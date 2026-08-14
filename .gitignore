@@ -1,0 +1,12 @@
+.env
+.rag/
+.venv/
+documents/
+__pycache__/
+.pytest_cache/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+AGENTS.md
