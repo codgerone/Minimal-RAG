@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any
 
 import chromadb
+from chromadb.errors import NotFoundError
 
 from rag.errors import VectorStoreError
 from rag.models import RetrievalHit, TextChunk
@@ -45,8 +46,14 @@ class ChromaVectorStore:
         try:
             client.get_collection(self.collection_name)
             return True
-        except Exception:
+        except NotFoundError:
             return False
+        except Exception as exc:
+            raise VectorStoreError(
+                f"无法读取 Collection {self.collection_name!r}。",
+                "请检查 Chroma 数据目录权限和完整性。",
+                cause=exc,
+            ) from exc
 
     def get_or_create_collection(self):
         try:

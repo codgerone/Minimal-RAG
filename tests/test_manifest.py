@@ -7,8 +7,9 @@ from rag.manifest import (
     load_manifest,
     make_empty_manifest,
     save_manifest_atomic,
+    validate_index,
 )
-from rag.models import ManifestDocument
+from rag.models import DocumentState, ManifestDocument, SourceDocument
 
 
 def _settings(tmp_path: Path) -> Settings:
@@ -52,3 +53,68 @@ def test_global_config_change_requires_rebuild(tmp_path: Path) -> None:
         manifest, replace(settings, embedding_model="other")
     )
 
+
+class _Store:
+    def __init__(self, exists: bool = True) -> None:
+        self.exists = exists
+        self.per_document_queries = 0
+
+    def collection_exists(self) -> bool:
+        return self.exists
+
+    def count_all(self) -> int:
+        return 0
+
+    def count_document(self, document_id: str) -> int:
+        self.per_document_queries += 1
+        return 0
+
+    def get_metadatas(self, document_id: str | None = None) -> list[dict[str, str]]:
+        if document_id is not None:
+            self.per_document_queries += 1
+        return []
+
+
+def _source(tmp_path: Path, name: str = "sales.pdf") -> SourceDocument:
+    return SourceDocument("sales", name, name, tmp_path / name, "hash")
+
+
+def test_config_mismatch_marks_all_documents_unassessed_without_store_queries(
+    tmp_path: Path,
+) -> None:
+    settings = _settings(tmp_path)
+    source = _source(tmp_path)
+    manifest = replace(
+        make_empty_manifest(settings),
+        documents={
+            source.document_id: ManifestDocument(
+                source.relative_path, source.document_name, source.file_hash, 1, 1, 1, "now"
+            ),
+            "removed": ManifestDocument("removed.pdf", "removed.pdf", "old", 1, 1, 1, "now"),
+        },
+    )
+    store = _Store()
+
+    health = validate_index(replace(settings, chunk_size=51), [source], manifest, store)  # type: ignore[arg-type]
+
+    assert [status.state for status in health.document_statuses] == [
+        DocumentState.UNASSESSED,
+        DocumentState.UNASSESSED,
+    ]
+    assert [issue.code for issue in health.issues] == ["global_config_mismatch"]
+    assert store.per_document_queries == 0
+
+
+def test_missing_collection_marks_documents_unassessed_without_store_queries(
+    tmp_path: Path,
+) -> None:
+    settings = _settings(tmp_path)
+    source = _source(tmp_path)
+    manifest = make_empty_manifest(settings)
+    store = _Store(exists=False)
+
+    health = validate_index(settings, [source], manifest, store)  # type: ignore[arg-type]
+
+    assert health.document_statuses[0].state is DocumentState.UNASSESSED
+    assert [issue.code for issue in health.issues] == ["collection_missing"]
+    assert store.per_document_queries == 0

@@ -14,6 +14,8 @@ class DocumentState(str, Enum):
     CHANGED = "changed"
     MISSING = "missing"
     INVALID = "invalid"
+    UNPROCESSABLE = "unprocessable"
+    UNASSESSED = "unassessed"
 
 
 @dataclass(frozen=True)
@@ -156,4 +158,3 @@ class EvaluationResult:
     question: str
     passed: bool | None
     detail: str
-

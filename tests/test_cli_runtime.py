@@ -12,7 +12,7 @@ def test_file_and_prune_are_rejected_together() -> None:
     assert exc_info.value.code == 2
 
 
-def test_ask_without_api_key_is_clean_configuration_error(
+def test_ask_checks_index_before_requesting_missing_api_key(
     monkeypatch: pytest.MonkeyPatch,
     capsys: pytest.CaptureFixture[str],
 ) -> None:
@@ -23,5 +23,5 @@ def test_ask_without_api_key_is_clean_configuration_error(
 
     captured = capsys.readouterr()
     assert exit_code == 2
-    assert "OPENROUTER_API_KEY" in captured.err
+    assert "LLM 凭据" in captured.err or "索引尚未就绪" in captured.err
     assert "Traceback" not in captured.err

@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import os
+import re
+import tempfile
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -113,3 +115,42 @@ def validate_settings(settings: Settings) -> None:
     if not settings.openrouter_model:
         raise ConfigurationError("OPENROUTER_MODEL 不能为空。", "请修改 .env。")
 
+
+def update_env_key(path: Path, key: str, value: str) -> None:
+    """Atomically update the sole interactively writable secret in a .env file."""
+    if key != "OPENROUTER_API_KEY":
+        raise ConfigurationError("只允许更新 OPENROUTER_API_KEY。")
+    try:
+        content = path.read_bytes().decode("utf-8") if path.exists() else ""
+        newline = "\r\n" if "\r\n" in content else "\n"
+        lines = content.splitlines(keepends=True)
+        pattern = re.compile(r"^(\s*OPENROUTER_API_KEY\s*=).*$", re.ASCII)
+        replaced = False
+        updated: list[str] = []
+        for line in lines:
+            if not replaced and (match := pattern.match(line.rstrip("\r\n"))):
+                ending = line[len(line.rstrip("\r\n")) :]
+                updated.append(f"{match.group(1)}{value}{ending}")
+                replaced = True
+            else:
+                updated.append(line)
+        if not replaced:
+            if updated and not updated[-1].endswith(("\n", "\r")):
+                updated.append(newline)
+            updated.append(f"{key}={value}{newline}")
+
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with tempfile.NamedTemporaryFile(
+            mode="w", encoding="utf-8", newline="", dir=path.parent,
+            prefix=f".{path.name}.", suffix=".tmp", delete=False
+        ) as stream:
+            temporary = Path(stream.name)
+            stream.write("".join(updated))
+            stream.flush()
+        temporary.replace(path)
+    except OSError as exc:
+        raise ConfigurationError(
+            f"无法更新 .env 中的 {key}。",
+            "请检查 .env 所在目录的权限和磁盘空间。",
+            cause=exc,
+        ) from exc

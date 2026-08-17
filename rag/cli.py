@@ -11,7 +11,7 @@ from time import perf_counter
 from rag.config import Settings, load_settings
 from rag.document_registry import discover_documents, resolve_document_selector
 from rag.embeddings import E5Embedder
-from rag.errors import LlmServiceError, PdfParseError, RagError
+from rag.errors import IndexNotReadyError, LlmServiceError, PdfParseError, RagError
 from rag.evaluator import Evaluator, load_evaluation_cases
 from rag.indexer import Indexer
 from rag.llm import OpenRouterClient
@@ -21,6 +21,15 @@ from rag.pdf_parser import parse_pdf
 from rag.pipeline import AnswerResult, RAGPipeline
 from rag.retriever import Retriever
 from rag.vector_store import ChromaVectorStore
+from rag.cli_readiness import (
+    ConsoleTerminal,
+    IndexInspection,
+    ReadinessResult,
+    display_status,
+    ensure_index_ready,
+    ensure_llm_credentials,
+    inspect_index_for_cli,
+)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -146,44 +155,22 @@ def _pipeline(
     )
 
 
-def _command_documents(settings: Settings) -> int:
-    discovered = discover_documents(settings.documents_dir)
-    if not discovered:
-        raise RagError(
-            f"目录中没有 PDF：{settings.documents_dir}",
-            "请将 PDF 放入 documents/ 后重试。",
-        )
-    store = _store(settings)
-    manifest = load_manifest(settings.manifest_path)
-    health = validate_index(settings, discovered, manifest, store)
-    statuses: list[DocumentStatus] = []
-    source_by_id = {source.document_id: source for source in discovered}
+def _command_documents(settings: Settings, inspection: IndexInspection | None = None) -> int:
+    inspection = inspection or inspect_index_for_cli(settings, _store(settings))
+    health = inspection.health
+    if health.usable:
+        print("知识库索引状态：可用")
+    else:
+        print(f"知识库索引状态：不可用，原因：发现 {len(health.issues)} 项需要处理的问题。")
+    print("文档名称 | 索引状态 | 索引状态说明 | 页数 | Chunks | 索引时间")
     for status in health.document_statuses:
-        if status.state not in {DocumentState.NEW, DocumentState.CHANGED}:
-            statuses.append(status)
-            continue
-        try:
-            pages = parse_pdf(source_by_id[status.document_id])
-            statuses.append(replace(status, page_count=len(pages)))
-        except PdfParseError as exc:
-            statuses.append(
-                replace(
-                    status,
-                    state=DocumentState.INVALID,
-                    detail=exc.message,
-                )
-            )
-
-    print("状态 | 相对路径 | 页数 | Chunks | 文件Hash前12位 | 索引时间")
-    for status in sorted(statuses, key=lambda item: item.relative_path.casefold()):
+        label, explanation = display_status(status)
         print(
-            f"{status.state.value} | {status.relative_path} | "
+            f"{status.relative_path.replace('|', '／')} | {label} | {explanation.replace('|', '／')} | "
             f"{status.page_count if status.page_count is not None else '-'} | "
             f"{status.chunk_count if status.chunk_count is not None else '-'} | "
-            f"{(status.file_hash or '-')[:12]} | {status.indexed_at or '-'}"
+            f"{status.indexed_at or '-'}"
         )
-        if status.detail:
-            print(f"  说明：{status.detail}")
     return 0
 
 
@@ -348,15 +335,22 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
     _validate_cli_args(parser, args)
-    require_api_key = args.command in {"ask", "chat"} or (
-        args.command == "eval" and args.live
-    )
     try:
-        settings = load_settings(require_api_key=require_api_key)
+        settings = load_settings(require_api_key=False)
         if args.command == "documents":
-            return _command_documents(settings)
+            terminal = ConsoleTerminal()
+            result, settings, inspection = ensure_index_ready(settings, _store(settings), terminal)
+            return _command_documents(settings, inspection)
         if args.command == "ingest":
             return _command_ingest(settings, args)
+        terminal = ConsoleTerminal()
+        result, settings, _ = ensure_index_ready(settings, _store(settings), terminal)
+        if result is not ReadinessResult.READY:
+            raise IndexNotReadyError("索引尚未就绪，未执行原始命令。")
+        if args.command in {"ask", "chat"} or (args.command == "eval" and args.live):
+            result, settings = ensure_llm_credentials(settings, terminal)
+            if result is not ReadinessResult.READY:
+                raise IndexNotReadyError("未获得 LLM 凭据，未执行原始命令。")
         if args.command == "chunks":
             return _command_chunks(settings, args)
         if args.command == "search":

@@ -160,6 +160,42 @@ def validate_index(
     statuses: list[DocumentStatus] = []
     issues: list[IndexIssue] = []
 
+    def unassessed_statuses(detail: str) -> tuple[DocumentStatus, ...]:
+        discovered_by_id = {source.document_id: source for source in discovered}
+        result: list[DocumentStatus] = []
+        for source in discovered:
+            recorded = manifest.documents.get(source.document_id) if manifest else None
+            result.append(
+                DocumentStatus(
+                    DocumentState.UNASSESSED,
+                    source.document_id,
+                    source.relative_path,
+                    source.document_name,
+                    file_hash=source.file_hash,
+                    page_count=recorded.page_count if recorded else None,
+                    chunk_count=recorded.chunk_count if recorded else None,
+                    indexed_at=recorded.indexed_at if recorded else None,
+                    detail=detail,
+                )
+            )
+        if manifest:
+            for document_id, recorded in manifest.documents.items():
+                if document_id not in discovered_by_id:
+                    result.append(
+                        DocumentStatus(
+                            DocumentState.UNASSESSED,
+                            document_id,
+                            recorded.relative_path,
+                            recorded.document_name,
+                            file_hash=recorded.file_hash,
+                            page_count=recorded.page_count,
+                            chunk_count=recorded.chunk_count,
+                            indexed_at=recorded.indexed_at,
+                            detail=detail,
+                        )
+                    )
+        return tuple(sorted(result, key=lambda item: item.relative_path.casefold()))
+
     if manifest is None:
         issues.append(
             IndexIssue(
@@ -189,6 +225,7 @@ def validate_index(
         return IndexHealth(False, tuple(statuses), tuple(issues))
 
     if not global_config_matches(manifest, settings):
+        detail = "当前 Embedding 模型、Collection 或分块配置与已有索引不一致，需要全量重建。"
         issues.append(
             IndexIssue(
                 "global_config_mismatch",
@@ -196,7 +233,9 @@ def validate_index(
                 "执行 python -m rag ingest --force。",
             )
         )
+        return IndexHealth(False, unassessed_statuses(detail), tuple(issues))
     if not vector_store.collection_exists():
+        detail = "目标 Collection 不存在，逐文档索引状态尚未检查，需要重新建立索引。"
         issues.append(
             IndexIssue(
                 "collection_missing",
@@ -204,6 +243,7 @@ def validate_index(
                 "执行 python -m rag ingest。",
             )
         )
+        return IndexHealth(False, unassessed_statuses(detail), tuple(issues))
 
     discovered_by_id = {source.document_id: source for source in discovered}
     for source in discovered:
@@ -308,4 +348,3 @@ def validate_index(
 
     statuses.sort(key=lambda item: item.relative_path.casefold())
     return IndexHealth(not issues, tuple(statuses), tuple(issues))
-
