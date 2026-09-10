@@ -10,3 +10,6 @@ __pycache__/
 dist/
 build/
 AGENTS.md
+/tmp/
+/.mcp.json
+/debug.log

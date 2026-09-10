@@ -1,0 +1,10 @@
+"""表格候选准入与分组的统一配置。"""
+
+MIN_CANDIDATE_COVERAGE = 0.65
+MIN_SLOT_COVERAGE = 0.77
+RATIO_EPSILON = 1e-12
+COORD_EPSILON_PT = 1e-6
+PAGE_SIZE_TOLERANCE_PT = 1.0
+TARGET_COORDINATE_SYSTEM = "pymupdf_page_top_left_pt_v1"
+FORMAT_VERSION = "table_candidate_selection_v2"
+

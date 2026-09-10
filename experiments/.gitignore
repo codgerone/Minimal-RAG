@@ -1,0 +1,3 @@
+# Derived artifacts can be regenerated; human labels live in data/.
+output/
+.tmp/
