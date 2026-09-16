@@ -3,6 +3,8 @@
 Minimal RAG 是一个面向本地 PDF 知识库的教学型、可运行 RAG V1，也是未来
 Sales Operations Agent 的知识检索模块原型。
 
+当前代码仍运行 V1 链路；V2.0 需求已经确认、尚未实现。需求、历史规格和 V2.0 实施入口见[文档导航](docs/README.md)。
+
 V1 完整覆盖两条链路：
 
 ```text
@@ -218,4 +220,3 @@ live eval 只检查预期词或拒答表达，不代表完整语义正确率。
 - 全局配置不一致：执行 `ingest --force`。
 - 缺少 API Key：在项目根目录 `.env` 中设置 `OPENROUTER_API_KEY`。
 - OpenRouter 认证、限流或服务错误：检查 Key、模型名和网络后重试。
-

@@ -6,5 +6,6 @@
 | --- | --- | --- |
 | [实验审查快照](experiment-spec-audit.md) | 2026-09-08 | 记录重构前的规格混杂、代码偏差和调查依据；问题状态以当时为准 |
 | [重构验收与修复对照](refactor-validation.md) | 2026-09-10 | 记录本次测试、真实运行、迁移比对和修复编号；不表示全部限制已经解决 |
+| [winner 文本化调研](winner-text-audit.md) | 2026-09-10 | 记录实验表格样本事实；从 RAG 规划目录归档至此，不作为 RAG 需求依赖 |
 
 当前仍存在的限制见[limitations](../limitations.md)，每次修改应遵循的验收场景见[validation](../validation.md)。旧临时快照不随仓库交付，证据可复验范围在验收记录中说明。
