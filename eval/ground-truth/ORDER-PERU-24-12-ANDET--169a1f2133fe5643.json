@@ -1,0 +1,148 @@
+{
+  "schema_version": "ground_truth_document_v1",
+  "document_key": "ORDER-PERU-24-12-ANDET--169a1f2133fe5643",
+  "document_id": "169a1f2133fe5643",
+  "document_name": "ORDER PERU 24-12 ANDET.pdf",
+  "relative_path": "ORDER PERU 24-12 ANDET.pdf",
+  "file_hash": "27b3e11879c4adef8bd5cd1b91d1f29322179959196c0412815fc767563ad4d3",
+  "cases": [
+    {
+      "case_id": "PO-24-12-Q001",
+      "question": "订单PURCHASE ORDER N° 24-12-HPE包含哪几款产品？单价、数量分别是多少？订单总金额是多少？。",
+      "answerable": true,
+      "reference_answer": "订单包含1款产品：HXF300，单价为USD 96.80，数量为10000件，总金额为USD 968,000.00。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "169a1f2133fe5643",
+              "document_name": "ORDER PERU 24-12 ANDET.pdf",
+              "relative_path": "ORDER PERU 24-12 ANDET.pdf",
+              "page_numbers": [
+                1
+              ],
+              "text": "C&I Meter CI 0.2S 3&4 Wires meter with modem 4G 2 pulses Model: HXF300 | Qty 10,000 | USD 96.80 | USD 968,000.00\nTotal CIF (CALLAO) | USD 968,000.00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "PO-24-12-Q002",
+      "question": "请阐述PURCHASE ORDER N° 24-12-HPE的交货时间规划。",
+      "answerable": true,
+      "reference_answer": "五批交付，每批次交付约2000件，具体交付日期待确认。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "169a1f2133fe5643",
+              "document_name": "ORDER PERU 24-12 ANDET.pdf",
+              "relative_path": "ORDER PERU 24-12 ANDET.pdf",
+              "page_numbers": [
+                1
+              ],
+              "text": "Delivery Date: To be confirmed the date, total 5 deliveries - each delivery will be approximately 2,000 units."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "PO-24-12-Q003",
+      "question": "订单PURCHASE ORDER N° 24-12-HPE分几批交付？每批次的具体交付日期是什么？。",
+      "answerable": true,
+      "reference_answer": "分五批交付，每批次的交付日期待确认。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "169a1f2133fe5643",
+              "document_name": "ORDER PERU 24-12 ANDET.pdf",
+              "relative_path": "ORDER PERU 24-12 ANDET.pdf",
+              "page_numbers": [
+                1
+              ],
+              "text": "Delivery Date: To be confirmed the date, total 5 deliveries - each delivery will be approximately 2,000 units."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "PO-24-12-Q004",
+      "question": "订单PURCHASE ORDER N° 24-12-HPE的总金额是否涵盖MDC ORCA的费用？如不包含，还需额外支付多少费用？付款的最后期限是什么？",
+      "answerable": true,
+      "reference_answer": "订单总金额不包含 MDC ORCA 的费用；MDC ORCA 需额外一次性支付 USD 10,000.00，付款截止日为 2026 年 8 月 1 日。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "169a1f2133fe5643",
+              "document_name": "ORDER PERU 24-12 ANDET.pdf",
+              "relative_path": "ORDER PERU 24-12 ANDET.pdf",
+              "page_numbers": [
+                1
+              ],
+              "text": "MDC ORCA: 10,000.00 USD (one-time purchase), payment due: August 1st, 2026"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "PO-24-12-Q005",
+      "question": "订单PURCHASE ORDER N° 24-12-HPE的运维服务如何收费？",
+      "answerable": true,
+      "reference_answer": "前两年免费，时间从2025年8月1日至2027年8月1日。之后需在2027年8月2日之前根据连接的电表数量付费，连接的电表数小于2500只，价格为5500 USD;连接的电表数在2500只至5000只之间，价格为7000 USD；连接的电表数在5001只至12000只之间，价格为10000 USD;连接的电表数在12001只至30000只之间，价格为15000 USD。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "169a1f2133fe5643",
+              "document_name": "ORDER PERU 24-12 ANDET.pdf",
+              "relative_path": "ORDER PERU 24-12 ANDET.pdf",
+              "page_numbers": [
+                1
+              ],
+              "text": "Operation and Maintenance Service, 2 years free (from August 1st, 2025 to August 1st 2027), payment due for the service: August 2nd 2027.\nMeters connected ≤ 2500: 5500 USD\nMeters connected 2501-5000: 7000 USD\nMeters connected 5001-12000: 10000 USD\nMeters connected 12001-30000: 15000 USD"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "PO-24-12-Q006",
+      "question": "订单PURCHASE ORDER N° 24-12-HPE的付款条件是什么？",
+      "answerable": true,
+      "reference_answer": "按批次付款，每批次在提单日后120天内100%银行支票付款。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "169a1f2133fe5643",
+              "document_name": "ORDER PERU 24-12 ANDET.pdf",
+              "relative_path": "ORDER PERU 24-12 ANDET.pdf",
+              "page_numbers": [
+                2
+              ],
+              "text": "Bank check payable at 100% within 120 days counted from the B/L date. (for each batch)"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

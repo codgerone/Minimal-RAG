@@ -146,7 +146,7 @@
 
 ## 9. winner 审核视图
 
-每 PDF 的 winner 审核 HTML 同时展示：结构表格及表头着色、本文定义的完整分块前文本、实际生成的全部表格 chunk。审核页面必须读取同一序列化结果和最终 chunk，不单独重算或使用另一套展示模板模拟 embedding 输入。
+每 PDF 的 winner 审核 HTML 同时展示：按真实 rowspan/colspan 恢复的结构表格、表头识别状态、仅在 identified 时着色的表头单元格，以及实际生成的全部表格 Embedding chunk 正文。审核页面必须读取同一 HeaderDecision 和最终 chunk，不单独重算或使用另一套展示模板模拟 embedding 输入。
 
 ## 10. 验收
 

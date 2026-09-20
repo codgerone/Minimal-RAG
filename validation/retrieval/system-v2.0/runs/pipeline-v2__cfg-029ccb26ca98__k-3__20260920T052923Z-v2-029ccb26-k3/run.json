@@ -1,0 +1,157 @@
+{
+  "run_id": "20260920T052923Z-v2-029ccb26-k3",
+  "status": "completed",
+  "system_version": "2.0",
+  "pipeline_id": "v2",
+  "collection_name": "minimal_rag_documents_v2",
+  "build_config": {
+    "parser": {
+      "rule_version": "docling_layout_v1",
+      "docling_version": "2.121.0",
+      "do_ocr": false,
+      "do_table_structure": true,
+      "table_mode": "accurate",
+      "do_cell_matching": true,
+      "generate_page_images": false,
+      "mapper_version": "docling_mapper_v2"
+    },
+    "table_selection": {
+      "strategies": [
+        "lines",
+        "lines_strict",
+        "text",
+        "lattice",
+        "stream",
+        "network",
+        "hybrid",
+        "accurate",
+        "hi_res"
+      ],
+      "metric_weights": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ],
+      "tool_tiebreak_order": [
+        "pymupdf",
+        "camelot",
+        "docling",
+        "unstructured"
+      ],
+      "rule_version": "table_selection_v1",
+      "page_bounds_tolerance_pt": 1e-06,
+      "page_size_tolerance_pt": 1.0,
+      "boundary_cluster_tolerance_pt": 2.0,
+      "comparison_epsilon": 1e-12,
+      "candidate_coverage_minimum": 0.65,
+      "slot_coverage_minimum": 0.77
+    },
+    "table_header": {
+      "rule_version": "table_header_v1",
+      "sample_row_budget": 8,
+      "minimum_independent_observations": 2
+    },
+    "table_serialization": {
+      "rule_version": "table_text_v1"
+    },
+    "document_text": {
+      "rule_version": "document_text_v1"
+    },
+    "chunker": {
+      "maximum_input_tokens": 512,
+      "text_overlap_tokens": 32,
+      "rule_version": "structured_chunk_v1",
+      "separator_version": "recursive_boundaries_v1"
+    },
+    "tokenizer": {
+      "model_name": "intfloat/multilingual-e5-small",
+      "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+      "passage_prefix": "passage: ",
+      "query_prefix": "query: ",
+      "add_special_tokens": true,
+      "truncation": false
+    },
+    "embedding": {
+      "model_name": "intfloat/multilingual-e5-small",
+      "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+      "vector_dimension": 384,
+      "normalize_embeddings": true
+    },
+    "dependency_versions": {
+      "pymupdf": "1.28.0",
+      "camelot": "2.0.0",
+      "docling": "2.121.0",
+      "docling_core": "2.92.0",
+      "unstructured": "0.27.1",
+      "sentence_transformers": "5.6.1",
+      "transformers": "5.14.1",
+      "chromadb": "1.5.9"
+    },
+    "schema_version": "build_config_v1",
+    "pipeline_id": "v2"
+  },
+  "build_config_fingerprint": "029ccb26ca98d826cd54d5ba21b1156a086d0718cb7bda78775a232fba68ff93",
+  "query_config": {
+    "top_k": 3,
+    "query_prefix": "query: ",
+    "document_filter": null,
+    "question_normalization": "strip_v1",
+    "distance_order": "ascending",
+    "tie_break_order": "chunk_id_ascending",
+    "strict_top_k": true
+  },
+  "evaluation_protocol_version": "retrieval_evaluation_v2",
+  "ground_truth": {
+    "dataset_version": "2.0.0",
+    "ground_truth_fingerprint": "4612ed552d4a523a22af19989b8e2b40589d3dc174b891400b9133bb5f98ac23"
+  },
+  "test_set": {
+    "test_set_version": "2.0.0",
+    "test_set_fingerprint": "5fcc83f09830fbea77f5213ca032d7ea6aeb481434afe44fe3c2eb7aa0ccdacf",
+    "annotation_rule_version": "evidence_chunk_mapping_v2"
+  },
+  "started_at": "2026-09-20T05:29:23.018330Z",
+  "completed_at": "2026-09-20T05:29:33.760897Z",
+  "documents": [
+    {
+      "document_key": "Contrato-N-105-2025-LP-002-2024-FONAFE-Adquisición-de-me--d359c37e0bc3c87a",
+      "json_path": "documents/Contrato-N-105-2025-LP-002-2024-FONAFE-Adquisición-de-me--d359c37e0bc3c87a.json",
+      "json_sha256": "4560e0a96228f5f802a27d5d2b9b832a60824cac4aaf7abeedfde434d45b5532",
+      "html_path": "documents/Contrato-N-105-2025-LP-002-2024-FONAFE-Adquisición-de-me--d359c37e0bc3c87a.html",
+      "html_sha256": "7ce9b6b7bea704b317612b80e01e5685cc3e2f099b9713b53857cc7cad8cb996"
+    },
+    {
+      "document_key": "E001-602--817cfff2927c6c65",
+      "json_path": "documents/E001-602--817cfff2927c6c65.json",
+      "json_sha256": "ea844cb00caf26dcfbc0a35b13ea13d16347d74de0db3ce248945c01cbf8a601",
+      "html_path": "documents/E001-602--817cfff2927c6c65.html",
+      "html_sha256": "006eb84cde48f9bb6727c2876be0ba53d308819127eeca3345448a2007442fef"
+    },
+    {
+      "document_key": "ORDER-PERU-24-12-ANDET--169a1f2133fe5643",
+      "json_path": "documents/ORDER-PERU-24-12-ANDET--169a1f2133fe5643.json",
+      "json_sha256": "a10fe43322266253849ec33d3c63e5591735dc91d1db6e62c1f19d4c19c3a1f9",
+      "html_path": "documents/ORDER-PERU-24-12-ANDET--169a1f2133fe5643.html",
+      "html_sha256": "88cf09d52253fa0e853b077f50495afe47b34ba20ddc4f9126767372844d88aa"
+    },
+    {
+      "document_key": "ORDER-PERU-25-15-ANDET-VF--5883b02cd922a64f",
+      "json_path": "documents/ORDER-PERU-25-15-ANDET-VF--5883b02cd922a64f.json",
+      "json_sha256": "ad42c315f67cbc1120d449244f97a42be6dc9f2a38575972d263c93403b17738",
+      "html_path": "documents/ORDER-PERU-25-15-ANDET-VF--5883b02cd922a64f.html",
+      "html_sha256": "d6082ecff74bcbb5e1dddfd5f11a319dc1ce96f51c6d7bf66a450c4795449555"
+    },
+    {
+      "document_key": "签字-ORDER-PERU-25-19-FONAFE--5a4c36e0022f4917",
+      "json_path": "documents/签字-ORDER-PERU-25-19-FONAFE--5a4c36e0022f4917.json",
+      "json_sha256": "a11fccb474210547e06af97eb02c3a9dce293badde8f6ccc57c4f57734ea69a6",
+      "html_path": "documents/签字-ORDER-PERU-25-19-FONAFE--5a4c36e0022f4917.html",
+      "html_sha256": "57f10a8f12ee4f60a535757bc5ea380c1069b3d29c7c10f535faf27b32480cbd"
+    }
+  ],
+  "aggregate_path": "aggregate.json",
+  "aggregate_sha256": "23223f7d2a50928ba16d9dca11b40a4a7c7506ec1cb29082fe8adabb208abc8d",
+  "error": null,
+  "schema_version": "evaluation_run_v1"
+}

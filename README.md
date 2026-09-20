@@ -1,222 +1,115 @@
 # Minimal RAG
 
-Minimal RAG 是一个面向本地 PDF 知识库的教学型、可运行 RAG V1，也是未来
-Sales Operations Agent 的知识检索模块原型。
+Minimal RAG 是一个面向本地 PDF 知识库的双链路 RAG 项目，也是未来 Sales Operations Agent 的知识检索模块原型。
 
-当前代码仍运行 V1 链路；V2.0 需求已经确认、尚未实现。需求、历史规格和 V2.0 实施入口见[文档导航](docs/README.md)。
+- `v2` 是默认链路：保留 Docling 文档结构，执行四工具九策略表格提取与确定性选优，生成结构化文本、token 安全分块和可审核产物。
+- `v1` 是兼容链路：保留原有 PyMuPDF 按页解析和字符分块行为，通过 `--pipeline v1` 显式使用。
+- 两条链路使用独立 collection、manifest、健康检查与恢复事务，不混查、不自动回退。
 
-V1 完整覆盖两条链路：
+完整规格与进度见[文档导航](docs/README.md)，从旧版本升级请阅读[升级指南](docs/upgrade-guide.md)。
 
-```text
-离线索引线路：
-PDF → 按页解析 → 分块 → E5 Embedding → Chroma → Manifest
+## 安装与配置
 
-在线问答线路：
-问题 → E5 Embedding → Top-K 检索 → 受控 Prompt → OpenRouter → 带来源回答
-```
-
-## V1 范围
-
-- 支持递归发现 `documents/` 中的多份 PDF。
-- 支持新增、变化、未变化和已移除文档的生命周期。
-- 所有 chunks 存入同一个 Chroma Collection。
-- 提供文档状态、chunks、检索、问答、chat 和最小评估 CLI。
-- 每个回答来源包含文档名、页码和 Chunk ID。
-
-V1 不支持 OCR、非 PDF 文件、Web UI、混合检索、reranker、Agent、Tool
-Calling、对话 Memory 或自动表格结构化。
-
-## 环境与安装
-
-需要 Python 3.11。推荐在 Windows PowerShell 中使用
-[uv](https://docs.astral.sh/uv/)：
+需要 Python 3.11。推荐使用 uv：
 
 ```powershell
 uv sync --python 3.11
 uv run python -m rag --help
-```
-
-项目的 `requires-python` 固定为 `>=3.11,<3.12`，`uv.lock` 保存已验证的依赖解析结果。
-
-首次执行需要 Embedding 的命令时，会从 Hugging Face 下载
-`intfloat/multilingual-e5-small`。模型下载失败时，请检查网络、模型名称和可用磁盘空间。
-Windows 未启用 Developer Mode 时，Hugging Face 可能提示无法使用缓存符号链接；这通常只会
-增加磁盘占用，不影响模型运行。
-
-## 配置
-
-复制环境变量模板：
-
-```powershell
 Copy-Item .env.example .env
 ```
 
-默认配置：
+主要配置：
 
 ```dotenv
 OPENROUTER_API_KEY=
 OPENROUTER_MODEL=google/gemini-2.5-flash-lite
 DOCUMENTS_DIR=documents
-RAG_DB_PATH=.rag/chroma
-RAG_MANIFEST_PATH=.rag/manifest.json
-RAG_COLLECTION=minimal_rag_documents
+RAG_DB_PATH=.rag/system-v2/chroma
+RAG_ARTIFACTS_PATH=.rag/system-v2/artifacts
 EMBEDDING_MODEL=intfloat/multilingual-e5-small
+EMBEDDING_MODEL_REVISION=614241f622f53c4eeff9890bdc4f31cfecc418b3
 CHUNK_SIZE=700
 CHUNK_OVERLAP=100
+V2_MAX_INPUT_TOKENS=512
+V2_TEXT_OVERLAP_TOKENS=32
 TOP_K=4
+RAG_DIAGNOSTICS=false
 ```
 
-只有 `ask`、`chat` 和 `eval --live` 需要 `OPENROUTER_API_KEY`。不要提交
-`.env`，也不要把 API Key 写入代码、命令输出或测试。
+`RAG_COLLECTION` 和 `RAG_MANIFEST_PATH` 已弃用。collection 与 manifest 由 pipeline 固定：
 
-## 准备 PDF
+| Pipeline | Collection | Manifest |
+| --- | --- | --- |
+| v1 | `minimal_rag_documents_v1` | `.rag/system-v2/pipelines/v1/manifest.json` |
+| v2 | `minimal_rag_documents_v2` | `.rag/system-v2/pipelines/v2/manifest.json` |
 
-将 PDF 固定放入项目内的 `documents/`：
+不要提交 `.env`、真实业务 PDF、`.rag/` 运行数据或模型缓存。
 
-```text
-documents/
-├─ order-a.pdf
-└─ region-b/
-   └─ order-b.pdf
-```
+## PDF 与 CLI
 
-系统不会修改、移动或删除源 PDF。`documents/` 已被 Git 忽略，避免真实业务资料被误提交。
-测试 PDF 会在临时目录中动态生成，不复制真实订单正文。
+将 PDF 放入 `documents/` 或其子目录。系统不会修改源文件。V2 固定 `do_ocr=false`，扫描件应先完成 OCR。
 
-V1 不执行 OCR。没有可提取文字层的 PDF 会被标记为 `invalid`。
-
-## CLI
-
-查看帮助：
+所有命令均接受 `--pipeline {v1,v2}`，省略时使用 `v2`：
 
 ```powershell
-uv run python -m rag --help
+uv run python -m rag documents --pipeline v2
+uv run python -m rag ingest --pipeline v2 --all
+uv run python -m rag ingest --pipeline v2 --file "relative/path.pdf"
+uv run python -m rag ingest --pipeline v2 --force
+uv run python -m rag ingest --pipeline v2 --prune
+
+uv run python -m rag chunks --pipeline v2 --document "order.pdf" --page 2
+uv run python -m rag browse --pipeline v2 --limit 20
+uv run python -m rag browse --pipeline v2 --document "order.pdf"
+uv run python -m rag search --pipeline v2 "付款条件是什么？" --top-k 3
+uv run python -m rag ask --pipeline v2 "订单总金额是多少？" --debug
+uv run python -m rag chat --pipeline v2
+
+uv run python -m rag search --pipeline v1 "付款条件是什么？"
 ```
 
-查看文档状态（只读，不生成 Embedding，不调用 LLM）：
+`ingest --all` 会递归处理 `documents/` 下全部 PDF；为兼容旧用法，省略 `--all` 和 `--file` 时也仍然执行全量增量索引。若要分别建立两个 collection：
 
 ```powershell
-uv run python -m rag documents
+uv run python -m rag ingest --pipeline v1 --all
+uv run python -m rag ingest --pipeline v2 --all
 ```
 
-建立或增量更新索引：
+`browse` 是项目内对 Chroma records 的只读浏览器，按纵向列表显示 ID、chunk 文本和 metadata，不读取 embedding 浮点数组。默认隐藏冗长的 `sources_json` 和 `node_ids_json`；需要原始完整 metadata 时追加 `--full-metadata`。可使用 `--offset`、`--limit` 分页，并用 `--document` 限定文档。
 
-```powershell
-uv run python -m rag ingest
-uv run python -m rag ingest --file "relative/path.pdf"
-```
+`ask`、`chat` 和 `eval --live` 才需要 OpenRouter API Key。目标 pipeline 不健康时命令会阻断，不会切换到另一条链路。
 
-普通 `ingest`：
+## V2 产物与恢复
 
-- `new`：新增；
-- `changed`：只重建变化文档；
-- `current`：跳过且不重复生成 Embedding；
-- `missing`：报告但不删除；
-- `invalid`：报告失败，并继续处理其他 PDF。
+每个已发布 V2 文档在 `.rag/system-v2/artifacts/v2/documents/<可读文件名>--<document_id>/<build_id>/` 保存 `raw-docling-document.json`、ParsedDocument、chunks、selection summary、`winner-review.html` 和可选 diagnostics。manifest 指向的 `build_id` 目录就是唯一正式快照；成功替换后默认只保留新快照，不另建 `latest`、`document.json` 或 `builds/` 层。
 
-强制重建：
+审核 HTML 把每个 winner 按实际 rowspan/colspan 渲染为可直接阅读的表格，明确标注表头识别成功/失败，成功时用黄色背景标出表头单元格，并在表格下展示实际送入 Embedding 的最终文本；页面不混入来源坐标和评分调试信息。
 
-```powershell
-uv run python -m rag ingest --force
-uv run python -m rag ingest --file "relative/path.pdf" --force
-```
-
-全量 `--force` 会先在内存中完成所有文档的解析、分块和 Embedding；任何 PDF
-预构建失败时不会替换旧 Collection。Embedding 模型或分块配置变化后必须执行全量 force。
-
-清理已经从 `documents/` 移除的文档索引：
-
-```powershell
-uv run python -m rag ingest --prune
-```
-
-`--prune` 只删除 Chroma 和 Manifest 中的索引记录，绝不删除源 PDF。
-
-查看已有 chunks：
-
-```powershell
-uv run python -m rag chunks --document "order-a.pdf"
-uv run python -m rag chunks --document "order-a.pdf" --page 1
-```
-
-执行原始向量检索：
-
-```powershell
-uv run python -m rag search "订单总金额是多少？"
-uv run python -m rag search "付款条件是什么？" --top-k 2
-uv run python -m rag search "订单总金额是多少？" --document "order-a.pdf"
-```
-
-输出同时展示余弦 `Distance` 和 `Similarity = 1 - Distance`。
-
-执行一次受控问答：
-
-```powershell
-uv run python -m rag ask "付款条件是什么？"
-uv run python -m rag ask "付款条件是什么？" --debug
-```
-
-`--debug` 会显示检索片段和最终 Prompt，但不会显示 API Key。
-
-启动终端问答循环：
-
-```powershell
-uv run python -m rag chat
-```
-
-支持 `/help`、`/exit`、`/quit`、`/debug on` 和 `/debug off`。每个问题彼此独立，
-不会把上一轮问题或回答发送给下一轮。
+向量、artifact 和 manifest 通过持久化 snapshot+journal 发布。进程中断后，显式 `ingest` 会先完成提交收尾或回滚；只读命令只报告问题，不擅自写入。
 
 ## 测试与评估
 
-默认测试不访问 OpenRouter，也不下载 E5 模型：
-
 ```powershell
 uv run pytest
+
+uv run python scripts/validate_v2_technical_gates.py tokenizer
+uv run python scripts/validate_v2_technical_gates.py docling-conversion --pdf documents/E001-602.pdf
+uv run python scripts/validate_v2_runtime.py --pipeline v2 --pdf documents/E001-602.pdf --output tmp/v2-smoke
+uv run python scripts/validate_v2_runtime.py --pipeline v1 --pdf documents/E001-602.pdf --output tmp/v1-smoke
+uv run python scripts/compare_v1_v2.py --output tmp/v1-v2-comparison
+uv run python scripts/compare_answers.py --index-root tmp/v1-v2-comparison --output tmp/v1-v2-comparison/live-answers.json
+
+uv run python -m rag eval --pipeline v2 --top-k 3
+uv run python -m rag eval --pipeline v1 --top-k 3
 ```
 
-默认评估只测试检索，不调用 LLM：
-
-```powershell
-uv run python -m rag eval
-```
-
-answerable 问题的 PASS 条件是 Top-K 中至少一个 hit 同时命中预期文档和页码。
-由于 V1 没有相似度阈值，向量检索总会返回近邻，因此不可回答题在默认 eval
-中只报告来源，不计入检索召回率。
-
-配置 API Key 后可运行 live smoke test：
-
-```powershell
-uv run python -m rag eval --live
-```
-
-live eval 只检查预期词或拒答表达，不代表完整语义正确率。
-
-## 数据边界
-
-- PDF 原文、E5 模型、embeddings、Chroma 和 Manifest 保存在本地。
-- `search` 和默认 `eval` 不向 OpenRouter 发送任何数据。
-- `ask`、`chat` 和 `eval --live` 仅发送用户问题、系统 Prompt 与 Top-K
-  检索片段。
-- 不会把整个知识库、Embedding 或 API Key 发送给 OpenRouter。
-- 检索片段会由 OpenRouter 转发给所选模型的上游提供商，请在使用真实业务资料前确认
-  组织的数据合规要求。
+默认 `eval` 使用已批准的 ground truth 与当前 pipeline/build 对应测试集运行正式检索评估，逐 PDF 输出原始 JSON 与人工审核 HTML，并重建汇总和跨链路对比；省略 `--top-k` 时使用 `TOP_K`。`eval --live` 保留为不进入正式报告的旧 LLM 冒烟入口。
 
 ## 已知边界
 
-- 每一页单独解析和分块，chunk 永不跨页；跨页段落可能因此被切断。
-- PDF 表格只按文字层提取，不自动恢复结构。
-- V1 不删除重复页眉页脚。
-- chat 不保存或传递对话历史。
-- Embedding 模型和分块配置全局统一，修改后需要 `ingest --force`。
-
-## 常见错误
-
-- `documents/` 不存在或没有 PDF：创建目录并放入具有文字层的 PDF。
-- PDF 显示 `invalid`：文件可能损坏或需要 OCR。
-- 索引有 `new`/`changed`：执行 `uv run python -m rag ingest`。
-- 索引有 `missing`：恢复文件，或明确执行 `ingest --prune`。
-- 全局配置不一致：执行 `ingest --force`。
-- 缺少 API Key：在项目根目录 `.env` 中设置 `OPENROUTER_API_KEY`。
-- OpenRouter 认证、限流或服务错误：检查 Key、模型名和网络后重试。
+- 不执行 OCR、reranker、混合检索、Agent、Tool Calling 或对话 Memory。
+- Docling 是 V2 布局主链的必需依赖；可选表格策略的单页失败会记录诊断并继续其他策略。
+- 表头可能合法地得到 `undetermined`；系统保留原始行列事实，不猜测字段含义，也不自动继承续表表头。
+- Windows 上打开的审核 HTML 可能暂时阻止旧 artifact 清理；已发布 build 仍有效，残留作为非阻断问题报告。
+- 功能测试与 winner 选优通过不等同于问答效果优于 V1；效果结论必须来自固定题集的双链路对比。
+- 当前五文档/24 题正式基线中，V2 的 Hit@3、证据组召回、完整覆盖、Chunk Precision 和 MRR 均高于 V1，但跨文档污染也由 54.17% 上升到 65.28%；相似采购明细表在向量空间中互相竞争仍是下一轮重点。完整事实见 `validation/retrieval/`，该结果不能外推为生产问答质量。

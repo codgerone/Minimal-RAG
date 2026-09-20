@@ -22,7 +22,7 @@ Chroma 适配器使用 `collection.get(where={document_id}, include=[documents, 
 
 ## 3. 恢复准备与通用规则
 
-任何会改变旧向量、active artifact 或 manifest 的操作都必须先建立唯一恢复目录 `.rag/recovery/<pipeline>/<build_id>/`，写入并验证 snapshot、old manifest 和 `journal.json`。journal 在首次破坏性写入前从 prepared 原子更新为 mutating；存在任何 journal 时，同 pipeline 不得开始第二个写操作。
+任何会改变旧向量、active artifact 或 manifest 的操作都必须先建立唯一恢复目录 `.rag/system-v2/recovery/<pipeline>/<build_id>/`，写入并验证 snapshot、old manifest 和 `journal.json`。journal 在首次破坏性写入前从 prepared 原子更新为 mutating；存在任何 journal 时，同 pipeline 不得开始第二个写操作。
 
 启动 ingest 或只读健康检查发现 journal 时，不猜测最新目录，也不继续原业务请求。只读命令只报告阻断问题；交互恢复经确认后或显式 ingest 才能调用恢复器，非交互只读命令不得写入。另一 pipeline 的恢复目录不得读取或修改。
 
@@ -76,7 +76,7 @@ CollectionSnapshot 可能占用大量内存，但本版是本地教学项目，�
 v2 每个 ManifestDocument 必须满足：
 
 - collection 中 count、build_id、file_hash、config_fingerprint 与记录一致；
-- artifact_path 位于 `.rag/artifacts/v2/documents/<document_id>/<build_id>`；
+- artifact_path 位于 `.rag/system-v2/artifacts/v2/documents/<可读文件名>--<document_id>/<build_id>`；该目录是唯一正式 build 快照，默认只保留 manifest 当前引用的一份，不设置 `latest`、`document.json` 或额外 `builds/` 层；
 - 五个必需文件存在且公共身份字段一致；
 - chunks.json 的 chunk IDs/count 与向量一致；
 - winner HTML 存在；selection summary 的 winner_count 与 HTML 声明一致。

@@ -1,6 +1,6 @@
 # Minimal RAG 当前系统需求
 
-需求版本：V2.0。状态：已确认需求，V2.0 尚未实现。运行形态：Windows 本地终端、Python 3.11、单用户、多 PDF。
+需求版本：V2.0。状态：核心功能已实现并通过回归；检索评估数据集与正式基线报告待按本文完成。运行形态：Windows 本地终端、Python 3.11、单用户、多 PDF。
 
 本文描述 V2.0 完成后系统的全部有效行为。以下详细规则属于本文组成部分：
 
@@ -8,6 +8,7 @@
 - [表头判定](requirements/v2.0/table-header-detection.md)
 - [结构表格文本化](requirements/v2.0/table-text-serialization.md)
 - [普通文本、List 文本化与 V2 分块](requirements/v2.0/document-text-and-chunking.md)
+- [检索效果评估](requirements/v2.0/retrieval-evaluation.md)
 
 [V2.0 增量需求](changes/v2.0/proposal.md)只说明本次变化，[实施清单](changes/v2.0/checklist.md)记录交付进度，均不替代本文。
 
@@ -32,12 +33,12 @@
 
 | pipeline | 解析和分块 | collection | manifest |
 | --- | --- | --- | --- |
-| v1 | PyMuPDF 按页纯文本；每页独立递归字符分块 | `minimal_rag_documents_v1` | `.rag/manifest.v1.json` |
-| v2 | Docling 版面、四工具表格处理、ParsedDocument、结构化 token 分块 | `minimal_rag_documents_v2` | `.rag/manifest.v2.json` |
+| v1 | PyMuPDF 按页纯文本；每页独立递归字符分块 | `minimal_rag_documents_v1` | `.rag/system-v2/pipelines/v1/manifest.json` |
+| v2 | Docling 版面、四工具表格处理、ParsedDocument、结构化 token 分块 | `minimal_rag_documents_v2` | `.rag/system-v2/pipelines/v2/manifest.json` |
 
-两条链路共享默认 Chroma 持久化目录 `.rag/chroma`，但 collection、manifest、状态检查、构建和查询完全隔离。**所有支持 pipeline 的命令在省略 `--pipeline` 时等同 `--pipeline v2`。** 既有编号的含义不能随版本更新而改变。
+两条链路共享当前系统的 Chroma 持久化目录 `.rag/system-v2/chroma`，但 collection、manifest、状态检查、构建和查询完全隔离。**所有支持 pipeline 的命令在省略 `--pipeline` 时等同 `--pipeline v2`。** 既有编号的含义不能随版本更新而改变。
 
-升级前未带版本号的 `minimal_rag_documents` 和 `.rag/manifest.json` 是 legacy 索引，不自动重命名、复制、删除或作为 v1/v2 查询来源。需要 v1 对照时按当前配置重建 v1；升级指南必须说明这一点。
+升级前未带版本号的 `minimal_rag_documents` 和旧 `.rag/manifest.json` 是上一代系统的 legacy 索引。迁移时原样归档到 `.rag/legacy-system-v1/`，不得作为当前系统 v1/v2 的查询来源；当前系统运行命令不得读写该目录。需要 v1 对照时使用当前系统的 pipeline v1 索引。
 
 ### P-02 命令范围
 
@@ -45,13 +46,15 @@
 documents [--pipeline v1|v2]
 ingest [--pipeline v1|v2] [--file PDF] [--force] [--prune]
 chunks --document PDF [--page PAGE] [--pipeline v1|v2]
+browse [--document PDF] [--offset N] [--limit N] [--full-metadata] [--pipeline v1|v2]
 search QUESTION [--top-k N] [--document PDF] [--pipeline v1|v2]
 ask QUESTION [--debug] [--pipeline v1|v2]
 chat [--pipeline v1|v2]
-eval [--live] [--pipeline v1|v2]
+eval [--live] [--top-k N] [--pipeline v1|v2]
 ```
 
 每条命令显示实际 pipeline。chat 启动后固定 pipeline。选定索引不可用时只引导构建/修复该 pipeline，不自动切换。
+`browse` 只读目标 collection 的 ID、chunk 正文和 metadata，禁止加载或显示 embedding；结果按相对路径、chunk_index、ID 稳定排序，并支持分页与文档限定。默认隐藏体积较大的 `sources_json`、`node_ids_json`，显式 `--full-metadata` 才展开完整 metadata。
 
 `ingest --file` 只处理一份文档，不能与 `--prune` 同用。`--force` 强制重建所选范围；`--prune` 只清理所选 pipeline 中源文件已删除的文档。
 
@@ -144,6 +147,8 @@ ParsedDocument 是 v2 完整的语义解析结果，不是等待后续补字段�
 
 返回 chunk ID、正文、文档来源、全部页面来源、chunk 次序、距离和相似度。`chunks --page` 在 chunk 页面集合包含指定页时命中，而不是假定单页字段。
 
+检索必须严格返回最多 K 条且结果可复现。应用先取得至少 K+1 个候选；若按距离升序排列后的第 K 条与当前候选池最后一条距离完全相同，则扩大候选池，直到最后一条距离已越过第 K 条或已读取当前检索作用域全部记录。随后按距离升序、chunk ID 升序决胜并严格截取 K 条。不得使用显示舍入值判断同分；普通无边界同分查询不得扩大到全部 collection。
+
 ## 8. Manifest、增量索引与发布
 
 ### I-04 每 pipeline 一份构建记录
@@ -165,9 +170,9 @@ manifest 保存 schema、pipeline、collection、embedding 模型、该 pipeline
 
 默认保存 Docling raw、完整 ParsedDocument、最终 chunks 及来源、包含 slot/group/winner 和最小原因链的 selection summary，并在 manifest 保存完整构建配置。每份 PDF 还必须生成一个 winner 审核 HTML。
 
-审核 HTML 按文档顺序包含全部 winner：身份及来源、按 rowspan/colspan 展示的结构表格、表头结论及原因、成功识别表头的背景色、完整文本化结果、实际生成的全部表格 chunk 及最终 token 数。零 winner 也输出明确空报告。
+审核 HTML 按文档顺序包含全部 winner：按 rowspan/colspan 展示的肉眼可读结构表格、明确的表头识别成功/失败状态、只在成功时对实际表头单元格着背景色，以及该表最终生成的全部 Embedding chunk 正文。页面不展示 cell 坐标清单、来源范围、评分明细或 embedding 浮点数组；零 winner 输出明确空报告。
 
-审核页面必须读取实际判定、文本和 chunk，不重算展示数据；内容可折叠但不截断，原文须 HTML 转义。未评分原生回退表格不冒充 winner。HTML 生成失败时，本次该 PDF 的 v2 入库失败，不发布新索引和 manifest，保留旧索引及旧 HTML，错误阶段为 `winner_review_generation`。
+审核页面必须读取实际 winner 网格、HeaderDecision 和最终 chunk，不重算展示数据；表格与文本不截断，原文须 HTML 转义。未评分原生回退表格不冒充 winner。HTML 生成失败时，本次该 PDF 的 v2 入库失败，不发布新索引和 manifest，保留旧索引及旧 HTML，错误阶段为 `winner_review_generation`。
 
 完整四工具 raw、全部候选、详细准入/分组/评分和额外审核视图属于可选诊断，不作为检索输入。具体路径由架构定义。
 
@@ -205,7 +210,7 @@ DocumentState 仅为：
 
 ### H-03 API Key 与服务恢复
 
-documents、ingest、chunks、search 和默认 eval 不要求 OpenRouter API Key。ask、chat、eval --live 在索引可用后检查 key。
+documents、ingest、browse、chunks、search 和默认 eval 不要求 OpenRouter API Key。ask、chat、eval --live 在索引可用后检查 key。
 
 交互环境缺 key 时可仅用于当前进程，或经明确确认只更新项目 `.env` 的 `OPENROUTER_API_KEY`；写入原子化，不打印秘密。认证失败允许重新输入 key 后重试一次原 LLM 请求；限流、超时及上游失败不自动循环重试。模型配置缺失或其他配置错误通过 `.env` 修复，不自动改写。
 
@@ -233,22 +238,24 @@ ask 执行一次检索和生成；`--debug` 显示命中和最终消息，但不
 - v2 表格结果满足三个表格子需求，ParsedDocument 内容不重复、不伪造来源。
 - 所有最终 v2 passage 输入满足模型硬上限，结构单元及 overlap 行为符合第 6 节。
 - 每 PDF winner HTML 与实际 winner、表头、文本化及 chunk 完全一致。
-- documents、ingest、chunks、search、ask、chat、eval 均按默认或显式 pipeline 正常运行。
+- documents、ingest、browse、chunks、search、ask、chat、eval 均按默认或显式 pipeline 正常运行。
 
 ### V-02 效果对比
 
-同一批 PDF 和普通文本/表格/List 问题，固定 embedding 模型、检索参数、LLM 和 prompt，分别运行 v1/v2。记录检索证据是否正确、回答是否准确完整、失败样例和入库成本。功能通过与效果改善分开报告，不预设提升比例。
+同一批 PDF 和固定问题分别运行 v1/v2。先由人工直接阅读 PDF，建立与 pipeline 无关的标准答案及必需 evidence group；再在检索运行前，把每个组映射到目标构建中的可接受 chunk。检索只返回 chunk，评估器依据映射派生组命中，不能用实际排名反向制定标准答案。
 
-固定题集、标准证据、指标和运行版本在集成验收前确定，不阻止架构设计。默认 pytest 不访问 OpenRouter、不下载模型；外部模型/LLM 测试显式标记。
+评估必须分别回答相关 chunk 是否前置、回答所需独立事实是否覆盖完整、相似订单是否造成跨文档污染。逐题保留可审计分子分母，并按 PDF 和全题集汇总；功能通过与效果改善分开报告，不预设提升比例。数据集分层、指标公式、空值规则、人工审核 HTML、版本汇总和变更控制以[检索效果评估需求](requirements/v2.0/retrieval-evaluation.md)为唯一权威。
 
-## 13. 架构与验收待完成事项
+本阶段只量化检索，不把 LLM 回答质量混入检索指标。默认 pytest 不访问 OpenRouter、不下载模型；外部模型/LLM 测试显式标记。
+
+## 13. 架构与验收边界
 
 以下事项按已确认边界处理：
 
 | 项目 | 当前处理 |
 | --- | --- |
-| Docling 类型到 ParsedDocument 的字段映射、产物路径和配置指纹 | 已在当前架构中设计并通过真实 SDK、PDF 和文件系统技术验证；实现时完成脱敏 fixture 契约测试，不新增业务语义 |
+| Docling 类型到 ParsedDocument 的字段映射、产物路径和配置指纹 | 已完成架构设计、真实 SDK/PDF/文件系统技术验证及 fixture 契约测试，不新增业务语义 |
 | Docling 部分页失败发布政策 | 等真实可复现样例，不在当前支持范围内造规则 |
-| 评估题集和报告格式 | 集成验收前完成 |
+| 检索评估题集和报告 | ground truth、双 pipeline test set、正式 JSON/HTML、汇总与对比均已按检索效果评估子需求完成 |
 
 当前没有尚待业务确认而可以由实现自行猜测的表头、表格转换或分块规则。

@@ -1,0 +1,192 @@
+{
+  "schema_version": "ground_truth_document_v1",
+  "document_key": "签字-ORDER-PERU-25-19-FONAFE--5a4c36e0022f4917",
+  "document_id": "5a4c36e0022f4917",
+  "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+  "relative_path": "签字-ORDER PERU 25-19 FONAFE.pdf",
+  "file_hash": "04d82628210338b261fbb0809d53bf5b2c85ca1f524940a0e3c9fcf712329e89",
+  "cases": [
+    {
+      "case_id": "PO-25-19-Q001",
+      "question": "订单PURCHASE ORDER N° 25-19-HPE中，ELCTO公司订购了哪些产品？每款产品的单价和数量是多少？订购的总金额是是多少？交货的计划是怎么样的？请详细说明每批次交付的具体日期，及每批次交付的产品和数量明细。",
+      "answerable": true,
+      "reference_answer": "ELCTO总共订购了两款产品：HXE12ES和HXE13ES。HXE12ES的单价为USD 4.56，数量总共116000件；HXE13ES的单价为USD 5.08，数量总共94000件。订购的总金额为USD 1006480.00。交货计划分为六批次：第一批次交付日期为2026年2月28日，交付HXE12ES 19330件和HXE13ES 16000件；第二批次交付日期为2026年4月9日，交付HXE12ES 19330件和HXE13ES 16000件；第三批次交付日期为2026年8月7日，交付HXE12ES 19330件和HXE13ES 15500件；第四批次交付日期为2026年12月5日，交付HXE12ES 19330件和HXE13ES 15500件；第五批次交付日期为2027年4月4日，交付HXE12ES 19330件和HXE13ES 15500件；第六批次交付日期为2027年8月2日，交付HXE12ES 19350件和HXE13ES 15500件。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "5a4c36e0022f4917",
+              "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+              "relative_path": "签字-ORDER PERU 25-19 FONAFE.pdf",
+              "page_numbers": [
+                1
+              ],
+              "text": "HXE12ES | 1´131,056.00 | USD 4.56\nHXE13ES | 109,130.00 | USD 5.08\nHXE33K-S1 | 8,368.00 | USD 13.49\nHXE34K-S1 | 45,938.00 | USD 14.37"
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "5a4c36e0022f4917",
+              "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+              "relative_path": "签字-ORDER PERU 25-19 FONAFE.pdf",
+              "page_numbers": [
+                2
+              ],
+              "text": "ELCTO | HXE12ES | TOTAL 116,000 | 19,330 | 19,330 | 19,330 | 19,330 | 19,330 | 19,350\nELCTO | HXE13ES | TOTAL 94,000 | 16,000 | 16,000 | 15,500 | 15,500 | 15,500 | 15,500"
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e3",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "5a4c36e0022f4917",
+              "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+              "relative_path": "签字-ORDER PERU 25-19 FONAFE.pdf",
+              "page_numbers": [
+                3
+              ],
+              "text": "1ST DELIVERY 28/02/2026\n2ND DELIVERY 09/04/2026\n3RD DELIVERY 07/08/2026\n4TH DELIVERY 05/12/2026\n5TH DELIVERY 04/04/2027\n6TH DELIVERY 02/08/2027"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-19-Q002",
+      "question": "订单PURCHASE ORDER N° 25-19-HPE中，ElUC公司订购了多少件HXE34K-S1？总金额是多少？",
+      "answerable": true,
+      "reference_answer": "ELUC订购了2000件HXE34K-S1，总金额为USD 28740.00。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "5a4c36e0022f4917",
+              "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+              "relative_path": "签字-ORDER PERU 25-19 FONAFE.pdf",
+              "page_numbers": [
+                1
+              ],
+              "text": "Three Phase 04 Wires meter Model: HXE34K-S1 | Unit price USD 14.37"
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "5a4c36e0022f4917",
+              "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+              "relative_path": "签字-ORDER PERU 25-19 FONAFE.pdf",
+              "page_numbers": [
+                3
+              ],
+              "text": "ELUC | HXE34K-S1 | TOTAL 2,000 | 1st Delivery 1,000 | 4th Delivery 1,000"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-19-Q003",
+      "question": "订单PURCHASE ORDER N° 25-19-HPE中，ENSA公司订购了哪些产品？每款产品的单价和数量是多少？订购的总金额是是多少？交货的计划是怎么样的？请详细说明每批次交付的具体日期，及每批次交付的产品和数量明细。",
+      "answerable": true,
+      "reference_answer": "ENSA总共订购了四款产品：HXE12ES、HXE13ES、HXE33K-S1和HXE34K-S1。HXE12ES的单价为USD 4.56，数量总共132180件；HXE13ES的单价为USD 5.08，数量总共9910件；HXE33K-S1的单价为USD 13.49，数量总共5018件；HXE34K-S1的单价为USD 14.37，数量总共10804件。订购的总金额为USD 876029.90。交货计划分为六批次：第一批次交付日期为2026年2月28日，交付HXE12ES 24330件、HXE13ES 1810件、HXE33K-S1 1153件和HXE34K-S1 2234件；第二批次交付日期为2026年4月9日，交付HXE12ES 23630件、HXE13ES 1710件、HXE33K-S1 853件和HXE34K-S1 1734件；第三批次交付日期为2026年8月7日，交付HXE12ES 21880件、HXE13ES 1710件、HXE33K-S1 753件和HXE34K-S1 1734件；第四批次交付日期为2026年12月5日，交付HXE12ES 21680件、HXE13ES 1610件、HXE33K-S1 753件和HXE34K-S1 1734件；第五批次交付日期为2027年4月4日，交付HXE12ES 20480件、HXE13ES 1560件、HXE33K-S1 753件和HXE34K-S1 1734件；第六批次交付日期为2027年8月2日，交付HXE12ES 20180件、HXE13ES 1510件、HXE33K-S1 753件和HXE34K-S1 1634件。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "5a4c36e0022f4917",
+              "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+              "relative_path": "签字-ORDER PERU 25-19 FONAFE.pdf",
+              "page_numbers": [
+                1
+              ],
+              "text": "HXE12ES | USD 4.56\nHXE13ES | USD 5.08\nHXE33K-S1 | USD 13.49\nHXE34K-S1 | USD 14.37"
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "5a4c36e0022f4917",
+              "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+              "relative_path": "签字-ORDER PERU 25-19 FONAFE.pdf",
+              "page_numbers": [
+                2
+              ],
+              "text": "ENSA | HXE12ES | TOTAL 132,180 | 24,330 | 23,630 | 21,880 | 21,680 | 20,480 | 20,180\nENSA | HXE13ES | TOTAL 9,910 | 1,810 | 1,710 | 1,710 | 1,610 | 1,560 | 1,510\nENSA | HXE33K-S1 | TOTAL 5,018 | 1,153 | 853 | 753 | 753 | 753 | 753"
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e3",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "5a4c36e0022f4917",
+              "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+              "relative_path": "签字-ORDER PERU 25-19 FONAFE.pdf",
+              "page_numbers": [
+                3
+              ],
+              "text": "ENSA | HXE34K-S1 | TOTAL 10,804 | 2,234 | 1,734 | 1,734 | 1,734 | 1,734 | 1,634"
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e4",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "5a4c36e0022f4917",
+              "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+              "relative_path": "签字-ORDER PERU 25-19 FONAFE.pdf",
+              "page_numbers": [
+                3
+              ],
+              "text": "1ST DELIVERY 28/02/2026\n2ND DELIVERY 09/04/2026\n3RD DELIVERY 07/08/2026\n4TH DELIVERY 05/12/2026\n5TH DELIVERY 04/04/2027\n6TH DELIVERY 02/08/2027"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-19-Q004",
+      "question": "订单PURCHASE ORDER N° 25-19-HPE，客户的付款条件是什么？",
+      "answerable": true,
+      "reference_answer": "货款将在货物在客户仓库被验收后30天内被支付。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "5a4c36e0022f4917",
+              "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+              "relative_path": "签字-ORDER PERU 25-19 FONAFE.pdf",
+              "page_numbers": [
+                3
+              ],
+              "text": "Customer´s Payment Terms: Payment will be done 30 days after the acceptance of the goods in customer´s warehouse."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

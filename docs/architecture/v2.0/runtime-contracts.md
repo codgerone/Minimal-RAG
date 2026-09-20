@@ -6,7 +6,7 @@
 
 Registry 只接受 `v1|v2`，默认值由 CLI 显式传入 `v2`。每个 runtime 在创建时验证 pipeline_id、固定 collection、固定 manifest 和 BuildConfig.pipeline_id 一致；错配抛 ConfigurationError，不打开 Chroma。
 
-`documents` 只装配 registry、manifest store、document registry 和 Chroma metadata reader；`ingest` 再装配 processor/embedder；`search/chunks` 装配 read store 和 query embedder；`ask/chat/eval --live` 才装配 LLM。
+`documents` 只装配 registry、manifest store、document registry 和 Chroma metadata reader；`browse/chunks` 只装配 read store，且 browse 的 Chroma `get` 明确排除 embeddings；`ingest` 再装配 processor/embedder；`search` 装配 read store 和 query embedder；默认 `eval` 另装配评估 repository、calculator 和 renderer，但不装配 LLM；`ask/chat/eval --live` 才装配 LLM。正式评估的详细依赖和产物以[检索效果评估架构契约](retrieval-evaluation.md)为准。
 
 ## 2. IndexIssue
 
@@ -107,7 +107,7 @@ class RagError(Exception):
 
 ## 5. CLI 参数和显示
 
-七个命令都接受 `--pipeline {v1,v2}`，省略等于 v2。`ingest --file` 与 `--prune` 互斥。`chunks --page` 必须为正整数；对 v2 匹配任一来源页，对 v1 匹配唯一页。
+八个命令都接受 `--pipeline {v1,v2}`，省略等于 v2。`ingest --file` 与 `--prune` 互斥。`chunks --page` 必须为正整数；对 v2 匹配任一来源页，对 v1 匹配唯一页。`browse` 在应用层按 relative_path、chunk_index、ID 稳定排序后执行 offset/limit，默认省略 sources_json 与 node_ids_json，只有 `--full-metadata` 展开。
 
 每个命令首个状态输出包含 `Pipeline: v1|v2`。documents 额外显示 collection 和 manifest；ingest summary 显示目标 collection 总数。目标索引不可用时不得改用另一 pipeline。
 

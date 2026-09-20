@@ -366,6 +366,8 @@ selection summary 的 slot 保存 slot_id/status/deferred_reason/docling_ref；g
 
 manifest 的 artifact_path 指向当前不可变 build 目录，而不是某个单文件。读取入口只通过 manifest 解析 active build，不扫描目录猜测。
 
+artifact 的文档目录名固定由“清洗并截断的源文件名 + `--` + document_id”组成；可读部分只服务人工浏览，稳定身份仍以完整 document_id 为准。build_id 子目录即正式不可变快照，成功发布新 build 后默认只保留 manifest 引用的最新一份。原始 Docling JSON 固定命名为 `raw-docling-document.json`，不再单独设置只有一个文件的 `raw/` 目录。
+
 ## 8. BuildConfig 引用
 
 BuildConfig 使用[运行与持久化模型契约第 1 节](runtime-persistence-models.md)的判别联合，本文件不再保留第二份字段定义。任何参与正文、来源、winner 或向量计算的字段变化均改变 fingerprint；运行路径、诊断、检索和展示配置不进入 fingerprint。
@@ -374,8 +376,8 @@ BuildConfig 使用[运行与持久化模型契约第 1 节](runtime-persistence-
 
 | 配置 | 默认值 | 用途 |
 | --- | --- | --- |
-| RAG_DB_PATH | `.rag/chroma` | 两条链路共享 Chroma 根目录 |
-| RAG_ARTIFACTS_PATH | `.rag/artifacts` | v2 产物根目录 |
+| RAG_DB_PATH | `.rag/system-v2/chroma` | 当前系统两条链路共享 Chroma 根目录 |
+| RAG_ARTIFACTS_PATH | `.rag/system-v2/artifacts` | 当前系统 v2 产物根目录 |
 | EMBEDDING_MODEL | `intfloat/multilingual-e5-small` | v1/v2 embedding 与 tokenizer 模型 |
 | EMBEDDING_MODEL_REVISION | `614241f622f53c4eeff9890bdc4f31cfecc418b3` | 固定模型/tokenizer snapshot；不能为空或使用可变别名 |
 | CHUNK_SIZE | `700` | 仅 v1 |

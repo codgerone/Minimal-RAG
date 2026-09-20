@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import re
 from collections.abc import Sequence
 from pathlib import Path, PurePosixPath
 
@@ -11,6 +12,7 @@ from rag.models import SourceDocument
 
 
 HASH_READ_SIZE = 1024 * 1024
+ARTIFACT_NAME_MAX_LENGTH = 56
 
 
 def normalize_relative_path(path: Path) -> str:
@@ -20,6 +22,14 @@ def normalize_relative_path(path: Path) -> str:
 def make_document_id(relative_path: str) -> str:
     normalized = PurePosixPath(relative_path.replace("\\", "/")).as_posix()
     return hashlib.sha256(normalized.casefold().encode("utf-8")).hexdigest()[:16]
+
+
+def make_artifact_document_name(relative_path: str, document_id: str) -> str:
+    """Return a readable, Windows-safe directory name with stable identity."""
+    stem = PurePosixPath(relative_path.replace("\\", "/")).stem
+    readable = re.sub(r"[^\w.-]+", "-", stem, flags=re.UNICODE).strip(" .-_")
+    readable = re.sub(r"-+", "-", readable)[:ARTIFACT_NAME_MAX_LENGTH].rstrip(" .-_")
+    return f"{readable or 'document'}--{document_id}"
 
 
 def hash_file(path: Path) -> str:
@@ -127,4 +137,3 @@ def resolve_document_selector(
         f"未找到文档 {selector!r}。当前可用文档：{available}",
         "请检查文件名，或先把 PDF 放入 documents/。",
     )
-

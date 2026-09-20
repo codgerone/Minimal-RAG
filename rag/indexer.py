@@ -4,10 +4,13 @@ from __future__ import annotations
 
 from dataclasses import replace
 from datetime import UTC, datetime
+import hashlib
+import json
+from uuid import uuid4
 from typing import Callable
 
-from rag.chunker import chunk_pages, make_splitter
 from rag.config import Settings
+from rag.document_processor import V1DocumentProcessor
 from rag.document_registry import discover_documents, resolve_document_selector
 from rag.embeddings import E5Embedder
 from rag.errors import DocumentDirectoryError, ManifestError, RagError, VectorStoreError
@@ -20,6 +23,7 @@ from rag.manifest import (
 )
 from rag.models import (
     BuiltDocument,
+    DocumentBuildResult,
     DocumentState,
     IngestDocumentResult,
     IngestSummary,
@@ -27,7 +31,7 @@ from rag.models import (
     ManifestDocument,
     SourceDocument,
 )
-from rag.pdf_parser import parse_pdf
+from rag.pipeline_registry import DocumentProcessor
 from rag.vector_store import ChromaVectorStore
 
 
@@ -46,18 +50,33 @@ class Indexer:
         embedder: E5Embedder,
         vector_store: ChromaVectorStore,
         clock: Callable[[], datetime] = utc_now,
+        document_processor: DocumentProcessor | None = None,
     ) -> None:
         self.settings = settings
         self.embedder = embedder
         self.vector_store = vector_store
         self.clock = clock
-        self.splitter = make_splitter(settings.chunk_size, settings.chunk_overlap)
+        self.document_processor = document_processor or V1DocumentProcessor(
+            settings.chunk_size, settings.chunk_overlap
+        )
+
+    def _new_build_id(self, source: SourceDocument) -> str:
+        config_payload = json.dumps(
+            {
+                "embedding_model": self.settings.embedding_model,
+                "chunk_size": self.settings.chunk_size,
+                "chunk_overlap": self.settings.chunk_overlap,
+            },
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode("utf-8")
+        config_hash = hashlib.sha256(config_payload).hexdigest()
+        timestamp = self.clock().astimezone(UTC).strftime("%Y%m%d%H%M%S")
+        return f"{timestamp}-{source.file_hash[:12]}-{config_hash[:12]}-{uuid4().hex[:8]}"
 
     def build_document_payload(self, source: SourceDocument) -> BuiltDocument:
-        pages = parse_pdf(source)
-        chunks = chunk_pages(pages, source.file_hash, self.splitter)
-        if not chunks:
-            raise ManifestError(f"文档没有生成任何 chunk：{source.relative_path}")
+        result = self.document_processor.process(source, self._new_build_id(source))
+        chunks = result.chunks
         embeddings = self.embedder.embed_passages([chunk.text for chunk in chunks])
         if len(chunks) != len(embeddings):
             raise ManifestError(
@@ -71,9 +90,7 @@ class Indexer:
         if len({chunk.chunk_id for chunk in chunks}) != len(chunks):
             raise ManifestError(f"文档 {source.relative_path} 生成了重复 Chunk ID。")
         return BuiltDocument(
-            source=source,
-            pages=tuple(pages),
-            chunks=tuple(chunks),
+            result=result,
             embeddings=tuple(tuple(vector) for vector in embeddings),
         )
 
@@ -92,15 +109,15 @@ class Indexer:
         self, manifest: Manifest, built: BuiltDocument
     ) -> Manifest:
         timestamp = _format_time(self.clock())
-        source = built.source
+        source = built.result.source
         documents = dict(manifest.documents)
         documents[source.document_id] = ManifestDocument(
             relative_path=source.relative_path,
             document_name=source.document_name,
             file_hash=source.file_hash,
-            page_count=len(built.pages),
-            character_count=sum(len(page.text) for page in built.pages),
-            chunk_count=len(built.chunks),
+            page_count=built.result.stats.page_count,
+            character_count=built.result.stats.character_count,
+            chunk_count=built.result.stats.chunk_count,
             indexed_at=timestamp,
         )
         return replace(manifest, documents=documents, updated_at=timestamp)
@@ -108,12 +125,12 @@ class Indexer:
     def _replace_one(
         self, manifest: Manifest, built: BuiltDocument
     ) -> Manifest:
-        document_id = built.source.document_id
+        document_id = built.result.source.document_id
         self.vector_store.delete_document(document_id)
-        self.vector_store.add_chunks(built.chunks, built.embeddings)
-        if self.vector_store.count_document(document_id) != len(built.chunks):
+        self.vector_store.add_chunks(built.result.chunks, built.embeddings)
+        if self.vector_store.count_document(document_id) != len(built.result.chunks):
             raise VectorStoreError(
-                f"写入后文档计数校验失败：{built.source.relative_path}"
+                f"写入后文档计数校验失败：{built.result.source.relative_path}"
             )
         updated = self._record_success(manifest, built)
         save_manifest_atomic(self.settings.manifest_path, updated)
@@ -274,12 +291,12 @@ class Indexer:
         self.vector_store.recreate_collection()
         manifest = make_empty_manifest(self.settings)
         for built in built_documents:
-            self.vector_store.add_chunks(built.chunks, built.embeddings)
-            if self.vector_store.count_document(built.source.document_id) != len(
-                built.chunks
+            self.vector_store.add_chunks(built.result.chunks, built.embeddings)
+            if self.vector_store.count_document(built.result.source.document_id) != len(
+                built.result.chunks
             ):
                 raise VectorStoreError(
-                    f"全量重建计数校验失败：{built.source.relative_path}"
+                    f"全量重建计数校验失败：{built.result.source.relative_path}"
                 )
             manifest = self._record_success(manifest, built)
         expected = sum(item.chunk_count for item in manifest.documents.values())
@@ -299,8 +316,7 @@ class Indexer:
             0,
             actual,
             tuple(
-                IngestDocumentResult(item.source.relative_path, "rebuilt")
+                IngestDocumentResult(item.result.source.relative_path, "rebuilt")
                 for item in built_documents
             ),
         )
-

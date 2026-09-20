@@ -3,11 +3,12 @@ from pathlib import Path
 import pymupdf
 import pytest
 
-from rag.config import Settings
+from rag.config import SelectedPipelineSettings, Settings, select_pipeline
 from rag.document_registry import discover_documents
 from rag.errors import IndexNotReadyError
 from rag.indexer import Indexer
-from rag.retriever import Retriever
+from rag.retriever import Retriever, query_with_stable_ties
+from rag.models import RetrievalHit
 from rag.vector_store import ChromaVectorStore
 
 
@@ -28,22 +29,14 @@ def _pdf(path: Path, text: str) -> None:
         pdf.save(path)
 
 
-def _settings(tmp_path: Path) -> Settings:
+def _settings(tmp_path: Path) -> SelectedPipelineSettings:
     documents = tmp_path / "documents"
     documents.mkdir()
-    return Settings(
-        tmp_path,
-        documents,
-        tmp_path / ".rag" / "chroma",
-        tmp_path / ".rag" / "manifest.json",
-        "collection",
-        "fake",
-        100,
-        10,
-        4,
-        None,
-        "llm",
-    )
+    return select_pipeline(Settings(
+        tmp_path, documents, tmp_path / ".rag/system-v2/chroma",
+        tmp_path / ".rag/system-v2/artifacts", "fake", "revision",
+        100, 10, 512, 32, 4, False, None, "llm",
+    ), "v1")
 
 
 def test_retrieval_crosses_documents_filters_and_sorts(tmp_path: Path) -> None:
@@ -76,4 +69,52 @@ def test_retrieval_refuses_stale_index(tmp_path: Path) -> None:
 
     with pytest.raises(IndexNotReadyError, match="尚未索引"):
         Retriever(settings, embedder, store).search("alpha")  # type: ignore[arg-type]
+
+
+class EqualDistanceStore:
+    def __init__(self) -> None:
+        self.requested: list[int] = []
+
+    def count_all(self) -> int:
+        return 8
+
+    def count_document(self, document_id: str) -> int:
+        return 8
+
+    def query(self, embedding, top_k: int, document_id=None):
+        self.requested.append(top_k)
+        ids = tuple(reversed([f"chunk-{index:02d}" for index in range(top_k)]))
+        return [
+            RetrievalHit(item, "doc", "doc.pdf", "doc.pdf", 1, index,
+                         item, 0.0)
+            for index, item in enumerate(ids)
+        ]
+
+
+def test_stable_ties_expand_boundary_and_return_strict_k() -> None:
+    store = EqualDistanceStore()
+
+    hits = query_with_stable_ties(store, [1.0, 0.0], 3)  # type: ignore[arg-type]
+
+    assert store.requested == [4, 8]
+    assert [item.chunk_id for item in hits] == ["chunk-00", "chunk-01", "chunk-02"]
+
+
+class DistinctBoundaryStore(EqualDistanceStore):
+    def query(self, embedding, top_k: int, document_id=None):
+        self.requested.append(top_k)
+        return [
+            RetrievalHit(f"chunk-{index:02d}", "doc", "doc.pdf", "doc.pdf",
+                         1, index, str(index), float(index))
+            for index in range(top_k)
+        ]
+
+
+def test_stable_ties_do_not_expand_past_distinct_boundary() -> None:
+    store = DistinctBoundaryStore()
+
+    hits = query_with_stable_ties(store, [1.0, 0.0], 3)  # type: ignore[arg-type]
+
+    assert store.requested == [4]
+    assert [item.chunk_id for item in hits] == ["chunk-00", "chunk-01", "chunk-02"]
 

@@ -1,0 +1,50 @@
+{
+  "schema_version": "evaluation_comparison_v1",
+  "generated_at": "2026-09-20T05:29:33.838900Z",
+  "comparisons": [
+    {
+      "baseline_run_id": "20260920T052848Z-v1-87059c0f-k3",
+      "candidate_run_id": "20260920T052923Z-v2-029ccb26-k3",
+      "status": "strictly_comparable",
+      "difference_codes": [],
+      "metric_deltas": [
+        {
+          "metric_name": "question_hit_rate_at_k",
+          "baseline_value": 0.041666666666666664,
+          "candidate_value": 0.20833333333333334,
+          "absolute_delta": 0.16666666666666669
+        },
+        {
+          "metric_name": "macro_evidence_group_recall_at_k",
+          "baseline_value": 0.041666666666666664,
+          "candidate_value": 0.1388888888888889,
+          "absolute_delta": 0.09722222222222224
+        },
+        {
+          "metric_name": "complete_coverage_rate_at_k",
+          "baseline_value": 0.041666666666666664,
+          "candidate_value": 0.08333333333333333,
+          "absolute_delta": 0.041666666666666664
+        },
+        {
+          "metric_name": "macro_chunk_precision_at_k",
+          "baseline_value": 0.05555555555555555,
+          "candidate_value": 0.1111111111111111,
+          "absolute_delta": 0.05555555555555555
+        },
+        {
+          "metric_name": "mean_reciprocal_rank_at_k",
+          "baseline_value": 0.09027777777777778,
+          "candidate_value": 0.1597222222222222,
+          "absolute_delta": 0.06944444444444443
+        },
+        {
+          "metric_name": "macro_cross_document_contamination_at_k",
+          "baseline_value": 0.5416666666666666,
+          "candidate_value": 0.6527777777777778,
+          "absolute_delta": 0.11111111111111116
+        }
+      ]
+    }
+  ]
+}

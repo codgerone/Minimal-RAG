@@ -12,13 +12,16 @@ def settings(tmp_path: Path) -> Settings:
     return Settings(
         project_root=tmp_path,
         documents_dir=tmp_path / "documents",
-        db_path=tmp_path / ".rag" / "chroma",
-        manifest_path=tmp_path / ".rag" / "manifest.json",
-        collection_name="minimal_rag_documents",
+        db_path=tmp_path / ".rag/system-v2/chroma",
+        artifacts_path=tmp_path / ".rag/system-v2/artifacts",
         embedding_model="intfloat/multilingual-e5-small",
-        chunk_size=700,
-        chunk_overlap=100,
+        embedding_model_revision="revision",
+        v1_chunk_size=700,
+        v1_chunk_overlap=100,
+        v2_max_input_tokens=512,
+        v2_text_overlap_tokens=32,
         top_k=4,
+        diagnostics_enabled=False,
         openrouter_api_key=None,
         openrouter_model="test-model",
     )
@@ -31,9 +34,9 @@ def test_valid_settings(settings: Settings) -> None:
 @pytest.mark.parametrize(
     ("field", "value"),
     [
-        ("chunk_size", 0),
-        ("chunk_overlap", -1),
-        ("chunk_overlap", 700),
+        ("v1_chunk_size", 0),
+        ("v1_chunk_overlap", -1),
+        ("v1_chunk_overlap", 700),
         ("top_k", 0),
     ],
 )

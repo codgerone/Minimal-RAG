@@ -4,6 +4,7 @@ import pytest
 
 from rag.document_registry import (
     discover_documents,
+    make_artifact_document_name,
     make_document_id,
     resolve_document_selector,
 )
@@ -36,6 +37,17 @@ def test_document_id_depends_on_path_not_content(tmp_path: Path) -> None:
     assert first.document_id == second.document_id
     assert first.file_hash != second.file_hash
     assert make_document_id("Order.PDF") == make_document_id("order.pdf")
+
+
+def test_artifact_document_name_is_readable_safe_and_stably_identified() -> None:
+    document_id = "817cfff2927c6c65"
+
+    name = make_artifact_document_name("nested/E001-602:采购明细?.pdf", document_id)
+
+    assert name == "E001-602-采购明细--817cfff2927c6c65"
+    assert make_artifact_document_name("a" * 80 + ".pdf", document_id) == (
+        "a" * 56 + "--817cfff2927c6c65"
+    )
 
 
 def test_selector_supports_unique_basename_and_rejects_traversal(

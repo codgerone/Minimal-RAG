@@ -2,7 +2,11 @@ from pathlib import Path
 
 import pytest
 
-from rag.models import TextChunk
+from rag.models import (
+    ArtifactStageResult, ChunkSource, DocumentBuildResult, DocumentBuildStats,
+    SourceDocument, TextChunk, V2DocumentChunk, V2RetrievalHit,
+)
+from rag.v2.common import BoundingBox, PageSpan
 from rag.vector_store import ChromaVectorStore
 
 
@@ -52,9 +56,51 @@ def test_explicit_vectors_persist_query_filter_and_delete(
     assert reopened.count_document("a") == 0
 
 
+def test_list_records_returns_sorted_text_and_metadata_without_embeddings(
+    store: ChromaVectorStore,
+) -> None:
+    chunks = [
+        _chunk("b-p1-c01", "b", 1, 1, "beta second"),
+        _chunk("a-p1-c00", "a", 1, 0, "alpha first"),
+    ]
+    store.add_chunks(chunks, [[0.0, 1.0], [1.0, 0.0]])
+
+    records = store.list_records()
+
+    assert [item.record_id for item in records] == ["a-p1-c00", "b-p1-c01"]
+    assert records[0].document == "alpha first"
+    assert records[0].metadata["document_id"] == "a"
+    assert not hasattr(records[0], "embedding")
+    assert [item.record_id for item in store.list_records("b")] == ["b-p1-c01"]
+
+
 def test_write_rejects_mismatched_embedding_count(
     store: ChromaVectorStore,
 ) -> None:
     with pytest.raises(Exception, match="数量不一致"):
         store.add_chunks([_chunk("a", "a", 1, 0, "alpha")], [])
+
+
+def test_v2_metadata_round_trip_preserves_multi_page_sources_and_page_filter(store, tmp_path: Path) -> None:
+    staging = tmp_path / "stage"
+    staging.mkdir()
+    paths = [staging / name for name in ("raw.json", "parsed.json", "chunks.json", "summary.json", "review.html")]
+    for path in paths:
+        path.write_text("x", encoding="utf-8")
+    artifact = ArtifactStageResult(staging, *paths, None, 0, 1)
+    source = SourceDocument("doc", "a.pdf", "documents/a.pdf", tmp_path / "a.pdf", "hash")
+    chunk_source = ChunkSource("node", (
+        PageSpan(1, BoundingBox(0, 0, 1, 1), "p1"), PageSpan(2, None, "p2"),
+    ), 0, 4, False, "none")
+    chunk = V2DocumentChunk("doc-v2-c000000", "doc", "v2", 0, "text", "text", 6,
+                            (chunk_source,), None, 0, 1)
+    result = DocumentBuildResult(source, "v2", "build", (chunk,), DocumentBuildStats(2, 4, 1), artifact)
+    store.add_v2_build(result, ((1.0, 0.0),), "fingerprint")
+
+    restored = store.list_chunks("doc", page=2)
+    assert restored == [chunk]
+    hit = store.query((1.0, 0.0), 1)[0]
+    assert isinstance(hit, V2RetrievalHit)
+    assert hit.page_numbers == (1, 2)
+    assert hit.sources == (chunk_source,)
 

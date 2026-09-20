@@ -1,0 +1,124 @@
+{
+  "schema_version": "test_set_document_v1",
+  "document_key": "签字-ORDER-PERU-25-19-FONAFE--5a4c36e0022f4917",
+  "document_id": "5a4c36e0022f4917",
+  "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+  "relative_path": "签字-ORDER PERU 25-19 FONAFE.pdf",
+  "file_hash": "04d82628210338b261fbb0809d53bf5b2c85ca1f524940a0e3c9fcf712329e89",
+  "cases": [
+    {
+      "case_id": "PO-25-19-Q001",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "status": "mapped",
+          "acceptable_chunk_sets": [
+            [
+              "5a4c36e0022f4917-p1-c02"
+            ]
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "status": "mapped",
+          "acceptable_chunk_sets": [
+            [
+              "5a4c36e0022f4917-p2-c03",
+              "5a4c36e0022f4917-p2-c07"
+            ]
+          ]
+        },
+        {
+          "evidence_group_id": "e3",
+          "status": "mapped",
+          "acceptable_chunk_sets": [
+            [
+              "5a4c36e0022f4917-p3-c04"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-19-Q002",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "status": "mapped",
+          "acceptable_chunk_sets": [
+            [
+              "5a4c36e0022f4917-p1-c03"
+            ]
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "status": "mapped",
+          "acceptable_chunk_sets": [
+            [
+              "5a4c36e0022f4917-p3-c01"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-19-Q003",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "status": "mapped",
+          "acceptable_chunk_sets": [
+            [
+              "5a4c36e0022f4917-p1-c02",
+              "5a4c36e0022f4917-p1-c03"
+            ]
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "status": "mapped",
+          "acceptable_chunk_sets": [
+            [
+              "5a4c36e0022f4917-p2-c04",
+              "5a4c36e0022f4917-p2-c07",
+              "5a4c36e0022f4917-p2-c08"
+            ]
+          ]
+        },
+        {
+          "evidence_group_id": "e3",
+          "status": "mapped",
+          "acceptable_chunk_sets": [
+            [
+              "5a4c36e0022f4917-p3-c01"
+            ]
+          ]
+        },
+        {
+          "evidence_group_id": "e4",
+          "status": "mapped",
+          "acceptable_chunk_sets": [
+            [
+              "5a4c36e0022f4917-p3-c04"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-19-Q004",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "status": "mapped",
+          "acceptable_chunk_sets": [
+            [
+              "5a4c36e0022f4917-p3-c07"
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

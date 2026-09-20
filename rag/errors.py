@@ -54,10 +54,13 @@ class ManifestError(RagError):
     pass
 
 
+class EvaluationDataError(RagError):
+    pass
+
+
 class IndexNotReadyError(RagError):
     pass
 
 
 class LlmServiceError(RagError):
     exit_code = 4
-

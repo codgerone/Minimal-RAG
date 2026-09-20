@@ -95,7 +95,34 @@
 - winner HTML 文件仍被打开时，删除 build 目录实际返回 WinError 32；因此 manifest 提交后的旧 artifact 清理必须是非阻断 warning，并允许以后重试。
 - Windows 上对只读文件描述符调用 fsync 返回 Bad file descriptor；实现必须用可写临时文件完成 flush/fsync。
 
-## 6. 结论与剩余实施验证
+## 6. 实现后真实双链路冒烟验证
+
+2026-09-16 使用隔离输出目录执行：
+
+```text
+.venv/Scripts/python.exe scripts/validate_v2_runtime.py --pipeline v2 --pdf documents/E001-602.pdf --output tmp/v2-runtime-validation-0916a
+.venv/Scripts/python.exe scripts/validate_v2_runtime.py --pipeline v1 --pdf documents/E001-602.pdf --output tmp/v1-runtime-validation-0917b
+```
+
+结果：通过。RAG 正式 V2 入口独立完成真实 PDF 的 Docling 映射、九策略提取、准入/分组/评分、winner 融合、结构化分块、E5 embedding、Chroma 发布、manifest 发布、健康检查和查询；生成 1 个 slot、1 个 group、1 个 winner、4 个最终 chunk（2 个 text、2 个 table），最终最大输入为 425 tokens，collection count 为 4，健康检查无问题，查询返回 3 条结果。输出保存在可再生的 `tmp/v2-runtime-validation-0916a/`，不读取 `experiments/`，也不改写项目正式 `.rag` 数据。
+
+运行中 tokenizer 对分块前的 537-token 探针给出超过模型 512 上限的提示；chunker 随后继续拆分，最终入库输入均低于硬上限。这是“关闭静默截断并以最终 passage 重算”的预期证据，不是超限入库。Hugging Face refs 缓存仍因沙箱权限无法更新时间戳，但缓存模型加载、构建和查询均成功。
+
+同一 PDF 的 V1 隔离验证也通过：独立发布到 `minimal_rag_documents_v1` 和 `.rag/manifest.v1.json`，生成 4 个旧式页内 chunk，健康检查无问题并返回 3 条查询结果。两次验证使用不同临时根目录，证明两条链路无需共享或改写索引即可分别运行；该结果属于功能贯通证据，不代表 V2 效果优于 V1。
+
+2026-09-17 又使用 `scripts/compare_v1_v2.py` 在同一隔离根连续构建现有 5 份 PDF。初次运行发现第三方提取器在 Windows 下延迟持有 staging 内输入副本，造成后续 artifact 发布及自动恢复无法删除该文件。实现随后改为让提取器读取权威源文件，Docling 使用 `DocumentStream(BytesIO)` 避免 Unicode 路径和文件句柄问题，且 `.work` 必须清理成功后才进入发布。修复后的批量重跑中 V1/V2 均构建 5/5 文档、健康检查 usable、无 recovery journal 或 staging 残留。正式检索效果见[检索效果汇总](../../../validation/retrieval/system-v2.0/summary.md)。
+
+## 6. 正式检索评估：同距离 Top-K 边界（已关闭）
+
+2026-09-18 使用 `scripts/validate_chroma_tie_boundary.py` 对 Chroma 1.5.9 建立隔离 collection，写入 8 条不同 ID、完全相同 embedding 的记录，以同一向量分别查询 K=1、3、5、8。验证包含同进程 10 轮和独立 Python 进程 4 轮，不读取或修改 `.rag`。
+
+结果：14 轮产生 5 组不同结果；K=1 曾分别返回 `chunk-00`、`chunk-02`、`chunk-04`、`chunk-05`，K=3/5 的候选集合也变化；只有取全部 8 条时集合稳定。不同 K 的结果不保证嵌套。因此，在 Chroma 已经严格截取 K 条之后再按 `(distance, chunk_id)` 排序，只能稳定已返回顺序，不能恢复被排除的同距离候选。
+
+用户确认采用严格 K 的确定性适配：初始请求 K+1，若第 K 条与候选池末条距离完全相同则倍增候选数，直到越过同分边界或覆盖全部作用域，最后按 `(distance, chunk_id)` 排序并严格取 K。脚本按该算法再次执行同进程 10 轮和独立进程 4 轮；虽然原始 Chroma 仍产生 5 组结果，适配后的 K=1、3、5、8 全部稳定且互为前缀，验证通过。
+
+结论：技术门已关闭。VectorStore 负责按指定候选数查询，Retriever 负责自适应扩展和最终稳定排序；search、ask、chat 和正式 eval 共用该行为。极端全同分时允许读取当前检索作用域全部候选，但最终仍严格返回 K 条。
+
+## 7. 结论与剩余实施验证
 
 四项编码前技术门均已得到足以确定适配方式的证据：Docling 字段/转换、Chroma snapshot、tokenizer 计数和 Windows 原子文件操作均可按当前架构实现。验证引起的架构修订为：关闭 Docling page image 生成、增加 docling-core 版本、固定 embedding revision、保留 Windows cleanup warning 和不支持目录 fsync的事实。
 

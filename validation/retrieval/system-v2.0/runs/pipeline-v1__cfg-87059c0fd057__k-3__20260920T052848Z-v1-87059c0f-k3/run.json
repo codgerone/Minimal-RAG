@@ -1,0 +1,104 @@
+{
+  "run_id": "20260920T052848Z-v1-87059c0f-k3",
+  "status": "completed",
+  "system_version": "2.0",
+  "pipeline_id": "v1",
+  "collection_name": "minimal_rag_documents_v1",
+  "build_config": {
+    "parser": {
+      "rule_version": "pymupdf_text_v1"
+    },
+    "chunker": {
+      "chunk_size_characters": 300,
+      "chunk_overlap_characters": 50,
+      "rule_version": "recursive_character_v1",
+      "separator_version": "legacy_default_v1"
+    },
+    "tokenizer": {
+      "model_name": "intfloat/multilingual-e5-small",
+      "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+      "passage_prefix": "passage: ",
+      "query_prefix": "query: ",
+      "add_special_tokens": true,
+      "truncation": false
+    },
+    "embedding": {
+      "model_name": "intfloat/multilingual-e5-small",
+      "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+      "vector_dimension": 384,
+      "normalize_embeddings": true
+    },
+    "dependency_versions": {
+      "pymupdf": "1.28.0",
+      "sentence_transformers": "5.6.1",
+      "transformers": "5.14.1",
+      "chromadb": "1.5.9",
+      "langchain_text_splitters": "1.1.2"
+    },
+    "schema_version": "build_config_v1",
+    "pipeline_id": "v1"
+  },
+  "build_config_fingerprint": "87059c0fd057e5f3c6fe26b9117b4580f57662791079c1afd0ff3c3e019c0750",
+  "query_config": {
+    "top_k": 3,
+    "query_prefix": "query: ",
+    "document_filter": null,
+    "question_normalization": "strip_v1",
+    "distance_order": "ascending",
+    "tie_break_order": "chunk_id_ascending",
+    "strict_top_k": true
+  },
+  "evaluation_protocol_version": "retrieval_evaluation_v2",
+  "ground_truth": {
+    "dataset_version": "2.0.0",
+    "ground_truth_fingerprint": "4612ed552d4a523a22af19989b8e2b40589d3dc174b891400b9133bb5f98ac23"
+  },
+  "test_set": {
+    "test_set_version": "2.0.0",
+    "test_set_fingerprint": "e3f17f78d804deb7d39d7e1c32896633b8f3127a7347b2c70b13fb8c60aaa53a",
+    "annotation_rule_version": "evidence_chunk_mapping_v2"
+  },
+  "started_at": "2026-09-20T05:28:48.036705Z",
+  "completed_at": "2026-09-20T05:28:57.297792Z",
+  "documents": [
+    {
+      "document_key": "Contrato-N-105-2025-LP-002-2024-FONAFE-Adquisición-de-me--d359c37e0bc3c87a",
+      "json_path": "documents/Contrato-N-105-2025-LP-002-2024-FONAFE-Adquisición-de-me--d359c37e0bc3c87a.json",
+      "json_sha256": "1dbda38db81b5b458dd7b688bce14dbb238f1abd5392e2b15b21083d2a92b29a",
+      "html_path": "documents/Contrato-N-105-2025-LP-002-2024-FONAFE-Adquisición-de-me--d359c37e0bc3c87a.html",
+      "html_sha256": "4d7d4a4992ddb24fa7ec8ecd68cb1dbd1b2fa76afc60060d25462a8c6210d76f"
+    },
+    {
+      "document_key": "E001-602--817cfff2927c6c65",
+      "json_path": "documents/E001-602--817cfff2927c6c65.json",
+      "json_sha256": "1e87b10674d69d7d0cf7b8796fce28bb27c498cffef621e372aa4182444b6f64",
+      "html_path": "documents/E001-602--817cfff2927c6c65.html",
+      "html_sha256": "dc9b74fbd0a12dd95cd1c05bd66ef3b93e7050810b83e3a6efdf4517c8e9304d"
+    },
+    {
+      "document_key": "ORDER-PERU-24-12-ANDET--169a1f2133fe5643",
+      "json_path": "documents/ORDER-PERU-24-12-ANDET--169a1f2133fe5643.json",
+      "json_sha256": "28f6000077ebe0b2f0fe6bd9ece752ad19fcb6bc8882f1183d07304bb1376c92",
+      "html_path": "documents/ORDER-PERU-24-12-ANDET--169a1f2133fe5643.html",
+      "html_sha256": "18916d0a96bc9fa9b08b4691f520498bd8a76526bbcad3b83927bb555038f8b1"
+    },
+    {
+      "document_key": "ORDER-PERU-25-15-ANDET-VF--5883b02cd922a64f",
+      "json_path": "documents/ORDER-PERU-25-15-ANDET-VF--5883b02cd922a64f.json",
+      "json_sha256": "2d1af53c7b3dfb7c4b2a03d025b8f7d7549bc9a5ee142ac269a03910288216b4",
+      "html_path": "documents/ORDER-PERU-25-15-ANDET-VF--5883b02cd922a64f.html",
+      "html_sha256": "d7d520e396944858fff3b8921c4163a0fb3d42bcaa9c1b20767bbac8760f0b92"
+    },
+    {
+      "document_key": "签字-ORDER-PERU-25-19-FONAFE--5a4c36e0022f4917",
+      "json_path": "documents/签字-ORDER-PERU-25-19-FONAFE--5a4c36e0022f4917.json",
+      "json_sha256": "05e0f914a5870af9d552f33f9ec7a784c5f05c4b4c35c1dd69747a8af2ed8bcd",
+      "html_path": "documents/签字-ORDER-PERU-25-19-FONAFE--5a4c36e0022f4917.html",
+      "html_sha256": "447c9147e4b0ff207aeffae3de2ac2211160687b9fcbbbcf06388000767e49b6"
+    }
+  ],
+  "aggregate_path": "aggregate.json",
+  "aggregate_sha256": "6daca1e31ba05368d1281324e6120d0145b22f561a67a88cff8e7d5ba531a69a",
+  "error": null,
+  "schema_version": "evaluation_run_v1"
+}

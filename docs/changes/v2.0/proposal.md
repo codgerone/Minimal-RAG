@@ -1,6 +1,6 @@
 # V2.0 增量需求：结构化 PDF 解析与多链路 RAG
 
-更新日期：2026-09-14。状态：已确认增量需求，尚未实现。
+更新日期：2026-09-18。状态：核心 RAG 增量已交付；正式检索评估闭环待按现行需求与架构完成。
 
 本次在现有纯文本 RAG 上新增结构化处理链路，保留旧链路供对比。升级基线包含已实现的 V1.1 索引健康与引导恢复能力。下文 v1/v2 是可选择的处理链路编号。
 
@@ -19,10 +19,10 @@
 
 ```text
 v1：PDF → PyMuPDF 按页提取纯文本 → 按页递归字符分块（默认700字符、重叠目标100字符）
-        → embedding → minimal_rag_documents_v1 + .rag/manifest.v1.json
+        → embedding → minimal_rag_documents_v1 + .rag/system-v2/pipelines/v1/manifest.json
 v2：PDF → Docling 版面 + 四工具表格恢复与选优
         → 表头判定与表格文本化 → 完整 ParsedDocument → 结构分块 → embedding
-        → minimal_rag_documents_v2 + .rag/manifest.v2.json
+        → minimal_rag_documents_v2 + .rag/system-v2/pipelines/v2/manifest.json
 检索、问答、聊天和评估使用所选链路的 collection。
 ```
 
@@ -37,7 +37,7 @@ v2：PDF → Docling 版面 + 四工具表格恢复与选优
 
 ### P-02 所有相关命令支持相同选择
 
-`documents`、`ingest`、`chunks`、`search`、`ask`、`chat`、`eval` 均支持 `--pipeline`，输出实际采用的编号。例如：
+`documents`、`ingest`、`browse`、`chunks`、`search`、`ask`、`chat`、`eval` 均支持 `--pipeline`，输出实际采用的编号。例如：
 
 ```text
 uv run python -m rag ingest --pipeline v2
@@ -45,7 +45,7 @@ uv run python -m rag search "交付数量是多少？" --pipeline v1
 uv run python -m rag eval --pipeline v2
 ```
 
-聊天会话内固定链路。所选链路无可用索引时，引导构建该链路索引，不自动改用另一条链路。以上为目标接口，待实现。
+聊天会话内固定链路。所选链路无可用索引时，引导构建该链路索引，不自动改用另一条链路。以上接口与隔离行为均已实现。
 
 ## 3. 新增结构化 PDF 解析
 
@@ -201,7 +201,7 @@ chunk 保存原节点、原页面、父单元、片段次序、原文范围及�
 
 manifest 保存一份该链路的构建配置，包含影响结果的 parser、文本化、chunker、embedding 参数及规则修订。当前配置只与同一链路的已有记录比较。
 
-v1 使用 `minimal_rag_documents_v1` 和 `.rag/manifest.v1.json`；v2 使用 `minimal_rag_documents_v2` 和 `.rag/manifest.v2.json`。升级前无版本号的 collection/manifest 不自动作为任一新链路索引。
+v1 使用 `minimal_rag_documents_v1` 和 `.rag/system-v2/pipelines/v1/manifest.json`；v2 使用 `minimal_rag_documents_v2` 和 `.rag/system-v2/pipelines/v2/manifest.json`。升级前无版本号的 collection/manifest 只归档到 `.rag/legacy-system-v1/`，不作为任一新链路索引。
 
 不一致时说明变更和影响范围，经用户确认后重建。日志、审核视图、top_k 和提示词调整不触发索引重建。
 
@@ -235,9 +235,9 @@ v1 使用 `minimal_rag_documents_v1` 和 `.rag/manifest.v1.json`；v2 使用 `mi
 | 表格身份 | group/slot/candidate ID、胜出工具与策略、原页面来源，能够与解析结果对应 |
 | 结构表格及表头 | 按实际 rowspan/colspan 展示完整表格；明确“已确定表头”或“未能确定表头”及原因。已确定时对所有表头物理格加背景色，包括多层及跨行格；未确定时不根据工具 role 猜测高亮 |
 | 文本化结果 | 展示完整的规则转换文本，含未确定表头和合并范围等表达，不只给摘要 |
-| 最终分块 | 展示该表关联的全部最终 chunk，逐块显示 chunk ID、顺序、正文、来源范围和完整 embedding 输入 token 数。未拆表也展示其唯一块；拆成多块则一块不漏，包含重复表头、合并上下文及兜底标识 |
+| 最终分块 | 展示该表关联的全部最终 Embedding chunk 正文。未拆表展示其唯一块；拆成多块则一块不漏。chunk ID、来源范围、token 数与评分明细属于诊断数据，不混入人工验收主视图 |
 
-文本化结果用于对照拆分前内容；chunk 正文必须直接读取实际送入 embedding 的最终 chunk 数据，不在页面里另做一套转换或模拟分块。模型技术前缀与特殊 token 的计数口径需标明。长内容可以折叠，但不能截断或省略块；PDF 原文按文本转义，不执行其中 HTML/脚本。页面应可本地打开，核心表格、样式与文本包含在该文件内。
+chunk 正文必须直接读取实际送入 embedding 的最终 chunk 数据，不在页面里另做一套转换或模拟分块。长内容不能截断或省略块；PDF 原文按文本转义，不执行其中 HTML/脚本。页面应可本地打开，核心表格、样式与文本包含在该文件内。
 
 只有选优 winner 纳入此视图，未评分的原生回退表格不计为 winner。本次成功处理但 winner 为零时仍输出文件，明确“本次没有 winner”，不能把旧运行的表格混入。若本次存在已知缺失结果，必须显式显示缺失阶段，不以空内容冒充成功完成。
 
@@ -273,11 +273,11 @@ HTML 生成是 v2 单文档入库的必需步骤。生成失败时，该 PDF 本
 - **D-03**：新文档处理能力按四层组织，现有 RAG 仅作必要接入，不重构整个系统层级。
 - **D-01**：本次增量合入完整当前需求/架构，并提供升级说明及 README 链路用法；执行任务由实施清单跟踪。
 
-### 实现前仍需确定的内容
+### 待定项处理
 
 | 编号 | 待定内容 |
 | --- | --- |
 | U-03 | 若出现真实 Docling 部分页失败样例，再确定该场景的索引发布政策 |
-| U-06 | 固定评估题集、标准证据、指标、运行依赖和版本 |
+| U-06 | 已由[检索效果评估需求](../../requirements/v2.0/retrieval-evaluation.md)确定 ground truth、配置 test set、指标、报告和版本规则；字段与运行契约见[检索效果评估架构](../../architecture/v2.0/retrieval-evaluation.md) |
 
 本版不增加：LLM 表格文本化、双文本表示、图片理解、自动续表拼接或表头继承、分组标题语义传播、阶段缓存恢复、LangGraph、更换 embedding 模型、生产阈值自动校准。扫描件 OCR 及未验证的旋转/裁剪页面不因迁移扩大支持范围。

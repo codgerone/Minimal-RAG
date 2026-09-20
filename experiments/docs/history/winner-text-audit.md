@@ -140,7 +140,7 @@ QTY AND DELIVERY SCHEDULE > 1st Delivery > (At 170 days of contract signature): 
 
 以下文件为本地样本，PDF 与 output 均未纳入 Git；缺少本地文件时不能仅靠本报告重建它们。
 
-- A：[Contrato 5000000202 - HEXING ELECTRICAL - v1-15.pdf](<../../../documents/Contrato 5000000202 - HEXING ELECTRICAL - v1-15.pdf>)
+- A：`documents/Contrato 5000000202 - HEXING ELECTRICAL - v1-15.pdf`（当前本地样本缺失；仅保留历史文件名事实）
 - B：[Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf](<../../../documents/Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL %281%29[R][R].pdf>)
 - C：[E001-602.pdf](<../../../documents/E001-602.pdf>)
 - D：[ORDER PERU 24-12 ANDET.pdf](<../../../documents/ORDER PERU 24-12 ANDET.pdf>)

@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from rag.cli_readiness import ReadinessResult, _read_masked_windows_secret, display_status, ensure_llm_credentials
-from rag.config import Settings
+from rag.config import SelectedPipelineSettings, Settings, select_pipeline
 from rag.models import DocumentState, DocumentStatus
 
 
@@ -27,8 +27,12 @@ class _Terminal:
         return self.choice
 
 
-def _settings(tmp_path: Path) -> Settings:
-    return Settings(tmp_path, tmp_path / "documents", tmp_path / ".rag", tmp_path / ".rag/m.json", "c", "e", 10, 1, 1, None, "llm")
+def _settings(tmp_path: Path) -> SelectedPipelineSettings:
+    return select_pipeline(Settings(
+        tmp_path, tmp_path / "documents", tmp_path / ".rag/system-v2/chroma",
+        tmp_path / ".rag/system-v2/artifacts", "e", "revision",
+        10, 1, 512, 32, 1, False, None, "llm",
+    ), "v1")
 
 
 def test_display_status_distinguishes_manual_processing() -> None:

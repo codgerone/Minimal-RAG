@@ -1,0 +1,81 @@
+{
+  "schema_version": "ground_truth_document_v1",
+  "document_key": "E001-602--817cfff2927c6c65",
+  "document_id": "817cfff2927c6c65",
+  "document_name": "E001-602.pdf",
+  "relative_path": "E001-602.pdf",
+  "file_hash": "22e75e312a2e2111326412927d76053ba8d74c95d458203623afce956e663239",
+  "cases": [
+    {
+      "case_id": "E001-602-Q001",
+      "question": "发票E001-602规定的付款到期日是什么时候？需要支付多少金额？其中包含多少税费？",
+      "answerable": true,
+      "reference_answer": "付款到期日为2026年3月30日，需要支付USD 331,432.50，其中包含税费USD 50557.50。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "817cfff2927c6c65",
+              "document_name": "E001-602.pdf",
+              "relative_path": "E001-602.pdf",
+              "page_numbers": [
+                1
+              ],
+              "text": "Nº Cuota | Fec. Venc. | Monto\n1 | 30/03/2026 | 331,432.50"
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "817cfff2927c6c65",
+              "document_name": "E001-602.pdf",
+              "relative_path": "E001-602.pdf",
+              "page_numbers": [
+                1
+              ],
+              "text": "Valor Venta: $ 280,875.00\nIGV: $ 50,557.50\nImporte Total: $ 331,432.50"
+            },
+            {
+              "excerpt_id": "x2",
+              "document_id": "817cfff2927c6c65",
+              "document_name": "E001-602.pdf",
+              "relative_path": "E001-602.pdf",
+              "page_numbers": [
+                1
+              ],
+              "text": "Información del crédito\nMonto neto pendiente de pago: $ 331,432.50\nTotal de Cuotas: 1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "E001-602-Q002",
+      "question": "发票E001-602中， HXE34K-S1的单价和数量分别是多少？",
+      "answerable": true,
+      "reference_answer": "HXE34K-S1的单价为USD 16.00，数量为500个。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "817cfff2927c6c65",
+              "document_name": "E001-602.pdf",
+              "relative_path": "E001-602.pdf",
+              "page_numbers": [
+                1
+              ],
+              "text": "Cantidad | Código | Descripción | Valor Unitario\n500.00 | HXE34K-S1 | MEDIDOR TRIFASICO HXE34K-S1, 4HILOS, 10(100)A, 3X220V, CLASE 1, CONEXION DIRECTA, MARCA HEXING | 16.00"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

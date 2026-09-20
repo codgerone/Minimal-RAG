@@ -88,7 +88,7 @@ class V2ParserConfig:
     table_mode: Literal["accurate"]
     do_cell_matching: Literal[True]
     generate_page_images: Literal[False]
-    mapper_version: Literal["docling_mapper_v1"]
+    mapper_version: Literal["docling_mapper_v2"]
 
 class TableSelectionConfig:
     rule_version: Literal["table_selection_v1"]
@@ -163,7 +163,7 @@ class PipelineRuntime:
     document_processor: DocumentProcessor
 ```
 
-V1 runtime 固定使用 `minimal_rag_documents_v1` 与 `.rag/manifest.v1.json`；V2 固定使用 `minimal_rag_documents_v2` 与 `.rag/manifest.v2.json`。runtime 的 pipeline_id、BuildConfig.pipeline_id、collection 和 manifest 必须一致。V1 的 artifact_stage 必须为 null；V2 必须非空。V1 chunks 的 document/file/path 字段必须与 source 一致；V2 chunks 还必须与 build 的 pipeline 身份一致。staged 产物公共身份必须与 DocumentBuildResult 一致。
+V1 runtime 固定使用 `minimal_rag_documents_v1` 与 `.rag/system-v2/pipelines/v1/manifest.json`；V2 固定使用 `minimal_rag_documents_v2` 与 `.rag/system-v2/pipelines/v2/manifest.json`。runtime 的 pipeline_id、BuildConfig.pipeline_id、collection 和 manifest 必须一致。V1 的 artifact_stage 必须为 null；V2 必须非空。V1 chunks 的 document/file/path 字段必须与 source 一致；V2 chunks 还必须与 build 的 pipeline 身份一致。staged 产物公共身份必须与 DocumentBuildResult 一致。
 
 `DocumentProcessor.process(source, build_id)` 是唯一公共执行方法。processor 不写 collection 或 manifest，不发布 staging，也不读取另一 pipeline 的状态。
 
@@ -197,6 +197,8 @@ RetrievalHit = V1RetrievalHit | V2RetrievalHit
 
 similarity 均为 `1.0-distance`。V1 字段和引用展示保持现状；V2 page_numbers 从 metadata 解码并升序去重，sources 必须完整还原。V2 引用展示全部 page_numbers；空集合显示“页码不可用”，不得虚构第一页。
 
+Retriever 的最终排序固定为 `(distance, chunk_id)`。为覆盖第 K 位完整同距离组，VectorStore 必须支持同一 query embedding、document filter 下重复请求逐步增大的 `n_results`；扩展公式、终止条件和严格 K 语义以总需求 I-03 为准。候选扩展是运行时查询行为，不进入 BuildConfig fingerprint。
+
 ## 4. Manifest
 
 ```python
@@ -224,7 +226,7 @@ class PipelineManifest:
     updated_at: str
 ```
 
-documents 的 key 必须等于记录的 document_id，序列化时按 key 升序。V1 的 artifact_path 必须为 null；V2 必须是项目根目录内的 POSIX 相对路径，并精确指向 `.rag/artifacts/v2/documents/<document_id>/<build_id>`。created_at 在同一 manifest 生命周期不变；updated_at 只在原子发布成功时更新。空索引也保存完整 BuildConfig 和空 documents。
+documents 的 key 必须等于记录的 document_id，序列化时按 key 升序。V1 的 artifact_path 必须为 null；V2 必须是项目根目录内的 POSIX 相对路径，并精确指向 `.rag/system-v2/artifacts/v2/documents/<可读文件名>--<document_id>/<build_id>`。created_at 在同一 manifest 生命周期不变；updated_at 只在原子发布成功时更新。空索引也保存完整 BuildConfig 和空 documents。
 
 读取 manifest 时，未知 schema、缺字段、额外字段、错误类型、身份错配或 fingerprint 复算不一致均产生阻断问题，不做宽松修复。旧 `.rag/manifest.json` 不反序列化成该模型。
 
@@ -323,7 +325,7 @@ class RecoveryJournal:
     error_message: str | None
 ```
 
-每个操作的恢复目录固定为 `.rag/recovery/<pipeline>/<build_id>/`，其中 `journal.json` 是唯一 journal，`snapshot.json` 保存 VectorSnapshot 或 CollectionSnapshot，`old-manifest.bin` 保存操作前 manifest 原始 bytes；prune 还可使用 `artifact-quarantine/`。`snapshot_path`、`old_manifest_path` 和非空的 `artifact_quarantine_path` 都必须位于该目录内，使用项目根目录相对 POSIX 路径。
+每个操作的恢复目录固定为 `.rag/system-v2/recovery/<pipeline>/<build_id>/`，其中 `journal.json` 是唯一 journal，`snapshot.json` 保存 VectorSnapshot 或 CollectionSnapshot，`old-manifest.bin` 保存操作前 manifest 原始 bytes；prune 还可使用 `artifact-quarantine/`。`snapshot_path`、`old_manifest_path` 和非空的 `artifact_quarantine_path` 都必须位于该目录内，使用项目根目录相对 POSIX 路径。
 
 在第一次删除向量、重建 collection、移动 active artifact 或替换 manifest 前，必须先完整写入 snapshot、old manifest 和 `state=prepared` 的 journal，并分别 flush/fsync；随后原子更新 journal 为 `mutating` 才可改变旧状态。每完成一个破坏性步骤便原子更新 current_step。捕获异常或启动时发现 journal 时进入 `restoring`，依据 snapshot、old manifest 和 quarantine 恢复并逐项回读验证；成功后删除整个恢复目录。恢复本身失败时写 `recovery_failed`、error_type 和安全 error_message，并由 `recovery_journal_present` 阻止查询。正常提交完成后才能删除恢复目录；仅内存 snapshot 不满足本契约。
 

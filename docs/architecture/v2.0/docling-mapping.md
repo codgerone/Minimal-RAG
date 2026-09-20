@@ -16,6 +16,27 @@ class LayoutParseResult:
 
 DoclingRawArtifact 只保存 staging 中 raw JSON 的相对路径、Docling schema/version 和文档统计，不把 SDK 对象传出 infrastructure。
 
+完整字段如下。`relative_path` 是相对当前 document build 产物根目录的 POSIX 路径；统计直接来自成功转换后的 DoclingDocument 容器长度，只用于产物完整性检查，不参与业务分支。
+
+```python
+class DoclingRawArtifact:
+    relative_path: str
+    schema_name: str
+    schema_version: str
+    page_count: int
+    text_count: int
+    table_count: int
+    picture_count: int
+
+class LayoutParseResult:
+    raw_document: DoclingRawArtifact
+    layout_document: LayoutDocument
+    docling_table_candidates: tuple[TableCandidate, ...]
+    page_executions: tuple[PageExecution, ...]
+```
+
+所有计数为非负整数，`page_count` 必须为正；`relative_path` 必须是非空相对路径，不得越出 build 产物根目录。raw JSON 本身保持 Docling 原生 schema，不套项目 envelope。
+
 ## 2. 遍历与去重
 
 1. 使用 `DoclingDocument.iterate_items(with_groups=True, traverse_pictures=True)` 遍历 body 主树，保存 SDK 给出的主阅读顺序和 group 层级。
@@ -37,7 +58,7 @@ DoclingRawArtifact 只保存 staging 中 raw JSON 的相对路径、Docling sche
 | `page_footer` | `footer` |
 | `footnote` | `footnote`；若被 table.footnotes 引用则 `table_note` |
 | `caption` | `caption`；若被 table.captions 引用仍为 `caption` |
-| `formula` | `other_text`，保留可用 text |
+| `formula` | `other_text`；非空 `text` 优先，否则回退非空 `orig` 并记录 `formula_orig_fallback` |
 | `list_item` 且属于 list group | LayoutListItem |
 | `list_item` 但不属于 list group | LayoutText.kind=`other_text`，保留 orig；warning=`detached_list_item` |
 | `table` | LayoutTablePlaceholder |
@@ -45,7 +66,7 @@ DoclingRawArtifact 只保存 staging 中 raw JSON 的相对路径、Docling sche
 | 其他含 text 的类型 | `other_text`，warning=`unknown_docling_text_label` |
 | 其他无 text 的类型 | 不输出，warning=`unsupported_nontext_item` |
 
-文字正文优先使用 `item.text`；仅 detached list item 使用 `orig` 以避免丢失 marker。`orig` 与 `text` 都保存在 mapper 契约测试输入中，但 ParsedDocument 正文只保存上述选定文本。
+文字正文优先使用 `item.text`；detached list item 使用 `orig` 以避免丢失 marker；formula 在 `text` 为空且 `orig` 非空时回退使用 `orig`，避免关闭公式增强时丢失底层抽取文字。`orig` 与 `text` 都保存在 mapper 契约测试输入中，但 ParsedDocument 正文只保存上述选定文本。formula 的 `text` 与 `orig` 均为空时仍输出空节点，并由分块阶段记录 `empty_text_node` 后跳过。
 
 ## 4. group 与 List
 

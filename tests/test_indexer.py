@@ -7,7 +7,7 @@ from pathlib import Path
 import pymupdf
 import pytest
 
-from rag.config import Settings
+from rag.config import SelectedPipelineSettings, Settings, select_pipeline
 from rag.document_registry import discover_documents
 from rag.errors import ManifestError
 from rag.indexer import Indexer
@@ -35,22 +35,25 @@ def _write_pdf(path: Path, texts: list[str]) -> None:
         pdf.save(path)
 
 
-def _settings(tmp_path: Path) -> Settings:
+def _settings(tmp_path: Path) -> SelectedPipelineSettings:
     documents = tmp_path / "documents"
     documents.mkdir()
-    return Settings(
+    return select_pipeline(Settings(
         project_root=tmp_path,
         documents_dir=documents,
-        db_path=tmp_path / ".rag" / "chroma",
-        manifest_path=tmp_path / ".rag" / "manifest.json",
-        collection_name="test_collection",
+        db_path=tmp_path / ".rag/system-v2/chroma",
+        artifacts_path=tmp_path / ".rag/system-v2/artifacts",
         embedding_model="fake",
-        chunk_size=80,
-        chunk_overlap=10,
+        embedding_model_revision="revision",
+        v1_chunk_size=80,
+        v1_chunk_overlap=10,
+        v2_max_input_tokens=512,
+        v2_text_overlap_tokens=32,
         top_k=2,
+        diagnostics_enabled=False,
         openrouter_api_key=None,
         openrouter_model="llm",
-    )
+    ), "v1")
 
 
 def _indexer(settings: Settings, embedder: FakeEmbedder) -> Indexer:
@@ -158,7 +161,7 @@ def test_changed_global_config_is_rejected_without_force(tmp_path: Path) -> None
     embedder = FakeEmbedder()
     _indexer(settings, embedder).ingest_all()
 
-    changed = replace(settings, chunk_size=90)
+    changed = replace(settings, application=replace(settings.application, v1_chunk_size=90))
     with pytest.raises(ManifestError) as exc_info:
         _indexer(changed, embedder).ingest_all()
     assert "--force" in (exc_info.value.remediation or "")

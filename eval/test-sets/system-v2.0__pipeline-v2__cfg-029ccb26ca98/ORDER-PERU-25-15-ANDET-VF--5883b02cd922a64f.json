@@ -1,0 +1,56 @@
+{
+  "schema_version": "test_set_document_v1",
+  "document_key": "ORDER-PERU-25-15-ANDET-VF--5883b02cd922a64f",
+  "document_id": "5883b02cd922a64f",
+  "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+  "relative_path": "ORDER PERU 25-15 ANDET VF.pdf",
+  "file_hash": "af1613f91c9aa298133e5d1328db4040c5dc156968102b41bc4340e456fce7a6",
+  "cases": [
+    {
+      "case_id": "PO-25-15-Q001",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "status": "mapped",
+          "acceptable_chunk_sets": [
+            [
+              "5883b02cd922a64f-v2-c000001"
+            ]
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "status": "mapped",
+          "acceptable_chunk_sets": [
+            [
+              "5883b02cd922a64f-v2-c000007"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-15-Q002",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "status": "mapped",
+          "acceptable_chunk_sets": [
+            [
+              "5883b02cd922a64f-v2-c000001"
+            ]
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "status": "mapped",
+          "acceptable_chunk_sets": [
+            [
+              "5883b02cd922a64f-v2-c000007"
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

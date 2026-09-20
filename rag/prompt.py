@@ -20,11 +20,15 @@ SYSTEM_PROMPT = """你是一个严格依据文档证据回答问题的助手。
 def format_context(hits: Sequence[RetrievalHit]) -> str:
     sources: list[str] = []
     for hit in hits:
+        is_v2 = hasattr(hit, "page_numbers")
+        page_numbers = getattr(hit, "page_numbers", (getattr(hit, "page_number", None),))
+        page_label = ",".join(str(item) for item in page_numbers if item is not None) or "unavailable"
+        page_attribute = "pages" if is_v2 else "page"
         attributes = (
             f'document="{escape(hit.document_name, quote=True)}"\n'
             f'        path="{escape(hit.relative_path, quote=True)}"\n'
             f'        id="{escape(hit.chunk_id, quote=True)}"\n'
-            f'        page="{hit.page_number}"'
+            f'        {page_attribute}="{page_label}"'
         )
         sources.append(
             f"[SOURCE {attributes}]\n{hit.text}\n[/SOURCE]"
@@ -43,4 +47,3 @@ def build_messages(
             "content": f"{format_context(hits)}\n\n用户问题：{question.strip()}",
         },
     ]
-

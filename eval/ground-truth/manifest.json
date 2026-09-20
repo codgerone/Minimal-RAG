@@ -1,0 +1,41 @@
+{
+  "schema_version": "ground_truth_manifest_v1",
+  "dataset_version": "2.0.0",
+  "ground_truth_fingerprint": "4612ed552d4a523a22af19989b8e2b40589d3dc174b891400b9133bb5f98ac23",
+  "review_status": "approved",
+  "files": [
+    {
+      "document_key": "Contrato-N-105-2025-LP-002-2024-FONAFE-Adquisición-de-me--d359c37e0bc3c87a",
+      "json_path": "eval/ground-truth/Contrato-N-105-2025-LP-002-2024-FONAFE-Adquisición-de-me--d359c37e0bc3c87a.json",
+      "content_sha256": "61db9041f16e8c39ca1ca4065e4f4faa43ee8d47c1db5630825fcfe714e31a1c",
+      "case_count": 10
+    },
+    {
+      "document_key": "E001-602--817cfff2927c6c65",
+      "json_path": "eval/ground-truth/E001-602--817cfff2927c6c65.json",
+      "content_sha256": "c14b94e4f4cb12a8559a0c37f5139f8e1d0a0cee701b3338da4f950c74b38ed7",
+      "case_count": 2
+    },
+    {
+      "document_key": "ORDER-PERU-24-12-ANDET--169a1f2133fe5643",
+      "json_path": "eval/ground-truth/ORDER-PERU-24-12-ANDET--169a1f2133fe5643.json",
+      "content_sha256": "0f5111f88828c19491c194d23fd68508ec01fdd0bd19dd4a515718a8db7a0844",
+      "case_count": 6
+    },
+    {
+      "document_key": "ORDER-PERU-25-15-ANDET-VF--5883b02cd922a64f",
+      "json_path": "eval/ground-truth/ORDER-PERU-25-15-ANDET-VF--5883b02cd922a64f.json",
+      "content_sha256": "514bc40e7c8b5b16907d96f82a7e40c1bfb321236fff9c7c1ef8e1d43501d76d",
+      "case_count": 2
+    },
+    {
+      "document_key": "签字-ORDER-PERU-25-19-FONAFE--5a4c36e0022f4917",
+      "json_path": "eval/ground-truth/签字-ORDER-PERU-25-19-FONAFE--5a4c36e0022f4917.json",
+      "content_sha256": "e2919bbfcb528273d7bdbda9457ffbbe18cf657244c3c4de860de26707e2f28e",
+      "case_count": 4
+    }
+  ],
+  "created_at": "2026-09-20T02:55:05Z",
+  "reviewed_at": "2026-09-20T02:59:47Z",
+  "superseded_by": null
+}

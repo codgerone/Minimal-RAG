@@ -1,0 +1,441 @@
+{
+  "schema_version": "ground_truth_document_v1",
+  "document_key": "Contrato-N-105-2025-LP-002-2024-FONAFE-Adquisición-de-me--d359c37e0bc3c87a",
+  "document_id": "d359c37e0bc3c87a",
+  "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+  "relative_path": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+  "file_hash": "d8700a61b3d7e8d82619bfce60c339844936fbd9c7a9c5055846a82795adc82c",
+  "cases": [
+    {
+      "case_id": "CONTRACT-105-Q001",
+      "question": "采购合同CONTRATO N° 105 - 2025 的签署双方分别是谁？各自的法定代表人是谁？",
+      "answerable": true,
+      "reference_answer": "合同买方为 ELECTRO SUR ESTE S.A.A. (LA EMPRESA)，法定代表人为总经理 Ing. Fredy Hernán Gonzáles De La Vega；承包商/卖方为 HEXING ELECTRICAL COMPANY S.A.C. (EL CONTRATISTA)，法定代表人为 María Isabel Gallardo Torres 和 Medaly Xiomara Arotoma Taipe。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "d359c37e0bc3c87a",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "relative_path": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "page_numbers": [
+                1
+              ],
+              "text": "ELECTRO SUR ESTE S.A.A., identificada con RUC. Nº 20116544289, cuya personería jurídica se encuentra inscrita en la Partida Electrónica Nº 11003503 del Registro de Personas Jurídicas Zona Registral Nº X - Sede Cusco, con domicilio en la Avenida Mariscal Sucre Nº 400 de la Urbanización Bancopata, del distrito de Santiago, provincia y departamento de Cusco, debidamente representada para este acto por su Gerente General el Ing. Fredy Hernán Gonzáles De La Vega, peruano, identificado con DNI. Nº 23839976, con poder de representación inscrito en los Asientos N° D00195 y N° D00232 de la Partida Electrónica en mención. A quien en adelante se le denominará “LA EMPRESA”."
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "d359c37e0bc3c87a",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "relative_path": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "page_numbers": [
+                1
+              ],
+              "text": "HEXING ELECTRICAL COMPANY S.A.C., identificada con RUC. Nº 20546102115, cuya razón social se encuentra inscrita en la Partida Electrónica Nº 12601784 de la Zona Registral IX – Sede Lima, con domicilio legal en el inmueble ubicado en la Avenida Guardia Civil N° 1321, Int. 1602, Urbanización El Aeropuerto, distrito de Surquillo, provincia y departamento de Lima, representada para este efecto por sus Apoderadas la Srta. María Isabel Gallardo Torres, peruana, identificada con DNI N° 44099982, y la Srta. Medaly Xiomara Arotoma Taipe, peruana, identificada con DNI N° 70034859, ambas con poderes inscritos en el asiento Nº C00010 de referida Partida Electrónica en mención. A quien en adelante se le denominará EL CONTRATISTA."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q002",
+      "question": "采购合同CONTRATO N° 105 - 2025包含哪些 Ítem 的产品？各自的数量、单价及含税总金额是多少？合同总金额是多少？",
+      "answerable": true,
+      "reference_answer": "合同共包含 3 个 Ítem，含税总金额为 US$ 810,722.54：\n1. Ítem 1（单相电子电表 2线）：数量 120,000 台，单价 US$ 6.1124，总价 US$ 733,488.00；\n2. Ítem 3（三相电子电表 3线）：数量 1,500 台，单价 US$ 18.0894，总价 US$ 27,134.10；\n3. Ítem 4（三相电子电表 4线）：数量 2,600 台，单价 US$ 19.2694，总价 US$ 50,100.44。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "d359c37e0bc3c87a",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "relative_path": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "page_numbers": [
+                2
+              ],
+              "text": "Ítem | Descripción\n1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS\n3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS\n4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS"
+            },
+            {
+              "excerpt_id": "x2",
+              "document_id": "d359c37e0bc3c87a",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "relative_path": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "page_numbers": [
+                3
+              ],
+              "text": "Ítem | DESCRIPCIÓN | TABLA DE DATOS TÉCNICOS\n1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 01\n3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS | Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 03\n4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 04"
+            },
+            {
+              "excerpt_id": "x3",
+              "document_id": "d359c37e0bc3c87a",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "relative_path": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "page_numbers": [
+                4
+              ],
+              "text": "Ítem 1: US$ 733,488.00 (Setecientos treinta y tres mil cuatrocientos ochenta y ocho con 00/100 Dólares Americanos) incluye todos los impuestos de Ley.\nÍtem 3: US$ 27,134.10 (Veintisiete mil ciento treinta y cuatro con 10/100 Dólares Americanos) incluye todos los impuestos de Ley.\nÍtem 4: US$ 50,100.44 (Cincuenta mil cien con 44/100 Dólares Americanos) incluye todos los impuestos de Ley."
+            },
+            {
+              "excerpt_id": "x4",
+              "document_id": "d359c37e0bc3c87a",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "relative_path": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "page_numbers": [
+                4
+              ],
+              "text": "ÍTEM | DESCRIPCIÓN | CANTIDAD | PRECIO UNITARIO CON IGV (US$) | PRECIO TOTAL (US$)\nÍtem 1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | 120,000 | 6.1124 | 733,488.00\nÍtem 3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS | 1,500 | 18.0894 | 27,134.10\nÍtem 4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | 2,600 | 19.2694 | 50,100.44"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q003",
+      "question": "采购合同CONTRATO N° 105 - 2025规定的总履约期限是多久？具体的交货地点在哪里？是否允许提前交货？",
+      "answerable": true,
+      "reference_answer": "合同规定的总履约交付期限为自合同签署之日起 690 个日历天。交货地点为 Almacén Central ELSE（地址：Av. Mariscal Sucre N° 400, Urb. Bancopata - Santiago, Cusco）。合同明确规定不接受提前交货，除非买方主动提出并经承包商同意。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "d359c37e0bc3c87a",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "relative_path": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "page_numbers": [
+                5
+              ],
+              "text": "Los bienes materia del presente contrato se entregarán en el plazo de 690 días calendarios de la firma de contrato."
+            },
+            {
+              "excerpt_id": "x2",
+              "document_id": "d359c37e0bc3c87a",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "relative_path": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "page_numbers": [
+                5
+              ],
+              "text": "6ta ENTREGA (A 690 días de la firma del contrato)"
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "d359c37e0bc3c87a",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "relative_path": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "page_numbers": [
+                5
+              ],
+              "text": "No se aceptarán entregas anticipadas, salvo que sea requerido por LA EMPRESA, previa disponibilidad y aceptación por parte del CONTRATISTA."
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e3",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "d359c37e0bc3c87a",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "relative_path": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "page_numbers": [
+                5
+              ],
+              "text": "LUGAR DE ENTREGA\nELSE | Almacén Central ELSE - Av. Mariscal Sucre Nº 400, Urb. Bancopata – Santiago, Cusco, Cusco"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q004",
+      "question": "采购合同CONTRATO N° 105 - 2025中，关于各 Ítem 的履约保证金（Garantía de fiel cumplimiento）金额及出具机构是如何规定的？",
+      "answerable": true,
+      "reference_answer": "履约保证金均由 AVLA Perú Compañía de Seguros 出具，金额为各 Ítem 原始合同金额的 10%：\n- Ítem 1：US$ 73,348.80（保函 N° 3012025041864）\n- Ítem 3：US$ 2,713.41（保函 N° 3012025041881）\n- Ítem 4：US$ 5,010.05（保函 N° 3012025041885）",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "d359c37e0bc3c87a",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "relative_path": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "page_numbers": [
+                2
+              ],
+              "text": "Correspondiente al Ítem 1 – Medidor electrónico monofásico de 2 hilos: Carta fianza N° 3012025041864 por el monto de US$ 73,348.80 (Setenta y tres mil trescientos cuarenta y ocho con 80/100 Dólares Americanos) con vencimiento al 20/09/2027.\nCorrespondiente al Ítem 3 – Medidor electrónico trifásico de 3 hilos: Carta fianza N° 3012025041881 por el monto de US$ 2,713.41 (Dos mil setecientos trece con 41/100 Dólares Americanos) con vencimiento al 20/09/2027.\nCorrespondiente al Ítem 4 – Medidor electrónico trifásico de 4 hilos: Carta fianza N° 3012025041885 por el monto de US$ 5,010.05 (Cinco mil diez con 05/100 Dólares Americanos) con vencimiento al 20/09/2027."
+            },
+            {
+              "excerpt_id": "x2",
+              "document_id": "d359c37e0bc3c87a",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "relative_path": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "page_numbers": [
+                6
+              ],
+              "text": "Correspondiente al Ítem 1 – Medidor electrónico monofásico de 2 hilos: De fiel cumplimiento del contrato: US$ 73,348.80 (Setenta y tres mil trescientos cuarenta y ocho con 80/100 Dólares Americanos), a través de la Carta Fianza N° 3012025041864 emitida por AVLA Perú Compañía de Seguros. Monto que es equivalente al diez por ciento (10%) del monto del contrato original. Correspondiente al Ítem 3 – Medidor electrónico trifásico de 3 hilos: De fiel cumplimiento del contrato: US$ 2,713.41 (Dos mil setecientos trece con 41/100 Dólares Americanos), a través de la Carta Fianza N° 3012025041881 emitida por AVLA Perú Compañía de Seguros. Monto que es equivalente al diez por ciento (10%) del monto del contrato original. Correspondiente al Ítem 4 – Medidor electrónico trifásico de 4 hilos: De fiel cumplimiento del contrato: US$ 5,010.05 (Cinco mil diez con 05/100 Dólares Americanos), a través de la Carta Fianza N° 3012025041885 emitida por AVLA Perú Compañía de Seguros. Monto que es equivalente al diez por ciento (10%) del monto del contrato original."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q005",
+      "question": "采购合同CONTRATO N° 105 - 2025中，技术商业质保期（Garantía Técnico-Comercial）的期限是多久？在质保期内发生故障时，承包商的响应和修复时限是多少？",
+      "answerable": true,
+      "reference_answer": "技术商业质保期为自货物送达买方仓库之日起 5 年零 1 个月。发生故障时，承包商须在收到通知后 30 个日历天内指派技术人员到场排查原因；若判定为承包商责任，须在确定原因或收到第三方鉴定结果后的 45 个日历天内修复或更换新机。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "d359c37e0bc3c87a",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "relative_path": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "page_numbers": [
+                3
+              ],
+              "text": "garantiza la calidad técnica de los medidores de energía, por un periodo de 5 años y 1 mes, contados a partir de la fecha de recepción en el almacén de LA EMPRESA"
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "d359c37e0bc3c87a",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "relative_path": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "page_numbers": [
+                3
+              ],
+              "text": "EL CONTRATISTA tendrá un plazo máximo de treinta (30) días calendario contados a partir de la fecha de realizada la notificación, para que se apersone un representante técnico"
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e3",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "d359c37e0bc3c87a",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "relative_path": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "page_numbers": [
+                3
+              ],
+              "text": "En el caso que la falla sea atribuible al CONTRATISTA, la reparación debe iniciarse a partir del día siguiente de emitido el resultado del peritaje por el organismo externo, debiendo devolverse el medidor debidamente reparado dentro de los cuarenta y cinco (45) días calendario a partir de esa fecha (y en caso no sea factible, por destrucción, imposibilidad de reparación u otra causa) deberá devolver un medidor nuevo a LA EMPRESA."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q006",
+      "question": "采购合同CONTRATO N° 105 - 2025中，对“重复性故障”（Falla Repetitiva）的认定标准是什么？出现重复性故障时承包商需要承担什么责任？",
+      "answerable": true,
+      "reference_answer": "重复性故障的认定标准为：安装未满 1 年的电表故障率达到 0.5%，或者安装未满 18 个月的同一规格电表累计发生 10 起以上相同原因的故障；此外，第三方鉴定证实存在隐患性制造缺陷的亦认定为重复性故障。出现重复性故障时，承包商必须自费全批次更换涉及的生产批次电表，并赔偿买方因此遭受的所有损失。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "d359c37e0bc3c87a",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "relative_path": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "page_numbers": [
+                3
+              ],
+              "text": "Se definirá como falla repetitiva aquella que se advierta en 0.5% de los medidores instalados del menos de un año o undécima ocasión, es decir que existen 10 casos anteriores los cuales presentaron la misma falla a medidores que lleven menos de 18 meses de instalación y cuyo origen sea de similares causas"
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "d359c37e0bc3c87a",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "relative_path": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "page_numbers": [
+                3,
+                4
+              ],
+              "text": "Adicionalmente, sí como resultado de un peritaje de determinación de la causa de una falla se comprueba, que independiente de la cantidad de medidores que hubieren sido afectados y los plazos de instalación transcurridos, existen motivos fundados sobre un defecto de fabricación, tal defecto de fabricación será catalogado como falla repetitiva, con el propósito de evitar un mal mayor en las instalaciones de LA EMPRESA, que afecte la calidad de servicio eléctrico, en este caso, EL CONTRATISTA se compromete a la reposición total del lote de producción involucrado, así como a resarcir todos los daños y perjuicios ocasionados a LA EMPRESA."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q007",
+      "question": "采购合同CONTRATO N° 105 - 2025中，买方办理支付流程的前提条件有哪些？出具验收合格证明以及付款的具体时限要求是什么？",
+      "answerable": true,
+      "reference_answer": "买方按交付批次以美元进行分期付款。付款的前提是承包商需提交发票（Comprobante de Pago）、使用部门出具的验收合格单（Hoja de Conformidad）、签收运单（Guía de remisión）及采购订单复印件。买方应在货物签收后 7 个日历天内（若需测试最长 15 天）出具验收合格证明；出具合格证明后，买方须在 10 个日历天内完成支付。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "d359c37e0bc3c87a",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "relative_path": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "page_numbers": [
+                4
+              ],
+              "text": "Comprobante de Pago (Factura).\nHoja de Conformidad emitida por el área usuaria por la recepción de los bienes.\nGuía de remisión o entregable con sello de recepción de la entidad contratante.\nCopia de la Orden de Compra."
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "d359c37e0bc3c87a",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "relative_path": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "page_numbers": [
+                5
+              ],
+              "text": "Para tal efecto, el responsable de otorgar la conformidad de la prestación deberá hacerlo en un plazo que no excederá de los siete (7) días de producida la recepción, salvo que se requiera efectuar pruebas que permitan verificar el cumplimiento de la obligación, en cuyo caso la conformidad se emite en un plazo máximo de quince (15) días, bajo responsabilidad de dicho funcionario."
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e3",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "d359c37e0bc3c87a",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "relative_path": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "page_numbers": [
+                5
+              ],
+              "text": "LA EMPRESA paga las contraprestaciones pactadas a EL CONTRATISTA dentro de los diez (10) días calendario siguientes de otorgada la conformidad de los bienes"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q008",
+      "question": "采购合同CONTRATO N° 105 - 2025中，如果承包商发生未经证明的延迟交货，延期罚金（Penalidad por Mora）的计算公式是什么？罚金的最高上限是多少？",
+      "answerable": true,
+      "reference_answer": "每日延期罚金公式为：Penalidad Diaria = (0.10 × monto vigente) / (F × plazo vigente en días)。由于本合同履约期限大于60天，系数 F 取值 0.25。延迟罚金最高上限为有效合同总额（或对应 Ítem 金额）的 10%。达到 10% 上限后，买方有权解除合同。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "d359c37e0bc3c87a",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "relative_path": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "page_numbers": [
+                7
+              ],
+              "text": "Penalidad Diaria = (0.10 x monto vigente) / (F x plazo vigente en días)\nF = 0.25 para plazos mayores a sesenta (60) días"
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "d359c37e0bc3c87a",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "relative_path": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "page_numbers": [
+                7
+              ],
+              "text": "Estos dos (2) tipos de penalidades pueden alcanzar cada una un monto máximo equivalente al diez por ciento (10%) del monto del contrato vigente, o de ser el caso, del ítem que debió ejecutarse. Cuando se llegue a cubrir el monto máximo de la penalidad por mora o el monto máximo para otras penalidades, de ser el caso, LA EMPRESA puede resolver el contrato por incumplimiento."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q009",
+      "question": "采购合同CONTRATO N° 105 - 2025的第 1 次交付（1era ENTREGA，合同签订后 170 天），具体的交付产品和数量是多少？",
+      "answerable": true,
+      "reference_answer": "第 1 次交付（签订合同后 170 天内）需要交付：Ítem 1（单相电子电表）15,000 台，以及 Ítem 4（三相 4 线电子电表）300 台。Ítem 3 在第 1 次交付中无交付任务。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "d359c37e0bc3c87a",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "relative_path": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "page_numbers": [
+                5
+              ],
+              "text": "1era ENTREGA (A 170 días de la firma del contrato)\nMEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | 15,000\nMEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | 300"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q010",
+      "question": "采购合同CONTRATO N° 105 - 2025是否规定分批交货？每个批次的具体交货日期分别是什么？",
+      "answerable": true,
+      "reference_answer": "是的，合同规定分为 6 个批次交货。合同签署日期为 2025 年 9 月 23 日，各批次期限分别为签署后 170、210、330、450、570 和 690 个日历日；据此计算，各批次截止日期依次为：第 1 批 2026 年 3 月 12 日、第 2 批 2026 年 4 月 21 日、第 3 批 2026 年 8 月 19 日、第 4 批 2026 年 12 月 17 日、第 5 批 2027 年 4 月 16 日、第 6 批 2027 年 8 月 14 日。这些绝对日期是依据合同签署日期和相对期限计算所得，并非合同表格直接列示。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "d359c37e0bc3c87a",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "relative_path": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "page_numbers": [
+                5
+              ],
+              "text": "1era ENTREGA (A 170 días de la firma del contrato) | 2da ENTREGA (A 210 días) | 3era ENTREGA (A 330 días) | 4ta ENTREGA (A 450 días) | 5ta ENTREGA (A 570 días) | 6ta ENTREGA (A 690 días)"
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_id": "d359c37e0bc3c87a",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "relative_path": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "page_numbers": [
+                9
+              ],
+              "text": "De acuerdo con las bases integradas, la oferta y las disposiciones del presente contrato, las partes lo firman por duplicado en señal de conformidad en la ciudad del Cusco a los 23 días del mes de setiembre de 2025."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "schema_version": "test_set_document_v1",
+  "document_key": "ORDER-PERU-24-12-ANDET--169a1f2133fe5643",
+  "document_id": "169a1f2133fe5643",
+  "document_name": "ORDER PERU 24-12 ANDET.pdf",
+  "relative_path": "ORDER PERU 24-12 ANDET.pdf",
+  "file_hash": "27b3e11879c4adef8bd5cd1b91d1f29322179959196c0412815fc767563ad4d3",
+  "cases": [
+    {
+      "case_id": "PO-24-12-Q001",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "status": "mapped",
+          "acceptable_chunk_sets": [
+            [
+              "169a1f2133fe5643-v2-c000001"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "PO-24-12-Q002",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "status": "mapped",
+          "acceptable_chunk_sets": [
+            [
+              "169a1f2133fe5643-v2-c000005"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "PO-24-12-Q003",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "status": "mapped",
+          "acceptable_chunk_sets": [
+            [
+              "169a1f2133fe5643-v2-c000005"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "PO-24-12-Q004",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "status": "mapped",
+          "acceptable_chunk_sets": [
+            [
+              "169a1f2133fe5643-v2-c000005"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "PO-24-12-Q005",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "status": "mapped",
+          "acceptable_chunk_sets": [
+            [
+              "169a1f2133fe5643-v2-c000005"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "PO-24-12-Q006",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "status": "mapped",
+          "acceptable_chunk_sets": [
+            [
+              "169a1f2133fe5643-v2-c000010"
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

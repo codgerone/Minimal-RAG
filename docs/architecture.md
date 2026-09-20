@@ -1,8 +1,8 @@
 # Minimal RAG 当前系统架构
 
-架构版本：V2.0。更新日期：2026-09-16。状态：已通过编码就绪审查，代码尚未实现。
+架构版本：V2.0。更新日期：2026-09-20。状态：核心 RAG 与正式检索评估均已实现并通过回归及真实双链路基线验证。
 
-本文是[当前系统需求](requirements.md)的实现架构。内容按照数据实际流动顺序组织；文档模型、ID 和 JSON 见[数据契约](architecture/v2.0/data-contracts.md)，BuildConfig、manifest、artifact envelope、运行交付和恢复日志见[运行与持久化模型契约](architecture/v2.0/runtime-persistence-models.md)，表格报告字段见[表格领域模型契约](architecture/v2.0/table-domain-models.md)，Docling 适配见[Docling 映射规格](architecture/v2.0/docling-mapping.md)，跨存储一致性见[发布契约](architecture/v2.0/index-publication.md)，CLI、健康检查和错误枚举见[运行时契约](architecture/v2.0/runtime-contracts.md)。
+本文是[当前系统需求](requirements.md)的实现架构。内容按照数据实际流动顺序组织；文档模型、ID 和 JSON 见[数据契约](architecture/v2.0/data-contracts.md)，BuildConfig、manifest、artifact envelope、运行交付和恢复日志见[运行与持久化模型契约](architecture/v2.0/runtime-persistence-models.md)，表格报告字段见[表格领域模型契约](architecture/v2.0/table-domain-models.md)，Docling 适配见[Docling 映射规格](architecture/v2.0/docling-mapping.md)，跨存储一致性见[发布契约](architecture/v2.0/index-publication.md)，CLI、健康检查和错误枚举见[运行时契约](architecture/v2.0/runtime-contracts.md)，正式检索评估的数据集、运行事实、指标与报告见[检索效果评估架构契约](architecture/v2.0/retrieval-evaluation.md)。
 
 本文中的短代码块用于说明模型在主链中的位置；字段级定义以链接的子契约为唯一权威来源。
 
@@ -10,10 +10,10 @@
 
 | pipeline | DocumentProcessor | collection | manifest |
 | --- | --- | --- | --- |
-| v1 | PyMuPDF 按页文本和原递归字符分块 | `minimal_rag_documents_v1` | `.rag/manifest.v1.json` |
-| v2 | Docling 版面、四工具表格、结构分块 | `minimal_rag_documents_v2` | `.rag/manifest.v2.json` |
+| v1 | PyMuPDF 按页文本和原递归字符分块 | `minimal_rag_documents_v1` | `.rag/system-v2/pipelines/v1/manifest.json` |
+| v2 | Docling 版面、四工具表格、结构分块 | `minimal_rag_documents_v2` | `.rag/system-v2/pipelines/v2/manifest.json` |
 
-两条链路共享 `.rag/chroma`，但构建、查询、健康检查和恢复均以 pipeline 为边界。legacy `minimal_rag_documents`、`.rag/manifest.json` 不参与运行。RAG 不依赖 `experiments/` 的代码、配置、产物或文档。
+两条链路共享 `.rag/system-v2/chroma`，但构建、查询、健康检查和恢复均以 pipeline 为边界。上一代系统的 `minimal_rag_documents` 与 manifest 归档在 `.rag/legacy-system-v1/`，不参与当前运行。RAG 不依赖 `experiments/` 的代码、配置、产物或文档。
 
 ## 2. 唯一数据主链
 
@@ -272,10 +272,10 @@ TokenCounter 与 E5Embedder 使用同一 tokenizer，按真实前缀和 special 
 ## 8. 产物目录
 
 ```text
-.rag/artifacts/v2/
-├─ .staging/<document_id>/<build_id>/
-└─ documents/<document_id>/<build_id>/
-   ├─ raw/docling-document.json
+.rag/system-v2/artifacts/v2/
+├─ staging/<可读文件名>--<document_id>/<build_id>/
+└─ documents/<可读文件名>--<document_id>/<build_id>/
+   ├─ raw-docling-document.json
    ├─ parsed-document.json
    ├─ chunks.json
    ├─ selection-summary.json
@@ -283,7 +283,9 @@ TokenCounter 与 E5Embedder 使用同一 tokenizer，按真实前缀和 special 
    └─ diagnostics/
 ```
 
-ArtifactStage 在 staging 写完并校验五个必需产物后返回 ArtifactStageResult。只有 Indexer 能 publish。HTML 直接读取实际 HeaderDecision、SerializedTable、chunks 和 ScoringReport；零 winner 也生成，失败阶段为 `winner_review_generation`。
+ArtifactStage 在 staging 写完并校验五个必需产物后返回 ArtifactStageResult。只有 Indexer 能 publish。HTML 直接读取 winner StructuredTable、实际 HeaderDecision 和最终 table chunks：按 rowspan/colspan 重建视觉表格，只给 identified 范围内的单元格着色，并展示实际 Embedding 正文；不展示坐标清单或评分诊断。零 winner 也生成，失败阶段为 `winner_review_generation`。
+
+`build_id` 目录是 manifest 指向的不可变正式快照，不是待整理的临时目录。新 build 成功生效后默认删除旧 build，因此每份文档通常只有一个 build 目录；失败或 Windows 文件占用导致的 orphan 只作为诊断残留报告。目录不增加 `builds/`、`latest` 或重复的 `document.json` 层。
 
 ## 9. 索引发布事务
 
@@ -316,11 +318,17 @@ manifest 保存 pipeline、collection、完整 BuildConfig/fingerprint，以及�
 
 ## 10. 检索、健康检查和 CLI
 
-向量 metadata 保存 pipeline/build、chunk 类型与序号、页面集合、node IDs、token 数、来源、file/config hash。Retriever 只打开 runtime collection；search/ask/chat 不提供页过滤。`chunks --page` 先按 document_id 读取该文档全部记录，再在应用层保留页面集合包含目标页的 chunk，不执行向量查询或候选过取。引用展示全部来源页。
+向量 metadata 保存 pipeline/build、chunk 类型与序号、页面集合、node IDs、token 数、来源、file/config hash。Retriever 只打开 runtime collection；search/ask/chat 不提供页过滤。VectorStore 按 Retriever 请求的候选数查询，Retriever 在第 K 位同距离组跨越候选池边界时倍增候选数，越过边界后按 `(distance, chunk_id)` 稳定排序并严格返回 K 条。`chunks --page` 先按 document_id 读取该文档全部记录，再在应用层保留页面集合包含目标页的 chunk，不执行向量查询或候选过取。引用展示全部来源页。
 
 健康检查依次验证 manifest 身份/schema、config fingerprint、collection 存在性、总数和逐文档 count/build/file hash，再计算 current/new/changed/missing/invalid/unprocessable/unassessed。pipeline 级阻断时使用 unassessed；只读 PDF 预检失败使用 unprocessable；已有记录、向量或 active artifact 不一致使用 invalid。所有修复只针对当前 pipeline。
 
 CLI 顺序为：解析 `--pipeline`（默认 v2）→ Registry 取 runtime → 按命令延迟装配 → readiness → use case。documents 不加载模型，v2 ingest 才加载四工具，ask/chat 再加载 LLM。
+
+### 10.1 正式检索评估
+
+默认 `eval` 在所选 pipeline readiness 通过后，加载 approved ground truth 及与当前 BuildConfig fingerprint 精确匹配的 approved test set，逐题复用 Retriever，生成不可变运行 JSON，再派生每 PDF HTML、版本 summary 和跨版本 comparison。评估不写 collection 或 pipeline manifest，不调用 LLM；`eval --live` 仅保留为非正式终端冒烟，不进入正式报告。
+
+ground truth、test set、运行状态、逐题事实、Macro/Micro 指标、原子发布和报告重建的字段级契约见[检索效果评估架构契约](architecture/v2.0/retrieval-evaluation.md)。
 
 ## 11. 错误与测试
 
@@ -330,11 +338,13 @@ CLI 顺序为：解析 `--pipeline`（默认 v2）→ Registry 取 runtime → �
 
 ## 12. 编码前技术验证
 
-以下验证已经完成，证据和环境见[编码前技术验证记录](architecture/v2.0/technical-validation.md)：
+核心 RAG 的以下验证已经完成，证据和环境见[编码前技术验证记录](architecture/v2.0/technical-validation.md)：
 
 1. 已锁定 Docling 2.121.0/docling-core 2.92.0 的节点、列表、表格、caption 和 provenance 字段，并完成真实 PDF 转换。
 2. Chroma 1.5.9 已通过 embedding snapshot、空 snapshot、恢复和重启读取，保留 snapshot+journal 架构。
 3. E5 tokenizer 已验证前缀、special tokens、512 上限和关闭截断，并固定模型 revision。
 4. Windows 同卷 replace/rename 已通过；目录 fsync 不支持、打开 HTML 时清理失败已固化为平台事实。
+
+正式检索评估的同距离 Top-K 技术门已关闭：Chroma 原始候选集合不稳定，现采用自适应扩展候选池并按 chunk ID 决胜。验证证据见[技术验证记录第 6 节](architecture/v2.0/technical-validation.md#6-正式检索评估同距离-top-k-边界已关闭)。
 
 这些验证只决定适配器实现。mapper fixture、发布故障注入、最终 embedder 一致性和延迟清理属于实现验证，由实施清单继续跟踪；不得据此新增业务语义。

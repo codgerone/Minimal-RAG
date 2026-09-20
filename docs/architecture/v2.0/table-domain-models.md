@@ -44,6 +44,10 @@ class TableRegion:
     bbox: BoundingBox | None
     source_ref: str
     coordinate_transform: CoordinateTransform | None
+    unavailable_reason: Literal[
+        "missing_bbox", "coordinate_conversion_failed",
+        "invalid_bbox", "invalid_page_geometry",
+    ] | None
 
 class TableCell:
     cell_id: str
@@ -102,11 +106,11 @@ StrategyExecution 的组合不变量为：
 
 StrategyExecution.candidate_ids 必须等于 completed 页面候选按页和工具原序连接；ExtractionReport.candidates 的 ID 集合必须与全部 execution candidate_ids 的并集相等且无重复。
 
-TableRegion 至少有非空 source_ref。能唯一定位到一页时 page_number/page_width/page_height 必须同时非空且为正；bbox 非空时这三者也必须非空。coordinate_transform 仅在源坐标经过转换时非空；原生目标坐标或无法定位时为空。跨页或无法唯一归页时 page_number/page_width/page_height/bbox 必须全部为空，不得保留部分推断值。
+TableRegion 至少有非空 source_ref。能唯一定位到一页时 page_number/page_width/page_height 必须同时非空且为正；bbox 非空时这三者也必须非空且 unavailable_reason 为空。coordinate_transform 仅在源坐标经过转换时非空。来源区域无法形成公共 bbox 时 unavailable_reason 保存最先发生的原始事实：源未提供框、坐标转换依据不足、转换后框非法或页几何非法；准入层据此映射 CandidateView 原因，不根据工具名猜测。一个候选跨页由多个各自可定位的 region 表达，不抹掉各页事实；单个 region 自身无法确定页面时 page_number/page_width/page_height/bbox 全为空并记录 invalid_page_geometry。
 
 TableCell 的四个 offset、row_span、col_span 是一组：可定位时全部非空，两个区间均为合法非空半开区间，span 分别等于区间长度；无法定位时六项全部为空且 span_source=unavailable。bbox 可独立为空，但非空时必须落在某个已定位 region。text=null 只表示工具未提供文字；空字符串表示工具明确提供空白格。
 
-TableCandidate 有合法网格时 row_count/column_count 必须同时为正，x/y boundaries 分别有 column_count+1/row_count+1 个严格递增值；无合法网格时四项全部为空。cells、uncovered_grid_positions 的坐标不得越界或相互矛盾。unplaced_text 仅在存在无法映射到物理格的非空原文时非空；否则为 null。已定位 cell 的区间、span 和 bbox 必须满足需求；无法定位时不得部分伪造。
+TableCandidate 的逻辑网格与可选几何边界分开表达。row_count/column_count 必须同时为正或同时为空；有逻辑网格时 cells、uncovered_grid_positions 的坐标不得越界或相互矛盾。x/y boundaries 必须同时存在或同时为空；存在时分别有 column_count+1/row_count+1 个有限、严格递增值。Docling 跨页表等仍有可靠逻辑 offsets、但无法把 cell 唯一归页的输入保留逻辑网格并令两组 boundaries 为空，不得用逻辑序号冒充页面坐标。无合法逻辑网格时四项全部为空，所有 cell 的位置组也必须为空。unplaced_text 仅在存在无法映射到物理格的非空原文时非空；否则为 null。已定位 cell 的区间、span 和 bbox 必须满足需求；无法定位时不得部分伪造。
 
 ## 2. 准入与分组
 

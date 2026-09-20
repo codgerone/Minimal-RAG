@@ -1,7 +1,7 @@
 from dataclasses import replace
 from pathlib import Path
 
-from rag.config import Settings
+from rag.config import SelectedPipelineSettings, Settings, select_pipeline
 from rag.manifest import (
     global_config_matches,
     load_manifest,
@@ -12,20 +12,23 @@ from rag.manifest import (
 from rag.models import DocumentState, ManifestDocument, SourceDocument
 
 
-def _settings(tmp_path: Path) -> Settings:
-    return Settings(
+def _settings(tmp_path: Path) -> SelectedPipelineSettings:
+    return select_pipeline(Settings(
         project_root=tmp_path,
         documents_dir=tmp_path / "documents",
-        db_path=tmp_path / ".rag" / "chroma",
-        manifest_path=tmp_path / ".rag" / "manifest.json",
-        collection_name="collection",
+        db_path=tmp_path / ".rag/system-v2/chroma",
+        artifacts_path=tmp_path / ".rag/system-v2/artifacts",
         embedding_model="embedding",
-        chunk_size=50,
-        chunk_overlap=10,
+        embedding_model_revision="revision",
+        v1_chunk_size=50,
+        v1_chunk_overlap=10,
+        v2_max_input_tokens=512,
+        v2_text_overlap_tokens=32,
         top_k=2,
+        diagnostics_enabled=False,
         openrouter_api_key=None,
         openrouter_model="llm",
-    )
+    ), "v1")
 
 
 def test_manifest_round_trip_multiple_documents(tmp_path: Path) -> None:
@@ -48,9 +51,14 @@ def test_global_config_change_requires_rebuild(tmp_path: Path) -> None:
     manifest = make_empty_manifest(settings)
 
     assert global_config_matches(manifest, settings)
-    assert not global_config_matches(manifest, replace(settings, chunk_size=51))
+    changed = replace(settings, application=replace(settings.application, v1_chunk_size=51))
+    assert not global_config_matches(manifest, changed)
+    changed_model = replace(
+        settings,
+        application=replace(settings.application, embedding_model="other"),
+    )
     assert not global_config_matches(
-        manifest, replace(settings, embedding_model="other")
+        manifest, changed_model
     )
 
 
@@ -95,7 +103,8 @@ def test_config_mismatch_marks_all_documents_unassessed_without_store_queries(
     )
     store = _Store()
 
-    health = validate_index(replace(settings, chunk_size=51), [source], manifest, store)  # type: ignore[arg-type]
+    changed = replace(settings, application=replace(settings.application, v1_chunk_size=51))
+    health = validate_index(changed, [source], manifest, store)  # type: ignore[arg-type]
 
     assert [status.state for status in health.document_statuses] == [
         DocumentState.UNASSESSED,
