@@ -1,0 +1,21 @@
+name = "plain_text"
+description = "PyMuPDF 按页取文本 + 每页内 300/50 字符分块，不处理表格结构"
+
+[parser]
+use = "pymupdf_pages"
+
+[chunker]
+use = "characters"
+chunk_size = 300
+chunk_overlap = 50
+
+[embedder]
+use = "e5_small"
+
+[retriever]
+use = "semantic"
+top_k = 4
+
+[llm]
+use = "openrouter"
+model = "google/gemini-2.5-flash-lite"

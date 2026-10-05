@@ -1,0 +1,36 @@
+name = "structured"
+description = "Docling 版面解析 + 四工具表格提取与选优 + 按结构的 token 分块"
+
+[parser]
+use = "docling_layout"
+
+[[table_extractors]]
+use = "pymupdf"
+
+[[table_extractors]]
+use = "camelot"
+
+[[table_extractors]]
+use = "docling"
+
+[[table_extractors]]
+use = "unstructured"
+
+[table_formatter]
+use = "row_text_v1"
+
+[chunker]
+use = "structured_tokens"
+max_tokens = 512
+overlap_tokens = 32
+
+[embedder]
+use = "e5_small"
+
+[retriever]
+use = "semantic"
+top_k = 4
+
+[llm]
+use = "openrouter"
+model = "google/gemini-2.5-flash-lite"
