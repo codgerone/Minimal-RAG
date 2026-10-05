@@ -1,0 +1,236 @@
+{
+  "cases": [
+    {
+      "case_id": "PO-25-19-Q001",
+      "groups": [
+        {
+          "acceptable_chunk_sets": [
+            [
+              "5a4c36e0022f4917-v2-c000001"
+            ]
+          ],
+          "evidence_group_id": "e1",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "5a4c36e0022f4917-v2-c000001"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        },
+        {
+          "acceptable_chunk_sets": [
+            [
+              "5a4c36e0022f4917-v2-c000010",
+              "5a4c36e0022f4917-v2-c000015"
+            ]
+          ],
+          "evidence_group_id": "e2",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "5a4c36e0022f4917-v2-c000010",
+                  "5a4c36e0022f4917-v2-c000015"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        },
+        {
+          "acceptable_chunk_sets": [
+            [
+              "5a4c36e0022f4917-v2-c000024"
+            ]
+          ],
+          "evidence_group_id": "e3",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "5a4c36e0022f4917-v2-c000024"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-19-Q002",
+      "groups": [
+        {
+          "acceptable_chunk_sets": [
+            [
+              "5a4c36e0022f4917-v2-c000001"
+            ]
+          ],
+          "evidence_group_id": "e1",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "5a4c36e0022f4917-v2-c000001"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        },
+        {
+          "acceptable_chunk_sets": [
+            [
+              "5a4c36e0022f4917-v2-c000021"
+            ]
+          ],
+          "evidence_group_id": "e2",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "5a4c36e0022f4917-v2-c000021"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-19-Q003",
+      "groups": [
+        {
+          "acceptable_chunk_sets": [
+            [
+              "5a4c36e0022f4917-v2-c000001"
+            ]
+          ],
+          "evidence_group_id": "e1",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "5a4c36e0022f4917-v2-c000001"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        },
+        {
+          "acceptable_chunk_sets": [
+            [
+              "5a4c36e0022f4917-v2-c000012",
+              "5a4c36e0022f4917-v2-c000016",
+              "5a4c36e0022f4917-v2-c000018"
+            ]
+          ],
+          "evidence_group_id": "e2",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "5a4c36e0022f4917-v2-c000012",
+                  "5a4c36e0022f4917-v2-c000016",
+                  "5a4c36e0022f4917-v2-c000018"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        },
+        {
+          "acceptable_chunk_sets": [
+            [
+              "5a4c36e0022f4917-v2-c000022"
+            ]
+          ],
+          "evidence_group_id": "e3",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "5a4c36e0022f4917-v2-c000022"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        },
+        {
+          "acceptable_chunk_sets": [
+            [
+              "5a4c36e0022f4917-v2-c000024"
+            ]
+          ],
+          "evidence_group_id": "e4",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "5a4c36e0022f4917-v2-c000024"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-19-Q004",
+      "groups": [
+        {
+          "acceptable_chunk_sets": [
+            [
+              "5a4c36e0022f4917-v2-c000026"
+            ]
+          ],
+          "evidence_group_id": "e1",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "5a4c36e0022f4917-v2-c000026"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        }
+      ]
+    }
+  ],
+  "document_id": "5a4c36e0022f4917",
+  "document_key": "签字-ORDER-PERU-25-19-FONAFE--5a4c36e0022f4917",
+  "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+  "file_hash": "04d82628210338b261fbb0809d53bf5b2c85ca1f524940a0e3c9fcf712329e89",
+  "relative_path": "签字-ORDER PERU 25-19 FONAFE.pdf",
+  "schema_version": "test_set_document_v3"
+}

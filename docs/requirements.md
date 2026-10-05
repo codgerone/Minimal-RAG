@@ -1,8 +1,10 @@
-# Minimal RAG 当前系统需求
+# Minimal RAG V2.0 历史系统需求
+
+归档说明：本文保留 V2.0 需求事实；现行系统的完整需求以 [V3.0 总需求](changes/v3.0/spec/requirements.md)及其子需求为准。
 
 需求版本：V2.0。状态：核心功能已实现并通过回归；检索评估数据集与正式基线报告待按本文完成。运行形态：Windows 本地终端、Python 3.11、单用户、多 PDF。
 
-本文描述 V2.0 完成后系统的全部有效行为。以下详细规则属于本文组成部分：
+本文描述 V2.0 完成时系统的行为。以下详细规则属于该历史版本的组成部分：
 
 - [表格提取、准入、分组与选优](requirements/v2.0/table-extraction-selection.md)
 - [表头判定](requirements/v2.0/table-header-detection.md)

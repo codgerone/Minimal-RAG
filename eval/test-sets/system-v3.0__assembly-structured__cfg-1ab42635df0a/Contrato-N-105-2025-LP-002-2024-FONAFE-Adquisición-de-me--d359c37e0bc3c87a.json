@@ -1,0 +1,542 @@
+{
+  "cases": [
+    {
+      "case_id": "CONTRACT-105-Q001",
+      "groups": [
+        {
+          "acceptable_chunk_sets": [
+            [
+              "d359c37e0bc3c87a-v2-c000001"
+            ]
+          ],
+          "evidence_group_id": "e1",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "d359c37e0bc3c87a-v2-c000001"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        },
+        {
+          "acceptable_chunk_sets": [
+            [
+              "d359c37e0bc3c87a-v2-c000001"
+            ]
+          ],
+          "evidence_group_id": "e2",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "d359c37e0bc3c87a-v2-c000001"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q002",
+      "groups": [
+        {
+          "acceptable_chunk_sets": [
+            [
+              "d359c37e0bc3c87a-v2-c000013"
+            ]
+          ],
+          "evidence_group_id": "e1",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "d359c37e0bc3c87a-v2-c000008"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            },
+            {
+              "chunk_sets": [
+                [
+                  "d359c37e0bc3c87a-v2-c000010"
+                ]
+              ],
+              "excerpt_id": "x2",
+              "status": "mapped"
+            },
+            {
+              "chunk_sets": [
+                [
+                  "d359c37e0bc3c87a-v2-c000012"
+                ]
+              ],
+              "excerpt_id": "x3",
+              "status": "mapped"
+            },
+            {
+              "chunk_sets": [
+                [
+                  "d359c37e0bc3c87a-v2-c000013"
+                ]
+              ],
+              "excerpt_id": "x4",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q003",
+      "groups": [
+        {
+          "acceptable_chunk_sets": [
+            [
+              "d359c37e0bc3c87a-v2-c000016"
+            ],
+            [
+              "d359c37e0bc3c87a-v2-c000017"
+            ],
+            [
+              "d359c37e0bc3c87a-v2-c000018"
+            ],
+            [
+              "d359c37e0bc3c87a-v2-c000019"
+            ]
+          ],
+          "evidence_group_id": "e1",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "d359c37e0bc3c87a-v2-c000016"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            },
+            {
+              "chunk_sets": [
+                [
+                  "d359c37e0bc3c87a-v2-c000017"
+                ],
+                [
+                  "d359c37e0bc3c87a-v2-c000018"
+                ],
+                [
+                  "d359c37e0bc3c87a-v2-c000019"
+                ]
+              ],
+              "excerpt_id": "x2",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        },
+        {
+          "acceptable_chunk_sets": [
+            [
+              "d359c37e0bc3c87a-v2-c000020"
+            ]
+          ],
+          "evidence_group_id": "e2",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "d359c37e0bc3c87a-v2-c000020"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        },
+        {
+          "acceptable_chunk_sets": [
+            [
+              "d359c37e0bc3c87a-v2-c000021"
+            ]
+          ],
+          "evidence_group_id": "e3",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "d359c37e0bc3c87a-v2-c000021"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q004",
+      "groups": [
+        {
+          "acceptable_chunk_sets": [
+            [
+              "d359c37e0bc3c87a-v2-c000023",
+              "d359c37e0bc3c87a-v2-c000025",
+              "d359c37e0bc3c87a-v2-c000027"
+            ]
+          ],
+          "evidence_group_id": "e1",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "d359c37e0bc3c87a-v2-c000005"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            },
+            {
+              "chunk_sets": [
+                [
+                  "d359c37e0bc3c87a-v2-c000023",
+                  "d359c37e0bc3c87a-v2-c000025",
+                  "d359c37e0bc3c87a-v2-c000027"
+                ]
+              ],
+              "excerpt_id": "x2",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q005",
+      "groups": [
+        {
+          "acceptable_chunk_sets": [
+            [
+              "d359c37e0bc3c87a-v2-c000011"
+            ]
+          ],
+          "evidence_group_id": "e1",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "d359c37e0bc3c87a-v2-c000011"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        },
+        {
+          "acceptable_chunk_sets": [
+            [
+              "d359c37e0bc3c87a-v2-c000011"
+            ]
+          ],
+          "evidence_group_id": "e2",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "d359c37e0bc3c87a-v2-c000011"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        },
+        {
+          "acceptable_chunk_sets": [
+            [
+              "d359c37e0bc3c87a-v2-c000011"
+            ]
+          ],
+          "evidence_group_id": "e3",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "d359c37e0bc3c87a-v2-c000011"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q006",
+      "groups": [
+        {
+          "acceptable_chunk_sets": [
+            [
+              "d359c37e0bc3c87a-v2-c000012"
+            ]
+          ],
+          "evidence_group_id": "e1",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "d359c37e0bc3c87a-v2-c000012"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        },
+        {
+          "acceptable_chunk_sets": [
+            [
+              "d359c37e0bc3c87a-v2-c000012"
+            ]
+          ],
+          "evidence_group_id": "e2",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "d359c37e0bc3c87a-v2-c000012"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q007",
+      "groups": [
+        {
+          "acceptable_chunk_sets": [
+            [
+              "d359c37e0bc3c87a-v2-c000015"
+            ]
+          ],
+          "evidence_group_id": "e1",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "d359c37e0bc3c87a-v2-c000015"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        },
+        {
+          "acceptable_chunk_sets": [
+            [
+              "d359c37e0bc3c87a-v2-c000016"
+            ]
+          ],
+          "evidence_group_id": "e2",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "d359c37e0bc3c87a-v2-c000016"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        },
+        {
+          "acceptable_chunk_sets": [
+            [
+              "d359c37e0bc3c87a-v2-c000016"
+            ]
+          ],
+          "evidence_group_id": "e3",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "d359c37e0bc3c87a-v2-c000016"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q008",
+      "groups": [
+        {
+          "acceptable_chunk_sets": [
+            [
+              "d359c37e0bc3c87a-v2-c000029"
+            ]
+          ],
+          "evidence_group_id": "e1",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "d359c37e0bc3c87a-v2-c000029"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        },
+        {
+          "acceptable_chunk_sets": [
+            [
+              "d359c37e0bc3c87a-v2-c000029",
+              "d359c37e0bc3c87a-v2-c000030"
+            ]
+          ],
+          "evidence_group_id": "e2",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "d359c37e0bc3c87a-v2-c000029",
+                  "d359c37e0bc3c87a-v2-c000030"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q009",
+      "groups": [
+        {
+          "acceptable_chunk_sets": [
+            [
+              "d359c37e0bc3c87a-v2-c000017",
+              "d359c37e0bc3c87a-v2-c000018",
+              "d359c37e0bc3c87a-v2-c000019"
+            ]
+          ],
+          "evidence_group_id": "e1",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "d359c37e0bc3c87a-v2-c000017",
+                  "d359c37e0bc3c87a-v2-c000018",
+                  "d359c37e0bc3c87a-v2-c000019"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q010",
+      "groups": [
+        {
+          "acceptable_chunk_sets": [
+            [
+              "d359c37e0bc3c87a-v2-c000017"
+            ],
+            [
+              "d359c37e0bc3c87a-v2-c000018"
+            ],
+            [
+              "d359c37e0bc3c87a-v2-c000019"
+            ]
+          ],
+          "evidence_group_id": "e1",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "d359c37e0bc3c87a-v2-c000017"
+                ],
+                [
+                  "d359c37e0bc3c87a-v2-c000018"
+                ],
+                [
+                  "d359c37e0bc3c87a-v2-c000019"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        },
+        {
+          "acceptable_chunk_sets": [
+            [
+              "d359c37e0bc3c87a-v2-c000033"
+            ]
+          ],
+          "evidence_group_id": "e2",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "d359c37e0bc3c87a-v2-c000033"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        }
+      ]
+    }
+  ],
+  "document_id": "d359c37e0bc3c87a",
+  "document_key": "Contrato-N-105-2025-LP-002-2024-FONAFE-Adquisición-de-me--d359c37e0bc3c87a",
+  "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+  "file_hash": "d8700a61b3d7e8d82619bfce60c339844936fbd9c7a9c5055846a82795adc82c",
+  "relative_path": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+  "schema_version": "test_set_document_v3"
+}

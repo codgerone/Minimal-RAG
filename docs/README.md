@@ -1,8 +1,12 @@
 # 文档导航
 
-当前代码提供相互隔离的 V1/V2 双链路，CLI 默认使用 V2；需求、架构、实现验证与升级入口均由本页导航。
+当前代码运行 V3.0 接口—插件—装配系统，默认选择 `structured` 装配；V2.0 文件和评估记录仅作只读历史证据。本页区分现行 V3.0 权威规格与旧版记录。
 
-## 当前有效需求
+## 当前有效需求与架构：V3.0
+
+[V3.0 规格地图](changes/v3.0/spec/README.md)是现行文档入口：其中的[总需求](changes/v3.0/spec/requirements.md)、[总架构](changes/v3.0/spec/architecture.md)及各子契约唯一地定义当前系统。该地图逐份说明回答的问题、权威内容和建议读者。[交互式架构审核图](changes/v3.0/system-architecture-review.html)仅辅助理解，不能替代正式契约。[实施与验收记录](changes/v3.0/implementation-plan.md)和[正式 V3.0 评估汇总](../validation/retrieval/system-v3.0/summary.md)给出两份内置装配的真实验证结果；[编码就绪复审](changes/v3.0/spec/architecture-review.md)记录编码前结论，不代替交付验收。
+
+## V2.0 历史需求
 
 | 文档 | 回答的问题 | 权威内容 | 建议读者 |
 | --- | --- | --- | --- |
@@ -13,16 +17,16 @@
 | [普通文本、List 文本化与 V2 分块](requirements/v2.0/document-text-and-chunking.md) | 非表格节点及超限结构如何分块？ | 正文格式、组合边界、overlap、退化和终止规则 | Chunker、tokenizer 与测试人员 |
 | [检索效果评估](requirements/v2.0/retrieval-evaluation.md) | 如何建立标准证据并量化、审核和跨版本比较检索效果？ | ground truth、配置 test set、证据组映射、指标公式、报告和变更控制 | 产品、检索实现、评估与审核人员 |
 
-总需求是系统行为入口；五份子需求分别是对应复杂规则的唯一权威。增量提案和历史文档不能补充或改写这些现行规则。
+以下文档保存 V2.0 的系统和领域规则，不定义现行 V3.0 行为。
 
-## 当前系统基线
+## 更早版本基线
 
 - [V1.0 需求](history/requirements/v1.0-minimal-rag-requirements.md)与[V1.0 架构](history/architecture/v1.0-minimal-rag-architecture.md)。
 - [V1.1 索引健康与引导恢复需求](history/requirements/v1.1-index-health-guided-recovery.md)与[V1.1 架构补充](history/architecture/v1.1-index-health-guided-recovery-architecture.md)。
 
-这些文件记录升级前版本，当前有效需求以 `requirements.md` 及其子文档为准。完成当前架构文档后再整体迁入 `history/`，避免在架构尚未完成时破坏旧链接。
+这些文件记录更早版本；V1.0、V1.1 和 V2.0 的文档、索引及已发布评估运行均保留为历史事实，不参与 V3.0 命令装配。
 
-## 当前架构
+## V2.0 历史架构
 
 | 文档 | 回答的问题 | 权威内容 | 建议读者 |
 | --- | --- | --- | --- |
@@ -38,12 +42,12 @@
 | [V2.0 正式检索效果汇总](../validation/retrieval/system-v2.0/summary.md) | 当前两条链路的正式检索效果怎样？ | 各配置及五份 PDF 的指标汇总，明细链接到不可变运行目录 | 产品、开发与效果审核人员 |
 | [正式检索效果对比](../validation/retrieval/comparison.md) | 可严格比较的运行之间有何变化？ | 比较状态、主指标基线值、候选值和 delta | 版本决策与迭代复盘人员 |
 
-总架构只说明定位、关系和数据流；字段级定义以上表对应子契约为唯一权威。核心 RAG、正式检索评估、ground truth/test set 审核以及五份 PDF 的 v1/v2 Top-3 基线均已完成。回答质量不属于本轮检索评估范围。
+这些架构文档保存 V2.0 数据流与模型；五份 PDF 的旧 Top-3 运行由 V3.0 评估比较服务只读回读。现行字段、状态、发布和失败语义以本页上方 V3.0 规格地图为准。
 
-## V2.0 变更与交付记录
+## V2.0 历史变更与交付记录
 
 1. [增量需求](changes/v2.0/proposal.md)：已确认从 V1.1 到 V2.0 的行为变化及明确后置事项。
 2. [实施清单](changes/v2.0/checklist.md)：设计与代码交付顺序、验收场景和进度。
 3. [升级指南](upgrade-guide.md)：默认链路变化、显式 V1、系统版本存储迁移、恢复方式和已知限制。
 
-实现不得自行补充需求中仍未确定的业务规则。
+现行实现不得从历史文档隐式继承规则；业务语义以 V3.0 已审核规格为准。

@@ -1,0 +1,112 @@
+{
+  "source_id": "817cfff2927c6c65",
+  "source_hash": "22e75e312a2e2111326412927d76053ba8d74c95d458203623afce956e663239",
+  "pages": [
+    [
+      1,
+      "bb378f47177edba738b4394f6ab8de029c9722c74289d3b7d525b8ac790e2e13"
+    ]
+  ],
+  "chunks": [
+    [
+      "817cfff2927c6c65-p1-c00",
+      "e3b49d5a60a7be0ff932c0c479bc587978f507e927cc02fd20167e93e96ad373",
+      1
+    ],
+    [
+      "817cfff2927c6c65-p1-c01",
+      "994bbf5835d76600babbee29d48e914a08df87f3b0b5a60656aee5744988c8e6",
+      1
+    ],
+    [
+      "817cfff2927c6c65-p1-c02",
+      "d1716d17ddc0e8efe972ce2a616a01efb828139b8ebfb6a99bd8e21b90b1d26c",
+      1
+    ],
+    [
+      "817cfff2927c6c65-p1-c03",
+      "439e196193f84c88d2eeeacbf1a98528d0376bfb2a09dc8866f397c02e967124",
+      1
+    ],
+    [
+      "817cfff2927c6c65-p1-c04",
+      "cd32ae2034a87c58c6a450aaba8db4ed52ba78fafa71021d9ab18abd1642e964",
+      1
+    ],
+    [
+      "817cfff2927c6c65-p1-c05",
+      "78d9a1485a2f03c4f2ac18f5a851ed34cff7008959a98263a0ec5de9efbb1c97",
+      1
+    ],
+    [
+      "817cfff2927c6c65-p1-c06",
+      "cf62854eb208cb507c6f8bbc720bb39d01606af83aac3a4c2bbc3b18f5cc9305",
+      1
+    ],
+    [
+      "817cfff2927c6c65-p1-c07",
+      "5baefa55dc90a91bfe39ebf98c84700df785e3f8f15caa531e9b5f8688c24ab6",
+      1
+    ],
+    [
+      "817cfff2927c6c65-p1-c08",
+      "4e07ac7f1fe6f114c974c18bf760e2107e3606366f6610e51ea0f3bc1adcb558",
+      1
+    ]
+  ],
+  "structured": [
+    [
+      "doc123-v2-c000000",
+      "订单编号 12345。",
+      20,
+      0,
+      3,
+      [
+        [
+          0,
+          11,
+          false
+        ]
+      ]
+    ],
+    [
+      "doc123-v2-c000001",
+      "345。交付日期 2026-09-25。",
+      29,
+      1,
+      3,
+      [
+        [
+          7,
+          11,
+          true
+        ],
+        [
+          11,
+          27,
+          false
+        ]
+      ]
+    ],
+    [
+      "doc123-v2-c000002",
+      "-25。客户要求保留全部来源。",
+      24,
+      2,
+      3,
+      [
+        [
+          23,
+          27,
+          true
+        ],
+        [
+          27,
+          38,
+          false
+        ]
+      ]
+    ]
+  ],
+  "system_prompt_sha256": "17ef19cce12e07828bdb9ebf3b601406618c4f62f53f0a842a7cb937d2a42404"
+}

@@ -1,0 +1,91 @@
+{
+  "cases": [
+    {
+      "case_id": "E001-602-Q001",
+      "groups": [
+        {
+          "acceptable_chunk_sets": [
+            [
+              "817cfff2927c6c65-p1-c07"
+            ]
+          ],
+          "evidence_group_id": "e1",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "817cfff2927c6c65-p1-c07"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        },
+        {
+          "acceptable_chunk_sets": [
+            [
+              "817cfff2927c6c65-p1-c06",
+              "817cfff2927c6c65-p1-c07"
+            ]
+          ],
+          "evidence_group_id": "e2",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "817cfff2927c6c65-p1-c06",
+                  "817cfff2927c6c65-p1-c07"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            },
+            {
+              "chunk_sets": [
+                [
+                  "817cfff2927c6c65-p1-c07"
+                ]
+              ],
+              "excerpt_id": "x2",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        }
+      ]
+    },
+    {
+      "case_id": "E001-602-Q002",
+      "groups": [
+        {
+          "acceptable_chunk_sets": [
+            [
+              "817cfff2927c6c65-p1-c04"
+            ]
+          ],
+          "evidence_group_id": "e1",
+          "excerpt_mappings": [
+            {
+              "chunk_sets": [
+                [
+                  "817cfff2927c6c65-p1-c04"
+                ]
+              ],
+              "excerpt_id": "x1",
+              "status": "mapped"
+            }
+          ],
+          "status": "mapped"
+        }
+      ]
+    }
+  ],
+  "document_id": "817cfff2927c6c65",
+  "document_key": "E001-602--817cfff2927c6c65",
+  "document_name": "E001-602.pdf",
+  "file_hash": "22e75e312a2e2111326412927d76053ba8d74c95d458203623afce956e663239",
+  "relative_path": "E001-602.pdf",
+  "schema_version": "test_set_document_v3"
+}
