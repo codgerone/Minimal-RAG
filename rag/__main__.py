@@ -1,6 +1,5 @@
-"""Minimal RAG V3 command entry point."""
+"""python -m rag"""
 
-from rag.v3.cli import main
-
+from rag.cli import main
 
 raise SystemExit(main())
