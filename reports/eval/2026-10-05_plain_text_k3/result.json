@@ -1,0 +1,2679 @@
+{
+  "config": "plain_text",
+  "fingerprint": "1b593bf52a3c826c90d0e446b4406958dfb40c385b8bb2d61f68dcf7c3b8c376",
+  "build_settings": {
+    "rules_version": "v3.1",
+    "parser": {
+      "use": "pymupdf_pages"
+    },
+    "table_extractors": [],
+    "table_formatter": null,
+    "chunker": {
+      "use": "characters",
+      "chunk_size": 300,
+      "chunk_overlap": 50
+    },
+    "embedder": {
+      "use": "e5_small"
+    },
+    "embedder_identity": {
+      "model": "intfloat/multilingual-e5-small",
+      "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+      "passage_prefix": "passage: ",
+      "query_prefix": "query: ",
+      "normalized": true
+    }
+  },
+  "top_k": 3,
+  "created_at": "2026-10-05T15:51:07+08:00",
+  "dataset": {
+    "version": "2.0.0",
+    "fingerprint": "2825f87edd35da41a17cb05ee2828deafea35f801b6c1e734a31ed49f8564580",
+    "questions": 24,
+    "answerable": 24,
+    "pdf_changed_since_labelling": []
+  },
+  "evidence_modes": {
+    "confirmed": 43,
+    "auto": 0,
+    "unmapped": 0
+  },
+  "metrics": {
+    "hit_rate": {
+      "value": 0.041666666666666664,
+      "numerator": 1,
+      "denominator": 24
+    },
+    "complete_coverage": {
+      "value": 0.041666666666666664,
+      "numerator": 1,
+      "denominator": 24
+    },
+    "group_recall": {
+      "value": 0.041666666666666664,
+      "numerator": 1.0,
+      "denominator": 24
+    },
+    "mrr": {
+      "value": 0.09027777777777778,
+      "numerator": 2.1666666666666665,
+      "denominator": 24
+    },
+    "chunk_precision": {
+      "value": 0.05555555555555555,
+      "numerator": 1.3333333333333333,
+      "denominator": 24
+    },
+    "cross_document": {
+      "value": 0.5416666666666666,
+      "numerator": 13.0,
+      "denominator": 24
+    }
+  },
+  "documents": {
+    "d359c37e0bc3c87a": {
+      "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+      "questions": 10,
+      "metrics": {
+        "hit_rate": {
+          "value": 0.0,
+          "numerator": 0,
+          "denominator": 10
+        },
+        "complete_coverage": {
+          "value": 0.0,
+          "numerator": 0,
+          "denominator": 10
+        },
+        "group_recall": {
+          "value": 0.0,
+          "numerator": 0.0,
+          "denominator": 10
+        },
+        "mrr": {
+          "value": 0.18333333333333332,
+          "numerator": 1.8333333333333333,
+          "denominator": 10
+        },
+        "chunk_precision": {
+          "value": 0.1,
+          "numerator": 1.0,
+          "denominator": 10
+        },
+        "cross_document": {
+          "value": 0.26666666666666666,
+          "numerator": 2.6666666666666665,
+          "denominator": 10
+        }
+      }
+    },
+    "817cfff2927c6c65": {
+      "document_name": "E001-602.pdf",
+      "questions": 2,
+      "metrics": {
+        "hit_rate": {
+          "value": 0.5,
+          "numerator": 1,
+          "denominator": 2
+        },
+        "complete_coverage": {
+          "value": 0.5,
+          "numerator": 1,
+          "denominator": 2
+        },
+        "group_recall": {
+          "value": 0.5,
+          "numerator": 1.0,
+          "denominator": 2
+        },
+        "mrr": {
+          "value": 0.16666666666666666,
+          "numerator": 0.3333333333333333,
+          "denominator": 2
+        },
+        "chunk_precision": {
+          "value": 0.16666666666666666,
+          "numerator": 0.3333333333333333,
+          "denominator": 2
+        },
+        "cross_document": {
+          "value": 0.8333333333333333,
+          "numerator": 1.6666666666666665,
+          "denominator": 2
+        }
+      }
+    },
+    "169a1f2133fe5643": {
+      "document_name": "ORDER PERU 24-12 ANDET.pdf",
+      "questions": 6,
+      "metrics": {
+        "hit_rate": {
+          "value": 0.0,
+          "numerator": 0,
+          "denominator": 6
+        },
+        "complete_coverage": {
+          "value": 0.0,
+          "numerator": 0,
+          "denominator": 6
+        },
+        "group_recall": {
+          "value": 0.0,
+          "numerator": 0.0,
+          "denominator": 6
+        },
+        "mrr": {
+          "value": 0.0,
+          "numerator": 0,
+          "denominator": 6
+        },
+        "chunk_precision": {
+          "value": 0.0,
+          "numerator": 0.0,
+          "denominator": 6
+        },
+        "cross_document": {
+          "value": 1.0,
+          "numerator": 6.0,
+          "denominator": 6
+        }
+      }
+    },
+    "5883b02cd922a64f": {
+      "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+      "questions": 2,
+      "metrics": {
+        "hit_rate": {
+          "value": 0.0,
+          "numerator": 0,
+          "denominator": 2
+        },
+        "complete_coverage": {
+          "value": 0.0,
+          "numerator": 0,
+          "denominator": 2
+        },
+        "group_recall": {
+          "value": 0.0,
+          "numerator": 0.0,
+          "denominator": 2
+        },
+        "mrr": {
+          "value": 0.0,
+          "numerator": 0,
+          "denominator": 2
+        },
+        "chunk_precision": {
+          "value": 0.0,
+          "numerator": 0.0,
+          "denominator": 2
+        },
+        "cross_document": {
+          "value": 0.6666666666666666,
+          "numerator": 1.3333333333333333,
+          "denominator": 2
+        }
+      }
+    },
+    "5a4c36e0022f4917": {
+      "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+      "questions": 4,
+      "metrics": {
+        "hit_rate": {
+          "value": 0.0,
+          "numerator": 0,
+          "denominator": 4
+        },
+        "complete_coverage": {
+          "value": 0.0,
+          "numerator": 0,
+          "denominator": 4
+        },
+        "group_recall": {
+          "value": 0.0,
+          "numerator": 0.0,
+          "denominator": 4
+        },
+        "mrr": {
+          "value": 0.0,
+          "numerator": 0,
+          "denominator": 4
+        },
+        "chunk_precision": {
+          "value": 0.0,
+          "numerator": 0.0,
+          "denominator": 4
+        },
+        "cross_document": {
+          "value": 0.3333333333333333,
+          "numerator": 1.3333333333333333,
+          "denominator": 4
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "CONTRACT-105-Q001",
+      "document_id": "d359c37e0bc3c87a",
+      "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+      "question": "采购合同CONTRATO N° 105 - 2025 的签署双方分别是谁？各自的法定代表人是谁？",
+      "reference_answer": "合同买方为 ELECTRO SUR ESTE S.A.A. (LA EMPRESA)，法定代表人为总经理 Ing. Fredy Hernán Gonzáles De La Vega；承包商/卖方为 HEXING ELECTRICAL COMPANY S.A.C. (EL CONTRATISTA)，法定代表人为 María Isabel Gallardo Torres 和 Medaly Xiomara Arotoma Taipe。",
+      "answerable": true,
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": null,
+      "groups": [
+        {
+          "group_id": "e1",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0004",
+              "d359c37e0bc3c87a-c0005",
+              "d359c37e0bc3c87a-c0006"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "pages": [
+                1
+              ],
+              "text": "ELECTRO SUR ESTE S.A.A., identificada con RUC. Nº 20116544289, cuya personería jurídica se encuentra inscrita en la Partida Electrónica Nº 11003503 del Registro de Personas Jurídicas Zona Registral Nº X - Sede Cusco, con domicilio en la Avenida Mariscal Sucre Nº 400 de la Urbanización Bancopata, del distrito de Santiago, provincia y departamento de Cusco, debidamente representada para este acto por su Gerente General el Ing. Fredy Hernán Gonzáles De La Vega, peruano, identificado con DNI. Nº 23839976, con poder de representación inscrito en los Asientos N° D00195 y N° D00232 de la Partida Electrónica en mención. A quien en adelante se le denominará “LA EMPRESA”."
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0007",
+              "d359c37e0bc3c87a-c0008",
+              "d359c37e0bc3c87a-c0009"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "pages": [
+                1
+              ],
+              "text": "HEXING ELECTRICAL COMPANY S.A.C., identificada con RUC. Nº 20546102115, cuya razón social se encuentra inscrita en la Partida Electrónica Nº 12601784 de la Zona Registral IX – Sede Lima, con domicilio legal en el inmueble ubicado en la Avenida Guardia Civil N° 1321, Int. 1602, Urbanización El Aeropuerto, distrito de Surquillo, provincia y departamento de Lima, representada para este efecto por sus Apoderadas la Srta. María Isabel Gallardo Torres, peruana, identificada con DNI N° 44099982, y la Srta. Medaly Xiomara Arotoma Taipe, peruana, identificada con DNI N° 70034859, ambas con poderes inscritos en el asiento Nº C00010 de referida Partida Electrónica en mención. A quien en adelante se le denominará EL CONTRATISTA."
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "d359c37e0bc3c87a-c0018",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.13395869731903076,
+          "similarity": 0.8660413026809692,
+          "relevant": false,
+          "cross_document": false,
+          "text": "sancionados por el Tribunal de Contrataciones del Estado con sanción vigente” EL CONTRATISTA no se encuentra"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "5a4c36e0022f4917-c0047",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.13594722747802734,
+          "similarity": 0.8640527725219727,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Prepared by: María Gallardo\n向忖\n\nHexing Electrical Company S.A.C.\nE-mail: maria.gallardo@hxgroup.com\n\nWebsite: www.hxgroup.cn"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "d359c37e0bc3c87a-c0020",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.136832594871521,
+          "similarity": 0.863167405128479,
+          "relevant": false,
+          "cross_document": false,
+          "text": "suspendido o inhabilitado para contratar con el Estado.\n\n2.4\nEL CONTRATISTA ha cumplido con presentar la siguiente documentación en fecha 02/09/2025 y su subsanación\nen fecha 10/09/2025:\n\n•\nGarantía de fiel cumplimiento del contrato:"
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q002",
+      "document_id": "d359c37e0bc3c87a",
+      "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+      "question": "采购合同CONTRATO N° 105 - 2025包含哪些 Ítem 的产品？各自的数量、单价及含税总金额是多少？合同总金额是多少？",
+      "reference_answer": "合同共包含 3 个 Ítem，含税总金额为 US$ 810,722.54：\n1. Ítem 1（单相电子电表 2线）：数量 120,000 台，单价 US$ 6.1124，总价 US$ 733,488.00；\n2. Ítem 3（三相电子电表 3线）：数量 1,500 台，单价 US$ 18.0894，总价 US$ 27,134.10；\n3. Ítem 4（三相电子电表 4线）：数量 2,600 台，单价 US$ 19.2694，总价 US$ 50,100.44。",
+      "answerable": true,
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": null,
+      "groups": [
+        {
+          "group_id": "e1",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0058"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "pages": [
+                2
+              ],
+              "text": "Ítem | Descripción\n1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS\n3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS\n4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS"
+            },
+            {
+              "excerpt_id": "x2",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "pages": [
+                3
+              ],
+              "text": "Ítem | DESCRIPCIÓN | TABLA DE DATOS TÉCNICOS\n1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 01\n3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS | Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 03\n4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 04"
+            },
+            {
+              "excerpt_id": "x3",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "pages": [
+                4
+              ],
+              "text": "Ítem 1: US$ 733,488.00 (Setecientos treinta y tres mil cuatrocientos ochenta y ocho con 00/100 Dólares Americanos) incluye todos los impuestos de Ley.\nÍtem 3: US$ 27,134.10 (Veintisiete mil ciento treinta y cuatro con 10/100 Dólares Americanos) incluye todos los impuestos de Ley.\nÍtem 4: US$ 50,100.44 (Cincuenta mil cien con 44/100 Dólares Americanos) incluye todos los impuestos de Ley."
+            },
+            {
+              "excerpt_id": "x4",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "pages": [
+                4
+              ],
+              "text": "ÍTEM | DESCRIPCIÓN | CANTIDAD | PRECIO UNITARIO CON IGV (US$) | PRECIO TOTAL (US$)\nÍtem 1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | 120,000 | 6.1124 | 733,488.00\nÍtem 3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS | 1,500 | 18.0894 | 27,134.10\nÍtem 4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | 2,600 | 19.2694 | 50,100.44"
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "5a4c36e0022f4917-c0047",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.12694305181503296,
+          "similarity": 0.873056948184967,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Prepared by: María Gallardo\n向忖\n\nHexing Electrical Company S.A.C.\nE-mail: maria.gallardo@hxgroup.com\n\nWebsite: www.hxgroup.cn"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "d359c37e0bc3c87a-c0000",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.13271570205688477,
+          "similarity": 0.8672842979431152,
+          "relevant": false,
+          "cross_document": false,
+          "text": "CONTRATO N° 105 - 2025\n\nCOMPRA CORPORATIVA DE MEDIDORES PARA LAS EMPRESAS DE LA\n\nCORPORACIÓN FONAFE – ÍTEMS 1, 3 Y 4\n\n(LICITACIÓN PÚBLICA N° LP-002-2024-FONAFE)"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "5883b02cd922a64f-c0015",
+          "document_id": "5883b02cd922a64f",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.13700878620147705,
+          "similarity": 0.862991213798523,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Website: www.hxgroup.cn"
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q003",
+      "document_id": "d359c37e0bc3c87a",
+      "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+      "question": "采购合同CONTRATO N° 105 - 2025规定的总履约期限是多久？具体的交货地点在哪里？是否允许提前交货？",
+      "reference_answer": "合同规定的总履约交付期限为自合同签署之日起 690 个日历天。交货地点为 Almacén Central ELSE（地址：Av. Mariscal Sucre N° 400, Urb. Bancopata - Santiago, Cusco）。合同明确规定不接受提前交货，除非买方主动提出并经承包商同意。",
+      "answerable": true,
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": null,
+      "groups": [
+        {
+          "group_id": "e1",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0075"
+            ],
+            [
+              "d359c37e0bc3c87a-c0078"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "pages": [
+                5
+              ],
+              "text": "Los bienes materia del presente contrato se entregarán en el plazo de 690 días calendarios de la firma de contrato."
+            },
+            {
+              "excerpt_id": "x2",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "pages": [
+                5
+              ],
+              "text": "6ta ENTREGA (A 690 días de la firma del contrato)"
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0080"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "pages": [
+                5
+              ],
+              "text": "No se aceptarán entregas anticipadas, salvo que sea requerido por LA EMPRESA, previa disponibilidad y aceptación por parte del CONTRATISTA."
+            }
+          ]
+        },
+        {
+          "group_id": "e3",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0081"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "pages": [
+                5
+              ],
+              "text": "LUGAR DE ENTREGA\nELSE | Almacén Central ELSE - Av. Mariscal Sucre Nº 400, Urb. Bancopata – Santiago, Cusco, Cusco"
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "d359c37e0bc3c87a-c0018",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.1409474015235901,
+          "similarity": 0.8590525984764099,
+          "relevant": false,
+          "cross_document": false,
+          "text": "sancionados por el Tribunal de Contrataciones del Estado con sanción vigente” EL CONTRATISTA no se encuentra"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "5a4c36e0022f4917-c0047",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.14159178733825684,
+          "similarity": 0.8584082126617432,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Prepared by: María Gallardo\n向忖\n\nHexing Electrical Company S.A.C.\nE-mail: maria.gallardo@hxgroup.com\n\nWebsite: www.hxgroup.cn"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "d359c37e0bc3c87a-c0020",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.1444464921951294,
+          "similarity": 0.8555535078048706,
+          "relevant": false,
+          "cross_document": false,
+          "text": "suspendido o inhabilitado para contratar con el Estado.\n\n2.4\nEL CONTRATISTA ha cumplido con presentar la siguiente documentación en fecha 02/09/2025 y su subsanación\nen fecha 10/09/2025:\n\n•\nGarantía de fiel cumplimiento del contrato:"
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q004",
+      "document_id": "d359c37e0bc3c87a",
+      "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+      "question": "采购合同CONTRATO N° 105 - 2025中，关于各 Ítem 的履约保证金（Garantía de fiel cumplimiento）金额及出具机构是如何规定的？",
+      "reference_answer": "履约保证金均由 AVLA Perú Compañía de Seguros 出具，金额为各 Ítem 原始合同金额的 10%：\n- Ítem 1：US$ 73,348.80（保函 N° 3012025041864）\n- Ítem 3：US$ 2,713.41（保函 N° 3012025041881）\n- Ítem 4：US$ 5,010.05（保函 N° 3012025041885）",
+      "answerable": true,
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": null,
+      "groups": [
+        {
+          "group_id": "e1",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0084",
+              "d359c37e0bc3c87a-c0085",
+              "d359c37e0bc3c87a-c0086",
+              "d359c37e0bc3c87a-c0088"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "pages": [
+                2
+              ],
+              "text": "Correspondiente al Ítem 1 – Medidor electrónico monofásico de 2 hilos: Carta fianza N° 3012025041864 por el monto de US$ 73,348.80 (Setenta y tres mil trescientos cuarenta y ocho con 80/100 Dólares Americanos) con vencimiento al 20/09/2027.\nCorrespondiente al Ítem 3 – Medidor electrónico trifásico de 3 hilos: Carta fianza N° 3012025041881 por el monto de US$ 2,713.41 (Dos mil setecientos trece con 41/100 Dólares Americanos) con vencimiento al 20/09/2027.\nCorrespondiente al Ítem 4 – Medidor electrónico trifásico de 4 hilos: Carta fianza N° 3012025041885 por el monto de US$ 5,010.05 (Cinco mil diez con 05/100 Dólares Americanos) con vencimiento al 20/09/2027."
+            },
+            {
+              "excerpt_id": "x2",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "pages": [
+                6
+              ],
+              "text": "Correspondiente al Ítem 1 – Medidor electrónico monofásico de 2 hilos: De fiel cumplimiento del contrato: US$ 73,348.80 (Setenta y tres mil trescientos cuarenta y ocho con 80/100 Dólares Americanos), a través de la Carta Fianza N° 3012025041864 emitida por AVLA Perú Compañía de Seguros. Monto que es equivalente al diez por ciento (10%) del monto del contrato original. Correspondiente al Ítem 3 – Medidor electrónico trifásico de 3 hilos: De fiel cumplimiento del contrato: US$ 2,713.41 (Dos mil setecientos trece con 41/100 Dólares Americanos), a través de la Carta Fianza N° 3012025041881 emitida por AVLA Perú Compañía de Seguros. Monto que es equivalente al diez por ciento (10%) del monto del contrato original. Correspondiente al Ítem 4 – Medidor electrónico trifásico de 4 hilos: De fiel cumplimiento del contrato: US$ 5,010.05 (Cinco mil diez con 05/100 Dólares Americanos), a través de la Carta Fianza N° 3012025041885 emitida por AVLA Perú Compañía de Seguros. Monto que es equivalente al diez por ciento (10%) del monto del contrato original."
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "d359c37e0bc3c87a-c0020",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.12381625175476074,
+          "similarity": 0.8761837482452393,
+          "relevant": false,
+          "cross_document": false,
+          "text": "suspendido o inhabilitado para contratar con el Estado.\n\n2.4\nEL CONTRATISTA ha cumplido con presentar la siguiente documentación en fecha 02/09/2025 y su subsanación\nen fecha 10/09/2025:\n\n•\nGarantía de fiel cumplimiento del contrato:"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "5a4c36e0022f4917-c0047",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.12914276123046875,
+          "similarity": 0.8708572387695312,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Prepared by: María Gallardo\n向忖\n\nHexing Electrical Company S.A.C.\nE-mail: maria.gallardo@hxgroup.com\n\nWebsite: www.hxgroup.cn"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "d359c37e0bc3c87a-c0018",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.1296362280845642,
+          "similarity": 0.8703637719154358,
+          "relevant": false,
+          "cross_document": false,
+          "text": "sancionados por el Tribunal de Contrataciones del Estado con sanción vigente” EL CONTRATISTA no se encuentra"
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q005",
+      "document_id": "d359c37e0bc3c87a",
+      "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+      "question": "采购合同CONTRATO N° 105 - 2025中，技术商业质保期（Garantía Técnico-Comercial）的期限是多久？在质保期内发生故障时，承包商的响应和修复时限是多少？",
+      "reference_answer": "技术商业质保期为自货物送达买方仓库之日起 5 年零 1 个月。发生故障时，承包商须在收到通知后 30 个日历天内指派技术人员到场排查原因；若判定为承包商责任，须在确定原因或收到第三方鉴定结果后的 45 个日历天内修复或更换新机。",
+      "answerable": true,
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": 1,
+      "groups": [
+        {
+          "group_id": "e1",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0038",
+              "d359c37e0bc3c87a-c0039"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "pages": [
+                3
+              ],
+              "text": "garantiza la calidad técnica de los medidores de energía, por un periodo de 5 años y 1 mes, contados a partir de la fecha de recepción en el almacén de LA EMPRESA"
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0041",
+              "d359c37e0bc3c87a-c0042"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "pages": [
+                3
+              ],
+              "text": "EL CONTRATISTA tendrá un plazo máximo de treinta (30) días calendario contados a partir de la fecha de realizada la notificación, para que se apersone un representante técnico"
+            }
+          ]
+        },
+        {
+          "group_id": "e3",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0046",
+              "d359c37e0bc3c87a-c0047"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "pages": [
+                3
+              ],
+              "text": "En el caso que la falla sea atribuible al CONTRATISTA, la reparación debe iniciarse a partir del día siguiente de emitido el resultado del peritaje por el organismo externo, debiendo devolverse el medidor debidamente reparado dentro de los cuarenta y cinco (45) días calendario a partir de esa fecha (y en caso no sea factible, por destrucción, imposibilidad de reparación u otra causa) deberá devolver un medidor nuevo a LA EMPRESA."
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "d359c37e0bc3c87a-c0038",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            3
+          ],
+          "kind": "text",
+          "distance": 0.12991458177566528,
+          "similarity": 0.8700854182243347,
+          "relevant": true,
+          "cross_document": false,
+          "text": "EL CONTRATISTA adjuntó para la suscripción del contrato, una garantía técnico-comercial en idioma español a\ntravés de la cual garantiza la calidad técnica de los medidores de energía, por un periodo de 5 años y 1 mes,"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "d359c37e0bc3c87a-c0018",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.13172203302383423,
+          "similarity": 0.8682779669761658,
+          "relevant": false,
+          "cross_document": false,
+          "text": "sancionados por el Tribunal de Contrataciones del Estado con sanción vigente” EL CONTRATISTA no se encuentra"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "d359c37e0bc3c87a-c0020",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.13466423749923706,
+          "similarity": 0.8653357625007629,
+          "relevant": false,
+          "cross_document": false,
+          "text": "suspendido o inhabilitado para contratar con el Estado.\n\n2.4\nEL CONTRATISTA ha cumplido con presentar la siguiente documentación en fecha 02/09/2025 y su subsanación\nen fecha 10/09/2025:\n\n•\nGarantía de fiel cumplimiento del contrato:"
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q006",
+      "document_id": "d359c37e0bc3c87a",
+      "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+      "question": "采购合同CONTRATO N° 105 - 2025中，对“重复性故障”（Falla Repetitiva）的认定标准是什么？出现重复性故障时承包商需要承担什么责任？",
+      "reference_answer": "重复性故障的认定标准为：安装未满 1 年的电表故障率达到 0.5%，或者安装未满 18 个月的同一规格电表累计发生 10 起以上相同原因的故障；此外，第三方鉴定证实存在隐患性制造缺陷的亦认定为重复性故障。出现重复性故障时，承包商必须自费全批次更换涉及的生产批次电表，并赔偿买方因此遭受的所有损失。",
+      "answerable": true,
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": null,
+      "groups": [
+        {
+          "group_id": "e1",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0049",
+              "d359c37e0bc3c87a-c0050"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "pages": [
+                3
+              ],
+              "text": "Se definirá como falla repetitiva aquella que se advierta en 0.5% de los medidores instalados del menos de un año o undécima ocasión, es decir que existen 10 casos anteriores los cuales presentaron la misma falla a medidores que lleven menos de 18 meses de instalación y cuyo origen sea de similares causas"
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0051",
+              "d359c37e0bc3c87a-c0052",
+              "d359c37e0bc3c87a-c0054"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "pages": [
+                3,
+                4
+              ],
+              "text": "Adicionalmente, sí como resultado de un peritaje de determinación de la causa de una falla se comprueba, que independiente de la cantidad de medidores que hubieren sido afectados y los plazos de instalación transcurridos, existen motivos fundados sobre un defecto de fabricación, tal defecto de fabricación será catalogado como falla repetitiva, con el propósito de evitar un mal mayor en las instalaciones de LA EMPRESA, que afecte la calidad de servicio eléctrico, en este caso, EL CONTRATISTA se compromete a la reposición total del lote de producción involucrado, así como a resarcir todos los daños y perjuicios ocasionados a LA EMPRESA."
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "d359c37e0bc3c87a-c0018",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.1410156488418579,
+          "similarity": 0.8589843511581421,
+          "relevant": false,
+          "cross_document": false,
+          "text": "sancionados por el Tribunal de Contrataciones del Estado con sanción vigente” EL CONTRATISTA no se encuentra"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "d359c37e0bc3c87a-c0020",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.14670902490615845,
+          "similarity": 0.8532909750938416,
+          "relevant": false,
+          "cross_document": false,
+          "text": "suspendido o inhabilitado para contratar con el Estado.\n\n2.4\nEL CONTRATISTA ha cumplido con presentar la siguiente documentación en fecha 02/09/2025 y su subsanación\nen fecha 10/09/2025:\n\n•\nGarantía de fiel cumplimiento del contrato:"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "d359c37e0bc3c87a-c0117",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            7
+          ],
+          "kind": "text",
+          "distance": 0.14680981636047363,
+          "similarity": 0.8531901836395264,
+          "relevant": false,
+          "cross_document": false,
+          "text": "XVII.\nCLÁUSULA DÉCIMO SÉTIMA: Responsabilidad de las partes. –"
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q007",
+      "document_id": "d359c37e0bc3c87a",
+      "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+      "question": "采购合同CONTRATO N° 105 - 2025中，买方办理支付流程的前提条件有哪些？出具验收合格证明以及付款的具体时限要求是什么？",
+      "reference_answer": "买方按交付批次以美元进行分期付款。付款的前提是承包商需提交发票（Comprobante de Pago）、使用部门出具的验收合格单（Hoja de Conformidad）、签收运单（Guía de remisión）及采购订单复印件。买方应在货物签收后 7 个日历天内（若需测试最长 15 天）出具验收合格证明；出具合格证明后，买方须在 10 个日历天内完成支付。",
+      "answerable": true,
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": null,
+      "groups": [
+        {
+          "group_id": "e1",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0066"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "pages": [
+                4
+              ],
+              "text": "Comprobante de Pago (Factura).\nHoja de Conformidad emitida por el área usuaria por la recepción de los bienes.\nGuía de remisión o entregable con sello de recepción de la entidad contratante.\nCopia de la Orden de Compra."
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0069",
+              "d359c37e0bc3c87a-c0070"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "pages": [
+                5
+              ],
+              "text": "Para tal efecto, el responsable de otorgar la conformidad de la prestación deberá hacerlo en un plazo que no excederá de los siete (7) días de producida la recepción, salvo que se requiera efectuar pruebas que permitan verificar el cumplimiento de la obligación, en cuyo caso la conformidad se emite en un plazo máximo de quince (15) días, bajo responsabilidad de dicho funcionario."
+            }
+          ]
+        },
+        {
+          "group_id": "e3",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0071"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "pages": [
+                5
+              ],
+              "text": "LA EMPRESA paga las contraprestaciones pactadas a EL CONTRATISTA dentro de los diez (10) días calendario siguientes de otorgada la conformidad de los bienes"
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "5a4c36e0022f4917-c0047",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.13403469324111938,
+          "similarity": 0.8659653067588806,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Prepared by: María Gallardo\n向忖\n\nHexing Electrical Company S.A.C.\nE-mail: maria.gallardo@hxgroup.com\n\nWebsite: www.hxgroup.cn"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "d359c37e0bc3c87a-c0020",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.1399686336517334,
+          "similarity": 0.8600313663482666,
+          "relevant": false,
+          "cross_document": false,
+          "text": "suspendido o inhabilitado para contratar con el Estado.\n\n2.4\nEL CONTRATISTA ha cumplido con presentar la siguiente documentación en fecha 02/09/2025 y su subsanación\nen fecha 10/09/2025:\n\n•\nGarantía de fiel cumplimiento del contrato:"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "d359c37e0bc3c87a-c0031",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.14039874076843262,
+          "similarity": 0.8596012592315674,
+          "relevant": false,
+          "cross_document": false,
+          "text": "2.5 EL CONTRATISTA mediante Carta HXPE25-065 de fecha 16 de setiembre de 2025, requirió a LA EMPRESA\ncumplir con el perfeccionamiento del contrato, de acuerdo a lo establecido en el artículo 91.1 del Reglamento de\nla Ley General de Contrataciones Públicas."
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q008",
+      "document_id": "d359c37e0bc3c87a",
+      "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+      "question": "采购合同CONTRATO N° 105 - 2025中，如果承包商发生未经证明的延迟交货，延期罚金（Penalidad por Mora）的计算公式是什么？罚金的最高上限是多少？",
+      "reference_answer": "每日延期罚金公式为：Penalidad Diaria = (0.10 × monto vigente) / (F × plazo vigente en días)。由于本合同履约期限大于60天，系数 F 取值 0.25。延迟罚金最高上限为有效合同总额（或对应 Ítem 金额）的 10%。达到 10% 上限后，买方有权解除合同。",
+      "answerable": true,
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": null,
+      "groups": [
+        {
+          "group_id": "e1",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0108"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "pages": [
+                7
+              ],
+              "text": "Penalidad Diaria = (0.10 x monto vigente) / (F x plazo vigente en días)\nF = 0.25 para plazos mayores a sesenta (60) días"
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0113",
+              "d359c37e0bc3c87a-c0114"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "pages": [
+                7
+              ],
+              "text": "Estos dos (2) tipos de penalidades pueden alcanzar cada una un monto máximo equivalente al diez por ciento (10%) del monto del contrato vigente, o de ser el caso, del ítem que debió ejecutarse. Cuando se llegue a cubrir el monto máximo de la penalidad por mora o el monto máximo para otras penalidades, de ser el caso, LA EMPRESA puede resolver el contrato por incumplimiento."
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "d359c37e0bc3c87a-c0018",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.1317734718322754,
+          "similarity": 0.8682265281677246,
+          "relevant": false,
+          "cross_document": false,
+          "text": "sancionados por el Tribunal de Contrataciones del Estado con sanción vigente” EL CONTRATISTA no se encuentra"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "5a4c36e0022f4917-c0047",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.13401728868484497,
+          "similarity": 0.865982711315155,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Prepared by: María Gallardo\n向忖\n\nHexing Electrical Company S.A.C.\nE-mail: maria.gallardo@hxgroup.com\n\nWebsite: www.hxgroup.cn"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "d359c37e0bc3c87a-c0020",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.137046217918396,
+          "similarity": 0.862953782081604,
+          "relevant": false,
+          "cross_document": false,
+          "text": "suspendido o inhabilitado para contratar con el Estado.\n\n2.4\nEL CONTRATISTA ha cumplido con presentar la siguiente documentación en fecha 02/09/2025 y su subsanación\nen fecha 10/09/2025:\n\n•\nGarantía de fiel cumplimiento del contrato:"
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q009",
+      "document_id": "d359c37e0bc3c87a",
+      "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+      "question": "采购合同CONTRATO N° 105 - 2025的第 1 次交付（1era ENTREGA，合同签订后 170 天），具体的交付产品和数量是多少？",
+      "reference_answer": "第 1 次交付（签订合同后 170 天内）需要交付：Ítem 1（单相电子电表）15,000 台，以及 Ítem 4（三相 4 线电子电表）300 台。Ítem 3 在第 1 次交付中无交付任务。",
+      "answerable": true,
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": 2,
+      "groups": [
+        {
+          "group_id": "e1",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0078",
+              "d359c37e0bc3c87a-c0079"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "pages": [
+                5
+              ],
+              "text": "1era ENTREGA (A 170 días de la firma del contrato)\nMEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | 15,000\nMEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | 300"
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "d359c37e0bc3c87a-c0077",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.1249123215675354,
+          "similarity": 0.8750876784324646,
+          "relevant": false,
+          "cross_document": false,
+          "text": "CRONOGRAMA DE ENTREGA\n\nCANTIDAD Y CRONOGRAMA DE ENTREGAS\n1era\nENTREG\n\n3era\nENTREG\n\n4ta\nENTREG\n\n5ta\nENTREG\n\n6ta\nENTREG\n\nUNIDAD\n\nREQUERIMI\n\n2da\nENTREGA\n\nA\n\nA\n\nA\n\nA\n\nTEM\nDESCRIPCIÓN\n\nDE\nMEDIDA\n\nENTO\nTOTAL\n\nA\n(A 170\ndías de la\n\n(A 210\ndías de la\n\n(A 330\ndías de la\n\n(A 450\ndías de la\n\n(A 570\ndías de la"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "d359c37e0bc3c87a-c0078",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.13277411460876465,
+          "similarity": 0.8672258853912354,
+          "relevant": true,
+          "cross_document": false,
+          "text": "(A 450\ndías de la\n\n(A 570\ndías de la\n\n(A 690\ndías de la\n\nfirma del\ncontrato)\n\nfirma del\ncontrato)\n\nfirma del\ncontrato)\n\nfirma del\ncontrato)\n\nfirma del\ncontrato)\n\nfirma del\ncontrato)\n\n1\nMEDIDOR ELECTRÓNICO\nMONOFASICO DE 2 HILOS\nUNIDAD\n120,000\n15,000\n15,000\n15,000\n25,000\n25,000\n25,000"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "5a4c36e0022f4917-c0047",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.13322103023529053,
+          "similarity": 0.8667789697647095,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Prepared by: María Gallardo\n向忖\n\nHexing Electrical Company S.A.C.\nE-mail: maria.gallardo@hxgroup.com\n\nWebsite: www.hxgroup.cn"
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q010",
+      "document_id": "d359c37e0bc3c87a",
+      "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+      "question": "采购合同CONTRATO N° 105 - 2025是否规定分批交货？每个批次的具体交货日期分别是什么？",
+      "reference_answer": "是的，合同规定分为 6 个批次交货。合同签署日期为 2025 年 9 月 23 日，各批次期限分别为签署后 170、210、330、450、570 和 690 个日历日；据此计算，各批次截止日期依次为：第 1 批 2026 年 3 月 12 日、第 2 批 2026 年 4 月 21 日、第 3 批 2026 年 8 月 19 日、第 4 批 2026 年 12 月 17 日、第 5 批 2027 年 4 月 16 日、第 6 批 2027 年 8 月 14 日。这些绝对日期是依据合同签署日期和相对期限计算所得，并非合同表格直接列示。",
+      "answerable": true,
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": 3,
+      "groups": [
+        {
+          "group_id": "e1",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0077",
+              "d359c37e0bc3c87a-c0078"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "pages": [
+                5
+              ],
+              "text": "1era ENTREGA (A 170 días de la firma del contrato) | 2da ENTREGA (A 210 días) | 3era ENTREGA (A 330 días) | 4ta ENTREGA (A 450 días) | 5ta ENTREGA (A 570 días) | 6ta ENTREGA (A 690 días)"
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0153"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+              "pages": [
+                9
+              ],
+              "text": "De acuerdo con las bases integradas, la oferta y las disposiciones del presente contrato, las partes lo firman por duplicado en señal de conformidad en la ciudad del Cusco a los 23 días del mes de setiembre de 2025."
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "d359c37e0bc3c87a-c0018",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.1387406587600708,
+          "similarity": 0.8612593412399292,
+          "relevant": false,
+          "cross_document": false,
+          "text": "sancionados por el Tribunal de Contrataciones del Estado con sanción vigente” EL CONTRATISTA no se encuentra"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "d359c37e0bc3c87a-c0020",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.13883262872695923,
+          "similarity": 0.8611673712730408,
+          "relevant": false,
+          "cross_document": false,
+          "text": "suspendido o inhabilitado para contratar con el Estado.\n\n2.4\nEL CONTRATISTA ha cumplido con presentar la siguiente documentación en fecha 02/09/2025 y su subsanación\nen fecha 10/09/2025:\n\n•\nGarantía de fiel cumplimiento del contrato:"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "d359c37e0bc3c87a-c0077",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.13897013664245605,
+          "similarity": 0.861029863357544,
+          "relevant": true,
+          "cross_document": false,
+          "text": "CRONOGRAMA DE ENTREGA\n\nCANTIDAD Y CRONOGRAMA DE ENTREGAS\n1era\nENTREG\n\n3era\nENTREG\n\n4ta\nENTREG\n\n5ta\nENTREG\n\n6ta\nENTREG\n\nUNIDAD\n\nREQUERIMI\n\n2da\nENTREGA\n\nA\n\nA\n\nA\n\nA\n\nTEM\nDESCRIPCIÓN\n\nDE\nMEDIDA\n\nENTO\nTOTAL\n\nA\n(A 170\ndías de la\n\n(A 210\ndías de la\n\n(A 330\ndías de la\n\n(A 450\ndías de la\n\n(A 570\ndías de la"
+        }
+      ]
+    },
+    {
+      "case_id": "E001-602-Q001",
+      "document_id": "817cfff2927c6c65",
+      "document_name": "E001-602.pdf",
+      "question": "发票E001-602规定的付款到期日是什么时候？需要支付多少金额？其中包含多少税费？",
+      "reference_answer": "付款到期日为2026年3月30日，需要支付USD 331,432.50，其中包含税费USD 50557.50。",
+      "answerable": true,
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": null,
+      "groups": [
+        {
+          "group_id": "e1",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "817cfff2927c6c65-c0007"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "E001-602.pdf",
+              "pages": [
+                1
+              ],
+              "text": "Nº Cuota | Fec. Venc. | Monto\n1 | 30/03/2026 | 331,432.50"
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "817cfff2927c6c65-c0006",
+              "817cfff2927c6c65-c0007"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "E001-602.pdf",
+              "pages": [
+                1
+              ],
+              "text": "Valor Venta: $ 280,875.00\nIGV: $ 50,557.50\nImporte Total: $ 331,432.50"
+            },
+            {
+              "excerpt_id": "x2",
+              "document_name": "E001-602.pdf",
+              "pages": [
+                1
+              ],
+              "text": "Información del crédito\nMonto neto pendiente de pago: $ 331,432.50\nTotal de Cuotas: 1"
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "5a4c36e0022f4917-c0047",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.1610373854637146,
+          "similarity": 0.8389626145362854,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Prepared by: María Gallardo\n向忖\n\nHexing Electrical Company S.A.C.\nE-mail: maria.gallardo@hxgroup.com\n\nWebsite: www.hxgroup.cn"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "5883b02cd922a64f-c0007",
+          "document_id": "5883b02cd922a64f",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.1616564393043518,
+          "similarity": 0.8383435606956482,
+          "relevant": false,
+          "cross_document": true,
+          "text": "6th\nDelivery\n25.09.25\n10.10.25\n10.12.25\n10.03.26\n10.05.26\n10.07.26\n\nHXE12ESX\n\n -\n\n20,000.00\n\n20,000.00\n\n20,000.00\n\n20,000.00\n\nHXE13ESX\n\n5,000.00\n\n2,500.00\n\n2,500.00\n -\n -\n\nHXE33K-S1\n\n900.00\n\n500.00\n -\n\n500.00\n -\n\nHXE34K-S1\n\n500\n\n1,000.00\n\n500.00\n\n1,000.00\n\n500.00\n -\n\nMeterbox\n\n -\n\n10,000.00"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "d359c37e0bc3c87a-c0108",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            7
+          ],
+          "kind": "text",
+          "distance": 0.16938257217407227,
+          "similarity": 0.8306174278259277,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Penalidad Diaria =\n0.10 x monto vigente\nF x plazo vigente en días\nDonde:\n\nF = 0.25 para plazos mayores a sesenta (60) días o;\nF = 0.40 para plazos menores o iguales a sesenta (60) días."
+        }
+      ]
+    },
+    {
+      "case_id": "E001-602-Q002",
+      "document_id": "817cfff2927c6c65",
+      "document_name": "E001-602.pdf",
+      "question": "发票E001-602中， HXE34K-S1的单价和数量分别是多少？",
+      "reference_answer": "HXE34K-S1的单价为USD 16.00，数量为500个。",
+      "answerable": true,
+      "hit": true,
+      "complete": true,
+      "first_relevant_rank": 3,
+      "groups": [
+        {
+          "group_id": "e1",
+          "mode": "confirmed",
+          "covered_at_rank": 3,
+          "acceptable_sets": [
+            [
+              "817cfff2927c6c65-c0004"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "E001-602.pdf",
+              "pages": [
+                1
+              ],
+              "text": "Cantidad | Código | Descripción | Valor Unitario\n500.00 | HXE34K-S1 | MEDIDOR TRIFASICO HXE34K-S1, 4HILOS, 10(100)A, 3X220V, CLASE 1, CONEXION DIRECTA, MARCA HEXING | 16.00"
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "5883b02cd922a64f-c0007",
+          "document_id": "5883b02cd922a64f",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.14174163341522217,
+          "similarity": 0.8582583665847778,
+          "relevant": false,
+          "cross_document": true,
+          "text": "6th\nDelivery\n25.09.25\n10.10.25\n10.12.25\n10.03.26\n10.05.26\n10.07.26\n\nHXE12ESX\n\n -\n\n20,000.00\n\n20,000.00\n\n20,000.00\n\n20,000.00\n\nHXE13ESX\n\n5,000.00\n\n2,500.00\n\n2,500.00\n -\n -\n\nHXE33K-S1\n\n900.00\n\n500.00\n -\n\n500.00\n -\n\nHXE34K-S1\n\n500\n\n1,000.00\n\n500.00\n\n1,000.00\n\n500.00\n -\n\nMeterbox\n\n -\n\n10,000.00"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "5a4c36e0022f4917-c0047",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.1532890796661377,
+          "similarity": 0.8467109203338623,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Prepared by: María Gallardo\n向忖\n\nHexing Electrical Company S.A.C.\nE-mail: maria.gallardo@hxgroup.com\n\nWebsite: www.hxgroup.cn"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "817cfff2927c6c65-c0004",
+          "document_id": "817cfff2927c6c65",
+          "document_name": "E001-602.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.1547691822052002,
+          "similarity": 0.8452308177947998,
+          "relevant": true,
+          "cross_document": false,
+          "text": "500.00\nUNIDAD\nHXE34K-S1 MEDIDOR TRIFASICO HXE34K-S1, 4HILOS, 10(100)A,\n\n3X220V, CLASE 1, CONEXION DIRECTA, MARCA HEXING\n16.00\n\n6.20\n\n10000.00\nUNIDAD\nHXPXS1\nCAJA PORTAMEDIDOR POLIMERICA MONOFASICA\nMARCA HEXING\n\n90.00"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-24-12-Q001",
+      "document_id": "169a1f2133fe5643",
+      "document_name": "ORDER PERU 24-12 ANDET.pdf",
+      "question": "订单PURCHASE ORDER N° 24-12-HPE包含哪几款产品？单价、数量分别是多少？订单总金额是多少？。",
+      "reference_answer": "订单包含1款产品：HXF300，单价为USD 96.80，数量为10000件，总金额为USD 968,000.00。",
+      "answerable": true,
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": null,
+      "groups": [
+        {
+          "group_id": "e1",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "169a1f2133fe5643-c0001"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "ORDER PERU 24-12 ANDET.pdf",
+              "pages": [
+                1
+              ],
+              "text": "C&I Meter CI 0.2S 3&4 Wires meter with modem 4G 2 pulses Model: HXF300 | Qty 10,000 | USD 96.80 | USD 968,000.00\nTotal CIF (CALLAO) | USD 968,000.00"
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "5a4c36e0022f4917-c0047",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.1282435655593872,
+          "similarity": 0.8717564344406128,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Prepared by: María Gallardo\n向忖\n\nHexing Electrical Company S.A.C.\nE-mail: maria.gallardo@hxgroup.com\n\nWebsite: www.hxgroup.cn"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "5883b02cd922a64f-c0015",
+          "document_id": "5883b02cd922a64f",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.1293906569480896,
+          "similarity": 0.8706093430519104,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Website: www.hxgroup.cn"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "5a4c36e0022f4917-c0009",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.1293906569480896,
+          "similarity": 0.8706093430519104,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Website: www.hxgroup.cn"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-24-12-Q002",
+      "document_id": "169a1f2133fe5643",
+      "document_name": "ORDER PERU 24-12 ANDET.pdf",
+      "question": "请阐述PURCHASE ORDER N° 24-12-HPE的交货时间规划。",
+      "reference_answer": "五批交付，每批次交付约2000件，具体交付日期待确认。",
+      "answerable": true,
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": null,
+      "groups": [
+        {
+          "group_id": "e1",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "169a1f2133fe5643-c0004"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "ORDER PERU 24-12 ANDET.pdf",
+              "pages": [
+                1
+              ],
+              "text": "Delivery Date: To be confirmed the date, total 5 deliveries - each delivery will be approximately 2,000 units."
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "5a4c36e0022f4917-c0047",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.13998734951019287,
+          "similarity": 0.8600126504898071,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Prepared by: María Gallardo\n向忖\n\nHexing Electrical Company S.A.C.\nE-mail: maria.gallardo@hxgroup.com\n\nWebsite: www.hxgroup.cn"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "d359c37e0bc3c87a-c0077",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.15380972623825073,
+          "similarity": 0.8461902737617493,
+          "relevant": false,
+          "cross_document": true,
+          "text": "CRONOGRAMA DE ENTREGA\n\nCANTIDAD Y CRONOGRAMA DE ENTREGAS\n1era\nENTREG\n\n3era\nENTREG\n\n4ta\nENTREG\n\n5ta\nENTREG\n\n6ta\nENTREG\n\nUNIDAD\n\nREQUERIMI\n\n2da\nENTREGA\n\nA\n\nA\n\nA\n\nA\n\nTEM\nDESCRIPCIÓN\n\nDE\nMEDIDA\n\nENTO\nTOTAL\n\nA\n(A 170\ndías de la\n\n(A 210\ndías de la\n\n(A 330\ndías de la\n\n(A 450\ndías de la\n\n(A 570\ndías de la"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "5883b02cd922a64f-c0015",
+          "document_id": "5883b02cd922a64f",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.15942448377609253,
+          "similarity": 0.8405755162239075,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Website: www.hxgroup.cn"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-24-12-Q003",
+      "document_id": "169a1f2133fe5643",
+      "document_name": "ORDER PERU 24-12 ANDET.pdf",
+      "question": "订单PURCHASE ORDER N° 24-12-HPE分几批交付？每批次的具体交付日期是什么？。",
+      "reference_answer": "分五批交付，每批次的交付日期待确认。",
+      "answerable": true,
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": null,
+      "groups": [
+        {
+          "group_id": "e1",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "169a1f2133fe5643-c0004"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "ORDER PERU 24-12 ANDET.pdf",
+              "pages": [
+                1
+              ],
+              "text": "Delivery Date: To be confirmed the date, total 5 deliveries - each delivery will be approximately 2,000 units."
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "5a4c36e0022f4917-c0047",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.13113725185394287,
+          "similarity": 0.8688627481460571,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Prepared by: María Gallardo\n向忖\n\nHexing Electrical Company S.A.C.\nE-mail: maria.gallardo@hxgroup.com\n\nWebsite: www.hxgroup.cn"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "5883b02cd922a64f-c0015",
+          "document_id": "5883b02cd922a64f",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.13613754510879517,
+          "similarity": 0.8638624548912048,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Website: www.hxgroup.cn"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "5a4c36e0022f4917-c0009",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.13613754510879517,
+          "similarity": 0.8638624548912048,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Website: www.hxgroup.cn"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-24-12-Q004",
+      "document_id": "169a1f2133fe5643",
+      "document_name": "ORDER PERU 24-12 ANDET.pdf",
+      "question": "订单PURCHASE ORDER N° 24-12-HPE的总金额是否涵盖MDC ORCA的费用？如不包含，还需额外支付多少费用？付款的最后期限是什么？",
+      "reference_answer": "订单总金额不包含 MDC ORCA 的费用；MDC ORCA 需额外一次性支付 USD 10,000.00，付款截止日为 2026 年 8 月 1 日。",
+      "answerable": true,
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": null,
+      "groups": [
+        {
+          "group_id": "e1",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "169a1f2133fe5643-c0006"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "ORDER PERU 24-12 ANDET.pdf",
+              "pages": [
+                1
+              ],
+              "text": "MDC ORCA: 10,000.00 USD (one-time purchase), payment due: August 1st, 2026"
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "5a4c36e0022f4917-c0047",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.14017748832702637,
+          "similarity": 0.8598225116729736,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Prepared by: María Gallardo\n向忖\n\nHexing Electrical Company S.A.C.\nE-mail: maria.gallardo@hxgroup.com\n\nWebsite: www.hxgroup.cn"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "5883b02cd922a64f-c0007",
+          "document_id": "5883b02cd922a64f",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.14545774459838867,
+          "similarity": 0.8545422554016113,
+          "relevant": false,
+          "cross_document": true,
+          "text": "6th\nDelivery\n25.09.25\n10.10.25\n10.12.25\n10.03.26\n10.05.26\n10.07.26\n\nHXE12ESX\n\n -\n\n20,000.00\n\n20,000.00\n\n20,000.00\n\n20,000.00\n\nHXE13ESX\n\n5,000.00\n\n2,500.00\n\n2,500.00\n -\n -\n\nHXE33K-S1\n\n900.00\n\n500.00\n -\n\n500.00\n -\n\nHXE34K-S1\n\n500\n\n1,000.00\n\n500.00\n\n1,000.00\n\n500.00\n -\n\nMeterbox\n\n -\n\n10,000.00"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "5883b02cd922a64f-c0015",
+          "document_id": "5883b02cd922a64f",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.14678049087524414,
+          "similarity": 0.8532195091247559,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Website: www.hxgroup.cn"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-24-12-Q005",
+      "document_id": "169a1f2133fe5643",
+      "document_name": "ORDER PERU 24-12 ANDET.pdf",
+      "question": "订单PURCHASE ORDER N° 24-12-HPE的运维服务如何收费？",
+      "reference_answer": "前两年免费，时间从2025年8月1日至2027年8月1日。之后需在2027年8月2日之前根据连接的电表数量付费，连接的电表数小于2500只，价格为5500 USD;连接的电表数在2500只至5000只之间，价格为7000 USD；连接的电表数在5001只至12000只之间，价格为10000 USD;连接的电表数在12001只至30000只之间，价格为15000 USD。",
+      "answerable": true,
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": null,
+      "groups": [
+        {
+          "group_id": "e1",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "169a1f2133fe5643-c0006",
+              "169a1f2133fe5643-c0007"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "ORDER PERU 24-12 ANDET.pdf",
+              "pages": [
+                1
+              ],
+              "text": "Operation and Maintenance Service, 2 years free (from August 1st, 2025 to August 1st 2027), payment due for the service: August 2nd 2027.\nMeters connected ≤ 2500: 5500 USD\nMeters connected 2501-5000: 7000 USD\nMeters connected 5001-12000: 10000 USD\nMeters connected 12001-30000: 15000 USD"
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "5a4c36e0022f4917-c0047",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.14582782983779907,
+          "similarity": 0.8541721701622009,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Prepared by: María Gallardo\n向忖\n\nHexing Electrical Company S.A.C.\nE-mail: maria.gallardo@hxgroup.com\n\nWebsite: www.hxgroup.cn"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "5883b02cd922a64f-c0015",
+          "document_id": "5883b02cd922a64f",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.14637506008148193,
+          "similarity": 0.8536249399185181,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Website: www.hxgroup.cn"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "5a4c36e0022f4917-c0009",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.14637506008148193,
+          "similarity": 0.8536249399185181,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Website: www.hxgroup.cn"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-24-12-Q006",
+      "document_id": "169a1f2133fe5643",
+      "document_name": "ORDER PERU 24-12 ANDET.pdf",
+      "question": "订单PURCHASE ORDER N° 24-12-HPE的付款条件是什么？",
+      "reference_answer": "按批次付款，每批次在提单日后120天内100%银行支票付款。",
+      "answerable": true,
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": null,
+      "groups": [
+        {
+          "group_id": "e1",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "169a1f2133fe5643-c0015"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "ORDER PERU 24-12 ANDET.pdf",
+              "pages": [
+                2
+              ],
+              "text": "Bank check payable at 100% within 120 days counted from the B/L date. (for each batch)"
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "5a4c36e0022f4917-c0047",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.1386132836341858,
+          "similarity": 0.8613867163658142,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Prepared by: María Gallardo\n向忖\n\nHexing Electrical Company S.A.C.\nE-mail: maria.gallardo@hxgroup.com\n\nWebsite: www.hxgroup.cn"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "5883b02cd922a64f-c0015",
+          "document_id": "5883b02cd922a64f",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.14443421363830566,
+          "similarity": 0.8555657863616943,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Website: www.hxgroup.cn"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "5a4c36e0022f4917-c0009",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.14443421363830566,
+          "similarity": 0.8555657863616943,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Website: www.hxgroup.cn"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-15-Q001",
+      "document_id": "5883b02cd922a64f",
+      "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+      "question": "订单PURCHASE ORDER N° 25-15-HPE中，第四批次交付的具体日期是什么？交付的产品总金额达多少？",
+      "reference_answer": "第四批次交付的具体日期为2026年3月10日，交付的产品总金额为USD 188030.00。",
+      "answerable": true,
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": null,
+      "groups": [
+        {
+          "group_id": "e1",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "5883b02cd922a64f-c0001",
+              "5883b02cd922a64f-c0002"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+              "pages": [
+                1
+              ],
+              "text": "HXE12ES | Qty 80,000 | USD 5.28\nHXE13ES | Qty 10,000 | USD 5.50\nHXE33K-S1 | Qty 1,900 | USD 13.64\nHXE34K-S1 | Qty 3,500 | USD 14.08\nHXPXS1 | Qty 40,000 | USD 5.46\nHXF300 | Qty 1,500 | USD 79.20"
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "5883b02cd922a64f-c0007",
+              "5883b02cd922a64f-c0008"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+              "pages": [
+                2
+              ],
+              "text": "4th Delivery | 10.03.26\nHXE12ESX 20,000.00 | HXE13ESX 2,500.00 | HXE33K-S1 - | HXE34K-S1 1,000.00 | Meterbox 10,000.00 | HXF300 -"
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "5a4c36e0022f4917-c0047",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.12479853630065918,
+          "similarity": 0.8752014636993408,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Prepared by: María Gallardo\n向忖\n\nHexing Electrical Company S.A.C.\nE-mail: maria.gallardo@hxgroup.com\n\nWebsite: www.hxgroup.cn"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "5883b02cd922a64f-c0015",
+          "document_id": "5883b02cd922a64f",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.13113325834274292,
+          "similarity": 0.8688667416572571,
+          "relevant": false,
+          "cross_document": false,
+          "text": "Website: www.hxgroup.cn"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "5a4c36e0022f4917-c0009",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.13113325834274292,
+          "similarity": 0.8688667416572571,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Website: www.hxgroup.cn"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-15-Q002",
+      "document_id": "5883b02cd922a64f",
+      "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+      "question": "订单PURCHASE ORDER N° 25-15-HPE中，第六批次交付的具体日期是什么？交付的产品总金额达多少？",
+      "reference_answer": "第六批次交付的具体日期为2026年7月10日，交付的产品总金额为USD 160200.00。",
+      "answerable": true,
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": null,
+      "groups": [
+        {
+          "group_id": "e1",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "5883b02cd922a64f-c0001",
+              "5883b02cd922a64f-c0002"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+              "pages": [
+                1
+              ],
+              "text": "HXE12ES | Qty 80,000 | USD 5.28\nHXE13ES | Qty 10,000 | USD 5.50\nHXE33K-S1 | Qty 1,900 | USD 13.64\nHXE34K-S1 | Qty 3,500 | USD 14.08\nHXPXS1 | Qty 40,000 | USD 5.46\nHXF300 | Qty 1,500 | USD 79.20"
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "5883b02cd922a64f-c0007",
+              "5883b02cd922a64f-c0008"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+              "pages": [
+                2
+              ],
+              "text": "6th Delivery | 10.07.26\nHXE12ESX 20,000.00 | HXE13ESX - | HXE33K-S1 - | HXE34K-S1 - | Meterbox 10,000.00 | HXF300 -"
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "5a4c36e0022f4917-c0047",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.12407207489013672,
+          "similarity": 0.8759279251098633,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Prepared by: María Gallardo\n向忖\n\nHexing Electrical Company S.A.C.\nE-mail: maria.gallardo@hxgroup.com\n\nWebsite: www.hxgroup.cn"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "5883b02cd922a64f-c0015",
+          "document_id": "5883b02cd922a64f",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.1290217638015747,
+          "similarity": 0.8709782361984253,
+          "relevant": false,
+          "cross_document": false,
+          "text": "Website: www.hxgroup.cn"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "5a4c36e0022f4917-c0009",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.1290217638015747,
+          "similarity": 0.8709782361984253,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Website: www.hxgroup.cn"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-19-Q001",
+      "document_id": "5a4c36e0022f4917",
+      "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+      "question": "订单PURCHASE ORDER N° 25-19-HPE中，ELCTO公司订购了哪些产品？每款产品的单价和数量是多少？订购的总金额是是多少？交货的计划是怎么样的？请详细说明每批次交付的具体日期，及每批次交付的产品和数量明细。",
+      "reference_answer": "ELCTO总共订购了两款产品：HXE12ES和HXE13ES。HXE12ES的单价为USD 4.56，数量总共116000件；HXE13ES的单价为USD 5.08，数量总共94000件。订购的总金额为USD 1006480.00。交货计划分为六批次：第一批次交付日期为2026年2月28日，交付HXE12ES 19330件和HXE13ES 16000件；第二批次交付日期为2026年4月9日，交付HXE12ES 19330件和HXE13ES 16000件；第三批次交付日期为2026年8月7日，交付HXE12ES 19330件和HXE13ES 15500件；第四批次交付日期为2026年12月5日，交付HXE12ES 19330件和HXE13ES 15500件；第五批次交付日期为2027年4月4日，交付HXE12ES 19330件和HXE13ES 15500件；第六批次交付日期为2027年8月2日，交付HXE12ES 19350件和HXE13ES 15500件。",
+      "answerable": true,
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": null,
+      "groups": [
+        {
+          "group_id": "e1",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0002"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+              "pages": [
+                1
+              ],
+              "text": "HXE12ES | 1´131,056.00 | USD 4.56\nHXE13ES | 109,130.00 | USD 5.08\nHXE33K-S1 | 8,368.00 | USD 13.49\nHXE34K-S1 | 45,938.00 | USD 14.37"
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0013",
+              "5a4c36e0022f4917-c0017"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+              "pages": [
+                2
+              ],
+              "text": "ELCTO | HXE12ES | TOTAL 116,000 | 19,330 | 19,330 | 19,330 | 19,330 | 19,330 | 19,350\nELCTO | HXE13ES | TOTAL 94,000 | 16,000 | 16,000 | 15,500 | 15,500 | 15,500 | 15,500"
+            }
+          ]
+        },
+        {
+          "group_id": "e3",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0024"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+              "pages": [
+                3
+              ],
+              "text": "1ST DELIVERY 28/02/2026\n2ND DELIVERY 09/04/2026\n3RD DELIVERY 07/08/2026\n4TH DELIVERY 05/12/2026\n5TH DELIVERY 04/04/2027\n6TH DELIVERY 02/08/2027"
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "5a4c36e0022f4917-c0047",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.1243288516998291,
+          "similarity": 0.8756711483001709,
+          "relevant": false,
+          "cross_document": false,
+          "text": "Prepared by: María Gallardo\n向忖\n\nHexing Electrical Company S.A.C.\nE-mail: maria.gallardo@hxgroup.com\n\nWebsite: www.hxgroup.cn"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "5883b02cd922a64f-c0015",
+          "document_id": "5883b02cd922a64f",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.1341366171836853,
+          "similarity": 0.8658633828163147,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Website: www.hxgroup.cn"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "5a4c36e0022f4917-c0009",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.1341366171836853,
+          "similarity": 0.8658633828163147,
+          "relevant": false,
+          "cross_document": false,
+          "text": "Website: www.hxgroup.cn"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-19-Q002",
+      "document_id": "5a4c36e0022f4917",
+      "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+      "question": "订单PURCHASE ORDER N° 25-19-HPE中，ElUC公司订购了多少件HXE34K-S1？总金额是多少？",
+      "reference_answer": "ELUC订购了2000件HXE34K-S1，总金额为USD 28740.00。",
+      "answerable": true,
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": null,
+      "groups": [
+        {
+          "group_id": "e1",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0003"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+              "pages": [
+                1
+              ],
+              "text": "Three Phase 04 Wires meter Model: HXE34K-S1 | Unit price USD 14.37"
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0021"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+              "pages": [
+                3
+              ],
+              "text": "ELUC | HXE34K-S1 | TOTAL 2,000 | 1st Delivery 1,000 | 4th Delivery 1,000"
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "5a4c36e0022f4917-c0047",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.1275339126586914,
+          "similarity": 0.8724660873413086,
+          "relevant": false,
+          "cross_document": false,
+          "text": "Prepared by: María Gallardo\n向忖\n\nHexing Electrical Company S.A.C.\nE-mail: maria.gallardo@hxgroup.com\n\nWebsite: www.hxgroup.cn"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "5883b02cd922a64f-c0015",
+          "document_id": "5883b02cd922a64f",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.13228082656860352,
+          "similarity": 0.8677191734313965,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Website: www.hxgroup.cn"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "5a4c36e0022f4917-c0009",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.13228082656860352,
+          "similarity": 0.8677191734313965,
+          "relevant": false,
+          "cross_document": false,
+          "text": "Website: www.hxgroup.cn"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-19-Q003",
+      "document_id": "5a4c36e0022f4917",
+      "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+      "question": "订单PURCHASE ORDER N° 25-19-HPE中，ENSA公司订购了哪些产品？每款产品的单价和数量是多少？订购的总金额是是多少？交货的计划是怎么样的？请详细说明每批次交付的具体日期，及每批次交付的产品和数量明细。",
+      "reference_answer": "ENSA总共订购了四款产品：HXE12ES、HXE13ES、HXE33K-S1和HXE34K-S1。HXE12ES的单价为USD 4.56，数量总共132180件；HXE13ES的单价为USD 5.08，数量总共9910件；HXE33K-S1的单价为USD 13.49，数量总共5018件；HXE34K-S1的单价为USD 14.37，数量总共10804件。订购的总金额为USD 876029.90。交货计划分为六批次：第一批次交付日期为2026年2月28日，交付HXE12ES 24330件、HXE13ES 1810件、HXE33K-S1 1153件和HXE34K-S1 2234件；第二批次交付日期为2026年4月9日，交付HXE12ES 23630件、HXE13ES 1710件、HXE33K-S1 853件和HXE34K-S1 1734件；第三批次交付日期为2026年8月7日，交付HXE12ES 21880件、HXE13ES 1710件、HXE33K-S1 753件和HXE34K-S1 1734件；第四批次交付日期为2026年12月5日，交付HXE12ES 21680件、HXE13ES 1610件、HXE33K-S1 753件和HXE34K-S1 1734件；第五批次交付日期为2027年4月4日，交付HXE12ES 20480件、HXE13ES 1560件、HXE33K-S1 753件和HXE34K-S1 1734件；第六批次交付日期为2027年8月2日，交付HXE12ES 20180件、HXE13ES 1510件、HXE33K-S1 753件和HXE34K-S1 1634件。",
+      "answerable": true,
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": null,
+      "groups": [
+        {
+          "group_id": "e1",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0002",
+              "5a4c36e0022f4917-c0003"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+              "pages": [
+                1
+              ],
+              "text": "HXE12ES | USD 4.56\nHXE13ES | USD 5.08\nHXE33K-S1 | USD 13.49\nHXE34K-S1 | USD 14.37"
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0014",
+              "5a4c36e0022f4917-c0017",
+              "5a4c36e0022f4917-c0018"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+              "pages": [
+                2
+              ],
+              "text": "ENSA | HXE12ES | TOTAL 132,180 | 24,330 | 23,630 | 21,880 | 21,680 | 20,480 | 20,180\nENSA | HXE13ES | TOTAL 9,910 | 1,810 | 1,710 | 1,710 | 1,610 | 1,560 | 1,510\nENSA | HXE33K-S1 | TOTAL 5,018 | 1,153 | 853 | 753 | 753 | 753 | 753"
+            }
+          ]
+        },
+        {
+          "group_id": "e3",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0021"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+              "pages": [
+                3
+              ],
+              "text": "ENSA | HXE34K-S1 | TOTAL 10,804 | 2,234 | 1,734 | 1,734 | 1,734 | 1,734 | 1,634"
+            }
+          ]
+        },
+        {
+          "group_id": "e4",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0024"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+              "pages": [
+                3
+              ],
+              "text": "1ST DELIVERY 28/02/2026\n2ND DELIVERY 09/04/2026\n3RD DELIVERY 07/08/2026\n4TH DELIVERY 05/12/2026\n5TH DELIVERY 04/04/2027\n6TH DELIVERY 02/08/2027"
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "5a4c36e0022f4917-c0047",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.11913979053497314,
+          "similarity": 0.8808602094650269,
+          "relevant": false,
+          "cross_document": false,
+          "text": "Prepared by: María Gallardo\n向忖\n\nHexing Electrical Company S.A.C.\nE-mail: maria.gallardo@hxgroup.com\n\nWebsite: www.hxgroup.cn"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "5883b02cd922a64f-c0015",
+          "document_id": "5883b02cd922a64f",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.1343483328819275,
+          "similarity": 0.8656516671180725,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Website: www.hxgroup.cn"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "5a4c36e0022f4917-c0009",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.1343483328819275,
+          "similarity": 0.8656516671180725,
+          "relevant": false,
+          "cross_document": false,
+          "text": "Website: www.hxgroup.cn"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-19-Q004",
+      "document_id": "5a4c36e0022f4917",
+      "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+      "question": "订单PURCHASE ORDER N° 25-19-HPE，客户的付款条件是什么？",
+      "reference_answer": "货款将在货物在客户仓库被验收后30天内被支付。",
+      "answerable": true,
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": null,
+      "groups": [
+        {
+          "group_id": "e1",
+          "mode": "confirmed",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0027"
+            ]
+          ],
+          "auto_coverage": {},
+          "excerpts": [
+            {
+              "excerpt_id": "x1",
+              "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+              "pages": [
+                3
+              ],
+              "text": "Customer´s Payment Terms: Payment will be done 30 days after the acceptance of the goods in customer´s warehouse."
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "5a4c36e0022f4917-c0047",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.12663042545318604,
+          "similarity": 0.873369574546814,
+          "relevant": false,
+          "cross_document": false,
+          "text": "Prepared by: María Gallardo\n向忖\n\nHexing Electrical Company S.A.C.\nE-mail: maria.gallardo@hxgroup.com\n\nWebsite: www.hxgroup.cn"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "5883b02cd922a64f-c0015",
+          "document_id": "5883b02cd922a64f",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.13115304708480835,
+          "similarity": 0.8688469529151917,
+          "relevant": false,
+          "cross_document": true,
+          "text": "Website: www.hxgroup.cn"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "5a4c36e0022f4917-c0009",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.13115304708480835,
+          "similarity": 0.8688469529151917,
+          "relevant": false,
+          "cross_document": false,
+          "text": "Website: www.hxgroup.cn"
+        }
+      ]
+    }
+  ]
+}

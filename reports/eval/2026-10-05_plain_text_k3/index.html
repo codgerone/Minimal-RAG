@@ -1,0 +1,1109 @@
+<!doctype html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>检索评估 · plain_text · K=3</title><style>
+:root{--bg:#f6f7f9;--panel:#fff;--text:#1d2129;--muted:#5f6b7a;--line:#dde2e8;
+--accent:#2f6fde;--ok:#1a7f43;--ok-bg:#e5f5ec;--bad:#c23b32;--bad-bg:#fdeceb;
+--warn:#a35d00;--warn-bg:#fff3dc;--code:#f1f3f6;--hl:#fff7cc}
+@media (prefers-color-scheme:dark){:root{--bg:#14171c;--panel:#1d2128;--text:#e4e7ec;
+--muted:#9aa4b2;--line:#323844;--accent:#6ea0ff;--ok:#5fd08f;--ok-bg:#183326;--bad:#ff7b72;
+--bad-bg:#3a1d1c;--warn:#f0b35a;--warn-bg:#382b14;--code:#252a33;--hl:#3a3418}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);
+font:15px/1.6 system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+main{max-width:1180px;margin:0 auto;padding:20px 16px 60px}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+h1{font-size:22px;margin:4px 0 2px}h2{font-size:18px;margin:28px 0 10px}
+h3{font-size:15px;margin:0 0 8px}
+.crumbs{font-size:13px;color:var(--muted)}.sub{color:var(--muted);font-size:13px;margin-bottom:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:12px 0}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin:12px 0}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+.tile .v{font-size:24px;font-weight:600}.tile .k{font-size:13px;color:var(--muted)}
+.tile .d{font-size:12px}
+.up{color:var(--ok)}.down{color:var(--bad)}.same{color:var(--muted)}
+.badge{display:inline-block;font-size:12px;line-height:18px;padding:0 7px;border-radius:9px;
+border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.badge.ok{background:var(--ok-bg);color:var(--ok);border-color:transparent}
+.badge.bad{background:var(--bad-bg);color:var(--bad);border-color:transparent}
+.badge.warn{background:var(--warn-bg);color:var(--warn);border-color:transparent}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:820px){.cols{grid-template-columns:1fr}}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px}
+pre,.text{white-space:pre-wrap;overflow-wrap:anywhere;background:var(--code);border-radius:6px;
+padding:8px 10px;margin:6px 0;font:13px/1.55 ui-monospace,Consolas,"Microsoft YaHei",monospace}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{border:1px solid var(--line);padding:4px 7px;text-align:left;vertical-align:top}
+th{background:var(--code);font-weight:600}td.num,th.num{text-align:right;white-space:nowrap}
+.scroll{overflow-x:auto;max-width:100%}
+details{margin:6px 0}summary{cursor:pointer;color:var(--muted);font-size:13px}
+.item{border-top:1px solid var(--line);padding:8px 0}.item:first-child{border-top:0}
+.meta{font-size:13px;color:var(--muted)}
+.winner{outline:2px solid var(--ok);outline-offset:-1px}
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.filters button{font:inherit;font-size:13px;padding:3px 10px;border-radius:14px;cursor:pointer;
+border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.filters button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.hidden{display:none}
+</style></head><body><main><div class="crumbs"><a href="../../index.html">报告首页</a></div><h1>检索评估 · plain_text · K=3</h1><div class="sub">2026-10-05T15:51:07+08:00 · 24 道可回答问题（数据集 2.0.0）· 构建指纹 1b593bf52a3c</div><div class="tiles"><div class="tile"><div class="k">命中率</div><div class="v">4.2%</div><div class="d same">无上次结果</div></div><div class="tile"><div class="k">完整覆盖率</div><div class="v">4.2%</div><div class="d same">无上次结果</div></div><div class="tile"><div class="k">证据组召回</div><div class="v">4.2%</div><div class="d same">无上次结果</div></div><div class="tile"><div class="k">MRR</div><div class="v">9.0%</div><div class="d same">无上次结果</div></div><div class="tile"><div class="k">Chunk 精确率</div><div class="v">5.6%</div><div class="d same">无上次结果</div></div><div class="tile"><div class="k">跨文档污染</div><div class="v">54.2%</div><div class="d same">无上次结果</div></div></div><h2>按文档</h2><div class="scroll"><table><tr><th>文档</th><th class="num">题数</th><th class="num">命中率</th><th class="num">完整覆盖率</th><th class="num">证据组召回</th><th class="num">MRR</th><th class="num">Chunk 精确率</th><th class="num">跨文档污染</th></tr><tr><td><a href="#doc-d359c37e0bc3c87a">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf</a></td><td class="num">10</td><td class="num">0.0%</td><td class="num">0.0%</td><td class="num">0.0%</td><td class="num">18.3%</td><td class="num">10.0%</td><td class="num">26.7%</td></tr><tr><td><a href="#doc-817cfff2927c6c65">E001-602.pdf</a></td><td class="num">2</td><td class="num">50.0%</td><td class="num">50.0%</td><td class="num">50.0%</td><td class="num">16.7%</td><td class="num">16.7%</td><td class="num">83.3%</td></tr><tr><td><a href="#doc-169a1f2133fe5643">ORDER PERU 24-12 ANDET.pdf</a></td><td class="num">6</td><td class="num">0.0%</td><td class="num">0.0%</td><td class="num">0.0%</td><td class="num">0.0%</td><td class="num">0.0%</td><td class="num">100.0%</td></tr><tr><td><a href="#doc-5883b02cd922a64f">ORDER PERU 25-15 ANDET VF.pdf</a></td><td class="num">2</td><td class="num">0.0%</td><td class="num">0.0%</td><td class="num">0.0%</td><td class="num">0.0%</td><td class="num">0.0%</td><td class="num">66.7%</td></tr><tr><td><a href="#doc-5a4c36e0022f4917">签字-ORDER PERU 25-19 FONAFE.pdf</a></td><td class="num">4</td><td class="num">0.0%</td><td class="num">0.0%</td><td class="num">0.0%</td><td class="num">0.0%</td><td class="num">0.0%</td><td class="num">33.3%</td></tr></table></div><details><summary>本次使用的构建配置</summary><pre>{
+  &quot;rules_version&quot;: &quot;v3.1&quot;,
+  &quot;parser&quot;: {
+    &quot;use&quot;: &quot;pymupdf_pages&quot;
+  },
+  &quot;table_extractors&quot;: [],
+  &quot;table_formatter&quot;: null,
+  &quot;chunker&quot;: {
+    &quot;use&quot;: &quot;characters&quot;,
+    &quot;chunk_size&quot;: 300,
+    &quot;chunk_overlap&quot;: 50
+  },
+  &quot;embedder&quot;: {
+    &quot;use&quot;: &quot;e5_small&quot;
+  },
+  &quot;embedder_identity&quot;: {
+    &quot;model&quot;: &quot;intfloat/multilingual-e5-small&quot;,
+    &quot;revision&quot;: &quot;614241f622f53c4eeff9890bdc4f31cfecc418b3&quot;,
+    &quot;passage_prefix&quot;: &quot;passage: &quot;,
+    &quot;query_prefix&quot;: &quot;query: &quot;,
+    &quot;normalized&quot;: true
+  }
+}</pre></details><h2>逐题明细</h2><div class="filters"><button data-tag="all" class=on>全部（24）</button><button data-tag="miss">未命中（23）</button><button data-tag="partial">部分覆盖（0）</button><button data-tag="complete">完整覆盖（1）</button><button data-tag="cross">有跨文档结果（21）</button><button data-tag="auto">含自动判定（0）</button></div><h2 id="doc-d359c37e0bc3c87a">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf</h2><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> CONTRACT-105-Q001 <span class="meta">· 1/3 条结果来自其他文档</span></h3><div>采购合同CONTRATO N° 105 - 2025 的签署双方分别是谁？各自的法定代表人是谁？</div><details><summary>参考答案</summary><div class="meta">合同买方为 ELECTRO SUR ESTE S.A.A. (LA EMPRESA)，法定代表人为总经理 Ing. Fredy Hernán Gonzáles De La Vega；承包商/卖方为 HEXING ELECTRICAL COMPANY S.A.C. (EL CONTRATISTA)，法定代表人为 María Isabel Gallardo Torres 和 Medaly Xiomara Arotoma Taipe。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 1 页</div><div class="text">ELECTRO SUR ESTE S.A.A., identificada con RUC. Nº 20116544289, cuya personería jurídica se encuentra inscrita en la Partida Electrónica Nº 11003503 del Registro de Personas Jurídicas Zona Registral Nº X - Sede Cusco, con domicilio en la Avenida Mariscal Sucre Nº 400 de la Urbanización Bancopata, del distrito de Santiago, provincia y departamento de Cusco, debidamente representada para este acto po…</div><details><summary>展开全文（670 字符）</summary><div class="text">ELECTRO SUR ESTE S.A.A., identificada con RUC. Nº 20116544289, cuya personería jurídica se encuentra inscrita en la Partida Electrónica Nº 11003503 del Registro de Personas Jurídicas Zona Registral Nº X - Sede Cusco, con domicilio en la Avenida Mariscal Sucre Nº 400 de la Urbanización Bancopata, del distrito de Santiago, provincia y departamento de Cusco, debidamente representada para este acto por su Gerente General el Ing. Fredy Hernán Gonzáles De La Vega, peruano, identificado con DNI. Nº 23839976, con poder de representación inscrito en los Asientos N° D00195 y N° D00232 de la Partida Electrónica en mención. A quien en adelante se le denominará “LA EMPRESA”.</div></details><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0004 + d359c37e0bc3c87a-c0005 + d359c37e0bc3c87a-c0006</div></details></div><div class="item"><b>证据 e2</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 1 页</div><div class="text">HEXING ELECTRICAL COMPANY S.A.C., identificada con RUC. Nº 20546102115, cuya razón social se encuentra inscrita en la Partida Electrónica Nº 12601784 de la Zona Registral IX – Sede Lima, con domicilio legal en el inmueble ubicado en la Avenida Guardia Civil N° 1321, Int. 1602, Urbanización El Aeropuerto, distrito de Surquillo, provincia y departamento de Lima, representada para este efecto por sus…</div><details><summary>展开全文（726 字符）</summary><div class="text">HEXING ELECTRICAL COMPANY S.A.C., identificada con RUC. Nº 20546102115, cuya razón social se encuentra inscrita en la Partida Electrónica Nº 12601784 de la Zona Registral IX – Sede Lima, con domicilio legal en el inmueble ubicado en la Avenida Guardia Civil N° 1321, Int. 1602, Urbanización El Aeropuerto, distrito de Surquillo, provincia y departamento de Lima, representada para este efecto por sus Apoderadas la Srta. María Isabel Gallardo Torres, peruana, identificada con DNI N° 44099982, y la Srta. Medaly Xiomara Arotoma Taipe, peruana, identificada con DNI N° 70034859, ambas con poderes inscritos en el asiento Nº C00010 de referida Partida Electrónica en mención. A quien en adelante se le denominará EL CONTRATISTA.</div></details><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0007 + d359c37e0bc3c87a-c0008 + d359c37e0bc3c87a-c0009</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge ">非证据</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 1 页 · 相似度 0.866</span><div class="text">sancionados por el Tribunal de Contrataciones del Estado con sanción vigente” EL CONTRATISTA no se encuentra</div><details><summary>d359c37e0bc3c87a-c0018</summary><div class="meta">距离 0.133959，类型 text</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 5 页 · 相似度 0.864</span><div class="text">Prepared by: María Gallardo
+向忖
+
+Hexing Electrical Company S.A.C.
+E-mail: maria.gallardo@hxgroup.com
+
+Website: www.hxgroup.cn</div><details><summary>5a4c36e0022f4917-c0047</summary><div class="meta">距离 0.135947，类型 text</div></details></div><div class="item"><b>#3</b> <span class="badge ">非证据</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 2 页 · 相似度 0.863</span><div class="text">suspendido o inhabilitado para contratar con el Estado.
+
+2.4
+EL CONTRATISTA ha cumplido con presentar la siguiente documentación en fecha 02/09/2025 y su subsanación
+en fecha 10/09/2025:
+
+•
+Garantía de fiel cumplimiento del contrato:</div><details><summary>d359c37e0bc3c87a-c0020</summary><div class="meta">距离 0.136833，类型 text</div></details></div></div></div></div><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> CONTRACT-105-Q002 <span class="meta">· 2/3 条结果来自其他文档</span></h3><div>采购合同CONTRATO N° 105 - 2025包含哪些 Ítem 的产品？各自的数量、单价及含税总金额是多少？合同总金额是多少？</div><details><summary>参考答案</summary><div class="meta">合同共包含 3 个 Ítem，含税总金额为 US$ 810,722.54：
+1. Ítem 1（单相电子电表 2线）：数量 120,000 台，单价 US$ 6.1124，总价 US$ 733,488.00；
+2. Ítem 3（三相电子电表 3线）：数量 1,500 台，单价 US$ 18.0894，总价 US$ 27,134.10；
+3. Ítem 4（三相电子电表 4线）：数量 2,600 台，单价 US$ 19.2694，总价 US$ 50,100.44。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 2 页</div><div class="text">Ítem | Descripción
+1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS
+3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS
+4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS</div><div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 3 页</div><div class="text">Ítem | DESCRIPCIÓN | TABLA DE DATOS TÉCNICOS
+1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 01
+3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS | Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 03
+4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el…</div><details><summary>展开全文（408 字符）</summary><div class="text">Ítem | DESCRIPCIÓN | TABLA DE DATOS TÉCNICOS
+1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 01
+3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS | Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 03
+4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 04</div></details><div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 4 页</div><div class="text">Ítem 1: US$ 733,488.00 (Setecientos treinta y tres mil cuatrocientos ochenta y ocho con 00/100 Dólares Americanos) incluye todos los impuestos de Ley.
+Ítem 3: US$ 27,134.10 (Veintisiete mil ciento treinta y cuatro con 10/100 Dólares Americanos) incluye todos los impuestos de Ley.
+Ítem 4: US$ 50,100.44 (Cincuenta mil cien con 44/100 Dólares Americanos) incluye todos los impuestos de Ley.</div><div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 4 页</div><div class="text">ÍTEM | DESCRIPCIÓN | CANTIDAD | PRECIO UNITARIO CON IGV (US$) | PRECIO TOTAL (US$)
+Ítem 1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | 120,000 | 6.1124 | 733,488.00
+Ítem 3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS | 1,500 | 18.0894 | 27,134.10
+Ítem 4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | 2,600 | 19.2694 | 50,100.44</div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0058</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 5 页 · 相似度 0.873</span><div class="text">Prepared by: María Gallardo
+向忖
+
+Hexing Electrical Company S.A.C.
+E-mail: maria.gallardo@hxgroup.com
+
+Website: www.hxgroup.cn</div><details><summary>5a4c36e0022f4917-c0047</summary><div class="meta">距离 0.126943，类型 text</div></details></div><div class="item"><b>#2</b> <span class="badge ">非证据</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 1 页 · 相似度 0.867</span><div class="text">CONTRATO N° 105 - 2025
+
+COMPRA CORPORATIVA DE MEDIDORES PARA LAS EMPRESAS DE LA
+
+CORPORACIÓN FONAFE – ÍTEMS 1, 3 Y 4
+
+(LICITACIÓN PÚBLICA N° LP-002-2024-FONAFE)</div><details><summary>d359c37e0bc3c87a-c0000</summary><div class="meta">距离 0.132716，类型 text</div></details></div><div class="item"><b>#3</b> <span class="badge bad">跨文档</span> <span class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页 · 相似度 0.863</span><div class="text">Website: www.hxgroup.cn</div><details><summary>5883b02cd922a64f-c0015</summary><div class="meta">距离 0.137009，类型 text</div></details></div></div></div></div><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> CONTRACT-105-Q003 <span class="meta">· 1/3 条结果来自其他文档</span></h3><div>采购合同CONTRATO N° 105 - 2025规定的总履约期限是多久？具体的交货地点在哪里？是否允许提前交货？</div><details><summary>参考答案</summary><div class="meta">合同规定的总履约交付期限为自合同签署之日起 690 个日历天。交货地点为 Almacén Central ELSE（地址：Av. Mariscal Sucre N° 400, Urb. Bancopata - Santiago, Cusco）。合同明确规定不接受提前交货，除非买方主动提出并经承包商同意。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 5 页</div><div class="text">Los bienes materia del presente contrato se entregarán en el plazo de 690 días calendarios de la firma de contrato.</div><div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 5 页</div><div class="text">6ta ENTREGA (A 690 días de la firma del contrato)</div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0075；d359c37e0bc3c87a-c0078</div></details></div><div class="item"><b>证据 e2</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 5 页</div><div class="text">No se aceptarán entregas anticipadas, salvo que sea requerido por LA EMPRESA, previa disponibilidad y aceptación por parte del CONTRATISTA.</div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0080</div></details></div><div class="item"><b>证据 e3</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 5 页</div><div class="text">LUGAR DE ENTREGA
+ELSE | Almacén Central ELSE - Av. Mariscal Sucre Nº 400, Urb. Bancopata – Santiago, Cusco, Cusco</div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0081</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge ">非证据</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 1 页 · 相似度 0.859</span><div class="text">sancionados por el Tribunal de Contrataciones del Estado con sanción vigente” EL CONTRATISTA no se encuentra</div><details><summary>d359c37e0bc3c87a-c0018</summary><div class="meta">距离 0.140947，类型 text</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 5 页 · 相似度 0.858</span><div class="text">Prepared by: María Gallardo
+向忖
+
+Hexing Electrical Company S.A.C.
+E-mail: maria.gallardo@hxgroup.com
+
+Website: www.hxgroup.cn</div><details><summary>5a4c36e0022f4917-c0047</summary><div class="meta">距离 0.141592，类型 text</div></details></div><div class="item"><b>#3</b> <span class="badge ">非证据</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 2 页 · 相似度 0.856</span><div class="text">suspendido o inhabilitado para contratar con el Estado.
+
+2.4
+EL CONTRATISTA ha cumplido con presentar la siguiente documentación en fecha 02/09/2025 y su subsanación
+en fecha 10/09/2025:
+
+•
+Garantía de fiel cumplimiento del contrato:</div><details><summary>d359c37e0bc3c87a-c0020</summary><div class="meta">距离 0.144446，类型 text</div></details></div></div></div></div><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> CONTRACT-105-Q004 <span class="meta">· 1/3 条结果来自其他文档</span></h3><div>采购合同CONTRATO N° 105 - 2025中，关于各 Ítem 的履约保证金（Garantía de fiel cumplimiento）金额及出具机构是如何规定的？</div><details><summary>参考答案</summary><div class="meta">履约保证金均由 AVLA Perú Compañía de Seguros 出具，金额为各 Ítem 原始合同金额的 10%：
+- Ítem 1：US$ 73,348.80（保函 N° 3012025041864）
+- Ítem 3：US$ 2,713.41（保函 N° 3012025041881）
+- Ítem 4：US$ 5,010.05（保函 N° 3012025041885）</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 2 页</div><div class="text">Correspondiente al Ítem 1 – Medidor electrónico monofásico de 2 hilos: Carta fianza N° 3012025041864 por el monto de US$ 73,348.80 (Setenta y tres mil trescientos cuarenta y ocho con 80/100 Dólares Americanos) con vencimiento al 20/09/2027.
+Correspondiente al Ítem 3 – Medidor electrónico trifásico de 3 hilos: Carta fianza N° 3012025041881 por el monto de US$ 2,713.41 (Dos mil setecientos trece con…</div><details><summary>展开全文（665 字符）</summary><div class="text">Correspondiente al Ítem 1 – Medidor electrónico monofásico de 2 hilos: Carta fianza N° 3012025041864 por el monto de US$ 73,348.80 (Setenta y tres mil trescientos cuarenta y ocho con 80/100 Dólares Americanos) con vencimiento al 20/09/2027.
+Correspondiente al Ítem 3 – Medidor electrónico trifásico de 3 hilos: Carta fianza N° 3012025041881 por el monto de US$ 2,713.41 (Dos mil setecientos trece con 41/100 Dólares Americanos) con vencimiento al 20/09/2027.
+Correspondiente al Ítem 4 – Medidor electrónico trifásico de 4 hilos: Carta fianza N° 3012025041885 por el monto de US$ 5,010.05 (Cinco mil diez con 05/100 Dólares Americanos) con vencimiento al 20/09/2027.</div></details><div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 6 页</div><div class="text">Correspondiente al Ítem 1 – Medidor electrónico monofásico de 2 hilos: De fiel cumplimiento del contrato: US$ 73,348.80 (Setenta y tres mil trescientos cuarenta y ocho con 80/100 Dólares Americanos), a través de la Carta Fianza N° 3012025041864 emitida por AVLA Perú Compañía de Seguros. Monto que es equivalente al diez por ciento (10%) del monto del contrato original. Correspondiente al Ítem 3 – M…</div><details><summary>展开全文（1055 字符）</summary><div class="text">Correspondiente al Ítem 1 – Medidor electrónico monofásico de 2 hilos: De fiel cumplimiento del contrato: US$ 73,348.80 (Setenta y tres mil trescientos cuarenta y ocho con 80/100 Dólares Americanos), a través de la Carta Fianza N° 3012025041864 emitida por AVLA Perú Compañía de Seguros. Monto que es equivalente al diez por ciento (10%) del monto del contrato original. Correspondiente al Ítem 3 – Medidor electrónico trifásico de 3 hilos: De fiel cumplimiento del contrato: US$ 2,713.41 (Dos mil setecientos trece con 41/100 Dólares Americanos), a través de la Carta Fianza N° 3012025041881 emitida por AVLA Perú Compañía de Seguros. Monto que es equivalente al diez por ciento (10%) del monto del contrato original. Correspondiente al Ítem 4 – Medidor electrónico trifásico de 4 hilos: De fiel cumplimiento del contrato: US$ 5,010.05 (Cinco mil diez con 05/100 Dólares Americanos), a través de la Carta Fianza N° 3012025041885 emitida por AVLA Perú Compañía de Seguros. Monto que es equivalente al diez por ciento (10%) del monto del contrato original.</div></details><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0084 + d359c37e0bc3c87a-c0085 + d359c37e0bc3c87a-c0086 + d359c37e0bc3c87a-c0088</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge ">非证据</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 2 页 · 相似度 0.876</span><div class="text">suspendido o inhabilitado para contratar con el Estado.
+
+2.4
+EL CONTRATISTA ha cumplido con presentar la siguiente documentación en fecha 02/09/2025 y su subsanación
+en fecha 10/09/2025:
+
+•
+Garantía de fiel cumplimiento del contrato:</div><details><summary>d359c37e0bc3c87a-c0020</summary><div class="meta">距离 0.123816，类型 text</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 5 页 · 相似度 0.871</span><div class="text">Prepared by: María Gallardo
+向忖
+
+Hexing Electrical Company S.A.C.
+E-mail: maria.gallardo@hxgroup.com
+
+Website: www.hxgroup.cn</div><details><summary>5a4c36e0022f4917-c0047</summary><div class="meta">距离 0.129143，类型 text</div></details></div><div class="item"><b>#3</b> <span class="badge ">非证据</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 1 页 · 相似度 0.870</span><div class="text">sancionados por el Tribunal de Contrataciones del Estado con sanción vigente” EL CONTRATISTA no se encuentra</div><details><summary>d359c37e0bc3c87a-c0018</summary><div class="meta">距离 0.129636，类型 text</div></details></div></div></div></div><div class="card" data-tags="all miss"><h3><span class="badge bad">✗ 未检索到证据</span> CONTRACT-105-Q005</h3><div>采购合同CONTRATO N° 105 - 2025中，技术商业质保期（Garantía Técnico-Comercial）的期限是多久？在质保期内发生故障时，承包商的响应和修复时限是多少？</div><details><summary>参考答案</summary><div class="meta">技术商业质保期为自货物送达买方仓库之日起 5 年零 1 个月。发生故障时，承包商须在收到通知后 30 个日历天内指派技术人员到场排查原因；若判定为承包商责任，须在确定原因或收到第三方鉴定结果后的 45 个日历天内修复或更换新机。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 3 页</div><div class="text">garantiza la calidad técnica de los medidores de energía, por un periodo de 5 años y 1 mes, contados a partir de la fecha de recepción en el almacén de LA EMPRESA</div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0038 + d359c37e0bc3c87a-c0039</div></details></div><div class="item"><b>证据 e2</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 3 页</div><div class="text">EL CONTRATISTA tendrá un plazo máximo de treinta (30) días calendario contados a partir de la fecha de realizada la notificación, para que se apersone un representante técnico</div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0041 + d359c37e0bc3c87a-c0042</div></details></div><div class="item"><b>证据 e3</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 3 页</div><div class="text">En el caso que la falla sea atribuible al CONTRATISTA, la reparación debe iniciarse a partir del día siguiente de emitido el resultado del peritaje por el organismo externo, debiendo devolverse el medidor debidamente reparado dentro de los cuarenta y cinco (45) días calendario a partir de esa fecha (y en caso no sea factible, por destrucción, imposibilidad de reparación u otra causa) deberá devolv…</div><details><summary>展开全文（433 字符）</summary><div class="text">En el caso que la falla sea atribuible al CONTRATISTA, la reparación debe iniciarse a partir del día siguiente de emitido el resultado del peritaje por el organismo externo, debiendo devolverse el medidor debidamente reparado dentro de los cuarenta y cinco (45) días calendario a partir de esa fecha (y en caso no sea factible, por destrucción, imposibilidad de reparación u otra causa) deberá devolver un medidor nuevo a LA EMPRESA.</div></details><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0046 + d359c37e0bc3c87a-c0047</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge ok">✓ 证据 e1</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 3 页 · 相似度 0.870</span><div class="text">EL CONTRATISTA adjuntó para la suscripción del contrato, una garantía técnico-comercial en idioma español a
+través de la cual garantiza la calidad técnica de los medidores de energía, por un periodo de 5 años y 1 mes,</div><details><summary>d359c37e0bc3c87a-c0038</summary><div class="meta">距离 0.129915，类型 text</div></details></div><div class="item"><b>#2</b> <span class="badge ">非证据</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 1 页 · 相似度 0.868</span><div class="text">sancionados por el Tribunal de Contrataciones del Estado con sanción vigente” EL CONTRATISTA no se encuentra</div><details><summary>d359c37e0bc3c87a-c0018</summary><div class="meta">距离 0.131722，类型 text</div></details></div><div class="item"><b>#3</b> <span class="badge ">非证据</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 2 页 · 相似度 0.865</span><div class="text">suspendido o inhabilitado para contratar con el Estado.
+
+2.4
+EL CONTRATISTA ha cumplido con presentar la siguiente documentación en fecha 02/09/2025 y su subsanación
+en fecha 10/09/2025:
+
+•
+Garantía de fiel cumplimiento del contrato:</div><details><summary>d359c37e0bc3c87a-c0020</summary><div class="meta">距离 0.134664，类型 text</div></details></div></div></div></div><div class="card" data-tags="all miss"><h3><span class="badge bad">✗ 未检索到证据</span> CONTRACT-105-Q006</h3><div>采购合同CONTRATO N° 105 - 2025中，对“重复性故障”（Falla Repetitiva）的认定标准是什么？出现重复性故障时承包商需要承担什么责任？</div><details><summary>参考答案</summary><div class="meta">重复性故障的认定标准为：安装未满 1 年的电表故障率达到 0.5%，或者安装未满 18 个月的同一规格电表累计发生 10 起以上相同原因的故障；此外，第三方鉴定证实存在隐患性制造缺陷的亦认定为重复性故障。出现重复性故障时，承包商必须自费全批次更换涉及的生产批次电表，并赔偿买方因此遭受的所有损失。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 3 页</div><div class="text">Se definirá como falla repetitiva aquella que se advierta en 0.5% de los medidores instalados del menos de un año o undécima ocasión, es decir que existen 10 casos anteriores los cuales presentaron la misma falla a medidores que lleven menos de 18 meses de instalación y cuyo origen sea de similares causas</div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0049 + d359c37e0bc3c87a-c0050</div></details></div><div class="item"><b>证据 e2</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 3,4 页</div><div class="text">Adicionalmente, sí como resultado de un peritaje de determinación de la causa de una falla se comprueba, que independiente de la cantidad de medidores que hubieren sido afectados y los plazos de instalación transcurridos, existen motivos fundados sobre un defecto de fabricación, tal defecto de fabricación será catalogado como falla repetitiva, con el propósito de evitar un mal mayor en las instala…</div><details><summary>展开全文（642 字符）</summary><div class="text">Adicionalmente, sí como resultado de un peritaje de determinación de la causa de una falla se comprueba, que independiente de la cantidad de medidores que hubieren sido afectados y los plazos de instalación transcurridos, existen motivos fundados sobre un defecto de fabricación, tal defecto de fabricación será catalogado como falla repetitiva, con el propósito de evitar un mal mayor en las instalaciones de LA EMPRESA, que afecte la calidad de servicio eléctrico, en este caso, EL CONTRATISTA se compromete a la reposición total del lote de producción involucrado, así como a resarcir todos los daños y perjuicios ocasionados a LA EMPRESA.</div></details><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0051 + d359c37e0bc3c87a-c0052 + d359c37e0bc3c87a-c0054</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge ">非证据</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 1 页 · 相似度 0.859</span><div class="text">sancionados por el Tribunal de Contrataciones del Estado con sanción vigente” EL CONTRATISTA no se encuentra</div><details><summary>d359c37e0bc3c87a-c0018</summary><div class="meta">距离 0.141016，类型 text</div></details></div><div class="item"><b>#2</b> <span class="badge ">非证据</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 2 页 · 相似度 0.853</span><div class="text">suspendido o inhabilitado para contratar con el Estado.
+
+2.4
+EL CONTRATISTA ha cumplido con presentar la siguiente documentación en fecha 02/09/2025 y su subsanación
+en fecha 10/09/2025:
+
+•
+Garantía de fiel cumplimiento del contrato:</div><details><summary>d359c37e0bc3c87a-c0020</summary><div class="meta">距离 0.146709，类型 text</div></details></div><div class="item"><b>#3</b> <span class="badge ">非证据</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 7 页 · 相似度 0.853</span><div class="text">XVII.
+CLÁUSULA DÉCIMO SÉTIMA: Responsabilidad de las partes. –</div><details><summary>d359c37e0bc3c87a-c0117</summary><div class="meta">距离 0.146810，类型 text</div></details></div></div></div></div><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> CONTRACT-105-Q007 <span class="meta">· 1/3 条结果来自其他文档</span></h3><div>采购合同CONTRATO N° 105 - 2025中，买方办理支付流程的前提条件有哪些？出具验收合格证明以及付款的具体时限要求是什么？</div><details><summary>参考答案</summary><div class="meta">买方按交付批次以美元进行分期付款。付款的前提是承包商需提交发票（Comprobante de Pago）、使用部门出具的验收合格单（Hoja de Conformidad）、签收运单（Guía de remisión）及采购订单复印件。买方应在货物签收后 7 个日历天内（若需测试最长 15 天）出具验收合格证明；出具合格证明后，买方须在 10 个日历天内完成支付。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 4 页</div><div class="text">Comprobante de Pago (Factura).
+Hoja de Conformidad emitida por el área usuaria por la recepción de los bienes.
+Guía de remisión o entregable con sello de recepción de la entidad contratante.
+Copia de la Orden de Compra.</div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0066</div></details></div><div class="item"><b>证据 e2</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 5 页</div><div class="text">Para tal efecto, el responsable de otorgar la conformidad de la prestación deberá hacerlo en un plazo que no excederá de los siete (7) días de producida la recepción, salvo que se requiera efectuar pruebas que permitan verificar el cumplimiento de la obligación, en cuyo caso la conformidad se emite en un plazo máximo de quince (15) días, bajo responsabilidad de dicho funcionario.</div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0069 + d359c37e0bc3c87a-c0070</div></details></div><div class="item"><b>证据 e3</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 5 页</div><div class="text">LA EMPRESA paga las contraprestaciones pactadas a EL CONTRATISTA dentro de los diez (10) días calendario siguientes de otorgada la conformidad de los bienes</div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0071</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 5 页 · 相似度 0.866</span><div class="text">Prepared by: María Gallardo
+向忖
+
+Hexing Electrical Company S.A.C.
+E-mail: maria.gallardo@hxgroup.com
+
+Website: www.hxgroup.cn</div><details><summary>5a4c36e0022f4917-c0047</summary><div class="meta">距离 0.134035，类型 text</div></details></div><div class="item"><b>#2</b> <span class="badge ">非证据</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 2 页 · 相似度 0.860</span><div class="text">suspendido o inhabilitado para contratar con el Estado.
+
+2.4
+EL CONTRATISTA ha cumplido con presentar la siguiente documentación en fecha 02/09/2025 y su subsanación
+en fecha 10/09/2025:
+
+•
+Garantía de fiel cumplimiento del contrato:</div><details><summary>d359c37e0bc3c87a-c0020</summary><div class="meta">距离 0.139969，类型 text</div></details></div><div class="item"><b>#3</b> <span class="badge ">非证据</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 2 页 · 相似度 0.860</span><div class="text">2.5 EL CONTRATISTA mediante Carta HXPE25-065 de fecha 16 de setiembre de 2025, requirió a LA EMPRESA
+cumplir con el perfeccionamiento del contrato, de acuerdo a lo establecido en el artículo 91.1 del Reglamento de
+la Ley General de Contrataciones Públicas.</div><details><summary>d359c37e0bc3c87a-c0031</summary><div class="meta">距离 0.140399，类型 text</div></details></div></div></div></div><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> CONTRACT-105-Q008 <span class="meta">· 1/3 条结果来自其他文档</span></h3><div>采购合同CONTRATO N° 105 - 2025中，如果承包商发生未经证明的延迟交货，延期罚金（Penalidad por Mora）的计算公式是什么？罚金的最高上限是多少？</div><details><summary>参考答案</summary><div class="meta">每日延期罚金公式为：Penalidad Diaria = (0.10 × monto vigente) / (F × plazo vigente en días)。由于本合同履约期限大于60天，系数 F 取值 0.25。延迟罚金最高上限为有效合同总额（或对应 Ítem 金额）的 10%。达到 10% 上限后，买方有权解除合同。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 7 页</div><div class="text">Penalidad Diaria = (0.10 x monto vigente) / (F x plazo vigente en días)
+F = 0.25 para plazos mayores a sesenta (60) días</div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0108</div></details></div><div class="item"><b>证据 e2</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 7 页</div><div class="text">Estos dos (2) tipos de penalidades pueden alcanzar cada una un monto máximo equivalente al diez por ciento (10%) del monto del contrato vigente, o de ser el caso, del ítem que debió ejecutarse. Cuando se llegue a cubrir el monto máximo de la penalidad por mora o el monto máximo para otras penalidades, de ser el caso, LA EMPRESA puede resolver el contrato por incumplimiento.</div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0113 + d359c37e0bc3c87a-c0114</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge ">非证据</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 1 页 · 相似度 0.868</span><div class="text">sancionados por el Tribunal de Contrataciones del Estado con sanción vigente” EL CONTRATISTA no se encuentra</div><details><summary>d359c37e0bc3c87a-c0018</summary><div class="meta">距离 0.131773，类型 text</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 5 页 · 相似度 0.866</span><div class="text">Prepared by: María Gallardo
+向忖
+
+Hexing Electrical Company S.A.C.
+E-mail: maria.gallardo@hxgroup.com
+
+Website: www.hxgroup.cn</div><details><summary>5a4c36e0022f4917-c0047</summary><div class="meta">距离 0.134017，类型 text</div></details></div><div class="item"><b>#3</b> <span class="badge ">非证据</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 2 页 · 相似度 0.863</span><div class="text">suspendido o inhabilitado para contratar con el Estado.
+
+2.4
+EL CONTRATISTA ha cumplido con presentar la siguiente documentación en fecha 02/09/2025 y su subsanación
+en fecha 10/09/2025:
+
+•
+Garantía de fiel cumplimiento del contrato:</div><details><summary>d359c37e0bc3c87a-c0020</summary><div class="meta">距离 0.137046，类型 text</div></details></div></div></div></div><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> CONTRACT-105-Q009 <span class="meta">· 1/3 条结果来自其他文档</span></h3><div>采购合同CONTRATO N° 105 - 2025的第 1 次交付（1era ENTREGA，合同签订后 170 天），具体的交付产品和数量是多少？</div><details><summary>参考答案</summary><div class="meta">第 1 次交付（签订合同后 170 天内）需要交付：Ítem 1（单相电子电表）15,000 台，以及 Ítem 4（三相 4 线电子电表）300 台。Ítem 3 在第 1 次交付中无交付任务。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 5 页</div><div class="text">1era ENTREGA (A 170 días de la firma del contrato)
+MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | 15,000
+MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | 300</div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0078 + d359c37e0bc3c87a-c0079</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge ">非证据</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 5 页 · 相似度 0.875</span><div class="text">CRONOGRAMA DE ENTREGA
+
+CANTIDAD Y CRONOGRAMA DE ENTREGAS
+1era
+ENTREG
+
+3era
+ENTREG
+
+4ta
+ENTREG
+
+5ta
+ENTREG
+
+6ta
+ENTREG
+
+UNIDAD
+
+REQUERIMI
+
+2da
+ENTREGA
+
+A
+
+A
+
+A
+
+A
+
+TEM
+DESCRIPCIÓN
+
+DE
+MEDIDA
+
+ENTO
+TOTAL
+
+A
+(A 170
+días de la
+
+(A 210
+días de la
+
+(A 330
+días de la
+
+(A 450
+días de la
+…</div><details><summary>展开全文（298 字符）</summary><div class="text">CRONOGRAMA DE ENTREGA
+
+CANTIDAD Y CRONOGRAMA DE ENTREGAS
+1era
+ENTREG
+
+3era
+ENTREG
+
+4ta
+ENTREG
+
+5ta
+ENTREG
+
+6ta
+ENTREG
+
+UNIDAD
+
+REQUERIMI
+
+2da
+ENTREGA
+
+A
+
+A
+
+A
+
+A
+
+TEM
+DESCRIPCIÓN
+
+DE
+MEDIDA
+
+ENTO
+TOTAL
+
+A
+(A 170
+días de la
+
+(A 210
+días de la
+
+(A 330
+días de la
+
+(A 450
+días de la
+
+(A 570
+días de la</div></details><details><summary>d359c37e0bc3c87a-c0077</summary><div class="meta">距离 0.124912，类型 text</div></details></div><div class="item"><b>#2</b> <span class="badge ok">✓ 证据 e1</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 5 页 · 相似度 0.867</span><div class="text">(A 450
+días de la
+
+(A 570
+días de la
+
+(A 690
+días de la
+
+firma del
+contrato)
+
+firma del
+contrato)
+
+firma del
+contrato)
+
+firma del
+contrato)
+
+firma del
+contrato)
+
+firma del
+contrato)
+
+1
+MEDIDOR ELECTRÓNICO
+MONOFASICO DE 2 HILOS
+UNIDAD
+120,000
+15,000
+15,000
+15,000
+25,000
+25,000
+25,…</div><details><summary>展开全文（283 字符）</summary><div class="text">(A 450
+días de la
+
+(A 570
+días de la
+
+(A 690
+días de la
+
+firma del
+contrato)
+
+firma del
+contrato)
+
+firma del
+contrato)
+
+firma del
+contrato)
+
+firma del
+contrato)
+
+firma del
+contrato)
+
+1
+MEDIDOR ELECTRÓNICO
+MONOFASICO DE 2 HILOS
+UNIDAD
+120,000
+15,000
+15,000
+15,000
+25,000
+25,000
+25,000</div></details><details><summary>d359c37e0bc3c87a-c0078</summary><div class="meta">距离 0.132774，类型 text</div></details></div><div class="item"><b>#3</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 5 页 · 相似度 0.867</span><div class="text">Prepared by: María Gallardo
+向忖
+
+Hexing Electrical Company S.A.C.
+E-mail: maria.gallardo@hxgroup.com
+
+Website: www.hxgroup.cn</div><details><summary>5a4c36e0022f4917-c0047</summary><div class="meta">距离 0.133221，类型 text</div></details></div></div></div></div><div class="card" data-tags="all miss"><h3><span class="badge bad">✗ 未检索到证据</span> CONTRACT-105-Q010</h3><div>采购合同CONTRATO N° 105 - 2025是否规定分批交货？每个批次的具体交货日期分别是什么？</div><details><summary>参考答案</summary><div class="meta">是的，合同规定分为 6 个批次交货。合同签署日期为 2025 年 9 月 23 日，各批次期限分别为签署后 170、210、330、450、570 和 690 个日历日；据此计算，各批次截止日期依次为：第 1 批 2026 年 3 月 12 日、第 2 批 2026 年 4 月 21 日、第 3 批 2026 年 8 月 19 日、第 4 批 2026 年 12 月 17 日、第 5 批 2027 年 4 月 16 日、第 6 批 2027 年 8 月 14 日。这些绝对日期是依据合同签署日期和相对期限计算所得，并非合同表格直接列示。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 5 页</div><div class="text">1era ENTREGA (A 170 días de la firma del contrato) | 2da ENTREGA (A 210 días) | 3era ENTREGA (A 330 días) | 4ta ENTREGA (A 450 días) | 5ta ENTREGA (A 570 días) | 6ta ENTREGA (A 690 días)</div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0077 + d359c37e0bc3c87a-c0078</div></details></div><div class="item"><b>证据 e2</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 9 页</div><div class="text">De acuerdo con las bases integradas, la oferta y las disposiciones del presente contrato, las partes lo firman por duplicado en señal de conformidad en la ciudad del Cusco a los 23 días del mes de setiembre de 2025.</div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0153</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge ">非证据</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 1 页 · 相似度 0.861</span><div class="text">sancionados por el Tribunal de Contrataciones del Estado con sanción vigente” EL CONTRATISTA no se encuentra</div><details><summary>d359c37e0bc3c87a-c0018</summary><div class="meta">距离 0.138741，类型 text</div></details></div><div class="item"><b>#2</b> <span class="badge ">非证据</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 2 页 · 相似度 0.861</span><div class="text">suspendido o inhabilitado para contratar con el Estado.
+
+2.4
+EL CONTRATISTA ha cumplido con presentar la siguiente documentación en fecha 02/09/2025 y su subsanación
+en fecha 10/09/2025:
+
+•
+Garantía de fiel cumplimiento del contrato:</div><details><summary>d359c37e0bc3c87a-c0020</summary><div class="meta">距离 0.138833，类型 text</div></details></div><div class="item"><b>#3</b> <span class="badge ok">✓ 证据 e1</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 5 页 · 相似度 0.861</span><div class="text">CRONOGRAMA DE ENTREGA
+
+CANTIDAD Y CRONOGRAMA DE ENTREGAS
+1era
+ENTREG
+
+3era
+ENTREG
+
+4ta
+ENTREG
+
+5ta
+ENTREG
+
+6ta
+ENTREG
+
+UNIDAD
+
+REQUERIMI
+
+2da
+ENTREGA
+
+A
+
+A
+
+A
+
+A
+
+TEM
+DESCRIPCIÓN
+
+DE
+MEDIDA
+
+ENTO
+TOTAL
+
+A
+(A 170
+días de la
+
+(A 210
+días de la
+
+(A 330
+días de la
+
+(A 450
+días de la
+…</div><details><summary>展开全文（298 字符）</summary><div class="text">CRONOGRAMA DE ENTREGA
+
+CANTIDAD Y CRONOGRAMA DE ENTREGAS
+1era
+ENTREG
+
+3era
+ENTREG
+
+4ta
+ENTREG
+
+5ta
+ENTREG
+
+6ta
+ENTREG
+
+UNIDAD
+
+REQUERIMI
+
+2da
+ENTREGA
+
+A
+
+A
+
+A
+
+A
+
+TEM
+DESCRIPCIÓN
+
+DE
+MEDIDA
+
+ENTO
+TOTAL
+
+A
+(A 170
+días de la
+
+(A 210
+días de la
+
+(A 330
+días de la
+
+(A 450
+días de la
+
+(A 570
+días de la</div></details><details><summary>d359c37e0bc3c87a-c0077</summary><div class="meta">距离 0.138970，类型 text</div></details></div></div></div></div><h2 id="doc-817cfff2927c6c65">E001-602.pdf</h2><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> E001-602-Q001 <span class="meta">· 3/3 条结果来自其他文档</span></h3><div>发票E001-602规定的付款到期日是什么时候？需要支付多少金额？其中包含多少税费？</div><details><summary>参考答案</summary><div class="meta">付款到期日为2026年3月30日，需要支付USD 331,432.50，其中包含税费USD 50557.50。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">E001-602.pdf · 第 1 页</div><div class="text">Nº Cuota | Fec. Venc. | Monto
+1 | 30/03/2026 | 331,432.50</div><details><summary>可接受的 chunk 组合</summary><div class="meta">817cfff2927c6c65-c0007</div></details></div><div class="item"><b>证据 e2</b> <span class="badge bad">未覆盖</span> <div class="meta">E001-602.pdf · 第 1 页</div><div class="text">Valor Venta: $ 280,875.00
+IGV: $ 50,557.50
+Importe Total: $ 331,432.50</div><div class="meta">E001-602.pdf · 第 1 页</div><div class="text">Información del crédito
+Monto neto pendiente de pago: $ 331,432.50
+Total de Cuotas: 1</div><details><summary>可接受的 chunk 组合</summary><div class="meta">817cfff2927c6c65-c0006 + 817cfff2927c6c65-c0007</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 5 页 · 相似度 0.839</span><div class="text">Prepared by: María Gallardo
+向忖
+
+Hexing Electrical Company S.A.C.
+E-mail: maria.gallardo@hxgroup.com
+
+Website: www.hxgroup.cn</div><details><summary>5a4c36e0022f4917-c0047</summary><div class="meta">距离 0.161037，类型 text</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页 · 相似度 0.838</span><div class="text">6th
+Delivery
+25.09.25
+10.10.25
+10.12.25
+10.03.26
+10.05.26
+10.07.26
+
+HXE12ESX
+
+ -
+
+20,000.00
+
+20,000.00
+
+20,000.00
+
+20,000.00
+
+HXE13ESX
+
+5,000.00
+
+2,500.00
+
+2,500.00
+ -
+ -
+
+HXE33K-S1
+
+900.00
+
+500.00
+ -
+
+500.00
+ -
+
+HXE34K-S1
+
+500
+
+1,000.00
+
+500.00
+
+1,000.00
+
+500.00
+ -
+
+Meterbox
+
+ -…</div><details><summary>展开全文（291 字符）</summary><div class="text">6th
+Delivery
+25.09.25
+10.10.25
+10.12.25
+10.03.26
+10.05.26
+10.07.26
+
+HXE12ESX
+
+ -
+
+20,000.00
+
+20,000.00
+
+20,000.00
+
+20,000.00
+
+HXE13ESX
+
+5,000.00
+
+2,500.00
+
+2,500.00
+ -
+ -
+
+HXE33K-S1
+
+900.00
+
+500.00
+ -
+
+500.00
+ -
+
+HXE34K-S1
+
+500
+
+1,000.00
+
+500.00
+
+1,000.00
+
+500.00
+ -
+
+Meterbox
+
+ -
+
+10,000.00</div></details><details><summary>5883b02cd922a64f-c0007</summary><div class="meta">距离 0.161656，类型 text</div></details></div><div class="item"><b>#3</b> <span class="badge bad">跨文档</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 7 页 · 相似度 0.831</span><div class="text">Penalidad Diaria =
+0.10 x monto vigente
+F x plazo vigente en días
+Donde:
+
+F = 0.25 para plazos mayores a sesenta (60) días o;
+F = 0.40 para plazos menores o iguales a sesenta (60) días.</div><details><summary>d359c37e0bc3c87a-c0108</summary><div class="meta">距离 0.169383，类型 text</div></details></div></div></div></div><div class="card" data-tags="all complete cross"><h3><span class="badge ok">✓ 全部证据已检索到</span> E001-602-Q002 <span class="meta">· 2/3 条结果来自其他文档</span></h3><div>发票E001-602中， HXE34K-S1的单价和数量分别是多少？</div><details><summary>参考答案</summary><div class="meta">HXE34K-S1的单价为USD 16.00，数量为500个。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge ok">第 3 位时已覆盖</span> <div class="meta">E001-602.pdf · 第 1 页</div><div class="text">Cantidad | Código | Descripción | Valor Unitario
+500.00 | HXE34K-S1 | MEDIDOR TRIFASICO HXE34K-S1, 4HILOS, 10(100)A, 3X220V, CLASE 1, CONEXION DIRECTA, MARCA HEXING | 16.00</div><details><summary>可接受的 chunk 组合</summary><div class="meta">817cfff2927c6c65-c0004</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge bad">跨文档</span> <span class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页 · 相似度 0.858</span><div class="text">6th
+Delivery
+25.09.25
+10.10.25
+10.12.25
+10.03.26
+10.05.26
+10.07.26
+
+HXE12ESX
+
+ -
+
+20,000.00
+
+20,000.00
+
+20,000.00
+
+20,000.00
+
+HXE13ESX
+
+5,000.00
+
+2,500.00
+
+2,500.00
+ -
+ -
+
+HXE33K-S1
+
+900.00
+
+500.00
+ -
+
+500.00
+ -
+
+HXE34K-S1
+
+500
+
+1,000.00
+
+500.00
+
+1,000.00
+
+500.00
+ -
+
+Meterbox
+
+ -…</div><details><summary>展开全文（291 字符）</summary><div class="text">6th
+Delivery
+25.09.25
+10.10.25
+10.12.25
+10.03.26
+10.05.26
+10.07.26
+
+HXE12ESX
+
+ -
+
+20,000.00
+
+20,000.00
+
+20,000.00
+
+20,000.00
+
+HXE13ESX
+
+5,000.00
+
+2,500.00
+
+2,500.00
+ -
+ -
+
+HXE33K-S1
+
+900.00
+
+500.00
+ -
+
+500.00
+ -
+
+HXE34K-S1
+
+500
+
+1,000.00
+
+500.00
+
+1,000.00
+
+500.00
+ -
+
+Meterbox
+
+ -
+
+10,000.00</div></details><details><summary>5883b02cd922a64f-c0007</summary><div class="meta">距离 0.141742，类型 text</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 5 页 · 相似度 0.847</span><div class="text">Prepared by: María Gallardo
+向忖
+
+Hexing Electrical Company S.A.C.
+E-mail: maria.gallardo@hxgroup.com
+
+Website: www.hxgroup.cn</div><details><summary>5a4c36e0022f4917-c0047</summary><div class="meta">距离 0.153289，类型 text</div></details></div><div class="item"><b>#3</b> <span class="badge ok">✓ 证据 e1</span> <span class="meta">E001-602.pdf · 第 1 页 · 相似度 0.845</span><div class="text">500.00
+UNIDAD
+HXE34K-S1 MEDIDOR TRIFASICO HXE34K-S1, 4HILOS, 10(100)A,
+
+3X220V, CLASE 1, CONEXION DIRECTA, MARCA HEXING
+16.00
+
+6.20
+
+10000.00
+UNIDAD
+HXPXS1
+CAJA PORTAMEDIDOR POLIMERICA MONOFASICA
+MARCA HEXING
+
+90.00</div><details><summary>817cfff2927c6c65-c0004</summary><div class="meta">距离 0.154769，类型 text</div></details></div></div></div></div><h2 id="doc-169a1f2133fe5643">ORDER PERU 24-12 ANDET.pdf</h2><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> PO-24-12-Q001 <span class="meta">· 3/3 条结果来自其他文档</span></h3><div>订单PURCHASE ORDER N° 24-12-HPE包含哪几款产品？单价、数量分别是多少？订单总金额是多少？。</div><details><summary>参考答案</summary><div class="meta">订单包含1款产品：HXF300，单价为USD 96.80，数量为10000件，总金额为USD 968,000.00。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">ORDER PERU 24-12 ANDET.pdf · 第 1 页</div><div class="text">C&amp;I Meter CI 0.2S 3&amp;4 Wires meter with modem 4G 2 pulses Model: HXF300 | Qty 10,000 | USD 96.80 | USD 968,000.00
+Total CIF (CALLAO) | USD 968,000.00</div><details><summary>可接受的 chunk 组合</summary><div class="meta">169a1f2133fe5643-c0001</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 5 页 · 相似度 0.872</span><div class="text">Prepared by: María Gallardo
+向忖
+
+Hexing Electrical Company S.A.C.
+E-mail: maria.gallardo@hxgroup.com
+
+Website: www.hxgroup.cn</div><details><summary>5a4c36e0022f4917-c0047</summary><div class="meta">距离 0.128244，类型 text</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页 · 相似度 0.871</span><div class="text">Website: www.hxgroup.cn</div><details><summary>5883b02cd922a64f-c0015</summary><div class="meta">距离 0.129391，类型 text</div></details></div><div class="item"><b>#3</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 1 页 · 相似度 0.871</span><div class="text">Website: www.hxgroup.cn</div><details><summary>5a4c36e0022f4917-c0009</summary><div class="meta">距离 0.129391，类型 text</div></details></div></div></div></div><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> PO-24-12-Q002 <span class="meta">· 3/3 条结果来自其他文档</span></h3><div>请阐述PURCHASE ORDER N° 24-12-HPE的交货时间规划。</div><details><summary>参考答案</summary><div class="meta">五批交付，每批次交付约2000件，具体交付日期待确认。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">ORDER PERU 24-12 ANDET.pdf · 第 1 页</div><div class="text">Delivery Date: To be confirmed the date, total 5 deliveries - each delivery will be approximately 2,000 units.</div><details><summary>可接受的 chunk 组合</summary><div class="meta">169a1f2133fe5643-c0004</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 5 页 · 相似度 0.860</span><div class="text">Prepared by: María Gallardo
+向忖
+
+Hexing Electrical Company S.A.C.
+E-mail: maria.gallardo@hxgroup.com
+
+Website: www.hxgroup.cn</div><details><summary>5a4c36e0022f4917-c0047</summary><div class="meta">距离 0.139987，类型 text</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 5 页 · 相似度 0.846</span><div class="text">CRONOGRAMA DE ENTREGA
+
+CANTIDAD Y CRONOGRAMA DE ENTREGAS
+1era
+ENTREG
+
+3era
+ENTREG
+
+4ta
+ENTREG
+
+5ta
+ENTREG
+
+6ta
+ENTREG
+
+UNIDAD
+
+REQUERIMI
+
+2da
+ENTREGA
+
+A
+
+A
+
+A
+
+A
+
+TEM
+DESCRIPCIÓN
+
+DE
+MEDIDA
+
+ENTO
+TOTAL
+
+A
+(A 170
+días de la
+
+(A 210
+días de la
+
+(A 330
+días de la
+
+(A 450
+días de la
+…</div><details><summary>展开全文（298 字符）</summary><div class="text">CRONOGRAMA DE ENTREGA
+
+CANTIDAD Y CRONOGRAMA DE ENTREGAS
+1era
+ENTREG
+
+3era
+ENTREG
+
+4ta
+ENTREG
+
+5ta
+ENTREG
+
+6ta
+ENTREG
+
+UNIDAD
+
+REQUERIMI
+
+2da
+ENTREGA
+
+A
+
+A
+
+A
+
+A
+
+TEM
+DESCRIPCIÓN
+
+DE
+MEDIDA
+
+ENTO
+TOTAL
+
+A
+(A 170
+días de la
+
+(A 210
+días de la
+
+(A 330
+días de la
+
+(A 450
+días de la
+
+(A 570
+días de la</div></details><details><summary>d359c37e0bc3c87a-c0077</summary><div class="meta">距离 0.153810，类型 text</div></details></div><div class="item"><b>#3</b> <span class="badge bad">跨文档</span> <span class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页 · 相似度 0.841</span><div class="text">Website: www.hxgroup.cn</div><details><summary>5883b02cd922a64f-c0015</summary><div class="meta">距离 0.159424，类型 text</div></details></div></div></div></div><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> PO-24-12-Q003 <span class="meta">· 3/3 条结果来自其他文档</span></h3><div>订单PURCHASE ORDER N° 24-12-HPE分几批交付？每批次的具体交付日期是什么？。</div><details><summary>参考答案</summary><div class="meta">分五批交付，每批次的交付日期待确认。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">ORDER PERU 24-12 ANDET.pdf · 第 1 页</div><div class="text">Delivery Date: To be confirmed the date, total 5 deliveries - each delivery will be approximately 2,000 units.</div><details><summary>可接受的 chunk 组合</summary><div class="meta">169a1f2133fe5643-c0004</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 5 页 · 相似度 0.869</span><div class="text">Prepared by: María Gallardo
+向忖
+
+Hexing Electrical Company S.A.C.
+E-mail: maria.gallardo@hxgroup.com
+
+Website: www.hxgroup.cn</div><details><summary>5a4c36e0022f4917-c0047</summary><div class="meta">距离 0.131137，类型 text</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页 · 相似度 0.864</span><div class="text">Website: www.hxgroup.cn</div><details><summary>5883b02cd922a64f-c0015</summary><div class="meta">距离 0.136138，类型 text</div></details></div><div class="item"><b>#3</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 1 页 · 相似度 0.864</span><div class="text">Website: www.hxgroup.cn</div><details><summary>5a4c36e0022f4917-c0009</summary><div class="meta">距离 0.136138，类型 text</div></details></div></div></div></div><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> PO-24-12-Q004 <span class="meta">· 3/3 条结果来自其他文档</span></h3><div>订单PURCHASE ORDER N° 24-12-HPE的总金额是否涵盖MDC ORCA的费用？如不包含，还需额外支付多少费用？付款的最后期限是什么？</div><details><summary>参考答案</summary><div class="meta">订单总金额不包含 MDC ORCA 的费用；MDC ORCA 需额外一次性支付 USD 10,000.00，付款截止日为 2026 年 8 月 1 日。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">ORDER PERU 24-12 ANDET.pdf · 第 1 页</div><div class="text">MDC ORCA: 10,000.00 USD (one-time purchase), payment due: August 1st, 2026</div><details><summary>可接受的 chunk 组合</summary><div class="meta">169a1f2133fe5643-c0006</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 5 页 · 相似度 0.860</span><div class="text">Prepared by: María Gallardo
+向忖
+
+Hexing Electrical Company S.A.C.
+E-mail: maria.gallardo@hxgroup.com
+
+Website: www.hxgroup.cn</div><details><summary>5a4c36e0022f4917-c0047</summary><div class="meta">距离 0.140177，类型 text</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页 · 相似度 0.855</span><div class="text">6th
+Delivery
+25.09.25
+10.10.25
+10.12.25
+10.03.26
+10.05.26
+10.07.26
+
+HXE12ESX
+
+ -
+
+20,000.00
+
+20,000.00
+
+20,000.00
+
+20,000.00
+
+HXE13ESX
+
+5,000.00
+
+2,500.00
+
+2,500.00
+ -
+ -
+
+HXE33K-S1
+
+900.00
+
+500.00
+ -
+
+500.00
+ -
+
+HXE34K-S1
+
+500
+
+1,000.00
+
+500.00
+
+1,000.00
+
+500.00
+ -
+
+Meterbox
+
+ -…</div><details><summary>展开全文（291 字符）</summary><div class="text">6th
+Delivery
+25.09.25
+10.10.25
+10.12.25
+10.03.26
+10.05.26
+10.07.26
+
+HXE12ESX
+
+ -
+
+20,000.00
+
+20,000.00
+
+20,000.00
+
+20,000.00
+
+HXE13ESX
+
+5,000.00
+
+2,500.00
+
+2,500.00
+ -
+ -
+
+HXE33K-S1
+
+900.00
+
+500.00
+ -
+
+500.00
+ -
+
+HXE34K-S1
+
+500
+
+1,000.00
+
+500.00
+
+1,000.00
+
+500.00
+ -
+
+Meterbox
+
+ -
+
+10,000.00</div></details><details><summary>5883b02cd922a64f-c0007</summary><div class="meta">距离 0.145458，类型 text</div></details></div><div class="item"><b>#3</b> <span class="badge bad">跨文档</span> <span class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页 · 相似度 0.853</span><div class="text">Website: www.hxgroup.cn</div><details><summary>5883b02cd922a64f-c0015</summary><div class="meta">距离 0.146780，类型 text</div></details></div></div></div></div><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> PO-24-12-Q005 <span class="meta">· 3/3 条结果来自其他文档</span></h3><div>订单PURCHASE ORDER N° 24-12-HPE的运维服务如何收费？</div><details><summary>参考答案</summary><div class="meta">前两年免费，时间从2025年8月1日至2027年8月1日。之后需在2027年8月2日之前根据连接的电表数量付费，连接的电表数小于2500只，价格为5500 USD;连接的电表数在2500只至5000只之间，价格为7000 USD；连接的电表数在5001只至12000只之间，价格为10000 USD;连接的电表数在12001只至30000只之间，价格为15000 USD。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">ORDER PERU 24-12 ANDET.pdf · 第 1 页</div><div class="text">Operation and Maintenance Service, 2 years free (from August 1st, 2025 to August 1st 2027), payment due for the service: August 2nd 2027.
+Meters connected ≤ 2500: 5500 USD
+Meters connected 2501-5000: 7000 USD
+Meters connected 5001-12000: 10000 USD
+Meters connected 12001-30000: 15000 USD</div><details><summary>可接受的 chunk 组合</summary><div class="meta">169a1f2133fe5643-c0006 + 169a1f2133fe5643-c0007</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 5 页 · 相似度 0.854</span><div class="text">Prepared by: María Gallardo
+向忖
+
+Hexing Electrical Company S.A.C.
+E-mail: maria.gallardo@hxgroup.com
+
+Website: www.hxgroup.cn</div><details><summary>5a4c36e0022f4917-c0047</summary><div class="meta">距离 0.145828，类型 text</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页 · 相似度 0.854</span><div class="text">Website: www.hxgroup.cn</div><details><summary>5883b02cd922a64f-c0015</summary><div class="meta">距离 0.146375，类型 text</div></details></div><div class="item"><b>#3</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 1 页 · 相似度 0.854</span><div class="text">Website: www.hxgroup.cn</div><details><summary>5a4c36e0022f4917-c0009</summary><div class="meta">距离 0.146375，类型 text</div></details></div></div></div></div><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> PO-24-12-Q006 <span class="meta">· 3/3 条结果来自其他文档</span></h3><div>订单PURCHASE ORDER N° 24-12-HPE的付款条件是什么？</div><details><summary>参考答案</summary><div class="meta">按批次付款，每批次在提单日后120天内100%银行支票付款。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">ORDER PERU 24-12 ANDET.pdf · 第 2 页</div><div class="text">Bank check payable at 100% within 120 days counted from the B/L date. (for each batch)</div><details><summary>可接受的 chunk 组合</summary><div class="meta">169a1f2133fe5643-c0015</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 5 页 · 相似度 0.861</span><div class="text">Prepared by: María Gallardo
+向忖
+
+Hexing Electrical Company S.A.C.
+E-mail: maria.gallardo@hxgroup.com
+
+Website: www.hxgroup.cn</div><details><summary>5a4c36e0022f4917-c0047</summary><div class="meta">距离 0.138613，类型 text</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页 · 相似度 0.856</span><div class="text">Website: www.hxgroup.cn</div><details><summary>5883b02cd922a64f-c0015</summary><div class="meta">距离 0.144434，类型 text</div></details></div><div class="item"><b>#3</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 1 页 · 相似度 0.856</span><div class="text">Website: www.hxgroup.cn</div><details><summary>5a4c36e0022f4917-c0009</summary><div class="meta">距离 0.144434，类型 text</div></details></div></div></div></div><h2 id="doc-5883b02cd922a64f">ORDER PERU 25-15 ANDET VF.pdf</h2><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> PO-25-15-Q001 <span class="meta">· 2/3 条结果来自其他文档</span></h3><div>订单PURCHASE ORDER N° 25-15-HPE中，第四批次交付的具体日期是什么？交付的产品总金额达多少？</div><details><summary>参考答案</summary><div class="meta">第四批次交付的具体日期为2026年3月10日，交付的产品总金额为USD 188030.00。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 1 页</div><div class="text">HXE12ES | Qty 80,000 | USD 5.28
+HXE13ES | Qty 10,000 | USD 5.50
+HXE33K-S1 | Qty 1,900 | USD 13.64
+HXE34K-S1 | Qty 3,500 | USD 14.08
+HXPXS1 | Qty 40,000 | USD 5.46
+HXF300 | Qty 1,500 | USD 79.20</div><details><summary>可接受的 chunk 组合</summary><div class="meta">5883b02cd922a64f-c0001 + 5883b02cd922a64f-c0002</div></details></div><div class="item"><b>证据 e2</b> <span class="badge bad">未覆盖</span> <div class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页</div><div class="text">4th Delivery | 10.03.26
+HXE12ESX 20,000.00 | HXE13ESX 2,500.00 | HXE33K-S1 - | HXE34K-S1 1,000.00 | Meterbox 10,000.00 | HXF300 -</div><details><summary>可接受的 chunk 组合</summary><div class="meta">5883b02cd922a64f-c0007 + 5883b02cd922a64f-c0008</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 5 页 · 相似度 0.875</span><div class="text">Prepared by: María Gallardo
+向忖
+
+Hexing Electrical Company S.A.C.
+E-mail: maria.gallardo@hxgroup.com
+
+Website: www.hxgroup.cn</div><details><summary>5a4c36e0022f4917-c0047</summary><div class="meta">距离 0.124799，类型 text</div></details></div><div class="item"><b>#2</b> <span class="badge ">非证据</span> <span class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页 · 相似度 0.869</span><div class="text">Website: www.hxgroup.cn</div><details><summary>5883b02cd922a64f-c0015</summary><div class="meta">距离 0.131133，类型 text</div></details></div><div class="item"><b>#3</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 1 页 · 相似度 0.869</span><div class="text">Website: www.hxgroup.cn</div><details><summary>5a4c36e0022f4917-c0009</summary><div class="meta">距离 0.131133，类型 text</div></details></div></div></div></div><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> PO-25-15-Q002 <span class="meta">· 2/3 条结果来自其他文档</span></h3><div>订单PURCHASE ORDER N° 25-15-HPE中，第六批次交付的具体日期是什么？交付的产品总金额达多少？</div><details><summary>参考答案</summary><div class="meta">第六批次交付的具体日期为2026年7月10日，交付的产品总金额为USD 160200.00。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 1 页</div><div class="text">HXE12ES | Qty 80,000 | USD 5.28
+HXE13ES | Qty 10,000 | USD 5.50
+HXE33K-S1 | Qty 1,900 | USD 13.64
+HXE34K-S1 | Qty 3,500 | USD 14.08
+HXPXS1 | Qty 40,000 | USD 5.46
+HXF300 | Qty 1,500 | USD 79.20</div><details><summary>可接受的 chunk 组合</summary><div class="meta">5883b02cd922a64f-c0001 + 5883b02cd922a64f-c0002</div></details></div><div class="item"><b>证据 e2</b> <span class="badge bad">未覆盖</span> <div class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页</div><div class="text">6th Delivery | 10.07.26
+HXE12ESX 20,000.00 | HXE13ESX - | HXE33K-S1 - | HXE34K-S1 - | Meterbox 10,000.00 | HXF300 -</div><details><summary>可接受的 chunk 组合</summary><div class="meta">5883b02cd922a64f-c0007 + 5883b02cd922a64f-c0008</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 5 页 · 相似度 0.876</span><div class="text">Prepared by: María Gallardo
+向忖
+
+Hexing Electrical Company S.A.C.
+E-mail: maria.gallardo@hxgroup.com
+
+Website: www.hxgroup.cn</div><details><summary>5a4c36e0022f4917-c0047</summary><div class="meta">距离 0.124072，类型 text</div></details></div><div class="item"><b>#2</b> <span class="badge ">非证据</span> <span class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页 · 相似度 0.871</span><div class="text">Website: www.hxgroup.cn</div><details><summary>5883b02cd922a64f-c0015</summary><div class="meta">距离 0.129022，类型 text</div></details></div><div class="item"><b>#3</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 1 页 · 相似度 0.871</span><div class="text">Website: www.hxgroup.cn</div><details><summary>5a4c36e0022f4917-c0009</summary><div class="meta">距离 0.129022，类型 text</div></details></div></div></div></div><h2 id="doc-5a4c36e0022f4917">签字-ORDER PERU 25-19 FONAFE.pdf</h2><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> PO-25-19-Q001 <span class="meta">· 1/3 条结果来自其他文档</span></h3><div>订单PURCHASE ORDER N° 25-19-HPE中，ELCTO公司订购了哪些产品？每款产品的单价和数量是多少？订购的总金额是是多少？交货的计划是怎么样的？请详细说明每批次交付的具体日期，及每批次交付的产品和数量明细。</div><details><summary>参考答案</summary><div class="meta">ELCTO总共订购了两款产品：HXE12ES和HXE13ES。HXE12ES的单价为USD 4.56，数量总共116000件；HXE13ES的单价为USD 5.08，数量总共94000件。订购的总金额为USD 1006480.00。交货计划分为六批次：第一批次交付日期为2026年2月28日，交付HXE12ES 19330件和HXE13ES 16000件；第二批次交付日期为2026年4月9日，交付HXE12ES 19330件和HXE13ES 16000件；第三批次交付日期为2026年8月7日，交付HXE12ES 19330件和HXE13ES 15500件；第四批次交付日期为2026年12月5日，交付HXE12ES 19330件和HXE13ES 15500件；第五批次交付日期为2027年4月4日，交付HXE12ES 19330件和HXE13ES 15500件；第六批次交付日期为2027年8月2日，交付HXE12ES 19350件和HXE13ES 15500件。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 1 页</div><div class="text">HXE12ES | 1´131,056.00 | USD 4.56
+HXE13ES | 109,130.00 | USD 5.08
+HXE33K-S1 | 8,368.00 | USD 13.49
+HXE34K-S1 | 45,938.00 | USD 14.37</div><details><summary>可接受的 chunk 组合</summary><div class="meta">5a4c36e0022f4917-c0002</div></details></div><div class="item"><b>证据 e2</b> <span class="badge bad">未覆盖</span> <div class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页</div><div class="text">ELCTO | HXE12ES | TOTAL 116,000 | 19,330 | 19,330 | 19,330 | 19,330 | 19,330 | 19,350
+ELCTO | HXE13ES | TOTAL 94,000 | 16,000 | 16,000 | 15,500 | 15,500 | 15,500 | 15,500</div><details><summary>可接受的 chunk 组合</summary><div class="meta">5a4c36e0022f4917-c0013 + 5a4c36e0022f4917-c0017</div></details></div><div class="item"><b>证据 e3</b> <span class="badge bad">未覆盖</span> <div class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 3 页</div><div class="text">1ST DELIVERY 28/02/2026
+2ND DELIVERY 09/04/2026
+3RD DELIVERY 07/08/2026
+4TH DELIVERY 05/12/2026
+5TH DELIVERY 04/04/2027
+6TH DELIVERY 02/08/2027</div><details><summary>可接受的 chunk 组合</summary><div class="meta">5a4c36e0022f4917-c0024</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge ">非证据</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 5 页 · 相似度 0.876</span><div class="text">Prepared by: María Gallardo
+向忖
+
+Hexing Electrical Company S.A.C.
+E-mail: maria.gallardo@hxgroup.com
+
+Website: www.hxgroup.cn</div><details><summary>5a4c36e0022f4917-c0047</summary><div class="meta">距离 0.124329，类型 text</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页 · 相似度 0.866</span><div class="text">Website: www.hxgroup.cn</div><details><summary>5883b02cd922a64f-c0015</summary><div class="meta">距离 0.134137，类型 text</div></details></div><div class="item"><b>#3</b> <span class="badge ">非证据</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 1 页 · 相似度 0.866</span><div class="text">Website: www.hxgroup.cn</div><details><summary>5a4c36e0022f4917-c0009</summary><div class="meta">距离 0.134137，类型 text</div></details></div></div></div></div><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> PO-25-19-Q002 <span class="meta">· 1/3 条结果来自其他文档</span></h3><div>订单PURCHASE ORDER N° 25-19-HPE中，ElUC公司订购了多少件HXE34K-S1？总金额是多少？</div><details><summary>参考答案</summary><div class="meta">ELUC订购了2000件HXE34K-S1，总金额为USD 28740.00。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 1 页</div><div class="text">Three Phase 04 Wires meter Model: HXE34K-S1 | Unit price USD 14.37</div><details><summary>可接受的 chunk 组合</summary><div class="meta">5a4c36e0022f4917-c0003</div></details></div><div class="item"><b>证据 e2</b> <span class="badge bad">未覆盖</span> <div class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 3 页</div><div class="text">ELUC | HXE34K-S1 | TOTAL 2,000 | 1st Delivery 1,000 | 4th Delivery 1,000</div><details><summary>可接受的 chunk 组合</summary><div class="meta">5a4c36e0022f4917-c0021</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge ">非证据</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 5 页 · 相似度 0.872</span><div class="text">Prepared by: María Gallardo
+向忖
+
+Hexing Electrical Company S.A.C.
+E-mail: maria.gallardo@hxgroup.com
+
+Website: www.hxgroup.cn</div><details><summary>5a4c36e0022f4917-c0047</summary><div class="meta">距离 0.127534，类型 text</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页 · 相似度 0.868</span><div class="text">Website: www.hxgroup.cn</div><details><summary>5883b02cd922a64f-c0015</summary><div class="meta">距离 0.132281，类型 text</div></details></div><div class="item"><b>#3</b> <span class="badge ">非证据</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 1 页 · 相似度 0.868</span><div class="text">Website: www.hxgroup.cn</div><details><summary>5a4c36e0022f4917-c0009</summary><div class="meta">距离 0.132281，类型 text</div></details></div></div></div></div><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> PO-25-19-Q003 <span class="meta">· 1/3 条结果来自其他文档</span></h3><div>订单PURCHASE ORDER N° 25-19-HPE中，ENSA公司订购了哪些产品？每款产品的单价和数量是多少？订购的总金额是是多少？交货的计划是怎么样的？请详细说明每批次交付的具体日期，及每批次交付的产品和数量明细。</div><details><summary>参考答案</summary><div class="meta">ENSA总共订购了四款产品：HXE12ES、HXE13ES、HXE33K-S1和HXE34K-S1。HXE12ES的单价为USD 4.56，数量总共132180件；HXE13ES的单价为USD 5.08，数量总共9910件；HXE33K-S1的单价为USD 13.49，数量总共5018件；HXE34K-S1的单价为USD 14.37，数量总共10804件。订购的总金额为USD 876029.90。交货计划分为六批次：第一批次交付日期为2026年2月28日，交付HXE12ES 24330件、HXE13ES 1810件、HXE33K-S1 1153件和HXE34K-S1 2234件；第二批次交付日期为2026年4月9日，交付HXE12ES 23630件、HXE13ES 1710件、HXE33K-S1 853件和HXE34K-S1 1734件；第三批次交付日期为2026年8月7日，交付HXE12ES 21880件、HXE13ES 1710件、HXE33K-S1 753件和HXE34K-S1 1734件；第四批次交付日期为2026年12月5日，交付HXE12ES 21680件、HXE13ES 1610件、HXE33K-S1 753件和HXE34K-S1 1734件；第五批次交付日期为2027年4月4日，交付HXE12ES 20480件、HXE13ES 1560件、HXE33K-S1 753件和HXE34K-S1 1734件；第六批次交付日期为2027年8月2日，交付HXE12ES 20180件、HXE13ES 1510件、HXE33K-S1 753件和HXE34K-S1 1634件。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 1 页</div><div class="text">HXE12ES | USD 4.56
+HXE13ES | USD 5.08
+HXE33K-S1 | USD 13.49
+HXE34K-S1 | USD 14.37</div><details><summary>可接受的 chunk 组合</summary><div class="meta">5a4c36e0022f4917-c0002 + 5a4c36e0022f4917-c0003</div></details></div><div class="item"><b>证据 e2</b> <span class="badge bad">未覆盖</span> <div class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页</div><div class="text">ENSA | HXE12ES | TOTAL 132,180 | 24,330 | 23,630 | 21,880 | 21,680 | 20,480 | 20,180
+ENSA | HXE13ES | TOTAL 9,910 | 1,810 | 1,710 | 1,710 | 1,610 | 1,560 | 1,510
+ENSA | HXE33K-S1 | TOTAL 5,018 | 1,153 | 853 | 753 | 753 | 753 | 753</div><details><summary>可接受的 chunk 组合</summary><div class="meta">5a4c36e0022f4917-c0014 + 5a4c36e0022f4917-c0017 + 5a4c36e0022f4917-c0018</div></details></div><div class="item"><b>证据 e3</b> <span class="badge bad">未覆盖</span> <div class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 3 页</div><div class="text">ENSA | HXE34K-S1 | TOTAL 10,804 | 2,234 | 1,734 | 1,734 | 1,734 | 1,734 | 1,634</div><details><summary>可接受的 chunk 组合</summary><div class="meta">5a4c36e0022f4917-c0021</div></details></div><div class="item"><b>证据 e4</b> <span class="badge bad">未覆盖</span> <div class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 3 页</div><div class="text">1ST DELIVERY 28/02/2026
+2ND DELIVERY 09/04/2026
+3RD DELIVERY 07/08/2026
+4TH DELIVERY 05/12/2026
+5TH DELIVERY 04/04/2027
+6TH DELIVERY 02/08/2027</div><details><summary>可接受的 chunk 组合</summary><div class="meta">5a4c36e0022f4917-c0024</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge ">非证据</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 5 页 · 相似度 0.881</span><div class="text">Prepared by: María Gallardo
+向忖
+
+Hexing Electrical Company S.A.C.
+E-mail: maria.gallardo@hxgroup.com
+
+Website: www.hxgroup.cn</div><details><summary>5a4c36e0022f4917-c0047</summary><div class="meta">距离 0.119140，类型 text</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页 · 相似度 0.866</span><div class="text">Website: www.hxgroup.cn</div><details><summary>5883b02cd922a64f-c0015</summary><div class="meta">距离 0.134348，类型 text</div></details></div><div class="item"><b>#3</b> <span class="badge ">非证据</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 1 页 · 相似度 0.866</span><div class="text">Website: www.hxgroup.cn</div><details><summary>5a4c36e0022f4917-c0009</summary><div class="meta">距离 0.134348，类型 text</div></details></div></div></div></div><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> PO-25-19-Q004 <span class="meta">· 1/3 条结果来自其他文档</span></h3><div>订单PURCHASE ORDER N° 25-19-HPE，客户的付款条件是什么？</div><details><summary>参考答案</summary><div class="meta">货款将在货物在客户仓库被验收后30天内被支付。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 3 页</div><div class="text">Customer´s Payment Terms: Payment will be done 30 days after the acceptance of the goods in customer´s warehouse.</div><details><summary>可接受的 chunk 组合</summary><div class="meta">5a4c36e0022f4917-c0027</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge ">非证据</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 5 页 · 相似度 0.873</span><div class="text">Prepared by: María Gallardo
+向忖
+
+Hexing Electrical Company S.A.C.
+E-mail: maria.gallardo@hxgroup.com
+
+Website: www.hxgroup.cn</div><details><summary>5a4c36e0022f4917-c0047</summary><div class="meta">距离 0.126630，类型 text</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页 · 相似度 0.869</span><div class="text">Website: www.hxgroup.cn</div><details><summary>5883b02cd922a64f-c0015</summary><div class="meta">距离 0.131153，类型 text</div></details></div><div class="item"><b>#3</b> <span class="badge ">非证据</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 1 页 · 相似度 0.869</span><div class="text">Website: www.hxgroup.cn</div><details><summary>5a4c36e0022f4917-c0009</summary><div class="meta">距离 0.131153，类型 text</div></details></div></div></div></div><div class="meta">指标定义见 docs/rules/evaluation.md；原始数据见同目录 result.json。</div></main><script>
+document.querySelectorAll('.filters').forEach(function(bar){
+  bar.addEventListener('click',function(e){
+    var b=e.target.closest('button');if(!b)return;
+    bar.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)});
+    var tag=b.dataset.tag;
+    document.querySelectorAll('[data-tags]').forEach(function(el){
+      el.classList.toggle('hidden',tag!=='all'&&el.dataset.tags.split(' ').indexOf(tag)<0);
+    });
+  });
+});
+</script></body></html>
