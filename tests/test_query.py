@@ -14,10 +14,10 @@ class TieStore:
         self.distances = distances
         self.requests: list[int] = []
 
-    def count(self, document_id=None):
+    def count(self, document_ids=None):
         return len(self.distances)
 
-    def query(self, vector, n, document_id=None):
+    def query(self, vector, n, document_ids=None):
         self.requests.append(n)
         ranked = sorted(self.distances.items(), key=lambda kv: (kv[1], -int(kv[0][1:])))
         return [VectorHit(chunk(cid), d) for cid, d in ranked[:n]]
