@@ -9,10 +9,8 @@ __pycache__/
 *.egg-info/
 dist/
 build/
-AGENTS.md
 CLAUDE.md
 /tmp/
 /.mcp.json
 /debug.log
-/validation/retrieval/system-v2.0/.work/
 /reports/ingest/

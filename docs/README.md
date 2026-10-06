@@ -6,11 +6,12 @@
 | [design.md](design.md) | 数据怎么流动、哪些环节可替换、索引怎么保证一致、关键取舍 | 读前两节；其余供实现和面试复盘 |
 | [rules/](rules/) | 表格选优、表头判定、表格文本化、分块、评估指标等算法细则 | 只看每份开头的"规则摘要" |
 | [decisions/](decisions/) | 重要决策的背景、选项和结论 | 新增决策时看 |
-| [changes/](changes/) | 每次迭代的提案：改什么、不改什么、怎么验收、需要你拍板的问题 | **主要审核入口** |
-| [archive/history.md](archive/history.md) | 各版本的演进和检索指标基线 | 需要时 |
+| [changes/](changes/) | 正在进行的迭代提案：改什么、不改什么、怎么验收、需要你拍板的问题。为空表示当前没有进行中的迭代 | **主要审核入口** |
+| [archive/](archive/) | `history.md`：各版本演进与指标基线；`changes/`：已完成迭代的提案与实施记录 | 需要时 |
 
 约定：
 
-- `overview.md`、`design.md`、`rules/` 只描述**当前系统**，随实现更新；变化过程记录在 `changes/` 和 git 历史中。
+- `overview.md`、`design.md`、`rules/` 只描述**当前系统**，随实现更新。
+- 迭代收尾时，提案中有长期价值的内容融入上述现行文档，提案本身移入 `archive/changes/`；`decisions/` 长期有效，只有被新决策取代时才标注"已被取代"。
 - 字段、枚举和异常处理的细节以代码中的类型定义和测试为准，不写进文档。
 - 给人看的运行结果在 `reports/`（入口 `reports/index.html`），不在 `docs/`。
