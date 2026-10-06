@@ -12,7 +12,7 @@ from rag.eval.judge import GroupEvidence, Mappings, chunk_key, judge_case
 from rag.eval.metrics import METRICS, QuestionScore, aggregate, score_question
 from rag.index.builder import current_status, open_store
 from rag.index.store import VectorHit
-from rag.jsonio import read_json, write_json
+from rag.jsonio import write_json
 from rag.paths import Workspace
 from rag.query.retriever import SemanticRetriever
 from rag.query.scope import SearchScope, load_catalog, resolve_scope
@@ -41,8 +41,14 @@ class CaseResult:
                 and set(self.scope.document_ids or ()) == self.evidence_documents)
 
 
-def _run_folder(workspace: Workspace, config_name: str, top_k: int) -> Path:
-    base = workspace.eval_reports() / f"{datetime.now():%Y-%m-%d}_{config_name}_k{top_k}"
+def run_name(config_name: str, top_k: int, document_filter: bool) -> str:
+    """Folder name: date, config, K and filter state, so a run reads without opening it."""
+    state = "filter-on" if document_filter else "filter-off"
+    return f"{datetime.now():%Y-%m-%d}_{config_name}_k{top_k}_{state}"
+
+
+def _run_folder(workspace: Workspace, name: str) -> Path:
+    base = workspace.eval_reports() / name
     folder, n = base, 1
     while folder.exists():
         n += 1
@@ -54,17 +60,6 @@ def _metrics_dict(scores: list[QuestionScore]) -> dict[str, Any]:
     ratios = aggregate(scores)
     return {key: {"value": ratios[key].value, "numerator": ratios[key].numerator,
                   "denominator": ratios[key].denominator} for key, _, _ in METRICS}
-
-
-def previous_run(workspace: Workspace, config_name: str, top_k: int,
-                 before: Path | None = None) -> dict[str, Any] | None:
-    """Latest earlier run of the same config and K, used for the 'change since last run' line."""
-    folder = workspace.eval_reports()
-    if not folder.is_dir():
-        return None
-    runs = sorted(p for p in folder.glob(f"*_{config_name}_k{top_k}*")
-                  if (p / "result.json").is_file() and p != before)
-    return read_json(runs[-1] / "result.json") if runs else None
 
 
 def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int, *,
@@ -113,7 +108,7 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int, *,
                                      [chunk_key(by_id[c].document_id, by_id[c].text) for c in chunk_set])
         mappings.save()
 
-    folder = _run_folder(workspace, assembly.name, top_k)
+    folder = _run_folder(workspace, run_name(assembly.name, top_k, enabled))
     names = {doc_id: source.document_name for doc_id, source in sources.items()}
     scored = [r.score for r in results if r.score is not None]
     per_document: dict[str, Any] = {}
@@ -139,8 +134,8 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int, *,
         "cases": [_case_json(r, names) for r in results],
     }
     write_json(folder / "result.json", result)
-    from rag.reports.evaluation import write_eval_report
-    write_eval_report(workspace, folder, result, previous_run(workspace, assembly.name, top_k, folder))
+    from rag.reports.evaluation import latest_before, write_eval_report
+    write_eval_report(workspace, folder, result, latest_before(workspace, result))
     return folder
 
 

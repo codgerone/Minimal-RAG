@@ -66,6 +66,12 @@ def _scope_html(case: dict[str, Any]) -> str:
     return f'<div class="meta">检索范围：{target} {verdict}</div>'
 
 
+def filter_state(result: dict[str, Any]) -> str:
+    """开启 / 关闭; runs from before the filter existed searched the whole index."""
+    summary = result.get("document_scope")
+    return "开启" if summary and summary["enabled"] else "关闭"
+
+
 def _scope_tile(result: dict[str, Any]) -> str:
     summary = result.get("document_scope")
     if not summary:
@@ -150,7 +156,8 @@ def render(result: dict[str, Any], previous: dict[str, Any] | None) -> str:
     settings = result["build_settings"]
     body = (f'<h1>检索评估 · {esc(result["config"])} · K={result["top_k"]}</h1>'
             f'<div class="sub">{esc(result["created_at"])} · {result["dataset"]["answerable"]} 道可回答问题'
-            f'（数据集 {esc(result["dataset"]["version"])}）· 构建指纹 {esc(result["fingerprint"][:12])}</div>'
+            f'（数据集 {esc(result["dataset"]["version"])}）· 文档过滤{filter_state(result)}'
+            f' · 构建指纹 {esc(result["fingerprint"][:12])}</div>'
             f'<div class="tiles">{tiles}</div>{notice_html}'
             f'<h2>按文档</h2>{doc_table}'
             f'<details><summary>本次使用的构建配置</summary><pre>{esc(_pretty(settings))}</pre></details>'
@@ -178,13 +185,16 @@ def rerender_all(workspace: Workspace) -> int:
     count = 0
     for path in sorted(folder.glob("*/result.json")) if folder.is_dir() else []:
         result = read_json(path)
-        write_eval_report(workspace, path.parent, result, _latest_before(workspace, result))
+        write_eval_report(workspace, path.parent, result, latest_before(workspace, result))
         count += 1
     return count
 
 
-def _latest_before(workspace: Workspace, result: dict[str, Any]) -> dict[str, Any] | None:
+def latest_before(workspace: Workspace, result: dict[str, Any]) -> dict[str, Any] | None:
+    """Latest earlier run with the same config and K, for the 'change since last run' line."""
     from rag.jsonio import read_json
-    runs = [read_json(p) for p in workspace.eval_reports().glob(f"*_{result['config']}_k{result['top_k']}*/result.json")]
-    earlier = [r for r in runs if r["created_at"] < result["created_at"]]
+    folder = workspace.eval_reports()
+    runs = [read_json(p) for p in folder.glob("*/result.json")] if folder.is_dir() else []
+    earlier = [r for r in runs if r["config"] == result["config"] and r["top_k"] == result["top_k"]
+               and r["created_at"] < result["created_at"]]
     return max(earlier, key=lambda r: r["created_at"]) if earlier else None
