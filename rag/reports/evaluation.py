@@ -48,6 +48,38 @@ def _group_html(group: dict[str, Any]) -> str:
             f'</details></div>')
 
 
+SCOPE_REASONS = {"unidentified": "问题中未识别出已登记的标识编码", "no_catalog": "未配置文档标识表",
+                 "disabled": "文档过滤已关闭"}
+
+
+def _scope_html(case: dict[str, Any]) -> str:
+    scope = case.get("scope")
+    if not scope:
+        return ""
+    if scope["kind"] == "identified":
+        verdict = (badge("✓ 识别正确", "ok") if scope["identified_correctly"]
+                   else badge("✗ 与证据文档不一致", "bad"))
+        target = f'按标识编码 {esc("、".join(scope["codes"]))} → {esc("、".join(scope["document_names"]))}'
+    else:
+        verdict = badge("未限定", "warn" if scope["kind"] == "unidentified" else "")
+        target = f'全库（{esc(SCOPE_REASONS.get(scope["kind"], scope["kind"]))}）'
+    return f'<div class="meta">检索范围：{target} {verdict}</div>'
+
+
+def _scope_tile(result: dict[str, Any]) -> str:
+    summary = result.get("document_scope")
+    if not summary:
+        return ""
+    if not summary["enabled"]:
+        return '<div class="tile"><div class="k">文档识别</div><div class="v">关闭</div><div class="d same">未按标识编码过滤</div></div>'
+    ratio = summary["identified_correctly"]
+    value = ratio["numerator"] / ratio["denominator"] if ratio["denominator"] else None
+    note = (f'{ratio["numerator"]}/{ratio["denominator"]} 题' if summary["catalog"]
+            else "未配置文档标识表")
+    return (f'<div class="tile"><div class="k">文档识别准确率</div><div class="v">{pct(value)}</div>'
+            f'<div class="d same">{note}</div></div>')
+
+
 def _hit_html(hit: dict[str, Any], groups: list[dict[str, Any]]) -> str:
     matched = [g["group_id"] for g in groups if any(hit["chunk_id"] in s for s in g["acceptable_sets"])]
     mark = (badge("✓ 证据 " + "、".join(matched), "ok") if hit["relevant"]
@@ -65,7 +97,7 @@ def render(result: dict[str, Any], previous: dict[str, Any] | None) -> str:
         f'<div class="tile"><div class="k">{esc(label)}</div><div class="v">{pct(metrics[key]["value"])}</div>'
         + _delta(key, metrics[key]["value"],
                  previous["metrics"][key]["value"] if previous else None, better_up) + "</div>"
-        for key, label, better_up in METRICS)
+        for key, label, better_up in METRICS) + _scope_tile(result)
     cases = result["cases"]
     statuses = [_case_status(c) for c in cases]
     modes = result["evidence_modes"]
@@ -87,25 +119,29 @@ def render(result: dict[str, Any], previous: dict[str, Any] | None) -> str:
                  + f"</tr>{doc_rows}</table></div>")
     has_cross = [any(h["cross_document"] for h in c["hits"]) for c in cases]
     has_auto = [any(g["mode"] != "confirmed" for g in c["groups"]) for c in cases]
+    scope_off = [bool(c.get("scope")) and c["answerable"] and c["scope"]["kind"] != "disabled"
+                 and not c["scope"]["identified_correctly"] for c in cases]
     bar = filters([("all", "全部", len(cases)),
                    ("miss", "未命中", sum(s[0] == "miss" for s in statuses)),
                    ("partial", "部分覆盖", sum(s[0] == "partial" for s in statuses)),
                    ("complete", "完整覆盖", sum(s[0] == "complete" for s in statuses)),
                    ("cross", "有跨文档结果", sum(has_cross)),
-                   ("auto", "含自动判定", sum(has_auto))])
+                   ("auto", "含自动判定", sum(has_auto))]
+                  + ([("scope", "文档识别有误", sum(scope_off))] if any(scope_off) else []))
     blocks = []
     current_doc = None
-    for case, (tag, label, kind), cross, auto in zip(cases, statuses, has_cross, has_auto):
+    for case, (tag, label, kind), cross, auto, off in zip(cases, statuses, has_cross, has_auto, scope_off):
         if case["document_id"] != current_doc:
             current_doc = case["document_id"]
             blocks.append(f'<h2 id="doc-{esc(current_doc)}">{esc(case["document_name"])}</h2>')
-        tags = " ".join(["all", tag] + (["cross"] if cross else []) + (["auto"] if auto else []))
+        tags = " ".join(["all", tag] + (["cross"] if cross else []) + (["auto"] if auto else [])
+                        + (["scope"] if off else []))
         cross_count = sum(h["cross_document"] for h in case["hits"])
         cross_note = (f' <span class="meta">· {cross_count}/{len(case["hits"])} 条结果来自其他文档</span>'
                       if cross_count else "")
         blocks.append(
             f'<div class="card" data-tags="{tags}"><h3>{badge(label, kind)} {esc(case["case_id"])}{cross_note}</h3>'
-            f'<div>{esc(case["question"])}</div>'
+            f'<div>{esc(case["question"])}</div>{_scope_html(case)}'
             f'<details><summary>参考答案</summary><div class="meta">{esc(case["reference_answer"])}</div></details>'
             f'<div class="cols"><div><h3>标准证据</h3>{"".join(_group_html(g) for g in case["groups"])}</div>'
             f'<div><h3>实际检索 Top-{result["top_k"]}</h3>'
