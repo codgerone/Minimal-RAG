@@ -277,6 +277,12 @@ def _eval(workspace: Workspace, args: argparse.Namespace) -> int:
                        ("group_recall", "证据组召回"), ("mrr", "MRR"),
                        ("chunk_precision", "Chunk 精确率"), ("cross_document", "跨文档污染")):
         _out(f"  {label}：{metrics[key]['value']:.2%}")
+    scope = result["document_scope"]
+    if scope["enabled"] and scope["catalog"]:
+        ratio = scope["identified_correctly"]
+        _out(f"  文档识别准确率：{ratio['numerator']}/{ratio['denominator']}")
+    else:
+        _out("  文档过滤：" + ("已关闭" if not scope["enabled"] else "未配置文档标识表，全库检索"))
     if modes["auto"] or modes["unmapped"]:
         note = "（已写入 eval/mappings.json）" if args.confirm_auto else "，请在报告中核对"
         _out(f"证据映射：{modes['confirmed']} 组已确认，{modes['auto']} 组自动判定，"
