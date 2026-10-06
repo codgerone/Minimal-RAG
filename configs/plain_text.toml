@@ -15,6 +15,7 @@ use = "e5_small"
 [retriever]
 use = "semantic"
 top_k = 4          # search / ask / chat 返回的条数
+document_filter = true   # 问题中出现 documents/documents.toml 登记的标识编码时，只在对应文档内检索
 
 [eval]
 top_k = 3          # 正式评估的 K，保持与历史基线可比
