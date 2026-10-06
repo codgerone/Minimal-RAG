@@ -44,7 +44,7 @@ def render_grid(table: StructuredTable | TableCandidate, max_rows: int | None = 
     covered: set[tuple[int, int]] = set()
     html_rows = []
     shown = rows if max_rows is None else min(rows, max_rows)
-    for r in range(shown):
+    for r in range(rows):
         cells = []
         for col in range(cols):
             if (r, col) in covered:
@@ -60,9 +60,14 @@ def render_grid(table: StructuredTable | TableCandidate, max_rows: int | None = 
                     covered.add((r + dr, col + dc))
             span = (f' rowspan="{rs}"' if rs > 1 else "") + (f' colspan="{cs}"' if cs > 1 else "")
             cells.append(f"<td{span}>{esc(cell.text or '')}</td>")
-        html_rows.append("<tr>" + "".join(cells) + "</tr>")
-    more = (f'<div class="meta">…另有 {rows - shown} 行</div>' if shown < rows else "")
-    return f'<div class="scroll"><table>{"".join(html_rows)}</table></div>{more}'
+        hidden = ' class="rest hidden"' if r >= shown else ""
+        html_rows.append(f"<tr{hidden}>" + "".join(cells) + "</tr>")
+    grid = f'<div class="scroll"><table>{"".join(html_rows)}</table></div>'
+    if shown >= rows:
+        return grid
+    label = f"展开其余 {rows - shown} 行"
+    return (f'<div data-expand>{grid}<div class="meta"><span class="ellipsis">…另有 {rows - shown} 行 </span>'
+            f'<button class="toggle" data-more="{label}" data-less="收起">{label}</button></div></div>')
 
 
 def _header(processed: ProcessedDocument, entry: DocumentEntry, config_name: str,
@@ -96,6 +101,7 @@ def parse_page(processed: ProcessedDocument, entry: DocumentEntry, config_name: 
     warn_html = ("" if not warnings else "<div class='meta'>处理提示：" +
                  "；".join(f"{esc(code)} ×{n}" for code, n in warnings.items()) + "</div>")
     by_page: dict[int, list[str]] = {}
+    slot_number = {slot.slot_id: n for n, slot in enumerate(processed.parse.primary.table_slots, start=1)}
     for node in document.nodes:
         if isinstance(node, TextNode):
             html = f'{badge(TEXT_KINDS.get(node.kind, node.kind))}{text_block(node.text)}'
@@ -108,7 +114,8 @@ def parse_page(processed: ProcessedDocument, entry: DocumentEntry, config_name: 
             origin = ("候选胜出：" + node.table.tool + "/" + node.table.strategy
                       if node.origin == "selected_winner" else "采用解析器原生表格")
             html = (f'{badge("表格", "warn")} <span class="meta">{esc(origin)}，'
-                    f'详见 <a href="2-表格.html">表格页</a></span>{render_grid(node.table, 12)}')
+                    f'详见 <a href="2-表格.html#t{slot_number.get(node.slot_id, 1)}">表格页·表 {slot_number.get(node.slot_id, "")}</a>'
+                    f'</span>{render_grid(node.table, 12)}')
         by_page.setdefault(_node_page(node), []).append(f'<div class="item">{html}</div>')
     sections = "".join(f'<div class="card"><h3>第 {p} 页</h3>{"".join(items)}</div>'
                        for p, items in sorted(by_page.items()))
@@ -122,14 +129,18 @@ def parse_page(processed: ProcessedDocument, entry: DocumentEntry, config_name: 
 
 def _score_table(scored: GroupScoringResult) -> str:
     rows = []
-    for candidate in sorted(scored.candidates, key=lambda c: -c.total_score):
+    winner = scored.selected_candidate_id
+    for candidate in sorted(scored.candidates,
+                            key=lambda c: (c.candidate_id != winner, -c.total_score, c.candidate_id)):
         raw = candidate.raw_metrics
         values = {"text_f1": raw.text_coverage.f1, "critical_token_integrity": raw.critical_tokens.integrity,
                   "shape_support": raw.grid_shape.support, "blank_anomaly": raw.blank_grid.blank_anomaly}
         cells = "".join(f'<td class="num">{"—" if values[key] is None else f"{values[key]:.2f}"}</td>'
                         for key, _ in METRIC_LABELS)
-        mark = " ★" if candidate.candidate_id == scored.selected_candidate_id else ""
-        rows.append(f"<tr><td>{esc(candidate.tool)}/{esc(candidate.strategy)}{mark}</td>{cells}"
+        won = candidate.candidate_id == winner
+        mark = " ★ 胜出" if won else ""
+        row_class = ' class="winner-row"' if won else ""
+        rows.append(f"<tr{row_class}><td>{esc(candidate.tool)}/{esc(candidate.strategy)}{mark}</td>{cells}"
                     f'<td class="num"><b>{candidate.total_score:.2f}</b></td></tr>')
     head = "".join(f'<th class="num">{esc(label)}</th>' for _, label in METRIC_LABELS)
     return (f'<div class="scroll"><table><tr><th>候选</th>{head}<th class="num">总分</th></tr>'
@@ -156,6 +167,7 @@ def tables_page(processed: ProcessedDocument, entry: DocumentEntry, config_name:
                + ("".join(f'<div class="meta">⚠ {esc(e.tool)}/{esc(e.strategy)}：{esc(e.status)} '
                           f'{esc(e.error_message or "")}</div>' for e in failed)) + "</div>")
     sections = []
+    tabs = []
     for number, slot in enumerate(slots, start=1):
         resolution = resolutions[slot.slot_id]
         scored = scores.get(slot.slot_id)
@@ -188,8 +200,10 @@ def tables_page(processed: ProcessedDocument, entry: DocumentEntry, config_name:
         header = prep.header_decision
         header_line = ("表头已识别：第 " + str((header.header_start_row or 0) + 1) + "–" + str(header.header_end_row) + " 行"
                        if header.outcome == "identified" else "表头未确定（按行列位置描述单元格）")
+        tab_mark = "" if resolution.origin == "selected_winner" else "（原生）"
+        tabs.append(f'<a href="#t{number}" data-tab="t{number}">表 {number} · 第 {slot.page_number or "?"} 页{tab_mark}</a>')
         sections.append(
-            f'<h2 id="t{number}">表 {number} · 第 {slot.page_number or "?"} 页</h2>'
+            f'<div data-panel="t{number}"><h2>表 {number} · 第 {slot.page_number or "?"} 页</h2>'
             f'<div class="card">{decision}<div class="meta">{esc(header_line)}</div>'
             + (_score_table(scored) if scored else "") + "</div>"
             + (f'<div class="grid">{"".join(cards[:3])}</div>' if cards else "")
@@ -198,8 +212,9 @@ def tables_page(processed: ProcessedDocument, entry: DocumentEntry, config_name:
             + (f'<details><summary>本页未进入该表评分的其他候选（{len(page_candidates)}）</summary>'
                f'<table><tr><th>候选</th><th>原因</th></tr>{others}</table></details>' if page_candidates else "")
             + f'<details><summary>入库文本（{len(prep.serialized_table.text)} 字符）</summary>'
-              f'{text_block(prep.serialized_table.text)}</details>')
-    body = _header(processed, entry, config_name, 1) + summary + "".join(sections)
+              f'{text_block(prep.serialized_table.text)}</details></div>')
+    tab_bar = f'<div class="tabs">{"".join(tabs)}</div>' if tabs else ""
+    body = _header(processed, entry, config_name, 1) + summary + tab_bar + "".join(sections)
     return page(f"表格 · {entry.document_name}", body, crumbs=_crumbs(config_name))
 
 

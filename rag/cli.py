@@ -12,8 +12,6 @@ from typing import Sequence
 from rag.config import ConfigError, list_configs, resolve_config
 from rag.paths import Workspace
 
-EVAL_TOP_K = 3   # K used for the recorded baselines; keep it unless comparing deliberately
-
 
 def _positive(value: str) -> int:
     number = int(value)
@@ -54,13 +52,13 @@ def build_parser() -> argparse.ArgumentParser:
     chat = command("chat", "多次提问（每轮独立检索，不保留对话记忆）")
     chat.add_argument("--top-k", type=_positive)
     evaluate = command("eval", "用 eval/ground-truth 的标注问题评估检索效果，生成报告")
-    evaluate.add_argument("--top-k", type=_positive, default=EVAL_TOP_K)
+    evaluate.add_argument("--top-k", type=_positive, help="默认取配置文件 [eval] top_k")
     evaluate.add_argument("--confirm-auto", action="store_true",
                           help="把本次自动判定的证据映射写入 eval/mappings.json（先看报告再用）")
     config = command("config", "查看装配配置")
     config.add_argument("action", choices=["list", "show"])
     config.add_argument("name", nargs="?")
-    command("report", "重新生成报告总入口 reports/index.html")
+    command("report", "按已保存的结果重新生成评估报告和总入口 reports/index.html")
     return parser
 
 
@@ -235,11 +233,12 @@ def _eval(workspace: Workspace, args: argparse.Namespace) -> int:
     from rag.jsonio import read_json
     from rag.reports.index_page import write_index_page
     assembly = _assembly(workspace, args.config)
-    folder = run_evaluation(workspace, assembly, args.top_k, confirm_auto=args.confirm_auto)
+    top_k = args.top_k or assembly.config.eval_top_k
+    folder = run_evaluation(workspace, assembly, top_k, confirm_auto=args.confirm_auto)
     result = read_json(folder / "result.json")
     metrics = result["metrics"]
     modes = result["evidence_modes"]
-    _out(f"配置 {assembly.name} · K={args.top_k} · {result['dataset']['answerable']} 道可回答问题")
+    _out(f"配置 {assembly.name} · K={top_k} · {result['dataset']['answerable']} 道可回答问题")
     for key, label in (("hit_rate", "命中率"), ("complete_coverage", "完整覆盖率"),
                        ("group_recall", "证据组召回"), ("mrr", "MRR"),
                        ("chunk_precision", "Chunk 精确率"), ("cross_document", "跨文档污染")):
@@ -267,9 +266,11 @@ def _config(workspace: Workspace, args: argparse.Namespace) -> int:
 
 
 def _report(workspace: Workspace, args: argparse.Namespace) -> int:
+    from rag.reports.evaluation import rerender_all
     from rag.reports.index_page import write_index_page
+    count = rerender_all(workspace)
     write_index_page(workspace)
-    _out("已生成 reports/index.html")
+    _out(f"已重新生成 {count} 份评估报告和 reports/index.html")
     return 0
 
 

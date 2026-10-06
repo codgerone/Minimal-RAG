@@ -1,4 +1,4 @@
-"""Shared page shell for every report: one stylesheet, light/dark, small filter helper."""
+"""Shared page shell for every report: one light stylesheet, small interaction helpers."""
 
 from __future__ import annotations
 
@@ -8,10 +8,7 @@ from typing import Iterable
 CSS = """
 :root{--bg:#f6f7f9;--panel:#fff;--text:#1d2129;--muted:#5f6b7a;--line:#dde2e8;
 --accent:#2f6fde;--ok:#1a7f43;--ok-bg:#e5f5ec;--bad:#c23b32;--bad-bg:#fdeceb;
---warn:#a35d00;--warn-bg:#fff3dc;--code:#f1f3f6;--hl:#fff7cc}
-@media (prefers-color-scheme:dark){:root{--bg:#14171c;--panel:#1d2128;--text:#e4e7ec;
---muted:#9aa4b2;--line:#323844;--accent:#6ea0ff;--ok:#5fd08f;--ok-bg:#183326;--bad:#ff7b72;
---bad-bg:#3a1d1c;--warn:#f0b35a;--warn-bg:#382b14;--code:#252a33;--hl:#3a3418}}
+--warn:#a35d00;--warn-bg:#fff3dc;--code:#f1f3f6;--hl:#fff7cc;color-scheme:light}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);
 font:15px/1.6 system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
@@ -49,6 +46,36 @@ details{margin:6px 0}summary{cursor:pointer;color:var(--muted);font-size:13px}
 border:1px solid var(--line);background:var(--panel);color:var(--text)}
 .filters button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
 .hidden{display:none}
+.toggle{border:0;background:none;padding:0 2px;font:inherit;font-size:13px;color:var(--accent);cursor:pointer}
+.toggle:hover{text-decoration:underline}
+tr.winner-row td{background:var(--ok-bg)}tr.winner-row{outline:2px solid var(--ok);outline-offset:-2px}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 4px;border-bottom:1px solid var(--line)}
+.tabs a{padding:6px 12px;border:1px solid var(--line);border-bottom:0;border-radius:8px 8px 0 0;
+background:var(--code);color:var(--text);font-size:14px}
+.tabs a.on{background:var(--panel);font-weight:600;position:relative;top:1px}
+.tabs a:hover{text-decoration:none}
+"""
+
+SCRIPT = """
+document.addEventListener('click',function(e){
+  var t=e.target.closest('.toggle');if(!t)return;
+  var box=t.closest('[data-expand]');if(!box)return;
+  var open=box.classList.toggle('open');
+  box.querySelectorAll('.rest').forEach(function(x){x.classList.toggle('hidden',!open)});
+  box.querySelectorAll('.ellipsis').forEach(function(x){x.classList.toggle('hidden',open)});
+  t.textContent=open?t.dataset.less:t.dataset.more;
+});
+(function(){
+  var tabs=document.querySelectorAll('.tabs a[data-tab]');if(!tabs.length)return;
+  function show(id){
+    var found=false;tabs.forEach(function(a){if(a.dataset.tab===id)found=true});
+    if(!found)id=tabs[0].dataset.tab;
+    tabs.forEach(function(a){a.classList.toggle('on',a.dataset.tab===id)});
+    document.querySelectorAll('[data-panel]').forEach(function(p){p.classList.toggle('hidden',p.dataset.panel!==id)});
+  }
+  window.addEventListener('hashchange',function(){show(location.hash.slice(1))});
+  show(location.hash.slice(1));
+})();
 """
 
 FILTER_JS = """
@@ -72,7 +99,7 @@ def esc(value: object) -> str:
 def page(title: str, body: str, *, crumbs: Iterable[tuple[str, str]] = (),
          scripts: bool = False) -> str:
     trail = " / ".join(f'<a href="{esc(href)}">{esc(label)}</a>' for label, href in crumbs)
-    script = f"<script>{FILTER_JS}</script>" if scripts else ""
+    script = f"<script>{SCRIPT}{FILTER_JS if scripts else ''}</script>"
     return (f'<!doctype html><html lang="zh"><head><meta charset="utf-8">'
             f'<meta name="viewport" content="width=device-width,initial-scale=1">'
             f'<title>{esc(title)}</title><style>{CSS}</style></head><body><main>'
@@ -88,12 +115,13 @@ def pct(value: float | None) -> str:
 
 
 def text_block(text: str, limit: int | None = None) -> str:
-    """Full text, or a preview with the rest behind a toggle."""
+    """Full text; long text shows a preview whose continuation expands in place."""
     if limit is None or len(text) <= limit:
         return f'<div class="text">{esc(text)}</div>'
-    return (f'<div class="text">{esc(text[:limit])}…</div>'
-            f'<details><summary>展开全文（{len(text)} 字符）</summary>'
-            f'<div class="text">{esc(text)}</div></details>')
+    more = f"展开全文（共 {len(text)} 字符）"
+    return (f'<div class="text" data-expand>{esc(text[:limit])}<span class="ellipsis">… </span>'
+            f'<span class="rest hidden">{esc(text[limit:])} </span>'
+            f'<button class="toggle" data-more="{more}" data-less="收起">{more}</button></div>')
 
 
 def filters(options: Iterable[tuple[str, str, int]]) -> str:

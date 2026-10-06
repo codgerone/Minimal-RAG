@@ -16,7 +16,7 @@
 | `python -m rag search "问题"` | 语义检索，显示命中的 chunk |
 | `python -m rag ask "问题"` | 检索后让 LLM 依据证据回答；`--debug` 显示命中内容和完整 Prompt |
 | `python -m rag chat` | 连续提问（每轮独立检索，不记忆上下文） |
-| `python -m rag eval` | 用标注题目评估检索效果并生成报告 |
+| `python -m rag eval` | 用标注题目评估检索效果并生成报告（K 取配置中的 `[eval] top_k`，内置为 3） |
 | `python -m rag config list` / `config show NAME` | 查看装配配置 |
 | `python -m rag report` | 重新生成报告首页 |
 
@@ -29,7 +29,7 @@
 | 解析 | PyMuPDF 按页取文本 | Docling 版面解析（标题、段落、列表、表格、阅读顺序） |
 | 表格 | 不处理 | 四个工具九种策略提取，评分选出最佳结构，判定表头后转成文本 |
 | 分块 | 每页内 300 字符、重叠 50 | 按结构分块，每块不超过 512 token |
-| 编码 / 检索 | multilingual-e5-small，余弦相似度，Top-K | 同左 |
+| 编码 / 检索 | multilingual-e5-small，余弦相似度；问答取 Top-4，评估取 Top-3 | 同左 |
 
 新建装配：复制 `configs/structured.toml` 改几行即可，启动时会校验组合是否合法。
 

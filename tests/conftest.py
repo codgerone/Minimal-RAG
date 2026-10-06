@@ -55,7 +55,7 @@ def fake_assembly(tmp_path: Path) -> Assembly:
     config = AssemblyConfig("fake", "", tmp_path / "configs" / "fake.toml",
                             Component("pymupdf_pages"), (), None,
                             Component("characters", {"chunk_size": 80, "chunk_overlap": 10}),
-                            Component("fake"), Component("semantic"), 3, Component("openrouter"))
+                            Component("fake"), Component("semantic"), 3, Component("openrouter"), 3)
     return Assembly(config, PyMuPDFPagesParser(), (), None, FakeEmbedder(),
                     CharacterChunker(80, 10))
 

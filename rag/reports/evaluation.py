@@ -132,3 +132,22 @@ def _pretty(value: Any) -> str:
 def write_eval_report(workspace: Workspace, folder: Path, result: dict[str, Any],
                       previous: dict[str, Any] | None) -> None:
     write_atomic(folder / "index.html", render(result, previous))
+
+
+def rerender_all(workspace: Workspace) -> int:
+    """Re-render every saved evaluation page from its result.json (after report style changes)."""
+    from rag.jsonio import read_json
+    folder = workspace.eval_reports()
+    count = 0
+    for path in sorted(folder.glob("*/result.json")) if folder.is_dir() else []:
+        result = read_json(path)
+        write_eval_report(workspace, path.parent, result, _latest_before(workspace, result))
+        count += 1
+    return count
+
+
+def _latest_before(workspace: Workspace, result: dict[str, Any]) -> dict[str, Any] | None:
+    from rag.jsonio import read_json
+    runs = [read_json(p) for p in workspace.eval_reports().glob(f"*_{result['config']}_k{result['top_k']}*/result.json")]
+    earlier = [r for r in runs if r["created_at"] < result["created_at"]]
+    return max(earlier, key=lambda r: r["created_at"]) if earlier else None

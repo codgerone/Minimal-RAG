@@ -37,8 +37,9 @@ class AssemblyConfig:
     chunker: Component
     embedder: Component
     retriever: Component
-    top_k: int
+    top_k: int          # search / ask / chat
     llm: Component
+    eval_top_k: int     # formal evaluation; kept at the baseline K for comparability
 
     def build_settings(self) -> dict[str, Any]:
         """Everything that changes index content. Retrieval, LLM and display settings are excluded."""
@@ -65,7 +66,7 @@ def load_config(path: Path) -> AssemblyConfig:
     except (OSError, tomllib.TOMLDecodeError) as exc:
         raise ConfigError(f"无法读取配置 {path.name}：{exc}") from exc
     known = {"name", "description", "parser", "table_extractors", "table_formatter",
-             "chunker", "embedder", "retriever", "llm"}
+             "chunker", "embedder", "retriever", "llm", "eval"}
     unknown = set(data) - known
     if unknown:
         raise ConfigError(f"{path.name}：未知配置项 {sorted(unknown)}")
@@ -82,6 +83,12 @@ def load_config(path: Path) -> AssemblyConfig:
     top_k = retriever.params.pop("top_k", 4)
     if type(top_k) is not int or top_k <= 0:
         raise ConfigError(f"{path.name}：retriever.top_k 必须为正整数")
+    evaluation = data.get("eval", {})
+    if not isinstance(evaluation, dict) or set(evaluation) - {"top_k"}:
+        raise ConfigError(f"{path.name}：[eval] 只接受 top_k")
+    eval_top_k = evaluation.get("top_k", 3)
+    if type(eval_top_k) is not int or eval_top_k <= 0:
+        raise ConfigError(f"{path.name}：eval.top_k 必须为正整数")
     formatter = data.get("table_formatter")
     return AssemblyConfig(
         name, str(data.get("description", "")), path,
@@ -92,6 +99,7 @@ def load_config(path: Path) -> AssemblyConfig:
         _component(data["embedder"], "embedder", path),
         retriever, top_k,
         _component(data["llm"], "llm", path),
+        eval_top_k,
     )
 
 

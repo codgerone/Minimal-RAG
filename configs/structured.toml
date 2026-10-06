@@ -29,7 +29,10 @@ use = "e5_small"
 
 [retriever]
 use = "semantic"
-top_k = 4
+top_k = 4          # search / ask / chat 返回的条数
+
+[eval]
+top_k = 3          # 正式评估的 K，保持与历史基线可比
 
 [llm]
 use = "openrouter"
