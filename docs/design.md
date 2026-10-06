@@ -75,6 +75,6 @@ rag/
   index/           embedder、store（Chroma）、manifest、status、builder
   query/           retriever、prompt、llm
   eval/            dataset、judge、metrics、runner
-  reports/         html（共用样式）、ingest、evaluation、index_page
+  reports/         html（页面外壳；样式与脚本写入 reports/assets/，改样式只需 `python -m rag report`）、ingest、evaluation、index_page
 tests/             算法、装配校验、索引一致性、检索、评估
 ```

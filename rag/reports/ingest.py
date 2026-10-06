@@ -12,7 +12,7 @@ from rag.ingest.tables.models import GroupScoringResult, StructuredTable, TableC
 from rag.jsonio import write_atomic
 from rag.models import ChunkBatch, ListNode, TableNode, TextNode
 from rag.paths import Workspace
-from rag.reports.html import badge, esc, filters, page, text_block
+from rag.reports.html import badge, esc, filters, page, text_block, write_assets
 
 TEXT_KINDS = {"title": "标题", "paragraph": "段落", "header": "页眉", "footer": "页脚",
               "footnote": "脚注", "caption": "图表标题", "table_note": "表注",
@@ -62,7 +62,7 @@ def render_grid(table: StructuredTable | TableCandidate, max_rows: int | None = 
             cells.append(f"<td{span}>{esc(cell.text or '')}</td>")
         hidden = ' class="rest hidden"' if r >= shown else ""
         html_rows.append(f"<tr{hidden}>" + "".join(cells) + "</tr>")
-    grid = f'<div class="scroll"><table>{"".join(html_rows)}</table></div>'
+    grid = f'<div class="scroll" data-grid><table>{"".join(html_rows)}</table></div>'
     if shown >= rows:
         return grid
     label = f"展开其余 {rows - shown} 行"
@@ -124,7 +124,7 @@ def parse_page(processed: ProcessedDocument, entry: DocumentEntry, config_name: 
             f'<div class="meta">按阅读顺序列出解析器识别出的元素；原始解析输出保存在 '
             f'.rag/indexes/{esc(config_name)}/documents/{esc(entry.folder)}/parse-native.json</div></div>'
             + sections)
-    return page(f"解析 · {entry.document_name}", body, crumbs=_crumbs(config_name))
+    return page(f"解析 · {entry.document_name}", body, root="../../../", crumbs=_crumbs(config_name))
 
 
 def _score_table(scored: GroupScoringResult) -> str:
@@ -215,7 +215,7 @@ def tables_page(processed: ProcessedDocument, entry: DocumentEntry, config_name:
               f'{text_block(prep.serialized_table.text)}</details></div>')
     tab_bar = f'<div class="tabs">{"".join(tabs)}</div>' if tabs else ""
     body = _header(processed, entry, config_name, 1) + summary + tab_bar + "".join(sections)
-    return page(f"表格 · {entry.document_name}", body, crumbs=_crumbs(config_name))
+    return page(f"表格 · {entry.document_name}", body, root="../../../", crumbs=_crumbs(config_name))
 
 
 def chunks_page(processed: ProcessedDocument, batch: ChunkBatch, entry: DocumentEntry,
@@ -260,11 +260,12 @@ def chunks_page(processed: ProcessedDocument, batch: ChunkBatch, entry: Document
                           if any(c.fragment_count > 1 for c in chunks) else []) +
                          ([("tiny", "过短的", len(tiny))] if tiny else []))
     body = _header(processed, entry, config_name, 2) + summary + filter_bar + "".join(cards)
-    return page(f"分块 · {entry.document_name}", body, crumbs=_crumbs(config_name), scripts=True)
+    return page(f"分块 · {entry.document_name}", body, root="../../../", crumbs=_crumbs(config_name))
 
 
 def write_document_reports(workspace: Workspace, config_name: str, processed: ProcessedDocument,
                            batch: ChunkBatch, entry: DocumentEntry) -> None:
+    write_assets(workspace.reports)
     folder = workspace.ingest_reports(config_name) / entry.folder
     if folder.exists():
         shutil.rmtree(folder)

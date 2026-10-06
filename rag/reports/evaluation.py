@@ -8,7 +8,7 @@ from typing import Any
 from rag.eval.metrics import METRICS
 from rag.jsonio import write_atomic
 from rag.paths import Workspace
-from rag.reports.html import badge, esc, filters, page, pct, text_block
+from rag.reports.html import badge, esc, filters, page, pct, text_block, write_assets
 
 MODE_LABELS = {"confirmed": ("已确认映射", ""), "auto": ("自动判定", "warn"),
                "unmapped": ("找不到对应 chunk", "bad")}
@@ -121,7 +121,7 @@ def render(result: dict[str, Any], previous: dict[str, Any] | None) -> str:
             f'<h2>逐题明细</h2>{bar}{"".join(blocks)}'
             f'<div class="meta">指标定义见 docs/rules/evaluation.md；原始数据见同目录 result.json。</div>')
     return page(f"检索评估 · {result['config']} · K={result['top_k']}", body,
-                crumbs=[("报告首页", "../../index.html")], scripts=True)
+                root="../../", crumbs=[("报告首页", "../../index.html")])
 
 
 def _pretty(value: Any) -> str:
@@ -131,6 +131,7 @@ def _pretty(value: Any) -> str:
 
 def write_eval_report(workspace: Workspace, folder: Path, result: dict[str, Any],
                       previous: dict[str, Any] | None) -> None:
+    write_assets(workspace.reports)
     write_atomic(folder / "index.html", render(result, previous))
 
 

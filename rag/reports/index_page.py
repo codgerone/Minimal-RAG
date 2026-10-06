@@ -9,7 +9,7 @@ from rag.config import ConfigError, list_configs
 from rag.eval.metrics import METRICS
 from rag.jsonio import read_json, write_atomic
 from rag.paths import Workspace
-from rag.reports.html import badge, esc, page, pct
+from rag.reports.html import badge, esc, page, pct, write_assets
 
 STATE_BADGES = {"current": ("已入库", "ok"), "new": ("未入库", "warn"), "changed": ("PDF 已修改", "warn"),
                 "incomplete": ("索引不完整", "bad"), "missing": ("PDF 已删除", ""),
@@ -76,4 +76,5 @@ def write_index_page(workspace: Workspace) -> None:
     body = (f'<h1>Minimal RAG 报告</h1><div class="sub">生成于 {datetime.now():%Y-%m-%d %H:%M} · '
             f'文档目录 documents/ · 评估数据 eval/ground-truth/</div>'
             f'{_eval_section(workspace)}{sections}')
-    write_atomic(workspace.reports / "index.html", page("Minimal RAG 报告", body))
+    write_assets(workspace.reports)
+    write_atomic(workspace.reports / "index.html", page("Minimal RAG 报告", body, root=""))

@@ -1,8 +1,9 @@
-"""Shared page shell for every report: one light stylesheet, small interaction helpers."""
+"""Shared page shell. Style and script live in reports/assets/ so they can change without re-ingesting."""
 
 from __future__ import annotations
 
 from html import escape
+from pathlib import Path
 from typing import Iterable
 
 CSS = """
@@ -54,6 +55,21 @@ tr.winner-row td{background:var(--ok-bg)}tr.winner-row{outline:2px solid var(--o
 background:var(--code);color:var(--text);font-size:14px}
 .tabs a.on{background:var(--panel);font-weight:600;position:relative;top:1px}
 .tabs a:hover{text-decoration:none}
+.table-tools{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:4px 0 2px;
+font-size:12px;color:var(--muted)}
+.expand-btn{font:inherit;font-size:12px;padding:1px 9px;border-radius:12px;cursor:pointer;
+border:1px solid var(--line);background:var(--panel);color:var(--accent);white-space:nowrap}
+.expand-btn:hover{border-color:var(--accent)}
+.overlay{position:fixed;inset:0;z-index:100;background:var(--bg);display:flex;flex-direction:column}
+.overlay-head{display:flex;align-items:center;gap:12px;padding:10px 16px;background:var(--panel);
+border-bottom:1px solid var(--line)}
+.overlay-head .title{font-weight:600}.overlay-head .meta{flex:1}
+.overlay-head button{font:inherit;font-size:13px;padding:3px 12px;border-radius:14px;cursor:pointer;
+border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.overlay-body{flex:1;overflow:auto;padding:16px}
+.overlay-body table{width:max-content;min-width:100%;font-size:14px;background:var(--panel)}
+.overlay-body td{min-width:80px;max-width:420px}
+body.no-scroll{overflow:hidden}
 """
 
 SCRIPT = """
@@ -78,6 +94,37 @@ document.addEventListener('click',function(e){
 })();
 """
 
+FULLSCREEN_JS = """
+(function(){
+  var overlay=null;
+  function close(){if(overlay){overlay.remove();overlay=null;document.body.classList.remove('no-scroll');}}
+  function open(wrap){
+    var table=wrap.querySelector('table');if(!table)return;
+    var card=wrap.closest('.card,[data-panel]');
+    var heading=card?card.querySelector('h3,h2'):null;
+    var clone=table.cloneNode(true);
+    clone.querySelectorAll('.hidden').forEach(function(x){x.classList.remove('hidden')});
+    overlay=document.createElement('div');overlay.className='overlay';
+    overlay.innerHTML='<div class="overlay-head"><span class="title"></span><span class="meta"></span>'+
+      '<button type="button">关闭（Esc）</button></div><div class="overlay-body"></div>';
+    overlay.querySelector('.title').textContent=heading?heading.textContent:document.title;
+    overlay.querySelector('.meta').textContent='共 '+clone.rows.length+' 行，可上下左右滚动';
+    overlay.querySelector('.overlay-body').appendChild(clone);
+    overlay.querySelector('button').addEventListener('click',close);
+    document.body.appendChild(overlay);document.body.classList.add('no-scroll');
+  }
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+  document.querySelectorAll('.scroll[data-grid]').forEach(function(wrap){
+    var bar=document.createElement('div');bar.className='table-tools';
+    var wide=wrap.scrollWidth>wrap.clientWidth+2;
+    bar.innerHTML='<span>'+(wide?'表格较宽，可左右滑动':'')+'</span>'+
+      '<button type="button" class="expand-btn">⤢ 全屏查看</button>';
+    bar.querySelector('button').addEventListener('click',function(){open(wrap)});
+    wrap.parentNode.insertBefore(bar,wrap);
+  });
+})();
+"""
+
 FILTER_JS = """
 document.querySelectorAll('.filters').forEach(function(bar){
   bar.addEventListener('click',function(e){
@@ -96,14 +143,22 @@ def esc(value: object) -> str:
     return escape(str(value), quote=True)
 
 
-def page(title: str, body: str, *, crumbs: Iterable[tuple[str, str]] = (),
-         scripts: bool = False) -> str:
+def write_assets(reports_dir: Path) -> None:
+    """reports/assets/report.css + report.js, shared by every page."""
+    from rag.jsonio import write_atomic
+    write_atomic(reports_dir / "assets" / "report.css", CSS.strip() + "\n")
+    write_atomic(reports_dir / "assets" / "report.js",
+                 (SCRIPT + FULLSCREEN_JS + FILTER_JS).strip() + "\n")
+
+
+def page(title: str, body: str, *, root: str, crumbs: Iterable[tuple[str, str]] = ()) -> str:
+    """`root` is the relative path from this page back to reports/ (e.g. "../../")."""
     trail = " / ".join(f'<a href="{esc(href)}">{esc(label)}</a>' for label, href in crumbs)
-    script = f"<script>{SCRIPT}{FILTER_JS if scripts else ''}</script>"
     return (f'<!doctype html><html lang="zh"><head><meta charset="utf-8">'
             f'<meta name="viewport" content="width=device-width,initial-scale=1">'
-            f'<title>{esc(title)}</title><style>{CSS}</style></head><body><main>'
-            f'<div class="crumbs">{trail}</div>{body}</main>{script}</body></html>')
+            f'<title>{esc(title)}</title><link rel="stylesheet" href="{root}assets/report.css"></head>'
+            f'<body><main><div class="crumbs">{trail}</div>{body}</main>'
+            f'<script src="{root}assets/report.js"></script></body></html>')
 
 
 def badge(text: str, kind: str = "") -> str:
