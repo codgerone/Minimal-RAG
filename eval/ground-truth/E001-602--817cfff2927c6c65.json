@@ -8,7 +8,7 @@
   "cases": [
     {
       "case_id": "E001-602-Q001",
-      "question": "发票E001-602规定的付款到期日是什么时候？需要支付多少金额？其中包含多少税费？",
+      "question": "发票E001-602（INVOICE-E001-602）规定的付款到期日是什么时候？需要支付多少金额？其中包含多少税费？",
       "answerable": true,
       "reference_answer": "付款到期日为2026年3月30日，需要支付USD 331,432.50，其中包含税费USD 50557.50。",
       "evidence_groups": [
@@ -56,7 +56,7 @@
     },
     {
       "case_id": "E001-602-Q002",
-      "question": "发票E001-602中， HXE34K-S1的单价和数量分别是多少？",
+      "question": "发票E001-602（INVOICE-E001-602）中， HXE34K-S1的单价和数量分别是多少？",
       "answerable": true,
       "reference_answer": "HXE34K-S1的单价为USD 16.00，数量为500个。",
       "evidence_groups": [

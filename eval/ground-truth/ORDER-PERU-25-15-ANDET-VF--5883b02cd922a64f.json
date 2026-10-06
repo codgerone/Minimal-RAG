@@ -8,7 +8,7 @@
   "cases": [
     {
       "case_id": "PO-25-15-Q001",
-      "question": "订单PURCHASE ORDER N° 25-15-HPE中，第四批次交付的具体日期是什么？交付的产品总金额达多少？",
+      "question": "订单PURCHASE ORDER N° 25-15-HPE（ORDER2025002）中，第四批次交付的具体日期是什么？交付的产品总金额达多少？",
       "answerable": true,
       "reference_answer": "第四批次交付的具体日期为2026年3月10日，交付的产品总金额为USD 188030.00。",
       "evidence_groups": [
@@ -46,7 +46,7 @@
     },
     {
       "case_id": "PO-25-15-Q002",
-      "question": "订单PURCHASE ORDER N° 25-15-HPE中，第六批次交付的具体日期是什么？交付的产品总金额达多少？",
+      "question": "订单PURCHASE ORDER N° 25-15-HPE（ORDER2025002）中，第六批次交付的具体日期是什么？交付的产品总金额达多少？",
       "answerable": true,
       "reference_answer": "第六批次交付的具体日期为2026年7月10日，交付的产品总金额为USD 160200.00。",
       "evidence_groups": [
