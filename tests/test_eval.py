@@ -61,3 +61,9 @@ def test_metrics_follow_the_documented_definitions():
     assert metrics["mrr"].value == (1 / 2 + 1 / 1) / 2
     assert metrics["chunk_precision"].value == (3 / 4 + 1 / 3) / 2
     assert metrics["cross_document"].value == (1 / 4 + 2 / 3) / 2
+
+
+def test_run_name_shows_config_k_and_filter_state():
+    from rag.eval.runner import run_name
+    assert run_name("structured", 3, True).endswith("_structured_k3_filter-on")
+    assert run_name("plain_text", 5, False).endswith("_plain_text_k5_filter-off")

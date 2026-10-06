@@ -74,8 +74,11 @@ def _assembly(workspace: Workspace, name: str | None):
 def _status(workspace: Workspace, args: argparse.Namespace) -> int:
     from rag.index.builder import current_status
     from rag.index.status import STATE_LABELS
+    from rag.ingest.sources import discover
+    from rag.query.scope import CATALOG_FILE, load_catalog
     assembly = _assembly(workspace, args.config)
-    status = current_status(workspace, assembly)
+    sources = discover(workspace.documents)
+    status = current_status(workspace, assembly, sources)
     headline = {"not_built": "尚未建立索引", "config_changed": "配置已改变，索引过期（需 ingest --force）",
                 "ready": "可用"}[status.state]
     _out(f"配置 {assembly.name}：{headline}")
@@ -87,6 +90,16 @@ def _status(workspace: Workspace, args: argparse.Namespace) -> int:
         _out(f"→ {len(todo)} 个文档需要处理：python -m rag ingest --config {assembly.name}")
     if status.count("missing"):
         _out(f"→ 清理已删除文档：python -m rag ingest --config {assembly.name} --prune")
+    catalog = load_catalog(workspace.documents, sources)
+    if catalog is None:
+        _out(f"文档标识表：未配置（documents/{CATALOG_FILE}），检索不会按标识编码限定范围")
+        return 0
+    switch = "" if assembly.config.document_filter else "（本配置已关闭文档过滤）"
+    _out(f"文档标识表：已登记 {len(catalog.entries)} / {len(sources)} 份 PDF{switch}")
+    for path in catalog.unregistered:
+        _out(f"  [未登记标识编码] {path}")
+    for path in catalog.missing_files:
+        _out(f"  [文件不在 documents/ 中，检索时忽略] {path}")
     return 0
 
 
@@ -147,6 +160,25 @@ def _chunks(workspace: Workspace, args: argparse.Namespace) -> int:
     return 0
 
 
+class _Scoper:
+    """Resolves each question's search scope from the document catalog and prints it."""
+
+    def __init__(self, workspace: Workspace, assembly, user_selector: str | None = None):
+        from rag.ingest.sources import discover, select
+        from rag.query.scope import load_catalog
+        sources = discover(workspace.documents)
+        self.names = {s.document_id: s.relative_path for s in sources}
+        self.user_document = select(user_selector, sources).document_id if user_selector else None
+        self.enabled = assembly.config.document_filter
+        self.catalog = load_catalog(workspace.documents, sources) if self.enabled else None
+
+    def __call__(self, question: str):
+        from rag.query.scope import describe, resolve_scope
+        scope = resolve_scope(question, self.catalog, self.enabled, self.user_document)
+        _out(describe(scope, self.names))
+        return scope.document_ids
+
+
 def _retriever(workspace: Workspace, assembly):
     from rag.index.builder import open_store
     from rag.query.retriever import SemanticRetriever
@@ -167,17 +199,18 @@ def _show_hits(hits) -> None:
 def _search(workspace: Workspace, args: argparse.Namespace) -> int:
     assembly = _assembly(workspace, args.config)
     _require_queryable(workspace, assembly)
+    documents = _Scoper(workspace, assembly, args.document)(args.question)
     hits = _retriever(workspace, assembly).retrieve(
-        args.question, args.top_k or assembly.config.top_k, _document_id(workspace, args.document))
+        args.question, args.top_k or assembly.config.top_k, documents)
     _show_hits(hits)
     return 0
 
 
 def _answer(workspace: Workspace, assembly, retriever, question: str, top_k: int,
-            document_id: str | None, debug: bool) -> None:
+            scoper: _Scoper, debug: bool) -> None:
     from rag.query.llm import LLMError
     from rag.query.prompt import build_messages
-    hits = retriever.retrieve(question, top_k, document_id)
+    hits = retriever.retrieve(question, top_k, scoper(question))
     messages = build_messages(question, hits)
     if debug:
         _show_hits(hits)
@@ -203,7 +236,7 @@ def _ask(workspace: Workspace, args: argparse.Namespace) -> int:
     assembly = _assembly(workspace, args.config)
     _require_queryable(workspace, assembly)
     _answer(workspace, assembly, _retriever(workspace, assembly), args.question,
-            args.top_k or assembly.config.top_k, _document_id(workspace, args.document), args.debug)
+            args.top_k or assembly.config.top_k, _Scoper(workspace, assembly, args.document), args.debug)
     return 0
 
 
@@ -212,6 +245,7 @@ def _chat(workspace: Workspace, args: argparse.Namespace) -> int:
     assembly = _assembly(workspace, args.config)
     _require_queryable(workspace, assembly)
     retriever = _retriever(workspace, assembly)
+    scoper = _Scoper(workspace, assembly)
     _out(f"配置 {assembly.name}，模型 {assembly.llm().model}。输入问题，空行或 exit 退出。")
     while True:
         try:
@@ -222,7 +256,7 @@ def _chat(workspace: Workspace, args: argparse.Namespace) -> int:
             break
         try:
             _answer(workspace, assembly, retriever, question,
-                    args.top_k or assembly.config.top_k, None, False)
+                    args.top_k or assembly.config.top_k, scoper, False)
         except LLMError as exc:
             _out(f"回答失败：{exc}")
     return 0
@@ -243,6 +277,12 @@ def _eval(workspace: Workspace, args: argparse.Namespace) -> int:
                        ("group_recall", "证据组召回"), ("mrr", "MRR"),
                        ("chunk_precision", "Chunk 精确率"), ("cross_document", "跨文档污染")):
         _out(f"  {label}：{metrics[key]['value']:.2%}")
+    scope = result["document_scope"]
+    if scope["enabled"] and scope["catalog"]:
+        ratio = scope["identified_correctly"]
+        _out(f"  文档识别准确率：{ratio['numerator']}/{ratio['denominator']}")
+    else:
+        _out("  文档过滤：" + ("已关闭" if not scope["enabled"] else "未配置文档标识表，全库检索"))
     if modes["auto"] or modes["unmapped"]:
         note = "（已写入 eval/mappings.json）" if args.confirm_auto else "，请在报告中核对"
         _out(f"证据映射：{modes['confirmed']} 组已确认，{modes['auto']} 组自动判定，"

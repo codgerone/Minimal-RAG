@@ -1,0 +1,2711 @@
+<!doctype html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>检索评估 · structured · K=3</title><link rel="stylesheet" href="../../assets/report.css"></head><body><main><div class="crumbs"><a href="../../index.html">报告首页</a></div><h1>检索评估 · structured · K=3</h1><div class="sub">2026-10-06T17:26:06+08:00 · 24 道可回答问题（数据集 2.1.0）· 文档过滤关闭 · 构建指纹 2a4fe9f0bfd6</div><div class="tiles"><div class="tile"><div class="k">命中率</div><div class="v">20.8%</div><div class="d same">与上次相同</div></div><div class="tile"><div class="k">完整覆盖率</div><div class="v">8.3%</div><div class="d same">与上次相同</div></div><div class="tile"><div class="k">证据组召回</div><div class="v">13.9%</div><div class="d same">与上次相同</div></div><div class="tile"><div class="k">MRR</div><div class="v">20.1%</div><div class="d up">+4.2% 较上次</div></div><div class="tile"><div class="k">Chunk 精确率</div><div class="v">11.1%</div><div class="d same">与上次相同</div></div><div class="tile"><div class="k">跨文档污染</div><div class="v">69.4%</div><div class="d down">+4.2% 较上次</div></div></div><h2>按文档</h2><div class="scroll"><table><tr><th>文档</th><th class="num">题数</th><th class="num">命中率</th><th class="num">完整覆盖率</th><th class="num">证据组召回</th><th class="num">MRR</th><th class="num">Chunk 精确率</th><th class="num">跨文档污染</th></tr><tr><td><a href="#doc-d359c37e0bc3c87a">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf</a></td><td class="num">10</td><td class="num">10.0%</td><td class="num">10.0%</td><td class="num">10.0%</td><td class="num">10.0%</td><td class="num">3.3%</td><td class="num">70.0%</td></tr><tr><td><a href="#doc-817cfff2927c6c65">E001-602.pdf</a></td><td class="num">2</td><td class="num">50.0%</td><td class="num">50.0%</td><td class="num">50.0%</td><td class="num">16.7%</td><td class="num">16.7%</td><td class="num">83.3%</td></tr><tr><td><a href="#doc-169a1f2133fe5643">ORDER PERU 24-12 ANDET.pdf</a></td><td class="num">6</td><td class="num">0.0%</td><td class="num">0.0%</td><td class="num">0.0%</td><td class="num">0.0%</td><td class="num">0.0%</td><td class="num">100.0%</td></tr><tr><td><a href="#doc-5883b02cd922a64f">ORDER PERU 25-15 ANDET VF.pdf</a></td><td class="num">2</td><td class="num">100.0%</td><td class="num">0.0%</td><td class="num">50.0%</td><td class="num">75.0%</td><td class="num">33.3%</td><td class="num">66.7%</td></tr><tr><td><a href="#doc-5a4c36e0022f4917">签字-ORDER PERU 25-19 FONAFE.pdf</a></td><td class="num">4</td><td class="num">25.0%</td><td class="num">0.0%</td><td class="num">8.3%</td><td class="num">50.0%</td><td class="num">33.3%</td><td class="num">16.7%</td></tr></table></div><details><summary>本次使用的构建配置</summary><pre>{
+  &quot;rules_version&quot;: &quot;v3.1&quot;,
+  &quot;parser&quot;: {
+    &quot;use&quot;: &quot;docling_layout&quot;
+  },
+  &quot;table_extractors&quot;: [
+    {
+      &quot;use&quot;: &quot;pymupdf&quot;
+    },
+    {
+      &quot;use&quot;: &quot;camelot&quot;
+    },
+    {
+      &quot;use&quot;: &quot;docling&quot;
+    },
+    {
+      &quot;use&quot;: &quot;unstructured&quot;
+    }
+  ],
+  &quot;table_formatter&quot;: {
+    &quot;use&quot;: &quot;row_text_v1&quot;
+  },
+  &quot;chunker&quot;: {
+    &quot;use&quot;: &quot;structured_tokens&quot;,
+    &quot;max_tokens&quot;: 512,
+    &quot;overlap_tokens&quot;: 32
+  },
+  &quot;embedder&quot;: {
+    &quot;use&quot;: &quot;e5_small&quot;
+  },
+  &quot;embedder_identity&quot;: {
+    &quot;model&quot;: &quot;intfloat/multilingual-e5-small&quot;,
+    &quot;revision&quot;: &quot;614241f622f53c4eeff9890bdc4f31cfecc418b3&quot;,
+    &quot;passage_prefix&quot;: &quot;passage: &quot;,
+    &quot;query_prefix&quot;: &quot;query: &quot;,
+    &quot;normalized&quot;: true
+  }
+}</pre></details><h2>逐题明细</h2><div class="filters"><button data-tag="all" class=on>全部（24）</button><button data-tag="miss">未命中（19）</button><button data-tag="partial">部分覆盖（3）</button><button data-tag="complete">完整覆盖（2）</button><button data-tag="cross">有跨文档结果（21）</button><button data-tag="auto">含自动判定（0）</button></div><h2 id="doc-d359c37e0bc3c87a">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf</h2><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> CONTRACT-105-Q001 <span class="meta">· 2/3 条结果来自其他文档</span></h3><div>采购合同CONTRATO N° 105 - 2025（CONT2025001） 的签署双方分别是谁？各自的法定代表人是谁？</div><details><summary>参考答案</summary><div class="meta">合同买方为 ELECTRO SUR ESTE S.A.A. (LA EMPRESA)，法定代表人为总经理 Ing. Fredy Hernán Gonzáles De La Vega；承包商/卖方为 HEXING ELECTRICAL COMPANY S.A.C. (EL CONTRATISTA)，法定代表人为 María Isabel Gallardo Torres 和 Medaly Xiomara Arotoma Taipe。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 1 页</div><div class="text" data-expand>ELECTRO SUR ESTE S.A.A., identificada con RUC. Nº 20116544289, cuya personería jurídica se encuentra inscrita en la Partida Electrónica Nº 11003503 del Registro de Personas Jurídicas Zona Registral Nº X - Sede Cusco, con domicilio en la Avenida Mariscal Sucre Nº 400 de la Urbanización Bancopata, del distrito de Santiago, provincia y departamento de Cusco, debidamente representada para este acto po<span class="ellipsis">… </span><span class="rest hidden">r su Gerente General el Ing. Fredy Hernán Gonzáles De La Vega, peruano, identificado con DNI. Nº 23839976, con poder de representación inscrito en los Asientos N° D00195 y N° D00232 de la Partida Electrónica en mención. A quien en adelante se le denominará “LA EMPRESA”. </span><button class="toggle" data-more="展开全文（共 670 字符）" data-less="收起">展开全文（共 670 字符）</button></div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0001</div></details></div><div class="item"><b>证据 e2</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 1 页</div><div class="text" data-expand>HEXING ELECTRICAL COMPANY S.A.C., identificada con RUC. Nº 20546102115, cuya razón social se encuentra inscrita en la Partida Electrónica Nº 12601784 de la Zona Registral IX – Sede Lima, con domicilio legal en el inmueble ubicado en la Avenida Guardia Civil N° 1321, Int. 1602, Urbanización El Aeropuerto, distrito de Surquillo, provincia y departamento de Lima, representada para este efecto por sus<span class="ellipsis">… </span><span class="rest hidden"> Apoderadas la Srta. María Isabel Gallardo Torres, peruana, identificada con DNI N° 44099982, y la Srta. Medaly Xiomara Arotoma Taipe, peruana, identificada con DNI N° 70034859, ambas con poderes inscritos en el asiento Nº C00010 de referida Partida Electrónica en mención. A quien en adelante se le denominará EL CONTRATISTA. </span><button class="toggle" data-more="展开全文（共 726 字符）" data-less="收起">展开全文（共 726 字符）</button></div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0001</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge ">非证据</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 2 页 · 相似度 0.869</span><div class="text">2.4 EL CONTRATISTA ha cumplido con presentar la siguiente documentación en fecha 02/09/2025 y su subsanación en fecha 10/09/2025:
+· Garantía de fiel cumplimiento del contrato:</div><details><summary>d359c37e0bc3c87a-c0004</summary><div class="meta">距离 0.131187，类型 list</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.868</span><div class="text" data-expand>第9行：COMPANY = &quot;ENOSA&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;108,630&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;18,105&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+<span class="ellipsis">… </span><span class="rest hidden">signature) = &quot;18,105&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;18,105&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;18,105&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;18,105&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;18,105&quot;。
+第10行：COMPANY = &quot;HDNA&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;190,941&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;70,000&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;60,941&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;60,000&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = 〔空白〕。 </span><button class="toggle" data-more="展开全文（共 1313 字符）" data-less="收起">展开全文（共 1313 字符）</button></div><details><summary>5a4c36e0022f4917-c0011</summary><div class="meta">距离 0.132449，类型 table</div></details></div><div class="item"><b>#3</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.867</span><div class="text" data-expand>第20行：COMPANY = &quot;ENSA&quot;；ITEM = &quot;2&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n3 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;9,910&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;1,810&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+sig<span class="ellipsis">… </span><span class="rest hidden">nature) = &quot;1,710&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;1,710&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;1,610&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;1,560&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;1,510&quot;。
+第21行：第1列至第11列为合并单元格，内容 = &quot;ITEM 3: THREE PHASE METER 3 WIRES - MODEL HXE33K-S1&quot;。
+第22行：COMPANY = &quot;ELUC&quot;；ITEM = &quot;3&quot;；DESCRIPTION = &quot;Three Phase 3\nwires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;150&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;150&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = 〔空白〕。 </span><button class="toggle" data-more="展开全文（共 1362 字符）" data-less="收起">展开全文（共 1362 字符）</button></div><details><summary>5a4c36e0022f4917-c0016</summary><div class="meta">距离 0.132671，类型 table</div></details></div></div></div></div><div class="card" data-tags="all complete cross"><h3><span class="badge ok">✓ 全部证据已检索到</span> CONTRACT-105-Q002 <span class="meta">· 2/3 条结果来自其他文档</span></h3><div>采购合同CONTRATO N° 105 - 2025（CONT2025001）包含哪些 Ítem 的产品？各自的数量、单价及含税总金额是多少？合同总金额是多少？</div><details><summary>参考答案</summary><div class="meta">合同共包含 3 个 Ítem，含税总金额为 US$ 810,722.54：
+1. Ítem 1（单相电子电表 2线）：数量 120,000 台，单价 US$ 6.1124，总价 US$ 733,488.00；
+2. Ítem 3（三相电子电表 3线）：数量 1,500 台，单价 US$ 18.0894，总价 US$ 27,134.10；
+3. Ítem 4（三相电子电表 4线）：数量 2,600 台，单价 US$ 19.2694，总价 US$ 50,100.44。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge ok">第 1 位时已覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 2 页</div><div class="text">Ítem | Descripción
+1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS
+3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS
+4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS</div><div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 3 页</div><div class="text" data-expand>Ítem | DESCRIPCIÓN | TABLA DE DATOS TÉCNICOS
+1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 01
+3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS | Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 03
+4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el<span class="ellipsis">… </span><span class="rest hidden"> Ítem 04 </span><button class="toggle" data-more="展开全文（共 408 字符）" data-less="收起">展开全文（共 408 字符）</button></div><div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 4 页</div><div class="text">Ítem 1: US$ 733,488.00 (Setecientos treinta y tres mil cuatrocientos ochenta y ocho con 00/100 Dólares Americanos) incluye todos los impuestos de Ley.
+Ítem 3: US$ 27,134.10 (Veintisiete mil ciento treinta y cuatro con 10/100 Dólares Americanos) incluye todos los impuestos de Ley.
+Ítem 4: US$ 50,100.44 (Cincuenta mil cien con 44/100 Dólares Americanos) incluye todos los impuestos de Ley.</div><div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 4 页</div><div class="text">ÍTEM | DESCRIPCIÓN | CANTIDAD | PRECIO UNITARIO CON IGV (US$) | PRECIO TOTAL (US$)
+Ítem 1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | 120,000 | 6.1124 | 733,488.00
+Ítem 3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS | 1,500 | 18.0894 | 27,134.10
+Ítem 4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | 2,600 | 19.2694 | 50,100.44</div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0013</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge ok">✓ 证据 e1</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 4 页 · 相似度 0.883</span><div class="text" data-expand>第2行：ÍTEM = &quot;Ítem 1&quot;；DESCRIPCIÓN = &quot;MEDIDOR ELECTRÓNICO MONOFASICO DE 2\nHILOS&quot;；CANTIDAD = &quot;120,000&quot;；PRECIO UNITARIO
+CON IGV
+(US$) = &quot;6.1124&quot;；PRECIO TOTAL
+(US$) = &quot;733,488.00&quot;。
+第3行：ÍTEM = &quot;Ítem 3&quot;；DESCRIPCIÓN = &quot;MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3\nHILOS&quot;；CANTIDAD = &quot;1,500&quot;；PRECIO <span class="ellipsis">… </span><span class="rest hidden">UNITARIO
+CON IGV
+(US$) = &quot;18.0894&quot;；PRECIO TOTAL
+(US$) = &quot;27,134.10&quot;。
+第4行：ÍTEM = &quot;Ítem 4&quot;；DESCRIPCIÓN = &quot;MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4\nHILOS&quot;；CANTIDAD = &quot;2,600&quot;；PRECIO UNITARIO
+CON IGV
+(US$) = &quot;19.2694&quot;；PRECIO TOTAL
+(US$) = &quot;50,100.44&quot;。 </span><button class="toggle" data-more="展开全文（共 521 字符）" data-less="收起">展开全文（共 521 字符）</button></div><details><summary>d359c37e0bc3c87a-c0013</summary><div class="meta">距离 0.117109，类型 table</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">ORDER PERU 24-12 ANDET.pdf · 第 1 页 · 相似度 0.878</span><div class="text" data-expand>表头未确定。
+第1行至第2行共享第1列，内容 = &quot;Item&quot;。
+第1行至第2行共享第2列，内容 = &quot;Goods of Description&quot;。
+第1行至第2行共享第3列，内容 = &quot;Qty&quot;。
+第1行：第4列 = &quot;Unit price&quot;；第5列 = &quot;Total Amount&quot;。
+第2行：第4列 = &quot;(CIF Callao)&quot;；第5列 = &quot;(USD)&quot;。
+第3行：第1列 = &quot;1&quot;；第2列 = &quot;C&amp;I Meter Cl 0.2S\n3&amp;4 Wires meter with modem 4G\n2 pulses\nModel: HXF300&quot;<span class="ellipsis">… </span><span class="rest hidden">；第3列 = &quot;10,000&quot;；第4列 = &quot;USD 96.80&quot;；第5列 = &quot;USD 968,000.00&quot;。
+第4行：第1列至第4列为合并单元格，内容 = &quot;Total CIF (CALLAO)&quot;。
+第4行：第5列 = &quot;USD 968,000.00&quot;。 </span><button class="toggle" data-more="展开全文（共 410 字符）" data-less="收起">展开全文（共 410 字符）</button></div><details><summary>169a1f2133fe5643-c0001</summary><div class="meta">距离 0.121603，类型 table</div></details></div><div class="item"><b>#3</b> <span class="badge bad">跨文档</span> <span class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页 · 相似度 0.877</span><div class="text">表头未确定。
+第8行：第1列 = &quot;HXF300&quot;；第2列 = 〔空白〕；第3列 = &quot;750.00&quot;；第4列 = &quot;750.00&quot;；第5列 = &quot;-&quot;；第6列 = &quot;-&quot;；第7列 = &quot;-&quot;。</div><details><summary>5883b02cd922a64f-c0008</summary><div class="meta">距离 0.122578，类型 table</div></details></div></div></div></div><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> CONTRACT-105-Q003 <span class="meta">· 3/3 条结果来自其他文档</span></h3><div>采购合同CONTRATO N° 105 - 2025（CONT2025001）规定的总履约期限是多久？具体的交货地点在哪里？是否允许提前交货？</div><details><summary>参考答案</summary><div class="meta">合同规定的总履约交付期限为自合同签署之日起 690 个日历天。交货地点为 Almacén Central ELSE（地址：Av. Mariscal Sucre N° 400, Urb. Bancopata - Santiago, Cusco）。合同明确规定不接受提前交货，除非买方主动提出并经承包商同意。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 5 页</div><div class="text">Los bienes materia del presente contrato se entregarán en el plazo de 690 días calendarios de la firma de contrato.</div><div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 5 页</div><div class="text">6ta ENTREGA (A 690 días de la firma del contrato)</div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0016；d359c37e0bc3c87a-c0017；d359c37e0bc3c87a-c0018；d359c37e0bc3c87a-c0019</div></details></div><div class="item"><b>证据 e2</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 5 页</div><div class="text">No se aceptarán entregas anticipadas, salvo que sea requerido por LA EMPRESA, previa disponibilidad y aceptación por parte del CONTRATISTA.</div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0020</div></details></div><div class="item"><b>证据 e3</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 5 页</div><div class="text">LUGAR DE ENTREGA
+ELSE | Almacén Central ELSE - Av. Mariscal Sucre Nº 400, Urb. Bancopata – Santiago, Cusco, Cusco</div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0021</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.875</span><div class="text" data-expand>第13行：COMPANY = &quot;ELSE&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;120,000&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;15,000&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+<span class="ellipsis">… </span><span class="rest hidden">signature) = &quot;15,000&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;15,000&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;25,000&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;25,000&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;25,000&quot;。
+第14行：COMPANY = &quot;SEAL&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;110,000&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;10,000&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;15,000&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;20,000&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;20,000&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;20,000&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;25,000&quot;。 </span><button class="toggle" data-more="展开全文（共 1325 字符）" data-less="收起">展开全文（共 1325 字符）</button></div><details><summary>5a4c36e0022f4917-c0013</summary><div class="meta">距离 0.124899，类型 table</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.875</span><div class="text" data-expand>第9行：COMPANY = &quot;ENOSA&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;108,630&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;18,105&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+<span class="ellipsis">… </span><span class="rest hidden">signature) = &quot;18,105&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;18,105&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;18,105&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;18,105&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;18,105&quot;。
+第10行：COMPANY = &quot;HDNA&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;190,941&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;70,000&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;60,941&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;60,000&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = 〔空白〕。 </span><button class="toggle" data-more="展开全文（共 1313 字符）" data-less="收起">展开全文（共 1313 字符）</button></div><details><summary>5a4c36e0022f4917-c0011</summary><div class="meta">距离 0.125462，类型 table</div></details></div><div class="item"><b>#3</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.873</span><div class="text" data-expand>第20行：COMPANY = &quot;ENSA&quot;；ITEM = &quot;2&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n3 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;9,910&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;1,810&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+sig<span class="ellipsis">… </span><span class="rest hidden">nature) = &quot;1,710&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;1,710&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;1,610&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;1,560&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;1,510&quot;。
+第21行：第1列至第11列为合并单元格，内容 = &quot;ITEM 3: THREE PHASE METER 3 WIRES - MODEL HXE33K-S1&quot;。
+第22行：COMPANY = &quot;ELUC&quot;；ITEM = &quot;3&quot;；DESCRIPTION = &quot;Three Phase 3\nwires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;150&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;150&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = 〔空白〕。 </span><button class="toggle" data-more="展开全文（共 1362 字符）" data-less="收起">展开全文（共 1362 字符）</button></div><details><summary>5a4c36e0022f4917-c0016</summary><div class="meta">距离 0.126564，类型 table</div></details></div></div></div></div><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> CONTRACT-105-Q004 <span class="meta">· 2/3 条结果来自其他文档</span></h3><div>采购合同CONTRATO N° 105 - 2025（CONT2025001）中，关于各 Ítem 的履约保证金（Garantía de fiel cumplimiento）金额及出具机构是如何规定的？</div><details><summary>参考答案</summary><div class="meta">履约保证金均由 AVLA Perú Compañía de Seguros 出具，金额为各 Ítem 原始合同金额的 10%：
+- Ítem 1：US$ 73,348.80（保函 N° 3012025041864）
+- Ítem 3：US$ 2,713.41（保函 N° 3012025041881）
+- Ítem 4：US$ 5,010.05（保函 N° 3012025041885）</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 2 页</div><div class="text" data-expand>Correspondiente al Ítem 1 – Medidor electrónico monofásico de 2 hilos: Carta fianza N° 3012025041864 por el monto de US$ 73,348.80 (Setenta y tres mil trescientos cuarenta y ocho con 80/100 Dólares Americanos) con vencimiento al 20/09/2027.
+Correspondiente al Ítem 3 – Medidor electrónico trifásico de 3 hilos: Carta fianza N° 3012025041881 por el monto de US$ 2,713.41 (Dos mil setecientos trece con<span class="ellipsis">… </span><span class="rest hidden"> 41/100 Dólares Americanos) con vencimiento al 20/09/2027.
+Correspondiente al Ítem 4 – Medidor electrónico trifásico de 4 hilos: Carta fianza N° 3012025041885 por el monto de US$ 5,010.05 (Cinco mil diez con 05/100 Dólares Americanos) con vencimiento al 20/09/2027. </span><button class="toggle" data-more="展开全文（共 665 字符）" data-less="收起">展开全文（共 665 字符）</button></div><div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 6 页</div><div class="text" data-expand>Correspondiente al Ítem 1 – Medidor electrónico monofásico de 2 hilos: De fiel cumplimiento del contrato: US$ 73,348.80 (Setenta y tres mil trescientos cuarenta y ocho con 80/100 Dólares Americanos), a través de la Carta Fianza N° 3012025041864 emitida por AVLA Perú Compañía de Seguros. Monto que es equivalente al diez por ciento (10%) del monto del contrato original. Correspondiente al Ítem 3 – M<span class="ellipsis">… </span><span class="rest hidden">edidor electrónico trifásico de 3 hilos: De fiel cumplimiento del contrato: US$ 2,713.41 (Dos mil setecientos trece con 41/100 Dólares Americanos), a través de la Carta Fianza N° 3012025041881 emitida por AVLA Perú Compañía de Seguros. Monto que es equivalente al diez por ciento (10%) del monto del contrato original. Correspondiente al Ítem 4 – Medidor electrónico trifásico de 4 hilos: De fiel cumplimiento del contrato: US$ 5,010.05 (Cinco mil diez con 05/100 Dólares Americanos), a través de la Carta Fianza N° 3012025041885 emitida por AVLA Perú Compañía de Seguros. Monto que es equivalente al diez por ciento (10%) del monto del contrato original. </span><button class="toggle" data-more="展开全文（共 1055 字符）" data-less="收起">展开全文（共 1055 字符）</button></div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0023 + d359c37e0bc3c87a-c0025 + d359c37e0bc3c87a-c0027</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge ">非证据</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 2 页 · 相似度 0.874</span><div class="text">2.4 EL CONTRATISTA ha cumplido con presentar la siguiente documentación en fecha 02/09/2025 y su subsanación en fecha 10/09/2025:
+· Garantía de fiel cumplimiento del contrato:</div><details><summary>d359c37e0bc3c87a-c0004</summary><div class="meta">距离 0.126006，类型 list</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.868</span><div class="text" data-expand>第20行：COMPANY = &quot;ENSA&quot;；ITEM = &quot;2&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n3 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;9,910&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;1,810&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+sig<span class="ellipsis">… </span><span class="rest hidden">nature) = &quot;1,710&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;1,710&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;1,610&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;1,560&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;1,510&quot;。
+第21行：第1列至第11列为合并单元格，内容 = &quot;ITEM 3: THREE PHASE METER 3 WIRES - MODEL HXE33K-S1&quot;。
+第22行：COMPANY = &quot;ELUC&quot;；ITEM = &quot;3&quot;；DESCRIPTION = &quot;Three Phase 3\nwires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;150&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;150&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = 〔空白〕。 </span><button class="toggle" data-more="展开全文（共 1362 字符）" data-less="收起">展开全文（共 1362 字符）</button></div><details><summary>5a4c36e0022f4917-c0016</summary><div class="meta">距离 0.132260，类型 table</div></details></div><div class="item"><b>#3</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.866</span><div class="text" data-expand>第17行：第1列至第11列为合并单元格，内容 = &quot;ITEM 2: SINGLE PHASE METER 3 WIRES - MODEL HXE13ES&quot;。
+第18行：COMPANY = &quot;ELCTO&quot;；ITEM = &quot;2&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n3 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;94,000&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) <span class="ellipsis">… </span><span class="rest hidden">= &quot;16,000&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;16,000&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;15,500&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;15,500&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;15,500&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;15,500&quot;。
+第19行：COMPANY = &quot;ENOSA&quot;；ITEM = &quot;2&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n3 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;5,220&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;870&quot;。 </span><button class="toggle" data-more="展开全文（共 1385 字符）" data-less="收起">展开全文（共 1385 字符）</button></div><details><summary>5a4c36e0022f4917-c0015</summary><div class="meta">距离 0.133851，类型 table</div></details></div></div></div></div><div class="card" data-tags="all miss"><h3><span class="badge bad">✗ 未检索到证据</span> CONTRACT-105-Q005</h3><div>采购合同CONTRATO N° 105 - 2025（CONT2025001）中，技术商业质保期（Garantía Técnico-Comercial）的期限是多久？在质保期内发生故障时，承包商的响应和修复时限是多少？</div><details><summary>参考答案</summary><div class="meta">技术商业质保期为自货物送达买方仓库之日起 5 年零 1 个月。发生故障时，承包商须在收到通知后 30 个日历天内指派技术人员到场排查原因；若判定为承包商责任，须在确定原因或收到第三方鉴定结果后的 45 个日历天内修复或更换新机。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 3 页</div><div class="text">garantiza la calidad técnica de los medidores de energía, por un periodo de 5 años y 1 mes, contados a partir de la fecha de recepción en el almacén de LA EMPRESA</div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0011</div></details></div><div class="item"><b>证据 e2</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 3 页</div><div class="text">EL CONTRATISTA tendrá un plazo máximo de treinta (30) días calendario contados a partir de la fecha de realizada la notificación, para que se apersone un representante técnico</div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0011</div></details></div><div class="item"><b>证据 e3</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 3 页</div><div class="text" data-expand>En el caso que la falla sea atribuible al CONTRATISTA, la reparación debe iniciarse a partir del día siguiente de emitido el resultado del peritaje por el organismo externo, debiendo devolverse el medidor debidamente reparado dentro de los cuarenta y cinco (45) días calendario a partir de esa fecha (y en caso no sea factible, por destrucción, imposibilidad de reparación u otra causa) deberá devolv<span class="ellipsis">… </span><span class="rest hidden">er un medidor nuevo a LA EMPRESA. </span><button class="toggle" data-more="展开全文（共 433 字符）" data-less="收起">展开全文（共 433 字符）</button></div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0011</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge ">非证据</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 5 页 · 相似度 0.879</span><div class="text" data-expand>第4行：TEM = &quot;1&quot;；DESCRIPCIÓN = &quot;MEDIDOR ELECTRÓNICO\nMONOFASICO DE 2 HILOS&quot;；UNIDAD
+DE
+MEDIDA = &quot;UNIDAD&quot;；REQUERIMI
+ENTO
+TOTAL = &quot;120,000&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 1era
+ENTREG
+A / (A 170
+días de la
+firma del
+contrato) = &quot;15,000&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 2da
+ENTRE<span class="ellipsis">… </span><span class="rest hidden">GA / (A 210
+días de la
+firma del
+contrato) = &quot;15,000&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 3era
+ENTREG
+A / (A 330
+días de la
+firma del
+contrato) = &quot;15,000&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 4ta
+ENTREG
+A / (A 450
+días de la
+firma del
+contrato) = &quot;25,000&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 5ta
+ENTREG
+A / (A 570
+días de la
+firma del
+contrato) = &quot;25,000&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 6ta
+ENTREG
+A / (A 690
+días de la
+firma del
+contrato) = &quot;25,000&quot;。 </span><button class="toggle" data-more="展开全文（共 735 字符）" data-less="收起">展开全文（共 735 字符）</button></div><details><summary>d359c37e0bc3c87a-c0017</summary><div class="meta">距离 0.120955，类型 table</div></details></div><div class="item"><b>#2</b> <span class="badge ">非证据</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 5 页 · 相似度 0.877</span><div class="text" data-expand>第6行：TEM = &quot;4&quot;；DESCRIPCIÓN = &quot;MEDIDOR ELECTRÓNICO\nTRIFÁSICO DE 4 HILOS&quot;；UNIDAD
+DE
+MEDIDA = &quot;UNIDAD&quot;；REQUERIMI
+ENTO
+TOTAL = &quot;2,600&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 1era
+ENTREG
+A / (A 170
+días de la
+firma del
+contrato) = &quot;300&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 2da
+ENTREGA / (<span class="ellipsis">… </span><span class="rest hidden">A 210
+días de la
+firma del
+contrato) = &quot;300&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 3era
+ENTREG
+A / (A 330
+días de la
+firma del
+contrato) = &quot;500&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 4ta
+ENTREG
+A / (A 450
+días de la
+firma del
+contrato) = &quot;500&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 5ta
+ENTREG
+A / (A 570
+días de la
+firma del
+contrato) = &quot;500&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 6ta
+ENTREG
+A / (A 690
+días de la
+firma del
+contrato) = &quot;500&quot;。 </span><button class="toggle" data-more="展开全文（共 714 字符）" data-less="收起">展开全文（共 714 字符）</button></div><details><summary>d359c37e0bc3c87a-c0019</summary><div class="meta">距离 0.123147，类型 table</div></details></div><div class="item"><b>#3</b> <span class="badge ">非证据</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 5 页 · 相似度 0.874</span><div class="text" data-expand>第5行：TEM = &quot;3&quot;；DESCRIPCIÓN = &quot;MEDIDOR ELECTRÓNICO\nTRIFÁSICO DE 3 HILOS&quot;；UNIDAD
+DE
+MEDIDA = &quot;UNIDAD&quot;；REQUERIMI
+ENTO
+TOTAL = &quot;1,500&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 1era
+ENTREG
+A / (A 170
+días de la
+firma del
+contrato) = 〔空白〕；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 2da
+ENTREGA / (A<span class="ellipsis">… </span><span class="rest hidden"> 210
+días de la
+firma del
+contrato) = 〔空白〕；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 3era
+ENTREG
+A / (A 330
+días de la
+firma del
+contrato) = &quot;750&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 4ta
+ENTREG
+A / (A 450
+días de la
+firma del
+contrato) = 〔空白〕；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 5ta
+ENTREG
+A / (A 570
+días de la
+firma del
+contrato) = 〔空白〕；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 6ta
+ENTREG
+A / (A 690
+días de la
+firma del
+contrato) = &quot;750&quot;。 </span><button class="toggle" data-more="展开全文（共 710 字符）" data-less="收起">展开全文（共 710 字符）</button></div><details><summary>d359c37e0bc3c87a-c0018</summary><div class="meta">距离 0.126468，类型 table</div></details></div></div></div></div><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> CONTRACT-105-Q006 <span class="meta">· 3/3 条结果来自其他文档</span></h3><div>采购合同CONTRATO N° 105 - 2025（CONT2025001）中，对“重复性故障”（Falla Repetitiva）的认定标准是什么？出现重复性故障时承包商需要承担什么责任？</div><details><summary>参考答案</summary><div class="meta">重复性故障的认定标准为：安装未满 1 年的电表故障率达到 0.5%，或者安装未满 18 个月的同一规格电表累计发生 10 起以上相同原因的故障；此外，第三方鉴定证实存在隐患性制造缺陷的亦认定为重复性故障。出现重复性故障时，承包商必须自费全批次更换涉及的生产批次电表，并赔偿买方因此遭受的所有损失。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 3 页</div><div class="text">Se definirá como falla repetitiva aquella que se advierta en 0.5% de los medidores instalados del menos de un año o undécima ocasión, es decir que existen 10 casos anteriores los cuales presentaron la misma falla a medidores que lleven menos de 18 meses de instalación y cuyo origen sea de similares causas</div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0012</div></details></div><div class="item"><b>证据 e2</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 3,4 页</div><div class="text" data-expand>Adicionalmente, sí como resultado de un peritaje de determinación de la causa de una falla se comprueba, que independiente de la cantidad de medidores que hubieren sido afectados y los plazos de instalación transcurridos, existen motivos fundados sobre un defecto de fabricación, tal defecto de fabricación será catalogado como falla repetitiva, con el propósito de evitar un mal mayor en las instala<span class="ellipsis">… </span><span class="rest hidden">ciones de LA EMPRESA, que afecte la calidad de servicio eléctrico, en este caso, EL CONTRATISTA se compromete a la reposición total del lote de producción involucrado, así como a resarcir todos los daños y perjuicios ocasionados a LA EMPRESA. </span><button class="toggle" data-more="展开全文（共 642 字符）" data-less="收起">展开全文（共 642 字符）</button></div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0012</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.867</span><div class="text" data-expand>第9行：COMPANY = &quot;ENOSA&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;108,630&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;18,105&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+<span class="ellipsis">… </span><span class="rest hidden">signature) = &quot;18,105&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;18,105&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;18,105&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;18,105&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;18,105&quot;。
+第10行：COMPANY = &quot;HDNA&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;190,941&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;70,000&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;60,941&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;60,000&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = 〔空白〕。 </span><button class="toggle" data-more="展开全文（共 1313 字符）" data-less="收起">展开全文（共 1313 字符）</button></div><details><summary>5a4c36e0022f4917-c0011</summary><div class="meta">距离 0.133326，类型 table</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.866</span><div class="text" data-expand>第11行：COMPANY = &quot;ENSA&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;132,180&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;24,330&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+<span class="ellipsis">… </span><span class="rest hidden">signature) = &quot;23,630&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;21,880&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;21,680&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;20,480&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;20,180&quot;。
+第12行：COMPANY = &quot;ELOR -\nLORETO&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;87,600&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;14,600&quot;。 </span><button class="toggle" data-more="展开全文（共 1334 字符）" data-less="收起">展开全文（共 1334 字符）</button></div><details><summary>5a4c36e0022f4917-c0012</summary><div class="meta">距离 0.133622，类型 table</div></details></div><div class="item"><b>#3</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.865</span><div class="text" data-expand>第15行：COMPANY = &quot;ELOR - SAN\nMARTIN&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;92,400&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days<span class="ellipsis">… </span><span class="rest hidden"> of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;15,400&quot;。
+第16行：COMPANY = &quot;ELOR -\nCAJAMARCA&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;67,305&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;11,220&quot;。 </span><button class="toggle" data-more="展开全文（共 1350 字符）" data-less="收起">展开全文（共 1350 字符）</button></div><details><summary>5a4c36e0022f4917-c0014</summary><div class="meta">距离 0.135011，类型 table</div></details></div></div></div></div><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> CONTRACT-105-Q007 <span class="meta">· 2/3 条结果来自其他文档</span></h3><div>采购合同CONTRATO N° 105 - 2025（CONT2025001）中，买方办理支付流程的前提条件有哪些？出具验收合格证明以及付款的具体时限要求是什么？</div><details><summary>参考答案</summary><div class="meta">买方按交付批次以美元进行分期付款。付款的前提是承包商需提交发票（Comprobante de Pago）、使用部门出具的验收合格单（Hoja de Conformidad）、签收运单（Guía de remisión）及采购订单复印件。买方应在货物签收后 7 个日历天内（若需测试最长 15 天）出具验收合格证明；出具合格证明后，买方须在 10 个日历天内完成支付。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 4 页</div><div class="text">Comprobante de Pago (Factura).
+Hoja de Conformidad emitida por el área usuaria por la recepción de los bienes.
+Guía de remisión o entregable con sello de recepción de la entidad contratante.
+Copia de la Orden de Compra.</div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0015</div></details></div><div class="item"><b>证据 e2</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 5 页</div><div class="text">Para tal efecto, el responsable de otorgar la conformidad de la prestación deberá hacerlo en un plazo que no excederá de los siete (7) días de producida la recepción, salvo que se requiera efectuar pruebas que permitan verificar el cumplimiento de la obligación, en cuyo caso la conformidad se emite en un plazo máximo de quince (15) días, bajo responsabilidad de dicho funcionario.</div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0016</div></details></div><div class="item"><b>证据 e3</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 5 页</div><div class="text">LA EMPRESA paga las contraprestaciones pactadas a EL CONTRATISTA dentro de los diez (10) días calendario siguientes de otorgada la conformidad de los bienes</div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0016</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.880</span><div class="text" data-expand>第17行：第1列至第11列为合并单元格，内容 = &quot;ITEM 2: SINGLE PHASE METER 3 WIRES - MODEL HXE13ES&quot;。
+第18行：COMPANY = &quot;ELCTO&quot;；ITEM = &quot;2&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n3 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;94,000&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) <span class="ellipsis">… </span><span class="rest hidden">= &quot;16,000&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;16,000&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;15,500&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;15,500&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;15,500&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;15,500&quot;。
+第19行：COMPANY = &quot;ENOSA&quot;；ITEM = &quot;2&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n3 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;5,220&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;870&quot;。 </span><button class="toggle" data-more="展开全文（共 1385 字符）" data-less="收起">展开全文（共 1385 字符）</button></div><details><summary>5a4c36e0022f4917-c0015</summary><div class="meta">距离 0.120433，类型 table</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.879</span><div class="text" data-expand>第13行：COMPANY = &quot;ELSE&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;120,000&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;15,000&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+<span class="ellipsis">… </span><span class="rest hidden">signature) = &quot;15,000&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;15,000&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;25,000&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;25,000&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;25,000&quot;。
+第14行：COMPANY = &quot;SEAL&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;110,000&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;10,000&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;15,000&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;20,000&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;20,000&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;20,000&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;25,000&quot;。 </span><button class="toggle" data-more="展开全文（共 1325 字符）" data-less="收起">展开全文（共 1325 字符）</button></div><details><summary>5a4c36e0022f4917-c0013</summary><div class="meta">距离 0.120699，类型 table</div></details></div><div class="item"><b>#3</b> <span class="badge ">非证据</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 5 页 · 相似度 0.879</span><div class="text" data-expand>第4行：TEM = &quot;1&quot;；DESCRIPCIÓN = &quot;MEDIDOR ELECTRÓNICO\nMONOFASICO DE 2 HILOS&quot;；UNIDAD
+DE
+MEDIDA = &quot;UNIDAD&quot;；REQUERIMI
+ENTO
+TOTAL = &quot;120,000&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 1era
+ENTREG
+A / (A 170
+días de la
+firma del
+contrato) = &quot;15,000&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 2da
+ENTRE<span class="ellipsis">… </span><span class="rest hidden">GA / (A 210
+días de la
+firma del
+contrato) = &quot;15,000&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 3era
+ENTREG
+A / (A 330
+días de la
+firma del
+contrato) = &quot;15,000&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 4ta
+ENTREG
+A / (A 450
+días de la
+firma del
+contrato) = &quot;25,000&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 5ta
+ENTREG
+A / (A 570
+días de la
+firma del
+contrato) = &quot;25,000&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 6ta
+ENTREG
+A / (A 690
+días de la
+firma del
+contrato) = &quot;25,000&quot;。 </span><button class="toggle" data-more="展开全文（共 735 字符）" data-less="收起">展开全文（共 735 字符）</button></div><details><summary>d359c37e0bc3c87a-c0017</summary><div class="meta">距离 0.121263，类型 table</div></details></div></div></div></div><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> CONTRACT-105-Q008 <span class="meta">· 1/3 条结果来自其他文档</span></h3><div>采购合同CONTRATO N° 105 - 2025（CONT2025001）中，如果承包商发生未经证明的延迟交货，延期罚金（Penalidad por Mora）的计算公式是什么？罚金的最高上限是多少？</div><details><summary>参考答案</summary><div class="meta">每日延期罚金公式为：Penalidad Diaria = (0.10 × monto vigente) / (F × plazo vigente en días)。由于本合同履约期限大于60天，系数 F 取值 0.25。延迟罚金最高上限为有效合同总额（或对应 Ítem 金额）的 10%。达到 10% 上限后，买方有权解除合同。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 7 页</div><div class="text">Penalidad Diaria = (0.10 x monto vigente) / (F x plazo vigente en días)
+F = 0.25 para plazos mayores a sesenta (60) días</div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0029</div></details></div><div class="item"><b>证据 e2</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 7 页</div><div class="text">Estos dos (2) tipos de penalidades pueden alcanzar cada una un monto máximo equivalente al diez por ciento (10%) del monto del contrato vigente, o de ser el caso, del ítem que debió ejecutarse. Cuando se llegue a cubrir el monto máximo de la penalidad por mora o el monto máximo para otras penalidades, de ser el caso, LA EMPRESA puede resolver el contrato por incumplimiento.</div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0029 + d359c37e0bc3c87a-c0030</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge ">非证据</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 5 页 · 相似度 0.876</span><div class="text" data-expand>第4行：TEM = &quot;1&quot;；DESCRIPCIÓN = &quot;MEDIDOR ELECTRÓNICO\nMONOFASICO DE 2 HILOS&quot;；UNIDAD
+DE
+MEDIDA = &quot;UNIDAD&quot;；REQUERIMI
+ENTO
+TOTAL = &quot;120,000&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 1era
+ENTREG
+A / (A 170
+días de la
+firma del
+contrato) = &quot;15,000&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 2da
+ENTRE<span class="ellipsis">… </span><span class="rest hidden">GA / (A 210
+días de la
+firma del
+contrato) = &quot;15,000&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 3era
+ENTREG
+A / (A 330
+días de la
+firma del
+contrato) = &quot;15,000&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 4ta
+ENTREG
+A / (A 450
+días de la
+firma del
+contrato) = &quot;25,000&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 5ta
+ENTREG
+A / (A 570
+días de la
+firma del
+contrato) = &quot;25,000&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 6ta
+ENTREG
+A / (A 690
+días de la
+firma del
+contrato) = &quot;25,000&quot;。 </span><button class="toggle" data-more="展开全文（共 735 字符）" data-less="收起">展开全文（共 735 字符）</button></div><details><summary>d359c37e0bc3c87a-c0017</summary><div class="meta">距离 0.124258，类型 table</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.869</span><div class="text" data-expand>第4行：第1列至第11列为合并单元格，内容 = &quot;ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES&quot;。
+第5行：COMPANY = &quot;ELUC&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;27,000&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;<span class="ellipsis">… </span><span class="rest hidden">2,000&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;5,000&quot;。
+第6行：COMPANY = &quot;ADINELSA&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;10,000&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = 〔空白〕。 </span><button class="toggle" data-more="展开全文（共 1379 字符）" data-less="收起">展开全文（共 1379 字符）</button></div><details><summary>5a4c36e0022f4917-c0009</summary><div class="meta">距离 0.130674，类型 table</div></details></div><div class="item"><b>#3</b> <span class="badge ">非证据</span> <span class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 5 页 · 相似度 0.869</span><div class="text" data-expand>第6行：TEM = &quot;4&quot;；DESCRIPCIÓN = &quot;MEDIDOR ELECTRÓNICO\nTRIFÁSICO DE 4 HILOS&quot;；UNIDAD
+DE
+MEDIDA = &quot;UNIDAD&quot;；REQUERIMI
+ENTO
+TOTAL = &quot;2,600&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 1era
+ENTREG
+A / (A 170
+días de la
+firma del
+contrato) = &quot;300&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 2da
+ENTREGA / (<span class="ellipsis">… </span><span class="rest hidden">A 210
+días de la
+firma del
+contrato) = &quot;300&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 3era
+ENTREG
+A / (A 330
+días de la
+firma del
+contrato) = &quot;500&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 4ta
+ENTREG
+A / (A 450
+días de la
+firma del
+contrato) = &quot;500&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 5ta
+ENTREG
+A / (A 570
+días de la
+firma del
+contrato) = &quot;500&quot;；CANTIDAD Y CRONOGRAMA DE ENTREGAS / 6ta
+ENTREG
+A / (A 690
+días de la
+firma del
+contrato) = &quot;500&quot;。 </span><button class="toggle" data-more="展开全文（共 714 字符）" data-less="收起">展开全文（共 714 字符）</button></div><details><summary>d359c37e0bc3c87a-c0019</summary><div class="meta">距离 0.130712，类型 table</div></details></div></div></div></div><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> CONTRACT-105-Q009 <span class="meta">· 3/3 条结果来自其他文档</span></h3><div>采购合同CONTRATO N° 105 - 2025（CONT2025001）的第 1 次交付（1era ENTREGA，合同签订后 170 天），具体的交付产品和数量是多少？</div><details><summary>参考答案</summary><div class="meta">第 1 次交付（签订合同后 170 天内）需要交付：Ítem 1（单相电子电表）15,000 台，以及 Ítem 4（三相 4 线电子电表）300 台。Ítem 3 在第 1 次交付中无交付任务。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 5 页</div><div class="text">1era ENTREGA (A 170 días de la firma del contrato)
+MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | 15,000
+MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | 300</div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0017 + d359c37e0bc3c87a-c0018 + d359c37e0bc3c87a-c0019</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.895</span><div class="text" data-expand>第11行：COMPANY = &quot;ENSA&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;132,180&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;24,330&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+<span class="ellipsis">… </span><span class="rest hidden">signature) = &quot;23,630&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;21,880&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;21,680&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;20,480&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;20,180&quot;。
+第12行：COMPANY = &quot;ELOR -\nLORETO&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;87,600&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;14,600&quot;。 </span><button class="toggle" data-more="展开全文（共 1334 字符）" data-less="收起">展开全文（共 1334 字符）</button></div><details><summary>5a4c36e0022f4917-c0012</summary><div class="meta">距离 0.104578，类型 table</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.895</span><div class="text" data-expand>第17行：第1列至第11列为合并单元格，内容 = &quot;ITEM 2: SINGLE PHASE METER 3 WIRES - MODEL HXE13ES&quot;。
+第18行：COMPANY = &quot;ELCTO&quot;；ITEM = &quot;2&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n3 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;94,000&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) <span class="ellipsis">… </span><span class="rest hidden">= &quot;16,000&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;16,000&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;15,500&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;15,500&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;15,500&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;15,500&quot;。
+第19行：COMPANY = &quot;ENOSA&quot;；ITEM = &quot;2&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n3 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;5,220&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;870&quot;。 </span><button class="toggle" data-more="展开全文（共 1385 字符）" data-less="收起">展开全文（共 1385 字符）</button></div><details><summary>5a4c36e0022f4917-c0015</summary><div class="meta">距离 0.105145，类型 table</div></details></div><div class="item"><b>#3</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.894</span><div class="text" data-expand>第15行：COMPANY = &quot;ELOR - SAN\nMARTIN&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;92,400&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days<span class="ellipsis">… </span><span class="rest hidden"> of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;15,400&quot;。
+第16行：COMPANY = &quot;ELOR -\nCAJAMARCA&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;67,305&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;11,220&quot;。 </span><button class="toggle" data-more="展开全文（共 1350 字符）" data-less="收起">展开全文（共 1350 字符）</button></div><details><summary>5a4c36e0022f4917-c0014</summary><div class="meta">距离 0.105690，类型 table</div></details></div></div></div></div><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> CONTRACT-105-Q010 <span class="meta">· 3/3 条结果来自其他文档</span></h3><div>采购合同CONTRATO N° 105 - 2025（CONT2025001）是否规定分批交货？每个批次的具体交货日期分别是什么？</div><details><summary>参考答案</summary><div class="meta">是的，合同规定分为 6 个批次交货。合同签署日期为 2025 年 9 月 23 日，各批次期限分别为签署后 170、210、330、450、570 和 690 个日历日；据此计算，各批次截止日期依次为：第 1 批 2026 年 3 月 12 日、第 2 批 2026 年 4 月 21 日、第 3 批 2026 年 8 月 19 日、第 4 批 2026 年 12 月 17 日、第 5 批 2027 年 4 月 16 日、第 6 批 2027 年 8 月 14 日。这些绝对日期是依据合同签署日期和相对期限计算所得，并非合同表格直接列示。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 5 页</div><div class="text">1era ENTREGA (A 170 días de la firma del contrato) | 2da ENTREGA (A 210 días) | 3era ENTREGA (A 330 días) | 4ta ENTREGA (A 450 días) | 5ta ENTREGA (A 570 días) | 6ta ENTREGA (A 690 días)</div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0017；d359c37e0bc3c87a-c0018；d359c37e0bc3c87a-c0019</div></details></div><div class="item"><b>证据 e2</b> <span class="badge bad">未覆盖</span> <div class="meta">Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf · 第 9 页</div><div class="text">De acuerdo con las bases integradas, la oferta y las disposiciones del presente contrato, las partes lo firman por duplicado en señal de conformidad en la ciudad del Cusco a los 23 días del mes de setiembre de 2025.</div><details><summary>可接受的 chunk 组合</summary><div class="meta">d359c37e0bc3c87a-c0033</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.881</span><div class="text" data-expand>第17行：第1列至第11列为合并单元格，内容 = &quot;ITEM 2: SINGLE PHASE METER 3 WIRES - MODEL HXE13ES&quot;。
+第18行：COMPANY = &quot;ELCTO&quot;；ITEM = &quot;2&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n3 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;94,000&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) <span class="ellipsis">… </span><span class="rest hidden">= &quot;16,000&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;16,000&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;15,500&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;15,500&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;15,500&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;15,500&quot;。
+第19行：COMPANY = &quot;ENOSA&quot;；ITEM = &quot;2&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n3 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;5,220&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;870&quot;。 </span><button class="toggle" data-more="展开全文（共 1385 字符）" data-less="收起">展开全文（共 1385 字符）</button></div><details><summary>5a4c36e0022f4917-c0015</summary><div class="meta">距离 0.119453，类型 table</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 3 页 · 相似度 0.879</span><div class="text" data-expand>第3行：第1列 / 1 = &quot;2&quot;；DELIVERIES / 1ST DELIVERY = &quot;2ND DELIVERY&quot;；DDP DATE / 28/02/2026 = &quot;09/04/2026&quot;。
+第4行：第1列 / 1 = &quot;3&quot;；DELIVERIES / 1ST DELIVERY = &quot;3RD DELIVERY&quot;；DDP DATE / 28/02/2026 = &quot;07/08/2026&quot;。
+第5行：第1列 / 1 = &quot;4&quot;；DELIVERIES / 1ST DELIVERY = &quot;4TH DELIVERY&quot;；DDP DATE / 28/02/2026<span class="ellipsis">… </span><span class="rest hidden"> = &quot;05/12/2026&quot;。
+第6行：第1列 / 1 = &quot;5&quot;；DELIVERIES / 1ST DELIVERY = &quot;5TH DELIVERY&quot;；DDP DATE / 28/02/2026 = &quot;04/04/2027&quot;。
+第7行：第1列 / 1 = &quot;6&quot;；DELIVERIES / 1ST DELIVERY = &quot;6TH DELIVERY&quot;；DDP DATE / 28/02/2026 = &quot;02/08/2027&quot;。 </span><button class="toggle" data-more="展开全文（共 494 字符）" data-less="收起">展开全文（共 494 字符）</button></div><details><summary>5a4c36e0022f4917-c0024</summary><div class="meta">距离 0.120954，类型 table</div></details></div><div class="item"><b>#3</b> <span class="badge bad">跨文档</span> <span class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页 · 相似度 0.879</span><div class="text" data-expand>表头未确定。
+第1行至第2行共享第1列，内容 = &quot;MODEL&quot;。
+第1行：第2列 = &quot;1st Delivery&quot;；第3列 = &quot;2nd\nDelivery&quot;；第4列 = &quot;3rd Delivery&quot;；第5列 = &quot;4th Delivery&quot;；第6列 = &quot;5th\nDelivery&quot;；第7列 = &quot;6th\nDelivery&quot;。
+第2行：第2列 = &quot;25.09.25&quot;；第3列 = &quot;10.10.25&quot;；第4列 = &quot;10.12.25&quot;；第5列 = &quot;10.03.26&quot;；第6列 = &quot;10.05.26&quot;；第7列 = &quot;10.07.26&quot;。
+第3行：第<span class="ellipsis">… </span><span class="rest hidden">1列 = &quot;HXE12ESX&quot;；第2列 = 〔空白〕；第3列 = &quot;-&quot;；第4列 = &quot;20,000.00&quot;；第5列 = &quot;20,000.00&quot;；第6列 = &quot;20,000.00&quot;；第7列 = &quot;20,000.00&quot;。
+第4行：第1列 = &quot;HXE13ESX&quot;；第2列 = 〔空白〕；第3列 = &quot;5,000.00&quot;；第4列 = &quot;2,500.00&quot;；第5列 = &quot;2,500.00&quot;；第6列 = &quot;-&quot;；第7列 = &quot;-&quot;。
+第5行：第1列 = &quot;HXE33K-S1&quot;；第2列 = 〔空白〕；第3列 = &quot;900.00&quot;；第4列 = &quot;500.00&quot;；第5列 = &quot;-&quot;；第6列 = &quot;500.00&quot;；第7列 = &quot;-&quot;。
+第6行：第1列 = &quot;HXE34K-S1&quot;；第2列 = &quot;500&quot;；第3列 = &quot;1,000.00&quot;；第4列 = &quot;500.00&quot;；第5列 = &quot;1,000.00&quot;；第6列 = &quot;500.00&quot;；第7列 = &quot;-&quot;。
+第7行：第1列 = &quot;Meterbox&quot;；第2列 = 〔空白〕；第3列 = &quot;-&quot;；第4列 = &quot;10,000.00&quot;；第5列 = &quot;10,000.00&quot;；第6列 = &quot;10,000.00&quot;；第7列 = &quot;10,000.00&quot;。 </span><button class="toggle" data-more="展开全文（共 816 字符）" data-less="收起">展开全文（共 816 字符）</button></div><details><summary>5883b02cd922a64f-c0007</summary><div class="meta">距离 0.121282，类型 table</div></details></div></div></div></div><h2 id="doc-817cfff2927c6c65">E001-602.pdf</h2><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> E001-602-Q001 <span class="meta">· 3/3 条结果来自其他文档</span></h3><div>发票E001-602（INVOICE-E001-602）规定的付款到期日是什么时候？需要支付多少金额？其中包含多少税费？</div><details><summary>参考答案</summary><div class="meta">付款到期日为2026年3月30日，需要支付USD 331,432.50，其中包含税费USD 50557.50。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">E001-602.pdf · 第 1 页</div><div class="text">Nº Cuota | Fec. Venc. | Monto
+1 | 30/03/2026 | 331,432.50</div><details><summary>可接受的 chunk 组合</summary><div class="meta">817cfff2927c6c65-c0003</div></details></div><div class="item"><b>证据 e2</b> <span class="badge bad">未覆盖</span> <div class="meta">E001-602.pdf · 第 1 页</div><div class="text">Valor Venta: $ 280,875.00
+IGV: $ 50,557.50
+Importe Total: $ 331,432.50</div><div class="meta">E001-602.pdf · 第 1 页</div><div class="text">Información del crédito
+Monto neto pendiente de pago: $ 331,432.50
+Total de Cuotas: 1</div><details><summary>可接受的 chunk 组合</summary><div class="meta">817cfff2927c6c65-c0003</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge bad">跨文档</span> <span class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页 · 相似度 0.878</span><div class="text">表头未确定。
+第8行：第1列 = &quot;HXF300&quot;；第2列 = 〔空白〕；第3列 = &quot;750.00&quot;；第4列 = &quot;750.00&quot;；第5列 = &quot;-&quot;；第6列 = &quot;-&quot;；第7列 = &quot;-&quot;。</div><details><summary>5883b02cd922a64f-c0008</summary><div class="meta">距离 0.122236，类型 table</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页 · 相似度 0.876</span><div class="text" data-expand>表头未确定。
+第1行至第2行共享第1列，内容 = &quot;MODEL&quot;。
+第1行：第2列 = &quot;1st Delivery&quot;；第3列 = &quot;2nd\nDelivery&quot;；第4列 = &quot;3rd Delivery&quot;；第5列 = &quot;4th Delivery&quot;；第6列 = &quot;5th\nDelivery&quot;；第7列 = &quot;6th\nDelivery&quot;。
+第2行：第2列 = &quot;25.09.25&quot;；第3列 = &quot;10.10.25&quot;；第4列 = &quot;10.12.25&quot;；第5列 = &quot;10.03.26&quot;；第6列 = &quot;10.05.26&quot;；第7列 = &quot;10.07.26&quot;。
+第3行：第<span class="ellipsis">… </span><span class="rest hidden">1列 = &quot;HXE12ESX&quot;；第2列 = 〔空白〕；第3列 = &quot;-&quot;；第4列 = &quot;20,000.00&quot;；第5列 = &quot;20,000.00&quot;；第6列 = &quot;20,000.00&quot;；第7列 = &quot;20,000.00&quot;。
+第4行：第1列 = &quot;HXE13ESX&quot;；第2列 = 〔空白〕；第3列 = &quot;5,000.00&quot;；第4列 = &quot;2,500.00&quot;；第5列 = &quot;2,500.00&quot;；第6列 = &quot;-&quot;；第7列 = &quot;-&quot;。
+第5行：第1列 = &quot;HXE33K-S1&quot;；第2列 = 〔空白〕；第3列 = &quot;900.00&quot;；第4列 = &quot;500.00&quot;；第5列 = &quot;-&quot;；第6列 = &quot;500.00&quot;；第7列 = &quot;-&quot;。
+第6行：第1列 = &quot;HXE34K-S1&quot;；第2列 = &quot;500&quot;；第3列 = &quot;1,000.00&quot;；第4列 = &quot;500.00&quot;；第5列 = &quot;1,000.00&quot;；第6列 = &quot;500.00&quot;；第7列 = &quot;-&quot;。
+第7行：第1列 = &quot;Meterbox&quot;；第2列 = 〔空白〕；第3列 = &quot;-&quot;；第4列 = &quot;10,000.00&quot;；第5列 = &quot;10,000.00&quot;；第6列 = &quot;10,000.00&quot;；第7列 = &quot;10,000.00&quot;。 </span><button class="toggle" data-more="展开全文（共 816 字符）" data-less="收起">展开全文（共 816 字符）</button></div><details><summary>5883b02cd922a64f-c0007</summary><div class="meta">距离 0.123855，类型 table</div></details></div><div class="item"><b>#3</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.871</span><div class="text" data-expand>第11行：COMPANY = &quot;ENSA&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;132,180&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;24,330&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+<span class="ellipsis">… </span><span class="rest hidden">signature) = &quot;23,630&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;21,880&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;21,680&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;20,480&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;20,180&quot;。
+第12行：COMPANY = &quot;ELOR -\nLORETO&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;87,600&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;14,600&quot;。 </span><button class="toggle" data-more="展开全文（共 1334 字符）" data-less="收起">展开全文（共 1334 字符）</button></div><details><summary>5a4c36e0022f4917-c0012</summary><div class="meta">距离 0.129411，类型 table</div></details></div></div></div></div><div class="card" data-tags="all complete cross"><h3><span class="badge ok">✓ 全部证据已检索到</span> E001-602-Q002 <span class="meta">· 2/3 条结果来自其他文档</span></h3><div>发票E001-602（INVOICE-E001-602）中， HXE34K-S1的单价和数量分别是多少？</div><details><summary>参考答案</summary><div class="meta">HXE34K-S1的单价为USD 16.00，数量为500个。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge ok">第 3 位时已覆盖</span> <div class="meta">E001-602.pdf · 第 1 页</div><div class="text">Cantidad | Código | Descripción | Valor Unitario
+500.00 | HXE34K-S1 | MEDIDOR TRIFASICO HXE34K-S1, 4HILOS, 10(100)A, 3X220V, CLASE 1, CONEXION DIRECTA, MARCA HEXING | 16.00</div><details><summary>可接受的 chunk 组合</summary><div class="meta">817cfff2927c6c65-c0001</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge bad">跨文档</span> <span class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页 · 相似度 0.894</span><div class="text" data-expand>表头未确定。
+第1行至第2行共享第1列，内容 = &quot;MODEL&quot;。
+第1行：第2列 = &quot;1st Delivery&quot;；第3列 = &quot;2nd\nDelivery&quot;；第4列 = &quot;3rd Delivery&quot;；第5列 = &quot;4th Delivery&quot;；第6列 = &quot;5th\nDelivery&quot;；第7列 = &quot;6th\nDelivery&quot;。
+第2行：第2列 = &quot;25.09.25&quot;；第3列 = &quot;10.10.25&quot;；第4列 = &quot;10.12.25&quot;；第5列 = &quot;10.03.26&quot;；第6列 = &quot;10.05.26&quot;；第7列 = &quot;10.07.26&quot;。
+第3行：第<span class="ellipsis">… </span><span class="rest hidden">1列 = &quot;HXE12ESX&quot;；第2列 = 〔空白〕；第3列 = &quot;-&quot;；第4列 = &quot;20,000.00&quot;；第5列 = &quot;20,000.00&quot;；第6列 = &quot;20,000.00&quot;；第7列 = &quot;20,000.00&quot;。
+第4行：第1列 = &quot;HXE13ESX&quot;；第2列 = 〔空白〕；第3列 = &quot;5,000.00&quot;；第4列 = &quot;2,500.00&quot;；第5列 = &quot;2,500.00&quot;；第6列 = &quot;-&quot;；第7列 = &quot;-&quot;。
+第5行：第1列 = &quot;HXE33K-S1&quot;；第2列 = 〔空白〕；第3列 = &quot;900.00&quot;；第4列 = &quot;500.00&quot;；第5列 = &quot;-&quot;；第6列 = &quot;500.00&quot;；第7列 = &quot;-&quot;。
+第6行：第1列 = &quot;HXE34K-S1&quot;；第2列 = &quot;500&quot;；第3列 = &quot;1,000.00&quot;；第4列 = &quot;500.00&quot;；第5列 = &quot;1,000.00&quot;；第6列 = &quot;500.00&quot;；第7列 = &quot;-&quot;。
+第7行：第1列 = &quot;Meterbox&quot;；第2列 = 〔空白〕；第3列 = &quot;-&quot;；第4列 = &quot;10,000.00&quot;；第5列 = &quot;10,000.00&quot;；第6列 = &quot;10,000.00&quot;；第7列 = &quot;10,000.00&quot;。 </span><button class="toggle" data-more="展开全文（共 816 字符）" data-less="收起">展开全文（共 816 字符）</button></div><details><summary>5883b02cd922a64f-c0007</summary><div class="meta">距离 0.105791，类型 table</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 1 页 · 相似度 0.885</span><div class="text" data-expand>表头未确定。
+第1行至第2行共享第1列，内容 = &quot;Item&quot;。
+第1行至第2行共享第2列，内容 = &quot;Goods of Description&quot;。
+第1行至第2行共享第3列，内容 = &quot;Qty&quot;。
+第1行：第4列 = &quot;Unit price&quot;；第5列 = &quot;Total Amount&quot;。
+第2行：第4列 = &quot;(CIF CALLAO)&quot;；第5列 = &quot;(USD)&quot;。
+第3行：第1列 = &quot;1&quot;；第2列 = &quot;Single Phase 02 Wires meter\nModel: HXE12ES&quot;；第3列 = &quot;1´131,056.00&quot;；第4列 = &quot;U<span class="ellipsis">… </span><span class="rest hidden">SD 4.56&quot;；第5列 = &quot;USD 5’157,615.36&quot;。
+第4行：第1列 = &quot;2&quot;；第2列 = &quot;Single Phase 03 Wires meter\nModel: HXE13ES&quot;；第3列 = &quot;109,130.00&quot;；第4列 = &quot;USD 5.08&quot;；第5列 = &quot;USD 554,380.40&quot;。
+第5行：第1列 = &quot;3&quot;；第2列 = &quot;Three Phase 03 Wires meter\nModel: HXE33K-S1&quot;；第3列 = &quot;8,368.00&quot;；第4列 = &quot;USD 13.49&quot;；第5列 = &quot;USD 112,884.32&quot;。
+第6行：第1列 = &quot;4&quot;；第2列 = &quot;Three Phase 04 Wires meter\nModel: HXE34K-S1&quot;；第3列 = &quot;45,938.00&quot;；第4列 = &quot;USD 14.37&quot;；第5列 = &quot;USD 660,129.06&quot;。
+第7行：第1列至第4列为合并单元格，内容 = &quot;Total CIF (CALLAO)&quot;。
+第7行：第5列 = &quot;USD 6’485,009.14&quot;。 </span><button class="toggle" data-more="展开全文（共 768 字符）" data-less="收起">展开全文（共 768 字符）</button></div><details><summary>5a4c36e0022f4917-c0001</summary><div class="meta">距离 0.115144，类型 table</div></details></div><div class="item"><b>#3</b> <span class="badge ok">✓ 证据 e1</span> <span class="meta">E001-602.pdf · 第 1 页 · 相似度 0.883</span><div class="text" data-expand>第2行：Cantidad = &quot;20000.00&quot;；Unidad Medida = &quot;UNIDAD&quot;；Código = &quot;HXE12ES&quot;；Descripción = &quot;MEDIDOR MONOFASICO HXE12ES,2HILOS ,5(60)A,220V,CLASE 1, CONEXION&quot;；Valor Unitario = &quot;6.00&quot;。
+第3行：Cantidad = &quot;2500.00&quot;；Unidad Medida = &quot;UNIDAD&quot;；Código = &quot;HXE13ES&quot;；Descripción = &quot;MEDIDOR MONOFASICO H<span class="ellipsis">… </span><span class="rest hidden">XE13ES, 3HILOS, 5(60)A, 220V, CLASE 1, CONEXION DIRECTA, MARCA HEXING&quot;；Valor Unitario = &quot;6.25&quot;。
+第4行：Cantidad = &quot;500.00&quot;；Unidad Medida = &quot;UNIDAD&quot;；Código = &quot;HXE33K-S1&quot;；Descripción = &quot;MEDIDOR TRIFASICO HXE33K-S1, 3HILOS, 10(60)A, 3X220V, CLASE 1, CONEXION DIRECTA, MARCA HEXING&quot;；Valor Unitario = &quot;15.50&quot;。
+第5行：Cantidad = &quot;500.00&quot;；Unidad Medida = &quot;UNIDAD&quot;；Código = &quot;HXE34K-S1&quot;；Descripción = &quot;MEDIDOR TRIFASICO HXE34K-S1, 4HILOS, 10(100)A, 3X220V, CLASE 1, CONEXION DIRECTA, MARCA HEXING&quot;；Valor Unitario = &quot;16.00&quot;。
+第6行：Cantidad = &quot;10000.00&quot;；Unidad Medida = &quot;UNIDAD&quot;；Código = &quot;HXPXS1&quot;；Descripción = &quot;CAJA PORTAMEDIDOR POLIMERICA MONOFASICA MARCA HEXING&quot;；Valor Unitario = &quot;6.20&quot;。 </span><button class="toggle" data-more="展开全文（共 951 字符）" data-less="收起">展开全文（共 951 字符）</button></div><details><summary>817cfff2927c6c65-c0001</summary><div class="meta">距离 0.116542，类型 table</div></details></div></div></div></div><h2 id="doc-169a1f2133fe5643">ORDER PERU 24-12 ANDET.pdf</h2><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> PO-24-12-Q001 <span class="meta">· 3/3 条结果来自其他文档</span></h3><div>订单PURCHASE ORDER N° 24-12-HPE（ORDER2025001）包含哪几款产品？单价、数量分别是多少？订单总金额是多少？。</div><details><summary>参考答案</summary><div class="meta">订单包含1款产品：HXF300，单价为USD 96.80，数量为10000件，总金额为USD 968,000.00。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">ORDER PERU 24-12 ANDET.pdf · 第 1 页</div><div class="text">C&amp;I Meter CI 0.2S 3&amp;4 Wires meter with modem 4G 2 pulses Model: HXF300 | Qty 10,000 | USD 96.80 | USD 968,000.00
+Total CIF (CALLAO) | USD 968,000.00</div><details><summary>可接受的 chunk 组合</summary><div class="meta">169a1f2133fe5643-c0001</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge bad">跨文档</span> <span class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页 · 相似度 0.892</span><div class="text" data-expand>表头未确定。
+第1行至第2行共享第1列，内容 = &quot;MODEL&quot;。
+第1行：第2列 = &quot;1st Delivery&quot;；第3列 = &quot;2nd\nDelivery&quot;；第4列 = &quot;3rd Delivery&quot;；第5列 = &quot;4th Delivery&quot;；第6列 = &quot;5th\nDelivery&quot;；第7列 = &quot;6th\nDelivery&quot;。
+第2行：第2列 = &quot;25.09.25&quot;；第3列 = &quot;10.10.25&quot;；第4列 = &quot;10.12.25&quot;；第5列 = &quot;10.03.26&quot;；第6列 = &quot;10.05.26&quot;；第7列 = &quot;10.07.26&quot;。
+第3行：第<span class="ellipsis">… </span><span class="rest hidden">1列 = &quot;HXE12ESX&quot;；第2列 = 〔空白〕；第3列 = &quot;-&quot;；第4列 = &quot;20,000.00&quot;；第5列 = &quot;20,000.00&quot;；第6列 = &quot;20,000.00&quot;；第7列 = &quot;20,000.00&quot;。
+第4行：第1列 = &quot;HXE13ESX&quot;；第2列 = 〔空白〕；第3列 = &quot;5,000.00&quot;；第4列 = &quot;2,500.00&quot;；第5列 = &quot;2,500.00&quot;；第6列 = &quot;-&quot;；第7列 = &quot;-&quot;。
+第5行：第1列 = &quot;HXE33K-S1&quot;；第2列 = 〔空白〕；第3列 = &quot;900.00&quot;；第4列 = &quot;500.00&quot;；第5列 = &quot;-&quot;；第6列 = &quot;500.00&quot;；第7列 = &quot;-&quot;。
+第6行：第1列 = &quot;HXE34K-S1&quot;；第2列 = &quot;500&quot;；第3列 = &quot;1,000.00&quot;；第4列 = &quot;500.00&quot;；第5列 = &quot;1,000.00&quot;；第6列 = &quot;500.00&quot;；第7列 = &quot;-&quot;。
+第7行：第1列 = &quot;Meterbox&quot;；第2列 = 〔空白〕；第3列 = &quot;-&quot;；第4列 = &quot;10,000.00&quot;；第5列 = &quot;10,000.00&quot;；第6列 = &quot;10,000.00&quot;；第7列 = &quot;10,000.00&quot;。 </span><button class="toggle" data-more="展开全文（共 816 字符）" data-less="收起">展开全文（共 816 字符）</button></div><details><summary>5883b02cd922a64f-c0007</summary><div class="meta">距离 0.107697，类型 table</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.883</span><div class="text" data-expand>第15行：COMPANY = &quot;ELOR - SAN\nMARTIN&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;92,400&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days<span class="ellipsis">… </span><span class="rest hidden"> of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;15,400&quot;。
+第16行：COMPANY = &quot;ELOR -\nCAJAMARCA&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;67,305&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;11,220&quot;。 </span><button class="toggle" data-more="展开全文（共 1350 字符）" data-less="收起">展开全文（共 1350 字符）</button></div><details><summary>5a4c36e0022f4917-c0014</summary><div class="meta">距离 0.116679，类型 table</div></details></div><div class="item"><b>#3</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.880</span><div class="text" data-expand>第4行：第1列至第11列为合并单元格，内容 = &quot;ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES&quot;。
+第5行：COMPANY = &quot;ELUC&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;27,000&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;<span class="ellipsis">… </span><span class="rest hidden">2,000&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;5,000&quot;。
+第6行：COMPANY = &quot;ADINELSA&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;10,000&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = 〔空白〕。 </span><button class="toggle" data-more="展开全文（共 1379 字符）" data-less="收起">展开全文（共 1379 字符）</button></div><details><summary>5a4c36e0022f4917-c0009</summary><div class="meta">距离 0.119513，类型 table</div></details></div></div></div></div><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> PO-24-12-Q002 <span class="meta">· 3/3 条结果来自其他文档</span></h3><div>请阐述PURCHASE ORDER N° 24-12-HPE（ORDER2025001）的交货时间规划。</div><details><summary>参考答案</summary><div class="meta">五批交付，每批次交付约2000件，具体交付日期待确认。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">ORDER PERU 24-12 ANDET.pdf · 第 1 页</div><div class="text">Delivery Date: To be confirmed the date, total 5 deliveries - each delivery will be approximately 2,000 units.</div><details><summary>可接受的 chunk 组合</summary><div class="meta">169a1f2133fe5643-c0005</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.890</span><div class="text" data-expand>第4行：第1列至第11列为合并单元格，内容 = &quot;ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES&quot;。
+第5行：COMPANY = &quot;ELUC&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;27,000&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;<span class="ellipsis">… </span><span class="rest hidden">2,000&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;5,000&quot;。
+第6行：COMPANY = &quot;ADINELSA&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;10,000&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = 〔空白〕。 </span><button class="toggle" data-more="展开全文（共 1379 字符）" data-less="收起">展开全文（共 1379 字符）</button></div><details><summary>5a4c36e0022f4917-c0009</summary><div class="meta">距离 0.109915，类型 table</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 3 页 · 相似度 0.889</span><div class="text" data-expand>第3行：第1列 / 1 = &quot;2&quot;；DELIVERIES / 1ST DELIVERY = &quot;2ND DELIVERY&quot;；DDP DATE / 28/02/2026 = &quot;09/04/2026&quot;。
+第4行：第1列 / 1 = &quot;3&quot;；DELIVERIES / 1ST DELIVERY = &quot;3RD DELIVERY&quot;；DDP DATE / 28/02/2026 = &quot;07/08/2026&quot;。
+第5行：第1列 / 1 = &quot;4&quot;；DELIVERIES / 1ST DELIVERY = &quot;4TH DELIVERY&quot;；DDP DATE / 28/02/2026<span class="ellipsis">… </span><span class="rest hidden"> = &quot;05/12/2026&quot;。
+第6行：第1列 / 1 = &quot;5&quot;；DELIVERIES / 1ST DELIVERY = &quot;5TH DELIVERY&quot;；DDP DATE / 28/02/2026 = &quot;04/04/2027&quot;。
+第7行：第1列 / 1 = &quot;6&quot;；DELIVERIES / 1ST DELIVERY = &quot;6TH DELIVERY&quot;；DDP DATE / 28/02/2026 = &quot;02/08/2027&quot;。 </span><button class="toggle" data-more="展开全文（共 494 字符）" data-less="收起">展开全文（共 494 字符）</button></div><details><summary>5a4c36e0022f4917-c0024</summary><div class="meta">距离 0.111423，类型 table</div></details></div><div class="item"><b>#3</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.888</span><div class="text" data-expand>第17行：第1列至第11列为合并单元格，内容 = &quot;ITEM 2: SINGLE PHASE METER 3 WIRES - MODEL HXE13ES&quot;。
+第18行：COMPANY = &quot;ELCTO&quot;；ITEM = &quot;2&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n3 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;94,000&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) <span class="ellipsis">… </span><span class="rest hidden">= &quot;16,000&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;16,000&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;15,500&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;15,500&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;15,500&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;15,500&quot;。
+第19行：COMPANY = &quot;ENOSA&quot;；ITEM = &quot;2&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n3 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;5,220&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;870&quot;。 </span><button class="toggle" data-more="展开全文（共 1385 字符）" data-less="收起">展开全文（共 1385 字符）</button></div><details><summary>5a4c36e0022f4917-c0015</summary><div class="meta">距离 0.112077，类型 table</div></details></div></div></div></div><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> PO-24-12-Q003 <span class="meta">· 3/3 条结果来自其他文档</span></h3><div>订单PURCHASE ORDER N° 24-12-HPE（ORDER2025001）分几批交付？每批次的具体交付日期是什么？。</div><details><summary>参考答案</summary><div class="meta">分五批交付，每批次的交付日期待确认。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">ORDER PERU 24-12 ANDET.pdf · 第 1 页</div><div class="text">Delivery Date: To be confirmed the date, total 5 deliveries - each delivery will be approximately 2,000 units.</div><details><summary>可接受的 chunk 组合</summary><div class="meta">169a1f2133fe5643-c0005</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge bad">跨文档</span> <span class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页 · 相似度 0.886</span><div class="text" data-expand>表头未确定。
+第1行至第2行共享第1列，内容 = &quot;MODEL&quot;。
+第1行：第2列 = &quot;1st Delivery&quot;；第3列 = &quot;2nd\nDelivery&quot;；第4列 = &quot;3rd Delivery&quot;；第5列 = &quot;4th Delivery&quot;；第6列 = &quot;5th\nDelivery&quot;；第7列 = &quot;6th\nDelivery&quot;。
+第2行：第2列 = &quot;25.09.25&quot;；第3列 = &quot;10.10.25&quot;；第4列 = &quot;10.12.25&quot;；第5列 = &quot;10.03.26&quot;；第6列 = &quot;10.05.26&quot;；第7列 = &quot;10.07.26&quot;。
+第3行：第<span class="ellipsis">… </span><span class="rest hidden">1列 = &quot;HXE12ESX&quot;；第2列 = 〔空白〕；第3列 = &quot;-&quot;；第4列 = &quot;20,000.00&quot;；第5列 = &quot;20,000.00&quot;；第6列 = &quot;20,000.00&quot;；第7列 = &quot;20,000.00&quot;。
+第4行：第1列 = &quot;HXE13ESX&quot;；第2列 = 〔空白〕；第3列 = &quot;5,000.00&quot;；第4列 = &quot;2,500.00&quot;；第5列 = &quot;2,500.00&quot;；第6列 = &quot;-&quot;；第7列 = &quot;-&quot;。
+第5行：第1列 = &quot;HXE33K-S1&quot;；第2列 = 〔空白〕；第3列 = &quot;900.00&quot;；第4列 = &quot;500.00&quot;；第5列 = &quot;-&quot;；第6列 = &quot;500.00&quot;；第7列 = &quot;-&quot;。
+第6行：第1列 = &quot;HXE34K-S1&quot;；第2列 = &quot;500&quot;；第3列 = &quot;1,000.00&quot;；第4列 = &quot;500.00&quot;；第5列 = &quot;1,000.00&quot;；第6列 = &quot;500.00&quot;；第7列 = &quot;-&quot;。
+第7行：第1列 = &quot;Meterbox&quot;；第2列 = 〔空白〕；第3列 = &quot;-&quot;；第4列 = &quot;10,000.00&quot;；第5列 = &quot;10,000.00&quot;；第6列 = &quot;10,000.00&quot;；第7列 = &quot;10,000.00&quot;。 </span><button class="toggle" data-more="展开全文（共 816 字符）" data-less="收起">展开全文（共 816 字符）</button></div><details><summary>5883b02cd922a64f-c0007</summary><div class="meta">距离 0.114313，类型 table</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.884</span><div class="text" data-expand>第4行：第1列至第11列为合并单元格，内容 = &quot;ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES&quot;。
+第5行：COMPANY = &quot;ELUC&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;27,000&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;<span class="ellipsis">… </span><span class="rest hidden">2,000&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;5,000&quot;。
+第6行：COMPANY = &quot;ADINELSA&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;10,000&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = 〔空白〕。 </span><button class="toggle" data-more="展开全文（共 1379 字符）" data-less="收起">展开全文（共 1379 字符）</button></div><details><summary>5a4c36e0022f4917-c0009</summary><div class="meta">距离 0.115984，类型 table</div></details></div><div class="item"><b>#3</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.884</span><div class="text" data-expand>第15行：COMPANY = &quot;ELOR - SAN\nMARTIN&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;92,400&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days<span class="ellipsis">… </span><span class="rest hidden"> of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;15,400&quot;。
+第16行：COMPANY = &quot;ELOR -\nCAJAMARCA&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;67,305&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;11,220&quot;。 </span><button class="toggle" data-more="展开全文（共 1350 字符）" data-less="收起">展开全文（共 1350 字符）</button></div><details><summary>5a4c36e0022f4917-c0014</summary><div class="meta">距离 0.116331，类型 table</div></details></div></div></div></div><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> PO-24-12-Q004 <span class="meta">· 3/3 条结果来自其他文档</span></h3><div>订单PURCHASE ORDER N° 24-12-HPE（ORDER2025001）的总金额是否涵盖MDC ORCA的费用？如不包含，还需额外支付多少费用？付款的最后期限是什么？</div><details><summary>参考答案</summary><div class="meta">订单总金额不包含 MDC ORCA 的费用；MDC ORCA 需额外一次性支付 USD 10,000.00，付款截止日为 2026 年 8 月 1 日。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">ORDER PERU 24-12 ANDET.pdf · 第 1 页</div><div class="text">MDC ORCA: 10,000.00 USD (one-time purchase), payment due: August 1st, 2026</div><details><summary>可接受的 chunk 组合</summary><div class="meta">169a1f2133fe5643-c0005</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge bad">跨文档</span> <span class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页 · 相似度 0.893</span><div class="text" data-expand>表头未确定。
+第1行至第2行共享第1列，内容 = &quot;MODEL&quot;。
+第1行：第2列 = &quot;1st Delivery&quot;；第3列 = &quot;2nd\nDelivery&quot;；第4列 = &quot;3rd Delivery&quot;；第5列 = &quot;4th Delivery&quot;；第6列 = &quot;5th\nDelivery&quot;；第7列 = &quot;6th\nDelivery&quot;。
+第2行：第2列 = &quot;25.09.25&quot;；第3列 = &quot;10.10.25&quot;；第4列 = &quot;10.12.25&quot;；第5列 = &quot;10.03.26&quot;；第6列 = &quot;10.05.26&quot;；第7列 = &quot;10.07.26&quot;。
+第3行：第<span class="ellipsis">… </span><span class="rest hidden">1列 = &quot;HXE12ESX&quot;；第2列 = 〔空白〕；第3列 = &quot;-&quot;；第4列 = &quot;20,000.00&quot;；第5列 = &quot;20,000.00&quot;；第6列 = &quot;20,000.00&quot;；第7列 = &quot;20,000.00&quot;。
+第4行：第1列 = &quot;HXE13ESX&quot;；第2列 = 〔空白〕；第3列 = &quot;5,000.00&quot;；第4列 = &quot;2,500.00&quot;；第5列 = &quot;2,500.00&quot;；第6列 = &quot;-&quot;；第7列 = &quot;-&quot;。
+第5行：第1列 = &quot;HXE33K-S1&quot;；第2列 = 〔空白〕；第3列 = &quot;900.00&quot;；第4列 = &quot;500.00&quot;；第5列 = &quot;-&quot;；第6列 = &quot;500.00&quot;；第7列 = &quot;-&quot;。
+第6行：第1列 = &quot;HXE34K-S1&quot;；第2列 = &quot;500&quot;；第3列 = &quot;1,000.00&quot;；第4列 = &quot;500.00&quot;；第5列 = &quot;1,000.00&quot;；第6列 = &quot;500.00&quot;；第7列 = &quot;-&quot;。
+第7行：第1列 = &quot;Meterbox&quot;；第2列 = 〔空白〕；第3列 = &quot;-&quot;；第4列 = &quot;10,000.00&quot;；第5列 = &quot;10,000.00&quot;；第6列 = &quot;10,000.00&quot;；第7列 = &quot;10,000.00&quot;。 </span><button class="toggle" data-more="展开全文（共 816 字符）" data-less="收起">展开全文（共 816 字符）</button></div><details><summary>5883b02cd922a64f-c0007</summary><div class="meta">距离 0.106788，类型 table</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.887</span><div class="text" data-expand>第15行：COMPANY = &quot;ELOR - SAN\nMARTIN&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;92,400&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days<span class="ellipsis">… </span><span class="rest hidden"> of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;15,400&quot;。
+第16行：COMPANY = &quot;ELOR -\nCAJAMARCA&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;67,305&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;11,220&quot;。 </span><button class="toggle" data-more="展开全文（共 1350 字符）" data-less="收起">展开全文（共 1350 字符）</button></div><details><summary>5a4c36e0022f4917-c0014</summary><div class="meta">距离 0.113256，类型 table</div></details></div><div class="item"><b>#3</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.884</span><div class="text" data-expand>第11行：COMPANY = &quot;ENSA&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;132,180&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;24,330&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+<span class="ellipsis">… </span><span class="rest hidden">signature) = &quot;23,630&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;21,880&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;21,680&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;20,480&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;20,180&quot;。
+第12行：COMPANY = &quot;ELOR -\nLORETO&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;87,600&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;14,600&quot;。 </span><button class="toggle" data-more="展开全文（共 1334 字符）" data-less="收起">展开全文（共 1334 字符）</button></div><details><summary>5a4c36e0022f4917-c0012</summary><div class="meta">距离 0.116354，类型 table</div></details></div></div></div></div><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> PO-24-12-Q005 <span class="meta">· 3/3 条结果来自其他文档</span></h3><div>订单PURCHASE ORDER N° 24-12-HPE（ORDER2025001）的运维服务如何收费？</div><details><summary>参考答案</summary><div class="meta">前两年免费，时间从2025年8月1日至2027年8月1日。之后需在2027年8月2日之前根据连接的电表数量付费，连接的电表数小于2500只，价格为5500 USD;连接的电表数在2500只至5000只之间，价格为7000 USD；连接的电表数在5001只至12000只之间，价格为10000 USD;连接的电表数在12001只至30000只之间，价格为15000 USD。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">ORDER PERU 24-12 ANDET.pdf · 第 1 页</div><div class="text">Operation and Maintenance Service, 2 years free (from August 1st, 2025 to August 1st 2027), payment due for the service: August 2nd 2027.
+Meters connected ≤ 2500: 5500 USD
+Meters connected 2501-5000: 7000 USD
+Meters connected 5001-12000: 10000 USD
+Meters connected 12001-30000: 15000 USD</div><details><summary>可接受的 chunk 组合</summary><div class="meta">169a1f2133fe5643-c0005</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge bad">跨文档</span> <span class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页 · 相似度 0.884</span><div class="text" data-expand>表头未确定。
+第1行至第2行共享第1列，内容 = &quot;MODEL&quot;。
+第1行：第2列 = &quot;1st Delivery&quot;；第3列 = &quot;2nd\nDelivery&quot;；第4列 = &quot;3rd Delivery&quot;；第5列 = &quot;4th Delivery&quot;；第6列 = &quot;5th\nDelivery&quot;；第7列 = &quot;6th\nDelivery&quot;。
+第2行：第2列 = &quot;25.09.25&quot;；第3列 = &quot;10.10.25&quot;；第4列 = &quot;10.12.25&quot;；第5列 = &quot;10.03.26&quot;；第6列 = &quot;10.05.26&quot;；第7列 = &quot;10.07.26&quot;。
+第3行：第<span class="ellipsis">… </span><span class="rest hidden">1列 = &quot;HXE12ESX&quot;；第2列 = 〔空白〕；第3列 = &quot;-&quot;；第4列 = &quot;20,000.00&quot;；第5列 = &quot;20,000.00&quot;；第6列 = &quot;20,000.00&quot;；第7列 = &quot;20,000.00&quot;。
+第4行：第1列 = &quot;HXE13ESX&quot;；第2列 = 〔空白〕；第3列 = &quot;5,000.00&quot;；第4列 = &quot;2,500.00&quot;；第5列 = &quot;2,500.00&quot;；第6列 = &quot;-&quot;；第7列 = &quot;-&quot;。
+第5行：第1列 = &quot;HXE33K-S1&quot;；第2列 = 〔空白〕；第3列 = &quot;900.00&quot;；第4列 = &quot;500.00&quot;；第5列 = &quot;-&quot;；第6列 = &quot;500.00&quot;；第7列 = &quot;-&quot;。
+第6行：第1列 = &quot;HXE34K-S1&quot;；第2列 = &quot;500&quot;；第3列 = &quot;1,000.00&quot;；第4列 = &quot;500.00&quot;；第5列 = &quot;1,000.00&quot;；第6列 = &quot;500.00&quot;；第7列 = &quot;-&quot;。
+第7行：第1列 = &quot;Meterbox&quot;；第2列 = 〔空白〕；第3列 = &quot;-&quot;；第4列 = &quot;10,000.00&quot;；第5列 = &quot;10,000.00&quot;；第6列 = &quot;10,000.00&quot;；第7列 = &quot;10,000.00&quot;。 </span><button class="toggle" data-more="展开全文（共 816 字符）" data-less="收起">展开全文（共 816 字符）</button></div><details><summary>5883b02cd922a64f-c0007</summary><div class="meta">距离 0.116111，类型 table</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.876</span><div class="text" data-expand>第15行：COMPANY = &quot;ELOR - SAN\nMARTIN&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;92,400&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days<span class="ellipsis">… </span><span class="rest hidden"> of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;15,400&quot;。
+第16行：COMPANY = &quot;ELOR -\nCAJAMARCA&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;67,305&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;11,220&quot;。 </span><button class="toggle" data-more="展开全文（共 1350 字符）" data-less="收起">展开全文（共 1350 字符）</button></div><details><summary>5a4c36e0022f4917-c0014</summary><div class="meta">距离 0.124372，类型 table</div></details></div><div class="item"><b>#3</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.875</span><div class="text" data-expand>第4行：第1列至第11列为合并单元格，内容 = &quot;ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES&quot;。
+第5行：COMPANY = &quot;ELUC&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;27,000&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;<span class="ellipsis">… </span><span class="rest hidden">2,000&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;5,000&quot;。
+第6行：COMPANY = &quot;ADINELSA&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;10,000&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = 〔空白〕。 </span><button class="toggle" data-more="展开全文（共 1379 字符）" data-less="收起">展开全文（共 1379 字符）</button></div><details><summary>5a4c36e0022f4917-c0009</summary><div class="meta">距离 0.124904，类型 table</div></details></div></div></div></div><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> PO-24-12-Q006 <span class="meta">· 3/3 条结果来自其他文档</span></h3><div>订单PURCHASE ORDER N° 24-12-HPE（ORDER2025001）的付款条件是什么？</div><details><summary>参考答案</summary><div class="meta">按批次付款，每批次在提单日后120天内100%银行支票付款。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">ORDER PERU 24-12 ANDET.pdf · 第 2 页</div><div class="text">Bank check payable at 100% within 120 days counted from the B/L date. (for each batch)</div><details><summary>可接受的 chunk 组合</summary><div class="meta">169a1f2133fe5643-c0010</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge bad">跨文档</span> <span class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页 · 相似度 0.881</span><div class="text" data-expand>表头未确定。
+第1行至第2行共享第1列，内容 = &quot;MODEL&quot;。
+第1行：第2列 = &quot;1st Delivery&quot;；第3列 = &quot;2nd\nDelivery&quot;；第4列 = &quot;3rd Delivery&quot;；第5列 = &quot;4th Delivery&quot;；第6列 = &quot;5th\nDelivery&quot;；第7列 = &quot;6th\nDelivery&quot;。
+第2行：第2列 = &quot;25.09.25&quot;；第3列 = &quot;10.10.25&quot;；第4列 = &quot;10.12.25&quot;；第5列 = &quot;10.03.26&quot;；第6列 = &quot;10.05.26&quot;；第7列 = &quot;10.07.26&quot;。
+第3行：第<span class="ellipsis">… </span><span class="rest hidden">1列 = &quot;HXE12ESX&quot;；第2列 = 〔空白〕；第3列 = &quot;-&quot;；第4列 = &quot;20,000.00&quot;；第5列 = &quot;20,000.00&quot;；第6列 = &quot;20,000.00&quot;；第7列 = &quot;20,000.00&quot;。
+第4行：第1列 = &quot;HXE13ESX&quot;；第2列 = 〔空白〕；第3列 = &quot;5,000.00&quot;；第4列 = &quot;2,500.00&quot;；第5列 = &quot;2,500.00&quot;；第6列 = &quot;-&quot;；第7列 = &quot;-&quot;。
+第5行：第1列 = &quot;HXE33K-S1&quot;；第2列 = 〔空白〕；第3列 = &quot;900.00&quot;；第4列 = &quot;500.00&quot;；第5列 = &quot;-&quot;；第6列 = &quot;500.00&quot;；第7列 = &quot;-&quot;。
+第6行：第1列 = &quot;HXE34K-S1&quot;；第2列 = &quot;500&quot;；第3列 = &quot;1,000.00&quot;；第4列 = &quot;500.00&quot;；第5列 = &quot;1,000.00&quot;；第6列 = &quot;500.00&quot;；第7列 = &quot;-&quot;。
+第7行：第1列 = &quot;Meterbox&quot;；第2列 = 〔空白〕；第3列 = &quot;-&quot;；第4列 = &quot;10,000.00&quot;；第5列 = &quot;10,000.00&quot;；第6列 = &quot;10,000.00&quot;；第7列 = &quot;10,000.00&quot;。 </span><button class="toggle" data-more="展开全文（共 816 字符）" data-less="收起">展开全文（共 816 字符）</button></div><details><summary>5883b02cd922a64f-c0007</summary><div class="meta">距离 0.118619，类型 table</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.874</span><div class="text" data-expand>第4行：第1列至第11列为合并单元格，内容 = &quot;ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES&quot;。
+第5行：COMPANY = &quot;ELUC&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;27,000&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;<span class="ellipsis">… </span><span class="rest hidden">2,000&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;5,000&quot;。
+第6行：COMPANY = &quot;ADINELSA&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;10,000&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = 〔空白〕。 </span><button class="toggle" data-more="展开全文（共 1379 字符）" data-less="收起">展开全文（共 1379 字符）</button></div><details><summary>5a4c36e0022f4917-c0009</summary><div class="meta">距离 0.126370，类型 table</div></details></div><div class="item"><b>#3</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.873</span><div class="text" data-expand>第15行：COMPANY = &quot;ELOR - SAN\nMARTIN&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;92,400&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days<span class="ellipsis">… </span><span class="rest hidden"> of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;15,400&quot;。
+第16行：COMPANY = &quot;ELOR -\nCAJAMARCA&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;67,305&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;11,220&quot;。 </span><button class="toggle" data-more="展开全文（共 1350 字符）" data-less="收起">展开全文（共 1350 字符）</button></div><details><summary>5a4c36e0022f4917-c0014</summary><div class="meta">距离 0.126583，类型 table</div></details></div></div></div></div><h2 id="doc-5883b02cd922a64f">ORDER PERU 25-15 ANDET VF.pdf</h2><div class="card" data-tags="all partial cross"><h3><span class="badge warn">◐ 部分证据检索到</span> PO-25-15-Q001 <span class="meta">· 2/3 条结果来自其他文档</span></h3><div>订单PURCHASE ORDER N° 25-15-HPE（ORDER2025002）中，第四批次交付的具体日期是什么？交付的产品总金额达多少？</div><details><summary>参考答案</summary><div class="meta">第四批次交付的具体日期为2026年3月10日，交付的产品总金额为USD 188030.00。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 1 页</div><div class="text">HXE12ES | Qty 80,000 | USD 5.28
+HXE13ES | Qty 10,000 | USD 5.50
+HXE33K-S1 | Qty 1,900 | USD 13.64
+HXE34K-S1 | Qty 3,500 | USD 14.08
+HXPXS1 | Qty 40,000 | USD 5.46
+HXF300 | Qty 1,500 | USD 79.20</div><details><summary>可接受的 chunk 组合</summary><div class="meta">5883b02cd922a64f-c0001</div></details></div><div class="item"><b>证据 e2</b> <span class="badge ok">第 1 位时已覆盖</span> <div class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页</div><div class="text">4th Delivery | 10.03.26
+HXE12ESX 20,000.00 | HXE13ESX 2,500.00 | HXE33K-S1 - | HXE34K-S1 1,000.00 | Meterbox 10,000.00 | HXF300 -</div><details><summary>可接受的 chunk 组合</summary><div class="meta">5883b02cd922a64f-c0007</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge ok">✓ 证据 e2</span> <span class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页 · 相似度 0.889</span><div class="text" data-expand>表头未确定。
+第1行至第2行共享第1列，内容 = &quot;MODEL&quot;。
+第1行：第2列 = &quot;1st Delivery&quot;；第3列 = &quot;2nd\nDelivery&quot;；第4列 = &quot;3rd Delivery&quot;；第5列 = &quot;4th Delivery&quot;；第6列 = &quot;5th\nDelivery&quot;；第7列 = &quot;6th\nDelivery&quot;。
+第2行：第2列 = &quot;25.09.25&quot;；第3列 = &quot;10.10.25&quot;；第4列 = &quot;10.12.25&quot;；第5列 = &quot;10.03.26&quot;；第6列 = &quot;10.05.26&quot;；第7列 = &quot;10.07.26&quot;。
+第3行：第<span class="ellipsis">… </span><span class="rest hidden">1列 = &quot;HXE12ESX&quot;；第2列 = 〔空白〕；第3列 = &quot;-&quot;；第4列 = &quot;20,000.00&quot;；第5列 = &quot;20,000.00&quot;；第6列 = &quot;20,000.00&quot;；第7列 = &quot;20,000.00&quot;。
+第4行：第1列 = &quot;HXE13ESX&quot;；第2列 = 〔空白〕；第3列 = &quot;5,000.00&quot;；第4列 = &quot;2,500.00&quot;；第5列 = &quot;2,500.00&quot;；第6列 = &quot;-&quot;；第7列 = &quot;-&quot;。
+第5行：第1列 = &quot;HXE33K-S1&quot;；第2列 = 〔空白〕；第3列 = &quot;900.00&quot;；第4列 = &quot;500.00&quot;；第5列 = &quot;-&quot;；第6列 = &quot;500.00&quot;；第7列 = &quot;-&quot;。
+第6行：第1列 = &quot;HXE34K-S1&quot;；第2列 = &quot;500&quot;；第3列 = &quot;1,000.00&quot;；第4列 = &quot;500.00&quot;；第5列 = &quot;1,000.00&quot;；第6列 = &quot;500.00&quot;；第7列 = &quot;-&quot;。
+第7行：第1列 = &quot;Meterbox&quot;；第2列 = 〔空白〕；第3列 = &quot;-&quot;；第4列 = &quot;10,000.00&quot;；第5列 = &quot;10,000.00&quot;；第6列 = &quot;10,000.00&quot;；第7列 = &quot;10,000.00&quot;。 </span><button class="toggle" data-more="展开全文（共 816 字符）" data-less="收起">展开全文（共 816 字符）</button></div><details><summary>5883b02cd922a64f-c0007</summary><div class="meta">距离 0.111276，类型 table</div></details></div><div class="item"><b>#2</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.888</span><div class="text" data-expand>第4行：第1列至第11列为合并单元格，内容 = &quot;ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES&quot;。
+第5行：COMPANY = &quot;ELUC&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;27,000&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;<span class="ellipsis">… </span><span class="rest hidden">2,000&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;5,000&quot;。
+第6行：COMPANY = &quot;ADINELSA&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;10,000&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = 〔空白〕。 </span><button class="toggle" data-more="展开全文（共 1379 字符）" data-less="收起">展开全文（共 1379 字符）</button></div><details><summary>5a4c36e0022f4917-c0009</summary><div class="meta">距离 0.112237，类型 table</div></details></div><div class="item"><b>#3</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.884</span><div class="text" data-expand>第15行：COMPANY = &quot;ELOR - SAN\nMARTIN&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;92,400&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days<span class="ellipsis">… </span><span class="rest hidden"> of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;15,400&quot;。
+第16行：COMPANY = &quot;ELOR -\nCAJAMARCA&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;67,305&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;11,220&quot;。 </span><button class="toggle" data-more="展开全文（共 1350 字符）" data-less="收起">展开全文（共 1350 字符）</button></div><details><summary>5a4c36e0022f4917-c0014</summary><div class="meta">距离 0.116190，类型 table</div></details></div></div></div></div><div class="card" data-tags="all partial cross"><h3><span class="badge warn">◐ 部分证据检索到</span> PO-25-15-Q002 <span class="meta">· 2/3 条结果来自其他文档</span></h3><div>订单PURCHASE ORDER N° 25-15-HPE（ORDER2025002）中，第六批次交付的具体日期是什么？交付的产品总金额达多少？</div><details><summary>参考答案</summary><div class="meta">第六批次交付的具体日期为2026年7月10日，交付的产品总金额为USD 160200.00。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 1 页</div><div class="text">HXE12ES | Qty 80,000 | USD 5.28
+HXE13ES | Qty 10,000 | USD 5.50
+HXE33K-S1 | Qty 1,900 | USD 13.64
+HXE34K-S1 | Qty 3,500 | USD 14.08
+HXPXS1 | Qty 40,000 | USD 5.46
+HXF300 | Qty 1,500 | USD 79.20</div><details><summary>可接受的 chunk 组合</summary><div class="meta">5883b02cd922a64f-c0001</div></details></div><div class="item"><b>证据 e2</b> <span class="badge ok">第 2 位时已覆盖</span> <div class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页</div><div class="text">6th Delivery | 10.07.26
+HXE12ESX 20,000.00 | HXE13ESX - | HXE33K-S1 - | HXE34K-S1 - | Meterbox 10,000.00 | HXF300 -</div><details><summary>可接受的 chunk 组合</summary><div class="meta">5883b02cd922a64f-c0007</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.892</span><div class="text" data-expand>第4行：第1列至第11列为合并单元格，内容 = &quot;ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES&quot;。
+第5行：COMPANY = &quot;ELUC&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;27,000&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;<span class="ellipsis">… </span><span class="rest hidden">2,000&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;5,000&quot;。
+第6行：COMPANY = &quot;ADINELSA&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;10,000&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;5,000&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = 〔空白〕。 </span><button class="toggle" data-more="展开全文（共 1379 字符）" data-less="收起">展开全文（共 1379 字符）</button></div><details><summary>5a4c36e0022f4917-c0009</summary><div class="meta">距离 0.108183，类型 table</div></details></div><div class="item"><b>#2</b> <span class="badge ok">✓ 证据 e2</span> <span class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页 · 相似度 0.891</span><div class="text" data-expand>表头未确定。
+第1行至第2行共享第1列，内容 = &quot;MODEL&quot;。
+第1行：第2列 = &quot;1st Delivery&quot;；第3列 = &quot;2nd\nDelivery&quot;；第4列 = &quot;3rd Delivery&quot;；第5列 = &quot;4th Delivery&quot;；第6列 = &quot;5th\nDelivery&quot;；第7列 = &quot;6th\nDelivery&quot;。
+第2行：第2列 = &quot;25.09.25&quot;；第3列 = &quot;10.10.25&quot;；第4列 = &quot;10.12.25&quot;；第5列 = &quot;10.03.26&quot;；第6列 = &quot;10.05.26&quot;；第7列 = &quot;10.07.26&quot;。
+第3行：第<span class="ellipsis">… </span><span class="rest hidden">1列 = &quot;HXE12ESX&quot;；第2列 = 〔空白〕；第3列 = &quot;-&quot;；第4列 = &quot;20,000.00&quot;；第5列 = &quot;20,000.00&quot;；第6列 = &quot;20,000.00&quot;；第7列 = &quot;20,000.00&quot;。
+第4行：第1列 = &quot;HXE13ESX&quot;；第2列 = 〔空白〕；第3列 = &quot;5,000.00&quot;；第4列 = &quot;2,500.00&quot;；第5列 = &quot;2,500.00&quot;；第6列 = &quot;-&quot;；第7列 = &quot;-&quot;。
+第5行：第1列 = &quot;HXE33K-S1&quot;；第2列 = 〔空白〕；第3列 = &quot;900.00&quot;；第4列 = &quot;500.00&quot;；第5列 = &quot;-&quot;；第6列 = &quot;500.00&quot;；第7列 = &quot;-&quot;。
+第6行：第1列 = &quot;HXE34K-S1&quot;；第2列 = &quot;500&quot;；第3列 = &quot;1,000.00&quot;；第4列 = &quot;500.00&quot;；第5列 = &quot;1,000.00&quot;；第6列 = &quot;500.00&quot;；第7列 = &quot;-&quot;。
+第7行：第1列 = &quot;Meterbox&quot;；第2列 = 〔空白〕；第3列 = &quot;-&quot;；第4列 = &quot;10,000.00&quot;；第5列 = &quot;10,000.00&quot;；第6列 = &quot;10,000.00&quot;；第7列 = &quot;10,000.00&quot;。 </span><button class="toggle" data-more="展开全文（共 816 字符）" data-less="收起">展开全文（共 816 字符）</button></div><details><summary>5883b02cd922a64f-c0007</summary><div class="meta">距离 0.108570，类型 table</div></details></div><div class="item"><b>#3</b> <span class="badge bad">跨文档</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.887</span><div class="text" data-expand>第15行：COMPANY = &quot;ELOR - SAN\nMARTIN&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;92,400&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days<span class="ellipsis">… </span><span class="rest hidden"> of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;15,400&quot;。
+第16行：COMPANY = &quot;ELOR -\nCAJAMARCA&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;67,305&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;11,220&quot;。 </span><button class="toggle" data-more="展开全文（共 1350 字符）" data-less="收起">展开全文（共 1350 字符）</button></div><details><summary>5a4c36e0022f4917-c0014</summary><div class="meta">距离 0.113213，类型 table</div></details></div></div></div></div><h2 id="doc-5a4c36e0022f4917">签字-ORDER PERU 25-19 FONAFE.pdf</h2><div class="card" data-tags="all partial"><h3><span class="badge warn">◐ 部分证据检索到</span> PO-25-19-Q001</h3><div>订单PURCHASE ORDER N° 25-19-HPE（ORDER2025003）中，ELCTO公司订购了哪些产品？每款产品的单价和数量是多少？订购的总金额是是多少？交货的计划是怎么样的？请详细说明每批次交付的具体日期，及每批次交付的产品和数量明细。</div><details><summary>参考答案</summary><div class="meta">ELCTO总共订购了两款产品：HXE12ES和HXE13ES。HXE12ES的单价为USD 4.56，数量总共116000件；HXE13ES的单价为USD 5.08，数量总共94000件。订购的总金额为USD 1006480.00。交货计划分为六批次：第一批次交付日期为2026年2月28日，交付HXE12ES 19330件和HXE13ES 16000件；第二批次交付日期为2026年4月9日，交付HXE12ES 19330件和HXE13ES 16000件；第三批次交付日期为2026年8月7日，交付HXE12ES 19330件和HXE13ES 15500件；第四批次交付日期为2026年12月5日，交付HXE12ES 19330件和HXE13ES 15500件；第五批次交付日期为2027年4月4日，交付HXE12ES 19330件和HXE13ES 15500件；第六批次交付日期为2027年8月2日，交付HXE12ES 19350件和HXE13ES 15500件。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 1 页</div><div class="text">HXE12ES | 1´131,056.00 | USD 4.56
+HXE13ES | 109,130.00 | USD 5.08
+HXE33K-S1 | 8,368.00 | USD 13.49
+HXE34K-S1 | 45,938.00 | USD 14.37</div><details><summary>可接受的 chunk 组合</summary><div class="meta">5a4c36e0022f4917-c0001</div></details></div><div class="item"><b>证据 e2</b> <span class="badge ok">第 2 位时已覆盖</span> <div class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页</div><div class="text">ELCTO | HXE12ES | TOTAL 116,000 | 19,330 | 19,330 | 19,330 | 19,330 | 19,330 | 19,350
+ELCTO | HXE13ES | TOTAL 94,000 | 16,000 | 16,000 | 15,500 | 15,500 | 15,500 | 15,500</div><details><summary>可接受的 chunk 组合</summary><div class="meta">5a4c36e0022f4917-c0010 + 5a4c36e0022f4917-c0015</div></details></div><div class="item"><b>证据 e3</b> <span class="badge bad">未覆盖</span> <div class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 3 页</div><div class="text">1ST DELIVERY 28/02/2026
+2ND DELIVERY 09/04/2026
+3RD DELIVERY 07/08/2026
+4TH DELIVERY 05/12/2026
+5TH DELIVERY 04/04/2027
+6TH DELIVERY 02/08/2027</div><details><summary>可接受的 chunk 组合</summary><div class="meta">5a4c36e0022f4917-c0024</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge ok">✓ 证据 e2</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.893</span><div class="text" data-expand>第17行：第1列至第11列为合并单元格，内容 = &quot;ITEM 2: SINGLE PHASE METER 3 WIRES - MODEL HXE13ES&quot;。
+第18行：COMPANY = &quot;ELCTO&quot;；ITEM = &quot;2&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n3 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;94,000&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) <span class="ellipsis">… </span><span class="rest hidden">= &quot;16,000&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;16,000&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;15,500&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;15,500&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;15,500&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;15,500&quot;。
+第19行：COMPANY = &quot;ENOSA&quot;；ITEM = &quot;2&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n3 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;5,220&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;870&quot;。 </span><button class="toggle" data-more="展开全文（共 1385 字符）" data-less="收起">展开全文（共 1385 字符）</button></div><details><summary>5a4c36e0022f4917-c0015</summary><div class="meta">距离 0.107235，类型 table</div></details></div><div class="item"><b>#2</b> <span class="badge ok">✓ 证据 e2</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.886</span><div class="text" data-expand>第7行：COMPANY = &quot;ELSU&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;69,000&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;29,000&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+si<span class="ellipsis">… </span><span class="rest hidden">gnature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;23,000&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;17,000&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = 〔空白〕。
+第8行：COMPANY = &quot;ELCTO&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;116,000&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;19,330&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;19,330&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;19,330&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;19,330&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;19,330&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;19,350&quot;。 </span><button class="toggle" data-more="展开全文（共 1311 字符）" data-less="收起">展开全文（共 1311 字符）</button></div><details><summary>5a4c36e0022f4917-c0010</summary><div class="meta">距离 0.113609，类型 table</div></details></div><div class="item"><b>#3</b> <span class="badge ">非证据</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.883</span><div class="text" data-expand>第11行：COMPANY = &quot;ENSA&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;132,180&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;24,330&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+<span class="ellipsis">… </span><span class="rest hidden">signature) = &quot;23,630&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;21,880&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;21,680&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;20,480&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;20,180&quot;。
+第12行：COMPANY = &quot;ELOR -\nLORETO&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;87,600&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;14,600&quot;。 </span><button class="toggle" data-more="展开全文（共 1334 字符）" data-less="收起">展开全文（共 1334 字符）</button></div><details><summary>5a4c36e0022f4917-c0012</summary><div class="meta">距离 0.117448，类型 table</div></details></div></div></div></div><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> PO-25-19-Q002 <span class="meta">· 1/3 条结果来自其他文档</span></h3><div>订单PURCHASE ORDER N° 25-19-HPE（ORDER2025003）中，ElUC公司订购了多少件HXE34K-S1？总金额是多少？</div><details><summary>参考答案</summary><div class="meta">ELUC订购了2000件HXE34K-S1，总金额为USD 28740.00。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 1 页</div><div class="text">Three Phase 04 Wires meter Model: HXE34K-S1 | Unit price USD 14.37</div><details><summary>可接受的 chunk 组合</summary><div class="meta">5a4c36e0022f4917-c0001</div></details></div><div class="item"><b>证据 e2</b> <span class="badge bad">未覆盖</span> <div class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 3 页</div><div class="text">ELUC | HXE34K-S1 | TOTAL 2,000 | 1st Delivery 1,000 | 4th Delivery 1,000</div><details><summary>可接受的 chunk 组合</summary><div class="meta">5a4c36e0022f4917-c0021</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge bad">跨文档</span> <span class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页 · 相似度 0.898</span><div class="text" data-expand>表头未确定。
+第1行至第2行共享第1列，内容 = &quot;MODEL&quot;。
+第1行：第2列 = &quot;1st Delivery&quot;；第3列 = &quot;2nd\nDelivery&quot;；第4列 = &quot;3rd Delivery&quot;；第5列 = &quot;4th Delivery&quot;；第6列 = &quot;5th\nDelivery&quot;；第7列 = &quot;6th\nDelivery&quot;。
+第2行：第2列 = &quot;25.09.25&quot;；第3列 = &quot;10.10.25&quot;；第4列 = &quot;10.12.25&quot;；第5列 = &quot;10.03.26&quot;；第6列 = &quot;10.05.26&quot;；第7列 = &quot;10.07.26&quot;。
+第3行：第<span class="ellipsis">… </span><span class="rest hidden">1列 = &quot;HXE12ESX&quot;；第2列 = 〔空白〕；第3列 = &quot;-&quot;；第4列 = &quot;20,000.00&quot;；第5列 = &quot;20,000.00&quot;；第6列 = &quot;20,000.00&quot;；第7列 = &quot;20,000.00&quot;。
+第4行：第1列 = &quot;HXE13ESX&quot;；第2列 = 〔空白〕；第3列 = &quot;5,000.00&quot;；第4列 = &quot;2,500.00&quot;；第5列 = &quot;2,500.00&quot;；第6列 = &quot;-&quot;；第7列 = &quot;-&quot;。
+第5行：第1列 = &quot;HXE33K-S1&quot;；第2列 = 〔空白〕；第3列 = &quot;900.00&quot;；第4列 = &quot;500.00&quot;；第5列 = &quot;-&quot;；第6列 = &quot;500.00&quot;；第7列 = &quot;-&quot;。
+第6行：第1列 = &quot;HXE34K-S1&quot;；第2列 = &quot;500&quot;；第3列 = &quot;1,000.00&quot;；第4列 = &quot;500.00&quot;；第5列 = &quot;1,000.00&quot;；第6列 = &quot;500.00&quot;；第7列 = &quot;-&quot;。
+第7行：第1列 = &quot;Meterbox&quot;；第2列 = 〔空白〕；第3列 = &quot;-&quot;；第4列 = &quot;10,000.00&quot;；第5列 = &quot;10,000.00&quot;；第6列 = &quot;10,000.00&quot;；第7列 = &quot;10,000.00&quot;。 </span><button class="toggle" data-more="展开全文（共 816 字符）" data-less="收起">展开全文（共 816 字符）</button></div><details><summary>5883b02cd922a64f-c0007</summary><div class="meta">距离 0.102183，类型 table</div></details></div><div class="item"><b>#2</b> <span class="badge ">非证据</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.885</span><div class="text" data-expand>第20行：COMPANY = &quot;ENSA&quot;；ITEM = &quot;2&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n3 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;9,910&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;1,810&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+sig<span class="ellipsis">… </span><span class="rest hidden">nature) = &quot;1,710&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;1,710&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;1,610&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;1,560&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;1,510&quot;。
+第21行：第1列至第11列为合并单元格，内容 = &quot;ITEM 3: THREE PHASE METER 3 WIRES - MODEL HXE33K-S1&quot;。
+第22行：COMPANY = &quot;ELUC&quot;；ITEM = &quot;3&quot;；DESCRIPTION = &quot;Three Phase 3\nwires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;150&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;150&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = 〔空白〕。 </span><button class="toggle" data-more="展开全文（共 1362 字符）" data-less="收起">展开全文（共 1362 字符）</button></div><details><summary>5a4c36e0022f4917-c0016</summary><div class="meta">距离 0.115183，类型 table</div></details></div><div class="item"><b>#3</b> <span class="badge ">非证据</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.884</span><div class="text" data-expand>第17行：第1列至第11列为合并单元格，内容 = &quot;ITEM 2: SINGLE PHASE METER 3 WIRES - MODEL HXE13ES&quot;。
+第18行：COMPANY = &quot;ELCTO&quot;；ITEM = &quot;2&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n3 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;94,000&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) <span class="ellipsis">… </span><span class="rest hidden">= &quot;16,000&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;16,000&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;15,500&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;15,500&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;15,500&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;15,500&quot;。
+第19行：COMPANY = &quot;ENOSA&quot;；ITEM = &quot;2&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n3 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;5,220&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;870&quot;。 </span><button class="toggle" data-more="展开全文（共 1385 字符）" data-less="收起">展开全文（共 1385 字符）</button></div><details><summary>5a4c36e0022f4917-c0015</summary><div class="meta">距离 0.116285，类型 table</div></details></div></div></div></div><div class="card" data-tags="all miss"><h3><span class="badge bad">✗ 未检索到证据</span> PO-25-19-Q003</h3><div>订单PURCHASE ORDER N° 25-19-HPE（ORDER2025003）中，ENSA公司订购了哪些产品？每款产品的单价和数量是多少？订购的总金额是是多少？交货的计划是怎么样的？请详细说明每批次交付的具体日期，及每批次交付的产品和数量明细。</div><details><summary>参考答案</summary><div class="meta">ENSA总共订购了四款产品：HXE12ES、HXE13ES、HXE33K-S1和HXE34K-S1。HXE12ES的单价为USD 4.56，数量总共132180件；HXE13ES的单价为USD 5.08，数量总共9910件；HXE33K-S1的单价为USD 13.49，数量总共5018件；HXE34K-S1的单价为USD 14.37，数量总共10804件。订购的总金额为USD 876029.90。交货计划分为六批次：第一批次交付日期为2026年2月28日，交付HXE12ES 24330件、HXE13ES 1810件、HXE33K-S1 1153件和HXE34K-S1 2234件；第二批次交付日期为2026年4月9日，交付HXE12ES 23630件、HXE13ES 1710件、HXE33K-S1 853件和HXE34K-S1 1734件；第三批次交付日期为2026年8月7日，交付HXE12ES 21880件、HXE13ES 1710件、HXE33K-S1 753件和HXE34K-S1 1734件；第四批次交付日期为2026年12月5日，交付HXE12ES 21680件、HXE13ES 1610件、HXE33K-S1 753件和HXE34K-S1 1734件；第五批次交付日期为2027年4月4日，交付HXE12ES 20480件、HXE13ES 1560件、HXE33K-S1 753件和HXE34K-S1 1734件；第六批次交付日期为2027年8月2日，交付HXE12ES 20180件、HXE13ES 1510件、HXE33K-S1 753件和HXE34K-S1 1634件。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 1 页</div><div class="text">HXE12ES | USD 4.56
+HXE13ES | USD 5.08
+HXE33K-S1 | USD 13.49
+HXE34K-S1 | USD 14.37</div><details><summary>可接受的 chunk 组合</summary><div class="meta">5a4c36e0022f4917-c0001</div></details></div><div class="item"><b>证据 e2</b> <span class="badge bad">未覆盖</span> <div class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页</div><div class="text">ENSA | HXE12ES | TOTAL 132,180 | 24,330 | 23,630 | 21,880 | 21,680 | 20,480 | 20,180
+ENSA | HXE13ES | TOTAL 9,910 | 1,810 | 1,710 | 1,710 | 1,610 | 1,560 | 1,510
+ENSA | HXE33K-S1 | TOTAL 5,018 | 1,153 | 853 | 753 | 753 | 753 | 753</div><details><summary>可接受的 chunk 组合</summary><div class="meta">5a4c36e0022f4917-c0012 + 5a4c36e0022f4917-c0016 + 5a4c36e0022f4917-c0018</div></details></div><div class="item"><b>证据 e3</b> <span class="badge bad">未覆盖</span> <div class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 3 页</div><div class="text">ENSA | HXE34K-S1 | TOTAL 10,804 | 2,234 | 1,734 | 1,734 | 1,734 | 1,734 | 1,634</div><details><summary>可接受的 chunk 组合</summary><div class="meta">5a4c36e0022f4917-c0022</div></details></div><div class="item"><b>证据 e4</b> <span class="badge bad">未覆盖</span> <div class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 3 页</div><div class="text">1ST DELIVERY 28/02/2026
+2ND DELIVERY 09/04/2026
+3RD DELIVERY 07/08/2026
+4TH DELIVERY 05/12/2026
+5TH DELIVERY 04/04/2027
+6TH DELIVERY 02/08/2027</div><details><summary>可接受的 chunk 组合</summary><div class="meta">5a4c36e0022f4917-c0024</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge ok">✓ 证据 e2</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.893</span><div class="text" data-expand>第11行：COMPANY = &quot;ENSA&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;132,180&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;24,330&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+<span class="ellipsis">… </span><span class="rest hidden">signature) = &quot;23,630&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;21,880&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;21,680&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;20,480&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;20,180&quot;。
+第12行：COMPANY = &quot;ELOR -\nLORETO&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;87,600&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;14,600&quot;。 </span><button class="toggle" data-more="展开全文（共 1334 字符）" data-less="收起">展开全文（共 1334 字符）</button></div><details><summary>5a4c36e0022f4917-c0012</summary><div class="meta">距离 0.106973，类型 table</div></details></div><div class="item"><b>#2</b> <span class="badge ">非证据</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.892</span><div class="text" data-expand>第17行：第1列至第11列为合并单元格，内容 = &quot;ITEM 2: SINGLE PHASE METER 3 WIRES - MODEL HXE13ES&quot;。
+第18行：COMPANY = &quot;ELCTO&quot;；ITEM = &quot;2&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n3 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;94,000&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) <span class="ellipsis">… </span><span class="rest hidden">= &quot;16,000&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;16,000&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;15,500&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;15,500&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;15,500&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;15,500&quot;。
+第19行：COMPANY = &quot;ENOSA&quot;；ITEM = &quot;2&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n3 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;5,220&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;870&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;870&quot;。 </span><button class="toggle" data-more="展开全文（共 1385 字符）" data-less="收起">展开全文（共 1385 字符）</button></div><details><summary>5a4c36e0022f4917-c0015</summary><div class="meta">距离 0.107504，类型 table</div></details></div><div class="item"><b>#3</b> <span class="badge ok">✓ 证据 e2</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.891</span><div class="text" data-expand>第20行：COMPANY = &quot;ENSA&quot;；ITEM = &quot;2&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n3 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;9,910&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;1,810&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+sig<span class="ellipsis">… </span><span class="rest hidden">nature) = &quot;1,710&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;1,710&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;1,610&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;1,560&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;1,510&quot;。
+第21行：第1列至第11列为合并单元格，内容 = &quot;ITEM 3: THREE PHASE METER 3 WIRES - MODEL HXE33K-S1&quot;。
+第22行：COMPANY = &quot;ELUC&quot;；ITEM = &quot;3&quot;；DESCRIPTION = &quot;Three Phase 3\nwires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;150&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;150&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = 〔空白〕；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = 〔空白〕。 </span><button class="toggle" data-more="展开全文（共 1362 字符）" data-less="收起">展开全文（共 1362 字符）</button></div><details><summary>5a4c36e0022f4917-c0016</summary><div class="meta">距离 0.109364，类型 table</div></details></div></div></div></div><div class="card" data-tags="all miss cross"><h3><span class="badge bad">✗ 未检索到证据</span> PO-25-19-Q004 <span class="meta">· 1/3 条结果来自其他文档</span></h3><div>订单PURCHASE ORDER N° 25-19-HPE（ORDER2025003），客户的付款条件是什么？</div><details><summary>参考答案</summary><div class="meta">货款将在货物在客户仓库被验收后30天内被支付。</div></details><div class="cols"><div><h3>标准证据</h3><div class="item"><b>证据 e1</b> <span class="badge bad">未覆盖</span> <div class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 3 页</div><div class="text">Customer´s Payment Terms: Payment will be done 30 days after the acceptance of the goods in customer´s warehouse.</div><details><summary>可接受的 chunk 组合</summary><div class="meta">5a4c36e0022f4917-c0026</div></details></div></div><div><h3>实际检索 Top-3</h3><div class="item"><b>#1</b> <span class="badge bad">跨文档</span> <span class="meta">ORDER PERU 25-15 ANDET VF.pdf · 第 2 页 · 相似度 0.882</span><div class="text" data-expand>表头未确定。
+第1行至第2行共享第1列，内容 = &quot;MODEL&quot;。
+第1行：第2列 = &quot;1st Delivery&quot;；第3列 = &quot;2nd\nDelivery&quot;；第4列 = &quot;3rd Delivery&quot;；第5列 = &quot;4th Delivery&quot;；第6列 = &quot;5th\nDelivery&quot;；第7列 = &quot;6th\nDelivery&quot;。
+第2行：第2列 = &quot;25.09.25&quot;；第3列 = &quot;10.10.25&quot;；第4列 = &quot;10.12.25&quot;；第5列 = &quot;10.03.26&quot;；第6列 = &quot;10.05.26&quot;；第7列 = &quot;10.07.26&quot;。
+第3行：第<span class="ellipsis">… </span><span class="rest hidden">1列 = &quot;HXE12ESX&quot;；第2列 = 〔空白〕；第3列 = &quot;-&quot;；第4列 = &quot;20,000.00&quot;；第5列 = &quot;20,000.00&quot;；第6列 = &quot;20,000.00&quot;；第7列 = &quot;20,000.00&quot;。
+第4行：第1列 = &quot;HXE13ESX&quot;；第2列 = 〔空白〕；第3列 = &quot;5,000.00&quot;；第4列 = &quot;2,500.00&quot;；第5列 = &quot;2,500.00&quot;；第6列 = &quot;-&quot;；第7列 = &quot;-&quot;。
+第5行：第1列 = &quot;HXE33K-S1&quot;；第2列 = 〔空白〕；第3列 = &quot;900.00&quot;；第4列 = &quot;500.00&quot;；第5列 = &quot;-&quot;；第6列 = &quot;500.00&quot;；第7列 = &quot;-&quot;。
+第6行：第1列 = &quot;HXE34K-S1&quot;；第2列 = &quot;500&quot;；第3列 = &quot;1,000.00&quot;；第4列 = &quot;500.00&quot;；第5列 = &quot;1,000.00&quot;；第6列 = &quot;500.00&quot;；第7列 = &quot;-&quot;。
+第7行：第1列 = &quot;Meterbox&quot;；第2列 = 〔空白〕；第3列 = &quot;-&quot;；第4列 = &quot;10,000.00&quot;；第5列 = &quot;10,000.00&quot;；第6列 = &quot;10,000.00&quot;；第7列 = &quot;10,000.00&quot;。 </span><button class="toggle" data-more="展开全文（共 816 字符）" data-less="收起">展开全文（共 816 字符）</button></div><details><summary>5883b02cd922a64f-c0007</summary><div class="meta">距离 0.117879，类型 table</div></details></div><div class="item"><b>#2</b> <span class="badge ">非证据</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.880</span><div class="text" data-expand>第11行：COMPANY = &quot;ENSA&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;132,180&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;24,330&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+<span class="ellipsis">… </span><span class="rest hidden">signature) = &quot;23,630&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;21,880&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;21,680&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;20,480&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;20,180&quot;。
+第12行：COMPANY = &quot;ELOR -\nLORETO&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;87,600&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;14,600&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;14,600&quot;。 </span><button class="toggle" data-more="展开全文（共 1334 字符）" data-less="收起">展开全文（共 1334 字符）</button></div><details><summary>5a4c36e0022f4917-c0012</summary><div class="meta">距离 0.120457，类型 table</div></details></div><div class="item"><b>#3</b> <span class="badge ">非证据</span> <span class="meta">签字-ORDER PERU 25-19 FONAFE.pdf · 第 2 页 · 相似度 0.878</span><div class="text" data-expand>第15行：COMPANY = &quot;ELOR - SAN\nMARTIN&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;92,400&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days<span class="ellipsis">… </span><span class="rest hidden"> of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;15,400&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;15,400&quot;。
+第16行：COMPANY = &quot;ELOR -\nCAJAMARCA&quot;；ITEM = &quot;1&quot;；DESCRIPTION = &quot;Single Phase\nMeter\n2 wires&quot;；UNIT = &quot;UNIT&quot;；TOTAL
+REQUIREMENT = &quot;67,305&quot;；QTY AND DELIVERY SCHEDULE / 1st
+Delivery / (At 170
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 2nd
+Delivery / (At 210
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 3rd
+Delivery / (At 330
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 4th
+Delivery / (At 450
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 5th
+Delivery / (At 570
+days of
+contract
+signature) = &quot;11,217&quot;；QTY AND DELIVERY SCHEDULE / 6th
+Delivery / (At 690
+days of
+contract
+signature) = &quot;11,220&quot;。 </span><button class="toggle" data-more="展开全文（共 1350 字符）" data-less="收起">展开全文（共 1350 字符）</button></div><details><summary>5a4c36e0022f4917-c0014</summary><div class="meta">距离 0.121737，类型 table</div></details></div></div></div></div><div class="meta">指标定义见 docs/rules/evaluation.md；原始数据见同目录 result.json。</div></main><script src="../../assets/report.js"></script></body></html>

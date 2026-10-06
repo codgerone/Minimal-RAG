@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from typing import Any, Collection
 
 COLLECTION = "chunks"
 WRITE_BATCH = 100
@@ -44,6 +44,13 @@ def _chunk(chunk_id: str, text: str, meta: dict[str, Any]) -> StoredChunk:
                        None if int(meta["token_count"]) < 0 else int(meta["token_count"]), text)
 
 
+def _where(document_ids: Collection[str] | None) -> dict[str, Any] | None:
+    if document_ids is None:
+        return None
+    ids = sorted(document_ids)
+    return {"document_id": ids[0]} if len(ids) == 1 else {"document_id": {"$in": ids}}
+
+
 class ChromaStore:
     def __init__(self, path: Path):
         self.path = path
@@ -60,13 +67,14 @@ class ChromaStore:
                 COLLECTION, configuration={"hnsw": {"space": "cosine"}})
         return self._collection
 
-    def count(self, document_id: str | None = None) -> int:
+    def count(self, document_ids: Collection[str] | None = None) -> int:
+        """Chunks in the given documents (None = whole index)."""
         collection = self._open(create=False)
-        if collection is None:
+        if collection is None or (document_ids is not None and not document_ids):
             return 0
-        if document_id is None:
+        if document_ids is None:
             return collection.count()
-        return len(collection.get(where={"document_id": document_id}, include=[])["ids"])
+        return len(collection.get(where=_where(document_ids), include=[])["ids"])
 
     def ids_by_document(self) -> dict[str, set[str]]:
         collection = self._open(create=False)
@@ -103,12 +111,12 @@ class ChromaStore:
         chunks = [_chunk(i, t, m) for i, t, m in zip(raw["ids"], raw["documents"], raw["metadatas"])]
         return sorted(chunks, key=lambda c: (c.relative_path.casefold(), c.chunk_index))
 
-    def query(self, vector: list[float], n: int, document_id: str | None = None) -> list[VectorHit]:
+    def query(self, vector: list[float], n: int,
+              document_ids: Collection[str] | None = None) -> list[VectorHit]:
         collection = self._open(create=False)
-        if collection is None or n <= 0:
+        if collection is None or n <= 0 or (document_ids is not None and not document_ids):
             return []
-        where = {"document_id": document_id} if document_id else None
-        raw = collection.query(query_embeddings=[vector], n_results=n, where=where,
+        raw = collection.query(query_embeddings=[vector], n_results=n, where=_where(document_ids),
                                include=["documents", "metadatas", "distances"])
         return [VectorHit(_chunk(i, t, m), float(d)) for i, t, m, d in
                 zip(raw["ids"][0], raw["documents"][0], raw["metadatas"][0], raw["distances"][0])]

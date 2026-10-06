@@ -127,7 +127,7 @@ def assemble(config: AssemblyConfig) -> Assembly:
     if config.retriever.use not in RETRIEVERS:
         raise ConfigError(f"[retriever] 没有名为 {config.retriever.use!r} 的实现，可选：{', '.join(RETRIEVERS)}")
     if config.retriever.params:
-        raise ConfigError(f"[retriever] semantic 只接受 top_k 参数")
+        raise ConfigError(f"[retriever] semantic 只接受 top_k 和 document_filter 参数")
     if config.llm.use not in LLMS:
         raise ConfigError(f"[llm] 没有名为 {config.llm.use!r} 的实现，可选：{', '.join(LLMS)}")
 

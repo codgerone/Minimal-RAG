@@ -7,6 +7,7 @@ from urllib.parse import quote
 
 from rag.config import ConfigError, list_configs
 from rag.eval.metrics import METRICS
+from rag.reports.evaluation import filter_state
 from rag.jsonio import read_json, write_atomic
 from rag.paths import Workspace
 from rag.reports.html import badge, esc, page, pct, write_assets
@@ -63,10 +64,11 @@ def _eval_section(workspace: Workspace) -> str:
         note = badge(f"{modes['auto']} 组自动判定", "warn") if modes["auto"] else ""
         rows.append(f'<tr><td><a href="eval/{esc(quote(path.parent.name))}/index.html">{esc(path.parent.name)}</a> {note}</td>'
                     f'<td>{esc(result["config"])}</td><td class="num">{result["top_k"]}</td>'
+                    f'<td>{filter_state(result)}</td>'
                     + "".join(f'<td class="num">{pct(result["metrics"][key]["value"])}</td>'
                               for key, _, _ in METRICS) + "</tr>")
     head = "".join(f'<th class="num">{esc(label)}</th>' for _, label, _ in METRICS)
-    return (f'<h2>检索评估</h2><div class="scroll"><table><tr><th>运行</th><th>配置</th><th class="num">K</th>'
+    return (f'<h2>检索评估</h2><div class="scroll"><table><tr><th>运行</th><th>配置</th><th class="num">K</th><th>文档过滤</th>'
             f'{head}</tr>{"".join(rows)}</table></div>')
 
 

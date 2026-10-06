@@ -40,6 +40,7 @@ class AssemblyConfig:
     top_k: int          # search / ask / chat
     llm: Component
     eval_top_k: int     # formal evaluation; kept at the baseline K for comparability
+    document_filter: bool = True   # limit retrieval to documents whose catalog code is in the question
 
     def build_settings(self) -> dict[str, Any]:
         """Everything that changes index content. Retrieval, LLM and display settings are excluded."""
@@ -83,6 +84,9 @@ def load_config(path: Path) -> AssemblyConfig:
     top_k = retriever.params.pop("top_k", 4)
     if type(top_k) is not int or top_k <= 0:
         raise ConfigError(f"{path.name}：retriever.top_k 必须为正整数")
+    document_filter = retriever.params.pop("document_filter", True)
+    if type(document_filter) is not bool:
+        raise ConfigError(f"{path.name}：retriever.document_filter 必须为 true 或 false")
     evaluation = data.get("eval", {})
     if not isinstance(evaluation, dict) or set(evaluation) - {"top_k"}:
         raise ConfigError(f"{path.name}：[eval] 只接受 top_k")
@@ -99,7 +103,7 @@ def load_config(path: Path) -> AssemblyConfig:
         _component(data["embedder"], "embedder", path),
         retriever, top_k,
         _component(data["llm"], "llm", path),
-        eval_top_k,
+        eval_top_k, document_filter,
     )
 
 

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -12,9 +12,10 @@ from rag.eval.judge import GroupEvidence, Mappings, chunk_key, judge_case
 from rag.eval.metrics import METRICS, QuestionScore, aggregate, score_question
 from rag.index.builder import current_status, open_store
 from rag.index.store import VectorHit
-from rag.jsonio import read_json, write_json
+from rag.jsonio import write_json
 from rag.paths import Workspace
 from rag.query.retriever import SemanticRetriever
+from rag.query.scope import SearchScope, load_catalog, resolve_scope
 from rag.registry import Assembly
 
 
@@ -28,10 +29,26 @@ class CaseResult:
     hits: list[VectorHit]
     evidence: list[GroupEvidence]
     score: QuestionScore | None   # None for unanswerable questions
+    scope: SearchScope
+
+    @property
+    def evidence_documents(self) -> set[str]:
+        return {x.document_id for g in self.case.groups for x in g.excerpts}
+
+    @property
+    def identified_correctly(self) -> bool:
+        return (self.scope.kind == "identified"
+                and set(self.scope.document_ids or ()) == self.evidence_documents)
 
 
-def _run_folder(workspace: Workspace, config_name: str, top_k: int) -> Path:
-    base = workspace.eval_reports() / f"{datetime.now():%Y-%m-%d}_{config_name}_k{top_k}"
+def run_name(config_name: str, top_k: int, document_filter: bool) -> str:
+    """Folder name: date, config, K and filter state, so a run reads without opening it."""
+    state = "filter-on" if document_filter else "filter-off"
+    return f"{datetime.now():%Y-%m-%d}_{config_name}_k{top_k}_{state}"
+
+
+def _run_folder(workspace: Workspace, name: str) -> Path:
+    base = workspace.eval_reports() / name
     folder, n = base, 1
     while folder.exists():
         n += 1
@@ -43,17 +60,6 @@ def _metrics_dict(scores: list[QuestionScore]) -> dict[str, Any]:
     ratios = aggregate(scores)
     return {key: {"value": ratios[key].value, "numerator": ratios[key].numerator,
                   "denominator": ratios[key].denominator} for key, _, _ in METRICS}
-
-
-def previous_run(workspace: Workspace, config_name: str, top_k: int,
-                 before: Path | None = None) -> dict[str, Any] | None:
-    """Latest earlier run of the same config and K, used for the 'change since last run' line."""
-    folder = workspace.eval_reports()
-    if not folder.is_dir():
-        return None
-    runs = sorted(p for p in folder.glob(f"*_{config_name}_k{top_k}*")
-                  if (p / "result.json").is_file() and p != before)
-    return read_json(runs[-1] / "result.json") if runs else None
 
 
 def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int, *,
@@ -76,17 +82,21 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int, *,
     store = open_store(workspace, assembly.name)
     chunks = store.list_chunks()
     mappings = Mappings(workspace.root / "eval" / "mappings.json")
+    enabled = assembly.config.document_filter
+    catalog = (load_catalog(workspace.documents, tuple(sources.values()))
+               if enabled else None)
     retriever = SemanticRetriever(assembly.embedder, store)
     results: list[CaseResult] = []
     for case in dataset.cases:
-        hits = retriever.retrieve(case.question, top_k)
+        scope = resolve_scope(case.question, catalog, enabled)
+        hits = retriever.retrieve(case.question, top_k, scope.document_ids)
         evidence = judge_case(case, chunks, mappings)
-        score = None
+        item = CaseResult(case, hits, evidence, None, scope)
         if case.answerable:
-            documents = {x.document_id for g in case.groups for x in g.excerpts}
-            score = score_question([h.chunk.chunk_id for h in hits],
-                                   [h.chunk.document_id for h in hits], evidence, documents)
-        results.append(CaseResult(case, hits, evidence, score))
+            item = replace(item, score=score_question(
+                [h.chunk.chunk_id for h in hits], [h.chunk.document_id for h in hits],
+                evidence, item.evidence_documents))
+        results.append(item)
 
     if confirm_auto:
         by_id = {c.chunk_id: c for c in chunks}
@@ -98,7 +108,8 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int, *,
                                      [chunk_key(by_id[c].document_id, by_id[c].text) for c in chunk_set])
         mappings.save()
 
-    folder = _run_folder(workspace, assembly.name, top_k)
+    folder = _run_folder(workspace, run_name(assembly.name, top_k, enabled))
+    names = {doc_id: source.document_name for doc_id, source in sources.items()}
     scored = [r.score for r in results if r.score is not None]
     per_document: dict[str, Any] = {}
     for doc_id in dict.fromkeys(r.case.document_id for r in results):
@@ -118,23 +129,39 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int, *,
         "evidence_modes": {mode: sum(g.mode == mode for r in results for g in r.evidence)
                            for mode in ("confirmed", "auto", "unmapped")},
         "metrics": _metrics_dict(scored),
+        "document_scope": _scope_summary(results, enabled, catalog is not None),
         "documents": per_document,
-        "cases": [_case_json(r) for r in results],
+        "cases": [_case_json(r, names) for r in results],
     }
     write_json(folder / "result.json", result)
-    from rag.reports.evaluation import write_eval_report
-    write_eval_report(workspace, folder, result, previous_run(workspace, assembly.name, top_k, folder))
+    from rag.reports.evaluation import latest_before, write_eval_report
+    write_eval_report(workspace, folder, result, latest_before(workspace, result))
     return folder
 
 
-def _case_json(item: CaseResult) -> dict[str, Any]:
+def _scope_summary(results: list[CaseResult], enabled: bool, has_catalog: bool) -> dict[str, Any]:
+    """Document identification over answerable questions: identified set == evidence documents."""
+    answerable = [r for r in results if r.score is not None]
+    kinds = ("identified", "unidentified", "no_catalog", "disabled")
+    return {"enabled": enabled, "catalog": has_catalog,
+            "identified_correctly": {"numerator": sum(r.identified_correctly for r in answerable),
+                                     "denominator": len(answerable)},
+            "kinds": {kind: sum(r.scope.kind == kind for r in answerable) for kind in kinds}}
+
+
+def _case_json(item: CaseResult, names: dict[str, str]) -> dict[str, Any]:
     case, score = item.case, item.score
     relevant = {cid for g in item.evidence for s in g.acceptable_sets for cid in s}
-    evidence_docs = {x.document_id for g in case.groups for x in g.excerpts}
+    evidence_docs = item.evidence_documents
     return {
         "case_id": case.case_id, "document_id": case.document_id,
         "document_name": case.document_name, "question": case.question,
         "reference_answer": case.reference_answer, "answerable": case.answerable,
+        "scope": {"kind": item.scope.kind, "codes": list(item.scope.codes),
+                  "document_ids": list(item.scope.document_ids) if item.scope.document_ids else None,
+                  "document_names": [names.get(d, d) for d in item.scope.document_ids or ()],
+                  "identified_correctly": item.identified_correctly},
+        "evidence_document_ids": sorted(item.evidence_documents),
         "hit": score.hit if score else None, "complete": score.complete if score else None,
         "first_relevant_rank": score.first_relevant_rank if score else None,
         "groups": [{

@@ -78,3 +78,17 @@ def test_name_must_match_file(tmp_path):
     path = write(tmp_path, name="other")
     with pytest.raises(ConfigError, match="文件名一致"):
         load_config(path.rename(tmp_path / "x.toml"))
+
+
+def test_document_filter_is_a_query_setting(tmp_path):
+    path = write(tmp_path)
+    first = assemble(load_config(path))
+    assert first.config.document_filter is True
+    path.write_text(path.read_text(encoding="utf-8").replace("top_k = 4", "top_k = 4\ndocument_filter = false"),
+                    encoding="utf-8")
+    second = assemble(load_config(path))
+    assert second.config.document_filter is False
+    assert second.fingerprint() == first.fingerprint()
+    path.write_text(path.read_text(encoding="utf-8").replace("= false", '= "no"'), encoding="utf-8")
+    with pytest.raises(ConfigError, match="document_filter"):
+        load_config(path)
