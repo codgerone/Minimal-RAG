@@ -1,5 +1,5 @@
 {
-  "schema_version": "ground_truth_document_v1",
+  "schema_version": "ground_truth_document_v2",
   "document_key": "ORDER-PERU-25-15-ANDET-VF--5883b02cd922a64f",
   "document_id": "5883b02cd922a64f",
   "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
@@ -11,36 +11,54 @@
       "question": "订单PURCHASE ORDER N° 25-15-HPE（ORDER2025002）中，第四批次交付的具体日期是什么？交付的产品总金额达多少？",
       "answerable": true,
       "reference_answer": "第四批次交付的具体日期为2026年3月10日，交付的产品总金额为USD 188030.00。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "5883b02cd922a64f",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "relative_path": "ORDER PERU 25-15 ANDET VF.pdf",
+          "page_numbers": [
+            1
+          ],
+          "text": "HXE12ES | Qty 80,000 | USD 5.28\nHXE13ES | Qty 10,000 | USD 5.50\nHXE33K-S1 | Qty 1,900 | USD 13.64\nHXE34K-S1 | Qty 3,500 | USD 14.08\nHXPXS1 | Qty 40,000 | USD 5.46\nHXF300 | Qty 1,500 | USD 79.20"
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "5883b02cd922a64f",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "relative_path": "ORDER PERU 25-15 ANDET VF.pdf",
+          "page_numbers": [
+            2
+          ],
+          "text": "4th Delivery | 10.03.26\nHXE12ESX 20,000.00 | HXE13ESX 2,500.00 | HXE33K-S1 - | HXE34K-S1 1,000.00 | Meterbox 10,000.00 | HXF300 -"
+        }
+      ],
       "evidence_groups": [
         {
           "evidence_group_id": "e1",
-          "excerpts": [
+          "information_item": "第四批次交付日期",
+          "schemes": [
             {
-              "excerpt_id": "x1",
-              "document_id": "5883b02cd922a64f",
-              "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
-              "relative_path": "ORDER PERU 25-15 ANDET VF.pdf",
-              "page_numbers": [
-                1
-              ],
-              "text": "HXE12ES | Qty 80,000 | USD 5.28\nHXE13ES | Qty 10,000 | USD 5.50\nHXE33K-S1 | Qty 1,900 | USD 13.64\nHXE34K-S1 | Qty 3,500 | USD 14.08\nHXPXS1 | Qty 40,000 | USD 5.46\nHXF300 | Qty 1,500 | USD 79.20"
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ]
             }
           ]
         },
         {
           "evidence_group_id": "e2",
-          "excerpts": [
+          "information_item": "第四批次交付产品总金额",
+          "schemes": [
             {
-              "excerpt_id": "x1",
-              "document_id": "5883b02cd922a64f",
-              "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
-              "relative_path": "ORDER PERU 25-15 ANDET VF.pdf",
-              "page_numbers": [
-                2
-              ],
-              "text": "4th Delivery | 10.03.26\nHXE12ESX 20,000.00 | HXE13ESX 2,500.00 | HXE33K-S1 - | HXE34K-S1 1,000.00 | Meterbox 10,000.00 | HXF300 -"
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2"
+              ]
             }
-          ]
+          ],
+          "note": "总金额 = 第四批各产品数量（x2）× 单价（x1）"
         }
       ]
     },
@@ -49,36 +67,54 @@
       "question": "订单PURCHASE ORDER N° 25-15-HPE（ORDER2025002）中，第六批次交付的具体日期是什么？交付的产品总金额达多少？",
       "answerable": true,
       "reference_answer": "第六批次交付的具体日期为2026年7月10日，交付的产品总金额为USD 160200.00。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "5883b02cd922a64f",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "relative_path": "ORDER PERU 25-15 ANDET VF.pdf",
+          "page_numbers": [
+            1
+          ],
+          "text": "HXE12ES | Qty 80,000 | USD 5.28\nHXE13ES | Qty 10,000 | USD 5.50\nHXE33K-S1 | Qty 1,900 | USD 13.64\nHXE34K-S1 | Qty 3,500 | USD 14.08\nHXPXS1 | Qty 40,000 | USD 5.46\nHXF300 | Qty 1,500 | USD 79.20"
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "5883b02cd922a64f",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "relative_path": "ORDER PERU 25-15 ANDET VF.pdf",
+          "page_numbers": [
+            2
+          ],
+          "text": "6th Delivery | 10.07.26\nHXE12ESX 20,000.00 | HXE13ESX - | HXE33K-S1 - | HXE34K-S1 - | Meterbox 10,000.00 | HXF300 -"
+        }
+      ],
       "evidence_groups": [
         {
           "evidence_group_id": "e1",
-          "excerpts": [
+          "information_item": "第六批次交付日期",
+          "schemes": [
             {
-              "excerpt_id": "x1",
-              "document_id": "5883b02cd922a64f",
-              "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
-              "relative_path": "ORDER PERU 25-15 ANDET VF.pdf",
-              "page_numbers": [
-                1
-              ],
-              "text": "HXE12ES | Qty 80,000 | USD 5.28\nHXE13ES | Qty 10,000 | USD 5.50\nHXE33K-S1 | Qty 1,900 | USD 13.64\nHXE34K-S1 | Qty 3,500 | USD 14.08\nHXPXS1 | Qty 40,000 | USD 5.46\nHXF300 | Qty 1,500 | USD 79.20"
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ]
             }
           ]
         },
         {
           "evidence_group_id": "e2",
-          "excerpts": [
+          "information_item": "第六批次交付产品总金额",
+          "schemes": [
             {
-              "excerpt_id": "x1",
-              "document_id": "5883b02cd922a64f",
-              "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
-              "relative_path": "ORDER PERU 25-15 ANDET VF.pdf",
-              "page_numbers": [
-                2
-              ],
-              "text": "6th Delivery | 10.07.26\nHXE12ESX 20,000.00 | HXE13ESX - | HXE33K-S1 - | HXE34K-S1 - | Meterbox 10,000.00 | HXF300 -"
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2"
+              ]
             }
-          ]
+          ],
+          "note": "总金额 = 第六批各产品数量（x2）× 单价（x1）"
         }
       ]
     }

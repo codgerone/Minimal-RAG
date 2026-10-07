@@ -64,7 +64,7 @@
 
 ## 6. 评估
 
-评估流程和指标定义见 [rules/evaluation.md](rules/evaluation.md)。关键设计是：证据映射用 chunk 正文哈希标识，不绑定 chunk ID 或构建配置，原因见 [decisions/001-evidence-mapping.md](decisions/001-evidence-mapping.md)。每次评估在 `reports/eval/<日期>_<配置>_k<K>_filter-on|filter-off/` 下生成 `index.html` 和 `result.json`，同名时在目录名后加 `_2`、`_3`。评估页的"较上次"对比同一配置、同一 K 的上一次运行（不论过滤状态）。
+评估流程和指标定义见 [rules/evaluation.md](rules/evaluation.md)。关键设计是：证据映射用 chunk 正文哈希标识，不绑定 chunk ID 或构建配置，原因见 [decisions/001-evidence-mapping.md](decisions/001-evidence-mapping.md)；证据按"信息项 → 方案 → excerpt"组织，映射按 excerpt 保存，原因见 [decisions/003-evidence-schemes.md](decisions/003-evidence-schemes.md)。每次评估在 `reports/eval/<日期>_<配置>_k<K>_filter-on|filter-off/` 下生成 `index.html` 和 `result.json`，同名时在目录名后加 `_2`、`_3`。评估页的"较上次"对比同一配置、同一 K、同一数据集版本的上一次运行（不论过滤状态）。
 
 ## 7. 代码地图
 

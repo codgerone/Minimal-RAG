@@ -1,5 +1,5 @@
 {
-  "schema_version": "ground_truth_document_v1",
+  "schema_version": "ground_truth_document_v2",
   "document_key": "E001-602--817cfff2927c6c65",
   "document_id": "817cfff2927c6c65",
   "document_name": "E001-602.pdf",
@@ -11,44 +11,111 @@
       "question": "发票E001-602（INVOICE-E001-602）规定的付款到期日是什么时候？需要支付多少金额？其中包含多少税费？",
       "answerable": true,
       "reference_answer": "付款到期日为2026年3月30日，需要支付USD 331,432.50，其中包含税费USD 50557.50。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "817cfff2927c6c65",
+          "document_name": "E001-602.pdf",
+          "relative_path": "E001-602.pdf",
+          "page_numbers": [
+            1
+          ],
+          "text": "Nº Cuota | Fec. Venc. | Monto\n1 | 30/03/2026 | 331,432.50"
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "817cfff2927c6c65",
+          "document_name": "E001-602.pdf",
+          "relative_path": "E001-602.pdf",
+          "page_numbers": [
+            1
+          ],
+          "text": "IGV :\n$ 50,557.50"
+        },
+        {
+          "excerpt_id": "x3",
+          "document_id": "817cfff2927c6c65",
+          "document_name": "E001-602.pdf",
+          "relative_path": "E001-602.pdf",
+          "page_numbers": [
+            1
+          ],
+          "text": "Importe Total :\n$ 331,432.50"
+        },
+        {
+          "excerpt_id": "x4",
+          "document_id": "817cfff2927c6c65",
+          "document_name": "E001-602.pdf",
+          "relative_path": "E001-602.pdf",
+          "page_numbers": [
+            1
+          ],
+          "text": "Información del crédito :\nMonto neto pendiente de pago :\n$ 331,432.50"
+        },
+        {
+          "excerpt_id": "x5",
+          "document_id": "817cfff2927c6c65",
+          "document_name": "E001-602.pdf",
+          "relative_path": "E001-602.pdf",
+          "page_numbers": [
+            1
+          ],
+          "text": "SON: TRESCIENTOS TREINTA Y UNO MIL CUATROCIENTOS TREINTA Y DOS Y 50/100 DOLAR AMERICANO"
+        }
+      ],
       "evidence_groups": [
         {
           "evidence_group_id": "e1",
-          "excerpts": [
+          "information_item": "付款到期日",
+          "schemes": [
             {
-              "excerpt_id": "x1",
-              "document_id": "817cfff2927c6c65",
-              "document_name": "E001-602.pdf",
-              "relative_path": "E001-602.pdf",
-              "page_numbers": [
-                1
-              ],
-              "text": "Nº Cuota | Fec. Venc. | Monto\n1 | 30/03/2026 | 331,432.50"
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
             }
           ]
         },
         {
           "evidence_group_id": "e2",
-          "excerpts": [
+          "information_item": "需支付金额",
+          "schemes": [
             {
-              "excerpt_id": "x1",
-              "document_id": "817cfff2927c6c65",
-              "document_name": "E001-602.pdf",
-              "relative_path": "E001-602.pdf",
-              "page_numbers": [
-                1
-              ],
-              "text": "Valor Venta: $ 280,875.00\nIGV: $ 50,557.50\nImporte Total: $ 331,432.50"
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
             },
             {
-              "excerpt_id": "x2",
-              "document_id": "817cfff2927c6c65",
-              "document_name": "E001-602.pdf",
-              "relative_path": "E001-602.pdf",
-              "page_numbers": [
-                1
-              ],
-              "text": "Información del crédito\nMonto neto pendiente de pago: $ 331,432.50\nTotal de Cuotas: 1"
+              "scheme_id": "s2",
+              "excerpt_ids": [
+                "x3"
+              ]
+            },
+            {
+              "scheme_id": "s3",
+              "excerpt_ids": [
+                "x4"
+              ]
+            },
+            {
+              "scheme_id": "s4",
+              "excerpt_ids": [
+                "x5"
+              ]
+            }
+          ],
+          "note": "分期表、总额、应付余额、大写金额都给出同一金额"
+        },
+        {
+          "evidence_group_id": "e3",
+          "information_item": "其中包含的税费",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ]
             }
           ]
         }
@@ -59,19 +126,40 @@
       "question": "发票E001-602（INVOICE-E001-602）中， HXE34K-S1的单价和数量分别是多少？",
       "answerable": true,
       "reference_answer": "HXE34K-S1的单价为USD 16.00，数量为500个。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "817cfff2927c6c65",
+          "document_name": "E001-602.pdf",
+          "relative_path": "E001-602.pdf",
+          "page_numbers": [
+            1
+          ],
+          "text": "Cantidad | Código | Descripción | Valor Unitario\n500.00 | HXE34K-S1 | MEDIDOR TRIFASICO HXE34K-S1, 4HILOS, 10(100)A, 3X220V, CLASE 1, CONEXION DIRECTA, MARCA HEXING | 16.00"
+        }
+      ],
       "evidence_groups": [
         {
           "evidence_group_id": "e1",
-          "excerpts": [
+          "information_item": "HXE34K-S1 的单价",
+          "schemes": [
             {
-              "excerpt_id": "x1",
-              "document_id": "817cfff2927c6c65",
-              "document_name": "E001-602.pdf",
-              "relative_path": "E001-602.pdf",
-              "page_numbers": [
-                1
-              ],
-              "text": "Cantidad | Código | Descripción | Valor Unitario\n500.00 | HXE34K-S1 | MEDIDOR TRIFASICO HXE34K-S1, 4HILOS, 10(100)A, 3X220V, CLASE 1, CONEXION DIRECTA, MARCA HEXING | 16.00"
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "HXE34K-S1 的数量",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
             }
           ]
         }

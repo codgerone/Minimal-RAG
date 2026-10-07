@@ -18,10 +18,19 @@ class Excerpt:
 
 
 @dataclass(frozen=True)
+class Scheme:
+    """Excerpts that together suffice for the information item; all must be retrieved."""
+    scheme_id: str
+    excerpt_ids: tuple[str, ...]
+
+
+@dataclass(frozen=True)
 class EvidenceGroup:
-    """One independent fact the answer needs; its excerpts must all be retrieved."""
+    """One information item the question asks for; covered when any one scheme is retrieved."""
     group_id: str
-    excerpts: tuple[Excerpt, ...]
+    information_item: str
+    schemes: tuple[Scheme, ...]
+    note: str
 
 
 @dataclass(frozen=True)
@@ -32,6 +41,7 @@ class Case:
     question: str
     reference_answer: str
     answerable: bool
+    excerpts: tuple[Excerpt, ...]
     groups: tuple[EvidenceGroup, ...]
 
 
@@ -56,11 +66,17 @@ def load_dataset(folder: Path) -> Dataset:
         data = json.loads(raw)
         hashes[data["document_id"]] = data["file_hash"]
         for case in data["cases"]:
-            groups = tuple(EvidenceGroup(group["evidence_group_id"], tuple(
-                Excerpt(x["excerpt_id"], x["document_id"], x["document_name"],
-                        tuple(x["page_numbers"]), x["text"]) for x in group["excerpts"]))
-                for group in case["evidence_groups"])
+            excerpts = tuple(Excerpt(x["excerpt_id"], x["document_id"], x["document_name"],
+                                     tuple(x["page_numbers"]), x["text"]) for x in case["excerpts"])
+            known = {x.excerpt_id for x in excerpts}
+            groups = tuple(EvidenceGroup(
+                group["evidence_group_id"], group["information_item"],
+                tuple(Scheme(s["scheme_id"], tuple(s["excerpt_ids"])) for s in group["schemes"]),
+                group.get("note", "")) for group in case["evidence_groups"])
+            unknown = {x for g in groups for s in g.schemes for x in s.excerpt_ids} - known
+            if unknown:
+                raise ValueError(f"{path.name} {case['case_id']}: 方案引用了不存在的 excerpt {sorted(unknown)}")
             cases.append(Case(case["case_id"], data["document_id"], data["document_name"],
                               case["question"].strip(), case["reference_answer"],
-                              bool(case["answerable"]), groups))
+                              bool(case["answerable"]), excerpts, groups))
     return Dataset(manifest.get("dataset_version", "?"), digest.hexdigest(), tuple(cases), hashes)
