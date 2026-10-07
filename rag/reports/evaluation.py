@@ -35,7 +35,13 @@ def _case_status(case: dict[str, Any]) -> tuple[str, str, str]:
     return "miss", "✗ 未检索到证据", "bad"
 
 
-def _group_html(group: dict[str, Any]) -> str:
+def _excerpt_html(x: dict[str, Any]) -> str:
+    return (f'<div class="meta">{esc(x["excerpt_id"])} · {esc(x["document_name"])} · 第 {",".join(map(str, x["pages"]))} 页</div>'
+            f'{text_block(x["text"], 300)}')
+
+
+def _legacy_group_html(group: dict[str, Any]) -> str:
+    """Runs before dataset 3.0.0: excerpts sit directly in the group and must all be retrieved."""
     label, kind = MODE_LABELS[group["mode"]]
     state = (badge(f"第 {group['covered_at_rank']} 位时已覆盖", "ok") if group["covered_at_rank"]
              else badge("未覆盖", "bad"))
@@ -46,6 +52,38 @@ def _group_html(group: dict[str, Any]) -> str:
     return (f'<div class="item"><b>证据 {esc(group["group_id"])}</b> {state} {mode}{excerpts}'
             f'<details><summary>可接受的 chunk 组合</summary><div class="meta">{esc(sets)}</div>'
             f'</details></div>')
+
+
+def _group_html(group: dict[str, Any], case: dict[str, Any], top_k: int) -> str:
+    if "schemes" not in group:
+        return _legacy_group_html(group)
+    excerpts = {x["excerpt_id"]: x for x in case["excerpts"]}
+    retrieved = {h["chunk_id"] for h in case["hits"]}
+    state = (badge(f"第 {group['covered_at_rank']} 位时已覆盖", "ok") if group["covered_at_rank"]
+             else badge("未覆盖", "bad"))
+    label, kind = MODE_LABELS[group["mode"]]
+    mode = badge(label, kind) if group["mode"] != "confirmed" else ""
+    fewest = min((len(s) for s in group["acceptable_sets"]), default=0)
+    beyond = badge(f"至少需 {fewest} 个 chunk，K={top_k} 时不可能覆盖", "bad") if fewest > top_k else ""
+    schemes = []
+    for n, scheme in enumerate(group["schemes"]):
+        got = any(set(s) <= retrieved for s in scheme["acceptable_sets"])
+        flags = [x for x in scheme["excerpt_ids"] if excerpts[x]["mode"] != "confirmed"]
+        mark = badge("已检索到", "ok") if got else badge("未检索到")
+        auto = "".join(badge(f"{x} {MODE_LABELS[excerpts[x]['mode']][0]}", MODE_LABELS[excerpts[x]["mode"]][1])
+                       for x in flags)
+        sets = "；".join(" + ".join(s) for s in scheme["acceptable_sets"]) or "无"
+        schemes.append(
+            (f'<div class="meta" style="margin:4px 0 0 4px">或</div>' if n else "")
+            + f'<div style="border-left:3px solid var(--line);padding-left:10px;margin:4px 0">'
+              f'<div><b>方案 {esc(scheme["scheme_id"])}</b> = {esc(" + ".join(scheme["excerpt_ids"]))} '
+              f'{badge("须全部检索到") if len(scheme["excerpt_ids"]) > 1 else ""} {mark} {auto}</div>'
+              f'{"".join(_excerpt_html(excerpts[x]) for x in scheme["excerpt_ids"])}'
+              f'<details><summary>可接受的 chunk 组合</summary><div class="meta">{esc(sets)}</div></details></div>')
+    note = f'<div class="meta">{esc(group["note"])}</div>' if group.get("note") else ""
+    relation = badge(f'{len(group["schemes"])} 套方案，任一即可') if len(group["schemes"]) > 1 else ""
+    return (f'<div class="item"><b>证据组 {esc(group["group_id"])}</b> 信息项：{esc(group["information_item"])} '
+            f'{state} {relation} {mode} {beyond}{note}{"".join(schemes)}</div>')
 
 
 SCOPE_REASONS = {"unidentified": "问题中未识别出已登记的标识编码", "no_catalog": "未配置文档标识表",
@@ -109,7 +147,8 @@ def render(result: dict[str, Any], previous: dict[str, Any] | None) -> str:
     modes = result["evidence_modes"]
     notices = []
     if modes["auto"] or modes["unmapped"]:
-        notices.append(f'{modes["auto"]} 个证据组由自动判定、{modes["unmapped"]} 个找不到对应 chunk'
+        unit = "段 excerpt" if result["cases"] and "excerpts" in result["cases"][0] else "个证据组"
+        notices.append(f'{modes["auto"]} {unit}由自动判定、{modes["unmapped"]} {unit}找不到对应 chunk'
                        f'（分块变化后没有已确认的映射）。请核对标有「自动判定」的题目；确认无误后运行 '
                        f'<code>python -m rag eval --config {esc(result["config"])} --confirm-auto</code> 保存。')
     if result["dataset"]["pdf_changed_since_labelling"]:
@@ -149,7 +188,7 @@ def render(result: dict[str, Any], previous: dict[str, Any] | None) -> str:
             f'<div class="card" data-tags="{tags}"><h3>{badge(label, kind)} {esc(case["case_id"])}{cross_note}</h3>'
             f'<div>{esc(case["question"])}</div>{_scope_html(case)}'
             f'<details><summary>参考答案</summary><div class="meta">{esc(case["reference_answer"])}</div></details>'
-            f'<div class="cols"><div><h3>标准证据</h3>{"".join(_group_html(g) for g in case["groups"])}</div>'
+            f'<div class="cols"><div><h3>标准证据</h3>{"".join(_group_html(g, case, result["top_k"]) for g in case["groups"])}</div>'
             f'<div><h3>实际检索 Top-{result["top_k"]}</h3>'
             f'{"".join(_hit_html(h, case["groups"]) for h in case["hits"]) or "<div class=meta>无结果</div>"}'
             f'</div></div></div>')
