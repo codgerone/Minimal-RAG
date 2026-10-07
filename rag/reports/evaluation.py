@@ -35,8 +35,9 @@ def _case_status(case: dict[str, Any]) -> tuple[str, str, str]:
     return "miss", "✗ 未检索到证据", "bad"
 
 
-def _excerpt_html(x: dict[str, Any]) -> str:
-    return (f'<div class="meta">{esc(x["excerpt_id"])} · {esc(x["document_name"])} · 第 {",".join(map(str, x["pages"]))} 页</div>'
+def _excerpt_html(x: dict[str, Any], case: dict[str, Any]) -> str:
+    source = "" if x["document_name"] == case["document_name"] else f' · {esc(x["document_name"])}'
+    return (f'<div class="meta">{esc(x["excerpt_id"])}{source} · 第 {",".join(map(str, x["pages"]))} 页</div>'
             f'{text_block(x["text"], 300)}')
 
 
@@ -78,7 +79,7 @@ def _group_html(group: dict[str, Any], case: dict[str, Any], top_k: int) -> str:
             + f'<div style="border-left:3px solid var(--line);padding-left:10px;margin:4px 0">'
               f'<div><b>方案 {esc(scheme["scheme_id"])}</b> = {esc(" + ".join(scheme["excerpt_ids"]))} '
               f'{badge("须全部检索到") if len(scheme["excerpt_ids"]) > 1 else ""} {mark} {auto}</div>'
-              f'{"".join(_excerpt_html(excerpts[x]) for x in scheme["excerpt_ids"])}'
+              f'{"".join(_excerpt_html(excerpts[x], case) for x in scheme["excerpt_ids"])}'
               f'<details><summary>可接受的 chunk 组合</summary><div class="meta">{esc(sets)}</div></details></div>')
     note = f'<div class="meta">{esc(group["note"])}</div>' if group.get("note") else ""
     relation = badge(f'{len(group["schemes"])} 套方案，任一即可') if len(group["schemes"]) > 1 else ""
@@ -230,10 +231,11 @@ def rerender_all(workspace: Workspace) -> int:
 
 
 def latest_before(workspace: Workspace, result: dict[str, Any]) -> dict[str, Any] | None:
-    """Latest earlier run with the same config and K, for the 'change since last run' line."""
+    """Latest earlier run with the same config, K and dataset version, for the 'change since last run' line."""
     from rag.jsonio import read_json
     folder = workspace.eval_reports()
     runs = [read_json(p) for p in folder.glob("*/result.json")] if folder.is_dir() else []
     earlier = [r for r in runs if r["config"] == result["config"] and r["top_k"] == result["top_k"]
+               and r["dataset"]["version"] == result["dataset"]["version"]
                and r["created_at"] < result["created_at"]]
     return max(earlier, key=lambda r: r["created_at"]) if earlier else None

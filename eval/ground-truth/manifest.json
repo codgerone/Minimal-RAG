@@ -1,13 +1,13 @@
 {
   "schema_version": "ground_truth_manifest_v1",
   "dataset_version": "3.0.0",
-  "ground_truth_fingerprint": "f31c66f5d9d1a7041b059742417da8fb7a9d0c1f11749221bc6805057288bfdd",
-  "review_status": "pending",
+  "ground_truth_fingerprint": "498ab84a637d38566e604771a18b52fe3cec7421e307a18e661ecaa35085c05e",
+  "review_status": "approved",
   "files": [
     {
       "document_key": "Contrato-N-105-2025-LP-002-2024-FONAFE-Adquisición-de-me--d359c37e0bc3c87a",
       "json_path": "eval/ground-truth/Contrato-N-105-2025-LP-002-2024-FONAFE-Adquisición-de-me--d359c37e0bc3c87a.json",
-      "content_sha256": "a1b5e0dc32e2e664165f8f140a1f24576ace11d6470fec59503db756fd65e3da",
+      "content_sha256": "f4b16bd616218ebdc25674c8951ff30c6088267bd6d46a2d0cc40860b043a90a",
       "case_count": 10
     },
     {
@@ -31,11 +31,11 @@
     {
       "document_key": "签字-ORDER-PERU-25-19-FONAFE--5a4c36e0022f4917",
       "json_path": "eval/ground-truth/签字-ORDER-PERU-25-19-FONAFE--5a4c36e0022f4917.json",
-      "content_sha256": "73c2dcef13c685132a380a8116b3f5e38c9931d7bef08f7c234476f1298edb47",
+      "content_sha256": "8d74e1b3fb2ffb256f902db1327349538e6233cb2ee6e76205baf742abe365b4",
       "case_count": 4
     }
   ],
   "created_at": "2026-09-20T02:55:05Z",
-  "reviewed_at": null,
+  "reviewed_at": "2026-10-07T00:00:00Z",
   "superseded_by": null
 }
