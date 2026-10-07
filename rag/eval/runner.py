@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from rag.eval.dataset import Case, Dataset, load_dataset
-from rag.eval.judge import GroupEvidence, Mappings, chunk_key, judge_case
+from rag.eval.judge import CaseEvidence, Mappings, chunk_key, judge_case
 from rag.eval.metrics import METRICS, QuestionScore, aggregate, score_question
 from rag.index.builder import current_status, open_store
 from rag.index.store import VectorHit
@@ -27,13 +27,13 @@ class EvalError(RuntimeError):
 class CaseResult:
     case: Case
     hits: list[VectorHit]
-    evidence: list[GroupEvidence]
+    evidence: CaseEvidence
     score: QuestionScore | None   # None for unanswerable questions
     scope: SearchScope
 
     @property
     def evidence_documents(self) -> set[str]:
-        return {x.document_id for g in self.case.groups for x in g.excerpts}
+        return {x.document_id for x in self.case.excerpts}
 
     @property
     def identified_correctly(self) -> bool:
@@ -95,16 +95,17 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int, *,
         if case.answerable:
             item = replace(item, score=score_question(
                 [h.chunk.chunk_id for h in hits], [h.chunk.document_id for h in hits],
-                evidence, item.evidence_documents))
+                evidence.groups, item.evidence_documents))
         results.append(item)
 
     if confirm_auto:
         by_id = {c.chunk_id: c for c in chunks}
         for item in results:
-            for group in item.evidence:
-                if group.mode == "auto":
-                    for chunk_set in group.acceptable_sets:
-                        mappings.add(item.case.case_id, group.group_id,
+            for excerpt in item.case.excerpts:
+                judged = item.evidence.excerpts[excerpt.excerpt_id]
+                if judged.mode == "auto":
+                    for chunk_set in judged.acceptable_sets:
+                        mappings.add(item.case.case_id, excerpt,
                                      [chunk_key(by_id[c].document_id, by_id[c].text) for c in chunk_set])
         mappings.save()
 
@@ -126,8 +127,8 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int, *,
         "dataset": {"version": dataset.version, "fingerprint": dataset.fingerprint,
                     "questions": len(dataset.cases), "answerable": len(scored),
                     "pdf_changed_since_labelling": changed},
-        "evidence_modes": {mode: sum(g.mode == mode for r in results for g in r.evidence)
-                           for mode in ("confirmed", "auto", "unmapped")},
+        "evidence_modes": {mode: sum(x.mode == mode for r in results for x in r.evidence.excerpts.values())
+                           for mode in ("confirmed", "auto", "unmapped")},   # counted per excerpt
         "metrics": _metrics_dict(scored),
         "document_scope": _scope_summary(results, enabled, catalog is not None),
         "documents": per_document,
@@ -151,7 +152,7 @@ def _scope_summary(results: list[CaseResult], enabled: bool, has_catalog: bool) 
 
 def _case_json(item: CaseResult, names: dict[str, str]) -> dict[str, Any]:
     case, score = item.case, item.score
-    relevant = {cid for g in item.evidence for s in g.acceptable_sets for cid in s}
+    relevant = {cid for g in item.evidence.groups for s in g.acceptable_sets for cid in s}
     evidence_docs = item.evidence_documents
     return {
         "case_id": case.case_id, "document_id": case.document_id,
@@ -164,15 +165,23 @@ def _case_json(item: CaseResult, names: dict[str, str]) -> dict[str, Any]:
         "evidence_document_ids": sorted(item.evidence_documents),
         "hit": score.hit if score else None, "complete": score.complete if score else None,
         "first_relevant_rank": score.first_relevant_rank if score else None,
+        "excerpts": [{
+            "excerpt_id": x.excerpt_id, "document_name": x.document_name, "pages": list(x.pages),
+            "text": x.text, "mode": item.evidence.excerpts[x.excerpt_id].mode,
+            "acceptable_sets": [sorted(s) for s in item.evidence.excerpts[x.excerpt_id].acceptable_sets],
+            "auto_coverage": item.evidence.excerpts[x.excerpt_id].auto_coverage,
+        } for x in case.excerpts],
         "groups": [{
             "group_id": group.group_id,
+            "information_item": group.information_item,
+            "note": group.note,
             "mode": judged.mode,
             "covered_at_rank": score.group_completion_ranks.get(group.group_id) if score else None,
             "acceptable_sets": [sorted(s) for s in judged.acceptable_sets],
-            "auto_coverage": judged.auto_coverage,
-            "excerpts": [{"excerpt_id": x.excerpt_id, "document_name": x.document_name,
-                          "pages": list(x.pages), "text": x.text} for x in group.excerpts],
-        } for group, judged in zip(case.groups, item.evidence)],
+            "schemes": [{"scheme_id": scheme.scheme_id, "excerpt_ids": list(scheme.excerpt_ids),
+                         "acceptable_sets": [sorted(s) for s in scheme_judged.acceptable_sets]}
+                        for scheme, scheme_judged in zip(group.schemes, judged.schemes)],
+        } for group, judged in zip(case.groups, item.evidence.groups)],
         "hits": [{
             "rank": rank, "chunk_id": h.chunk.chunk_id, "document_id": h.chunk.document_id,
             "document_name": h.chunk.document_name, "pages": list(h.chunk.pages),

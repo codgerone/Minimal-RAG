@@ -285,8 +285,8 @@ def _eval(workspace: Workspace, args: argparse.Namespace) -> int:
         _out("  文档过滤：" + ("已关闭" if not scope["enabled"] else "未配置文档标识表，全库检索"))
     if modes["auto"] or modes["unmapped"]:
         note = "（已写入 eval/mappings.json）" if args.confirm_auto else "，请在报告中核对"
-        _out(f"证据映射：{modes['confirmed']} 组已确认，{modes['auto']} 组自动判定，"
-             f"{modes['unmapped']} 组无法匹配{note}")
+        _out(f"证据映射：{modes['confirmed']} 段 excerpt 已确认，{modes['auto']} 段自动判定，"
+             f"{modes['unmapped']} 段无法匹配{note}")
     write_index_page(workspace)
     _out(f"报告：{(folder / 'index.html').relative_to(workspace.root).as_posix()}")
     return 0
