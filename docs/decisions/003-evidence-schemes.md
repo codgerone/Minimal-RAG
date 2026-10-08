@@ -1,6 +1,6 @@
 # 003 证据按"信息项 → 方案 → excerpt"组织，映射按 excerpt 保存
 
-日期：2026-10-07　状态：已采用（V3.3）
+日期：2026-10-07　状态：已采用（V3.3）；其中“映射按 excerpt 保存在 `eval/mappings.json`”一项已被 [004](004-coordinate-mapping.md) 取代，信息项 → 方案 → excerpt 的组织方式仍有效
 
 ## 背景
 

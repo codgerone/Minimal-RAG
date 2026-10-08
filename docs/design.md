@@ -1,4 +1,4 @@
-# 系统设计（V3.2）
+# 系统设计（V3.4）
 
 ## 1. 数据主链
 
@@ -7,10 +7,10 @@
               │
               └─→ TableExtractor × N ─→ 准入·分组·评分选优 ─→ 表头判定 ─→ TableFormatter ─┐
                                                                                          ↓
-                       组装后的文档（ParsedDocument）─→ Chunker ─→ chunks ─→ Embedder ─→ Chroma
-                                                                  └─→ 中间结果 JSON + 审核 HTML
+                       组装后的文档（ParsedDocument）─→ Chunker ─→ chunks ─→ 来源区域 ─→ Embedder ─→ Chroma
+                                                                                └─→ 中间结果 JSON + 审核 HTML
 查询   问题 ─→ 检索范围（文档标识表）─→ Embedder ─→ Retriever（范围内 Chroma 检索，确定性排序）─→ 命中 ─→ Prompt ─→ LLM ─→ 回答
-评估   标注题目 ─→ 同一检索范围与 Retriever ─→ 证据判定（已确认映射 / 自动判定）─→ 指标 ─→ 评估报告
+评估   标注题目（含 excerpt 坐标）─→ 同一检索范围与 Retriever ─→ 证据判定（excerpt 坐标 × chunk 来源区域）─→ 指标 ─→ 评估报告
 ```
 
 各阶段的数据模型定义在 `rag/models.py`（文档与 chunk）和 `rag/ingest/tables/models.py`（表格证据）。设计原则：解析器和工具的原始结果是"事实"，不会被后续阶段原地修改；选优、表头这类判断单独记录，审核页可以逐层追溯。
@@ -64,7 +64,7 @@
 
 ## 6. 评估
 
-评估流程和指标定义见 [rules/evaluation.md](rules/evaluation.md)。关键设计是：证据映射用 chunk 正文哈希标识，不绑定 chunk ID 或构建配置，原因见 [decisions/001-evidence-mapping.md](decisions/001-evidence-mapping.md)；证据按"信息项 → 方案 → excerpt"组织，映射按 excerpt 保存，原因见 [decisions/003-evidence-schemes.md](decisions/003-evidence-schemes.md)。每次评估在 `reports/eval/<日期>_<配置>_k<K>_filter-on|filter-off/` 下生成 `index.html` 和 `result.json`，同名时在目录名后加 `_2`、`_3`。评估页的"较上次"对比同一配置、同一 K、同一数据集版本的上一次运行（不论过滤状态）。
+评估流程和指标定义见 [rules/evaluation.md](rules/evaluation.md)。关键设计是：证据按"信息项 → 方案 → excerpt"组织，原因见 [decisions/003-evidence-schemes.md](decisions/003-evidence-schemes.md)；excerpt 与 chunk 的对应按 PDF 坐标判定，原因见 [decisions/004-coordinate-mapping.md](decisions/004-coordinate-mapping.md)。excerpt 的位置只依赖 PDF，人工确认一次后写入 ground-truth；chunk 的来源区域在入库时由 chunk 来源记录和解析器坐标统一推出（`rag/ingest/regions.py`），所以任何装配都不需要为评估另做确认。对插件的要求：解析器提供元素坐标，分块器记录 chunk 内容来自哪个元素的哪段文字；缺细坐标时记粗略区域，评估在其中按片段文字兜底。每次评估在 `reports/eval/<日期>_<配置>_k<K>_filter-on|filter-off/` 下生成 `index.html` 和 `result.json`，同名时在目录名后加 `_2`、`_3`。评估页的"较上次"对比同一配置、同一 K、同一数据集版本的上一次运行（不论过滤状态）。
 
 ## 7. 代码地图
 
