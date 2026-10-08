@@ -1,37 +1,37 @@
 {
   "schema_version": "ground_truth_manifest_v1",
   "dataset_version": "3.1.0",
-  "ground_truth_fingerprint": "e884ee2788a5343228b492b15e4322e384d9db72b69e0559b4ce306ea594ebad",
+  "ground_truth_fingerprint": "5762157fd89167791dfc97d713f04ad8c84bd7e4877cd7b5a36d1974b666c94b",
   "review_status": "approved",
   "files": [
     {
       "document_key": "Contrato-N-105-2025-LP-002-2024-FONAFE-Adquisición-de-me--d359c37e0bc3c87a",
       "json_path": "eval/ground-truth/Contrato-N-105-2025-LP-002-2024-FONAFE-Adquisición-de-me--d359c37e0bc3c87a.json",
-      "content_sha256": "ed5e941cc38ff07a9d2a10be11f7b9409dda17fca1c9dc7d1aee4a839f6857ad",
+      "content_sha256": "d5a63a32270180160d015309ddc2724f7cbdd338af930de44fd5c36538d8177d",
       "case_count": 10
     },
     {
       "document_key": "E001-602--817cfff2927c6c65",
       "json_path": "eval/ground-truth/E001-602--817cfff2927c6c65.json",
-      "content_sha256": "175f06f5c1b9bdde12ec071e50f21721bb97816c534bc40726fea4aae795347e",
+      "content_sha256": "602605ab42029619f2a6c0e780468833ab08ec73e42c7c8c5437399669430fa5",
       "case_count": 2
     },
     {
       "document_key": "ORDER-PERU-24-12-ANDET--169a1f2133fe5643",
       "json_path": "eval/ground-truth/ORDER-PERU-24-12-ANDET--169a1f2133fe5643.json",
-      "content_sha256": "608bf0e5915075b66dbc6f90df5aa5071d641aad1db22cce6dace368e04e0e74",
+      "content_sha256": "71a95db3fe6473ff51aef4b9bc63a534c65134f0a3ba997040634cfba4264747",
       "case_count": 6
     },
     {
       "document_key": "ORDER-PERU-25-15-ANDET-VF--5883b02cd922a64f",
       "json_path": "eval/ground-truth/ORDER-PERU-25-15-ANDET-VF--5883b02cd922a64f.json",
-      "content_sha256": "8788a6eaf4d4aa152c337658b955a492679f1334dfccfc144f1979c50ce8f430",
+      "content_sha256": "ae7733a5cfb8d5b2ef90ac971ef543b81366e2cc55efd403b01938e4ce526788",
       "case_count": 2
     },
     {
       "document_key": "签字-ORDER-PERU-25-19-FONAFE--5a4c36e0022f4917",
       "json_path": "eval/ground-truth/签字-ORDER-PERU-25-19-FONAFE--5a4c36e0022f4917.json",
-      "content_sha256": "be2bf107a4b579c5c941c914073648c20402d6090966f7b82805732d4108c859",
+      "content_sha256": "6edca5d7a158d21463fa4f3b53ab7f65e166ce1846c396f661ad794df1b256e9",
       "case_count": 4
     }
   ],

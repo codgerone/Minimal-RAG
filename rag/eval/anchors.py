@@ -93,6 +93,7 @@ class ExcerptAnchor:
     status: Status
     pieces: tuple[PieceResult, ...]
     words: tuple[PdfWord, ...]
+    groups: tuple[tuple[str, tuple[PdfWord, ...]], ...] = ()   # excerpt piece (split at " | " / line) → its words
 
 
 class _Stream:
@@ -251,7 +252,8 @@ def split_pieces(text: str) -> list[str]:
 
 def locate_excerpt(excerpt: Excerpt, words: list[PdfWord]) -> ExcerptAnchor:
     stream = _Stream(words)
-    pieces = [sub for p in split_pieces(excerpt.text) for sub in _match_piece(stream, p)]
+    owners = [(text, sub) for text in split_pieces(excerpt.text) for sub in _match_piece(stream, text)]
+    pieces = [sub for _, sub in owners]
     if excerpt.locate_hint:
         hint = _match_piece(stream, excerpt.locate_hint)
         if len(hint) != 1 or len(hint[0][1]) != 1:
@@ -268,7 +270,11 @@ def locate_excerpt(excerpt: Excerpt, words: list[PdfWord]) -> ExcerptAnchor:
     indices = sorted({i for words_ in chosen.values() for i in words_})
     status: Status = ("missing" if any(r.missing or not r.candidates for r in results)
                       else "ambiguous" if any(r.candidates > 1 for r in results) else "located")
-    return ExcerptAnchor(excerpt, status, results, tuple(words[i] for i in indices))
+    groups: dict[str, list[int]] = {}
+    for n, (text, _) in enumerate(owners):
+        groups.setdefault(text, []).extend(chosen.get(n, ()))
+    return ExcerptAnchor(excerpt, status, results, tuple(words[i] for i in indices),
+                         tuple((text, tuple(words[i] for i in sorted(set(ids)))) for text, ids in groups.items()))
 
 
 def document_words(pdf_path: Path, pages: set[int]) -> dict[int, list[PdfWord]]:
@@ -313,8 +319,8 @@ def write_anchors(folder: Path, anchors: dict[tuple[str, str], ExcerptAnchor]) -
                 item = anchors.get((case["case_id"], x["excerpt_id"]))
                 if item is None:
                     continue
-                x["anchor"] = {"text_sha256": text_sha256(x["text"]),
-                               "words": [format_word(w) for w in item.words]}
+                x["anchor"] = {"text_sha256": text_sha256(x["text"]), "pieces": [
+                    {"text": text, "words": [format_word(w) for w in words]} for text, words in item.groups]}
                 written += 1
         write_json(path, data)
     return written
