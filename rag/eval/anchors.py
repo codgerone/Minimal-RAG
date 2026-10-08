@@ -290,6 +290,17 @@ def text_sha256(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()[:16]
 
 
+def format_word(word: PdfWord) -> str:
+    """One located word as "page x0 y0 x1 y1" (PyMuPDF page coordinates, points, origin top left)."""
+    return " ".join([str(word.page), *(f"{v:.2f}" for v in word.bbox)])
+
+
+def parse_word(value: str) -> tuple[int, tuple[float, float, float, float]]:
+    page, *box = value.split()
+    x0, y0, x1, y1 = (float(v) for v in box)
+    return int(page), (x0, y0, x1, y1)
+
+
 def write_anchors(folder: Path, anchors: dict[tuple[str, str], ExcerptAnchor]) -> int:
     """Store confirmed locations in the ground-truth files; keyed by (case_id, excerpt_id)."""
     written = 0
@@ -303,7 +314,7 @@ def write_anchors(folder: Path, anchors: dict[tuple[str, str], ExcerptAnchor]) -
                 if item is None:
                     continue
                 x["anchor"] = {"text_sha256": text_sha256(x["text"]),
-                               "words": [[w.page, *(round(v, 2) for v in w.bbox)] for w in item.words]}
+                               "words": [format_word(w) for w in item.words]}
                 written += 1
         write_json(path, data)
     return written

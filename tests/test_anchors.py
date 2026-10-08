@@ -61,3 +61,9 @@ def test_row_label_is_taken_from_the_row_not_from_near_a_section_title():
              word("ENSA", 10, 190), word("5,018", 200, 190), word("1,153", 260, 190)]
     anchor = locate_excerpt(excerpt("ENSA | HXE33K-S1 | 5,018 | 1,153"), words)
     assert ("ENSA", 10, 190) in texts(anchor)
+
+
+def test_stored_word_round_trips():
+    from rag.eval.anchors import format_word, parse_word
+    w = word("Cl", 60.004, 10.5)
+    assert parse_word(format_word(w)) == (1, (60.0, 10.5, 72.0, 18.5))
