@@ -53,8 +53,6 @@ def build_parser() -> argparse.ArgumentParser:
     chat.add_argument("--top-k", type=_positive)
     evaluate = command("eval", "用 eval/ground-truth 的标注问题评估检索效果，生成报告")
     evaluate.add_argument("--top-k", type=_positive, help="默认取配置文件 [eval] top_k")
-    evaluate.add_argument("--confirm-auto", action="store_true",
-                          help="把本次自动判定的证据映射写入 eval/mappings.json（先看报告再用）")
     anchors = command("anchors", "在 PDF 上定位每段 excerpt，生成审核文件 tmp/anchor-review/")
     anchors.add_argument("--since", metavar="GIT_REF", help="审核页并排显示相对这个 git 版本改动过的 excerpt")
     anchors.add_argument("--write", action="store_true", help="把定位结果写入 eval/ground-truth（审核确认后再用）")
@@ -271,7 +269,7 @@ def _eval(workspace: Workspace, args: argparse.Namespace) -> int:
     from rag.reports.index_page import write_index_page
     assembly = _assembly(workspace, args.config)
     top_k = args.top_k or assembly.config.eval_top_k
-    folder = run_evaluation(workspace, assembly, top_k, confirm_auto=args.confirm_auto)
+    folder = run_evaluation(workspace, assembly, top_k)
     result = read_json(folder / "result.json")
     metrics = result["metrics"]
     modes = result["evidence_modes"]
@@ -286,10 +284,8 @@ def _eval(workspace: Workspace, args: argparse.Namespace) -> int:
         _out(f"  文档识别准确率：{ratio['numerator']}/{ratio['denominator']}")
     else:
         _out("  文档过滤：" + ("已关闭" if not scope["enabled"] else "未配置文档标识表，全库检索"))
-    if modes["auto"] or modes["unmapped"]:
-        note = "（已写入 eval/mappings.json）" if args.confirm_auto else "，请在报告中核对"
-        _out(f"证据映射：{modes['confirmed']} 段 excerpt 已确认，{modes['auto']} 段自动判定，"
-             f"{modes['unmapped']} 段无法匹配{note}")
+    if modes["fallback"]:
+        _out(f"证据映射：{modes['coordinate']} 段 excerpt 按坐标判定，{modes['fallback']} 段文字兜底，请在报告中抽查")
     write_index_page(workspace)
     _out(f"报告：{(folder / 'index.html').relative_to(workspace.root).as_posix()}")
     return 0

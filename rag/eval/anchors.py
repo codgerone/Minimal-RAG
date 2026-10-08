@@ -23,7 +23,6 @@ The result is for human review; once confirmed it is written into the ground tru
 
 from __future__ import annotations
 
-import hashlib
 import itertools
 import math
 import re
@@ -34,7 +33,7 @@ from typing import Literal
 
 import pymupdf
 
-from rag.eval.dataset import Excerpt
+from rag.eval.dataset import Excerpt, text_sha256
 from rag.jsonio import read_json, write_json
 
 PAGE_GAP = 2000.0          # added to y per page so pieces on other pages count as far away
@@ -292,19 +291,9 @@ def locate_all(excerpts: list[Excerpt], pdf_paths: dict[str, Path]) -> list[Exce
             for x in excerpts]
 
 
-def text_sha256(text: str) -> str:
-    return hashlib.sha256(text.encode("utf-8")).hexdigest()[:16]
-
-
 def format_word(word: PdfWord) -> str:
     """One located word as "page x0 y0 x1 y1" (PyMuPDF page coordinates, points, origin top left)."""
     return " ".join([str(word.page), *(f"{v:.2f}" for v in word.bbox)])
-
-
-def parse_word(value: str) -> tuple[int, tuple[float, float, float, float]]:
-    page, *box = value.split()
-    x0, y0, x1, y1 = (float(v) for v in box)
-    return int(page), (x0, y0, x1, y1)
 
 
 def write_anchors(folder: Path, anchors: dict[tuple[str, str], ExcerptAnchor]) -> int:

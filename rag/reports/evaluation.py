@@ -10,8 +10,11 @@ from rag.jsonio import write_atomic
 from rag.paths import Workspace
 from rag.reports.html import badge, esc, filters, page, pct, text_block, write_assets
 
-MODE_LABELS = {"confirmed": ("已确认映射", ""), "auto": ("自动判定", "warn"),
-               "unmapped": ("找不到对应 chunk", "bad")}
+MODE_LABELS = {"coordinate": ("坐标判定", ""), "fallback": ("文字兜底", "warn"),
+               "unmapped": ("找不到对应 chunk", "bad"),
+               # runs before V3.4 (mapping file + text-overlap judging)
+               "confirmed": ("已确认映射", ""), "auto": ("自动判定", "warn")}
+PLAIN_MODES = {"coordinate", "confirmed"}   # modes that need no checking, shown without a badge
 
 
 def _delta(key: str, now: float | None, before: float | None, better_up: bool) -> str:
@@ -46,7 +49,7 @@ def _legacy_group_html(group: dict[str, Any]) -> str:
     label, kind = MODE_LABELS[group["mode"]]
     state = (badge(f"第 {group['covered_at_rank']} 位时已覆盖", "ok") if group["covered_at_rank"]
              else badge("未覆盖", "bad"))
-    mode = badge(label, kind) if group["mode"] != "confirmed" else ""
+    mode = badge(label, kind) if group["mode"] not in PLAIN_MODES else ""
     excerpts = "".join(f'<div class="meta">{esc(x["document_name"])} · 第 {",".join(map(str, x["pages"]))} 页</div>'
                        f'{text_block(x["text"], 400)}' for x in group["excerpts"])
     sets = "；".join(" + ".join(s) for s in group["acceptable_sets"]) or "无"
@@ -63,13 +66,13 @@ def _group_html(group: dict[str, Any], case: dict[str, Any], top_k: int) -> str:
     state = (badge(f"第 {group['covered_at_rank']} 位时已覆盖", "ok") if group["covered_at_rank"]
              else badge("未覆盖", "bad"))
     label, kind = MODE_LABELS[group["mode"]]
-    mode = badge(label, kind) if group["mode"] != "confirmed" else ""
+    mode = badge(label, kind) if group["mode"] not in PLAIN_MODES else ""
     fewest = min((len(s) for s in group["acceptable_sets"]), default=0)
     beyond = badge(f"至少需 {fewest} 个 chunk，K={top_k} 时不可能覆盖", "bad") if fewest > top_k else ""
     schemes = []
     for n, scheme in enumerate(group["schemes"]):
         got = any(set(s) <= retrieved for s in scheme["acceptable_sets"])
-        flags = [x for x in scheme["excerpt_ids"] if excerpts[x]["mode"] != "confirmed"]
+        flags = [x for x in scheme["excerpt_ids"] if excerpts[x]["mode"] not in PLAIN_MODES]
         mark = badge("已检索到", "ok") if got else badge("未检索到")
         auto = "".join(badge(f"{x} {MODE_LABELS[excerpts[x]['mode']][0]}", MODE_LABELS[excerpts[x]["mode"]][1])
                        for x in flags)
@@ -147,11 +150,14 @@ def render(result: dict[str, Any], previous: dict[str, Any] | None) -> str:
     statuses = [_case_status(c) for c in cases]
     modes = result["evidence_modes"]
     notices = []
-    if modes["auto"] or modes["unmapped"]:
+    if "fallback" in modes:
+        if modes["fallback"]:
+            notices.append(f'{modes["fallback"]} 段 excerpt 落在没有细坐标的区域，按文字兜底判定。'
+                           f'请抽查标有「文字兜底」的题目。')
+    elif modes.get("auto") or modes.get("unmapped"):
         unit = "段 excerpt" if result["cases"] and "excerpts" in result["cases"][0] else "个证据组"
         notices.append(f'{modes["auto"]} {unit}由自动判定、{modes["unmapped"]} {unit}找不到对应 chunk'
-                       f'（分块变化后没有已确认的映射）。请核对标有「自动判定」的题目；确认无误后运行 '
-                       f'<code>python -m rag eval --config {esc(result["config"])} --confirm-auto</code> 保存。')
+                       f'（V3.4 之前的旧判定方式）。')
     if result["dataset"]["pdf_changed_since_labelling"]:
         notices.append("部分 PDF 在标注之后被修改过，标注证据可能已过时。")
     notice_html = "".join(f'<div class="card">⚠ {n}</div>' for n in notices)
@@ -164,7 +170,7 @@ def render(result: dict[str, Any], previous: dict[str, Any] | None) -> str:
                  + "".join(f'<th class="num">{esc(label)}</th>' for _, label, _ in METRICS)
                  + f"</tr>{doc_rows}</table></div>")
     has_cross = [any(h["cross_document"] for h in c["hits"]) for c in cases]
-    has_auto = [any(g["mode"] != "confirmed" for g in c["groups"]) for c in cases]
+    has_auto = [any(g["mode"] not in PLAIN_MODES for g in c["groups"]) for c in cases]
     scope_off = [bool(c.get("scope")) and c["answerable"] and c["scope"]["kind"] != "disabled"
                  and not c["scope"]["identified_correctly"] for c in cases]
     bar = filters([("all", "全部", len(cases)),
@@ -172,7 +178,7 @@ def render(result: dict[str, Any], previous: dict[str, Any] | None) -> str:
                    ("partial", "部分覆盖", sum(s[0] == "partial" for s in statuses)),
                    ("complete", "完整覆盖", sum(s[0] == "complete" for s in statuses)),
                    ("cross", "有跨文档结果", sum(has_cross)),
-                   ("auto", "含自动判定", sum(has_auto))]
+                   ("auto", "含文字兜底" if "fallback" in modes else "含自动判定", sum(has_auto))]
                   + ([("scope", "文档识别有误", sum(scope_off))] if any(scope_off) else []))
     blocks = []
     current_doc = None

@@ -63,7 +63,23 @@ def test_row_label_is_taken_from_the_row_not_from_near_a_section_title():
     assert ("ENSA", 10, 190) in texts(anchor)
 
 
-def test_stored_word_round_trips():
-    from rag.eval.anchors import format_word, parse_word
-    w = word("Cl", 60.004, 10.5)
-    assert parse_word(format_word(w)) == (1, (60.0, 10.5, 72.0, 18.5))
+def test_written_anchor_loads_back_and_goes_stale_when_text_changes(tmp_path):
+    import json
+    from rag.eval.anchors import write_anchors
+    from rag.eval.dataset import load_dataset
+    x = {"excerpt_id": "x1", "document_id": "d1", "document_name": "doc.pdf", "page_numbers": [1],
+         "text": "Meter Cl"}
+    data = {"document_id": "d1", "document_name": "doc.pdf", "file_hash": "h", "cases": [
+        {"case_id": "C1", "question": "q", "reference_answer": "a", "answerable": True,
+         "excerpts": [x], "evidence_groups": []}]}
+    (tmp_path / "manifest.json").write_text('{"dataset_version": "t"}', encoding="utf-8")
+    (tmp_path / "doc.json").write_text(json.dumps(data), encoding="utf-8")
+    words = [word("Meter", 10, 10), word("Cl", 60.004, 10)]
+    write_anchors(tmp_path, {("C1", "x1"): locate_excerpt(excerpt("Meter Cl"), words)})
+    loaded = load_dataset(tmp_path).cases[0].excerpts[0]
+    assert loaded.anchor_state == "ok"
+    assert loaded.anchor == (("Meter Cl", ((1, (10.0, 10.0, 40.0, 18.0)), (1, (60.0, 10.0, 72.0, 18.0)))),)
+    data = json.loads((tmp_path / "doc.json").read_text(encoding="utf-8"))
+    data["cases"][0]["excerpts"][0]["text"] = "Meter CI"
+    (tmp_path / "doc.json").write_text(json.dumps(data), encoding="utf-8")
+    assert load_dataset(tmp_path).cases[0].excerpts[0].anchor_state == "stale"
