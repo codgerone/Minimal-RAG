@@ -15,6 +15,8 @@ class Excerpt:
     document_name: str
     pages: tuple[int, ...]
     text: str
+    table_header: bool = False   # the excerpt is table header text that itself answers the question
+    locate_hint: str | None = None   # header text of the excerpt's column; only for locating it in the PDF
 
 
 @dataclass(frozen=True)
@@ -67,7 +69,9 @@ def load_dataset(folder: Path) -> Dataset:
         hashes[data["document_id"]] = data["file_hash"]
         for case in data["cases"]:
             excerpts = tuple(Excerpt(x["excerpt_id"], x["document_id"], x["document_name"],
-                                     tuple(x["page_numbers"]), x["text"]) for x in case["excerpts"])
+                                     tuple(x["page_numbers"]), x["text"], bool(x.get("table_header", False)),
+                                     x.get("locate_hint"))
+                             for x in case["excerpts"])
             known = {x.excerpt_id for x in excerpts}
             groups = tuple(EvidenceGroup(
                 group["evidence_group_id"], group["information_item"],

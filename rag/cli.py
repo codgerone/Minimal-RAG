@@ -55,6 +55,9 @@ def build_parser() -> argparse.ArgumentParser:
     evaluate.add_argument("--top-k", type=_positive, help="默认取配置文件 [eval] top_k")
     evaluate.add_argument("--confirm-auto", action="store_true",
                           help="把本次自动判定的证据映射写入 eval/mappings.json（先看报告再用）")
+    anchors = command("anchors", "在 PDF 上定位每段 excerpt，生成审核文件 tmp/anchor-review/")
+    anchors.add_argument("--since", metavar="GIT_REF", help="审核页并排显示相对这个 git 版本改动过的 excerpt")
+    anchors.add_argument("--write", action="store_true", help="把定位结果写入 eval/ground-truth（审核确认后再用）")
     config = command("config", "查看装配配置")
     config.add_argument("action", choices=["list", "show"])
     config.add_argument("name", nargs="?")
@@ -292,6 +295,51 @@ def _eval(workspace: Workspace, args: argparse.Namespace) -> int:
     return 0
 
 
+def _anchors(workspace: Workspace, args: argparse.Namespace) -> int:
+    import json
+    import subprocess
+    from rag.eval.anchors import locate_all, write_anchors
+    from rag.eval.dataset import load_dataset
+    from rag.eval.runner import EvalError
+    from rag.ingest.sources import discover
+    from rag.reports.anchor_review import write_anchor_review
+    dataset = load_dataset(workspace.ground_truth)
+    sources = {s.document_id: s for s in discover(workspace.documents)}
+    for doc, labelled in dataset.document_hashes.items():
+        if doc not in sources:
+            raise EvalError(f"标注涉及的 PDF 不在 documents/ 中：{doc}")
+        if sources[doc].file_hash != labelled:
+            raise EvalError(f"PDF 在标注之后被修改过，需重新标注：{sources[doc].relative_path}")
+    pairs = [(c.case_id, x) for c in dataset.cases for x in c.excerpts]
+    located = locate_all([x for _, x in pairs], {d: s.absolute_path for d, s in sources.items()})
+    items = [(case_id, item) for (case_id, _), item in zip(pairs, located)]
+    previous: dict[tuple[str, str], str | None] = {}
+    if args.since:
+        for path in sorted(workspace.ground_truth.glob("*--*.json")):
+            relative = path.relative_to(workspace.root).as_posix()
+            shown = subprocess.run(["git", "show", f"{args.since}:{relative}"], cwd=workspace.root,
+                                   capture_output=True)
+            old = json.loads(shown.stdout.decode("utf-8")) if shown.returncode == 0 else {"cases": []}
+            texts = {(c["case_id"], x["excerpt_id"]): x["text"] for c in old["cases"] for x in c["excerpts"]}
+            for case_id, item in items:
+                key = (case_id, item.excerpt.excerpt_id)
+                if item.excerpt.document_id in path.stem and texts.get(key) != item.excerpt.text:
+                    previous[key] = texts.get(key)
+    folder = workspace.root / "tmp" / "anchor-review"
+    page_path = write_anchor_review(folder, items, {d: s.absolute_path for d, s in sources.items()},
+                                    {c.case_id: c.question for c in dataset.cases}, previous)
+    counts = {s: sum(1 for _, i in items if i.status == s) for s in ("located", "ambiguous", "missing")}
+    _out(f"{len(items)} 段 excerpt：唯一定位 {counts['located']}，多处出现按位置选定 {counts['ambiguous']}，"
+         f"有片段找不到 {counts['missing']}")
+    _out(f"审核页：{page_path.relative_to(workspace.root).as_posix()}")
+    if args.write:
+        if counts["missing"]:
+            raise EvalError("有 excerpt 存在找不到的片段，不能写入；请先修正这些 excerpt")
+        written = write_anchors(workspace.ground_truth, {(c, i.excerpt.excerpt_id): i for c, i in items})
+        _out(f"已把 {written} 段 excerpt 的定位写入 eval/ground-truth")
+    return 0
+
+
 def _config(workspace: Workspace, args: argparse.Namespace) -> int:
     if args.action == "list":
         for config in list_configs(workspace.root):
@@ -315,7 +363,7 @@ def _report(workspace: Workspace, args: argparse.Namespace) -> int:
 
 
 HANDLERS = {"status": _status, "ingest": _ingest, "chunks": _chunks, "search": _search,
-            "ask": _ask, "chat": _chat, "eval": _eval, "config": _config, "report": _report}
+            "ask": _ask, "chat": _chat, "eval": _eval, "anchors": _anchors, "config": _config, "report": _report}
 
 
 def main(argv: Sequence[str] | None = None, *, workspace_root: Path | None = None) -> int:
