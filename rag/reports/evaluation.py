@@ -40,7 +40,8 @@ def _case_status(case: dict[str, Any]) -> tuple[str, str, str]:
 
 def _excerpt_html(x: dict[str, Any], case: dict[str, Any]) -> str:
     source = "" if x["document_name"] == case["document_name"] else f' · {esc(x["document_name"])}'
-    return (f'<div class="meta">{esc(x["excerpt_id"])}{source} · 第 {",".join(map(str, x["pages"]))} 页</div>'
+    header = " " + badge("表头") if x.get("table_header") else ""
+    return (f'<div class="meta">{esc(x["excerpt_id"])}{source} · 第 {",".join(map(str, x["pages"]))} 页{header}</div>'
             f'{text_block(x["text"], 300)}')
 
 
