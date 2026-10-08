@@ -264,9 +264,11 @@ def chunk_parsed_document(
         table_parts: list[tuple[str, tuple[ChunkSource, ...]]] = []
         current_lines: list[str] = []
         current_sources: list[ChunkSource] = []
-        header_line = lines[0] if lines and lines[0].kind == "header" else None
+        header_index = next((index for index, item in enumerate(lines) if item.kind == "header"), None)
+        header_line = lines[header_index] if header_index is not None else None
+        line_by_id = {item.line_id: item for item in lines}
         active_merged = []
-        for line in lines:
+        for line_index, line in enumerate(lines):
             if line.source_rows:
                 first_row = min(line.source_rows)
                 active_merged = [item for item in active_merged
@@ -285,7 +287,7 @@ def chunk_parsed_document(
                 current_lines, current_sources = [], []
             context_lines = []
             context_sources = []
-            if header_line and line is not header_line:
+            if header_line and header_index is not None and line_index > header_index:
                 context_lines.append(header_line.text)
                 context_sources.append(table_source(header_line, repeated=True,
                                                     context_kind="table_header"))
@@ -295,10 +297,17 @@ def chunk_parsed_document(
                 context_lines.append(merged_line.text)
                 context_sources.append(table_source(merged_line, repeated=True,
                                                     context_kind="merged_cell"))
+            # A line opening a chunk inside a vertical merge gets the merged value back.
+            opening_text = line.resumed_text()
+            for item in line.continuations:
+                context_sources.append(table_source(line_by_id[item.anchor_line_id], repeated=True,
+                                                    context_kind="merged_cell",
+                                                    local_start=item.anchor_start,
+                                                    local_end=item.anchor_end))
             prefix = "\n".join(context_lines)
-            contextual = f"{prefix}\n{line.text}" if prefix else line.text
+            contextual = f"{prefix}\n{opening_text}" if prefix else opening_text
             if _fits(counter, contextual, max_input_tokens):
-                current_lines = [*context_lines, line.text]
+                current_lines = [*context_lines, opening_text]
                 current_sources = [*context_sources, source]
             else:
                 pieces = _split_text(line.text, counter, max_input_tokens, 0)

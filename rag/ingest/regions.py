@@ -8,9 +8,10 @@ the chunk's regions, so every chunker gets them without code of its own:
 - text, list item without word positions: the element's box; fine when the chunk holds the whole
   element, coarse when it holds only part of it; the whole page (coarse) when there is no box;
 - table: the cells of the table lines in the chunk's range (fine; coarse when the chunk holds only
-  part of a line, or the table's box when a cell has no position). An identified header is written
-  into every line as field names rather than as lines of its own; its cells count for the table's
-  first chunk only;
+  part of a line, or the table's box when a cell has no position). When the formatter records where
+  each cell sits in a line, part of a line gives the cells in that part. Under `row_text_v1` an
+  identified header is written into every line as field names rather than as lines of its own; its
+  cells count for the table's first chunk only;
 - locator text the chunker adds (`fallback_locator`) is not content and has no region.
 """
 
@@ -69,7 +70,13 @@ def _table_regions(node: TableNode, source: ChunkSource, first_fragment: bool) -
         offset = line_end + 1
         if line_start < end and start < line_end:
             whole = start <= line_start and line_end <= end
-            add(line.source_cell_ids, "fine" if whole else "coarse")
+            if whole or not line.cell_spans:
+                add(line.source_cell_ids, "fine" if whole else "coarse")
+                continue
+            for span in line.cell_spans:
+                if line_start + span.start < end and start < line_start + span.end:
+                    inside = start <= line_start + span.start and line_start + span.end <= end
+                    add(span.cell_ids, "fine" if inside else "coarse")
     header = node.header
     if first_fragment and header.outcome == "identified" and header.header_end_row:
         rows = range(header.header_start_row or 0, header.header_end_row)

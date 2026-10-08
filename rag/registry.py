@@ -12,7 +12,7 @@ from rag.index.embedder import E5Embedder, Embedder
 from rag.ingest.chunkers import Chunker
 from rag.ingest.parsers import Parser
 from rag.ingest.tables.extractors import TableExtractor
-from rag.ingest.tables.formatters import RowTextFormatter, TableFormatter
+from rag.ingest.tables.formatters import MarkdownRowsFormatter, RowTextFormatter, TableFormatter
 from rag.query.llm import LLM, OpenRouterLLM
 
 
@@ -52,7 +52,10 @@ PARSERS: dict[str, Callable[..., Parser]] = {
 TABLE_EXTRACTORS: dict[str, Callable[..., TableExtractor]] = {
     name: _extractor(name) for name in ("pymupdf", "camelot", "docling", "unstructured")
 }
-TABLE_FORMATTERS: dict[str, Callable[..., TableFormatter]] = {"row_text_v1": RowTextFormatter}
+TABLE_FORMATTERS: dict[str, Callable[..., TableFormatter]] = {
+    "row_text_v1": RowTextFormatter,
+    "markdown_rows_v1": MarkdownRowsFormatter,
+}
 CHUNKERS: dict[str, Callable[..., Chunker]] = {
     "characters": _characters,
     "structured_tokens": _structured,
