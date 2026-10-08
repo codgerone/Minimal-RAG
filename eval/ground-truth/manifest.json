@@ -1,41 +1,41 @@
 {
   "schema_version": "ground_truth_manifest_v1",
-  "dataset_version": "3.0.0",
-  "ground_truth_fingerprint": "498ab84a637d38566e604771a18b52fe3cec7421e307a18e661ecaa35085c05e",
+  "dataset_version": "3.1.0",
+  "ground_truth_fingerprint": "73e97db442cb925c95e635f6296b1b13c0f71ade55ac6dcdacaaf10e5e5018cb",
   "review_status": "approved",
   "files": [
     {
       "document_key": "Contrato-N-105-2025-LP-002-2024-FONAFE-Adquisición-de-me--d359c37e0bc3c87a",
       "json_path": "eval/ground-truth/Contrato-N-105-2025-LP-002-2024-FONAFE-Adquisición-de-me--d359c37e0bc3c87a.json",
-      "content_sha256": "f4b16bd616218ebdc25674c8951ff30c6088267bd6d46a2d0cc40860b043a90a",
+      "content_sha256": "b22e547dd900e7fe15abb26a8f32508206dfe6d6ce59178061a140767152fab1",
       "case_count": 10
     },
     {
       "document_key": "E001-602--817cfff2927c6c65",
       "json_path": "eval/ground-truth/E001-602--817cfff2927c6c65.json",
-      "content_sha256": "0c22406b7b63da85177ad0368493c08bd23a395846f369fb5281909bfd1dda4f",
+      "content_sha256": "602605ab42029619f2a6c0e780468833ab08ec73e42c7c8c5437399669430fa5",
       "case_count": 2
     },
     {
       "document_key": "ORDER-PERU-24-12-ANDET--169a1f2133fe5643",
       "json_path": "eval/ground-truth/ORDER-PERU-24-12-ANDET--169a1f2133fe5643.json",
-      "content_sha256": "e1a7a4466c60d0cb8e05723035435bf14b922b212f531858b32231843b6a17d3",
+      "content_sha256": "71a95db3fe6473ff51aef4b9bc63a534c65134f0a3ba997040634cfba4264747",
       "case_count": 6
     },
     {
       "document_key": "ORDER-PERU-25-15-ANDET-VF--5883b02cd922a64f",
       "json_path": "eval/ground-truth/ORDER-PERU-25-15-ANDET-VF--5883b02cd922a64f.json",
-      "content_sha256": "62c583007140bb432ff89fcffd8c64e730b00e64d3825c6cb9723adfd6a41bf8",
+      "content_sha256": "ae7733a5cfb8d5b2ef90ac971ef543b81366e2cc55efd403b01938e4ce526788",
       "case_count": 2
     },
     {
       "document_key": "签字-ORDER-PERU-25-19-FONAFE--5a4c36e0022f4917",
       "json_path": "eval/ground-truth/签字-ORDER-PERU-25-19-FONAFE--5a4c36e0022f4917.json",
-      "content_sha256": "8d74e1b3fb2ffb256f902db1327349538e6233cb2ee6e76205baf742abe365b4",
+      "content_sha256": "6edca5d7a158d21463fa4f3b53ab7f65e166ce1846c396f661ad794df1b256e9",
       "case_count": 4
     }
   ],
   "created_at": "2026-09-20T02:55:05Z",
-  "reviewed_at": "2026-10-07T00:00:00Z",
+  "reviewed_at": "2026-10-08T00:00:00Z",
   "superseded_by": null
 }

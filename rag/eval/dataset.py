@@ -6,6 +6,10 @@ import hashlib
 import json
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Literal
+
+Box = tuple[float, float, float, float]
+AnchorPiece = tuple[str, tuple[tuple[int, Box], ...]]    # piece text, its words (page, box)
 
 
 @dataclass(frozen=True)
@@ -15,6 +19,10 @@ class Excerpt:
     document_name: str
     pages: tuple[int, ...]
     text: str
+    table_header: bool = False   # the excerpt is table header text that itself answers the question
+    locate_hint: str | None = None   # header text of the excerpt's column; only for locating it in the PDF
+    anchor: tuple[AnchorPiece, ...] | None = None   # confirmed PDF position; None unless anchor_state == "ok"
+    anchor_state: Literal["ok", "missing", "stale"] = "missing"   # stale: text edited after locating
 
 
 @dataclass(frozen=True)
@@ -53,6 +61,32 @@ class Dataset:
     document_hashes: dict[str, str]   # document_id → PDF hash the evidence was labelled on
 
 
+def text_sha256(text: str) -> str:
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()[:16]
+
+
+def _anchor(raw: dict) -> tuple[tuple[AnchorPiece, ...] | None, str]:
+    stored = raw.get("anchor")
+    if not stored:
+        return None, "missing"
+    if stored["text_sha256"] != text_sha256(raw["text"]):
+        return None, "stale"
+    pieces = []
+    for piece in stored["pieces"]:
+        words = []
+        for value in piece["words"]:
+            page, *box = value.split()
+            words.append((int(page), tuple(float(v) for v in box)))
+        pieces.append((piece["text"], tuple(words)))
+    return tuple(pieces), "ok"
+
+
+def _excerpt(x: dict) -> Excerpt:
+    anchor, state = _anchor(x)
+    return Excerpt(x["excerpt_id"], x["document_id"], x["document_name"], tuple(x["page_numbers"]),
+                   x["text"], bool(x.get("table_header", False)), x.get("locate_hint"), anchor, state)
+
+
 def load_dataset(folder: Path) -> Dataset:
     manifest = json.loads((folder / "manifest.json").read_text(encoding="utf-8"))
     digest = hashlib.sha256()
@@ -66,8 +100,7 @@ def load_dataset(folder: Path) -> Dataset:
         data = json.loads(raw)
         hashes[data["document_id"]] = data["file_hash"]
         for case in data["cases"]:
-            excerpts = tuple(Excerpt(x["excerpt_id"], x["document_id"], x["document_name"],
-                                     tuple(x["page_numbers"]), x["text"]) for x in case["excerpts"])
+            excerpts = tuple(_excerpt(x) for x in case["excerpts"])
             known = {x.excerpt_id for x in excerpts}
             groups = tuple(EvidenceGroup(
                 group["evidence_group_id"], group["information_item"],

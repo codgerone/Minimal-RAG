@@ -15,6 +15,7 @@ from typing import Callable, Literal
 from rag.index.manifest import DocumentEntry, Manifest, now
 from rag.index.status import IndexStatus, check_status
 from rag.index.store import ChromaStore, StoredChunk
+from rag.ingest.regions import attach_regions
 from rag.ingest.pipeline import ProcessedDocument, process_document
 from rag.ingest.sources import discover, select
 from rag.jsonio import write_json
@@ -59,7 +60,7 @@ def current_status(workspace: Workspace, assembly: Assembly,
 
 def prepare(source: SourceDocument, assembly: Assembly) -> Prepared:
     processed = process_document(source, assembly.parser, assembly.extractors, assembly.formatter)
-    batch = assembly.chunker.chunk(processed.document)
+    batch = attach_regions(assembly.chunker.chunk(processed.document), processed.document)
     vectors = assembly.embedder.encode_passages([chunk.text for chunk in batch.chunks])
     entry = DocumentEntry(source.document_id, source.document_name, source.relative_path,
                           source.file_hash, readable_name(source.relative_path),

@@ -20,7 +20,30 @@
           "page_numbers": [
             1
           ],
-          "text": "Nº Cuota | Fec. Venc. | Monto\n1 | 30/03/2026 | 331,432.50"
+          "text": "1 | 30/03/2026 | 331,432.50",
+          "anchor": {
+            "text_sha256": "f8058dea0bccf962",
+            "pieces": [
+              {
+                "text": "1",
+                "words": [
+                  "1 38.58 548.48 42.75 558.78"
+                ]
+              },
+              {
+                "text": "30/03/2026",
+                "words": [
+                  "1 60.08 548.48 97.61 558.78"
+                ]
+              },
+              {
+                "text": "331,432.50",
+                "words": [
+                  "1 140.09 548.48 177.62 558.78"
+                ]
+              }
+            ]
+          }
         },
         {
           "excerpt_id": "x2",
@@ -30,7 +53,24 @@
           "page_numbers": [
             1
           ],
-          "text": "IGV :\n$ 50,557.50"
+          "text": "IGV :\n$ 50,557.50",
+          "anchor": {
+            "text_sha256": "9952ad37df7e8ae7",
+            "pieces": [
+              {
+                "text": "IGV :",
+                "words": [
+                  "1 438.73 431.41 451.65 441.71"
+                ]
+              },
+              {
+                "text": "$ 50,557.50",
+                "words": [
+                  "1 556.82 431.41 590.17 441.71"
+                ]
+              }
+            ]
+          }
         },
         {
           "excerpt_id": "x3",
@@ -40,7 +80,25 @@
           "page_numbers": [
             1
           ],
-          "text": "Importe Total :\n$ 331,432.50"
+          "text": "Importe Total :\n$ 331,432.50",
+          "anchor": {
+            "text_sha256": "1182287140253861",
+            "pieces": [
+              {
+                "text": "Importe Total :",
+                "words": [
+                  "1 398.63 476.62 429.14 488.98",
+                  "1 431.64 476.62 451.65 488.98"
+                ]
+              },
+              {
+                "text": "$ 331,432.50",
+                "words": [
+                  "1 544.73 476.62 589.76 488.98"
+                ]
+              }
+            ]
+          }
         },
         {
           "excerpt_id": "x4",
@@ -50,7 +108,36 @@
           "page_numbers": [
             1
           ],
-          "text": "Información del crédito :\nMonto neto pendiente de pago :\n$ 331,432.50"
+          "text": "Información del crédito :\nMonto neto pendiente de pago :\n$ 331,432.50",
+          "anchor": {
+            "text_sha256": "c75cd7de8f930599",
+            "pieces": [
+              {
+                "text": "Información del crédito :",
+                "words": [
+                  "1 21.99 499.77 64.91 510.09",
+                  "1 67.00 499.77 77.83 510.09",
+                  "1 79.92 499.77 104.92 510.09"
+                ]
+              },
+              {
+                "text": "Monto neto pendiente de pago :",
+                "words": [
+                  "1 21.99 509.67 42.83 519.97",
+                  "1 44.92 509.67 59.51 519.97",
+                  "1 61.60 509.67 94.54 519.97",
+                  "1 96.62 509.67 104.96 519.97",
+                  "1 107.05 509.67 123.73 519.97"
+                ]
+              },
+              {
+                "text": "$ 331,432.50",
+                "words": [
+                  "1 230.56 509.67 268.09 519.97"
+                ]
+              }
+            ]
+          }
         },
         {
           "excerpt_id": "x5",
@@ -60,7 +147,31 @@
           "page_numbers": [
             1
           ],
-          "text": "SON: TRESCIENTOS TREINTA Y UNO MIL CUATROCIENTOS TREINTA Y DOS Y 50/100 DOLAR AMERICANO"
+          "text": "SON: TRESCIENTOS TREINTA Y UNO MIL CUATROCIENTOS TREINTA Y DOS Y 50/100 DOLAR AMERICANO",
+          "anchor": {
+            "text_sha256": "3f75698427dac109",
+            "pieces": [
+              {
+                "text": "SON: TRESCIENTOS TREINTA Y UNO MIL CUATROCIENTOS TREINTA Y DOS Y 50/100 DOLAR AMERICANO",
+                "words": [
+                  "1 18.99 421.80 41.49 434.19",
+                  "1 43.99 421.80 108.00 434.19",
+                  "1 110.50 421.80 149.50 434.19",
+                  "1 152.00 421.80 158.00 434.19",
+                  "1 160.51 421.80 180.50 434.19",
+                  "1 183.01 421.80 198.50 434.19",
+                  "1 201.01 421.80 279.50 434.19",
+                  "1 282.01 421.80 321.00 434.19",
+                  "1 18.99 432.60 24.99 444.99",
+                  "1 27.50 432.60 47.00 444.99",
+                  "1 49.50 432.60 55.50 444.99",
+                  "1 58.00 432.60 85.53 444.99",
+                  "1 88.03 432.60 120.02 444.99",
+                  "1 122.53 432.60 178.02 444.99"
+                ]
+              }
+            ]
+          }
         }
       ],
       "evidence_groups": [
@@ -135,7 +246,47 @@
           "page_numbers": [
             1
           ],
-          "text": "Cantidad | Código | Descripción | Valor Unitario\n500.00 | HXE34K-S1 | MEDIDOR TRIFASICO HXE34K-S1, 4HILOS, 10(100)A, 3X220V, CLASE 1, CONEXION DIRECTA, MARCA HEXING | 16.00"
+          "text": "500.00 | HXE34K-S1 | MEDIDOR TRIFASICO HXE34K-S1, 4HILOS, 10(100)A, 3X220V, CLASE 1, CONEXION DIRECTA, MARCA HEXING | 16.00",
+          "anchor": {
+            "text_sha256": "e24df32c1ac36b14",
+            "pieces": [
+              {
+                "text": "500.00",
+                "words": [
+                  "1 60.58 282.31 83.51 292.61"
+                ]
+              },
+              {
+                "text": "HXE34K-S1",
+                "words": [
+                  "1 227.86 282.31 268.29 292.61"
+                ]
+              },
+              {
+                "text": "MEDIDOR TRIFASICO HXE34K-S1, 4HILOS, 10(100)A, 3X220V, CLASE 1, CONEXION DIRECTA, MARCA HEXING",
+                "words": [
+                  "1 273.79 282.31 309.21 292.61",
+                  "1 311.29 282.31 351.29 292.61",
+                  "1 353.38 282.31 395.90 292.61",
+                  "1 397.98 282.31 426.75 292.61",
+                  "1 428.83 282.31 461.76 292.61",
+                  "1 273.79 291.31 302.56 301.61",
+                  "1 304.65 291.31 329.24 301.61",
+                  "1 331.32 291.31 337.58 301.61",
+                  "1 339.66 291.31 379.67 301.61",
+                  "1 381.75 291.31 416.76 301.61",
+                  "1 418.84 291.31 445.92 301.61",
+                  "1 448.01 291.31 476.76 301.61"
+                ]
+              },
+              {
+                "text": "16.00",
+                "words": [
+                  "1 576.49 282.31 595.25 292.61"
+                ]
+              }
+            ]
+          }
         }
       ],
       "evidence_groups": [

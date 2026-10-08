@@ -73,6 +73,28 @@ class PageSpan:
 
 
 @dataclass(frozen=True)
+class WordBox:
+    """Where one word of an element's text sits: text[start:end] is drawn inside bbox on that page."""
+    start: int
+    end: int
+    page_number: int
+    bbox: BoundingBox
+
+
+@dataclass(frozen=True)
+class ChunkRegion:
+    """A place on the PDF the chunk's content comes from.
+
+    fine: the box holds exactly this content (word, paragraph, list item, table cell).
+    coarse: the content lies somewhere inside the box (or anywhere on the page when bbox is None),
+    because the parser gave no finer position.
+    """
+    page_number: int
+    bbox: BoundingBox | None
+    precision: Literal["fine", "coarse"]
+
+
+@dataclass(frozen=True)
 class ProcessingWarning:
     code: WarningCode
     stage: ProcessingStage
@@ -87,6 +109,7 @@ class PrimaryText:
     text: str
     sources: tuple[PageSpan, ...]
     source_ref: str | None
+    word_boxes: tuple[WordBox, ...] = ()     # per-word positions, when the parser knows them
 
 
 @dataclass(frozen=True)
@@ -158,6 +181,7 @@ class TextNode:
     text: str
     sources: tuple[PageSpan, ...]
     source_ref: str | None
+    word_boxes: tuple[WordBox, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -232,6 +256,7 @@ class DocumentChunk:
     parent_unit_id: str | None
     fragment_index: int
     fragment_count: int
+    regions: tuple[ChunkRegion, ...] = ()    # filled after chunking, see rag/ingest/regions.py
 
     def __post_init__(self) -> None:
         if not self.text.strip() or type(self.chunk_index) is not int or self.chunk_index < 0:

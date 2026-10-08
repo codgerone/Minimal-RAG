@@ -61,7 +61,9 @@ def _eval_section(workspace: Workspace) -> str:
     for path in runs:
         result = read_json(path)
         modes = result["evidence_modes"]
-        note = badge(f"{modes['auto']} 段 excerpt 自动判定", "warn") if modes["auto"] else ""
+        flagged = modes.get("fallback", modes.get("auto", 0))
+        label = "文字兜底" if "fallback" in modes else "自动判定"
+        note = badge(f"{flagged} 段 excerpt {label}", "warn") if flagged else ""
         rows.append(f'<tr><td><a href="eval/{esc(quote(path.parent.name))}/index.html">{esc(path.parent.name)}</a> {note}</td>'
                     f'<td>{esc(result["config"])}</td><td class="num">{result["top_k"]}</td>'
                     f'<td>{filter_state(result)}</td>'

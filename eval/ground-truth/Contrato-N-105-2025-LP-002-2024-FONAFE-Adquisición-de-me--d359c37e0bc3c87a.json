@@ -20,7 +20,122 @@
           "page_numbers": [
             1
           ],
-          "text": "ELECTRO SUR ESTE S.A.A., identificada con RUC. Nº 20116544289, cuya personería jurídica se encuentra inscrita en la Partida Electrónica Nº 11003503 del Registro de Personas Jurídicas Zona Registral Nº X - Sede Cusco, con domicilio en la Avenida Mariscal Sucre Nº 400 de la Urbanización Bancopata, del distrito de Santiago, provincia y departamento de Cusco, debidamente representada para este acto por su Gerente General el Ing. Fredy Hernán Gonzáles De La Vega, peruano, identificado con DNI. Nº 23839976, con poder de representación inscrito en los Asientos N° D00195 y N° D00232 de la Partida Electrónica en mención. A quien en adelante se le denominará “LA EMPRESA”."
+          "text": "ELECTRO SUR ESTE S.A.A., identificada con RUC. Nº 20116544289, cuya personería jurídica se encuentra inscrita en la Partida Electrónica Nº 11003503 del Registro de Personas Jurídicas Zona Registral Nº X - Sede Cusco, con domicilio en la Avenida Mariscal Sucre Nº 400 de la Urbanización Bancopata, del distrito de Santiago, provincia y departamento de Cusco, debidamente representada para este acto por su Gerente General el Ing. Fredy Hernán Gonzáles De La Vega, peruano, identificado con DNI. Nº 23839976, con poder de representación inscrito en los Asientos N° D00195 y N° D00232 de la Partida Electrónica en mención. A quien en adelante se le denominará “LA EMPRESA”.",
+          "anchor": {
+            "text_sha256": "2fb2aedc1d77903e",
+            "pieces": [
+              {
+                "text": "ELECTRO SUR ESTE S.A.A., identificada con RUC. Nº 20116544289, cuya personería jurídica se encuentra inscrita en la Partida Electrónica Nº 11003503 del Registro de Personas Jurídicas Zona Registral Nº X - Sede Cusco, con domicilio en la Avenida Mariscal Sucre Nº 400 de la Urbanización Bancopata, del distrito de Santiago, provincia y departamento de Cusco, debidamente representada para este acto por su Gerente General el Ing. Fredy Hernán Gonzáles De La Vega, peruano, identificado con DNI. Nº 23839976, con poder de representación inscrito en los Asientos N° D00195 y N° D00232 de la Partida Electrónica en mención. A quien en adelante se le denominará “LA EMPRESA”.",
+                "words": [
+                  "1 99.26 319.65 138.25 331.06",
+                  "1 141.62 319.65 158.92 331.06",
+                  "1 162.24 319.65 183.63 331.06",
+                  "1 186.93 319.65 213.20 331.06",
+                  "1 216.65 319.65 258.12 331.06",
+                  "1 261.37 319.65 274.54 331.06",
+                  "1 277.90 319.65 297.83 331.06",
+                  "1 301.16 319.65 310.03 331.06",
+                  "1 313.37 319.65 365.87 331.06",
+                  "1 369.13 319.65 386.38 331.06",
+                  "1 389.63 319.65 428.81 331.06",
+                  "1 432.06 319.65 458.43 331.06",
+                  "1 461.91 319.65 470.54 331.06",
+                  "1 473.79 319.65 510.22 331.06",
+                  "1 99.26 331.05 125.16 342.46",
+                  "1 128.29 331.05 137.37 342.46",
+                  "1 140.51 331.05 146.86 342.46",
+                  "1 149.98 331.05 175.86 342.46",
+                  "1 178.98 331.05 219.40 342.46",
+                  "1 222.62 331.05 231.49 342.46",
+                  "1 234.77 331.05 271.23 342.46",
+                  "1 274.36 331.05 285.29 342.46",
+                  "1 288.38 331.05 318.83 342.46",
+                  "1 321.98 331.05 331.08 342.46",
+                  "1 334.21 331.05 368.65 342.46",
+                  "1 371.75 331.05 404.54 342.46",
+                  "1 407.62 331.05 426.31 342.46",
+                  "1 429.43 331.05 461.71 342.46",
+                  "1 464.83 331.05 473.70 342.46",
+                  "1 476.83 331.05 482.28 342.46",
+                  "1 491.38 331.05 510.43 342.46",
+                  "1 99.26 342.57 124.68 353.98",
+                  "1 126.86 342.57 140.03 353.98",
+                  "1 142.21 342.57 174.09 353.98",
+                  "1 176.27 342.57 185.36 353.98",
+                  "1 187.66 342.57 194.01 353.98",
+                  "1 196.18 342.57 225.90 353.98",
+                  "1 228.08 342.57 258.55 353.98",
+                  "1 260.70 342.57 282.14 353.98",
+                  "1 284.32 342.57 293.20 353.98",
+                  "1 295.36 342.57 309.01 353.98",
+                  "1 311.19 342.57 320.28 353.98",
+                  "1 322.47 342.57 328.82 353.98",
+                  "1 331.10 342.57 378.93 353.98",
+                  "1 381.23 342.57 422.61 353.98",
+                  "1 424.78 342.57 435.70 353.98",
+                  "1 437.85 342.57 462.28 353.98",
+                  "1 464.58 342.57 473.66 353.98",
+                  "1 475.85 342.57 510.36 353.98",
+                  "1 99.26 354.09 131.99 365.50",
+                  "1 134.88 354.09 138.96 365.50",
+                  "1 141.83 354.09 192.40 365.50",
+                  "1 195.30 354.09 204.38 365.50",
+                  "1 207.28 354.09 232.70 365.50",
+                  "1 235.73 354.09 283.07 365.50",
+                  "1 285.97 354.09 334.24 365.50",
+                  "1 337.14 354.09 353.44 365.50",
+                  "1 356.33 354.09 371.76 365.50",
+                  "1 374.66 354.09 390.10 365.50",
+                  "1 393.00 354.09 404.83 365.50",
+                  "1 407.73 354.09 416.35 365.50",
+                  "1 419.47 354.09 450.40 365.50",
+                  "1 453.28 354.09 483.60 365.50",
+                  "1 486.58 354.09 492.93 365.50",
+                  "1 495.82 354.09 510.43 365.50",
+                  "1 99.26 365.49 121.54 376.90",
+                  "1 123.82 365.49 151.98 376.90",
+                  "1 154.29 365.49 190.73 376.90",
+                  "1 193.00 365.49 203.44 376.90",
+                  "1 205.74 365.49 215.31 376.90",
+                  "1 217.37 365.49 236.90 376.90",
+                  "1 241.59 365.49 273.97 376.90",
+                  "1 276.24 365.49 317.62 376.90",
+                  "1 319.89 365.49 333.08 376.90",
+                  "1 335.27 365.49 351.57 376.90",
+                  "1 353.84 365.49 362.72 376.90",
+                  "1 365.01 365.49 403.74 376.90",
+                  "1 406.01 365.49 419.20 376.90",
+                  "1 421.47 365.49 442.42 376.90",
+                  "1 444.75 365.49 453.83 376.90",
+                  "1 455.92 365.49 510.09 376.90",
+                  "1 99.26 377.01 125.16 388.42",
+                  "1 127.56 377.01 136.64 388.42",
+                  "1 139.10 377.01 149.54 388.42",
+                  "1 151.93 377.01 183.24 388.42",
+                  "1 185.63 377.01 195.52 388.42",
+                  "1 197.89 377.01 226.65 388.42",
+                  "1 229.07 377.01 233.15 388.42",
+                  "1 235.54 377.01 245.42 388.42",
+                  "1 247.77 377.01 276.41 388.42",
+                  "1 278.93 377.01 288.01 388.42",
+                  "1 290.43 377.01 296.79 388.42",
+                  "1 299.19 377.01 325.06 388.42",
+                  "1 327.47 377.01 367.89 388.42",
+                  "1 370.28 377.01 379.37 388.42",
+                  "1 381.79 377.01 414.98 388.42",
+                  "1 417.40 377.01 422.85 388.42",
+                  "1 425.19 377.01 445.20 388.42",
+                  "1 447.61 377.01 456.70 388.42",
+                  "1 459.00 377.01 490.40 388.42",
+                  "1 492.82 377.01 501.45 388.42",
+                  "1 503.85 377.01 510.20 388.42",
+                  "1 99.26 388.41 142.53 399.82",
+                  "1 144.86 388.41 159.87 399.82",
+                  "1 162.14 388.41 209.36 399.82"
+                ]
+              }
+            ]
+          }
         },
         {
           "excerpt_id": "x2",
@@ -30,7 +145,128 @@
           "page_numbers": [
             1
           ],
-          "text": "HEXING ELECTRICAL COMPANY S.A.C., identificada con RUC. Nº 20546102115, cuya razón social se encuentra inscrita en la Partida Electrónica Nº 12601784 de la Zona Registral IX – Sede Lima, con domicilio legal en el inmueble ubicado en la Avenida Guardia Civil N° 1321, Int. 1602, Urbanización El Aeropuerto, distrito de Surquillo, provincia y departamento de Lima, representada para este efecto por sus Apoderadas la Srta. María Isabel Gallardo Torres, peruana, identificada con DNI N° 44099982, y la Srta. Medaly Xiomara Arotoma Taipe, peruana, identificada con DNI N° 70034859, ambas con poderes inscritos en el asiento Nº C00010 de referida Partida Electrónica en mención. A quien en adelante se le denominará EL CONTRATISTA."
+          "text": "HEXING ELECTRICAL COMPANY S.A.C., identificada con RUC. Nº 20546102115, cuya razón social se encuentra inscrita en la Partida Electrónica Nº 12601784 de la Zona Registral IX – Sede Lima, con domicilio legal en el inmueble ubicado en la Avenida Guardia Civil N° 1321, Int. 1602, Urbanización El Aeropuerto, distrito de Surquillo, provincia y departamento de Lima, representada para este efecto por sus Apoderadas la Srta. María Isabel Gallardo Torres, peruana, identificada con DNI N° 44099982, y la Srta. Medaly Xiomara Arotoma Taipe, peruana, identificada con DNI N° 70034859, ambas con poderes inscritos en el asiento Nº C00010 de referida Partida Electrónica en mención. A quien en adelante se le denominará EL CONTRATISTA.",
+          "anchor": {
+            "text_sha256": "6dcf446c9952b0d5",
+            "pieces": [
+              {
+                "text": "HEXING ELECTRICAL COMPANY S.A.C., identificada con RUC. Nº 20546102115, cuya razón social se encuentra inscrita en la Partida Electrónica Nº 12601784 de la Zona Registral IX – Sede Lima, con domicilio legal en el inmueble ubicado en la Avenida Guardia Civil N° 1321, Int. 1602, Urbanización El Aeropuerto, distrito de Surquillo, provincia y departamento de Lima, representada para este efecto por sus Apoderadas la Srta. María Isabel Gallardo Torres, peruana, identificada con DNI N° 44099982, y la Srta. Medaly Xiomara Arotoma Taipe, peruana, identificada con DNI N° 70034859, ambas con poderes inscritos en el asiento Nº C00010 de referida Partida Electrónica en mención. A quien en adelante se le denominará EL CONTRATISTA.",
+                "words": [
+                  "1 99.26 412.41 130.59 423.82",
+                  "1 135.25 412.41 187.14 423.82",
+                  "1 191.83 412.41 233.63 423.82",
+                  "1 238.38 412.41 264.76 423.82",
+                  "1 269.45 412.41 310.91 423.82",
+                  "1 315.65 412.41 328.82 423.82",
+                  "1 333.67 412.41 353.60 423.82",
+                  "1 358.26 412.41 367.14 423.82",
+                  "1 371.83 412.41 424.26 423.82",
+                  "1 428.94 412.41 446.19 423.82",
+                  "1 450.89 412.41 471.49 423.82",
+                  "1 476.18 412.41 497.06 423.82",
+                  "1 501.73 412.41 510.35 423.82",
+                  "1 99.26 423.81 135.70 435.22",
+                  "1 137.97 423.81 163.87 435.22",
+                  "1 166.15 423.81 175.26 435.22",
+                  "1 177.53 423.81 183.88 435.22",
+                  "1 186.17 423.81 212.06 435.22",
+                  "1 214.35 423.81 254.89 435.22",
+                  "1 257.16 423.81 266.03 435.22",
+                  "1 268.49 423.81 304.95 435.22",
+                  "1 307.25 423.81 316.33 435.22",
+                  "1 318.63 423.81 324.99 435.22",
+                  "1 327.26 423.81 345.96 435.22",
+                  "1 348.24 423.81 380.52 435.22",
+                  "1 382.79 423.81 390.51 435.22",
+                  "1 399.67 423.81 418.72 435.22",
+                  "1 420.99 423.81 441.03 435.22",
+                  "1 443.30 423.81 456.49 435.22",
+                  "1 458.76 423.81 490.69 435.22",
+                  "1 492.97 423.81 510.25 435.22",
+                  "1 99.26 435.33 108.37 446.74",
+                  "1 111.38 435.33 117.73 446.74",
+                  "1 120.74 435.33 153.94 446.74",
+                  "1 156.95 435.33 185.59 446.74",
+                  "1 188.61 435.33 197.69 446.74",
+                  "1 200.71 435.33 207.06 446.74",
+                  "1 210.17 435.33 239.54 446.74",
+                  "1 242.56 435.33 271.67 446.74",
+                  "1 274.69 435.33 290.08 446.74",
+                  "1 293.05 435.33 302.93 446.74",
+                  "1 305.88 435.33 326.37 446.74",
+                  "1 329.37 435.33 340.76 446.74",
+                  "1 343.75 435.33 364.25 446.74",
+                  "1 367.25 435.33 414.97 446.74",
+                  "1 417.98 435.33 425.19 446.74",
+                  "1 428.16 435.33 470.93 446.74",
+                  "1 474.22 435.33 498.31 446.74",
+                  "1 501.32 435.33 510.40 446.74",
+                  "1 99.26 446.73 133.33 458.14",
+                  "1 135.97 446.73 168.70 458.14",
+                  "1 171.47 446.73 175.55 458.14",
+                  "1 178.18 446.73 228.75 458.14",
+                  "1 231.41 446.73 240.49 458.14",
+                  "1 243.15 446.73 263.15 458.14",
+                  "1 265.81 446.73 314.08 458.14",
+                  "1 316.74 446.73 333.15 458.14",
+                  "1 335.80 446.73 351.24 458.14",
+                  "1 353.89 446.73 376.19 458.14",
+                  "1 378.83 446.73 390.67 458.14",
+                  "1 393.67 446.73 406.39 458.14",
+                  "1 409.03 446.73 456.41 458.14",
+                  "1 459.07 446.73 465.41 458.14",
+                  "1 468.10 446.73 486.21 458.14",
+                  "1 488.86 446.73 510.30 458.14",
+                  "1 99.26 458.27 122.50 469.68",
+                  "1 124.57 458.27 157.74 469.68",
+                  "1 159.82 458.27 185.20 469.68",
+                  "1 189.62 458.27 222.16 469.68",
+                  "1 224.21 458.27 265.59 469.68",
+                  "1 267.65 458.27 280.82 469.68",
+                  "1 282.88 458.27 297.03 469.68",
+                  "1 299.06 458.27 308.94 469.68",
+                  "1 310.97 458.27 349.86 469.68",
+                  "1 351.91 458.27 355.99 469.68",
+                  "1 358.03 458.27 364.38 469.68",
+                  "1 366.43 458.27 384.62 469.68",
+                  "1 386.69 458.27 414.47 469.68",
+                  "1 416.55 458.27 448.79 469.68",
+                  "1 450.85 458.27 484.72 469.68",
+                  "1 486.79 458.27 508.23 469.68",
+                  "1 99.26 469.79 131.62 481.20",
+                  "1 134.62 469.79 175.97 481.20",
+                  "1 178.98 469.79 192.15 481.20",
+                  "1 195.16 469.79 209.19 481.20",
+                  "1 212.19 469.79 222.07 481.20",
+                  "1 225.02 469.79 263.74 481.20",
+                  "1 266.74 469.79 291.33 481.20",
+                  "1 294.53 469.79 307.70 481.20",
+                  "1 310.71 469.79 340.31 481.20",
+                  "1 343.18 469.79 373.16 481.20",
+                  "1 376.16 469.79 385.25 481.20",
+                  "1 388.26 469.79 394.62 481.20",
+                  "1 397.62 469.79 423.98 481.20",
+                  "1 427.00 469.79 435.87 481.20",
+                  "1 438.87 469.79 467.57 481.20",
+                  "1 470.62 469.79 479.70 481.20",
+                  "1 482.72 469.79 510.51 481.20",
+                  "1 99.26 481.19 125.14 492.60",
+                  "1 127.43 481.19 167.98 492.60",
+                  "1 170.30 481.19 179.38 492.60",
+                  "1 181.68 481.19 212.62 492.60",
+                  "1 217.37 481.19 222.82 492.60",
+                  "1 225.04 481.19 245.06 492.60",
+                  "1 247.35 481.19 256.43 492.60",
+                  "1 258.73 481.19 290.14 492.60",
+                  "1 292.44 481.19 301.06 492.60",
+                  "1 303.33 481.19 309.69 492.60",
+                  "1 311.99 481.19 355.49 492.60",
+                  "1 357.91 481.19 368.30 492.60",
+                  "1 370.61 481.19 431.54 492.60"
+                ]
+              }
+            ]
+          }
         }
       ],
       "evidence_groups": [
@@ -77,7 +313,63 @@
           "page_numbers": [
             2
           ],
-          "text": "Ítem | Descripción\n1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS\n3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS\n4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS"
+          "text": "1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS\n3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS\n4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS",
+          "anchor": {
+            "text_sha256": "30dae0b2df6eea4e",
+            "pieces": [
+              {
+                "text": "1",
+                "words": [
+                  "2 176.06 699.08 180.16 709.39"
+                ]
+              },
+              {
+                "text": "MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS",
+                "words": [
+                  "2 225.17 694.04 259.87 704.35",
+                  "2 262.00 694.04 315.25 704.35",
+                  "2 317.30 694.04 367.80 704.35",
+                  "2 369.85 694.04 380.06 704.35",
+                  "2 382.11 694.04 386.22 704.35",
+                  "2 388.33 694.04 410.40 704.35"
+                ]
+              },
+              {
+                "text": "3",
+                "words": [
+                  "2 176.06 721.52 180.16 731.83"
+                ]
+              },
+              {
+                "text": "MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS",
+                "words": [
+                  "2 230.69 716.48 265.39 726.79",
+                  "2 267.52 716.48 320.77 726.79",
+                  "2 322.85 716.48 362.29 726.79",
+                  "2 364.39 716.48 374.60 726.79",
+                  "2 376.65 716.48 380.75 726.79",
+                  "2 382.87 716.48 404.93 726.79"
+                ]
+              },
+              {
+                "text": "4",
+                "words": [
+                  "2 176.06 743.83 180.16 754.15"
+                ]
+              },
+              {
+                "text": "MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS",
+                "words": [
+                  "2 230.69 738.79 265.39 749.11",
+                  "2 267.52 738.79 320.77 749.11",
+                  "2 322.82 738.79 362.26 749.11",
+                  "2 364.31 738.79 374.52 749.11",
+                  "2 376.57 738.79 380.68 749.11",
+                  "2 382.87 738.79 404.94 749.11"
+                ]
+              }
+            ]
+          }
         },
         {
           "excerpt_id": "x2",
@@ -87,7 +379,123 @@
           "page_numbers": [
             3
           ],
-          "text": "Ítem | DESCRIPCIÓN | TABLA DE DATOS TÉCNICOS\n1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 01\n3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS | Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 03\n4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 04"
+          "text": "1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 01\n3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS | Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 03\n4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 04",
+          "anchor": {
+            "text_sha256": "3f60fc59e5dfb60b",
+            "pieces": [
+              {
+                "text": "1",
+                "words": [
+                  "3 125.54 221.04 129.64 231.35"
+                ]
+              },
+              {
+                "text": "MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS",
+                "words": [
+                  "3 152.42 215.88 187.12 226.19",
+                  "3 189.25 215.88 242.50 226.19",
+                  "3 244.55 215.88 295.05 226.19",
+                  "3 297.10 215.88 307.31 226.19",
+                  "3 152.42 226.20 156.52 236.51",
+                  "3 158.54 226.20 180.61 236.51"
+                ]
+              },
+              {
+                "text": "Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 01",
+                "words": [
+                  "3 315.41 213.24 338.36 223.55",
+                  "3 342.40 213.24 350.61 223.55",
+                  "3 354.67 213.24 358.77 223.55",
+                  "3 362.94 213.24 371.15 223.55",
+                  "3 375.17 213.24 383.38 223.55",
+                  "3 387.51 213.24 393.29 223.55",
+                  "3 397.34 213.24 416.21 223.55",
+                  "3 420.24 213.24 457.24 223.55",
+                  "3 461.27 213.24 472.02 223.55",
+                  "3 476.14 213.24 485.57 223.55",
+                  "3 315.41 223.56 368.25 233.87",
+                  "3 370.27 223.56 385.05 233.87",
+                  "3 387.06 223.56 392.81 233.87",
+                  "3 394.86 223.56 409.29 233.87",
+                  "3 411.31 223.56 419.48 233.87"
+                ]
+              },
+              {
+                "text": "3",
+                "words": [
+                  "3 125.54 247.56 129.64 257.87"
+                ]
+              },
+              {
+                "text": "MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS",
+                "words": [
+                  "3 152.42 242.40 187.12 252.71",
+                  "3 189.25 242.40 242.50 252.71",
+                  "3 244.61 242.40 284.05 252.71",
+                  "3 286.13 242.40 296.34 252.71",
+                  "3 298.39 242.40 302.49 252.71",
+                  "3 152.42 252.72 174.49 263.03"
+                ]
+              },
+              {
+                "text": "Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 03",
+                "words": [
+                  "3 315.41 239.64 338.36 249.95",
+                  "3 342.40 239.64 350.61 249.95",
+                  "3 354.67 239.64 358.77 249.95",
+                  "3 362.94 239.64 371.13 249.95",
+                  "3 375.19 239.64 383.40 249.95",
+                  "3 387.53 239.64 393.31 249.95",
+                  "3 397.36 239.64 416.23 249.95",
+                  "3 420.26 239.64 457.26 249.95",
+                  "3 461.28 239.64 472.04 249.95",
+                  "3 476.14 239.64 485.57 249.95",
+                  "3 315.41 249.96 368.25 260.27",
+                  "3 370.27 249.96 385.05 260.27",
+                  "3 387.06 249.96 392.81 260.27",
+                  "3 394.86 249.96 409.29 260.27",
+                  "3 411.31 249.96 419.49 260.27"
+                ]
+              },
+              {
+                "text": "4",
+                "words": [
+                  "3 125.54 274.11 129.64 284.42"
+                ]
+              },
+              {
+                "text": "MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS",
+                "words": [
+                  "3 152.42 268.83 187.12 279.14",
+                  "3 189.25 268.83 242.50 279.14",
+                  "3 244.55 268.83 283.99 279.14",
+                  "3 286.04 268.83 296.25 279.14",
+                  "3 298.37 268.83 302.47 279.14",
+                  "3 152.42 279.27 174.49 289.58"
+                ]
+              },
+              {
+                "text": "Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 04",
+                "words": [
+                  "3 315.41 266.16 338.36 276.47",
+                  "3 342.40 266.16 350.61 276.47",
+                  "3 354.67 266.16 358.77 276.47",
+                  "3 362.94 266.16 371.13 276.47",
+                  "3 375.19 266.16 383.40 276.47",
+                  "3 387.53 266.16 393.31 276.47",
+                  "3 397.36 266.16 416.23 276.47",
+                  "3 420.26 266.16 457.26 276.47",
+                  "3 461.28 266.16 472.04 276.47",
+                  "3 476.14 266.16 485.57 276.47",
+                  "3 315.41 276.51 368.25 286.82",
+                  "3 370.27 276.51 385.05 286.82",
+                  "3 387.06 276.51 392.81 286.82",
+                  "3 394.86 276.51 409.29 286.82",
+                  "3 411.31 276.51 419.49 286.82"
+                ]
+              }
+            ]
+          }
         },
         {
           "excerpt_id": "x3",
@@ -97,7 +505,101 @@
           "page_numbers": [
             4
           ],
-          "text": "El monto total del presente se detalla a continuación:\nÍtem 1: US$ 733,488.00 (Setecientos treinta y tres mil cuatrocientos ochenta y ocho con 00/100 Dólares Americanos) incluye todos los impuestos de Ley.\nÍtem 3: US$ 27,134.10 (Veintisiete mil ciento treinta y cuatro con 10/100 Dólares Americanos) incluye todos los impuestos de Ley.\nÍtem 4: US$ 50,100.44 (Cincuenta mil cien con 44/100 Dólares Americanos) incluye todos los impuestos de Ley."
+          "text": "El monto total del presente se detalla a continuación:\nÍtem 1: US$ 733,488.00 (Setecientos treinta y tres mil cuatrocientos ochenta y ocho con 00/100 Dólares Americanos) incluye todos los impuestos de Ley.\nÍtem 3: US$ 27,134.10 (Veintisiete mil ciento treinta y cuatro con 10/100 Dólares Americanos) incluye todos los impuestos de Ley.\nÍtem 4: US$ 50,100.44 (Cincuenta mil cien con 44/100 Dólares Americanos) incluye todos los impuestos de Ley.",
+          "anchor": {
+            "text_sha256": "0b46e5b44221bcd2",
+            "pieces": [
+              {
+                "text": "El monto total del presente se detalla a continuación:",
+                "words": [
+                  "4 99.26 228.42 106.48 239.83",
+                  "4 108.75 228.42 131.49 239.83",
+                  "4 133.80 228.42 149.26 239.83",
+                  "4 151.53 228.42 162.45 239.83",
+                  "4 164.78 228.42 196.63 239.83",
+                  "4 199.01 228.42 207.64 239.83",
+                  "4 209.91 228.42 234.14 239.83",
+                  "4 236.45 228.42 240.99 239.83",
+                  "4 243.26 228.42 291.47 239.83"
+                ]
+              },
+              {
+                "text": "Ítem 1: US$ 733,488.00 (Setecientos treinta y tres mil cuatrocientos ochenta y ocho con 00/100 Dólares Americanos) incluye todos los impuestos de Ley.",
+                "words": [
+                  "4 99.26 251.34 116.10 262.75",
+                  "4 119.15 251.34 126.41 262.75",
+                  "4 129.45 251.34 145.28 262.75",
+                  "4 148.34 251.34 189.38 262.75",
+                  "4 192.38 251.34 241.37 262.75",
+                  "4 244.38 251.34 269.41 262.75",
+                  "4 272.42 251.34 276.96 262.75",
+                  "4 279.97 251.34 294.92 262.75",
+                  "4 297.94 251.34 309.79 262.75",
+                  "4 312.80 251.34 366.71 262.75",
+                  "4 369.72 251.34 401.22 262.75",
+                  "4 404.23 251.34 408.77 262.75",
+                  "4 411.78 251.34 431.28 262.75",
+                  "4 434.31 251.34 448.89 262.75",
+                  "4 451.92 251.34 476.97 262.75",
+                  "4 480.46 251.34 510.41 262.75",
+                  "4 99.26 262.86 148.90 274.27",
+                  "4 151.22 262.86 176.64 274.27",
+                  "4 178.93 262.86 198.95 274.27",
+                  "4 201.22 262.86 211.66 274.27",
+                  "4 213.95 262.86 251.36 274.27",
+                  "4 253.63 262.86 262.71 274.27",
+                  "4 265.01 262.86 280.49 274.27"
+                ]
+              },
+              {
+                "text": "Ítem 3: US$ 27,134.10 (Veintisiete mil ciento treinta y cuatro con 10/100 Dólares Americanos) incluye todos los impuestos de Ley.",
+                "words": [
+                  "4 99.26 285.81 116.10 297.22",
+                  "4 118.44 285.81 125.70 297.22",
+                  "4 128.03 285.81 143.85 297.22",
+                  "4 146.30 285.81 182.78 297.22",
+                  "4 185.06 285.81 228.90 297.22",
+                  "4 231.17 285.81 243.06 297.22",
+                  "4 245.33 285.81 269.52 297.22",
+                  "4 271.83 285.81 296.87 297.22",
+                  "4 299.14 285.81 303.68 297.22",
+                  "4 305.99 285.81 331.01 297.22",
+                  "4 333.32 285.81 348.04 297.22",
+                  "4 350.35 285.81 375.41 297.22",
+                  "4 377.95 285.81 407.90 297.22",
+                  "4 410.32 285.81 460.11 297.22",
+                  "4 462.43 285.81 487.85 297.22",
+                  "4 490.14 285.81 510.29 297.22",
+                  "4 99.26 297.33 109.70 308.74",
+                  "4 111.97 297.33 149.28 308.74",
+                  "4 151.55 297.33 160.64 308.74",
+                  "4 162.94 297.33 178.42 308.74"
+                ]
+              },
+              {
+                "text": "Ítem 4: US$ 50,100.44 (Cincuenta mil cien con 44/100 Dólares Americanos) incluye todos los impuestos de Ley.",
+                "words": [
+                  "4 99.26 320.25 116.10 331.66",
+                  "4 118.92 320.25 126.18 331.66",
+                  "4 128.97 320.25 144.80 331.66",
+                  "4 147.62 320.25 184.10 331.66",
+                  "4 186.86 320.25 229.39 331.66",
+                  "4 232.25 320.25 244.10 331.66",
+                  "4 246.89 320.25 263.29 331.66",
+                  "4 266.09 320.25 280.67 331.66",
+                  "4 283.49 320.25 308.53 331.66",
+                  "4 311.33 320.25 341.41 331.66",
+                  "4 344.18 320.25 393.87 331.66",
+                  "4 396.67 320.25 422.09 331.66",
+                  "4 424.86 320.25 445.01 331.66",
+                  "4 447.75 320.25 458.19 331.66",
+                  "4 461.05 320.25 498.33 331.66",
+                  "4 501.10 320.25 510.18 331.66",
+                  "4 99.26 331.77 114.73 343.18"
+                ]
+              }
+            ]
+          }
         },
         {
           "excerpt_id": "x4",
@@ -107,7 +609,120 @@
           "page_numbers": [
             4
           ],
-          "text": "ÍTEM | DESCRIPCIÓN | CANTIDAD | PRECIO UNITARIO CON IGV (US$) | PRECIO TOTAL (US$)\nÍtem 1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | 120,000 | 6.1124 | 733,488.00\nÍtem 3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS | 1,500 | 18.0894 | 27,134.10\nÍtem 4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | 2,600 | 19.2694 | 50,100.44"
+          "text": "Ítem 1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | 120,000 | 6.1124 | 733,488.00\nÍtem 3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS | 1,500 | 18.0894 | 27,134.10\nÍtem 4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | 2,600 | 19.2694 | 50,100.44",
+          "anchor": {
+            "text_sha256": "1e6e431c950737cc",
+            "pieces": [
+              {
+                "text": "Ítem 1",
+                "words": [
+                  "4 109.82 398.55 124.92 408.86",
+                  "4 126.97 398.55 131.08 408.86"
+                ]
+              },
+              {
+                "text": "MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS",
+                "words": [
+                  "4 146.18 393.39 180.88 403.70",
+                  "4 183.01 393.39 236.26 403.70",
+                  "4 238.31 393.39 288.81 403.70",
+                  "4 290.86 393.39 301.07 403.70",
+                  "4 303.12 393.39 307.23 403.70",
+                  "4 215.57 403.71 237.64 414.02"
+                ]
+              },
+              {
+                "text": "120,000",
+                "words": [
+                  "4 323.33 398.55 349.88 408.86"
+                ]
+              },
+              {
+                "text": "6.1124",
+                "words": [
+                  "4 392.83 398.55 415.32 408.86"
+                ]
+              },
+              {
+                "text": "733,488.00",
+                "words": [
+                  "4 459.91 398.55 496.79 408.86"
+                ]
+              },
+              {
+                "text": "Ítem 3",
+                "words": [
+                  "4 109.82 424.47 124.92 434.78",
+                  "4 126.97 424.47 131.08 434.78"
+                ]
+              },
+              {
+                "text": "MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS",
+                "words": [
+                  "4 151.70 419.31 186.40 429.62",
+                  "4 188.53 419.31 241.78 429.62",
+                  "4 243.83 419.31 283.27 429.62",
+                  "4 285.32 419.31 295.53 429.62",
+                  "4 297.58 419.31 301.69 429.62",
+                  "4 215.57 429.63 237.64 439.94"
+                ]
+              },
+              {
+                "text": "1,500",
+                "words": [
+                  "4 327.41 424.47 345.80 434.78"
+                ]
+              },
+              {
+                "text": "18.0894",
+                "words": [
+                  "4 390.79 424.47 417.34 434.78"
+                ]
+              },
+              {
+                "text": "27,134.10",
+                "words": [
+                  "4 461.95 424.47 494.73 434.78"
+                ]
+              },
+              {
+                "text": "Ítem 4",
+                "words": [
+                  "4 109.82 448.11 124.92 458.42",
+                  "4 126.98 448.11 131.08 458.42"
+                ]
+              },
+              {
+                "text": "MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS",
+                "words": [
+                  "4 151.70 442.95 186.40 453.26",
+                  "4 188.53 442.95 241.78 453.26",
+                  "4 243.83 442.95 283.27 453.26",
+                  "4 285.32 442.95 295.53 453.26",
+                  "4 297.65 442.95 301.75 453.26",
+                  "4 215.57 453.27 237.64 463.58"
+                ]
+              },
+              {
+                "text": "2,600",
+                "words": [
+                  "4 327.41 448.11 345.80 458.42"
+                ]
+              },
+              {
+                "text": "19.2694",
+                "words": [
+                  "4 390.79 448.11 417.34 458.42"
+                ]
+              },
+              {
+                "text": "50,100.44",
+                "words": [
+                  "4 461.95 448.11 494.73 458.42"
+                ]
+              }
+            ]
+          }
         },
         {
           "excerpt_id": "x5",
@@ -117,7 +732,115 @@
           "page_numbers": [
             5
           ],
-          "text": "TEM | DESCRIPCIÓN | UNIDAD DE MEDIDA | REQUERIMIENTO TOTAL\n1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | UNIDAD | 120,000\n3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS | UNIDAD | 1,500\n4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | UNIDAD | 2,600"
+          "text": "1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | UNIDAD | 120,000\n3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS | UNIDAD | 1,500\n4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | UNIDAD | 2,600",
+          "anchor": {
+            "text_sha256": "7568312ab3adceca",
+            "pieces": [
+              {
+                "text": "1",
+                "words": [
+                  "5 90.98 540.34 94.65 549.56"
+                ]
+              },
+              {
+                "text": "MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS",
+                "words": [
+                  "5 112.94 535.78 143.96 545.00",
+                  "5 145.79 535.78 193.13 545.00",
+                  "5 112.94 545.02 157.87 554.24",
+                  "5 159.57 545.02 168.76 554.24",
+                  "5 170.47 545.02 174.14 554.24",
+                  "5 175.99 545.02 195.74 554.24"
+                ]
+              },
+              {
+                "text": "UNIDAD",
+                "words": [
+                  "5 214.37 540.34 239.51 549.56",
+                  "5 214.37 559.18 239.51 568.40",
+                  "5 214.37 578.14 239.51 587.36"
+                ]
+              },
+              {
+                "text": "120,000",
+                "words": [
+                  "5 261.05 540.34 284.86 549.56"
+                ]
+              },
+              {
+                "text": "3",
+                "words": [
+                  "5 90.98 559.18 94.65 568.40"
+                ]
+              },
+              {
+                "text": "MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS",
+                "words": [
+                  "5 112.94 554.62 143.96 563.84",
+                  "5 145.79 554.62 193.13 563.84",
+                  "5 112.94 563.86 148.02 573.08",
+                  "5 149.78 563.86 158.97 573.08",
+                  "5 160.68 563.86 164.35 573.08",
+                  "5 166.20 563.86 185.94 573.08"
+                ]
+              },
+              {
+                "text": "1,500",
+                "words": [
+                  "5 264.77 559.18 281.27 568.40"
+                ]
+              },
+              {
+                "text": "4",
+                "words": [
+                  "5 90.98 578.14 94.65 587.36"
+                ]
+              },
+              {
+                "text": "MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS",
+                "words": [
+                  "5 112.94 573.46 143.96 582.68",
+                  "5 145.79 573.46 193.13 582.68",
+                  "5 112.94 582.70 148.02 591.92",
+                  "5 149.72 582.70 158.91 591.92",
+                  "5 160.63 582.70 164.29 591.92",
+                  "5 166.14 582.70 185.89 591.92"
+                ]
+              },
+              {
+                "text": "2,600",
+                "words": [
+                  "5 264.77 578.14 281.27 587.36"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x6",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "relative_path": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "page_numbers": [
+            4
+          ],
+          "text": "PRECIO UNITARIO CON IGV (US$)",
+          "table_header": true,
+          "anchor": {
+            "text_sha256": "edf139f37eca078d",
+            "pieces": [
+              {
+                "text": "PRECIO UNITARIO CON IGV (US$)",
+                "words": [
+                  "4 371.11 357.27 399.30 367.58",
+                  "4 401.35 357.27 436.96 367.58",
+                  "4 388.51 367.59 404.86 377.90",
+                  "4 406.87 367.59 419.59 377.90",
+                  "4 394.39 377.91 413.64 388.22"
+                ]
+              }
+            ]
+          }
         }
       ],
       "evidence_groups": [
@@ -196,11 +919,12 @@
             {
               "scheme_id": "s2",
               "excerpt_ids": [
-                "x4"
+                "x4",
+                "x6"
               ]
             }
           ],
-          "note": "x4 单价列标明 CON IGV，总价列即含税总价"
+          "note": "x4 为价格表数据行，x6 为单价列表头（CON IGV 表明含税），两者合起来说明总价含税；x3 为第六条“合同金额”条款，写明含税"
         },
         {
           "evidence_group_id": "e5",
@@ -237,7 +961,37 @@
           "page_numbers": [
             5
           ],
-          "text": "Los bienes materia del presente contrato se entregarán en el plazo de 690 días calendarios de la firma de contrato."
+          "text": "Los bienes materia del presente contrato se entregarán en el plazo de 690 días calendarios de la firma de contrato.",
+          "anchor": {
+            "text_sha256": "126cc9ad1ed0028a",
+            "pieces": [
+              {
+                "text": "Los bienes materia del presente contrato se entregarán en el plazo de 690 días calendarios de la firma de contrato.",
+                "words": [
+                  "5 99.26 390.21 112.46 401.62",
+                  "5 115.81 390.21 139.90 401.62",
+                  "5 143.27 390.21 170.60 401.62",
+                  "5 173.95 390.21 184.95 401.62",
+                  "5 188.30 390.21 220.15 401.62",
+                  "5 223.43 390.21 253.00 401.62",
+                  "5 256.39 390.21 265.01 401.62",
+                  "5 268.38 390.21 308.03 401.62",
+                  "5 311.30 390.21 320.38 401.62",
+                  "5 323.76 390.21 330.11 401.62",
+                  "5 333.47 390.21 352.88 401.62",
+                  "5 356.25 390.21 365.33 401.62",
+                  "5 368.95 390.21 382.61 401.62",
+                  "5 385.97 390.21 402.36 401.62",
+                  "5 405.63 390.21 451.18 401.62",
+                  "5 454.55 390.21 464.01 401.62",
+                  "5 467.50 390.21 474.31 401.62",
+                  "5 477.69 390.21 497.69 401.62",
+                  "5 501.06 390.21 510.52 401.62",
+                  "5 99.26 401.73 132.05 413.14"
+                ]
+              }
+            ]
+          }
         },
         {
           "excerpt_id": "x2",
@@ -247,7 +1001,29 @@
           "page_numbers": [
             5
           ],
-          "text": "6ta ENTREGA (A 690 días de la firma del contrato)"
+          "text": "6ta ENTREGA (A 690 días de la firma del contrato)",
+          "table_header": true,
+          "anchor": {
+            "text_sha256": "a353a08aa174775c",
+            "pieces": [
+              {
+                "text": "6ta ENTREGA (A 690 días de la firma del contrato)",
+                "words": [
+                  "5 526.90 470.50 536.44 479.72",
+                  "5 518.02 479.74 545.44 488.96",
+                  "5 529.30 488.86 534.06 498.08",
+                  "5 521.98 498.58 528.54 507.80",
+                  "5 530.37 498.58 541.36 507.80",
+                  "5 517.42 507.70 529.95 516.92",
+                  "5 531.69 507.70 538.96 516.92",
+                  "5 540.81 507.70 545.94 516.92",
+                  "5 518.98 516.94 533.56 526.16",
+                  "5 535.41 516.94 544.31 526.16",
+                  "5 518.74 526.06 544.80 535.28"
+                ]
+              }
+            ]
+          }
         },
         {
           "excerpt_id": "x3",
@@ -257,7 +1033,36 @@
           "page_numbers": [
             5
           ],
-          "text": "LUGAR DE ENTREGA\nELSE | Almacén Central ELSE - Av. Mariscal Sucre Nº 400, Urb. Bancopata – Santiago, Cusco, Cusco"
+          "text": "ELSE | Almacén Central ELSE - Av. Mariscal Sucre Nº 400, Urb. Bancopata – Santiago, Cusco, Cusco",
+          "anchor": {
+            "text_sha256": "b60a7ac71e2c1979",
+            "pieces": [
+              {
+                "text": "ELSE",
+                "words": [
+                  "5 125.30 706.88 144.15 717.19"
+                ]
+              },
+              {
+                "text": "Almacén Central ELSE - Av. Mariscal Sucre Nº 400, Urb. Bancopata – Santiago, Cusco, Cusco",
+                "words": [
+                  "5 175.58 706.88 204.29 717.19",
+                  "5 206.30 706.88 230.02 717.19",
+                  "5 232.07 706.88 250.95 717.19",
+                  "5 257.57 706.88 268.25 717.19",
+                  "5 270.31 706.88 297.83 717.19",
+                  "5 299.88 706.88 319.11 717.19",
+                  "5 321.13 706.88 329.21 717.19",
+                  "5 331.21 706.88 345.60 717.19",
+                  "5 347.65 706.88 361.57 717.19",
+                  "5 363.67 706.88 398.97 717.19",
+                  "5 407.11 706.88 438.44 717.19",
+                  "5 440.45 706.88 463.39 717.19",
+                  "5 465.50 706.88 486.40 717.19"
+                ]
+              }
+            ]
+          }
         },
         {
           "excerpt_id": "x4",
@@ -267,7 +1072,37 @@
           "page_numbers": [
             5
           ],
-          "text": "No se aceptarán entregas anticipadas, salvo que sea requerido por LA EMPRESA, previa disponibilidad y aceptación por parte del CONTRATISTA."
+          "text": "No se aceptarán entregas anticipadas, salvo que sea requerido por LA EMPRESA, previa disponibilidad y aceptación por parte del CONTRATISTA.",
+          "anchor": {
+            "text_sha256": "8380f0cb409b4cc4",
+            "pieces": [
+              {
+                "text": "No se aceptarán entregas anticipadas, salvo que sea requerido por LA EMPRESA, previa disponibilidad y aceptación por parte del CONTRATISTA.",
+                "words": [
+                  "5 99.26 614.21 108.65 624.52",
+                  "5 110.31 614.21 118.12 624.52",
+                  "5 119.89 614.21 152.69 624.52",
+                  "5 154.43 614.21 183.11 624.52",
+                  "5 184.92 614.21 224.36 624.52",
+                  "5 226.03 614.21 243.31 624.52",
+                  "5 244.97 614.21 257.23 624.52",
+                  "5 259.01 614.21 270.92 624.52",
+                  "5 272.68 614.21 303.80 624.52",
+                  "5 305.54 614.21 316.16 624.52",
+                  "5 318.05 614.21 327.93 624.52",
+                  "5 329.57 614.21 366.20 624.52",
+                  "5 370.03 614.21 390.09 624.52",
+                  "5 391.86 614.21 436.62 624.52",
+                  "5 438.27 614.21 441.96 624.52",
+                  "5 443.66 614.21 479.45 624.52",
+                  "5 481.08 614.21 491.70 624.52",
+                  "5 493.44 614.21 510.27 624.52",
+                  "5 99.26 624.53 109.07 634.84",
+                  "5 111.14 624.53 163.98 634.84"
+                ]
+              }
+            ]
+          }
         }
       ],
       "evidence_groups": [
@@ -330,7 +1165,126 @@
           "page_numbers": [
             2
           ],
-          "text": "Correspondiente al Ítem 1 – Medidor electrónico monofásico de 2 hilos: Carta fianza N° 3012025041864 por el monto de US$ 73,348.80 (Setenta y tres mil trescientos cuarenta y ocho con 80/100 Dólares Americanos) con vencimiento al 20/09/2027.\nCorrespondiente al Ítem 3 – Medidor electrónico trifásico de 3 hilos: Carta fianza N° 3012025041881 por el monto de US$ 2,713.41 (Dos mil setecientos trece con 41/100 Dólares Americanos) con vencimiento al 20/09/2027.\nCorrespondiente al Ítem 4 – Medidor electrónico trifásico de 4 hilos: Carta fianza N° 3012025041885 por el monto de US$ 5,010.05 (Cinco mil diez con 05/100 Dólares Americanos) con vencimiento al 20/09/2027."
+          "text": "Correspondiente al Ítem 1 – Medidor electrónico monofásico de 2 hilos: Carta fianza N° 3012025041864 por el monto de US$ 73,348.80 (Setenta y tres mil trescientos cuarenta y ocho con 80/100 Dólares Americanos) con vencimiento al 20/09/2027.\nCorrespondiente al Ítem 3 – Medidor electrónico trifásico de 3 hilos: Carta fianza N° 3012025041881 por el monto de US$ 2,713.41 (Dos mil setecientos trece con 41/100 Dólares Americanos) con vencimiento al 20/09/2027.\nCorrespondiente al Ítem 4 – Medidor electrónico trifásico de 4 hilos: Carta fianza N° 3012025041885 por el monto de US$ 5,010.05 (Cinco mil diez con 05/100 Dólares Americanos) con vencimiento al 20/09/2027.",
+          "anchor": {
+            "text_sha256": "875fe178487631b8",
+            "pieces": [
+              {
+                "text": "Correspondiente al Ítem 1 – Medidor electrónico monofásico de 2 hilos: Carta fianza N° 3012025041864 por el monto de US$ 73,348.80 (Setenta y tres mil trescientos cuarenta y ocho con 80/100 Dólares Americanos) con vencimiento al 20/09/2027.",
+                "words": [
+                  "2 99.86 205.98 163.93 217.39",
+                  "2 166.10 205.98 172.82 217.39",
+                  "2 174.87 205.98 191.38 217.39",
+                  "2 193.48 205.98 198.02 217.39",
+                  "2 206.81 205.98 238.19 217.39",
+                  "2 240.18 205.98 282.85 217.39",
+                  "2 284.95 205.98 330.14 217.39",
+                  "2 332.24 205.98 341.81 217.39",
+                  "2 343.87 205.98 348.41 217.39",
+                  "2 350.47 205.98 371.79 217.39",
+                  "2 99.86 217.38 119.86 228.79",
+                  "2 122.52 217.38 144.34 228.79",
+                  "2 146.98 217.38 156.87 228.79",
+                  "2 159.45 217.38 218.76 228.79",
+                  "2 221.45 217.38 233.28 228.79",
+                  "2 235.94 217.38 242.30 228.79",
+                  "2 244.94 217.38 267.69 228.79",
+                  "2 270.35 217.38 279.44 228.79",
+                  "2 281.99 217.38 297.81 228.79",
+                  "2 300.53 217.38 337.01 228.79",
+                  "2 339.67 217.38 370.46 228.79",
+                  "2 373.13 217.38 377.21 228.79",
+                  "2 379.84 217.38 393.49 228.79",
+                  "2 396.19 217.38 406.65 228.79",
+                  "2 409.27 217.38 448.87 228.79",
+                  "2 451.50 217.38 483.41 228.79",
+                  "2 486.07 217.38 490.16 228.79",
+                  "2 492.79 217.38 510.52 228.79",
+                  "2 99.86 228.90 113.03 240.31",
+                  "2 116.06 228.90 141.12 240.31",
+                  "2 144.12 228.90 172.30 240.31",
+                  "2 175.43 228.90 221.32 240.31",
+                  "2 224.46 228.90 237.63 240.31",
+                  "2 240.64 228.90 284.26 240.31",
+                  "2 287.39 228.90 293.74 240.31",
+                  "2 296.74 228.90 340.26 240.31"
+                ]
+              },
+              {
+                "text": "Correspondiente al Ítem 3 – Medidor electrónico trifásico de 3 hilos: Carta fianza N° 3012025041881 por el monto de US$ 2,713.41 (Dos mil setecientos trece con 41/100 Dólares Americanos) con vencimiento al 20/09/2027.",
+                "words": [
+                  "2 99.86 274.89 163.93 286.30",
+                  "2 166.10 274.89 172.82 286.30",
+                  "2 174.87 274.89 191.38 286.30",
+                  "2 193.48 274.89 198.02 286.30",
+                  "2 206.81 274.89 238.19 286.30",
+                  "2 240.18 274.89 282.85 286.30",
+                  "2 284.95 274.89 316.09 286.30",
+                  "2 318.18 274.89 327.64 286.30",
+                  "2 329.71 274.89 334.25 286.30",
+                  "2 336.52 274.89 357.87 286.30",
+                  "2 99.86 286.29 119.86 297.70",
+                  "2 122.88 286.29 144.69 297.70",
+                  "2 147.70 286.29 157.58 297.70",
+                  "2 160.53 286.29 219.75 297.70",
+                  "2 222.76 286.29 234.59 297.70",
+                  "2 237.61 286.29 243.97 297.70",
+                  "2 246.96 286.29 269.72 297.70",
+                  "2 272.62 286.29 281.70 297.70",
+                  "2 284.72 286.29 300.55 297.70",
+                  "2 303.56 286.29 335.42 297.70",
+                  "2 338.45 286.29 355.61 297.70",
+                  "2 358.59 286.29 369.05 297.70",
+                  "2 372.02 286.29 413.40 297.70",
+                  "2 416.39 286.29 434.59 297.70",
+                  "2 437.60 286.29 450.76 297.70",
+                  "2 454.15 286.29 479.20 297.70",
+                  "2 482.21 286.29 510.38 297.70",
+                  "2 99.86 297.81 145.76 309.22",
+                  "2 147.59 297.81 160.76 309.22",
+                  "2 162.58 297.81 206.31 309.22",
+                  "2 208.15 297.81 214.50 309.22",
+                  "2 216.31 297.81 259.69 309.22"
+                ]
+              },
+              {
+                "text": "Correspondiente al Ítem 4 – Medidor electrónico trifásico de 4 hilos: Carta fianza N° 3012025041885 por el monto de US$ 5,010.05 (Cinco mil diez con 05/100 Dólares Americanos) con vencimiento al 20/09/2027.",
+                "words": [
+                  "2 99.86 332.25 163.93 343.66",
+                  "2 166.10 332.25 172.82 343.66",
+                  "2 174.86 332.25 191.36 343.66",
+                  "2 193.47 332.25 198.01 343.66",
+                  "2 206.81 332.25 238.19 343.66",
+                  "2 240.18 332.25 282.85 343.66",
+                  "2 284.95 332.25 316.09 343.66",
+                  "2 318.18 332.25 327.64 343.66",
+                  "2 329.71 332.25 334.25 343.66",
+                  "2 336.52 332.25 357.87 343.66",
+                  "2 99.86 343.65 119.86 355.06",
+                  "2 122.40 343.65 144.22 355.06",
+                  "2 146.74 343.65 156.62 355.06",
+                  "2 159.09 343.65 218.31 355.06",
+                  "2 220.84 343.65 232.67 355.06",
+                  "2 235.21 343.65 241.56 355.06",
+                  "2 244.08 343.65 266.84 355.06",
+                  "2 269.38 343.65 278.47 355.06",
+                  "2 280.90 343.65 296.72 355.06",
+                  "2 299.25 343.65 331.12 355.06",
+                  "2 333.66 343.65 357.29 355.06",
+                  "2 359.80 343.65 370.26 355.06",
+                  "2 372.74 343.65 387.72 355.06",
+                  "2 390.25 343.65 403.41 355.06",
+                  "2 405.94 343.65 430.99 355.06",
+                  "2 433.52 343.65 461.70 355.06",
+                  "2 464.10 343.65 510.00 355.06",
+                  "2 99.86 355.17 113.03 366.58",
+                  "2 115.09 355.17 158.72 366.58",
+                  "2 160.79 355.17 167.14 366.58",
+                  "2 169.19 355.17 212.47 366.58"
+                ]
+              }
+            ]
+          }
         },
         {
           "excerpt_id": "x2",
@@ -340,7 +1294,140 @@
           "page_numbers": [
             6
           ],
-          "text": "Correspondiente al Ítem 1 – Medidor electrónico monofásico de 2 hilos: De fiel cumplimiento del contrato: US$ 73,348.80 (Setenta y tres mil trescientos cuarenta y ocho con 80/100 Dólares Americanos), a través de la Carta Fianza N° 3012025041864 emitida por AVLA Perú Compañía de Seguros. Monto que es equivalente al diez por ciento (10%) del monto del contrato original. Correspondiente al Ítem 3 – Medidor electrónico trifásico de 3 hilos: De fiel cumplimiento del contrato: US$ 2,713.41 (Dos mil setecientos trece con 41/100 Dólares Americanos), a través de la Carta Fianza N° 3012025041881 emitida por AVLA Perú Compañía de Seguros. Monto que es equivalente al diez por ciento (10%) del monto del contrato original. Correspondiente al Ítem 4 – Medidor electrónico trifásico de 4 hilos: De fiel cumplimiento del contrato: US$ 5,010.05 (Cinco mil diez con 05/100 Dólares Americanos), a través de la Carta Fianza N° 3012025041885 emitida por AVLA Perú Compañía de Seguros. Monto que es equivalente al diez por ciento (10%) del monto del contrato original."
+          "text": "Correspondiente al Ítem 1 – Medidor electrónico monofásico de 2 hilos: De fiel cumplimiento del contrato: US$ 73,348.80 (Setenta y tres mil trescientos cuarenta y ocho con 80/100 Dólares Americanos), a través de la Carta Fianza N° 3012025041864 emitida por AVLA Perú Compañía de Seguros. Correspondiente al Ítem 3 – Medidor electrónico trifásico de 3 hilos: De fiel cumplimiento del contrato: US$ 2,713.41 (Dos mil setecientos trece con 41/100 Dólares Americanos), a través de la Carta Fianza N° 3012025041881 emitida por AVLA Perú Compañía de Seguros. Correspondiente al Ítem 4 – Medidor electrónico trifásico de 4 hilos: De fiel cumplimiento del contrato: US$ 5,010.05 (Cinco mil diez con 05/100 Dólares Americanos), a través de la Carta Fianza N° 3012025041885 emitida por AVLA Perú Compañía de Seguros.",
+          "anchor": {
+            "text_sha256": "d38914f0e3f81928",
+            "pieces": [
+              {
+                "text": "Correspondiente al Ítem 1 – Medidor electrónico monofásico de 2 hilos: De fiel cumplimiento del contrato: US$ 73,348.80 (Setenta y tres mil trescientos cuarenta y ocho con 80/100 Dólares Americanos), a través de la Carta Fianza N° 3012025041864 emitida por AVLA Perú Compañía de Seguros. Correspondiente al Ítem 3 – Medidor electrónico trifásico de 3 hilos: De fiel cumplimiento del contrato: US$ 2,713.41 (Dos mil setecientos trece con 41/100 Dólares Americanos), a través de la Carta Fianza N° 3012025041881 emitida por AVLA Perú Compañía de Seguros. Correspondiente al Ítem 4 – Medidor electrónico trifásico de 4 hilos: De fiel cumplimiento del contrato: US$ 5,010.05 (Cinco mil diez con 05/100 Dólares Americanos), a través de la Carta Fianza N° 3012025041885 emitida por AVLA Perú Compañía de Seguros.",
+                "words": [
+                  "6 113.54 205.50 177.60 216.91",
+                  "6 179.77 205.50 186.50 216.91",
+                  "6 188.55 205.50 205.05 216.91",
+                  "6 207.15 205.50 211.70 216.91",
+                  "6 220.49 205.50 251.87 216.91",
+                  "6 253.86 205.50 296.53 216.91",
+                  "6 298.63 205.50 343.82 216.91",
+                  "6 345.92 205.50 355.49 216.91",
+                  "6 357.55 205.50 362.09 216.91",
+                  "6 364.15 205.50 385.48 216.91",
+                  "6 113.54 217.74 123.98 229.15",
+                  "6 126.49 217.74 136.93 229.15",
+                  "6 139.44 217.74 187.74 229.15",
+                  "6 190.28 217.74 201.21 229.15",
+                  "6 203.82 217.74 233.39 229.15",
+                  "6 238.85 217.74 254.68 229.15",
+                  "6 257.21 217.74 293.65 229.15",
+                  "6 296.29 217.74 327.19 229.15",
+                  "6 329.85 217.74 333.94 229.15",
+                  "6 336.45 217.74 350.10 229.15",
+                  "6 352.75 217.74 363.21 229.15",
+                  "6 365.69 217.74 405.24 229.15",
+                  "6 407.89 217.74 439.75 229.15",
+                  "6 442.29 217.74 446.38 229.15",
+                  "6 448.89 217.74 466.61 229.15",
+                  "6 469.26 217.74 482.54 229.15",
+                  "6 485.08 217.74 510.13 229.15",
+                  "6 113.54 229.14 141.72 240.55",
+                  "6 144.49 229.14 192.73 240.55",
+                  "6 195.38 229.14 199.92 240.55",
+                  "6 202.68 229.14 224.98 240.55",
+                  "6 227.61 229.14 236.82 240.55",
+                  "6 239.47 229.14 245.83 240.55",
+                  "6 248.59 229.14 268.59 240.55",
+                  "6 271.25 229.14 295.80 240.55",
+                  "6 298.58 229.14 308.46 240.55",
+                  "6 311.33 229.14 370.70 240.55",
+                  "6 373.39 229.14 399.76 240.55",
+                  "6 402.41 229.14 414.25 240.55",
+                  "6 417.02 229.14 437.92 240.55",
+                  "6 440.63 229.14 457.88 240.55",
+                  "6 460.64 229.14 498.49 240.55",
+                  "6 501.16 229.14 510.24 240.55",
+                  "6 113.54 240.54 146.26 251.95",
+                  "6 113.54 275.01 177.60 286.42",
+                  "6 179.77 275.01 186.50 286.42",
+                  "6 188.55 275.01 205.05 286.42",
+                  "6 207.15 275.01 211.70 286.42",
+                  "6 220.49 275.01 251.87 286.42",
+                  "6 253.86 275.01 296.53 286.42",
+                  "6 298.63 275.01 329.77 286.42",
+                  "6 331.86 275.01 341.32 286.42",
+                  "6 343.39 275.01 347.93 286.42",
+                  "6 350.20 275.01 371.55 286.42",
+                  "6 113.54 287.25 123.98 298.66",
+                  "6 126.37 287.25 136.81 298.66",
+                  "6 139.20 287.25 187.50 298.66",
+                  "6 189.92 287.25 200.85 298.66",
+                  "6 203.34 287.25 232.91 298.66",
+                  "6 238.25 287.25 254.08 298.66",
+                  "6 256.49 287.25 288.35 298.66",
+                  "6 290.90 287.25 308.17 298.66",
+                  "6 310.56 287.25 321.12 298.66",
+                  "6 323.50 287.25 364.98 298.66",
+                  "6 367.38 287.25 385.58 298.66",
+                  "6 387.99 287.25 401.16 298.66",
+                  "6 403.57 287.25 428.61 298.66",
+                  "6 431.14 287.25 459.32 298.66",
+                  "6 461.84 287.25 510.45 298.66",
+                  "6 113.54 298.65 118.08 310.06",
+                  "6 120.35 298.65 142.67 310.06",
+                  "6 144.94 298.65 154.03 310.06",
+                  "6 156.33 298.65 162.68 310.06",
+                  "6 164.95 298.65 184.98 310.06",
+                  "6 187.28 298.65 211.84 310.06",
+                  "6 214.26 298.65 224.14 310.06",
+                  "6 226.49 298.65 285.83 310.06",
+                  "6 288.17 298.65 314.54 310.06",
+                  "6 316.81 298.65 328.66 310.06",
+                  "6 330.98 298.65 351.88 310.06",
+                  "6 354.35 298.65 371.60 310.06",
+                  "6 373.88 298.65 411.64 310.06",
+                  "6 413.95 298.65 423.04 310.06",
+                  "6 425.47 298.65 458.19 310.06",
+                  "6 113.54 344.61 177.60 356.02",
+                  "6 179.77 344.61 186.50 356.02",
+                  "6 188.55 344.61 205.05 356.02",
+                  "6 207.15 344.61 211.70 356.02",
+                  "6 220.49 344.61 251.87 356.02",
+                  "6 253.85 344.61 296.53 356.02",
+                  "6 298.62 344.61 329.76 356.02",
+                  "6 331.86 344.61 341.32 356.02",
+                  "6 343.38 344.61 347.92 356.02",
+                  "6 350.19 344.61 371.55 356.02",
+                  "6 113.54 356.85 123.98 368.26",
+                  "6 126.25 356.85 136.69 368.26",
+                  "6 138.96 356.85 187.16 368.26",
+                  "6 189.44 356.85 200.37 368.26",
+                  "6 202.64 356.85 232.23 368.26",
+                  "6 237.53 356.85 253.36 368.26",
+                  "6 255.63 356.85 287.54 368.26",
+                  "6 289.81 356.85 313.46 368.26",
+                  "6 315.74 356.85 326.20 368.26",
+                  "6 328.47 356.85 343.57 368.26",
+                  "6 345.84 356.85 359.14 368.26",
+                  "6 361.41 356.85 386.47 368.26",
+                  "6 388.77 356.85 416.96 368.26",
+                  "6 419.23 356.85 467.61 368.26",
+                  "6 469.90 356.85 474.44 368.26",
+                  "6 476.85 356.85 499.15 368.26",
+                  "6 501.42 356.85 510.51 368.26",
+                  "6 113.54 368.25 119.89 379.66",
+                  "6 122.06 368.25 142.06 379.66",
+                  "6 144.25 368.25 168.80 379.66",
+                  "6 171.11 368.25 180.99 379.66",
+                  "6 183.26 368.25 242.63 379.66",
+                  "6 244.85 368.25 271.22 379.66",
+                  "6 273.41 368.25 285.24 379.66",
+                  "6 287.54 368.25 308.44 379.66",
+                  "6 310.69 368.25 327.94 379.66",
+                  "6 330.21 368.25 368.10 379.66",
+                  "6 370.30 368.25 379.38 379.66",
+                  "6 381.57 368.25 414.29 379.66"
+                ]
+              }
+            ]
+          }
         }
       ],
       "evidence_groups": [
@@ -392,7 +1479,49 @@
           "page_numbers": [
             3
           ],
-          "text": "garantiza la calidad técnica de los medidores de energía, por un periodo de 5 años y 1 mes, contados a partir de la fecha de recepción en el almacén de LA EMPRESA"
+          "text": "garantiza la calidad técnica de los medidores de energía, por un periodo de 5 años y 1 mes, contados a partir de la fecha de recepción en el almacén de LA EMPRESA",
+          "anchor": {
+            "text_sha256": "08b1fdd08f15300b",
+            "pieces": [
+              {
+                "text": "garantiza la calidad técnica de los medidores de energía, por un periodo de 5 años y 1 mes, contados a partir de la fecha de recepción en el almacén de LA EMPRESA",
+                "words": [
+                  "3 163.58 339.57 197.26 350.98",
+                  "3 200.14 339.57 206.50 350.98",
+                  "3 209.38 339.57 235.25 350.98",
+                  "3 238.15 339.57 264.06 350.98",
+                  "3 266.92 339.57 276.01 350.98",
+                  "3 278.91 339.57 289.34 350.98",
+                  "3 292.21 339.57 330.45 350.98",
+                  "3 333.34 339.57 342.42 350.98",
+                  "3 345.32 339.57 375.41 350.98",
+                  "3 378.29 339.57 390.12 350.98",
+                  "3 393.02 339.57 402.10 350.98",
+                  "3 405.00 339.57 432.30 350.98",
+                  "3 435.20 339.57 444.28 350.98",
+                  "3 447.43 339.57 451.97 350.98",
+                  "3 454.87 339.57 473.92 350.98",
+                  "3 476.86 339.57 481.40 350.98",
+                  "3 484.30 339.57 488.84 350.98",
+                  "3 491.74 339.57 508.13 350.98",
+                  "3 99.26 351.09 132.47 362.50",
+                  "3 135.24 351.09 139.78 362.50",
+                  "3 142.55 351.09 161.22 362.50",
+                  "3 163.99 351.09 173.08 362.50",
+                  "3 175.86 351.09 182.21 362.50",
+                  "3 184.97 351.09 204.98 362.50",
+                  "3 207.75 351.09 216.83 362.50",
+                  "3 219.49 351.09 255.15 362.50",
+                  "3 257.92 351.09 267.00 362.50",
+                  "3 269.78 351.09 276.14 362.50",
+                  "3 278.89 351.09 309.81 362.50",
+                  "3 312.58 351.09 321.66 362.50",
+                  "3 324.53 351.09 335.46 362.50",
+                  "3 338.07 351.09 378.48 362.50"
+                ]
+              }
+            ]
+          }
         },
         {
           "excerpt_id": "x2",
@@ -402,7 +1531,45 @@
           "page_numbers": [
             3
           ],
-          "text": "EL CONTRATISTA tendrá un plazo máximo de treinta (30) días calendario contados a partir de la fecha de realizada la notificación, para que se apersone un representante técnico"
+          "text": "EL CONTRATISTA tendrá un plazo máximo de treinta (30) días calendario contados a partir de la fecha de realizada la notificación, para que se apersone un representante técnico",
+          "anchor": {
+            "text_sha256": "e11ad6e30dd08eda",
+            "pieces": [
+              {
+                "text": "EL CONTRATISTA tendrá un plazo máximo de treinta (30) días calendario contados a partir de la fecha de realizada la notificación, para que se apersone un representante técnico",
+                "words": [
+                  "3 310.13 442.89 320.52 454.30",
+                  "3 322.83 442.89 381.60 454.30",
+                  "3 383.95 442.89 407.20 454.30",
+                  "3 409.47 442.89 418.59 454.30",
+                  "3 420.86 442.89 440.54 454.30",
+                  "3 442.81 442.89 471.59 454.30",
+                  "3 473.86 442.89 482.98 454.30",
+                  "3 485.38 442.89 510.41 454.30",
+                  "3 99.26 454.29 113.86 465.70",
+                  "3 118.22 454.29 134.60 465.70",
+                  "3 138.96 454.29 179.79 465.70",
+                  "3 184.22 454.29 217.43 465.70",
+                  "3 221.63 454.29 226.17 465.70",
+                  "3 230.50 454.29 249.17 465.70",
+                  "3 253.51 454.29 262.60 465.70",
+                  "3 266.94 454.29 273.29 465.70",
+                  "3 277.60 454.29 297.61 465.70",
+                  "3 301.95 454.29 311.03 465.70",
+                  "3 315.26 454.29 348.46 465.70",
+                  "3 352.79 454.29 359.15 465.70",
+                  "3 363.46 454.29 406.84 465.70",
+                  "3 411.17 454.29 427.58 465.70",
+                  "3 431.91 454.29 445.56 465.70",
+                  "3 449.90 454.29 458.52 465.70",
+                  "3 462.72 454.29 496.88 465.70",
+                  "3 501.21 454.29 510.29 465.70",
+                  "3 99.26 465.83 149.81 477.24",
+                  "3 152.01 465.83 180.19 477.24"
+                ]
+              }
+            ]
+          }
         },
         {
           "excerpt_id": "x3",
@@ -412,7 +1579,88 @@
           "page_numbers": [
             3
           ],
-          "text": "En el caso que la falla sea atribuible al CONTRATISTA, la reparación debe iniciarse a partir del día siguiente de emitido el resultado del peritaje por el organismo externo, debiendo devolverse el medidor debidamente reparado dentro de los cuarenta y cinco (45) días calendario a partir de esa fecha (y en caso no sea factible, por destrucción, imposibilidad de reparación u otra causa) deberá devolver un medidor nuevo a LA EMPRESA."
+          "text": "En el caso que la falla sea atribuible al CONTRATISTA, la reparación debe iniciarse a partir del día siguiente de emitido el resultado del peritaje por el organismo externo, debiendo devolverse el medidor debidamente reparado dentro de los cuarenta y cinco (45) días calendario a partir de esa fecha (y en caso no sea factible, por destrucción, imposibilidad de reparación u otra causa) deberá devolver un medidor nuevo a LA EMPRESA.",
+          "anchor": {
+            "text_sha256": "259cc11640d4c760",
+            "pieces": [
+              {
+                "text": "En el caso que la falla sea atribuible al CONTRATISTA, la reparación debe iniciarse a partir del día siguiente de emitido el resultado del peritaje por el organismo externo, debiendo devolverse el medidor debidamente reparado dentro de los cuarenta y cinco (45) días calendario a partir de esa fecha (y en caso no sea factible, por destrucción, imposibilidad de reparación u otra causa) deberá devolver un medidor nuevo a LA EMPRESA.",
+                "words": [
+                  "3 99.26 557.63 109.20 569.04",
+                  "3 111.73 557.63 118.09 569.04",
+                  "3 120.61 557.63 137.86 569.04",
+                  "3 140.40 557.63 154.05 569.04",
+                  "3 156.58 557.63 162.94 569.04",
+                  "3 165.46 557.63 180.44 569.04",
+                  "3 182.97 557.63 196.13 569.04",
+                  "3 198.66 557.63 231.86 569.04",
+                  "3 234.39 557.63 240.75 569.04",
+                  "3 243.41 557.63 302.08 569.04",
+                  "3 306.88 557.63 313.24 569.04",
+                  "3 315.76 557.63 354.45 569.04",
+                  "3 356.99 557.63 375.19 569.04",
+                  "3 377.73 557.63 407.71 569.04",
+                  "3 410.23 557.63 414.77 569.04",
+                  "3 417.30 557.63 435.96 569.04",
+                  "3 438.50 557.63 449.43 569.04",
+                  "3 451.93 557.63 463.28 569.04",
+                  "3 465.71 557.63 498.43 569.04",
+                  "3 500.97 557.63 510.05 569.04",
+                  "3 99.26 569.03 125.62 580.44",
+                  "3 127.81 569.03 134.17 580.44",
+                  "3 136.33 569.03 170.00 580.44",
+                  "3 172.29 569.03 183.21 580.44",
+                  "3 185.36 569.03 212.21 580.44",
+                  "3 214.50 569.03 226.43 580.44",
+                  "3 228.64 569.03 234.99 580.44",
+                  "3 237.16 569.03 275.39 580.44",
+                  "3 277.57 569.03 307.17 580.44",
+                  "3 309.35 569.03 343.26 580.44",
+                  "3 345.44 569.03 385.01 580.44",
+                  "3 387.18 569.03 393.54 580.44",
+                  "3 395.82 569.03 425.38 580.44",
+                  "3 427.59 569.03 475.05 580.44",
+                  "3 477.24 569.03 510.07 580.44",
+                  "3 99.26 580.55 122.51 591.96",
+                  "3 124.45 580.55 133.54 591.96",
+                  "3 135.49 580.55 145.93 591.96",
+                  "3 147.86 580.55 179.72 591.96",
+                  "3 181.67 580.55 185.76 591.96",
+                  "3 187.67 580.55 206.73 591.96",
+                  "3 208.67 580.55 223.21 591.96",
+                  "3 225.17 580.55 240.65 591.96",
+                  "3 242.56 580.55 280.33 591.96",
+                  "3 282.25 580.55 286.79 591.96",
+                  "3 288.73 580.55 307.40 591.96",
+                  "3 309.24 580.55 318.33 591.96",
+                  "3 320.28 580.55 333.44 591.96",
+                  "3 335.39 580.55 355.28 591.96",
+                  "3 357.22 580.55 364.05 591.96",
+                  "3 365.96 580.55 375.05 591.96",
+                  "3 377.00 580.55 394.25 591.96",
+                  "3 396.20 580.55 405.29 591.96",
+                  "3 407.24 580.55 420.41 591.96",
+                  "3 422.35 580.55 450.51 591.96",
+                  "3 452.46 580.55 464.29 591.96",
+                  "3 466.13 580.55 510.25 591.96",
+                  "3 99.26 592.07 146.49 603.48",
+                  "3 148.80 592.07 157.88 603.48",
+                  "3 160.19 592.07 198.89 603.48",
+                  "3 201.19 592.07 205.74 603.48",
+                  "3 208.13 592.07 222.38 603.48",
+                  "3 224.65 592.07 249.22 603.48",
+                  "3 251.52 592.07 277.04 603.48",
+                  "3 279.31 592.07 310.24 603.48",
+                  "3 312.54 592.07 321.62 603.48",
+                  "3 323.93 592.07 353.51 603.48",
+                  "3 355.83 592.07 378.12 603.48",
+                  "3 380.41 592.07 384.95 603.48",
+                  "3 387.43 592.07 398.36 603.48",
+                  "3 400.63 592.07 443.32 603.48"
+                ]
+              }
+            ]
+          }
         }
       ],
       "evidence_groups": [
@@ -468,7 +1716,70 @@
           "page_numbers": [
             3
           ],
-          "text": "Se definirá como falla repetitiva aquella que se advierta en 0.5% de los medidores instalados del menos de un año o undécima ocasión, es decir que existen 10 casos anteriores los cuales presentaron la misma falla a medidores que lleven menos de 18 meses de instalación y cuyo origen sea de similares causas"
+          "text": "Se definirá como falla repetitiva aquella que se advierta en 0.5% de los medidores instalados del menos de un año o undécima ocasión, es decir que existen 10 casos anteriores los cuales presentaron la misma falla a medidores que lleven menos de 18 meses de instalación y cuyo origen sea de similares causas",
+          "anchor": {
+            "text_sha256": "101c91253d402147",
+            "pieces": [
+              {
+                "text": "Se definirá como falla repetitiva aquella que se advierta en 0.5% de los medidores instalados del menos de un año o undécima ocasión, es decir que existen 10 casos anteriores los cuales presentaron la misma falla a medidores que lleven menos de 18 meses de instalación y cuyo origen sea de similares causas",
+                "words": [
+                  "3 99.26 660.86 109.20 672.27",
+                  "3 112.09 660.86 138.93 672.27",
+                  "3 141.82 660.86 161.83 672.27",
+                  "3 164.72 660.86 179.70 672.27",
+                  "3 182.59 660.86 215.79 672.27",
+                  "3 218.68 660.86 245.08 672.27",
+                  "3 247.94 660.86 261.59 672.27",
+                  "3 264.48 660.86 273.11 672.27",
+                  "3 275.99 660.86 305.11 672.27",
+                  "3 308.01 660.86 317.09 672.27",
+                  "3 319.99 660.86 338.76 672.27",
+                  "3 341.45 660.86 350.53 672.27",
+                  "3 353.43 660.86 363.87 672.27",
+                  "3 366.74 660.86 404.98 672.27",
+                  "3 407.86 660.86 444.69 672.27",
+                  "3 447.55 660.86 458.48 672.27",
+                  "3 461.34 660.86 485.91 672.27",
+                  "3 488.80 660.86 497.88 672.27",
+                  "3 500.78 660.86 509.86 672.27",
+                  "3 99.26 672.38 112.92 683.79",
+                  "3 116.76 672.38 121.31 683.79",
+                  "3 125.15 672.38 160.62 683.79",
+                  "3 164.48 672.38 194.92 683.79",
+                  "3 198.77 672.38 207.53 683.79",
+                  "3 211.35 672.38 229.20 683.79",
+                  "3 233.06 672.38 246.71 683.79",
+                  "3 250.56 672.38 276.43 683.79",
+                  "3 280.30 672.38 289.38 683.79",
+                  "3 293.24 672.38 314.71 683.79",
+                  "3 318.55 672.38 355.11 683.79",
+                  "3 358.95 672.38 369.39 683.79",
+                  "3 373.22 672.38 396.85 683.79",
+                  "3 400.68 672.38 444.41 683.79",
+                  "3 448.27 672.38 454.63 683.79",
+                  "3 458.58 672.38 482.65 683.79",
+                  "3 486.52 672.38 501.50 683.79",
+                  "3 505.35 672.38 509.89 683.79",
+                  "3 99.26 683.90 137.50 695.31",
+                  "3 141.23 683.90 154.88 695.31",
+                  "3 158.66 683.90 179.99 695.31",
+                  "3 183.73 683.90 208.30 695.31",
+                  "3 212.03 683.90 221.11 695.31",
+                  "3 224.96 683.90 234.05 695.31",
+                  "3 237.78 683.90 261.89 695.31",
+                  "3 265.59 683.90 274.67 695.31",
+                  "3 278.41 683.90 317.01 695.31",
+                  "3 320.87 683.90 324.95 695.31",
+                  "3 328.66 683.90 346.03 695.31",
+                  "3 349.75 683.90 372.50 695.31",
+                  "3 376.24 683.90 389.40 695.31",
+                  "3 393.13 683.90 402.21 695.31",
+                  "3 405.95 683.90 438.20 695.31",
+                  "3 441.92 683.90 470.22 695.31"
+                ]
+              }
+            ]
+          }
         },
         {
           "excerpt_id": "x2",
@@ -479,7 +1790,118 @@
             3,
             4
           ],
-          "text": "Adicionalmente, sí como resultado de un peritaje de determinación de la causa de una falla se comprueba, que independiente de la cantidad de medidores que hubieren sido afectados y los plazos de instalación transcurridos, existen motivos fundados sobre un defecto de fabricación, tal defecto de fabricación será catalogado como falla repetitiva, con el propósito de evitar un mal mayor en las instalaciones de LA EMPRESA, que afecte la calidad de servicio eléctrico, en este caso, EL CONTRATISTA se compromete a la reposición total del lote de producción involucrado, así como a resarcir todos los daños y perjuicios ocasionados a LA EMPRESA."
+          "text": "Adicionalmente, sí como resultado de un peritaje de determinación de la causa de una falla se comprueba, que independiente de la cantidad de medidores que hubieren sido afectados y los plazos de instalación transcurridos, existen motivos fundados sobre un defecto de fabricación, tal defecto de fabricación será catalogado como falla repetitiva, con el propósito de evitar un mal mayor en las instalaciones de LA EMPRESA, que afecte la calidad de servicio eléctrico, en este caso, EL CONTRATISTA se compromete a la reposición total del lote de producción involucrado, así como a resarcir todos los daños y perjuicios ocasionados a LA EMPRESA.",
+          "anchor": {
+            "text_sha256": "91475c474d9218cb",
+            "pieces": [
+              {
+                "text": "Adicionalmente, sí como resultado de un peritaje de determinación de la causa de una falla se comprueba, que independiente de la cantidad de medidores que hubieren sido afectados y los plazos de instalación transcurridos, existen motivos fundados sobre un defecto de fabricación, tal defecto de fabricación será catalogado como falla repetitiva, con el propósito de evitar un mal mayor en las instalaciones de LA EMPRESA, que afecte la calidad de servicio eléctrico, en este caso, EL CONTRATISTA se compromete a la reposición total del lote de producción involucrado, así como a resarcir todos los daños y perjuicios ocasionados a LA EMPRESA.",
+                "words": [
+                  "3 99.26 718.22 157.42 729.63",
+                  "3 160.17 718.22 166.52 729.63",
+                  "3 169.28 718.22 189.29 729.63",
+                  "3 191.94 718.22 225.73 729.63",
+                  "3 228.38 718.22 237.46 729.63",
+                  "3 240.12 718.22 249.20 729.63",
+                  "3 251.98 718.22 278.82 729.63",
+                  "3 281.47 718.22 290.56 729.63",
+                  "3 293.33 718.22 344.89 729.63",
+                  "3 347.54 718.22 356.62 729.63",
+                  "3 359.28 718.22 365.63 729.63",
+                  "3 368.38 718.22 390.20 729.63",
+                  "3 392.95 718.22 402.04 729.63",
+                  "3 404.70 718.22 418.35 729.63",
+                  "3 421.11 718.22 436.09 729.63",
+                  "3 438.86 718.22 447.48 729.63",
+                  "3 450.13 718.22 493.53 729.63",
+                  "3 496.17 718.22 509.82 729.63",
+                  "3 99.26 729.74 150.69 741.15",
+                  "3 152.96 729.74 162.08 741.15",
+                  "3 164.35 729.74 170.71 741.15",
+                  "3 173.06 729.74 203.98 741.15",
+                  "3 206.25 729.74 215.37 741.15",
+                  "3 217.55 729.74 255.79 741.15",
+                  "3 258.06 729.74 271.71 741.15",
+                  "3 274.01 729.74 305.89 741.15",
+                  "3 308.19 729.74 323.17 741.15",
+                  "3 325.47 729.74 360.85 741.15",
+                  "3 363.12 729.74 367.20 741.15",
+                  "3 369.47 729.74 379.93 741.15",
+                  "3 382.20 729.74 405.83 741.15",
+                  "3 408.11 729.74 417.19 741.15",
+                  "3 419.49 729.74 458.10 741.15",
+                  "3 460.51 729.74 510.14 741.15",
+                  "3 99.26 741.25 125.14 752.67",
+                  "3 127.80 741.25 155.97 752.67",
+                  "3 158.63 741.25 192.45 752.67",
+                  "3 195.08 741.25 215.56 752.67",
+                  "3 218.33 741.25 227.41 752.67",
+                  "3 230.07 741.25 256.91 752.67",
+                  "3 259.56 741.25 268.64 752.67",
+                  "3 271.30 741.25 313.13 752.67",
+                  "3 315.90 741.25 324.53 752.67",
+                  "3 327.18 741.25 354.12 752.67",
+                  "3 356.78 741.25 365.86 752.67",
+                  "3 368.52 741.25 408.08 752.67",
+                  "3 410.73 741.25 426.67 752.67",
+                  "3 429.44 741.25 469.58 752.67",
+                  "3 472.24 741.25 492.25 752.67",
+                  "3 494.89 741.25 509.87 752.67",
+                  "3 99.26 752.65 134.73 764.07",
+                  "3 136.91 752.65 150.08 764.07",
+                  "3 152.26 752.65 158.62 764.07",
+                  "3 160.78 752.65 194.45 764.07",
+                  "3 196.64 752.65 205.73 764.07",
+                  "3 207.92 752.65 227.89 764.07",
+                  "3 230.11 752.65 239.19 764.07",
+                  "3 241.38 752.65 254.57 764.07",
+                  "3 256.73 752.65 279.61 764.07",
+                  "3 281.80 752.65 290.88 764.07",
+                  "3 293.07 752.65 303.51 764.07",
+                  "3 305.67 752.65 352.93 764.07",
+                  "3 355.10 752.65 364.18 764.07",
+                  "3 366.43 752.65 377.36 764.07",
+                  "3 379.50 752.65 419.81 764.07",
+                  "3 424.27 752.65 437.93 764.07",
+                  "3 440.11 752.65 462.40 764.07",
+                  "3 464.69 752.65 471.04 764.07",
+                  "3 473.21 752.65 499.08 764.07",
+                  "3 501.27 752.65 510.36 764.07",
+                  "4 99.26 124.26 126.96 135.67",
+                  "4 129.85 124.26 162.59 135.67",
+                  "4 165.47 124.26 174.55 135.67",
+                  "4 177.45 124.26 192.89 135.67",
+                  "4 195.79 124.26 215.31 135.67",
+                  "4 218.33 124.26 228.72 135.67",
+                  "4 231.63 124.26 290.29 135.67",
+                  "4 293.21 124.26 301.84 135.67",
+                  "4 304.72 124.26 350.25 135.67",
+                  "4 353.16 124.26 357.70 135.67",
+                  "4 360.59 124.26 366.94 135.67",
+                  "4 369.82 124.26 407.10 135.67",
+                  "4 409.99 124.26 425.46 135.67",
+                  "4 428.34 124.26 439.26 135.67",
+                  "4 442.12 124.26 455.29 135.67",
+                  "4 458.06 124.26 467.14 135.67",
+                  "4 470.04 124.26 510.07 135.67",
+                  "4 99.26 135.66 143.38 147.07",
+                  "4 145.68 135.66 156.57 147.07",
+                  "4 158.86 135.66 178.87 147.07",
+                  "4 181.15 135.66 185.69 147.07",
+                  "4 188.00 135.66 215.31 147.07",
+                  "4 217.60 135.66 237.73 147.07",
+                  "4 240.00 135.66 250.44 147.07",
+                  "4 252.73 135.66 275.04 147.07",
+                  "4 277.31 135.66 281.39 147.07",
+                  "4 283.66 135.66 318.33 147.07",
+                  "4 320.60 135.66 366.64 147.07",
+                  "4 368.91 135.66 373.45 147.07",
+                  "4 376.03 135.66 386.96 147.07",
+                  "4 389.23 135.66 429.69 147.07"
+                ]
+              }
+            ]
+          }
         }
       ],
       "evidence_groups": [
@@ -525,7 +1947,69 @@
           "page_numbers": [
             4
           ],
-          "text": "Comprobante de Pago (Factura).\nHoja de Conformidad emitida por el área usuaria por la recepción de los bienes.\nGuía de remisión o entregable con sello de recepción de la entidad contratante.\nCopia de la Orden de Compra."
+          "text": "Comprobante de Pago (Factura).\nHoja de Conformidad emitida por el área usuaria por la recepción de los bienes.\nGuía de remisión o entregable con sello de recepción de la entidad contratante.\nCopia de la Orden de Compra.",
+          "anchor": {
+            "text_sha256": "5cf68b856367bdef",
+            "pieces": [
+              {
+                "text": "Comprobante de Pago (Factura).",
+                "words": [
+                  "4 131.54 690.62 181.16 702.03",
+                  "4 183.46 690.62 192.54 702.03",
+                  "4 194.85 690.62 213.91 702.03",
+                  "4 216.18 690.62 251.79 702.03"
+                ]
+              },
+              {
+                "text": "Hoja de Conformidad emitida por el área usuaria por la recepción de los bienes.",
+                "words": [
+                  "4 131.54 702.74 148.33 714.15",
+                  "4 150.60 702.74 159.71 714.15",
+                  "4 161.98 702.74 208.86 714.15",
+                  "4 211.16 702.74 237.53 714.15",
+                  "4 239.81 702.74 251.65 714.15",
+                  "4 254.09 702.74 260.44 714.15",
+                  "4 262.71 702.74 279.11 714.15",
+                  "4 281.41 702.74 308.27 714.15",
+                  "4 310.54 702.74 322.36 714.15",
+                  "4 324.68 702.74 331.04 714.15",
+                  "4 333.31 702.74 368.79 714.15",
+                  "4 371.09 702.74 380.17 714.15",
+                  "4 382.48 702.74 392.92 714.15",
+                  "4 395.19 702.74 421.58 714.15"
+                ]
+              },
+              {
+                "text": "Guía de remisión o entregable con sello de recepción de la entidad contratante.",
+                "words": [
+                  "4 131.54 714.86 149.27 726.27",
+                  "4 151.54 714.86 160.66 726.27",
+                  "4 162.93 714.86 193.90 726.27",
+                  "4 196.17 714.86 200.71 726.27",
+                  "4 203.00 714.86 241.74 726.27",
+                  "4 244.01 714.86 257.31 726.27",
+                  "4 259.59 714.86 276.41 726.27",
+                  "4 278.68 714.86 287.76 726.27",
+                  "4 290.06 714.86 325.53 726.27",
+                  "4 327.83 714.86 336.91 726.27",
+                  "4 339.23 714.86 345.58 726.27",
+                  "4 347.85 714.86 374.69 726.27",
+                  "4 377.11 714.86 420.40 726.27"
+                ]
+              },
+              {
+                "text": "Copia de la Orden de Compra.",
+                "words": [
+                  "4 131.54 727.10 152.87 738.51",
+                  "4 155.17 727.10 164.25 738.51",
+                  "4 166.55 727.10 172.90 738.51",
+                  "4 175.17 727.10 197.96 738.51",
+                  "4 200.23 727.10 209.36 738.51",
+                  "4 211.63 727.10 243.05 738.51"
+                ]
+              }
+            ]
+          }
         },
         {
           "excerpt_id": "x2",
@@ -535,7 +2019,80 @@
           "page_numbers": [
             5
           ],
-          "text": "Para tal efecto, el responsable de otorgar la conformidad de la prestación deberá hacerlo en un plazo que no excederá de los siete (7) días de producida la recepción, salvo que se requiera efectuar pruebas que permitan verificar el cumplimiento de la obligación, en cuyo caso la conformidad se emite en un plazo máximo de quince (15) días, bajo responsabilidad de dicho funcionario."
+          "text": "Para tal efecto, el responsable de otorgar la conformidad de la prestación deberá hacerlo en un plazo que no excederá de los siete (7) días de producida la recepción, salvo que se requiera efectuar pruebas que permitan verificar el cumplimiento de la obligación, en cuyo caso la conformidad se emite en un plazo máximo de quince (15) días, bajo responsabilidad de dicho funcionario.",
+          "anchor": {
+            "text_sha256": "f12600cf0e9ec5e7",
+            "pieces": [
+              {
+                "text": "Para tal efecto, el responsable de otorgar la conformidad de la prestación deberá hacerlo en un plazo que no excederá de los siete (7) días de producida la recepción, salvo que se requiera efectuar pruebas que permitan verificar el cumplimiento de la obligación, en cuyo caso la conformidad se emite en un plazo máximo de quince (15) días, bajo responsabilidad de dicho funcionario.",
+                "words": [
+                  "5 99.26 181.62 116.51 193.03",
+                  "5 119.64 181.62 128.27 193.03",
+                  "5 131.39 181.62 155.96 193.03",
+                  "5 159.08 181.62 165.44 193.03",
+                  "5 168.56 181.62 213.27 193.03",
+                  "5 216.38 181.62 225.60 193.03",
+                  "5 228.72 181.62 254.70 193.03",
+                  "5 257.84 181.62 264.19 193.03",
+                  "5 267.31 181.62 312.36 193.03",
+                  "5 315.50 181.62 324.58 193.03",
+                  "5 327.72 181.62 334.07 193.03",
+                  "5 337.19 181.62 375.06 193.03",
+                  "5 378.18 181.62 403.70 193.03",
+                  "5 406.83 181.62 433.69 193.03",
+                  "5 436.81 181.62 445.89 193.03",
+                  "5 449.03 181.62 458.11 193.03",
+                  "5 461.37 181.62 480.89 193.03",
+                  "5 484.03 181.62 497.68 193.03",
+                  "5 500.81 181.62 509.89 193.03",
+                  "5 99.26 193.02 132.95 204.43",
+                  "5 135.84 193.02 144.92 204.43",
+                  "5 147.82 193.02 158.26 204.43",
+                  "5 161.13 193.02 178.43 204.43",
+                  "5 181.33 193.02 191.34 204.43",
+                  "5 194.26 193.02 209.74 204.43",
+                  "5 212.61 193.02 221.69 204.43",
+                  "5 224.71 193.02 260.65 204.43",
+                  "5 263.55 193.02 269.91 204.43",
+                  "5 272.78 193.02 310.54 204.43",
+                  "5 313.42 193.02 332.48 204.43",
+                  "5 335.48 193.02 349.24 204.43",
+                  "5 352.13 193.02 360.76 204.43",
+                  "5 363.65 193.02 393.72 204.43",
+                  "5 396.61 193.02 426.19 204.43",
+                  "5 429.09 193.02 458.71 204.43",
+                  "5 461.58 193.02 475.23 204.43",
+                  "5 478.12 193.02 509.98 204.43",
+                  "5 99.26 204.54 127.90 215.95",
+                  "5 130.68 204.54 137.03 215.95",
+                  "5 139.79 204.54 187.98 215.95",
+                  "5 190.75 204.54 199.83 215.95",
+                  "5 202.61 204.54 208.96 215.95",
+                  "5 211.72 204.54 250.82 215.95",
+                  "5 253.57 204.54 262.66 215.95",
+                  "5 265.44 204.54 282.69 215.95",
+                  "5 285.47 204.54 302.72 215.95",
+                  "5 305.50 204.54 311.85 215.95",
+                  "5 314.61 204.54 359.66 215.95",
+                  "5 362.44 204.54 371.06 215.95",
+                  "5 373.83 204.54 393.85 215.95",
+                  "5 396.62 204.54 405.70 215.95",
+                  "5 408.48 204.54 417.57 215.95",
+                  "5 420.34 204.54 439.87 215.95",
+                  "5 442.64 204.54 471.29 215.95",
+                  "5 474.06 204.54 483.14 215.95",
+                  "5 485.92 204.54 510.01 215.95",
+                  "5 99.26 216.06 113.85 227.47",
+                  "5 116.15 216.06 133.88 227.47",
+                  "5 136.18 216.06 151.64 227.47",
+                  "5 153.91 216.06 211.22 227.47",
+                  "5 213.50 216.06 222.74 227.47",
+                  "5 225.01 216.06 244.57 227.47",
+                  "5 246.84 216.06 289.18 227.47"
+                ]
+              }
+            ]
+          }
         },
         {
           "excerpt_id": "x3",
@@ -545,7 +2102,41 @@
           "page_numbers": [
             5
           ],
-          "text": "LA EMPRESA paga las contraprestaciones pactadas a EL CONTRATISTA dentro de los diez (10) días calendario siguientes de otorgada la conformidad de los bienes"
+          "text": "LA EMPRESA paga las contraprestaciones pactadas a EL CONTRATISTA dentro de los diez (10) días calendario siguientes de otorgada la conformidad de los bienes",
+          "anchor": {
+            "text_sha256": "71b90fad5f4a2691",
+            "pieces": [
+              {
+                "text": "LA EMPRESA paga las contraprestaciones pactadas a EL CONTRATISTA dentro de los diez (10) días calendario siguientes de otorgada la conformidad de los bienes",
+                "words": [
+                  "5 99.26 238.98 110.19 250.39",
+                  "5 112.09 238.98 152.51 250.39",
+                  "5 154.46 238.98 172.66 250.39",
+                  "5 174.61 238.98 185.05 250.39",
+                  "5 186.97 238.98 256.25 250.39",
+                  "5 258.18 238.98 291.39 250.39",
+                  "5 293.32 238.98 297.86 250.39",
+                  "5 300.05 238.98 310.44 250.39",
+                  "5 312.40 238.98 371.06 250.39",
+                  "5 373.03 238.98 396.28 250.39",
+                  "5 398.22 238.98 407.30 250.39",
+                  "5 409.25 238.98 419.69 250.39",
+                  "5 421.61 238.98 436.59 250.39",
+                  "5 438.54 238.98 453.12 250.39",
+                  "5 455.07 238.98 470.55 250.39",
+                  "5 472.46 238.98 510.23 250.39",
+                  "5 99.26 250.38 136.07 261.79",
+                  "5 138.72 250.38 147.80 261.79",
+                  "5 150.46 250.38 182.80 261.79",
+                  "5 185.46 250.38 191.81 261.79",
+                  "5 194.45 250.38 239.50 261.79",
+                  "5 242.16 250.38 251.24 261.79",
+                  "5 253.90 250.38 264.34 261.79",
+                  "5 266.97 250.38 293.33 261.79"
+                ]
+              }
+            ]
+          }
         },
         {
           "excerpt_id": "x4",
@@ -555,7 +2146,66 @@
           "page_numbers": [
             6
           ],
-          "text": "en el plazo máximo de siete (7) días de producida la recepción salvo que se requiera efectuar pruebas que permitan verificar el cumplimiento de la obligación, en cuyo caso la conformidad se emite en un plazo de quince (15) días, bajo responsabilidad del funcionario que debe emitir la conformidad."
+          "text": "en el plazo máximo de siete (7) días de producida la recepción salvo que se requiera efectuar pruebas que permitan verificar el cumplimiento de la obligación, en cuyo caso la conformidad se emite en un plazo de quince (15) días, bajo responsabilidad del funcionario que debe emitir la conformidad.",
+          "anchor": {
+            "text_sha256": "3f9d3ef818fc807e",
+            "pieces": [
+              {
+                "text": "en el plazo máximo de siete (7) días de producida la recepción salvo que se requiera efectuar pruebas que permitan verificar el cumplimiento de la obligación, en cuyo caso la conformidad se emite en un plazo de quince (15) días, bajo responsabilidad del funcionario que debe emitir la conformidad.",
+                "words": [
+                  "6 139.93 553.67 149.01 565.08",
+                  "6 151.21 553.67 157.56 565.08",
+                  "6 159.72 553.67 179.24 565.08",
+                  "6 181.43 553.67 210.08 565.08",
+                  "6 212.26 553.67 221.34 565.08",
+                  "6 223.65 553.67 240.91 565.08",
+                  "6 243.10 553.67 253.11 565.08",
+                  "6 255.32 553.67 270.80 565.08",
+                  "6 272.96 553.67 282.04 565.08",
+                  "6 284.23 553.67 320.18 565.08",
+                  "6 322.37 553.67 328.72 565.08",
+                  "6 330.88 553.67 366.34 565.08",
+                  "6 368.71 553.67 387.77 565.08",
+                  "6 389.95 553.67 403.61 565.08",
+                  "6 405.79 553.67 414.42 565.08",
+                  "6 416.59 553.67 446.66 565.08",
+                  "6 448.84 553.67 478.54 565.08",
+                  "6 480.73 553.67 510.35 565.08",
+                  "6 99.26 565.19 112.92 576.60",
+                  "6 116.05 565.19 147.91 576.60",
+                  "6 151.04 565.19 179.67 576.60",
+                  "6 182.81 565.19 189.16 576.60",
+                  "6 192.28 565.19 240.58 576.60",
+                  "6 243.70 565.19 252.79 576.60",
+                  "6 255.92 565.19 262.28 576.60",
+                  "6 265.40 565.19 304.49 576.60",
+                  "6 307.72 565.19 316.80 576.60",
+                  "6 319.94 565.19 337.19 576.60",
+                  "6 340.44 565.19 357.69 576.60",
+                  "6 360.82 565.19 367.18 576.60",
+                  "6 370.30 565.19 415.34 576.60",
+                  "6 418.48 565.19 427.11 576.60",
+                  "6 430.23 565.19 450.37 576.60",
+                  "6 453.50 565.19 462.71 576.60",
+                  "6 465.84 565.19 474.92 576.60",
+                  "6 478.06 565.19 497.58 576.60",
+                  "6 500.72 565.19 509.80 576.60",
+                  "6 99.26 576.59 123.36 588.00",
+                  "6 125.63 576.59 140.24 588.00",
+                  "6 142.54 576.59 160.28 588.00",
+                  "6 162.57 576.59 178.04 588.00",
+                  "6 180.31 576.59 237.73 588.00",
+                  "6 240.03 576.59 250.95 588.00",
+                  "6 253.23 576.59 293.26 588.00",
+                  "6 295.54 576.59 309.18 588.00",
+                  "6 311.48 576.59 329.69 588.00",
+                  "6 331.99 576.59 352.12 588.00",
+                  "6 354.41 576.59 360.76 588.00",
+                  "6 363.03 576.59 410.40 588.00"
+                ]
+              }
+            ]
+          }
         }
       ],
       "evidence_groups": [
@@ -618,7 +2268,43 @@
           "page_numbers": [
             7
           ],
-          "text": "Penalidad Diaria = (0.10 x monto vigente) / (F x plazo vigente en días)\nF = 0.25 para plazos mayores a sesenta (60) días"
+          "text": "Penalidad Diaria = (0.10 x monto vigente) / (F x plazo vigente en días)\nF = 0.25 para plazos mayores a sesenta (60) días",
+          "anchor": {
+            "text_sha256": "ac5d33bd5702fb2a",
+            "pieces": [
+              {
+                "text": "Penalidad Diaria = (0.10 x monto vigente) / (F x plazo vigente en días)",
+                "words": [
+                  "7 161.54 362.49 197.84 373.90",
+                  "7 200.15 362.49 221.51 373.90",
+                  "7 303.53 356.49 319.47 367.90",
+                  "7 321.74 356.49 325.82 367.90",
+                  "7 328.11 356.49 350.87 367.90",
+                  "7 353.17 356.49 379.53 367.90",
+                  "7 296.09 368.49 301.08 379.90",
+                  "7 303.39 368.49 307.47 379.90",
+                  "7 309.75 368.49 329.29 379.90",
+                  "7 331.56 368.49 357.94 379.90",
+                  "7 360.24 368.49 369.33 379.90",
+                  "7 371.63 368.49 387.09 379.90"
+                ]
+              },
+              {
+                "text": "F = 0.25 para plazos mayores a sesenta (60) días",
+                "words": [
+                  "7 99.26 402.93 104.25 414.34",
+                  "7 113.64 402.93 129.56 414.34",
+                  "7 131.86 402.93 149.12 414.34",
+                  "7 151.39 402.93 176.94 414.34",
+                  "7 179.21 402.93 212.90 414.34",
+                  "7 215.20 402.93 219.74 414.34",
+                  "7 222.04 402.93 252.59 414.34",
+                  "7 254.86 402.93 269.47 414.34",
+                  "7 271.77 402.93 288.17 414.34"
+                ]
+              }
+            ]
+          }
         },
         {
           "excerpt_id": "x2",
@@ -628,7 +2314,83 @@
           "page_numbers": [
             7
           ],
-          "text": "Estos dos (2) tipos de penalidades pueden alcanzar cada una un monto máximo equivalente al diez por ciento (10%) del monto del contrato vigente, o de ser el caso, del ítem que debió ejecutarse. Cuando se llegue a cubrir el monto máximo de la penalidad por mora o el monto máximo para otras penalidades, de ser el caso, LA EMPRESA puede resolver el contrato por incumplimiento."
+          "text": "Estos dos (2) tipos de penalidades pueden alcanzar cada una un monto máximo equivalente al diez por ciento (10%) del monto del contrato vigente, o de ser el caso, del ítem que debió ejecutarse. Cuando se llegue a cubrir el monto máximo de la penalidad por mora o el monto máximo para otras penalidades, de ser el caso, LA EMPRESA puede resolver el contrato por incumplimiento.",
+          "anchor": {
+            "text_sha256": "37d14504d68cb8fc",
+            "pieces": [
+              {
+                "text": "Estos dos (2) tipos de penalidades pueden alcanzar cada una un monto máximo equivalente al diez por ciento (10%) del monto del contrato vigente, o de ser el caso, del ítem que debió ejecutarse. Cuando se llegue a cubrir el monto máximo de la penalidad por mora o el monto máximo para otras penalidades, de ser el caso, LA EMPRESA puede resolver el contrato por incumplimiento.",
+                "words": [
+                  "7 99.26 552.11 119.64 563.52",
+                  "7 122.53 552.11 135.73 563.52",
+                  "7 138.60 552.11 148.61 563.52",
+                  "7 151.52 552.11 168.79 563.52",
+                  "7 171.66 552.11 180.75 563.52",
+                  "7 183.65 552.11 228.01 563.52",
+                  "7 230.90 552.11 258.21 563.52",
+                  "7 261.10 552.11 292.00 563.52",
+                  "7 294.92 552.11 312.65 563.52",
+                  "7 315.54 552.11 329.19 563.52",
+                  "7 332.08 552.11 341.16 563.52",
+                  "7 344.18 552.11 366.94 563.52",
+                  "7 369.84 552.11 398.48 563.52",
+                  "7 401.37 552.11 443.20 563.52",
+                  "7 446.10 552.11 452.46 563.52",
+                  "7 455.33 552.11 470.54 563.52",
+                  "7 473.43 552.11 485.26 563.52",
+                  "7 488.16 552.11 509.95 563.52",
+                  "7 99.26 563.63 120.93 575.04",
+                  "7 123.23 563.63 134.16 575.04",
+                  "7 136.43 563.63 159.18 575.04",
+                  "7 161.48 563.63 172.53 575.04",
+                  "7 174.80 563.63 204.37 575.04",
+                  "7 206.68 563.63 235.47 575.04",
+                  "7 237.74 563.63 242.28 575.04",
+                  "7 244.73 563.63 253.81 575.04",
+                  "7 256.11 563.63 267.46 575.04",
+                  "7 269.78 563.63 276.13 575.04",
+                  "7 278.40 563.63 297.96 575.04",
+                  "7 300.25 563.63 311.17 575.04",
+                  "7 313.44 563.63 329.35 575.04",
+                  "7 331.65 563.63 345.44 575.04",
+                  "7 347.71 563.63 367.76 575.04",
+                  "7 370.03 563.63 410.07 575.04",
+                  "7 99.26 586.55 127.90 597.96",
+                  "7 130.20 586.55 138.83 597.96",
+                  "7 141.12 586.55 162.91 597.96",
+                  "7 165.22 586.55 169.76 597.96",
+                  "7 172.17 586.55 192.65 597.96",
+                  "7 194.95 586.55 201.30 597.96",
+                  "7 203.58 586.55 226.46 597.96",
+                  "7 228.73 586.55 257.40 597.96",
+                  "7 259.67 586.55 268.79 597.96",
+                  "7 271.06 586.55 277.42 597.96",
+                  "7 279.71 586.55 315.30 597.96",
+                  "7 317.60 586.55 329.44 597.96",
+                  "7 331.74 586.55 350.54 597.96",
+                  "7 352.82 586.55 357.36 597.96",
+                  "7 359.67 586.55 366.02 597.96",
+                  "7 368.29 586.55 391.07 597.96",
+                  "7 393.37 586.55 422.02 597.96",
+                  "7 424.29 586.55 440.72 597.96",
+                  "7 442.99 586.55 461.23 597.96",
+                  "7 463.63 586.55 510.04 597.96",
+                  "7 99.26 598.07 108.35 609.48",
+                  "7 110.65 598.07 121.99 609.48",
+                  "7 124.31 598.07 130.67 609.48",
+                  "7 132.94 598.07 152.49 609.48",
+                  "7 154.82 598.07 165.75 609.48",
+                  "7 168.02 598.07 208.43 609.48",
+                  "7 210.89 598.07 233.78 609.48",
+                  "7 236.05 598.07 265.17 609.48",
+                  "7 267.47 598.07 273.83 609.48",
+                  "7 276.10 598.07 305.70 609.48",
+                  "7 308.01 598.07 319.85 609.48",
+                  "7 322.15 598.07 378.98 609.48"
+                ]
+              }
+            ]
+          }
         }
       ],
       "evidence_groups": [
@@ -672,7 +2434,47 @@
           "page_numbers": [
             5
           ],
-          "text": "1era ENTREGA (A 170 días de la firma del contrato)\nMEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | 15,000\nMEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | 300"
+          "text": "MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | 15,000\nMEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | 300",
+          "locate_hint": "1era ENTREGA",
+          "anchor": {
+            "text_sha256": "0440569d76c6dabd",
+            "pieces": [
+              {
+                "text": "MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS",
+                "words": [
+                  "5 112.94 535.78 143.96 545.00",
+                  "5 145.79 535.78 193.13 545.00",
+                  "5 112.94 545.02 157.87 554.24",
+                  "5 159.57 545.02 168.76 554.24",
+                  "5 170.47 545.02 174.14 554.24",
+                  "5 175.99 545.02 195.74 554.24"
+                ]
+              },
+              {
+                "text": "15,000",
+                "words": [
+                  "5 309.05 540.34 329.14 549.56"
+                ]
+              },
+              {
+                "text": "MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS",
+                "words": [
+                  "5 112.94 573.46 143.96 582.68",
+                  "5 145.79 573.46 193.13 582.68",
+                  "5 112.94 582.70 148.02 591.92",
+                  "5 149.72 582.70 158.91 591.92",
+                  "5 160.63 582.70 164.29 591.92",
+                  "5 166.14 582.70 185.89 591.92"
+                ]
+              },
+              {
+                "text": "300",
+                "words": [
+                  "5 313.61 578.14 324.59 587.36"
+                ]
+              }
+            ]
+          }
         }
       ],
       "evidence_groups": [
@@ -704,7 +2506,108 @@
           "page_numbers": [
             5
           ],
-          "text": "1era ENTREGA (A 170 días de la firma del contrato) | 2da ENTREGA (A 210 días) | 3era ENTREGA (A 330 días) | 4ta ENTREGA (A 450 días) | 5ta ENTREGA (A 570 días) | 6ta ENTREGA (A 690 días)"
+          "text": "1era ENTREGA (A 170 días de la firma del contrato) | 2da ENTREGA (A 210 días de la firma del contrato) | 3era ENTREGA (A 330 días de la firma del contrato) | 4ta ENTREGA (A 450 días de la firma del contrato) | 5ta ENTREGA (A 570 días de la firma del contrato) | 6ta ENTREGA (A 690 días de la firma del contrato)",
+          "table_header": true,
+          "anchor": {
+            "text_sha256": "c6a38619fb1ed35d",
+            "pieces": [
+              {
+                "text": "1era ENTREGA (A 170 días de la firma del contrato)",
+                "words": [
+                  "5 311.45 470.50 324.95 479.72",
+                  "5 304.61 479.74 332.03 488.96",
+                  "5 315.89 488.86 320.65 498.08",
+                  "5 308.57 498.58 315.13 507.80",
+                  "5 316.96 498.58 327.95 507.80",
+                  "5 304.01 507.70 316.54 516.92",
+                  "5 318.28 507.70 325.55 516.92",
+                  "5 327.40 507.70 332.53 516.92",
+                  "5 305.57 516.94 320.15 526.16",
+                  "5 322.00 516.94 330.90 526.16",
+                  "5 305.33 526.06 331.39 535.28"
+                ]
+              },
+              {
+                "text": "2da ENTREGA (A 210 días de la firma del contrato)",
+                "words": [
+                  "5 355.51 475.06 366.85 484.28",
+                  "5 345.19 484.30 377.28 493.52",
+                  "5 351.55 498.58 358.11 507.80",
+                  "5 359.94 498.58 370.93 507.80",
+                  "5 346.99 507.70 359.52 516.92",
+                  "5 361.26 507.70 368.53 516.92",
+                  "5 370.38 507.70 375.51 516.92",
+                  "5 348.55 516.94 363.13 526.16",
+                  "5 364.98 516.94 373.88 526.16",
+                  "5 348.31 526.06 374.37 535.28"
+                ]
+              },
+              {
+                "text": "3era ENTREGA (A 330 días de la firma del contrato)",
+                "words": [
+                  "5 397.39 470.50 410.89 479.72",
+                  "5 390.43 479.74 417.85 488.96",
+                  "5 401.83 488.86 406.59 498.08",
+                  "5 394.39 498.58 400.95 507.80",
+                  "5 402.78 498.58 413.77 507.80",
+                  "5 389.83 507.70 402.36 516.92",
+                  "5 404.10 507.70 411.37 516.92",
+                  "5 413.22 507.70 418.35 516.92",
+                  "5 391.51 516.94 406.09 526.16",
+                  "5 407.95 516.94 416.84 526.16",
+                  "5 391.15 526.06 417.21 535.28"
+                ]
+              },
+              {
+                "text": "4ta ENTREGA (A 450 días de la firma del contrato)",
+                "words": [
+                  "5 441.79 470.50 451.33 479.72",
+                  "5 432.91 479.74 460.33 488.96",
+                  "5 444.19 488.86 448.95 498.08",
+                  "5 436.87 498.58 443.43 507.80",
+                  "5 445.26 498.58 456.25 507.80",
+                  "5 432.31 507.70 444.84 516.92",
+                  "5 446.58 507.70 453.85 516.92",
+                  "5 455.70 507.70 460.83 516.92",
+                  "5 433.87 516.94 448.45 526.16",
+                  "5 450.30 516.94 459.20 526.16",
+                  "5 433.63 526.06 459.69 535.28"
+                ]
+              },
+              {
+                "text": "5ta ENTREGA (A 570 días de la firma del contrato)",
+                "words": [
+                  "5 484.30 470.50 493.84 479.72",
+                  "5 475.42 479.74 502.84 488.96",
+                  "5 486.82 488.86 491.58 498.08",
+                  "5 479.38 498.58 485.94 507.80",
+                  "5 487.77 498.58 498.76 507.80",
+                  "5 474.82 507.70 487.35 516.92",
+                  "5 489.09 507.70 496.36 516.92",
+                  "5 498.21 507.70 503.34 516.92",
+                  "5 476.50 516.94 491.08 526.16",
+                  "5 492.93 516.94 501.83 526.16",
+                  "5 476.14 526.06 502.20 535.28"
+                ]
+              },
+              {
+                "text": "6ta ENTREGA (A 690 días de la firma del contrato)",
+                "words": [
+                  "5 526.90 470.50 536.44 479.72",
+                  "5 518.02 479.74 545.44 488.96",
+                  "5 529.30 488.86 534.06 498.08",
+                  "5 521.98 498.58 528.54 507.80",
+                  "5 530.37 498.58 541.36 507.80",
+                  "5 517.42 507.70 529.95 516.92",
+                  "5 531.69 507.70 538.96 516.92",
+                  "5 540.81 507.70 545.94 516.92",
+                  "5 518.98 516.94 533.56 526.16",
+                  "5 535.41 516.94 544.31 526.16",
+                  "5 518.74 526.06 544.80 535.28"
+                ]
+              }
+            ]
+          }
         },
         {
           "excerpt_id": "x2",
@@ -714,7 +2617,56 @@
           "page_numbers": [
             9
           ],
-          "text": "De acuerdo con las bases integradas, la oferta y las disposiciones del presente contrato, las partes lo firman por duplicado en señal de conformidad en la ciudad del Cusco a los 23 días del mes de setiembre de 2025."
+          "text": "De acuerdo con las bases integradas, la oferta y las disposiciones del presente contrato, las partes lo firman por duplicado en señal de conformidad en la ciudad del Cusco a los 23 días del mes de setiembre de 2025.",
+          "anchor": {
+            "text_sha256": "3b55cf62a0ef0f84",
+            "pieces": [
+              {
+                "text": "De acuerdo con las bases integradas, la oferta y las disposiciones del presente contrato, las partes lo firman por duplicado en señal de conformidad en la ciudad del Cusco a los 23 días del mes de setiembre de 2025.",
+                "words": [
+                  "9 99.26 550.67 109.70 562.08",
+                  "9 112.21 550.67 141.79 562.08",
+                  "9 144.33 550.67 157.50 562.08",
+                  "9 160.03 550.67 170.47 562.08",
+                  "9 172.98 550.67 194.80 562.08",
+                  "9 197.32 550.67 237.72 562.08",
+                  "9 240.25 550.67 246.60 562.08",
+                  "9 249.12 550.67 270.08 562.08",
+                  "9 272.62 550.67 276.70 562.08",
+                  "9 279.21 550.67 289.65 562.08",
+                  "9 292.37 550.67 341.42 562.08",
+                  "9 343.94 550.67 354.87 562.08",
+                  "9 357.37 550.67 389.22 562.08",
+                  "9 391.77 550.67 423.65 562.08",
+                  "9 426.17 550.67 436.61 562.08",
+                  "9 439.12 550.67 461.79 562.08",
+                  "9 464.30 550.67 470.65 562.08",
+                  "9 473.17 550.67 495.92 562.08",
+                  "9 498.46 550.67 510.29 562.08",
+                  "9 99.26 562.19 134.25 573.60",
+                  "9 136.55 562.19 145.64 573.60",
+                  "9 147.95 562.19 167.50 573.60",
+                  "9 169.77 562.19 178.87 573.60",
+                  "9 181.15 562.19 226.34 573.60",
+                  "9 228.61 562.19 237.74 573.60",
+                  "9 240.01 562.19 246.36 573.60",
+                  "9 248.65 562.19 272.76 573.60",
+                  "9 275.03 562.19 285.96 573.60",
+                  "9 288.23 562.19 311.50 573.60",
+                  "9 313.77 562.19 318.31 573.60",
+                  "9 320.61 562.19 331.05 573.60",
+                  "9 333.55 562.19 342.65 573.60",
+                  "9 345.07 562.19 360.55 573.60",
+                  "9 362.82 562.19 373.74 573.60",
+                  "9 376.02 562.19 391.46 573.60",
+                  "9 393.73 562.19 402.85 573.60",
+                  "9 405.19 562.19 441.16 573.60",
+                  "9 443.47 562.19 452.55 573.60",
+                  "9 454.85 562.19 475.53 573.60"
+                ]
+              }
+            ]
+          }
         }
       ],
       "evidence_groups": [
