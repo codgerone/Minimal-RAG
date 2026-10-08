@@ -11,8 +11,9 @@ an excerpt is split into pieces at " | " and line breaks and each piece is match
    A piece found nowhere as one run is split into the longest such runs of its words; a word found
    nowhere is reported missing rather than guessed.
 3. When pieces occur more than once, the occurrences are chosen so that the chosen words are as
-   close together as possible (smallest spanning tree, vertical distance weighted so that pieces
-   of one table row stay together), never reusing the same PDF word twice.
+   close together as possible (smallest spanning tree; pieces on the same line, i.e. one table
+   row, count as close, vertical distance between lines counts more than horizontal), never
+   reusing the same PDF word twice.
 4. When the same value repeats across columns of one row, only the column tells them apart: the
    excerpt's `locate_hint` (its column's header text, found once on the page) keeps only the
    occurrences that overlap that column horizontally. The hint is not part of the evidence.
@@ -37,7 +38,8 @@ from rag.eval.dataset import Excerpt
 from rag.jsonio import read_json, write_json
 
 PAGE_GAP = 2000.0          # added to y per page so pieces on other pages count as far away
-ROW_WEIGHT = 4.0           # vertical distance counts more: pieces of one table row share a line
+ROW_WEIGHT = 4.0           # vertical distance counts more between lines
+SAME_LINE_WEIGHT = 0.25    # pieces sharing a line (a table row) count as close
 MAX_CANDIDATES = 40        # occurrences kept per piece
 MAX_COMBINATIONS = 200_000
 
@@ -170,24 +172,41 @@ def _match_piece(stream: _Stream, text: str) -> list[tuple[str, list[tuple[int, 
     return result
 
 
-def _center(stream: _Stream, words: tuple[int, ...]) -> tuple[float, float]:
-    xs = [(stream.words[i].bbox[0] + stream.words[i].bbox[2]) / 2 for i in words]
-    ys = [(stream.words[i].bbox[1] + stream.words[i].bbox[3]) / 2 + stream.words[i].page * PAGE_GAP
-          for i in words]
-    return sum(xs) / len(xs), ROW_WEIGHT * sum(ys) / len(ys)
+@dataclass(frozen=True)
+class _Place:
+    """Where an occurrence sits: centre, vertical extent and page."""
+    x: float
+    y: float
+    top: float
+    bottom: float
+    page: int
 
 
-def _tree_length(points: list[tuple[float, float]]) -> float:
+def _place(stream: _Stream, words: tuple[int, ...]) -> _Place:
+    boxes = [stream.words[i].bbox for i in words]
+    return _Place(sum((b[0] + b[2]) / 2 for b in boxes) / len(boxes),
+                  sum((b[1] + b[3]) / 2 for b in boxes) / len(boxes),
+                  min(b[1] for b in boxes), max(b[3] for b in boxes), stream.words[words[0]].page)
+
+
+def _distance(a: _Place, b: _Place) -> float:
+    """Pieces on one line (one table row) are close whatever the columns between them; otherwise
+    vertical distance counts ROW_WEIGHT times and another page is far away."""
+    if a.page == b.page and min(a.bottom, b.bottom) - max(a.top, b.top) > 0:
+        return SAME_LINE_WEIGHT * abs(a.x - b.x)
+    return math.hypot(a.x - b.x, ROW_WEIGHT * (a.y - b.y + PAGE_GAP * (a.page - b.page)))
+
+
+def _tree_length(points: list[_Place]) -> float:
     if len(points) < 2:
         return 0.0
-    inside, total = {0}, 0.0
-    best = {i: math.dist(points[0], points[i]) for i in range(1, len(points))}
+    total = 0.0
+    best = {i: _distance(points[0], points[i]) for i in range(1, len(points))}
     while best:
         nxt = min(best, key=best.get)
         total += best.pop(nxt)
-        inside.add(nxt)
         for i in best:
-            best[i] = min(best[i], math.dist(points[nxt], points[i]))
+            best[i] = min(best[i], _distance(points[nxt], points[i]))
     return total
 
 
@@ -199,7 +218,7 @@ def _in_column(stream: _Stream, words: tuple[int, ...], column: tuple[float, flo
 
 def _choose(stream: _Stream, options: list[list[tuple[int, ...]]]) -> list[tuple[int, ...]]:
     """One occurrence per piece: no PDF word used twice, chosen words as close together as possible."""
-    centers = [[_center(stream, o) for o in opts] for opts in options]
+    centers = [[_place(stream, o) for o in opts] for opts in options]
     total = math.prod(len(o) for o in options)
     if total <= MAX_COMBINATIONS:
         best, best_cost = None, math.inf
@@ -218,9 +237,9 @@ def _choose(stream: _Stream, options: list[list[tuple[int, ...]]]) -> list[tuple
     chosen: dict[int, tuple[int, ...]] = {}
     used: set[int] = set()
     for i in order:
-        placed = [_center(stream, chosen[k]) for k in chosen]
+        placed = [_place(stream, chosen[k]) for k in chosen]
         free = [j for j, o in enumerate(options[i]) if not used & set(o)] or list(range(len(options[i])))
-        j = min(free, key=lambda j: min((math.dist(centers[i][j], p) for p in placed), default=0.0))
+        j = min(free, key=lambda j: min((_distance(centers[i][j], p) for p in placed), default=0.0))
         chosen[i] = options[i][j]
         used.update(options[i][j])
     return [chosen[i] for i in range(len(options))]

@@ -51,3 +51,13 @@ def test_a_hint_that_is_not_unique_is_reported():
     words = [word("4th", 10, 0), word("4th", 50, 0), word("7", 10, 20), word("7", 50, 20)]
     anchor = locate_excerpt(excerpt("7", hint="4th"), words)
     assert anchor.status == "missing"
+
+
+def test_row_label_is_taken_from_the_row_not_from_near_a_section_title():
+    # Section title "HXE33K-S1" sits just below an earlier "ENSA" row; the excerpt's ENSA is the
+    # one on the same line as its values.
+    words = [word("ENSA", 10, 100), word("9,910", 200, 100),
+             word("HXE33K-S1", 120, 115),
+             word("ENSA", 10, 190), word("5,018", 200, 190), word("1,153", 260, 190)]
+    anchor = locate_excerpt(excerpt("ENSA | HXE33K-S1 | 5,018 | 1,153"), words)
+    assert ("ENSA", 10, 190) in texts(anchor)
