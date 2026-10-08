@@ -1,13 +1,13 @@
 {
   "schema_version": "ground_truth_manifest_v1",
   "dataset_version": "3.1.0",
-  "ground_truth_fingerprint": "5762157fd89167791dfc97d713f04ad8c84bd7e4877cd7b5a36d1974b666c94b",
+  "ground_truth_fingerprint": "73e97db442cb925c95e635f6296b1b13c0f71ade55ac6dcdacaaf10e5e5018cb",
   "review_status": "approved",
   "files": [
     {
       "document_key": "Contrato-N-105-2025-LP-002-2024-FONAFE-Adquisición-de-me--d359c37e0bc3c87a",
       "json_path": "eval/ground-truth/Contrato-N-105-2025-LP-002-2024-FONAFE-Adquisición-de-me--d359c37e0bc3c87a.json",
-      "content_sha256": "d5a63a32270180160d015309ddc2724f7cbdd338af930de44fd5c36538d8177d",
+      "content_sha256": "b22e547dd900e7fe15abb26a8f32508206dfe6d6ce59178061a140767152fab1",
       "case_count": 10
     },
     {
