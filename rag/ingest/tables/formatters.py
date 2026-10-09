@@ -14,8 +14,8 @@ class TableFormatter(Protocol):
                table_node_id: str | None = None) -> SerializedTable: ...
 
 
-class RowTextFormatter:
-    """`row_text_v1`: one line per row, `字段 = "值"` pairs; merged cells stated once."""
+class NumberedFieldsFormatter:
+    """`numbered_fields_v1`: one line per row, `字段 = "值"` pairs; merged cells stated once."""
 
     def format(self, table: StructuredTable, header: HeaderDecision, *,
                table_node_id: str | None = None) -> SerializedTable:

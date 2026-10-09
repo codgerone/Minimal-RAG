@@ -9,7 +9,7 @@ the chunk's regions, so every chunker gets them without code of its own:
   element, coarse when it holds only part of it; the whole page (coarse) when there is no box;
 - table: the cells of the table lines in the chunk's range (fine; coarse when the chunk holds only
   part of a line, or the table's box when a cell has no position). When the formatter records where
-  each cell sits in a line, part of a line gives the cells in that part. Under `row_text_v1` an
+  each cell sits in a line, part of a line gives the cells in that part. Under `numbered_fields_v1` an
   identified header is written into every line as field names rather than as lines of its own; its
   cells count for the table's first chunk only;
 - locator text the chunker adds (`fallback_locator`) is not content and has no region.

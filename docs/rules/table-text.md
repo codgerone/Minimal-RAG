@@ -1,10 +1,10 @@
 # 表格文本化
 
 > **规则摘要**
-> - 两种实现，由装配的 `table_formatter` 选择：`row_text_v1`（逐格写字段名）、`markdown_rows_v1`（Markdown 竖线行，表头只写一次）。
+> - 两种实现，由装配的 `table_formatter` 选择：`numbered_fields_v1`（逐格写字段名）、`markdown_rows_v1`（Markdown 竖线行，表头只写一次）。
 > - 两者都保留每个单元格的内容，并为每行记录它来自哪些表格行和单元格。
 
-## row_text_v1
+## numbered_fields_v1（V3.4 及之前名为 row_text_v1）
 
 > - 一张表格变成多行文本，每行对应表格的一行，写成 `第N行：字段 = "值"；字段 = "值"。`
 > - 认出表头时，字段名是多级表头路径（如 `数量 / 国内`）；没认出时，字段名写成 `第M列`，并在开头加一行 `表头未确定。`
@@ -59,5 +59,5 @@
 
 ## 已知限制
 
-- `row_text_v1`：中文的"第N行/第M列"脚手架和重复出现的字段名占据大部分 token，稀释 embedding 对内容的表达，也让一个 chunk 只装得下少数几行。
+- `numbered_fields_v1`：中文的"第N行/第M列"脚手架和重复出现的字段名占据大部分 token，稀释 embedding 对内容的表达，也让一个 chunk 只装得下少数几行。
 - `markdown_rows_v1`：原文中本来就有的 `←`、`↑` 字符会与合并标记混淆；横跨整行的合并行只覆盖一行，不带进后续的 chunk。

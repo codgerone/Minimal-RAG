@@ -103,4 +103,4 @@ def serialize_table(
         unplaced_ids = tuple(cell.cell_id for cell in table.cells if cell.start_row_offset_idx is None)
         append("unplaced_text", f"结构无法定位：{_quoted(table.unplaced_text)}。", (), unplaced_ids)
     result = tuple(lines)
-    return SerializedTable("\n".join(item.text for item in result), result, "table_text_v1")
+    return SerializedTable("\n".join(item.text for item in result), result, "numbered_fields_v1")

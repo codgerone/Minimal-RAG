@@ -58,7 +58,7 @@ def test_build_settings_change_fingerprint(tmp_path):
     ({"parser": "docling_layout", "chunker": "characters"}, "只能搭配 pymupdf_pages"),
     ({"parser": "docling_layout", "chunker": "structured_tokens"}, "需要配置 [table_formatter]"),
     ({"parser": "docling_layout", "chunker": "structured_tokens",
-      "extra": '[table_formatter]\nuse = "row_text_v1"\n[[table_extractors]]\nuse = "camelot"\n[[table_extractors]]\nuse = "camelot"'},
+      "extra": '[table_formatter]\nuse = "numbered_fields_v1"\n[[table_extractors]]\nuse = "camelot"\n[[table_extractors]]\nuse = "camelot"'},
      "重复"),
 ])
 def test_invalid_assemblies_are_rejected_before_any_work(tmp_path, kwargs, message):

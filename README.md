@@ -38,7 +38,7 @@ name = "docling_native"
 [parser]
 use = "docling_layout"
 [table_formatter]
-use = "row_text_v1"
+use = "numbered_fields_v1"
 [chunker]
 use = "structured_tokens"
 max_tokens = 512
