@@ -11,7 +11,7 @@ from rag.ingest.tables.pdf_words import PyMuPdfEvidenceReader
 from rag.ingest.assemble import compose_document
 from rag.ingest.tables.prepare import TablePreparationError, prepare_tables
 from rag.ingest.tables.header import classify_cell, detect_header
-from rag.ingest.tables.formatter import serialize_table
+from rag.ingest.tables.markdown_rows import serialize_markdown_rows
 from rag.ingest.tables.select import select_tables
 from rag.models import (
     BoundingBox, NativeTableFact, PrimaryDocument, PrimaryTablePlaceholder, SourceDocument, TableNode,
@@ -40,20 +40,19 @@ def test_header_and_serialization_preserve_exact_cell_text() -> None:
     source = table([["产品", "数量"], ["A", '100"'], ["B", "200"]])
     decision = detect_header(source)
     assert decision.outcome == "undetermined"  # quote makes the first quantity text
-    result = serialize_table(source, decision, table_node_id="node")
-    assert result.text.startswith("表头未确定。\n第1行：第1列 = \"产品\"")
-    assert '第2列 = "100\\\""' in result.text
-    assert result.lines[-1].line_id == "node_line_000004"
+    result = serialize_markdown_rows(source, decision, table_node_id="node", labeled=True)
+    assert result.text == '| 产品 | 数量 |\n| A | 100" |\n| B | 200 |'
+    assert result.lines[-1].line_id == "node_line_000003"
 
 
 def test_header_h01_and_fallback_for_invalid_span() -> None:
     source = table([["产品", "数量"], ["A", "100"], ["B", "200"]])
     result = detect_header(source)
     assert (result.outcome, result.header_start_row, result.header_end_row) == ("identified", 0, 1)
-    assert serialize_table(source, result).text == (
-        '第2行：产品 = "A"；数量 = "100"。\n'
-        '第3行：产品 = "B"；数量 = "200"。'
+    assert serialize_markdown_rows(source, result, labeled=True).text == (
+        "| 产品: A | 数量: 100 |\n| 产品: B | 数量: 200 |"
     )
+    assert serialize_markdown_rows(source, result).text == "| 产品 | 数量 |\n| A | 100 |\n| B | 200 |"
     bad_cell = replace(source.cells[0], row_span=2)
     bad = replace(source, cells=(bad_cell,) + source.cells[1:])
     rejected = detect_header(bad)
@@ -68,9 +67,7 @@ def test_missing_header_position_and_merged_fact() -> None:
     result = detect_header(source)
     assert result.outcome == "identified"
     assert result.skipped_prefix_rows == (0,)
-    assert serialize_table(source, result).text.startswith(
-        '第1行：第1列至第2列为合并单元格，内容 = "采购明细"。'
-    )
+    assert serialize_markdown_rows(source, result).text.startswith("| 采购明细 | ← |\n| 产品 | 数量 |")
     gap = replace(source, cells=tuple(cell for cell in source.cells if cell.cell_id != "c1_1"),
                   uncovered_grid_positions=(GridPosition(1, 1, "missing_physical_cell"),))
     assert detect_header(gap).evaluations[0].structural_issues[0].code == "missing_header_position"
@@ -91,7 +88,7 @@ def test_selected_and_native_table_use_same_content_rules() -> None:
     primary = PrimaryDocument("doc", source.file_hash, 1, (placeholder,), (slot,),
                               (NativeTableFact("slot_001", "#/tables/0", native),), ())
     fallback = ContentResolution("slot_001", "docling_native_fallback", None, None, "decision")
-    prepared = prepare_tables(primary, (), (fallback,), True)
+    prepared = prepare_tables(primary, (), (fallback,), True, serializer=serialize_markdown_rows)
     parsed = compose_document(source, primary, (fallback,), prepared, True)
     assert isinstance(parsed.nodes[0], TableNode)
     assert parsed.nodes[0].origin == "docling_native_fallback"
@@ -105,12 +102,13 @@ def test_selected_and_native_table_use_same_content_rules() -> None:
                                   ("winner",), None, None)
     report = TableExtractionReport("x.pdf", source.file_hash, (execution,), (winner_candidate,), ())
     winner = ContentResolution("slot_001", "selected_winner", "winner", "group:winner", "decision")
-    selected = prepare_tables(primary, (report,), (winner,), True)
+    selected = prepare_tables(primary, (report,), (winner,), True, serializer=serialize_markdown_rows)
     selected_parsed = compose_document(source, primary, (winner,), selected, True)
     assert selected_parsed.nodes[0].table.tool == "pymupdf"
     assert selected_parsed.nodes[0].serialized.text == parsed.nodes[0].serialized.text
     with pytest.raises(TablePreparationError):
-        prepare_tables(primary, (report,), (replace(winner, selected_candidate_id="other"),), True)
+        prepare_tables(primary, (report,), (replace(winner, selected_candidate_id="other"),), True,
+                       serializer=serialize_markdown_rows)
 
 
 def test_real_pdf_words_drive_group_scoring_and_explicit_fallback(tmp_path: Path) -> None:

@@ -17,7 +17,7 @@ use = "docling"
 use = "unstructured"
 
 [table_formatter]
-use = "row_text_v1"
+use = "labeled_rows_v1"
 
 [chunker]
 use = "structured_tokens"

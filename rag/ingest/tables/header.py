@@ -248,9 +248,8 @@ def detect_header(table: StructuredTable, *, sample_row_budget: int = 8,
             if cell and cell.cell_id not in seen:
                 seen.add(cell.cell_id)
                 cells.append(cell)
-        parts = tuple((cell.text or "") if classify_cell(cell.text) != "empty" else f"第{col + 1}列" for cell in cells)
-        if not any(classify_cell(cell.text) != "empty" for cell in cells):
-            parts = (f"第{col + 1}列",)
+        # Blank header cells contribute no part; a column with none has an empty path.
+        parts = tuple(cell.text or "" for cell in cells if classify_cell(cell.text) != "empty")
         paths.append(HeaderPath(col, tuple(cell.cell_id for cell in cells), parts))
     return HeaderDecision("identified", "unique_supported_candidate", (), tuple(skipped), evaluations,
                           winner.start_row, winner.end_row, tuple(paths), "table_header_v1", sample_row_budget, minimum_independent_observations)

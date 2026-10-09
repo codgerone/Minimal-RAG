@@ -487,21 +487,53 @@ class HeaderDecision:
             raise ValueError("undetermined header cannot publish paths")
 
 @dataclass(frozen=True)
+class CellSpan:
+    """Where cell text sits inside a line (local character offsets)."""
+    cell_ids: tuple[str, ...]
+    start: int
+    end: int
+
+@dataclass(frozen=True)
+class Continuation:
+    """How a line is rewritten when it opens a chunk while a vertical merged cell runs through it.
+
+    `start`/`end` cover the line's own markers for that cell; `text` replaces them. The value written
+    into `text` is the anchor cell's text, found at `anchor_start`/`anchor_end` of `anchor_line_id`.
+    """
+    start: int
+    end: int
+    text: str
+    anchor_line_id: str
+    anchor_start: int
+    anchor_end: int
+
+@dataclass(frozen=True)
 class SerializedTableLine:
     line_id: str
-    kind: Literal["header", "data", "merged", "unplaced_text"]
+    kind: Literal["header", "data", "unplaced_text"]
     text: str
     source_rows: tuple[int, ...]
     source_cell_ids: tuple[str, ...]
+    cell_spans: tuple[CellSpan, ...] = ()
+    continuations: tuple[Continuation, ...] = ()
+
+    def resumed_text(self) -> str:
+        text = self.text
+        for item in sorted(self.continuations, key=lambda c: c.start, reverse=True):
+            text = text[:item.start] + item.text + text[item.end:]
+        return text
+
+TableTextRule: TypeAlias = Literal["markdown_rows_v1", "labeled_rows_v1"]
 
 @dataclass(frozen=True)
 class SerializedTable:
     text: str
     lines: tuple[SerializedTableLine, ...]
-    rule_version: Literal["table_text_v1"]
+    rule_version: TableTextRule
 
     def __post_init__(self) -> None:
-        if self.rule_version != "table_text_v1" or self.text != "\n".join(line.text for line in self.lines):
+        if (self.rule_version not in ("markdown_rows_v1", "labeled_rows_v1")
+                or self.text != "\n".join(line.text for line in self.lines)):
             raise ValueError("serialized table body or rule invalid")
         ids = tuple(line.line_id for line in self.lines)
         if len(ids) != len(set(ids)):

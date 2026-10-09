@@ -3,7 +3,7 @@
 from dataclasses import replace
 
 from rag.ingest.regions import chunk_regions
-from rag.ingest.tables.formatter import serialize_table
+from rag.ingest.tables.markdown_rows import serialize_markdown_rows
 from rag.ingest.tables.header import detect_header
 from rag.ingest.tables.models import StructuredTable, TableCell
 from rag.models import (
@@ -53,11 +53,11 @@ def _table_node() -> TableNode:
     header = detect_header(table)
     assert header.outcome == "identified"
     return TableNode("tbl", "s", "#/tables/0", "selected_winner", table, None, header,
-                     serialize_table(table, header, table_node_id="tbl"),
+                     serialize_markdown_rows(table, header, table_node_id="tbl", labeled=True),
                      (PageSpan(1, BoundingBox(0, 0, 100, 30), "#/tables/0"),))
 
 
-def test_table_chunk_gives_its_rows_cells_and_the_first_one_the_header_cells():
+def test_table_chunk_gives_its_rows_cells_and_the_header_cells_its_column_names_come_from():
     node = _table_node()
     first_line = node.serialized.lines[0].text      # row 2: A / 100
     second = len(first_line) + 1
@@ -65,7 +65,7 @@ def test_table_chunk_gives_its_rows_cells_and_the_first_one_the_header_cells():
     later = chunk([ChunkSource("tbl", node.sources, second, len(node.serialized.text), False, "none")], 1, 2, "tbl")
     doc = document(node)
     assert {r.bbox for r in chunk_regions(first, doc)} == {box(0, 10), box(50, 10), box(0, 0), box(50, 0)}
-    assert {r.bbox for r in chunk_regions(later, doc)} == {box(0, 20), box(50, 20)}
+    assert {r.bbox for r in chunk_regions(later, doc)} == {box(0, 20), box(50, 20), box(0, 0), box(50, 0)}
 
 
 def test_table_cell_without_position_falls_back_to_the_table_box():

@@ -5,7 +5,6 @@ from __future__ import annotations
 from collections.abc import Callable
 
 from rag.ingest.tables.header import detect_header
-from rag.ingest.tables.formatter import serialize_table
 from rag.models import PageSpan, PrimaryDocument, PrimaryTablePlaceholder
 from rag.ingest.tables.models import (
     ContentResolution, HeaderDecision, PreparedTableContent, SerializedTable,
@@ -38,7 +37,7 @@ def prepare_tables(
     branch_attached: bool,
     *,
     header_detector: Callable[[StructuredTable], HeaderDecision] = detect_header,
-    serializer: Callable[..., SerializedTable] = serialize_table,
+    serializer: Callable[..., SerializedTable],
 ) -> tuple[PreparedTableContent, ...]:
     """Resolve IDs once; header and text rules operate on the adopted structure."""
     if not branch_attached:
