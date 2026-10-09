@@ -135,3 +135,12 @@ def test_labeled_continuation_keeps_the_column_name():
     line = serialize_markdown_rows(table, header, table_node_id="tbl", labeled=True).lines[2]
     assert line.text == "| ↑ | MODEL: HXE33K |"
     assert line.resumed_text() == "| COMPANY: ↑ ENSA | MODEL: HXE33K |"
+
+
+def test_blank_header_cell_gives_no_column_name():
+    table = grid([["", "Qty"], ["A", "1"], ["B", "2"]])
+    header = HeaderDecision("identified", "unique_supported_candidate", (), (), (), 0, 1,
+                            (HeaderPath(0, ("c0_0",), ()), HeaderPath(1, ("c0_1",), ("Qty",))),
+                            "table_header_v1", 8, 2)
+    assert serialize_markdown_rows(table, header, labeled=True).text == "| A | Qty: 1 |\n| B | Qty: 2 |"
+    assert serialize_markdown_rows(table, header).text.startswith("|  | Qty |")
