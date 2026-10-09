@@ -8,10 +8,9 @@ the chunk's regions, so every chunker gets them without code of its own:
 - text, list item without word positions: the element's box; fine when the chunk holds the whole
   element, coarse when it holds only part of it; the whole page (coarse) when there is no box;
 - table: the cells of the table lines in the chunk's range (fine; coarse when the chunk holds only
-  part of a line, or the table's box when a cell has no position). When the formatter records where
-  each cell sits in a line, part of a line gives the cells in that part. Under `numbered_fields_v1` an
-  identified header is written into every line as field names rather than as lines of its own; its
-  cells count for the table's first chunk only;
+  part of a line, or the table's box when a cell has no position). Part of a line gives the cells
+  in that part. Header cells come with the lines that write them: the header line, or the column
+  names written before values;
 - locator text the chunker adds (`fallback_locator`) is not content and has no region.
 """
 
@@ -48,7 +47,7 @@ def _item_regions(item: ListItem, source: ChunkSource) -> list[ChunkRegion]:
     return _span_regions(item.sources, whole)
 
 
-def _table_regions(node: TableNode, source: ChunkSource, first_fragment: bool) -> list[ChunkRegion]:
+def _table_regions(node: TableNode, source: ChunkSource) -> list[ChunkRegion]:
     table_box: BoundingBox | None = next((s.bbox for s in node.sources if s.bbox is not None), None)
     page = node.sources[0].page_number
     cells = {cell.cell_id: cell for cell in node.table.cells}
@@ -77,11 +76,6 @@ def _table_regions(node: TableNode, source: ChunkSource, first_fragment: bool) -
                 if line_start + span.start < end and start < line_start + span.end:
                     inside = start <= line_start + span.start and line_start + span.end <= end
                     add(span.cell_ids, "fine" if inside else "coarse")
-    header = node.header
-    if first_fragment and header.outcome == "identified" and header.header_end_row:
-        rows = range(header.header_start_row or 0, header.header_end_row)
-        add([c.cell_id for c in node.table.cells
-             if c.start_row_offset_idx is not None and c.start_row_offset_idx in rows], "fine")
     return regions
 
 
@@ -97,7 +91,7 @@ def chunk_regions(chunk: DocumentChunk, document: ParsedDocument) -> tuple[Chunk
         if isinstance(node, TextNode):
             regions += _text_regions(node, source)
         elif isinstance(node, TableNode):
-            regions += _table_regions(node, source, chunk.fragment_index == 0)
+            regions += _table_regions(node, source)
         elif source.node_id in items:
             regions += _item_regions(items[source.node_id], source)
         else:

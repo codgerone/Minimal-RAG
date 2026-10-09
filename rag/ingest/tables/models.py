@@ -510,7 +510,7 @@ class Continuation:
 @dataclass(frozen=True)
 class SerializedTableLine:
     line_id: str
-    kind: Literal["header", "data", "merged", "unplaced_text"]
+    kind: Literal["header", "data", "unplaced_text"]
     text: str
     source_rows: tuple[int, ...]
     source_cell_ids: tuple[str, ...]
@@ -523,7 +523,7 @@ class SerializedTableLine:
             text = text[:item.start] + item.text + text[item.end:]
         return text
 
-TableTextRule: TypeAlias = Literal["numbered_fields_v1", "markdown_rows_v1", "labeled_rows_v1"]
+TableTextRule: TypeAlias = Literal["markdown_rows_v1", "labeled_rows_v1"]
 
 @dataclass(frozen=True)
 class SerializedTable:
@@ -532,7 +532,7 @@ class SerializedTable:
     rule_version: TableTextRule
 
     def __post_init__(self) -> None:
-        if (self.rule_version not in ("numbered_fields_v1", "markdown_rows_v1", "labeled_rows_v1")
+        if (self.rule_version not in ("markdown_rows_v1", "labeled_rows_v1")
                 or self.text != "\n".join(line.text for line in self.lines)):
             raise ValueError("serialized table body or rule invalid")
         ids = tuple(line.line_id for line in self.lines)

@@ -267,15 +267,7 @@ def chunk_parsed_document(
         header_index = next((index for index, item in enumerate(lines) if item.kind == "header"), None)
         header_line = lines[header_index] if header_index is not None else None
         line_by_id = {item.line_id: item for item in lines}
-        active_merged = []
         for line_index, line in enumerate(lines):
-            if line.source_rows:
-                first_row = min(line.source_rows)
-                active_merged = [item for item in active_merged
-                                 if item is line or not item.source_rows
-                                 or max(item.source_rows) >= first_row]
-            if line.kind == "merged" and len(line.source_rows) > 1:
-                active_merged.append(line)
             source = table_source(line)
             proposed_lines = current_lines + [line.text]
             proposed = "\n".join(proposed_lines)
@@ -291,12 +283,6 @@ def chunk_parsed_document(
                 context_lines.append(header_line.text)
                 context_sources.append(table_source(header_line, repeated=True,
                                                     context_kind="table_header"))
-            for merged_line in active_merged:
-                if merged_line is line or not set(merged_line.source_rows) & set(line.source_rows):
-                    continue
-                context_lines.append(merged_line.text)
-                context_sources.append(table_source(merged_line, repeated=True,
-                                                    context_kind="merged_cell"))
             # A line opening a chunk inside a vertical merge gets the merged value back.
             opening_text = line.resumed_text()
             for item in line.continuations:
@@ -312,11 +298,8 @@ def chunk_parsed_document(
             else:
                 pieces = _split_text(line.text, counter, max_input_tokens, 0)
                 for rendered, start, end, _overlap_start, _overlap_end in pieces:
-                    row_label = line.text.split("：", 1)[0] if "：" in line.text else "原始范围"
-                    segment_start = max(line.text.rfind("；", 0, start), line.text.rfind("：", 0, start)) + 1
-                    equals = line.text.find(" = ", segment_start)
-                    field = line.text[segment_start:equals].strip() if equals >= segment_start else "内容"
-                    locator = f"〔表格 {node.table.table_id}，{row_label}，{field}〕\n"
+                    row_label = f"第{line.source_rows[0] + 1}行" if line.source_rows else "原始范围"
+                    locator = f"〔表格 {node.table.table_id}，{row_label}〕\n"
                     subparts = ((rendered, 0, len(rendered), None, None),)
                     if not _fits(counter, locator + rendered, max_input_tokens):
                         subparts = _split_text(rendered, _PrefixedCounter(counter, locator),
