@@ -282,10 +282,15 @@ def _evaluate(table: StructuredTable, start: int, end: int,
     row = end
     while row < table.row_count and len(sampled) < sample_row_budget:  # type: ignore[operator]
         cells = _unique(_row_cells(table, row))
-        # Horizontally merged cells are left out; a row with no other usable cell is skipped.
-        usable = any((cell.col_span or 0) == 1 and cell_shape(cell.text) != "empty" for cell in cells)
+        # A row led by a horizontally merged cell is a summary or section row and is skipped whole;
+        # elsewhere only the merged cells are left out.
+        filled = sorted((cell for cell in cells if cell_shape(cell.text) != "empty"),
+                        key=lambda cell: cell.start_col_offset_idx or 0)
+        summary = bool(filled) and (filled[0].col_span or 0) > 1
+        usable = not summary and any((cell.col_span or 0) == 1 for cell in filled)
         missing = any(pos.row_index == row for pos in table.uncovered_grid_positions)
-        reason = (None if usable else "horizontal_span" if any((cell.col_span or 0) > 1 for cell in cells)
+        reason = (None if usable else "summary_row" if summary
+                  else "horizontal_span" if any((cell.col_span or 0) > 1 for cell in cells)
                   else "missing_position" if missing else "blank_row")
         if reason:
             skipped.append(HeaderSkippedRow(row, reason, tuple(cell.cell_id for cell in cells)))  # type: ignore[arg-type]

@@ -206,18 +206,29 @@ def test_real_pdf_words_drive_group_scoring_and_explicit_fallback(tmp_path: Path
     assert empty_scoring.groups == ()
 
 
-def test_total_row_single_cells_are_sampled() -> None:
+def test_summary_row_is_skipped_and_split_cells_are_left_out() -> None:
     item = TableCell("item", "Item", 0, 2, 0, 1, 2, 1, None, ("body",), "native", ("/item",))
     qty = TableCell("qty", "Qty", 0, 2, 1, 2, 2, 1, None, ("body",), "native", ("/qty",))
     total = TableCell("total", "Total CIF", 3, 4, 0, 2, 1, 2, None, ("body",), "native", ("/total",))
-    source = table([[None, None, "Total Amount"], [None, None, "(USD)"],
-                    ["1", "10,000", "USD 968,000.00"], [None, None, "USD 968,000.00"]],
-                   spans=(item, qty, total))
-    result = detect_header(source)
-    assert (result.outcome, result.header_start_row, result.header_end_row) == ("identified", 0, 2)
-    winner = next(item for item in result.evaluations if item.end_row == 2)
-    assert winner.sampled_row_indices == (2, 3)
-    assert winner.supporting_columns == (2,)
+    single = table([[None, None, "Total Amount"], [None, None, "(USD)"],
+                    ["1", "10,000", "968,000.00"], [None, None, "USD 968,000.00"]], spans=(item, qty, total))
+    result = detect_header(single)
+    assert result.outcome == "undetermined"  # one data row: no column can be checked
+    skipped = next(item for item in result.evaluations if item.end_row == 2).skipped_rows
+    assert [(row.row_index, row.reason) for row in skipped] == [(3, "summary_row")]
+
+    blank_led = TableCell("label", "Total", 3, 4, 1, 3, 1, 2, None, ("body",), "native", ("/label",))
+    led = table([["Item", "Desc", "Qty", "Amount"], ["1", "a", "5", "USD 1"], ["2", "b", "6", "USD 2"],
+                 [None, None, None, "USD 3"]], spans=(blank_led,))
+    winner = next(item for item in detect_header(led).evaluations if item.end_row == 1)
+    assert [(row.row_index, row.reason) for row in winner.skipped_rows] == [(3, "summary_row")]
+
+    price = [TableCell(f"p{row}", value, row, row + 1, 1, 3, 1, 2, None, ("body",), "native", (f"/p{row}",))
+             for row, value in ((0, "Unit price"), (1, "USD 5.28"), (2, "USD 5.50"))]
+    split = table([["Item", None, None], ["1", None, None], ["2", None, None]], spans=tuple(price))
+    result = detect_header(split)
+    assert (result.outcome, result.header_end_row) == ("identified", 1)
+    assert result.evaluations[0].sampled_row_indices == (1, 2)
 
 
 def test_date_header_over_numbers_and_placeholders() -> None:

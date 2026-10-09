@@ -412,7 +412,7 @@ class HeaderPath:
 @dataclass(frozen=True)
 class HeaderSkippedRow:
     row_index: int
-    reason: Literal["missing_position", "horizontal_span", "blank_row"]
+    reason: Literal["missing_position", "horizontal_span", "summary_row", "blank_row"]
     cell_ids: tuple[str, ...]
 
 @dataclass(frozen=True)
