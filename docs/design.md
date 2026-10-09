@@ -23,7 +23,7 @@
 |---|---|---|
 | Parser | `rag/ingest/parsers/__init__.py` | `pymupdf_pages`、`docling_layout` |
 | TableExtractor（可配多个） | `rag/ingest/tables/extractors.py` | `pymupdf`、`camelot`、`docling`、`unstructured` |
-| TableFormatter | `rag/ingest/tables/formatters.py` | `numbered_fields_v1` |
+| TableFormatter | `rag/ingest/tables/formatters.py` | `labeled_rows_v1`、`markdown_rows_v1` |
 | Chunker | `rag/ingest/chunkers/__init__.py` | `characters`、`structured_tokens` |
 | Embedder | `rag/index/embedder.py` | `e5_small` |
 | Retriever | `rag/query/retriever.py` | `semantic` |
