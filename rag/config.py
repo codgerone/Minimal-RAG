@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any
 
 # Bump when a built-in algorithm changes its output, so existing indexes are flagged stale.
-RULES_VERSION = "v3.6"
+RULES_VERSION = "v3.7"
 DEFAULT_CONFIG = "structured"
 
 
