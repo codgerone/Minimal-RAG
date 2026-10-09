@@ -159,25 +159,21 @@ HEADER_REASONS = {
 }
 
 
-def _header_block(table: StructuredTable, header: HeaderDecision) -> str:
-    """Header detection outcome next to the adopted table, header cells marked."""
-    if header.outcome == "identified":
-        start, end = (header.header_start_row or 0), (header.header_end_row or 0)
-        rows = f"第 {start + 1} 行" if end == start + 1 else f"第 {start + 1}–{end} 行"
-        status = f'{badge("表头识别成功", "ok")} {rows}，表中蓝底加粗的单元格为表头'
-        skipped = (f'<div class="meta">判定时跳过的顶部行：'
-                   f'{"、".join(f"第 {r + 1} 行" for r in header.skipped_prefix_rows)}</div>'
-                   if header.skipped_prefix_rows else "")
-        paths = "".join(f"<tr><td>第 {p.column_index + 1} 列</td><td>{esc(' / '.join(p.display_parts))}</td></tr>"
-                        for p in sorted(header.paths, key=lambda p: p.column_index))
-        detail = (skipped + f'<details><summary>各列的表头路径（{len(header.paths)} 列）</summary>'
-                  f'<table><tr><th>列</th><th>表头路径</th></tr>{paths}</table></details>')
-        marked = frozenset(range(start, end))
-    else:
-        status = f'{badge("表头识别失败", "warn")} {esc(HEADER_REASONS.get(header.reason, header.reason))}'
-        detail, marked = "", frozenset()
-    return (f'<div class="card"><h3>采用的表格</h3><div>{status}</div>{detail}'
-            f'{render_grid(table, 15, marked)}</div>')
+def _header_status(header: HeaderDecision) -> tuple[str, frozenset[int]]:
+    """Header detection outcome for the adopted table, and the rows to mark in its grid."""
+    if header.outcome != "identified":
+        reason = HEADER_REASONS.get(header.reason, header.reason)
+        return f'<div>{badge("表头识别失败", "warn")} {esc(reason)}</div>', frozenset()
+    start, end = (header.header_start_row or 0), (header.header_end_row or 0)
+    rows = f"第 {start + 1} 行" if end == start + 1 else f"第 {start + 1}–{end} 行"
+    skipped = ("；判定时跳过顶部的" + "、".join(f"第 {r + 1} 行" for r in header.skipped_prefix_rows)
+               if header.skipped_prefix_rows else "")
+    paths = "".join(f"<tr><td>第 {p.column_index + 1} 列</td><td>{esc(' / '.join(p.display_parts))}</td></tr>"
+                    for p in sorted(header.paths, key=lambda p: p.column_index))
+    return (f'<div>{badge("表头识别成功", "ok")} {rows}（蓝底加粗）{esc(skipped)}</div>'
+            f'<details><summary>各列的表头路径</summary>'
+            f'<table><tr><th>列</th><th>表头路径</th></tr>{paths}</table></details>',
+            frozenset(range(start, end)))
 
 
 def tables_page(processed: ProcessedDocument, entry: DocumentEntry, config_name: str) -> str:
@@ -211,6 +207,9 @@ def tables_page(processed: ProcessedDocument, entry: DocumentEntry, config_name:
                         f'（总分 {scored.highest_total_score:.2f}，{len(scored.candidates)} 个候选参与评分）')
         else:
             decision = f'{badge("原生表格", "warn")} 没有可评分的候选，保留解析器识别的表格结构'
+        header_status, header_rows = _header_status(prep.header_decision)
+        if resolution.origin != "selected_winner":
+            decision += header_status + render_grid(prep.adopted_table, 15, header_rows)
         cards = []
         totals = {c.candidate_id: c.total_score for c in scored.candidates} if scored else {}
         ordered = sorted(members, key=lambda cid: (cid != resolution.selected_candidate_id,
@@ -221,7 +220,8 @@ def tables_page(processed: ProcessedDocument, entry: DocumentEntry, config_name:
             cards.append(f'<div class="card{" winner" if chosen else ""}"><h3>{esc(candidate.tool)}/'
                          f'{esc(candidate.strategy)}{" ★ 胜出" if chosen else ""}</h3>'
                          f'<div class="meta">{candidate.row_count or "?"} 行 × {candidate.column_count or "?"} 列</div>'
-                         f'{render_grid(candidate, 15)}</div>')
+                         + (header_status + render_grid(prep.adopted_table, 15, header_rows) if chosen
+                            else render_grid(candidate, 15)) + '</div>')
         page_candidates = [c for c in candidates.values()
                            if c.regions and c.regions[0].page_number == slot.page_number
                            and c.candidate_id not in members]
@@ -229,13 +229,11 @@ def tables_page(processed: ProcessedDocument, entry: DocumentEntry, config_name:
             f"<tr><td>{esc(c.tool)}/{esc(c.strategy)}</td><td>"
             f"{esc(ADMISSION.get(admissions[c.candidate_id].reason_codes[0], admissions[c.candidate_id].reason_codes[0]) if admissions.get(c.candidate_id) and admissions[c.candidate_id].reason_codes else (admissions[c.candidate_id].deferred_reason if admissions.get(c.candidate_id) else ''))}"
             f"</td></tr>" for c in page_candidates)
-        header_block = _header_block(prep.adopted_table, prep.header_decision)
         tab_mark = "" if resolution.origin == "selected_winner" else "（原生）"
         tabs.append(f'<a href="#t{number}" data-tab="t{number}">表 {number} · 第 {slot.page_number or "?"} 页{tab_mark}</a>')
         sections.append(
             f'<div data-panel="t{number}"><h2>表 {number} · 第 {slot.page_number or "?"} 页</h2>'
             f'<div class="card">{decision}' + (_score_table(scored) if scored else "") + "</div>"
-            + header_block
             + (f'<div class="grid">{"".join(cards[:3])}</div>' if cards else "")
             + (f'<details><summary>其余 {len(cards) - 3} 个候选表</summary>'
                f'<div class="grid">{"".join(cards[3:])}</div></details>' if len(cards) > 3 else "")
