@@ -10,7 +10,7 @@ import pytest
 from rag.ingest.tables.pdf_words import PyMuPdfEvidenceReader
 from rag.ingest.assemble import compose_document
 from rag.ingest.tables.prepare import TablePreparationError, prepare_tables
-from rag.ingest.tables.header import classify_cell, detect_header
+from rag.ingest.tables.header import detect_header, value_types
 from rag.ingest.tables.markdown_rows import serialize_markdown_rows
 from rag.ingest.tables.select import select_tables
 from rag.models import (
@@ -73,10 +73,55 @@ def test_missing_header_position_and_merged_fact() -> None:
     assert detect_header(gap).evaluations[0].structural_issues[0].code == "missing_header_position"
 
 
-def test_classifier_keeps_nonempty_placeholders_as_text() -> None:
-    assert classify_cell("USD 96.80") == "number"
-    assert classify_cell("25.09.25") == "date"
-    assert classify_cell("N/A") == "text_shape"
+@pytest.mark.parametrize("value", [
+    "28/02/2026", "02/28/2026", "09/04/2026", "2026/02/28", "2026-02-28", "2026.02.28",
+    "26/02/28", "26.02.28", "28.02.26", "25.09.25", "28-02-2026", "2026-02", "02/2026",
+    "28/02", "02/28", "20260228", "29/02", "2026年2月28日", "2026年2月", "2月28日",
+    "28 Feb 2026", "28-Feb-26", "Feb 28, 2026", "February 28th, 2026", "August 2nd",
+    "28 de febrero de 2026", "28 febrero", "Feb 2026", "febrero de 2026", "28 setiembre 2026",
+])
+def test_dates_in_common_formats(value: str) -> None:
+    assert "date" in value_types(value)
+
+
+@pytest.mark.parametrize("value", [
+    "USD 96.80", "USD96.80", "96.80 USD", "$ 280,875.00", "$280,875.00", "US$ 2,713.41",
+    "S/ 1,200.50", "S/. 1,200.50", "€1.234,56", "1.234,56 €", "-$5.00", "$-5.00", "(1,200.00)",
+    "(USD 1,200.00)", "1´131,056.00", "1´ 131,056.00", "5’157,615.36", "12%", "12 %", "3‰",
+    "−15", "+15", "1 000 000", "100元", "12.5万元", "¥100", "￥100",
+])
+def test_numbers_and_amounts_in_common_formats(value: str) -> None:
+    assert "number" in value_types(value)
+
+
+@pytest.mark.parametrize("value", [
+    "N/A", "14:31:15", "HXE34K-S1", "HXE12", "224-4609", "2373310-1-37", "62058-31", "4G",
+    "2 wires", "1,000 PCS", "220V", "5(60)A", "1ST DELIVERY", "12-05", "30/02/2026",
+    "13/13/2026", "1, 3 y 4", "Item 1", "Mar", "DDP DATE", "+51 1 2345678 ext",
+])
+def test_other_writings_stay_text(value: str) -> None:
+    assert value_types(value) == ()
+
+
+def test_ambiguous_writings_keep_every_reading() -> None:
+    assert value_types("20260228") == ("number", "date")
+    assert value_types("2026.02") == ("number", "date")
+    assert value_types("28.02") == ("number",)
+    assert value_types("") == ()
+
+
+def test_shared_type_makes_column_stable_and_blank_header_column_is_allowed() -> None:
+    source = table([[None, "DELIVERIES", "DDP DATE"],
+                    ["1", "1ST DELIVERY", "28/02/2026"],
+                    ["2", "2ND DELIVERY", "09/04/2026"],
+                    ["3", "3RD DELIVERY", "07/08/2026"]])
+    result = detect_header(source)
+    assert (result.outcome, result.header_start_row, result.header_end_row) == ("identified", 0, 1)
+    assert [path.display_parts for path in result.paths] == [(), ("DELIVERIES",), ("DDP DATE",)]
+    assert result.evaluations[0].column_observations[2].stable_body_types == ("date",)
+
+    numbers = table([["Price"], ["4.56"], ["2026.02"]])
+    assert detect_header(numbers).evaluations[0].column_observations[0].stable_body_types == ("number",)
 
 
 def test_selected_and_native_table_use_same_content_rules() -> None:

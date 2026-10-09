@@ -27,6 +27,8 @@ AdmissionReason: TypeAlias = Literal["no_eligible_table_slot_on_page", "no_table
 MetricName: TypeAlias = Literal["text_f1", "critical_token_integrity", "shape_support", "blank_anomaly"]
 MetricReason: TypeAlias = Literal["empty_reference", "empty_candidate", "no_critical_reference_tokens", "invalid_or_missing_dimensions", "invalid_cell_interval", "overlapping_cells"]
 HeaderInputIssueCode: TypeAlias = Literal["invalid_dimensions", "duplicate_cell_id", "unavailable_cell_position", "invalid_cell_interval", "span_mismatch", "overlapping_cells", "unplaced_text"]
+ValueType: TypeAlias = Literal["number", "date"]
+CellShape: TypeAlias = Literal["empty", "text", "typed"]
 HeaderStructuralIssueCode: TypeAlias = Literal["boundary_crosses_cell", "missing_header_position", "internal_blank_row", "internal_full_width_row", "crossing_column_intervals", "no_nonempty_path"]
 
 
@@ -425,15 +427,15 @@ class HeaderObservation:
     row_index: int
     cell_id: str
     raw_text: str
-    value_type: Literal["number", "date", "text_shape"]
+    value_types: tuple[ValueType, ...]
 
 @dataclass(frozen=True)
 class HeaderColumnObservation:
     column_index: int
     lowest_header_cell_id: str | None
-    header_value_type: Literal["number", "date", "text_shape", "empty"]
+    header_shape: CellShape
     observations: tuple[HeaderObservation, ...]
-    stable_body_type: Literal["number", "date"] | None
+    stable_body_types: tuple[ValueType, ...]
     supports_transition: bool
 
 @dataclass(frozen=True)
@@ -471,13 +473,13 @@ class HeaderDecision:
     header_start_row: int | None
     header_end_row: int | None
     paths: tuple[HeaderPath, ...]
-    rule_version: Literal["table_header_v1"]
+    rule_version: Literal["table_header_v2"]
     sample_row_budget: Literal[8]
     minimum_independent_observations: Literal[2]
 
     def __post_init__(self) -> None:
         if (self.rule_version, self.sample_row_budget,
-                self.minimum_independent_observations) != ("table_header_v1", 8, 2):
+                self.minimum_independent_observations) != ("table_header_v2", 8, 2):
             raise ValueError("unsupported header rule")
         identified = self.outcome == "identified"
         has_range = self.header_start_row is not None and self.header_end_row is not None
