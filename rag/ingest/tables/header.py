@@ -12,18 +12,23 @@ from rag.ingest.tables.models import (
     HeaderSkippedRow, StructuredTable, TableCell, ValueType,
 )
 
-RULE_VERSION = "table_header_v2"
+RULE_VERSION = "table_header_v3"
+MAX_HEADER_ROWS = 5
 
-# Digit groups joined by thousands marks; an apostrophe-like mark may be followed by one space.
-_DIGITS = r"\d+(?:(?:[.,' ]|' )(?=\d)|\d)*"
+# Integer part: plain digits, or 1-3 digits then groups of exactly 3 joined by a thousands mark
+# (an apostrophe may be followed by one space); an optional decimal part closes the number.
+_DIGITS = r"(?:\d{1,3}(?:(?:[,.' ]|' )\d{3})+|\d+)(?:[.,]\d+)?"
 _SIGN = r"[+\-−]"
 _CURRENCY_CODES = ("USD", "EUR", "GBP", "CNY", "RMB", "JPY", "HKD", "PEN", "BRL", "MXN", "CLP",
                    "COP", "ARS", "CAD", "AUD", "CHF", "SGD", "KRW", "INR")
 _SYMBOLS = r"US\$|S/\.?|R\$|[$€£¥]|" + "|".join(_CURRENCY_CODES)
-_AMOUNT = (rf"{_SIGN}?{_DIGITS}(?: ?[%‰])?"
-           rf"|{_SIGN}?(?:{_SYMBOLS}) ?{_SIGN}?{_DIGITS}"
-           rf"|{_SIGN}?{_DIGITS} ?(?:万元|元|{_SYMBOLS})")
-_NUMBER = re.compile(rf"(?:{_AMOUNT})|\((?:{_AMOUNT})\)")
+_PLAIN = rf"{_SIGN}?{_DIGITS}(?: ?[%‰])?"
+_MONEY = (rf"{_SIGN}?(?:{_SYMBOLS}) ?{_SIGN}?{_DIGITS}"
+          rf"|{_SIGN}?{_DIGITS} ?(?:万元|元|{_SYMBOLS})")
+_NUMBER = re.compile(rf"{_PLAIN}|\({_PLAIN}\)")
+_CURRENCY = re.compile(rf"(?:{_MONEY})|\((?:{_MONEY})\)")
+# Cells meaning "none"; they count as empty in every header judgment.
+_PLACEHOLDERS = frozenset({"-", "–", "—", "−"})
 
 _NUMERIC_DATE = re.compile(r"(\d{1,4})([/.\-])(\d{1,2})\2(\d{1,4})")
 _YEAR_MONTH = re.compile(r"(\d{4})[/.\-](\d{1,2})|(\d{1,2})/(\d{4})")
@@ -134,13 +139,16 @@ def value_types(value: str | None) -> tuple[ValueType, ...]:
     types: list[ValueType] = []
     if _NUMBER.fullmatch(text):
         types.append("number")
+    if _CURRENCY.fullmatch(text):
+        types.append("currency")
     if _numeric_date(text) or _worded_date(text):
         types.append("date")
     return tuple(types)
 
 
 def cell_shape(value: str | None) -> CellShape:
-    if not _normalized(value):
+    text = _normalized(value)
+    if not text or text in _PLACEHOLDERS:
         return "empty"
     return "typed" if value_types(value) else "text"
 
@@ -274,8 +282,16 @@ def _evaluate(table: StructuredTable, start: int, end: int,
     row = end
     while row < table.row_count and len(sampled) < sample_row_budget:  # type: ignore[operator]
         cells = _unique(_row_cells(table, row))
+        # A row led by a horizontally merged cell is a summary or section row and is skipped whole;
+        # elsewhere only the merged cells are left out.
+        filled = sorted((cell for cell in cells if cell_shape(cell.text) != "empty"),
+                        key=lambda cell: cell.start_col_offset_idx or 0)
+        summary = bool(filled) and (filled[0].col_span or 0) > 1
+        usable = not summary and any((cell.col_span or 0) == 1 for cell in filled)
         missing = any(pos.row_index == row for pos in table.uncovered_grid_positions)
-        reason = "missing_position" if missing else "horizontal_span" if any((cell.col_span or 0) > 1 for cell in cells) else "blank_row" if _is_blank_row(table, row) else None
+        reason = (None if usable else "summary_row" if summary
+                  else "horizontal_span" if any((cell.col_span or 0) > 1 for cell in cells)
+                  else "missing_position" if missing else "blank_row")
         if reason:
             skipped.append(HeaderSkippedRow(row, reason, tuple(cell.cell_id for cell in cells)))  # type: ignore[arg-type]
         else:
@@ -292,15 +308,18 @@ def _evaluate(table: StructuredTable, start: int, end: int,
             if cell is None or cell.cell_id in seen:
                 continue
             seen.add(cell.cell_id)
-            if cell_shape(cell.text) != "empty":
+            if (cell.col_span or 0) == 1 and cell_shape(cell.text) != "empty":
                 observations.append(HeaderObservation(sample_row, cell.cell_id, cell.text or "",
                                                       value_types(cell.text)))
         # Stable: enough observations that share a type under at least one reading each.
         shared = (set.intersection(*(set(item.value_types) for item in observations))
                   if len(observations) >= minimum_independent_observations else set())
-        stable: tuple[ValueType, ...] = tuple(kind for kind in ("number", "date") if kind in shared)
-        header_shape = cell_shape(lowest.text if lowest else None)
-        supports = header_shape == "text" and bool(stable)
+        stable: tuple[ValueType, ...] = tuple(kind for kind in ("number", "currency", "date") if kind in shared)
+        header_text = lowest.text if lowest else None
+        header_shape = cell_shape(header_text)
+        # Transition: a non-empty header cell that cannot be read as the body's stable type.
+        supports = (header_shape != "empty" and bool(stable)
+                    and not set(value_types(header_text)) & set(stable))
         if supports:
             supporting.append(col)
         columns.append(HeaderColumnObservation(col, lowest.cell_id if lowest else None, header_shape,
@@ -330,7 +349,7 @@ def detect_header(table: StructuredTable, *, sample_row_budget: int = 8,
         return HeaderDecision("undetermined", "no_candidate_region", (), tuple(skipped), (), None, None, (), RULE_VERSION, sample_row_budget, minimum_independent_observations)
     evaluations = tuple(_evaluate(table, start, end, sample_row_budget,
                                   minimum_independent_observations)
-                        for end in range(start + 1, table.row_count))
+                        for end in range(start + 1, min(start + MAX_HEADER_ROWS, table.row_count - 1) + 1))
     supported = tuple(item for item in evaluations if item.result_reason == "supported")
     if len(supported) != 1:
         reason = "no_supported_candidate" if not supported else "ambiguous_candidates"

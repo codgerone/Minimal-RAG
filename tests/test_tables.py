@@ -10,7 +10,7 @@ import pytest
 from rag.ingest.tables.pdf_words import PyMuPdfEvidenceReader
 from rag.ingest.assemble import compose_document
 from rag.ingest.tables.prepare import TablePreparationError, prepare_tables
-from rag.ingest.tables.header import detect_header, value_types
+from rag.ingest.tables.header import cell_shape, detect_header, value_types
 from rag.ingest.tables.markdown_rows import serialize_markdown_rows
 from rag.ingest.tables.select import select_tables
 from rag.models import (
@@ -85,19 +85,31 @@ def test_dates_in_common_formats(value: str) -> None:
 
 
 @pytest.mark.parametrize("value", [
-    "USD 96.80", "USD96.80", "96.80 USD", "$ 280,875.00", "$280,875.00", "US$ 2,713.41",
-    "S/ 1,200.50", "S/. 1,200.50", "€1.234,56", "1.234,56 €", "-$5.00", "$-5.00", "(1,200.00)",
-    "(USD 1,200.00)", "1´131,056.00", "1´ 131,056.00", "5’157,615.36", "12%", "12 %", "3‰",
-    "−15", "+15", "1 000 000", "100元", "12.5万元", "¥100", "￥100",
+    "1´131,056.00", "1´ 131,056.00", "5’157,615.36", "1,234.56", "1.234,56", "1 000 000", "10,000",
+    "20000.00", "4.56", "(1,200.00)", "12%", "12 %", "3‰", "−15", "+15",
 ])
-def test_numbers_and_amounts_in_common_formats(value: str) -> None:
-    assert "number" in value_types(value)
+def test_plain_numbers_in_common_formats(value: str) -> None:
+    assert value_types(value)[0] == "number" and "currency" not in value_types(value)
+
+
+@pytest.mark.parametrize("value", [
+    "USD 96.80", "USD96.80", "96.80 USD", "$ 280,875.00", "$280,875.00", "US$ 2,713.41",
+    "S/ 1,200.50", "S/. 1,200.50", "€1.234,56", "1.234,56 €", "-$5.00", "$-5.00",
+    "(USD 1,200.00)", "100元", "12.5万元", "¥100", "￥100", "USD 5’157,615.36",
+])
+def test_currency_amounts_in_common_formats(value: str) -> None:
+    assert value_types(value) == ("currency",)
+
+
+@pytest.mark.parametrize("value", ["10.12.25", "25.09.25", "1,00,000", "12,34.5", "1.2345,6"])
+def test_thousands_groups_must_have_three_digits(value: str) -> None:
+    assert "number" not in value_types(value)
 
 
 @pytest.mark.parametrize("value", [
     "N/A", "14:31:15", "HXE34K-S1", "HXE12", "224-4609", "2373310-1-37", "62058-31", "4G",
     "2 wires", "1,000 PCS", "220V", "5(60)A", "1ST DELIVERY", "12-05", "30/02/2026",
-    "13/13/2026", "1, 3 y 4", "Item 1", "Mar", "DDP DATE", "+51 1 2345678 ext",
+    "13/13/2026", "1, 3 y 4", "Item 1", "Mar", "DDP DATE", "+51 1 2345678 ext", "UD 218,400.00",
 ])
 def test_other_writings_stay_text(value: str) -> None:
     assert value_types(value) == ()
@@ -108,6 +120,8 @@ def test_ambiguous_writings_keep_every_reading() -> None:
     assert value_types("2026.02") == ("number", "date")
     assert value_types("28.02") == ("number",)
     assert value_types("") == ()
+    assert [cell_shape(value) for value in ("-", "–", "—", "−", "", "x", "5")] == [
+        "empty", "empty", "empty", "empty", "empty", "text", "typed"]
 
 
 def test_shared_type_makes_column_stable_and_blank_header_column_is_allowed() -> None:
@@ -190,3 +204,57 @@ def test_real_pdf_words_drive_group_scoring_and_explicit_fallback(tmp_path: Path
     assert fallback[0].origin == "docling_native_fallback"
     assert empty_grouping.groups[0].status == "unresolved"
     assert empty_scoring.groups == ()
+
+
+def test_summary_row_is_skipped_and_split_cells_are_left_out() -> None:
+    item = TableCell("item", "Item", 0, 2, 0, 1, 2, 1, None, ("body",), "native", ("/item",))
+    qty = TableCell("qty", "Qty", 0, 2, 1, 2, 2, 1, None, ("body",), "native", ("/qty",))
+    total = TableCell("total", "Total CIF", 3, 4, 0, 2, 1, 2, None, ("body",), "native", ("/total",))
+    single = table([[None, None, "Total Amount"], [None, None, "(USD)"],
+                    ["1", "10,000", "968,000.00"], [None, None, "USD 968,000.00"]], spans=(item, qty, total))
+    result = detect_header(single)
+    assert result.outcome == "undetermined"  # one data row: no column can be checked
+    skipped = next(item for item in result.evaluations if item.end_row == 2).skipped_rows
+    assert [(row.row_index, row.reason) for row in skipped] == [(3, "summary_row")]
+
+    blank_led = TableCell("label", "Total", 3, 4, 1, 3, 1, 2, None, ("body",), "native", ("/label",))
+    led = table([["Item", "Desc", "Qty", "Amount"], ["1", "a", "5", "USD 1"], ["2", "b", "6", "USD 2"],
+                 [None, None, None, "USD 3"]], spans=(blank_led,))
+    winner = next(item for item in detect_header(led).evaluations if item.end_row == 1)
+    assert [(row.row_index, row.reason) for row in winner.skipped_rows] == [(3, "summary_row")]
+
+    price = [TableCell(f"p{row}", value, row, row + 1, 1, 3, 1, 2, None, ("body",), "native", (f"/p{row}",))
+             for row, value in ((0, "Unit price"), (1, "USD 5.28"), (2, "USD 5.50"))]
+    split = table([["Item", None, None], ["1", None, None], ["2", None, None]], spans=tuple(price))
+    result = detect_header(split)
+    assert (result.outcome, result.header_end_row) == ("identified", 1)
+    assert result.evaluations[0].sampled_row_indices == (1, 2)
+
+
+def test_date_header_over_numbers_and_placeholders() -> None:
+    source = table([["MODEL", "1st Delivery", "2nd Delivery"],
+                    [None, "25.09.25", "10.10.25"],
+                    ["HXE12ESX", "-", "20,000.00"],
+                    ["HXE13ESX", "5,000.00", "2,500.00"],
+                    ["HXE33K-S1", "900.00", "-"]])
+    merged = replace(source, cells=tuple(
+        replace(cell, end_row_offset_idx=2, row_span=2) if cell.cell_id == "c0_0" else cell
+        for cell in source.cells if cell.cell_id != "c1_0"))
+    result = detect_header(merged)
+    assert (result.outcome, result.header_start_row, result.header_end_row) == ("identified", 0, 2)
+    assert [path.display_parts for path in result.paths] == [
+        ("MODEL",), ("1st Delivery", "25.09.25"), ("2nd Delivery", "10.10.25")]
+
+
+def test_number_over_currency_is_a_transition_and_mixed_column_is_unstable() -> None:
+    assert detect_header(table([["2025"], ["USD 5.00"], ["USD 6.00"]])).header_end_row == 1
+    mixed = detect_header(table([["Price"], ["USD 5.00"], ["6.00"]]))
+    assert mixed.outcome == "undetermined"
+    assert mixed.evaluations[0].column_observations[0].stable_body_types == ()
+
+
+def test_header_candidates_have_at_most_five_rows() -> None:
+    source = table([[f"h{row}", f"g{row}"] for row in range(7)] + [["1", "2"], ["3", "4"]])
+    result = detect_header(source)
+    assert max(item.end_row for item in result.evaluations) == 5
+    assert result.outcome == "undetermined"

@@ -154,7 +154,7 @@ HEADER_REASONS = {
     "invalid_grid": "表格网格不完整或单元格跨度与位置不一致，无法判定",
     "unplaced_content": "有无法定位到网格的文字，无法判定",
     "no_candidate_region": "表格顶部找不到可作为表头的行",
-    "no_supported_candidate": "没有哪一组顶部行满足“文字标题下面是数字或日期”的依据",
+    "no_supported_candidate": "顶部 1–5 行中没有哪一组满足依据：某列标题的类型，与它下方至少 2 个格的共同类型不同",
     "ambiguous_candidates": "有多组顶部行同样满足依据，无法唯一确定",
 }
 
