@@ -1,8 +1,8 @@
 # 表格文本化
 
 > **规则摘要**
-> - 两种实现，由装配的 `table_formatter` 选择：`numbered_fields_v1`（逐格写字段名）、`markdown_rows_v1`（Markdown 竖线行，表头只写一次）。
-> - 两者都保留每个单元格的内容，并为每行记录它来自哪些表格行和单元格。
+> - 三种实现，由装配的 `table_formatter` 选择：`numbered_fields_v1`（行列编号 + 逐格写字段名）、`markdown_rows_v1`（Markdown 竖线行，表头只写一次）、`labeled_rows_v1`（Markdown 竖线行，列名写在值前）。
+> - 都保留每个单元格的内容，并为每行记录它来自哪些表格行和单元格。
 
 ## numbered_fields_v1（V3.4 及之前名为 row_text_v1）
 
@@ -57,7 +57,26 @@
 - 每行记录各单元格内容在行内的位置；某行开启新的 chunk 且有纵向合并单元格从上方的数据行延续下来时，分块器按这一行记录的续接写法改写它（见 [chunking.md](chunking.md)）。
 - 回答用的系统提示词说明 `←`、`↑` 和 `↑ 值` 的含义；表格文本本身不加图例。
 
+## labeled_rows_v1
+
+> - 与 `markdown_rows_v1` 只差两处：没有单独的表头行；只占一列的格，其值写作 `列名: 值`。
+> - 横跨多列的格、空格、`←`、`↑`、缺失格不写列名；没认出表头时输出与 `markdown_rows_v1` 相同。
+
+代码：`rag/ingest/tables/markdown_rows.py`。
+
+### 示例
+
+```
+| Item: 1 | Goods of Description: Single Phase Meter 2 wires | Qty: 80,000 |
+| Total CIF (CALLAO) | ← | ← |
+```
+
+### 规则
+
+- 续接时补出的值同样写列名：`列名: ↑ 值`。
+- 行内的列名记为该行的来源，表头单元格计入含有它的每个 chunk 的区域。
+
 ## 已知限制
 
 - `numbered_fields_v1`：中文的"第N行/第M列"脚手架和重复出现的字段名占据大部分 token，稀释 embedding 对内容的表达，也让一个 chunk 只装得下少数几行。
-- `markdown_rows_v1`：原文中本来就有的 `←`、`↑` 字符会与合并标记混淆；横跨整行的合并行只覆盖一行，不带进后续的 chunk。
+- `markdown_rows_v1`、`labeled_rows_v1`：原文中本来就有的 `←`、`↑` 字符会与合并标记混淆；横跨整行的合并行只覆盖一行，不带进后续的 chunk。
