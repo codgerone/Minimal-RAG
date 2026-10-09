@@ -105,3 +105,33 @@ def test_chunk_opening_inside_a_vertical_merge_gets_the_value_back_as_repeated_c
     boxes = {r.bbox for r in regions if r.precision == "fine"}
     assert company.bbox in boxes and block.bbox in boxes
     assert all(r.precision == "fine" for r in regions)
+
+
+def test_labeled_rows_put_column_names_on_single_column_values_only():
+    total = cell("total", "Total CIF", 2, 0, cols=2)
+    table = grid([["Model", "Qty", "Amount"], ["A", "", "5"], ["", "", "9"]], merged=(total,))
+    header = first_row_header(table)
+    labeled = serialize_markdown_rows(table, header, table_node_id="tbl", labeled=True)
+    assert labeled.text == "| Model: A |  | Amount: 5 |\n| Total CIF | ← | Amount: 9 |"
+    assert labeled.rule_version == "labeled_rows_v1"
+    first = labeled.lines[0]
+    assert [first.text[s.start:s.end] for s in first.cell_spans if s.end > s.start] == ["Model", "A", "Amount", "5"]
+    assert "c0_0" in first.source_cell_ids and "c0_2" in first.source_cell_ids
+
+
+def test_labeled_rows_without_header_equal_markdown_rows():
+    table = grid([["产品", "数量"], ["A", '100"'], ["B", "200"]])
+    header = detect_header(table)
+    assert header.outcome == "undetermined"
+    plain = serialize_markdown_rows(table, header, table_node_id="tbl")
+    labeled = serialize_markdown_rows(table, header, table_node_id="tbl", labeled=True)
+    assert labeled.text == plain.text
+
+
+def test_labeled_continuation_keeps_the_column_name():
+    company = cell("company", "ENSA", 1, 0, rows=3)
+    table = grid([["COMPANY", "MODEL"], ["", "HXE12ES"], ["", "HXE13ES"], ["", "HXE33K"]], merged=(company,))
+    header = first_row_header(table)
+    line = serialize_markdown_rows(table, header, table_node_id="tbl", labeled=True).lines[2]
+    assert line.text == "| ↑ | MODEL: HXE33K |"
+    assert line.resumed_text() == "| COMPANY: ↑ ENSA | MODEL: HXE33K |"

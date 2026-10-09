@@ -28,3 +28,11 @@ class MarkdownRowsFormatter:
     def format(self, table: StructuredTable, header: HeaderDecision, *,
                table_node_id: str | None = None) -> SerializedTable:
         return serialize_markdown_rows(table, header, table_node_id=table_node_id)
+
+
+class LabeledRowsFormatter:
+    """`labeled_rows_v1`: as `markdown_rows_v1`, but single-column values read `列名: 值`, no header line."""
+
+    def format(self, table: StructuredTable, header: HeaderDecision, *,
+               table_node_id: str | None = None) -> SerializedTable:
+        return serialize_markdown_rows(table, header, table_node_id=table_node_id, labeled=True)
