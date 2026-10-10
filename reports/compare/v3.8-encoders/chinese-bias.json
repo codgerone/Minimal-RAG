@@ -1,0 +1,37 @@
+{
+  "sentence": "今天天气很好，适合出门散步。",
+  "top": 3,
+  "questions": [
+    "CONTRACT-105-Q001",
+    "CONTRACT-105-Q004",
+    "CONTRACT-105-Q005",
+    "CONTRACT-105-Q006",
+    "CONTRACT-105-Q007",
+    "CONTRACT-105-Q008",
+    "E001-602-Q001",
+    "PO-24-12-Q002",
+    "PO-24-12-Q003",
+    "PO-24-12-Q005",
+    "PO-24-12-Q006",
+    "PO-25-19-Q004"
+  ],
+  "slots": 36,
+  "models": {
+    "e5_small": {
+      "as_indexed": 1,
+      "chinese_prefixed": 23
+    },
+    "e5_large_instruct": {
+      "as_indexed": 2,
+      "chinese_prefixed": 19
+    },
+    "bge_m3": {
+      "as_indexed": 1,
+      "chinese_prefixed": 1
+    },
+    "qwen3_embedding_0_6b": {
+      "as_indexed": 2,
+      "chinese_prefixed": 1
+    }
+  }
+}

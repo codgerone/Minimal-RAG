@@ -1,0 +1,17 @@
+{
+  "name": "v3.8-encoders",
+  "runs": [
+    "2026-10-09_structured_k3_filter-on_4",
+    "2026-10-10_structured_e5_large_instruct_k3_filter-on",
+    "2026-10-10_structured_bge_m3_k3_filter-on",
+    "2026-10-10_structured_qwen3_0_6b_k3_filter-on",
+    "2026-10-10_structured_k3_filter-on_translated",
+    "2026-10-10_structured_bge_m3_k3_filter-on_translated",
+    "2026-10-09_plain_text_k3_filter-on_4",
+    "2026-10-10_plain_text_e5_large_instruct_k3_filter-on",
+    "2026-10-10_plain_text_bge_m3_k3_filter-on",
+    "2026-10-10_plain_text_qwen3_0_6b_k3_filter-on",
+    "2026-10-10_plain_text_k3_filter-on_translated",
+    "2026-10-10_plain_text_bge_m3_k3_filter-on_translated"
+  ]
+}
