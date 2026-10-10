@@ -39,7 +39,10 @@ class SentenceTransformerEmbedder:
     def _load_model(self) -> Any:
         if self._model is None:
             from sentence_transformers import SentenceTransformer
-            self._model = SentenceTransformer(self.model_name, revision=self.revision)
+            # Always float32: some checkpoints load as float16 / bfloat16, which CPUs without
+            # half-precision kernels run many times slower.
+            self._model = SentenceTransformer(self.model_name, revision=self.revision,
+                                              model_kwargs={"dtype": "float32"})
         return self._model
 
     def _encode(self, texts: list[str], batch_size: int) -> list[list[float]]:
