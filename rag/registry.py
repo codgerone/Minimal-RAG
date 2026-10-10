@@ -8,7 +8,8 @@ from dataclasses import dataclass, field
 from typing import Any, Callable
 
 from rag.config import AssemblyConfig, Component, ConfigError
-from rag.index.embedder import E5Embedder, Embedder
+from rag.index import embedder as embedders
+from rag.index.embedder import Embedder
 from rag.ingest.chunkers import Chunker
 from rag.ingest.parsers import Parser
 from rag.ingest.tables.extractors import TableExtractor
@@ -42,9 +43,8 @@ def _characters(embedder: Embedder, **params: Any) -> Chunker:
 
 def _structured(embedder: Embedder, **params: Any) -> Chunker:
     from rag.ingest.chunkers.structured import StructuredTokenChunker
-    if not hasattr(embedder, "count_passage"):
-        raise ConfigError("structured_tokens 分块器需要能统计 token 的编码器")
-    return StructuredTokenChunker(embedder, **params)  # type: ignore[arg-type]
+    from rag.ingest.chunkers.tokens import E5TokenCounter
+    return StructuredTokenChunker(E5TokenCounter(), **params)
 
 
 PARSERS: dict[str, Callable[..., Parser]] = {
@@ -62,7 +62,12 @@ CHUNKERS: dict[str, Callable[..., Chunker]] = {
     "characters": _characters,
     "structured_tokens": _structured,
 }
-EMBEDDERS: dict[str, Callable[..., Embedder]] = {"e5_small": E5Embedder}
+EMBEDDERS: dict[str, Callable[..., Embedder]] = {
+    "e5_small": embedders.e5_small,
+    "e5_large_instruct": embedders.e5_large_instruct,
+    "bge_m3": embedders.bge_m3,
+    "qwen3_embedding_0_6b": embedders.qwen3_embedding_0_6b,
+}
 RETRIEVERS = ("semantic",)
 LLMS: dict[str, Callable[..., LLM]] = {"openrouter": OpenRouterLLM}
 

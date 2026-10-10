@@ -1,0 +1,29 @@
+{
+  "note": "V3.8 翻译诊断：中文问题译成文档语言（订单译英文，合同、发票译西班牙文），标识编码、型号、原文术语保持原样。译文由助手撰写。",
+  "questions": {
+    "CONTRACT-105-Q001": "¿Quiénes son las partes firmantes del contrato de compra CONTRATO N° 105 - 2025 (CONT2025001)? ¿Quién es el representante legal de cada una?",
+    "CONTRACT-105-Q002": "¿Qué Ítem de productos incluye el contrato de compra CONTRATO N° 105 - 2025 (CONT2025001)? ¿Cuál es la cantidad, el precio unitario y el monto total con impuestos de cada uno? ¿Cuál es el monto total del contrato?",
+    "CONTRACT-105-Q003": "¿Cuál es el plazo total de ejecución establecido en el contrato de compra CONTRATO N° 105 - 2025 (CONT2025001)? ¿Cuál es el lugar de entrega específico? ¿Se permite la entrega anticipada?",
+    "CONTRACT-105-Q004": "En el contrato de compra CONTRATO N° 105 - 2025 (CONT2025001), ¿qué se establece sobre el monto de la Garantía de fiel cumplimiento de cada Ítem y la entidad que la emite?",
+    "CONTRACT-105-Q005": "En el contrato de compra CONTRATO N° 105 - 2025 (CONT2025001), ¿cuál es el plazo de la Garantía Técnico-Comercial? Si ocurre una falla durante el período de garantía, ¿cuáles son los plazos de respuesta y de reparación del contratista?",
+    "CONTRACT-105-Q006": "En el contrato de compra CONTRATO N° 105 - 2025 (CONT2025001), ¿cuál es el criterio para determinar una Falla Repetitiva? ¿Qué responsabilidad asume el contratista cuando se presenta una falla repetitiva?",
+    "CONTRACT-105-Q007": "En el contrato de compra CONTRATO N° 105 - 2025 (CONT2025001), ¿cuáles son las condiciones previas para que el comprador tramite el pago? ¿Cuáles son los plazos para emitir la conformidad y para efectuar el pago?",
+    "CONTRACT-105-Q008": "En el contrato de compra CONTRATO N° 105 - 2025 (CONT2025001), si el contratista incurre en un retraso injustificado en la entrega, ¿cuál es la fórmula de cálculo de la Penalidad por Mora? ¿Cuál es el monto máximo de la penalidad?",
+    "CONTRACT-105-Q009": "En el contrato de compra CONTRATO N° 105 - 2025 (CONT2025001), ¿cuáles son los productos y las cantidades específicos de la primera entrega (1era ENTREGA, a los 170 días de la firma del contrato)?",
+    "CONTRACT-105-Q010": "¿El contrato de compra CONTRATO N° 105 - 2025 (CONT2025001) establece entregas por lotes? ¿Cuáles son las fechas de entrega específicas de cada lote?",
+    "E001-602-Q001": "¿Cuál es la fecha de vencimiento del pago de la factura E001-602 (INVOICE-E001-602)? ¿Qué monto se debe pagar? ¿Cuánto corresponde a impuestos?",
+    "E001-602-Q002": "En la factura E001-602 (INVOICE-E001-602), ¿cuál es el precio unitario y la cantidad de HXE34K-S1?",
+    "PO-24-12-Q001": "Which products are included in PURCHASE ORDER N° 24-12-HPE (ORDER2025001)? What are their unit prices and quantities? What is the total amount of the order?",
+    "PO-24-12-Q002": "Please describe the delivery schedule of PURCHASE ORDER N° 24-12-HPE (ORDER2025001).",
+    "PO-24-12-Q003": "In how many batches will PURCHASE ORDER N° 24-12-HPE (ORDER2025001) be delivered? What is the specific delivery date of each batch?",
+    "PO-24-12-Q004": "Does the total amount of PURCHASE ORDER N° 24-12-HPE (ORDER2025001) cover the cost of MDC ORCA? If not, how much must be paid additionally? What is the payment deadline?",
+    "PO-24-12-Q005": "How are the operation and maintenance services of PURCHASE ORDER N° 24-12-HPE (ORDER2025001) charged?",
+    "PO-24-12-Q006": "What are the payment terms of PURCHASE ORDER N° 24-12-HPE (ORDER2025001)?",
+    "PO-25-15-Q001": "In PURCHASE ORDER N° 25-15-HPE (ORDER2025002), what is the specific date of the fourth delivery batch? What is the total amount of the products delivered?",
+    "PO-25-15-Q002": "In PURCHASE ORDER N° 25-15-HPE (ORDER2025002), what is the specific date of the sixth delivery batch? What is the total amount of the products delivered?",
+    "PO-25-19-Q001": "In PURCHASE ORDER N° 25-19-HPE (ORDER2025003), which products did ELCTO order? What are the unit price and quantity of each product? What is the total amount ordered? What is the delivery plan? Please detail the specific date of each delivery batch and the products and quantities delivered in each batch.",
+    "PO-25-19-Q002": "In PURCHASE ORDER N° 25-19-HPE (ORDER2025003), how many units of HXE34K-S1 did ElUC order? What is the total amount?",
+    "PO-25-19-Q003": "In PURCHASE ORDER N° 25-19-HPE (ORDER2025003), which products did ENSA order? What are the unit price and quantity of each product? What is the total amount ordered? What is the delivery plan? Please detail the specific date of each delivery batch and the products and quantities delivered in each batch.",
+    "PO-25-19-Q004": "In PURCHASE ORDER N° 25-19-HPE (ORDER2025003), what are the customer's payment terms?"
+  }
+}

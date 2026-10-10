@@ -26,7 +26,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     def command(name: str, help_text: str) -> argparse.ArgumentParser:
         sub = commands.add_parser(name, help=help_text, description=help_text)
-        if name != "config":
+        if name not in ("config", "compare"):
             sub.add_argument("--config", metavar="NAME",
                              help="装配配置名（configs/NAME.toml），默认 structured 或环境变量 RAG_CONFIG")
         return sub
@@ -59,6 +59,9 @@ def build_parser() -> argparse.ArgumentParser:
     config = command("config", "查看装配配置")
     config.add_argument("action", choices=["list", "show"])
     config.add_argument("name", nargs="?")
+    compare = command("compare", "把几次评估并排对比，生成 reports/compare/NAME/；每组第一次评估是基线")
+    compare.add_argument("runs", nargs="+", metavar="RUN", help="reports/eval/ 下的评估目录名")
+    compare.add_argument("--name", required=True, help="对比页名称（目录名）")
     command("report", "按已保存的结果重新生成评估报告和总入口 reports/index.html")
     return parser
 
@@ -349,17 +352,29 @@ def _config(workspace: Workspace, args: argparse.Namespace) -> int:
     return 0
 
 
+def _compare(workspace: Workspace, args: argparse.Namespace) -> int:
+    from rag.reports.compare import write_comparison
+    from rag.reports.index_page import write_index_page
+    folder = write_comparison(workspace, args.name, args.runs)
+    write_index_page(workspace)
+    _out(f"对比页：{(folder / 'index.html').relative_to(workspace.root).as_posix()}")
+    return 0
+
+
 def _report(workspace: Workspace, args: argparse.Namespace) -> int:
+    from rag.reports.compare import rerender_comparisons
     from rag.reports.evaluation import rerender_all
     from rag.reports.index_page import write_index_page
     count = rerender_all(workspace)
+    comparisons = rerender_comparisons(workspace)
     write_index_page(workspace)
-    _out(f"已重新生成 {count} 份评估报告和 reports/index.html")
+    _out(f"已重新生成 {count} 份评估报告、{comparisons} 份对比页和 reports/index.html")
     return 0
 
 
 HANDLERS = {"status": _status, "ingest": _ingest, "chunks": _chunks, "search": _search,
-            "ask": _ask, "chat": _chat, "eval": _eval, "anchors": _anchors, "config": _config, "report": _report}
+            "ask": _ask, "chat": _chat, "eval": _eval, "anchors": _anchors, "config": _config,
+            "compare": _compare, "report": _report}
 
 
 def main(argv: Sequence[str] | None = None, *, workspace_root: Path | None = None) -> int:
@@ -379,9 +394,10 @@ def main(argv: Sequence[str] | None = None, *, workspace_root: Path | None = Non
     from rag.index.builder import IngestError
     from rag.ingest.sources import SourceError
     from rag.query.llm import LLMError
+    from rag.reports.compare import CompareError
     try:
         return HANDLERS[args.command](workspace, args)
-    except (ConfigError, SourceError, IngestError, EvalError) as exc:
+    except (ConfigError, SourceError, IngestError, EvalError, CompareError) as exc:
         print(f"错误：{exc}", file=sys.stderr)
         return 2
     except LLMError as exc:

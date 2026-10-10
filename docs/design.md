@@ -25,9 +25,11 @@
 | TableExtractor（可配多个） | `rag/ingest/tables/extractors.py` | `pymupdf`、`camelot`、`docling`、`unstructured` |
 | TableFormatter | `rag/ingest/tables/formatters.py` | `labeled_rows_v1`、`markdown_rows_v1` |
 | Chunker | `rag/ingest/chunkers/__init__.py` | `characters`、`structured_tokens` |
-| Embedder | `rag/index/embedder.py` | `e5_small` |
+| Embedder | `rag/index/embedder.py` | `bge_m3`、`e5_small`、`e5_large_instruct`、`qwen3_embedding_0_6b` |
 | Retriever | `rag/query/retriever.py` | `semantic` |
 | LLM | `rag/query/llm.py` | `openrouter` |
+
+编码器都是固定版本（revision）的 sentence-transformers 模型，按 float32 加载，查询与文档各加固定前缀或指令，向量 L2 归一化；编码前用模型自己的分词器检查 chunk 不超过其输入上限，超过则报错而不截断。模型选择见 [decisions/008-embedder-bge-m3.md](decisions/008-embedder-bge-m3.md)。
 
 表格选优、表头判定、检索范围识别、向量库（Chroma）目前都只有一种实现，作为普通模块存在，等出现第二种实现时再抽象成接口。
 
@@ -65,6 +67,8 @@
 ## 6. 评估
 
 评估流程和指标定义见 [rules/evaluation.md](rules/evaluation.md)。关键设计是：证据按"信息项 → 方案 → excerpt"组织，原因见 [decisions/003-evidence-schemes.md](decisions/003-evidence-schemes.md)；excerpt 与 chunk 的对应按 PDF 坐标判定，原因见 [decisions/004-coordinate-mapping.md](decisions/004-coordinate-mapping.md)。excerpt 的位置只依赖 PDF，人工确认一次后写入 ground-truth；chunk 的来源区域在入库时由 chunk 来源记录和解析器坐标统一推出（`rag/ingest/regions.py`），所以任何装配都不需要为评估另做确认。对插件的要求：解析器提供元素坐标，分块器记录 chunk 内容来自哪个元素的哪段文字；缺细坐标时记粗略区域，评估在其中按片段文字兜底。每次评估在 `reports/eval/<日期>_<配置>_k<K>_filter-on|filter-off/` 下生成 `index.html` 和 `result.json`，同名时在目录名后加 `_2`、`_3`。评估页的"较上次"对比同一配置、同一 K、同一数据集版本的上一次运行（不论过滤状态）。
+
+`compare` 把几次评估并排生成 `reports/compare/<名称>/`：构建设置只差编码器、K 相同的评估放在同一标签页，第一次为基线；每题状态按 未命中 < 部分覆盖 < 完整覆盖 比较，标出变好、变差，并列出在 ≥3 题 Top-K 中出现的不相关 chunk。`runs.json` 记录输入，`report` 会按它重新生成。
 
 ## 7. 代码地图
 

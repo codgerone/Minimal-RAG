@@ -92,3 +92,9 @@ def test_document_filter_is_a_query_setting(tmp_path):
     path.write_text(path.read_text(encoding="utf-8").replace("= false", '= "no"'), encoding="utf-8")
     with pytest.raises(ConfigError, match="document_filter"):
         load_config(path)
+
+
+def test_structured_chunk_budget_is_counted_with_e5_tokenizer():
+    from rag.ingest.chunkers.tokens import E5TokenCounter
+    structured = assemble(resolve_config(ROOT, "structured"))
+    assert isinstance(structured.chunker.counter, E5TokenCounter)
