@@ -1,0 +1,5049 @@
+{
+  "config": "plain_text",
+  "fingerprint": "354f5482ae8af0e22428e720ddb809a4bb13b902b174f6967892e0432f583986",
+  "build_settings": {
+    "rules_version": "v3.7",
+    "parser": {
+      "use": "pymupdf_pages"
+    },
+    "table_extractors": [],
+    "table_formatter": null,
+    "chunker": {
+      "use": "characters",
+      "chunk_size": 300,
+      "chunk_overlap": 50
+    },
+    "embedder": {
+      "use": "e5_small"
+    },
+    "embedder_identity": {
+      "model": "intfloat/multilingual-e5-small",
+      "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+      "passage_prefix": "passage: ",
+      "query_prefix": "query: ",
+      "normalized": true
+    }
+  },
+  "top_k": 3,
+  "created_at": "2026-10-10T13:19:04+08:00",
+  "dataset": {
+    "version": "3.1.0+translated",
+    "fingerprint": "5c9e767133f6fd0169266c54c9da474522625c826f0ca7ea3700bc6c3df1cd9c",
+    "questions": 24,
+    "answerable": 24,
+    "pdf_changed_since_labelling": []
+  },
+  "evidence_modes": {
+    "coordinate": 60,
+    "fallback": 0,
+    "unmapped": 0
+  },
+  "metrics": {
+    "hit_rate": {
+      "value": 0.5416666666666666,
+      "numerator": 13,
+      "denominator": 24
+    },
+    "complete_coverage": {
+      "value": 0.25,
+      "numerator": 6,
+      "denominator": 24
+    },
+    "group_recall": {
+      "value": 0.3680555555555555,
+      "numerator": 8.833333333333332,
+      "denominator": 24
+    },
+    "mrr": {
+      "value": 0.611111111111111,
+      "numerator": 14.666666666666666,
+      "denominator": 24
+    },
+    "chunk_precision": {
+      "value": 0.34722222222222227,
+      "numerator": 8.333333333333334,
+      "denominator": 24
+    },
+    "cross_document": {
+      "value": 0.0,
+      "numerator": 0.0,
+      "denominator": 24
+    }
+  },
+  "document_scope": {
+    "enabled": true,
+    "catalog": true,
+    "identified_correctly": {
+      "numerator": 24,
+      "denominator": 24
+    },
+    "kinds": {
+      "identified": 24,
+      "unidentified": 0,
+      "no_catalog": 0,
+      "disabled": 0
+    }
+  },
+  "documents": {
+    "d359c37e0bc3c87a": {
+      "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+      "questions": 10,
+      "metrics": {
+        "hit_rate": {
+          "value": 0.2,
+          "numerator": 2,
+          "denominator": 10
+        },
+        "complete_coverage": {
+          "value": 0.0,
+          "numerator": 0,
+          "denominator": 10
+        },
+        "group_recall": {
+          "value": 0.06666666666666667,
+          "numerator": 0.6666666666666666,
+          "denominator": 10
+        },
+        "mrr": {
+          "value": 0.4833333333333333,
+          "numerator": 4.833333333333333,
+          "denominator": 10
+        },
+        "chunk_precision": {
+          "value": 0.3,
+          "numerator": 3.0,
+          "denominator": 10
+        },
+        "cross_document": {
+          "value": 0.0,
+          "numerator": 0.0,
+          "denominator": 10
+        }
+      }
+    },
+    "817cfff2927c6c65": {
+      "document_name": "E001-602.pdf",
+      "questions": 2,
+      "metrics": {
+        "hit_rate": {
+          "value": 1.0,
+          "numerator": 2,
+          "denominator": 2
+        },
+        "complete_coverage": {
+          "value": 0.5,
+          "numerator": 1,
+          "denominator": 2
+        },
+        "group_recall": {
+          "value": 0.8333333333333333,
+          "numerator": 1.6666666666666665,
+          "denominator": 2
+        },
+        "mrr": {
+          "value": 0.75,
+          "numerator": 1.5,
+          "denominator": 2
+        },
+        "chunk_precision": {
+          "value": 0.3333333333333333,
+          "numerator": 0.6666666666666666,
+          "denominator": 2
+        },
+        "cross_document": {
+          "value": 0.0,
+          "numerator": 0.0,
+          "denominator": 2
+        }
+      }
+    },
+    "169a1f2133fe5643": {
+      "document_name": "ORDER PERU 24-12 ANDET.pdf",
+      "questions": 6,
+      "metrics": {
+        "hit_rate": {
+          "value": 0.6666666666666666,
+          "numerator": 4,
+          "denominator": 6
+        },
+        "complete_coverage": {
+          "value": 0.6666666666666666,
+          "numerator": 4,
+          "denominator": 6
+        },
+        "group_recall": {
+          "value": 0.6666666666666666,
+          "numerator": 4.0,
+          "denominator": 6
+        },
+        "mrr": {
+          "value": 0.75,
+          "numerator": 4.5,
+          "denominator": 6
+        },
+        "chunk_precision": {
+          "value": 0.3333333333333333,
+          "numerator": 1.9999999999999998,
+          "denominator": 6
+        },
+        "cross_document": {
+          "value": 0.0,
+          "numerator": 0.0,
+          "denominator": 6
+        }
+      }
+    },
+    "5883b02cd922a64f": {
+      "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+      "questions": 2,
+      "metrics": {
+        "hit_rate": {
+          "value": 1.0,
+          "numerator": 2,
+          "denominator": 2
+        },
+        "complete_coverage": {
+          "value": 0.0,
+          "numerator": 0,
+          "denominator": 2
+        },
+        "group_recall": {
+          "value": 0.5,
+          "numerator": 1.0,
+          "denominator": 2
+        },
+        "mrr": {
+          "value": 0.75,
+          "numerator": 1.5,
+          "denominator": 2
+        },
+        "chunk_precision": {
+          "value": 0.5,
+          "numerator": 1.0,
+          "denominator": 2
+        },
+        "cross_document": {
+          "value": 0.0,
+          "numerator": 0.0,
+          "denominator": 2
+        }
+      }
+    },
+    "5a4c36e0022f4917": {
+      "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+      "questions": 4,
+      "metrics": {
+        "hit_rate": {
+          "value": 0.75,
+          "numerator": 3,
+          "denominator": 4
+        },
+        "complete_coverage": {
+          "value": 0.25,
+          "numerator": 1,
+          "denominator": 4
+        },
+        "group_recall": {
+          "value": 0.375,
+          "numerator": 1.5,
+          "denominator": 4
+        },
+        "mrr": {
+          "value": 0.5833333333333334,
+          "numerator": 2.3333333333333335,
+          "denominator": 4
+        },
+        "chunk_precision": {
+          "value": 0.41666666666666663,
+          "numerator": 1.6666666666666665,
+          "denominator": 4
+        },
+        "cross_document": {
+          "value": 0.0,
+          "numerator": 0.0,
+          "denominator": 4
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "case_id": "CONTRACT-105-Q001",
+      "document_id": "d359c37e0bc3c87a",
+      "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+      "question": "¿Quiénes son las partes firmantes del contrato de compra CONTRATO N° 105 - 2025 (CONT2025001)? ¿Quién es el representante legal de cada una?",
+      "reference_answer": "合同买方为 ELECTRO SUR ESTE S.A.A. (LA EMPRESA)，法定代表人为总经理 Ing. Fredy Hernán Gonzáles De La Vega；承包商/卖方为 HEXING ELECTRICAL COMPANY S.A.C. (EL CONTRATISTA)，法定代表人为 María Isabel Gallardo Torres 和 Medaly Xiomara Arotoma Taipe。",
+      "answerable": true,
+      "scope": {
+        "kind": "identified",
+        "codes": [
+          "CONT2025001"
+        ],
+        "document_ids": [
+          "d359c37e0bc3c87a"
+        ],
+        "document_names": [
+          "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+        ],
+        "identified_correctly": true
+      },
+      "evidence_document_ids": [
+        "d359c37e0bc3c87a"
+      ],
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": null,
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            1
+          ],
+          "text": "ELECTRO SUR ESTE S.A.A., identificada con RUC. Nº 20116544289, cuya personería jurídica se encuentra inscrita en la Partida Electrónica Nº 11003503 del Registro de Personas Jurídicas Zona Registral Nº X - Sede Cusco, con domicilio en la Avenida Mariscal Sucre Nº 400 de la Urbanización Bancopata, del distrito de Santiago, provincia y departamento de Cusco, debidamente representada para este acto por su Gerente General el Ing. Fredy Hernán Gonzáles De La Vega, peruano, identificado con DNI. Nº 23839976, con poder de representación inscrito en los Asientos N° D00195 y N° D00232 de la Partida Electrónica en mención. A quien en adelante se le denominará “LA EMPRESA”.",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0004",
+              "d359c37e0bc3c87a-c0005",
+              "d359c37e0bc3c87a-c0006"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x2",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            1
+          ],
+          "text": "HEXING ELECTRICAL COMPANY S.A.C., identificada con RUC. Nº 20546102115, cuya razón social se encuentra inscrita en la Partida Electrónica Nº 12601784 de la Zona Registral IX – Sede Lima, con domicilio legal en el inmueble ubicado en la Avenida Guardia Civil N° 1321, Int. 1602, Urbanización El Aeropuerto, distrito de Surquillo, provincia y departamento de Lima, representada para este efecto por sus Apoderadas la Srta. María Isabel Gallardo Torres, peruana, identificada con DNI N° 44099982, y la Srta. Medaly Xiomara Arotoma Taipe, peruana, identificada con DNI N° 70034859, ambas con poderes inscritos en el asiento Nº C00010 de referida Partida Electrónica en mención. A quien en adelante se le denominará EL CONTRATISTA.",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0007",
+              "d359c37e0bc3c87a-c0008",
+              "d359c37e0bc3c87a-c0009"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        }
+      ],
+      "groups": [
+        {
+          "group_id": "e1",
+          "information_item": "签署双方",
+          "note": "买方、卖方分别写在两段，需两段一起才能说全双方",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0004",
+              "d359c37e0bc3c87a-c0005",
+              "d359c37e0bc3c87a-c0006",
+              "d359c37e0bc3c87a-c0007",
+              "d359c37e0bc3c87a-c0008",
+              "d359c37e0bc3c87a-c0009"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0004",
+                  "d359c37e0bc3c87a-c0005",
+                  "d359c37e0bc3c87a-c0006",
+                  "d359c37e0bc3c87a-c0007",
+                  "d359c37e0bc3c87a-c0008",
+                  "d359c37e0bc3c87a-c0009"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "information_item": "各自的法定代表人",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0004",
+              "d359c37e0bc3c87a-c0005",
+              "d359c37e0bc3c87a-c0006",
+              "d359c37e0bc3c87a-c0007",
+              "d359c37e0bc3c87a-c0008",
+              "d359c37e0bc3c87a-c0009"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0004",
+                  "d359c37e0bc3c87a-c0005",
+                  "d359c37e0bc3c87a-c0006",
+                  "d359c37e0bc3c87a-c0007",
+                  "d359c37e0bc3c87a-c0008",
+                  "d359c37e0bc3c87a-c0009"
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "d359c37e0bc3c87a-c0020",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.13157570362091064,
+          "similarity": 0.8684242963790894,
+          "relevant": false,
+          "cross_document": false,
+          "text": "suspendido o inhabilitado para contratar con el Estado.\n\n2.4\nEL CONTRATISTA ha cumplido con presentar la siguiente documentación en fecha 02/09/2025 y su subsanación\nen fecha 10/09/2025:\n\n•\nGarantía de fiel cumplimiento del contrato:"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "d359c37e0bc3c87a-c0153",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            9
+          ],
+          "kind": "text",
+          "distance": 0.1373308300971985,
+          "similarity": 0.8626691699028015,
+          "relevant": false,
+          "cross_document": false,
+          "text": "De acuerdo con las bases integradas, la oferta y las disposiciones del presente contrato, las partes lo firman por\nduplicado en señal de conformidad en la ciudad del Cusco a los 23 días del mes de setiembre de 2025.\n\n “LA EMPRESA”\n\n “EL CONTRATISTA”\n\n9"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "d359c37e0bc3c87a-c0031",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.13734006881713867,
+          "similarity": 0.8626599311828613,
+          "relevant": false,
+          "cross_document": false,
+          "text": "2.5 EL CONTRATISTA mediante Carta HXPE25-065 de fecha 16 de setiembre de 2025, requirió a LA EMPRESA\ncumplir con el perfeccionamiento del contrato, de acuerdo a lo establecido en el artículo 91.1 del Reglamento de\nla Ley General de Contrataciones Públicas."
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q002",
+      "document_id": "d359c37e0bc3c87a",
+      "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+      "question": "¿Qué Ítem de productos incluye el contrato de compra CONTRATO N° 105 - 2025 (CONT2025001)? ¿Cuál es la cantidad, el precio unitario y el monto total con impuestos de cada uno? ¿Cuál es el monto total del contrato?",
+      "reference_answer": "合同共包含 3 个 Ítem，含税总金额为 US$ 810,722.54：\n1. Ítem 1（单相电子电表 2线）：数量 120,000 台，单价 US$ 6.1124，总价 US$ 733,488.00；\n2. Ítem 3（三相电子电表 3线）：数量 1,500 台，单价 US$ 18.0894，总价 US$ 27,134.10；\n3. Ítem 4（三相电子电表 4线）：数量 2,600 台，单价 US$ 19.2694，总价 US$ 50,100.44。",
+      "answerable": true,
+      "scope": {
+        "kind": "identified",
+        "codes": [
+          "CONT2025001"
+        ],
+        "document_ids": [
+          "d359c37e0bc3c87a"
+        ],
+        "document_names": [
+          "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+        ],
+        "identified_correctly": true
+      },
+      "evidence_document_ids": [
+        "d359c37e0bc3c87a"
+      ],
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": 1,
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            2
+          ],
+          "text": "1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS\n3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS\n4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0033"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x2",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            3
+          ],
+          "text": "1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 01\n3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS | Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 03\n4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 04",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0036",
+              "d359c37e0bc3c87a-c0037"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x3",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            4
+          ],
+          "text": "El monto total del presente se detalla a continuación:\nÍtem 1: US$ 733,488.00 (Setecientos treinta y tres mil cuatrocientos ochenta y ocho con 00/100 Dólares Americanos) incluye todos los impuestos de Ley.\nÍtem 3: US$ 27,134.10 (Veintisiete mil ciento treinta y cuatro con 10/100 Dólares Americanos) incluye todos los impuestos de Ley.\nÍtem 4: US$ 50,100.44 (Cincuenta mil cien con 44/100 Dólares Americanos) incluye todos los impuestos de Ley.",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0056",
+              "d359c37e0bc3c87a-c0057"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x4",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            4
+          ],
+          "text": "Ítem 1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | 120,000 | 6.1124 | 733,488.00\nÍtem 3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS | 1,500 | 18.0894 | 27,134.10\nÍtem 4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | 2,600 | 19.2694 | 50,100.44",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0058"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x5",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            5
+          ],
+          "text": "1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | UNIDAD | 120,000\n3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS | UNIDAD | 1,500\n4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | UNIDAD | 2,600",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0078",
+              "d359c37e0bc3c87a-c0079"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x6",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            4
+          ],
+          "text": "PRECIO UNITARIO CON IGV (US$)",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0057",
+              "d359c37e0bc3c87a-c0058"
+            ]
+          ],
+          "problem": "",
+          "table_header": true
+        }
+      ],
+      "groups": [
+        {
+          "group_id": "e1",
+          "information_item": "各 Ítem 的品名",
+          "note": "x5 交货计划表同样列出全部 Ítem",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0033"
+            ],
+            [
+              "d359c37e0bc3c87a-c0058"
+            ],
+            [
+              "d359c37e0bc3c87a-c0036",
+              "d359c37e0bc3c87a-c0037"
+            ],
+            [
+              "d359c37e0bc3c87a-c0078",
+              "d359c37e0bc3c87a-c0079"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0033"
+                ]
+              ]
+            },
+            {
+              "scheme_id": "s2",
+              "excerpt_ids": [
+                "x2"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0036",
+                  "d359c37e0bc3c87a-c0037"
+                ]
+              ]
+            },
+            {
+              "scheme_id": "s3",
+              "excerpt_ids": [
+                "x4"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0058"
+                ]
+              ]
+            },
+            {
+              "scheme_id": "s4",
+              "excerpt_ids": [
+                "x5"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0078",
+                  "d359c37e0bc3c87a-c0079"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "information_item": "各 Ítem 的数量",
+          "note": "x5 为交货计划表的需求总量列",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0058"
+            ],
+            [
+              "d359c37e0bc3c87a-c0078",
+              "d359c37e0bc3c87a-c0079"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x4"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0058"
+                ]
+              ]
+            },
+            {
+              "scheme_id": "s2",
+              "excerpt_ids": [
+                "x5"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0078",
+                  "d359c37e0bc3c87a-c0079"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e3",
+          "information_item": "各 Ítem 的单价",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0058"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x4"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0058"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e4",
+          "information_item": "各 Ítem 的含税总金额",
+          "note": "x4 为价格表数据行，x6 为单价列表头（CON IGV 表明含税），两者合起来说明总价含税；x3 为第六条“合同金额”条款，写明含税",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0056",
+              "d359c37e0bc3c87a-c0057"
+            ],
+            [
+              "d359c37e0bc3c87a-c0057",
+              "d359c37e0bc3c87a-c0058"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x3"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0056",
+                  "d359c37e0bc3c87a-c0057"
+                ]
+              ]
+            },
+            {
+              "scheme_id": "s2",
+              "excerpt_ids": [
+                "x4",
+                "x6"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0057",
+                  "d359c37e0bc3c87a-c0058"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e5",
+          "information_item": "合同总金额",
+          "note": "合同未写合计数，参考答案由三项相加得出；x3 为第六条“合同金额”条款",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0058"
+            ],
+            [
+              "d359c37e0bc3c87a-c0056",
+              "d359c37e0bc3c87a-c0057"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x3"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0056",
+                  "d359c37e0bc3c87a-c0057"
+                ]
+              ]
+            },
+            {
+              "scheme_id": "s2",
+              "excerpt_ids": [
+                "x4"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0058"
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "d359c37e0bc3c87a-c0057",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            4
+          ],
+          "kind": "text",
+          "distance": 0.12328201532363892,
+          "similarity": 0.8767179846763611,
+          "relevant": true,
+          "cross_document": false,
+          "text": "Ítem 3: US$ 27,134.10 (Veintisiete mil ciento treinta y cuatro con 10/100 Dólares Americanos) incluye todos\nlos impuestos de Ley.\n\nÍtem 4: US$ 50,100.44 (Cincuenta mil cien con 44/100 Dólares Americanos) incluye todos los impuestos de\nLey.\n\nPRECIO UNITARIO\n\nPRECIO TOTAL\n\nÍTEM\nDESCRIPCIÓN\nCANTIDAD"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "d359c37e0bc3c87a-c0020",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.12599319219589233,
+          "similarity": 0.8740068078041077,
+          "relevant": false,
+          "cross_document": false,
+          "text": "suspendido o inhabilitado para contratar con el Estado.\n\n2.4\nEL CONTRATISTA ha cumplido con presentar la siguiente documentación en fecha 02/09/2025 y su subsanación\nen fecha 10/09/2025:\n\n•\nGarantía de fiel cumplimiento del contrato:"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "d359c37e0bc3c87a-c0000",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.127194344997406,
+          "similarity": 0.872805655002594,
+          "relevant": false,
+          "cross_document": false,
+          "text": "CONTRATO N° 105 - 2025\n\nCOMPRA CORPORATIVA DE MEDIDORES PARA LAS EMPRESAS DE LA\n\nCORPORACIÓN FONAFE – ÍTEMS 1, 3 Y 4\n\n(LICITACIÓN PÚBLICA N° LP-002-2024-FONAFE)"
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q003",
+      "document_id": "d359c37e0bc3c87a",
+      "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+      "question": "¿Cuál es el plazo total de ejecución establecido en el contrato de compra CONTRATO N° 105 - 2025 (CONT2025001)? ¿Cuál es el lugar de entrega específico? ¿Se permite la entrega anticipada?",
+      "reference_answer": "合同规定的总履约交付期限为自合同签署之日起 690 个日历天。交货地点为 Almacén Central ELSE（地址：Av. Mariscal Sucre N° 400, Urb. Bancopata - Santiago, Cusco）。合同明确规定不接受提前交货，除非买方主动提出并经承包商同意。",
+      "answerable": true,
+      "scope": {
+        "kind": "identified",
+        "codes": [
+          "CONT2025001"
+        ],
+        "document_ids": [
+          "d359c37e0bc3c87a"
+        ],
+        "document_names": [
+          "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+        ],
+        "identified_correctly": true
+      },
+      "evidence_document_ids": [
+        "d359c37e0bc3c87a"
+      ],
+      "hit": true,
+      "complete": false,
+      "first_relevant_rank": 1,
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            5
+          ],
+          "text": "Los bienes materia del presente contrato se entregarán en el plazo de 690 días calendarios de la firma de contrato.",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0075"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x2",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            5
+          ],
+          "text": "6ta ENTREGA (A 690 días de la firma del contrato)",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0077",
+              "d359c37e0bc3c87a-c0078"
+            ]
+          ],
+          "problem": "",
+          "table_header": true
+        },
+        {
+          "excerpt_id": "x3",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            5
+          ],
+          "text": "ELSE | Almacén Central ELSE - Av. Mariscal Sucre Nº 400, Urb. Bancopata – Santiago, Cusco, Cusco",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0081"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x4",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            5
+          ],
+          "text": "No se aceptarán entregas anticipadas, salvo que sea requerido por LA EMPRESA, previa disponibilidad y aceptación por parte del CONTRATISTA.",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0080"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        }
+      ],
+      "groups": [
+        {
+          "group_id": "e1",
+          "information_item": "总履约期限",
+          "note": "x2 为最后一批交货期限，同样给出 690 天",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0075"
+            ],
+            [
+              "d359c37e0bc3c87a-c0077",
+              "d359c37e0bc3c87a-c0078"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0075"
+                ]
+              ]
+            },
+            {
+              "scheme_id": "s2",
+              "excerpt_ids": [
+                "x2"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0077",
+                  "d359c37e0bc3c87a-c0078"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "information_item": "交货地点",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0081"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x3"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0081"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e3",
+          "information_item": "是否允许提前交货",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": 1,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0080"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x4"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0080"
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "d359c37e0bc3c87a-c0080",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.12138080596923828,
+          "similarity": 0.8786191940307617,
+          "relevant": true,
+          "cross_document": false,
+          "text": "NOTA IMPORTANTE:\nNo se aceptarán entregas anticipadas, salvo que sea requerido por LA EMPRESA, previa disponibilidad y aceptación por parte\ndel CONTRATISTA.\n\nLugar de entrega:\n\nLa entrega de los bienes, será en los almacenes de LA EMPRESA, según el siguiente detalle:"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "d359c37e0bc3c87a-c0020",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.13136863708496094,
+          "similarity": 0.8686313629150391,
+          "relevant": false,
+          "cross_document": false,
+          "text": "suspendido o inhabilitado para contratar con el Estado.\n\n2.4\nEL CONTRATISTA ha cumplido con presentar la siguiente documentación en fecha 02/09/2025 y su subsanación\nen fecha 10/09/2025:\n\n•\nGarantía de fiel cumplimiento del contrato:"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "d359c37e0bc3c87a-c0035",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            3
+          ],
+          "kind": "text",
+          "distance": 0.1368408203125,
+          "similarity": 0.8631591796875,
+          "relevant": false,
+          "cross_document": false,
+          "text": "EL CONTRATISTA se obliga a la entrega de los bienes objeto del presente contrato, de acuerdo con las\nespecificaciones técnicas detallas en su oferta, a las cuales las partes se remiten para efectos de la presente\nejecución contractual:\n\nÍtem\nDESCRIPCIÓN\nTABLA DE DATOS TÉCNICOS"
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q004",
+      "document_id": "d359c37e0bc3c87a",
+      "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+      "question": "En el contrato de compra CONTRATO N° 105 - 2025 (CONT2025001), ¿qué se establece sobre el monto de la Garantía de fiel cumplimiento de cada Ítem y la entidad que la emite?",
+      "reference_answer": "履约保证金均由 AVLA Perú Compañía de Seguros 出具，金额为各 Ítem 原始合同金额的 10%：\n- Ítem 1：US$ 73,348.80（保函 N° 3012025041864）\n- Ítem 3：US$ 2,713.41（保函 N° 3012025041881）\n- Ítem 4：US$ 5,010.05（保函 N° 3012025041885）",
+      "answerable": true,
+      "scope": {
+        "kind": "identified",
+        "codes": [
+          "CONT2025001"
+        ],
+        "document_ids": [
+          "d359c37e0bc3c87a"
+        ],
+        "document_names": [
+          "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+        ],
+        "identified_correctly": true
+      },
+      "evidence_document_ids": [
+        "d359c37e0bc3c87a"
+      ],
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": null,
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            2
+          ],
+          "text": "Correspondiente al Ítem 1 – Medidor electrónico monofásico de 2 hilos: Carta fianza N° 3012025041864 por el monto de US$ 73,348.80 (Setenta y tres mil trescientos cuarenta y ocho con 80/100 Dólares Americanos) con vencimiento al 20/09/2027.\nCorrespondiente al Ítem 3 – Medidor electrónico trifásico de 3 hilos: Carta fianza N° 3012025041881 por el monto de US$ 2,713.41 (Dos mil setecientos trece con 41/100 Dólares Americanos) con vencimiento al 20/09/2027.\nCorrespondiente al Ítem 4 – Medidor electrónico trifásico de 4 hilos: Carta fianza N° 3012025041885 por el monto de US$ 5,010.05 (Cinco mil diez con 05/100 Dólares Americanos) con vencimiento al 20/09/2027.",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0021",
+              "d359c37e0bc3c87a-c0023",
+              "d359c37e0bc3c87a-c0025"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x2",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            6
+          ],
+          "text": "Correspondiente al Ítem 1 – Medidor electrónico monofásico de 2 hilos: De fiel cumplimiento del contrato: US$ 73,348.80 (Setenta y tres mil trescientos cuarenta y ocho con 80/100 Dólares Americanos), a través de la Carta Fianza N° 3012025041864 emitida por AVLA Perú Compañía de Seguros. Correspondiente al Ítem 3 – Medidor electrónico trifásico de 3 hilos: De fiel cumplimiento del contrato: US$ 2,713.41 (Dos mil setecientos trece con 41/100 Dólares Americanos), a través de la Carta Fianza N° 3012025041881 emitida por AVLA Perú Compañía de Seguros. Correspondiente al Ítem 4 – Medidor electrónico trifásico de 4 hilos: De fiel cumplimiento del contrato: US$ 5,010.05 (Cinco mil diez con 05/100 Dólares Americanos), a través de la Carta Fianza N° 3012025041885 emitida por AVLA Perú Compañía de Seguros.",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0084",
+              "d359c37e0bc3c87a-c0085",
+              "d359c37e0bc3c87a-c0086",
+              "d359c37e0bc3c87a-c0088"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        }
+      ],
+      "groups": [
+        {
+          "group_id": "e1",
+          "information_item": "各 Ítem 履约保证金金额",
+          "note": "x1（第 2 页）列出各 Ítem 保函金额",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0021",
+              "d359c37e0bc3c87a-c0023",
+              "d359c37e0bc3c87a-c0025"
+            ],
+            [
+              "d359c37e0bc3c87a-c0084",
+              "d359c37e0bc3c87a-c0085",
+              "d359c37e0bc3c87a-c0086",
+              "d359c37e0bc3c87a-c0088"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0021",
+                  "d359c37e0bc3c87a-c0023",
+                  "d359c37e0bc3c87a-c0025"
+                ]
+              ]
+            },
+            {
+              "scheme_id": "s2",
+              "excerpt_ids": [
+                "x2"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0084",
+                  "d359c37e0bc3c87a-c0085",
+                  "d359c37e0bc3c87a-c0086",
+                  "d359c37e0bc3c87a-c0088"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "information_item": "出具机构",
+          "note": "x1 未写出具机构",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0084",
+              "d359c37e0bc3c87a-c0085",
+              "d359c37e0bc3c87a-c0086",
+              "d359c37e0bc3c87a-c0088"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0084",
+                  "d359c37e0bc3c87a-c0085",
+                  "d359c37e0bc3c87a-c0086",
+                  "d359c37e0bc3c87a-c0088"
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "d359c37e0bc3c87a-c0020",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.1120145320892334,
+          "similarity": 0.8879854679107666,
+          "relevant": false,
+          "cross_document": false,
+          "text": "suspendido o inhabilitado para contratar con el Estado.\n\n2.4\nEL CONTRATISTA ha cumplido con presentar la siguiente documentación en fecha 02/09/2025 y su subsanación\nen fecha 10/09/2025:\n\n•\nGarantía de fiel cumplimiento del contrato:"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "d359c37e0bc3c87a-c0112",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            7
+          ],
+          "kind": "text",
+          "distance": 0.1370672583580017,
+          "similarity": 0.8629327416419983,
+          "relevant": false,
+          "cross_document": false,
+          "text": "Esta penalidad se deduce de los pagos a cuenta o del pago final, según corresponda; o si fuera necesario, se\ncobra del monto resultante de la ejecución de la garantía de fiel cumplimiento."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "d359c37e0bc3c87a-c0123",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            8
+          ],
+          "kind": "text",
+          "distance": 0.13825774192810059,
+          "similarity": 0.8617422580718994,
+          "relevant": false,
+          "cross_document": false,
+          "text": "todos los principios dispuestos en el Código de Ética en la ejecución de sus obligaciones en virtud de este contrato.\nAsimismo, EL CONTRATISTA asegurará que todos sus representantes actuando en relación con este contrato\ncumplan con los principios dispuestos en el Código de Ética antes referido."
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q005",
+      "document_id": "d359c37e0bc3c87a",
+      "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+      "question": "En el contrato de compra CONTRATO N° 105 - 2025 (CONT2025001), ¿cuál es el plazo de la Garantía Técnico-Comercial? Si ocurre una falla durante el período de garantía, ¿cuáles son los plazos de respuesta y de reparación del contratista?",
+      "reference_answer": "技术商业质保期为自货物送达买方仓库之日起 5 年零 1 个月。发生故障时，承包商须在收到通知后 30 个日历天内指派技术人员到场排查原因；若判定为承包商责任，须在确定原因或收到第三方鉴定结果后的 45 个日历天内修复或更换新机。",
+      "answerable": true,
+      "scope": {
+        "kind": "identified",
+        "codes": [
+          "CONT2025001"
+        ],
+        "document_ids": [
+          "d359c37e0bc3c87a"
+        ],
+        "document_names": [
+          "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+        ],
+        "identified_correctly": true
+      },
+      "evidence_document_ids": [
+        "d359c37e0bc3c87a"
+      ],
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": 2,
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            3
+          ],
+          "text": "garantiza la calidad técnica de los medidores de energía, por un periodo de 5 años y 1 mes, contados a partir de la fecha de recepción en el almacén de LA EMPRESA",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0038",
+              "d359c37e0bc3c87a-c0039"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x2",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            3
+          ],
+          "text": "EL CONTRATISTA tendrá un plazo máximo de treinta (30) días calendario contados a partir de la fecha de realizada la notificación, para que se apersone un representante técnico",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0041",
+              "d359c37e0bc3c87a-c0042"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x3",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            3
+          ],
+          "text": "En el caso que la falla sea atribuible al CONTRATISTA, la reparación debe iniciarse a partir del día siguiente de emitido el resultado del peritaje por el organismo externo, debiendo devolverse el medidor debidamente reparado dentro de los cuarenta y cinco (45) días calendario a partir de esa fecha (y en caso no sea factible, por destrucción, imposibilidad de reparación u otra causa) deberá devolver un medidor nuevo a LA EMPRESA.",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0046",
+              "d359c37e0bc3c87a-c0047"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        }
+      ],
+      "groups": [
+        {
+          "group_id": "e1",
+          "information_item": "质保期期限",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0038",
+              "d359c37e0bc3c87a-c0039"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0038",
+                  "d359c37e0bc3c87a-c0039"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "information_item": "故障响应时限",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0041",
+              "d359c37e0bc3c87a-c0042"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0041",
+                  "d359c37e0bc3c87a-c0042"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e3",
+          "information_item": "修复时限",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0046",
+              "d359c37e0bc3c87a-c0047"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x3"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0046",
+                  "d359c37e0bc3c87a-c0047"
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "d359c37e0bc3c87a-c0020",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.10907232761383057,
+          "similarity": 0.8909276723861694,
+          "relevant": false,
+          "cross_document": false,
+          "text": "suspendido o inhabilitado para contratar con el Estado.\n\n2.4\nEL CONTRATISTA ha cumplido con presentar la siguiente documentación en fecha 02/09/2025 y su subsanación\nen fecha 10/09/2025:\n\n•\nGarantía de fiel cumplimiento del contrato:"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "d359c37e0bc3c87a-c0041",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            3
+          ],
+          "kind": "text",
+          "distance": 0.1129828691482544,
+          "similarity": 0.8870171308517456,
+          "relevant": true,
+          "cross_document": false,
+          "text": "Durante el período de garantía, ante la falla de alguno de los medidores, LA EMPRESA informará al\nCONTRATISTA, de la ocurrencia del evento, ante lo cual EL CONTRATISTA tendrá un plazo máximo de treinta"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "d359c37e0bc3c87a-c0046",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            3
+          ],
+          "kind": "text",
+          "distance": 0.1272408366203308,
+          "similarity": 0.8727591633796692,
+          "relevant": true,
+          "cross_document": false,
+          "text": "En el caso que la falla sea atribuible al CONTRATISTA, la reparación debe iniciarse a partir del día siguiente de\nemitido el resultado del peritaje por el organismo externo, debiendo devolverse el medidor debidamente reparado"
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q006",
+      "document_id": "d359c37e0bc3c87a",
+      "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+      "question": "En el contrato de compra CONTRATO N° 105 - 2025 (CONT2025001), ¿cuál es el criterio para determinar una Falla Repetitiva? ¿Qué responsabilidad asume el contratista cuando se presenta una falla repetitiva?",
+      "reference_answer": "重复性故障的认定标准为：安装未满 1 年的电表故障率达到 0.5%，或者安装未满 18 个月的同一规格电表累计发生 10 起以上相同原因的故障；此外，第三方鉴定证实存在隐患性制造缺陷的亦认定为重复性故障。出现重复性故障时，承包商必须自费全批次更换涉及的生产批次电表，并赔偿买方因此遭受的所有损失。",
+      "answerable": true,
+      "scope": {
+        "kind": "identified",
+        "codes": [
+          "CONT2025001"
+        ],
+        "document_ids": [
+          "d359c37e0bc3c87a"
+        ],
+        "document_names": [
+          "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+        ],
+        "identified_correctly": true
+      },
+      "evidence_document_ids": [
+        "d359c37e0bc3c87a"
+      ],
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": 2,
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            3
+          ],
+          "text": "Se definirá como falla repetitiva aquella que se advierta en 0.5% de los medidores instalados del menos de un año o undécima ocasión, es decir que existen 10 casos anteriores los cuales presentaron la misma falla a medidores que lleven menos de 18 meses de instalación y cuyo origen sea de similares causas",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0049",
+              "d359c37e0bc3c87a-c0050"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x2",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            3,
+            4
+          ],
+          "text": "Adicionalmente, sí como resultado de un peritaje de determinación de la causa de una falla se comprueba, que independiente de la cantidad de medidores que hubieren sido afectados y los plazos de instalación transcurridos, existen motivos fundados sobre un defecto de fabricación, tal defecto de fabricación será catalogado como falla repetitiva, con el propósito de evitar un mal mayor en las instalaciones de LA EMPRESA, que afecte la calidad de servicio eléctrico, en este caso, EL CONTRATISTA se compromete a la reposición total del lote de producción involucrado, así como a resarcir todos los daños y perjuicios ocasionados a LA EMPRESA.",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0051",
+              "d359c37e0bc3c87a-c0052",
+              "d359c37e0bc3c87a-c0054"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        }
+      ],
+      "groups": [
+        {
+          "group_id": "e1",
+          "information_item": "重复性故障的认定标准",
+          "note": "两条标准：x1 为比例/次数标准，x2 为鉴定证实制造缺陷",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0049",
+              "d359c37e0bc3c87a-c0050",
+              "d359c37e0bc3c87a-c0051",
+              "d359c37e0bc3c87a-c0052",
+              "d359c37e0bc3c87a-c0054"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0049",
+                  "d359c37e0bc3c87a-c0050",
+                  "d359c37e0bc3c87a-c0051",
+                  "d359c37e0bc3c87a-c0052",
+                  "d359c37e0bc3c87a-c0054"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "information_item": "承包商需承担的责任",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0051",
+              "d359c37e0bc3c87a-c0052",
+              "d359c37e0bc3c87a-c0054"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0051",
+                  "d359c37e0bc3c87a-c0052",
+                  "d359c37e0bc3c87a-c0054"
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "d359c37e0bc3c87a-c0020",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.11535513401031494,
+          "similarity": 0.8846448659896851,
+          "relevant": false,
+          "cross_document": false,
+          "text": "suspendido o inhabilitado para contratar con el Estado.\n\n2.4\nEL CONTRATISTA ha cumplido con presentar la siguiente documentación en fecha 02/09/2025 y su subsanación\nen fecha 10/09/2025:\n\n•\nGarantía de fiel cumplimiento del contrato:"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "d359c37e0bc3c87a-c0049",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            3
+          ],
+          "kind": "text",
+          "distance": 0.12506651878356934,
+          "similarity": 0.8749334812164307,
+          "relevant": true,
+          "cross_document": false,
+          "text": "Se definirá como falla repetitiva aquella que se advierta en 0.5% de los medidores instalados del menos de un\naño o undécima ocasión, es decir que existen 10 casos anteriores los cuales presentaron la misma falla a"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "d359c37e0bc3c87a-c0046",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            3
+          ],
+          "kind": "text",
+          "distance": 0.12587130069732666,
+          "similarity": 0.8741286993026733,
+          "relevant": false,
+          "cross_document": false,
+          "text": "En el caso que la falla sea atribuible al CONTRATISTA, la reparación debe iniciarse a partir del día siguiente de\nemitido el resultado del peritaje por el organismo externo, debiendo devolverse el medidor debidamente reparado"
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q007",
+      "document_id": "d359c37e0bc3c87a",
+      "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+      "question": "En el contrato de compra CONTRATO N° 105 - 2025 (CONT2025001), ¿cuáles son las condiciones previas para que el comprador tramite el pago? ¿Cuáles son los plazos para emitir la conformidad y para efectuar el pago?",
+      "reference_answer": "买方按交付批次以美元进行分期付款。付款的前提是承包商需提交发票（Comprobante de Pago）、使用部门出具的验收合格单（Hoja de Conformidad）、签收运单（Guía de remisión）及采购订单复印件。买方应在货物签收后 7 个日历天内（若需测试最长 15 天）出具验收合格证明；出具合格证明后，买方须在 10 个日历天内完成支付。",
+      "answerable": true,
+      "scope": {
+        "kind": "identified",
+        "codes": [
+          "CONT2025001"
+        ],
+        "document_ids": [
+          "d359c37e0bc3c87a"
+        ],
+        "document_names": [
+          "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+        ],
+        "identified_correctly": true
+      },
+      "evidence_document_ids": [
+        "d359c37e0bc3c87a"
+      ],
+      "hit": true,
+      "complete": false,
+      "first_relevant_rank": 2,
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            4
+          ],
+          "text": "Comprobante de Pago (Factura).\nHoja de Conformidad emitida por el área usuaria por la recepción de los bienes.\nGuía de remisión o entregable con sello de recepción de la entidad contratante.\nCopia de la Orden de Compra.",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0066"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x2",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            5
+          ],
+          "text": "Para tal efecto, el responsable de otorgar la conformidad de la prestación deberá hacerlo en un plazo que no excederá de los siete (7) días de producida la recepción, salvo que se requiera efectuar pruebas que permitan verificar el cumplimiento de la obligación, en cuyo caso la conformidad se emite en un plazo máximo de quince (15) días, bajo responsabilidad de dicho funcionario.",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0069",
+              "d359c37e0bc3c87a-c0070"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x3",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            5
+          ],
+          "text": "LA EMPRESA paga las contraprestaciones pactadas a EL CONTRATISTA dentro de los diez (10) días calendario siguientes de otorgada la conformidad de los bienes",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0071"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x4",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            6
+          ],
+          "text": "en el plazo máximo de siete (7) días de producida la recepción salvo que se requiera efectuar pruebas que permitan verificar el cumplimiento de la obligación, en cuyo caso la conformidad se emite en un plazo de quince (15) días, bajo responsabilidad del funcionario que debe emitir la conformidad.",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0095",
+              "d359c37e0bc3c87a-c0096"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        }
+      ],
+      "groups": [
+        {
+          "group_id": "e1",
+          "information_item": "支付流程的前提条件",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0066"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0066"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "information_item": "出具验收合格证明的时限",
+          "note": "x4 为第十二条，重复规定了 7 天 / 15 天时限",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0069",
+              "d359c37e0bc3c87a-c0070"
+            ],
+            [
+              "d359c37e0bc3c87a-c0095",
+              "d359c37e0bc3c87a-c0096"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0069",
+                  "d359c37e0bc3c87a-c0070"
+                ]
+              ]
+            },
+            {
+              "scheme_id": "s2",
+              "excerpt_ids": [
+                "x4"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0095",
+                  "d359c37e0bc3c87a-c0096"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e3",
+          "information_item": "付款时限",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": 2,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0071"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x3"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0071"
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "d359c37e0bc3c87a-c0020",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.1227496862411499,
+          "similarity": 0.8772503137588501,
+          "relevant": false,
+          "cross_document": false,
+          "text": "suspendido o inhabilitado para contratar con el Estado.\n\n2.4\nEL CONTRATISTA ha cumplido con presentar la siguiente documentación en fecha 02/09/2025 y su subsanación\nen fecha 10/09/2025:\n\n•\nGarantía de fiel cumplimiento del contrato:"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "d359c37e0bc3c87a-c0071",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.12570762634277344,
+          "similarity": 0.8742923736572266,
+          "relevant": true,
+          "cross_document": false,
+          "text": "LA EMPRESA paga las contraprestaciones pactadas a EL CONTRATISTA dentro de los diez (10) días calendario\nsiguientes de otorgada la conformidad de los bienes, siempre que se verifiquen las condiciones establecidas en\nel contrato para ello, bajo responsabilidad del funcionario competente."
+        },
+        {
+          "rank": 3,
+          "chunk_id": "d359c37e0bc3c87a-c0027",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.12944447994232178,
+          "similarity": 0.8705555200576782,
+          "relevant": false,
+          "cross_document": false,
+          "text": "•\nCódigo de cuenta interbancario (CCI).\n•\nCopia de la vigencia de poder de las representantes legales del CONTRATISTA.\n•\nCopia del DNI de las representantes legales del CONTRATISTA.\n•\nDomicilio para efectos de la notificación durante la ejecución del contrato.\n•"
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q008",
+      "document_id": "d359c37e0bc3c87a",
+      "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+      "question": "En el contrato de compra CONTRATO N° 105 - 2025 (CONT2025001), si el contratista incurre en un retraso injustificado en la entrega, ¿cuál es la fórmula de cálculo de la Penalidad por Mora? ¿Cuál es el monto máximo de la penalidad?",
+      "reference_answer": "每日延期罚金公式为：Penalidad Diaria = (0.10 × monto vigente) / (F × plazo vigente en días)。由于本合同履约期限大于60天，系数 F 取值 0.25。延迟罚金最高上限为有效合同总额（或对应 Ítem 金额）的 10%。达到 10% 上限后，买方有权解除合同。",
+      "answerable": true,
+      "scope": {
+        "kind": "identified",
+        "codes": [
+          "CONT2025001"
+        ],
+        "document_ids": [
+          "d359c37e0bc3c87a"
+        ],
+        "document_names": [
+          "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+        ],
+        "identified_correctly": true
+      },
+      "evidence_document_ids": [
+        "d359c37e0bc3c87a"
+      ],
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": 2,
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            7
+          ],
+          "text": "Penalidad Diaria = (0.10 x monto vigente) / (F x plazo vigente en días)\nF = 0.25 para plazos mayores a sesenta (60) días",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0108"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x2",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            7
+          ],
+          "text": "Estos dos (2) tipos de penalidades pueden alcanzar cada una un monto máximo equivalente al diez por ciento (10%) del monto del contrato vigente, o de ser el caso, del ítem que debió ejecutarse. Cuando se llegue a cubrir el monto máximo de la penalidad por mora o el monto máximo para otras penalidades, de ser el caso, LA EMPRESA puede resolver el contrato por incumplimiento.",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0113",
+              "d359c37e0bc3c87a-c0114"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        }
+      ],
+      "groups": [
+        {
+          "group_id": "e1",
+          "information_item": "延期罚金计算公式",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0108"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0108"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "information_item": "罚金最高上限",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0113",
+              "d359c37e0bc3c87a-c0114"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0113",
+                  "d359c37e0bc3c87a-c0114"
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "d359c37e0bc3c87a-c0107",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            7
+          ],
+          "kind": "text",
+          "distance": 0.10535287857055664,
+          "similarity": 0.8946471214294434,
+          "relevant": false,
+          "cross_document": false,
+          "text": "XV.\nCLÁUSULA DÉCIMO QUINTA: Penalidades. –\n\nSi EL CONTRATISTA incurre en retraso injustificado en la ejecución de las prestaciones objeto del contrato, LA\nEMPRESA le aplica automáticamente una penalidad por mora por cada día de atraso, de acuerdo a la siguiente\nfórmula:"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "d359c37e0bc3c87a-c0114",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            7
+          ],
+          "kind": "text",
+          "distance": 0.10869437456130981,
+          "similarity": 0.8913056254386902,
+          "relevant": true,
+          "cross_document": false,
+          "text": "Cuando se llegue a cubrir el monto máximo de la penalidad por mora o el monto máximo para otras penalidades,\nde ser el caso, LA EMPRESA puede resolver el contrato por incumplimiento.\n\nXVI.\nCLÁUSULA DÉCIMO SEXTA: Resolución del contrato. –"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "d359c37e0bc3c87a-c0109",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            7
+          ],
+          "kind": "text",
+          "distance": 0.12738221883773804,
+          "similarity": 0.872617781162262,
+          "relevant": false,
+          "cross_document": false,
+          "text": "El retraso se justifica a través de la solicitud de ampliación de plazo debidamente aprobado. Adicionalmente, se\nconsidera justificado el retraso, y en consecuencia no se aplica penalidad, cuando EL CONTRATISTA acredite,"
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q009",
+      "document_id": "d359c37e0bc3c87a",
+      "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+      "question": "En el contrato de compra CONTRATO N° 105 - 2025 (CONT2025001), ¿cuáles son los productos y las cantidades específicos de la primera entrega (1era ENTREGA, a los 170 días de la firma del contrato)?",
+      "reference_answer": "第 1 次交付（签订合同后 170 天内）需要交付：Ítem 1（单相电子电表）15,000 台，以及 Ítem 4（三相 4 线电子电表）300 台。Ítem 3 在第 1 次交付中无交付任务。",
+      "answerable": true,
+      "scope": {
+        "kind": "identified",
+        "codes": [
+          "CONT2025001"
+        ],
+        "document_ids": [
+          "d359c37e0bc3c87a"
+        ],
+        "document_names": [
+          "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+        ],
+        "identified_correctly": true
+      },
+      "evidence_document_ids": [
+        "d359c37e0bc3c87a"
+      ],
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": 3,
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            5
+          ],
+          "text": "MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | 15,000\nMEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | 300",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0078",
+              "d359c37e0bc3c87a-c0079"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        }
+      ],
+      "groups": [
+        {
+          "group_id": "e1",
+          "information_item": "第 1 次交付的产品和数量",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0078",
+              "d359c37e0bc3c87a-c0079"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0078",
+                  "d359c37e0bc3c87a-c0079"
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "d359c37e0bc3c87a-c0075",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.11974644660949707,
+          "similarity": 0.8802535533905029,
+          "relevant": false,
+          "cross_document": false,
+          "text": "Los bienes materia del presente contrato se entregarán en el plazo de 690 días calendarios de la firma de\ncontrato, en concordancia con lo establecido en el expediente de contratación, de acuerdo con las cantidades y"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "d359c37e0bc3c87a-c0077",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.12103533744812012,
+          "similarity": 0.8789646625518799,
+          "relevant": false,
+          "cross_document": false,
+          "text": "CRONOGRAMA DE ENTREGA\n\nCANTIDAD Y CRONOGRAMA DE ENTREGAS\n1era\nENTREG\n\n3era\nENTREG\n\n4ta\nENTREG\n\n5ta\nENTREG\n\n6ta\nENTREG\n\nUNIDAD\n\nREQUERIMI\n\n2da\nENTREGA\n\nA\n\nA\n\nA\n\nA\n\nTEM\nDESCRIPCIÓN\n\nDE\nMEDIDA\n\nENTO\nTOTAL\n\nA\n(A 170\ndías de la\n\n(A 210\ndías de la\n\n(A 330\ndías de la\n\n(A 450\ndías de la\n\n(A 570\ndías de la"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "d359c37e0bc3c87a-c0078",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.12239992618560791,
+          "similarity": 0.8776000738143921,
+          "relevant": true,
+          "cross_document": false,
+          "text": "(A 450\ndías de la\n\n(A 570\ndías de la\n\n(A 690\ndías de la\n\nfirma del\ncontrato)\n\nfirma del\ncontrato)\n\nfirma del\ncontrato)\n\nfirma del\ncontrato)\n\nfirma del\ncontrato)\n\nfirma del\ncontrato)\n\n1\nMEDIDOR ELECTRÓNICO\nMONOFASICO DE 2 HILOS\nUNIDAD\n120,000\n15,000\n15,000\n15,000\n25,000\n25,000\n25,000"
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-105-Q010",
+      "document_id": "d359c37e0bc3c87a",
+      "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+      "question": "¿El contrato de compra CONTRATO N° 105 - 2025 (CONT2025001) establece entregas por lotes? ¿Cuáles son las fechas de entrega específicas de cada lote?",
+      "reference_answer": "是的，合同规定分为 6 个批次交货。合同签署日期为 2025 年 9 月 23 日，各批次期限分别为签署后 170、210、330、450、570 和 690 个日历日；据此计算，各批次截止日期依次为：第 1 批 2026 年 3 月 12 日、第 2 批 2026 年 4 月 21 日、第 3 批 2026 年 8 月 19 日、第 4 批 2026 年 12 月 17 日、第 5 批 2027 年 4 月 16 日、第 6 批 2027 年 8 月 14 日。这些绝对日期是依据合同签署日期和相对期限计算所得，并非合同表格直接列示。",
+      "answerable": true,
+      "scope": {
+        "kind": "identified",
+        "codes": [
+          "CONT2025001"
+        ],
+        "document_ids": [
+          "d359c37e0bc3c87a"
+        ],
+        "document_names": [
+          "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+        ],
+        "identified_correctly": true
+      },
+      "evidence_document_ids": [
+        "d359c37e0bc3c87a"
+      ],
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": 2,
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            5
+          ],
+          "text": "1era ENTREGA (A 170 días de la firma del contrato) | 2da ENTREGA (A 210 días de la firma del contrato) | 3era ENTREGA (A 330 días de la firma del contrato) | 4ta ENTREGA (A 450 días de la firma del contrato) | 5ta ENTREGA (A 570 días de la firma del contrato) | 6ta ENTREGA (A 690 días de la firma del contrato)",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0077",
+              "d359c37e0bc3c87a-c0078"
+            ]
+          ],
+          "problem": "",
+          "table_header": true
+        },
+        {
+          "excerpt_id": "x2",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            9
+          ],
+          "text": "De acuerdo con las bases integradas, la oferta y las disposiciones del presente contrato, las partes lo firman por duplicado en señal de conformidad en la ciudad del Cusco a los 23 días del mes de setiembre de 2025.",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0153"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        }
+      ],
+      "groups": [
+        {
+          "group_id": "e1",
+          "information_item": "是否分批交货",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0077",
+              "d359c37e0bc3c87a-c0078"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0077",
+                  "d359c37e0bc3c87a-c0078"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "information_item": "各批次具体交货日期",
+          "note": "日期 = 签署日期（x2）+ 各批相对天数（x1），需两段一起",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "d359c37e0bc3c87a-c0077",
+              "d359c37e0bc3c87a-c0078",
+              "d359c37e0bc3c87a-c0153"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2"
+              ],
+              "acceptable_sets": [
+                [
+                  "d359c37e0bc3c87a-c0077",
+                  "d359c37e0bc3c87a-c0078",
+                  "d359c37e0bc3c87a-c0153"
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "d359c37e0bc3c87a-c0020",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.12640070915222168,
+          "similarity": 0.8735992908477783,
+          "relevant": false,
+          "cross_document": false,
+          "text": "suspendido o inhabilitado para contratar con el Estado.\n\n2.4\nEL CONTRATISTA ha cumplido con presentar la siguiente documentación en fecha 02/09/2025 y su subsanación\nen fecha 10/09/2025:\n\n•\nGarantía de fiel cumplimiento del contrato:"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "d359c37e0bc3c87a-c0153",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            9
+          ],
+          "kind": "text",
+          "distance": 0.13059449195861816,
+          "similarity": 0.8694055080413818,
+          "relevant": true,
+          "cross_document": false,
+          "text": "De acuerdo con las bases integradas, la oferta y las disposiciones del presente contrato, las partes lo firman por\nduplicado en señal de conformidad en la ciudad del Cusco a los 23 días del mes de setiembre de 2025.\n\n “LA EMPRESA”\n\n “EL CONTRATISTA”\n\n9"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "d359c37e0bc3c87a-c0075",
+          "document_id": "d359c37e0bc3c87a",
+          "document_name": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.1347823143005371,
+          "similarity": 0.8652176856994629,
+          "relevant": false,
+          "cross_document": false,
+          "text": "Los bienes materia del presente contrato se entregarán en el plazo de 690 días calendarios de la firma de\ncontrato, en concordancia con lo establecido en el expediente de contratación, de acuerdo con las cantidades y"
+        }
+      ]
+    },
+    {
+      "case_id": "E001-602-Q001",
+      "document_id": "817cfff2927c6c65",
+      "document_name": "E001-602.pdf",
+      "question": "¿Cuál es la fecha de vencimiento del pago de la factura E001-602 (INVOICE-E001-602)? ¿Qué monto se debe pagar? ¿Cuánto corresponde a impuestos?",
+      "reference_answer": "付款到期日为2026年3月30日，需要支付USD 331,432.50，其中包含税费USD 50557.50。",
+      "answerable": true,
+      "scope": {
+        "kind": "identified",
+        "codes": [
+          "INVOICE-E001-602"
+        ],
+        "document_ids": [
+          "817cfff2927c6c65"
+        ],
+        "document_names": [
+          "E001-602.pdf"
+        ],
+        "identified_correctly": true
+      },
+      "evidence_document_ids": [
+        "817cfff2927c6c65"
+      ],
+      "hit": true,
+      "complete": false,
+      "first_relevant_rank": 2,
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_name": "E001-602.pdf",
+          "pages": [
+            1
+          ],
+          "text": "1 | 30/03/2026 | 331,432.50",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "817cfff2927c6c65-c0007"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x2",
+          "document_name": "E001-602.pdf",
+          "pages": [
+            1
+          ],
+          "text": "IGV :\n$ 50,557.50",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "817cfff2927c6c65-c0006"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x3",
+          "document_name": "E001-602.pdf",
+          "pages": [
+            1
+          ],
+          "text": "Importe Total :\n$ 331,432.50",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "817cfff2927c6c65-c0007"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x4",
+          "document_name": "E001-602.pdf",
+          "pages": [
+            1
+          ],
+          "text": "Información del crédito :\nMonto neto pendiente de pago :\n$ 331,432.50",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "817cfff2927c6c65-c0007"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x5",
+          "document_name": "E001-602.pdf",
+          "pages": [
+            1
+          ],
+          "text": "SON: TRESCIENTOS TREINTA Y UNO MIL CUATROCIENTOS TREINTA Y DOS Y 50/100 DOLAR AMERICANO",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "817cfff2927c6c65-c0006"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        }
+      ],
+      "groups": [
+        {
+          "group_id": "e1",
+          "information_item": "付款到期日",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": 2,
+          "acceptable_sets": [
+            [
+              "817cfff2927c6c65-c0007"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ],
+              "acceptable_sets": [
+                [
+                  "817cfff2927c6c65-c0007"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "information_item": "需支付金额",
+          "note": "分期表、总额、应付余额、大写金额都给出同一金额",
+          "mode": "coordinate",
+          "covered_at_rank": 2,
+          "acceptable_sets": [
+            [
+              "817cfff2927c6c65-c0006"
+            ],
+            [
+              "817cfff2927c6c65-c0007"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ],
+              "acceptable_sets": [
+                [
+                  "817cfff2927c6c65-c0007"
+                ]
+              ]
+            },
+            {
+              "scheme_id": "s2",
+              "excerpt_ids": [
+                "x3"
+              ],
+              "acceptable_sets": [
+                [
+                  "817cfff2927c6c65-c0007"
+                ]
+              ]
+            },
+            {
+              "scheme_id": "s3",
+              "excerpt_ids": [
+                "x4"
+              ],
+              "acceptable_sets": [
+                [
+                  "817cfff2927c6c65-c0007"
+                ]
+              ]
+            },
+            {
+              "scheme_id": "s4",
+              "excerpt_ids": [
+                "x5"
+              ],
+              "acceptable_sets": [
+                [
+                  "817cfff2927c6c65-c0006"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e3",
+          "information_item": "其中包含的税费",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "817cfff2927c6c65-c0006"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ],
+              "acceptable_sets": [
+                [
+                  "817cfff2927c6c65-c0006"
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "817cfff2927c6c65-c0008",
+          "document_id": "817cfff2927c6c65",
+          "document_name": "E001-602.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.1374192237854004,
+          "similarity": 0.8625807762145996,
+          "relevant": false,
+          "cross_document": false,
+          "text": "Nº Cuota\nFec. Venc.\nMonto\n\nEsta es una representación impresa de la factura electrónica, generada en el Sistema de SUNAT. Puede\n\nverificarla utilizando su clave SOL."
+        },
+        {
+          "rank": 2,
+          "chunk_id": "817cfff2927c6c65-c0007",
+          "document_id": "817cfff2927c6c65",
+          "document_name": "E001-602.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.1427077054977417,
+          "similarity": 0.8572922945022583,
+          "relevant": true,
+          "cross_document": false,
+          "text": "Monto de redondeo :\n$ 0.00\nImporte Total :\n$ 331,432.50\n\nInformación del crédito\n:\n\nMonto neto pendiente de pago\n:\n$ 331,432.50\nTotal de Cuotas\n:\n1\n\nNº Cuota Fec. Venc.\nMonto\n1\n30/03/2026\n331,432.50\nNº Cuota\nFec. Venc.\nMonto\n\nNº Cuota\nFec. Venc.\nMonto"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "817cfff2927c6c65-c0000",
+          "document_id": "817cfff2927c6c65",
+          "document_name": "E001-602.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.1560589075088501,
+          "similarity": 0.8439410924911499,
+          "relevant": false,
+          "cross_document": false,
+          "text": "FACTURA ELECTRONICA\n\nRUC: 20546102115\n\nE001-602\n\nHEXING ELECTRICAL CO. S.A.C.\nHEXING ELECTRICAL COMPANY SAC\nAV. GUARDIA CIVIL 1321 URB. EL AEROPUERTO INT. 1602\nSURQUILLO - LIMA - LIMA\n\nForma de pago: Crédito\n\nFecha de Emisión\n: 30/01/2026\nSeñor(es)\n: ANDET S.A.C.\nRUC\n: 20601248647"
+        }
+      ]
+    },
+    {
+      "case_id": "E001-602-Q002",
+      "document_id": "817cfff2927c6c65",
+      "document_name": "E001-602.pdf",
+      "question": "En la factura E001-602 (INVOICE-E001-602), ¿cuál es el precio unitario y la cantidad de HXE34K-S1?",
+      "reference_answer": "HXE34K-S1的单价为USD 16.00，数量为500个。",
+      "answerable": true,
+      "scope": {
+        "kind": "identified",
+        "codes": [
+          "INVOICE-E001-602"
+        ],
+        "document_ids": [
+          "817cfff2927c6c65"
+        ],
+        "document_names": [
+          "E001-602.pdf"
+        ],
+        "identified_correctly": true
+      },
+      "evidence_document_ids": [
+        "817cfff2927c6c65"
+      ],
+      "hit": true,
+      "complete": true,
+      "first_relevant_rank": 1,
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_name": "E001-602.pdf",
+          "pages": [
+            1
+          ],
+          "text": "500.00 | HXE34K-S1 | MEDIDOR TRIFASICO HXE34K-S1, 4HILOS, 10(100)A, 3X220V, CLASE 1, CONEXION DIRECTA, MARCA HEXING | 16.00",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "817cfff2927c6c65-c0004"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        }
+      ],
+      "groups": [
+        {
+          "group_id": "e1",
+          "information_item": "HXE34K-S1 的单价",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": 1,
+          "acceptable_sets": [
+            [
+              "817cfff2927c6c65-c0004"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ],
+              "acceptable_sets": [
+                [
+                  "817cfff2927c6c65-c0004"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "information_item": "HXE34K-S1 的数量",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": 1,
+          "acceptable_sets": [
+            [
+              "817cfff2927c6c65-c0004"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ],
+              "acceptable_sets": [
+                [
+                  "817cfff2927c6c65-c0004"
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "817cfff2927c6c65-c0004",
+          "document_id": "817cfff2927c6c65",
+          "document_name": "E001-602.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.11667585372924805,
+          "similarity": 0.883324146270752,
+          "relevant": true,
+          "cross_document": false,
+          "text": "500.00\nUNIDAD\nHXE34K-S1 MEDIDOR TRIFASICO HXE34K-S1, 4HILOS, 10(100)A,\n\n3X220V, CLASE 1, CONEXION DIRECTA, MARCA HEXING\n16.00\n\n6.20\n\n10000.00\nUNIDAD\nHXPXS1\nCAJA PORTAMEDIDOR POLIMERICA MONOFASICA\nMARCA HEXING\n\n90.00"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "817cfff2927c6c65-c0003",
+          "document_id": "817cfff2927c6c65",
+          "document_name": "E001-602.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.12159299850463867,
+          "similarity": 0.8784070014953613,
+          "relevant": false,
+          "cross_document": false,
+          "text": "6.25\n\n2500.00\nUNIDAD\nHXE13ES\nMEDIDOR MONOFASICO HXE13ES, 3HILOS, 5(60)A, 220V,\nCLASE 1, CONEXION DIRECTA, MARCA HEXING\n\n500.00\nUNIDAD\nHXE33K-S1 MEDIDOR TRIFASICO HXE33K-S1, 3HILOS, 10(60)A,\n\n3X220V, CLASE 1, CONEXION DIRECTA, MARCA HEXING\n15.50"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "817cfff2927c6c65-c0000",
+          "document_id": "817cfff2927c6c65",
+          "document_name": "E001-602.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.12640273571014404,
+          "similarity": 0.873597264289856,
+          "relevant": false,
+          "cross_document": false,
+          "text": "FACTURA ELECTRONICA\n\nRUC: 20546102115\n\nE001-602\n\nHEXING ELECTRICAL CO. S.A.C.\nHEXING ELECTRICAL COMPANY SAC\nAV. GUARDIA CIVIL 1321 URB. EL AEROPUERTO INT. 1602\nSURQUILLO - LIMA - LIMA\n\nForma de pago: Crédito\n\nFecha de Emisión\n: 30/01/2026\nSeñor(es)\n: ANDET S.A.C.\nRUC\n: 20601248647"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-24-12-Q001",
+      "document_id": "169a1f2133fe5643",
+      "document_name": "ORDER PERU 24-12 ANDET.pdf",
+      "question": "Which products are included in PURCHASE ORDER N° 24-12-HPE (ORDER2025001)? What are their unit prices and quantities? What is the total amount of the order?",
+      "reference_answer": "订单包含1款产品：HXF300，单价为USD 96.80，数量为10000件，总金额为USD 968,000.00。",
+      "answerable": true,
+      "scope": {
+        "kind": "identified",
+        "codes": [
+          "ORDER2025001"
+        ],
+        "document_ids": [
+          "169a1f2133fe5643"
+        ],
+        "document_names": [
+          "ORDER PERU 24-12 ANDET.pdf"
+        ],
+        "identified_correctly": true
+      },
+      "evidence_document_ids": [
+        "169a1f2133fe5643"
+      ],
+      "hit": true,
+      "complete": true,
+      "first_relevant_rank": 1,
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_name": "ORDER PERU 24-12 ANDET.pdf",
+          "pages": [
+            1
+          ],
+          "text": "C&I Meter Cl 0.2S 3&4 Wires meter with modem 4G 2 pulses Model: HXF300 | 10,000 | USD 96.80 | USD 968,000.00\nTotal CIF (CALLAO) | USD 968,000.00",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "169a1f2133fe5643-c0001"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        }
+      ],
+      "groups": [
+        {
+          "group_id": "e1",
+          "information_item": "包含哪几款产品",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": 1,
+          "acceptable_sets": [
+            [
+              "169a1f2133fe5643-c0001"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ],
+              "acceptable_sets": [
+                [
+                  "169a1f2133fe5643-c0001"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "information_item": "单价",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": 1,
+          "acceptable_sets": [
+            [
+              "169a1f2133fe5643-c0001"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ],
+              "acceptable_sets": [
+                [
+                  "169a1f2133fe5643-c0001"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e3",
+          "information_item": "数量",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": 1,
+          "acceptable_sets": [
+            [
+              "169a1f2133fe5643-c0001"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ],
+              "acceptable_sets": [
+                [
+                  "169a1f2133fe5643-c0001"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e4",
+          "information_item": "订单总金额",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": 1,
+          "acceptable_sets": [
+            [
+              "169a1f2133fe5643-c0001"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ],
+              "acceptable_sets": [
+                [
+                  "169a1f2133fe5643-c0001"
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "169a1f2133fe5643-c0001",
+          "document_id": "169a1f2133fe5643",
+          "document_name": "ORDER PERU 24-12 ANDET.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.1381833553314209,
+          "similarity": 0.8618166446685791,
+          "relevant": true,
+          "cross_document": false,
+          "text": "Sub.: Purchase ANDET N°160\n\nPURCHASE ORDER N° 24-12-HPE\n\nDetails:\n\nItem\nGoods of Description\nQty\nUnit price\nTotal Amount\n\n(CIF Callao)\n(USD)\n\n1\n\n10,000\nUSD 96.80\nUSD 968,000.00\n\nC&I Meter Cl 0.2S\n3&4 Wires meter with modem 4G\n2 pulses\nModel: HXF300\n\nTotal CIF (CALLAO)\nUSD 968,000.00"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "169a1f2133fe5643-c0002",
+          "document_id": "169a1f2133fe5643",
+          "document_name": "ORDER PERU 24-12 ANDET.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.16056495904922485,
+          "similarity": 0.8394350409507751,
+          "relevant": false,
+          "cross_document": false,
+          "text": "Total CIF (CALLAO)\nUSD 968,000.00\n\n(Hexing Peru margin 12%)\n\nSpecial conditions:\n\n1.\nTechnical Requirements\n\nAttach technical specifications signed by ANDET\n\n2.\nSerial Number: According factory standard\n\n3.\nPackaging"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "169a1f2133fe5643-c0010",
+          "document_id": "169a1f2133fe5643",
+          "document_name": "ORDER PERU 24-12 ANDET.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.16794079542160034,
+          "similarity": 0.8320592045783997,
+          "relevant": false,
+          "cross_document": false,
+          "text": "Hexing Electrical Company S.A.C.\nE-mail: maria.gallardo@hxgroup.com\n\nWebsite: www.hxgroup.cn"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-24-12-Q002",
+      "document_id": "169a1f2133fe5643",
+      "document_name": "ORDER PERU 24-12 ANDET.pdf",
+      "question": "Please describe the delivery schedule of PURCHASE ORDER N° 24-12-HPE (ORDER2025001).",
+      "reference_answer": "五批交付，每批次交付约2000件，具体交付日期待确认。",
+      "answerable": true,
+      "scope": {
+        "kind": "identified",
+        "codes": [
+          "ORDER2025001"
+        ],
+        "document_ids": [
+          "169a1f2133fe5643"
+        ],
+        "document_names": [
+          "ORDER PERU 24-12 ANDET.pdf"
+        ],
+        "identified_correctly": true
+      },
+      "evidence_document_ids": [
+        "169a1f2133fe5643"
+      ],
+      "hit": true,
+      "complete": true,
+      "first_relevant_rank": 1,
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_name": "ORDER PERU 24-12 ANDET.pdf",
+          "pages": [
+            1
+          ],
+          "text": "Delivery Date: To be confirmed the date, total 5 deliveries - each delivery will be approximately 2,000 units.",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "169a1f2133fe5643-c0004"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        }
+      ],
+      "groups": [
+        {
+          "group_id": "e1",
+          "information_item": "交货时间规划",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": 1,
+          "acceptable_sets": [
+            [
+              "169a1f2133fe5643-c0004"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ],
+              "acceptable_sets": [
+                [
+                  "169a1f2133fe5643-c0004"
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "169a1f2133fe5643-c0004",
+          "document_id": "169a1f2133fe5643",
+          "document_name": "ORDER PERU 24-12 ANDET.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.17777109146118164,
+          "similarity": 0.8222289085388184,
+          "relevant": true,
+          "cross_document": false,
+          "text": "4.\nDelivery Date: To be confirmed the date, total 5 deliveries - each delivery will be approximately 2,000 units.\n\n5.\nConsider the following:"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "169a1f2133fe5643-c0001",
+          "document_id": "169a1f2133fe5643",
+          "document_name": "ORDER PERU 24-12 ANDET.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.17818284034729004,
+          "similarity": 0.82181715965271,
+          "relevant": false,
+          "cross_document": false,
+          "text": "Sub.: Purchase ANDET N°160\n\nPURCHASE ORDER N° 24-12-HPE\n\nDetails:\n\nItem\nGoods of Description\nQty\nUnit price\nTotal Amount\n\n(CIF Callao)\n(USD)\n\n1\n\n10,000\nUSD 96.80\nUSD 968,000.00\n\nC&I Meter Cl 0.2S\n3&4 Wires meter with modem 4G\n2 pulses\nModel: HXF300\n\nTotal CIF (CALLAO)\nUSD 968,000.00"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "169a1f2133fe5643-c0011",
+          "document_id": "169a1f2133fe5643",
+          "document_name": "ORDER PERU 24-12 ANDET.pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.1857762336730957,
+          "similarity": 0.8142237663269043,
+          "relevant": false,
+          "cross_document": false,
+          "text": "Ref: OC N°160\nDate: 24/07/2024\nPage: 2 of 2\n\nDirección: Urb.El aeropuerto, Av. Guardia Civil 1321, Of. 1602, Surquillo, Lima – Perú\n\nTeléfonos: +51(1) 224-4609"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-24-12-Q003",
+      "document_id": "169a1f2133fe5643",
+      "document_name": "ORDER PERU 24-12 ANDET.pdf",
+      "question": "In how many batches will PURCHASE ORDER N° 24-12-HPE (ORDER2025001) be delivered? What is the specific delivery date of each batch?",
+      "reference_answer": "分五批交付，每批次的交付日期待确认。",
+      "answerable": true,
+      "scope": {
+        "kind": "identified",
+        "codes": [
+          "ORDER2025001"
+        ],
+        "document_ids": [
+          "169a1f2133fe5643"
+        ],
+        "document_names": [
+          "ORDER PERU 24-12 ANDET.pdf"
+        ],
+        "identified_correctly": true
+      },
+      "evidence_document_ids": [
+        "169a1f2133fe5643"
+      ],
+      "hit": true,
+      "complete": true,
+      "first_relevant_rank": 1,
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_name": "ORDER PERU 24-12 ANDET.pdf",
+          "pages": [
+            1
+          ],
+          "text": "Delivery Date: To be confirmed the date, total 5 deliveries - each delivery will be approximately 2,000 units.",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "169a1f2133fe5643-c0004"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        }
+      ],
+      "groups": [
+        {
+          "group_id": "e1",
+          "information_item": "分几批交付",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": 1,
+          "acceptable_sets": [
+            [
+              "169a1f2133fe5643-c0004"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ],
+              "acceptable_sets": [
+                [
+                  "169a1f2133fe5643-c0004"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "information_item": "每批次的具体交付日期",
+          "note": "原文写明日期待定",
+          "mode": "coordinate",
+          "covered_at_rank": 1,
+          "acceptable_sets": [
+            [
+              "169a1f2133fe5643-c0004"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ],
+              "acceptable_sets": [
+                [
+                  "169a1f2133fe5643-c0004"
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "169a1f2133fe5643-c0004",
+          "document_id": "169a1f2133fe5643",
+          "document_name": "ORDER PERU 24-12 ANDET.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.13773244619369507,
+          "similarity": 0.8622675538063049,
+          "relevant": true,
+          "cross_document": false,
+          "text": "4.\nDelivery Date: To be confirmed the date, total 5 deliveries - each delivery will be approximately 2,000 units.\n\n5.\nConsider the following:"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "169a1f2133fe5643-c0003",
+          "document_id": "169a1f2133fe5643",
+          "document_name": "ORDER PERU 24-12 ANDET.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.17647171020507812,
+          "similarity": 0.8235282897949219,
+          "relevant": false,
+          "cross_document": false,
+          "text": "a)\nTwo Initial Verification Certificates per Meter: Yes (High Quality Reports Please). Also digital.\nb)\nEvery meter in their own individual box in order.\nc)\nEach individual box labeled with its own serial number.\nd)\nThe serial number of the sticker should be according factory serial number"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "169a1f2133fe5643-c0015",
+          "document_id": "169a1f2133fe5643",
+          "document_name": "ORDER PERU 24-12 ANDET.pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.17768454551696777,
+          "similarity": 0.8223154544830322,
+          "relevant": false,
+          "cross_document": false,
+          "text": "Additional requirement of ANDET:\n\n6.\nHexing Peru Payment to China:\n\nBank check payable at 100% within 120 days counted from the B/L date. (for each batch)\n\nPrepared by: María Gallardo\n\nHexing Electrical Company S.A.C.\nE-mail: maria.gallardo@hxgroup.com\n\nWebsite: www.hxgroup.cn"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-24-12-Q004",
+      "document_id": "169a1f2133fe5643",
+      "document_name": "ORDER PERU 24-12 ANDET.pdf",
+      "question": "Does the total amount of PURCHASE ORDER N° 24-12-HPE (ORDER2025001) cover the cost of MDC ORCA? If not, how much must be paid additionally? What is the payment deadline?",
+      "reference_answer": "订单总金额不包含 MDC ORCA 的费用；MDC ORCA 需额外一次性支付 USD 10,000.00，付款截止日为 2026 年 8 月 1 日。",
+      "answerable": true,
+      "scope": {
+        "kind": "identified",
+        "codes": [
+          "ORDER2025001"
+        ],
+        "document_ids": [
+          "169a1f2133fe5643"
+        ],
+        "document_names": [
+          "ORDER PERU 24-12 ANDET.pdf"
+        ],
+        "identified_correctly": true
+      },
+      "evidence_document_ids": [
+        "169a1f2133fe5643"
+      ],
+      "hit": true,
+      "complete": true,
+      "first_relevant_rank": 1,
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_name": "ORDER PERU 24-12 ANDET.pdf",
+          "pages": [
+            1
+          ],
+          "text": "MDC ORCA: 10,000.00 USD (one-time purchase), payment due: August 1st, 2026",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "169a1f2133fe5643-c0006"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x2",
+          "document_name": "ORDER PERU 24-12 ANDET.pdf",
+          "pages": [
+            1
+          ],
+          "text": "C&I Meter Cl 0.2S 3&4 Wires meter with modem 4G 2 pulses Model: HXF300 | 10,000 | USD 96.80 | USD 968,000.00\nTotal CIF (CALLAO) | USD 968,000.00",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "169a1f2133fe5643-c0001"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        }
+      ],
+      "groups": [
+        {
+          "group_id": "e1",
+          "information_item": "总金额是否涵盖 MDC ORCA 费用",
+          "note": "需对照订单明细（总额 = 电表数量 × 单价）与 MDC ORCA 单列的费用，才能判断不包含",
+          "mode": "coordinate",
+          "covered_at_rank": 2,
+          "acceptable_sets": [
+            [
+              "169a1f2133fe5643-c0001",
+              "169a1f2133fe5643-c0006"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2"
+              ],
+              "acceptable_sets": [
+                [
+                  "169a1f2133fe5643-c0001",
+                  "169a1f2133fe5643-c0006"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "information_item": "需额外支付的金额",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": 1,
+          "acceptable_sets": [
+            [
+              "169a1f2133fe5643-c0006"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ],
+              "acceptable_sets": [
+                [
+                  "169a1f2133fe5643-c0006"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e3",
+          "information_item": "付款最后期限",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": 1,
+          "acceptable_sets": [
+            [
+              "169a1f2133fe5643-c0006"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ],
+              "acceptable_sets": [
+                [
+                  "169a1f2133fe5643-c0006"
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "169a1f2133fe5643-c0006",
+          "document_id": "169a1f2133fe5643",
+          "document_name": "ORDER PERU 24-12 ANDET.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.12650763988494873,
+          "similarity": 0.8734923601150513,
+          "relevant": true,
+          "cross_document": false,
+          "text": "laboratories.\n•\nSoftware and License:\n•\nMDC ORCA: 10,000.00 USD (one-time purchase), payment due: August 1st, 2026\n•\nOperation and Maintenance Service, 2 years free (from August 1st, 2025 to August 1st 2027),\npaymet due for the service: August 2nd 2027.\no\nMeters connected ≤ 2500 : 5500 USD\no"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "169a1f2133fe5643-c0001",
+          "document_id": "169a1f2133fe5643",
+          "document_name": "ORDER PERU 24-12 ANDET.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.14897948503494263,
+          "similarity": 0.8510205149650574,
+          "relevant": true,
+          "cross_document": false,
+          "text": "Sub.: Purchase ANDET N°160\n\nPURCHASE ORDER N° 24-12-HPE\n\nDetails:\n\nItem\nGoods of Description\nQty\nUnit price\nTotal Amount\n\n(CIF Callao)\n(USD)\n\n1\n\n10,000\nUSD 96.80\nUSD 968,000.00\n\nC&I Meter Cl 0.2S\n3&4 Wires meter with modem 4G\n2 pulses\nModel: HXF300\n\nTotal CIF (CALLAO)\nUSD 968,000.00"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "169a1f2133fe5643-c0002",
+          "document_id": "169a1f2133fe5643",
+          "document_name": "ORDER PERU 24-12 ANDET.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.15685707330703735,
+          "similarity": 0.8431429266929626,
+          "relevant": false,
+          "cross_document": false,
+          "text": "Total CIF (CALLAO)\nUSD 968,000.00\n\n(Hexing Peru margin 12%)\n\nSpecial conditions:\n\n1.\nTechnical Requirements\n\nAttach technical specifications signed by ANDET\n\n2.\nSerial Number: According factory standard\n\n3.\nPackaging"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-24-12-Q005",
+      "document_id": "169a1f2133fe5643",
+      "document_name": "ORDER PERU 24-12 ANDET.pdf",
+      "question": "How are the operation and maintenance services of PURCHASE ORDER N° 24-12-HPE (ORDER2025001) charged?",
+      "reference_answer": "前两年免费，时间从2025年8月1日至2027年8月1日。之后需在2027年8月2日之前根据连接的电表数量付费，连接的电表数小于2500只，价格为5500 USD;连接的电表数在2500只至5000只之间，价格为7000 USD；连接的电表数在5001只至12000只之间，价格为10000 USD;连接的电表数在12001只至30000只之间，价格为15000 USD。",
+      "answerable": true,
+      "scope": {
+        "kind": "identified",
+        "codes": [
+          "ORDER2025001"
+        ],
+        "document_ids": [
+          "169a1f2133fe5643"
+        ],
+        "document_names": [
+          "ORDER PERU 24-12 ANDET.pdf"
+        ],
+        "identified_correctly": true
+      },
+      "evidence_document_ids": [
+        "169a1f2133fe5643"
+      ],
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": 2,
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_name": "ORDER PERU 24-12 ANDET.pdf",
+          "pages": [
+            1
+          ],
+          "text": "Operation and Maintenance Service, 2 years free (from August 1st, 2025 to August 1st 2027), paymet due for the service: August 2nd 2027.\nMeters connected ≤ 2500: 5500 USD\nMeters connected 2501-5000: 7000 USD\nMeters connected 5001-12000: 10000 USD\nMeters connected 12001-30000: 15000 USD",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "169a1f2133fe5643-c0006",
+              "169a1f2133fe5643-c0007"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        }
+      ],
+      "groups": [
+        {
+          "group_id": "e1",
+          "information_item": "运维服务收费方式",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "169a1f2133fe5643-c0006",
+              "169a1f2133fe5643-c0007"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ],
+              "acceptable_sets": [
+                [
+                  "169a1f2133fe5643-c0006",
+                  "169a1f2133fe5643-c0007"
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "169a1f2133fe5643-c0001",
+          "document_id": "169a1f2133fe5643",
+          "document_name": "ORDER PERU 24-12 ANDET.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.1670147180557251,
+          "similarity": 0.8329852819442749,
+          "relevant": false,
+          "cross_document": false,
+          "text": "Sub.: Purchase ANDET N°160\n\nPURCHASE ORDER N° 24-12-HPE\n\nDetails:\n\nItem\nGoods of Description\nQty\nUnit price\nTotal Amount\n\n(CIF Callao)\n(USD)\n\n1\n\n10,000\nUSD 96.80\nUSD 968,000.00\n\nC&I Meter Cl 0.2S\n3&4 Wires meter with modem 4G\n2 pulses\nModel: HXF300\n\nTotal CIF (CALLAO)\nUSD 968,000.00"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "169a1f2133fe5643-c0006",
+          "document_id": "169a1f2133fe5643",
+          "document_name": "ORDER PERU 24-12 ANDET.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.1727691888809204,
+          "similarity": 0.8272308111190796,
+          "relevant": true,
+          "cross_document": false,
+          "text": "laboratories.\n•\nSoftware and License:\n•\nMDC ORCA: 10,000.00 USD (one-time purchase), payment due: August 1st, 2026\n•\nOperation and Maintenance Service, 2 years free (from August 1st, 2025 to August 1st 2027),\npaymet due for the service: August 2nd 2027.\no\nMeters connected ≤ 2500 : 5500 USD\no"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "169a1f2133fe5643-c0000",
+          "document_id": "169a1f2133fe5643",
+          "document_name": "ORDER PERU 24-12 ANDET.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.19644856452941895,
+          "similarity": 0.803551435470581,
+          "relevant": false,
+          "cross_document": false,
+          "text": "Ref: OC N°160\nDate: 24/07/2024\nPage: 1 of 2\n\nDirección: Urb.El aeropuerto, Av. Guardia Civil 1321, Of. 1602, Surquillo, Lima – Perú\n\nTeléfonos: +51(1) 224-4609\n\nTo: Hexing Electrical Co. LTD.\nAddreess: 1418-5 Moganshan Rd. Shangcheng Industrial Zone\n310011, Hangzhou, China."
+        }
+      ]
+    },
+    {
+      "case_id": "PO-24-12-Q006",
+      "document_id": "169a1f2133fe5643",
+      "document_name": "ORDER PERU 24-12 ANDET.pdf",
+      "question": "What are the payment terms of PURCHASE ORDER N° 24-12-HPE (ORDER2025001)?",
+      "reference_answer": "按批次付款，每批次在提单日后120天内100%银行支票付款。",
+      "answerable": true,
+      "scope": {
+        "kind": "identified",
+        "codes": [
+          "ORDER2025001"
+        ],
+        "document_ids": [
+          "169a1f2133fe5643"
+        ],
+        "document_names": [
+          "ORDER PERU 24-12 ANDET.pdf"
+        ],
+        "identified_correctly": true
+      },
+      "evidence_document_ids": [
+        "169a1f2133fe5643"
+      ],
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": null,
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_name": "ORDER PERU 24-12 ANDET.pdf",
+          "pages": [
+            2
+          ],
+          "text": "Bank check payable at 100% within 120 days counted from the B/L date. (for each batch)",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "169a1f2133fe5643-c0015"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        }
+      ],
+      "groups": [
+        {
+          "group_id": "e1",
+          "information_item": "付款条件",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "169a1f2133fe5643-c0015"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ],
+              "acceptable_sets": [
+                [
+                  "169a1f2133fe5643-c0015"
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "169a1f2133fe5643-c0001",
+          "document_id": "169a1f2133fe5643",
+          "document_name": "ORDER PERU 24-12 ANDET.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.15926271677017212,
+          "similarity": 0.8407372832298279,
+          "relevant": false,
+          "cross_document": false,
+          "text": "Sub.: Purchase ANDET N°160\n\nPURCHASE ORDER N° 24-12-HPE\n\nDetails:\n\nItem\nGoods of Description\nQty\nUnit price\nTotal Amount\n\n(CIF Callao)\n(USD)\n\n1\n\n10,000\nUSD 96.80\nUSD 968,000.00\n\nC&I Meter Cl 0.2S\n3&4 Wires meter with modem 4G\n2 pulses\nModel: HXF300\n\nTotal CIF (CALLAO)\nUSD 968,000.00"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "169a1f2133fe5643-c0010",
+          "document_id": "169a1f2133fe5643",
+          "document_name": "ORDER PERU 24-12 ANDET.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.18061941862106323,
+          "similarity": 0.8193805813789368,
+          "relevant": false,
+          "cross_document": false,
+          "text": "Hexing Electrical Company S.A.C.\nE-mail: maria.gallardo@hxgroup.com\n\nWebsite: www.hxgroup.cn"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "169a1f2133fe5643-c0002",
+          "document_id": "169a1f2133fe5643",
+          "document_name": "ORDER PERU 24-12 ANDET.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.18314242362976074,
+          "similarity": 0.8168575763702393,
+          "relevant": false,
+          "cross_document": false,
+          "text": "Total CIF (CALLAO)\nUSD 968,000.00\n\n(Hexing Peru margin 12%)\n\nSpecial conditions:\n\n1.\nTechnical Requirements\n\nAttach technical specifications signed by ANDET\n\n2.\nSerial Number: According factory standard\n\n3.\nPackaging"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-15-Q001",
+      "document_id": "5883b02cd922a64f",
+      "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+      "question": "In PURCHASE ORDER N° 25-15-HPE (ORDER2025002), what is the specific date of the fourth delivery batch? What is the total amount of the products delivered?",
+      "reference_answer": "第四批次交付的具体日期为2026年3月10日，交付的产品总金额为USD 188030.00。",
+      "answerable": true,
+      "scope": {
+        "kind": "identified",
+        "codes": [
+          "ORDER2025002"
+        ],
+        "document_ids": [
+          "5883b02cd922a64f"
+        ],
+        "document_names": [
+          "ORDER PERU 25-15 ANDET VF.pdf"
+        ],
+        "identified_correctly": true
+      },
+      "evidence_document_ids": [
+        "5883b02cd922a64f"
+      ],
+      "hit": true,
+      "complete": false,
+      "first_relevant_rank": 2,
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "pages": [
+            1
+          ],
+          "text": "HXE12ES | 80,000 | USD 5.28\nHXE13ES | 10,000 | USD 5.50\nHXE33K-S1 | 1,900 | USD 13.64\nHXE34K-S1 | 3,500 | USD 14.08\nHXPXS1 | 40,000 | USD 5.46\nHXF300 | 1,500 | USD 79.20",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "5883b02cd922a64f-c0001",
+              "5883b02cd922a64f-c0002",
+              "5883b02cd922a64f-c0003"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x2",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "pages": [
+            2
+          ],
+          "text": "4th Delivery | 10.03.26",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "5883b02cd922a64f-c0006",
+              "5883b02cd922a64f-c0007"
+            ]
+          ],
+          "problem": "",
+          "table_header": true
+        },
+        {
+          "excerpt_id": "x3",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "pages": [
+            2
+          ],
+          "text": "HXE12ESX 20,000.00 | HXE13ESX 2,500.00 | HXE33K-S1 - | HXE34K-S1 1,000.00 | Meterbox 10,000.00 | HXF300 -",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "5883b02cd922a64f-c0007",
+              "5883b02cd922a64f-c0008"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        }
+      ],
+      "groups": [
+        {
+          "group_id": "e1",
+          "information_item": "第四批次交付日期",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": 3,
+          "acceptable_sets": [
+            [
+              "5883b02cd922a64f-c0006",
+              "5883b02cd922a64f-c0007"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ],
+              "acceptable_sets": [
+                [
+                  "5883b02cd922a64f-c0006",
+                  "5883b02cd922a64f-c0007"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "information_item": "第四批次交付产品总金额",
+          "note": "总金额 = 第四批各产品数量（x3）× 单价（x1）",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "5883b02cd922a64f-c0001",
+              "5883b02cd922a64f-c0002",
+              "5883b02cd922a64f-c0003",
+              "5883b02cd922a64f-c0007",
+              "5883b02cd922a64f-c0008"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x3"
+              ],
+              "acceptable_sets": [
+                [
+                  "5883b02cd922a64f-c0001",
+                  "5883b02cd922a64f-c0002",
+                  "5883b02cd922a64f-c0003",
+                  "5883b02cd922a64f-c0007",
+                  "5883b02cd922a64f-c0008"
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "5883b02cd922a64f-c0012",
+          "document_id": "5883b02cd922a64f",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.13985377550125122,
+          "similarity": 0.8601462244987488,
+          "relevant": false,
+          "cross_document": false,
+          "text": "format.\n•\nIndicate the number of purchase order in all the documents, invoices and shipping documents.\n•\nAll the boxes and pallets must be arranged in descending order (by serial number), with label.\n•\nThe conformity of the goods will be as maximum 5 days after receiving de goods (DDP)\n•"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "5883b02cd922a64f-c0007",
+          "document_id": "5883b02cd922a64f",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.1501109004020691,
+          "similarity": 0.8498890995979309,
+          "relevant": true,
+          "cross_document": false,
+          "text": "6th\nDelivery\n25.09.25\n10.10.25\n10.12.25\n10.03.26\n10.05.26\n10.07.26\n\nHXE12ESX\n\n -\n\n20,000.00\n\n20,000.00\n\n20,000.00\n\n20,000.00\n\nHXE13ESX\n\n5,000.00\n\n2,500.00\n\n2,500.00\n -\n -\n\nHXE33K-S1\n\n900.00\n\n500.00\n -\n\n500.00\n -\n\nHXE34K-S1\n\n500\n\n1,000.00\n\n500.00\n\n1,000.00\n\n500.00\n -\n\nMeterbox\n\n -\n\n10,000.00"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "5883b02cd922a64f-c0006",
+          "document_id": "5883b02cd922a64f",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.16109442710876465,
+          "similarity": 0.8389055728912354,
+          "relevant": true,
+          "cross_document": false,
+          "text": "Ref: OC N°221\nDate: 25/07/2025\nPage: 2 of 2\n\nDirección: Urb.El aeropuerto, Av. Guardia Civil 1321, Of. 1602, Surquillo, Lima – Perú\n\nTeléfonos: +51(1) 224-4609\n\n4.\nDelivery Date:\n\nMODEL\n1st Delivery\n2nd\nDelivery\n3rd Delivery\n4th Delivery\n5th\nDelivery"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-15-Q002",
+      "document_id": "5883b02cd922a64f",
+      "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+      "question": "In PURCHASE ORDER N° 25-15-HPE (ORDER2025002), what is the specific date of the sixth delivery batch? What is the total amount of the products delivered?",
+      "reference_answer": "第六批次交付的具体日期为2026年7月10日，交付的产品总金额为USD 160200.00。",
+      "answerable": true,
+      "scope": {
+        "kind": "identified",
+        "codes": [
+          "ORDER2025002"
+        ],
+        "document_ids": [
+          "5883b02cd922a64f"
+        ],
+        "document_names": [
+          "ORDER PERU 25-15 ANDET VF.pdf"
+        ],
+        "identified_correctly": true
+      },
+      "evidence_document_ids": [
+        "5883b02cd922a64f"
+      ],
+      "hit": true,
+      "complete": false,
+      "first_relevant_rank": 1,
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "pages": [
+            1
+          ],
+          "text": "HXE12ES | 80,000 | USD 5.28\nHXE13ES | 10,000 | USD 5.50\nHXE33K-S1 | 1,900 | USD 13.64\nHXE34K-S1 | 3,500 | USD 14.08\nHXPXS1 | 40,000 | USD 5.46\nHXF300 | 1,500 | USD 79.20",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "5883b02cd922a64f-c0001",
+              "5883b02cd922a64f-c0002",
+              "5883b02cd922a64f-c0003"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x2",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "pages": [
+            2
+          ],
+          "text": "6th Delivery | 10.07.26",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "5883b02cd922a64f-c0007"
+            ]
+          ],
+          "problem": "",
+          "table_header": true
+        },
+        {
+          "excerpt_id": "x3",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "pages": [
+            2
+          ],
+          "text": "HXE12ESX 20,000.00 | HXE13ESX - | HXE33K-S1 - | HXE34K-S1 - | Meterbox 10,000.00 | HXF300 -",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "5883b02cd922a64f-c0007",
+              "5883b02cd922a64f-c0008"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        }
+      ],
+      "groups": [
+        {
+          "group_id": "e1",
+          "information_item": "第六批次交付日期",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": 1,
+          "acceptable_sets": [
+            [
+              "5883b02cd922a64f-c0007"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ],
+              "acceptable_sets": [
+                [
+                  "5883b02cd922a64f-c0007"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "information_item": "第六批次交付产品总金额",
+          "note": "总金额 = 第六批各产品数量（x3）× 单价（x1）",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "5883b02cd922a64f-c0001",
+              "5883b02cd922a64f-c0002",
+              "5883b02cd922a64f-c0003",
+              "5883b02cd922a64f-c0007",
+              "5883b02cd922a64f-c0008"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x3"
+              ],
+              "acceptable_sets": [
+                [
+                  "5883b02cd922a64f-c0001",
+                  "5883b02cd922a64f-c0002",
+                  "5883b02cd922a64f-c0003",
+                  "5883b02cd922a64f-c0007",
+                  "5883b02cd922a64f-c0008"
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "5883b02cd922a64f-c0007",
+          "document_id": "5883b02cd922a64f",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.1259797215461731,
+          "similarity": 0.8740202784538269,
+          "relevant": true,
+          "cross_document": false,
+          "text": "6th\nDelivery\n25.09.25\n10.10.25\n10.12.25\n10.03.26\n10.05.26\n10.07.26\n\nHXE12ESX\n\n -\n\n20,000.00\n\n20,000.00\n\n20,000.00\n\n20,000.00\n\nHXE13ESX\n\n5,000.00\n\n2,500.00\n\n2,500.00\n -\n -\n\nHXE33K-S1\n\n900.00\n\n500.00\n -\n\n500.00\n -\n\nHXE34K-S1\n\n500\n\n1,000.00\n\n500.00\n\n1,000.00\n\n500.00\n -\n\nMeterbox\n\n -\n\n10,000.00"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "5883b02cd922a64f-c0012",
+          "document_id": "5883b02cd922a64f",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.1412551999092102,
+          "similarity": 0.8587448000907898,
+          "relevant": false,
+          "cross_document": false,
+          "text": "format.\n•\nIndicate the number of purchase order in all the documents, invoices and shipping documents.\n•\nAll the boxes and pallets must be arranged in descending order (by serial number), with label.\n•\nThe conformity of the goods will be as maximum 5 days after receiving de goods (DDP)\n•"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "5883b02cd922a64f-c0015",
+          "document_id": "5883b02cd922a64f",
+          "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.16341406106948853,
+          "similarity": 0.8365859389305115,
+          "relevant": false,
+          "cross_document": false,
+          "text": "Website: www.hxgroup.cn"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-19-Q001",
+      "document_id": "5a4c36e0022f4917",
+      "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+      "question": "In PURCHASE ORDER N° 25-19-HPE (ORDER2025003), which products did ELCTO order? What are the unit price and quantity of each product? What is the total amount ordered? What is the delivery plan? Please detail the specific date of each delivery batch and the products and quantities delivered in each batch.",
+      "reference_answer": "ELCTO总共订购了两款产品：HXE12ES和HXE13ES。HXE12ES的单价为USD 4.56，数量总共116000件；HXE13ES的单价为USD 5.08，数量总共94000件。订购的总金额为USD 1006480.00。交货计划分为六批次：第一批次交付日期为2026年2月28日，交付HXE12ES 19330件和HXE13ES 16000件；第二批次交付日期为2026年4月9日，交付HXE12ES 19330件和HXE13ES 16000件；第三批次交付日期为2026年8月7日，交付HXE12ES 19330件和HXE13ES 15500件；第四批次交付日期为2026年12月5日，交付HXE12ES 19330件和HXE13ES 15500件；第五批次交付日期为2027年4月4日，交付HXE12ES 19330件和HXE13ES 15500件；第六批次交付日期为2027年8月2日，交付HXE12ES 19350件和HXE13ES 15500件。",
+      "answerable": true,
+      "scope": {
+        "kind": "identified",
+        "codes": [
+          "ORDER2025003"
+        ],
+        "document_ids": [
+          "5a4c36e0022f4917"
+        ],
+        "document_names": [
+          "签字-ORDER PERU 25-19 FONAFE.pdf"
+        ],
+        "identified_correctly": true
+      },
+      "evidence_document_ids": [
+        "5a4c36e0022f4917"
+      ],
+      "hit": true,
+      "complete": false,
+      "first_relevant_rank": 1,
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            1
+          ],
+          "text": "HXE12ES | 1´131,056.00 | USD 4.56\nHXE13ES | 109,130.00 | USD 5.08",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0002"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x2",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            2
+          ],
+          "text": "ELCTO | HXE12ES | 116,000 | 19,330 | 19,330 | 19,330 | 19,330 | 19,330 | 19,350",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0012",
+              "5a4c36e0022f4917-c0013"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x3",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            2
+          ],
+          "text": "ELCTO | HXE13ES | 94,000 | 16,000 | 16,000 | 15,500 | 15,500 | 15,500 | 15,500",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0016",
+              "5a4c36e0022f4917-c0017"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x4",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            3
+          ],
+          "text": "1ST DELIVERY 28/02/2026\n2ND DELIVERY 09/04/2026\n3RD DELIVERY 07/08/2026\n4TH DELIVERY 05/12/2026\n5TH DELIVERY 04/04/2027\n6TH DELIVERY 02/08/2027",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0024"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        }
+      ],
+      "groups": [
+        {
+          "group_id": "e1",
+          "information_item": "订购了哪些产品",
+          "note": "两款产品分列在分配表的不同 ITEM 段落",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0012",
+              "5a4c36e0022f4917-c0013",
+              "5a4c36e0022f4917-c0016",
+              "5a4c36e0022f4917-c0017"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2",
+                "x3"
+              ],
+              "acceptable_sets": [
+                [
+                  "5a4c36e0022f4917-c0012",
+                  "5a4c36e0022f4917-c0013",
+                  "5a4c36e0022f4917-c0016",
+                  "5a4c36e0022f4917-c0017"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "information_item": "每款产品的单价",
+          "note": "x1 只含 ELCTO 订购的两款产品",
+          "mode": "coordinate",
+          "covered_at_rank": 1,
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0002"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ],
+              "acceptable_sets": [
+                [
+                  "5a4c36e0022f4917-c0002"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e3",
+          "information_item": "每款产品的数量",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0012",
+              "5a4c36e0022f4917-c0013",
+              "5a4c36e0022f4917-c0016",
+              "5a4c36e0022f4917-c0017"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2",
+                "x3"
+              ],
+              "acceptable_sets": [
+                [
+                  "5a4c36e0022f4917-c0012",
+                  "5a4c36e0022f4917-c0013",
+                  "5a4c36e0022f4917-c0016",
+                  "5a4c36e0022f4917-c0017"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e4",
+          "information_item": "订购总金额",
+          "note": "原文无此数，由数量 × 单价求和得出",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0002",
+              "5a4c36e0022f4917-c0012",
+              "5a4c36e0022f4917-c0013",
+              "5a4c36e0022f4917-c0016",
+              "5a4c36e0022f4917-c0017"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2",
+                "x3"
+              ],
+              "acceptable_sets": [
+                [
+                  "5a4c36e0022f4917-c0002",
+                  "5a4c36e0022f4917-c0012",
+                  "5a4c36e0022f4917-c0013",
+                  "5a4c36e0022f4917-c0016",
+                  "5a4c36e0022f4917-c0017"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e5",
+          "information_item": "各批次交付日期",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": 3,
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0024"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x4"
+              ],
+              "acceptable_sets": [
+                [
+                  "5a4c36e0022f4917-c0024"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e6",
+          "information_item": "各批次交付的产品和数量",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0012",
+              "5a4c36e0022f4917-c0013",
+              "5a4c36e0022f4917-c0016",
+              "5a4c36e0022f4917-c0017"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2",
+                "x3"
+              ],
+              "acceptable_sets": [
+                [
+                  "5a4c36e0022f4917-c0012",
+                  "5a4c36e0022f4917-c0013",
+                  "5a4c36e0022f4917-c0016",
+                  "5a4c36e0022f4917-c0017"
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "5a4c36e0022f4917-c0002",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.14694666862487793,
+          "similarity": 0.8530533313751221,
+          "relevant": true,
+          "cross_document": false,
+          "text": "PURCHASE ORDER N° 25-19-HPE\n\nDetails:\n\nItem\nGoods of Description\nQty\nUnit price\nTotal Amount\n\n(CIF CALLAO)\n(USD)\n\n1\nSingle Phase 02 Wires meter\nModel: HXE12ES\n1´131,056.00\nUSD 4.56\nUSD 5’157,615.36\n\n2\nSingle Phase 03 Wires meter\nModel: HXE13ES\n109,130.00\nUSD 5.08\nUSD 554,380.40"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "5a4c36e0022f4917-c0047",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.15519577264785767,
+          "similarity": 0.8448042273521423,
+          "relevant": false,
+          "cross_document": false,
+          "text": "Prepared by: María Gallardo\n向忖\n\nHexing Electrical Company S.A.C.\nE-mail: maria.gallardo@hxgroup.com\n\nWebsite: www.hxgroup.cn"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "5a4c36e0022f4917-c0024",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            3
+          ],
+          "kind": "text",
+          "distance": 0.1566872000694275,
+          "similarity": 0.8433127999305725,
+          "relevant": true,
+          "cross_document": false,
+          "text": "7.\nDelivery date:\n\nDELIVERIES\nDDP DATE\n1 1ST DELIVERY\n28/02/2026\n2 2ND DELIVERY\n09/04/2026\n3 3RD DELIVERY\n07/08/2026\n4 4TH DELIVERY\n05/12/2026\n5 5TH DELIVERY\n04/04/2027\n6 6TH DELIVERY\n02/08/2027"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-19-Q002",
+      "document_id": "5a4c36e0022f4917",
+      "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+      "question": "In PURCHASE ORDER N° 25-19-HPE (ORDER2025003), how many units of HXE34K-S1 did ElUC order? What is the total amount?",
+      "reference_answer": "ELUC订购了2000件HXE34K-S1，总金额为USD 28740.00。",
+      "answerable": true,
+      "scope": {
+        "kind": "identified",
+        "codes": [
+          "ORDER2025003"
+        ],
+        "document_ids": [
+          "5a4c36e0022f4917"
+        ],
+        "document_names": [
+          "签字-ORDER PERU 25-19 FONAFE.pdf"
+        ],
+        "identified_correctly": true
+      },
+      "evidence_document_ids": [
+        "5a4c36e0022f4917"
+      ],
+      "hit": false,
+      "complete": false,
+      "first_relevant_rank": null,
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            1
+          ],
+          "text": "Three Phase 04 Wires meter Model: HXE34K-S1 | USD 14.37",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0003"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x2",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            3
+          ],
+          "text": "ELUC | HXE34K-S1 | 2,000 | 1,000 | 1,000",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0020",
+              "5a4c36e0022f4917-c0021"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        }
+      ],
+      "groups": [
+        {
+          "group_id": "e1",
+          "information_item": "订购数量",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0020",
+              "5a4c36e0022f4917-c0021"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ],
+              "acceptable_sets": [
+                [
+                  "5a4c36e0022f4917-c0020",
+                  "5a4c36e0022f4917-c0021"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "information_item": "总金额",
+          "note": "原文无此数，由数量 × 单价得出",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0003",
+              "5a4c36e0022f4917-c0020",
+              "5a4c36e0022f4917-c0021"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2"
+              ],
+              "acceptable_sets": [
+                [
+                  "5a4c36e0022f4917-c0003",
+                  "5a4c36e0022f4917-c0020",
+                  "5a4c36e0022f4917-c0021"
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "5a4c36e0022f4917-c0002",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.13612014055252075,
+          "similarity": 0.8638798594474792,
+          "relevant": false,
+          "cross_document": false,
+          "text": "PURCHASE ORDER N° 25-19-HPE\n\nDetails:\n\nItem\nGoods of Description\nQty\nUnit price\nTotal Amount\n\n(CIF CALLAO)\n(USD)\n\n1\nSingle Phase 02 Wires meter\nModel: HXE12ES\n1´131,056.00\nUSD 4.56\nUSD 5’157,615.36\n\n2\nSingle Phase 03 Wires meter\nModel: HXE13ES\n109,130.00\nUSD 5.08\nUSD 554,380.40"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "5a4c36e0022f4917-c0022",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            3
+          ],
+          "kind": "text",
+          "distance": 0.15490102767944336,
+          "similarity": 0.8450989723205566,
+          "relevant": false,
+          "cross_document": false,
+          "text": "ELSE\n4\nThree Phase 4\nwires\nUNIT\n2,600\n300\n300\n500\n500\n500\n500\n\nELPU\n4\nThree Phase 4\nwires\nUNIT\n1,200\n1,200\n\nSEAL\n4\nThree Phase 4\nwires\nUNIT\n1,500\n500\n1,000"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "5a4c36e0022f4917-c0013",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            2
+          ],
+          "kind": "text",
+          "distance": 0.1567986011505127,
+          "similarity": 0.8432013988494873,
+          "relevant": false,
+          "cross_document": false,
+          "text": "ADINELSA\n1\nSingle Phase\nMeter\n2 wires\nUNIT\n10,000\n5,000\n5,000\n\nELSU\n1\nSingle Phase\nMeter\n2 wires\nUNIT\n69,000\n29,000\n23,000\n17,000\n\nELCTO\n1\nSingle Phase\nMeter\n2 wires\nUNIT\n116,000\n19,330\n19,330\n19,330\n19,330\n19,330\n19,350"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-19-Q003",
+      "document_id": "5a4c36e0022f4917",
+      "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+      "question": "In PURCHASE ORDER N° 25-19-HPE (ORDER2025003), which products did ENSA order? What are the unit price and quantity of each product? What is the total amount ordered? What is the delivery plan? Please detail the specific date of each delivery batch and the products and quantities delivered in each batch.",
+      "reference_answer": "ENSA总共订购了四款产品：HXE12ES、HXE13ES、HXE33K-S1和HXE34K-S1。HXE12ES的单价为USD 4.56，数量总共132180件；HXE13ES的单价为USD 5.08，数量总共9910件；HXE33K-S1的单价为USD 13.49，数量总共5018件；HXE34K-S1的单价为USD 14.37，数量总共10804件。订购的总金额为USD 876029.90。交货计划分为六批次：第一批次交付日期为2026年2月28日，交付HXE12ES 24330件、HXE13ES 1810件、HXE33K-S1 1153件和HXE34K-S1 2234件；第二批次交付日期为2026年4月9日，交付HXE12ES 23630件、HXE13ES 1710件、HXE33K-S1 853件和HXE34K-S1 1734件；第三批次交付日期为2026年8月7日，交付HXE12ES 21880件、HXE13ES 1710件、HXE33K-S1 753件和HXE34K-S1 1734件；第四批次交付日期为2026年12月5日，交付HXE12ES 21680件、HXE13ES 1610件、HXE33K-S1 753件和HXE34K-S1 1734件；第五批次交付日期为2027年4月4日，交付HXE12ES 20480件、HXE13ES 1560件、HXE33K-S1 753件和HXE34K-S1 1734件；第六批次交付日期为2027年8月2日，交付HXE12ES 20180件、HXE13ES 1510件、HXE33K-S1 753件和HXE34K-S1 1634件。",
+      "answerable": true,
+      "scope": {
+        "kind": "identified",
+        "codes": [
+          "ORDER2025003"
+        ],
+        "document_ids": [
+          "5a4c36e0022f4917"
+        ],
+        "document_names": [
+          "签字-ORDER PERU 25-19 FONAFE.pdf"
+        ],
+        "identified_correctly": true
+      },
+      "evidence_document_ids": [
+        "5a4c36e0022f4917"
+      ],
+      "hit": true,
+      "complete": false,
+      "first_relevant_rank": 1,
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            1
+          ],
+          "text": "HXE12ES | USD 4.56\nHXE13ES | USD 5.08\nHXE33K-S1 | USD 13.49\nHXE34K-S1 | USD 14.37",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0002",
+              "5a4c36e0022f4917-c0003"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x2",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            2
+          ],
+          "text": "ENSA | HXE12ES | 132,180 | 24,330 | 23,630 | 21,880 | 21,680 | 20,480 | 20,180",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0012",
+              "5a4c36e0022f4917-c0014"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x3",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            2
+          ],
+          "text": "ENSA | HXE13ES | 9,910 | 1,810 | 1,710 | 1,710 | 1,610 | 1,560 | 1,510",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0016",
+              "5a4c36e0022f4917-c0017"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x4",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            2
+          ],
+          "text": "ENSA | HXE33K-S1 | 5,018 | 1,153 | 853 | 753 | 753 | 753 | 753",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0017",
+              "5a4c36e0022f4917-c0018"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x5",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            3
+          ],
+          "text": "ENSA | HXE34K-S1 | 10,804 | 2,234 | 1,734 | 1,734 | 1,734 | 1,734 | 1,634",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0020",
+              "5a4c36e0022f4917-c0021"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        },
+        {
+          "excerpt_id": "x6",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            3
+          ],
+          "text": "1ST DELIVERY 28/02/2026\n2ND DELIVERY 09/04/2026\n3RD DELIVERY 07/08/2026\n4TH DELIVERY 05/12/2026\n5TH DELIVERY 04/04/2027\n6TH DELIVERY 02/08/2027",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0024"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        }
+      ],
+      "groups": [
+        {
+          "group_id": "e1",
+          "information_item": "订购了哪些产品",
+          "note": "四款产品分列在分配表的四个 ITEM 段落",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0012",
+              "5a4c36e0022f4917-c0014",
+              "5a4c36e0022f4917-c0016",
+              "5a4c36e0022f4917-c0017",
+              "5a4c36e0022f4917-c0018",
+              "5a4c36e0022f4917-c0020",
+              "5a4c36e0022f4917-c0021"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2",
+                "x3",
+                "x4",
+                "x5"
+              ],
+              "acceptable_sets": [
+                [
+                  "5a4c36e0022f4917-c0012",
+                  "5a4c36e0022f4917-c0014",
+                  "5a4c36e0022f4917-c0016",
+                  "5a4c36e0022f4917-c0017",
+                  "5a4c36e0022f4917-c0018",
+                  "5a4c36e0022f4917-c0020",
+                  "5a4c36e0022f4917-c0021"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e2",
+          "information_item": "每款产品的单价",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0002",
+              "5a4c36e0022f4917-c0003"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ],
+              "acceptable_sets": [
+                [
+                  "5a4c36e0022f4917-c0002",
+                  "5a4c36e0022f4917-c0003"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e3",
+          "information_item": "每款产品的数量",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0012",
+              "5a4c36e0022f4917-c0014",
+              "5a4c36e0022f4917-c0016",
+              "5a4c36e0022f4917-c0017",
+              "5a4c36e0022f4917-c0018",
+              "5a4c36e0022f4917-c0020",
+              "5a4c36e0022f4917-c0021"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2",
+                "x3",
+                "x4",
+                "x5"
+              ],
+              "acceptable_sets": [
+                [
+                  "5a4c36e0022f4917-c0012",
+                  "5a4c36e0022f4917-c0014",
+                  "5a4c36e0022f4917-c0016",
+                  "5a4c36e0022f4917-c0017",
+                  "5a4c36e0022f4917-c0018",
+                  "5a4c36e0022f4917-c0020",
+                  "5a4c36e0022f4917-c0021"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e4",
+          "information_item": "订购总金额",
+          "note": "原文无此数，由数量 × 单价求和得出",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0002",
+              "5a4c36e0022f4917-c0003",
+              "5a4c36e0022f4917-c0012",
+              "5a4c36e0022f4917-c0014",
+              "5a4c36e0022f4917-c0016",
+              "5a4c36e0022f4917-c0017",
+              "5a4c36e0022f4917-c0018",
+              "5a4c36e0022f4917-c0020",
+              "5a4c36e0022f4917-c0021"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2",
+                "x3",
+                "x4",
+                "x5"
+              ],
+              "acceptable_sets": [
+                [
+                  "5a4c36e0022f4917-c0002",
+                  "5a4c36e0022f4917-c0003",
+                  "5a4c36e0022f4917-c0012",
+                  "5a4c36e0022f4917-c0014",
+                  "5a4c36e0022f4917-c0016",
+                  "5a4c36e0022f4917-c0017",
+                  "5a4c36e0022f4917-c0018",
+                  "5a4c36e0022f4917-c0020",
+                  "5a4c36e0022f4917-c0021"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e5",
+          "information_item": "各批次交付日期",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": 3,
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0024"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x6"
+              ],
+              "acceptable_sets": [
+                [
+                  "5a4c36e0022f4917-c0024"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "group_id": "e6",
+          "information_item": "各批次交付的产品和数量",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": null,
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0012",
+              "5a4c36e0022f4917-c0014",
+              "5a4c36e0022f4917-c0016",
+              "5a4c36e0022f4917-c0017",
+              "5a4c36e0022f4917-c0018",
+              "5a4c36e0022f4917-c0020",
+              "5a4c36e0022f4917-c0021"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2",
+                "x3",
+                "x4",
+                "x5"
+              ],
+              "acceptable_sets": [
+                [
+                  "5a4c36e0022f4917-c0012",
+                  "5a4c36e0022f4917-c0014",
+                  "5a4c36e0022f4917-c0016",
+                  "5a4c36e0022f4917-c0017",
+                  "5a4c36e0022f4917-c0018",
+                  "5a4c36e0022f4917-c0020",
+                  "5a4c36e0022f4917-c0021"
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "5a4c36e0022f4917-c0002",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.14780420064926147,
+          "similarity": 0.8521957993507385,
+          "relevant": true,
+          "cross_document": false,
+          "text": "PURCHASE ORDER N° 25-19-HPE\n\nDetails:\n\nItem\nGoods of Description\nQty\nUnit price\nTotal Amount\n\n(CIF CALLAO)\n(USD)\n\n1\nSingle Phase 02 Wires meter\nModel: HXE12ES\n1´131,056.00\nUSD 4.56\nUSD 5’157,615.36\n\n2\nSingle Phase 03 Wires meter\nModel: HXE13ES\n109,130.00\nUSD 5.08\nUSD 554,380.40"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "5a4c36e0022f4917-c0047",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.14988833665847778,
+          "similarity": 0.8501116633415222,
+          "relevant": false,
+          "cross_document": false,
+          "text": "Prepared by: María Gallardo\n向忖\n\nHexing Electrical Company S.A.C.\nE-mail: maria.gallardo@hxgroup.com\n\nWebsite: www.hxgroup.cn"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "5a4c36e0022f4917-c0024",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            3
+          ],
+          "kind": "text",
+          "distance": 0.15029656887054443,
+          "similarity": 0.8497034311294556,
+          "relevant": true,
+          "cross_document": false,
+          "text": "7.\nDelivery date:\n\nDELIVERIES\nDDP DATE\n1 1ST DELIVERY\n28/02/2026\n2 2ND DELIVERY\n09/04/2026\n3 3RD DELIVERY\n07/08/2026\n4 4TH DELIVERY\n05/12/2026\n5 5TH DELIVERY\n04/04/2027\n6 6TH DELIVERY\n02/08/2027"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-19-Q004",
+      "document_id": "5a4c36e0022f4917",
+      "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+      "question": "In PURCHASE ORDER N° 25-19-HPE (ORDER2025003), what are the customer's payment terms?",
+      "reference_answer": "货款将在货物在客户仓库被验收后30天内被支付。",
+      "answerable": true,
+      "scope": {
+        "kind": "identified",
+        "codes": [
+          "ORDER2025003"
+        ],
+        "document_ids": [
+          "5a4c36e0022f4917"
+        ],
+        "document_names": [
+          "签字-ORDER PERU 25-19 FONAFE.pdf"
+        ],
+        "identified_correctly": true
+      },
+      "evidence_document_ids": [
+        "5a4c36e0022f4917"
+      ],
+      "hit": true,
+      "complete": true,
+      "first_relevant_rank": 3,
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            3
+          ],
+          "text": "Customer´s Payment Terms: Payment will be done 30 days after the acceptance of the goods in customer´s warehouse.",
+          "mode": "coordinate",
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0027"
+            ]
+          ],
+          "problem": "",
+          "table_header": false
+        }
+      ],
+      "groups": [
+        {
+          "group_id": "e1",
+          "information_item": "客户的付款条件",
+          "note": "",
+          "mode": "coordinate",
+          "covered_at_rank": 3,
+          "acceptable_sets": [
+            [
+              "5a4c36e0022f4917-c0027"
+            ]
+          ],
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ],
+              "acceptable_sets": [
+                [
+                  "5a4c36e0022f4917-c0027"
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "rank": 1,
+          "chunk_id": "5a4c36e0022f4917-c0002",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            1
+          ],
+          "kind": "text",
+          "distance": 0.1510733962059021,
+          "similarity": 0.8489266037940979,
+          "relevant": false,
+          "cross_document": false,
+          "text": "PURCHASE ORDER N° 25-19-HPE\n\nDetails:\n\nItem\nGoods of Description\nQty\nUnit price\nTotal Amount\n\n(CIF CALLAO)\n(USD)\n\n1\nSingle Phase 02 Wires meter\nModel: HXE12ES\n1´131,056.00\nUSD 4.56\nUSD 5’157,615.36\n\n2\nSingle Phase 03 Wires meter\nModel: HXE13ES\n109,130.00\nUSD 5.08\nUSD 554,380.40"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "5a4c36e0022f4917-c0047",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            5
+          ],
+          "kind": "text",
+          "distance": 0.16643863916397095,
+          "similarity": 0.833561360836029,
+          "relevant": false,
+          "cross_document": false,
+          "text": "Prepared by: María Gallardo\n向忖\n\nHexing Electrical Company S.A.C.\nE-mail: maria.gallardo@hxgroup.com\n\nWebsite: www.hxgroup.cn"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "5a4c36e0022f4917-c0027",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "pages": [
+            3
+          ],
+          "kind": "text",
+          "distance": 0.16778326034545898,
+          "similarity": 0.832216739654541,
+          "relevant": true,
+          "cross_document": false,
+          "text": "8.\nCustomer´s Payment Terms: Payment will be done 30 days after the acceptance of the goods in customer´s\nwarehouse.\n\n9.\nConsider the following:"
+        }
+      ]
+    }
+  ]
+}
