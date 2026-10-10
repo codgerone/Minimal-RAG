@@ -190,10 +190,7 @@ def _rebuild_all(workspace: Workspace, assembly: Assembly,
 
     # Every document succeeded: now replace the index contents.
     store = open_store(workspace, assembly.name)
-    keep = {item.source.document_id for item in prepared_all}
-    for document_id in store.ids_by_document():
-        if document_id not in keep:
-            store.delete_document(document_id)
+    store.clear()
     manifest = _new_manifest(assembly)
     for prepared in prepared_all:
         store.replace_document(prepared.source.document_id, _stored(prepared), prepared.vectors)

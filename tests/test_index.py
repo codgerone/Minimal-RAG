@@ -106,3 +106,21 @@ def test_ingest_writes_readable_report_and_audit_folders(workspace, fake_assembl
     report = workspace.ingest_reports("fake") / "sub__订单 A"
     assert (report / "1-解析.html").is_file() and (report / "3-分块.html").is_file()
     assert not (report / "2-表格.html").exists()
+
+
+def test_full_rebuild_accepts_an_embedder_with_another_vector_dimension(workspace, fake_assembly):
+    from dataclasses import replace
+
+    class WiderEmbedder(type(fake_assembly.embedder)):
+        def identity(self):
+            return {"model": "wider"}
+
+        def _vector(self, text):
+            return super()._vector(text) + [0.0]
+
+    make_pdf(workspace.documents / "a.pdf", PAGES)
+    ingest(workspace, fake_assembly)
+    wider = replace(fake_assembly, embedder=WiderEmbedder())
+    assert [o.action for o in ingest(workspace, wider, force=True)] == ["rebuilt"]
+    assert current_status(workspace, wider).state == "ready"
+    assert len(open_store(workspace, "fake").query(WiderEmbedder().encode_query("page"), 1)) == 1

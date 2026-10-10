@@ -97,6 +97,14 @@ class ChromaStore:
                            documents=[c.text for c in batch],
                            metadatas=[_metadata(c) for c in batch])
 
+    def clear(self) -> None:
+        """Drop the collection: a full rebuild may change the vector dimension (new embedder)."""
+        collection = self._open(create=False)
+        if collection is not None:
+            import chromadb
+            chromadb.PersistentClient(path=str(self.path)).delete_collection(COLLECTION)
+        self._collection = None
+
     def delete_document(self, document_id: str) -> None:
         collection = self._open(create=False)
         if collection is not None:
