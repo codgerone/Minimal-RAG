@@ -12,6 +12,8 @@ import shutil
 from dataclasses import dataclass
 from typing import Callable, Literal
 
+from rag.index.analyzer import detect_language
+from rag.index.lexical import LexicalChunk, LexicalStore
 from rag.index.manifest import DocumentEntry, Manifest, now
 from rag.index.status import IndexStatus, check_status
 from rag.index.store import ChromaStore, StoredChunk
@@ -44,6 +46,7 @@ class Prepared:
     processed: ProcessedDocument
     batch: ChunkBatch
     vectors: list[list[float]]
+    lexical: list[LexicalChunk] | None     # None when the assembly has no BM25 index
     entry: DocumentEntry
 
 
@@ -51,22 +54,33 @@ def open_store(workspace: Workspace, config_name: str) -> ChromaStore:
     return ChromaStore(workspace.index_dir(config_name) / "chroma")
 
 
+def open_lexical(workspace: Workspace, assembly: Assembly) -> LexicalStore | None:
+    if assembly.lexical is None:
+        return None
+    return LexicalStore(workspace.index_dir(assembly.name) / "bm25.sqlite")
+
+
 def current_status(workspace: Workspace, assembly: Assembly,
                    sources: tuple[SourceDocument, ...] | None = None) -> IndexStatus:
     sources = discover(workspace.documents) if sources is None else sources
     return check_status(workspace, assembly.name, assembly.fingerprint(), sources,
-                        open_store(workspace, assembly.name))
+                        open_store(workspace, assembly.name), open_lexical(workspace, assembly))
 
 
 def prepare(source: SourceDocument, assembly: Assembly) -> Prepared:
     processed = process_document(source, assembly.parser, assembly.extractors, assembly.formatter)
     batch = attach_regions(assembly.chunker.chunk(processed.document), processed.document)
     vectors = assembly.embedder.encode_passages([chunk.text for chunk in batch.chunks])
+    lexical = None
+    if assembly.lexical is not None:
+        language = detect_language(chunk.text for chunk in batch.chunks)
+        lexical = [LexicalChunk(chunk.chunk_id, language, assembly.lexical.terms(chunk.text, language))
+                   for chunk in batch.chunks]
     entry = DocumentEntry(source.document_id, source.document_name, source.relative_path,
                           source.file_hash, readable_name(source.relative_path),
                           processed.parse.primary.page_count, len(batch.chunks),
                           len(processed.prepared_tables), now())
-    return Prepared(source, processed, batch, vectors, entry)
+    return Prepared(source, processed, batch, vectors, lexical, entry)
 
 
 def _stored(prepared: Prepared) -> list[StoredChunk]:
@@ -122,6 +136,7 @@ def ingest(workspace: Workspace, assembly: Assembly, *, file: str | None = None,
     index_dir = workspace.index_dir(assembly.name)
     manifest = status.manifest or _new_manifest(assembly)
     store = open_store(workspace, assembly.name)
+    lexical = open_lexical(workspace, assembly)
     targets = status.documents
     if file is not None:
         chosen = select(file, sources)
@@ -132,6 +147,8 @@ def ingest(workspace: Workspace, assembly: Assembly, *, file: str | None = None,
             if prune:
                 assert item.entry is not None
                 store.delete_document(item.entry.document_id)
+                if lexical is not None:
+                    lexical.delete_document(item.entry.document_id)
                 shutil.rmtree(index_dir / "documents" / item.entry.folder, ignore_errors=True)
                 shutil.rmtree(workspace.ingest_reports(assembly.name) / item.entry.folder,
                               ignore_errors=True)
@@ -153,6 +170,8 @@ def ingest(workspace: Workspace, assembly: Assembly, *, file: str | None = None,
                 shutil.rmtree(index_dir / "documents" / item.entry.folder, ignore_errors=True)
             write_audit_files(index_dir / "documents" / prepared.entry.folder, prepared)
             store.replace_document(item.source.document_id, _stored(prepared), prepared.vectors)
+            if lexical is not None:
+                lexical.replace_document(item.source.document_id, prepared.lexical or [])
             manifest.documents[item.source.document_id] = prepared.entry
             manifest.save(index_dir / "manifest.json")
         except Exception as exc:  # one bad PDF must not stop the others
@@ -191,9 +210,14 @@ def _rebuild_all(workspace: Workspace, assembly: Assembly,
     # Every document succeeded: now replace the index contents.
     store = open_store(workspace, assembly.name)
     store.clear()
+    lexical = open_lexical(workspace, assembly)
+    if lexical is not None:
+        lexical.clear()
     manifest = _new_manifest(assembly)
     for prepared in prepared_all:
         store.replace_document(prepared.source.document_id, _stored(prepared), prepared.vectors)
+        if lexical is not None:
+            lexical.replace_document(prepared.source.document_id, prepared.lexical or [])
         manifest.documents[prepared.source.document_id] = prepared.entry
     old = index_dir / "documents.old"
     shutil.rmtree(old, ignore_errors=True)

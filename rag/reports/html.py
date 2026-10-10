@@ -179,6 +179,21 @@ def text_block(text: str, limit: int | None = None) -> str:
             f'<button class="toggle" data-more="{more}" data-less="收起">{more}</button></div>')
 
 
+def hit_scores(hit: dict, retriever: str) -> str:
+    """Per-hit scores from an evaluation result: vector similarity and rank, BM25 rank and score.
+    Results written before V3.9 only carry the similarity."""
+    parts = []
+    if hit.get("similarity") is not None:
+        rank = hit.get("semantic_rank")
+        parts.append(f"向量第 {rank} 名 · 相似度 {hit['similarity']:.3f}" if rank and retriever == "hybrid"
+                     else f"相似度 {hit['similarity']:.3f}")
+    if hit.get("bm25") is not None:
+        parts.append(f"BM25 第 {hit['lexical_rank']} 名 · {hit['bm25']:.2f}")
+    elif retriever == "hybrid":
+        parts.append("BM25 无匹配词")
+    return " · ".join(parts)
+
+
 def filters(options: Iterable[tuple[str, str, int]]) -> str:
     buttons = "".join(f'<button data-tag="{esc(tag)}"{" class=on" if tag == "all" else ""}>'
                       f'{esc(label)}（{count}）</button>' for tag, label, count in options)

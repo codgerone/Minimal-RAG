@@ -19,6 +19,7 @@ dependencies = [
     "sentence-transformers>=3.0,<6",
     "unstructured[local-inference]>=0.18,<1",
     "unstructured-inference>=1.0,<2",
+    "snowballstemmer>=2.2,<4",
 ]
 
 [dependency-groups]

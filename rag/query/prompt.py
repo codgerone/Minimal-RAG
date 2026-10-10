@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from html import escape
 
-from rag.index.store import VectorHit
+from rag.query.retriever import Hit
 
 SYSTEM_PROMPT = """你是一个严格依据文档证据回答问题的助手。
 你只能使用 <document_context> 中提供的内容回答，不能使用外部知识补充业务事实。
@@ -16,7 +16,7 @@ SYSTEM_PROMPT = """你是一个严格依据文档证据回答问题的助手。
 每个事实结论必须引用真实来源，包含文档名、页码和 Chunk ID；不得捏造来源。"""
 
 
-def build_messages(question: str, hits: list[VectorHit]) -> list[dict[str, str]]:
+def build_messages(question: str, hits: list[Hit]) -> list[dict[str, str]]:
     sources = []
     for hit in hits:
         chunk = hit.chunk

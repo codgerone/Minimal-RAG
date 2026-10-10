@@ -9,6 +9,7 @@ from typing import Any, Callable
 
 from rag.config import AssemblyConfig, Component, ConfigError
 from rag.index import embedder as embedders
+from rag.index.analyzer import Analyzer
 from rag.index.embedder import Embedder
 from rag.ingest.chunkers import Chunker
 from rag.ingest.parsers import Parser
@@ -68,7 +69,8 @@ EMBEDDERS: dict[str, Callable[..., Embedder]] = {
     "bge_m3": embedders.bge_m3,
     "qwen3_embedding_0_6b": embedders.qwen3_embedding_0_6b,
 }
-RETRIEVERS = ("semantic",)
+RETRIEVERS = ("semantic", "bm25", "hybrid")
+NEEDS_LEXICAL = ("bm25", "hybrid")
 LLMS: dict[str, Callable[..., LLM]] = {"openrouter": OpenRouterLLM}
 
 # Steps whose implementation only makes sense with a specific parser.
@@ -100,6 +102,7 @@ class Assembly:
     formatter: TableFormatter | None
     embedder: Embedder
     chunker: Chunker
+    lexical: Analyzer | None = None     # set when the config has [lexical]: ingest builds a BM25 index
     _llm: LLM | None = field(default=None, repr=False)
 
     @property
@@ -137,7 +140,9 @@ def assemble(config: AssemblyConfig) -> Assembly:
     if config.retriever.use not in RETRIEVERS:
         raise ConfigError(f"[retriever] 没有名为 {config.retriever.use!r} 的实现，可选：{', '.join(RETRIEVERS)}")
     if config.retriever.params:
-        raise ConfigError(f"[retriever] semantic 只接受 top_k 和 document_filter 参数")
+        raise ConfigError(f"[retriever] {config.retriever.use} 只接受 top_k 和 document_filter 参数")
+    if config.retriever.use in NEEDS_LEXICAL and config.lexical is None:
+        raise ConfigError(f"检索器 {config.retriever.use} 需要 BM25 索引，请在配置中加入 [lexical]")
     if config.llm.use not in LLMS:
         raise ConfigError(f"[llm] 没有名为 {config.llm.use!r} 的实现，可选：{', '.join(LLMS)}")
 
@@ -155,4 +160,5 @@ def assemble(config: AssemblyConfig) -> Assembly:
         raise ConfigError(f"解析器 {parser_name} 不产出表格，[table_formatter] 不会生效，请删除")
     embedder = _make(EMBEDDERS, "embedder", config.embedder)
     chunker = _make(CHUNKERS, "chunker", config.chunker, embedder)
-    return Assembly(config, parser, extractors, formatter, embedder, chunker)
+    lexical = Analyzer(**config.lexical) if config.lexical is not None else None
+    return Assembly(config, parser, extractors, formatter, embedder, chunker, lexical)

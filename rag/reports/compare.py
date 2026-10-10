@@ -1,7 +1,7 @@
 """Comparison page: several evaluation runs side by side, changes against a baseline run.
 
-Runs with the same build settings apart from the embedder (and the same K) share a tab; the
-first run given in each tab is its baseline. A question improves when its status moves up
+Runs with the same build settings apart from the embedder and the BM25 analyzer (and the same
+K) share a tab, whatever their retriever; the first run given in each tab is its baseline. A question improves when its status moves up
 (未命中 < 部分覆盖 < 完整覆盖) against the baseline and regresses when it moves down.
 """
 
@@ -15,7 +15,7 @@ from urllib.parse import quote
 from rag.eval.metrics import METRICS
 from rag.jsonio import read_json, write_atomic, write_json
 from rag.paths import Workspace
-from rag.reports.html import badge, esc, filters, page, pct, text_block, write_assets
+from rag.reports.html import badge, esc, filters, hit_scores, page, pct, text_block, write_assets
 
 LEVELS = {"miss": (0, "✗ 未命中", "bad"), "partial": (1, "◐ 部分", "warn"), "complete": (2, "✓ 完整", "ok")}
 RECURRING_MIN = 3   # an irrelevant chunk listed when it is in the Top-K of at least this many questions
@@ -30,16 +30,22 @@ def _status(case: dict[str, Any]) -> str:
 
 
 def _group_key(result: dict[str, Any]) -> str:
-    settings = {k: v for k, v in result["build_settings"].items() if k not in ("embedder", "embedder_identity")}
+    settings = {k: v for k, v in result["build_settings"].items() if k not in ("embedder", "embedder_identity", "lexical")}
     import json
     return json.dumps([settings, result["top_k"]], sort_keys=True, ensure_ascii=False)
 
 
 def _model(result: dict[str, Any]) -> str:
-    """Embedder model name, plus the dataset variant (e.g. `+translated`) when there is one."""
-    model = str(result["build_settings"].get("embedder_identity", {}).get("model", "?")).split("/")[-1]
+    """Embedder model name; the retriever and BM25 analyzer settings when not plain semantic;
+    the dataset variant (e.g. `+translated`) when there is one."""
+    parts = [str(result["build_settings"].get("embedder_identity", {}).get("model", "?")).split("/")[-1]]
+    retriever = result.get("retriever", "semantic")
+    if retriever != "semantic":
+        lexical = result["build_settings"].get("lexical") or {}
+        parts.append(retriever + "（" + ("去停用词" if lexical.get("stopwords") else "保留停用词")
+                     + ("、词干化" if lexical.get("stemming") else "") + "）")
     variant = result["dataset"]["version"].partition("+")[2]
-    return f"{model} · {variant}" if variant else model
+    return " · ".join(parts + ([variant] if variant else []))
 
 
 def load_runs(workspace: Workspace, names: list[str]) -> list[tuple[str, dict[str, Any]]]:
@@ -133,9 +139,9 @@ def _matrix(runs: list[tuple[str, dict[str, Any]]], tab: str) -> tuple[str, str,
     return table, _cards(runs, by_run, tags_of, tab), tags_of
 
 
-def _hit(hit: dict[str, Any]) -> str:
+def _hit(hit: dict[str, Any], retriever: str) -> str:
     state = badge("相关", "ok") if hit["relevant"] else badge("不相关")
-    return (f'<div class="item"><b>#{hit["rank"]}</b> {state} <span class="meta">相似度 {hit["similarity"]:.4f}'
+    return (f'<div class="item"><b>#{hit["rank"]}</b> {state} <span class="meta">{esc(hit_scores(hit, retriever))}'
             f' · 第 {",".join(map(str, hit["pages"]))} 页</span>{text_block(hit["text"], 160)}'
             f'<details><summary>chunk ID</summary><div class="meta">{esc(hit["chunk_id"])}</div></details></div>')
 
@@ -144,12 +150,12 @@ def _cards(runs, by_run, tags_of: dict[str, str], tab: str) -> str:
     cards = []
     for cid, tags in tags_of.items():
         case = by_run[0][cid]
-        columns = "".join(f'<div><h3>{esc(_model(result))}</h3>{"".join(_hit(h) for h in by_run[i][cid]["hits"])}</div>'
+        columns = "".join(f'<div><h3>{esc(_model(result))}</h3>{"".join(_hit(h, result.get("retriever", "semantic")) for h in by_run[i][cid]["hits"])}</div>'
                           for i, (_, result) in enumerate(runs))
         questions = dict.fromkeys(run[cid]["question"] for run in by_run)
         cards.append(f'<div class="card" id="{esc(tab)}-{esc(cid)}" data-tags="{tags}"><h3>{esc(cid)}</h3>'
                      + "".join(f'<div>{esc(q)}</div>' for q in questions)
-                     + f'<details><summary>各编码器的 Top-{runs[0][1]["top_k"]}</summary>'
+                     + f'<details><summary>各运行的 Top-{runs[0][1]["top_k"]}</summary>'
                      f'<div class="grid">{columns}</div></details></div>')
     return "".join(cards)
 

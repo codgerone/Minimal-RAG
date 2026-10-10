@@ -10,11 +10,10 @@ from typing import Any
 from rag.eval.dataset import Case, Dataset, load_dataset
 from rag.eval.judge import CaseEvidence, JudgeChunk, judge_case
 from rag.eval.metrics import METRICS, QuestionScore, aggregate, score_question
-from rag.index.builder import current_status, open_store
-from rag.index.store import VectorHit
+from rag.index.builder import current_status, open_lexical, open_store
 from rag.jsonio import read_json, write_json
 from rag.paths import Workspace
-from rag.query.retriever import SemanticRetriever
+from rag.query.retriever import Hit, build_retriever
 from rag.query.scope import SearchScope, load_catalog, resolve_scope
 from rag.registry import Assembly
 
@@ -26,7 +25,7 @@ class EvalError(RuntimeError):
 @dataclass(frozen=True)
 class CaseResult:
     case: Case
-    hits: list[VectorHit]
+    hits: list[Hit]
     evidence: CaseEvidence
     score: QuestionScore | None   # None for unanswerable questions
     scope: SearchScope
@@ -111,7 +110,7 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int) -> Path
     enabled = assembly.config.document_filter
     catalog = (load_catalog(workspace.documents, tuple(sources.values()))
                if enabled else None)
-    retriever = SemanticRetriever(assembly.embedder, store)
+    retriever = build_retriever(assembly, store, open_lexical(workspace, assembly))
     results: list[CaseResult] = []
     for case in dataset.cases:
         scope = resolve_scope(case.question, catalog, enabled)
@@ -141,6 +140,7 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int) -> Path
         "config": assembly.name,
         "fingerprint": assembly.fingerprint(),
         "build_settings": assembly.build_settings(),
+        "retriever": assembly.config.retriever.use,
         "top_k": top_k,
         "created_at": datetime.now().astimezone().isoformat(timespec="seconds"),
         "dataset": {"version": dataset.version, "fingerprint": dataset.fingerprint,
@@ -204,7 +204,9 @@ def _case_json(item: CaseResult, names: dict[str, str]) -> dict[str, Any]:
         "hits": [{
             "rank": rank, "chunk_id": h.chunk.chunk_id, "document_id": h.chunk.document_id,
             "document_name": h.chunk.document_name, "pages": list(h.chunk.pages),
-            "kind": h.chunk.kind, "distance": h.distance, "similarity": 1 - h.distance,
+            "kind": h.chunk.kind, "score": h.score,
+            "semantic_rank": h.semantic_rank, "similarity": h.similarity,
+            "lexical_rank": h.lexical_rank, "bm25": h.bm25,
             "relevant": h.chunk.chunk_id in relevant,
             "cross_document": h.chunk.document_id not in evidence_docs,
             "text": h.chunk.text,

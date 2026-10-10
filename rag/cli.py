@@ -184,17 +184,30 @@ class _Scoper:
 
 
 def _retriever(workspace: Workspace, assembly):
-    from rag.index.builder import open_store
-    from rag.query.retriever import SemanticRetriever
-    return SemanticRetriever(assembly.embedder, open_store(workspace, assembly.name))
+    from rag.index.builder import open_lexical, open_store
+    from rag.query.retriever import build_retriever
+    return build_retriever(assembly, open_store(workspace, assembly.name), open_lexical(workspace, assembly))
 
 
-def _show_hits(hits) -> None:
+def _hit_scores(hit, retriever: str) -> str:
+    parts = []
+    if hit.semantic_rank is not None:
+        parts.append(f"向量第 {hit.semantic_rank} 名（相似度 {hit.similarity:.4f}）")
+    if hit.bm25 is not None:
+        parts.append(f"BM25 第 {hit.lexical_rank} 名（{hit.bm25:.3f}）")
+    if retriever == "hybrid":
+        if hit.bm25 is None:
+            parts.append("BM25 无匹配词")
+        parts.append(f"融合得分 {hit.score:.5f}")
+    return " · ".join(parts)
+
+
+def _show_hits(hits, retriever: str) -> None:
     if not hits:
         _out("没有检索到内容。")
     for rank, hit in enumerate(hits, start=1):
         chunk = hit.chunk
-        _out(f"#{rank} 相似度 {1 - hit.distance:.4f} · {chunk.document_name} · "
+        _out(f"#{rank} {_hit_scores(hit, retriever)} · {chunk.document_name} · "
              f"第 {','.join(map(str, chunk.pages))} 页 · {chunk.chunk_id}")
         _out(chunk.text)
         _out()
@@ -206,7 +219,7 @@ def _search(workspace: Workspace, args: argparse.Namespace) -> int:
     documents = _Scoper(workspace, assembly, args.document)(args.question)
     hits = _retriever(workspace, assembly).retrieve(
         args.question, args.top_k or assembly.config.top_k, documents)
-    _show_hits(hits)
+    _show_hits(hits, assembly.config.retriever.use)
     return 0
 
 
@@ -217,7 +230,7 @@ def _answer(workspace: Workspace, assembly, retriever, question: str, top_k: int
     hits = retriever.retrieve(question, top_k, scoper(question))
     messages = build_messages(question, hits)
     if debug:
-        _show_hits(hits)
+        _show_hits(hits, assembly.config.retriever.use)
         for message in messages:
             _out(f"[{message['role']}]\n{message['content']}\n")
     llm = assembly.llm()

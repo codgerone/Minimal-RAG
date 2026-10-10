@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Literal
 
+from rag.index.lexical import LexicalStore
 from rag.index.manifest import DocumentEntry, Manifest
 from rag.index.store import ChromaStore
 from rag.ingest.chunkers import chunk_id
@@ -62,13 +63,16 @@ def _complete(entry: DocumentEntry, ids: set[str], workspace: Workspace, config_
 
 
 def check_status(workspace: Workspace, config_name: str, fingerprint: str,
-                 sources: tuple[SourceDocument, ...], store: ChromaStore) -> IndexStatus:
+                 sources: tuple[SourceDocument, ...], store: ChromaStore,
+                 lexical: LexicalStore | None = None) -> IndexStatus:
+    """`lexical` is the BM25 index when the config has one; its chunk IDs are checked like the vectors'."""
     manifest = Manifest.load(workspace.index_dir(config_name) / "manifest.json")
     if manifest is None:
         documents = tuple(DocumentStatus("new" if has_text(s) else "unreadable", s, None)
                           for s in sources)
         return IndexStatus(config_name, "not_built", fingerprint, None, documents)
     stored_ids = store.ids_by_document()
+    lexical_ids = lexical.ids_by_document() if lexical is not None else None
     by_id = {source.document_id: source for source in sources}
     result: list[DocumentStatus] = []
     for source in sources:
@@ -77,7 +81,9 @@ def check_status(workspace: Workspace, config_name: str, fingerprint: str,
             state: DocumentState = "new" if has_text(source) else "unreadable"
         elif entry.file_hash != source.file_hash:
             state = "changed" if has_text(source) else "unreadable"
-        elif not _complete(entry, stored_ids.get(source.document_id, set()), workspace, config_name):
+        elif (not _complete(entry, stored_ids.get(source.document_id, set()), workspace, config_name)
+              or (lexical_ids is not None
+                  and not _complete(entry, lexical_ids.get(source.document_id, set()), workspace, config_name))):
             state = "incomplete"
         else:
             state = "current"

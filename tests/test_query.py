@@ -1,6 +1,6 @@
 from rag.index.store import StoredChunk, VectorHit
 from rag.query.prompt import SYSTEM_PROMPT, build_messages
-from rag.query.retriever import SemanticRetriever
+from rag.query.retriever import Hit, SemanticRetriever
 
 
 def chunk(chunk_id: str, text: str = "x") -> StoredChunk:
@@ -32,6 +32,7 @@ def test_ties_at_the_k_boundary_are_resolved_by_chunk_id():
     store = TieStore({"c1": 0.1, "c5": 0.2, "c4": 0.2, "c3": 0.2, "c2": 0.2, "c6": 0.3})
     hits = SemanticRetriever(Embedder(), store).retrieve("q", 2)
     assert [h.chunk.chunk_id for h in hits] == ["c1", "c2"]
+    assert [(h.semantic_rank, h.similarity, h.lexical_rank) for h in hits] == [(1, 0.9, None), (2, 0.8, None)]
     assert store.requests[-1] > store.requests[0]      # widened until the tie group was complete
 
 
@@ -40,8 +41,8 @@ def test_empty_index_returns_no_hits():
 
 
 def test_prompt_keeps_chunk_text_verbatim_and_escapes_attributes():
-    hit = VectorHit(StoredChunk("d-c0001", "d", 'a"b.pdf', "x/a.pdf", 1, "table", (2, 3), 10,
-                                "C&I Meter 3&4 Wires"), 0.1)
+    hit = Hit(StoredChunk("d-c0001", "d", 'a"b.pdf', "x/a.pdf", 1, "table", (2, 3), 10,
+                          "C&I Meter 3&4 Wires"), 0.9)
     system, user = build_messages("  价格？ ", [hit])
     assert system["content"] == SYSTEM_PROMPT
     assert "C&I Meter 3&4 Wires" in user["content"]
