@@ -42,9 +42,8 @@ def _characters(embedder: Embedder, **params: Any) -> Chunker:
 
 def _structured(embedder: Embedder, **params: Any) -> Chunker:
     from rag.ingest.chunkers.structured import StructuredTokenChunker
-    if not hasattr(embedder, "count_passage"):
-        raise ConfigError("structured_tokens 分块器需要能统计 token 的编码器")
-    return StructuredTokenChunker(embedder, **params)  # type: ignore[arg-type]
+    from rag.ingest.chunkers.tokens import E5TokenCounter
+    return StructuredTokenChunker(E5TokenCounter(), **params)
 
 
 PARSERS: dict[str, Callable[..., Parser]] = {

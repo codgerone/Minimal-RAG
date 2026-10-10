@@ -1,4 +1,4 @@
-"""Embedder interface and the E5 implementation (also the tokenizer used for chunk budgets)."""
+"""Embedder interface and the E5 implementation."""
 
 from __future__ import annotations
 
@@ -24,7 +24,6 @@ class E5Embedder:
         self.revision = revision
         self.batch_size = batch_size
         self._model: Any = None
-        self._tokenizer: Any = None
 
     def identity(self) -> dict[str, object]:
         return {"model": self.model_name, "revision": self.revision,
@@ -36,12 +35,6 @@ class E5Embedder:
             from sentence_transformers import SentenceTransformer
             self._model = SentenceTransformer(self.model_name, revision=self.revision)
         return self._model
-
-    def _load_tokenizer(self) -> Any:
-        if self._tokenizer is None:
-            from transformers import AutoTokenizer
-            self._tokenizer = AutoTokenizer.from_pretrained(self.model_name, revision=self.revision)
-        return self._tokenizer
 
     def _encode(self, texts: list[str], batch_size: int) -> list[list[float]]:
         vectors = self._load_model().encode(texts, batch_size=batch_size, show_progress_bar=False,
@@ -56,14 +49,3 @@ class E5Embedder:
 
     def encode_query(self, text: str) -> list[float]:
         return self._encode([self.query_prefix + text.strip()], 1)[0]
-
-    # Token counting for structure-aware chunking, measured on the real model input.
-    def _count(self, text: str, special: bool) -> int:
-        ids = self._load_tokenizer()(text, add_special_tokens=special, truncation=False)["input_ids"]
-        return len(ids[0] if ids and isinstance(ids[0], list) else ids)
-
-    def count_passage(self, text: str) -> int:
-        return self._count(self.passage_prefix + text, special=True)
-
-    def count_text(self, text: str) -> int:
-        return self._count(text, special=False)
