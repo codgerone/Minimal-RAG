@@ -10,7 +10,7 @@ chunk_size = 300
 chunk_overlap = 50
 
 [embedder]
-use = "e5_small"
+use = "bge_m3"
 
 [retriever]
 use = "semantic"
