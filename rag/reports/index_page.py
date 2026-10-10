@@ -74,13 +74,18 @@ def _eval_section(workspace: Workspace) -> str:
             f'{head}</tr>{"".join(rows)}</table></div>')
 
 
+def _runs_cell(runs: list[str]) -> str:
+    return (f'{len(runs)} 次评估<details><summary>评估目录</summary>'
+            f'<div class="meta">{"<br>".join(esc(r) for r in runs)}</div></details>')
+
+
 def _compare_section(workspace: Workspace) -> str:
     from rag.reports.compare import compare_dir
     specs = sorted(compare_dir(workspace).glob("*/runs.json")) if compare_dir(workspace).is_dir() else []
     if not specs:
         return ""
     rows = "".join(f'<tr><td><a href="compare/{esc(quote(p.parent.name))}/index.html">{esc(p.parent.name)}</a></td>'
-                   f'<td>{esc("、".join(read_json(p)["runs"]))}</td></tr>' for p in specs)
+                   f'<td>{_runs_cell(read_json(p)["runs"])}</td></tr>' for p in specs)
     return f'<h2>评估对比</h2><div class="scroll"><table><tr><th>对比</th><th>包含的评估</th></tr>{rows}</table></div>'
 
 
