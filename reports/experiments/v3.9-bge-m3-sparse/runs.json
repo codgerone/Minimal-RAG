@@ -1,0 +1,20 @@
+{
+  "structured": {
+    "semantic": "2026-10-12_structured_k3_filter-on",
+    "bm25": "2026-10-12_structured_k3_filter-on_bm25",
+    "sparse": "2026-10-12_structured_k3_filter-on_sparse",
+    "sparse_nocode": "2026-10-12_structured_k3_filter-on_sparse_nocode",
+    "hybrid": "2026-10-12_structured_k3_filter-on_hybrid",
+    "hybrid_sparse": "2026-10-12_structured_k3_filter-on_hybrid_sparse",
+    "hybrid_sparse_nocode": "2026-10-12_structured_k3_filter-on_hybrid_sparse_nocode"
+  },
+  "plain_text": {
+    "semantic": "2026-10-12_plain_text_k3_filter-on",
+    "bm25": "2026-10-12_plain_text_k3_filter-on_bm25",
+    "sparse": "2026-10-12_plain_text_k3_filter-on_sparse",
+    "sparse_nocode": "2026-10-12_plain_text_k3_filter-on_sparse_nocode",
+    "hybrid": "2026-10-12_plain_text_k3_filter-on_hybrid",
+    "hybrid_sparse": "2026-10-12_plain_text_k3_filter-on_hybrid_sparse",
+    "hybrid_sparse_nocode": "2026-10-12_plain_text_k3_filter-on_hybrid_sparse_nocode"
+  }
+}
