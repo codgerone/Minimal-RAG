@@ -12,6 +12,10 @@ chunk_overlap = 50
 [embedder]
 use = "bge_m3"
 
+[lexical]          # BM25 倒排索引的分析器（规则见 docs/rules/lexical.md）
+stopwords = true   # 去西班牙文、英文停用词
+stemming = true    # 按文档语言词干化
+
 [retriever]
 use = "semantic"
 top_k = 4          # search / ask / chat 返回的条数

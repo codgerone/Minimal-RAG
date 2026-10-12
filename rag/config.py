@@ -100,7 +100,7 @@ def load_config(path: Path) -> AssemblyConfig:
     if lexical is not None:
         if not isinstance(lexical, dict) or set(lexical) - {"stopwords", "stemming"}:
             raise ConfigError(f"{path.name}：[lexical] 只接受 stopwords 和 stemming")
-        lexical = {"stopwords": lexical.get("stopwords", True), "stemming": lexical.get("stemming", False)}
+        lexical = {"stopwords": lexical.get("stopwords", True), "stemming": lexical.get("stemming", True)}
         if not all(type(v) is bool for v in lexical.values()):
             raise ConfigError(f"{path.name}：lexical.stopwords、lexical.stemming 必须为 true 或 false")
     formatter = data.get("table_formatter")

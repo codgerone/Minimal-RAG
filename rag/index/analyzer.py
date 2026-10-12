@@ -65,7 +65,7 @@ def detect_language(texts: Iterable[str]) -> Language:
 
 
 class Analyzer:
-    def __init__(self, stopwords: bool = True, stemming: bool = False):
+    def __init__(self, stopwords: bool = True, stemming: bool = True):
         if type(stopwords) is not bool or type(stemming) is not bool:
             raise ValueError("stopwords 和 stemming 必须为 true 或 false")
         self.remove_stopwords = stopwords

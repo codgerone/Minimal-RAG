@@ -132,9 +132,9 @@ def test_lexical_section_enters_the_fingerprint_only_when_present(tmp_path):
     plain = assemble(load_config(write(tmp_path)))
     assert plain.lexical is None and "lexical" not in plain.config.build_settings()
     with_bm25 = assemble(load_config(write(tmp_path, extra="[lexical]\n")))
-    assert with_bm25.config.lexical == {"stopwords": True, "stemming": False}
-    stemmed = assemble(load_config(write(tmp_path, extra="[lexical]\nstemming = true\n")))
-    assert len({plain.fingerprint(), with_bm25.fingerprint(), stemmed.fingerprint()}) == 3
+    assert with_bm25.config.lexical == {"stopwords": True, "stemming": True}
+    unstemmed = assemble(load_config(write(tmp_path, extra="[lexical]\nstemming = false\n")))
+    assert len({plain.fingerprint(), with_bm25.fingerprint(), unstemmed.fingerprint()}) == 3
 
 
 @pytest.mark.parametrize("extra, retriever, message", [
@@ -154,7 +154,7 @@ def test_invalid_lexical_settings_are_rejected(tmp_path, extra, retriever, messa
 @pytest.fixture
 def lexical_assembly(fake_assembly):
     config = replace(fake_assembly.config, retriever=replace(fake_assembly.config.retriever, use="hybrid"),
-                     lexical={"stopwords": True, "stemming": False})
+                     lexical={"stopwords": True, "stemming": True})
     return replace(fake_assembly, config=config, lexical=Analyzer())
 
 
