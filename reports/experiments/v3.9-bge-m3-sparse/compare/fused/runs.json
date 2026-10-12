@@ -1,0 +1,13 @@
+{
+  "name": "fused",
+  "runs": [
+    "2026-10-12_structured_k3_filter-on_hybrid",
+    "2026-10-12_structured_k3_filter-on_hybrid_sparse",
+    "2026-10-12_structured_k3_filter-on_hybrid_sparse_nocode",
+    "2026-10-12_structured_k3_filter-on",
+    "2026-10-12_plain_text_k3_filter-on_hybrid",
+    "2026-10-12_plain_text_k3_filter-on_hybrid_sparse",
+    "2026-10-12_plain_text_k3_filter-on_hybrid_sparse_nocode",
+    "2026-10-12_plain_text_k3_filter-on"
+  ]
+}
