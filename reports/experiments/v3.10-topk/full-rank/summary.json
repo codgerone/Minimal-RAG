@@ -1,0 +1,5376 @@
+{
+  "structured": {
+    "hybrid": [
+      {
+        "case_id": "CONTRACT-105-Q001",
+        "scope_chunks": 33,
+        "needed_k": 3,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "签署双方",
+            "needed_k": 3,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0001",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "各自的法定代表人",
+            "needed_k": 3,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0001",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q002",
+        "scope_chunks": 33,
+        "needed_k": 1,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "各 Ítem 的品名",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0013",
+                "rank": 1,
+                "semantic_rank": 3,
+                "lexical_rank": 3
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "各 Ítem 的数量",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0013",
+                "rank": 1,
+                "semantic_rank": 3,
+                "lexical_rank": 3
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "各 Ítem 的单价",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0013",
+                "rank": 1,
+                "semantic_rank": 3,
+                "lexical_rank": 3
+              }
+            ]
+          },
+          {
+            "group_id": "e4",
+            "information_item": "各 Ítem 的含税总金额",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0013",
+                "rank": 1,
+                "semantic_rank": 3,
+                "lexical_rank": 3
+              }
+            ]
+          },
+          {
+            "group_id": "e5",
+            "information_item": "合同总金额",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0013",
+                "rank": 1,
+                "semantic_rank": 3,
+                "lexical_rank": 3
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q003",
+        "scope_chunks": 33,
+        "needed_k": 29,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "总履约期限",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0016",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "交货地点",
+            "needed_k": 29,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0020",
+                "rank": 29,
+                "semantic_rank": 29,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "是否允许提前交货",
+            "needed_k": 9,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0019",
+                "rank": 9,
+                "semantic_rank": 9,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q004",
+        "scope_chunks": 33,
+        "needed_k": 20,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "各 Ítem 履约保证金金额",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0005",
+                "rank": 2,
+                "semantic_rank": 5,
+                "lexical_rank": 1
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "出具机构",
+            "needed_k": 20,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0021",
+                "rank": 6,
+                "semantic_rank": 9,
+                "lexical_rank": 6
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0022",
+                "rank": 5,
+                "semantic_rank": 3,
+                "lexical_rank": 5
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0023",
+                "rank": 19,
+                "semantic_rank": 33,
+                "lexical_rank": 17
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0024",
+                "rank": 4,
+                "semantic_rank": 2,
+                "lexical_rank": 4
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0025",
+                "rank": 20,
+                "semantic_rank": 32,
+                "lexical_rank": 18
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0026",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": 3
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q005",
+        "scope_chunks": 33,
+        "needed_k": 1,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "质保期期限",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0011",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": 2
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "故障响应时限",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0011",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": 2
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "修复时限",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0011",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q006",
+        "scope_chunks": 33,
+        "needed_k": 1,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "重复性故障的认定标准",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0012",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": 1
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "承包商需承担的责任",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0012",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q007",
+        "scope_chunks": 33,
+        "needed_k": 3,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "支付流程的前提条件",
+            "needed_k": 3,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0015",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "出具验收合格证明的时限",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0016",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "付款时限",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0016",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q008",
+        "scope_chunks": 33,
+        "needed_k": 2,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "延期罚金计算公式",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0028",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": 1
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "罚金最高上限",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0029",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q009",
+        "scope_chunks": 33,
+        "needed_k": 2,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "第 1 次交付的产品和数量",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0017",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": 2
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0018",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q010",
+        "scope_chunks": 33,
+        "needed_k": 12,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "是否分批交货",
+            "needed_k": 4,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0017",
+                "rank": 4,
+                "semantic_rank": 4,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "各批次具体交货日期",
+            "needed_k": 12,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0017",
+                "rank": 4,
+                "semantic_rank": 4,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0032",
+                "rank": 12,
+                "semantic_rank": 12,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "E001-602-Q001",
+        "scope_chunks": 3,
+        "needed_k": 2,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "付款到期日",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "817cfff2927c6c65-c0002",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "需支付金额",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "817cfff2927c6c65-c0002",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "其中包含的税费",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "817cfff2927c6c65-c0002",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "E001-602-Q002",
+        "scope_chunks": 3,
+        "needed_k": 1,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "HXE34K-S1 的单价",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "817cfff2927c6c65-c0001",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": 1
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "HXE34K-S1 的数量",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "817cfff2927c6c65-c0001",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-24-12-Q001",
+        "scope_chunks": 11,
+        "needed_k": 2,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "包含哪几款产品",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0001",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "单价",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0001",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "数量",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0001",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e4",
+            "information_item": "订单总金额",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0001",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-24-12-Q002",
+        "scope_chunks": 11,
+        "needed_k": 1,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "交货时间规划",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0005",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-24-12-Q003",
+        "scope_chunks": 11,
+        "needed_k": 1,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "分几批交付",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0005",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "每批次的具体交付日期",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0005",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-24-12-Q004",
+        "scope_chunks": 11,
+        "needed_k": 3,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "总金额是否涵盖 MDC ORCA 费用",
+            "needed_k": 3,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0001",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "169a1f2133fe5643-c0005",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": 1
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "需额外支付的金额",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0005",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": 1
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "付款最后期限",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0005",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-24-12-Q005",
+        "scope_chunks": 11,
+        "needed_k": 1,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "运维服务收费方式",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0005",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-24-12-Q006",
+        "scope_chunks": 11,
+        "needed_k": 2,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "付款条件",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0010",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-25-15-Q001",
+        "scope_chunks": 11,
+        "needed_k": 2,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "第四批次交付日期",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "5883b02cd922a64f-c0007",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "第四批次交付产品总金额",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "5883b02cd922a64f-c0001",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5883b02cd922a64f-c0007",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-25-15-Q002",
+        "scope_chunks": 11,
+        "needed_k": 2,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "第六批次交付日期",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "5883b02cd922a64f-c0007",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "第六批次交付产品总金额",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "5883b02cd922a64f-c0001",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5883b02cd922a64f-c0007",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-25-19-Q001",
+        "scope_chunks": 37,
+        "needed_k": 13,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "订购了哪些产品",
+            "needed_k": 13,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0009",
+                "rank": 13,
+                "semantic_rank": 13,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0010",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": 1
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0014",
+                "rank": 2,
+                "semantic_rank": 3,
+                "lexical_rank": 2
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "每款产品的单价",
+            "needed_k": 10,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0001",
+                "rank": 10,
+                "semantic_rank": 10,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "每款产品的数量",
+            "needed_k": 13,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0009",
+                "rank": 13,
+                "semantic_rank": 13,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0010",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": 1
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0014",
+                "rank": 2,
+                "semantic_rank": 3,
+                "lexical_rank": 2
+              }
+            ]
+          },
+          {
+            "group_id": "e4",
+            "information_item": "订购总金额",
+            "needed_k": 13,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0001",
+                "rank": 10,
+                "semantic_rank": 10,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0009",
+                "rank": 13,
+                "semantic_rank": 13,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0010",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": 1
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0014",
+                "rank": 2,
+                "semantic_rank": 3,
+                "lexical_rank": 2
+              }
+            ]
+          },
+          {
+            "group_id": "e5",
+            "information_item": "各批次交付日期",
+            "needed_k": 7,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0021",
+                "rank": 7,
+                "semantic_rank": 7,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e6",
+            "information_item": "各批次交付的产品和数量",
+            "needed_k": 13,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0009",
+                "rank": 13,
+                "semantic_rank": 13,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0010",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": 1
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0014",
+                "rank": 2,
+                "semantic_rank": 3,
+                "lexical_rank": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-25-19-Q002",
+        "scope_chunks": 37,
+        "needed_k": 3,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "订购数量",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0019",
+                "rank": 1,
+                "semantic_rank": 3,
+                "lexical_rank": 1
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "总金额",
+            "needed_k": 3,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0001",
+                "rank": 3,
+                "semantic_rank": 7,
+                "lexical_rank": 2
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0019",
+                "rank": 1,
+                "semantic_rank": 3,
+                "lexical_rank": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-25-19-Q003",
+        "scope_chunks": 37,
+        "needed_k": 13,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "订购了哪些产品",
+            "needed_k": 12,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0009",
+                "rank": 12,
+                "semantic_rank": 11,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0011",
+                "rank": 2,
+                "semantic_rank": 4,
+                "lexical_rank": 3
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0014",
+                "rank": 6,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0015",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": 4
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0017",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": 1
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0019",
+                "rank": 4,
+                "semantic_rank": 20,
+                "lexical_rank": 2
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "每款产品的单价",
+            "needed_k": 13,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0001",
+                "rank": 13,
+                "semantic_rank": 12,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "每款产品的数量",
+            "needed_k": 12,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0009",
+                "rank": 12,
+                "semantic_rank": 11,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0011",
+                "rank": 2,
+                "semantic_rank": 4,
+                "lexical_rank": 3
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0014",
+                "rank": 6,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0015",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": 4
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0017",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": 1
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0019",
+                "rank": 4,
+                "semantic_rank": 20,
+                "lexical_rank": 2
+              }
+            ]
+          },
+          {
+            "group_id": "e4",
+            "information_item": "订购总金额",
+            "needed_k": 13,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0001",
+                "rank": 13,
+                "semantic_rank": 12,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0009",
+                "rank": 12,
+                "semantic_rank": 11,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0011",
+                "rank": 2,
+                "semantic_rank": 4,
+                "lexical_rank": 3
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0014",
+                "rank": 6,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0015",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": 4
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0017",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": 1
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0019",
+                "rank": 4,
+                "semantic_rank": 20,
+                "lexical_rank": 2
+              }
+            ]
+          },
+          {
+            "group_id": "e5",
+            "information_item": "各批次交付日期",
+            "needed_k": 10,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0021",
+                "rank": 10,
+                "semantic_rank": 9,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e6",
+            "information_item": "各批次交付的产品和数量",
+            "needed_k": 12,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0009",
+                "rank": 12,
+                "semantic_rank": 11,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0011",
+                "rank": 2,
+                "semantic_rank": 4,
+                "lexical_rank": 3
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0014",
+                "rank": 6,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0015",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": 4
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0017",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": 1
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0019",
+                "rank": 4,
+                "semantic_rank": 20,
+                "lexical_rank": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-25-19-Q004",
+        "scope_chunks": 37,
+        "needed_k": 1,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "客户的付款条件",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0023",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "semantic": [
+      {
+        "case_id": "CONTRACT-105-Q001",
+        "scope_chunks": 33,
+        "needed_k": 3,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "签署双方",
+            "needed_k": 3,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0001",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "各自的法定代表人",
+            "needed_k": 3,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0001",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q002",
+        "scope_chunks": 33,
+        "needed_k": 3,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "各 Ítem 的品名",
+            "needed_k": 3,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0013",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "各 Ítem 的数量",
+            "needed_k": 3,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0013",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "各 Ítem 的单价",
+            "needed_k": 3,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0013",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e4",
+            "information_item": "各 Ítem 的含税总金额",
+            "needed_k": 3,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0013",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e5",
+            "information_item": "合同总金额",
+            "needed_k": 3,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0013",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q003",
+        "scope_chunks": 33,
+        "needed_k": 29,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "总履约期限",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0016",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "交货地点",
+            "needed_k": 29,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0020",
+                "rank": 29,
+                "semantic_rank": 29,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "是否允许提前交货",
+            "needed_k": 9,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0019",
+                "rank": 9,
+                "semantic_rank": 9,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q004",
+        "scope_chunks": 33,
+        "needed_k": 33,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "各 Ítem 履约保证金金额",
+            "needed_k": 5,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0005",
+                "rank": 5,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "出具机构",
+            "needed_k": 33,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0021",
+                "rank": 9,
+                "semantic_rank": 9,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0022",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0023",
+                "rank": 33,
+                "semantic_rank": 33,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0024",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0025",
+                "rank": 32,
+                "semantic_rank": 32,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0026",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q005",
+        "scope_chunks": 33,
+        "needed_k": 1,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "质保期期限",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0011",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "故障响应时限",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0011",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "修复时限",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0011",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q006",
+        "scope_chunks": 33,
+        "needed_k": 1,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "重复性故障的认定标准",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0012",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "承包商需承担的责任",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0012",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q007",
+        "scope_chunks": 33,
+        "needed_k": 3,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "支付流程的前提条件",
+            "needed_k": 3,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0015",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "出具验收合格证明的时限",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0016",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "付款时限",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0016",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q008",
+        "scope_chunks": 33,
+        "needed_k": 2,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "延期罚金计算公式",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0028",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "罚金最高上限",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0029",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q009",
+        "scope_chunks": 33,
+        "needed_k": 2,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "第 1 次交付的产品和数量",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0017",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0018",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q010",
+        "scope_chunks": 33,
+        "needed_k": 12,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "是否分批交货",
+            "needed_k": 4,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0017",
+                "rank": 4,
+                "semantic_rank": 4,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "各批次具体交货日期",
+            "needed_k": 12,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0017",
+                "rank": 4,
+                "semantic_rank": 4,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0032",
+                "rank": 12,
+                "semantic_rank": 12,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "E001-602-Q001",
+        "scope_chunks": 3,
+        "needed_k": 2,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "付款到期日",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "817cfff2927c6c65-c0002",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "需支付金额",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "817cfff2927c6c65-c0002",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "其中包含的税费",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "817cfff2927c6c65-c0002",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "E001-602-Q002",
+        "scope_chunks": 3,
+        "needed_k": 1,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "HXE34K-S1 的单价",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "817cfff2927c6c65-c0001",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "HXE34K-S1 的数量",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "817cfff2927c6c65-c0001",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-24-12-Q001",
+        "scope_chunks": 11,
+        "needed_k": 2,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "包含哪几款产品",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0001",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "单价",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0001",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "数量",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0001",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e4",
+            "information_item": "订单总金额",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0001",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-24-12-Q002",
+        "scope_chunks": 11,
+        "needed_k": 1,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "交货时间规划",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0005",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-24-12-Q003",
+        "scope_chunks": 11,
+        "needed_k": 1,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "分几批交付",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0005",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "每批次的具体交付日期",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0005",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-24-12-Q004",
+        "scope_chunks": 11,
+        "needed_k": 3,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "总金额是否涵盖 MDC ORCA 费用",
+            "needed_k": 3,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0001",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "169a1f2133fe5643-c0005",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "需额外支付的金额",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0005",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "付款最后期限",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0005",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-24-12-Q005",
+        "scope_chunks": 11,
+        "needed_k": 1,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "运维服务收费方式",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0005",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-24-12-Q006",
+        "scope_chunks": 11,
+        "needed_k": 2,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "付款条件",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0010",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-25-15-Q001",
+        "scope_chunks": 11,
+        "needed_k": 2,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "第四批次交付日期",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "5883b02cd922a64f-c0007",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "第四批次交付产品总金额",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "5883b02cd922a64f-c0001",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5883b02cd922a64f-c0007",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-25-15-Q002",
+        "scope_chunks": 11,
+        "needed_k": 2,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "第六批次交付日期",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "5883b02cd922a64f-c0007",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "第六批次交付产品总金额",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "5883b02cd922a64f-c0001",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5883b02cd922a64f-c0007",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-25-19-Q001",
+        "scope_chunks": 37,
+        "needed_k": 13,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "订购了哪些产品",
+            "needed_k": 13,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0009",
+                "rank": 13,
+                "semantic_rank": 13,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0010",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0014",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "每款产品的单价",
+            "needed_k": 10,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0001",
+                "rank": 10,
+                "semantic_rank": 10,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "每款产品的数量",
+            "needed_k": 13,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0009",
+                "rank": 13,
+                "semantic_rank": 13,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0010",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0014",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e4",
+            "information_item": "订购总金额",
+            "needed_k": 13,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0001",
+                "rank": 10,
+                "semantic_rank": 10,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0009",
+                "rank": 13,
+                "semantic_rank": 13,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0010",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0014",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e5",
+            "information_item": "各批次交付日期",
+            "needed_k": 7,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0021",
+                "rank": 7,
+                "semantic_rank": 7,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e6",
+            "information_item": "各批次交付的产品和数量",
+            "needed_k": 13,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0009",
+                "rank": 13,
+                "semantic_rank": 13,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0010",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0014",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-25-19-Q002",
+        "scope_chunks": 37,
+        "needed_k": 7,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "订购数量",
+            "needed_k": 3,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0019",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "总金额",
+            "needed_k": 7,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0001",
+                "rank": 7,
+                "semantic_rank": 7,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0019",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-25-19-Q003",
+        "scope_chunks": 37,
+        "needed_k": 20,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "订购了哪些产品",
+            "needed_k": 20,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0009",
+                "rank": 11,
+                "semantic_rank": 11,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0011",
+                "rank": 4,
+                "semantic_rank": 4,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0014",
+                "rank": 5,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0015",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0017",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0019",
+                "rank": 20,
+                "semantic_rank": 20,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "每款产品的单价",
+            "needed_k": 12,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0001",
+                "rank": 12,
+                "semantic_rank": 12,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "每款产品的数量",
+            "needed_k": 20,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0009",
+                "rank": 11,
+                "semantic_rank": 11,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0011",
+                "rank": 4,
+                "semantic_rank": 4,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0014",
+                "rank": 5,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0015",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0017",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0019",
+                "rank": 20,
+                "semantic_rank": 20,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e4",
+            "information_item": "订购总金额",
+            "needed_k": 20,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0001",
+                "rank": 12,
+                "semantic_rank": 12,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0009",
+                "rank": 11,
+                "semantic_rank": 11,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0011",
+                "rank": 4,
+                "semantic_rank": 4,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0014",
+                "rank": 5,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0015",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0017",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0019",
+                "rank": 20,
+                "semantic_rank": 20,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e5",
+            "information_item": "各批次交付日期",
+            "needed_k": 9,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0021",
+                "rank": 9,
+                "semantic_rank": 9,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e6",
+            "information_item": "各批次交付的产品和数量",
+            "needed_k": 20,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0009",
+                "rank": 11,
+                "semantic_rank": 11,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0011",
+                "rank": 4,
+                "semantic_rank": 4,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0014",
+                "rank": 5,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0015",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0017",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0019",
+                "rank": 20,
+                "semantic_rank": 20,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-25-19-Q004",
+        "scope_chunks": 37,
+        "needed_k": 1,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "客户的付款条件",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0023",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "plain_text": {
+    "hybrid": [
+      {
+        "case_id": "CONTRACT-105-Q001",
+        "scope_chunks": 154,
+        "needed_k": 85,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "签署双方",
+            "needed_k": 85,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0004",
+                "rank": 37,
+                "semantic_rank": 37,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0005",
+                "rank": 72,
+                "semantic_rank": 72,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0006",
+                "rank": 25,
+                "semantic_rank": 25,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0007",
+                "rank": 71,
+                "semantic_rank": 71,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0008",
+                "rank": 85,
+                "semantic_rank": 85,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0009",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "各自的法定代表人",
+            "needed_k": 85,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0004",
+                "rank": 37,
+                "semantic_rank": 37,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0005",
+                "rank": 72,
+                "semantic_rank": 72,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0006",
+                "rank": 25,
+                "semantic_rank": 25,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0007",
+                "rank": 71,
+                "semantic_rank": 71,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0008",
+                "rank": 85,
+                "semantic_rank": 85,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0009",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q002",
+        "scope_chunks": 154,
+        "needed_k": 2,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "各 Ítem 的品名",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0058",
+                "rank": 2,
+                "semantic_rank": 5,
+                "lexical_rank": 2
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "各 Ítem 的数量",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0058",
+                "rank": 2,
+                "semantic_rank": 5,
+                "lexical_rank": 2
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "各 Ítem 的单价",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0058",
+                "rank": 2,
+                "semantic_rank": 5,
+                "lexical_rank": 2
+              }
+            ]
+          },
+          {
+            "group_id": "e4",
+            "information_item": "各 Ítem 的含税总金额",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0057",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": 3
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0058",
+                "rank": 2,
+                "semantic_rank": 5,
+                "lexical_rank": 2
+              }
+            ]
+          },
+          {
+            "group_id": "e5",
+            "information_item": "合同总金额",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0058",
+                "rank": 2,
+                "semantic_rank": 5,
+                "lexical_rank": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q003",
+        "scope_chunks": 154,
+        "needed_k": 39,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "总履约期限",
+            "needed_k": 3,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0075",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "交货地点",
+            "needed_k": 39,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0081",
+                "rank": 39,
+                "semantic_rank": 39,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "是否允许提前交货",
+            "needed_k": 9,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0080",
+                "rank": 9,
+                "semantic_rank": 9,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q004",
+        "scope_chunks": 154,
+        "needed_k": 53,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "各 Ítem 履约保证金金额",
+            "needed_k": 13,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0021",
+                "rank": 13,
+                "semantic_rank": 8,
+                "lexical_rank": 31
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0023",
+                "rank": 12,
+                "semantic_rank": 7,
+                "lexical_rank": 32
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0025",
+                "rank": 11,
+                "semantic_rank": 6,
+                "lexical_rank": 33
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "出具机构",
+            "needed_k": 53,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0084",
+                "rank": 8,
+                "semantic_rank": 9,
+                "lexical_rank": 6
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0085",
+                "rank": 53,
+                "semantic_rank": 39,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0086",
+                "rank": 5,
+                "semantic_rank": 4,
+                "lexical_rank": 7
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0088",
+                "rank": 3,
+                "semantic_rank": 1,
+                "lexical_rank": 8
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q005",
+        "scope_chunks": 154,
+        "needed_k": 35,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "质保期期限",
+            "needed_k": 27,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0038",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": 2
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0039",
+                "rank": 27,
+                "semantic_rank": 9,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "故障响应时限",
+            "needed_k": 5,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0041",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": 15
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0042",
+                "rank": 5,
+                "semantic_rank": 19,
+                "lexical_rank": 4
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "修复时限",
+            "needed_k": 35,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0046",
+                "rank": 35,
+                "semantic_rank": 20,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0047",
+                "rank": 32,
+                "semantic_rank": 14,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q006",
+        "scope_chunks": 154,
+        "needed_k": 57,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "重复性故障的认定标准",
+            "needed_k": 57,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0049",
+                "rank": 2,
+                "semantic_rank": 3,
+                "lexical_rank": 1
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0050",
+                "rank": 57,
+                "semantic_rank": 57,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0051",
+                "rank": 7,
+                "semantic_rank": 15,
+                "lexical_rank": 6
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0052",
+                "rank": 3,
+                "semantic_rank": 2,
+                "lexical_rank": 3
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0054",
+                "rank": 12,
+                "semantic_rank": 9,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "承包商需承担的责任",
+            "needed_k": 12,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0051",
+                "rank": 7,
+                "semantic_rank": 15,
+                "lexical_rank": 6
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0052",
+                "rank": 3,
+                "semantic_rank": 2,
+                "lexical_rank": 3
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0054",
+                "rank": 12,
+                "semantic_rank": 9,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q007",
+        "scope_chunks": 154,
+        "needed_k": 21,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "支付流程的前提条件",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0066",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "出具验收合格证明的时限",
+            "needed_k": 21,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0095",
+                "rank": 18,
+                "semantic_rank": 18,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0096",
+                "rank": 21,
+                "semantic_rank": 21,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "付款时限",
+            "needed_k": 13,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0071",
+                "rank": 13,
+                "semantic_rank": 13,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q008",
+        "scope_chunks": 154,
+        "needed_k": 9,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "延期罚金计算公式",
+            "needed_k": 9,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0108",
+                "rank": 9,
+                "semantic_rank": 34,
+                "lexical_rank": 10
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "罚金最高上限",
+            "needed_k": 7,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0113",
+                "rank": 7,
+                "semantic_rank": 8,
+                "lexical_rank": 9
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0114",
+                "rank": 2,
+                "semantic_rank": 3,
+                "lexical_rank": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q009",
+        "scope_chunks": 154,
+        "needed_k": 30,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "第 1 次交付的产品和数量",
+            "needed_k": 30,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0078",
+                "rank": 8,
+                "semantic_rank": 4,
+                "lexical_rank": 30
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0079",
+                "rank": 30,
+                "semantic_rank": 117,
+                "lexical_rank": 23
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q010",
+        "scope_chunks": 154,
+        "needed_k": 11,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "是否分批交货",
+            "needed_k": 11,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0077",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0078",
+                "rank": 11,
+                "semantic_rank": 11,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "各批次具体交货日期",
+            "needed_k": 11,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0077",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0078",
+                "rank": 11,
+                "semantic_rank": 11,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0153",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "E001-602-Q001",
+        "scope_chunks": 9,
+        "needed_k": 3,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "付款到期日",
+            "needed_k": 3,
+            "chunks": [
+              {
+                "chunk_id": "817cfff2927c6c65-c0007",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "需支付金额",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "817cfff2927c6c65-c0006",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "其中包含的税费",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "817cfff2927c6c65-c0006",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "E001-602-Q002",
+        "scope_chunks": 9,
+        "needed_k": 1,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "HXE34K-S1 的单价",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "817cfff2927c6c65-c0004",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": 1
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "HXE34K-S1 的数量",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "817cfff2927c6c65-c0004",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-24-12-Q001",
+        "scope_chunks": 16,
+        "needed_k": 2,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "包含哪几款产品",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0001",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "单价",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0001",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "数量",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0001",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e4",
+            "information_item": "订单总金额",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0001",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-24-12-Q002",
+        "scope_chunks": 16,
+        "needed_k": 1,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "交货时间规划",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0004",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-24-12-Q003",
+        "scope_chunks": 16,
+        "needed_k": 1,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "分几批交付",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0004",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "每批次的具体交付日期",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0004",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-24-12-Q004",
+        "scope_chunks": 16,
+        "needed_k": 3,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "总金额是否涵盖 MDC ORCA 费用",
+            "needed_k": 3,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0001",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "169a1f2133fe5643-c0006",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": 1
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "需额外支付的金额",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0006",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": 1
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "付款最后期限",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0006",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-24-12-Q005",
+        "scope_chunks": 16,
+        "needed_k": 5,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "运维服务收费方式",
+            "needed_k": 5,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0006",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "169a1f2133fe5643-c0007",
+                "rank": 5,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-24-12-Q006",
+        "scope_chunks": 16,
+        "needed_k": 4,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "付款条件",
+            "needed_k": 4,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0015",
+                "rank": 4,
+                "semantic_rank": 4,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-25-15-Q001",
+        "scope_chunks": 16,
+        "needed_k": 13,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "第四批次交付日期",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "5883b02cd922a64f-c0006",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5883b02cd922a64f-c0007",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "第四批次交付产品总金额",
+            "needed_k": 13,
+            "chunks": [
+              {
+                "chunk_id": "5883b02cd922a64f-c0001",
+                "rank": 5,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5883b02cd922a64f-c0002",
+                "rank": 8,
+                "semantic_rank": 8,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5883b02cd922a64f-c0003",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5883b02cd922a64f-c0007",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5883b02cd922a64f-c0008",
+                "rank": 13,
+                "semantic_rank": 13,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-25-15-Q002",
+        "scope_chunks": 16,
+        "needed_k": 13,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "第六批次交付日期",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "5883b02cd922a64f-c0007",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "第六批次交付产品总金额",
+            "needed_k": 13,
+            "chunks": [
+              {
+                "chunk_id": "5883b02cd922a64f-c0001",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5883b02cd922a64f-c0002",
+                "rank": 13,
+                "semantic_rank": 13,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5883b02cd922a64f-c0003",
+                "rank": 5,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5883b02cd922a64f-c0007",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5883b02cd922a64f-c0008",
+                "rank": 12,
+                "semantic_rank": 12,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-25-19-Q001",
+        "scope_chunks": 71,
+        "needed_k": 28,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "订购了哪些产品",
+            "needed_k": 28,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0012",
+                "rank": 7,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0013",
+                "rank": 1,
+                "semantic_rank": 11,
+                "lexical_rank": 1
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0016",
+                "rank": 28,
+                "semantic_rank": 28,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0017",
+                "rank": 2,
+                "semantic_rank": 13,
+                "lexical_rank": 2
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "每款产品的单价",
+            "needed_k": 4,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0002",
+                "rank": 4,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "每款产品的数量",
+            "needed_k": 28,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0012",
+                "rank": 7,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0013",
+                "rank": 1,
+                "semantic_rank": 11,
+                "lexical_rank": 1
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0016",
+                "rank": 28,
+                "semantic_rank": 28,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0017",
+                "rank": 2,
+                "semantic_rank": 13,
+                "lexical_rank": 2
+              }
+            ]
+          },
+          {
+            "group_id": "e4",
+            "information_item": "订购总金额",
+            "needed_k": 28,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0002",
+                "rank": 4,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0012",
+                "rank": 7,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0013",
+                "rank": 1,
+                "semantic_rank": 11,
+                "lexical_rank": 1
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0016",
+                "rank": 28,
+                "semantic_rank": 28,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0017",
+                "rank": 2,
+                "semantic_rank": 13,
+                "lexical_rank": 2
+              }
+            ]
+          },
+          {
+            "group_id": "e5",
+            "information_item": "各批次交付日期",
+            "needed_k": 6,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0024",
+                "rank": 6,
+                "semantic_rank": 4,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e6",
+            "information_item": "各批次交付的产品和数量",
+            "needed_k": 28,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0012",
+                "rank": 7,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0013",
+                "rank": 1,
+                "semantic_rank": 11,
+                "lexical_rank": 1
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0016",
+                "rank": 28,
+                "semantic_rank": 28,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0017",
+                "rank": 2,
+                "semantic_rank": 13,
+                "lexical_rank": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-25-19-Q002",
+        "scope_chunks": 71,
+        "needed_k": 4,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "订购数量",
+            "needed_k": 4,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0020",
+                "rank": 3,
+                "semantic_rank": 8,
+                "lexical_rank": 2
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0021",
+                "rank": 4,
+                "semantic_rank": 5,
+                "lexical_rank": 5
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "总金额",
+            "needed_k": 4,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0003",
+                "rank": 1,
+                "semantic_rank": 3,
+                "lexical_rank": 1
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0020",
+                "rank": 3,
+                "semantic_rank": 8,
+                "lexical_rank": 2
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0021",
+                "rank": 4,
+                "semantic_rank": 5,
+                "lexical_rank": 5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-25-19-Q003",
+        "scope_chunks": 71,
+        "needed_k": 54,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "订购了哪些产品",
+            "needed_k": 54,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0012",
+                "rank": 9,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0014",
+                "rank": 1,
+                "semantic_rank": 7,
+                "lexical_rank": 3
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0016",
+                "rank": 26,
+                "semantic_rank": 26,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0017",
+                "rank": 2,
+                "semantic_rank": 13,
+                "lexical_rank": 4
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0018",
+                "rank": 3,
+                "semantic_rank": 21,
+                "lexical_rank": 1
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0020",
+                "rank": 54,
+                "semantic_rank": 54,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0021",
+                "rank": 4,
+                "semantic_rank": 22,
+                "lexical_rank": 2
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "每款产品的单价",
+            "needed_k": 27,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0002",
+                "rank": 5,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0003",
+                "rank": 27,
+                "semantic_rank": 27,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "每款产品的数量",
+            "needed_k": 54,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0012",
+                "rank": 9,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0014",
+                "rank": 1,
+                "semantic_rank": 7,
+                "lexical_rank": 3
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0016",
+                "rank": 26,
+                "semantic_rank": 26,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0017",
+                "rank": 2,
+                "semantic_rank": 13,
+                "lexical_rank": 4
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0018",
+                "rank": 3,
+                "semantic_rank": 21,
+                "lexical_rank": 1
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0020",
+                "rank": 54,
+                "semantic_rank": 54,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0021",
+                "rank": 4,
+                "semantic_rank": 22,
+                "lexical_rank": 2
+              }
+            ]
+          },
+          {
+            "group_id": "e4",
+            "information_item": "订购总金额",
+            "needed_k": 54,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0002",
+                "rank": 5,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0003",
+                "rank": 27,
+                "semantic_rank": 27,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0012",
+                "rank": 9,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0014",
+                "rank": 1,
+                "semantic_rank": 7,
+                "lexical_rank": 3
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0016",
+                "rank": 26,
+                "semantic_rank": 26,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0017",
+                "rank": 2,
+                "semantic_rank": 13,
+                "lexical_rank": 4
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0018",
+                "rank": 3,
+                "semantic_rank": 21,
+                "lexical_rank": 1
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0020",
+                "rank": 54,
+                "semantic_rank": 54,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0021",
+                "rank": 4,
+                "semantic_rank": 22,
+                "lexical_rank": 2
+              }
+            ]
+          },
+          {
+            "group_id": "e5",
+            "information_item": "各批次交付日期",
+            "needed_k": 7,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0024",
+                "rank": 7,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e6",
+            "information_item": "各批次交付的产品和数量",
+            "needed_k": 54,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0012",
+                "rank": 9,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0014",
+                "rank": 1,
+                "semantic_rank": 7,
+                "lexical_rank": 3
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0016",
+                "rank": 26,
+                "semantic_rank": 26,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0017",
+                "rank": 2,
+                "semantic_rank": 13,
+                "lexical_rank": 4
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0018",
+                "rank": 3,
+                "semantic_rank": 21,
+                "lexical_rank": 1
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0020",
+                "rank": 54,
+                "semantic_rank": 54,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0021",
+                "rank": 4,
+                "semantic_rank": 22,
+                "lexical_rank": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-25-19-Q004",
+        "scope_chunks": 71,
+        "needed_k": 1,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "客户的付款条件",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0027",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "semantic": [
+      {
+        "case_id": "CONTRACT-105-Q001",
+        "scope_chunks": 154,
+        "needed_k": 85,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "签署双方",
+            "needed_k": 85,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0004",
+                "rank": 37,
+                "semantic_rank": 37,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0005",
+                "rank": 72,
+                "semantic_rank": 72,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0006",
+                "rank": 25,
+                "semantic_rank": 25,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0007",
+                "rank": 71,
+                "semantic_rank": 71,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0008",
+                "rank": 85,
+                "semantic_rank": 85,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0009",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "各自的法定代表人",
+            "needed_k": 85,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0004",
+                "rank": 37,
+                "semantic_rank": 37,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0005",
+                "rank": 72,
+                "semantic_rank": 72,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0006",
+                "rank": 25,
+                "semantic_rank": 25,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0007",
+                "rank": 71,
+                "semantic_rank": 71,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0008",
+                "rank": 85,
+                "semantic_rank": 85,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0009",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q002",
+        "scope_chunks": 154,
+        "needed_k": 5,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "各 Ítem 的品名",
+            "needed_k": 5,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0058",
+                "rank": 5,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "各 Ítem 的数量",
+            "needed_k": 5,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0058",
+                "rank": 5,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "各 Ítem 的单价",
+            "needed_k": 5,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0058",
+                "rank": 5,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e4",
+            "information_item": "各 Ítem 的含税总金额",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0056",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0057",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e5",
+            "information_item": "合同总金额",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0056",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0057",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q003",
+        "scope_chunks": 154,
+        "needed_k": 39,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "总履约期限",
+            "needed_k": 3,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0075",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "交货地点",
+            "needed_k": 39,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0081",
+                "rank": 39,
+                "semantic_rank": 39,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "是否允许提前交货",
+            "needed_k": 9,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0080",
+                "rank": 9,
+                "semantic_rank": 9,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q004",
+        "scope_chunks": 154,
+        "needed_k": 39,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "各 Ítem 履约保证金金额",
+            "needed_k": 8,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0021",
+                "rank": 8,
+                "semantic_rank": 8,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0023",
+                "rank": 7,
+                "semantic_rank": 7,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0025",
+                "rank": 6,
+                "semantic_rank": 6,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "出具机构",
+            "needed_k": 39,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0084",
+                "rank": 9,
+                "semantic_rank": 9,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0085",
+                "rank": 39,
+                "semantic_rank": 39,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0086",
+                "rank": 4,
+                "semantic_rank": 4,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0088",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q005",
+        "scope_chunks": 154,
+        "needed_k": 20,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "质保期期限",
+            "needed_k": 9,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0038",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0039",
+                "rank": 9,
+                "semantic_rank": 9,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "故障响应时限",
+            "needed_k": 19,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0041",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0042",
+                "rank": 19,
+                "semantic_rank": 19,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "修复时限",
+            "needed_k": 20,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0046",
+                "rank": 20,
+                "semantic_rank": 20,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0047",
+                "rank": 14,
+                "semantic_rank": 14,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q006",
+        "scope_chunks": 154,
+        "needed_k": 57,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "重复性故障的认定标准",
+            "needed_k": 57,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0049",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0050",
+                "rank": 57,
+                "semantic_rank": 57,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0051",
+                "rank": 15,
+                "semantic_rank": 15,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0052",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0054",
+                "rank": 9,
+                "semantic_rank": 9,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "承包商需承担的责任",
+            "needed_k": 15,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0051",
+                "rank": 15,
+                "semantic_rank": 15,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0052",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0054",
+                "rank": 9,
+                "semantic_rank": 9,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q007",
+        "scope_chunks": 154,
+        "needed_k": 21,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "支付流程的前提条件",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0066",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "出具验收合格证明的时限",
+            "needed_k": 21,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0095",
+                "rank": 18,
+                "semantic_rank": 18,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0096",
+                "rank": 21,
+                "semantic_rank": 21,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "付款时限",
+            "needed_k": 13,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0071",
+                "rank": 13,
+                "semantic_rank": 13,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q008",
+        "scope_chunks": 154,
+        "needed_k": 34,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "延期罚金计算公式",
+            "needed_k": 34,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0108",
+                "rank": 34,
+                "semantic_rank": 34,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "罚金最高上限",
+            "needed_k": 8,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0113",
+                "rank": 8,
+                "semantic_rank": 8,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0114",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q009",
+        "scope_chunks": 154,
+        "needed_k": 117,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "第 1 次交付的产品和数量",
+            "needed_k": 117,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0078",
+                "rank": 4,
+                "semantic_rank": 4,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0079",
+                "rank": 117,
+                "semantic_rank": 117,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "CONTRACT-105-Q010",
+        "scope_chunks": 154,
+        "needed_k": 11,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "是否分批交货",
+            "needed_k": 11,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0077",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0078",
+                "rank": 11,
+                "semantic_rank": 11,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "各批次具体交货日期",
+            "needed_k": 11,
+            "chunks": [
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0077",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0078",
+                "rank": 11,
+                "semantic_rank": 11,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "d359c37e0bc3c87a-c0153",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "E001-602-Q001",
+        "scope_chunks": 9,
+        "needed_k": 3,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "付款到期日",
+            "needed_k": 3,
+            "chunks": [
+              {
+                "chunk_id": "817cfff2927c6c65-c0007",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "需支付金额",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "817cfff2927c6c65-c0006",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "其中包含的税费",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "817cfff2927c6c65-c0006",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "E001-602-Q002",
+        "scope_chunks": 9,
+        "needed_k": 1,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "HXE34K-S1 的单价",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "817cfff2927c6c65-c0004",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "HXE34K-S1 的数量",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "817cfff2927c6c65-c0004",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-24-12-Q001",
+        "scope_chunks": 16,
+        "needed_k": 2,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "包含哪几款产品",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0001",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "单价",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0001",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "数量",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0001",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e4",
+            "information_item": "订单总金额",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0001",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-24-12-Q002",
+        "scope_chunks": 16,
+        "needed_k": 1,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "交货时间规划",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0004",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-24-12-Q003",
+        "scope_chunks": 16,
+        "needed_k": 1,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "分几批交付",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0004",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "每批次的具体交付日期",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0004",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-24-12-Q004",
+        "scope_chunks": 16,
+        "needed_k": 3,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "总金额是否涵盖 MDC ORCA 费用",
+            "needed_k": 3,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0001",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "169a1f2133fe5643-c0006",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "需额外支付的金额",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0006",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "付款最后期限",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0006",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-24-12-Q005",
+        "scope_chunks": 16,
+        "needed_k": 5,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "运维服务收费方式",
+            "needed_k": 5,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0006",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "169a1f2133fe5643-c0007",
+                "rank": 5,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-24-12-Q006",
+        "scope_chunks": 16,
+        "needed_k": 4,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "付款条件",
+            "needed_k": 4,
+            "chunks": [
+              {
+                "chunk_id": "169a1f2133fe5643-c0015",
+                "rank": 4,
+                "semantic_rank": 4,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-25-15-Q001",
+        "scope_chunks": 16,
+        "needed_k": 13,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "第四批次交付日期",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "5883b02cd922a64f-c0006",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5883b02cd922a64f-c0007",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "第四批次交付产品总金额",
+            "needed_k": 13,
+            "chunks": [
+              {
+                "chunk_id": "5883b02cd922a64f-c0001",
+                "rank": 5,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5883b02cd922a64f-c0002",
+                "rank": 8,
+                "semantic_rank": 8,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5883b02cd922a64f-c0003",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5883b02cd922a64f-c0007",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5883b02cd922a64f-c0008",
+                "rank": 13,
+                "semantic_rank": 13,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-25-15-Q002",
+        "scope_chunks": 16,
+        "needed_k": 13,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "第六批次交付日期",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "5883b02cd922a64f-c0007",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "第六批次交付产品总金额",
+            "needed_k": 13,
+            "chunks": [
+              {
+                "chunk_id": "5883b02cd922a64f-c0001",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5883b02cd922a64f-c0002",
+                "rank": 13,
+                "semantic_rank": 13,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5883b02cd922a64f-c0003",
+                "rank": 5,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5883b02cd922a64f-c0007",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5883b02cd922a64f-c0008",
+                "rank": 12,
+                "semantic_rank": 12,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-25-19-Q001",
+        "scope_chunks": 71,
+        "needed_k": 28,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "订购了哪些产品",
+            "needed_k": 28,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0012",
+                "rank": 5,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0013",
+                "rank": 11,
+                "semantic_rank": 11,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0016",
+                "rank": 28,
+                "semantic_rank": 28,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0017",
+                "rank": 13,
+                "semantic_rank": 13,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "每款产品的单价",
+            "needed_k": 2,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0002",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "每款产品的数量",
+            "needed_k": 28,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0012",
+                "rank": 5,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0013",
+                "rank": 11,
+                "semantic_rank": 11,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0016",
+                "rank": 28,
+                "semantic_rank": 28,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0017",
+                "rank": 13,
+                "semantic_rank": 13,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e4",
+            "information_item": "订购总金额",
+            "needed_k": 28,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0002",
+                "rank": 2,
+                "semantic_rank": 2,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0012",
+                "rank": 5,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0013",
+                "rank": 11,
+                "semantic_rank": 11,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0016",
+                "rank": 28,
+                "semantic_rank": 28,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0017",
+                "rank": 13,
+                "semantic_rank": 13,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e5",
+            "information_item": "各批次交付日期",
+            "needed_k": 4,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0024",
+                "rank": 4,
+                "semantic_rank": 4,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e6",
+            "information_item": "各批次交付的产品和数量",
+            "needed_k": 28,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0012",
+                "rank": 5,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0013",
+                "rank": 11,
+                "semantic_rank": 11,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0016",
+                "rank": 28,
+                "semantic_rank": 28,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0017",
+                "rank": 13,
+                "semantic_rank": 13,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-25-19-Q002",
+        "scope_chunks": 71,
+        "needed_k": 8,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "订购数量",
+            "needed_k": 8,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0020",
+                "rank": 8,
+                "semantic_rank": 8,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0021",
+                "rank": 5,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "总金额",
+            "needed_k": 8,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0003",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0020",
+                "rank": 8,
+                "semantic_rank": 8,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0021",
+                "rank": 5,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-25-19-Q003",
+        "scope_chunks": 71,
+        "needed_k": 54,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "订购了哪些产品",
+            "needed_k": 54,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0012",
+                "rank": 5,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0014",
+                "rank": 7,
+                "semantic_rank": 7,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0016",
+                "rank": 26,
+                "semantic_rank": 26,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0017",
+                "rank": 13,
+                "semantic_rank": 13,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0018",
+                "rank": 21,
+                "semantic_rank": 21,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0020",
+                "rank": 54,
+                "semantic_rank": 54,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0021",
+                "rank": 22,
+                "semantic_rank": 22,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e2",
+            "information_item": "每款产品的单价",
+            "needed_k": 27,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0002",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0003",
+                "rank": 27,
+                "semantic_rank": 27,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e3",
+            "information_item": "每款产品的数量",
+            "needed_k": 54,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0012",
+                "rank": 5,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0014",
+                "rank": 7,
+                "semantic_rank": 7,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0016",
+                "rank": 26,
+                "semantic_rank": 26,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0017",
+                "rank": 13,
+                "semantic_rank": 13,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0018",
+                "rank": 21,
+                "semantic_rank": 21,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0020",
+                "rank": 54,
+                "semantic_rank": 54,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0021",
+                "rank": 22,
+                "semantic_rank": 22,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e4",
+            "information_item": "订购总金额",
+            "needed_k": 54,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0002",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0003",
+                "rank": 27,
+                "semantic_rank": 27,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0012",
+                "rank": 5,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0014",
+                "rank": 7,
+                "semantic_rank": 7,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0016",
+                "rank": 26,
+                "semantic_rank": 26,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0017",
+                "rank": 13,
+                "semantic_rank": 13,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0018",
+                "rank": 21,
+                "semantic_rank": 21,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0020",
+                "rank": 54,
+                "semantic_rank": 54,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0021",
+                "rank": 22,
+                "semantic_rank": 22,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e5",
+            "information_item": "各批次交付日期",
+            "needed_k": 3,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0024",
+                "rank": 3,
+                "semantic_rank": 3,
+                "lexical_rank": null
+              }
+            ]
+          },
+          {
+            "group_id": "e6",
+            "information_item": "各批次交付的产品和数量",
+            "needed_k": 54,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0012",
+                "rank": 5,
+                "semantic_rank": 5,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0014",
+                "rank": 7,
+                "semantic_rank": 7,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0016",
+                "rank": 26,
+                "semantic_rank": 26,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0017",
+                "rank": 13,
+                "semantic_rank": 13,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0018",
+                "rank": 21,
+                "semantic_rank": 21,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0020",
+                "rank": 54,
+                "semantic_rank": 54,
+                "lexical_rank": null
+              },
+              {
+                "chunk_id": "5a4c36e0022f4917-c0021",
+                "rank": 22,
+                "semantic_rank": 22,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "case_id": "PO-25-19-Q004",
+        "scope_chunks": 71,
+        "needed_k": 1,
+        "groups": [
+          {
+            "group_id": "e1",
+            "information_item": "客户的付款条件",
+            "needed_k": 1,
+            "chunks": [
+              {
+                "chunk_id": "5a4c36e0022f4917-c0027",
+                "rank": 1,
+                "semantic_rank": 1,
+                "lexical_rank": null
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
