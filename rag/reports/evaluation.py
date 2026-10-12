@@ -240,11 +240,12 @@ def rerender_all(workspace: Workspace) -> int:
 
 
 def latest_before(workspace: Workspace, result: dict[str, Any]) -> dict[str, Any] | None:
-    """Latest earlier run with the same config, K and dataset version, for the 'change since last run' line."""
+    """Latest earlier run with the same config, retriever, K and dataset version, for the 'change since last run' line."""
     from rag.jsonio import read_json
     folder = workspace.eval_reports()
     runs = [read_json(p) for p in folder.glob("*/result.json")] if folder.is_dir() else []
     earlier = [r for r in runs if r["config"] == result["config"] and r["top_k"] == result["top_k"]
+               and r.get("retriever", "semantic") == result.get("retriever", "semantic")
                and r["dataset"]["version"] == result["dataset"]["version"]
                and r["created_at"] < result["created_at"]]
     return max(earlier, key=lambda r: r["created_at"]) if earlier else None

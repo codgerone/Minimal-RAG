@@ -180,3 +180,19 @@ def test_full_rebuild_and_prune_keep_the_bm25_index_in_step(workspace, lexical_a
     ingest(workspace, lexical_assembly, prune=True)
     assert len(store.ids_by_document()) == 1
     assert {d.state for d in current_status(workspace, lexical_assembly).documents} == {"current"}
+
+
+def test_retriever_override_is_named_in_the_eval_folder_and_previous_run_matches_it(workspace):
+    from rag.eval.runner import run_name
+    from rag.jsonio import write_json
+    from rag.reports.evaluation import latest_before
+    assert run_name("structured", 3, True).endswith("_structured_k3_filter-on")
+    assert run_name("structured", 3, True, "hybrid").endswith("_structured_k3_filter-on_hybrid")
+    base = {"config": "structured", "top_k": 3, "dataset": {"version": "3.2.0"}}
+    write_json(workspace.eval_reports() / "a" / "result.json",
+               {**base, "created_at": "2026-10-12T10:00:00+08:00"})          # pre-V3.9: semantic
+    write_json(workspace.eval_reports() / "b" / "result.json",
+               {**base, "retriever": "hybrid", "created_at": "2026-10-12T11:00:00+08:00"})
+    now = {**base, "created_at": "2026-10-12T12:00:00+08:00"}
+    assert latest_before(workspace, {**now, "retriever": "semantic"})["created_at"].startswith("2026-10-12T10")
+    assert latest_before(workspace, {**now, "retriever": "hybrid"})["created_at"].startswith("2026-10-12T11")

@@ -40,10 +40,11 @@ class CaseResult:
                 and set(self.scope.document_ids or ()) == self.evidence_documents)
 
 
-def run_name(config_name: str, top_k: int, document_filter: bool) -> str:
-    """Folder name: date, config, K and filter state, so a run reads without opening it."""
+def run_name(config_name: str, top_k: int, document_filter: bool, retriever: str | None = None) -> str:
+    """Folder name: date, config, K and filter state, so a run reads without opening it;
+    `retriever` is appended when it overrides the one in the config."""
     state = "filter-on" if document_filter else "filter-off"
-    return f"{datetime.now():%Y-%m-%d}_{config_name}_k{top_k}_{state}"
+    return f"{datetime.now():%Y-%m-%d}_{config_name}_k{top_k}_{state}" + (f"_{retriever}" if retriever else "")
 
 
 def _run_folder(workspace: Workspace, name: str) -> Path:
@@ -82,7 +83,8 @@ def _metrics_dict(scores: list[QuestionScore]) -> dict[str, Any]:
                   "denominator": ratios[key].denominator} for key, _, _ in METRICS}
 
 
-def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int) -> Path:
+def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int,
+                   retriever_override: bool = False) -> Path:
     status = current_status(workspace, assembly)
     if not status.queryable:
         raise EvalError(f"配置 {assembly.name} 的索引不可用（{status.state}），请先运行 ingest")
@@ -127,7 +129,8 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int) -> Path
                 for x, e in r.evidence.excerpts.items() if e.mode == "unmapped"]
     if unmapped:
         raise EvalError("以下 excerpt 找不到对应 chunk，评估结果会失真：" + "；".join(unmapped))
-    folder = _run_folder(workspace, run_name(assembly.name, top_k, enabled))
+    folder = _run_folder(workspace, run_name(assembly.name, top_k, enabled,
+                                             assembly.config.retriever.use if retriever_override else None))
     names = {doc_id: source.document_name for doc_id, source in sources.items()}
     scored = [r.score for r in results if r.score is not None]
     per_document: dict[str, Any] = {}

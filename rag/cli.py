@@ -20,6 +20,12 @@ def _positive(value: str) -> int:
     return number
 
 
+def _retriever_option(sub: argparse.ArgumentParser) -> None:
+    from rag.registry import RETRIEVERS
+    sub.add_argument("--retriever", choices=RETRIEVERS,
+                     help="本次改用这个检索器（默认取配置文件 [retriever] use；bm25、hybrid 需要配置 [lexical]）")
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="python -m rag", description="本地 PDF 知识库 RAG")
     commands = parser.add_subparsers(dest="command", required=True)
@@ -47,12 +53,15 @@ def build_parser() -> argparse.ArgumentParser:
         sub.add_argument("question")
         sub.add_argument("--top-k", type=_positive)
         sub.add_argument("--document", help="只在这个文档内检索")
+        _retriever_option(sub)
         if name == "ask":
             sub.add_argument("--debug", action="store_true", help="显示检索命中和发给 LLM 的完整消息")
     chat = command("chat", "多次提问（每轮独立检索，不保留对话记忆）")
     chat.add_argument("--top-k", type=_positive)
+    _retriever_option(chat)
     evaluate = command("eval", "用 eval/ground-truth 的标注问题评估检索效果，生成报告")
     evaluate.add_argument("--top-k", type=_positive, help="默认取配置文件 [eval] top_k")
+    _retriever_option(evaluate)
     anchors = command("anchors", "在 PDF 上定位每段 excerpt，生成审核文件 tmp/anchor-review/")
     anchors.add_argument("--since", metavar="GIT_REF", help="审核页并排显示相对这个 git 版本改动过的 excerpt")
     anchors.add_argument("--write", action="store_true", help="把定位结果写入 eval/ground-truth（审核确认后再用）")
@@ -70,9 +79,14 @@ def _out(text: str = "") -> None:
     print(text, flush=True)
 
 
-def _assembly(workspace: Workspace, name: str | None):
+def _assembly(workspace: Workspace, name: str | None, retriever: str | None = None):
+    """`retriever` replaces the config's [retriever] use for this command (a query setting)."""
+    from dataclasses import replace
     from rag.registry import assemble
-    return assemble(resolve_config(workspace.root, name))
+    config = resolve_config(workspace.root, name)
+    if retriever is not None:
+        config = replace(config, retriever=replace(config.retriever, use=retriever))
+    return assemble(config)
 
 
 def _status(workspace: Workspace, args: argparse.Namespace) -> int:
@@ -214,7 +228,7 @@ def _show_hits(hits, retriever: str) -> None:
 
 
 def _search(workspace: Workspace, args: argparse.Namespace) -> int:
-    assembly = _assembly(workspace, args.config)
+    assembly = _assembly(workspace, args.config, args.retriever)
     _require_queryable(workspace, assembly)
     documents = _Scoper(workspace, assembly, args.document)(args.question)
     hits = _retriever(workspace, assembly).retrieve(
@@ -250,7 +264,7 @@ def _answer(workspace: Workspace, assembly, retriever, question: str, top_k: int
 
 
 def _ask(workspace: Workspace, args: argparse.Namespace) -> int:
-    assembly = _assembly(workspace, args.config)
+    assembly = _assembly(workspace, args.config, args.retriever)
     _require_queryable(workspace, assembly)
     _answer(workspace, assembly, _retriever(workspace, assembly), args.question,
             args.top_k or assembly.config.top_k, _Scoper(workspace, assembly, args.document), args.debug)
@@ -259,7 +273,7 @@ def _ask(workspace: Workspace, args: argparse.Namespace) -> int:
 
 def _chat(workspace: Workspace, args: argparse.Namespace) -> int:
     from rag.query.llm import LLMError
-    assembly = _assembly(workspace, args.config)
+    assembly = _assembly(workspace, args.config, args.retriever)
     _require_queryable(workspace, assembly)
     retriever = _retriever(workspace, assembly)
     scoper = _Scoper(workspace, assembly)
@@ -283,9 +297,9 @@ def _eval(workspace: Workspace, args: argparse.Namespace) -> int:
     from rag.eval.runner import run_evaluation
     from rag.jsonio import read_json
     from rag.reports.index_page import write_index_page
-    assembly = _assembly(workspace, args.config)
+    assembly = _assembly(workspace, args.config, args.retriever)
     top_k = args.top_k or assembly.config.eval_top_k
-    folder = run_evaluation(workspace, assembly, top_k)
+    folder = run_evaluation(workspace, assembly, top_k, retriever_override=args.retriever is not None)
     result = read_json(folder / "result.json")
     metrics = result["metrics"]
     modes = result["evidence_modes"]
