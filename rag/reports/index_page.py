@@ -17,6 +17,24 @@ STATE_BADGES = {"current": ("已入库", "ok"), "new": ("未入库", "warn"), "c
                 "unreadable": ("无可用文本", "bad")}
 
 
+def _index_cell(complete: bool | None) -> str:
+    if complete is None:
+        return '<span class="meta">—</span>'
+    return badge("✓ 完整", "ok") if complete else badge("✗ 不完整", "bad")
+
+
+def index_summary(assembly) -> str:
+    """Which indexes the config builds and which retriever queries use by default."""
+    model = str(assembly.embedder.identity().get("model", "?")).split("/")[-1]
+    parts = [f"向量（{model}）"]
+    if assembly.lexical is not None:
+        flags = [("去停用词" if assembly.lexical.remove_stopwords else "保留停用词")]
+        if assembly.lexical.stemming:
+            flags.append("词干化")
+        parts.append(f"倒排 BM25（{'、'.join(flags)}）")
+    return f"索引：{' + '.join(parts)} · 默认检索器：{assembly.config.retriever.use}"
+
+
 def _config_section(workspace: Workspace, config) -> str:
     from rag.index.builder import current_status
     from rag.registry import assemble
@@ -43,13 +61,17 @@ def _config_section(workspace: Workspace, config) -> str:
         numbers = (f'<td class="num">{entry.page_count}</td><td class="num">{entry.table_count}</td>'
                    f'<td class="num">{entry.chunk_count}</td>' if entry else '<td></td><td></td><td></td>')
         rows.append(f"<tr><td>{esc(item.relative_path)}</td><td>{badge(label, kind)}</td>"
-                    f"{numbers}<td>{links}</td></tr>")
-    table = (f'<div class="scroll"><table><tr><th>文档</th><th>状态</th><th class="num">页</th>'
+                    f"<td>{_index_cell(item.vectors_complete)}</td>"
+                    + (f"<td>{_index_cell(item.lexical_complete)}</td>" if assembly.lexical else "")
+                    + f'{numbers}<td class="nw">{links}</td></tr>')
+    lexical_head = '<th class="nw">倒排索引</th>' if assembly.lexical else ""
+    table = (f'<div class="scroll"><table><tr><th>文档</th><th class="nw">状态</th><th class="nw">向量索引</th>{lexical_head}<th class="num">页</th>'
              f'<th class="num">表格</th><th class="num">chunk</th><th>审核页</th></tr>{"".join(rows)}</table></div>'
              if rows else '<div class="meta">documents/ 中没有 PDF</div>')
     return (f'<h2 id="{esc(config.name)}">配置 {esc(config.name)} {state}</h2>'
             f'<div class="sub">{esc(config.description)} · configs/{esc(config.name)}.toml · '
-            f'构建指纹 {esc(assembly.fingerprint()[:12])}</div>{table}')
+            f'构建指纹 {esc(assembly.fingerprint()[:12])}</div>'
+            f'<div class="sub">{esc(index_summary(assembly))}</div>{table}')
 
 
 def _eval_section(workspace: Workspace) -> str:

@@ -41,6 +41,7 @@ class AssemblyConfig:
     llm: Component
     eval_top_k: int     # formal evaluation; kept at the baseline K for comparability
     document_filter: bool = True   # limit retrieval to documents whose catalog code is in the question
+    lexical: dict[str, Any] | None = None   # [lexical]: BM25 index analyzer settings; None = no BM25 index
 
     def build_settings(self) -> dict[str, Any]:
         """Everything that changes index content. Retrieval, LLM and display settings are excluded."""
@@ -51,6 +52,8 @@ class AssemblyConfig:
             "table_formatter": self.table_formatter.as_dict() if self.table_formatter else None,
             "chunker": self.chunker.as_dict(),
             "embedder": self.embedder.as_dict(),
+            # Only present when configured, so configs without a BM25 index keep their fingerprint.
+            **({"lexical": self.lexical} if self.lexical is not None else {}),
         }
 
 
@@ -67,7 +70,7 @@ def load_config(path: Path) -> AssemblyConfig:
     except (OSError, tomllib.TOMLDecodeError) as exc:
         raise ConfigError(f"无法读取配置 {path.name}：{exc}") from exc
     known = {"name", "description", "parser", "table_extractors", "table_formatter",
-             "chunker", "embedder", "retriever", "llm", "eval"}
+             "chunker", "embedder", "lexical", "retriever", "llm", "eval"}
     unknown = set(data) - known
     if unknown:
         raise ConfigError(f"{path.name}：未知配置项 {sorted(unknown)}")
@@ -93,6 +96,13 @@ def load_config(path: Path) -> AssemblyConfig:
     eval_top_k = evaluation.get("top_k", 3)
     if type(eval_top_k) is not int or eval_top_k <= 0:
         raise ConfigError(f"{path.name}：eval.top_k 必须为正整数")
+    lexical = data.get("lexical")
+    if lexical is not None:
+        if not isinstance(lexical, dict) or set(lexical) - {"stopwords", "stemming"}:
+            raise ConfigError(f"{path.name}：[lexical] 只接受 stopwords 和 stemming")
+        lexical = {"stopwords": lexical.get("stopwords", True), "stemming": lexical.get("stemming", True)}
+        if not all(type(v) is bool for v in lexical.values()):
+            raise ConfigError(f"{path.name}：lexical.stopwords、lexical.stemming 必须为 true 或 false")
     formatter = data.get("table_formatter")
     return AssemblyConfig(
         name, str(data.get("description", "")), path,
@@ -103,7 +113,7 @@ def load_config(path: Path) -> AssemblyConfig:
         _component(data["embedder"], "embedder", path),
         retriever, top_k,
         _component(data["llm"], "llm", path),
-        eval_top_k, document_filter,
+        eval_top_k, document_filter, lexical,
     )
 
 

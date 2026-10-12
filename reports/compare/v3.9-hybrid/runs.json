@@ -1,0 +1,11 @@
+{
+  "name": "v3.9-hybrid",
+  "runs": [
+    "2026-10-12_structured_k3_filter-on",
+    "2026-10-12_structured_k3_filter-on_hybrid",
+    "2026-10-12_structured_k3_filter-on_bm25",
+    "2026-10-12_plain_text_k3_filter-on",
+    "2026-10-12_plain_text_k3_filter-on_hybrid",
+    "2026-10-12_plain_text_k3_filter-on_bm25"
+  ]
+}

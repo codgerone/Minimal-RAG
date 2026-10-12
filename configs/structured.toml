@@ -27,8 +27,12 @@ overlap_tokens = 32
 [embedder]
 use = "bge_m3"
 
+[lexical]          # BM25 倒排索引的分析器（规则见 docs/rules/lexical.md）
+stopwords = true   # 去西班牙文、英文停用词
+stemming = true    # 按文档语言词干化
+
 [retriever]
-use = "semantic"
+use = "hybrid"     # 向量排名与 BM25 排名按 RRF 融合；semantic 为纯向量，bm25 为纯关键词
 top_k = 4          # search / ask / chat 返回的条数
 document_filter = true   # 问题中出现 documents/documents.toml 登记的标识编码时，只在对应文档内检索
 

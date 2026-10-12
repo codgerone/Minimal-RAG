@@ -36,7 +36,7 @@ pre,.text{white-space:pre-wrap;overflow-wrap:anywhere;background:var(--code);bor
 padding:8px 10px;margin:6px 0;font:13px/1.55 ui-monospace,Consolas,"Microsoft YaHei",monospace}
 table{border-collapse:collapse;width:100%;font-size:13px}
 th,td{border:1px solid var(--line);padding:4px 7px;text-align:left;vertical-align:top}
-th{background:var(--code);font-weight:600}td.hdr{background:#e3edff;font-weight:600;box-shadow:inset 0 0 0 1px #8fb0ee}td.num,th.num{text-align:right;white-space:nowrap}
+th{background:var(--code);font-weight:600}td.hdr{background:#e3edff;font-weight:600;box-shadow:inset 0 0 0 1px #8fb0ee}td.num,th.num{text-align:right;white-space:nowrap}th.nw,td.nw{white-space:nowrap}
 .scroll{overflow-x:auto;max-width:100%}
 details{margin:6px 0}summary{cursor:pointer;color:var(--muted);font-size:13px}
 .item{border-top:1px solid var(--line);padding:8px 0}.item:first-child{border-top:0}
@@ -177,6 +177,21 @@ def text_block(text: str, limit: int | None = None) -> str:
     return (f'<div class="text" data-expand>{esc(text[:limit])}<span class="ellipsis">… </span>'
             f'<span class="rest hidden">{esc(text[limit:])} </span>'
             f'<button class="toggle" data-more="{more}" data-less="收起">{more}</button></div>')
+
+
+def hit_scores(hit: dict, retriever: str) -> str:
+    """Per-hit scores from an evaluation result: vector similarity and rank, BM25 rank and score.
+    Results written before V3.9 only carry the similarity."""
+    parts = []
+    if hit.get("similarity") is not None:
+        rank = hit.get("semantic_rank")
+        parts.append(f"向量第 {rank} 名 · 相似度 {hit['similarity']:.3f}" if rank and retriever == "hybrid"
+                     else f"相似度 {hit['similarity']:.3f}")
+    if hit.get("bm25") is not None:
+        parts.append(f"BM25 第 {hit['lexical_rank']} 名 · {hit['bm25']:.2f}")
+    elif retriever == "hybrid":
+        parts.append("BM25 无匹配词")
+    return " · ".join(parts)
 
 
 def filters(options: Iterable[tuple[str, str, int]]) -> str:

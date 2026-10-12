@@ -108,5 +108,5 @@ def test_metrics_follow_the_documented_definitions():
 
 def test_run_name_shows_config_k_and_filter_state():
     from rag.eval.runner import run_name
-    assert run_name("structured", 3, True).endswith("_structured_k3_filter-on")
-    assert run_name("plain_text", 5, False).endswith("_plain_text_k5_filter-off")
+    assert run_name("structured", 3, True, "semantic").endswith("_structured_k3_filter-on")
+    assert run_name("plain_text", 5, False, "semantic").endswith("_plain_text_k5_filter-off")

@@ -119,6 +119,13 @@ class ChromaStore:
         chunks = [_chunk(i, t, m) for i, t, m in zip(raw["ids"], raw["documents"], raw["metadatas"])]
         return sorted(chunks, key=lambda c: (c.relative_path.casefold(), c.chunk_index))
 
+    def get_chunks(self, chunk_ids: list[str]) -> dict[str, StoredChunk]:
+        collection = self._open(create=False)
+        if collection is None or not chunk_ids:
+            return {}
+        raw = collection.get(ids=chunk_ids, include=["documents", "metadatas"])
+        return {i: _chunk(i, t, m) for i, t, m in zip(raw["ids"], raw["documents"], raw["metadatas"])}
+
     def query(self, vector: list[float], n: int,
               document_ids: Collection[str] | None = None) -> list[VectorHit]:
         collection = self._open(create=False)

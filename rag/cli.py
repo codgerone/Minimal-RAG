@@ -20,6 +20,12 @@ def _positive(value: str) -> int:
     return number
 
 
+def _retriever_option(sub: argparse.ArgumentParser) -> None:
+    from rag.registry import RETRIEVERS
+    sub.add_argument("--retriever", choices=RETRIEVERS,
+                     help="本次改用这个检索器（默认取配置文件 [retriever] use；bm25、hybrid 需要配置 [lexical]）")
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="python -m rag", description="本地 PDF 知识库 RAG")
     commands = parser.add_subparsers(dest="command", required=True)
@@ -47,12 +53,15 @@ def build_parser() -> argparse.ArgumentParser:
         sub.add_argument("question")
         sub.add_argument("--top-k", type=_positive)
         sub.add_argument("--document", help="只在这个文档内检索")
+        _retriever_option(sub)
         if name == "ask":
             sub.add_argument("--debug", action="store_true", help="显示检索命中和发给 LLM 的完整消息")
     chat = command("chat", "多次提问（每轮独立检索，不保留对话记忆）")
     chat.add_argument("--top-k", type=_positive)
+    _retriever_option(chat)
     evaluate = command("eval", "用 eval/ground-truth 的标注问题评估检索效果，生成报告")
     evaluate.add_argument("--top-k", type=_positive, help="默认取配置文件 [eval] top_k")
+    _retriever_option(evaluate)
     anchors = command("anchors", "在 PDF 上定位每段 excerpt，生成审核文件 tmp/anchor-review/")
     anchors.add_argument("--since", metavar="GIT_REF", help="审核页并排显示相对这个 git 版本改动过的 excerpt")
     anchors.add_argument("--write", action="store_true", help="把定位结果写入 eval/ground-truth（审核确认后再用）")
@@ -70,9 +79,14 @@ def _out(text: str = "") -> None:
     print(text, flush=True)
 
 
-def _assembly(workspace: Workspace, name: str | None):
+def _assembly(workspace: Workspace, name: str | None, retriever: str | None = None):
+    """`retriever` replaces the config's [retriever] use for this command (a query setting)."""
+    from dataclasses import replace
     from rag.registry import assemble
-    return assemble(resolve_config(workspace.root, name))
+    config = resolve_config(workspace.root, name)
+    if retriever is not None:
+        config = replace(config, retriever=replace(config.retriever, use=retriever))
+    return assemble(config)
 
 
 def _status(workspace: Workspace, args: argparse.Namespace) -> int:
@@ -85,10 +99,17 @@ def _status(workspace: Workspace, args: argparse.Namespace) -> int:
     status = current_status(workspace, assembly, sources)
     headline = {"not_built": "尚未建立索引", "config_changed": "配置已改变，索引过期（需 ingest --force）",
                 "ready": "可用"}[status.state]
+    from rag.reports.index_page import index_summary
     _out(f"配置 {assembly.name}：{headline}")
+    _out(f"  {index_summary(assembly)}")
     for item in status.documents:
         chunks = f"{item.entry.chunk_count} chunks" if item.entry and item.state != "new" else ""
-        _out(f"  [{STATE_LABELS[item.state]}] {item.relative_path}  {chunks}")
+        indexes = ""
+        if item.state == "incomplete":
+            missing = [name for name, ok in (("向量", item.vectors_complete), ("倒排", item.lexical_complete))
+                       if ok is False]
+            indexes = f"  （{'、'.join(missing)}索引不完整）"
+        _out(f"  [{STATE_LABELS[item.state]}] {item.relative_path}  {chunks}{indexes}")
     todo = [d for d in status.documents if d.needs_ingest]
     if todo:
         _out(f"→ {len(todo)} 个文档需要处理：python -m rag ingest --config {assembly.name}")
@@ -184,29 +205,42 @@ class _Scoper:
 
 
 def _retriever(workspace: Workspace, assembly):
-    from rag.index.builder import open_store
-    from rag.query.retriever import SemanticRetriever
-    return SemanticRetriever(assembly.embedder, open_store(workspace, assembly.name))
+    from rag.index.builder import open_lexical, open_store
+    from rag.query.retriever import build_retriever
+    return build_retriever(assembly, open_store(workspace, assembly.name), open_lexical(workspace, assembly))
 
 
-def _show_hits(hits) -> None:
+def _hit_scores(hit, retriever: str) -> str:
+    parts = []
+    if hit.semantic_rank is not None:
+        parts.append(f"向量第 {hit.semantic_rank} 名（相似度 {hit.similarity:.4f}）")
+    if hit.bm25 is not None:
+        parts.append(f"BM25 第 {hit.lexical_rank} 名（{hit.bm25:.3f}）")
+    if retriever == "hybrid":
+        if hit.bm25 is None:
+            parts.append("BM25 无匹配词")
+        parts.append(f"融合得分 {hit.score:.5f}")
+    return " · ".join(parts)
+
+
+def _show_hits(hits, retriever: str) -> None:
     if not hits:
         _out("没有检索到内容。")
     for rank, hit in enumerate(hits, start=1):
         chunk = hit.chunk
-        _out(f"#{rank} 相似度 {1 - hit.distance:.4f} · {chunk.document_name} · "
+        _out(f"#{rank} {_hit_scores(hit, retriever)} · {chunk.document_name} · "
              f"第 {','.join(map(str, chunk.pages))} 页 · {chunk.chunk_id}")
         _out(chunk.text)
         _out()
 
 
 def _search(workspace: Workspace, args: argparse.Namespace) -> int:
-    assembly = _assembly(workspace, args.config)
+    assembly = _assembly(workspace, args.config, args.retriever)
     _require_queryable(workspace, assembly)
     documents = _Scoper(workspace, assembly, args.document)(args.question)
     hits = _retriever(workspace, assembly).retrieve(
         args.question, args.top_k or assembly.config.top_k, documents)
-    _show_hits(hits)
+    _show_hits(hits, assembly.config.retriever.use)
     return 0
 
 
@@ -217,7 +251,7 @@ def _answer(workspace: Workspace, assembly, retriever, question: str, top_k: int
     hits = retriever.retrieve(question, top_k, scoper(question))
     messages = build_messages(question, hits)
     if debug:
-        _show_hits(hits)
+        _show_hits(hits, assembly.config.retriever.use)
         for message in messages:
             _out(f"[{message['role']}]\n{message['content']}\n")
     llm = assembly.llm()
@@ -237,7 +271,7 @@ def _answer(workspace: Workspace, assembly, retriever, question: str, top_k: int
 
 
 def _ask(workspace: Workspace, args: argparse.Namespace) -> int:
-    assembly = _assembly(workspace, args.config)
+    assembly = _assembly(workspace, args.config, args.retriever)
     _require_queryable(workspace, assembly)
     _answer(workspace, assembly, _retriever(workspace, assembly), args.question,
             args.top_k or assembly.config.top_k, _Scoper(workspace, assembly, args.document), args.debug)
@@ -246,7 +280,7 @@ def _ask(workspace: Workspace, args: argparse.Namespace) -> int:
 
 def _chat(workspace: Workspace, args: argparse.Namespace) -> int:
     from rag.query.llm import LLMError
-    assembly = _assembly(workspace, args.config)
+    assembly = _assembly(workspace, args.config, args.retriever)
     _require_queryable(workspace, assembly)
     retriever = _retriever(workspace, assembly)
     scoper = _Scoper(workspace, assembly)
@@ -270,7 +304,7 @@ def _eval(workspace: Workspace, args: argparse.Namespace) -> int:
     from rag.eval.runner import run_evaluation
     from rag.jsonio import read_json
     from rag.reports.index_page import write_index_page
-    assembly = _assembly(workspace, args.config)
+    assembly = _assembly(workspace, args.config, args.retriever)
     top_k = args.top_k or assembly.config.eval_top_k
     folder = run_evaluation(workspace, assembly, top_k)
     result = read_json(folder / "result.json")

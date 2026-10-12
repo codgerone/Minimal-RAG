@@ -8,7 +8,7 @@ from typing import Any
 from rag.eval.metrics import METRICS
 from rag.jsonio import write_atomic
 from rag.paths import Workspace
-from rag.reports.html import badge, esc, filters, page, pct, text_block, write_assets
+from rag.reports.html import badge, esc, filters, hit_scores, page, pct, text_block, write_assets
 
 MODE_LABELS = {"coordinate": ("坐标判定", ""), "fallback": ("文字兜底", "warn"),
                "unmapped": ("找不到对应 chunk", "bad"),
@@ -129,15 +129,16 @@ def _scope_tile(result: dict[str, Any]) -> str:
             f'<div class="d same">{note}</div></div>')
 
 
-def _hit_html(hit: dict[str, Any], groups: list[dict[str, Any]]) -> str:
+def _hit_html(hit: dict[str, Any], groups: list[dict[str, Any]], retriever: str) -> str:
     matched = [g["group_id"] for g in groups if any(hit["chunk_id"] in s for s in g["acceptable_sets"])]
     mark = (badge("✓ 证据 " + "、".join(matched), "ok") if hit["relevant"]
             else badge("跨文档", "bad") if hit["cross_document"] else badge("非证据"))
     return (f'<div class="item"><b>#{hit["rank"]}</b> {mark} '
             f'<span class="meta">{esc(hit["document_name"])} · 第 {",".join(map(str, hit["pages"]))} 页'
-            f' · 相似度 {hit["similarity"]:.3f}</span>{text_block(hit["text"], 280)}'
-            f'<details><summary>{esc(hit["chunk_id"])}</summary><div class="meta">距离 {hit["distance"]:.6f}'
-            f'，类型 {esc(hit["kind"])}</div></details></div>')
+            f' · {esc(hit_scores(hit, retriever))}</span>{text_block(hit["text"], 280)}'
+            f'<details><summary>{esc(hit["chunk_id"])}</summary><div class="meta">'
+            + (f'得分 {hit["score"]:.6f}' if "score" in hit else f'距离 {hit["distance"]:.6f}')
+            + f'，类型 {esc(hit["kind"])}</div></details></div>')
 
 
 def render(result: dict[str, Any], previous: dict[str, Any] | None) -> str:
@@ -198,12 +199,13 @@ def render(result: dict[str, Any], previous: dict[str, Any] | None) -> str:
             f'<details><summary>参考答案</summary><div class="meta">{esc(case["reference_answer"])}</div></details>'
             f'<div class="cols"><div><h3>标准证据</h3>{"".join(_group_html(g, case, result["top_k"]) for g in case["groups"])}</div>'
             f'<div><h3>实际检索 Top-{result["top_k"]}</h3>'
-            f'{"".join(_hit_html(h, case["groups"]) for h in case["hits"]) or "<div class=meta>无结果</div>"}'
+            f'{"".join(_hit_html(h, case["groups"], result.get("retriever", "semantic")) for h in case["hits"]) or "<div class=meta>无结果</div>"}'
             f'</div></div></div>')
     settings = result["build_settings"]
     body = (f'<h1>检索评估 · {esc(result["config"])} · K={result["top_k"]}</h1>'
             f'<div class="sub">{esc(result["created_at"])} · {result["dataset"]["answerable"]} 道可回答问题'
-            f'（数据集 {esc(result["dataset"]["version"])}）· 文档过滤{filter_state(result)}'
+            f'（数据集 {esc(result["dataset"]["version"])}）· 检索器 {esc(result.get("retriever", "semantic"))}'
+            f' · 文档过滤{filter_state(result)}'
             f' · 构建指纹 {esc(result["fingerprint"][:12])}</div>'
             f'<div class="tiles">{tiles}</div>{notice_html}'
             f'<h2>按文档</h2>{doc_table}'
@@ -238,11 +240,12 @@ def rerender_all(workspace: Workspace) -> int:
 
 
 def latest_before(workspace: Workspace, result: dict[str, Any]) -> dict[str, Any] | None:
-    """Latest earlier run with the same config, K and dataset version, for the 'change since last run' line."""
+    """Latest earlier run with the same config, retriever, K and dataset version, for the 'change since last run' line."""
     from rag.jsonio import read_json
     folder = workspace.eval_reports()
     runs = [read_json(p) for p in folder.glob("*/result.json")] if folder.is_dir() else []
     earlier = [r for r in runs if r["config"] == result["config"] and r["top_k"] == result["top_k"]
+               and r.get("retriever", "semantic") == result.get("retriever", "semantic")
                and r["dataset"]["version"] == result["dataset"]["version"]
                and r["created_at"] < result["created_at"]]
     return max(earlier, key=lambda r: r["created_at"]) if earlier else None
