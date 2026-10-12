@@ -1,8 +1,8 @@
-# 系统概览（V3.8）
+# 系统概览（V3.9）
 
 ## 这是什么
 
-一个本地运行的 PDF 知识库 RAG 系统：把 `documents/` 里的 PDF（合同、订单、发票等）解析、切块、编码后存进向量库，然后支持语义检索、依据证据的问答，以及用人工标注的题目评估检索效果。
+一个本地运行的 PDF 知识库 RAG 系统：把 `documents/` 里的 PDF（合同、订单、发票等）解析、切块后建立向量索引和 BM25 倒排索引，然后支持混合检索、依据证据的问答，以及用人工标注的题目评估检索效果。
 
 系统的每个关键环节都可以替换（解析器、表格提取器、表格文本化、分块器、编码器、检索器、LLM）。用一个配置文件选择各环节的实现，就得到一份"装配"；不同装配各自建索引，可以放在一起比较效果。它也是 Sales Operations Agent 的检索模块原型。
 
@@ -13,7 +13,7 @@
 | `python -m rag status` | 查看哪些文档已入库、需要更新或可以清理 |
 | `python -m rag ingest` | 入库新增或修改过的 PDF；`--force` 全量重建，`--prune` 清理已删除的文档，`--all-configs` 对所有配置执行 |
 | `python -m rag chunks` | 浏览已入库的 chunk（可按 `--document`、`--page` 筛选） |
-| `python -m rag search "问题"` | 语义检索，显示检索范围和命中的 chunk |
+| `python -m rag search "问题"` | 检索，显示检索范围、命中的 chunk 及其在向量与 BM25 两路的名次 |
 | `python -m rag ask "问题"` | 检索后让 LLM 依据证据回答；`--debug` 显示命中内容和完整 Prompt |
 | `python -m rag chat` | 连续提问（每轮独立检索，不记忆上下文） |
 | `python -m rag eval` | 用标注题目评估检索效果并生成报告（K 取配置中的 `[eval] top_k`，内置为 3） |
@@ -22,7 +22,7 @@
 | `python -m rag compare RUN... --name NAME` | 把几次评估并排对比（每组第一次为基线），生成 `reports/compare/NAME/` |
 | `python -m rag report` | 重新生成报告首页 |
 
-`search`、`ask`、`chat` 会按问题中的标识编码限定检索范围（见下节）；`--document` 可手动指定只在某个文档内检索。
+`search`、`ask`、`chat` 会按问题中的标识编码限定检索范围（见下节）；`--document` 可手动指定只在某个文档内检索。`search`、`ask`、`chat`、`eval` 可加 `--retriever semantic|bm25|hybrid` 临时换检索器，不需要重建索引。
 
 所有命令都可以加 `--config NAME` 选择装配，默认使用 `structured`（也可以用环境变量 `RAG_CONFIG` 指定）。
 
@@ -48,16 +48,30 @@ codes = ["ORDER2025001"]
 | 解析 | PyMuPDF 按页取文本 | Docling 版面解析（标题、段落、列表、表格、阅读顺序） |
 | 表格 | 不处理 | 四个工具九种策略提取，评分选出最佳结构，判定表头后写成带列名的 Markdown 行（`labeled_rows_v1`，见 [rules/table-text.md](rules/table-text.md)） |
 | 分块 | 每页内 300 字符、重叠 50 | 按结构分块，每块不超过 512 token（按 multilingual-e5 分词器计数） |
-| 编码 / 检索 | bge-m3，余弦相似度；按标识编码限定文档；问答取 Top-4，评估取 Top-3 | 同左 |
+| 索引 / 检索 | bge-m3 向量索引 + BM25 倒排索引，混合检索；按标识编码限定文档；问答取 Top-4，评估取 Top-3 | 同左 |
 
 新建装配：复制 `configs/structured.toml` 改几行即可，启动时会校验组合是否合法。
 
-## 当前效果（K=3，5 份 PDF，24 道题，数据集 3.1.0）
+## 检索方式
+
+每份装配入库时建两份索引：向量索引（bge-m3）和 BM25 倒排索引（配置 `[lexical]`：默认去西、英停用词，按文档语言词干化）。检索器由 `[retriever] use` 选择：
+
+| 检索器 | 排序依据 |
+|---|---|
+| `hybrid`（内置装配默认） | 向量排名与 BM25 排名按倒数排名融合（RRF） |
+| `semantic` | 向量相似度 |
+| `bm25` | BM25 关键词得分 |
+
+BM25 只能匹配问题中照抄原文的词（外文术语、型号、公司名、数字），中文部分依靠向量检索。规则细节：[rules/lexical.md](rules/lexical.md)。
+
+## 当前效果（K=3，5 份 PDF，24 道题，数据集 3.2.0，混合检索）
 
 | 装配 | 命中率 | 完整覆盖 | 证据组召回 | MRR | Chunk 精确率 | 跨文档污染 | 文档识别 |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| plain_text | 58.3% | 33.3% | 42.6% | 74.3% | 44.4% | 0.0% | 24/24 |
-| structured | 75.0% | 58.3% | 67.4% | 72.2% | 40.3% | 0.0% | 24/24 |
+| plain_text | 50.0% | 33.3% | 40.3% | 80.6% | 51.4% | 0.0% | 24/24 |
+| structured | 87.5% | 79.2% | 82.6% | 86.8% | 48.6% | 0.0% | 24/24 |
+
+同一数据集上用纯向量检索：plain_text 58.3% / 29.2% / 39.2% / 77.8% / 45.8%，structured 83.3% / 75.0% / 78.5% / 81.9% / 47.2%（次序为命中率、完整覆盖、证据组召回、MRR、Chunk 精确率）。
 
 证据对应的 chunk 按 PDF 坐标判定：excerpt 写了什么，就要求检索到包含这些内容的全部 chunk。部分证据组所需的 chunk 数超过 3，K=3 时不可能被覆盖，因此完整覆盖率的上限为 plain_text 17/24、structured 21/24（报告中标出这些证据组）。
 
@@ -71,13 +85,15 @@ V3.7 继续调整表头判定的取样与类型转变（[决策 007](decisions/0
 
 V3.8 把编码器由 multilingual-e5-small 换成 bge-m3（[决策 008](decisions/008-embedder-bge-m3.md)），chunk 不变。structured 完整覆盖由 7/24 升到 14/24、MRR 由 42.4% 升到 72.2%；plain_text 命中由 9/24 升到 14/24、MRR 由 46.5% 升到 74.3%。用 e5-small 时把问题译成文档语言，structured 完整覆盖为 11/24；用 bge-m3 时译文只再多 1 题，跨语言差距基本消除。bge-m3 没有中文偏向，泛化 chunk 反复进入 Top-3 的次数也减少。各编码器的逐题对比见 `reports/compare/v3.8-encoders/`。
 
+V3.9 加入 BM25 倒排索引，内置装配默认混合检索（[决策 009](decisions/009-hybrid-retrieval.md)）。题目原先以文档标题开头，标题词只出现在标题 chunk 中，使 BM25 把标题 chunk 排在前面，也干扰向量检索；数据集 3.2.0 去掉标题、只保留标识编码，纯向量 structured 完整覆盖由 14/24 升到 18/24。混合检索相对纯向量：structured 变好 2 题、变差 0 题（都是问题含原文术语、型号的题）；plain_text 变好 1 题、变差 2 题，变差的两题各需 4–9 个 chunk 才能覆盖一个证据组，混合检索返回的相关 chunk 更多但未覆盖任何证据组。两套装配的证据组召回、MRR、Chunk 精确率都提高。逐题对比见 `reports/compare/v3.9-hybrid/`。
+
 ## 不做什么（当前范围外）
 
-扫描件 OCR、图片理解、跨页表格拼接、关键词/混合检索、从文档内容自动抽取编号、按文档属性（类型、客户、日期）过滤、多轮对话记忆、Agent/工具调用、Web 界面。
+扫描件 OCR、图片理解、跨页表格拼接、重排模型、从文档内容自动抽取编号、按文档属性（类型、客户、日期）过滤、多轮对话记忆、Agent/工具调用、Web 界面。
 
 ## 怎么验收
 
-1. 打开 `reports/index.html`：每份装配都显示"可用"，文档都是"已入库"。点进解析、表格、分块页，抽查内容是否与 PDF 一致。
+1. 打开 `reports/index.html`：每份装配都显示"可用"，文档都是"已入库"，向量索引、倒排索引都是"完整"。点进解析、表格、分块页，抽查内容是否与 PDF 一致。
 2. 打开最新的评估报告：指标不低于上表；文档识别准确率 24/24；"含文字兜底"为 0，或者已抽查确认。
 3. `uv run pytest` 全部通过。
 
@@ -90,5 +106,5 @@ V3.8 把编码器由 multilingual-e5-small 换成 bge-m3（[决策 008](decision
 | `configs/` | 装配配置 | 是 |
 | `eval/ground-truth/` | 人工标注的问题、信息项与证据，以及每段证据在 PDF 上的已确认位置 | 是 |
 | `reports/` | 给人看的报告：`index.html` 入口、`ingest/` 入库审核页、`eval/` 评估报告 | 评估报告进 git，入库审核页不进 |
-| `.rag/indexes/<配置名>/` | 机器数据：`manifest.json`、向量库、各文档中间结果 JSON（含 chunk 来源区域） | 否 |
+| `.rag/indexes/<配置名>/` | 机器数据：`manifest.json`、向量库 `chroma/`、BM25 倒排索引 `bm25.sqlite`、各文档中间结果 JSON（含 chunk 来源区域） | 否 |
 | `tmp/anchor-review/` | excerpt 定位审核文件（临时） | 否 |
