@@ -28,6 +28,10 @@ class DocumentStatus:
     state: DocumentState
     source: SourceDocument | None
     entry: DocumentEntry | None
+    # Whether each index holds exactly the manifest's chunks for this document;
+    # None when the document is not in the manifest, or (lexical) the config has no BM25 index.
+    vectors_complete: bool | None = None
+    lexical_complete: bool | None = None
 
     @property
     def relative_path(self) -> str:
@@ -77,17 +81,20 @@ def check_status(workspace: Workspace, config_name: str, fingerprint: str,
     result: list[DocumentStatus] = []
     for source in sources:
         entry = manifest.documents.get(source.document_id)
+        vectors = lexical_ok = None
+        if entry is not None:
+            vectors = _complete(entry, stored_ids.get(source.document_id, set()), workspace, config_name)
+            if lexical_ids is not None:
+                lexical_ok = _complete(entry, lexical_ids.get(source.document_id, set()), workspace, config_name)
         if entry is None:
             state: DocumentState = "new" if has_text(source) else "unreadable"
         elif entry.file_hash != source.file_hash:
             state = "changed" if has_text(source) else "unreadable"
-        elif (not _complete(entry, stored_ids.get(source.document_id, set()), workspace, config_name)
-              or (lexical_ids is not None
-                  and not _complete(entry, lexical_ids.get(source.document_id, set()), workspace, config_name))):
+        elif not vectors or lexical_ok is False:
             state = "incomplete"
         else:
             state = "current"
-        result.append(DocumentStatus(state, source, entry))
+        result.append(DocumentStatus(state, source, entry, vectors, lexical_ok))
     for document_id, entry in manifest.documents.items():
         if document_id not in by_id:
             result.append(DocumentStatus("missing", None, entry))

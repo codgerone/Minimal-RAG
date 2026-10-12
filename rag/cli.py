@@ -99,10 +99,17 @@ def _status(workspace: Workspace, args: argparse.Namespace) -> int:
     status = current_status(workspace, assembly, sources)
     headline = {"not_built": "尚未建立索引", "config_changed": "配置已改变，索引过期（需 ingest --force）",
                 "ready": "可用"}[status.state]
+    from rag.reports.index_page import index_summary
     _out(f"配置 {assembly.name}：{headline}")
+    _out(f"  {index_summary(assembly)}")
     for item in status.documents:
         chunks = f"{item.entry.chunk_count} chunks" if item.entry and item.state != "new" else ""
-        _out(f"  [{STATE_LABELS[item.state]}] {item.relative_path}  {chunks}")
+        indexes = ""
+        if item.state == "incomplete":
+            missing = [name for name, ok in (("向量", item.vectors_complete), ("倒排", item.lexical_complete))
+                       if ok is False]
+            indexes = f"  （{'、'.join(missing)}索引不完整）"
+        _out(f"  [{STATE_LABELS[item.state]}] {item.relative_path}  {chunks}{indexes}")
     todo = [d for d in status.documents if d.needs_ingest]
     if todo:
         _out(f"→ {len(todo)} 个文档需要处理：python -m rag ingest --config {assembly.name}")
@@ -299,7 +306,7 @@ def _eval(workspace: Workspace, args: argparse.Namespace) -> int:
     from rag.reports.index_page import write_index_page
     assembly = _assembly(workspace, args.config, args.retriever)
     top_k = args.top_k or assembly.config.eval_top_k
-    folder = run_evaluation(workspace, assembly, top_k, retriever_override=args.retriever is not None)
+    folder = run_evaluation(workspace, assembly, top_k)
     result = read_json(folder / "result.json")
     metrics = result["metrics"]
     modes = result["evidence_modes"]

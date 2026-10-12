@@ -165,7 +165,8 @@ def test_ingest_builds_the_bm25_index_and_status_checks_it(workspace, lexical_as
     document_id = current_status(workspace, lexical_assembly).documents[0].source.document_id
     assert store.score(lexical_assembly.lexical.query_terms("hxf300"))
     store.delete_document(document_id)
-    assert current_status(workspace, lexical_assembly).documents[0].state == "incomplete"
+    item = current_status(workspace, lexical_assembly).documents[0]
+    assert (item.state, item.vectors_complete, item.lexical_complete) == ("incomplete", True, False)
     assert ingest(workspace, lexical_assembly)[0].action == "updated"
     assert current_status(workspace, lexical_assembly).documents[0].state == "current"
 
@@ -182,11 +183,11 @@ def test_full_rebuild_and_prune_keep_the_bm25_index_in_step(workspace, lexical_a
     assert {d.state for d in current_status(workspace, lexical_assembly).documents} == {"current"}
 
 
-def test_retriever_override_is_named_in_the_eval_folder_and_previous_run_matches_it(workspace):
+def test_eval_folder_names_a_non_semantic_retriever_and_previous_run_matches_it(workspace):
     from rag.eval.runner import run_name
     from rag.jsonio import write_json
     from rag.reports.evaluation import latest_before
-    assert run_name("structured", 3, True).endswith("_structured_k3_filter-on")
+    assert run_name("structured", 3, True, "semantic").endswith("_structured_k3_filter-on")
     assert run_name("structured", 3, True, "hybrid").endswith("_structured_k3_filter-on_hybrid")
     base = {"config": "structured", "top_k": 3, "dataset": {"version": "3.2.0"}}
     write_json(workspace.eval_reports() / "a" / "result.json",
