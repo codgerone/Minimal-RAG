@@ -1,0 +1,1821 @@
+{
+  "plain_text": {
+    "hybrid": [
+      {
+        "run": "2026-10-12_plain_text_k1_filter-on_hybrid",
+        "returned_chars": 232.0,
+        "hit_rate": {
+          "numerator": 7,
+          "denominator": 24,
+          "value": 0.2916666666666667
+        },
+        "complete_coverage": {
+          "numerator": 4,
+          "denominator": 24,
+          "value": 0.16666666666666666
+        },
+        "group_recall": {
+          "numerator": 5.5,
+          "denominator": 24,
+          "value": 0.22916666666666666
+        },
+        "mrr": {
+          "numerator": 17.0,
+          "denominator": 24,
+          "value": 0.7083333333333334
+        },
+        "chunk_precision": {
+          "numerator": 17.0,
+          "denominator": 24,
+          "value": 0.7083333333333334
+        },
+        "complete_cases": [
+          "E001-602-Q002",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-25-19-Q004"
+        ],
+        "k": 1
+      },
+      {
+        "run": "2026-10-12_plain_text_k2_filter-on_hybrid",
+        "returned_chars": 472.1,
+        "hit_rate": {
+          "numerator": 11,
+          "denominator": 24,
+          "value": 0.4583333333333333
+        },
+        "complete_coverage": {
+          "numerator": 6,
+          "denominator": 24,
+          "value": 0.25
+        },
+        "group_recall": {
+          "numerator": 8.666666666666668,
+          "denominator": 24,
+          "value": 0.36111111111111116
+        },
+        "mrr": {
+          "numerator": 19.0,
+          "denominator": 24,
+          "value": 0.7916666666666666
+        },
+        "chunk_precision": {
+          "numerator": 12.5,
+          "denominator": 24,
+          "value": 0.5208333333333334
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q002",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-25-19-Q004"
+        ],
+        "k": 2
+      },
+      {
+        "run": "2026-10-12_plain_text_k3_filter-on_hybrid",
+        "returned_chars": 714.3,
+        "hit_rate": {
+          "numerator": 12,
+          "denominator": 24,
+          "value": 0.5
+        },
+        "complete_coverage": {
+          "numerator": 8,
+          "denominator": 24,
+          "value": 0.3333333333333333
+        },
+        "group_recall": {
+          "numerator": 9.666666666666666,
+          "denominator": 24,
+          "value": 0.40277777777777773
+        },
+        "mrr": {
+          "numerator": 19.333333333333336,
+          "denominator": 24,
+          "value": 0.8055555555555557
+        },
+        "chunk_precision": {
+          "numerator": 12.333333333333332,
+          "denominator": 24,
+          "value": 0.5138888888888888
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q002",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-25-19-Q004"
+        ],
+        "k": 3
+      },
+      {
+        "run": "2026-10-12_plain_text_k4_filter-on_hybrid",
+        "returned_chars": 942.9,
+        "hit_rate": {
+          "numerator": 15,
+          "denominator": 24,
+          "value": 0.625
+        },
+        "complete_coverage": {
+          "numerator": 10,
+          "denominator": 24,
+          "value": 0.4166666666666667
+        },
+        "group_recall": {
+          "numerator": 11.833333333333332,
+          "denominator": 24,
+          "value": 0.4930555555555555
+        },
+        "mrr": {
+          "numerator": 19.583333333333336,
+          "denominator": 24,
+          "value": 0.8159722222222223
+        },
+        "chunk_precision": {
+          "numerator": 10.5,
+          "denominator": 24,
+          "value": 0.4375
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q002",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-24-12-Q006",
+          "PO-25-19-Q002",
+          "PO-25-19-Q004"
+        ],
+        "k": 4
+      },
+      {
+        "run": "2026-10-12_plain_text_k5_filter-on_hybrid",
+        "returned_chars": 1194.5,
+        "hit_rate": {
+          "numerator": 17,
+          "denominator": 24,
+          "value": 0.7083333333333334
+        },
+        "complete_coverage": {
+          "numerator": 11,
+          "denominator": 24,
+          "value": 0.4583333333333333
+        },
+        "group_recall": {
+          "numerator": 13.166666666666666,
+          "denominator": 24,
+          "value": 0.548611111111111
+        },
+        "mrr": {
+          "numerator": 19.583333333333336,
+          "denominator": 24,
+          "value": 0.8159722222222223
+        },
+        "chunk_precision": {
+          "numerator": 9.6,
+          "denominator": 24,
+          "value": 0.39999999999999997
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q002",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-24-12-Q005",
+          "PO-24-12-Q006",
+          "PO-25-19-Q002",
+          "PO-25-19-Q004"
+        ],
+        "k": 5
+      },
+      {
+        "run": "2026-10-12_plain_text_k6_filter-on_hybrid",
+        "returned_chars": 1421.6,
+        "hit_rate": {
+          "numerator": 17,
+          "denominator": 24,
+          "value": 0.7083333333333334
+        },
+        "complete_coverage": {
+          "numerator": 11,
+          "denominator": 24,
+          "value": 0.4583333333333333
+        },
+        "group_recall": {
+          "numerator": 13.333333333333334,
+          "denominator": 24,
+          "value": 0.5555555555555556
+        },
+        "mrr": {
+          "numerator": 19.583333333333336,
+          "denominator": 24,
+          "value": 0.8159722222222223
+        },
+        "chunk_precision": {
+          "numerator": 8.166666666666666,
+          "denominator": 24,
+          "value": 0.34027777777777773
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q002",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-24-12-Q005",
+          "PO-24-12-Q006",
+          "PO-25-19-Q002",
+          "PO-25-19-Q004"
+        ],
+        "k": 6
+      },
+      {
+        "run": "2026-10-12_plain_text_k7_filter-on_hybrid",
+        "returned_chars": 1666.8,
+        "hit_rate": {
+          "numerator": 19,
+          "denominator": 24,
+          "value": 0.7916666666666666
+        },
+        "complete_coverage": {
+          "numerator": 11,
+          "denominator": 24,
+          "value": 0.4583333333333333
+        },
+        "group_recall": {
+          "numerator": 14.0,
+          "denominator": 24,
+          "value": 0.5833333333333334
+        },
+        "mrr": {
+          "numerator": 19.583333333333336,
+          "denominator": 24,
+          "value": 0.8159722222222223
+        },
+        "chunk_precision": {
+          "numerator": 7.714285714285714,
+          "denominator": 24,
+          "value": 0.32142857142857145
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q002",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-24-12-Q005",
+          "PO-24-12-Q006",
+          "PO-25-19-Q002",
+          "PO-25-19-Q004"
+        ],
+        "k": 7
+      },
+      {
+        "run": "2026-10-12_plain_text_k8_filter-on_hybrid",
+        "returned_chars": 1907.0,
+        "hit_rate": {
+          "numerator": 19,
+          "denominator": 24,
+          "value": 0.7916666666666666
+        },
+        "complete_coverage": {
+          "numerator": 11,
+          "denominator": 24,
+          "value": 0.4583333333333333
+        },
+        "group_recall": {
+          "numerator": 14.0,
+          "denominator": 24,
+          "value": 0.5833333333333334
+        },
+        "mrr": {
+          "numerator": 19.708333333333336,
+          "denominator": 24,
+          "value": 0.8211805555555557
+        },
+        "chunk_precision": {
+          "numerator": 7.125,
+          "denominator": 24,
+          "value": 0.296875
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q002",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-24-12-Q005",
+          "PO-24-12-Q006",
+          "PO-25-19-Q002",
+          "PO-25-19-Q004"
+        ],
+        "k": 8
+      },
+      {
+        "run": "2026-10-12_plain_text_k9_filter-on_hybrid",
+        "returned_chars": 2131.4,
+        "hit_rate": {
+          "numerator": 19,
+          "denominator": 24,
+          "value": 0.7916666666666666
+        },
+        "complete_coverage": {
+          "numerator": 12,
+          "denominator": 24,
+          "value": 0.5
+        },
+        "group_recall": {
+          "numerator": 14.833333333333332,
+          "denominator": 24,
+          "value": 0.6180555555555555
+        },
+        "mrr": {
+          "numerator": 19.708333333333336,
+          "denominator": 24,
+          "value": 0.8211805555555557
+        },
+        "chunk_precision": {
+          "numerator": 6.666666666666665,
+          "denominator": 24,
+          "value": 0.27777777777777773
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q002",
+          "CONTRACT-105-Q008",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-24-12-Q005",
+          "PO-24-12-Q006",
+          "PO-25-19-Q002",
+          "PO-25-19-Q004"
+        ],
+        "k": 9
+      },
+      {
+        "run": "2026-10-12_plain_text_k10_filter-on_hybrid",
+        "returned_chars": 2335.6,
+        "hit_rate": {
+          "numerator": 19,
+          "denominator": 24,
+          "value": 0.7916666666666666
+        },
+        "complete_coverage": {
+          "numerator": 12,
+          "denominator": 24,
+          "value": 0.5
+        },
+        "group_recall": {
+          "numerator": 14.833333333333332,
+          "denominator": 24,
+          "value": 0.6180555555555555
+        },
+        "mrr": {
+          "numerator": 19.708333333333336,
+          "denominator": 24,
+          "value": 0.8211805555555557
+        },
+        "chunk_precision": {
+          "numerator": 6.033333333333334,
+          "denominator": 24,
+          "value": 0.25138888888888894
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q002",
+          "CONTRACT-105-Q008",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-24-12-Q005",
+          "PO-24-12-Q006",
+          "PO-25-19-Q002",
+          "PO-25-19-Q004"
+        ],
+        "k": 10
+      }
+    ],
+    "semantic": [
+      {
+        "run": "2026-10-12_plain_text_k1_filter-on",
+        "returned_chars": 244.2,
+        "hit_rate": {
+          "numerator": 7,
+          "denominator": 24,
+          "value": 0.2916666666666667
+        },
+        "complete_coverage": {
+          "numerator": 4,
+          "denominator": 24,
+          "value": 0.16666666666666666
+        },
+        "group_recall": {
+          "numerator": 5.5,
+          "denominator": 24,
+          "value": 0.22916666666666666
+        },
+        "mrr": {
+          "numerator": 16.0,
+          "denominator": 24,
+          "value": 0.6666666666666666
+        },
+        "chunk_precision": {
+          "numerator": 16.0,
+          "denominator": 24,
+          "value": 0.6666666666666666
+        },
+        "complete_cases": [
+          "E001-602-Q002",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-25-19-Q004"
+        ],
+        "k": 1
+      },
+      {
+        "run": "2026-10-12_plain_text_k2_filter-on",
+        "returned_chars": 483.3,
+        "hit_rate": {
+          "numerator": 12,
+          "denominator": 24,
+          "value": 0.5
+        },
+        "complete_coverage": {
+          "numerator": 5,
+          "denominator": 24,
+          "value": 0.20833333333333334
+        },
+        "group_recall": {
+          "numerator": 8.233333333333334,
+          "denominator": 24,
+          "value": 0.3430555555555556
+        },
+        "mrr": {
+          "numerator": 18.0,
+          "denominator": 24,
+          "value": 0.75
+        },
+        "chunk_precision": {
+          "numerator": 11.0,
+          "denominator": 24,
+          "value": 0.4583333333333333
+        },
+        "complete_cases": [
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-25-19-Q004"
+        ],
+        "k": 2
+      },
+      {
+        "run": "2026-10-12_plain_text_k3_filter-on",
+        "returned_chars": 711.8,
+        "hit_rate": {
+          "numerator": 14,
+          "denominator": 24,
+          "value": 0.5833333333333334
+        },
+        "complete_coverage": {
+          "numerator": 7,
+          "denominator": 24,
+          "value": 0.2916666666666667
+        },
+        "group_recall": {
+          "numerator": 9.399999999999999,
+          "denominator": 24,
+          "value": 0.3916666666666666
+        },
+        "mrr": {
+          "numerator": 18.666666666666664,
+          "denominator": 24,
+          "value": 0.7777777777777777
+        },
+        "chunk_precision": {
+          "numerator": 11.0,
+          "denominator": 24,
+          "value": 0.4583333333333333
+        },
+        "complete_cases": [
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-25-19-Q004"
+        ],
+        "k": 3
+      },
+      {
+        "run": "2026-10-12_plain_text_k4_filter-on",
+        "returned_chars": 945.8,
+        "hit_rate": {
+          "numerator": 15,
+          "denominator": 24,
+          "value": 0.625
+        },
+        "complete_coverage": {
+          "numerator": 8,
+          "denominator": 24,
+          "value": 0.3333333333333333
+        },
+        "group_recall": {
+          "numerator": 10.566666666666666,
+          "denominator": 24,
+          "value": 0.44027777777777777
+        },
+        "mrr": {
+          "numerator": 19.166666666666664,
+          "denominator": 24,
+          "value": 0.798611111111111
+        },
+        "chunk_precision": {
+          "numerator": 9.25,
+          "denominator": 24,
+          "value": 0.3854166666666667
+        },
+        "complete_cases": [
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-24-12-Q006",
+          "PO-25-19-Q004"
+        ],
+        "k": 4
+      },
+      {
+        "run": "2026-10-12_plain_text_k5_filter-on",
+        "returned_chars": 1184.2,
+        "hit_rate": {
+          "numerator": 16,
+          "denominator": 24,
+          "value": 0.6666666666666666
+        },
+        "complete_coverage": {
+          "numerator": 10,
+          "denominator": 24,
+          "value": 0.4166666666666667
+        },
+        "group_recall": {
+          "numerator": 12.166666666666666,
+          "denominator": 24,
+          "value": 0.5069444444444444
+        },
+        "mrr": {
+          "numerator": 19.166666666666664,
+          "denominator": 24,
+          "value": 0.798611111111111
+        },
+        "chunk_precision": {
+          "numerator": 8.799999999999999,
+          "denominator": 24,
+          "value": 0.36666666666666664
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q002",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-24-12-Q005",
+          "PO-24-12-Q006",
+          "PO-25-19-Q004"
+        ],
+        "k": 5
+      },
+      {
+        "run": "2026-10-12_plain_text_k6_filter-on",
+        "returned_chars": 1409.6,
+        "hit_rate": {
+          "numerator": 16,
+          "denominator": 24,
+          "value": 0.6666666666666666
+        },
+        "complete_coverage": {
+          "numerator": 10,
+          "denominator": 24,
+          "value": 0.4166666666666667
+        },
+        "group_recall": {
+          "numerator": 12.166666666666666,
+          "denominator": 24,
+          "value": 0.5069444444444444
+        },
+        "mrr": {
+          "numerator": 19.166666666666664,
+          "denominator": 24,
+          "value": 0.798611111111111
+        },
+        "chunk_precision": {
+          "numerator": 7.499999999999999,
+          "denominator": 24,
+          "value": 0.31249999999999994
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q002",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-24-12-Q005",
+          "PO-24-12-Q006",
+          "PO-25-19-Q004"
+        ],
+        "k": 6
+      },
+      {
+        "run": "2026-10-12_plain_text_k7_filter-on",
+        "returned_chars": 1662.1,
+        "hit_rate": {
+          "numerator": 16,
+          "denominator": 24,
+          "value": 0.6666666666666666
+        },
+        "complete_coverage": {
+          "numerator": 10,
+          "denominator": 24,
+          "value": 0.4166666666666667
+        },
+        "group_recall": {
+          "numerator": 12.166666666666666,
+          "denominator": 24,
+          "value": 0.5069444444444444
+        },
+        "mrr": {
+          "numerator": 19.166666666666664,
+          "denominator": 24,
+          "value": 0.798611111111111
+        },
+        "chunk_precision": {
+          "numerator": 7.0,
+          "denominator": 24,
+          "value": 0.2916666666666667
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q002",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-24-12-Q005",
+          "PO-24-12-Q006",
+          "PO-25-19-Q004"
+        ],
+        "k": 7
+      },
+      {
+        "run": "2026-10-12_plain_text_k8_filter-on",
+        "returned_chars": 1897.5,
+        "hit_rate": {
+          "numerator": 19,
+          "denominator": 24,
+          "value": 0.7916666666666666
+        },
+        "complete_coverage": {
+          "numerator": 11,
+          "denominator": 24,
+          "value": 0.4583333333333333
+        },
+        "group_recall": {
+          "numerator": 14.166666666666666,
+          "denominator": 24,
+          "value": 0.5902777777777778
+        },
+        "mrr": {
+          "numerator": 19.166666666666664,
+          "denominator": 24,
+          "value": 0.798611111111111
+        },
+        "chunk_precision": {
+          "numerator": 6.625,
+          "denominator": 24,
+          "value": 0.2760416666666667
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q002",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-24-12-Q005",
+          "PO-24-12-Q006",
+          "PO-25-19-Q002",
+          "PO-25-19-Q004"
+        ],
+        "k": 8
+      },
+      {
+        "run": "2026-10-12_plain_text_k9_filter-on",
+        "returned_chars": 2114.6,
+        "hit_rate": {
+          "numerator": 20,
+          "denominator": 24,
+          "value": 0.8333333333333334
+        },
+        "complete_coverage": {
+          "numerator": 11,
+          "denominator": 24,
+          "value": 0.4583333333333333
+        },
+        "group_recall": {
+          "numerator": 14.833333333333334,
+          "denominator": 24,
+          "value": 0.6180555555555556
+        },
+        "mrr": {
+          "numerator": 19.166666666666664,
+          "denominator": 24,
+          "value": 0.798611111111111
+        },
+        "chunk_precision": {
+          "numerator": 6.333333333333332,
+          "denominator": 24,
+          "value": 0.26388888888888884
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q002",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-24-12-Q005",
+          "PO-24-12-Q006",
+          "PO-25-19-Q002",
+          "PO-25-19-Q004"
+        ],
+        "k": 9
+      },
+      {
+        "run": "2026-10-12_plain_text_k10_filter-on",
+        "returned_chars": 2318.3,
+        "hit_rate": {
+          "numerator": 20,
+          "denominator": 24,
+          "value": 0.8333333333333334
+        },
+        "complete_coverage": {
+          "numerator": 11,
+          "denominator": 24,
+          "value": 0.4583333333333333
+        },
+        "group_recall": {
+          "numerator": 14.833333333333334,
+          "denominator": 24,
+          "value": 0.6180555555555556
+        },
+        "mrr": {
+          "numerator": 19.166666666666664,
+          "denominator": 24,
+          "value": 0.798611111111111
+        },
+        "chunk_precision": {
+          "numerator": 5.733333333333334,
+          "denominator": 24,
+          "value": 0.23888888888888893
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q002",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-24-12-Q005",
+          "PO-24-12-Q006",
+          "PO-25-19-Q002",
+          "PO-25-19-Q004"
+        ],
+        "k": 10
+      }
+    ]
+  },
+  "structured": {
+    "hybrid": [
+      {
+        "run": "2026-10-12_structured_k1_filter-on_hybrid",
+        "returned_chars": 1281.5,
+        "hit_rate": {
+          "numerator": 15,
+          "denominator": 24,
+          "value": 0.625
+        },
+        "complete_coverage": {
+          "numerator": 8,
+          "denominator": 24,
+          "value": 0.3333333333333333
+        },
+        "group_recall": {
+          "numerator": 11.666666666666666,
+          "denominator": 24,
+          "value": 0.4861111111111111
+        },
+        "mrr": {
+          "numerator": 19.0,
+          "denominator": 24,
+          "value": 0.7916666666666666
+        },
+        "chunk_precision": {
+          "numerator": 19.0,
+          "denominator": 24,
+          "value": 0.7916666666666666
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q002",
+          "CONTRACT-105-Q005",
+          "CONTRACT-105-Q006",
+          "E001-602-Q002",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q005",
+          "PO-25-19-Q004"
+        ],
+        "k": 1
+      },
+      {
+        "run": "2026-10-12_structured_k2_filter-on_hybrid",
+        "returned_chars": 2079.0,
+        "hit_rate": {
+          "numerator": 20,
+          "denominator": 24,
+          "value": 0.8333333333333334
+        },
+        "complete_coverage": {
+          "numerator": 15,
+          "denominator": 24,
+          "value": 0.625
+        },
+        "group_recall": {
+          "numerator": 17.666666666666664,
+          "denominator": 24,
+          "value": 0.736111111111111
+        },
+        "mrr": {
+          "numerator": 20.5,
+          "denominator": 24,
+          "value": 0.8541666666666666
+        },
+        "chunk_precision": {
+          "numerator": 15.0,
+          "denominator": 24,
+          "value": 0.625
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q002",
+          "CONTRACT-105-Q005",
+          "CONTRACT-105-Q006",
+          "CONTRACT-105-Q008",
+          "CONTRACT-105-Q009",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q005",
+          "PO-24-12-Q006",
+          "PO-25-15-Q001",
+          "PO-25-15-Q002",
+          "PO-25-19-Q004"
+        ],
+        "k": 2
+      },
+      {
+        "run": "2026-10-12_structured_k3_filter-on_hybrid",
+        "returned_chars": 3156.8,
+        "hit_rate": {
+          "numerator": 21,
+          "denominator": 24,
+          "value": 0.875
+        },
+        "complete_coverage": {
+          "numerator": 19,
+          "denominator": 24,
+          "value": 0.7916666666666666
+        },
+        "group_recall": {
+          "numerator": 19.833333333333336,
+          "denominator": 24,
+          "value": 0.826388888888889
+        },
+        "mrr": {
+          "numerator": 20.833333333333332,
+          "denominator": 24,
+          "value": 0.8680555555555555
+        },
+        "chunk_precision": {
+          "numerator": 11.666666666666664,
+          "denominator": 24,
+          "value": 0.486111111111111
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q001",
+          "CONTRACT-105-Q002",
+          "CONTRACT-105-Q005",
+          "CONTRACT-105-Q006",
+          "CONTRACT-105-Q007",
+          "CONTRACT-105-Q008",
+          "CONTRACT-105-Q009",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-24-12-Q005",
+          "PO-24-12-Q006",
+          "PO-25-15-Q001",
+          "PO-25-15-Q002",
+          "PO-25-19-Q002",
+          "PO-25-19-Q004"
+        ],
+        "k": 3
+      },
+      {
+        "run": "2026-10-12_structured_k4_filter-on_hybrid",
+        "returned_chars": 3907.2,
+        "hit_rate": {
+          "numerator": 22,
+          "denominator": 24,
+          "value": 0.9166666666666666
+        },
+        "complete_coverage": {
+          "numerator": 19,
+          "denominator": 24,
+          "value": 0.7916666666666666
+        },
+        "group_recall": {
+          "numerator": 20.333333333333336,
+          "denominator": 24,
+          "value": 0.8472222222222223
+        },
+        "mrr": {
+          "numerator": 21.083333333333332,
+          "denominator": 24,
+          "value": 0.8784722222222222
+        },
+        "chunk_precision": {
+          "numerator": 9.916666666666666,
+          "denominator": 24,
+          "value": 0.4131944444444444
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q001",
+          "CONTRACT-105-Q002",
+          "CONTRACT-105-Q005",
+          "CONTRACT-105-Q006",
+          "CONTRACT-105-Q007",
+          "CONTRACT-105-Q008",
+          "CONTRACT-105-Q009",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-24-12-Q005",
+          "PO-24-12-Q006",
+          "PO-25-15-Q001",
+          "PO-25-15-Q002",
+          "PO-25-19-Q002",
+          "PO-25-19-Q004"
+        ],
+        "k": 4
+      },
+      {
+        "run": "2026-10-12_structured_k5_filter-on_hybrid",
+        "returned_chars": 4744.8,
+        "hit_rate": {
+          "numerator": 22,
+          "denominator": 24,
+          "value": 0.9166666666666666
+        },
+        "complete_coverage": {
+          "numerator": 19,
+          "denominator": 24,
+          "value": 0.7916666666666666
+        },
+        "group_recall": {
+          "numerator": 20.333333333333336,
+          "denominator": 24,
+          "value": 0.8472222222222223
+        },
+        "mrr": {
+          "numerator": 21.083333333333332,
+          "denominator": 24,
+          "value": 0.8784722222222222
+        },
+        "chunk_precision": {
+          "numerator": 8.666666666666668,
+          "denominator": 24,
+          "value": 0.36111111111111116
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q001",
+          "CONTRACT-105-Q002",
+          "CONTRACT-105-Q005",
+          "CONTRACT-105-Q006",
+          "CONTRACT-105-Q007",
+          "CONTRACT-105-Q008",
+          "CONTRACT-105-Q009",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-24-12-Q005",
+          "PO-24-12-Q006",
+          "PO-25-15-Q001",
+          "PO-25-15-Q002",
+          "PO-25-19-Q002",
+          "PO-25-19-Q004"
+        ],
+        "k": 5
+      },
+      {
+        "run": "2026-10-12_structured_k6_filter-on_hybrid",
+        "returned_chars": 5491.8,
+        "hit_rate": {
+          "numerator": 22,
+          "denominator": 24,
+          "value": 0.9166666666666666
+        },
+        "complete_coverage": {
+          "numerator": 19,
+          "denominator": 24,
+          "value": 0.7916666666666666
+        },
+        "group_recall": {
+          "numerator": 20.333333333333336,
+          "denominator": 24,
+          "value": 0.8472222222222223
+        },
+        "mrr": {
+          "numerator": 21.083333333333332,
+          "denominator": 24,
+          "value": 0.8784722222222222
+        },
+        "chunk_precision": {
+          "numerator": 7.833333333333333,
+          "denominator": 24,
+          "value": 0.3263888888888889
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q001",
+          "CONTRACT-105-Q002",
+          "CONTRACT-105-Q005",
+          "CONTRACT-105-Q006",
+          "CONTRACT-105-Q007",
+          "CONTRACT-105-Q008",
+          "CONTRACT-105-Q009",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-24-12-Q005",
+          "PO-24-12-Q006",
+          "PO-25-15-Q001",
+          "PO-25-15-Q002",
+          "PO-25-19-Q002",
+          "PO-25-19-Q004"
+        ],
+        "k": 6
+      },
+      {
+        "run": "2026-10-12_structured_k7_filter-on_hybrid",
+        "returned_chars": 6206.0,
+        "hit_rate": {
+          "numerator": 23,
+          "denominator": 24,
+          "value": 0.9583333333333334
+        },
+        "complete_coverage": {
+          "numerator": 19,
+          "denominator": 24,
+          "value": 0.7916666666666666
+        },
+        "group_recall": {
+          "numerator": 20.500000000000004,
+          "denominator": 24,
+          "value": 0.8541666666666669
+        },
+        "mrr": {
+          "numerator": 21.083333333333332,
+          "denominator": 24,
+          "value": 0.8784722222222222
+        },
+        "chunk_precision": {
+          "numerator": 7.095238095238097,
+          "denominator": 24,
+          "value": 0.2956349206349207
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q001",
+          "CONTRACT-105-Q002",
+          "CONTRACT-105-Q005",
+          "CONTRACT-105-Q006",
+          "CONTRACT-105-Q007",
+          "CONTRACT-105-Q008",
+          "CONTRACT-105-Q009",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-24-12-Q005",
+          "PO-24-12-Q006",
+          "PO-25-15-Q001",
+          "PO-25-15-Q002",
+          "PO-25-19-Q002",
+          "PO-25-19-Q004"
+        ],
+        "k": 7
+      },
+      {
+        "run": "2026-10-12_structured_k8_filter-on_hybrid",
+        "returned_chars": 7095.5,
+        "hit_rate": {
+          "numerator": 23,
+          "denominator": 24,
+          "value": 0.9583333333333334
+        },
+        "complete_coverage": {
+          "numerator": 19,
+          "denominator": 24,
+          "value": 0.7916666666666666
+        },
+        "group_recall": {
+          "numerator": 20.500000000000004,
+          "denominator": 24,
+          "value": 0.8541666666666669
+        },
+        "mrr": {
+          "numerator": 21.083333333333332,
+          "denominator": 24,
+          "value": 0.8784722222222222
+        },
+        "chunk_precision": {
+          "numerator": 6.416666666666667,
+          "denominator": 24,
+          "value": 0.2673611111111111
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q001",
+          "CONTRACT-105-Q002",
+          "CONTRACT-105-Q005",
+          "CONTRACT-105-Q006",
+          "CONTRACT-105-Q007",
+          "CONTRACT-105-Q008",
+          "CONTRACT-105-Q009",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-24-12-Q005",
+          "PO-24-12-Q006",
+          "PO-25-15-Q001",
+          "PO-25-15-Q002",
+          "PO-25-19-Q002",
+          "PO-25-19-Q004"
+        ],
+        "k": 8
+      },
+      {
+        "run": "2026-10-12_structured_k9_filter-on_hybrid",
+        "returned_chars": 7619.7,
+        "hit_rate": {
+          "numerator": 23,
+          "denominator": 24,
+          "value": 0.9583333333333334
+        },
+        "complete_coverage": {
+          "numerator": 19,
+          "denominator": 24,
+          "value": 0.7916666666666666
+        },
+        "group_recall": {
+          "numerator": 20.833333333333332,
+          "denominator": 24,
+          "value": 0.8680555555555555
+        },
+        "mrr": {
+          "numerator": 21.083333333333332,
+          "denominator": 24,
+          "value": 0.8784722222222222
+        },
+        "chunk_precision": {
+          "numerator": 5.888888888888888,
+          "denominator": 24,
+          "value": 0.24537037037037035
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q001",
+          "CONTRACT-105-Q002",
+          "CONTRACT-105-Q005",
+          "CONTRACT-105-Q006",
+          "CONTRACT-105-Q007",
+          "CONTRACT-105-Q008",
+          "CONTRACT-105-Q009",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-24-12-Q005",
+          "PO-24-12-Q006",
+          "PO-25-15-Q001",
+          "PO-25-15-Q002",
+          "PO-25-19-Q002",
+          "PO-25-19-Q004"
+        ],
+        "k": 9
+      },
+      {
+        "run": "2026-10-12_structured_k10_filter-on_hybrid",
+        "returned_chars": 8175.8,
+        "hit_rate": {
+          "numerator": 24,
+          "denominator": 24,
+          "value": 1.0
+        },
+        "complete_coverage": {
+          "numerator": 19,
+          "denominator": 24,
+          "value": 0.7916666666666666
+        },
+        "group_recall": {
+          "numerator": 21.166666666666664,
+          "denominator": 24,
+          "value": 0.8819444444444443
+        },
+        "mrr": {
+          "numerator": 21.083333333333332,
+          "denominator": 24,
+          "value": 0.8784722222222222
+        },
+        "chunk_precision": {
+          "numerator": 5.566666666666668,
+          "denominator": 24,
+          "value": 0.2319444444444445
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q001",
+          "CONTRACT-105-Q002",
+          "CONTRACT-105-Q005",
+          "CONTRACT-105-Q006",
+          "CONTRACT-105-Q007",
+          "CONTRACT-105-Q008",
+          "CONTRACT-105-Q009",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-24-12-Q005",
+          "PO-24-12-Q006",
+          "PO-25-15-Q001",
+          "PO-25-15-Q002",
+          "PO-25-19-Q002",
+          "PO-25-19-Q004"
+        ],
+        "k": 10
+      }
+    ],
+    "semantic": [
+      {
+        "run": "2026-10-12_structured_k1_filter-on",
+        "returned_chars": 1325.8,
+        "hit_rate": {
+          "numerator": 13,
+          "denominator": 24,
+          "value": 0.5416666666666666
+        },
+        "complete_coverage": {
+          "numerator": 7,
+          "denominator": 24,
+          "value": 0.2916666666666667
+        },
+        "group_recall": {
+          "numerator": 10.166666666666668,
+          "denominator": 24,
+          "value": 0.42361111111111116
+        },
+        "mrr": {
+          "numerator": 17.0,
+          "denominator": 24,
+          "value": 0.7083333333333334
+        },
+        "chunk_precision": {
+          "numerator": 17.0,
+          "denominator": 24,
+          "value": 0.7083333333333334
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q005",
+          "CONTRACT-105-Q006",
+          "E001-602-Q002",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q005",
+          "PO-25-19-Q004"
+        ],
+        "k": 1
+      },
+      {
+        "run": "2026-10-12_structured_k2_filter-on",
+        "returned_chars": 2172.4,
+        "hit_rate": {
+          "numerator": 17,
+          "denominator": 24,
+          "value": 0.7083333333333334
+        },
+        "complete_coverage": {
+          "numerator": 14,
+          "denominator": 24,
+          "value": 0.5833333333333334
+        },
+        "group_recall": {
+          "numerator": 15.666666666666666,
+          "denominator": 24,
+          "value": 0.6527777777777778
+        },
+        "mrr": {
+          "numerator": 19.0,
+          "denominator": 24,
+          "value": 0.7916666666666666
+        },
+        "chunk_precision": {
+          "numerator": 13.0,
+          "denominator": 24,
+          "value": 0.5416666666666666
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q005",
+          "CONTRACT-105-Q006",
+          "CONTRACT-105-Q008",
+          "CONTRACT-105-Q009",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q005",
+          "PO-24-12-Q006",
+          "PO-25-15-Q001",
+          "PO-25-15-Q002",
+          "PO-25-19-Q004"
+        ],
+        "k": 2
+      },
+      {
+        "run": "2026-10-12_structured_k3_filter-on",
+        "returned_chars": 3209.5,
+        "hit_rate": {
+          "numerator": 20,
+          "denominator": 24,
+          "value": 0.8333333333333334
+        },
+        "complete_coverage": {
+          "numerator": 18,
+          "denominator": 24,
+          "value": 0.75
+        },
+        "group_recall": {
+          "numerator": 18.833333333333336,
+          "denominator": 24,
+          "value": 0.7847222222222223
+        },
+        "mrr": {
+          "numerator": 19.666666666666664,
+          "denominator": 24,
+          "value": 0.8194444444444443
+        },
+        "chunk_precision": {
+          "numerator": 11.33333333333333,
+          "denominator": 24,
+          "value": 0.4722222222222221
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q001",
+          "CONTRACT-105-Q002",
+          "CONTRACT-105-Q005",
+          "CONTRACT-105-Q006",
+          "CONTRACT-105-Q007",
+          "CONTRACT-105-Q008",
+          "CONTRACT-105-Q009",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-24-12-Q005",
+          "PO-24-12-Q006",
+          "PO-25-15-Q001",
+          "PO-25-15-Q002",
+          "PO-25-19-Q004"
+        ],
+        "k": 3
+      },
+      {
+        "run": "2026-10-12_structured_k4_filter-on",
+        "returned_chars": 4062.6,
+        "hit_rate": {
+          "numerator": 21,
+          "denominator": 24,
+          "value": 0.875
+        },
+        "complete_coverage": {
+          "numerator": 18,
+          "denominator": 24,
+          "value": 0.75
+        },
+        "group_recall": {
+          "numerator": 19.333333333333336,
+          "denominator": 24,
+          "value": 0.8055555555555557
+        },
+        "mrr": {
+          "numerator": 19.916666666666664,
+          "denominator": 24,
+          "value": 0.829861111111111
+        },
+        "chunk_precision": {
+          "numerator": 9.416666666666666,
+          "denominator": 24,
+          "value": 0.3923611111111111
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q001",
+          "CONTRACT-105-Q002",
+          "CONTRACT-105-Q005",
+          "CONTRACT-105-Q006",
+          "CONTRACT-105-Q007",
+          "CONTRACT-105-Q008",
+          "CONTRACT-105-Q009",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-24-12-Q005",
+          "PO-24-12-Q006",
+          "PO-25-15-Q001",
+          "PO-25-15-Q002",
+          "PO-25-19-Q004"
+        ],
+        "k": 4
+      },
+      {
+        "run": "2026-10-12_structured_k5_filter-on",
+        "returned_chars": 4958.8,
+        "hit_rate": {
+          "numerator": 22,
+          "denominator": 24,
+          "value": 0.9166666666666666
+        },
+        "complete_coverage": {
+          "numerator": 18,
+          "denominator": 24,
+          "value": 0.75
+        },
+        "group_recall": {
+          "numerator": 19.833333333333336,
+          "denominator": 24,
+          "value": 0.826388888888889
+        },
+        "mrr": {
+          "numerator": 19.916666666666664,
+          "denominator": 24,
+          "value": 0.829861111111111
+        },
+        "chunk_precision": {
+          "numerator": 8.466666666666669,
+          "denominator": 24,
+          "value": 0.35277777777777786
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q001",
+          "CONTRACT-105-Q002",
+          "CONTRACT-105-Q005",
+          "CONTRACT-105-Q006",
+          "CONTRACT-105-Q007",
+          "CONTRACT-105-Q008",
+          "CONTRACT-105-Q009",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-24-12-Q005",
+          "PO-24-12-Q006",
+          "PO-25-15-Q001",
+          "PO-25-15-Q002",
+          "PO-25-19-Q004"
+        ],
+        "k": 5
+      },
+      {
+        "run": "2026-10-12_structured_k6_filter-on",
+        "returned_chars": 5607.7,
+        "hit_rate": {
+          "numerator": 22,
+          "denominator": 24,
+          "value": 0.9166666666666666
+        },
+        "complete_coverage": {
+          "numerator": 18,
+          "denominator": 24,
+          "value": 0.75
+        },
+        "group_recall": {
+          "numerator": 19.833333333333336,
+          "denominator": 24,
+          "value": 0.826388888888889
+        },
+        "mrr": {
+          "numerator": 19.916666666666664,
+          "denominator": 24,
+          "value": 0.829861111111111
+        },
+        "chunk_precision": {
+          "numerator": 7.333333333333335,
+          "denominator": 24,
+          "value": 0.30555555555555564
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q001",
+          "CONTRACT-105-Q002",
+          "CONTRACT-105-Q005",
+          "CONTRACT-105-Q006",
+          "CONTRACT-105-Q007",
+          "CONTRACT-105-Q008",
+          "CONTRACT-105-Q009",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-24-12-Q005",
+          "PO-24-12-Q006",
+          "PO-25-15-Q001",
+          "PO-25-15-Q002",
+          "PO-25-19-Q004"
+        ],
+        "k": 6
+      },
+      {
+        "run": "2026-10-12_structured_k7_filter-on",
+        "returned_chars": 6293.9,
+        "hit_rate": {
+          "numerator": 23,
+          "denominator": 24,
+          "value": 0.9583333333333334
+        },
+        "complete_coverage": {
+          "numerator": 19,
+          "denominator": 24,
+          "value": 0.7916666666666666
+        },
+        "group_recall": {
+          "numerator": 20.500000000000004,
+          "denominator": 24,
+          "value": 0.8541666666666669
+        },
+        "mrr": {
+          "numerator": 19.916666666666664,
+          "denominator": 24,
+          "value": 0.829861111111111
+        },
+        "chunk_precision": {
+          "numerator": 6.666666666666667,
+          "denominator": 24,
+          "value": 0.2777777777777778
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q001",
+          "CONTRACT-105-Q002",
+          "CONTRACT-105-Q005",
+          "CONTRACT-105-Q006",
+          "CONTRACT-105-Q007",
+          "CONTRACT-105-Q008",
+          "CONTRACT-105-Q009",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-24-12-Q005",
+          "PO-24-12-Q006",
+          "PO-25-15-Q001",
+          "PO-25-15-Q002",
+          "PO-25-19-Q002",
+          "PO-25-19-Q004"
+        ],
+        "k": 7
+      },
+      {
+        "run": "2026-10-12_structured_k8_filter-on",
+        "returned_chars": 7132.1,
+        "hit_rate": {
+          "numerator": 23,
+          "denominator": 24,
+          "value": 0.9583333333333334
+        },
+        "complete_coverage": {
+          "numerator": 19,
+          "denominator": 24,
+          "value": 0.7916666666666666
+        },
+        "group_recall": {
+          "numerator": 20.500000000000004,
+          "denominator": 24,
+          "value": 0.8541666666666669
+        },
+        "mrr": {
+          "numerator": 19.916666666666664,
+          "denominator": 24,
+          "value": 0.829861111111111
+        },
+        "chunk_precision": {
+          "numerator": 6.041666666666667,
+          "denominator": 24,
+          "value": 0.2517361111111111
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q001",
+          "CONTRACT-105-Q002",
+          "CONTRACT-105-Q005",
+          "CONTRACT-105-Q006",
+          "CONTRACT-105-Q007",
+          "CONTRACT-105-Q008",
+          "CONTRACT-105-Q009",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-24-12-Q005",
+          "PO-24-12-Q006",
+          "PO-25-15-Q001",
+          "PO-25-15-Q002",
+          "PO-25-19-Q002",
+          "PO-25-19-Q004"
+        ],
+        "k": 8
+      },
+      {
+        "run": "2026-10-12_structured_k9_filter-on",
+        "returned_chars": 7663.6,
+        "hit_rate": {
+          "numerator": 24,
+          "denominator": 24,
+          "value": 1.0
+        },
+        "complete_coverage": {
+          "numerator": 19,
+          "denominator": 24,
+          "value": 0.7916666666666666
+        },
+        "group_recall": {
+          "numerator": 21.0,
+          "denominator": 24,
+          "value": 0.875
+        },
+        "mrr": {
+          "numerator": 19.916666666666664,
+          "denominator": 24,
+          "value": 0.829861111111111
+        },
+        "chunk_precision": {
+          "numerator": 5.777777777777778,
+          "denominator": 24,
+          "value": 0.24074074074074073
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q001",
+          "CONTRACT-105-Q002",
+          "CONTRACT-105-Q005",
+          "CONTRACT-105-Q006",
+          "CONTRACT-105-Q007",
+          "CONTRACT-105-Q008",
+          "CONTRACT-105-Q009",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-24-12-Q005",
+          "PO-24-12-Q006",
+          "PO-25-15-Q001",
+          "PO-25-15-Q002",
+          "PO-25-19-Q002",
+          "PO-25-19-Q004"
+        ],
+        "k": 9
+      },
+      {
+        "run": "2026-10-12_structured_k10_filter-on",
+        "returned_chars": 8243.0,
+        "hit_rate": {
+          "numerator": 24,
+          "denominator": 24,
+          "value": 1.0
+        },
+        "complete_coverage": {
+          "numerator": 19,
+          "denominator": 24,
+          "value": 0.7916666666666666
+        },
+        "group_recall": {
+          "numerator": 21.166666666666664,
+          "denominator": 24,
+          "value": 0.8819444444444443
+        },
+        "mrr": {
+          "numerator": 19.916666666666664,
+          "denominator": 24,
+          "value": 0.829861111111111
+        },
+        "chunk_precision": {
+          "numerator": 5.366666666666669,
+          "denominator": 24,
+          "value": 0.2236111111111112
+        },
+        "complete_cases": [
+          "CONTRACT-105-Q001",
+          "CONTRACT-105-Q002",
+          "CONTRACT-105-Q005",
+          "CONTRACT-105-Q006",
+          "CONTRACT-105-Q007",
+          "CONTRACT-105-Q008",
+          "CONTRACT-105-Q009",
+          "E001-602-Q001",
+          "E001-602-Q002",
+          "PO-24-12-Q001",
+          "PO-24-12-Q002",
+          "PO-24-12-Q003",
+          "PO-24-12-Q004",
+          "PO-24-12-Q005",
+          "PO-24-12-Q006",
+          "PO-25-15-Q001",
+          "PO-25-15-Q002",
+          "PO-25-19-Q002",
+          "PO-25-19-Q004"
+        ],
+        "k": 10
+      }
+    ]
+  }
+}
