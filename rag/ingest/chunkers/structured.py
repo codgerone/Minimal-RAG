@@ -126,12 +126,34 @@ def chunk_parsed_document(
     character_count = 0
     pending_text = ""
     pending_sources: list[ChunkSource] = []
+    pending_has_list = False
+    pending_list_id: str | None = None   # list whose item ended the pending chunk, if any
 
     def flush_text() -> None:
-        nonlocal pending_text, pending_sources
+        nonlocal pending_text, pending_sources, pending_has_list, pending_list_id
         if pending_text:
-            drafts.append(("text", pending_text, tuple(pending_sources), None, 0, 1))
-        pending_text, pending_sources = "", []
+            drafts.append(("list" if pending_has_list else "text", pending_text,
+                           tuple(pending_sources), None, 0, 1))
+        pending_text, pending_sources, pending_has_list, pending_list_id = "", [], False, None
+
+    def add_unit(text: str, sources: list[ChunkSource], *, list_id: str | None = None,
+                 context: str = "", context_sources: tuple[ChunkSource, ...] = ()) -> None:
+        """Append a whole unit to the pending chunk, or start a new chunk with it.
+
+        Text nodes and list items share one stream. Context (list ancestors) is written only
+        when the unit opens a chunk."""
+        nonlocal pending_text, pending_has_list, pending_list_id
+        separator = "\n" if list_id is not None and list_id == pending_list_id else "\n\n"
+        combined = f"{pending_text}{separator}{text}"
+        if pending_text and _fits(counter, combined, max_input_tokens):
+            pending_text = combined
+            pending_sources.extend(sources)
+        else:
+            flush_text()
+            pending_text = f"{context}\n{text}" if context else text
+            pending_sources.extend((*context_sources, *sources))
+        pending_has_list = pending_has_list or list_id is not None
+        pending_list_id = list_id
 
     for node in document.nodes:
         if isinstance(node, TextNode):
@@ -141,14 +163,8 @@ def chunk_parsed_document(
                 warnings.append(ProcessingWarning("empty_text_node", "structured_chunking",
                                                   "规范化后文字节点为空，未生成正文。", (node.source_ref or node.node_id,)))
                 continue
-            whole_source = ChunkSource(node.node_id, node.sources, 0, len(text), False, "none")
             if _fits(counter, text, max_input_tokens):
-                combined = f"{pending_text}\n\n{text}" if pending_text else text
-                if pending_text and not _fits(counter, combined, max_input_tokens):
-                    flush_text()
-                    combined = text
-                pending_text = combined
-                pending_sources.append(whole_source)
+                add_unit(text, [ChunkSource(node.node_id, node.sources, 0, len(text), False, "none")])
                 continue
             flush_text()
             parts = _split_text(text, counter, max_input_tokens,
@@ -163,15 +179,12 @@ def chunk_parsed_document(
                 drafts.append(("text", rendered, tuple(sources), node.node_id if total > 1 else None, index, total))
             continue
 
-        flush_text()
         if isinstance(node, ListNode):
             formatted_items = serialize_list(node)
             character_count += sum(len(normalize_node_text(item.text)) for item in node.items)
-            # Group complete items greedily. Ancestors are repeated for nested items when needed.
+            # Items are whole units in the text stream. Ancestors are repeated when an item opens a chunk.
             item_by_id = {item.item_id: item for item in node.items}
             formatted_by_id = {item_id: text for item_id, text, *_ in formatted_items}
-            chunks_for_list: list[tuple[str, tuple[ChunkSource, ...]]] = []
-            current_text, current_sources = "", []
             for item, (_item_id, formatted, _start, body_end) in zip(node.items, formatted_items):
                 ancestors = []
                 parent = item.parent_item_id
@@ -179,14 +192,12 @@ def chunk_parsed_document(
                     ancestors.append(parent)
                     parent = item_by_id[parent].parent_item_id
                 ancestor_chain = list(reversed(ancestors))
-                ancestor_lines = [formatted_by_id[value] for value in ancestor_chain]
-                context_sources = [
+                context = "\n".join(formatted_by_id[value] for value in ancestor_chain)
+                context_sources = tuple(
                     ChunkSource(parent_id, item_by_id[parent_id].sources, None, None,
                                 True, "list_ancestor") for parent_id in ancestor_chain
-                ]
-                ancestor_text = "\n".join(ancestor_lines)
-                unit = f"{ancestor_text}\n{formatted}" if ancestor_text else formatted
-                if ancestors and not _fits(counter, unit, max_input_tokens):
+                )
+                if ancestors and not _fits(counter, f"{context}\n{formatted}", max_input_tokens):
                     for removed_count in range(1, len(ancestor_chain) + 1):
                         locators = []
                         for ancestor_id in ancestor_chain[:removed_count]:
@@ -196,54 +207,39 @@ def chunk_parsed_document(
                             position = siblings.index(ancestor) + 1
                             locators.append(f"〔上级项：第{position}项〕")
                         kept = ancestor_chain[removed_count:]
-                        context = "\n".join((*locators, *(formatted_by_id[value] for value in kept)))
-                        candidate_unit = f"{context}\n{formatted}"
-                        if _fits(counter, candidate_unit, max_input_tokens):
-                            unit = candidate_unit
-                            context_sources = [
+                        candidate = "\n".join((*locators, *(formatted_by_id[value] for value in kept)))
+                        if _fits(counter, f"{candidate}\n{formatted}", max_input_tokens):
+                            context = candidate
+                            context_sources = (
                                 *(ChunkSource(node.node_id, node.sources, None, None, True,
                                               "fallback_locator") for _ in locators),
                                 *(ChunkSource(parent_id, item_by_id[parent_id].sources, None, None,
                                               True, "list_ancestor") for parent_id in kept),
-                            ]
+                            )
                             break
+                unit = f"{context}\n{formatted}" if context else formatted
                 if _fits(counter, unit, max_input_tokens):
-                    proposed = f"{current_text}\n{formatted}" if current_text else unit
-                    if current_text and not _fits(counter, proposed, max_input_tokens):
-                        chunks_for_list.append((current_text, tuple(current_sources)))
-                        current_text, current_sources = unit, [
-                            *context_sources,
-                            ChunkSource(item.item_id, item.sources, 0, body_end, False, "none"),
-                        ]
-                    else:
-                        current_text = proposed
-                        if not current_sources and ancestors:
-                            current_sources.extend(context_sources)
-                        current_sources.append(ChunkSource(item.item_id, item.sources, 0, body_end, False, "none"))
-                else:
-                    if current_text:
-                        chunks_for_list.append((current_text, tuple(current_sources)))
-                        current_text, current_sources = "", []
-                    locator = f"〔List {node.node_id}，父项路径见完整列表〕\n" if ancestors else ""
-                    body = normalize_node_text(item.text)
-                    prefix = ("  " * item.level) + (item.ordinal or "-") + " "
-                    fixed_context = locator + prefix
-                    parts = _split_text(body, _PrefixedCounter(counter, fixed_context),
-                                        max_input_tokens, overlap_tokens)
-                    for rendered, start, end, overlap_start, overlap_end in parts:
-                        content = fixed_context + rendered
-                        sources = ([ChunkSource(node.node_id, node.sources, None, None, True, "fallback_locator")] if locator else [])
-                        if overlap_start is not None:
-                            sources.append(ChunkSource(item.item_id, item.sources, overlap_start, overlap_end, True, "overlap"))
-                        sources.append(ChunkSource(item.item_id, item.sources, start, end, False, "none"))
-                        chunks_for_list.append((content, tuple(sources)))
-            if current_text:
-                chunks_for_list.append((current_text, tuple(current_sources)))
-            total = len(chunks_for_list)
-            for index, (text, sources) in enumerate(chunks_for_list):
-                drafts.append(("list", text, sources, node.node_id if total > 1 else None, index, total))
+                    add_unit(formatted, [ChunkSource(item.item_id, item.sources, 0, body_end, False, "none")],
+                             list_id=node.node_id, context=context, context_sources=context_sources)
+                    continue
+                flush_text()
+                locator = f"〔List {node.node_id}，父项路径见完整列表〕\n" if ancestors else ""
+                body = normalize_node_text(item.text)
+                prefix = ("  " * item.level) + (item.ordinal or "-") + " "
+                fixed_context = locator + prefix
+                parts = _split_text(body, _PrefixedCounter(counter, fixed_context),
+                                    max_input_tokens, overlap_tokens)
+                total = len(parts)
+                for index, (rendered, start, end, overlap_start, overlap_end) in enumerate(parts):
+                    content = fixed_context + rendered
+                    sources = ([ChunkSource(node.node_id, node.sources, None, None, True, "fallback_locator")] if locator else [])
+                    if overlap_start is not None:
+                        sources.append(ChunkSource(item.item_id, item.sources, overlap_start, overlap_end, True, "overlap"))
+                    sources.append(ChunkSource(item.item_id, item.sources, start, end, False, "none"))
+                    drafts.append(("list", content, tuple(sources), item.item_id if total > 1 else None, index, total))
             continue
 
+        flush_text()
         assert isinstance(node, TableNode)
         character_count += len(node.serialized.text)
         lines = node.serialized.lines
