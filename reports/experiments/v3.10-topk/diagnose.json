@@ -1,0 +1,448 @@
+{
+  "rows": [
+    {
+      "case_id": "CONTRACT-105-Q003",
+      "group_id": "e2",
+      "chunks": [
+        "c0020"
+      ],
+      "scope_chunks": 33,
+      "original": {
+        "question": "采购合同 CONT2025001 规定的总履约期限是多久？具体的交货地点在哪里？是否允许提前交货？",
+        "hybrid": [
+          29
+        ],
+        "vector": [
+          29
+        ],
+        "vector_enriched": [
+          29
+        ]
+      },
+      "sub1": {
+        "question": "采购合同 CONT2025001 的交货地点在哪里？",
+        "hybrid": [
+          15
+        ],
+        "vector": [
+          15
+        ],
+        "vector_enriched": [
+          9
+        ]
+      }
+    },
+    {
+      "case_id": "CONTRACT-105-Q003",
+      "group_id": "e3",
+      "chunks": [
+        "c0019"
+      ],
+      "scope_chunks": 33,
+      "original": {
+        "question": "采购合同 CONT2025001 规定的总履约期限是多久？具体的交货地点在哪里？是否允许提前交货？",
+        "hybrid": [
+          9
+        ],
+        "vector": [
+          9
+        ],
+        "vector_enriched": [
+          4
+        ]
+      },
+      "sub1": {
+        "question": "采购合同 CONT2025001 是否允许提前交货？",
+        "hybrid": [
+          1
+        ],
+        "vector": [
+          1
+        ],
+        "vector_enriched": [
+          1
+        ]
+      }
+    },
+    {
+      "case_id": "CONTRACT-105-Q004",
+      "group_id": "e2",
+      "chunks": [
+        "c0021",
+        "c0022",
+        "c0023",
+        "c0024",
+        "c0025",
+        "c0026"
+      ],
+      "scope_chunks": 33,
+      "original": {
+        "question": "采购合同 CONT2025001 中，关于各 Ítem 的履约保证金（Garantía de fiel cumplimiento）金额及出具机构是如何规定的？",
+        "hybrid": [
+          6,
+          5,
+          19,
+          4,
+          20,
+          1
+        ],
+        "vector": [
+          9,
+          3,
+          33,
+          2,
+          32,
+          1
+        ],
+        "vector_enriched": [
+          4,
+          2,
+          32,
+          3,
+          33,
+          1
+        ]
+      },
+      "sub1": {
+        "question": "采购合同 CONT2025001 中各 Ítem 的履约保证金由哪家机构出具？",
+        "hybrid": [
+          2,
+          21,
+          8,
+          19,
+          9,
+          17
+        ],
+        "vector": [
+          3,
+          14,
+          32,
+          12,
+          33,
+          10
+        ],
+        "vector_enriched": [
+          1,
+          11,
+          32,
+          14,
+          33,
+          13
+        ]
+      }
+    },
+    {
+      "case_id": "CONTRACT-105-Q010",
+      "group_id": "e2",
+      "chunks": [
+        "c0017",
+        "c0032"
+      ],
+      "scope_chunks": 33,
+      "original": {
+        "question": "采购合同 CONT2025001 是否规定分批交货？每个批次的具体交货日期分别是什么？",
+        "hybrid": [
+          4,
+          12
+        ],
+        "vector": [
+          4,
+          12
+        ],
+        "vector_enriched": [
+          5,
+          15
+        ]
+      },
+      "sub1": {
+        "question": "采购合同 CONT2025001 中每个批次的具体交货日期分别是什么？",
+        "hybrid": [
+          3,
+          10
+        ],
+        "vector": [
+          3,
+          10
+        ],
+        "vector_enriched": [
+          3,
+          9
+        ]
+      },
+      "sub2": {
+        "question": "采购合同 CONT2025001 的签署日期是哪一天？",
+        "hybrid": [
+          9,
+          10
+        ],
+        "vector": [
+          9,
+          10
+        ],
+        "vector_enriched": [
+          10,
+          9
+        ]
+      }
+    },
+    {
+      "case_id": "PO-25-19-Q001",
+      "group_id": "e1",
+      "chunks": [
+        "c0009",
+        "c0010",
+        "c0014"
+      ],
+      "scope_chunks": 37,
+      "original": {
+        "question": "订单 ORDER2025003 中，ELCTO公司订购了哪些产品？每款产品的单价和数量是多少？订购的总金额是多少？交货的计划是怎么样的？请详细说明每批次交付的具体日期，及每批次交付的产品和数量明细。",
+        "hybrid": [
+          13,
+          1,
+          2
+        ],
+        "vector": [
+          13,
+          1,
+          3
+        ],
+        "vector_enriched": [
+          7,
+          1,
+          4
+        ]
+      },
+      "sub1": {
+        "question": "订单 ORDER2025003 中，ELCTO公司订购了哪些产品？数量分别是多少？",
+        "hybrid": [
+          7,
+          1,
+          2
+        ],
+        "vector": [
+          7,
+          1,
+          2
+        ],
+        "vector_enriched": [
+          6,
+          1,
+          3
+        ]
+      }
+    },
+    {
+      "case_id": "PO-25-19-Q001",
+      "group_id": "e2",
+      "chunks": [
+        "c0001"
+      ],
+      "scope_chunks": 37,
+      "original": {
+        "question": "订单 ORDER2025003 中，ELCTO公司订购了哪些产品？每款产品的单价和数量是多少？订购的总金额是多少？交货的计划是怎么样的？请详细说明每批次交付的具体日期，及每批次交付的产品和数量明细。",
+        "hybrid": [
+          10
+        ],
+        "vector": [
+          10
+        ],
+        "vector_enriched": [
+          11
+        ]
+      },
+      "sub1": {
+        "question": "订单 ORDER2025003 中每款产品的单价是多少？",
+        "hybrid": [
+          1
+        ],
+        "vector": [
+          1
+        ],
+        "vector_enriched": [
+          1
+        ]
+      }
+    },
+    {
+      "case_id": "PO-25-19-Q001",
+      "group_id": "e5",
+      "chunks": [
+        "c0021"
+      ],
+      "scope_chunks": 37,
+      "original": {
+        "question": "订单 ORDER2025003 中，ELCTO公司订购了哪些产品？每款产品的单价和数量是多少？订购的总金额是多少？交货的计划是怎么样的？请详细说明每批次交付的具体日期，及每批次交付的产品和数量明细。",
+        "hybrid": [
+          7
+        ],
+        "vector": [
+          7
+        ],
+        "vector_enriched": [
+          5
+        ]
+      },
+      "sub1": {
+        "question": "订单 ORDER2025003 中每批次交付的具体日期是什么？",
+        "hybrid": [
+          1
+        ],
+        "vector": [
+          1
+        ],
+        "vector_enriched": [
+          1
+        ]
+      }
+    },
+    {
+      "case_id": "PO-25-19-Q003",
+      "group_id": "e1",
+      "chunks": [
+        "c0009",
+        "c0011",
+        "c0014",
+        "c0015",
+        "c0017",
+        "c0019"
+      ],
+      "scope_chunks": 37,
+      "original": {
+        "question": "订单 ORDER2025003 中，ENSA公司订购了哪些产品？每款产品的单价和数量是多少？订购的总金额是多少？交货的计划是怎么样的？请详细说明每批次交付的具体日期，及每批次交付的产品和数量明细。",
+        "hybrid": [
+          12,
+          2,
+          6,
+          3,
+          1,
+          4
+        ],
+        "vector": [
+          11,
+          4,
+          5,
+          3,
+          1,
+          20
+        ],
+        "vector_enriched": [
+          11,
+          5,
+          4,
+          1,
+          2,
+          18
+        ]
+      },
+      "sub1": {
+        "question": "订单 ORDER2025003 中，ENSA公司订购了哪些产品？数量分别是多少？",
+        "hybrid": [
+          10,
+          3,
+          7,
+          2,
+          1,
+          4
+        ],
+        "vector": [
+          9,
+          4,
+          6,
+          2,
+          1,
+          12
+        ],
+        "vector_enriched": [
+          8,
+          4,
+          3,
+          2,
+          1,
+          10
+        ]
+      }
+    },
+    {
+      "case_id": "PO-25-19-Q003",
+      "group_id": "e2",
+      "chunks": [
+        "c0001"
+      ],
+      "scope_chunks": 37,
+      "original": {
+        "question": "订单 ORDER2025003 中，ENSA公司订购了哪些产品？每款产品的单价和数量是多少？订购的总金额是多少？交货的计划是怎么样的？请详细说明每批次交付的具体日期，及每批次交付的产品和数量明细。",
+        "hybrid": [
+          13
+        ],
+        "vector": [
+          12
+        ],
+        "vector_enriched": [
+          13
+        ]
+      },
+      "sub1": {
+        "question": "订单 ORDER2025003 中每款产品的单价是多少？",
+        "hybrid": [
+          1
+        ],
+        "vector": [
+          1
+        ],
+        "vector_enriched": [
+          1
+        ]
+      }
+    },
+    {
+      "case_id": "PO-25-19-Q003",
+      "group_id": "e5",
+      "chunks": [
+        "c0021"
+      ],
+      "scope_chunks": 37,
+      "original": {
+        "question": "订单 ORDER2025003 中，ENSA公司订购了哪些产品？每款产品的单价和数量是多少？订购的总金额是多少？交货的计划是怎么样的？请详细说明每批次交付的具体日期，及每批次交付的产品和数量明细。",
+        "hybrid": [
+          10
+        ],
+        "vector": [
+          9
+        ],
+        "vector_enriched": [
+          8
+        ]
+      },
+      "sub1": {
+        "question": "订单 ORDER2025003 中每批次交付的具体日期是什么？",
+        "hybrid": [
+          1
+        ],
+        "vector": [
+          1
+        ],
+        "vector_enriched": [
+          1
+        ]
+      }
+    }
+  ],
+  "enriched_samples": {
+    "d359c37e0bc3c87a": {
+      "c0009": "III. CLÁUSULA TERCERA: Objeto del contrato. -\n2\n\nIV. CLÁUSULA CUARTA. - Alcance de especificaciones técnicas. -\n\nEL  CONTRATISTA se  obliga  a  la  entrega  de  los  bienes  objeto  del  presente  contrato,  de  acuerdo  con  las especificaciones técnicas detallas en su oferta, a las cuales las partes se remiten para efectos de la presente ejecución contractual:",
+      "c0010": "IV. CLÁUSULA CUARTA. - Alcance de especificaciones técnicas. -\nEL  CONTRATISTA se  obliga  a  la  entrega  de  los  bienes  objeto  del  presente  contrato,  de  acuerdo  con  las especificaciones técnicas detallas en su oferta, a las cuales las partes se remiten para efectos de la presente ejecución contractual:\n| Ítem: 1 | DESCRIPCIÓN: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 01 |\n| Ítem: 3 | DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS | TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 03 |\n| Ítem: 4 | DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 04 |",
+      "c0019": "CRONOGRAMA DE ENTREGA\nNOTA IMPORTANTE:\n\nNo se aceptarán entregas anticipadas, salvo que sea requerido por LA EMPRESA , previa disponibilidad y aceptación por parte del CONTRATISTA .\n\nLugar de entrega:\n\nLa entrega de los bienes, será en los almacenes de LA EMPRESA, según el siguiente detalle:",
+      "c0020": "Lugar de entrega:\nLa entrega de los bienes, será en los almacenes de LA EMPRESA, según el siguiente detalle:\n|  | LUGAR DE ENTREGA |\n| ELSE | Almacén Central ELSE - Av. Mariscal Sucre Nº 400, Urb. Bancopata – Santiago, Cusco, Cusco |",
+      "c0023": "Correspondiente al Ítem 1 -Medidor electrónico monofásico de 2 hilos:\nCorrespondiente al Ítem 3 -Medidor electrónico trifásico de 3 hilos:",
+      "c0001": "(LICITACIÓN PÚBLICA N° LP-002-2024-FONAFE)\nConste por el presente documento un Contrato de: COMPRA CORPORATIVA DE MEDIDORES PARA LAS EMPRESAS DE LA CORPORACIÓN FONAFE -ÍTEMS 1, 3 Y 4, que celebramos las partes contratantes en los términos y condiciones siguientes:\nI. CLÁUSULA PRIMERA: De los otorgantes.-\n1.1 ELECTRO SUR ESTE S.A.A., identificada con RUC. Nº 20116544289, cuya personería jurídica se encuentra inscrita en la Partida Electrónica Nº 11003503 del Registro de Personas Jurídicas Zona Registral Nº X - Sede Cusco, con domicilio en la Avenida Mariscal Sucre Nº 400 de la Urbanización Bancopata, del distrito de Santiago, provincia y departamento de Cusco, debidamente representada para este acto por su Gerente General el Ing. Fredy Hernán Gonzáles De La Vega , peruano, identificado con DNI. Nº 23839976, con poder de representación inscrito en los Asientos N° D00195 y N° D00232 de la Partida Electrónica en mención. A quien en adelante se le denominará 'LA EMPRESA'; y\n1.2 HEXING  ELECTRICAL  COMPANY  S.A.C., identificada con RUC.  Nº  20546102115,  cuya  razón  social  se encuentra inscrita en la Partida Electrónica Nº 12601784 de la Zona Registral IX -Sede Lima, con domicilio legal en el inmueble ubicado en la Avenida Guardia Civil N° 1321, Int. 1602, Urbanización El Aeropuerto, distrito de Surquillo, provincia y departamento de Lima, representada para este efecto por sus Apoderadas la Srta. María Isabel Gallardo Torres , peruana, identificada con DNI N° 44099982, y la Srta. Medaly Xiomara Arotoma Taipe , peruana, identificada con DNI N° 70034859, ambas con poderes inscritos en el asiento Nº C00010 de referida Partida Electrónica en mención . A quien en adelante se le denominará EL CONTRATISTA.\nII. CLÁUSULA SEGUNDA: Antecedentes. -"
+    },
+    "5a4c36e0022f4917": {
+      "c0009": "6. Quantity per electrical company:\n| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | COMPANY: ELUC | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 27,000 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 2,000 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 5,000 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 5,000 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 5,000 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 5,000 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 5,000 |\n| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | COMPANY: ADINELSA | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 10,000 |  | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 5,000 |  | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 5,000 |  |  |\n| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | COMPANY: ELSU | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 69,000 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 29,000 |  | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 23,000 |  | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 17,000 |  |",
+      "c0010": "6. Quantity per electrical company:\n| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | COMPANY: ELCTO | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 116,000 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 19,330 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 19,330 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 19,330 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 19,330 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 19,330 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 19,350 |\n| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | COMPANY: ENOSA | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 108,630 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 18,105 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 18,105 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 18,105 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 18,105 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 18,105 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 18,105 |",
+      "c0019": "6. Quantity per electrical company:\n| ELPU | 3 | Three Phase 3 wires | UNIT | 100 |  |  |  | 100 |  |  |\n| ITEM 4: THREE PHASE METER 4 WIRES - MODEL HXE34K-S1 | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| ITEM 4: THREE PHASE METER 4 WIRES - MODEL HXE34K-S1 | ELUC | 4 | Three Phase 4 wires | UNIT | 2,000 | 1,000 |  |  | 1,000 |  |  |\n| ITEM 4: THREE PHASE METER 4 WIRES - MODEL HXE34K-S1 | ENOSA | 4 | Three Phase 4 wires | UNIT | 4,848 | 808 | 808 | 808 | 808 | 808 | 808 |\n| ITEM 4: THREE PHASE METER 4 WIRES - MODEL HXE34K-S1 | HDNA | 4 | Three Phase 4 wires | UNIT | 22,986 | 12,000 | 10,986 |  |  |  |  |\n| ITEM 4: THREE PHASE METER 4 WIRES - MODEL HXE34K-S1 | ENSA | 4 | Three Phase 4 wires | UNIT | 10,804 | 2,234 | 1,734 | 1,734 | 1,734 | 1,734 | 1,634 |\n| ITEM 4: THREE PHASE METER 4 WIRES - MODEL HXE34K-S1 | ELSE | 4 | Three Phase 4 wires | UNIT | 2,600 | 300 | 300 | 500 | 500 | 500 | 500 |\n| ITEM 4: THREE PHASE METER 4 WIRES - MODEL HXE34K-S1 | ELPU | 4 | Three Phase 4 wires | UNIT | 1,200 |  |  |  | 1,200 |  |  |\n| ITEM 4: THREE PHASE METER 4 WIRES - MODEL HXE34K-S1 | SEAL | 4 | Three Phase 4 wires | UNIT | 1,500 |  |  |  |  | 500 | 1,000 |",
+      "c0020": "6. Quantity per electrical company:\n(*) Notice each Electrical Company should have its own logo in nameplate and carton.\n\nAll the pallets should be ready for delivery to customer. It means separately by customer .\n\n7. Delivery date:",
+      "c0023": "7. Delivery date:\n8. Customer´s Payment Terms: Payment will be done 30 days after the acceptance of the goods in customer´s warehouse .",
+      "c0001": "Details:\n| Item: 1 | Goods of Description: Single Phase 02 Wires meter Model: HXE12ES | Qty: 1´131,056.00 | Unit price / (CIF CALLAO): USD 4.56 | Total Amount / (USD): USD 5’157,615.36 |\n| Item: 2 | Goods of Description: Single Phase 03 Wires meter Model: HXE13ES | Qty: 109,130.00 | Unit price / (CIF CALLAO): USD 5.08 | Total Amount / (USD): USD 554,380.40 |\n| Item: 3 | Goods of Description: Three Phase 03 Wires meter Model: HXE33K-S1 | Qty: 8,368.00 | Unit price / (CIF CALLAO): USD 13.49 | Total Amount / (USD): USD 112,884.32 |\n| Item: 4 | Goods of Description: Three Phase 04 Wires meter Model: HXE34K-S1 | Qty: 45,938.00 | Unit price / (CIF CALLAO): USD 14.37 | Total Amount / (USD): USD 660,129.06 |\n| Total CIF (CALLAO) | ← | ← | ← | Total Amount / (USD): USD 6’485,009.14 |"
+    }
+  }
+}

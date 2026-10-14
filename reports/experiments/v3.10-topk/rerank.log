@@ -1,0 +1,24 @@
+To support symlinks on Windows, you either need to activate Developer Mode or to run Python as an administrator. In order to activate developer mode, see this article: https://docs.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development
+  warnings.warn(message)
+structured K=1 1178.5 {'hit_rate': 12, 'complete_coverage': 7}
+structured K=2 2016.7 {'hit_rate': 20, 'complete_coverage': 14}
+structured K=3 2834.2 {'hit_rate': 21, 'complete_coverage': 16}
+structured K=4 3547.1 {'hit_rate': 21, 'complete_coverage': 16}
+structured K=5 4391.5 {'hit_rate': 22, 'complete_coverage': 18}
+structured K=6 5055.8 {'hit_rate': 22, 'complete_coverage': 19}
+structured K=7 5834.9 {'hit_rate': 22, 'complete_coverage': 19}
+structured K=8 6521.4 {'hit_rate': 24, 'complete_coverage': 19}
+structured K=9 7126.6 {'hit_rate': 24, 'complete_coverage': 19}
+structured K=10 7996.7 {'hit_rate': 24, 'complete_coverage': 19}
+structured [('CONTRACT-105-Q001', 5), ('CONTRACT-105-Q002', 11), ('CONTRACT-105-Q003', 26), ('CONTRACT-105-Q004', 30), ('CONTRACT-105-Q005', 1), ('CONTRACT-105-Q006', 1), ('CONTRACT-105-Q007', 5), ('CONTRACT-105-Q008', 2), ('CONTRACT-105-Q009', 2), ('CONTRACT-105-Q010', 6), ('E001-602-Q001', 2), ('E001-602-Q002', 1), ('PO-24-12-Q001', 2), ('PO-24-12-Q002', 1), ('PO-24-12-Q003', 1), ('PO-24-12-Q004', 3), ('PO-24-12-Q005', 1), ('PO-24-12-Q006', 2), ('PO-25-15-Q001', 3), ('PO-25-15-Q002', 2), ('PO-25-19-Q001', 14), ('PO-25-19-Q002', 2), ('PO-25-19-Q003', 17), ('PO-25-19-Q004', 1)]
+plain_text K=1 264.0 {'hit_rate': 3, 'complete_coverage': 0}
+plain_text K=2 512.8 {'hit_rate': 9, 'complete_coverage': 3}
+plain_text K=3 718.6 {'hit_rate': 11, 'complete_coverage': 3}
+plain_text K=4 965.1 {'hit_rate': 11, 'complete_coverage': 4}
+plain_text K=5 1211.1 {'hit_rate': 11, 'complete_coverage': 4}
+plain_text K=6 1432.8 {'hit_rate': 11, 'complete_coverage': 5}
+plain_text K=7 1670.7 {'hit_rate': 13, 'complete_coverage': 6}
+plain_text K=8 1910.2 {'hit_rate': 13, 'complete_coverage': 7}
+plain_text K=9 2115.0 {'hit_rate': 14, 'complete_coverage': 7}
+plain_text K=10 2333.1 {'hit_rate': 15, 'complete_coverage': 8}
+plain_text [('CONTRACT-105-Q001', None), ('CONTRACT-105-Q002', 8), ('CONTRACT-105-Q003', None), ('CONTRACT-105-Q004', None), ('CONTRACT-105-Q005', None), ('CONTRACT-105-Q006', None), ('CONTRACT-105-Q007', 13), ('CONTRACT-105-Q008', 6), ('CONTRACT-105-Q009', 29), ('CONTRACT-105-Q010', 22), ('E001-602-Q001', 4), ('E001-602-Q002', 2), ('PO-24-12-Q001', 2), ('PO-24-12-Q002', 7), ('PO-24-12-Q003', 12), ('PO-24-12-Q004', 12), ('PO-24-12-Q005', 10), ('PO-24-12-Q006', 2), ('PO-25-15-Q001', 16), ('PO-25-15-Q002', 16), ('PO-25-19-Q001', 14), ('PO-25-19-Q002', 24), ('PO-25-19-Q003', None), ('PO-25-19-Q004', 17)]
