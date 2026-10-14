@@ -136,3 +136,7 @@ K=3，文档过滤开启，索引与 V3.9 相同（不重建）。纯向量见 V
 4. **融合时不如现行混合检索**：向量 + sparse（查询去编码）较向量 + BM25，structured 变好 0 题、变差 2 题，plain_text 变好 1 题、变差 2 题。
 
 不加入系统。复现：`.venv/Scripts/python.exe reports/experiments/v3.9-bge-m3-sparse/run_experiment.py`（不改动系统代码，运行时替换评估所用的检索器，结果写在同一目录）；逐题对比页为该目录下的 `compare/lexical/`、`compare/fused/`。
+
+### 诊断：检索未覆盖与误检的根因（数据集 3.2.0，2026-10-12 至 2026-10-14，系统未改动）
+
+原计划的 V3.10 chunk 长度实验在第一步（扫 K）后延后：structured 完整覆盖在 K=3 与 K=10 下都是 19/24，剩余 5 题需要 K=12–29。随后逐题逐证据定位漏检的根因（C1–C6），并用对照实验分析排在前面的错误 chunk，结论、方向与优先级（P1–P5）写入 `docs/roadmap.md`；延后的提案移入 `docs/backlog/topk-chunk-length.md`。bge-reranker-v2-m3 直接重排（structured K=3 完整覆盖 19 → 16）、检索前去掉标识编码（19 → 18）均未采用。脚本与数据：`reports/experiments/v3.10-topk/`。
