@@ -1,0 +1,462 @@
+{
+  "questions": {
+    "zh": {
+      "CONTRACT-105-Q001": "采购合同 CONT2025001 的签署双方分别是谁？各自的法定代表人是谁？",
+      "CONTRACT-105-Q002": "采购合同 CONT2025001 包含哪些 Ítem 的产品？各自的数量、单价及含税总金额是多少？合同总金额是多少？",
+      "CONTRACT-105-Q003": "采购合同 CONT2025001 规定的总履约期限是多久？具体的交货地点在哪里？是否允许提前交货？",
+      "CONTRACT-105-Q004": "采购合同 CONT2025001 中，关于各 Ítem 的履约保证金（Garantía de fiel cumplimiento）金额及出具机构是如何规定的？",
+      "CONTRACT-105-Q005": "采购合同 CONT2025001 中，技术商业质保期（Garantía Técnico-Comercial）的期限是多久？在质保期内发生故障时，承包商的响应和修复时限是多少？",
+      "CONTRACT-105-Q006": "采购合同 CONT2025001 中，对“重复性故障”（Falla Repetitiva）的认定标准是什么？出现重复性故障时承包商需要承担什么责任？",
+      "CONTRACT-105-Q007": "采购合同 CONT2025001 中，买方办理支付流程的前提条件有哪些？出具验收合格证明以及付款的具体时限要求是什么？",
+      "CONTRACT-105-Q008": "采购合同 CONT2025001 中，如果承包商发生未经证明的延迟交货，延期罚金（Penalidad por Mora）的计算公式是什么？罚金的最高上限是多少？",
+      "CONTRACT-105-Q009": "采购合同 CONT2025001 的第 1 次交付（1era ENTREGA，合同签订后 170 天），具体的交付产品和数量是多少？",
+      "CONTRACT-105-Q010": "采购合同 CONT2025001 是否规定分批交货？每个批次的具体交货日期分别是什么？"
+    },
+    "zh_no_prefix": {
+      "CONTRACT-105-Q001": "的签署双方分别是谁？各自的法定代表人是谁？",
+      "CONTRACT-105-Q002": "包含哪些 Ítem 的产品？各自的数量、单价及含税总金额是多少？合同总金额是多少？",
+      "CONTRACT-105-Q003": "规定的总履约期限是多久？具体的交货地点在哪里？是否允许提前交货？",
+      "CONTRACT-105-Q004": "关于各 Ítem 的履约保证金（Garantía de fiel cumplimiento）金额及出具机构是如何规定的？",
+      "CONTRACT-105-Q005": "技术商业质保期（Garantía Técnico-Comercial）的期限是多久？在质保期内发生故障时，承包商的响应和修复时限是多少？",
+      "CONTRACT-105-Q006": "对“重复性故障”（Falla Repetitiva）的认定标准是什么？出现重复性故障时承包商需要承担什么责任？",
+      "CONTRACT-105-Q007": "买方办理支付流程的前提条件有哪些？出具验收合格证明以及付款的具体时限要求是什么？",
+      "CONTRACT-105-Q008": "如果承包商发生未经证明的延迟交货，延期罚金（Penalidad por Mora）的计算公式是什么？罚金的最高上限是多少？",
+      "CONTRACT-105-Q009": "的第 1 次交付（1era ENTREGA，合同签订后 170 天），具体的交付产品和数量是多少？",
+      "CONTRACT-105-Q010": "是否规定分批交货？每个批次的具体交货日期分别是什么？"
+    },
+    "es": {
+      "CONTRACT-105-Q001": "¿Quiénes son las partes que firman el contrato y quiénes son sus representantes legales?",
+      "CONTRACT-105-Q002": "¿Qué ítems incluye el contrato? ¿Cuál es la cantidad, el precio unitario y el monto total con impuestos de cada uno? ¿Cuál es el monto total del contrato?",
+      "CONTRACT-105-Q003": "¿Cuál es el plazo total de ejecución del contrato? ¿Dónde es el lugar de entrega? ¿Se aceptan entregas anticipadas?",
+      "CONTRACT-105-Q004": "¿Cuál es el monto de la garantía de fiel cumplimiento de cada ítem y qué entidad la emite?",
+      "CONTRACT-105-Q005": "¿Cuál es el plazo de la garantía técnico-comercial? ¿Cuáles son los plazos de respuesta y reparación del contratista ante una falla durante la garantía?",
+      "CONTRACT-105-Q006": "¿Cuál es el criterio para considerar una falla repetitiva? ¿Qué responsabilidad asume el contratista ante una falla repetitiva?",
+      "CONTRACT-105-Q007": "¿Qué condiciones previas exige la empresa para tramitar el pago? ¿Cuáles son los plazos para emitir la conformidad y para pagar?",
+      "CONTRACT-105-Q008": "Si el contratista incurre en retraso injustificado en la entrega, ¿cuál es la fórmula de la penalidad por mora y cuál es su monto máximo?",
+      "CONTRACT-105-Q009": "En la primera entrega (1era ENTREGA, 170 días después de la firma del contrato), ¿qué productos y qué cantidades se entregan?",
+      "CONTRACT-105-Q010": "¿El contrato establece entregas parciales? ¿Cuál es la fecha de entrega de cada entrega?"
+    }
+  },
+  "ablation": {
+    "as_indexed": {
+      "text": "2.4 EL CONTRATISTA ha cumplido con presentar la siguiente documentación en fecha 02/09/2025 y su subsanación en fecha 10/09/2025:\n· Garantía de fiel cumplimiento del contrato:",
+      "zh": {
+        "ranks": [
+          1,
+          13,
+          2,
+          4,
+          6,
+          6,
+          2,
+          19,
+          6,
+          2
+        ],
+        "median": 5.0,
+        "top3": 4
+      },
+      "zh_no_prefix": {
+        "ranks": [
+          3,
+          27,
+          11,
+          10,
+          6,
+          11,
+          7,
+          23,
+          20,
+          9
+        ],
+        "median": 10.5,
+        "top3": 1
+      },
+      "es": {
+        "ranks": [
+          14,
+          25,
+          12,
+          8,
+          5,
+          7,
+          6,
+          22,
+          19,
+          8
+        ],
+        "median": 10.0,
+        "top3": 0
+      }
+    },
+    "line1_only": {
+      "text": "2.4 EL CONTRATISTA ha cumplido con presentar la siguiente documentación en fecha 02/09/2025 y su subsanación en fecha 10/09/2025:",
+      "zh": {
+        "ranks": [
+          1,
+          10,
+          5,
+          22,
+          6,
+          6,
+          3,
+          21,
+          8,
+          1
+        ],
+        "median": 6.0,
+        "top3": 3
+      },
+      "zh_no_prefix": {
+        "ranks": [
+          8,
+          29,
+          22,
+          29,
+          17,
+          21,
+          14,
+          26,
+          24,
+          16
+        ],
+        "median": 21.5,
+        "top3": 0
+      },
+      "es": {
+        "ranks": [
+          21,
+          28,
+          24,
+          30,
+          11,
+          10,
+          14,
+          24,
+          29,
+          14
+        ],
+        "median": 22.5,
+        "top3": 0
+      }
+    },
+    "line2_only": {
+      "text": "· Garantía de fiel cumplimiento del contrato:",
+      "zh": {
+        "ranks": [
+          24,
+          30,
+          24,
+          4,
+          28,
+          25,
+          23,
+          28,
+          28,
+          27
+        ],
+        "median": 26.0,
+        "top3": 0
+      },
+      "zh_no_prefix": {
+        "ranks": [
+          10,
+          29,
+          13,
+          4,
+          22,
+          19,
+          15,
+          26,
+          25,
+          26
+        ],
+        "median": 20.5,
+        "top3": 0
+      },
+      "es": {
+        "ranks": [
+          16,
+          30,
+          13,
+          4,
+          13,
+          14,
+          13,
+          23,
+          19,
+          22
+        ],
+        "median": 15.0,
+        "top3": 0
+      }
+    },
+    "no_dates": {
+      "text": "2.4 EL CONTRATISTA ha cumplido con presentar la siguiente documentación:\n· Garantía de fiel cumplimiento del contrato:",
+      "zh": {
+        "ranks": [
+          7,
+          22,
+          17,
+          4,
+          20,
+          17,
+          5,
+          27,
+          25,
+          20
+        ],
+        "median": 18.5,
+        "top3": 0
+      },
+      "zh_no_prefix": {
+        "ranks": [
+          3,
+          27,
+          23,
+          8,
+          22,
+          19,
+          5,
+          28,
+          25,
+          26
+        ],
+        "median": 22.5,
+        "top3": 1
+      },
+      "es": {
+        "ranks": [
+          13,
+          25,
+          22,
+          8,
+          10,
+          8,
+          7,
+          27,
+          19,
+          22
+        ],
+        "median": 16.0,
+        "top3": 0
+      }
+    },
+    "no_number": {
+      "text": "EL CONTRATISTA ha cumplido con presentar la siguiente documentación en fecha 02/09/2025 y su subsanación en fecha 10/09/2025:\n· Garantía de fiel cumplimiento del contrato:",
+      "zh": {
+        "ranks": [
+          1,
+          13,
+          2,
+          4,
+          6,
+          6,
+          2,
+          19,
+          13,
+          2
+        ],
+        "median": 5.0,
+        "top3": 4
+      },
+      "zh_no_prefix": {
+        "ranks": [
+          2,
+          25,
+          10,
+          8,
+          6,
+          16,
+          6,
+          23,
+          21,
+          11
+        ],
+        "median": 10.5,
+        "top3": 1
+      },
+      "es": {
+        "ranks": [
+          13,
+          25,
+          12,
+          6,
+          4,
+          7,
+          5,
+          22,
+          19,
+          11
+        ],
+        "median": 11.5,
+        "top3": 0
+      }
+    },
+    "no_guarantee": {
+      "text": "2.4 EL CONTRATISTA ha cumplido con presentar la siguiente documentación en fecha 02/09/2025 y su subsanación en fecha 10/09/2025:",
+      "zh": {
+        "ranks": [
+          1,
+          10,
+          5,
+          22,
+          6,
+          6,
+          3,
+          21,
+          8,
+          1
+        ],
+        "median": 6.0,
+        "top3": 3
+      },
+      "zh_no_prefix": {
+        "ranks": [
+          8,
+          29,
+          22,
+          29,
+          17,
+          21,
+          14,
+          26,
+          24,
+          16
+        ],
+        "median": 21.5,
+        "top3": 0
+      },
+      "es": {
+        "ranks": [
+          21,
+          28,
+          24,
+          30,
+          11,
+          10,
+          14,
+          24,
+          29,
+          14
+        ],
+        "median": 22.5,
+        "top3": 0
+      }
+    },
+    "dates_only": {
+      "text": "en fecha 02/09/2025 y su subsanación en fecha 10/09/2025",
+      "zh": {
+        "ranks": [
+          13,
+          21,
+          14,
+          28,
+          24,
+          19,
+          25,
+          25,
+          27,
+          8
+        ],
+        "median": 22.5,
+        "top3": 0
+      },
+      "zh_no_prefix": {
+        "ranks": [
+          18,
+          29,
+          25,
+          28,
+          26,
+          24,
+          26,
+          27,
+          31,
+          8
+        ],
+        "median": 26.0,
+        "top3": 0
+      },
+      "es": {
+        "ranks": [
+          28,
+          32,
+          28,
+          25,
+          27,
+          27,
+          27,
+          28,
+          31,
+          27
+        ],
+        "median": 27.5,
+        "top3": 0
+      }
+    },
+    "contrato_word_only": {
+      "text": "del contrato:",
+      "zh": {
+        "ranks": [
+          16,
+          21,
+          24,
+          27,
+          28,
+          27,
+          26,
+          27,
+          27,
+          23
+        ],
+        "median": 26.5,
+        "top3": 0
+      },
+      "zh_no_prefix": {
+        "ranks": [
+          2,
+          16,
+          25,
+          26,
+          28,
+          26,
+          26,
+          26,
+          29,
+          27
+        ],
+        "median": 26.0,
+        "top3": 1
+      },
+      "es": {
+        "ranks": [
+          13,
+          19,
+          26,
+          30,
+          28,
+          28,
+          27,
+          27,
+          28,
+          18
+        ],
+        "median": 27.0,
+        "top3": 0
+      }
+    }
+  },
+  "partial": {
+    "zh": {
+      "centroid_given_length": -0.436,
+      "length_given_centroid": -0.162,
+      "n": 93
+    },
+    "es": {
+      "centroid_given_length": -0.454,
+      "length_given_centroid": -0.242,
+      "n": 93
+    }
+  }
+}

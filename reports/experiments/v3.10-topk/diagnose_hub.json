@@ -1,0 +1,3617 @@
+{
+  "probes": {
+    "generic_1": {
+      "chars": 107,
+      "centroid_similarity": 0.6684,
+      "zh": {
+        "ranks": [
+          7,
+          23,
+          24,
+          23,
+          29,
+          26,
+          7,
+          28,
+          25,
+          22
+        ],
+        "median": 23.5,
+        "top3": 0
+      },
+      "es": {
+        "ranks": [
+          16,
+          25,
+          28,
+          28,
+          20,
+          13,
+          11,
+          25,
+          29,
+          27
+        ],
+        "median": 25.0,
+        "top3": 0
+      }
+    },
+    "generic_2": {
+      "chars": 217,
+      "centroid_similarity": 0.7221,
+      "zh": {
+        "ranks": [
+          8,
+          26,
+          25,
+          19,
+          27,
+          18,
+          7,
+          28,
+          28,
+          25
+        ],
+        "median": 25.0,
+        "top3": 0
+      },
+      "es": {
+        "ranks": [
+          1,
+          9,
+          24,
+          20,
+          16,
+          9,
+          6,
+          23,
+          20,
+          19
+        ],
+        "median": 17.5,
+        "top3": 1
+      }
+    },
+    "generic_4": {
+      "chars": 436,
+      "centroid_similarity": 0.7614,
+      "zh": {
+        "ranks": [
+          12,
+          25,
+          19,
+          18,
+          18,
+          18,
+          7,
+          24,
+          28,
+          22
+        ],
+        "median": 18.5,
+        "top3": 0
+      },
+      "es": {
+        "ranks": [
+          1,
+          5,
+          12,
+          18,
+          11,
+          9,
+          5,
+          22,
+          14,
+          13
+        ],
+        "median": 11.5,
+        "top3": 1
+      }
+    },
+    "generic_8": {
+      "chars": 846,
+      "centroid_similarity": 0.7648,
+      "zh": {
+        "ranks": [
+          8,
+          21,
+          20,
+          24,
+          20,
+          20,
+          9,
+          27,
+          28,
+          22
+        ],
+        "median": 20.5,
+        "top3": 0
+      },
+      "es": {
+        "ranks": [
+          1,
+          4,
+          12,
+          20,
+          11,
+          9,
+          5,
+          25,
+          14,
+          10
+        ],
+        "median": 10.5,
+        "top3": 1
+      }
+    },
+    "specific_1": {
+      "chars": 109,
+      "centroid_similarity": 0.5207,
+      "zh": {
+        "ranks": [
+          25,
+          31,
+          27,
+          30,
+          27,
+          28,
+          28,
+          29,
+          22,
+          18
+        ],
+        "median": 27.5,
+        "top3": 0
+      },
+      "es": {
+        "ranks": [
+          29,
+          34,
+          31,
+          34,
+          29,
+          29,
+          31,
+          30,
+          32,
+          32
+        ],
+        "median": 31.0,
+        "top3": 0
+      }
+    },
+    "specific_2": {
+      "chars": 227,
+      "centroid_similarity": 0.586,
+      "zh": {
+        "ranks": [
+          25,
+          26,
+          24,
+          29,
+          25,
+          27,
+          28,
+          26,
+          18,
+          18
+        ],
+        "median": 25.5,
+        "top3": 0
+      },
+      "es": {
+        "ranks": [
+          29,
+          33,
+          29,
+          25,
+          29,
+          28,
+          30,
+          29,
+          30,
+          28
+        ],
+        "median": 29.0,
+        "top3": 0
+      }
+    },
+    "specific_4": {
+      "chars": 439,
+      "centroid_similarity": 0.5987,
+      "zh": {
+        "ranks": [
+          24,
+          19,
+          15,
+          26,
+          22,
+          25,
+          28,
+          21,
+          6,
+          16
+        ],
+        "median": 21.5,
+        "top3": 0
+      },
+      "es": {
+        "ranks": [
+          29,
+          31,
+          27,
+          23,
+          29,
+          28,
+          29,
+          28,
+          26,
+          28
+        ],
+        "median": 28.0,
+        "top3": 0
+      }
+    },
+    "specific_8": {
+      "chars": 875,
+      "centroid_similarity": 0.6077,
+      "zh": {
+        "ranks": [
+          20,
+          22,
+          14,
+          26,
+          25,
+          26,
+          28,
+          21,
+          6,
+          16
+        ],
+        "median": 21.5,
+        "top3": 0
+      },
+      "es": {
+        "ranks": [
+          29,
+          31,
+          23,
+          18,
+          29,
+          28,
+          29,
+          28,
+          18,
+          27
+        ],
+        "median": 28.0,
+        "top3": 0
+      }
+    },
+    "out_of_domain_1": {
+      "chars": 111,
+      "centroid_similarity": 0.4609,
+      "zh": {
+        "ranks": [
+          34,
+          34,
+          32,
+          34,
+          32,
+          34,
+          32,
+          32,
+          34,
+          32
+        ],
+        "median": 33.0,
+        "top3": 0
+      },
+      "es": {
+        "ranks": [
+          32,
+          33,
+          32,
+          34,
+          32,
+          34,
+          30,
+          30,
+          32,
+          32
+        ],
+        "median": 32.0,
+        "top3": 0
+      }
+    },
+    "c0004_as_indexed": {
+      "chars": 175,
+      "centroid_similarity": 0.7454,
+      "zh": {
+        "ranks": [
+          1,
+          13,
+          2,
+          4,
+          6,
+          6,
+          2,
+          19,
+          6,
+          2
+        ],
+        "median": 5.0,
+        "top3": 4
+      },
+      "es": {
+        "ranks": [
+          14,
+          25,
+          12,
+          8,
+          5,
+          7,
+          6,
+          22,
+          19,
+          8
+        ],
+        "median": 10.0,
+        "top3": 0
+      }
+    },
+    "c0004+c0005": {
+      "chars": 1368,
+      "centroid_similarity": 0.8436,
+      "zh": {
+        "ranks": [
+          1,
+          2,
+          6,
+          6,
+          1,
+          5,
+          4,
+          1
+        ],
+        "median": 3.0,
+        "top3": 4
+      },
+      "es": {
+        "ranks": [
+          11,
+          10,
+          5,
+          7,
+          5,
+          9,
+          8,
+          8
+        ],
+        "median": 8.0,
+        "top3": 0
+      }
+    },
+    "specific_only_1": {
+      "chars": 109,
+      "centroid_similarity": 0.5207,
+      "zh": {
+        "ranks": [
+          25,
+          31,
+          27,
+          30,
+          27,
+          28,
+          28,
+          29,
+          22,
+          18
+        ],
+        "median": 27.5,
+        "top3": 0
+      },
+      "es": {
+        "ranks": [
+          29,
+          34,
+          31,
+          34,
+          29,
+          29,
+          31,
+          30,
+          32,
+          32
+        ],
+        "median": 31.0,
+        "top3": 0
+      }
+    },
+    "specific_only_2": {
+      "chars": 117,
+      "centroid_similarity": 0.5833,
+      "zh": {
+        "ranks": [
+          29,
+          31,
+          28,
+          29,
+          29,
+          27,
+          29,
+          28,
+          26,
+          28
+        ],
+        "median": 28.5,
+        "top3": 0
+      },
+      "es": {
+        "ranks": [
+          30,
+          33,
+          29,
+          20,
+          32,
+          28,
+          30,
+          29,
+          30,
+          30
+        ],
+        "median": 30.0,
+        "top3": 0
+      }
+    },
+    "specific_only_3": {
+      "chars": 109,
+      "centroid_similarity": 0.5304,
+      "zh": {
+        "ranks": [
+          31,
+          20,
+          27,
+          30,
+          30,
+          29,
+          30,
+          29,
+          22,
+          25
+        ],
+        "median": 29.0,
+        "top3": 0
+      },
+      "es": {
+        "ranks": [
+          31,
+          25,
+          29,
+          31,
+          32,
+          32,
+          30,
+          29,
+          28,
+          30
+        ],
+        "median": 30.0,
+        "top3": 0
+      }
+    },
+    "specific_only_4": {
+      "chars": 101,
+      "centroid_similarity": 0.5167,
+      "zh": {
+        "ranks": [
+          29,
+          31,
+          31,
+          30,
+          30,
+          30,
+          30,
+          30,
+          31,
+          29
+        ],
+        "median": 30.0,
+        "top3": 0
+      },
+      "es": {
+        "ranks": [
+          32,
+          34,
+          32,
+          34,
+          34,
+          34,
+          31,
+          33,
+          32,
+          32
+        ],
+        "median": 32.5,
+        "top3": 0
+      }
+    },
+    "specific_only_5": {
+      "chars": 107,
+      "centroid_similarity": 0.5679,
+      "zh": {
+        "ranks": [
+          20,
+          26,
+          25,
+          30,
+          29,
+          28,
+          30,
+          30,
+          26,
+          18
+        ],
+        "median": 27.0,
+        "top3": 0
+      },
+      "es": {
+        "ranks": [
+          29,
+          31,
+          29,
+          31,
+          29,
+          29,
+          30,
+          32,
+          32,
+          30
+        ],
+        "median": 30.0,
+        "top3": 0
+      }
+    },
+    "specific_only_6": {
+      "chars": 103,
+      "centroid_similarity": 0.5503,
+      "zh": {
+        "ranks": [
+          32,
+          31,
+          31,
+          32,
+          30,
+          29,
+          32,
+          30,
+          32,
+          29
+        ],
+        "median": 31.0,
+        "top3": 0
+      },
+      "es": {
+        "ranks": [
+          32,
+          33,
+          32,
+          29,
+          29,
+          33,
+          31,
+          32,
+          32,
+          32
+        ],
+        "median": 32.0,
+        "top3": 0
+      }
+    },
+    "specific_only_7": {
+      "chars": 110,
+      "centroid_similarity": 0.5318,
+      "zh": {
+        "ranks": [
+          29,
+          31,
+          18,
+          32,
+          23,
+          28,
+          29,
+          29,
+          10,
+          18
+        ],
+        "median": 28.5,
+        "top3": 0
+      },
+      "es": {
+        "ranks": [
+          29,
+          33,
+          19,
+          34,
+          22,
+          28,
+          28,
+          29,
+          14,
+          20
+        ],
+        "median": 28.0,
+        "top3": 0
+      }
+    },
+    "specific_only_8": {
+      "chars": 112,
+      "centroid_similarity": 0.6062,
+      "zh": {
+        "ranks": [
+          32,
+          26,
+          29,
+          29,
+          29,
+          28,
+          30,
+          29,
+          26,
+          28
+        ],
+        "median": 29.0,
+        "top3": 0
+      },
+      "es": {
+        "ranks": [
+          30,
+          23,
+          29,
+          26,
+          28,
+          29,
+          31,
+          29,
+          28,
+          32
+        ],
+        "median": 29.0,
+        "top3": 0
+      }
+    }
+  },
+  "real_chunks": {
+    "correlation": {
+      "zh_centroid_similarity": {
+        "rho": -0.586,
+        "p": 6.5e-10,
+        "n": 93
+      },
+      "zh_chars": {
+        "rho": -0.459,
+        "p": 3.6e-06,
+        "n": 93
+      },
+      "zh_chars_vs_centroid": {
+        "rho": 0.605,
+        "p": 1.3e-10,
+        "n": 93
+      },
+      "es_centroid_similarity": {
+        "rho": -0.627,
+        "p": 1.7e-11,
+        "n": 93
+      },
+      "es_chars": {
+        "rho": -0.529,
+        "p": 4.8e-08,
+        "n": 93
+      },
+      "es_chars_vs_centroid": {
+        "rho": 0.605,
+        "p": 1.3e-10,
+        "n": 93
+      }
+    },
+    "rows": [
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0000",
+        "lang": "zh",
+        "chars": 381,
+        "centroid_similarity": 0.7208475399794401,
+        "mean_norm_rank": 0.475,
+        "questions": 10
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0001",
+        "lang": "zh",
+        "chars": 1498,
+        "centroid_similarity": 0.7096628392607472,
+        "mean_norm_rank": 0.6597222222222222,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0002",
+        "lang": "zh",
+        "chars": 1491,
+        "centroid_similarity": 0.7110325111714676,
+        "mean_norm_rank": 0.34375,
+        "questions": 10
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0003",
+        "lang": "zh",
+        "chars": 58,
+        "centroid_similarity": 0.6567968200731871,
+        "mean_norm_rank": 0.734375,
+        "questions": 10
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0004",
+        "lang": "zh",
+        "chars": 175,
+        "centroid_similarity": 0.7454143545095414,
+        "mean_norm_rank": 0.159375,
+        "questions": 10
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0005",
+        "lang": "zh",
+        "chars": 1192,
+        "centroid_similarity": 0.7869561147509975,
+        "mean_norm_rank": 0.3784722222222222,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0006",
+        "lang": "zh",
+        "chars": 878,
+        "centroid_similarity": 0.7920003141764144,
+        "mean_norm_rank": 0.259375,
+        "questions": 10
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0007",
+        "lang": "zh",
+        "chars": 465,
+        "centroid_similarity": 0.7540211538365861,
+        "mean_norm_rank": 0.303125,
+        "questions": 10
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0008",
+        "lang": "zh",
+        "chars": 204,
+        "centroid_similarity": 0.7306130553287853,
+        "mean_norm_rank": 0.9236111111111112,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0009",
+        "lang": "zh",
+        "chars": 318,
+        "centroid_similarity": 0.7678287481369701,
+        "mean_norm_rank": 0.471875,
+        "questions": 10
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0010",
+        "lang": "zh",
+        "chars": 507,
+        "centroid_similarity": 0.7944104664060724,
+        "mean_norm_rank": 0.7222222222222222,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0011",
+        "lang": "zh",
+        "chars": 2084,
+        "centroid_similarity": 0.7879474560538464,
+        "mean_norm_rank": 0.1909722222222222,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0012",
+        "lang": "zh",
+        "chars": 2025,
+        "centroid_similarity": 0.738585285695764,
+        "mean_norm_rank": 0.52734375,
+        "questions": 8
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0013",
+        "lang": "zh",
+        "chars": 494,
+        "centroid_similarity": 0.7096090643845494,
+        "mean_norm_rank": 0.8680555555555556,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0014",
+        "lang": "zh",
+        "chars": 1226,
+        "centroid_similarity": 0.7767206147098158,
+        "mean_norm_rank": 0.321875,
+        "questions": 10
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0015",
+        "lang": "zh",
+        "chars": 227,
+        "centroid_similarity": 0.7507856588442048,
+        "mean_norm_rank": 0.5659722222222222,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0016",
+        "lang": "zh",
+        "chars": 1813,
+        "centroid_similarity": 0.7921331711929572,
+        "mean_norm_rank": 0.1796875,
+        "questions": 8
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0017",
+        "lang": "zh",
+        "chars": 1050,
+        "centroid_similarity": 0.7925307640775228,
+        "mean_norm_rank": 0.3958333333333333,
+        "questions": 6
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0018",
+        "lang": "zh",
+        "chars": 700,
+        "centroid_similarity": 0.8005201857357973,
+        "mean_norm_rank": 0.546875,
+        "questions": 6
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0019",
+        "lang": "zh",
+        "chars": 270,
+        "centroid_similarity": 0.6885396667781627,
+        "mean_norm_rank": 0.6736111111111112,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0020",
+        "lang": "zh",
+        "chars": 124,
+        "centroid_similarity": 0.5688699637292526,
+        "mean_norm_rank": 0.9340277777777778,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0021",
+        "lang": "zh",
+        "chars": 634,
+        "centroid_similarity": 0.7997970261192001,
+        "mean_norm_rank": 0.4756944444444444,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0022",
+        "lang": "zh",
+        "chars": 394,
+        "centroid_similarity": 0.7350359370436106,
+        "mean_norm_rank": 0.5798611111111112,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0023",
+        "lang": "zh",
+        "chars": 68,
+        "centroid_similarity": 0.6448048329228082,
+        "mean_norm_rank": 0.9861111111111112,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0024",
+        "lang": "zh",
+        "chars": 372,
+        "centroid_similarity": 0.7340762530917746,
+        "mean_norm_rank": 0.5,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0025",
+        "lang": "zh",
+        "chars": 68,
+        "centroid_similarity": 0.6624452083404712,
+        "mean_norm_rank": 0.96875,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0026",
+        "lang": "zh",
+        "chars": 376,
+        "centroid_similarity": 0.7408564391152125,
+        "mean_norm_rank": 0.4201388888888889,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0027",
+        "lang": "zh",
+        "chars": 2197,
+        "centroid_similarity": 0.7797860581197806,
+        "mean_norm_rank": 0.1840277777777778,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0028",
+        "lang": "zh",
+        "chars": 2017,
+        "centroid_similarity": 0.7639120201486815,
+        "mean_norm_rank": 0.3159722222222222,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0029",
+        "lang": "zh",
+        "chars": 1961,
+        "centroid_similarity": 0.7604608401180379,
+        "mean_norm_rank": 0.5763888888888888,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0030",
+        "lang": "zh",
+        "chars": 2325,
+        "centroid_similarity": 0.7324503576659634,
+        "mean_norm_rank": 0.678125,
+        "questions": 10
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0031",
+        "lang": "zh",
+        "chars": 2255,
+        "centroid_similarity": 0.6835466117490215,
+        "mean_norm_rank": 0.665625,
+        "questions": 10
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0032",
+        "lang": "zh",
+        "chars": 1120,
+        "centroid_similarity": 0.7242081583609998,
+        "mean_norm_rank": 0.5243055555555556,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0000",
+        "lang": "es",
+        "chars": 381,
+        "centroid_similarity": 0.7208475399794401,
+        "mean_norm_rank": 0.76875,
+        "questions": 10
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0001",
+        "lang": "es",
+        "chars": 1498,
+        "centroid_similarity": 0.7096628392607472,
+        "mean_norm_rank": 0.6805555555555556,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0002",
+        "lang": "es",
+        "chars": 1491,
+        "centroid_similarity": 0.7110325111714676,
+        "mean_norm_rank": 0.7375,
+        "questions": 10
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0003",
+        "lang": "es",
+        "chars": 58,
+        "centroid_similarity": 0.6567968200731871,
+        "mean_norm_rank": 0.734375,
+        "questions": 10
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0004",
+        "lang": "es",
+        "chars": 175,
+        "centroid_similarity": 0.7454143545095414,
+        "mean_norm_rank": 0.3625,
+        "questions": 10
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0005",
+        "lang": "es",
+        "chars": 1192,
+        "centroid_similarity": 0.7869561147509975,
+        "mean_norm_rank": 0.6145833333333334,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0006",
+        "lang": "es",
+        "chars": 878,
+        "centroid_similarity": 0.7920003141764144,
+        "mean_norm_rank": 0.290625,
+        "questions": 10
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0007",
+        "lang": "es",
+        "chars": 465,
+        "centroid_similarity": 0.7540211538365861,
+        "mean_norm_rank": 0.515625,
+        "questions": 10
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0008",
+        "lang": "es",
+        "chars": 204,
+        "centroid_similarity": 0.7306130553287853,
+        "mean_norm_rank": 0.8993055555555556,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0009",
+        "lang": "es",
+        "chars": 318,
+        "centroid_similarity": 0.7678287481369701,
+        "mean_norm_rank": 0.39375,
+        "questions": 10
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0010",
+        "lang": "es",
+        "chars": 507,
+        "centroid_similarity": 0.7944104664060724,
+        "mean_norm_rank": 0.6909722222222222,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0011",
+        "lang": "es",
+        "chars": 2084,
+        "centroid_similarity": 0.7879474560538464,
+        "mean_norm_rank": 0.3298611111111111,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0012",
+        "lang": "es",
+        "chars": 2025,
+        "centroid_similarity": 0.738585285695764,
+        "mean_norm_rank": 0.55859375,
+        "questions": 8
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0013",
+        "lang": "es",
+        "chars": 494,
+        "centroid_similarity": 0.7096090643845494,
+        "mean_norm_rank": 0.8506944444444444,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0014",
+        "lang": "es",
+        "chars": 1226,
+        "centroid_similarity": 0.7767206147098158,
+        "mean_norm_rank": 0.184375,
+        "questions": 10
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0015",
+        "lang": "es",
+        "chars": 227,
+        "centroid_similarity": 0.7507856588442048,
+        "mean_norm_rank": 0.4652777777777778,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0016",
+        "lang": "es",
+        "chars": 1813,
+        "centroid_similarity": 0.7921331711929572,
+        "mean_norm_rank": 0.19921875,
+        "questions": 8
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0017",
+        "lang": "es",
+        "chars": 1050,
+        "centroid_similarity": 0.7925307640775228,
+        "mean_norm_rank": 0.421875,
+        "questions": 6
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0018",
+        "lang": "es",
+        "chars": 700,
+        "centroid_similarity": 0.8005201857357973,
+        "mean_norm_rank": 0.4635416666666667,
+        "questions": 6
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0019",
+        "lang": "es",
+        "chars": 270,
+        "centroid_similarity": 0.6885396667781627,
+        "mean_norm_rank": 0.5520833333333334,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0020",
+        "lang": "es",
+        "chars": 124,
+        "centroid_similarity": 0.5688699637292526,
+        "mean_norm_rank": 0.9270833333333334,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0021",
+        "lang": "es",
+        "chars": 634,
+        "centroid_similarity": 0.7997970261192001,
+        "mean_norm_rank": 0.2881944444444444,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0022",
+        "lang": "es",
+        "chars": 394,
+        "centroid_similarity": 0.7350359370436106,
+        "mean_norm_rank": 0.5069444444444444,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0023",
+        "lang": "es",
+        "chars": 68,
+        "centroid_similarity": 0.6448048329228082,
+        "mean_norm_rank": 0.96875,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0024",
+        "lang": "es",
+        "chars": 372,
+        "centroid_similarity": 0.7340762530917746,
+        "mean_norm_rank": 0.5034722222222222,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0025",
+        "lang": "es",
+        "chars": 68,
+        "centroid_similarity": 0.6624452083404712,
+        "mean_norm_rank": 0.9861111111111112,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0026",
+        "lang": "es",
+        "chars": 376,
+        "centroid_similarity": 0.7408564391152125,
+        "mean_norm_rank": 0.4722222222222222,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0027",
+        "lang": "es",
+        "chars": 2197,
+        "centroid_similarity": 0.7797860581197806,
+        "mean_norm_rank": 0.1875,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0028",
+        "lang": "es",
+        "chars": 2017,
+        "centroid_similarity": 0.7639120201486815,
+        "mean_norm_rank": 0.21875,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0029",
+        "lang": "es",
+        "chars": 1961,
+        "centroid_similarity": 0.7604608401180379,
+        "mean_norm_rank": 0.3263888888888889,
+        "questions": 9
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0030",
+        "lang": "es",
+        "chars": 2325,
+        "centroid_similarity": 0.7324503576659634,
+        "mean_norm_rank": 0.50625,
+        "questions": 10
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0031",
+        "lang": "es",
+        "chars": 2255,
+        "centroid_similarity": 0.6835466117490215,
+        "mean_norm_rank": 0.496875,
+        "questions": 10
+      },
+      {
+        "document": "d359c37e0bc3c87a",
+        "chunk": "c0032",
+        "lang": "es",
+        "chars": 1120,
+        "centroid_similarity": 0.7242081583609998,
+        "mean_norm_rank": 0.4930555555555556,
+        "questions": 9
+      },
+      {
+        "document": "817cfff2927c6c65",
+        "chunk": "c0000",
+        "lang": "zh",
+        "chars": 646,
+        "centroid_similarity": 0.8493932702991147,
+        "mean_norm_rank": 0.25,
+        "questions": 2
+      },
+      {
+        "document": "817cfff2927c6c65",
+        "chunk": "c0001",
+        "lang": "zh",
+        "chars": 1168,
+        "centroid_similarity": 0.8265852631758348,
+        "mean_norm_rank": 1.0,
+        "questions": 1
+      },
+      {
+        "document": "817cfff2927c6c65",
+        "chunk": "c0002",
+        "lang": "zh",
+        "chars": 761,
+        "centroid_similarity": 0.8159543296947452,
+        "mean_norm_rank": 1.0,
+        "questions": 1
+      },
+      {
+        "document": "817cfff2927c6c65",
+        "chunk": "c0000",
+        "lang": "es",
+        "chars": 646,
+        "centroid_similarity": 0.8493932702991147,
+        "mean_norm_rank": 0.25,
+        "questions": 2
+      },
+      {
+        "document": "817cfff2927c6c65",
+        "chunk": "c0001",
+        "lang": "es",
+        "chars": 1168,
+        "centroid_similarity": 0.8265852631758348,
+        "mean_norm_rank": 1.0,
+        "questions": 1
+      },
+      {
+        "document": "817cfff2927c6c65",
+        "chunk": "c0002",
+        "lang": "es",
+        "chars": 761,
+        "centroid_similarity": 0.8159543296947452,
+        "mean_norm_rank": 1.0,
+        "questions": 1
+      },
+      {
+        "document": "169a1f2133fe5643",
+        "chunk": "c0000",
+        "lang": "zh",
+        "chars": 349,
+        "centroid_similarity": 0.7880700470576791,
+        "mean_norm_rank": 0.35,
+        "questions": 6
+      },
+      {
+        "document": "169a1f2133fe5643",
+        "chunk": "c0001",
+        "lang": "zh",
+        "chars": 271,
+        "centroid_similarity": 0.6801068650696733,
+        "mean_norm_rank": 0.475,
+        "questions": 4
+      },
+      {
+        "document": "169a1f2133fe5643",
+        "chunk": "c0002",
+        "lang": "zh",
+        "chars": 45,
+        "centroid_similarity": 0.7316732043567741,
+        "mean_norm_rank": 0.65,
+        "questions": 6
+      },
+      {
+        "document": "169a1f2133fe5643",
+        "chunk": "c0003",
+        "lang": "zh",
+        "chars": 25,
+        "centroid_similarity": 0.7348162041465174,
+        "mean_norm_rank": 0.4166666666666667,
+        "questions": 6
+      },
+      {
+        "document": "169a1f2133fe5643",
+        "chunk": "c0004",
+        "lang": "zh",
+        "chars": 47,
+        "centroid_similarity": 0.6611823914789781,
+        "mean_norm_rank": 0.7,
+        "questions": 6
+      },
+      {
+        "document": "169a1f2133fe5643",
+        "chunk": "c0005",
+        "lang": "zh",
+        "chars": 1647,
+        "centroid_similarity": 0.7958489355281566,
+        "mean_norm_rank": 0.0,
+        "questions": 2
+      },
+      {
+        "document": "169a1f2133fe5643",
+        "chunk": "c0006",
+        "lang": "zh",
+        "chars": 256,
+        "centroid_similarity": 0.7268716382468932,
+        "mean_norm_rank": 0.95,
+        "questions": 6
+      },
+      {
+        "document": "169a1f2133fe5643",
+        "chunk": "c0007",
+        "lang": "zh",
+        "chars": 590,
+        "centroid_similarity": 0.684364173428891,
+        "mean_norm_rank": 0.18333333333333335,
+        "questions": 6
+      },
+      {
+        "document": "169a1f2133fe5643",
+        "chunk": "c0008",
+        "lang": "zh",
+        "chars": 32,
+        "centroid_similarity": 0.6988798478953082,
+        "mean_norm_rank": 0.8666666666666667,
+        "questions": 6
+      },
+      {
+        "document": "169a1f2133fe5643",
+        "chunk": "c0009",
+        "lang": "zh",
+        "chars": 32,
+        "centroid_similarity": 0.7153998489910138,
+        "mean_norm_rank": 0.7833333333333333,
+        "questions": 6
+      },
+      {
+        "document": "169a1f2133fe5643",
+        "chunk": "c0010",
+        "lang": "zh",
+        "chars": 210,
+        "centroid_similarity": 0.7471268740621292,
+        "mean_norm_rank": 0.26,
+        "questions": 5
+      },
+      {
+        "document": "169a1f2133fe5643",
+        "chunk": "c0000",
+        "lang": "es",
+        "chars": 349,
+        "centroid_similarity": 0.7880700470576791,
+        "mean_norm_rank": 0.4,
+        "questions": 6
+      },
+      {
+        "document": "169a1f2133fe5643",
+        "chunk": "c0001",
+        "lang": "es",
+        "chars": 271,
+        "centroid_similarity": 0.6801068650696733,
+        "mean_norm_rank": 0.325,
+        "questions": 4
+      },
+      {
+        "document": "169a1f2133fe5643",
+        "chunk": "c0002",
+        "lang": "es",
+        "chars": 45,
+        "centroid_similarity": 0.7316732043567741,
+        "mean_norm_rank": 0.65,
+        "questions": 6
+      },
+      {
+        "document": "169a1f2133fe5643",
+        "chunk": "c0003",
+        "lang": "es",
+        "chars": 25,
+        "centroid_similarity": 0.7348162041465174,
+        "mean_norm_rank": 0.4166666666666667,
+        "questions": 6
+      },
+      {
+        "document": "169a1f2133fe5643",
+        "chunk": "c0004",
+        "lang": "es",
+        "chars": 47,
+        "centroid_similarity": 0.6611823914789781,
+        "mean_norm_rank": 0.8666666666666667,
+        "questions": 6
+      },
+      {
+        "document": "169a1f2133fe5643",
+        "chunk": "c0005",
+        "lang": "es",
+        "chars": 1647,
+        "centroid_similarity": 0.7958489355281566,
+        "mean_norm_rank": 0.1,
+        "questions": 2
+      },
+      {
+        "document": "169a1f2133fe5643",
+        "chunk": "c0006",
+        "lang": "es",
+        "chars": 256,
+        "centroid_similarity": 0.7268716382468932,
+        "mean_norm_rank": 0.9166666666666666,
+        "questions": 6
+      },
+      {
+        "document": "169a1f2133fe5643",
+        "chunk": "c0007",
+        "lang": "es",
+        "chars": 590,
+        "centroid_similarity": 0.684364173428891,
+        "mean_norm_rank": 0.13333333333333333,
+        "questions": 6
+      },
+      {
+        "document": "169a1f2133fe5643",
+        "chunk": "c0008",
+        "lang": "es",
+        "chars": 32,
+        "centroid_similarity": 0.6988798478953082,
+        "mean_norm_rank": 0.8166666666666667,
+        "questions": 6
+      },
+      {
+        "document": "169a1f2133fe5643",
+        "chunk": "c0009",
+        "lang": "es",
+        "chars": 32,
+        "centroid_similarity": 0.7153998489910138,
+        "mean_norm_rank": 0.7333333333333333,
+        "questions": 6
+      },
+      {
+        "document": "169a1f2133fe5643",
+        "chunk": "c0010",
+        "lang": "es",
+        "chars": 210,
+        "centroid_similarity": 0.7471268740621292,
+        "mean_norm_rank": 0.26,
+        "questions": 5
+      },
+      {
+        "document": "5883b02cd922a64f",
+        "chunk": "c0000",
+        "lang": "zh",
+        "chars": 347,
+        "centroid_similarity": 0.7425182914081323,
+        "mean_norm_rank": 0.6499999999999999,
+        "questions": 2
+      },
+      {
+        "document": "5883b02cd922a64f",
+        "chunk": "c0002",
+        "lang": "zh",
+        "chars": 19,
+        "centroid_similarity": 0.666973036850949,
+        "mean_norm_rank": 1.0,
+        "questions": 2
+      },
+      {
+        "document": "5883b02cd922a64f",
+        "chunk": "c0003",
+        "lang": "zh",
+        "chars": 25,
+        "centroid_similarity": 0.7615938278363821,
+        "mean_norm_rank": 0.8,
+        "questions": 2
+      },
+      {
+        "document": "5883b02cd922a64f",
+        "chunk": "c0004",
+        "lang": "zh",
+        "chars": 51,
+        "centroid_similarity": 0.6025364910985592,
+        "mean_norm_rank": 0.5,
+        "questions": 2
+      },
+      {
+        "document": "5883b02cd922a64f",
+        "chunk": "c0005",
+        "lang": "zh",
+        "chars": 348,
+        "centroid_similarity": 0.7401589633830474,
+        "mean_norm_rank": 0.6499999999999999,
+        "questions": 2
+      },
+      {
+        "document": "5883b02cd922a64f",
+        "chunk": "c0006",
+        "lang": "zh",
+        "chars": 260,
+        "centroid_similarity": 0.7279232124082988,
+        "mean_norm_rank": 0.35,
+        "questions": 2
+      },
+      {
+        "document": "5883b02cd922a64f",
+        "chunk": "c0008",
+        "lang": "zh",
+        "chars": 26,
+        "centroid_similarity": 0.6744114086206623,
+        "mean_norm_rank": 0.9,
+        "questions": 2
+      },
+      {
+        "document": "5883b02cd922a64f",
+        "chunk": "c0009",
+        "lang": "zh",
+        "chars": 1193,
+        "centroid_similarity": 0.7463096159942604,
+        "mean_norm_rank": 0.35,
+        "questions": 2
+      },
+      {
+        "document": "5883b02cd922a64f",
+        "chunk": "c0010",
+        "lang": "zh",
+        "chars": 324,
+        "centroid_similarity": 0.7750442045949948,
+        "mean_norm_rank": 0.2,
+        "questions": 2
+      },
+      {
+        "document": "5883b02cd922a64f",
+        "chunk": "c0000",
+        "lang": "es",
+        "chars": 347,
+        "centroid_similarity": 0.7425182914081323,
+        "mean_norm_rank": 0.7,
+        "questions": 2
+      },
+      {
+        "document": "5883b02cd922a64f",
+        "chunk": "c0002",
+        "lang": "es",
+        "chars": 19,
+        "centroid_similarity": 0.666973036850949,
+        "mean_norm_rank": 1.0,
+        "questions": 2
+      },
+      {
+        "document": "5883b02cd922a64f",
+        "chunk": "c0003",
+        "lang": "es",
+        "chars": 25,
+        "centroid_similarity": 0.7615938278363821,
+        "mean_norm_rank": 0.8500000000000001,
+        "questions": 2
+      },
+      {
+        "document": "5883b02cd922a64f",
+        "chunk": "c0004",
+        "lang": "es",
+        "chars": 51,
+        "centroid_similarity": 0.6025364910985592,
+        "mean_norm_rank": 0.55,
+        "questions": 2
+      },
+      {
+        "document": "5883b02cd922a64f",
+        "chunk": "c0005",
+        "lang": "es",
+        "chars": 348,
+        "centroid_similarity": 0.7401589633830474,
+        "mean_norm_rank": 0.55,
+        "questions": 2
+      },
+      {
+        "document": "5883b02cd922a64f",
+        "chunk": "c0006",
+        "lang": "es",
+        "chars": 260,
+        "centroid_similarity": 0.7279232124082988,
+        "mean_norm_rank": 0.4,
+        "questions": 2
+      },
+      {
+        "document": "5883b02cd922a64f",
+        "chunk": "c0008",
+        "lang": "es",
+        "chars": 26,
+        "centroid_similarity": 0.6744114086206623,
+        "mean_norm_rank": 0.8500000000000001,
+        "questions": 2
+      },
+      {
+        "document": "5883b02cd922a64f",
+        "chunk": "c0009",
+        "lang": "es",
+        "chars": 1193,
+        "centroid_similarity": 0.7463096159942604,
+        "mean_norm_rank": 0.25,
+        "questions": 2
+      },
+      {
+        "document": "5883b02cd922a64f",
+        "chunk": "c0010",
+        "lang": "es",
+        "chars": 324,
+        "centroid_similarity": 0.7750442045949948,
+        "mean_norm_rank": 0.25,
+        "questions": 2
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0000",
+        "lang": "zh",
+        "chars": 411,
+        "centroid_similarity": 0.7243901241416095,
+        "mean_norm_rank": 0.6180555555555556,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0001",
+        "lang": "zh",
+        "chars": 776,
+        "centroid_similarity": 0.7612051520142349,
+        "mean_norm_rank": 0.5277777777777778,
+        "questions": 1
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0002",
+        "lang": "zh",
+        "chars": 19,
+        "centroid_similarity": 0.5728695366587356,
+        "mean_norm_rank": 0.8819444444444444,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0003",
+        "lang": "zh",
+        "chars": 177,
+        "centroid_similarity": 0.7314134983947838,
+        "mean_norm_rank": 0.4930555555555556,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0004",
+        "lang": "zh",
+        "chars": 396,
+        "centroid_similarity": 0.6584626431260319,
+        "mean_norm_rank": 0.8472222222222222,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0005",
+        "lang": "zh",
+        "chars": 209,
+        "centroid_similarity": 0.6901737623827945,
+        "mean_norm_rank": 0.7569444444444444,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0006",
+        "lang": "zh",
+        "chars": 12,
+        "centroid_similarity": 0.6255126414731383,
+        "mean_norm_rank": 0.7291666666666667,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0007",
+        "lang": "zh",
+        "chars": 215,
+        "centroid_similarity": 0.7591752531298802,
+        "mean_norm_rank": 0.5625,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0008",
+        "lang": "zh",
+        "chars": 305,
+        "centroid_similarity": 0.7653646160495914,
+        "mean_norm_rank": 0.5555555555555556,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0009",
+        "lang": "zh",
+        "chars": 1423,
+        "centroid_similarity": 0.8162660196246421,
+        "mean_norm_rank": 0.2361111111111111,
+        "questions": 2
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0010",
+        "lang": "zh",
+        "chars": 1293,
+        "centroid_similarity": 0.8318969177964147,
+        "mean_norm_rank": 0.09259259259259259,
+        "questions": 3
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0011",
+        "lang": "zh",
+        "chars": 1033,
+        "centroid_similarity": 0.8222017529019068,
+        "mean_norm_rank": 0.3055555555555556,
+        "questions": 3
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0012",
+        "lang": "zh",
+        "chars": 1299,
+        "centroid_similarity": 0.8251759048672673,
+        "mean_norm_rank": 0.09722222222222222,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0013",
+        "lang": "zh",
+        "chars": 1303,
+        "centroid_similarity": 0.8351449032528963,
+        "mean_norm_rank": 0.1388888888888889,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0014",
+        "lang": "zh",
+        "chars": 1397,
+        "centroid_similarity": 0.8308395945744297,
+        "mean_norm_rank": 0.05555555555555555,
+        "questions": 2
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0015",
+        "lang": "zh",
+        "chars": 1360,
+        "centroid_similarity": 0.8394457405092154,
+        "mean_norm_rank": 0.17592592592592593,
+        "questions": 3
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0016",
+        "lang": "zh",
+        "chars": 1389,
+        "centroid_similarity": 0.8076664096101969,
+        "mean_norm_rank": 0.2152777777777778,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0017",
+        "lang": "zh",
+        "chars": 907,
+        "centroid_similarity": 0.8273378088889687,
+        "mean_norm_rank": 0.25925925925925924,
+        "questions": 3
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0018",
+        "lang": "zh",
+        "chars": 268,
+        "centroid_similarity": 0.7194948783415767,
+        "mean_norm_rank": 0.7569444444444444,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0019",
+        "lang": "zh",
+        "chars": 744,
+        "centroid_similarity": 0.7621922236487413,
+        "mean_norm_rank": 0.7222222222222222,
+        "questions": 2
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0020",
+        "lang": "zh",
+        "chars": 196,
+        "centroid_similarity": 0.7283544737978054,
+        "mean_norm_rank": 0.2847222222222222,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0021",
+        "lang": "zh",
+        "chars": 335,
+        "centroid_similarity": 0.6957275845705528,
+        "mean_norm_rank": 0.2777777777777778,
+        "questions": 2
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0022",
+        "lang": "zh",
+        "chars": 346,
+        "centroid_similarity": 0.7121948999528229,
+        "mean_norm_rank": 0.4166666666666667,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0023",
+        "lang": "zh",
+        "chars": 117,
+        "centroid_similarity": 0.6723368225083921,
+        "mean_norm_rank": 0.4814814814814815,
+        "questions": 3
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0024",
+        "lang": "zh",
+        "chars": 26,
+        "centroid_similarity": 0.551236194625705,
+        "mean_norm_rank": 0.9861111111111112,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0025",
+        "lang": "zh",
+        "chars": 1088,
+        "centroid_similarity": 0.7755262195885073,
+        "mean_norm_rank": 0.4027777777777778,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0026",
+        "lang": "zh",
+        "chars": 284,
+        "centroid_similarity": 0.7292940198239665,
+        "mean_norm_rank": 0.7222222222222222,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0027",
+        "lang": "zh",
+        "chars": 33,
+        "centroid_similarity": 0.5785924330812818,
+        "mean_norm_rank": 0.7916666666666666,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0028",
+        "lang": "zh",
+        "chars": 451,
+        "centroid_similarity": 0.790411866512742,
+        "mean_norm_rank": 0.4930555555555556,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0029",
+        "lang": "zh",
+        "chars": 82,
+        "centroid_similarity": 0.7094304082197472,
+        "mean_norm_rank": 0.513888888888889,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0030",
+        "lang": "zh",
+        "chars": 161,
+        "centroid_similarity": 0.7176846884087005,
+        "mean_norm_rank": 0.4375,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0031",
+        "lang": "zh",
+        "chars": 890,
+        "centroid_similarity": 0.6898474859333981,
+        "mean_norm_rank": 0.9583333333333333,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0032",
+        "lang": "zh",
+        "chars": 1401,
+        "centroid_similarity": 0.7953921178933705,
+        "mean_norm_rank": 0.6458333333333333,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0033",
+        "lang": "zh",
+        "chars": 2081,
+        "centroid_similarity": 0.6710589734554417,
+        "mean_norm_rank": 0.7361111111111112,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0034",
+        "lang": "zh",
+        "chars": 1967,
+        "centroid_similarity": 0.7776873097254692,
+        "mean_norm_rank": 0.6041666666666667,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0035",
+        "lang": "zh",
+        "chars": 652,
+        "centroid_similarity": 0.7553933148917575,
+        "mean_norm_rank": 0.6666666666666666,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0036",
+        "lang": "zh",
+        "chars": 93,
+        "centroid_similarity": 0.6652653979101879,
+        "mean_norm_rank": 0.7708333333333334,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0000",
+        "lang": "es",
+        "chars": 411,
+        "centroid_similarity": 0.7243901241416095,
+        "mean_norm_rank": 0.6736111111111112,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0001",
+        "lang": "es",
+        "chars": 776,
+        "centroid_similarity": 0.7612051520142349,
+        "mean_norm_rank": 0.4444444444444444,
+        "questions": 1
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0002",
+        "lang": "es",
+        "chars": 19,
+        "centroid_similarity": 0.5728695366587356,
+        "mean_norm_rank": 0.8888888888888888,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0003",
+        "lang": "es",
+        "chars": 177,
+        "centroid_similarity": 0.7314134983947838,
+        "mean_norm_rank": 0.6597222222222222,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0004",
+        "lang": "es",
+        "chars": 396,
+        "centroid_similarity": 0.6584626431260319,
+        "mean_norm_rank": 0.8680555555555556,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0005",
+        "lang": "es",
+        "chars": 209,
+        "centroid_similarity": 0.6901737623827945,
+        "mean_norm_rank": 0.7361111111111112,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0006",
+        "lang": "es",
+        "chars": 12,
+        "centroid_similarity": 0.6255126414731383,
+        "mean_norm_rank": 0.7638888888888888,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0007",
+        "lang": "es",
+        "chars": 215,
+        "centroid_similarity": 0.7591752531298802,
+        "mean_norm_rank": 0.5208333333333334,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0008",
+        "lang": "es",
+        "chars": 305,
+        "centroid_similarity": 0.7653646160495914,
+        "mean_norm_rank": 0.5902777777777778,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0009",
+        "lang": "es",
+        "chars": 1423,
+        "centroid_similarity": 0.8162660196246421,
+        "mean_norm_rank": 0.1388888888888889,
+        "questions": 2
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0010",
+        "lang": "es",
+        "chars": 1293,
+        "centroid_similarity": 0.8318969177964147,
+        "mean_norm_rank": 0.07407407407407407,
+        "questions": 3
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0011",
+        "lang": "es",
+        "chars": 1033,
+        "centroid_similarity": 0.8222017529019068,
+        "mean_norm_rank": 0.22222222222222224,
+        "questions": 3
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0012",
+        "lang": "es",
+        "chars": 1299,
+        "centroid_similarity": 0.8251759048672673,
+        "mean_norm_rank": 0.125,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0013",
+        "lang": "es",
+        "chars": 1303,
+        "centroid_similarity": 0.8351449032528963,
+        "mean_norm_rank": 0.1111111111111111,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0014",
+        "lang": "es",
+        "chars": 1397,
+        "centroid_similarity": 0.8308395945744297,
+        "mean_norm_rank": 0.1388888888888889,
+        "questions": 2
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0015",
+        "lang": "es",
+        "chars": 1360,
+        "centroid_similarity": 0.8394457405092154,
+        "mean_norm_rank": 0.19444444444444445,
+        "questions": 3
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0016",
+        "lang": "es",
+        "chars": 1389,
+        "centroid_similarity": 0.8076664096101969,
+        "mean_norm_rank": 0.1388888888888889,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0017",
+        "lang": "es",
+        "chars": 907,
+        "centroid_similarity": 0.8273378088889687,
+        "mean_norm_rank": 0.23148148148148148,
+        "questions": 3
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0018",
+        "lang": "es",
+        "chars": 268,
+        "centroid_similarity": 0.7194948783415767,
+        "mean_norm_rank": 0.7777777777777778,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0019",
+        "lang": "es",
+        "chars": 744,
+        "centroid_similarity": 0.7621922236487413,
+        "mean_norm_rank": 0.625,
+        "questions": 2
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0020",
+        "lang": "es",
+        "chars": 196,
+        "centroid_similarity": 0.7283544737978054,
+        "mean_norm_rank": 0.3611111111111111,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0021",
+        "lang": "es",
+        "chars": 335,
+        "centroid_similarity": 0.6957275845705528,
+        "mean_norm_rank": 0.41666666666666663,
+        "questions": 2
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0022",
+        "lang": "es",
+        "chars": 346,
+        "centroid_similarity": 0.7121948999528229,
+        "mean_norm_rank": 0.4375,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0023",
+        "lang": "es",
+        "chars": 117,
+        "centroid_similarity": 0.6723368225083921,
+        "mean_norm_rank": 0.6388888888888888,
+        "questions": 3
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0024",
+        "lang": "es",
+        "chars": 26,
+        "centroid_similarity": 0.551236194625705,
+        "mean_norm_rank": 1.0,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0025",
+        "lang": "es",
+        "chars": 1088,
+        "centroid_similarity": 0.7755262195885073,
+        "mean_norm_rank": 0.4166666666666667,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0026",
+        "lang": "es",
+        "chars": 284,
+        "centroid_similarity": 0.7292940198239665,
+        "mean_norm_rank": 0.7152777777777778,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0027",
+        "lang": "es",
+        "chars": 33,
+        "centroid_similarity": 0.5785924330812818,
+        "mean_norm_rank": 0.8402777777777778,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0028",
+        "lang": "es",
+        "chars": 451,
+        "centroid_similarity": 0.790411866512742,
+        "mean_norm_rank": 0.5277777777777778,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0029",
+        "lang": "es",
+        "chars": 82,
+        "centroid_similarity": 0.7094304082197472,
+        "mean_norm_rank": 0.5555555555555556,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0030",
+        "lang": "es",
+        "chars": 161,
+        "centroid_similarity": 0.7176846884087005,
+        "mean_norm_rank": 0.4791666666666667,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0031",
+        "lang": "es",
+        "chars": 890,
+        "centroid_similarity": 0.6898474859333981,
+        "mean_norm_rank": 0.8958333333333334,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0032",
+        "lang": "es",
+        "chars": 1401,
+        "centroid_similarity": 0.7953921178933705,
+        "mean_norm_rank": 0.5833333333333333,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0033",
+        "lang": "es",
+        "chars": 2081,
+        "centroid_similarity": 0.6710589734554417,
+        "mean_norm_rank": 0.5902777777777778,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0034",
+        "lang": "es",
+        "chars": 1967,
+        "centroid_similarity": 0.7776873097254692,
+        "mean_norm_rank": 0.5138888888888888,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0035",
+        "lang": "es",
+        "chars": 652,
+        "centroid_similarity": 0.7553933148917575,
+        "mean_norm_rank": 0.5347222222222222,
+        "questions": 4
+      },
+      {
+        "document": "5a4c36e0022f4917",
+        "chunk": "c0036",
+        "lang": "es",
+        "chars": 93,
+        "centroid_similarity": 0.6652653979101879,
+        "mean_norm_rank": 0.7777777777777778,
+        "questions": 4
+      }
+    ]
+  },
+  "mixed": {
+    "c0027": {
+      "whole": {
+        "chars": 2197,
+        "centroid_similarity": 0.7798,
+        "zh": {
+          "ranks": [
+            11,
+            23,
+            3,
+            7,
+            2,
+            3,
+            5,
+            5,
+            3
+          ],
+          "median": 5,
+          "top3": 4
+        },
+        "es": {
+          "ranks": [
+            9,
+            27,
+            3,
+            5,
+            2,
+            4,
+            3,
+            5,
+            5
+          ],
+          "median": 5,
+          "top3": 3
+        }
+      },
+      "parts": [
+        {
+          "chars": 78,
+          "centroid_similarity": 0.6124,
+          "zh": {
+            "ranks": [
+              29,
+              33,
+              28,
+              25,
+              26,
+              10,
+              16,
+              31,
+              28
+            ],
+            "median": 28,
+            "top3": 0
+          },
+          "es": {
+            "ranks": [
+              28,
+              33,
+              30,
+              14,
+              15,
+              8,
+              22,
+              28,
+              31
+            ],
+            "median": 28,
+            "top3": 0
+          },
+          "text": "XI. CLÁUSULA DÉCIMO PRIMERA: Ejecución de garantías por falta de renovación. -"
+        },
+        {
+          "chars": 270,
+          "centroid_similarity": 0.6952,
+          "zh": {
+            "ranks": [
+              22,
+              30,
+              14,
+              16,
+              6,
+              13,
+              14,
+              27,
+              17
+            ],
+            "median": 16,
+            "top3": 0
+          },
+          "es": {
+            "ranks": [
+              22,
+              32,
+              22,
+              17,
+              5,
+              10,
+              16,
+              28,
+              23
+            ],
+            "median": 22,
+            "top3": 0
+          },
+          "text": "LA EMPRESA puede solicitar la ejecución de las garantías cuando EL CONTRATISTA n"
+        },
+        {
+          "chars": 73,
+          "centroid_similarity": 0.6558,
+          "zh": {
+            "ranks": [
+              28,
+              30,
+              30,
+              28,
+              29,
+              26,
+              29,
+              29,
+              28
+            ],
+            "median": 29,
+            "top3": 0
+          },
+          "es": {
+            "ranks": [
+              28,
+              30,
+              23,
+              19,
+              28,
+              22,
+              28,
+              14,
+              25
+            ],
+            "median": 25,
+            "top3": 0
+          },
+          "text": "XII. CLÁUSULA DÉCIMO SEGUNDA: Recepción y conformidad de la prestación. -"
+        },
+        {
+          "chars": 742,
+          "centroid_similarity": 0.7222,
+          "zh": {
+            "ranks": [
+              12,
+              30,
+              10,
+              17,
+              6,
+              22,
+              24,
+              4,
+              8
+            ],
+            "median": 12,
+            "top3": 0
+          },
+          "es": {
+            "ranks": [
+              11,
+              25,
+              3,
+              14,
+              10,
+              12,
+              9,
+              3,
+              4
+            ],
+            "median": 10,
+            "top3": 2
+          },
+          "text": "La recepción y conformidad de la prestación se regula por lo dispuesto en el art"
+        },
+        {
+          "chars": 673,
+          "centroid_similarity": 0.6899,
+          "zh": {
+            "ranks": [
+              28,
+              30,
+              14,
+              29,
+              6,
+              13,
+              3,
+              21,
+              23
+            ],
+            "median": 21,
+            "top3": 1
+          },
+          "es": {
+            "ranks": [
+              26,
+              30,
+              18,
+              28,
+              5,
+              6,
+              3,
+              27,
+              14
+            ],
+            "median": 18,
+            "top3": 1
+          },
+          "text": "De existir observaciones, LA EMPRESA debe comunicar las mismas al CONTRATISTA , "
+        },
+        {
+          "chars": 348,
+          "centroid_similarity": 0.6611,
+          "zh": {
+            "ranks": [
+              31,
+              30,
+              24,
+              28,
+              22,
+              25,
+              14,
+              21,
+              23
+            ],
+            "median": 24,
+            "top3": 0
+          },
+          "es": {
+            "ranks": [
+              29,
+              30,
+              11,
+              25,
+              24,
+              22,
+              9,
+              12,
+              15
+            ],
+            "median": 22,
+            "top3": 0
+          },
+          "text": "Este procedimiento no resulta aplicable cuando los bienes manifiestamente no cum"
+        }
+      ]
+    },
+    "c0016": {
+      "whole": {
+        "chars": 1813,
+        "centroid_similarity": 0.7921,
+        "zh": {
+          "ranks": [
+            9,
+            14,
+            6,
+            4,
+            14,
+            3,
+            3,
+            1
+          ],
+          "median": 5.0,
+          "top3": 3
+        },
+        "es": {
+          "ranks": [
+            5,
+            15,
+            10,
+            6,
+            13,
+            6,
+            3,
+            1
+          ],
+          "median": 6.0,
+          "top3": 2
+        }
+      },
+      "parts": [
+        {
+          "chars": 105,
+          "centroid_similarity": 0.6048,
+          "zh": {
+            "ranks": [
+              29,
+              30,
+              28,
+              28,
+              26,
+              19,
+              31,
+              29
+            ],
+            "median": 28.5,
+            "top3": 0
+          },
+          "es": {
+            "ranks": [
+              28,
+              30,
+              27,
+              28,
+              27,
+              24,
+              29,
+              31
+            ],
+            "median": 28.0,
+            "top3": 0
+          },
+          "text": "De no cumplir con lo solicitado, el comprobante de pago no será tramitado y se p"
+        },
+        {
+          "chars": 242,
+          "centroid_similarity": 0.6676,
+          "zh": {
+            "ranks": [
+              18,
+              30,
+              27,
+              28,
+              28,
+              29,
+              27,
+              24
+            ],
+            "median": 27.5,
+            "top3": 0
+          },
+          "es": {
+            "ranks": [
+              12,
+              24,
+              27,
+              28,
+              28,
+              29,
+              27,
+              21
+            ],
+            "median": 27.0,
+            "top3": 0
+          },
+          "text": "Dicha documentación se debe presentar en mesa de partes virtual de LA EMPRESA : "
+        },
+        {
+          "chars": 382,
+          "centroid_similarity": 0.7077,
+          "zh": {
+            "ranks": [
+              28,
+              30,
+              24,
+              9,
+              22,
+              16,
+              5,
+              20
+            ],
+            "median": 21.0,
+            "top3": 0
+          },
+          "es": {
+            "ranks": [
+              26,
+              30,
+              13,
+              7,
+              12,
+              9,
+              5,
+              6
+            ],
+            "median": 10.5,
+            "top3": 0
+          },
+          "text": "Para tal efecto, el responsable de otorgar la conformidad de la prestación deber"
+        },
+        {
+          "chars": 287,
+          "centroid_similarity": 0.7056,
+          "zh": {
+            "ranks": [
+              18,
+              30,
+              22,
+              6,
+              17,
+              12,
+              5,
+              16
+            ],
+            "median": 16.5,
+            "top3": 0
+          },
+          "es": {
+            "ranks": [
+              15,
+              25,
+              19,
+              6,
+              10,
+              6,
+              5,
+              6
+            ],
+            "median": 8.0,
+            "top3": 0
+          },
+          "text": "LA EMPRESA paga las contraprestaciones pactadas a EL CONTRATISTA dentro de los d"
+        },
+        {
+          "chars": 360,
+          "centroid_similarity": 0.6621,
+          "zh": {
+            "ranks": [
+              29,
+              30,
+              29,
+              26,
+              27,
+              11,
+              27,
+              27
+            ],
+            "median": 27.0,
+            "top3": 0
+          },
+          "es": {
+            "ranks": [
+              23,
+              22,
+              28,
+              15,
+              21,
+              3,
+              28,
+              23
+            ],
+            "median": 22.5,
+            "top3": 1
+          },
+          "text": "En caso de retraso en el pago por parte de LA EMPRESA , salvo que se deba a caso"
+        },
+        {
+          "chars": 74,
+          "centroid_similarity": 0.6515,
+          "zh": {
+            "ranks": [
+              29,
+              33,
+              28,
+              28,
+              27,
+              26,
+              30,
+              25
+            ],
+            "median": 28.0,
+            "top3": 0
+          },
+          "es": {
+            "ranks": [
+              26,
+              30,
+              19,
+              21,
+              27,
+              21,
+              19,
+              16
+            ],
+            "median": 21.0,
+            "top3": 0
+          },
+          "text": "VIII. CLÁUSULA OCTAVA. - Plazo y lugar de la ejecución de la prestación. -"
+        },
+        {
+          "chars": 306,
+          "centroid_similarity": 0.7053,
+          "zh": {
+            "ranks": [
+              13,
+              8,
+              16,
+              6,
+              26,
+              16,
+              2,
+              2
+            ],
+            "median": 10.5,
+            "top3": 2
+          },
+          "es": {
+            "ranks": [
+              19,
+              9,
+              19,
+              7,
+              27,
+              10,
+              1,
+              1
+            ],
+            "median": 9.5,
+            "top3": 2
+          },
+          "text": "Los bienes materia del presente contrato se entregarán en el plazo de 690 días c"
+        }
+      ]
+    },
+    "c0011": {
+      "whole": {
+        "chars": 2084,
+        "centroid_similarity": 0.7879,
+        "zh": {
+          "ranks": [
+            7,
+            18,
+            5,
+            8,
+            2,
+            8,
+            4,
+            4,
+            8
+          ],
+          "median": 7,
+          "top3": 1
+        },
+        "es": {
+          "ranks": [
+            10,
+            23,
+            10,
+            12,
+            3,
+            18,
+            7,
+            12,
+            9
+          ],
+          "median": 10,
+          "top3": 1
+        }
+      },
+      "parts": [
+        {
+          "chars": 53,
+          "centroid_similarity": 0.6537,
+          "zh": {
+            "ranks": [
+              18,
+              27,
+              23,
+              17,
+              25,
+              25,
+              28,
+              28,
+              21
+            ],
+            "median": 25,
+            "top3": 0
+          },
+          "es": {
+            "ranks": [
+              26,
+              30,
+              28,
+              19,
+              27,
+              27,
+              29,
+              28,
+              27
+            ],
+            "median": 27,
+            "top3": 0
+          },
+          "text": "V. CLÁUSULA QUINTA. - Garantía Técnico - Comercial. -"
+        },
+        {
+          "chars": 367,
+          "centroid_similarity": 0.7452,
+          "zh": {
+            "ranks": [
+              6,
+              19,
+              6,
+              12,
+              17,
+              14,
+              12,
+              4,
+              10
+            ],
+            "median": 12,
+            "top3": 0
+          },
+          "es": {
+            "ranks": [
+              9,
+              23,
+              11,
+              17,
+              13,
+              24,
+              14,
+              11,
+              11
+            ],
+            "median": 13,
+            "top3": 0
+          },
+          "text": "EL CONTRATISTA adjuntó para la suscripción del contrato, una garantía técnico-co"
+        },
+        {
+          "chars": 270,
+          "centroid_similarity": 0.72,
+          "zh": {
+            "ranks": [
+              18,
+              25,
+              17,
+              28,
+              2,
+              21,
+              16,
+              23,
+              23
+            ],
+            "median": 21,
+            "top3": 1
+          },
+          "es": {
+            "ranks": [
+              16,
+              19,
+              18,
+              27,
+              3,
+              22,
+              8,
+              27,
+              19
+            ],
+            "median": 19,
+            "top3": 1
+          },
+          "text": "Durante este plazo, EL CONTRATISTA se compromete a la reposición total de los me"
+        },
+        {
+          "chars": 629,
+          "centroid_similarity": 0.7275,
+          "zh": {
+            "ranks": [
+              23,
+              30,
+              13,
+              24,
+              6,
+              23,
+              8,
+              6,
+              19
+            ],
+            "median": 19,
+            "top3": 0
+          },
+          "es": {
+            "ranks": [
+              16,
+              30,
+              11,
+              17,
+              3,
+              22,
+              8,
+              13,
+              12
+            ],
+            "median": 13,
+            "top3": 1
+          },
+          "text": "Durante  el  período  de  garantía,  ante  la  falla  de  alguno  de  los  medid"
+        },
+        {
+          "chars": 321,
+          "centroid_similarity": 0.6229,
+          "zh": {
+            "ranks": [
+              31,
+              33,
+              31,
+              28,
+              6,
+              27,
+              25,
+              31,
+              33
+            ],
+            "median": 31,
+            "top3": 0
+          },
+          "es": {
+            "ranks": [
+              23,
+              28,
+              31,
+              26,
+              3,
+              24,
+              22,
+              31,
+              29
+            ],
+            "median": 26,
+            "top3": 1
+          },
+          "text": "En la eventualidad de existir discrepancia en la causa de la falla, las partes d"
+        },
+        {
+          "chars": 434,
+          "centroid_similarity": 0.7014,
+          "zh": {
+            "ranks": [
+              28,
+              30,
+              20,
+              28,
+              2,
+              23,
+              8,
+              13,
+              24
+            ],
+            "median": 23,
+            "top3": 1
+          },
+          "es": {
+            "ranks": [
+              28,
+              30,
+              23,
+              28,
+              3,
+              26,
+              7,
+              14,
+              20
+            ],
+            "median": 23,
+            "top3": 1
+          },
+          "text": "En el caso que la falla sea atribuible al CONTRATISTA , la reparación debe inici"
+        }
+      ]
+    },
+    "c0028": {
+      "whole": {
+        "chars": 2017,
+        "centroid_similarity": 0.7639,
+        "zh": {
+          "ranks": [
+            18,
+            20,
+            6,
+            18,
+            3,
+            4,
+            10,
+            7,
+            14
+          ],
+          "median": 10,
+          "top3": 1
+        },
+        "es": {
+          "ranks": [
+            13,
+            10,
+            8,
+            13,
+            3,
+            2,
+            5,
+            8,
+            10
+          ],
+          "median": 8,
+          "top3": 2
+        }
+      },
+      "parts": [
+        {
+          "chars": 68,
+          "centroid_similarity": 0.6795,
+          "zh": {
+            "ranks": [
+              10,
+              25,
+              26,
+              18,
+              22,
+              13,
+              17,
+              27,
+              24
+            ],
+            "median": 22,
+            "top3": 0
+          },
+          "es": {
+            "ranks": [
+              5,
+              24,
+              28,
+              19,
+              15,
+              7,
+              24,
+              29,
+              27
+            ],
+            "median": 24,
+            "top3": 0
+          },
+          "text": "XIII. CLÁUSULA DÉCIMO TERCERA: Declaración jurada del CONTRATISTA. -"
+        },
+        {
+          "chars": 207,
+          "centroid_similarity": 0.6953,
+          "zh": {
+            "ranks": [
+              8,
+              22,
+              24,
+              23,
+              19,
+              14,
+              17,
+              26,
+              24
+            ],
+            "median": 22,
+            "top3": 0
+          },
+          "es": {
+            "ranks": [
+              1,
+              10,
+              23,
+              17,
+              14,
+              6,
+              22,
+              25,
+              26
+            ],
+            "median": 17,
+            "top3": 1
+          },
+          "text": "EL CONTRATISTA declara bajo juramento que se compromete a cumplir las obligacion"
+        },
+        {
+          "chars": 66,
+          "centroid_similarity": 0.5294,
+          "zh": {
+            "ranks": [
+              33,
+              33,
+              31,
+              31,
+              31,
+              27,
+              33,
+              33,
+              33
+            ],
+            "median": 33,
+            "top3": 0
+          },
+          "es": {
+            "ranks": [
+              31,
+              33,
+              33,
+              28,
+              31,
+              23,
+              30,
+              31,
+              33
+            ],
+            "median": 31,
+            "top3": 0
+          },
+          "text": "XIV. CLÁUSULA DÉCIMO CUARTA: Responsabilidad por vicios ocultos. -"
+        },
+        {
+          "chars": 279,
+          "centroid_similarity": 0.6616,
+          "zh": {
+            "ranks": [
+              28,
+              30,
+              28,
+              28,
+              22,
+              25,
+              26,
+              27,
+              27
+            ],
+            "median": 27,
+            "top3": 0
+          },
+          "es": {
+            "ranks": [
+              25,
+              30,
+              28,
+              25,
+              18,
+              10,
+              24,
+              18,
+              27
+            ],
+            "median": 25,
+            "top3": 0
+          },
+          "text": "La  recepción  conforme  de  la  prestación  por  parte  de LA  EMPRESA no  ener"
+        },
+        {
+          "chars": 145,
+          "centroid_similarity": 0.7131,
+          "zh": {
+            "ranks": [
+              13,
+              21,
+              3,
+              25,
+              2,
+              6,
+              18,
+              4,
+              15
+            ],
+            "median": 13,
+            "top3": 2
+          },
+          "es": {
+            "ranks": [
+              16,
+              22,
+              8,
+              19,
+              2,
+              5,
+              10,
+              12,
+              12
+            ],
+            "median": 12,
+            "top3": 1
+          },
+          "text": "El plazo máximo de responsabilidad del CONTRATISTA es de cinco (5) años y un (1)"
+        },
+        {
+          "chars": 42,
+          "centroid_similarity": 0.5684,
+          "zh": {
+            "ranks": [
+              31,
+              33,
+              31,
+              31,
+              31,
+              27,
+              29,
+              31,
+              31
+            ],
+            "median": 31,
+            "top3": 0
+          },
+          "es": {
+            "ranks": [
+              30,
+              32,
+              32,
+              30,
+              31,
+              27,
+              28,
+              31,
+              31
+            ],
+            "median": 31,
+            "top3": 0
+          },
+          "text": "XV. CLÁUSULA DÉCIMO QUINTA: Penalidades. -"
+        },
+        {
+          "chars": 226,
+          "centroid_similarity": 0.6854,
+          "zh": {
+            "ranks": [
+              29,
+              30,
+              18,
+              28,
+              21,
+              13,
+              23,
+              21,
+              20
+            ],
+            "median": 21,
+            "top3": 0
+          },
+          "es": {
+            "ranks": [
+              28,
+              24,
+              11,
+              22,
+              11,
+              6,
+              10,
+              15,
+              13
+            ],
+            "median": 13,
+            "top3": 0
+          },
+          "text": "Si EL CONTRATISTA incurre en retraso injustificado en la ejecución de las presta"
+        },
+        {
+          "chars": 65,
+          "centroid_similarity": 0.5563,
+          "zh": {
+            "ranks": [
+              31,
+              30,
+              30,
+              28,
+              28,
+              27,
+              29,
+              27,
+              31
+            ],
+            "median": 29,
+            "top3": 0
+          },
+          "es": {
+            "ranks": [
+              31,
+              30,
+              31,
+              18,
+              28,
+              27,
+              27,
+              31,
+              31
+            ],
+            "median": 30,
+            "top3": 0
+          },
+          "text": "Penalidad Diaria = 0.10 x monto vigente F x plazo vigente en días"
+        },
+        {
+          "chars": 51,
+          "centroid_similarity": 0.598,
+          "zh": {
+            "ranks": [
+              29,
+              30,
+              18,
+              24,
+              22,
+              26,
+              26,
+              16,
+              21
+            ],
+            "median": 24,
+            "top3": 0
+          },
+          "es": {
+            "ranks": [
+              30,
+              32,
+              28,
+              17,
+              23,
+              27,
+              24,
+              21,
+              27
+            ],
+            "median": 27,
+            "top3": 0
+          },
+          "text": "F = 0.25 para plazos mayores a sesenta (60) días o;"
+        },
+        {
+          "chars": 59,
+          "centroid_similarity": 0.6037,
+          "zh": {
+            "ranks": [
+              31,
+              30,
+              26,
+              27,
+              26,
+              27,
+              27,
+              21,
+              24
+            ],
+            "median": 27,
+            "top3": 0
+          },
+          "es": {
+            "ranks": [
+              30,
+              32,
+              28,
+              17,
+              22,
+              27,
+              24,
+              22,
+              26
+            ],
+            "median": 26,
+            "top3": 0
+          },
+          "text": "F = 0.40 para plazos menores o iguales a sesenta (60) días."
+        },
+        {
+          "chars": 591,
+          "centroid_similarity": 0.6759,
+          "zh": {
+            "ranks": [
+              29,
+              30,
+              23,
+              29,
+              22,
+              26,
+              21,
+              28,
+              27
+            ],
+            "median": 27,
+            "top3": 0
+          },
+          "es": {
+            "ranks": [
+              28,
+              24,
+              16,
+              32,
+              11,
+              8,
+              13,
+              30,
+              27
+            ],
+            "median": 24,
+            "top3": 0
+          },
+          "text": "El retraso se justifica a través de la solicitud de ampliación de plazo debidame"
+        },
+        {
+          "chars": 188,
+          "centroid_similarity": 0.6647,
+          "zh": {
+            "ranks": [
+              31,
+              30,
+              29,
+              9,
+              28,
+              26,
+              25,
+              31,
+              29
+            ],
+            "median": 29,
+            "top3": 0
+          },
+          "es": {
+            "ranks": [
+              28,
+              24,
+              23,
+              5,
+              26,
+              21,
+              12,
+              28,
+              27
+            ],
+            "median": 24,
+            "top3": 0
+          },
+          "text": "Esta penalidad se deduce de los pagos a cuenta o del pago final, según correspon"
+        }
+      ]
+    }
+  }
+}
