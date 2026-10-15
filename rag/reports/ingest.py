@@ -17,7 +17,7 @@ from rag.reports.html import badge, esc, filters, page, text_block, write_assets
 TEXT_KINDS = {"title": "标题", "paragraph": "段落", "header": "页眉", "footer": "页脚",
               "footnote": "脚注", "caption": "图表标题", "table_note": "表注",
               "other_text": "其他文本"}
-CHUNK_KINDS = {"text": "正文", "list": "列表", "table": "表格"}
+CHUNK_KINDS = {"text": "正文", "list": "含列表", "table": "表格"}
 ADMISSION = {
     "matched_single_table_slot": "进入候选",
     "no_eligible_table_slot_on_page": "该页没有可对应的表格",

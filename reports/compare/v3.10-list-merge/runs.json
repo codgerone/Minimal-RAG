@@ -1,0 +1,9 @@
+{
+  "name": "v3.10-list-merge",
+  "runs": [
+    "2026-10-12_structured_k3_filter-on_hybrid=V3.9",
+    "2026-10-14_structured_k3_filter-on_hybrid=V3.10",
+    "2026-10-12_structured_k3_filter-on=V3.9",
+    "2026-10-14_structured_k3_filter-on=V3.10"
+  ]
+}
