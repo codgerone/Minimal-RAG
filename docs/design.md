@@ -70,7 +70,7 @@
 
 评估流程和指标定义见 [rules/evaluation.md](rules/evaluation.md)。关键设计是：证据按"信息项 → 方案 → excerpt"组织，原因见 [decisions/003-evidence-schemes.md](decisions/003-evidence-schemes.md)；excerpt 与 chunk 的对应按 PDF 坐标判定，原因见 [decisions/004-coordinate-mapping.md](decisions/004-coordinate-mapping.md)。excerpt 的位置只依赖 PDF，人工确认一次后写入 ground-truth；chunk 的来源区域在入库时由 chunk 来源记录和解析器坐标统一推出（`rag/ingest/regions.py`），所以任何装配都不需要为评估另做确认。对插件的要求：解析器提供元素坐标，分块器记录 chunk 内容来自哪个元素的哪段文字；缺细坐标时记粗略区域，评估在其中按片段文字兜底。每次评估在 `reports/eval/<日期>_<配置>_k<K>_filter-on|filter-off[_<检索器>]/` 下生成 `index.html` 和 `result.json`（检索器不是 `semantic` 时目录名带上检索器名），同名时在目录名后加 `_2`、`_3`。评估页的"较上次"对比同一配置、同一检索器、同一 K、同一数据集版本的上一次运行（不论过滤状态）。
 
-`compare` 把几次评估并排生成 `reports/compare/<名称>/`：构建设置只差规则版本、编码器与 BM25 分析器、K 相同的评估放在同一标签页（检索器可以不同），第一次为基线，每列标明规则版本、编码器和检索器；分块预算等其他构建设置不同的评估分在不同标签页，因此多预算配对比较按预算分页；每题状态按 未命中 < 部分覆盖 < 完整覆盖 比较，标出变好、变差，并列出在 ≥3 题 Top-K 中出现的不相关 chunk。`runs.json` 记录输入，`report` 会按它重新生成。
+`compare` 把几次评估并排生成 `reports/compare/<名称>/`：构建设置只差规则版本、编码器与 BM25 分析器、K 相同的评估放在同一标签页（检索器可以不同），第一次为基线，每列标明规则版本、编码器和检索器，可另给显示名（`目录名=显示名`，如版本号），存进 `runs.json`；分块预算等其他构建设置不同的评估分在不同标签页，因此多预算配对比较按预算分页；每题状态按 未命中 < 部分覆盖 < 完整覆盖 比较，标出变好、变差，并列出在 ≥3 题 Top-K 中出现的不相关 chunk。`runs.json` 记录输入，`report` 会按它重新生成。
 
 ## 7. 代码地图
 

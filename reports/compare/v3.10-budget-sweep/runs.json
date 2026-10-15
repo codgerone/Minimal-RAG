@@ -1,15 +1,15 @@
 {
   "name": "v3.10-budget-sweep",
   "runs": [
-    "2026-10-15_structured_b448_k3_filter-on_hybrid",
-    "2026-10-15_structured_lm_b448_k3_filter-on_hybrid",
-    "2026-10-15_structured_b480_k3_filter-on_hybrid",
-    "2026-10-15_structured_lm_b480_k3_filter-on_hybrid",
-    "2026-10-12_structured_k3_filter-on_hybrid",
-    "2026-10-14_structured_k3_filter-on_hybrid",
-    "2026-10-15_structured_b544_k3_filter-on_hybrid",
-    "2026-10-15_structured_lm_b544_k3_filter-on_hybrid",
-    "2026-10-15_structured_b576_k3_filter-on_hybrid",
-    "2026-10-15_structured_lm_b576_k3_filter-on_hybrid"
+    "2026-10-15_structured_b448_k3_filter-on_hybrid=V3.9",
+    "2026-10-15_structured_lm_b448_k3_filter-on_hybrid=V3.10",
+    "2026-10-15_structured_b480_k3_filter-on_hybrid=V3.9",
+    "2026-10-15_structured_lm_b480_k3_filter-on_hybrid=V3.10",
+    "2026-10-12_structured_k3_filter-on_hybrid=V3.9",
+    "2026-10-14_structured_k3_filter-on_hybrid=V3.10",
+    "2026-10-15_structured_b544_k3_filter-on_hybrid=V3.9",
+    "2026-10-15_structured_lm_b544_k3_filter-on_hybrid=V3.10",
+    "2026-10-15_structured_b576_k3_filter-on_hybrid=V3.9",
+    "2026-10-15_structured_lm_b576_k3_filter-on_hybrid=V3.10"
   ]
 }

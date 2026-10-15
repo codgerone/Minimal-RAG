@@ -1,7 +1,8 @@
 """Comparison page: several evaluation runs side by side, changes against a baseline run.
 
-Runs with the same build settings apart from the embedder and the BM25 analyzer (and the same
-K) share a tab, whatever their retriever; the first run given in each tab is its baseline. A question improves when its status moves up
+Runs with the same build settings apart from the rules version, the embedder and the BM25 analyzer
+(and the same K) share a tab, whatever their retriever; the first run given in each tab is its
+baseline. A run may be given a display name (`<run>=<name>`, e.g. `V3.9`), shown before its settings. A question improves when its status moves up
 (未命中 < 部分覆盖 < 完整覆盖) against the baseline and regresses when it moves down.
 """
 
@@ -37,11 +38,13 @@ def _group_key(result: dict[str, Any]) -> str:
 
 
 def _model(result: dict[str, Any]) -> str:
-    """Rules version and embedder model name; the retriever and BM25 analyzer settings when not
-    plain semantic; the dataset variant (e.g. `+translated`) when there is one."""
+    """Display name when given; rules version and embedder model name; the retriever and BM25
+    analyzer settings when not plain semantic; the dataset variant (e.g. `+translated`) when there is one."""
     parts = [str(result["build_settings"].get("embedder_identity", {}).get("model", "?")).split("/")[-1]]
     if "rules_version" in result["build_settings"]:
         parts.insert(0, "规则 " + str(result["build_settings"]["rules_version"]))
+    if result.get("display_name"):
+        parts.insert(0, str(result["display_name"]))
     retriever = result.get("retriever", "semantic")
     if retriever != "semantic":
         lexical = result["build_settings"].get("lexical") or {}
@@ -51,13 +54,23 @@ def _model(result: dict[str, Any]) -> str:
     return " · ".join(parts + ([variant] if variant else []))
 
 
-def load_runs(workspace: Workspace, names: list[str]) -> list[tuple[str, dict[str, Any]]]:
+def parse_run(spec: str) -> tuple[str, str | None]:
+    """`<run>` or `<run>=<display name>`; evaluation directory names never contain `=`."""
+    name, _, display = spec.partition("=")
+    return Path(name.strip()).name, display.strip() or None
+
+
+def load_runs(workspace: Workspace, specs: list[str]) -> list[tuple[str, dict[str, Any]]]:
     runs = []
-    for name in names:
-        path = workspace.eval_reports() / Path(name).name / "result.json"
+    for spec in specs:
+        name, display = parse_run(spec)
+        path = workspace.eval_reports() / name / "result.json"
         if not path.is_file():
             raise CompareError(f"找不到评估结果：{path.relative_to(workspace.root).as_posix()}")
-        runs.append((path.parent.name, read_json(path)))
+        result = read_json(path)
+        if display:
+            result["display_name"] = display   # in memory only; result.json is not changed
+        runs.append((name, result))
     first = {c["case_id"] for c in runs[0][1]["cases"]}
     for name, result in runs[1:]:
         if {c["case_id"] for c in result["cases"]} != first:
@@ -105,7 +118,7 @@ def _summary(runs: list[tuple[str, dict[str, Any]]]) -> str:
                     f'{esc(result["dataset"]["version"])}</div></td><td class="num">{counts}</td>{cells}'
                     f'<td class="num">{moved}</td></tr>')
     head = "".join(f'<th class="num">{esc(label)}</th>' for _, label, _ in METRICS)
-    return (f'<div class="scroll"><table><tr><th>规则 · 编码器 / 运行</th><th class="num">命中 / 完整覆盖（题）</th>'
+    return (f'<div class="scroll"><table><tr><th>设置 / 运行</th><th class="num">命中 / 完整覆盖（题）</th>'
             f'{head}<th class="num">较基线 变好 / 变差</th></tr>{"".join(rows)}</table></div>')
 
 
@@ -219,10 +232,10 @@ def compare_dir(workspace: Workspace) -> Path:
     return workspace.reports / "compare"
 
 
-def write_comparison(workspace: Workspace, name: str, run_names: list[str]) -> Path:
-    runs = load_runs(workspace, run_names)
+def write_comparison(workspace: Workspace, name: str, run_specs: list[str]) -> Path:
+    runs = load_runs(workspace, run_specs)
     folder = compare_dir(workspace) / name
-    write_json(folder / "runs.json", {"name": name, "runs": [n for n, _ in runs]})
+    write_json(folder / "runs.json", {"name": name, "runs": [spec.strip() for spec in run_specs]})
     write_assets(workspace.reports)
     write_atomic(folder / "index.html", render(name, runs))
     return folder

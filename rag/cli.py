@@ -69,7 +69,8 @@ def build_parser() -> argparse.ArgumentParser:
     config.add_argument("action", choices=["list", "show"])
     config.add_argument("name", nargs="?")
     compare = command("compare", "把几次评估并排对比，生成 reports/compare/NAME/；每组第一次评估是基线")
-    compare.add_argument("runs", nargs="+", metavar="RUN", help="reports/eval/ 下的评估目录名")
+    compare.add_argument("runs", nargs="+", metavar="RUN",
+                         help="reports/eval/ 下的评估目录名；可写成 目录名=显示名（如 =V3.9），显示在该列设置之前")
     compare.add_argument("--name", required=True, help="对比页名称（目录名）")
     command("report", "按已保存的结果重新生成评估报告和总入口 reports/index.html")
     return parser

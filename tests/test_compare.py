@@ -64,3 +64,13 @@ def test_runs_differing_in_rules_version_share_a_tab_and_tabs_stay_unique():
     page = render("x", [("a", old), ("b", new), ("c", other_budget)])
     assert page.count('data-tab="') == 2 and 'data-tab="structured_2"' in page
     assert "规则 v3.7 · small" in page and "规则 v3.10 · small" in page
+
+
+def test_display_names_are_shown_and_kept_for_rerendering(workspace):
+    write_json(workspace.eval_reports() / "a" / "result.json", run("structured", "small", {"q1": "miss"}))
+    write_json(workspace.eval_reports() / "b" / "result.json", run("structured", "large", {"q1": "partial"}))
+    folder = write_comparison(workspace, "v", ["a=V3.9", "b"])
+    assert read_json(folder / "runs.json") == {"name": "v", "runs": ["a=V3.9", "b"]}
+    page = (folder / "index.html").read_text(encoding="utf-8")
+    assert "V3.9 · small" in page and "large" in page
+    assert "display_name" not in read_json(workspace.eval_reports() / "a" / "result.json")
