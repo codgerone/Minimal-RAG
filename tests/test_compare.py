@@ -54,3 +54,13 @@ def test_comparison_is_saved_for_rerendering_and_rejects_different_questions(wor
     assert (folder / "index.html").is_file()
     with pytest.raises(CompareError, match="题目"):
         write_comparison(workspace, "w", ["a", "c"])
+
+
+def test_runs_differing_in_rules_version_share_a_tab_and_tabs_stay_unique():
+    old, new = run("structured", "small", {"q1": "partial"}), run("structured", "small", {"q1": "complete"})
+    old["build_settings"]["rules_version"], new["build_settings"]["rules_version"] = "v3.7", "v3.10"
+    other_budget = run("structured", "small", {"q1": "miss"})
+    other_budget["build_settings"]["chunker"] = {"max_tokens": 480}
+    page = render("x", [("a", old), ("b", new), ("c", other_budget)])
+    assert page.count('data-tab="') == 2 and 'data-tab="structured_2"' in page
+    assert "规则 v3.7 · small" in page and "规则 v3.10 · small" in page

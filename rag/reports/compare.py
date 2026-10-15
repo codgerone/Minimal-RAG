@@ -30,15 +30,18 @@ def _status(case: dict[str, Any]) -> str:
 
 
 def _group_key(result: dict[str, Any]) -> str:
-    settings = {k: v for k, v in result["build_settings"].items() if k not in ("embedder", "embedder_identity", "lexical")}
+    settings = {k: v for k, v in result["build_settings"].items()
+                if k not in ("rules_version", "embedder", "embedder_identity", "lexical")}
     import json
     return json.dumps([settings, result["top_k"]], sort_keys=True, ensure_ascii=False)
 
 
 def _model(result: dict[str, Any]) -> str:
-    """Embedder model name; the retriever and BM25 analyzer settings when not plain semantic;
-    the dataset variant (e.g. `+translated`) when there is one."""
+    """Rules version and embedder model name; the retriever and BM25 analyzer settings when not
+    plain semantic; the dataset variant (e.g. `+translated`) when there is one."""
     parts = [str(result["build_settings"].get("embedder_identity", {}).get("model", "?")).split("/")[-1]]
+    if "rules_version" in result["build_settings"]:
+        parts.insert(0, "规则 " + str(result["build_settings"]["rules_version"]))
     retriever = result.get("retriever", "semantic")
     if retriever != "semantic":
         lexical = result["build_settings"].get("lexical") or {}
@@ -102,7 +105,7 @@ def _summary(runs: list[tuple[str, dict[str, Any]]]) -> str:
                     f'{esc(result["dataset"]["version"])}</div></td><td class="num">{counts}</td>{cells}'
                     f'<td class="num">{moved}</td></tr>')
     head = "".join(f'<th class="num">{esc(label)}</th>' for _, label, _ in METRICS)
-    return (f'<div class="scroll"><table><tr><th>编码器 / 运行</th><th class="num">命中 / 完整覆盖（题）</th>'
+    return (f'<div class="scroll"><table><tr><th>规则 · 编码器 / 运行</th><th class="num">命中 / 完整覆盖（题）</th>'
             f'{head}<th class="num">较基线 变好 / 变差</th></tr>{"".join(rows)}</table></div>')
 
 
@@ -187,8 +190,12 @@ def render(name: str, runs: list[tuple[str, dict[str, Any]]]) -> str:
     for run in runs:
         groups.setdefault(_group_key(run[1]), []).append(run)
     tabs, panels = [], []
+    used: set[str] = set()
     for members in groups.values():
-        tab = members[0][1]["config"]
+        tab = config = members[0][1]["config"]
+        while tab in used:   # same config in two groups (e.g. different chunk budgets)
+            tab = f"{config}_{len(used) + 1}"
+        used.add(tab)
         tabs.append(f'<a href="#{esc(tab)}" data-tab="{esc(tab)}">{esc(tab)}</a>')
         matrix, cards, tags_of = _matrix(members, tab)
         top_k = members[0][1]["top_k"]
