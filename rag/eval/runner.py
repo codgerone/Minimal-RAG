@@ -32,6 +32,7 @@ class CaseResult:
     score: QuestionScore | None   # None for unanswerable questions
     scope: SearchScope
     required_k: dict[str, int]    # group → units needed in the full ranking; uncoverable groups left out
+    fewest_units: dict[str, int]  # group → fewest return units any acceptable set spreads over
 
     @property
     def evidence_documents(self) -> set[str]:
@@ -119,8 +120,11 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int) -> Path
     catalog = (load_catalog(workspace.documents, tuple(sources.values()))
                if enabled else None)
     table_return_unit = assembly.config.table_return_unit
+    tables = open_tables(workspace, assembly.name)
     searcher = UnitSearch(build_retriever(assembly, store, open_lexical(workspace, assembly)), store,
-                          open_tables(workspace, assembly.name), table_return_unit)
+                          tables, table_return_unit)
+    owners = ({cid: t.table_id for cid, t in tables.tables_for_chunks([c.chunk_id for c in chunks]).items()}
+              if table_return_unit == "table" else {})
     from rag.ingest.chunkers.tokens import E5TokenCounter
     counter = E5TokenCounter()
     results: list[CaseResult] = []
@@ -130,7 +134,9 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int) -> Path
         units = ranking[:top_k]
         evidence = judge_case(case, chunks)
         item = CaseResult(case, units, [counter.count_passage(u.text) for u in units], evidence,
-                          None, scope, completion_ranks([u.chunk_ids for u in ranking], evidence.groups))
+                          None, scope, completion_ranks([u.chunk_ids for u in ranking], evidence.groups),
+                          {g.group_id: min(len({owners.get(c, c) for c in s}) for s in g.acceptable_sets)
+                           for g in evidence.groups if g.acceptable_sets})
         if case.answerable:
             item = replace(item, score=score_question(
                 [u.chunk_ids for u in units], [u.document_id for u in units],
@@ -222,6 +228,7 @@ def _case_json(item: CaseResult, names: dict[str, str]) -> dict[str, Any]:
             "mode": judged.mode,
             "covered_at_rank": score.group_completion_ranks.get(group.group_id) if score else None,
             "required_k": item.required_k.get(group.group_id),
+            "fewest_units": item.fewest_units.get(group.group_id),
             "acceptable_sets": [sorted(s) for s in judged.acceptable_sets],
             "schemes": [{"scheme_id": scheme.scheme_id, "excerpt_ids": list(scheme.excerpt_ids),
                          "acceptable_sets": [sorted(s) for s in scheme_judged.acceptable_sets]}

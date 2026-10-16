@@ -87,8 +87,11 @@ def _group_html(group: dict[str, Any], case: dict[str, Any], top_k: int) -> str:
              else badge("未覆盖", "bad")) + " " + required_k_badge(group)
     label, kind = MODE_LABELS[group["mode"]]
     mode = badge(label, kind) if group["mode"] not in PLAIN_MODES else ""
-    fewest = min((len(s) for s in group["acceptable_sets"]), default=0)
-    beyond = badge(f"至少需 {fewest} 个 chunk，K={top_k} 时不可能覆盖", "bad") if fewest > top_k else ""
+    if "fewest_units" in group:      # runs since V3.12 count return units (a whole table is one)
+        fewest, unit = group["fewest_units"] or 0, "个结果"
+    else:
+        fewest, unit = min((len(s) for s in group["acceptable_sets"]), default=0), "个 chunk"
+    beyond = badge(f"至少需 {fewest} {unit}，K={top_k} 时不可能覆盖", "bad") if fewest > top_k else ""
     schemes = []
     for n, scheme in enumerate(group["schemes"]):
         got = any(set(s) <= retrieved for s in scheme["acceptable_sets"])
