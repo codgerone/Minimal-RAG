@@ -1,0 +1,9 @@
+{
+  "name": "v3.11-continuation",
+  "runs": [
+    "2026-10-14_structured_k3_filter-on_hybrid=V3.10",
+    "2026-10-16_structured_k3_filter-on_hybrid=V3.11",
+    "2026-10-14_structured_k3_filter-on=V3.10",
+    "2026-10-16_structured_k3_filter-on=V3.11"
+  ]
+}
