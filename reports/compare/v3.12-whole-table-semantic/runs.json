@@ -1,0 +1,7 @@
+{
+  "name": "v3.12-whole-table-semantic",
+  "runs": [
+    "2026-10-16_structured_k3_filter-on_2=V3.11",
+    "2026-10-16_structured_k3_filter-on_table=V3.12"
+  ]
+}

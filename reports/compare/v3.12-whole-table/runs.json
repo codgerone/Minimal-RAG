@@ -1,0 +1,10 @@
+{
+  "name": "v3.12-whole-table",
+  "runs": [
+    "2026-10-16_structured_k3_filter-on_hybrid_2=V3.11",
+    "2026-10-16_structured_k3_filter-on_hybrid_table=V3.12",
+    "2026-10-16_structured_k5_filter-on_hybrid=V3.11",
+    "2026-10-16_structured_k5_filter-on_hybrid_table=V3.12",
+    "2026-10-16_structured_k6_filter-on_hybrid=V3.11"
+  ]
+}

@@ -53,7 +53,7 @@ def _model(result: dict[str, Any]) -> str:
         parts.append(retriever + "（" + ("去停用词" if lexical.get("stopwords") else "保留停用词")
                      + ("、词干化" if lexical.get("stemming") else "") + "）")
     if result.get("table_return_unit") == "table":
-        parts.append("整表")
+        parts.append("返回整表")
     variant = result["dataset"]["version"].partition("+")[2]
     return " · ".join(parts + ([variant] if variant else []))
 
@@ -151,14 +151,14 @@ def _required_k(runs: list[tuple[str, dict[str, Any]]], tab: str) -> str:
                 better = base is None or (value is not None and value < base)
                 cls = "" if i == 0 or value == base else "up" if better else "down"
                 cells.append(f'<td class="num"><span class="{cls}">{text}</span></td>')
-            rows.append(f'<tr><td><a href="#{esc(tab)}-{esc(case["case_id"])}">{esc(case["case_id"])}</a> '
+            rows.append(f'<tr><td><a href="#{esc(tab)}-{esc(case["case_id"])}">{esc(case["case_id"])}</a>&nbsp;'
                         f'{esc(group["group_id"])}<div class="meta">{esc(group["information_item"])}</div></td>'
                         f'{"".join(cells)}</tr>')
     head = "".join(f'<th class="num">{esc(_model(result))}</th>' for _, result in runs)
     note = f'<div class="meta">其余 {same} 个证据组在各运行中所需 K 相同。</div>'
     if not rows:
         return note
-    return f'<div class="scroll"><table><tr><th>题目 · 证据组</th>{head}</tr>{"".join(rows)}</table></div>{note}'
+    return f'<div class="scroll"><table><tr><th style="min-width:240px">题目 · 证据组</th>{head}</tr>{"".join(rows)}</table></div>{note}'
 
 
 def _matrix(runs: list[tuple[str, dict[str, Any]]], tab: str) -> tuple[str, str, dict[str, str]]:
