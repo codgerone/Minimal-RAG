@@ -147,7 +147,7 @@ def test_selected_and_native_table_use_same_content_rules() -> None:
     primary = PrimaryDocument("doc", source.file_hash, 1, (placeholder,), (slot,),
                               (NativeTableFact("slot_001", "#/tables/0", native),), ())
     fallback = ContentResolution("slot_001", "docling_native_fallback", None, None, "decision")
-    prepared = prepare_tables(primary, (), (fallback,), True, serializer=serialize_markdown_rows)
+    prepared, _ = prepare_tables(primary, (), (fallback,), True, serializer=serialize_markdown_rows)
     parsed = compose_document(source, primary, (fallback,), prepared, True)
     assert isinstance(parsed.nodes[0], TableNode)
     assert parsed.nodes[0].origin == "docling_native_fallback"
@@ -161,7 +161,7 @@ def test_selected_and_native_table_use_same_content_rules() -> None:
                                   ("winner",), None, None)
     report = TableExtractionReport("x.pdf", source.file_hash, (execution,), (winner_candidate,), ())
     winner = ContentResolution("slot_001", "selected_winner", "winner", "group:winner", "decision")
-    selected = prepare_tables(primary, (report,), (winner,), True, serializer=serialize_markdown_rows)
+    selected, _ = prepare_tables(primary, (report,), (winner,), True, serializer=serialize_markdown_rows)
     selected_parsed = compose_document(source, primary, (winner,), selected, True)
     assert selected_parsed.nodes[0].table.tool == "pymupdf"
     assert selected_parsed.nodes[0].serialized.text == parsed.nodes[0].serialized.text

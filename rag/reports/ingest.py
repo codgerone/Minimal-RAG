@@ -8,11 +8,14 @@ from statistics import median
 
 from rag.index.manifest import DocumentEntry
 from rag.ingest.pipeline import ProcessedDocument
-from rag.ingest.tables.models import GroupScoringResult, HeaderDecision, StructuredTable, TableCandidate
+from rag.ingest.tables import continuation as cont
+from rag.ingest.tables.models import (
+    ContinuationEvaluation, GroupScoringResult, HeaderDecision, StructuredTable, TableCandidate,
+)
 from rag.jsonio import write_atomic
 from rag.models import ChunkBatch, ListNode, TableNode, TextNode
 from rag.paths import Workspace
-from rag.reports.html import badge, esc, filters, page, text_block, write_assets
+from rag.reports.html import badge, esc, filters, page, pct, text_block, write_assets
 
 TEXT_KINDS = {"title": "标题", "paragraph": "段落", "header": "页眉", "footer": "页脚",
               "footnote": "脚注", "caption": "图表标题", "table_note": "表注",
@@ -176,24 +179,83 @@ def _header_status(header: HeaderDecision) -> tuple[str, frozenset[int]]:
             frozenset(range(start, end)))
 
 
+TYPE_NAMES = {"number": "数字", "currency": "金额", "date": "日期"}
+
+
+def _types(columns: tuple[tuple[str, ...], ...]) -> str:
+    return "，".join(f"第 {i + 1} 列 " + "/".join(TYPE_NAMES[t] for t in kinds)
+                    for i, kinds in enumerate(columns) if kinds) or "无稳定类型的列"
+
+
+def _continuation_card(item: ContinuationEvaluation, numbers: dict[str, int]) -> str:
+    """One pair of tables on consecutive pages: every condition's facts and result."""
+    failed = set(item.failures)
+
+    def mark(*codes: str) -> str:
+        return badge("不满足", "warn") if failed & set(codes) else badge("满足", "ok")
+
+    def num(value: float | None) -> str:
+        return "—" if value is None else f"{value:.2f}"
+
+    rows = [
+        ("上表下边界的位置", pct(item.earlier_bottom), f"≥ {1 - cont.POSITION_BAND:.0%}",
+         mark("position_unavailable", "earlier_not_at_page_end")),
+        ("下表上边界的位置", pct(item.later_top), f"≤ {cont.POSITION_BAND:.0%}",
+         mark("position_unavailable", "later_not_at_page_start")),
+        ("两表之间的文字宽度（上页 / 下页，不含页眉页脚）", f"{item.text_width_before} / {item.text_width_after}",
+         f"各 ≤ {cont.TEXT_WIDTH_LIMIT}", mark("text_between_too_long")),
+        ("列数", f"{item.earlier_columns or '?'} / {item.later_columns or '?'}", "相同",
+         mark("column_count_differs", "invalid_grid")),
+    ]
+    if item.geometry is not None:
+        rows.append(("列几何",
+                     ("单元格没有坐标，无法比较" if item.geometry == "unavailable" else
+                      f"外沿重叠 {num(item.extent_overlap)}，最大相对偏移 {num(item.max_separator_shift)}，"
+                      f"可比分界 {item.comparable_separators}/{item.total_separators}"),
+                     f"外沿 ≥ {cont.EXTENT_OVERLAP_MIN}，偏移 ≤ {cont.SEPARATOR_SHIFT_MAX}，可比分界 ≥ 一半",
+                     mark("geometry_unavailable", "columns_misaligned")))
+        conflicts = "、".join(f"第 {c + 1} 列" for c in item.conflicting_columns) or "无"
+        rows.append(("列类型",
+                     f"上表：{_types(item.earlier_stable_types)}；下表：{_types(item.later_stable_types)}；冲突：{conflicts}",
+                     "两边都稳定的列，类型有交集", mark("column_types_conflict")))
+    rows.append(("下表自身的表头", "已认出" if item.later_header_outcome == "identified" else "未认出",
+                 "未认出", mark("later_has_header")))
+    verdict = badge("判为续表，已合并", "ok") if item.is_continuation else badge("不是续表")
+    body = "".join(f"<tr><td>{esc(a)}</td><td>{esc(b)}</td><td>{esc(c)}</td><td>{d}</td></tr>"
+                   for a, b, c, d in rows)
+    return (f'<div class="card"><h3>表 {numbers[item.earlier_slot_id]}（第 {item.earlier_page} 页）→ '
+            f'表 {numbers[item.later_slot_id]}（第 {item.later_page} 页） {verdict}</h3>'
+            f'<div class="scroll"><table><tr><th>条件</th><th>实际</th><th>要求</th><th>结果</th></tr>'
+            f'{body}</table></div></div>')
+
+
 def tables_page(processed: ProcessedDocument, entry: DocumentEntry, config_name: str) -> str:
     candidates = {c.candidate_id: c for r in processed.extraction_reports for c in r.candidates}
     admissions = ({a.candidate_id: a for a in processed.grouping.candidate_admission_results}
                   if processed.grouping else {})
     scores = {g.slot_id: g for g in processed.scoring.groups} if processed.scoring else {}
     resolutions = {r.slot_id: r for r in processed.resolutions}
-    prepared = {p.slot_id: p for p in processed.prepared_tables}
+    # A table merged across pages is prepared once; every slot of it points to the merged result.
+    prepared = {segment.slot_id: p for p in processed.prepared_tables for segment in p.segments}
     slots = processed.parse.primary.table_slots
+    numbers = {slot.slot_id: number for number, slot in enumerate(slots, start=1)}
+    evaluations = processed.continuations.evaluations if processed.continuations else ()
+    merged = [p for p in processed.prepared_tables if len(p.segments) > 1]
+    merged_line = "；".join("表 " + "、".join(str(numbers[seg.slot_id]) for seg in p.segments) + " 合并为一张表"
+                           for p in merged) or "没有判为续表的"
     winners = sum(r.origin == "selected_winner" for r in processed.resolutions)
     executions = [e for r in processed.extraction_reports for e in r.executions]
     failed = [e for e in executions if e.status in {"failed", "not_started", "completed_with_page_failures"}]
     tool_line = "　".join(f"{e.tool}/{e.strategy} {sum(len(p.candidate_ids) for p in e.pages)} 张"
                           + (" ⚠" if e in failed else "") for e in executions)
     summary = (f'<div class="card"><b>{len(slots)} 张表</b>：{winners} 张采用候选胜出者，'
-               f'{len(slots) - winners} 张采用解析器原生表格。'
+               f'{len(slots) - winners} 张采用解析器原生表格'
+               + (f'；跨页合并后共 {len(processed.prepared_tables)} 张' if merged else '') + '。'
                f'<div class="meta">各工具找到的候选：{esc(tool_line) or "（未配置表格提取器）"}</div>'
                + ("".join(f'<div class="meta">⚠ {esc(e.tool)}/{esc(e.strategy)}：{esc(e.status)} '
-                          f'{esc(e.error_message or "")}</div>' for e in failed)) + "</div>")
+                          f'{esc(e.error_message or "")}</div>' for e in failed))
+               + (f'<div>跨页续表：{len(evaluations)} 对相邻页表格参与判定，{esc(merged_line)}（见“续表判定”）</div>'
+                  if evaluations else "") + "</div>")
     sections = []
     tabs = []
     for number, slot in enumerate(slots, start=1):
@@ -208,8 +270,21 @@ def tables_page(processed: ProcessedDocument, entry: DocumentEntry, config_name:
         else:
             decision = f'{badge("原生表格", "warn")} 没有可评分的候选，保留解析器识别的表格结构'
         header_status, header_rows = _header_status(prep.header_decision)
+        head = numbers[prep.segments[0].slot_id]
+        continued = prep.segments[0].slot_id != slot.slot_id
+        if len(prep.segments) > 1:
+            parts = "、".join(f"表 {numbers[seg.slot_id]}（第 {seg.page_number} 页，第 {seg.start_row + 1}–{seg.end_row} 行）"
+                             for seg in prep.segments)
+            note = f'<div>{badge("跨页合并", "ok")} 由 {esc(parts)} 合并为一张表'
+            if continued:
+                # The merged table, its header and text are shown under the chain's first table.
+                header_status, header_rows = note + f"，表头判定和入库文本见表 {head}</div>", frozenset()
+            else:
+                header_status = note + "，下面的表头判定、表格和入库文本都是合并后的</div>" + header_status
+        own_table = (candidates[resolution.selected_candidate_id]
+                     if continued and resolution.selected_candidate_id in candidates else prep.adopted_table)
         if resolution.origin != "selected_winner":
-            decision += header_status + render_grid(prep.adopted_table, 15, header_rows)
+            decision += header_status + render_grid(own_table, 15, header_rows)
         cards = []
         totals = {c.candidate_id: c.total_score for c in scored.candidates} if scored else {}
         ordered = sorted(members, key=lambda cid: (cid != resolution.selected_candidate_id,
@@ -219,8 +294,10 @@ def tables_page(processed: ProcessedDocument, entry: DocumentEntry, config_name:
             chosen = cid == resolution.selected_candidate_id
             cards.append(f'<div class="card{" winner" if chosen else ""}"><h3>{esc(candidate.tool)}/'
                          f'{esc(candidate.strategy)}{" ★ 胜出" if chosen else ""}</h3>'
-                         f'<div class="meta">{candidate.row_count or "?"} 行 × {candidate.column_count or "?"} 列</div>'
-                         + (header_status + render_grid(prep.adopted_table, 15, header_rows) if chosen
+                         f'<div class="meta">{candidate.row_count or "?"} 行 × {candidate.column_count or "?"} 列'
+                         + (f'（下图为合并后的表，{prep.adopted_table.row_count} 行）'
+                            if chosen and len(prep.segments) > 1 and not continued else '') + '</div>'
+                         + (header_status + render_grid(own_table, 15, header_rows) if chosen
                             else render_grid(candidate, 15)) + '</div>')
         page_candidates = [c for c in candidates.values()
                            if c.regions and c.regions[0].page_number == slot.page_number
@@ -229,7 +306,8 @@ def tables_page(processed: ProcessedDocument, entry: DocumentEntry, config_name:
             f"<tr><td>{esc(c.tool)}/{esc(c.strategy)}</td><td>"
             f"{esc(ADMISSION.get(admissions[c.candidate_id].reason_codes[0], admissions[c.candidate_id].reason_codes[0]) if admissions.get(c.candidate_id) and admissions[c.candidate_id].reason_codes else (admissions[c.candidate_id].deferred_reason if admissions.get(c.candidate_id) else ''))}"
             f"</td></tr>" for c in page_candidates)
-        tab_mark = "" if resolution.origin == "selected_winner" else "（原生）"
+        tab_mark = (("" if resolution.origin == "selected_winner" else "（原生）")
+                    + (f"（续表 {head}）" if continued else ""))
         tabs.append(f'<a href="#t{number}" data-tab="t{number}">表 {number} · 第 {slot.page_number or "?"} 页{tab_mark}</a>')
         sections.append(
             f'<div data-panel="t{number}"><h2>表 {number} · 第 {slot.page_number or "?"} 页</h2>'
@@ -239,8 +317,14 @@ def tables_page(processed: ProcessedDocument, entry: DocumentEntry, config_name:
                f'<div class="grid">{"".join(cards[3:])}</div></details>' if len(cards) > 3 else "")
             + (f'<details><summary>本页未进入该表评分的其他候选（{len(page_candidates)}）</summary>'
                f'<table><tr><th>候选</th><th>原因</th></tr>{others}</table></details>' if page_candidates else "")
-            + f'<details><summary>入库文本（{len(prep.serialized_table.text)} 字符）</summary>'
-              f'{text_block(prep.serialized_table.text)}</details></div>')
+            + ("" if continued else
+               f'<details><summary>入库文本（{len(prep.serialized_table.text)} 字符）</summary>'
+               f'{text_block(prep.serialized_table.text)}</details>') + "</div>")
+    if evaluations:
+        tabs.append('<a href="#cont" data-tab="cont">续表判定</a>')
+        sections.append('<div data-panel="cont"><h2>续表判定</h2><div class="meta">阅读顺序中相邻、'
+                        '分处相邻两页的表格逐对判定，全部条件满足才合并。规则见 docs/rules/table-continuation.md</div>'
+                        + "".join(_continuation_card(item, numbers) for item in evaluations) + "</div>")
     tab_bar = f'<div class="tabs">{"".join(tabs)}</div>' if tabs else ""
     body = _header(processed, entry, config_name, 1) + summary + tab_bar + "".join(sections)
     return page(f"表格 · {entry.document_name}", body, root="../../../", crumbs=_crumbs(config_name))

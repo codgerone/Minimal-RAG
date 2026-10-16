@@ -254,8 +254,8 @@ def chunk_parsed_document(
                          local_end: int | None = None) -> ChunkSource:
             start, _end = line_offsets[serialized_line.line_id]
             resolved_end = len(serialized_line.text) if local_end is None else local_end
-            return ChunkSource(node.node_id, node.sources, start + local_start,
-                               start + resolved_end, repeated, context_kind)
+            return ChunkSource(node.node_id, node.spans_for_rows(serialized_line.source_rows),
+                               start + local_start, start + resolved_end, repeated, context_kind)
 
         table_parts: list[tuple[str, tuple[ChunkSource, ...]]] = []
         current_lines: list[str] = []

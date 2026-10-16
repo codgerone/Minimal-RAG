@@ -1,0 +1,11 @@
+same physical table (incl. continuation): pairs=136 rel max(excluding structurally wrong network/text)= 0.27806380182516394 passing rule: 132
+different tables: pairs=242 rel max(excluding structurally wrong network/text)= 1.4025776488217894 passing rule: 66
+
+different tables passing the rule:
+Counter({('ORDER PERU 25-/slot_001', '签字-ORDER PERU /slot_001'): 25, ('ORDER PERU 24-/slot_001', 'ORDER PERU 25-/slot_001'): 24, ('ORDER PERU 24-/slot_001', '签字-ORDER PERU /slot_001'): 17})
+
+same physical table failing the rule:
+   签字-ORDER PERU /slot_002 pymupdf/text vs 签字-ORDER PERU /slot_003 pymupdf/lines rel=2.53 ext=0.99
+   签字-ORDER PERU /slot_004 camelot/hybrid vs 签字-ORDER PERU /slot_004 camelot/network rel=1.81 ext=0.82
+   签字-ORDER PERU /slot_004 camelot/lattice vs 签字-ORDER PERU /slot_004 camelot/network rel=1.81 ext=0.82
+   签字-ORDER PERU /slot_004 camelot/network vs 签字-ORDER PERU /slot_004 pymupdf/lines_strict rel=1.80 ext=0.82

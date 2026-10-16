@@ -1,15 +1,16 @@
-"""Prepare the exact adopted table for each primary document slot."""
+"""Prepare the adopted tables: adopt one per slot, merge cross-page continuations, then judge
+headers and serialize each resulting table."""
 
 from __future__ import annotations
 
 from collections.abc import Callable
 
+from rag.ingest.tables.continuation import RULE_VERSION, detect_continuations, merge_tables
 from rag.ingest.tables.header import detect_header
 from rag.models import PageSpan, PrimaryDocument, PrimaryTablePlaceholder
 from rag.ingest.tables.models import (
-    ContentResolution, HeaderDecision, PreparedTableContent, SerializedTable,
-    StructuredTable, TableCandidate,
-    TableExtractionReport,
+    ContentResolution, ContinuationReport, HeaderDecision, PreparedTableContent, SerializedTable,
+    StructuredTable, TableCandidate, TableExtractionReport, TableSegment,
 )
 
 
@@ -38,12 +39,12 @@ def prepare_tables(
     *,
     header_detector: Callable[[StructuredTable], HeaderDecision] = detect_header,
     serializer: Callable[..., SerializedTable],
-) -> tuple[PreparedTableContent, ...]:
-    """Resolve IDs once; header and text rules operate on the adopted structure."""
+) -> tuple[tuple[PreparedTableContent, ...], ContinuationReport]:
+    """Resolve IDs once; header and text rules operate on the adopted (or merged) structure."""
     if not branch_attached:
         if reports or resolutions or primary.table_slots:
             raise TablePreparationError("detached table branch has table evidence")
-        return ()
+        return (), ContinuationReport(RULE_VERSION, (), ())
 
     placeholders = tuple(item for item in primary.elements
                          if isinstance(item, PrimaryTablePlaceholder))
@@ -62,7 +63,7 @@ def prepare_tables(
                 raise TablePreparationError("duplicate candidate ID across extraction reports")
             by_candidate[candidate.candidate_id] = candidate
 
-    prepared: list[PreparedTableContent] = []
+    adopted_by_slot: dict[str, StructuredTable] = {}
     for placeholder in placeholders:
         resolution = by_resolution[placeholder.slot_id]
         if resolution.origin == "selected_winner":
@@ -86,8 +87,29 @@ def prepare_tables(
             adopted = native.table
         else:
             raise TablePreparationError("unknown table resolution origin")
-        header = header_detector(adopted)
-        serialized = serializer(adopted, header, table_node_id=placeholder.element_id)
-        prepared.append(PreparedTableContent(placeholder.slot_id, adopted.table_id,
-                                             adopted, header, serialized))
-    return tuple(prepared)
+        adopted_by_slot[placeholder.slot_id] = adopted
+
+    # Each table is judged on its own first; continuation detection needs the later table's verdict.
+    headers = {slot_id: header_detector(table) for slot_id, table in adopted_by_slot.items()}
+    report = detect_continuations(primary, adopted_by_slot, headers)
+    chained = {slot_id: chain for chain in report.chains for slot_id in chain}
+    slots = {slot.slot_id: slot for slot in primary.table_slots}
+
+    prepared: list[PreparedTableContent] = []
+    for placeholder in placeholders:
+        chain = chained.get(placeholder.slot_id)
+        if chain and chain[0] != placeholder.slot_id:
+            continue                                   # merged into the table it continues
+        if chain:
+            table, segments = merge_tables(tuple((slots[slot_id], adopted_by_slot[slot_id])
+                                                 for slot_id in chain))
+            header = header_detector(table)
+        else:
+            table = adopted_by_slot[placeholder.slot_id]
+            header = headers[placeholder.slot_id]
+            segments = (TableSegment(placeholder.slot_id, table.table_id,
+                                     slots[placeholder.slot_id].page_number, 0, table.row_count or 0),)
+        serialized = serializer(table, header, table_node_id=placeholder.element_id)
+        prepared.append(PreparedTableContent(placeholder.slot_id, table.table_id,
+                                             table, header, serialized, segments))
+    return tuple(prepared), report

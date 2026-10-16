@@ -119,6 +119,6 @@ blank_anomaly = max(0, 本候选空白率 − 参照空白率)
 
 ## 4. 已知限制
 
-- 跨页表格不做拼接，交给 Docling 原生结构。
+- Docling 判为一张跨页表格的位置不拆分，采用原生结构；按页拆成几张的表格在选优之后判定续表并合并，见 [table-continuation.md](table-continuation.md)。
 - 扫描件没有文本层，参照文本为空，不在支持范围内。
 - 准入阈值来自 `experiments/` 中的校准实验，只用 5 份 PDF 验证过。

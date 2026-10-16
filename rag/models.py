@@ -12,7 +12,9 @@ from pathlib import Path
 from typing import TYPE_CHECKING, Literal, TypeAlias
 
 if TYPE_CHECKING:
-    from rag.ingest.tables.models import HeaderDecision, SerializedTable, StructuredTable, TableSlot
+    from rag.ingest.tables.models import (
+        HeaderDecision, SerializedTable, StructuredTable, TableSegment, TableSlot,
+    )
 
 
 TextKind: TypeAlias = Literal["title", "paragraph", "header", "footer", "footnote",
@@ -203,6 +205,16 @@ class TableNode:
     header: HeaderDecision
     serialized: SerializedTable
     sources: tuple[PageSpan, ...]
+    # Pages of a table merged across pages, one per part in row order; empty for a single part.
+    segments: tuple[TableSegment, ...] = ()
+
+    def spans_for_rows(self, rows: tuple[int, ...]) -> tuple[PageSpan, ...]:
+        """The page spans holding these table rows; all of them when unknown."""
+        if not self.segments or not rows:
+            return self.sources
+        pages = {segment.page_number for segment in self.segments
+                 if any(segment.start_row <= row < segment.end_row for row in rows)}
+        return tuple(span for span in self.sources if span.page_number in pages) or self.sources
 
 
 ParsedNode: TypeAlias = TextNode | ListNode | TableNode

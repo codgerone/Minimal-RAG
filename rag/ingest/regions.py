@@ -48,9 +48,14 @@ def _item_regions(item: ListItem, source: ChunkSource) -> list[ChunkRegion]:
 
 
 def _table_regions(node: TableNode, source: ChunkSource) -> list[ChunkRegion]:
-    table_box: BoundingBox | None = next((s.bbox for s in node.sources if s.bbox is not None), None)
-    page = node.sources[0].page_number
     cells = {cell.cell_id: cell for cell in node.table.cells}
+
+    def place(cell) -> tuple[int, BoundingBox | None]:
+        # A table merged across pages: the cell's row tells its page.
+        spans = node.spans_for_rows(() if cell is None or cell.start_row_offset_idx is None
+                                    else (cell.start_row_offset_idx,))
+        box = next((s.bbox for s in spans if s.bbox is not None), None)
+        return spans[0].page_number, box
     start = source.source_text_start or 0
     end = len(node.serialized.text) if source.source_text_end is None else source.source_text_end
     regions: list[ChunkRegion] = []
@@ -58,6 +63,7 @@ def _table_regions(node: TableNode, source: ChunkSource) -> list[ChunkRegion]:
     def add(cell_ids, precision: str) -> None:
         for cell_id in cell_ids:
             cell = cells.get(cell_id)
+            page, table_box = place(cell)
             if cell is not None and cell.bbox is not None:
                 regions.append(ChunkRegion(page, cell.bbox, precision))   # type: ignore[arg-type]
             else:
