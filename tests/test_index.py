@@ -124,3 +124,15 @@ def test_full_rebuild_accepts_an_embedder_with_another_vector_dimension(workspac
     assert [o.action for o in ingest(workspace, wider, force=True)] == ["rebuilt"]
     assert current_status(workspace, wider).state == "ready"
     assert len(open_store(workspace, "fake").query(WiderEmbedder().encode_query("page"), 1)) == 1
+
+
+def test_missing_whole_tables_are_detected_as_incomplete(workspace, fake_assembly):
+    make_pdf(workspace.documents / "a.pdf", PAGES)
+    ingest(workspace, fake_assembly)
+    path = workspace.index_dir("fake") / "manifest.json"
+    manifest = Manifest.load(path)
+    entry = next(iter(manifest.documents.values()))
+    entry.table_count = 1           # the store holds no table for this document
+    manifest.save(path)
+    status = current_status(workspace, fake_assembly).documents[0]
+    assert status.state == "incomplete" and status.tables_complete is False

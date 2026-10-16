@@ -107,8 +107,8 @@ def _status(workspace: Workspace, args: argparse.Namespace) -> int:
         chunks = f"{item.entry.chunk_count} chunks" if item.entry and item.state != "new" else ""
         indexes = ""
         if item.state == "incomplete":
-            missing = [name for name, ok in (("向量", item.vectors_complete), ("倒排", item.lexical_complete))
-                       if ok is False]
+            missing = [name for name, ok in (("向量", item.vectors_complete), ("倒排", item.lexical_complete),
+                                             ("整表", item.tables_complete)) if ok is False]
             indexes = f"  （{'、'.join(missing)}索引不完整）"
         _out(f"  [{STATE_LABELS[item.state]}] {item.relative_path}  {chunks}{indexes}")
     todo = [d for d in status.documents if d.needs_ingest]
