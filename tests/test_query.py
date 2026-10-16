@@ -1,6 +1,8 @@
 from rag.index.store import StoredChunk, VectorHit
 from rag.query.prompt import SYSTEM_PROMPT, build_messages
+from rag.index.tables import StoredTable
 from rag.query.retriever import Hit, SemanticRetriever
+from rag.query.units import ResultUnit, to_units
 
 
 def chunk(chunk_id: str, text: str = "x") -> StoredChunk:
@@ -43,8 +45,25 @@ def test_empty_index_returns_no_hits():
 def test_prompt_keeps_chunk_text_verbatim_and_escapes_attributes():
     hit = Hit(StoredChunk("d-c0001", "d", 'a"b.pdf', "x/a.pdf", 1, "table", (2, 3), 10,
                           "C&I Meter 3&4 Wires"), 0.9)
-    system, user = build_messages("  价格？ ", [hit])
+    system, user = build_messages("  价格？ ", [ResultUnit(hit)])
     assert system["content"] == SYSTEM_PROMPT
     assert "C&I Meter 3&4 Wires" in user["content"]
     assert 'document="a&quot;b.pdf"' in user["content"] and 'pages="2,3"' in user["content"]
     assert user["content"].endswith("用户问题：价格？")
+
+
+def test_a_table_takes_the_place_of_its_best_ranked_chunk_and_later_results_move_up():
+    table = StoredTable("doc-tbl", "doc", "whole table", ("c2", "c4", "c5"))
+    hits = [Hit(chunk(cid), 1.0 - i / 10) for i, cid in enumerate(["c1", "c4", "c2", "c3", "c5", "c6"])]
+    units = to_units(hits, {cid: table for cid in table.chunk_ids}, {"doc-tbl": (2, 3)})
+    assert [(u.hit.chunk.chunk_id, u.table is not None) for u in units] == [
+        ("c1", False), ("c4", True), ("c3", False), ("c6", False)]
+    assert units[1].text == "whole table" and units[1].chunk_ids == ("c2", "c4", "c5")
+    assert units[1].pages == (2, 3) and units[0].chunk_ids == ("c1",)
+
+
+def test_prompt_marks_a_whole_table_and_cites_its_table_id():
+    table = StoredTable("doc-tbl", "doc", "| A | 1 |", ("c2",))
+    _, user = build_messages("q", [ResultUnit(Hit(chunk("c2"), 0.9), table, (4,))])
+    assert '[TABLE document="a.pdf"' in user["content"] and 'id="doc-tbl"' in user["content"]
+    assert 'pages="4"' in user["content"] and "| A | 1 |\n[/TABLE]" in user["content"]

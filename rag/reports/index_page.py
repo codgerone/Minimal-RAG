@@ -24,7 +24,7 @@ def _index_cell(complete: bool | None) -> str:
 
 
 def index_summary(assembly) -> str:
-    """Which indexes the config builds and which retriever queries use by default."""
+    """Which indexes the config builds, and how queries retrieve and return results by default."""
     model = str(assembly.embedder.identity().get("model", "?")).split("/")[-1]
     parts = [f"向量（{model}）"]
     if assembly.lexical is not None:
@@ -32,7 +32,10 @@ def index_summary(assembly) -> str:
         if assembly.lexical.stemming:
             flags.append("词干化")
         parts.append(f"倒排 BM25（{'、'.join(flags)}）")
-    return f"索引：{' + '.join(parts)} · 默认检索器：{assembly.config.retriever.use}"
+    parts.append("整表")
+    returned = "整表" if assembly.config.table_return_unit == "table" else "命中的 chunk"
+    return (f"索引：{' + '.join(parts)} · 默认检索器：{assembly.config.retriever.use}"
+            f" · 命中表格时返回{returned}")
 
 
 def _config_section(workspace: Workspace, config) -> str:

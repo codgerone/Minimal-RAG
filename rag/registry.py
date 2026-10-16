@@ -140,7 +140,7 @@ def assemble(config: AssemblyConfig) -> Assembly:
     if config.retriever.use not in RETRIEVERS:
         raise ConfigError(f"[retriever] 没有名为 {config.retriever.use!r} 的实现，可选：{', '.join(RETRIEVERS)}")
     if config.retriever.params:
-        raise ConfigError(f"[retriever] {config.retriever.use} 只接受 top_k 和 document_filter 参数")
+        raise ConfigError(f"[retriever] {config.retriever.use} 只接受 top_k、document_filter 和 table_return_unit 参数")
     if config.retriever.use in NEEDS_LEXICAL and config.lexical is None:
         raise ConfigError(f"检索器 {config.retriever.use} 需要 BM25 索引，请在配置中加入 [lexical]")
     if config.llm.use not in LLMS:
