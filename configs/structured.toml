@@ -35,6 +35,7 @@ stemming = true    # 按文档语言词干化
 use = "hybrid"     # 向量排名与 BM25 排名按 RRF 融合；semantic 为纯向量，bm25 为纯关键词
 top_k = 4          # search / ask / chat 返回的条数
 document_filter = true   # 问题中出现 documents/documents.toml 登记的标识编码时，只在对应文档内检索
+table_return_unit = "table"   # 命中表格 chunk 时返回整张表；"chunk" 只返回命中的 chunk
 
 [eval]
 top_k = 3          # 正式评估的 K，保持与历史基线可比
