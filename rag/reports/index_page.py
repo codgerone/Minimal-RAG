@@ -24,7 +24,7 @@ def _index_cell(complete: bool | None) -> str:
 
 
 def index_summary(assembly) -> str:
-    """Which indexes the config builds and which retriever queries use by default."""
+    """Which indexes the config builds, and how queries retrieve and return results by default."""
     model = str(assembly.embedder.identity().get("model", "?")).split("/")[-1]
     parts = [f"向量（{model}）"]
     if assembly.lexical is not None:
@@ -32,7 +32,10 @@ def index_summary(assembly) -> str:
         if assembly.lexical.stemming:
             flags.append("词干化")
         parts.append(f"倒排 BM25（{'、'.join(flags)}）")
-    return f"索引：{' + '.join(parts)} · 默认检索器：{assembly.config.retriever.use}"
+    parts.append("整表")
+    returned = "整表" if assembly.config.table_return_unit == "table" else "命中的 chunk"
+    return (f"索引：{' + '.join(parts)} · 默认检索器：{assembly.config.retriever.use}"
+            f" · 命中表格时返回{returned}")
 
 
 def _config_section(workspace: Workspace, config) -> str:
@@ -63,9 +66,10 @@ def _config_section(workspace: Workspace, config) -> str:
         rows.append(f"<tr><td>{esc(item.relative_path)}</td><td>{badge(label, kind)}</td>"
                     f"<td>{_index_cell(item.vectors_complete)}</td>"
                     + (f"<td>{_index_cell(item.lexical_complete)}</td>" if assembly.lexical else "")
+                    + f"<td>{_index_cell(item.tables_complete)}</td>"
                     + f'{numbers}<td class="nw">{links}</td></tr>')
     lexical_head = '<th class="nw">倒排索引</th>' if assembly.lexical else ""
-    table = (f'<div class="scroll"><table><tr><th>文档</th><th class="nw">状态</th><th class="nw">向量索引</th>{lexical_head}<th class="num">页</th>'
+    table = (f'<div class="scroll"><table><tr><th>文档</th><th class="nw">状态</th><th class="nw">向量索引</th>{lexical_head}<th class="nw">整表库</th><th class="num">页</th>'
              f'<th class="num">表格</th><th class="num">chunk</th><th>审核页</th></tr>{"".join(rows)}</table></div>'
              if rows else '<div class="meta">documents/ 中没有 PDF</div>')
     return (f'<h2 id="{esc(config.name)}">配置 {esc(config.name)} {state}</h2>'

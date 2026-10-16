@@ -21,9 +21,12 @@ def _positive(value: str) -> int:
 
 
 def _retriever_option(sub: argparse.ArgumentParser) -> None:
+    from rag.config import TABLE_RETURN_UNITS
     from rag.registry import RETRIEVERS
     sub.add_argument("--retriever", choices=RETRIEVERS,
                      help="本次改用这个检索器（默认取配置文件 [retriever] use；bm25、hybrid 需要配置 [lexical]）")
+    sub.add_argument("--table-return-unit", choices=TABLE_RETURN_UNITS,
+                     help="命中表格 chunk 时返回该 chunk 还是整张表（默认取配置文件 [retriever] table_return_unit）")
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -80,14 +83,21 @@ def _out(text: str = "") -> None:
     print(text, flush=True)
 
 
-def _assembly(workspace: Workspace, name: str | None, retriever: str | None = None):
-    """`retriever` replaces the config's [retriever] use for this command (a query setting)."""
+def _assembly(workspace: Workspace, name: str | None, retriever: str | None = None,
+              table_return_unit: str | None = None):
+    """`retriever` and `table_return_unit` replace the config's query settings for this command."""
     from dataclasses import replace
     from rag.registry import assemble
     config = resolve_config(workspace.root, name)
     if retriever is not None:
         config = replace(config, retriever=replace(config.retriever, use=retriever))
+    if table_return_unit is not None:
+        config = replace(config, table_return_unit=table_return_unit)
     return assemble(config)
+
+
+def _query_assembly(workspace: Workspace, args: argparse.Namespace):
+    return _assembly(workspace, args.config, args.retriever, args.table_return_unit)
 
 
 def _status(workspace: Workspace, args: argparse.Namespace) -> int:
@@ -107,8 +117,8 @@ def _status(workspace: Workspace, args: argparse.Namespace) -> int:
         chunks = f"{item.entry.chunk_count} chunks" if item.entry and item.state != "new" else ""
         indexes = ""
         if item.state == "incomplete":
-            missing = [name for name, ok in (("向量", item.vectors_complete), ("倒排", item.lexical_complete))
-                       if ok is False]
+            missing = [name for name, ok in (("向量", item.vectors_complete), ("倒排", item.lexical_complete),
+                                             ("整表", item.tables_complete)) if ok is False]
             indexes = f"  （{'、'.join(missing)}索引不完整）"
         _out(f"  [{STATE_LABELS[item.state]}] {item.relative_path}  {chunks}{indexes}")
     todo = [d for d in status.documents if d.needs_ingest]
@@ -205,10 +215,13 @@ class _Scoper:
         return scope.document_ids
 
 
-def _retriever(workspace: Workspace, assembly):
-    from rag.index.builder import open_lexical, open_store
+def _searcher(workspace: Workspace, assembly):
+    from rag.index.builder import open_lexical, open_store, open_tables
     from rag.query.retriever import build_retriever
-    return build_retriever(assembly, open_store(workspace, assembly.name), open_lexical(workspace, assembly))
+    from rag.query.units import UnitSearch
+    store = open_store(workspace, assembly.name)
+    return UnitSearch(build_retriever(assembly, store, open_lexical(workspace, assembly)), store,
+                      open_tables(workspace, assembly.name), assembly.config.table_return_unit)
 
 
 def _hit_scores(hit, retriever: str) -> str:
@@ -224,35 +237,37 @@ def _hit_scores(hit, retriever: str) -> str:
     return " · ".join(parts)
 
 
-def _show_hits(hits, retriever: str) -> None:
-    if not hits:
+def _show_units(units, retriever: str) -> None:
+    if not units:
         _out("没有检索到内容。")
-    for rank, hit in enumerate(hits, start=1):
-        chunk = hit.chunk
-        _out(f"#{rank} {_hit_scores(hit, retriever)} · {chunk.document_name} · "
-             f"第 {','.join(map(str, chunk.pages))} 页 · {chunk.chunk_id}")
-        _out(chunk.text)
+    for rank, unit in enumerate(units, start=1):
+        chunk = unit.hit.chunk
+        source = (f"整表 {unit.table.table_id}（命中 {chunk.chunk_id}，共 {len(unit.chunk_ids)} 块）"
+                  if unit.table else chunk.chunk_id)
+        _out(f"#{rank} {_hit_scores(unit.hit, retriever)} · {chunk.document_name} · "
+             f"第 {','.join(map(str, unit.pages))} 页 · {source}")
+        _out(unit.text)
         _out()
 
 
 def _search(workspace: Workspace, args: argparse.Namespace) -> int:
-    assembly = _assembly(workspace, args.config, args.retriever)
+    assembly = _query_assembly(workspace, args)
     _require_queryable(workspace, assembly)
     documents = _Scoper(workspace, assembly, args.document)(args.question)
-    hits = _retriever(workspace, assembly).retrieve(
+    units = _searcher(workspace, assembly).search(
         args.question, args.top_k or assembly.config.top_k, documents)
-    _show_hits(hits, assembly.config.retriever.use)
+    _show_units(units, assembly.config.retriever.use)
     return 0
 
 
-def _answer(workspace: Workspace, assembly, retriever, question: str, top_k: int,
+def _answer(workspace: Workspace, assembly, searcher, question: str, top_k: int,
             scoper: _Scoper, debug: bool) -> None:
     from rag.query.llm import LLMError
     from rag.query.prompt import build_messages
-    hits = retriever.retrieve(question, top_k, scoper(question))
-    messages = build_messages(question, hits)
+    units = searcher.search(question, top_k, scoper(question))
+    messages = build_messages(question, units)
     if debug:
-        _show_hits(hits, assembly.config.retriever.use)
+        _show_units(units, assembly.config.retriever.use)
         for message in messages:
             _out(f"[{message['role']}]\n{message['content']}\n")
     llm = assembly.llm()
@@ -272,18 +287,18 @@ def _answer(workspace: Workspace, assembly, retriever, question: str, top_k: int
 
 
 def _ask(workspace: Workspace, args: argparse.Namespace) -> int:
-    assembly = _assembly(workspace, args.config, args.retriever)
+    assembly = _query_assembly(workspace, args)
     _require_queryable(workspace, assembly)
-    _answer(workspace, assembly, _retriever(workspace, assembly), args.question,
+    _answer(workspace, assembly, _searcher(workspace, assembly), args.question,
             args.top_k or assembly.config.top_k, _Scoper(workspace, assembly, args.document), args.debug)
     return 0
 
 
 def _chat(workspace: Workspace, args: argparse.Namespace) -> int:
     from rag.query.llm import LLMError
-    assembly = _assembly(workspace, args.config, args.retriever)
+    assembly = _query_assembly(workspace, args)
     _require_queryable(workspace, assembly)
-    retriever = _retriever(workspace, assembly)
+    searcher = _searcher(workspace, assembly)
     scoper = _Scoper(workspace, assembly)
     _out(f"配置 {assembly.name}，模型 {assembly.llm().model}。输入问题，空行或 exit 退出。")
     while True:
@@ -294,7 +309,7 @@ def _chat(workspace: Workspace, args: argparse.Namespace) -> int:
         if not question or question.lower() in {"exit", "quit"}:
             break
         try:
-            _answer(workspace, assembly, retriever, question,
+            _answer(workspace, assembly, searcher, question,
                     args.top_k or assembly.config.top_k, scoper, False)
         except LLMError as exc:
             _out(f"回答失败：{exc}")
@@ -305,17 +320,20 @@ def _eval(workspace: Workspace, args: argparse.Namespace) -> int:
     from rag.eval.runner import run_evaluation
     from rag.jsonio import read_json
     from rag.reports.index_page import write_index_page
-    assembly = _assembly(workspace, args.config, args.retriever)
+    assembly = _query_assembly(workspace, args)
     top_k = args.top_k or assembly.config.eval_top_k
     folder = run_evaluation(workspace, assembly, top_k)
     result = read_json(folder / "result.json")
     metrics = result["metrics"]
     modes = result["evidence_modes"]
-    _out(f"配置 {assembly.name} · K={top_k} · {result['dataset']['answerable']} 道可回答问题")
+    returned = "整表" if assembly.config.table_return_unit == "table" else "命中的 chunk"
+    _out(f"配置 {assembly.name} · K={top_k} · 命中表格时返回{returned} · {result['dataset']['answerable']} 道可回答问题")
     for key, label in (("hit_rate", "命中率"), ("complete_coverage", "完整覆盖率"),
                        ("group_recall", "证据组召回"), ("mrr", "MRR"),
                        ("chunk_precision", "Chunk 精确率"), ("cross_document", "跨文档污染")):
         _out(f"  {label}：{metrics[key]['value']:.2%}")
+    tokens = result["returned_tokens"]
+    _out(f"  每题返回 token：{tokens['value']:.0f}（最多 {tokens['max']}）")
     scope = result["document_scope"]
     if scope["enabled"] and scope["catalog"]:
         ratio = scope["identified_correctly"]

@@ -8,6 +8,7 @@ from typing import Literal
 from rag.index.lexical import LexicalStore
 from rag.index.manifest import DocumentEntry, Manifest
 from rag.index.store import ChromaStore
+from rag.index.tables import TableStore
 from rag.ingest.chunkers import chunk_id
 from rag.ingest.sources import has_text
 from rag.models import SourceDocument
@@ -32,6 +33,7 @@ class DocumentStatus:
     # None when the document is not in the manifest, or (lexical) the config has no BM25 index.
     vectors_complete: bool | None = None
     lexical_complete: bool | None = None
+    tables_complete: bool | None = None     # the whole-table store holds the manifest's table count
 
     @property
     def relative_path(self) -> str:
@@ -68,8 +70,10 @@ def _complete(entry: DocumentEntry, ids: set[str], workspace: Workspace, config_
 
 def check_status(workspace: Workspace, config_name: str, fingerprint: str,
                  sources: tuple[SourceDocument, ...], store: ChromaStore,
-                 lexical: LexicalStore | None = None) -> IndexStatus:
-    """`lexical` is the BM25 index when the config has one; its chunk IDs are checked like the vectors'."""
+                 lexical: LexicalStore | None = None,
+                 tables: TableStore | None = None) -> IndexStatus:
+    """`lexical` is the BM25 index when the config has one; its chunk IDs are checked like the vectors'.
+    `tables` is the whole-table store; each document must hold as many tables as the manifest records."""
     manifest = Manifest.load(workspace.index_dir(config_name) / "manifest.json")
     if manifest is None:
         documents = tuple(DocumentStatus("new" if has_text(s) else "unreadable", s, None)
@@ -77,12 +81,15 @@ def check_status(workspace: Workspace, config_name: str, fingerprint: str,
         return IndexStatus(config_name, "not_built", fingerprint, None, documents)
     stored_ids = store.ids_by_document()
     lexical_ids = lexical.ids_by_document() if lexical is not None else None
+    table_counts = tables.counts_by_document() if tables is not None else None
     by_id = {source.document_id: source for source in sources}
     result: list[DocumentStatus] = []
     for source in sources:
         entry = manifest.documents.get(source.document_id)
-        vectors = lexical_ok = None
+        vectors = lexical_ok = tables_ok = None
         if entry is not None:
+            if table_counts is not None:
+                tables_ok = table_counts.get(source.document_id, 0) == entry.table_count
             vectors = _complete(entry, stored_ids.get(source.document_id, set()), workspace, config_name)
             if lexical_ids is not None:
                 lexical_ok = _complete(entry, lexical_ids.get(source.document_id, set()), workspace, config_name)
@@ -90,11 +97,11 @@ def check_status(workspace: Workspace, config_name: str, fingerprint: str,
             state: DocumentState = "new" if has_text(source) else "unreadable"
         elif entry.file_hash != source.file_hash:
             state = "changed" if has_text(source) else "unreadable"
-        elif not vectors or lexical_ok is False:
+        elif not vectors or lexical_ok is False or tables_ok is False:
             state = "incomplete"
         else:
             state = "current"
-        result.append(DocumentStatus(state, source, entry, vectors, lexical_ok))
+        result.append(DocumentStatus(state, source, entry, vectors, lexical_ok, tables_ok))
     for document_id, entry in manifest.documents.items():
         if document_id not in by_id:
             result.append(DocumentStatus("missing", None, entry))

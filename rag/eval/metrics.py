@@ -1,4 +1,8 @@
-"""Retrieval metrics at K. Definitions: docs/rules/evaluation.md."""
+"""Retrieval metrics at K. Definitions: docs/rules/evaluation.md.
+
+Results are return units (a chunk, or a whole table standing for all its chunks); each unit is
+given as the chunk IDs whose content it returns.
+"""
 
 from __future__ import annotations
 
@@ -19,11 +23,11 @@ class Ratio:
 
 @dataclass(frozen=True)
 class QuestionScore:
-    returned: int
-    relevant: int                 # returned chunks that belong to some acceptable set
+    returned: int                 # return units
+    relevant: int                 # returned units holding a chunk of some acceptable set
     groups_required: int
     groups_covered: int
-    cross_document: int           # returned chunks from documents outside the evidence
+    cross_document: int           # returned units from documents outside the evidence
     first_relevant_rank: int | None
     group_completion_ranks: dict[str, int]   # group → rank at which it became fully covered
 
@@ -36,20 +40,30 @@ class QuestionScore:
         return self.groups_covered == self.groups_required
 
 
-def score_question(hit_ids: list[str], hit_documents: list[str],
-                   evidence: list[GroupEvidence], evidence_documents: set[str]) -> QuestionScore:
-    ranks = {chunk_id: rank for rank, chunk_id in enumerate(hit_ids, start=1)}
-    relevant_ids = {cid for group in evidence for chunk_set in group.acceptable_sets for cid in chunk_set}
-    relevant_ranks = [ranks[cid] for cid in hit_ids if cid in relevant_ids]
+def completion_ranks(units: list[tuple[str, ...]], evidence: list[GroupEvidence]) -> dict[str, int]:
+    """Group → the number of leading units needed to cover it; groups never covered are left out."""
+    ranks: dict[str, int] = {}
+    for rank, chunk_ids in enumerate(units, start=1):
+        for chunk_id in chunk_ids:
+            ranks.setdefault(chunk_id, rank)
     completion: dict[str, int] = {}
     for group in evidence:
         reached = [max(ranks[cid] for cid in chunk_set) for chunk_set in group.acceptable_sets
                    if chunk_set and all(cid in ranks for cid in chunk_set)]
         if reached:
             completion[group.group_id] = min(reached)
+    return completion
+
+
+def score_question(units: list[tuple[str, ...]], unit_documents: list[str],
+                   evidence: list[GroupEvidence], evidence_documents: set[str]) -> QuestionScore:
+    relevant_ids = {cid for group in evidence for chunk_set in group.acceptable_sets for cid in chunk_set}
+    relevant_ranks = [rank for rank, chunk_ids in enumerate(units, start=1)
+                      if any(cid in relevant_ids for cid in chunk_ids)]
+    completion = completion_ranks(units, evidence)
     return QuestionScore(
-        len(hit_ids), len(relevant_ranks), len(evidence), len(completion),
-        sum(doc not in evidence_documents for doc in hit_documents),
+        len(units), len(relevant_ranks), len(evidence), len(completion),
+        sum(doc not in evidence_documents for doc in unit_documents),
         min(relevant_ranks) if relevant_ranks else None, completion)
 
 

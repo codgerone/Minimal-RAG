@@ -1,7 +1,7 @@
 """Comparison page: several evaluation runs side by side, changes against a baseline run.
 
 Runs with the same build settings apart from the rules version, the embedder and the BM25 analyzer
-(and the same K) share a tab, whatever their retriever; the first run given in each tab is its
+(and the same K) share a tab, whatever their retriever and table return unit; the first run given in each tab is its
 baseline. A run may be given a display name (`<run>=<name>`, e.g. `V3.9`), shown before its settings. A question improves when its status moves up
 (未命中 < 部分覆盖 < 完整覆盖) against the baseline and regresses when it moves down.
 """
@@ -16,6 +16,7 @@ from urllib.parse import quote
 from rag.eval.metrics import METRICS
 from rag.jsonio import read_json, write_atomic, write_json
 from rag.paths import Workspace
+from rag.reports.evaluation import unit_chunks
 from rag.reports.html import badge, esc, filters, hit_scores, page, pct, text_block, write_assets
 
 LEVELS = {"miss": (0, "✗ 未命中", "bad"), "partial": (1, "◐ 部分", "warn"), "complete": (2, "✓ 完整", "ok")}
@@ -39,7 +40,8 @@ def _group_key(result: dict[str, Any]) -> str:
 
 def _model(result: dict[str, Any]) -> str:
     """Display name when given; rules version and embedder model name; the retriever and BM25
-    analyzer settings when not plain semantic; the dataset variant (e.g. `+translated`) when there is one."""
+    analyzer settings when not plain semantic; 整表 when whole tables are returned; the dataset
+    variant (e.g. `+translated`) when there is one."""
     parts = [str(result["build_settings"].get("embedder_identity", {}).get("model", "?")).split("/")[-1]]
     if "rules_version" in result["build_settings"]:
         parts.insert(0, "规则 " + str(result["build_settings"]["rules_version"]))
@@ -50,6 +52,8 @@ def _model(result: dict[str, Any]) -> str:
         lexical = result["build_settings"].get("lexical") or {}
         parts.append(retriever + "（" + ("去停用词" if lexical.get("stopwords") else "保留停用词")
                      + ("、词干化" if lexical.get("stemming") else "") + "）")
+    if result.get("table_return_unit") == "table":
+        parts.append("返回整表")
     variant = result["dataset"]["version"].partition("+")[2]
     return " · ".join(parts + ([variant] if variant else []))
 
@@ -114,12 +118,47 @@ def _summary(runs: list[tuple[str, dict[str, Any]]]) -> str:
                  f'<span class="down">↓{sum(v < 0 for v in changes.values())}</span>')
         counts = (f'{result["metrics"]["hit_rate"]["numerator"]:.0f} / '
                   f'{result["metrics"]["complete_coverage"]["numerator"]:.0f}')
+        tokens = result.get("returned_tokens")
+        token_cell = f'{tokens["value"]:.0f}<div class="meta">最多 {tokens["max"]}</div>' if tokens else "—"
         rows.append(f'<tr><td><b>{esc(_model(result))}</b><div class="meta">{_run_link(name)} · 数据集 '
                     f'{esc(result["dataset"]["version"])}</div></td><td class="num">{counts}</td>{cells}'
-                    f'<td class="num">{moved}</td></tr>')
+                    f'<td class="num">{token_cell}</td><td class="num">{moved}</td></tr>')
     head = "".join(f'<th class="num">{esc(label)}</th>' for _, label, _ in METRICS)
     return (f'<div class="scroll"><table><tr><th>设置 / 运行</th><th class="num">命中 / 完整覆盖（题）</th>'
-            f'{head}<th class="num">较基线 变好 / 变差</th></tr>{"".join(rows)}</table></div>')
+            f'{head}<th class="num">每题返回 token</th><th class="num">较基线 变好 / 变差</th></tr>'
+            f'{"".join(rows)}</table></div>')
+
+
+def _required_k(runs: list[tuple[str, dict[str, Any]]], tab: str) -> str:
+    """Evidence groups whose required K (leading results the full ranking needs to cover them)
+    differs between runs; runs before V3.12 do not record it."""
+    if not all(any("required_k" in g for c in r["cases"] for g in c.get("groups", ())) for _, r in runs):
+        return '<div class="meta">有运行未记录所需 K（V3.12 之前的评估）。</div>'
+    by_run = [{c["case_id"]: c for c in result["cases"]} for _, result in runs]
+    rows, same = [], 0
+    for case in runs[0][1]["cases"]:
+        if not case["answerable"]:
+            continue
+        for index, group in enumerate(case["groups"]):
+            values = [run[case["case_id"]]["groups"][index].get("required_k") for run in by_run]
+            if len(set(values)) == 1:
+                same += 1
+                continue
+            base = values[0]
+            cells = []
+            for i, value in enumerate(values):
+                text = "无法覆盖" if value is None else str(value)
+                better = base is None or (value is not None and value < base)
+                cls = "" if i == 0 or value == base else "up" if better else "down"
+                cells.append(f'<td class="num"><span class="{cls}">{text}</span></td>')
+            rows.append(f'<tr><td><a href="#{esc(tab)}-{esc(case["case_id"])}">{esc(case["case_id"])}</a>&nbsp;'
+                        f'{esc(group["group_id"])}<div class="meta">{esc(group["information_item"])}</div></td>'
+                        f'{"".join(cells)}</tr>')
+    head = "".join(f'<th class="num">{esc(_model(result))}</th>' for _, result in runs)
+    note = f'<div class="meta">其余 {same} 个证据组在各运行中所需 K 相同。</div>'
+    if not rows:
+        return note
+    return f'<div class="scroll"><table><tr><th style="min-width:240px">题目 · 证据组</th>{head}</tr>{"".join(rows)}</table></div>{note}'
 
 
 def _matrix(runs: list[tuple[str, dict[str, Any]]], tab: str) -> tuple[str, str, dict[str, str]]:
@@ -157,9 +196,11 @@ def _matrix(runs: list[tuple[str, dict[str, Any]]], tab: str) -> tuple[str, str,
 
 def _hit(hit: dict[str, Any], retriever: str) -> str:
     state = badge("相关", "ok") if hit["relevant"] else badge("不相关")
-    return (f'<div class="item"><b>#{hit["rank"]}</b> {state} <span class="meta">{esc(hit_scores(hit, retriever))}'
+    table = badge(f"整表 · {len(unit_chunks(hit))} 块") if hit.get("table_id") else ""
+    ids = f'整表 {hit["table_id"]}，排名来自 {hit["chunk_id"]}' if hit.get("table_id") else hit["chunk_id"]
+    return (f'<div class="item"><b>#{hit["rank"]}</b> {state} {table} <span class="meta">{esc(hit_scores(hit, retriever))}'
             f' · 第 {",".join(map(str, hit["pages"]))} 页</span>{text_block(hit["text"], 160)}'
-            f'<details><summary>chunk ID</summary><div class="meta">{esc(hit["chunk_id"])}</div></details></div>')
+            f'<details><summary>ID</summary><div class="meta">{esc(ids)}</div></details></div>')
 
 
 def _cards(runs, by_run, tags_of: dict[str, str], tab: str) -> str:
@@ -184,8 +225,9 @@ def _recurring(runs: list[tuple[str, dict[str, Any]]]) -> str:
         for case in result["cases"]:
             for hit in case["hits"]:
                 if not hit["relevant"]:
-                    counts[hit["chunk_id"]] += 1
-                    texts[hit["chunk_id"]] = hit
+                    key = hit.get("table_id") or hit["chunk_id"]
+                    counts[key] += 1
+                    texts[key] = hit
         items = [(cid, n) for cid, n in counts.most_common() if n >= RECURRING_MIN]
         body = "".join(f'<div class="item"><b>{n} 题</b> <span class="meta">{esc(texts[cid]["document_name"])} · '
                        f'第 {",".join(map(str, texts[cid]["pages"]))} 页</span>'
@@ -217,8 +259,11 @@ def render(name: str, runs: list[tuple[str, dict[str, Any]]]) -> str:
                        (f"{tab}-worse", "有运行变差", sum(f"{tab}-worse" in t.split() for t in tags_of.values()))])
         panels.append(
             f'<div data-panel="{esc(tab)}"><h2>指标（K={top_k}，基线 {esc(_model(members[0][1]))}）</h2>'
-            f'{_summary(members)}<h2>逐题状态</h2>{bar}{matrix}'
-            f'<h2>反复进入 Top-{top_k} 的不相关 chunk（≥{RECURRING_MIN} 题）</h2>{_recurring(members)}'
+            f'{_summary(members)}<h2>逐证据组所需 K 的变化</h2>'
+            f'<div class="meta">所需 K：按全量排名，该证据组全部进入前几个结果；整表算一个结果。</div>'
+            f'{_required_k(members, tab)}'
+            f'<h2>逐题状态</h2>{bar}{matrix}'
+            f'<h2>反复进入 Top-{top_k} 的不相关结果（≥{RECURRING_MIN} 题）</h2>{_recurring(members)}'
             f'<h2>逐题 Top-{top_k}</h2>{cards}</div>')
     body = (f'<h1>评估对比 · {esc(name)}</h1>'
             f'<div class="sub">{len(runs)} 次评估 · 每个标签页的第一列是基线；状态按 未命中 &lt; 部分覆盖 &lt; 完整覆盖 '

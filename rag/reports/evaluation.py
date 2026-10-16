@@ -38,6 +38,25 @@ def _case_status(case: dict[str, Any]) -> tuple[str, str, str]:
     return "miss", "✗ 未检索到证据", "bad"
 
 
+def unit_chunks(hit: dict[str, Any]) -> list[str]:
+    """Chunks a returned result stands for: all chunks of a whole table, else the chunk itself
+    (runs before V3.12 only record the chunk)."""
+    return hit.get("chunk_ids") or [hit["chunk_id"]]
+
+
+def table_return_label(result: dict[str, Any]) -> str:
+    return "整表" if result.get("table_return_unit") == "table" else "命中的 chunk"
+
+
+def required_k_badge(group: dict[str, Any]) -> str:
+    """How many leading results the full ranking needs to cover the group (runs since V3.12)."""
+    if "required_k" not in group:
+        return ""
+    if group["required_k"] is None:
+        return badge("全量排名中无法覆盖", "bad")
+    return badge(f"所需 K={group['required_k']}")
+
+
 def _excerpt_html(x: dict[str, Any], case: dict[str, Any]) -> str:
     source = "" if x["document_name"] == case["document_name"] else f' · {esc(x["document_name"])}'
     header = " " + badge("表头") if x.get("table_header") else ""
@@ -63,13 +82,16 @@ def _group_html(group: dict[str, Any], case: dict[str, Any], top_k: int) -> str:
     if "schemes" not in group:
         return _legacy_group_html(group)
     excerpts = {x["excerpt_id"]: x for x in case["excerpts"]}
-    retrieved = {h["chunk_id"] for h in case["hits"]}
+    retrieved = {cid for h in case["hits"] for cid in unit_chunks(h)}
     state = (badge(f"第 {group['covered_at_rank']} 位时已覆盖", "ok") if group["covered_at_rank"]
-             else badge("未覆盖", "bad"))
+             else badge("未覆盖", "bad")) + " " + required_k_badge(group)
     label, kind = MODE_LABELS[group["mode"]]
     mode = badge(label, kind) if group["mode"] not in PLAIN_MODES else ""
-    fewest = min((len(s) for s in group["acceptable_sets"]), default=0)
-    beyond = badge(f"至少需 {fewest} 个 chunk，K={top_k} 时不可能覆盖", "bad") if fewest > top_k else ""
+    if "fewest_units" in group:      # runs since V3.12 count return units (a whole table is one)
+        fewest, unit = group["fewest_units"] or 0, "个结果"
+    else:
+        fewest, unit = min((len(s) for s in group["acceptable_sets"]), default=0), "个 chunk"
+    beyond = badge(f"至少需 {fewest} {unit}，K={top_k} 时不可能覆盖", "bad") if fewest > top_k else ""
     schemes = []
     for n, scheme in enumerate(group["schemes"]):
         got = any(set(s) <= retrieved for s in scheme["acceptable_sets"])
@@ -129,14 +151,36 @@ def _scope_tile(result: dict[str, Any]) -> str:
             f'<div class="d same">{note}</div></div>')
 
 
+def _tokens_tile(result: dict[str, Any], previous: dict[str, Any] | None) -> str:
+    tokens = result.get("returned_tokens")
+    if not tokens:
+        return ""
+    before = (previous or {}).get("returned_tokens")
+    if before is None:
+        change = '<div class="d same">无上次结果</div>'
+    elif tokens["value"] == before["value"]:
+        change = '<div class="d same">与上次相同</div>'
+    else:
+        diff = tokens["value"] - before["value"]
+        change = f'<div class="d same">{"+" if diff > 0 else "−"}{abs(diff):.0f} 较上次</div>'
+    return (f'<div class="tile"><div class="k">每题返回 token</div><div class="v">{tokens["value"]:.0f}</div>'
+            f'<div class="d same">最多 {tokens["max"]}</div>{change}</div>')
+
+
 def _hit_html(hit: dict[str, Any], groups: list[dict[str, Any]], retriever: str) -> str:
-    matched = [g["group_id"] for g in groups if any(hit["chunk_id"] in s for s in g["acceptable_sets"])]
+    chunks = unit_chunks(hit)
+    matched = [g["group_id"] for g in groups if any(c in s for c in chunks for s in g["acceptable_sets"])]
     mark = (badge("✓ 证据 " + "、".join(matched), "ok") if hit["relevant"]
             else badge("跨文档", "bad") if hit["cross_document"] else badge("非证据"))
-    return (f'<div class="item"><b>#{hit["rank"]}</b> {mark} '
+    table = badge(f"整表 · {len(chunks)} 块") if hit.get("table_id") else ""
+    tokens = f' · {hit["tokens"]} token' if "tokens" in hit else ""
+    ids = (f'整表 {esc(hit["table_id"])}，排名来自 {esc(hit["chunk_id"])}；成员 {esc("、".join(chunks))}'
+           + (f'；含证据的 {esc("、".join(hit["relevant_chunk_ids"]))}' if hit.get("relevant_chunk_ids") else "")
+           if hit.get("table_id") else esc(hit["chunk_id"]))
+    return (f'<div class="item"><b>#{hit["rank"]}</b> {mark} {table} '
             f'<span class="meta">{esc(hit["document_name"])} · 第 {",".join(map(str, hit["pages"]))} 页'
-            f' · {esc(hit_scores(hit, retriever))}</span>{text_block(hit["text"], 280)}'
-            f'<details><summary>{esc(hit["chunk_id"])}</summary><div class="meta">'
+            f' · {esc(hit_scores(hit, retriever))}{tokens}</span>{text_block(hit["text"], 280)}'
+            f'<details><summary>{esc(hit.get("table_id") or hit["chunk_id"])}</summary><div class="meta">{ids}；'
             + (f'得分 {hit["score"]:.6f}' if "score" in hit else f'距离 {hit["distance"]:.6f}')
             + f'，类型 {esc(hit["kind"])}</div></details></div>')
 
@@ -147,7 +191,7 @@ def render(result: dict[str, Any], previous: dict[str, Any] | None) -> str:
         f'<div class="tile"><div class="k">{esc(label)}</div><div class="v">{pct(metrics[key]["value"])}</div>'
         + _delta(key, metrics[key]["value"],
                  previous["metrics"][key]["value"] if previous else None, better_up) + "</div>"
-        for key, label, better_up in METRICS) + _scope_tile(result)
+        for key, label, better_up in METRICS) + _tokens_tile(result, previous) + _scope_tile(result)
     cases = result["cases"]
     statuses = [_case_status(c) for c in cases]
     modes = result["evidence_modes"]
@@ -205,6 +249,7 @@ def render(result: dict[str, Any], previous: dict[str, Any] | None) -> str:
     body = (f'<h1>检索评估 · {esc(result["config"])} · K={result["top_k"]}</h1>'
             f'<div class="sub">{esc(result["created_at"])} · {result["dataset"]["answerable"]} 道可回答问题'
             f'（数据集 {esc(result["dataset"]["version"])}）· 检索器 {esc(result.get("retriever", "semantic"))}'
+            f' · 命中表格时返回{table_return_label(result)}'
             f' · 文档过滤{filter_state(result)}'
             f' · 构建指纹 {esc(result["fingerprint"][:12])}</div>'
             f'<div class="tiles">{tiles}</div>{notice_html}'
@@ -240,12 +285,14 @@ def rerender_all(workspace: Workspace) -> int:
 
 
 def latest_before(workspace: Workspace, result: dict[str, Any]) -> dict[str, Any] | None:
-    """Latest earlier run with the same config, retriever, K and dataset version, for the 'change since last run' line."""
+    """Latest earlier run with the same config, retriever, table return unit, K and dataset version,
+    for the 'change since last run' line."""
     from rag.jsonio import read_json
     folder = workspace.eval_reports()
     runs = [read_json(p) for p in folder.glob("*/result.json")] if folder.is_dir() else []
     earlier = [r for r in runs if r["config"] == result["config"] and r["top_k"] == result["top_k"]
                and r.get("retriever", "semantic") == result.get("retriever", "semantic")
+               and r.get("table_return_unit", "chunk") == result.get("table_return_unit", "chunk")
                and r["dataset"]["version"] == result["dataset"]["version"]
                and r["created_at"] < result["created_at"]]
     return max(earlier, key=lambda r: r["created_at"]) if earlier else None

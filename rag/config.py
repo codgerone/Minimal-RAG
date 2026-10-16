@@ -11,6 +11,7 @@ from typing import Any
 # Bump when a built-in algorithm changes its output, so existing indexes are flagged stale.
 RULES_VERSION = "v3.11"
 DEFAULT_CONFIG = "structured"
+TABLE_RETURN_UNITS = ("chunk", "table")
 
 
 class ConfigError(ValueError):
@@ -42,6 +43,7 @@ class AssemblyConfig:
     eval_top_k: int     # formal evaluation; kept at the baseline K for comparability
     document_filter: bool = True   # limit retrieval to documents whose catalog code is in the question
     lexical: dict[str, Any] | None = None   # [lexical]: BM25 index analyzer settings; None = no BM25 index
+    table_return_unit: str = "chunk"   # a hit on a table chunk returns that chunk, or the whole table
 
     def build_settings(self) -> dict[str, Any]:
         """Everything that changes index content. Retrieval, LLM and display settings are excluded."""
@@ -90,6 +92,9 @@ def load_config(path: Path) -> AssemblyConfig:
     document_filter = retriever.params.pop("document_filter", True)
     if type(document_filter) is not bool:
         raise ConfigError(f"{path.name}：retriever.document_filter 必须为 true 或 false")
+    table_return_unit = retriever.params.pop("table_return_unit", "chunk")
+    if table_return_unit not in TABLE_RETURN_UNITS:
+        raise ConfigError(f"{path.name}：retriever.table_return_unit 只能是 \"chunk\" 或 \"table\"")
     evaluation = data.get("eval", {})
     if not isinstance(evaluation, dict) or set(evaluation) - {"top_k"}:
         raise ConfigError(f"{path.name}：[eval] 只接受 top_k")
@@ -113,7 +118,7 @@ def load_config(path: Path) -> AssemblyConfig:
         _component(data["embedder"], "embedder", path),
         retriever, top_k,
         _component(data["llm"], "llm", path),
-        eval_top_k, document_filter, lexical,
+        eval_top_k, document_filter, lexical, table_return_unit,
     )
 
 

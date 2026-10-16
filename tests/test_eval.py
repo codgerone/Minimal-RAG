@@ -93,10 +93,10 @@ def test_scheme_with_an_unmapped_excerpt_is_unusable():
 def test_metrics_follow_the_documented_definitions():
     evidence = [GroupEvidence("e1", "coordinate", (frozenset({"a"}),)),
                 GroupEvidence("e2", "coordinate", (frozenset({"b", "c"}),))]
-    full = score_question(["x", "a", "b", "c"], ["d2", "d1", "d1", "d1"], evidence, {"d1"})
+    full = score_question([("x",), ("a",), ("b",), ("c",)], ["d2", "d1", "d1", "d1"], evidence, {"d1"})
     assert (full.hit, full.complete, full.first_relevant_rank, full.cross_document) == (True, True, 2, 1)
     assert full.group_completion_ranks == {"e1": 2, "e2": 4}
-    partial = score_question(["b", "x", "y"], ["d1", "d2", "d2"], evidence, {"d1"})
+    partial = score_question([("b",), ("x",), ("y",)], ["d1", "d2", "d2"], evidence, {"d1"})
     assert (partial.hit, partial.groups_covered, partial.relevant) == (False, 0, 1)
     metrics = aggregate([full, partial])
     assert metrics["hit_rate"].value == 0.5
@@ -106,7 +106,16 @@ def test_metrics_follow_the_documented_definitions():
     assert metrics["cross_document"].value == (1 / 4 + 2 / 3) / 2
 
 
+def test_a_whole_table_unit_counts_as_all_its_chunks_at_its_rank():
+    evidence = [GroupEvidence("e1", "coordinate", (frozenset({"t1", "t3"}),)),
+                GroupEvidence("e2", "coordinate", (frozenset({"z"}),))]
+    score = score_question([("x",), ("t1", "t2", "t3"), ("y",)], ["d1", "d1", "d1"], evidence, {"d1"})
+    assert score.group_completion_ranks == {"e1": 2}
+    assert (score.relevant, score.returned, score.first_relevant_rank) == (1, 3, 2)
+
+
 def test_run_name_shows_config_k_and_filter_state():
     from rag.eval.runner import run_name
     assert run_name("structured", 3, True, "semantic").endswith("_structured_k3_filter-on")
     assert run_name("plain_text", 5, False, "semantic").endswith("_plain_text_k5_filter-off")
+    assert run_name("structured", 3, True, "hybrid", "table").endswith("_structured_k3_filter-on_hybrid_table")

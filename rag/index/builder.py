@@ -17,6 +17,7 @@ from rag.index.lexical import LexicalChunk, LexicalStore
 from rag.index.manifest import DocumentEntry, Manifest, now
 from rag.index.status import IndexStatus, check_status
 from rag.index.store import ChromaStore, StoredChunk
+from rag.index.tables import StoredTable, TableStore, collect_tables
 from rag.ingest.regions import attach_regions
 from rag.ingest.pipeline import ProcessedDocument, process_document
 from rag.ingest.sources import discover, select
@@ -47,6 +48,7 @@ class Prepared:
     batch: ChunkBatch
     vectors: list[list[float]]
     lexical: list[LexicalChunk] | None     # None when the assembly has no BM25 index
+    tables: list[StoredTable]
     entry: DocumentEntry
 
 
@@ -60,11 +62,16 @@ def open_lexical(workspace: Workspace, assembly: Assembly) -> LexicalStore | Non
     return LexicalStore(workspace.index_dir(assembly.name) / "bm25.sqlite")
 
 
+def open_tables(workspace: Workspace, config_name: str) -> TableStore:
+    return TableStore(workspace.index_dir(config_name) / "tables.sqlite")
+
+
 def current_status(workspace: Workspace, assembly: Assembly,
                    sources: tuple[SourceDocument, ...] | None = None) -> IndexStatus:
     sources = discover(workspace.documents) if sources is None else sources
     return check_status(workspace, assembly.name, assembly.fingerprint(), sources,
-                        open_store(workspace, assembly.name), open_lexical(workspace, assembly))
+                        open_store(workspace, assembly.name), open_lexical(workspace, assembly),
+                        open_tables(workspace, assembly.name))
 
 
 def prepare(source: SourceDocument, assembly: Assembly) -> Prepared:
@@ -80,7 +87,10 @@ def prepare(source: SourceDocument, assembly: Assembly) -> Prepared:
                           source.file_hash, readable_name(source.relative_path),
                           processed.parse.primary.page_count, len(batch.chunks),
                           len(processed.prepared_tables), now())
-    return Prepared(source, processed, batch, vectors, lexical, entry)
+    tables = collect_tables(processed.document, batch)
+    if len(tables) != entry.table_count:
+        raise IngestError(f"整表数 {len(tables)} 与表格数 {entry.table_count} 不一致")
+    return Prepared(source, processed, batch, vectors, lexical, tables, entry)
 
 
 def _stored(prepared: Prepared) -> list[StoredChunk]:
@@ -138,6 +148,7 @@ def ingest(workspace: Workspace, assembly: Assembly, *, file: str | None = None,
     manifest = status.manifest or _new_manifest(assembly)
     store = open_store(workspace, assembly.name)
     lexical = open_lexical(workspace, assembly)
+    tables = open_tables(workspace, assembly.name)
     targets = status.documents
     if file is not None:
         chosen = select(file, sources)
@@ -150,6 +161,7 @@ def ingest(workspace: Workspace, assembly: Assembly, *, file: str | None = None,
                 store.delete_document(item.entry.document_id)
                 if lexical is not None:
                     lexical.delete_document(item.entry.document_id)
+                tables.delete_document(item.entry.document_id)
                 shutil.rmtree(index_dir / "documents" / item.entry.folder, ignore_errors=True)
                 shutil.rmtree(workspace.ingest_reports(assembly.name) / item.entry.folder,
                               ignore_errors=True)
@@ -173,6 +185,7 @@ def ingest(workspace: Workspace, assembly: Assembly, *, file: str | None = None,
             store.replace_document(item.source.document_id, _stored(prepared), prepared.vectors)
             if lexical is not None:
                 lexical.replace_document(item.source.document_id, prepared.lexical or [])
+            tables.replace_document(item.source.document_id, prepared.tables)
             manifest.documents[item.source.document_id] = prepared.entry
             manifest.save(index_dir / "manifest.json")
         except Exception as exc:  # one bad PDF must not stop the others
@@ -214,11 +227,14 @@ def _rebuild_all(workspace: Workspace, assembly: Assembly,
     lexical = open_lexical(workspace, assembly)
     if lexical is not None:
         lexical.clear()
+    tables = open_tables(workspace, assembly.name)
+    tables.clear()
     manifest = _new_manifest(assembly)
     for prepared in prepared_all:
         store.replace_document(prepared.source.document_id, _stored(prepared), prepared.vectors)
         if lexical is not None:
             lexical.replace_document(prepared.source.document_id, prepared.lexical or [])
+        tables.replace_document(prepared.source.document_id, prepared.tables)
         manifest.documents[prepared.source.document_id] = prepared.entry
     old = index_dir / "documents.old"
     shutil.rmtree(old, ignore_errors=True)
