@@ -249,7 +249,8 @@ def tables_page(processed: ProcessedDocument, entry: DocumentEntry, config_name:
     tool_line = "　".join(f"{e.tool}/{e.strategy} {sum(len(p.candidate_ids) for p in e.pages)} 张"
                           + (" ⚠" if e in failed else "") for e in executions)
     summary = (f'<div class="card"><b>{len(slots)} 张表</b>：{winners} 张采用候选胜出者，'
-               f'{len(slots) - winners} 张采用解析器原生表格。'
+               f'{len(slots) - winners} 张采用解析器原生表格'
+               + (f'；跨页合并后共 {len(processed.prepared_tables)} 张' if merged else '') + '。'
                f'<div class="meta">各工具找到的候选：{esc(tool_line) or "（未配置表格提取器）"}</div>'
                + ("".join(f'<div class="meta">⚠ {esc(e.tool)}/{esc(e.strategy)}：{esc(e.status)} '
                           f'{esc(e.error_message or "")}</div>' for e in failed))
@@ -293,7 +294,9 @@ def tables_page(processed: ProcessedDocument, entry: DocumentEntry, config_name:
             chosen = cid == resolution.selected_candidate_id
             cards.append(f'<div class="card{" winner" if chosen else ""}"><h3>{esc(candidate.tool)}/'
                          f'{esc(candidate.strategy)}{" ★ 胜出" if chosen else ""}</h3>'
-                         f'<div class="meta">{candidate.row_count or "?"} 行 × {candidate.column_count or "?"} 列</div>'
+                         f'<div class="meta">{candidate.row_count or "?"} 行 × {candidate.column_count or "?"} 列'
+                         + (f'（下图为合并后的表，{prep.adopted_table.row_count} 行）'
+                            if chosen and len(prep.segments) > 1 and not continued else '') + '</div>'
                          + (header_status + render_grid(own_table, 15, header_rows) if chosen
                             else render_grid(candidate, 15)) + '</div>')
         page_candidates = [c for c in candidates.values()
