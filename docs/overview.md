@@ -46,7 +46,7 @@ codes = ["ORDER2025001"]
 | | `plain_text` | `structured` |
 |---|---|---|
 | 解析 | PyMuPDF 按页取文本 | Docling 版面解析（标题、段落、列表、表格、阅读顺序） |
-| 表格 | 不处理 | 四个工具九种策略提取，评分选出最佳结构，判定表头后写成带列名的 Markdown 行（`labeled_rows_v1`，见 [rules/table-text.md](rules/table-text.md)） |
+| 表格 | 不处理 | 四个工具九种策略提取，评分选出最佳结构；跨页的续表与前表合并成一张表（见 [rules/table-continuation.md](rules/table-continuation.md)）；判定表头后写成带列名的 Markdown 行（`labeled_rows_v1`，见 [rules/table-text.md](rules/table-text.md)） |
 | 分块 | 每页内 300 字符、重叠 50 | 按阅读顺序把正文、列表项合并成块，表格单独成块，每块不超过 512 token（按 multilingual-e5 分词器计数，见 [rules/chunking.md](rules/chunking.md)） |
 | 索引 / 检索 | bge-m3 向量索引 + BM25 倒排索引，混合检索；按标识编码限定文档；问答取 Top-4，评估取 Top-3 | 同左 |
 
@@ -91,7 +91,7 @@ V3.10 让列表不再单独成块，与相邻正文按预算合并（[决策 010
 
 ## 不做什么（当前范围外）
 
-扫描件 OCR、图片理解、跨页表格拼接、重排模型、从文档内容自动抽取编号、按文档属性（类型、客户、日期）过滤、多轮对话记忆、Agent/工具调用、Web 界面。
+扫描件 OCR、图片理解、重排模型、从文档内容自动抽取编号、按文档属性（类型、客户、日期）过滤、多轮对话记忆、Agent/工具调用、Web 界面。
 
 ## 怎么验收
 

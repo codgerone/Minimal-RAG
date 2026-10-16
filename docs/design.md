@@ -5,8 +5,8 @@
 ```
 入库   PDF ─→ Parser ─→ 主文档（文本 / 列表 / 表格位置，按阅读顺序）
               │
-              └─→ TableExtractor × N ─→ 准入·分组·评分选优 ─→ 表头判定 ─→ TableFormatter ─┐
-                                                                                         ↓
+              └─→ TableExtractor × N ─→ 准入·分组·评分选优 ─→ 续表合并 ─→ 表头判定 ─→ TableFormatter ─┐
+                                                                                                     ↓
                        组装后的文档（ParsedDocument）─→ Chunker ─→ chunks ─→ 来源区域 ─┬─→ Embedder ─→ Chroma（向量索引）
                                                                                        ├─→ Analyzer ─→ SQLite（BM25 倒排索引）
                                                                                        └─→ 中间结果 JSON + 审核 HTML
@@ -33,7 +33,7 @@
 
 编码器都是固定版本（revision）的 sentence-transformers 模型，按 float32 加载，查询与文档各加固定前缀或指令，向量 L2 归一化；编码前用模型自己的分词器检查 chunk 不超过其输入上限，超过则报错而不截断。模型选择见 [decisions/008-embedder-bge-m3.md](decisions/008-embedder-bge-m3.md)。
 
-表格选优、表头判定、检索范围识别、向量库（Chroma）、BM25 分析器与倒排索引目前都只有一种实现，作为普通模块存在，等出现第二种实现时再抽象成接口。
+表格选优、续表判定、表头判定、检索范围识别、向量库（Chroma）、BM25 分析器与倒排索引目前都只有一种实现，作为普通模块存在，等出现第二种实现时再抽象成接口。
 
 **新增一种实现**：写一个满足接口的类，在 `registry.py` 对应的字典里登记一个名字，然后在配置文件里 `use = "名字"` 即可，主流程不用改。
 
