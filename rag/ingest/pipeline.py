@@ -1,4 +1,4 @@
-"""Process one PDF: parse → (extract → select → prepare tables) → assemble."""
+"""Process one PDF: parse → (extract → select → merge continuations → prepare tables) → assemble."""
 
 from __future__ import annotations
 
@@ -9,7 +9,7 @@ from rag.ingest.parsers import ParseResult, Parser
 from rag.ingest.tables.extractors import TableExtractor
 from rag.ingest.tables.formatters import TableFormatter
 from rag.ingest.tables.models import (
-    ContentResolution, GroupingReport, PreparedTableContent, ScoringReport,
+    ContentResolution, ContinuationReport, GroupingReport, PreparedTableContent, ScoringReport,
     TableExtractionReport,
 )
 from rag.ingest.tables.pdf_words import PyMuPdfEvidenceReader
@@ -28,6 +28,7 @@ class ProcessedDocument:
     grouping: GroupingReport | None
     scoring: ScoringReport | None
     prepared_tables: tuple[PreparedTableContent, ...]
+    continuations: ContinuationReport | None
     document: ParsedDocument
 
     @property
@@ -47,8 +48,8 @@ def process_document(source: SourceDocument, parser: Parser,
         warnings = tuple(w for report in reports for w in report.warnings)
         warnings += grouping.warnings + scoring.warnings
         assert formatter is not None
-        prepared = prepare_tables(primary, reports, resolutions, True,
-                                  serializer=formatter.format)
+        prepared, continuations = prepare_tables(primary, reports, resolutions, True,
+                                                 serializer=formatter.format)
     elif primary.table_slots:
         # No extractors configured: every table keeps the parser's own structure.
         resolutions = tuple(ContentResolution(slot.slot_id, "docling_native_fallback",
@@ -56,10 +57,12 @@ def process_document(source: SourceDocument, parser: Parser,
                             for slot in primary.table_slots)
         grouping, scoring, warnings = None, None, ()
         assert formatter is not None
-        prepared = prepare_tables(primary, (), resolutions, True, serializer=formatter.format)
+        prepared, continuations = prepare_tables(primary, (), resolutions, True,
+                                                 serializer=formatter.format)
     else:
         resolutions, grouping, scoring, prepared, warnings = (), None, None, (), ()
+        continuations = None
     document = compose_document(source, primary, resolutions, prepared,
                                 bool(primary.table_slots), warnings)
     return ProcessedDocument(source, parsed, reports, resolutions, grouping, scoring,
-                             prepared, document)
+                             prepared, continuations, document)

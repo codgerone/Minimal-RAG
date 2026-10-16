@@ -30,6 +30,8 @@ HeaderInputIssueCode: TypeAlias = Literal["invalid_dimensions", "duplicate_cell_
 ValueType: TypeAlias = Literal["number", "currency", "date"]
 CellShape: TypeAlias = Literal["empty", "text", "typed"]
 HeaderStructuralIssueCode: TypeAlias = Literal["boundary_crosses_cell", "missing_header_position", "internal_blank_row", "internal_full_width_row", "crossing_column_intervals", "no_nonempty_path"]
+ContinuationFailure: TypeAlias = Literal["position_unavailable", "earlier_not_at_page_end", "later_not_at_page_start", "text_between_too_long", "invalid_grid", "column_count_differs", "geometry_unavailable", "columns_misaligned", "column_types_conflict", "later_has_header"]
+ColumnGeometry: TypeAlias = Literal["aligned", "misaligned", "unavailable"]
 
 
 @dataclass(frozen=True)
@@ -43,12 +45,66 @@ class PdfPageWord:
 
 
 @dataclass(frozen=True)
-class PreparedTableContent:
+class TableSegment:
+    """One page's part of a (possibly merged) table: rows [start_row, end_row) came from this slot."""
     slot_id: str
     table_id: str
-    adopted_table: StructuredTable
+    page_number: int | None
+    start_row: int
+    end_row: int
+
+
+@dataclass(frozen=True)
+class ContinuationEvaluation:
+    """Facts and verdict for two tables adjacent in reading order on consecutive pages."""
+    earlier_slot_id: str
+    later_slot_id: str
+    earlier_page: int
+    later_page: int
+    earlier_bottom: float | None            # table bottom edge / page height
+    later_top: float | None                 # table top edge / page height
+    text_width_before: int                  # text between the tables on the earlier page
+    text_width_after: int                   # ... and on the later page
+    earlier_columns: int | None
+    later_columns: int | None
+    geometry: ColumnGeometry | None         # None when column counts differ
+    extent_overlap: float | None
+    max_separator_shift: float | None
+    comparable_separators: int
+    total_separators: int
+    earlier_stable_types: tuple[tuple[ValueType, ...], ...]
+    later_stable_types: tuple[tuple[ValueType, ...], ...]
+    conflicting_columns: tuple[int, ...]
+    later_header_outcome: Literal["identified", "undetermined"]
+    failures: tuple[ContinuationFailure, ...]
+
+    @property
+    def is_continuation(self) -> bool:
+        return not self.failures
+
+
+@dataclass(frozen=True)
+class ContinuationReport:
+    rule_version: Literal["table_continuation_v1"]
+    evaluations: tuple[ContinuationEvaluation, ...]
+    chains: tuple[tuple[str, ...], ...]     # slot IDs merged into one table, two or more each
+
+
+@dataclass(frozen=True)
+class PreparedTableContent:
+    slot_id: str                            # the first slot of a merged chain
+    table_id: str
+    adopted_table: StructuredTable          # the merged table when segments > 1
     header_decision: HeaderDecision
     serialized_table: SerializedTable
+    segments: tuple[TableSegment, ...]
+
+    def __post_init__(self) -> None:
+        if not self.segments or self.segments[0].slot_id != self.slot_id:
+            raise ValueError("prepared table segments must start with its own slot")
+        rows = [(item.start_row, item.end_row) for item in self.segments]
+        if rows[0][0] != 0 or any(a[1] != b[0] for a, b in zip(rows, rows[1:])) or any(s > e for s, e in rows):
+            raise ValueError("prepared table segments must tile the rows")
 
 @dataclass(frozen=True)
 class TableExtractionReport:

@@ -107,6 +107,7 @@ def write_audit_files(folder, prepared: Prepared) -> None:
             "grouping": processed.grouping,
             "scoring": processed.scoring,
             "resolutions": processed.resolutions,
+            "continuations": processed.continuations,
             "prepared_tables": processed.prepared_tables,
         })
     write_json(folder / "chunks.json", prepared.batch)
