@@ -326,11 +326,14 @@ def _eval(workspace: Workspace, args: argparse.Namespace) -> int:
     result = read_json(folder / "result.json")
     metrics = result["metrics"]
     modes = result["evidence_modes"]
-    _out(f"配置 {assembly.name} · K={top_k} · {result['dataset']['answerable']} 道可回答问题")
+    returned = "整表" if assembly.config.table_return_unit == "table" else "命中的 chunk"
+    _out(f"配置 {assembly.name} · K={top_k} · 命中表格时返回{returned} · {result['dataset']['answerable']} 道可回答问题")
     for key, label in (("hit_rate", "命中率"), ("complete_coverage", "完整覆盖率"),
                        ("group_recall", "证据组召回"), ("mrr", "MRR"),
                        ("chunk_precision", "Chunk 精确率"), ("cross_document", "跨文档污染")):
         _out(f"  {label}：{metrics[key]['value']:.2%}")
+    tokens = result["returned_tokens"]
+    _out(f"  每题返回 token：{tokens['value']:.0f}（最多 {tokens['max']}）")
     scope = result["document_scope"]
     if scope["enabled"] and scope["catalog"]:
         ratio = scope["identified_correctly"]

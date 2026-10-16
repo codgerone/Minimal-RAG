@@ -9,12 +9,13 @@ from typing import Any
 
 from rag.eval.dataset import Case, Dataset, load_dataset
 from rag.eval.judge import CaseEvidence, JudgeChunk, judge_case
-from rag.eval.metrics import METRICS, QuestionScore, aggregate, score_question
-from rag.index.builder import current_status, open_lexical, open_store
+from rag.eval.metrics import METRICS, QuestionScore, aggregate, completion_ranks, score_question
+from rag.index.builder import current_status, open_lexical, open_store, open_tables
 from rag.jsonio import read_json, write_json
 from rag.paths import Workspace
-from rag.query.retriever import Hit, build_retriever
+from rag.query.retriever import build_retriever
 from rag.query.scope import SearchScope, load_catalog, resolve_scope
+from rag.query.units import ResultUnit, UnitSearch
 from rag.registry import Assembly
 
 
@@ -25,10 +26,12 @@ class EvalError(RuntimeError):
 @dataclass(frozen=True)
 class CaseResult:
     case: Case
-    hits: list[Hit]
+    units: list[ResultUnit]       # the top-K return units
+    tokens: list[int]             # token count of each returned unit
     evidence: CaseEvidence
     score: QuestionScore | None   # None for unanswerable questions
     scope: SearchScope
+    required_k: dict[str, int]    # group → units needed in the full ranking; uncoverable groups left out
 
     @property
     def evidence_documents(self) -> set[str]:
@@ -40,11 +43,14 @@ class CaseResult:
                 and set(self.scope.document_ids or ()) == self.evidence_documents)
 
 
-def run_name(config_name: str, top_k: int, document_filter: bool, retriever: str) -> str:
-    """Folder name: date, config, K, filter state and (unless semantic) the retriever,
-    so a run reads without opening it."""
+def run_name(config_name: str, top_k: int, document_filter: bool, retriever: str,
+             table_return_unit: str = "chunk") -> str:
+    """Folder name: date, config, K, filter state, (unless semantic) the retriever and (when
+    whole tables are returned) `_table`, so a run reads without opening it."""
     state = "filter-on" if document_filter else "filter-off"
     suffix = "" if retriever == "semantic" else f"_{retriever}"
+    if table_return_unit == "table":
+        suffix += "_table"
     return f"{datetime.now():%Y-%m-%d}_{config_name}_k{top_k}_{state}{suffix}"
 
 
@@ -112,16 +118,22 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int) -> Path
     enabled = assembly.config.document_filter
     catalog = (load_catalog(workspace.documents, tuple(sources.values()))
                if enabled else None)
-    retriever = build_retriever(assembly, store, open_lexical(workspace, assembly))
+    table_return_unit = assembly.config.table_return_unit
+    searcher = UnitSearch(build_retriever(assembly, store, open_lexical(workspace, assembly)), store,
+                          open_tables(workspace, assembly.name), table_return_unit)
+    from rag.ingest.chunkers.tokens import E5TokenCounter
+    counter = E5TokenCounter()
     results: list[CaseResult] = []
     for case in dataset.cases:
         scope = resolve_scope(case.question, catalog, enabled)
-        hits = retriever.retrieve(case.question, top_k, scope.document_ids)
+        ranking = searcher.rank_all(case.question, scope.document_ids)
+        units = ranking[:top_k]
         evidence = judge_case(case, chunks)
-        item = CaseResult(case, hits, evidence, None, scope)
+        item = CaseResult(case, units, [counter.count_passage(u.text) for u in units], evidence,
+                          None, scope, completion_ranks([u.chunk_ids for u in ranking], evidence.groups))
         if case.answerable:
             item = replace(item, score=score_question(
-                [h.chunk.chunk_id for h in hits], [h.chunk.document_id for h in hits],
+                [u.chunk_ids for u in units], [u.document_id for u in units],
                 evidence.groups, item.evidence_documents))
         results.append(item)
 
@@ -129,7 +141,8 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int) -> Path
                 for x, e in r.evidence.excerpts.items() if e.mode == "unmapped"]
     if unmapped:
         raise EvalError("以下 excerpt 找不到对应 chunk，评估结果会失真：" + "；".join(unmapped))
-    folder = _run_folder(workspace, run_name(assembly.name, top_k, enabled, assembly.config.retriever.use))
+    folder = _run_folder(workspace, run_name(assembly.name, top_k, enabled, assembly.config.retriever.use,
+                                             table_return_unit))
     names = {doc_id: source.document_name for doc_id, source in sources.items()}
     scored = [r.score for r in results if r.score is not None]
     per_document: dict[str, Any] = {}
@@ -143,6 +156,7 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int) -> Path
         "fingerprint": assembly.fingerprint(),
         "build_settings": assembly.build_settings(),
         "retriever": assembly.config.retriever.use,
+        "table_return_unit": table_return_unit,
         "top_k": top_k,
         "created_at": datetime.now().astimezone().isoformat(timespec="seconds"),
         "dataset": {"version": dataset.version, "fingerprint": dataset.fingerprint,
@@ -151,6 +165,7 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int) -> Path
         "evidence_modes": {mode: sum(x.mode == mode for r in results for x in r.evidence.excerpts.values())
                            for mode in ("coordinate", "fallback", "unmapped")},   # counted per excerpt
         "metrics": _metrics_dict(scored),
+        "returned_tokens": _tokens_summary([r for r in results if r.score is not None]),
         "document_scope": _scope_summary(results, enabled, catalog is not None),
         "documents": per_document,
         "cases": [_case_json(r, names) for r in results],
@@ -159,6 +174,14 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int) -> Path
     from rag.reports.evaluation import latest_before, write_eval_report
     write_eval_report(workspace, folder, result, latest_before(workspace, result))
     return folder
+
+
+def _tokens_summary(answerable: list[CaseResult]) -> dict[str, Any]:
+    """Tokens returned per answerable question: the sum over questions / N, and the largest."""
+    per_question = [sum(r.tokens) for r in answerable]
+    return {"total": sum(per_question), "denominator": len(per_question),
+            "value": sum(per_question) / len(per_question) if per_question else None,
+            "max": max(per_question, default=0)}
 
 
 def _scope_summary(results: list[CaseResult], enabled: bool, has_catalog: bool) -> dict[str, Any]:
@@ -198,19 +221,25 @@ def _case_json(item: CaseResult, names: dict[str, str]) -> dict[str, Any]:
             "note": group.note,
             "mode": judged.mode,
             "covered_at_rank": score.group_completion_ranks.get(group.group_id) if score else None,
+            "required_k": item.required_k.get(group.group_id),
             "acceptable_sets": [sorted(s) for s in judged.acceptable_sets],
             "schemes": [{"scheme_id": scheme.scheme_id, "excerpt_ids": list(scheme.excerpt_ids),
                          "acceptable_sets": [sorted(s) for s in scheme_judged.acceptable_sets]}
                         for scheme, scheme_judged in zip(group.schemes, judged.schemes)],
         } for group, judged in zip(case.groups, item.evidence.groups)],
+        "returned_tokens": sum(item.tokens),
         "hits": [{
-            "rank": rank, "chunk_id": h.chunk.chunk_id, "document_id": h.chunk.document_id,
-            "document_name": h.chunk.document_name, "pages": list(h.chunk.pages),
-            "kind": h.chunk.kind, "score": h.score,
-            "semantic_rank": h.semantic_rank, "similarity": h.similarity,
-            "lexical_rank": h.lexical_rank, "bm25": h.bm25,
-            "relevant": h.chunk.chunk_id in relevant,
-            "cross_document": h.chunk.document_id not in evidence_docs,
-            "text": h.chunk.text,
-        } for rank, h in enumerate(item.hits, start=1)],
+            "rank": rank, "chunk_id": u.hit.chunk.chunk_id, "document_id": u.document_id,
+            "document_name": u.hit.chunk.document_name, "pages": list(u.pages),
+            "kind": u.hit.chunk.kind, "score": u.hit.score,
+            "semantic_rank": u.hit.semantic_rank, "similarity": u.hit.similarity,
+            "lexical_rank": u.hit.lexical_rank, "bm25": u.hit.bm25,
+            "table_id": u.table.table_id if u.table else None,
+            "chunk_ids": list(u.chunk_ids),
+            "relevant_chunk_ids": [cid for cid in u.chunk_ids if cid in relevant],
+            "relevant": any(cid in relevant for cid in u.chunk_ids),
+            "cross_document": u.document_id not in evidence_docs,
+            "tokens": tokens,
+            "text": u.text,
+        } for rank, (u, tokens) in enumerate(zip(item.units, item.tokens), start=1)],
     }
