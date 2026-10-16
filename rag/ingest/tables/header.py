@@ -5,6 +5,7 @@ from __future__ import annotations
 import datetime
 import re
 import unicodedata
+from collections.abc import Iterable
 
 from rag.ingest.tables.models import (
     CellShape, HeaderCandidateEvaluation, HeaderColumnObservation, HeaderDecision,
@@ -271,16 +272,14 @@ def _tool_ids(table: StructuredTable, start: int, end: int) -> tuple[tuple[str, 
     return inside, tuple(item for item in header_ids if item not in inside)
 
 
-def _evaluate(table: StructuredTable, start: int, end: int,
-              sample_row_budget: int, minimum_independent_observations: int) -> HeaderCandidateEvaluation:
-    inside, outside = _tool_ids(table, start, end)
-    issues = _structural_issues(table, start, end)
-    if issues:
-        return HeaderCandidateEvaluation(start, end, "structural_rejection", issues, (), (), (), (), inside, outside)
+def sample_rows(table: StructuredTable, rows: Iterable[int],
+                budget: int) -> tuple[tuple[int, ...], tuple[HeaderSkippedRow, ...]]:
+    """Take up to `budget` usable rows in the given order; also used by continuation detection."""
     sampled: list[int] = []
     skipped: list[HeaderSkippedRow] = []
-    row = end
-    while row < table.row_count and len(sampled) < sample_row_budget:  # type: ignore[operator]
+    for row in rows:
+        if len(sampled) >= budget:
+            break
         cells = _unique(_row_cells(table, row))
         # A row led by a horizontally merged cell is a summary or section row and is skipped whole;
         # elsewhere only the merged cells are left out.
@@ -296,25 +295,41 @@ def _evaluate(table: StructuredTable, start: int, end: int,
             skipped.append(HeaderSkippedRow(row, reason, tuple(cell.cell_id for cell in cells)))  # type: ignore[arg-type]
         else:
             sampled.append(row)
-        row += 1
+    return tuple(sampled), tuple(skipped)
+
+
+def column_observations(table: StructuredTable, sampled: tuple[int, ...], col: int,
+                        minimum_independent_observations: int,
+                        ) -> tuple[tuple[HeaderObservation, ...], tuple[ValueType, ...]]:
+    """One column's typed observations in the sampled rows, and the types they all share (stable)."""
+    observations: list[HeaderObservation] = []
+    seen: set[str] = set()
+    for sample_row in sampled:
+        cell = _cell_at(table, sample_row, col)
+        if cell is None or cell.cell_id in seen:
+            continue
+        seen.add(cell.cell_id)
+        if (cell.col_span or 0) == 1 and cell_shape(cell.text) != "empty":
+            observations.append(HeaderObservation(sample_row, cell.cell_id, cell.text or "",
+                                                  value_types(cell.text)))
+    # Stable: enough observations that share a type under at least one reading each.
+    shared = (set.intersection(*(set(item.value_types) for item in observations))
+              if len(observations) >= minimum_independent_observations else set())
+    return tuple(observations), tuple(kind for kind in ("number", "currency", "date") if kind in shared)
+
+
+def _evaluate(table: StructuredTable, start: int, end: int,
+              sample_row_budget: int, minimum_independent_observations: int) -> HeaderCandidateEvaluation:
+    inside, outside = _tool_ids(table, start, end)
+    issues = _structural_issues(table, start, end)
+    if issues:
+        return HeaderCandidateEvaluation(start, end, "structural_rejection", issues, (), (), (), (), inside, outside)
+    sampled, skipped = sample_rows(table, range(end, table.row_count or 0), sample_row_budget)
     columns: list[HeaderColumnObservation] = []
     supporting: list[int] = []
     for col in range(table.column_count or 0):
         lowest = _cell_at(table, end - 1, col)
-        observations: list[HeaderObservation] = []
-        seen: set[str] = set()
-        for sample_row in sampled:
-            cell = _cell_at(table, sample_row, col)
-            if cell is None or cell.cell_id in seen:
-                continue
-            seen.add(cell.cell_id)
-            if (cell.col_span or 0) == 1 and cell_shape(cell.text) != "empty":
-                observations.append(HeaderObservation(sample_row, cell.cell_id, cell.text or "",
-                                                      value_types(cell.text)))
-        # Stable: enough observations that share a type under at least one reading each.
-        shared = (set.intersection(*(set(item.value_types) for item in observations))
-                  if len(observations) >= minimum_independent_observations else set())
-        stable: tuple[ValueType, ...] = tuple(kind for kind in ("number", "currency", "date") if kind in shared)
+        observations, stable = column_observations(table, sampled, col, minimum_independent_observations)
         header_text = lowest.text if lowest else None
         header_shape = cell_shape(header_text)
         # Transition: a non-empty header cell that cannot be read as the body's stable type.
