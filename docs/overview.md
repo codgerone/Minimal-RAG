@@ -22,7 +22,7 @@
 | `python -m rag compare RUN... --name NAME` | 把几次评估并排对比（每组第一次为基线），生成 `reports/compare/NAME/` |
 | `python -m rag report` | 重新生成报告首页 |
 
-`search`、`ask`、`chat` 会按问题中的标识编码限定检索范围（见下节）；`--document` 可手动指定只在某个文档内检索。`search`、`ask`、`chat`、`eval` 可加 `--retriever semantic|bm25|hybrid` 临时换检索器，不需要重建索引。
+`search`、`ask`、`chat` 会按问题中的标识编码限定检索范围（见下节）；`--document` 可手动指定只在某个文档内检索。`search`、`ask`、`chat`、`eval` 可加 `--retriever semantic|bm25|hybrid` 临时换检索器，加 `--table-return-unit chunk|table` 临时改变命中表格时的返回方式，都不需要重建索引。
 
 所有命令都可以加 `--config NAME` 选择装配，默认使用 `structured`（也可以用环境变量 `RAG_CONFIG` 指定）。
 
@@ -48,7 +48,7 @@ codes = ["ORDER2025001"]
 | 解析 | PyMuPDF 按页取文本 | Docling 版面解析（标题、段落、列表、表格、阅读顺序） |
 | 表格 | 不处理 | 四个工具九种策略提取，评分选出最佳结构；跨页的续表与前表合并成一张表（见 [rules/table-continuation.md](rules/table-continuation.md)）；判定表头后写成带列名的 Markdown 行（`labeled_rows_v1`，见 [rules/table-text.md](rules/table-text.md)） |
 | 分块 | 每页内 300 字符、重叠 50 | 按阅读顺序把正文、列表项合并成块，表格单独成块，每块不超过 512 token（按 multilingual-e5 分词器计数，见 [rules/chunking.md](rules/chunking.md)） |
-| 索引 / 检索 | bge-m3 向量索引 + BM25 倒排索引，混合检索；按标识编码限定文档；问答取 Top-4，评估取 Top-3 | 同左 |
+| 索引 / 检索 | bge-m3 向量索引 + BM25 倒排索引，混合检索；按标识编码限定文档；问答取 Top-4，评估取 Top-3 | 同左；命中表格时返回整张表 |
 
 新建装配：复制 `configs/structured.toml` 改几行即可，启动时会校验组合是否合法。
 
@@ -64,16 +64,20 @@ codes = ["ORDER2025001"]
 
 BM25 只能匹配问题中照抄原文的词（外文术语、型号、公司名、数字），中文部分依靠向量检索。规则细节：[rules/lexical.md](rules/lexical.md)。
 
+**命中表格即返回整表**（`[retriever] table_return_unit = "table"`，内置装配默认）：检索命中表格的任一块时，返回整张表，同一张表在结果中只占一个位置，名次取它排名最靠前的一块，空出的位置由后面的结果补上。整表文本在入库时存入整表库（不做向量化）。长表格被切成多块后，分组标题、合计行与数据行分处不同块，整表交给 LLM 才能看懂（[决策 012](decisions/012-whole-table-return.md)）。代价是返回的文本变长：本库最大的表约 5000 token，对表格大小不设上限。
+
 ## 当前效果（K=3，5 份 PDF，24 道题，数据集 3.2.0，混合检索）
 
 | 装配 | 命中率 | 完整覆盖 | 证据组召回 | MRR | Chunk 精确率 | 跨文档污染 | 文档识别 |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | plain_text | 50.0% | 33.3% | 40.3% | 80.6% | 51.4% | 0.0% | 24/24 |
-| structured | 83.3% | 70.8% | 75.7% | 83.3% | 48.6% | 0.0% | 24/24 |
+| structured | 91.7% | 83.3% | 86.1% | 83.3% | 48.6% | 0.0% | 24/24 |
 
-同一数据集上用纯向量检索：plain_text 58.3% / 29.2% / 39.2% / 77.8% / 45.8%，structured 75.0% / 66.7% / 69.4% / 77.8% / 44.4%（次序为命中率、完整覆盖、证据组召回、MRR、Chunk 精确率）。
+返回整表时，结果按"返回单元"计：一张整表算一个结果，视为返回了它的全部 chunk；Chunk 精确率、跨文档污染也按结果计。每题返回的文本（按 multilingual-e5 分词器计数）：structured 全部题之和除以 24 为 1860 token，最多 5627；plain_text 为 220、最多 314。
 
-证据对应的 chunk 按 PDF 坐标判定：excerpt 写了什么，就要求检索到包含这些内容的全部 chunk。部分证据组所需的 chunk 数超过 3，K=3 时不可能被覆盖，因此完整覆盖率的上限为 plain_text 17/24、structured 22/24（报告中标出这些证据组）。
+同一数据集上用纯向量检索：plain_text 58.3% / 29.2% / 39.2% / 77.8% / 45.8%，structured 91.7% / 79.2% / 83.6% / 80.6% / 47.2%（次序为命中率、完整覆盖、证据组召回、MRR、Chunk 精确率）。
+
+证据对应的 chunk 按 PDF 坐标判定：excerpt 写了什么，就要求检索到包含这些内容的全部 chunk。部分证据组需要的结果数超过 3，K=3 时不可能被覆盖，因此完整覆盖率的上限为 plain_text 17/24、structured 24/24（报告中标出这些证据组）。
 
 以下数字为数据集 2.1.0 上的测量：关闭文档过滤时（同一题目），plain_text 命中率 4.2%、跨文档污染 56.9%，structured 命中率 20.8%、跨文档污染 69.4%。题目都含标识编码，所以以上结果只反映识别正确时的效果。剩余差距在文档内部的排序上。
 
@@ -91,13 +95,15 @@ V3.10 让列表不再单独成块，与相邻正文按预算合并（[决策 010
 
 V3.11 把跨页的续表与前表合并成一张表（[决策 011](decisions/011-table-continuation.md)，[rules/table-continuation.md](rules/table-continuation.md)）。本库只有 PO 25-19 的数量表跨页，合并后第 3 页各行带上列名，其他文档的 chunk 不变。合并后各行变长，表内分界移动，PO-25-19-Q002 所需的分组标题（型号只写在这一行）与 ELUC 行被切进相邻两块，structured 混合检索完整覆盖少 1 题、纯向量命中少 1 题；根因是分组标题不写进它所管的各行，留给后续的表格优化。审核页"续表判定"逐对列出各条件的实际值。
 
+V3.12 在命中表格时返回整张表（[决策 012](decisions/012-whole-table-return.md)），chunk 不变。structured 混合检索完整覆盖由 17/24 升到 20/24，变好的是 PO 25-19 的三道题，没有题变差：PO-25-19-Q001、Q003 的表格证据组原先要前 12–14 个结果才能找全，现在前 1–3 个；V3.11 变差的 Q002 恢复。每题返回 token 由 1149 增到 1860。只多返回几块也能得到相近的总分（不返回整表、K=6 时完整覆盖同为 20/24，每题 1939 token），但多覆盖的是 CONTRACT-105-Q001、Q007 和 PO-25-19-Q002，PO-25-19-Q001、Q003 在 K=6 下仍找不全。纯向量完整覆盖由 16/24 升到 19/24。plain_text 没有表格，结果不变。逐题对比与所需 K 的变化见 `reports/compare/v3.12-whole-table/`。
+
 ## 不做什么（当前范围外）
 
 扫描件 OCR、图片理解、重排模型、从文档内容自动抽取编号、按文档属性（类型、客户、日期）过滤、多轮对话记忆、Agent/工具调用、Web 界面。
 
 ## 怎么验收
 
-1. 打开 `reports/index.html`：每份装配都显示"可用"，文档都是"已入库"，向量索引、倒排索引都是"完整"。点进解析、表格、分块页，抽查内容是否与 PDF 一致。
+1. 打开 `reports/index.html`：每份装配都显示"可用"，文档都是"已入库"，向量索引、倒排索引、整表库都是"完整"。点进解析、表格、分块页，抽查内容是否与 PDF 一致。
 2. 打开最新的评估报告：指标不低于上表；文档识别准确率 24/24；"含文字兜底"为 0，或者已抽查确认。
 3. `uv run pytest` 全部通过。
 
@@ -110,5 +116,5 @@ V3.11 把跨页的续表与前表合并成一张表（[决策 011](decisions/011
 | `configs/` | 装配配置 | 是 |
 | `eval/ground-truth/` | 人工标注的问题、信息项与证据，以及每段证据在 PDF 上的已确认位置 | 是 |
 | `reports/` | 给人看的报告：`index.html` 入口、`ingest/` 入库审核页、`eval/` 评估报告 | 评估报告进 git，入库审核页不进 |
-| `.rag/indexes/<配置名>/` | 机器数据：`manifest.json`、向量库 `chroma/`、BM25 倒排索引 `bm25.sqlite`、各文档中间结果 JSON（含 chunk 来源区域） | 否 |
+| `.rag/indexes/<配置名>/` | 机器数据：`manifest.json`、向量库 `chroma/`、BM25 倒排索引 `bm25.sqlite`、整表库 `tables.sqlite`、各文档中间结果 JSON（含 chunk 来源区域） | 否 |
 | `tmp/anchor-review/` | excerpt 定位审核文件（临时） | 否 |
