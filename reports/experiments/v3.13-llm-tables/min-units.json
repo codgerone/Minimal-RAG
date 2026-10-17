@@ -1,0 +1,150 @@
+{
+  "run": "2026-10-16_structured_k3_filter-on_hybrid_2",
+  "config": "structured",
+  "cases": [
+    {
+      "case_id": "CONTRACT-105-Q001",
+      "groups": 2,
+      "chunks": 2,
+      "units": 2
+    },
+    {
+      "case_id": "CONTRACT-105-Q002",
+      "groups": 5,
+      "chunks": 1,
+      "units": 1
+    },
+    {
+      "case_id": "CONTRACT-105-Q003",
+      "groups": 3,
+      "chunks": 3,
+      "units": 3
+    },
+    {
+      "case_id": "CONTRACT-105-Q004",
+      "groups": 2,
+      "chunks": 1,
+      "units": 1
+    },
+    {
+      "case_id": "CONTRACT-105-Q005",
+      "groups": 3,
+      "chunks": 1,
+      "units": 1
+    },
+    {
+      "case_id": "CONTRACT-105-Q006",
+      "groups": 2,
+      "chunks": 1,
+      "units": 1
+    },
+    {
+      "case_id": "CONTRACT-105-Q007",
+      "groups": 3,
+      "chunks": 2,
+      "units": 2
+    },
+    {
+      "case_id": "CONTRACT-105-Q008",
+      "groups": 2,
+      "chunks": 2,
+      "units": 2
+    },
+    {
+      "case_id": "CONTRACT-105-Q009",
+      "groups": 1,
+      "chunks": 2,
+      "units": 1
+    },
+    {
+      "case_id": "CONTRACT-105-Q010",
+      "groups": 2,
+      "chunks": 2,
+      "units": 2
+    },
+    {
+      "case_id": "E001-602-Q001",
+      "groups": 3,
+      "chunks": 1,
+      "units": 1
+    },
+    {
+      "case_id": "E001-602-Q002",
+      "groups": 2,
+      "chunks": 1,
+      "units": 1
+    },
+    {
+      "case_id": "PO-24-12-Q001",
+      "groups": 4,
+      "chunks": 1,
+      "units": 1
+    },
+    {
+      "case_id": "PO-24-12-Q002",
+      "groups": 1,
+      "chunks": 1,
+      "units": 1
+    },
+    {
+      "case_id": "PO-24-12-Q003",
+      "groups": 2,
+      "chunks": 1,
+      "units": 1
+    },
+    {
+      "case_id": "PO-24-12-Q004",
+      "groups": 3,
+      "chunks": 2,
+      "units": 2
+    },
+    {
+      "case_id": "PO-24-12-Q005",
+      "groups": 1,
+      "chunks": 1,
+      "units": 1
+    },
+    {
+      "case_id": "PO-24-12-Q006",
+      "groups": 1,
+      "chunks": 1,
+      "units": 1
+    },
+    {
+      "case_id": "PO-25-15-Q001",
+      "groups": 2,
+      "chunks": 2,
+      "units": 2
+    },
+    {
+      "case_id": "PO-25-15-Q002",
+      "groups": 2,
+      "chunks": 2,
+      "units": 2
+    },
+    {
+      "case_id": "PO-25-19-Q001",
+      "groups": 6,
+      "chunks": 5,
+      "units": 3
+    },
+    {
+      "case_id": "PO-25-19-Q002",
+      "groups": 2,
+      "chunks": 3,
+      "units": 2
+    },
+    {
+      "case_id": "PO-25-19-Q003",
+      "groups": 6,
+      "chunks": 8,
+      "units": 3
+    },
+    {
+      "case_id": "PO-25-19-Q004",
+      "groups": 1,
+      "chunks": 1,
+      "units": 1
+    }
+  ]
+}
