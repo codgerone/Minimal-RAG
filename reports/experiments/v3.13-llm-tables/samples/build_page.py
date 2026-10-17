@@ -171,7 +171,7 @@ def main() -> None:
             f'<div class="sub">8 个模型 × 4 张表，提示词 llm_tables_v1（docs/changes/v3.13-prompts.md）。'
             f'请看：记录是否自足、分组标题与合计是否判对、数值是否原样；引导句能否区分 c0004 与 c0006；'
             f'摘要是否写出标识各行的值。</div><div class="tabs">{"".join(tabs)}</div>{"".join(panels)}')
-    write_assets(Path("reports"))
+    write_assets(HERE.parents[2])     # repo reports/
     (HERE / "index.html").write_text(page("V3.13 样例审核", body, root=ROOT,
                                           crumbs=[("报告首页", ROOT + "index.html")]), encoding="utf-8")
 
