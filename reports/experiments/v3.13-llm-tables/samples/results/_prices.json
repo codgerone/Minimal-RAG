@@ -1,0 +1,34 @@
+{
+  "google/gemini-4-argon": {
+    "prompt": 2.0,
+    "completion": 10.0
+  },
+  "anthropic/claude-haiku-5.5": {
+    "prompt": 0.09999999999999999,
+    "completion": 0.5
+  },
+  "openai/gpt-6.1-sol": {
+    "prompt": 2.0,
+    "completion": 10.0
+  },
+  "anthropic/claude-sonnet-5.5": {
+    "prompt": 2.0,
+    "completion": 10.0
+  },
+  "openai/gpt-6-luna": {
+    "prompt": 0.09999999999999999,
+    "completion": 0.5
+  },
+  "anthropic/claude-opus-5.5": {
+    "prompt": 4.0,
+    "completion": 20.0
+  },
+  "deepseek/deepseek-v4.1-flash": {
+    "prompt": 0.15,
+    "completion": 0.6
+  },
+  "google/gemini-3.8-flash": {
+    "prompt": 0.8250000000000001,
+    "completion": 4.125
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "records": {
+    "kind": "records",
+    "model": "openai/gpt-6-luna",
+    "prompt_version": "llm_tables_v1",
+    "attempts": [
+      {
+        "raw": "{\"segments\":[{\"records\":[{\"text\":\"IV. CLÁUSULA CUARTA. - Alcance de especificaciones técnicas. -; Ítem: 1; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 01\",\"cells\":[\"r0c0\",\"r0c1\",\"r0c2\",\"r1c0\",\"r1c1\",\"r1c2\"]},{\"text\":\"IV. CLÁUSULA CUARTA. - Alcance de especificaciones técnicas. -; Ítem: 3; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 03\",\"cells\":[\"r0c0\",\"r0c1\",\"r0c2\",\"r2c0\",\"r2c1\",\"r2c2\"]},{\"text\":\"IV. CLÁUSULA CUARTA. - Alcance de especificaciones técnicas. -; Ítem: 4; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 04\",\"cells\":[\"r0c0\",\"r0c1\",\"r0c2\",\"r3c0\",\"r3c1\",\"r3c2\"]}]}]}",
+        "issues": [],
+        "prompt_tokens": 880,
+        "completion_tokens": 569,
+        "cost_usd": 0.0003725,
+        "cached": false
+      }
+    ],
+    "records": [
+      [
+        {
+          "text": "IV. CLÁUSULA CUARTA. - Alcance de especificaciones técnicas. -; Ítem: 1; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 01",
+          "cell_ids": [
+            "pymupdf_lines_p0003_t0001_r0000c0000_r0001c0001",
+            "pymupdf_lines_p0003_t0001_r0000c0001_r0001c0002",
+            "pymupdf_lines_p0003_t0001_r0000c0002_r0001c0003",
+            "pymupdf_lines_p0003_t0001_r0001c0000_r0002c0001",
+            "pymupdf_lines_p0003_t0001_r0001c0001_r0002c0002",
+            "pymupdf_lines_p0003_t0001_r0001c0002_r0002c0003"
+          ]
+        },
+        {
+          "text": "IV. CLÁUSULA CUARTA. - Alcance de especificaciones técnicas. -; Ítem: 3; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 03",
+          "cell_ids": [
+            "pymupdf_lines_p0003_t0001_r0000c0000_r0001c0001",
+            "pymupdf_lines_p0003_t0001_r0000c0001_r0001c0002",
+            "pymupdf_lines_p0003_t0001_r0000c0002_r0001c0003",
+            "pymupdf_lines_p0003_t0001_r0002c0000_r0003c0001",
+            "pymupdf_lines_p0003_t0001_r0002c0001_r0003c0002",
+            "pymupdf_lines_p0003_t0001_r0002c0002_r0003c0003"
+          ]
+        },
+        {
+          "text": "IV. CLÁUSULA CUARTA. - Alcance de especificaciones técnicas. -; Ítem: 4; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 04",
+          "cell_ids": [
+            "pymupdf_lines_p0003_t0001_r0000c0000_r0001c0001",
+            "pymupdf_lines_p0003_t0001_r0000c0001_r0001c0002",
+            "pymupdf_lines_p0003_t0001_r0000c0002_r0001c0003",
+            "pymupdf_lines_p0003_t0001_r0003c0000_r0004c0001",
+            "pymupdf_lines_p0003_t0001_r0003c0001_r0004c0002",
+            "pymupdf_lines_p0003_t0001_r0003c0002_r0004c0003"
+          ]
+        }
+      ]
+    ],
+    "text": ""
+  },
+  "lead": {
+    "kind": "lead",
+    "model": "openai/gpt-6-luna",
+    "prompt_version": "llm_tables_v1",
+    "attempts": [
+      {
+        "raw": "La tabla identifica los medidores electrónicos incluidos y remite a las tablas de datos técnicos de la oferta del contratista, en el marco de la cláusula cuarta sobre alcance de las especificaciones técnicas.",
+        "issues": [
+          "output is not JSON of the form {\"lead\": \"...\"}"
+        ],
+        "prompt_tokens": 584,
+        "completion_tokens": 104,
+        "cost_usd": 0.0001104,
+        "cached": false
+      },
+      {
+        "raw": "{\"lead\":\"La tabla identifica los medidores electrónicos incluidos y remite a las tablas de datos técnicos de la oferta del contratista, en el marco de la cláusula cuarta sobre alcance de las especificaciones técnicas.\"}",
+        "issues": [],
+        "prompt_tokens": 661,
+        "completion_tokens": 48,
+        "cost_usd": 9.01e-05,
+        "cached": false
+      }
+    ],
+    "records": [],
+    "text": "La tabla identifica los medidores electrónicos incluidos y remite a las tablas de datos técnicos de la oferta del contratista, en el marco de la cláusula cuarta sobre alcance de las especificaciones técnicas."
+  },
+  "summary": {
+    "kind": "summary",
+    "model": "openai/gpt-6-luna",
+    "prompt_version": "llm_tables_v1",
+    "attempts": [
+      {
+        "raw": "{\"summary\":\"La tabla pertenece a la cláusula cuarta, «Alcance de especificaciones técnicas», sobre la entrega de los bienes conforme a las especificaciones de la oferta del contratista. Se organiza por bien: las columnas son «Ítem», «DESCRIPCIÓN» y «TABLA DE DATOS TÉCNICOS». Los ítems identificados son 1, «MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS»; 3, «MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS»; y 4, «MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS». La tabla remite, para cada bien, a las páginas 25 a 33 de la oferta presentada por EL CONTRATISTA para el ítem correspondiente.\"}",
+        "issues": [],
+        "prompt_tokens": 693,
+        "completion_tokens": 274,
+        "cost_usd": 0.0002063,
+        "cached": false
+      }
+    ],
+    "records": [],
+    "text": "La tabla pertenece a la cláusula cuarta, «Alcance de especificaciones técnicas», sobre la entrega de los bienes conforme a las especificaciones de la oferta del contratista. Se organiza por bien: las columnas son «Ítem», «DESCRIPCIÓN» y «TABLA DE DATOS TÉCNICOS». Los ítems identificados son 1, «MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS»; 3, «MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS»; y 4, «MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS». La tabla remite, para cada bien, a las páginas 25 a 33 de la oferta presentada por EL CONTRATISTA para el ítem correspondiente."
+  },
+  "chunks": [
+    {
+      "text": "IV. CLÁUSULA CUARTA. - Alcance de especificaciones técnicas. -; Ítem: 1; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 01\nIV. CLÁUSULA CUARTA. - Alcance de especificaciones técnicas. -; Ítem: 3; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 03\nIV. CLÁUSULA CUARTA. - Alcance de especificaciones técnicas. -; Ítem: 4; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 04",
+      "records": [
+        {
+          "text": "IV. CLÁUSULA CUARTA. - Alcance de especificaciones técnicas. -; Ítem: 1; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 01",
+          "cell_ids": [
+            "pymupdf_lines_p0003_t0001_r0000c0000_r0001c0001",
+            "pymupdf_lines_p0003_t0001_r0000c0001_r0001c0002",
+            "pymupdf_lines_p0003_t0001_r0000c0002_r0001c0003",
+            "pymupdf_lines_p0003_t0001_r0001c0000_r0002c0001",
+            "pymupdf_lines_p0003_t0001_r0001c0001_r0002c0002",
+            "pymupdf_lines_p0003_t0001_r0001c0002_r0002c0003"
+          ]
+        },
+        {
+          "text": "IV. CLÁUSULA CUARTA. - Alcance de especificaciones técnicas. -; Ítem: 3; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 03",
+          "cell_ids": [
+            "pymupdf_lines_p0003_t0001_r0000c0000_r0001c0001",
+            "pymupdf_lines_p0003_t0001_r0000c0001_r0001c0002",
+            "pymupdf_lines_p0003_t0001_r0000c0002_r0001c0003",
+            "pymupdf_lines_p0003_t0001_r0002c0000_r0003c0001",
+            "pymupdf_lines_p0003_t0001_r0002c0001_r0003c0002",
+            "pymupdf_lines_p0003_t0001_r0002c0002_r0003c0003"
+          ]
+        },
+        {
+          "text": "IV. CLÁUSULA CUARTA. - Alcance de especificaciones técnicas. -; Ítem: 4; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 04",
+          "cell_ids": [
+            "pymupdf_lines_p0003_t0001_r0000c0000_r0001c0001",
+            "pymupdf_lines_p0003_t0001_r0000c0001_r0001c0002",
+            "pymupdf_lines_p0003_t0001_r0000c0002_r0001c0003",
+            "pymupdf_lines_p0003_t0001_r0003c0000_r0004c0001",
+            "pymupdf_lines_p0003_t0001_r0003c0001_r0004c0002",
+            "pymupdf_lines_p0003_t0001_r0003c0002_r0004c0003"
+          ]
+        }
+      ],
+      "tokens": 226
+    }
+  ],
+  "chunks_with_lead": [
+    {
+      "text": "La tabla identifica los medidores electrónicos incluidos y remite a las tablas de datos técnicos de la oferta del contratista, en el marco de la cláusula cuarta sobre alcance de las especificaciones técnicas.\nIV. CLÁUSULA CUARTA. - Alcance de especificaciones técnicas. -; Ítem: 1; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 01\nIV. CLÁUSULA CUARTA. - Alcance de especificaciones técnicas. -; Ítem: 3; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 03\nIV. CLÁUSULA CUARTA. - Alcance de especificaciones técnicas. -; Ítem: 4; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 04",
+      "records": [
+        {
+          "text": "IV. CLÁUSULA CUARTA. - Alcance de especificaciones técnicas. -; Ítem: 1; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 01",
+          "cell_ids": [
+            "pymupdf_lines_p0003_t0001_r0000c0000_r0001c0001",
+            "pymupdf_lines_p0003_t0001_r0000c0001_r0001c0002",
+            "pymupdf_lines_p0003_t0001_r0000c0002_r0001c0003",
+            "pymupdf_lines_p0003_t0001_r0001c0000_r0002c0001",
+            "pymupdf_lines_p0003_t0001_r0001c0001_r0002c0002",
+            "pymupdf_lines_p0003_t0001_r0001c0002_r0002c0003"
+          ]
+        },
+        {
+          "text": "IV. CLÁUSULA CUARTA. - Alcance de especificaciones técnicas. -; Ítem: 3; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 03",
+          "cell_ids": [
+            "pymupdf_lines_p0003_t0001_r0000c0000_r0001c0001",
+            "pymupdf_lines_p0003_t0001_r0000c0001_r0001c0002",
+            "pymupdf_lines_p0003_t0001_r0000c0002_r0001c0003",
+            "pymupdf_lines_p0003_t0001_r0002c0000_r0003c0001",
+            "pymupdf_lines_p0003_t0001_r0002c0001_r0003c0002",
+            "pymupdf_lines_p0003_t0001_r0002c0002_r0003c0003"
+          ]
+        },
+        {
+          "text": "IV. CLÁUSULA CUARTA. - Alcance de especificaciones técnicas. -; Ítem: 4; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 04",
+          "cell_ids": [
+            "pymupdf_lines_p0003_t0001_r0000c0000_r0001c0001",
+            "pymupdf_lines_p0003_t0001_r0000c0001_r0001c0002",
+            "pymupdf_lines_p0003_t0001_r0000c0002_r0001c0003",
+            "pymupdf_lines_p0003_t0001_r0003c0000_r0004c0001",
+            "pymupdf_lines_p0003_t0001_r0003c0001_r0004c0002",
+            "pymupdf_lines_p0003_t0001_r0003c0002_r0004c0003"
+          ]
+        }
+      ],
+      "tokens": 270
+    }
+  ]
+}

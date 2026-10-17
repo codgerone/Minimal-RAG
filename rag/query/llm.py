@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from dataclasses import dataclass
 from typing import Protocol
 
 
@@ -10,6 +11,14 @@ class LLMError(RuntimeError):
     def __init__(self, code: str, message: str):
         self.code = code  # missing_key | auth_failed | rate_limited | timeout | upstream_failed
         super().__init__(message)
+
+
+@dataclass(frozen=True)
+class Completion:
+    text: str
+    prompt_tokens: int | None
+    completion_tokens: int | None
+    cost_usd: float | None          # as billed by the provider, when it reports it
 
 
 class LLM(Protocol):
@@ -21,26 +30,37 @@ class LLM(Protocol):
 class OpenRouterLLM:
     base_url = "https://openrouter.ai/api/v1"
 
-    def __init__(self, model: str = "google/gemini-2.5-flash-lite", temperature: float = 0):
-        self.model = os.environ.get("OPENROUTER_MODEL") or model
+    def __init__(self, model: str = "google/gemini-2.5-flash-lite", temperature: float = 0,
+                 timeout: float = 600, env_override: bool = True):
+        # OPENROUTER_MODEL overrides the answering model only; ingest-time callers pass False.
+        self.model = (os.environ.get("OPENROUTER_MODEL") if env_override else None) or model
         self.temperature = temperature
+        self.timeout = timeout
         self.api_key: str | None = None
 
     def complete(self, messages: list[dict[str, str]]) -> str:
+        return self.complete_with_usage(messages).text
+
+    def complete_with_usage(self, messages: list[dict[str, str]]) -> Completion:
         key = self.api_key or os.environ.get("OPENROUTER_API_KEY", "").strip()
         if not key:
             raise LLMError("missing_key", "未设置 OPENROUTER_API_KEY")
         from openai import APITimeoutError, OpenAI
         try:
-            client = OpenAI(api_key=key, base_url=self.base_url, max_retries=0)
+            client = OpenAI(api_key=key, base_url=self.base_url, max_retries=0, timeout=self.timeout)
             response = client.chat.completions.create(model=self.model, messages=messages,
-                                                      temperature=self.temperature)
+                                                      temperature=self.temperature,
+                                                      extra_body={"usage": {"include": True}})
         except Exception as exc:
             status = getattr(exc, "status_code", None)
             code = ("auth_failed" if status in {401, 403} else "rate_limited" if status == 429
                     else "timeout" if isinstance(exc, APITimeoutError) else "upstream_failed")
             raise LLMError(code, f"OpenRouter 请求失败（{code}）") from exc
-        answer = response.choices[0].message.content
+        answer = response.choices[0].message.content if response.choices else None
         if not isinstance(answer, str) or not answer.strip():
             raise LLMError("upstream_failed", "OpenRouter 返回了空回答")
-        return answer.strip()
+        usage = response.usage
+        cost = getattr(usage, "cost", None) if usage else None
+        return Completion(answer.strip(), getattr(usage, "prompt_tokens", None),
+                          getattr(usage, "completion_tokens", None),
+                          float(cost) if cost is not None else None)
