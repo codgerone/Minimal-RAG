@@ -5,7 +5,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 from run_samples import MODELS, NO_TEMPERATURE, REAL  # noqa: E402
-from synthetic import TABLES as SYNTHETIC  # noqa: E402
+from synthetic import TABLES as SYNTHETIC, build  # noqa: E402
 
 from rag.ingest.tables.llm_tables import LEAD_MAX_TOKENS, Lengths  # noqa: E402
 from rag.reports.html import badge, esc, page, text_block, write_assets  # noqa: E402
@@ -150,6 +150,24 @@ def findings() -> str:
     return f'<div class="card"><h3>结论与问题</h3><ul>{items}</ul></div>'
 
 
+def table_html(key: str) -> str:
+    """A synthetic table drawn with its merged cells, row numbers as in the grid (r0, r1, ...)."""
+    spec = next((t for t in SYNTHETIC if t[0] == key), None)
+    if spec is None:
+        return ""
+    table = build(key, spec[4]())
+    starts = {(c.start_row_offset_idx, c.start_col_offset_idx): c for c in table.cells}
+    rows = []
+    for r in range(table.row_count):
+        cells = "".join(
+            f'<td{f" rowspan={c.row_span}" if c.row_span > 1 else ""}'
+            f'{f" colspan={c.col_span}" if c.col_span > 1 else ""}>{esc(c.text)}</td>'
+            for col in range(table.column_count) if (c := starts.get((r, col))))
+        rows.append(f'<tr><td class="meta nw">r{r}</td>{cells}</tr>')
+    return (f'<div class="meta">表格原样（合并单元格按原样合并；左列为行号，与标注中的行号一致）：</div>'
+            f'<div class="scroll" data-grid><table>{"".join(rows)}</table></div>')
+
+
 def table_panel(key: str, title: str, inp: dict, data: dict) -> str:
     lengths = Lengths(inp["language"], inp["lengths"]["summary_max_tokens"])
     context = "".join(f'<div class="meta">[{esc(n["kind"])}]</div>{text_block(n["text"])}'
@@ -160,7 +178,7 @@ def table_panel(key: str, title: str, inp: dict, data: dict) -> str:
              f'<div class="card"><h3>输入</h3><div class="meta">文档语言：{esc(inp["language"])} · '
              f'告诉模型：引导句不超过 {esc(lengths.lead_limit)}（代码接受 ≤ {LEAD_MAX_TOKENS} token）、'
              f'摘要不超过 {esc(lengths.summary_limit)}（代码接受 ≤ {lengths.summary_max_tokens} token）</div>'
-             f'<div class="meta">上下文（表前两个节点）：</div>{context}{expected}'
+             f'<div class="meta">上下文（表前两个节点）：</div>{context}{table_html(key)}{expected}'
              f'<details><summary>表格网格（交给 LLM 的 Markdown）</summary>{text_block(inp["grid"])}</details></div>']
     rule_header = inp["rule_header_rows"]
     rows = [f'<tr><td class=nw><b>规则表头判定</b></td><td>表头 {rule_header if rule_header is not None else "未认出"}</td><td></td></tr>']
