@@ -1,0 +1,27 @@
+{
+  "schema_version": "table_structure_v1",
+  "document_key": "E001-602--817cfff2927c6c65",
+  "document_id": "817cfff2927c6c65",
+  "document_name": "E001-602.pdf",
+  "file_hash": "22e75e312a2e2111326412927d76053ba8d74c95d458203623afce956e663239",
+  "tables": [
+    {
+      "regions": [
+        {
+          "page": 1,
+          "bbox": [
+            12.6,
+            214.0,
+            598.3,
+            358.9
+          ]
+        }
+      ],
+      "header_rows": [
+        0
+      ],
+      "sections": [],
+      "implicit_merges": []
+    }
+  ]
+}

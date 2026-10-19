@@ -10,7 +10,8 @@ from rag.index.manifest import DocumentEntry
 from rag.ingest.pipeline import ProcessedDocument
 from rag.ingest.tables import continuation as cont
 from rag.ingest.tables.models import (
-    ContinuationEvaluation, GroupScoringResult, HeaderDecision, StructuredTable, TableCandidate,
+    ContinuationEvaluation, GroupScoringResult, HeaderDecision, StructuredTable, TableAnnotation,
+    TableCandidate,
 )
 from rag.jsonio import write_atomic
 from rag.models import ChunkBatch, ListNode, TableNode, TextNode
@@ -34,9 +35,17 @@ METRIC_LABELS = (("text_f1", "文本覆盖"), ("critical_token_integrity", "关�
 PAGE_NAMES = ("1-解析.html", "2-表格.html", "3-分块.html")
 
 
+GRID_LEGEND = ('<div class="meta legend"><span class="hdr">表头行</span><span class="sec">节标题行</span>'
+               '<span class="anc">隐式合并的起始值</span><span class="dup">↑ 沿用上方的值</span></div>')
+
+
 def render_grid(table: StructuredTable | TableCandidate, max_rows: int | None = None,
-                header_rows: frozenset[int] = frozenset()) -> str:
-    """Draw a table from its cell grid, honouring merged cells; cells starting in `header_rows` are marked."""
+                header_rows: frozenset[int] = frozenset(),
+                annotation: TableAnnotation | None = None) -> str:
+    """Draw a table from its cell grid, honouring merged cells; cells starting in `header_rows` are marked.
+
+    With an annotation, its header rows, section title rows and implicit merges are marked instead
+    (blanks repeating the value above read `↑`), and every row starts with its grid row number."""
     rows = table.row_count or 0
     cols = table.column_count or 0
     placed = [c for c in table.cells if c.start_row_offset_idx is not None
@@ -45,13 +54,26 @@ def render_grid(table: StructuredTable | TableCandidate, max_rows: int | None = 
         loose = " | ".join(c.text or "" for c in table.cells)
         return f'<div class="meta">（无法排成网格）</div>{text_block(loose or table.unplaced_text or "")}'
     starts = {(c.start_row_offset_idx, c.start_col_offset_idx): c for c in placed}
+    titles: frozenset[int] = frozenset()
+    anchors: set[tuple[int, int]] = set()
+    repeats: set[tuple[int, int]] = set()
+    if annotation is not None:
+        header_rows = frozenset(annotation.header_rows)
+        titles = annotation.title_rows()
+        for merge in annotation.implicit_merges:
+            anchors.add((merge.first_row, merge.column))
+            repeats.update((row, merge.column) for row in range(merge.first_row + 1, merge.last_row + 1))
     covered: set[tuple[int, int]] = set()
     html_rows = []
     shown = rows if max_rows is None else min(rows, max_rows)
     for r in range(rows):
-        cells = []
+        cells = [f'<td class="meta nw">r{r}</td>'] if annotation is not None else []
         for col in range(cols):
             if (r, col) in covered:
+                continue
+            if (r, col) in repeats:
+                covered.add((r, col))
+                cells.append('<td class="dup">↑</td>')
                 continue
             cell = starts.get((r, col))
             if cell is None:
@@ -63,7 +85,8 @@ def render_grid(table: StructuredTable | TableCandidate, max_rows: int | None = 
                 for dc in range(cs):
                     covered.add((r + dr, col + dc))
             span = (f' rowspan="{rs}"' if rs > 1 else "") + (f' colspan="{cs}"' if cs > 1 else "")
-            mark = ' class="hdr"' if r in header_rows else ""
+            mark = (' class="hdr"' if r in header_rows else ' class="sec"' if r in titles
+                    else ' class="anc"' if (r, col) in anchors else "")
             cells.append(f"<td{span}{mark}>{esc(cell.text or '')}</td>")
         hidden = ' class="rest hidden"' if r >= shown else ""
         html_rows.append(f"<tr{hidden}>" + "".join(cells) + "</tr>")

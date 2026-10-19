@@ -68,6 +68,7 @@ def build_parser() -> argparse.ArgumentParser:
     anchors = command("anchors", "在 PDF 上定位每段 excerpt，生成审核文件 tmp/anchor-review/")
     anchors.add_argument("--since", metavar="GIT_REF", help="审核页并排显示相对这个 git 版本改动过的 excerpt")
     anchors.add_argument("--write", action="store_true", help="把定位结果写入 eval/ground-truth（审核确认后再用）")
+    command("table-structure", "把 eval/table-structure 的表格结构答案画在已入库的表格上，生成核对页")
     config = command("config", "查看装配配置")
     config.add_argument("action", choices=["list", "show"])
     config.add_argument("name", nargs="?")
@@ -347,6 +348,13 @@ def _eval(workspace: Workspace, args: argparse.Namespace) -> int:
     return 0
 
 
+def _table_structure(workspace: Workspace, args: argparse.Namespace) -> int:
+    from rag.reports.table_structure import write_answers_page
+    config = resolve_config(workspace.root, args.config)
+    _out(f"核对页：{write_answers_page(workspace, config.name)}")
+    return 0
+
+
 def _anchors(workspace: Workspace, args: argparse.Namespace) -> int:
     import json
     import subprocess
@@ -426,7 +434,7 @@ def _report(workspace: Workspace, args: argparse.Namespace) -> int:
 
 
 HANDLERS = {"status": _status, "ingest": _ingest, "chunks": _chunks, "search": _search,
-            "ask": _ask, "chat": _chat, "eval": _eval, "anchors": _anchors, "config": _config,
+            "ask": _ask, "chat": _chat, "eval": _eval, "anchors": _anchors, "table-structure": _table_structure, "config": _config,
             "compare": _compare, "report": _report}
 
 
