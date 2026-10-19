@@ -47,6 +47,7 @@ class TableGroup:
 
 
 def table_groups(case: Case, evidence: CaseEvidence, table_excerpts: set[str]) -> list[TableGroup]:
+    """`table_excerpts`: IDs of this case's table excerpts."""
     found = []
     for group in case.groups:
         own = [x for scheme in group.schemes for x in scheme.excerpt_ids if x in table_excerpts]

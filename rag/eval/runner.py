@@ -138,8 +138,8 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int) -> Path
         return token_cache[text]
 
     table_boxes = _table_boxes(workspace, assembly.name)
-    table_excerpts = {x.excerpt_id for c in dataset.cases for x in c.excerpts
-                      if tm.is_table_excerpt(x, table_boxes)}
+    table_excerpts = {(c.case_id, x.excerpt_id) for c in dataset.cases for x in c.excerpts
+                      if tm.is_table_excerpt(x, table_boxes.get(x.document_id, []))}
     results: list[CaseResult] = []
     for case in dataset.cases:
         scope = resolve_scope(case.question, catalog, enabled)
@@ -147,7 +147,7 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int) -> Path
         ranking = searcher.units_for(hits)
         units = ranking[:top_k]
         evidence = judge_case(case, chunks)
-        groups = tm.table_groups(case, evidence, table_excerpts)
+        groups = tm.table_groups(case, evidence, {x for c, x in table_excerpts if c == case.case_id})
         table = None
         needed = tm.CURVE_K
         if groups:
@@ -214,14 +214,16 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int) -> Path
     return folder
 
 
-def _table_boxes(workspace: Workspace, config_name: str) -> list[tuple[int, tuple[float, float, float, float]]]:
-    """Every table's box on each of its pages, as the parser gave it."""
-    boxes = []
+def _table_boxes(workspace: Workspace, config_name: str) -> dict[str, list[tuple[int, tuple[float, float, float, float]]]]:
+    """Per document, every table's box on each of its pages, as the parser gave it."""
+    boxes: dict[str, list[tuple[int, tuple[float, float, float, float]]]] = {}
     for path in sorted((workspace.index_dir(config_name) / "documents").glob("*/parsed.json")):
-        for node in read_json(path)["nodes"]:
+        parsed = read_json(path)
+        own = boxes.setdefault(parsed["document_id"], [])
+        for node in parsed["nodes"]:
             if "table" in node:
-                boxes += [(s["page_number"], (s["bbox"]["x0"], s["bbox"]["y0"], s["bbox"]["x1"], s["bbox"]["y1"]))
-                          for s in node["sources"] if s.get("bbox")]
+                own += [(s["page_number"], (s["bbox"]["x0"], s["bbox"]["y0"], s["bbox"]["x1"], s["bbox"]["y1"]))
+                        for s in node["sources"] if s.get("bbox")]
     return boxes
 
 
