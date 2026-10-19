@@ -12,7 +12,6 @@ import shutil
 from dataclasses import dataclass
 from typing import Callable, Literal
 
-from rag.index.analyzer import detect_language
 from rag.index.lexical import LexicalChunk, LexicalStore
 from rag.index.manifest import DocumentEntry, Manifest, now
 from rag.index.status import IndexStatus, check_status
@@ -80,7 +79,7 @@ def prepare(source: SourceDocument, assembly: Assembly) -> Prepared:
     vectors = assembly.embedder.encode_passages([chunk.text for chunk in batch.chunks])
     lexical = None
     if assembly.lexical is not None:
-        language = detect_language(chunk.text for chunk in batch.chunks)
+        language = processed.document.language
         lexical = [LexicalChunk(chunk.chunk_id, language, assembly.lexical.terms(chunk.text, language))
                    for chunk in batch.chunks]
     entry = DocumentEntry(source.document_id, source.document_name, source.relative_path,

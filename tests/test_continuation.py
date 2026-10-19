@@ -72,7 +72,7 @@ def run(*items):
                                       serializer=lambda t, h, table_node_id: serialize_markdown_rows(
                                           t, h, table_node_id=table_node_id, labeled=True))
     source = SourceDocument("doc", "x.pdf", "x.pdf", Path("x.pdf"), "a" * 64)
-    return report, compose_document(source, primary, resolutions, prepared, True)
+    return report, compose_document(source, primary, resolutions, prepared, True, "english")
 
 
 def at_end(table_id="a", rows=HEAD + BODY, **kw):

@@ -33,6 +33,7 @@ SELECTION = {"highest_total_score": "总分最高", "tool_priority_tiebreak": "�
 METRIC_LABELS = (("text_f1", "文本覆盖"), ("critical_token_integrity", "关键数字完整"),
                  ("shape_support", "行列形状共识"), ("blank_anomaly", "空白异常"))
 PAGE_NAMES = ("1-解析.html", "2-表格.html", "3-分块.html")
+LANGUAGE_NAMES = {"chinese": "中文", "spanish": "西班牙文", "english": "英文"}
 
 
 GRID_LEGEND = ('<div class="meta legend"><span class="hdr">表头行</span><span class="sec">节标题行</span>'
@@ -108,7 +109,8 @@ def _header(processed: ProcessedDocument, entry: DocumentEntry, config_name: str
         links.append(f"<b>{esc(label)}</b>" if index == current else f'<a href="{esc(name)}">{esc(label)}</a>')
     return (f"<h1>{esc(entry.document_name)}</h1>"
             f'<div class="sub">配置 {esc(config_name)} · {entry.page_count} 页 · '
-            f'{entry.chunk_count} 个 chunk · {entry.table_count} 张表 · 入库于 {esc(entry.built_at)}'
+            f'{entry.chunk_count} 个 chunk · {entry.table_count} 张表 · '
+            f'文档语言 {LANGUAGE_NAMES[processed.document.language]} · 入库于 {esc(entry.built_at)}'
             f'　|　{"　".join(links)}</div>')
 
 

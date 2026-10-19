@@ -20,7 +20,7 @@ def chunk(sources, fragment_index=0, fragment_count=1, parent=None) -> DocumentC
 
 
 def document(*nodes) -> ParsedDocument:
-    return ParsedDocument("d", "d.pdf", "d.pdf", "a" * 64, tuple(nodes), ())
+    return ParsedDocument("d", "d.pdf", "d.pdf", "a" * 64, tuple(nodes), (), "english")
 
 
 def test_text_with_word_positions_gives_the_words_in_the_chunk_range():

@@ -148,7 +148,7 @@ def test_selected_and_native_table_use_same_content_rules() -> None:
                               (NativeTableFact("slot_001", "#/tables/0", native),), ())
     fallback = ContentResolution("slot_001", "docling_native_fallback", None, None, "decision")
     prepared, _ = prepare_tables(primary, (), (fallback,), True, serializer=serialize_markdown_rows)
-    parsed = compose_document(source, primary, (fallback,), prepared, True)
+    parsed = compose_document(source, primary, (fallback,), prepared, True, "english")
     assert isinstance(parsed.nodes[0], TableNode)
     assert parsed.nodes[0].origin == "docling_native_fallback"
     assert parsed.nodes[0].serialized.text == prepared[0].serialized_table.text
@@ -162,7 +162,7 @@ def test_selected_and_native_table_use_same_content_rules() -> None:
     report = TableExtractionReport("x.pdf", source.file_hash, (execution,), (winner_candidate,), ())
     winner = ContentResolution("slot_001", "selected_winner", "winner", "group:winner", "decision")
     selected, _ = prepare_tables(primary, (report,), (winner,), True, serializer=serialize_markdown_rows)
-    selected_parsed = compose_document(source, primary, (winner,), selected, True)
+    selected_parsed = compose_document(source, primary, (winner,), selected, True, "english")
     assert selected_parsed.nodes[0].table.tool == "pymupdf"
     assert selected_parsed.nodes[0].serialized.text == parsed.nodes[0].serialized.text
     with pytest.raises(TablePreparationError):

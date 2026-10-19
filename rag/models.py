@@ -228,11 +228,14 @@ class ParsedDocument:
     file_hash: str
     nodes: tuple[ParsedNode, ...]
     warnings: tuple[ProcessingWarning, ...]
-    schema_version: str = "parsed_document_v3"
+    language: Literal["chinese", "spanish", "english"]   # decided after parsing, read by later stages
+    schema_version: str = "parsed_document_v4"
 
     def __post_init__(self) -> None:
-        if self.schema_version != "parsed_document_v3":
+        if self.schema_version != "parsed_document_v4":
             raise ValueError("unsupported parsed document schema")
+        if self.language not in ("chinese", "spanish", "english"):
+            raise ValueError("unsupported document language")
         ids = [node.node_id for node in self.nodes]
         if len(ids) != len(set(ids)):
             raise ValueError("duplicate parsed node ID")

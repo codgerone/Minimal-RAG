@@ -20,6 +20,7 @@ def compose_document(
     resolutions: tuple[ContentResolution, ...],
     prepared_tables: tuple[PreparedTableContent, ...],
     branch_attached: bool,
+    language: str,
     additional_warnings: tuple[ProcessingWarning, ...] = (),
 ) -> ParsedDocument:
     if primary.document_id != source.document_id or primary.file_hash != source.file_hash:
@@ -70,4 +71,5 @@ def compose_document(
         else:
             raise DocumentCompositionError("unknown primary element")
     return ParsedDocument(source.document_id, source.document_name, source.relative_path,
-                          source.file_hash, tuple(nodes), primary.warnings + additional_warnings)
+                          source.file_hash, tuple(nodes), primary.warnings + additional_warnings,
+                          language)

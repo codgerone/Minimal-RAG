@@ -21,7 +21,7 @@ def test_long_multilingual_text_retains_boundaries_ids_and_source_ranges():
     text = "订单编号 12345。交付日期 2026-09-25。客户要求保留全部来源。"
     source_new = PageSpan(1, None, "#/texts/0")
     new = ParsedDocument("doc123", "sample.pdf", "sample.pdf", "a" * 64,
-                         (TextNode("node1", "paragraph", text, (source_new,), "#/texts/0"),), ())
+                         (TextNode("node1", "paragraph", text, (source_new,), "#/texts/0"),), (), "chinese")
     result = chunk_parsed_document(new, CharacterCounter(), max_input_tokens=30, overlap_tokens=4)
     fixture = json.loads((Path(__file__).parent / "fixtures" /
                           "legacy_equivalence.json").read_text(encoding="utf-8"))
@@ -43,7 +43,7 @@ def _list(node_id: str, *items: tuple[str, str, int, str | None]) -> ListNode:
 
 
 def _document(*nodes) -> ParsedDocument:
-    return ParsedDocument("doc123", "sample.pdf", "sample.pdf", "a" * 64, nodes, ())
+    return ParsedDocument("doc123", "sample.pdf", "sample.pdf", "a" * 64, nodes, (), "english")
 
 
 def test_list_items_merge_with_neighbouring_text():

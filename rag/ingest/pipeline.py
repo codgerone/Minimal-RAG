@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from rag.ingest.assemble import compose_document
+from rag.ingest.language import primary_language
 from rag.ingest.parsers import ParseResult, Parser
 from rag.ingest.tables.extractors import TableExtractor
 from rag.ingest.tables.formatters import TableFormatter
@@ -41,6 +42,7 @@ def process_document(source: SourceDocument, parser: Parser,
                      formatter: TableFormatter | None) -> ProcessedDocument:
     parsed = parser.parse(source)
     primary = parsed.primary
+    language = primary_language(primary)
     reports = tuple(extractor.extract(source, parsed.shared) for extractor in extractors)
     if reports:
         resolutions, grouping, scoring = select_tables(source, primary, reports,
@@ -63,6 +65,6 @@ def process_document(source: SourceDocument, parser: Parser,
         resolutions, grouping, scoring, prepared, warnings = (), None, None, (), ()
         continuations = None
     document = compose_document(source, primary, resolutions, prepared,
-                                bool(primary.table_slots), warnings)
+                                bool(primary.table_slots), language, warnings)
     return ProcessedDocument(source, parsed, reports, resolutions, grouping, scoring,
                              prepared, continuations, document)

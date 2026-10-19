@@ -82,7 +82,7 @@ def _document(table: StructuredTable) -> tuple[ParsedDocument, TableNode]:
     node = TableNode("tbl", "s", "#/tables/0", "selected_winner", table, None, header,
                      serialize_markdown_rows(table, header, table_node_id="tbl"),
                      (PageSpan(1, BoundingBox(0, 0, 200, 100), "#/tables/0"),))
-    return ParsedDocument("d", "d.pdf", "d.pdf", "a" * 64, (node,), ()), node
+    return ParsedDocument("d", "d.pdf", "d.pdf", "a" * 64, (node,), (), "english"), node
 
 
 def test_chunk_opening_inside_a_vertical_merge_gets_the_value_back_as_repeated_context():
