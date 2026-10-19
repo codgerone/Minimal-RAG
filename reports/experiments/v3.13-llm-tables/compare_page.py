@@ -39,8 +39,12 @@ def load(date: str) -> dict[str, dict]:
         for unit, suffix in UNITS:
             if code == "S" and unit == "C":
                 continue
-            path = ROOT / "reports" / "eval" / f"{date}_{config}_k3_filter-on_hybrid{suffix}" / "result.json"
-            runs[f"{code}-{unit}"] = json.loads(path.read_text(encoding="utf-8"))
+            # A name evaluated again the same day gets _2, _3 …; the latest one counts.
+            base = f"{date}_{config}_k3_filter-on_hybrid{suffix}"
+            found = [p for p in (ROOT / "reports" / "eval").iterdir()
+                     if p.name == base or (p.name.startswith(base + "_") and p.name[len(base) + 1:].isdigit())]
+            results = [json.loads((p / "result.json").read_text(encoding="utf-8")) for p in found]
+            runs[f"{code}-{unit}"] = max(results, key=lambda r: r["created_at"])
     return runs
 
 
