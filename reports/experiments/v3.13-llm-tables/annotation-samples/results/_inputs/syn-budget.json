@@ -1,0 +1,87 @@
+{
+  "title": "人造：西文工程预算表（嵌套分节、多行节标题、全表标题、合计与注释）",
+  "node_id": "syn-budget",
+  "language": "spanish",
+  "context": [
+    {
+      "kind": "title",
+      "text": "5. PRESUPUESTO REFERENCIAL"
+    },
+    {
+      "kind": "paragraph",
+      "text": "El presupuesto referencial se ha elaborado con precios vigentes al mes de marzo de 2026 y comprende las partidas de obras civiles e instalaciones electromecánicas necesarias para la ampliación de la subestación."
+    }
+  ],
+  "grid": "| row | c0 | c1 | c2 | c3 | c4 | c5 |\n| r0 | PRESUPUESTO DE OBRA: AMPLIACIÓN DE LA SUBESTACIÓN DE DISTRIBUCIÓN SED-114 Y REDES ASOCIADAS | ← | ← | ← | ← | ← |\n| r1 | Partida | Descripción | Und. | Metrado | Precio (S/) | ← |\n| r2 | ↑ | ↑ | ↑ | ↑ | Unitario | Parcial |\n| r3 | 01 | OBRAS CIVILES | ← | ← | ← | ← |\n| r4 | 01.01 | Movimiento de tierras |  |  |  |  |\n| r5 | 01.01.01 | Excavación manual de zanjas en terreno normal para cables subterráneos | m3 | 45.60 | 38.50 | 1,755.60 |\n| r6 | 01.01.02 | Excavación de hoyos para cimentación de postes de concreto armado | m3 | 18.20 | 52.00 | 946.40 |\n| r7 | 01.01.03 | Relleno compactado con material propio seleccionado en capas de 0.20 m | m3 | 39.80 | 24.75 | 985.05 |\n| r8 | 01.01.04 | Eliminación de material excedente con volquete a distancia promedio de 5 km | m3 | 24.00 | 31.40 | 753.60 |\n| r9 | 01.01.05 | Nivelación y compactación del terreno para la losa de la subestación | m2 | 64.00 | 9.80 | 627.20 |\n| r10 | 01.02 | Concreto simple y armado |  |  |  |  |\n| r11 | 01.02.01 | Solado de concreto f'c = 100 kg/cm2, espesor 0.10 m | m2 | 64.00 | 42.30 | 2,707.20 |\n| r12 | 01.02.02 | Concreto f'c = 210 kg/cm2 para losa de la subestación | m3 | 12.80 | 415.00 | 5,312.00 |\n| r13 | 01.02.03 | Acero de refuerzo fy = 4200 kg/cm2, habilitado y colocado | kg | 1,350.00 | 6.85 | 9,247.50 |\n| r14 | 01.02.04 | Encofrado y desencofrado de muros perimetrales de la caseta | m2 | 86.40 | 48.20 | 4,164.48 |\n| r15 | 01.02.05 | Concreto f'c = 175 kg/cm2 para buzones de inspección de cables | m3 | 6.40 | 380.00 | 2,432.00 |\n| r16 | 01.02.06 | Tapa de concreto armado para buzón, con marco de fierro fundido | und | 8.00 | 265.00 | 2,120.00 |\n| r17 |  | Subtotal 01 Obras civiles |  |  |  | 31,051.03 |\n| r18 | 02 | INSTALACIONES ELECTROMECÁNICAS | ← | ← | ← | ← |\n| r19 | 02.01 | Tableros y celdas de media tensión |  |  |  |  |\n| r20 |  | (incluye suministro, transporte, montaje, pruebas y puesta en servicio) |  |  |  |  |\n| r21 | 02.01.01 | Celda de llegada con seccionador bajo carga 24 kV, 630 A | und | 2.00 | 38,500.00 | 77,000.00 |\n| r22 | 02.01.02 | Celda de protección del transformador con interruptor de vacío 24 kV | und | 1.00 | 52,300.00 | 52,300.00 |\n| r23 | 02.01.03 | Celda de medición con transformadores de tensión y de corriente | und | 1.00 | 41,750.00 | 41,750.00 |\n| r24 | 02.01.04 | Tablero general de baja tensión 400/230 V con barras de cobre | und | 1.00 | 28,900.00 | 28,900.00 |\n| r25 | 02.01.05 | Tablero de servicios auxiliares con rectificador y banco de baterías | und | 1.00 | 17,450.00 | 17,450.00 |\n| r26 | 02.01.06 | Sistema de puesta a tierra con resistencia menor de 10 ohmios | glb | 1.00 | 9,850.00 | 9,850.00 |\n| r27 | 02.02 | Cables y accesorios |  |  |  |  |\n| r28 | 02.02.01 | Cable N2XSY 18/30 kV, 1 x 70 mm2, tendido en ducto | m | 640.00 | 96.40 | 61,696.00 |\n| r29 | 02.02.02 | Cable NYY 0.6/1 kV, 3 x 120 mm2 + 1 x 70 mm2, tendido en zanja | m | 380.00 | 118.70 | 45,106.00 |\n| r30 | 02.02.03 | Terminación unipolar exterior para cable de 18/30 kV | jgo | 6.00 | 2,150.00 | 12,900.00 |\n| r31 | 02.02.04 | Empalme recto termocontraíble para cable de 18/30 kV | jgo | 4.00 | 1,890.00 | 7,560.00 |\n| r32 | 02.02.05 | Ducto de PVC SAP de 6 pulgadas para cruce de vías | m | 120.00 | 58.30 | 6,996.00 |\n| r33 | 02.02.06 | Cinta señalizadora de peligro y ladrillo de protección | m | 640.00 | 7.20 | 4,608.00 |\n| r34 | 02.02.07 | Pruebas de aislamiento y de continuidad de cables instalados | glb | 1.00 | 4,200.00 | 4,200.00 |\n| r35 |  | Subtotal 02 Instalaciones electromecánicas |  |  |  | 370,316.00 |\n| r36 |  | COSTO DIRECTO |  |  |  | 401,367.03 |\n| r37 | Nota: Los precios unitarios no incluyen el Impuesto General a las Ventas (IGV). | ← | ← | ← | ← | ← |",
+  "expected": "表头 1–2；节：0（全表标题，到末行）；3 起的 01 节（到 Subtotal 01）、其下 01.01、01.02；02 节、其下 02.01（标题 2 行）、02.02；Subtotal、COSTO DIRECTO、Nota 不是节标题；无隐式合并",
+  "rule_header_rows": [
+    1,
+    2
+  ],
+  "rule_chunks": {
+    "markdown": [
+      {
+        "text": "| PRESUPUESTO DE OBRA: AMPLIACIÓN DE LA SUBESTACIÓN DE DISTRIBUCIÓN SED-114 Y REDES ASOCIADAS | ← | ← | ← | ← | ← |\n| Partida | Descripción | Und. | Metrado | Precio (S/) / Unitario | Precio (S/) / Parcial |\n| 01 | OBRAS CIVILES | ← | ← | ← | ← |\n| 01.01 | Movimiento de tierras |  |  |  |  |\n| 01.01.01 | Excavación manual de zanjas en terreno normal para cables subterráneos | m3 | 45.60 | 38.50 | 1,755.60 |\n| 01.01.02 | Excavación de hoyos para cimentación de postes de concreto armado | m3 | 18.20 | 52.00 | 946.40 |\n| 01.01.03 | Relleno compactado con material propio seleccionado en capas de 0.20 m | m3 | 39.80 | 24.75 | 985.05 |\n| 01.01.04 | Eliminación de material excedente con volquete a distancia promedio de 5 km | m3 | 24.00 | 31.40 | 753.60 |\n| 01.01.05 | Nivelación y compactación del terreno para la losa de la subestación | m2 | 64.00 | 9.80 | 627.20 |\n| 01.02 | Concreto simple y armado |  |  |  |  |\n| 01.02.01 | Solado de concreto f'c = 100 kg/cm2, espesor 0.10 m | m2 | 64.00 | 42.30 | 2,707.20 |\n| 01.02.02 | Concreto f'c = 210 kg/cm2 para losa de la subestación | m3 | 12.80 | 415.00 | 5,312.00 |",
+        "tokens": 472,
+        "repeated": 0,
+        "lines": 12
+      },
+      {
+        "text": "| Partida | Descripción | Und. | Metrado | Precio (S/) / Unitario | Precio (S/) / Parcial |\n| 01.02.03 | Acero de refuerzo fy = 4200 kg/cm2, habilitado y colocado | kg | 1,350.00 | 6.85 | 9,247.50 |\n| 01.02.04 | Encofrado y desencofrado de muros perimetrales de la caseta | m2 | 86.40 | 48.20 | 4,164.48 |\n| 01.02.05 | Concreto f'c = 175 kg/cm2 para buzones de inspección de cables | m3 | 6.40 | 380.00 | 2,432.00 |\n| 01.02.06 | Tapa de concreto armado para buzón, con marco de fierro fundido | und | 8.00 | 265.00 | 2,120.00 |\n|  | Subtotal 01 Obras civiles |  |  |  | 31,051.03 |\n| 02 | INSTALACIONES ELECTROMECÁNICAS | ← | ← | ← | ← |\n| 02.01 | Tableros y celdas de media tensión |  |  |  |  |\n|  | (incluye suministro, transporte, montaje, pruebas y puesta en servicio) |  |  |  |  |\n| 02.01.01 | Celda de llegada con seccionador bajo carga 24 kV, 630 A | und | 2.00 | 38,500.00 | 77,000.00 |\n| 02.01.02 | Celda de protección del transformador con interruptor de vacío 24 kV | und | 1.00 | 52,300.00 | 52,300.00 |\n| 02.01.03 | Celda de medición con transformadores de tensión y de corriente | und | 1.00 | 41,750.00 | 41,750.00 |\n| 02.01.04 | Tablero general de baja tensión 400/230 V con barras de cobre | und | 1.00 | 28,900.00 | 28,900.00 |",
+        "tokens": 508,
+        "repeated": 1,
+        "lines": 12
+      },
+      {
+        "text": "| Partida | Descripción | Und. | Metrado | Precio (S/) / Unitario | Precio (S/) / Parcial |\n| 02.01.05 | Tablero de servicios auxiliares con rectificador y banco de baterías | und | 1.00 | 17,450.00 | 17,450.00 |\n| 02.01.06 | Sistema de puesta a tierra con resistencia menor de 10 ohmios | glb | 1.00 | 9,850.00 | 9,850.00 |\n| 02.02 | Cables y accesorios |  |  |  |  |\n| 02.02.01 | Cable N2XSY 18/30 kV, 1 x 70 mm2, tendido en ducto | m | 640.00 | 96.40 | 61,696.00 |\n| 02.02.02 | Cable NYY 0.6/1 kV, 3 x 120 mm2 + 1 x 70 mm2, tendido en zanja | m | 380.00 | 118.70 | 45,106.00 |\n| 02.02.03 | Terminación unipolar exterior para cable de 18/30 kV | jgo | 6.00 | 2,150.00 | 12,900.00 |\n| 02.02.04 | Empalme recto termocontraíble para cable de 18/30 kV | jgo | 4.00 | 1,890.00 | 7,560.00 |\n| 02.02.05 | Ducto de PVC SAP de 6 pulgadas para cruce de vías | m | 120.00 | 58.30 | 6,996.00 |\n| 02.02.06 | Cinta señalizadora de peligro y ladrillo de protección | m | 640.00 | 7.20 | 4,608.00 |\n| 02.02.07 | Pruebas de aislamiento y de continuidad de cables instalados | glb | 1.00 | 4,200.00 | 4,200.00 |\n|  | Subtotal 02 Instalaciones electromecánicas |  |  |  | 370,316.00 |\n|  | COSTO DIRECTO |  |  |  | 401,367.03 |",
+        "tokens": 511,
+        "repeated": 1,
+        "lines": 12
+      },
+      {
+        "text": "| Partida | Descripción | Und. | Metrado | Precio (S/) / Unitario | Precio (S/) / Parcial |\n| Nota: Los precios unitarios no incluyen el Impuesto General a las Ventas (IGV). | ← | ← | ← | ← | ← |",
+        "tokens": 84,
+        "repeated": 1,
+        "lines": 1
+      }
+    ],
+    "labeled": [
+      {
+        "text": "| PRESUPUESTO DE OBRA: AMPLIACIÓN DE LA SUBESTACIÓN DE DISTRIBUCIÓN SED-114 Y REDES ASOCIADAS | ← | ← | ← | ← | ← |\n| Partida: 01 | OBRAS CIVILES | ← | ← | ← | ← |\n| Partida: 01.01 | Descripción: Movimiento de tierras |  |  |  |  |\n| Partida: 01.01.01 | Descripción: Excavación manual de zanjas en terreno normal para cables subterráneos | Und.: m3 | Metrado: 45.60 | Precio (S/) / Unitario: 38.50 | Precio (S/) / Parcial: 1,755.60 |\n| Partida: 01.01.02 | Descripción: Excavación de hoyos para cimentación de postes de concreto armado | Und.: m3 | Metrado: 18.20 | Precio (S/) / Unitario: 52.00 | Precio (S/) / Parcial: 946.40 |\n| Partida: 01.01.03 | Descripción: Relleno compactado con material propio seleccionado en capas de 0.20 m | Und.: m3 | Metrado: 39.80 | Precio (S/) / Unitario: 24.75 | Precio (S/) / Parcial: 985.05 |\n| Partida: 01.01.04 | Descripción: Eliminación de material excedente con volquete a distancia promedio de 5 km | Und.: m3 | Metrado: 24.00 | Precio (S/) / Unitario: 31.40 | Precio (S/) / Parcial: 753.60 |\n| Partida: 01.01.05 | Descripción: Nivelación y compactación del terreno para la losa de la subestación | Und.: m2 | Metrado: 64.00 | Precio (S/) / Unitario: 9.80 | Precio (S/) / Parcial: 627.20 |",
+        "tokens": 487,
+        "repeated": 0,
+        "lines": 8
+      },
+      {
+        "text": "| Partida: 01.02 | Descripción: Concreto simple y armado |  |  |  |  |\n| Partida: 01.02.01 | Descripción: Solado de concreto f'c = 100 kg/cm2, espesor 0.10 m | Und.: m2 | Metrado: 64.00 | Precio (S/) / Unitario: 42.30 | Precio (S/) / Parcial: 2,707.20 |\n| Partida: 01.02.02 | Descripción: Concreto f'c = 210 kg/cm2 para losa de la subestación | Und.: m3 | Metrado: 12.80 | Precio (S/) / Unitario: 415.00 | Precio (S/) / Parcial: 5,312.00 |\n| Partida: 01.02.03 | Descripción: Acero de refuerzo fy = 4200 kg/cm2, habilitado y colocado | Und.: kg | Metrado: 1,350.00 | Precio (S/) / Unitario: 6.85 | Precio (S/) / Parcial: 9,247.50 |\n| Partida: 01.02.04 | Descripción: Encofrado y desencofrado de muros perimetrales de la caseta | Und.: m2 | Metrado: 86.40 | Precio (S/) / Unitario: 48.20 | Precio (S/) / Parcial: 4,164.48 |\n| Partida: 01.02.05 | Descripción: Concreto f'c = 175 kg/cm2 para buzones de inspección de cables | Und.: m3 | Metrado: 6.40 | Precio (S/) / Unitario: 380.00 | Precio (S/) / Parcial: 2,432.00 |\n| Partida: 01.02.06 | Descripción: Tapa de concreto armado para buzón, con marco de fierro fundido | Und.: und | Metrado: 8.00 | Precio (S/) / Unitario: 265.00 | Precio (S/) / Parcial: 2,120.00 |",
+        "tokens": 501,
+        "repeated": 0,
+        "lines": 7
+      },
+      {
+        "text": "|  | Descripción: Subtotal 01 Obras civiles |  |  |  | Precio (S/) / Parcial: 31,051.03 |\n| Partida: 02 | INSTALACIONES ELECTROMECÁNICAS | ← | ← | ← | ← |\n| Partida: 02.01 | Descripción: Tableros y celdas de media tensión |  |  |  |  |\n|  | Descripción: (incluye suministro, transporte, montaje, pruebas y puesta en servicio) |  |  |  |  |\n| Partida: 02.01.01 | Descripción: Celda de llegada con seccionador bajo carga 24 kV, 630 A | Und.: und | Metrado: 2.00 | Precio (S/) / Unitario: 38,500.00 | Precio (S/) / Parcial: 77,000.00 |\n| Partida: 02.01.02 | Descripción: Celda de protección del transformador con interruptor de vacío 24 kV | Und.: und | Metrado: 1.00 | Precio (S/) / Unitario: 52,300.00 | Precio (S/) / Parcial: 52,300.00 |\n| Partida: 02.01.03 | Descripción: Celda de medición con transformadores de tensión y de corriente | Und.: und | Metrado: 1.00 | Precio (S/) / Unitario: 41,750.00 | Precio (S/) / Parcial: 41,750.00 |\n| Partida: 02.01.04 | Descripción: Tablero general de baja tensión 400/230 V con barras de cobre | Und.: und | Metrado: 1.00 | Precio (S/) / Unitario: 28,900.00 | Precio (S/) / Parcial: 28,900.00 |\n| Partida: 02.01.05 | Descripción: Tablero de servicios auxiliares con rectificador y banco de baterías | Und.: und | Metrado: 1.00 | Precio (S/) / Unitario: 17,450.00 | Precio (S/) / Parcial: 17,450.00 |",
+        "tokens": 508,
+        "repeated": 0,
+        "lines": 9
+      },
+      {
+        "text": "| Partida: 02.01.06 | Descripción: Sistema de puesta a tierra con resistencia menor de 10 ohmios | Und.: glb | Metrado: 1.00 | Precio (S/) / Unitario: 9,850.00 | Precio (S/) / Parcial: 9,850.00 |\n| Partida: 02.02 | Descripción: Cables y accesorios |  |  |  |  |\n| Partida: 02.02.01 | Descripción: Cable N2XSY 18/30 kV, 1 x 70 mm2, tendido en ducto | Und.: m | Metrado: 640.00 | Precio (S/) / Unitario: 96.40 | Precio (S/) / Parcial: 61,696.00 |\n| Partida: 02.02.02 | Descripción: Cable NYY 0.6/1 kV, 3 x 120 mm2 + 1 x 70 mm2, tendido en zanja | Und.: m | Metrado: 380.00 | Precio (S/) / Unitario: 118.70 | Precio (S/) / Parcial: 45,106.00 |\n| Partida: 02.02.03 | Descripción: Terminación unipolar exterior para cable de 18/30 kV | Und.: jgo | Metrado: 6.00 | Precio (S/) / Unitario: 2,150.00 | Precio (S/) / Parcial: 12,900.00 |\n| Partida: 02.02.04 | Descripción: Empalme recto termocontraíble para cable de 18/30 kV | Und.: jgo | Metrado: 4.00 | Precio (S/) / Unitario: 1,890.00 | Precio (S/) / Parcial: 7,560.00 |\n| Partida: 02.02.05 | Descripción: Ducto de PVC SAP de 6 pulgadas para cruce de vías | Und.: m | Metrado: 120.00 | Precio (S/) / Unitario: 58.30 | Precio (S/) / Parcial: 6,996.00 |",
+        "tokens": 494,
+        "repeated": 0,
+        "lines": 7
+      },
+      {
+        "text": "| Partida: 02.02.06 | Descripción: Cinta señalizadora de peligro y ladrillo de protección | Und.: m | Metrado: 640.00 | Precio (S/) / Unitario: 7.20 | Precio (S/) / Parcial: 4,608.00 |\n| Partida: 02.02.07 | Descripción: Pruebas de aislamiento y de continuidad de cables instalados | Und.: glb | Metrado: 1.00 | Precio (S/) / Unitario: 4,200.00 | Precio (S/) / Parcial: 4,200.00 |\n|  | Descripción: Subtotal 02 Instalaciones electromecánicas |  |  |  | Precio (S/) / Parcial: 370,316.00 |\n|  | Descripción: COSTO DIRECTO |  |  |  | Precio (S/) / Parcial: 401,367.03 |\n| Nota: Los precios unitarios no incluyen el Impuesto General a las Ventas (IGV). | ← | ← | ← | ← | ← |",
+        "tokens": 269,
+        "repeated": 0,
+        "lines": 5
+      }
+    ]
+  },
+  "lengths": {
+    "language": "spanish",
+    "summary_max_tokens": 508
+  },
+  "max_tokens": 512,
+  "lead_max_tokens": 64
+}

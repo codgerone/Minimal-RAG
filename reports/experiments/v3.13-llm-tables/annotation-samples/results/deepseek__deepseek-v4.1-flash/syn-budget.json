@@ -1,0 +1,256 @@
+{
+  "annotation": {
+    "model": "deepseek/deepseek-v4.1-flash",
+    "attempts": [
+      {
+        "raw": "{\n  \"header_rows\": [1, 2],\n  \"sections\": [\n    {\"title_rows\": [0], \"last_row\": 37},\n    {\"title_rows\": [3], \"last_row\": 17},\n    {\"title_rows\": [4], \"last_row\": 9},\n    {\"title_rows\": [10], \"last_row\": 16},\n    {\"title_rows\": [18], \"last_row\": 35},\n    {\"title_rows\": [19], \"last_row\": 26},\n    {\"title_rows\": [27], \"last_row\": 34}\n  ],\n  \"implicit_merges\": [],\n  \"lead\": \"Presupuesto de obras civiles e instalaciones electromecánicas de la subestación: cada fila es una partida con unidad, metrado, precio unitario y parcial.\"\n}",
+        "reasoning": "Let me analyze the table.\n\nHeader rows: r1 and r2 (r1 has Partida, Descripción, Und., Metrado, Precio (S/) spanning c4-c5; r2 has Unitario, Parcial). So header_rows = [1,2].\n\nSections: \n- r0 is a title spanning full width: \"PRESUPUESTO DE OBRA: AMPLIACIÓN DE LA SUBESTACIÓN DE DISTRIBUCIÓN SED-114 Y REDES ASOCIADAS\" — this is a title above the header rows that applies to the whole table. So section title_rows=[0], last_row=37? But r37 is a note. Hmm. The section runs to the last row. But r37 is a note row. The note is not a section title. The whole-table section: title_rows [0], last_row = 37 (last row of table). Actually should it include the note? The section runs to the last row of the table. I'd say last_row=37.\n\n- r3: \"01 | OBRAS CIVILES\" — section title. Rows r3 to r17 (subtotal 01 Obras civiles). Actually r17 is a subtotal row, not a section title. The section 01 OBRAS CIVILES covers r3..r17. last_row=17.\n\n- r4: \"01.01 | Movimiento de tierras\" — sub-section title, rows r4..r9. last_row=9.\n\n- r10: \"01.02 | Concreto simple y armado\" — sub-section, rows r10..r16. last_row=16. (r17 is subtotal, not part of it.)\n\n- r18: \"02 | INSTALACIONES ELECTROMECÁNICAS\" — section, rows r18..r35. last_row=35.\n\n- r19: \"02.01 | Tableros y celdas de media tensión\" — sub-section, rows r19..r26. r20 is a note/continuation \"(incluye suministro...)\" — it's a continuation of the title? It's a parenthetical note under the title. Hmm, it's a row that spans... it's in c1 only. It's a note describing the section. Not a section title itself. So sub-section 02.01 title_rows=[19], last_row=26.\n\n- r27: \"02.02 | Cables y accesorios\" — sub-section, rows r27..r34. last_row=34.\n\nImplicit merges: \n- c0: r1 \"Partida\" header... no. Data: r3 \"01\" then r4 \"01.01\"... no merges.\n- c4/c5 header merge r1: \"Precio (S/)\" spans c4-c5, that's a merged cell written in c4 with ← in c5. Not an implicit merge (it's a horizontal merge, not empty).\n- r0 spans all columns.\n- r3: c1 \"OBRAS CIVILES\" with ← in c2..c5. That's a horizontal merge.\n- r18 similar.\n- r37 note spans.\n\nImplicit merges (empty cells repeating value above in same column): Look for empty cells. r4: c3,c4,c5 empty — but those are empty because no value (section title row). r10, r19, r27 similar. r17: c0 empty, c1 \"Subtotal...\", c3,c4 empty, c5 value. r20: c0 empty, c1 text, others empty. r35, r36: c0 empty.\n\nHmm, are there any true implicit merges? Consider c0 for r17, r35, r36 — empty, but they're subtotal rows, no value to repeat. Not merges.\n\nWhat about r20's c0 empty — no.\n\nI don't think there are implicit merges. Actually wait — check r4: c0 = \"01.01\", c1 = \"Movimiento de tierras\", c2-c5 empty. No.\n\nSo implicit_merges = [].\n\nLead: Spanish, ≤24 words. \"Presupuesto referencial de la ampliación de la subestación SED-114: cada fila es una partida de obra civil o instalación electromecánica, con unidad, metrado, precio unitario y parcial.\" That's about 25 words. Let me count: Presupuesto(1) referencial(2) de(3) la(4) ampliación(5) de(6) la(7) subestación(8) SED-114(9): cada(10) fila(11) es(12) una(13) partida(14) de(15) obra(16) civil(17) o(18) instalación(19) electromecánica(20), con(21) unidad(22), metrado(23), precio(24) unitario(25) y(26) parcial(27). Too long.\n\nShorter: \"Presupuesto de la ampliación de la subestación: cada fila es una partida de obra civil o instalación electromecánica, con unidad, metrado, precio unitario y parcial.\" Count: Presupuesto1 de2 la3 ampliación4 de5 la6 subestación7 cada8 fila9 es10 una11 partida12 de13 obra14 civil15 o16 instalación17 electromecánica18 con19 unidad20 metrado21 precio22 unitario23 y24 parcial25. 25. Hmm.\n\n\"Presupuesto de la ampliación de la subestación: cada fila es una partida, con unidad, metrado, precio unitario y precio parcial.\" Count: 1Presupuesto 2de 3la 4ampliación 5de 6la 7subestación 8cada 9fila 10es 11una 12partida 13con 14unidad 15metrado 16precio 17unitario 18y 19precio 20parcial. 20 words. Good.\n\nMaybe mention obra civil e instalaciones electromecánicas. \"Presupuesto de obras civiles e instalaciones electromecánicas de la subestación: cada fila es una partida con unidad, metrado, precio unitario y parcial.\" Count: 1Presupuesto 2de 3obras 4civiles 5e 6instalaciones 7electromecánicas 8de 9la 10subestación 11cada 12fila 13es 14una 15partida 16con 17unidad 18metrado 19precio 20unitario 21y 22parcial. 22 words. Good.\n\nNow sections list. Should I include the whole-table section r0? Yes, \"A title above the header rows that applies to the whole table is a section that runs to the last row.\" So title_rows=[0], last_row=37.\n\nBut wait, r37 is a note row. The section runs to the last row — 37. Fine.\n\nSections:\n1. title_rows [0], last_row 37\n2. title_rows [3], last_row 17\n3. title_rows [4], last_row 9\n4. title_rows [10], last_row 16\n5. title_rows [18], last_row 35\n6. title_rows [19], last_row 26\n7. title_rows [27], last_row 34\n\nCheck nesting: section 2 (3-17) within 1 (0-37). Section 3 (4-9) within 2. Section 4 (10-16) within 2. Section 5 (18-35) within 1. Section 6 (19-26) within 5. Section 7 (27-34) within 5. Good.\n\nr20 is a note row within section 6 — it's a data row (kept as is). Fine.\n\nHeader rows [1,2].",
+        "issues": [],
+        "prompt_tokens": 2532,
+        "completion_tokens": 1926,
+        "reasoning_tokens": 1745,
+        "cost_usd": 0.0030708,
+        "cached": false
+      }
+    ],
+    "annotation": {
+      "header_rows": [
+        1,
+        2
+      ],
+      "sections": [
+        {
+          "title_rows": [
+            0
+          ],
+          "last_row": 37
+        },
+        {
+          "title_rows": [
+            3
+          ],
+          "last_row": 17
+        },
+        {
+          "title_rows": [
+            4
+          ],
+          "last_row": 9
+        },
+        {
+          "title_rows": [
+            10
+          ],
+          "last_row": 16
+        },
+        {
+          "title_rows": [
+            18
+          ],
+          "last_row": 35
+        },
+        {
+          "title_rows": [
+            19
+          ],
+          "last_row": 26
+        },
+        {
+          "title_rows": [
+            27
+          ],
+          "last_row": 34
+        }
+      ],
+      "implicit_merges": []
+    },
+    "lead": "Presupuesto de obras civiles e instalaciones electromecánicas de la subestación: cada fila es una partida con unidad, metrado, precio unitario y parcial."
+  },
+  "fallback": {
+    "annotation": false,
+    "lead": false
+  },
+  "markdown": [
+    {
+      "text": "| PRESUPUESTO DE OBRA: AMPLIACIÓN DE LA SUBESTACIÓN DE DISTRIBUCIÓN SED-114 Y REDES ASOCIADAS | ← | ← | ← | ← | ← |\n| Partida | Descripción | Und. | Metrado | Precio (S/) | ← |\n| ↑ | ↑ | ↑ | ↑ | Unitario | Parcial |\n| 01 | OBRAS CIVILES | ← | ← | ← | ← |\n| 01.01 | Movimiento de tierras |  |  |  |  |\n| 01.01.01 | Excavación manual de zanjas en terreno normal para cables subterráneos | m3 | 45.60 | 38.50 | 1,755.60 |\n| 01.01.02 | Excavación de hoyos para cimentación de postes de concreto armado | m3 | 18.20 | 52.00 | 946.40 |\n| 01.01.03 | Relleno compactado con material propio seleccionado en capas de 0.20 m | m3 | 39.80 | 24.75 | 985.05 |\n| 01.01.04 | Eliminación de material excedente con volquete a distancia promedio de 5 km | m3 | 24.00 | 31.40 | 753.60 |\n| 01.01.05 | Nivelación y compactación del terreno para la losa de la subestación | m2 | 64.00 | 9.80 | 627.20 |",
+      "tokens": 369,
+      "repeated": 3,
+      "lines": 7
+    },
+    {
+      "text": "| PRESUPUESTO DE OBRA: AMPLIACIÓN DE LA SUBESTACIÓN DE DISTRIBUCIÓN SED-114 Y REDES ASOCIADAS | ← | ← | ← | ← | ← |\n| Partida | Descripción | Und. | Metrado | Precio (S/) | ← |\n| ↑ | ↑ | ↑ | ↑ | Unitario | Parcial |\n| 01 | OBRAS CIVILES | ← | ← | ← | ← |\n| 01.02 | Concreto simple y armado |  |  |  |  |\n| 01.02.01 | Solado de concreto f'c = 100 kg/cm2, espesor 0.10 m | m2 | 64.00 | 42.30 | 2,707.20 |\n| 01.02.02 | Concreto f'c = 210 kg/cm2 para losa de la subestación | m3 | 12.80 | 415.00 | 5,312.00 |\n| 01.02.03 | Acero de refuerzo fy = 4200 kg/cm2, habilitado y colocado | kg | 1,350.00 | 6.85 | 9,247.50 |\n| 01.02.04 | Encofrado y desencofrado de muros perimetrales de la caseta | m2 | 86.40 | 48.20 | 4,164.48 |\n| 01.02.05 | Concreto f'c = 175 kg/cm2 para buzones de inspección de cables | m3 | 6.40 | 380.00 | 2,432.00 |\n| 01.02.06 | Tapa de concreto armado para buzón, con marco de fierro fundido | und | 8.00 | 265.00 | 2,120.00 |",
+      "tokens": 430,
+      "repeated": 4,
+      "lines": 7
+    },
+    {
+      "text": "| PRESUPUESTO DE OBRA: AMPLIACIÓN DE LA SUBESTACIÓN DE DISTRIBUCIÓN SED-114 Y REDES ASOCIADAS | ← | ← | ← | ← | ← |\n| Partida | Descripción | Und. | Metrado | Precio (S/) | ← |\n| ↑ | ↑ | ↑ | ↑ | Unitario | Parcial |\n| 01 | OBRAS CIVILES | ← | ← | ← | ← |\n|  | Subtotal 01 Obras civiles |  |  |  | 31,051.03 |",
+      "tokens": 157,
+      "repeated": 4,
+      "lines": 1
+    },
+    {
+      "text": "| PRESUPUESTO DE OBRA: AMPLIACIÓN DE LA SUBESTACIÓN DE DISTRIBUCIÓN SED-114 Y REDES ASOCIADAS | ← | ← | ← | ← | ← |\n| Partida | Descripción | Und. | Metrado | Precio (S/) | ← |\n| ↑ | ↑ | ↑ | ↑ | Unitario | Parcial |\n| 02 | INSTALACIONES ELECTROMECÁNICAS | ← | ← | ← | ← |\n| 02.01 | Tableros y celdas de media tensión |  |  |  |  |\n|  | (incluye suministro, transporte, montaje, pruebas y puesta en servicio) |  |  |  |  |\n| 02.01.01 | Celda de llegada con seccionador bajo carga 24 kV, 630 A | und | 2.00 | 38,500.00 | 77,000.00 |\n| 02.01.02 | Celda de protección del transformador con interruptor de vacío 24 kV | und | 1.00 | 52,300.00 | 52,300.00 |\n| 02.01.03 | Celda de medición con transformadores de tensión y de corriente | und | 1.00 | 41,750.00 | 41,750.00 |\n| 02.01.04 | Tablero general de baja tensión 400/230 V con barras de cobre | und | 1.00 | 28,900.00 | 28,900.00 |\n| 02.01.05 | Tablero de servicios auxiliares con rectificador y banco de baterías | und | 1.00 | 17,450.00 | 17,450.00 |\n| 02.01.06 | Sistema de puesta a tierra con resistencia menor de 10 ohmios | glb | 1.00 | 9,850.00 | 9,850.00 |",
+      "tokens": 442,
+      "repeated": 3,
+      "lines": 9
+    },
+    {
+      "text": "| PRESUPUESTO DE OBRA: AMPLIACIÓN DE LA SUBESTACIÓN DE DISTRIBUCIÓN SED-114 Y REDES ASOCIADAS | ← | ← | ← | ← | ← |\n| Partida | Descripción | Und. | Metrado | Precio (S/) | ← |\n| ↑ | ↑ | ↑ | ↑ | Unitario | Parcial |\n| 02 | INSTALACIONES ELECTROMECÁNICAS | ← | ← | ← | ← |\n| 02.02 | Cables y accesorios |  |  |  |  |\n| 02.02.01 | Cable N2XSY 18/30 kV, 1 x 70 mm2, tendido en ducto | m | 640.00 | 96.40 | 61,696.00 |\n| 02.02.02 | Cable NYY 0.6/1 kV, 3 x 120 mm2 + 1 x 70 mm2, tendido en zanja | m | 380.00 | 118.70 | 45,106.00 |\n| 02.02.03 | Terminación unipolar exterior para cable de 18/30 kV | jgo | 6.00 | 2,150.00 | 12,900.00 |\n| 02.02.04 | Empalme recto termocontraíble para cable de 18/30 kV | jgo | 4.00 | 1,890.00 | 7,560.00 |\n| 02.02.05 | Ducto de PVC SAP de 6 pulgadas para cruce de vías | m | 120.00 | 58.30 | 6,996.00 |\n| 02.02.06 | Cinta señalizadora de peligro y ladrillo de protección | m | 640.00 | 7.20 | 4,608.00 |",
+      "tokens": 425,
+      "repeated": 4,
+      "lines": 7
+    },
+    {
+      "text": "| PRESUPUESTO DE OBRA: AMPLIACIÓN DE LA SUBESTACIÓN DE DISTRIBUCIÓN SED-114 Y REDES ASOCIADAS | ← | ← | ← | ← | ← |\n| Partida | Descripción | Und. | Metrado | Precio (S/) | ← |\n| ↑ | ↑ | ↑ | ↑ | Unitario | Parcial |\n| 02 | INSTALACIONES ELECTROMECÁNICAS | ← | ← | ← | ← |\n| 02.02 | Cables y accesorios |  |  |  |  |\n| 02.02.07 | Pruebas de aislamiento y de continuidad de cables instalados | glb | 1.00 | 4,200.00 | 4,200.00 |\n|  | Subtotal 02 Instalaciones electromecánicas |  |  |  | 370,316.00 |\n|  | COSTO DIRECTO |  |  |  | 401,367.03 |\n| Nota: Los precios unitarios no incluyen el Impuesto General a las Ventas (IGV). | ← | ← | ← | ← | ← |",
+      "tokens": 294,
+      "repeated": 5,
+      "lines": 4
+    }
+  ],
+  "markdown_lead": [
+    {
+      "text": "Presupuesto de obras civiles e instalaciones electromecánicas de la subestación: cada fila es una partida con unidad, metrado, precio unitario y parcial.\n| PRESUPUESTO DE OBRA: AMPLIACIÓN DE LA SUBESTACIÓN DE DISTRIBUCIÓN SED-114 Y REDES ASOCIADAS | ← | ← | ← | ← | ← |\n| Partida | Descripción | Und. | Metrado | Precio (S/) | ← |\n| ↑ | ↑ | ↑ | ↑ | Unitario | Parcial |\n| 01 | OBRAS CIVILES | ← | ← | ← | ← |\n| 01.01 | Movimiento de tierras |  |  |  |  |\n| 01.01.01 | Excavación manual de zanjas en terreno normal para cables subterráneos | m3 | 45.60 | 38.50 | 1,755.60 |\n| 01.01.02 | Excavación de hoyos para cimentación de postes de concreto armado | m3 | 18.20 | 52.00 | 946.40 |\n| 01.01.03 | Relleno compactado con material propio seleccionado en capas de 0.20 m | m3 | 39.80 | 24.75 | 985.05 |\n| 01.01.04 | Eliminación de material excedente con volquete a distancia promedio de 5 km | m3 | 24.00 | 31.40 | 753.60 |\n| 01.01.05 | Nivelación y compactación del terreno para la losa de la subestación | m2 | 64.00 | 9.80 | 627.20 |",
+      "tokens": 406,
+      "repeated": 3,
+      "lines": 7
+    },
+    {
+      "text": "Presupuesto de obras civiles e instalaciones electromecánicas de la subestación: cada fila es una partida con unidad, metrado, precio unitario y parcial.\n| PRESUPUESTO DE OBRA: AMPLIACIÓN DE LA SUBESTACIÓN DE DISTRIBUCIÓN SED-114 Y REDES ASOCIADAS | ← | ← | ← | ← | ← |\n| Partida | Descripción | Und. | Metrado | Precio (S/) | ← |\n| ↑ | ↑ | ↑ | ↑ | Unitario | Parcial |\n| 01 | OBRAS CIVILES | ← | ← | ← | ← |\n| 01.02 | Concreto simple y armado |  |  |  |  |\n| 01.02.01 | Solado de concreto f'c = 100 kg/cm2, espesor 0.10 m | m2 | 64.00 | 42.30 | 2,707.20 |\n| 01.02.02 | Concreto f'c = 210 kg/cm2 para losa de la subestación | m3 | 12.80 | 415.00 | 5,312.00 |\n| 01.02.03 | Acero de refuerzo fy = 4200 kg/cm2, habilitado y colocado | kg | 1,350.00 | 6.85 | 9,247.50 |\n| 01.02.04 | Encofrado y desencofrado de muros perimetrales de la caseta | m2 | 86.40 | 48.20 | 4,164.48 |\n| 01.02.05 | Concreto f'c = 175 kg/cm2 para buzones de inspección de cables | m3 | 6.40 | 380.00 | 2,432.00 |\n| 01.02.06 | Tapa de concreto armado para buzón, con marco de fierro fundido | und | 8.00 | 265.00 | 2,120.00 |",
+      "tokens": 467,
+      "repeated": 4,
+      "lines": 7
+    },
+    {
+      "text": "Presupuesto de obras civiles e instalaciones electromecánicas de la subestación: cada fila es una partida con unidad, metrado, precio unitario y parcial.\n| PRESUPUESTO DE OBRA: AMPLIACIÓN DE LA SUBESTACIÓN DE DISTRIBUCIÓN SED-114 Y REDES ASOCIADAS | ← | ← | ← | ← | ← |\n| Partida | Descripción | Und. | Metrado | Precio (S/) | ← |\n| ↑ | ↑ | ↑ | ↑ | Unitario | Parcial |\n| 01 | OBRAS CIVILES | ← | ← | ← | ← |\n|  | Subtotal 01 Obras civiles |  |  |  | 31,051.03 |",
+      "tokens": 194,
+      "repeated": 4,
+      "lines": 1
+    },
+    {
+      "text": "Presupuesto de obras civiles e instalaciones electromecánicas de la subestación: cada fila es una partida con unidad, metrado, precio unitario y parcial.\n| PRESUPUESTO DE OBRA: AMPLIACIÓN DE LA SUBESTACIÓN DE DISTRIBUCIÓN SED-114 Y REDES ASOCIADAS | ← | ← | ← | ← | ← |\n| Partida | Descripción | Und. | Metrado | Precio (S/) | ← |\n| ↑ | ↑ | ↑ | ↑ | Unitario | Parcial |\n| 02 | INSTALACIONES ELECTROMECÁNICAS | ← | ← | ← | ← |\n| 02.01 | Tableros y celdas de media tensión |  |  |  |  |\n|  | (incluye suministro, transporte, montaje, pruebas y puesta en servicio) |  |  |  |  |\n| 02.01.01 | Celda de llegada con seccionador bajo carga 24 kV, 630 A | und | 2.00 | 38,500.00 | 77,000.00 |\n| 02.01.02 | Celda de protección del transformador con interruptor de vacío 24 kV | und | 1.00 | 52,300.00 | 52,300.00 |\n| 02.01.03 | Celda de medición con transformadores de tensión y de corriente | und | 1.00 | 41,750.00 | 41,750.00 |\n| 02.01.04 | Tablero general de baja tensión 400/230 V con barras de cobre | und | 1.00 | 28,900.00 | 28,900.00 |\n| 02.01.05 | Tablero de servicios auxiliares con rectificador y banco de baterías | und | 1.00 | 17,450.00 | 17,450.00 |\n| 02.01.06 | Sistema de puesta a tierra con resistencia menor de 10 ohmios | glb | 1.00 | 9,850.00 | 9,850.00 |",
+      "tokens": 479,
+      "repeated": 3,
+      "lines": 9
+    },
+    {
+      "text": "Presupuesto de obras civiles e instalaciones electromecánicas de la subestación: cada fila es una partida con unidad, metrado, precio unitario y parcial.\n| PRESUPUESTO DE OBRA: AMPLIACIÓN DE LA SUBESTACIÓN DE DISTRIBUCIÓN SED-114 Y REDES ASOCIADAS | ← | ← | ← | ← | ← |\n| Partida | Descripción | Und. | Metrado | Precio (S/) | ← |\n| ↑ | ↑ | ↑ | ↑ | Unitario | Parcial |\n| 02 | INSTALACIONES ELECTROMECÁNICAS | ← | ← | ← | ← |\n| 02.02 | Cables y accesorios |  |  |  |  |\n| 02.02.01 | Cable N2XSY 18/30 kV, 1 x 70 mm2, tendido en ducto | m | 640.00 | 96.40 | 61,696.00 |\n| 02.02.02 | Cable NYY 0.6/1 kV, 3 x 120 mm2 + 1 x 70 mm2, tendido en zanja | m | 380.00 | 118.70 | 45,106.00 |\n| 02.02.03 | Terminación unipolar exterior para cable de 18/30 kV | jgo | 6.00 | 2,150.00 | 12,900.00 |\n| 02.02.04 | Empalme recto termocontraíble para cable de 18/30 kV | jgo | 4.00 | 1,890.00 | 7,560.00 |\n| 02.02.05 | Ducto de PVC SAP de 6 pulgadas para cruce de vías | m | 120.00 | 58.30 | 6,996.00 |\n| 02.02.06 | Cinta señalizadora de peligro y ladrillo de protección | m | 640.00 | 7.20 | 4,608.00 |",
+      "tokens": 462,
+      "repeated": 4,
+      "lines": 7
+    },
+    {
+      "text": "Presupuesto de obras civiles e instalaciones electromecánicas de la subestación: cada fila es una partida con unidad, metrado, precio unitario y parcial.\n| PRESUPUESTO DE OBRA: AMPLIACIÓN DE LA SUBESTACIÓN DE DISTRIBUCIÓN SED-114 Y REDES ASOCIADAS | ← | ← | ← | ← | ← |\n| Partida | Descripción | Und. | Metrado | Precio (S/) | ← |\n| ↑ | ↑ | ↑ | ↑ | Unitario | Parcial |\n| 02 | INSTALACIONES ELECTROMECÁNICAS | ← | ← | ← | ← |\n| 02.02 | Cables y accesorios |  |  |  |  |\n| 02.02.07 | Pruebas de aislamiento y de continuidad de cables instalados | glb | 1.00 | 4,200.00 | 4,200.00 |\n|  | Subtotal 02 Instalaciones electromecánicas |  |  |  | 370,316.00 |\n|  | COSTO DIRECTO |  |  |  | 401,367.03 |\n| Nota: Los precios unitarios no incluyen el Impuesto General a las Ventas (IGV). | ← | ← | ← | ← | ← |",
+      "tokens": 331,
+      "repeated": 5,
+      "lines": 4
+    }
+  ],
+  "markdown_checks": [],
+  "labeled": [
+    {
+      "text": "| PRESUPUESTO DE OBRA: AMPLIACIÓN DE LA SUBESTACIÓN DE DISTRIBUCIÓN SED-114 Y REDES ASOCIADAS | ← | ← | ← | ← | ← |\n| 01 | OBRAS CIVILES | ← | ← | ← | ← |\n| 01.01 | Movimiento de tierras |  |  |  |  |\n| Partida: 01.01.01 | Descripción: Excavación manual de zanjas en terreno normal para cables subterráneos | Und.: m3 | Metrado: 45.60 | Precio (S/) / Unitario: 38.50 | Precio (S/) / Parcial: 1,755.60 |\n| Partida: 01.01.02 | Descripción: Excavación de hoyos para cimentación de postes de concreto armado | Und.: m3 | Metrado: 18.20 | Precio (S/) / Unitario: 52.00 | Precio (S/) / Parcial: 946.40 |\n| Partida: 01.01.03 | Descripción: Relleno compactado con material propio seleccionado en capas de 0.20 m | Und.: m3 | Metrado: 39.80 | Precio (S/) / Unitario: 24.75 | Precio (S/) / Parcial: 985.05 |\n| Partida: 01.01.04 | Descripción: Eliminación de material excedente con volquete a distancia promedio de 5 km | Und.: m3 | Metrado: 24.00 | Precio (S/) / Unitario: 31.40 | Precio (S/) / Parcial: 753.60 |",
+      "tokens": 404,
+      "repeated": 1,
+      "lines": 6
+    },
+    {
+      "text": "| PRESUPUESTO DE OBRA: AMPLIACIÓN DE LA SUBESTACIÓN DE DISTRIBUCIÓN SED-114 Y REDES ASOCIADAS | ← | ← | ← | ← | ← |\n| 01 | OBRAS CIVILES | ← | ← | ← | ← |\n| 01.01 | Movimiento de tierras |  |  |  |  |\n| Partida: 01.01.05 | Descripción: Nivelación y compactación del terreno para la losa de la subestación | Und.: m2 | Metrado: 64.00 | Precio (S/) / Unitario: 9.80 | Precio (S/) / Parcial: 627.20 |\n| 01.02 | Concreto simple y armado |  |  |  |  |\n| Partida: 01.02.01 | Descripción: Solado de concreto f'c = 100 kg/cm2, espesor 0.10 m | Und.: m2 | Metrado: 64.00 | Precio (S/) / Unitario: 42.30 | Precio (S/) / Parcial: 2,707.20 |\n| Partida: 01.02.02 | Descripción: Concreto f'c = 210 kg/cm2 para losa de la subestación | Und.: m3 | Metrado: 12.80 | Precio (S/) / Unitario: 415.00 | Precio (S/) / Parcial: 5,312.00 |\n| Partida: 01.02.03 | Descripción: Acero de refuerzo fy = 4200 kg/cm2, habilitado y colocado | Und.: kg | Metrado: 1,350.00 | Precio (S/) / Unitario: 6.85 | Precio (S/) / Parcial: 9,247.50 |",
+      "tokens": 433,
+      "repeated": 3,
+      "lines": 5
+    },
+    {
+      "text": "| PRESUPUESTO DE OBRA: AMPLIACIÓN DE LA SUBESTACIÓN DE DISTRIBUCIÓN SED-114 Y REDES ASOCIADAS | ← | ← | ← | ← | ← |\n| 01 | OBRAS CIVILES | ← | ← | ← | ← |\n| 01.02 | Concreto simple y armado |  |  |  |  |\n| Partida: 01.02.04 | Descripción: Encofrado y desencofrado de muros perimetrales de la caseta | Und.: m2 | Metrado: 86.40 | Precio (S/) / Unitario: 48.20 | Precio (S/) / Parcial: 4,164.48 |\n| Partida: 01.02.05 | Descripción: Concreto f'c = 175 kg/cm2 para buzones de inspección de cables | Und.: m3 | Metrado: 6.40 | Precio (S/) / Unitario: 380.00 | Precio (S/) / Parcial: 2,432.00 |\n| Partida: 01.02.06 | Descripción: Tapa de concreto armado para buzón, con marco de fierro fundido | Und.: und | Metrado: 8.00 | Precio (S/) / Unitario: 265.00 | Precio (S/) / Parcial: 2,120.00 |\n|  | Descripción: Subtotal 01 Obras civiles |  |  |  | Precio (S/) / Parcial: 31,051.03 |",
+      "tokens": 374,
+      "repeated": 3,
+      "lines": 4
+    },
+    {
+      "text": "| PRESUPUESTO DE OBRA: AMPLIACIÓN DE LA SUBESTACIÓN DE DISTRIBUCIÓN SED-114 Y REDES ASOCIADAS | ← | ← | ← | ← | ← |\n| 02 | INSTALACIONES ELECTROMECÁNICAS | ← | ← | ← | ← |\n| 02.01 | Tableros y celdas de media tensión |  |  |  |  |\n|  | Descripción: (incluye suministro, transporte, montaje, pruebas y puesta en servicio) |  |  |  |  |\n| Partida: 02.01.01 | Descripción: Celda de llegada con seccionador bajo carga 24 kV, 630 A | Und.: und | Metrado: 2.00 | Precio (S/) / Unitario: 38,500.00 | Precio (S/) / Parcial: 77,000.00 |\n| Partida: 02.01.02 | Descripción: Celda de protección del transformador con interruptor de vacío 24 kV | Und.: und | Metrado: 1.00 | Precio (S/) / Unitario: 52,300.00 | Precio (S/) / Parcial: 52,300.00 |\n| Partida: 02.01.03 | Descripción: Celda de medición con transformadores de tensión y de corriente | Und.: und | Metrado: 1.00 | Precio (S/) / Unitario: 41,750.00 | Precio (S/) / Parcial: 41,750.00 |\n| Partida: 02.01.04 | Descripción: Tablero general de baja tensión 400/230 V con barras de cobre | Und.: und | Metrado: 1.00 | Precio (S/) / Unitario: 28,900.00 | Precio (S/) / Parcial: 28,900.00 |",
+      "tokens": 440,
+      "repeated": 1,
+      "lines": 7
+    },
+    {
+      "text": "| PRESUPUESTO DE OBRA: AMPLIACIÓN DE LA SUBESTACIÓN DE DISTRIBUCIÓN SED-114 Y REDES ASOCIADAS | ← | ← | ← | ← | ← |\n| 02 | INSTALACIONES ELECTROMECÁNICAS | ← | ← | ← | ← |\n| 02.01 | Tableros y celdas de media tensión |  |  |  |  |\n| Partida: 02.01.05 | Descripción: Tablero de servicios auxiliares con rectificador y banco de baterías | Und.: und | Metrado: 1.00 | Precio (S/) / Unitario: 17,450.00 | Precio (S/) / Parcial: 17,450.00 |\n| Partida: 02.01.06 | Descripción: Sistema de puesta a tierra con resistencia menor de 10 ohmios | Und.: glb | Metrado: 1.00 | Precio (S/) / Unitario: 9,850.00 | Precio (S/) / Parcial: 9,850.00 |\n| 02.02 | Cables y accesorios |  |  |  |  |\n| Partida: 02.02.01 | Descripción: Cable N2XSY 18/30 kV, 1 x 70 mm2, tendido en ducto | Und.: m | Metrado: 640.00 | Precio (S/) / Unitario: 96.40 | Precio (S/) / Parcial: 61,696.00 |\n| Partida: 02.02.02 | Descripción: Cable NYY 0.6/1 kV, 3 x 120 mm2 + 1 x 70 mm2, tendido en zanja | Und.: m | Metrado: 380.00 | Precio (S/) / Unitario: 118.70 | Precio (S/) / Parcial: 45,106.00 |",
+      "tokens": 443,
+      "repeated": 3,
+      "lines": 5
+    },
+    {
+      "text": "| PRESUPUESTO DE OBRA: AMPLIACIÓN DE LA SUBESTACIÓN DE DISTRIBUCIÓN SED-114 Y REDES ASOCIADAS | ← | ← | ← | ← | ← |\n| 02 | INSTALACIONES ELECTROMECÁNICAS | ← | ← | ← | ← |\n| 02.02 | Cables y accesorios |  |  |  |  |\n| Partida: 02.02.03 | Descripción: Terminación unipolar exterior para cable de 18/30 kV | Und.: jgo | Metrado: 6.00 | Precio (S/) / Unitario: 2,150.00 | Precio (S/) / Parcial: 12,900.00 |\n| Partida: 02.02.04 | Descripción: Empalme recto termocontraíble para cable de 18/30 kV | Und.: jgo | Metrado: 4.00 | Precio (S/) / Unitario: 1,890.00 | Precio (S/) / Parcial: 7,560.00 |\n| Partida: 02.02.05 | Descripción: Ducto de PVC SAP de 6 pulgadas para cruce de vías | Und.: m | Metrado: 120.00 | Precio (S/) / Unitario: 58.30 | Precio (S/) / Parcial: 6,996.00 |\n| Partida: 02.02.06 | Descripción: Cinta señalizadora de peligro y ladrillo de protección | Und.: m | Metrado: 640.00 | Precio (S/) / Unitario: 7.20 | Precio (S/) / Parcial: 4,608.00 |",
+      "tokens": 399,
+      "repeated": 3,
+      "lines": 4
+    },
+    {
+      "text": "| PRESUPUESTO DE OBRA: AMPLIACIÓN DE LA SUBESTACIÓN DE DISTRIBUCIÓN SED-114 Y REDES ASOCIADAS | ← | ← | ← | ← | ← |\n| 02 | INSTALACIONES ELECTROMECÁNICAS | ← | ← | ← | ← |\n| 02.02 | Cables y accesorios |  |  |  |  |\n| Partida: 02.02.07 | Descripción: Pruebas de aislamiento y de continuidad de cables instalados | Und.: glb | Metrado: 1.00 | Precio (S/) / Unitario: 4,200.00 | Precio (S/) / Parcial: 4,200.00 |\n|  | Descripción: Subtotal 02 Instalaciones electromecánicas |  |  |  | Precio (S/) / Parcial: 370,316.00 |\n|  | Descripción: COSTO DIRECTO |  |  |  | Precio (S/) / Parcial: 401,367.03 |\n| Nota: Los precios unitarios no incluyen el Impuesto General a las Ventas (IGV). | ← | ← | ← | ← | ← |",
+      "tokens": 301,
+      "repeated": 3,
+      "lines": 4
+    }
+  ],
+  "labeled_lead": [
+    {
+      "text": "Presupuesto de obras civiles e instalaciones electromecánicas de la subestación: cada fila es una partida con unidad, metrado, precio unitario y parcial.\n| PRESUPUESTO DE OBRA: AMPLIACIÓN DE LA SUBESTACIÓN DE DISTRIBUCIÓN SED-114 Y REDES ASOCIADAS | ← | ← | ← | ← | ← |\n| 01 | OBRAS CIVILES | ← | ← | ← | ← |\n| 01.01 | Movimiento de tierras |  |  |  |  |\n| Partida: 01.01.01 | Descripción: Excavación manual de zanjas en terreno normal para cables subterráneos | Und.: m3 | Metrado: 45.60 | Precio (S/) / Unitario: 38.50 | Precio (S/) / Parcial: 1,755.60 |\n| Partida: 01.01.02 | Descripción: Excavación de hoyos para cimentación de postes de concreto armado | Und.: m3 | Metrado: 18.20 | Precio (S/) / Unitario: 52.00 | Precio (S/) / Parcial: 946.40 |\n| Partida: 01.01.03 | Descripción: Relleno compactado con material propio seleccionado en capas de 0.20 m | Und.: m3 | Metrado: 39.80 | Precio (S/) / Unitario: 24.75 | Precio (S/) / Parcial: 985.05 |\n| Partida: 01.01.04 | Descripción: Eliminación de material excedente con volquete a distancia promedio de 5 km | Und.: m3 | Metrado: 24.00 | Precio (S/) / Unitario: 31.40 | Precio (S/) / Parcial: 753.60 |",
+      "tokens": 441,
+      "repeated": 1,
+      "lines": 6
+    },
+    {
+      "text": "Presupuesto de obras civiles e instalaciones electromecánicas de la subestación: cada fila es una partida con unidad, metrado, precio unitario y parcial.\n| PRESUPUESTO DE OBRA: AMPLIACIÓN DE LA SUBESTACIÓN DE DISTRIBUCIÓN SED-114 Y REDES ASOCIADAS | ← | ← | ← | ← | ← |\n| 01 | OBRAS CIVILES | ← | ← | ← | ← |\n| 01.01 | Movimiento de tierras |  |  |  |  |\n| Partida: 01.01.05 | Descripción: Nivelación y compactación del terreno para la losa de la subestación | Und.: m2 | Metrado: 64.00 | Precio (S/) / Unitario: 9.80 | Precio (S/) / Parcial: 627.20 |\n| 01.02 | Concreto simple y armado |  |  |  |  |\n| Partida: 01.02.01 | Descripción: Solado de concreto f'c = 100 kg/cm2, espesor 0.10 m | Und.: m2 | Metrado: 64.00 | Precio (S/) / Unitario: 42.30 | Precio (S/) / Parcial: 2,707.20 |\n| Partida: 01.02.02 | Descripción: Concreto f'c = 210 kg/cm2 para losa de la subestación | Und.: m3 | Metrado: 12.80 | Precio (S/) / Unitario: 415.00 | Precio (S/) / Parcial: 5,312.00 |\n| Partida: 01.02.03 | Descripción: Acero de refuerzo fy = 4200 kg/cm2, habilitado y colocado | Und.: kg | Metrado: 1,350.00 | Precio (S/) / Unitario: 6.85 | Precio (S/) / Parcial: 9,247.50 |",
+      "tokens": 470,
+      "repeated": 3,
+      "lines": 5
+    },
+    {
+      "text": "Presupuesto de obras civiles e instalaciones electromecánicas de la subestación: cada fila es una partida con unidad, metrado, precio unitario y parcial.\n| PRESUPUESTO DE OBRA: AMPLIACIÓN DE LA SUBESTACIÓN DE DISTRIBUCIÓN SED-114 Y REDES ASOCIADAS | ← | ← | ← | ← | ← |\n| 01 | OBRAS CIVILES | ← | ← | ← | ← |\n| 01.02 | Concreto simple y armado |  |  |  |  |\n| Partida: 01.02.04 | Descripción: Encofrado y desencofrado de muros perimetrales de la caseta | Und.: m2 | Metrado: 86.40 | Precio (S/) / Unitario: 48.20 | Precio (S/) / Parcial: 4,164.48 |\n| Partida: 01.02.05 | Descripción: Concreto f'c = 175 kg/cm2 para buzones de inspección de cables | Und.: m3 | Metrado: 6.40 | Precio (S/) / Unitario: 380.00 | Precio (S/) / Parcial: 2,432.00 |\n| Partida: 01.02.06 | Descripción: Tapa de concreto armado para buzón, con marco de fierro fundido | Und.: und | Metrado: 8.00 | Precio (S/) / Unitario: 265.00 | Precio (S/) / Parcial: 2,120.00 |\n|  | Descripción: Subtotal 01 Obras civiles |  |  |  | Precio (S/) / Parcial: 31,051.03 |",
+      "tokens": 411,
+      "repeated": 3,
+      "lines": 4
+    },
+    {
+      "text": "Presupuesto de obras civiles e instalaciones electromecánicas de la subestación: cada fila es una partida con unidad, metrado, precio unitario y parcial.\n| PRESUPUESTO DE OBRA: AMPLIACIÓN DE LA SUBESTACIÓN DE DISTRIBUCIÓN SED-114 Y REDES ASOCIADAS | ← | ← | ← | ← | ← |\n| 02 | INSTALACIONES ELECTROMECÁNICAS | ← | ← | ← | ← |\n| 02.01 | Tableros y celdas de media tensión |  |  |  |  |\n|  | Descripción: (incluye suministro, transporte, montaje, pruebas y puesta en servicio) |  |  |  |  |\n| Partida: 02.01.01 | Descripción: Celda de llegada con seccionador bajo carga 24 kV, 630 A | Und.: und | Metrado: 2.00 | Precio (S/) / Unitario: 38,500.00 | Precio (S/) / Parcial: 77,000.00 |\n| Partida: 02.01.02 | Descripción: Celda de protección del transformador con interruptor de vacío 24 kV | Und.: und | Metrado: 1.00 | Precio (S/) / Unitario: 52,300.00 | Precio (S/) / Parcial: 52,300.00 |\n| Partida: 02.01.03 | Descripción: Celda de medición con transformadores de tensión y de corriente | Und.: und | Metrado: 1.00 | Precio (S/) / Unitario: 41,750.00 | Precio (S/) / Parcial: 41,750.00 |\n| Partida: 02.01.04 | Descripción: Tablero general de baja tensión 400/230 V con barras de cobre | Und.: und | Metrado: 1.00 | Precio (S/) / Unitario: 28,900.00 | Precio (S/) / Parcial: 28,900.00 |",
+      "tokens": 477,
+      "repeated": 1,
+      "lines": 7
+    },
+    {
+      "text": "Presupuesto de obras civiles e instalaciones electromecánicas de la subestación: cada fila es una partida con unidad, metrado, precio unitario y parcial.\n| PRESUPUESTO DE OBRA: AMPLIACIÓN DE LA SUBESTACIÓN DE DISTRIBUCIÓN SED-114 Y REDES ASOCIADAS | ← | ← | ← | ← | ← |\n| 02 | INSTALACIONES ELECTROMECÁNICAS | ← | ← | ← | ← |\n| 02.01 | Tableros y celdas de media tensión |  |  |  |  |\n| Partida: 02.01.05 | Descripción: Tablero de servicios auxiliares con rectificador y banco de baterías | Und.: und | Metrado: 1.00 | Precio (S/) / Unitario: 17,450.00 | Precio (S/) / Parcial: 17,450.00 |\n| Partida: 02.01.06 | Descripción: Sistema de puesta a tierra con resistencia menor de 10 ohmios | Und.: glb | Metrado: 1.00 | Precio (S/) / Unitario: 9,850.00 | Precio (S/) / Parcial: 9,850.00 |\n| 02.02 | Cables y accesorios |  |  |  |  |\n| Partida: 02.02.01 | Descripción: Cable N2XSY 18/30 kV, 1 x 70 mm2, tendido en ducto | Und.: m | Metrado: 640.00 | Precio (S/) / Unitario: 96.40 | Precio (S/) / Parcial: 61,696.00 |\n| Partida: 02.02.02 | Descripción: Cable NYY 0.6/1 kV, 3 x 120 mm2 + 1 x 70 mm2, tendido en zanja | Und.: m | Metrado: 380.00 | Precio (S/) / Unitario: 118.70 | Precio (S/) / Parcial: 45,106.00 |",
+      "tokens": 480,
+      "repeated": 3,
+      "lines": 5
+    },
+    {
+      "text": "Presupuesto de obras civiles e instalaciones electromecánicas de la subestación: cada fila es una partida con unidad, metrado, precio unitario y parcial.\n| PRESUPUESTO DE OBRA: AMPLIACIÓN DE LA SUBESTACIÓN DE DISTRIBUCIÓN SED-114 Y REDES ASOCIADAS | ← | ← | ← | ← | ← |\n| 02 | INSTALACIONES ELECTROMECÁNICAS | ← | ← | ← | ← |\n| 02.02 | Cables y accesorios |  |  |  |  |\n| Partida: 02.02.03 | Descripción: Terminación unipolar exterior para cable de 18/30 kV | Und.: jgo | Metrado: 6.00 | Precio (S/) / Unitario: 2,150.00 | Precio (S/) / Parcial: 12,900.00 |\n| Partida: 02.02.04 | Descripción: Empalme recto termocontraíble para cable de 18/30 kV | Und.: jgo | Metrado: 4.00 | Precio (S/) / Unitario: 1,890.00 | Precio (S/) / Parcial: 7,560.00 |\n| Partida: 02.02.05 | Descripción: Ducto de PVC SAP de 6 pulgadas para cruce de vías | Und.: m | Metrado: 120.00 | Precio (S/) / Unitario: 58.30 | Precio (S/) / Parcial: 6,996.00 |\n| Partida: 02.02.06 | Descripción: Cinta señalizadora de peligro y ladrillo de protección | Und.: m | Metrado: 640.00 | Precio (S/) / Unitario: 7.20 | Precio (S/) / Parcial: 4,608.00 |",
+      "tokens": 436,
+      "repeated": 3,
+      "lines": 4
+    },
+    {
+      "text": "Presupuesto de obras civiles e instalaciones electromecánicas de la subestación: cada fila es una partida con unidad, metrado, precio unitario y parcial.\n| PRESUPUESTO DE OBRA: AMPLIACIÓN DE LA SUBESTACIÓN DE DISTRIBUCIÓN SED-114 Y REDES ASOCIADAS | ← | ← | ← | ← | ← |\n| 02 | INSTALACIONES ELECTROMECÁNICAS | ← | ← | ← | ← |\n| 02.02 | Cables y accesorios |  |  |  |  |\n| Partida: 02.02.07 | Descripción: Pruebas de aislamiento y de continuidad de cables instalados | Und.: glb | Metrado: 1.00 | Precio (S/) / Unitario: 4,200.00 | Precio (S/) / Parcial: 4,200.00 |\n|  | Descripción: Subtotal 02 Instalaciones electromecánicas |  |  |  | Precio (S/) / Parcial: 370,316.00 |\n|  | Descripción: COSTO DIRECTO |  |  |  | Precio (S/) / Parcial: 401,367.03 |\n| Nota: Los precios unitarios no incluyen el Impuesto General a las Ventas (IGV). | ← | ← | ← | ← | ← |",
+      "tokens": 338,
+      "repeated": 3,
+      "lines": 4
+    }
+  ],
+  "labeled_checks": [],
+  "summary": {
+    "model": "deepseek/deepseek-v4.1-flash",
+    "attempts": [
+      {
+        "raw": "{\"summary\": \"La tabla presenta el presupuesto de obra para la ampliación de la subestación de distribución SED-114 y redes asociadas. Se organiza en filas que corresponden a partidas, agrupadas en capítulos y subcapítulos, y columnas: Partida, Descripción, Und., Metrado, Precio (S/) —desdoblada en Unitario y Parcial—. Los grupos principales son 01 OBRAS CIVILES y 02 INSTALACIONES ELECTROMECÁNICAS; los subgrupos son 01.01 Movimiento de tierras, 01.02 Concreto simple y armado, 02.01 Tableros y celdas de media tensión y 02.02 Cables y accesorios. Las partidas se identifican con los códigos 01.01.01, 01.01.02, 01.01.03, 01.01.04, 01.01.05, 01.02.01, 01.02.02, 01.02.03, 01.02.04, 01.02.05, 01.02.06, 02.01.01, 02.01.02, 02.01.03, 02.01.04, 02.01.05, 02.01.06, 02.02.01, 02.02.02, 02.02.03, 02.02.04, 02.02.05, 02.02.06 y 02.02.07, además de su descripción. Incluye filas de subtotal: Subtotal 01 Obras civiles, Subtotal 02 Instalaciones electromecánicas y COSTO DIRECTO. Una nota final indica que los precios unitarios no incluyen el Impuesto General a las Ventas (IGV). La tabla reporta para cada partida la unidad, el metrado, el precio unitario y el precio parcial.\"}",
+        "reasoning": "We need write retrieval summary in Spanish, one paragraph, max 254 words. Must state what table is about, organization, row meaning, columns labels, groups/subtotals/totals, copy exact values identifying rows and groups. Do not list other values. No mention section/table numbers/page. Document language Spanish.\n\nWe need identify headers: r0 title merged: \"PRESUPUESTO DE OBRA: AMPLIACIÓN DE LA SUBESTACIÓN DE DISTRIBUCIÓN SED-114 Y REDES ASOCIADAS\". r1 headers: Partida, Descripción, Und., Metrado, Precio (S/) with r2 subheaders Unitario, Parcial. So columns: Partida, Descripción, Und., Metrado, Precio (S/) Unitario, Precio (S/) Parcial. Rows: partidas (items) with codes, descriptions, units, quantities, unit prices, partial prices. Groups: 01 OBRAS CIVILES, 02 INSTALACIONES ELECTROMECÁNICAS; subgroups 01.01 Movimiento de tierras, 01.02 Concreto simple y armado, 02.01 Tableros y celdas de media tensión, 02.02 Cables y accesorios. Subtotals: Subtotal 01 Obras civiles, Subtotal 02 Instalaciones electromecánicas, COSTO DIRECTO. Note about IGV. Need copy exact values that identify rows/groups: codes and names. We can include all group names and codes? At most 254 words. We can list codes and names. Also row identifiers are Partida codes like 01.01.01 etc. But rule 4: copy exactly values that identify rows and groups, that is, values a question would use to point at a particular row. If they do not all fit, say what kinds there are and give as many as fit, in original order. We can include group codes/names and maybe item codes? There are many item codes (01.01.01 to 02.02.07). We can say rows are identified by Partida codes (01.01.01, 01.01.02, ...) and descriptions. But need copy exact values? We can list group codes and names, and say item rows have codes like 01.01.01 etc. But rule says copy exactly values that identify rows and groups. If not all fit, say what kinds there are and give as many as fit. We can include all group codes/names and maybe not all item codes. But item codes are row identifiers. We can mention \"Partida\" values: 01, 01.01, 01.01.01... etc. That's many. We can say \"las partidas se identifican con códigos jerárquicos (01, 01.01, 01.01.01, ..., 02.02.07)\". But that's not exact all. Maybe acceptable? We need be concise.\n\nLet's draft Spanish paragraph.\n\n\"La tabla presenta el presupuesto de obra para la ampliación de la subestación de distribución SED-114 y redes asociadas. Se organiza en filas que corresponden a partidas de obra, agrupadas en capítulos y subcapítulos, y columnas: Partida, Descripción, Und., Metrado, Precio (S/) —desdoblada en Unitario y Parcial—. Los grupos principales son 01 OBRAS CIVILES y 02 INSTALACIONES ELECTROMECÁNICAS; los subgrupos son 01.01 Movimiento de tierras, 01.02 Concreto simple y armado, 02.01 Tableros y celdas de media tensión y 02.02 Cables y accesorios. Las filas de partida se identifican con códigos como 01.01.01, 01.01.02, ..., 02.02.07 y su descripción. Incluye filas de subtotal: Subtotal 01 Obras civiles, Subtotal 02 Instalaciones electromecánicas y COSTO DIRECTO. Una nota final indica que los precios unitarios no incluyen el Impuesto General a las Ventas (IGV). La tabla reporta para cada partida la unidad, el metrado, el precio unitario y el precio parcial.\"\n\nCheck word count. Spanish words. Let's count roughly: La(1) tabla(2) presenta(3) el(4) presupuesto(5) de(6) obra(7) para(8) la(9) ampliación(10) de(11) la(12) subestación(13) de(14) distribución(15) SED-114(16) y(17) redes(18) asociadas(19). Se(20) organiza(21) en(22) filas(23) que(24) corresponden(25) a(26) partidas(27) de(28) obra(29), agrupadas(30) en(31) capítulos(32) y(33) subcapítulos(34), y(35) columnas(36): Partida(37), Descripción(38), Und.(39), Metrado(40), Precio(41) (S/)(42) —desdoblada(43) en(44) Unitario(45) y(46) Parcial(47)—. Los(48) grupos(49) principales(50) son(51) 01(52) OBRAS(53) CIVILES(54) y(55) 02(56) INSTALACIONES(57) ELECTROMECÁNICAS(58); los(59) subgrupos(60) son(61) 01.01(62) Movimiento(63) de(64) tierras(65), 01.02(66) Concreto(67) simple(68) y(69) armado(70), 02.01(71) Tableros(72) y(73) celdas(74) de(75) media(76) tensión(77) y(78) 02.02(79) Cables(80) y(81) accesorios(82). Las(83) filas(84) de(85) partida(86) se(87) identifican(88) con(89) códigos(90) como(91) 01.01.01(92), 01.01.02(93), ..., 02.02.07(94) y(95) su(96) descripción(97). Incluye(98) filas(99) de(100) subtotal(101): Subtotal(102) 01(103) Obras(104) civiles(105), Subtotal(106) 02(107) Instalaciones(108) electromecánicas(109) y(110) COSTO(111) DIRECTO(112). Una(113) nota(114) final(115) indica(116) que(117) los(118) precios(119) unitarios(120) no(121) incluyen(122) el(123) Impuesto(124) General(125) a(126) las(127) Ventas(128) (IGV)(129). La(130) tabla(131) reporta(132) para(133) cada(134) partida(135) la(136) unidad(137), el(138) metrado(139), el(140) precio(141) unitario(142) y(143) el(144) precio(145) parcial(146). ~146 words. Good.\n\nBut rule 4: copy exactly values that identify rows and groups. We included group codes/names and subtotal names. For item rows, we didn't copy all codes, but said \"códigos como 01.01.01, 01.01.02, ..., 02.02.07\". Is that acceptable? It says if they do not all fit, say what kinds there are and give as many as fit, in original order. We gave examples. Maybe we should include all item codes? There are 5+6+6+7 = 24 item codes. That would be long but maybe within 254 words? Let's see. Could list all codes: 01.01.01, 01.01.02, 01.01.03, 01.01.04, 01.01.05, 01.02.01, 01.02.02, 01.02.03, 01.02.04, 01.02.05, 01.02.06, 02.01.01, 02.01.02, 02.01.03, 02.01.04, 02.01.05, 02.01.06, 02.02.01, 02.02.02, 02.02.03, 02.02.04, 02.02.05, 02.02.06, 02.02.07. That's 24 codes. Plus group codes. That might be okay. But rule says copy exactly values that identify rows and groups. The descriptions also identify rows. But we can't list all descriptions. We can say \"cada fila de partida se identifica por su código (01.01.01 a 02.02.07) y descripción\". That's not exact all. Maybe acceptable because not all fit? But 24 codes fit. Let's include all item codes? It might be too much but within 254 words. Let's try to include all codes in a compact list. But then we also need group names. Let's draft with all codes.\n\n\"La tabla presenta el presupuesto de obra para la ampliación de la subestación de distribución SED-114 y redes asociadas. Se organiza en filas que corresponden a partidas, agrupadas en capítulos y subcapítulos, y columnas: Partida, Descripción, Und., Metrado, Precio (S/) —desdoblada en Unitario y Parcial—. Los grupos principales son 01 OBRAS CIVILES y 02 INSTALACIONES ELECTROMECÁNICAS; los subgrupos son 01.01 Movimiento de tierras, 01.02 Concreto simple y armado, 02.01 Tableros y celdas de media tensión y 02.02 Cables y accesorios. Las partidas se identifican con los códigos 01.01.01, 01.01.02, 01.01.03, 01.01.04, 01.01.05, 01.02.01, 01.02.02, 01.02.03, 01.02.04, 01.02.05, 01.02.06, 02.01.01, 02.01.02, 02.01.03, 02.01.04, 02.01.05, 02.01.06, 02.02.01, 02.02.02, 02.02.03, 02.02.04, 02.02.05, 02.02.06 y 02.02.07, además de su descripción. Incluye filas de subtotal: Subtotal 01 Obras civiles, Subtotal 02 Instalaciones electromecánicas y COSTO DIRECTO. Una nota final indica que los precios unitarios no incluyen el Impuesto General a las Ventas (IGV). La tabla reporta para cada partida la unidad, el metrado, el precio unitario y el precio parcial.\"\n\nCount words: Let's count. La1 tabla2 presenta3 el4 presupuesto5 de6 obra7 para8 la9 ampliación10 de11 la12 subestación13 de14 distribución15 SED-11416 y17 redes18 asociadas19. Se20 organiza21 en22 filas23 que24 corresponden25 a26 partidas27, agrupadas28 en29 capítulos30 y31 subcapítulos32, y33 columnas34: Partida35, Descripción36, Und.37, Metrado38, Precio39 (S/)40 —desdoblada41 en42 Unitario43 y44 Parcial45—. Los46 grupos47 principales48 son49 01 50 OBRAS51 CIVILES52 y53 02 54 INSTALACIONES55 ELECTROMECÁNICAS56; los57 subgrupos58 son59 01.01 60 Movimiento61 de62 tierras63, 01.02 64 Concreto65 simple66 y67 armado68, 02.01 69 Tableros70 y71 celdas72 de73 media74 tensión75 y76 02.02 77 Cables78 y79 accesorios80. Las81 partidas82 se83 identifican84 con85 los86 códigos87 01.01.01, 88 01.01.02, 89 01.01.03, 90 01.01.04, 91 01.01.05, 92 01.02.01, 93 01.02.02, 94 01.02.03, 95 01.02.04, 96 01.02.05, 97 01.02.06, 98 02.01.01, 99 02.01.02, 100 02.01.03, 101 02.01.04, 102 02.01.05, 103 02.01.06, 104 02.02.01, 105 02.02.02, 106 02.02.03, 107 02.02.04, 108 02.02.05, 109 02.02.06 110 y111 02.02.07, 112 además113 de114 su115 descripción116. Incluye117 filas118 de119 subtotal120: Subtotal121 01 122 Obras123 civiles124, Subtotal125 02 126 Instalaciones127 electromecánicas128 y129 COSTO130 DIRECTO131. Una132 nota133 final134 indica135 que136 los137 precios138 unitarios139 no140 incluyen141 el142 Impuesto143 General144 a145 las146 Ventas147 (IGV)148. La149 tabla150 reporta151 para152 cada153 partida154 la155 unidad156, el157 metrado158, el159 precio160 unitario161 y162 el163 precio164 parcial165. 165 words. Good.\n\nBut rule 5: Do not list the other values the rows report; say only which kinds of values the table gives. We said \"La tabla reporta para cada partida la unidad, el metrado, el precio unitario y el precio parcial.\" That's kinds of values, okay. We didn't list actual values except subtotal amounts? We didn't list amounts. Good.\n\nRule 2: Do not mention where table is in document (section, clause, article or table numbers, page numbers). We didn't.\n\nRule 6: Do not state anything table/context doesn't support. We said \"presupuesto de obra para la ampliación...\" from title. Good. \"SED-114\" from title. \"redes asociadas\" from title. \"precios unitarios no incluyen IGV\" from note. Good.\n\nPotential issue: We said \"Los grupos principales son 01 OBRAS CIVILES y 02 INSTALACIONES ELECTROMECÁNICAS; los subgrupos son...\" That's supported. \"Las partidas se identifican con los códigos ... además de su descripción.\" Supported. \"Incluye filas de subtotal: Subtotal 01 Obras civiles, Subtotal 02 Instalaciones electromecánicas y COSTO DIRECTO.\" Supported. \"Una nota final indica...\" Supported.\n\nWe should ensure no mention of \"tabla\" maybe okay. It's a summary. Fine.\n\nCould we improve by saying \"La tabla presenta el presupuesto de obra...\" That's fine.\n\nOne nuance: The table has a row r20 \"(incluye suministro, transporte, montaje, pruebas y puesta en servicio)\" under 02.01. That's a note/description, not a row identifier. We don't need mention.\n\nAlso r37 note. We mentioned.\n\nWe should not mention \"desdoblada\" maybe okay.\n\nFinal answer in Spanish, one paragraph. Ensure no line breaks? It can be one paragraph. We'll output.\n\nCheck word count again maybe 165. Good.\n\nLet's final.",
+        "issues": [],
+        "prompt_tokens": 2227,
+        "completion_tokens": 4090,
+        "reasoning_tokens": 2707,
+        "cost_usd": 0.0008544,
+        "cached": false
+      }
+    ],
+    "summary": "La tabla presenta el presupuesto de obra para la ampliación de la subestación de distribución SED-114 y redes asociadas. Se organiza en filas que corresponden a partidas, agrupadas en capítulos y subcapítulos, y columnas: Partida, Descripción, Und., Metrado, Precio (S/) —desdoblada en Unitario y Parcial—. Los grupos principales son 01 OBRAS CIVILES y 02 INSTALACIONES ELECTROMECÁNICAS; los subgrupos son 01.01 Movimiento de tierras, 01.02 Concreto simple y armado, 02.01 Tableros y celdas de media tensión y 02.02 Cables y accesorios. Las partidas se identifican con los códigos 01.01.01, 01.01.02, 01.01.03, 01.01.04, 01.01.05, 01.02.01, 01.02.02, 01.02.03, 01.02.04, 01.02.05, 01.02.06, 02.01.01, 02.01.02, 02.01.03, 02.01.04, 02.01.05, 02.01.06, 02.02.01, 02.02.02, 02.02.03, 02.02.04, 02.02.05, 02.02.06 y 02.02.07, además de su descripción. Incluye filas de subtotal: Subtotal 01 Obras civiles, Subtotal 02 Instalaciones electromecánicas y COSTO DIRECTO. Una nota final indica que los precios unitarios no incluyen el Impuesto General a las Ventas (IGV). La tabla reporta para cada partida la unidad, el metrado, el precio unitario y el precio parcial."
+  },
+  "summary_tokens": 343
+}

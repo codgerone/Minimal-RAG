@@ -1,0 +1,171 @@
+{
+  "annotation": {
+    "model": "deepseek/deepseek-v4.1-flash",
+    "attempts": [
+      {
+        "raw": "{\"header_rows\": [0], \"sections\": [{\"title_rows\": [1], \"last_row\": 6}, {\"title_rows\": [7], \"last_row\": 12}], \"implicit_merges\": [{\"column\": 0, \"first_row\": 3, \"last_row\": 5}, {\"column\": 1, \"first_row\": 3, \"last_row\": 5}, {\"column\": 2, \"first_row\": 3, \"last_row\": 5}, {\"column\": 3, \"first_row\": 3, \"last_row\": 5}, {\"column\": 6, \"first_row\": 3, \"last_row\": 5}, {\"column\": 0, \"first_row\": 8, \"last_row\": 10}, {\"column\": 1, \"first_row\": 8, \"last_row\": 10}, {\"column\": 2, \"first_row\": 8, \"last_row\": 10}, {\"column\": 3, \"first_row\": 8, \"last_row\": 10}, {\"column\": 6, \"first_row\": 8, \"last_row\": 10}], \"lead\": \"本表列出合同各期付款节点，每行对应一期付款的比例、金额、交货内容、数量与计划日期。\"}",
+        "reasoning": "Let me analyze the table.\n\nColumns: c0 期次, c1 付款节点, c2 付款比例, c3 金额（元）, c4 对应交货内容, c5 数量, c6 计划日期.\n\nHeader row: r0.\n\nSections: r1 is a title row \"第一批：单相智能电能表及表箱\" spanning full width. It covers rows r1..r6 (until next section title r7). r7 is \"第二批：三相智能电能表及互感器\" covering r7..r12? Or r7..r13? r13 is 合计 total row, which is not part of section 2. Hmm. The total row r13 summarizes all. Section 2's last_row: r12.\n\nActually, does the first section include r13? No, r13 is a total row, not a section title, and it's a data row. Sections: title r1, last_row r6; title r7, last_row r12.\n\nImplicit merges: \n- c0: r3 has \"2\", r4, r5 empty repeating \"2\"? Actually r3 is 期次 2, and r4, r5 are empty — they belong to the same payment node 2 (到货验收合格后) with multiple delivery items. So c0 merge r3-r5. Also c1, c2, c3, c6 merge r3-r5.\n- r8-r10: c0 \"4\", c1, c2, c3, c6 merged r8-r10.\n- r2: c5 empty — no value (预付款 no delivery). Not a merge.\n- r6: c5 empty — no value.\n- r12: c5 empty — no value.\n- r13: c1, c4, c5, c6 empty — total row, no value.\n\nSo implicit merges:\n- c0: first_row 3, last_row 5\n- c1: 3-5\n- c2: 3-5\n- c3: 3-5\n- c6: 3-5\n- c0: 8-10\n- c1: 8-10\n- c2: 8-10\n- c3: 8-10\n- c6: 8-10\n\nAlso r1 title row spans all columns — that's a merged cell written in c0 with ← for others. Not an implicit merge (it's a title row).\n\nr13 合计 with ← for c1 — merged cell, not implicit merge.\n\nLead: 表格列出合同付款期次，每行对应一个付款节点及其比例、金额、交货内容、数量和计划日期。\n\nLet me count characters: \"本表列出合同各期付款节点，每行对应一期付款的比例、金额、交货内容、数量与计划日期。\" That's about 40 chars. Good.\n\nLet me write: \"本表列出合同付款期次，每行对应一个付款节点及其付款比例、金额、交货内容、数量和计划日期。\" ~44 chars. Fine.\n\nHeader rows: [0].\n\nSections: [{title_rows:[1], last_row:6}, {title_rows:[7], last_row:12}].\n\nShould the total row r13 be included in section 2? It's a total row, not a section title. Sections' last_row for section 2 = 12. r13 remains a data row.\n\nHmm, but maybe the whole table has a title above header? No, r0 is header.\n\nLead in Chinese, ≤48 chars.",
+        "issues": [
+          "implicit_merges[4]: in column 6, rows [4, 5] are not empty cells of their own (they hold text or belong to a merged cell)",
+          "implicit_merges[9]: in column 6, rows [9, 10] are not empty cells of their own (they hold text or belong to a merged cell)"
+        ],
+        "prompt_tokens": 1704,
+        "completion_tokens": 1046,
+        "reasoning_tokens": 656,
+        "cost_usd": 0.00034164,
+        "cached": false
+      },
+      {
+        "raw": "{\"header_rows\": [0], \"sections\": [{\"title_rows\": [1], \"last_row\": 6}, {\"title_rows\": [7], \"last_row\": 12}], \"implicit_merges\": [{\"column\": 0, \"first_row\": 3, \"last_row\": 5}, {\"column\": 1, \"first_row\": 3, \"last_row\": 5}, {\"column\": 2, \"first_row\": 3, \"last_row\": 5}, {\"column\": 3, \"first_row\": 3, \"last_row\": 5}, {\"column\": 0, \"first_row\": 8, \"last_row\": 10}, {\"column\": 1, \"first_row\": 8, \"last_row\": 10}, {\"column\": 2, \"first_row\": 8, \"last_row\": 10}, {\"column\": 3, \"first_row\": 8, \"last_row\": 10}], \"lead\": \"本表列出合同各期付款节点，每行对应一期付款的比例、金额、交货内容、数量与计划日期。\"}",
+        "reasoning": "The issue: r4, r5 in c6 are empty in the grid? Let me check: r4: |  |  |  |  | 单相表箱（透明聚碳酸酯） | 60,000 个 | 2027年3月31日 | — c6 has text \"2027年3月31日\". So c6 is not empty. Right, I mistakenly included c6. Remove those merges.\n\nAlso check c0-c3 for r3-r5: r4 and r5 have empty c0-c3, yes. c6 has text. So remove column 6 merges.\n\nAlso r2 c6 has date, fine.\n\nSo corrected implicit_merges: columns 0,1,2,3 for rows 3-5 and 8-10.",
+        "issues": [],
+        "prompt_tokens": 2083,
+        "completion_tokens": 415,
+        "reasoning_tokens": 122,
+        "cost_usd": 0.00026217,
+        "cached": false
+      }
+    ],
+    "annotation": {
+      "header_rows": [
+        0
+      ],
+      "sections": [
+        {
+          "title_rows": [
+            1
+          ],
+          "last_row": 6
+        },
+        {
+          "title_rows": [
+            7
+          ],
+          "last_row": 12
+        }
+      ],
+      "implicit_merges": [
+        {
+          "column": 0,
+          "first_row": 3,
+          "last_row": 5
+        },
+        {
+          "column": 1,
+          "first_row": 3,
+          "last_row": 5
+        },
+        {
+          "column": 2,
+          "first_row": 3,
+          "last_row": 5
+        },
+        {
+          "column": 3,
+          "first_row": 3,
+          "last_row": 5
+        },
+        {
+          "column": 0,
+          "first_row": 8,
+          "last_row": 10
+        },
+        {
+          "column": 1,
+          "first_row": 8,
+          "last_row": 10
+        },
+        {
+          "column": 2,
+          "first_row": 8,
+          "last_row": 10
+        },
+        {
+          "column": 3,
+          "first_row": 8,
+          "last_row": 10
+        }
+      ]
+    },
+    "lead": "本表列出合同各期付款节点，每行对应一期付款的比例、金额、交货内容、数量与计划日期。"
+  },
+  "fallback": {
+    "annotation": false,
+    "lead": false
+  },
+  "markdown": [
+    {
+      "text": "| 期次 | 付款节点 | 付款比例 | 金额（元） | 对应交货内容 | 数量 | 计划日期 |\n| 第一批：单相智能电能表及表箱 | ← | ← | ← | ← | ← | ← |\n| 1 | 合同生效后预付款 | 10% | 1,286,400.00 | — |  | 2027年1月15日 |\n| 2 | 到货验收合格后 | 40% | 5,145,600.00 | 单相智能电能表 2 级 | 60,000 只 | 2027年3月31日 |\n| ↑ | ↑ | ↑ | ↑ | 单相表箱（透明聚碳酸酯） | 60,000 个 | 2027年3月31日 |\n| ↑ | ↑ | ↑ | ↑ | 封印及安装附件 | 60,000 套 | 2027年3月31日 |\n| 3 | 安装调试完成并经买方签认后 | 20% | 2,572,800.00 | 现场安装指导 |  | 2027年5月31日 |",
+      "tokens": 291,
+      "repeated": 1,
+      "lines": 6
+    },
+    {
+      "text": "| 期次 | 付款节点 | 付款比例 | 金额（元） | 对应交货内容 | 数量 | 计划日期 |\n| 第二批：三相智能电能表及互感器 | ← | ← | ← | ← | ← | ← |\n| 4 | 到货验收合格后 | 15% | 1,929,600.00 | 三相四线智能电能表 0.5S 级 | 3,000 只 | 2027年6月30日 |\n| ↑ | ↑ | ↑ | ↑ | 低压电流互感器 200/5A | 9,000 只 | 2027年6月30日 |\n| ↑ | ↑ | ↑ | ↑ | 联合接线盒 | 3,000 个 | 2027年6月30日 |\n| 5 | 系统联调完成后 | 10% | 1,286,400.00 | 采集终端及主站软件接入 | 150 套 | 2027年8月31日 |\n| 6 | 质保期满且无质量问题后 | 5% | 643,200.00 | 质量保证金 |  | 2029年8月31日 |\n| 合计 | ← | 100% | 12,864,000.00 |  |  |  |",
+      "tokens": 327,
+      "repeated": 1,
+      "lines": 7
+    }
+  ],
+  "markdown_lead": [
+    {
+      "text": "本表列出合同各期付款节点，每行对应一期付款的比例、金额、交货内容、数量与计划日期。\n| 期次 | 付款节点 | 付款比例 | 金额（元） | 对应交货内容 | 数量 | 计划日期 |\n| 第一批：单相智能电能表及表箱 | ← | ← | ← | ← | ← | ← |\n| 1 | 合同生效后预付款 | 10% | 1,286,400.00 | — |  | 2027年1月15日 |\n| 2 | 到货验收合格后 | 40% | 5,145,600.00 | 单相智能电能表 2 级 | 60,000 只 | 2027年3月31日 |\n| ↑ | ↑ | ↑ | ↑ | 单相表箱（透明聚碳酸酯） | 60,000 个 | 2027年3月31日 |\n| ↑ | ↑ | ↑ | ↑ | 封印及安装附件 | 60,000 套 | 2027年3月31日 |\n| 3 | 安装调试完成并经买方签认后 | 20% | 2,572,800.00 | 现场安装指导 |  | 2027年5月31日 |",
+      "tokens": 320,
+      "repeated": 1,
+      "lines": 6
+    },
+    {
+      "text": "本表列出合同各期付款节点，每行对应一期付款的比例、金额、交货内容、数量与计划日期。\n| 期次 | 付款节点 | 付款比例 | 金额（元） | 对应交货内容 | 数量 | 计划日期 |\n| 第二批：三相智能电能表及互感器 | ← | ← | ← | ← | ← | ← |\n| 4 | 到货验收合格后 | 15% | 1,929,600.00 | 三相四线智能电能表 0.5S 级 | 3,000 只 | 2027年6月30日 |\n| ↑ | ↑ | ↑ | ↑ | 低压电流互感器 200/5A | 9,000 只 | 2027年6月30日 |\n| ↑ | ↑ | ↑ | ↑ | 联合接线盒 | 3,000 个 | 2027年6月30日 |\n| 5 | 系统联调完成后 | 10% | 1,286,400.00 | 采集终端及主站软件接入 | 150 套 | 2027年8月31日 |\n| 6 | 质保期满且无质量问题后 | 5% | 643,200.00 | 质量保证金 |  | 2029年8月31日 |\n| 合计 | ← | 100% | 12,864,000.00 |  |  |  |",
+      "tokens": 356,
+      "repeated": 1,
+      "lines": 7
+    }
+  ],
+  "markdown_checks": [],
+  "labeled": [
+    {
+      "text": "| 第一批：单相智能电能表及表箱 | ← | ← | ← | ← | ← | ← |\n| 期次: 1 | 付款节点: 合同生效后预付款 | 付款比例: 10% | 金额（元）: 1,286,400.00 | 对应交货内容: — |  | 计划日期: 2027年1月15日 |\n| 期次: 2 | 付款节点: 到货验收合格后 | 付款比例: 40% | 金额（元）: 5,145,600.00 | 对应交货内容: 单相智能电能表 2 级 | 数量: 60,000 只 | 计划日期: 2027年3月31日 |\n| ↑ | ↑ | ↑ | ↑ | 对应交货内容: 单相表箱（透明聚碳酸酯） | 数量: 60,000 个 | 计划日期: 2027年3月31日 |\n| ↑ | ↑ | ↑ | ↑ | 对应交货内容: 封印及安装附件 | 数量: 60,000 套 | 计划日期: 2027年3月31日 |\n| 期次: 3 | 付款节点: 安装调试完成并经买方签认后 | 付款比例: 20% | 金额（元）: 2,572,800.00 | 对应交货内容: 现场安装指导 |  | 计划日期: 2027年5月31日 |",
+      "tokens": 367,
+      "repeated": 0,
+      "lines": 6
+    },
+    {
+      "text": "| 第二批：三相智能电能表及互感器 | ← | ← | ← | ← | ← | ← |\n| 期次: 4 | 付款节点: 到货验收合格后 | 付款比例: 15% | 金额（元）: 1,929,600.00 | 对应交货内容: 三相四线智能电能表 0.5S 级 | 数量: 3,000 只 | 计划日期: 2027年6月30日 |\n| ↑ | ↑ | ↑ | ↑ | 对应交货内容: 低压电流互感器 200/5A | 数量: 9,000 只 | 计划日期: 2027年6月30日 |\n| ↑ | ↑ | ↑ | ↑ | 对应交货内容: 联合接线盒 | 数量: 3,000 个 | 计划日期: 2027年6月30日 |\n| 期次: 5 | 付款节点: 系统联调完成后 | 付款比例: 10% | 金额（元）: 1,286,400.00 | 对应交货内容: 采集终端及主站软件接入 | 数量: 150 套 | 计划日期: 2027年8月31日 |\n| 期次: 6 | 付款节点: 质保期满且无质量问题后 | 付款比例: 5% | 金额（元）: 643,200.00 | 对应交货内容: 质量保证金 |  | 计划日期: 2029年8月31日 |\n| 合计 | ← | 付款比例: 100% | 金额（元）: 12,864,000.00 |  |  |  |",
+      "tokens": 415,
+      "repeated": 0,
+      "lines": 7
+    }
+  ],
+  "labeled_lead": [
+    {
+      "text": "本表列出合同各期付款节点，每行对应一期付款的比例、金额、交货内容、数量与计划日期。\n| 第一批：单相智能电能表及表箱 | ← | ← | ← | ← | ← | ← |\n| 期次: 1 | 付款节点: 合同生效后预付款 | 付款比例: 10% | 金额（元）: 1,286,400.00 | 对应交货内容: — |  | 计划日期: 2027年1月15日 |\n| 期次: 2 | 付款节点: 到货验收合格后 | 付款比例: 40% | 金额（元）: 5,145,600.00 | 对应交货内容: 单相智能电能表 2 级 | 数量: 60,000 只 | 计划日期: 2027年3月31日 |\n| ↑ | ↑ | ↑ | ↑ | 对应交货内容: 单相表箱（透明聚碳酸酯） | 数量: 60,000 个 | 计划日期: 2027年3月31日 |\n| ↑ | ↑ | ↑ | ↑ | 对应交货内容: 封印及安装附件 | 数量: 60,000 套 | 计划日期: 2027年3月31日 |\n| 期次: 3 | 付款节点: 安装调试完成并经买方签认后 | 付款比例: 20% | 金额（元）: 2,572,800.00 | 对应交货内容: 现场安装指导 |  | 计划日期: 2027年5月31日 |",
+      "tokens": 396,
+      "repeated": 0,
+      "lines": 6
+    },
+    {
+      "text": "本表列出合同各期付款节点，每行对应一期付款的比例、金额、交货内容、数量与计划日期。\n| 第二批：三相智能电能表及互感器 | ← | ← | ← | ← | ← | ← |\n| 期次: 4 | 付款节点: 到货验收合格后 | 付款比例: 15% | 金额（元）: 1,929,600.00 | 对应交货内容: 三相四线智能电能表 0.5S 级 | 数量: 3,000 只 | 计划日期: 2027年6月30日 |\n| ↑ | ↑ | ↑ | ↑ | 对应交货内容: 低压电流互感器 200/5A | 数量: 9,000 只 | 计划日期: 2027年6月30日 |\n| ↑ | ↑ | ↑ | ↑ | 对应交货内容: 联合接线盒 | 数量: 3,000 个 | 计划日期: 2027年6月30日 |\n| 期次: 5 | 付款节点: 系统联调完成后 | 付款比例: 10% | 金额（元）: 1,286,400.00 | 对应交货内容: 采集终端及主站软件接入 | 数量: 150 套 | 计划日期: 2027年8月31日 |\n| 期次: 6 | 付款节点: 质保期满且无质量问题后 | 付款比例: 5% | 金额（元）: 643,200.00 | 对应交货内容: 质量保证金 |  | 计划日期: 2029年8月31日 |\n| 合计 | ← | 付款比例: 100% | 金额（元）: 12,864,000.00 |  |  |  |",
+      "tokens": 444,
+      "repeated": 0,
+      "lines": 7
+    }
+  ],
+  "labeled_checks": [],
+  "summary": {
+    "model": "deepseek/deepseek-v4.1-flash",
+    "attempts": [
+      {
+        "raw": "{\"summary\":\"本表为合同价款付款与交货计划，按两批货物分组：第一批：单相智能电能表及表箱；第二批：三相智能电能表及互感器。每行对应一个付款期次，列包括期次、付款节点、付款比例、金额（元）、对应交货内容、数量、计划日期。期次为1至6，付款节点包括合同生效后预付款、到货验收合格后、安装调试完成并经买方签认后、系统联调完成后、质保期满且无质量问题后；另有合计行汇总付款比例与金额。部分期次下按交货内容分列多行。\"}",
+        "reasoning": "We need answer JSON only. Need write Chinese summary <=508 chars. Need describe table about payment and delivery schedule. Organize rows: grouped by batches, each row payment installment with columns 期次,付款节点,付款比例,金额（元）,对应交货内容,数量,计划日期. Groups: 第一批：单相智能电能表及表箱; 第二批：三相智能电能表及互感器; 合计 row. Need copy exact row/group identifiers: 期次 values 1-6, 合计; group names. Maybe mention payment nodes? Rule 4 copy exactly values identify rows and groups. Row identifiers are 期次 1,2,3,4,5,6 and 合计; groups names. Could include payment nodes? They identify rows too? The question might use \"到货验收合格后\" etc. But rule says values that identify rows and groups, values a question would use to point at particular row. Include 期次 and group names, maybe payment nodes as row labels. Need not list other values. But summary should be useful. We can say 表按两批货物分组，每行对应一个付款期次，列有期次、付款节点、付款比例、金额（元）、对应交货内容、数量、计划日期；第一批...第二批...；期次为1至6，另有合计行。付款节点包括合同生效后预付款、到货验收合格后、安装调试完成并经买方签认后、系统联调完成后、质保期满且无质量问题后。 This lists payment nodes, which are row identifiers. Is that too much? Fine. Need mention subtotals? There is 合计 row with 100% and total amount. We can say 合计行汇总付款比例和金额. Do not list other values. Need not mention amounts. But maybe \"金额\" kind. Good.\n\nNeed ensure no mention table number. Chinese chars count maybe ~250. JSON.",
+        "issues": [],
+        "prompt_tokens": 1217,
+        "completion_tokens": 544,
+        "reasoning_tokens": 404,
+        "cost_usd": 0.000383599,
+        "cached": false
+      }
+    ],
+    "summary": "本表为合同价款付款与交货计划，按两批货物分组：第一批：单相智能电能表及表箱；第二批：三相智能电能表及互感器。每行对应一个付款期次，列包括期次、付款节点、付款比例、金额（元）、对应交货内容、数量、计划日期。期次为1至6，付款节点包括合同生效后预付款、到货验收合格后、安装调试完成并经买方签认后、系统联调完成后、质保期满且无质量问题后；另有合计行汇总付款比例与金额。部分期次下按交货内容分列多行。"
+  },
+  "summary_tokens": 162
+}

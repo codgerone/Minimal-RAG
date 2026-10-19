@@ -32,11 +32,11 @@ class LLM(Protocol):
 class OpenRouterLLM:
     base_url = "https://openrouter.ai/api/v1"
 
-    def __init__(self, model: str = "google/gemini-2.5-flash-lite", temperature: float = 0,
+    def __init__(self, model: str = "google/gemini-2.5-flash-lite", temperature: float | None = 0,
                  timeout: float = 600, env_override: bool = True):
         # OPENROUTER_MODEL overrides the answering model only; ingest-time callers pass False.
         self.model = (os.environ.get("OPENROUTER_MODEL") if env_override else None) or model
-        self.temperature = temperature
+        self.temperature = temperature  # None: not sent (some reasoning models accept none)
         self.timeout = timeout
         self.api_key: str | None = None
 
@@ -64,8 +64,9 @@ class OpenRouterLLM:
         from openai import APITimeoutError, OpenAI
         try:
             client = OpenAI(api_key=key, base_url=self.base_url, max_retries=0, timeout=self.timeout)
+            if self.temperature is not None:
+                options = {**options, "temperature": self.temperature}
             response = client.chat.completions.create(model=self.model, messages=messages,
-                                                      temperature=self.temperature,
                                                       extra_body=extra_body, **options)
         except Exception as exc:
             status = getattr(exc, "status_code", None)

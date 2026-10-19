@@ -1,0 +1,169 @@
+{
+  "annotation": {
+    "model": "deepseek/deepseek-v4.1-flash",
+    "attempts": [
+      {
+        "raw": "{\n  \"sections\": [],\n  \"lead\": \"Delivery and inspection schedule listing, per lot and destination warehouse, each item with its description, quantity, delivery date, inspection witness and remarks.\"\n  ,\n  \"implicit_merges\": [\n    {\"last_row\": 5, \"first_row\": 1, \"column\": 0},\n    {\"last_row\": 11, \"first_row\": 6, \"column\": 0},\n    {\"last_row\": 15, \"first_row\": 12, \"column\": 0},\n    {\"last_row\": 3, \"first_row\": 1, \"column\": 1},\n    {\"last_row\": 5, \"first_row\": 4, \"column\": 1},\n    {\"last_row\": 9, \"first_row\": 6, \"column\": 1},\n    {\"last_row\": 11, \"first_row\": 10, \"column\": 1},\n    {\"last_row\": 15, \"first_row\": 12, \"column\": 1},\n    {\"last_row\": 2, \"first_row\": 1, \"column\": 6}\n  ],\n  \"header_rows\": [0]\n}",
+        "reasoning": "Let me analyze the table.\n\nHeader row: r0 with columns Lot, Destination warehouse, Item, Description, Qty, Delivery date, Inspection witness, Remarks.\n\nSections: The table has \"Lot 1\", \"Lot 2\", \"Lot 3\" in c0. Are these section titles? They are in a column, not full-width rows. Hmm. The instruction says a section is a group of rows introduced by a title. The title takes one row or several consecutive rows. Here \"Lot 1\" is in c0 of r1, and rows r1-r5 belong to Lot 1. But r1 also contains data (item 1.1). So the title is not a separate row. Hmm.\n\nThe instruction: \"a section is a group of rows introduced by a title. The title takes one row or several consecutive rows.\" If the title is not its own row, we can't mark it. But we could still consider... Actually the guidance says title rows are rows. Here \"Lot 1\" appears in the same row as data. Marking r1 as a title row would remove data. Hmm.\n\nBut the implicit_merges: c0 has empty cells repeating \"Lot 1\" for r2-r5, \"Lot 2\" for r7-r11, \"Lot 3\" for r13-r15. That's the implicit merge mechanism. So c0 values are merged cells.\n\nShould we treat Lot as sections? The instruction says sections are introduced by a title taking one row or several consecutive rows. Since the Lot label is embedded in a data row, it's not a title row. I think we should not create sections here; instead use implicit_merges for c0.\n\nHmm, but the section concept: \"A title above the header rows that applies to the whole table is a section that runs to the last row.\" There's no title above header rows here.\n\nLet me consider: is \"Lot 1\" a section title? It's a grouping label. But it's in a column, and the row also has data. The rules say \"Every row not named in header_rows or in any title_rows is a data row and is kept as it is.\" If we mark r1 as title row, we'd lose the data of item 1.1. That's bad. So no sections.\n\nActually, wait — could we consider the Lot column as a section title spanning? The spec says title takes one row or several consecutive rows — meaning the title occupies whole rows. Here it doesn't. So no sections.\n\nSo sections: empty list.\n\nImplicit merges:\n- c0: r1 \"Lot 1\" repeats r2-r5 (empty in r2,r3,r4,r5). So c0, first_row 1, last_row 5.\n- c0: r6 \"Lot 2\" repeats r7-r11. first_row 6, last_row 11.\n- c0: r12 \"Lot 3\" repeats r13-r15. first_row 12, last_row 15.\n- c1: r1 \"Callao Central Warehouse...\" repeats r2, r3 (empty in r2, r3). r4 has Arequipa. So c1, first_row 1, last_row 3.\n- c1: r4 \"Arequipa Regional Warehouse...\" repeats r5. first_row 4, last_row 5.\n- c1: r6 \"Callao...\" repeats r7, r8, r9. first_row 6, last_row 9.\n- c1: r10 \"Trujillo...\" repeats r11. first_row 10, last_row 11.\n- c1: r12 \"Callao...\" repeats r13, r14, r15. first_row 12, last_row 15.\n- c5 (Delivery date): r12 \"10/08/2027\" with r13, r14 having \"↑\" — those are merged cells, not empty. So not implicit merges. The instruction says mark only cells that are empty in the grid, not cells written \"↑\". So skip.\n- c6 (Inspection witness): r1 \"Client QA\" repeats r2 (empty). r3 empty — is that a repeat? r3 has no inspection witness (meter box, no witness). Hmm. r3's c6 is empty. Is it empty because no value, or repeating? Looking at r4 \"Client QA\" again, r5 empty. Hmm.\n\nLet's think: r1 Client QA, r2 Client QA (empty), r3 empty (meter box — no witness needed?). r4 Client QA, r5 empty (meter box). r6 Third-party inspector, r7 empty (cancelled), r8 Third-party inspector, r9 empty (test terminal block), r10 Third-party inspector, r11 Third-party inspector, r12 Client QA, r13 empty, r14 empty, r15 empty.\n\nHmm, this is ambiguous. The pattern: meters get witness, boxes/accessories don't. So r3, r5, r9, r13, r14, r15 empty because no value. r2 repeats r1's Client QA. r7? cancelled row, empty. r8 has its own value. r11 has its own value.\n\nSo implicit merge c6: r1-r2 (Client QA). And r4-r5? r5 is meter box, no witness. Hmm, but r4 is Client QA and r5 empty. Is r5 repeating? By meaning, meter box has no inspection witness, so it's empty because no value. But we can't be sure. Hmm.\n\nActually, let's look at the pattern more carefully. In r1-r3: r1 meter (Client QA), r2 meter (Client QA), r3 box (empty). So the box has no witness. Similarly r4 meter (Client QA), r5 box (empty). So r5 empty = no value.\n\nr6 meter (Third-party), r7 cancelled (empty), r8 CT (Third-party), r9 TTB (empty). Hmm, r8 has its own value so no merge. r9 empty = no value.\n\nr10 meter (Third-party), r11 CT (Third-party) — both written.\n\nr12 concentrator (Client QA), r13 software licence (empty), r14 kit (empty), r15 training (empty). These are empty because no witness.\n\nSo only implicit merge in c6: r1-r2.\n\nHmm, but is that right? The safest: mark c6 r1-r2. Actually, could r1-r2 be considered? r2 is empty and repeats Client QA. Yes.\n\nWhat about c5 (Delivery date)? r1 15/03/2027, r2 15/03/2027, r3 15/03/2027 — all written. r4 30/03/2027, r5 30/03/2027 written. r6 20/05/2027, r7 empty (cancelled), r8 20/05/2027, r9 20/05/2027. r10 05/06/2027, r11 05/06/2027. r12 10/08/2027, r13 ↑, r14 ↑, r15 18/08/2027. So no empty repeats in c5 except r7 which is cancelled (no value).\n\nc7 Remarks: r12 has \"Includes 2 years of firmware updates\", r15 \"At the client's premises\". Others empty — no value.\n\nc2 Item: all written.\n\nSo implicit merges: c0 (3), c1 (4), c6 (1).\n\nHmm, should I include c6 r1-r2? Let me reconsider. The rule: \"empty cells that, by meaning, repeat the value above them in the same column\". r2's c6 is empty and by meaning repeats Client QA (both are meters from same lot, same delivery, same witness). Yes, include.\n\nWhat about r4-r5? r5 is a meter box; the box in r3 had no witness. So r5 empty = no value. Exclude.\n\nHmm, but one could argue r5 repeats r4. Risky. I'll exclude based on the r3 pattern.\n\nActually wait, let me reconsider r3. r3 is \"Meter box in polycarbonate with sealing screws\" — no witness. So the pattern is consistent: boxes have no witness. So r5 empty = no value. Good.\n\nNow, sections. Should I create sections for Lot 1/2/3? The problem: title rows must be rows. Since the Lot label is in a data row, we can't. But maybe the intended answer is that there are no sections. Hmm, but the task says \"Decide by meaning, not by layout\". The Lot groups are clearly sections by meaning. But the mechanism requires title rows.\n\nHmm, let me re-read: \"sections: a section is a group of rows introduced by a title. The title takes one row or several consecutive rows. Give the title rows as title_rows and the last row of the group as last_row.\"\n\nIf the title is embedded in a data row, we can't give it as title_rows without losing data. I think the correct answer is no sections, and the Lot grouping is captured by implicit merges in c0.\n\nHmm, but actually, maybe the intended design: the \"Lot\" column acts as a section label, and the implicit merge handles the repetition. I'll go with no sections.\n\nWait, but consider: is there a possibility that the header row r0 is the only header? Yes.\n\nLead: \"Delivery and inspection schedule listing, per lot and destination warehouse, each item with its description, quantity, delivery date, inspection witness and remarks.\" That's about 24 words. Let me count: Delivery(1) and(2) inspection(3) schedule(4) listing(5) per(6) lot(7) and(8) destination(9) warehouse(10) each(11) item(12) with(13) its(14) description(15) quantity(16) delivery(17) date(18) inspection(19) witness(20) and(21) remarks(22). 22 words. Good.\n\nLet me finalize.\n\nActually, let me double check c1 merges. r1: \"Callao Central Warehouse, Av. Argentina 2850\". r2, r3 empty. r4: \"Arequipa Regional Warehouse, Parque Industrial Mz. F\". r5 empty. r6: \"Callao Central Warehouse, Av. Argentina 2850\". r7, r8, r9 empty. r10: \"Trujillo Regional Warehouse, Av. Nicolás de Piérola 1210\". r11 empty. r12: \"Callao Central Warehouse, Av. Argentina 2850\". r13, r14, r15 empty.\n\nYes.\n\nc0: r1 Lot 1, r2-r5 empty; r6 Lot 2, r7-r11 empty; r12 Lot 3, r13-r15 empty.\n\nGood.\n\nFinal answer.",
+        "issues": [
+          "implicit_merges[8]: in column 6, rows [2] are not empty cells of their own (they hold text or belong to a merged cell)"
+        ],
+        "prompt_tokens": 1638,
+        "completion_tokens": 2628,
+        "reasoning_tokens": 2375,
+        "cost_usd": 0.002047734,
+        "cached": false
+      },
+      {
+        "raw": "{\n  \"sections\": [],\n  \"lead\": \"Delivery and inspection schedule listing, per lot and destination warehouse, each item with its description, quantity, delivery date, inspection witness and remarks.\",\n  \"implicit_merges\": [\n    {\"last_row\": 5, \"first_row\": 1, \"column\": 0},\n    {\"last_row\": 11, \"first_row\": 6, \"column\": 0},\n    {\"last_row\": 15, \"first_row\": 12, \"column\": 0},\n    {\"last_row\": 3, \"first_row\": 1, \"column\": 1},\n    {\"last_row\": 5, \"first_row\": 4, \"column\": 1},\n    {\"last_row\": 9, \"first_row\": 6, \"column\": 1},\n    {\"last_row\": 11, \"first_row\": 10, \"column\": 1},\n    {\"last_row\": 15, \"first_row\": 12, \"column\": 1}\n  ],\n  \"header_rows\": [0]\n}",
+        "reasoning": "The issue: implicit_merges[8] column 6, first_row 1, last_row 2. Row 2 c6 is empty, row 1 c6 = \"Client QA\". Wait, the check says rows [2] are not empty cells. Hmm, r2 c6 is empty in the grid... Let me re-read.\n\n| r2 |  |  | 1.2 | ... | 4,500 | 15/03/2027 | Client QA |  |\n\nWait, r2 has \"Client QA\" in c6! Let me recount. r2: c0 empty, c1 empty, c2=1.2, c3=description, c4=4,500, c5=15/03/2027, c6=Client QA, c7 empty. Yes! So r2 c6 is \"Client QA\", not empty. So the merge should be only r1..r1, which is pointless. Remove it.\n\nAlso check r3 c6: empty. r3: c0 empty, c1 empty, c2=1.3, c3=..., c4=16,500, c5=15/03/2027, c6 empty, c7 empty. So r3 c6 is empty but r2 has value, so no merge.\n\nSo remove that entry.\n\nAlso check other merges: c6 for r4..r5? r4 c6 = Client QA, r5 c6 empty. Hmm, r5 c6 empty — does it repeat r4? r5 is a meter box, no inspection witness. Actually r3 also empty for meter box. So r5 empty is \"no value\". Leave it.\n\nCheck c6 r6..r9: r6=Third-party inspector, r7 empty, r8=Third-party inspector, r9 empty. r7 empty is cancelled item, r9 empty is test terminal block. Hmm, ambiguous. I didn't include those. Fine.\n\nCheck c0 merges: r1..r5 Lot 1 — correct. r6..r11 Lot 2 — correct. r12..r15 Lot 3 — correct.\n\nc1: r1..r3 Callao — correct. r4..r5 Arequipa — correct. r6..r9 Callao — correct. r10..r11 Trujillo — correct. r12..r15 Callao — correct.\n\nSo just remove the c6 entry.",
+        "issues": [],
+        "prompt_tokens": 1945,
+        "completion_tokens": 753,
+        "reasoning_tokens": 523,
+        "cost_usd": 0.00059281,
+        "cached": false
+      }
+    ],
+    "annotation": {
+      "header_rows": [
+        0
+      ],
+      "sections": [],
+      "implicit_merges": [
+        {
+          "column": 0,
+          "first_row": 1,
+          "last_row": 5
+        },
+        {
+          "column": 0,
+          "first_row": 6,
+          "last_row": 11
+        },
+        {
+          "column": 0,
+          "first_row": 12,
+          "last_row": 15
+        },
+        {
+          "column": 1,
+          "first_row": 1,
+          "last_row": 3
+        },
+        {
+          "column": 1,
+          "first_row": 4,
+          "last_row": 5
+        },
+        {
+          "column": 1,
+          "first_row": 6,
+          "last_row": 9
+        },
+        {
+          "column": 1,
+          "first_row": 10,
+          "last_row": 11
+        },
+        {
+          "column": 1,
+          "first_row": 12,
+          "last_row": 15
+        }
+      ]
+    },
+    "lead": "Delivery and inspection schedule listing, per lot and destination warehouse, each item with its description, quantity, delivery date, inspection witness and remarks."
+  },
+  "fallback": {
+    "annotation": false,
+    "lead": false
+  },
+  "markdown": [
+    {
+      "text": "| Lot | Destination warehouse | Item | Description | Qty | Delivery date | Inspection witness | Remarks |\n| Lot 1 | Callao Central Warehouse, Av. Argentina 2850 | 1.1 | Single phase meter 2 wires, 5(60) A, class 1 | 12,000 | 15/03/2027 | Client QA |  |\n| ↑ | ↑ | 1.2 | Single phase meter 3 wires, 5(80) A, class 1 | 4,500 | 15/03/2027 | Client QA |  |\n| ↑ | ↑ | 1.3 | Meter box in polycarbonate with sealing screws | 16,500 | 15/03/2027 |  |  |\n| ↑ | Arequipa Regional Warehouse, Parque Industrial Mz. F | 1.4 | Single phase meter 2 wires, 5(60) A, class 1 | 6,000 | 30/03/2027 | Client QA |  |\n| ↑ | ↑ | 1.5 | Meter box in polycarbonate with sealing screws | 6,000 | 30/03/2027 |  |  |\n| Lot 2 | Callao Central Warehouse, Av. Argentina 2850 | 2.1 | Three phase meter 4 wires, 5(100) A, class 1, with RS-485 port | 1,200 | 20/05/2027 | Third-party inspector |  |\n| ↑ | ↑ | 2.2 | Three phase meter 3 wires, 5(100) A, class 1 |  |  |  | Cancelled by Addendum No. 2 |\n| ↑ | ↑ | 2.3 | Current transformer 200/5 A, class 0.5S | 3,600 | 20/05/2027 | Third-party inspector |  |",
+      "tokens": 424,
+      "repeated": 1,
+      "lines": 8
+    },
+    {
+      "text": "| Lot | Destination warehouse | Item | Description | Qty | Delivery date | Inspection witness | Remarks |\n| ↑ Lot 2 | ↑ Callao Central Warehouse, Av. Argentina 2850 | 2.4 | Test terminal block for indirect metering | 1,200 | 20/05/2027 |  |  |\n| ↑ | Trujillo Regional Warehouse, Av. Nicolás de Piérola 1210 | 2.5 | Three phase meter 4 wires, 5(100) A, class 1, with RS-485 port | 800 | 05/06/2027 | Third-party inspector |  |\n| ↑ | ↑ | 2.6 | Current transformer 200/5 A, class 0.5S | 2,400 | 05/06/2027 | Third-party inspector |  |\n| Lot 3 | Callao Central Warehouse, Av. Argentina 2850 | 3.1 | Data concentrator with PLC and 4G modem | 150 | 10/08/2027 | Client QA | Includes 2 years of firmware updates |\n| ↑ | ↑ | 3.2 | Head-end software licence, per 1,000 meters | 30 | ↑ |  |  |\n| ↑ | ↑ | 3.3 | Installation and commissioning kit for concentrator | 150 | ↑ |  |  |\n| ↑ | ↑ | 3.4 | Training of client staff, 5 days | 1 | 18/08/2027 |  | At the client's premises |",
+      "tokens": 358,
+      "repeated": 1,
+      "lines": 7
+    }
+  ],
+  "markdown_lead": [
+    {
+      "text": "Delivery and inspection schedule listing, per lot and destination warehouse, each item with its description, quantity, delivery date, inspection witness and remarks.\n| Lot | Destination warehouse | Item | Description | Qty | Delivery date | Inspection witness | Remarks |\n| Lot 1 | Callao Central Warehouse, Av. Argentina 2850 | 1.1 | Single phase meter 2 wires, 5(60) A, class 1 | 12,000 | 15/03/2027 | Client QA |  |\n| ↑ | ↑ | 1.2 | Single phase meter 3 wires, 5(80) A, class 1 | 4,500 | 15/03/2027 | Client QA |  |\n| ↑ | ↑ | 1.3 | Meter box in polycarbonate with sealing screws | 16,500 | 15/03/2027 |  |  |\n| ↑ | Arequipa Regional Warehouse, Parque Industrial Mz. F | 1.4 | Single phase meter 2 wires, 5(60) A, class 1 | 6,000 | 30/03/2027 | Client QA |  |\n| ↑ | ↑ | 1.5 | Meter box in polycarbonate with sealing screws | 6,000 | 30/03/2027 |  |  |\n| Lot 2 | Callao Central Warehouse, Av. Argentina 2850 | 2.1 | Three phase meter 4 wires, 5(100) A, class 1, with RS-485 port | 1,200 | 20/05/2027 | Third-party inspector |  |\n| ↑ | ↑ | 2.2 | Three phase meter 3 wires, 5(100) A, class 1 |  |  |  | Cancelled by Addendum No. 2 |\n| ↑ | ↑ | 2.3 | Current transformer 200/5 A, class 0.5S | 3,600 | 20/05/2027 | Third-party inspector |  |",
+      "tokens": 458,
+      "repeated": 1,
+      "lines": 8
+    },
+    {
+      "text": "Delivery and inspection schedule listing, per lot and destination warehouse, each item with its description, quantity, delivery date, inspection witness and remarks.\n| Lot | Destination warehouse | Item | Description | Qty | Delivery date | Inspection witness | Remarks |\n| ↑ Lot 2 | ↑ Callao Central Warehouse, Av. Argentina 2850 | 2.4 | Test terminal block for indirect metering | 1,200 | 20/05/2027 |  |  |\n| ↑ | Trujillo Regional Warehouse, Av. Nicolás de Piérola 1210 | 2.5 | Three phase meter 4 wires, 5(100) A, class 1, with RS-485 port | 800 | 05/06/2027 | Third-party inspector |  |\n| ↑ | ↑ | 2.6 | Current transformer 200/5 A, class 0.5S | 2,400 | 05/06/2027 | Third-party inspector |  |\n| Lot 3 | Callao Central Warehouse, Av. Argentina 2850 | 3.1 | Data concentrator with PLC and 4G modem | 150 | 10/08/2027 | Client QA | Includes 2 years of firmware updates |\n| ↑ | ↑ | 3.2 | Head-end software licence, per 1,000 meters | 30 | ↑ |  |  |\n| ↑ | ↑ | 3.3 | Installation and commissioning kit for concentrator | 150 | ↑ |  |  |\n| ↑ | ↑ | 3.4 | Training of client staff, 5 days | 1 | 18/08/2027 |  | At the client's premises |",
+      "tokens": 392,
+      "repeated": 1,
+      "lines": 7
+    }
+  ],
+  "markdown_checks": [],
+  "labeled": [
+    {
+      "text": "| Lot: Lot 1 | Destination warehouse: Callao Central Warehouse, Av. Argentina 2850 | Item: 1.1 | Description: Single phase meter 2 wires, 5(60) A, class 1 | Qty: 12,000 | Delivery date: 15/03/2027 | Inspection witness: Client QA |  |\n| ↑ | ↑ | Item: 1.2 | Description: Single phase meter 3 wires, 5(80) A, class 1 | Qty: 4,500 | Delivery date: 15/03/2027 | Inspection witness: Client QA |  |\n| ↑ | ↑ | Item: 1.3 | Description: Meter box in polycarbonate with sealing screws | Qty: 16,500 | Delivery date: 15/03/2027 |  |  |\n| ↑ | Destination warehouse: Arequipa Regional Warehouse, Parque Industrial Mz. F | Item: 1.4 | Description: Single phase meter 2 wires, 5(60) A, class 1 | Qty: 6,000 | Delivery date: 30/03/2027 | Inspection witness: Client QA |  |\n| ↑ | ↑ | Item: 1.5 | Description: Meter box in polycarbonate with sealing screws | Qty: 6,000 | Delivery date: 30/03/2027 |  |  |\n| Lot: Lot 2 | Destination warehouse: Callao Central Warehouse, Av. Argentina 2850 | Item: 2.1 | Description: Three phase meter 4 wires, 5(100) A, class 1, with RS-485 port | Qty: 1,200 | Delivery date: 20/05/2027 | Inspection witness: Third-party inspector |  |",
+      "tokens": 403,
+      "repeated": 0,
+      "lines": 6
+    },
+    {
+      "text": "| Lot: ↑ Lot 2 | Destination warehouse: ↑ Callao Central Warehouse, Av. Argentina 2850 | Item: 2.2 | Description: Three phase meter 3 wires, 5(100) A, class 1 |  |  |  | Remarks: Cancelled by Addendum No. 2 |\n| ↑ | ↑ | Item: 2.3 | Description: Current transformer 200/5 A, class 0.5S | Qty: 3,600 | Delivery date: 20/05/2027 | Inspection witness: Third-party inspector |  |\n| ↑ | ↑ | Item: 2.4 | Description: Test terminal block for indirect metering | Qty: 1,200 | Delivery date: 20/05/2027 |  |  |\n| ↑ | Destination warehouse: Trujillo Regional Warehouse, Av. Nicolás de Piérola 1210 | Item: 2.5 | Description: Three phase meter 4 wires, 5(100) A, class 1, with RS-485 port | Qty: 800 | Delivery date: 05/06/2027 | Inspection witness: Third-party inspector |  |\n| ↑ | ↑ | Item: 2.6 | Description: Current transformer 200/5 A, class 0.5S | Qty: 2,400 | Delivery date: 05/06/2027 | Inspection witness: Third-party inspector |  |\n| Lot: Lot 3 | Destination warehouse: Callao Central Warehouse, Av. Argentina 2850 | Item: 3.1 | Description: Data concentrator with PLC and 4G modem | Qty: 150 | Delivery date: 10/08/2027 | Inspection witness: Client QA | Remarks: Includes 2 years of firmware updates |\n| ↑ | ↑ | Item: 3.2 | Description: Head-end software licence, per 1,000 meters | Qty: 30 | ↑ |  |  |",
+      "tokens": 443,
+      "repeated": 0,
+      "lines": 7
+    },
+    {
+      "text": "| Lot: ↑ Lot 3 | Destination warehouse: ↑ Callao Central Warehouse, Av. Argentina 2850 | Item: 3.3 | Description: Installation and commissioning kit for concentrator | Qty: 150 | Delivery date: ↑ 10/08/2027 |  |  |\n| ↑ | ↑ | Item: 3.4 | Description: Training of client staff, 5 days | Qty: 1 | Delivery date: 18/08/2027 |  | Remarks: At the client's premises |",
+      "tokens": 123,
+      "repeated": 0,
+      "lines": 2
+    }
+  ],
+  "labeled_lead": [
+    {
+      "text": "Delivery and inspection schedule listing, per lot and destination warehouse, each item with its description, quantity, delivery date, inspection witness and remarks.\n| Lot: Lot 1 | Destination warehouse: Callao Central Warehouse, Av. Argentina 2850 | Item: 1.1 | Description: Single phase meter 2 wires, 5(60) A, class 1 | Qty: 12,000 | Delivery date: 15/03/2027 | Inspection witness: Client QA |  |\n| ↑ | ↑ | Item: 1.2 | Description: Single phase meter 3 wires, 5(80) A, class 1 | Qty: 4,500 | Delivery date: 15/03/2027 | Inspection witness: Client QA |  |\n| ↑ | ↑ | Item: 1.3 | Description: Meter box in polycarbonate with sealing screws | Qty: 16,500 | Delivery date: 15/03/2027 |  |  |\n| ↑ | Destination warehouse: Arequipa Regional Warehouse, Parque Industrial Mz. F | Item: 1.4 | Description: Single phase meter 2 wires, 5(60) A, class 1 | Qty: 6,000 | Delivery date: 30/03/2027 | Inspection witness: Client QA |  |\n| ↑ | ↑ | Item: 1.5 | Description: Meter box in polycarbonate with sealing screws | Qty: 6,000 | Delivery date: 30/03/2027 |  |  |\n| Lot: Lot 2 | Destination warehouse: Callao Central Warehouse, Av. Argentina 2850 | Item: 2.1 | Description: Three phase meter 4 wires, 5(100) A, class 1, with RS-485 port | Qty: 1,200 | Delivery date: 20/05/2027 | Inspection witness: Third-party inspector |  |",
+      "tokens": 437,
+      "repeated": 0,
+      "lines": 6
+    },
+    {
+      "text": "Delivery and inspection schedule listing, per lot and destination warehouse, each item with its description, quantity, delivery date, inspection witness and remarks.\n| Lot: ↑ Lot 2 | Destination warehouse: ↑ Callao Central Warehouse, Av. Argentina 2850 | Item: 2.2 | Description: Three phase meter 3 wires, 5(100) A, class 1 |  |  |  | Remarks: Cancelled by Addendum No. 2 |\n| ↑ | ↑ | Item: 2.3 | Description: Current transformer 200/5 A, class 0.5S | Qty: 3,600 | Delivery date: 20/05/2027 | Inspection witness: Third-party inspector |  |\n| ↑ | ↑ | Item: 2.4 | Description: Test terminal block for indirect metering | Qty: 1,200 | Delivery date: 20/05/2027 |  |  |\n| ↑ | Destination warehouse: Trujillo Regional Warehouse, Av. Nicolás de Piérola 1210 | Item: 2.5 | Description: Three phase meter 4 wires, 5(100) A, class 1, with RS-485 port | Qty: 800 | Delivery date: 05/06/2027 | Inspection witness: Third-party inspector |  |\n| ↑ | ↑ | Item: 2.6 | Description: Current transformer 200/5 A, class 0.5S | Qty: 2,400 | Delivery date: 05/06/2027 | Inspection witness: Third-party inspector |  |\n| Lot: Lot 3 | Destination warehouse: Callao Central Warehouse, Av. Argentina 2850 | Item: 3.1 | Description: Data concentrator with PLC and 4G modem | Qty: 150 | Delivery date: 10/08/2027 | Inspection witness: Client QA | Remarks: Includes 2 years of firmware updates |\n| ↑ | ↑ | Item: 3.2 | Description: Head-end software licence, per 1,000 meters | Qty: 30 | ↑ |  |  |",
+      "tokens": 477,
+      "repeated": 0,
+      "lines": 7
+    },
+    {
+      "text": "Delivery and inspection schedule listing, per lot and destination warehouse, each item with its description, quantity, delivery date, inspection witness and remarks.\n| Lot: ↑ Lot 3 | Destination warehouse: ↑ Callao Central Warehouse, Av. Argentina 2850 | Item: 3.3 | Description: Installation and commissioning kit for concentrator | Qty: 150 | Delivery date: ↑ 10/08/2027 |  |  |\n| ↑ | ↑ | Item: 3.4 | Description: Training of client staff, 5 days | Qty: 1 | Delivery date: 18/08/2027 |  | Remarks: At the client's premises |",
+      "tokens": 157,
+      "repeated": 0,
+      "lines": 2
+    }
+  ],
+  "labeled_checks": [],
+  "summary": {
+    "model": "deepseek/deepseek-v4.1-flash",
+    "attempts": [
+      {
+        "raw": "{\"summary\": \"The table is a delivery and inspection schedule for metering equipment and related goods. Each row is an item line within a lot, and the columns are Lot, Destination warehouse, Item, Description, Qty, Delivery date, Inspection witness and Remarks. Rows are grouped by Lot: Lot 1, Lot 2 and Lot 3. Within each lot, rows are identified by Item numbers: 1.1, 1.2, 1.3, 1.4, 1.5; 2.1, 2.2, 2.3, 2.4, 2.5, 2.6; and 3.1, 3.2, 3.3, 3.4. Destination warehouse values are Callao Central Warehouse, Av. Argentina 2850; Arequipa Regional Warehouse, Parque Industrial Mz. F; and Trujillo Regional Warehouse, Av. Nicolás de Piérola 1210. The table gives item descriptions, quantities, delivery dates, inspection witnesses and remarks. Some cells are merged across rows, so a lot or destination applies to several item lines; remarks include cancellation and scope notes.\"}",
+        "reasoning": "We need answer write retrieval summary. Need follow rules. Document language English. At most 254 words. One paragraph. State what table about. No mention section/table numbers/page. Organize: row stands for? Columns labels: Lot, Destination warehouse, Item, Description, Qty, Delivery date, Inspection witness, Remarks. Groups: Lot 1, Lot 2, Lot 3. Merged cells. Copy exactly values identifying rows/groups: Lot 1, Lot 2, Lot 3; destinations: Callao Central Warehouse, Av. Argentina 2850; Arequipa Regional Warehouse, Parque Industrial Mz. F; Trujillo Regional Warehouse, Av. Nicolás de Piérola 1210; Item numbers 1.1 etc. Need maybe include all item identifiers? Rule 4: copy exactly values that identify rows and groups, that is, values a question would use to point at particular row. If not all fit, say kinds and give as many as fit, original order. We can include lots and item numbers maybe all 15? That's many but okay. Need at most 254 words. We can list item numbers compactly. Also destinations. Columns. Values kinds: quantities, delivery dates, inspection witness, remarks. Do not list other values. But maybe mention cancelled remark? That's a value? Rule 5 do not list other values rows report; say only kinds. But remarks include \"Cancelled by Addendum No. 2\", \"Includes 2 years...\" etc. We can say remarks. But maybe row 2.2 has no qty/date and remark cancelled. That's identifying? Hmm.\n\nNeed one paragraph. Let's draft.\n\n\"The table is a delivery and inspection schedule for metering equipment and related goods. Each row is an item line within a lot, and the columns are Lot, Destination warehouse, Item, Description, Qty, Delivery date, Inspection witness and Remarks. Rows are grouped by Lot: Lot 1, Lot 2 and Lot 3. Within each lot, rows are identified by Item numbers: 1.1, 1.2, 1.3, 1.4, 1.5; 2.1, 2.2, 2.3, 2.4, 2.5, 2.6; and 3.1, 3.2, 3.3, 3.4. Destination warehouse values are Callao Central Warehouse, Av. Argentina 2850; Arequipa Regional Warehouse, Parque Industrial Mz. F; and Trujillo Regional Warehouse, Av. Nicolás de Piérola 1210. The table gives item descriptions, quantities, delivery dates, inspection witnesses and remarks. Some cells are merged across rows, so a lot or destination applies to several item lines; one item is marked as cancelled by addendum.\"\n\nCount words ~150. Good. Need ensure no mention table number? \"The table\" okay. No section. Good. But rule 4 says copy exactly values that identify rows and groups. We did. We didn't include \"Lot 1\" etc. Good. We included destinations. We didn't include all descriptions. Good. We said \"one item is marked as cancelled by addendum\" but that's a remark value, maybe okay? It is a value row reports. Rule 5 says do not list other values rows report; say only kinds. But \"one item is marked as cancelled\" is a specific value. Maybe remove to comply. But it might be useful. However rule 5 says do not list other values. We can say remarks include cancellation notes? That's kind. But \"cancelled by addendum\" is specific. Better: \"Remarks include cancellation and scope notes.\" But that's kind. Hmm.\n\nAlso \"Some cells are merged across rows, so a lot or destination applies to several item lines\" okay.\n\nNeed maybe mention \"Inspection witness\" values? No, kind. Good.\n\nFinal one paragraph. Ensure at most 254. Good.",
+        "issues": [],
+        "prompt_tokens": 1333,
+        "completion_tokens": 1097,
+        "reasoning_tokens": 832,
+        "cost_usd": 0.0003763,
+        "cached": false
+      }
+    ],
+    "summary": "The table is a delivery and inspection schedule for metering equipment and related goods. Each row is an item line within a lot, and the columns are Lot, Destination warehouse, Item, Description, Qty, Delivery date, Inspection witness and Remarks. Rows are grouped by Lot: Lot 1, Lot 2 and Lot 3. Within each lot, rows are identified by Item numbers: 1.1, 1.2, 1.3, 1.4, 1.5; 2.1, 2.2, 2.3, 2.4, 2.5, 2.6; and 3.1, 3.2, 3.3, 3.4. Destination warehouse values are Callao Central Warehouse, Av. Argentina 2850; Arequipa Regional Warehouse, Parque Industrial Mz. F; and Trujillo Regional Warehouse, Av. Nicolás de Piérola 1210. The table gives item descriptions, quantities, delivery dates, inspection witnesses and remarks. Some cells are merged across rows, so a lot or destination applies to several item lines; remarks include cancellation and scope notes."
+  },
+  "summary_tokens": 230
+}

@@ -1,0 +1,80 @@
+{
+  "annotation": {
+    "model": "deepseek/deepseek-v4.1-flash",
+    "attempts": [
+      {
+        "raw": "{\n  \"header_rows\": [0],\n  \"sections\": [],\n  \"implicit_merges\": [],\n  \"lead\": \"La tabla enumera los medidores electrónicos incluidos en la compra corporativa, indicando el número de ítem y la descripción de cada medidor.\"\n}",
+        "reasoning": "We need answer annotation. Need parse table. Spanish. Table has header row r0: Ítem, Descripción. Data rows r1-r3. No sections? Context says corporate purchase of meters. Table lists items? Row stands for a type of meter? Columns give item number and description. Need annotate header_rows [0]. sections empty. implicit_merges? c0 values 1,3,4 no empty. c1 descriptions no empty. lead in Spanish max 24 words. \"La tabla lista los medidores electrónicos que se compran corporativamente, con su número de ítem y la descripción de cada tipo de medidor.\" That's 22? Count: La(1) tabla2 lista3 los4 medidores5 electrónicos6 que7 se8 compran9 corporativamente10, con11 su12 número13 de14 ítem15 y16 la17 descripción18 de19 cada20 tipo21 de22 medidor23. Good. But \"se compran corporativamente\" supported by context. Table itself lists item and description. Could say \"La tabla enumera los medidores electrónicos incluidos en la compra corporativa, indicando el número de ítem y la descripción de cada medidor.\" 21. Good.\n\nNeed ensure no section title above header? r0 header. No title row. The context title \"III. CLÁUSULA...\" not in table. So sections [].\n\nNeed output JSON? The prompt likely expects structured. We need provide fields. Let's craft.\n\nNeed maybe header_rows: [0]. sections: []. implicit_merges: []. lead.\n\nCheck if any implicit merge? c0 row r1=1, r2=3, r3=4. No. c1 all filled. Good.\n\nFinal.",
+        "issues": [],
+        "prompt_tokens": 984,
+        "completion_tokens": 446,
+        "reasoning_tokens": 379,
+        "cost_usd": 0.00060018,
+        "cached": false
+      }
+    ],
+    "annotation": {
+      "header_rows": [
+        0
+      ],
+      "sections": [],
+      "implicit_merges": []
+    },
+    "lead": "La tabla enumera los medidores electrónicos incluidos en la compra corporativa, indicando el número de ítem y la descripción de cada medidor."
+  },
+  "fallback": {
+    "annotation": false,
+    "lead": false
+  },
+  "markdown": [
+    {
+      "text": "| Ítem | Descripción |\n| 1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS |\n| 3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS |\n| 4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS |",
+      "tokens": 80,
+      "repeated": 1,
+      "lines": 3
+    }
+  ],
+  "markdown_lead": [
+    {
+      "text": "La tabla enumera los medidores electrónicos incluidos en la compra corporativa, indicando el número de ítem y la descripción de cada medidor.\n| Ítem | Descripción |\n| 1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS |\n| 3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS |\n| 4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS |",
+      "tokens": 113,
+      "repeated": 1,
+      "lines": 3
+    }
+  ],
+  "markdown_checks": [],
+  "labeled": [
+    {
+      "text": "| Ítem: 1 | Descripción: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS |\n| Ítem: 3 | Descripción: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS |\n| Ítem: 4 | Descripción: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS |",
+      "tokens": 88,
+      "repeated": 0,
+      "lines": 3
+    }
+  ],
+  "labeled_lead": [
+    {
+      "text": "La tabla enumera los medidores electrónicos incluidos en la compra corporativa, indicando el número de ítem y la descripción de cada medidor.\n| Ítem: 1 | Descripción: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS |\n| Ítem: 3 | Descripción: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS |\n| Ítem: 4 | Descripción: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS |",
+      "tokens": 121,
+      "repeated": 0,
+      "lines": 3
+    }
+  ],
+  "labeled_checks": [],
+  "summary": {
+    "model": "deepseek/deepseek-v4.1-flash",
+    "attempts": [
+      {
+        "raw": "{\"summary\": \"El cuadro detalla la compra corporativa de medidores para las empresas de la Corporación FONAFE. Se organiza en dos columnas: Ítem y Descripción. Cada fila corresponde a un ítem de medidor según su descripción. Los valores que identifican las filas son: 1, MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS; 3, MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS; y 4, MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS. La columna Descripción indica el tipo de medidor. No se presentan agrupaciones, subtotales ni totales.\"}",
+        "reasoning": "We need answer in Spanish, one paragraph, max 254 words. Need summarize table. Need follow rules. Table has columns Ítem, Descripción. Rows: 1 MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS; 3 MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS; 4 MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS. Note missing item 2? We can mention. It is about corporate purchase of meters for FONAFE companies. Table organizes items with Ítem and Descripción. Row stands for a type of meter. Copy exact values identifying rows: Ítem values 1,3,4 and descriptions. Need maybe include all. No other values. Do not mention table number. At most 254 words. Spanish. One paragraph. Should state what table is about, organization, row stands for, columns labels, groups/subtotals/totals. No totals. Mention no totals? Could say no hay totales. Need not mention section. We can say \"El cuadro detalla...\" It is about \"compra corporativa de medidores para las empresas de la Corporación FONAFE\". Columns: Ítem y Descripción. Cada fila corresponde a un ítem de medidor. Los valores que identifican las filas son: 1, MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS; 3, MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS; 4, MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS. La columna Descripción contiene el tipo de medidor. No hay agrupaciones, subtotales ni totales. That's enough. Ensure exact accents? Table has MONOFASICO without accent, TRIFÁSICO with accent. Copy exactly. \"Ítem\" exact. \"Descripción\". Good. Word count ~80. Final only.",
+        "issues": [],
+        "prompt_tokens": 679,
+        "completion_tokens": 593,
+        "reasoning_tokens": 427,
+        "cost_usd": 0.0009153,
+        "cached": false
+      }
+    ],
+    "summary": "El cuadro detalla la compra corporativa de medidores para las empresas de la Corporación FONAFE. Se organiza en dos columnas: Ítem y Descripción. Cada fila corresponde a un ítem de medidor según su descripción. Los valores que identifican las filas son: 1, MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS; 3, MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS; y 4, MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS. La columna Descripción indica el tipo de medidor. No se presentan agrupaciones, subtotales ni totales."
+  },
+  "summary_tokens": 145
+}
