@@ -12,15 +12,18 @@ from __future__ import annotations
 
 import hashlib
 import json
-import math
 import re
-from dataclasses import dataclass
+import time
+from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Any, Callable, Literal, Protocol, Sequence
 
+from rag.ingest.chunkers.table_plan import plan_chunks, plan_issues
 from rag.ingest.tables.models import (
-    ImplicitMerge, SerializedTable, SerializedTableLine, TableAnnotation, TableSection,
+    ImplicitMerge, LLMAttempt, PreparedTableContent, TableAnnotation, TableContextNode,
+    TableLLMResult, TableSection,
 )
+from rag.models import PrimaryDocument, PrimaryList, PrimaryTablePlaceholder, PrimaryText
 
 PROMPT_VERSION = "llm_tables_v4"
 REASONING_EFFORT = "medium"
@@ -92,10 +95,7 @@ def render_grid(table: _Table) -> Grid:
 
 # ---------------------------------------------------------------- context
 
-@dataclass(frozen=True)
-class ContextNode:
-    kind: str
-    text: str
+ContextNode = TableContextNode
 
 
 def table_context(nodes: Sequence[tuple[str, str]], index: int,
@@ -400,18 +400,6 @@ def text_issues(field: str, text: str, digits: frozenset[str], count: Callable[[
 
 # ---------------------------------------------------------------- calling
 
-@dataclass(frozen=True)
-class Attempt:
-    raw: str
-    reasoning: str | None
-    issues: tuple[str, ...]
-    prompt_tokens: int | None
-    completion_tokens: int | None
-    reasoning_tokens: int | None
-    cost_usd: float | None
-    cached: bool
-
-
 class _StructuredLLM(Protocol):
     model: str
 
@@ -444,19 +432,20 @@ def _call(llm: _StructuredLLM, messages: list[dict[str, str]], name: str, schema
     hit = cache.get(key) if cache else None
     if hit is not None:
         return hit, True
+    started = time.perf_counter()
     done = llm.complete_structured(messages, name, schema, REASONING_EFFORT)
     hit = {"text": done.text, "reasoning": done.reasoning, "prompt_tokens": done.prompt_tokens,
            "completion_tokens": done.completion_tokens, "reasoning_tokens": done.reasoning_tokens,
-           "cost_usd": done.cost_usd}
+           "cost_usd": done.cost_usd, "seconds": round(time.perf_counter() - started, 2)}
     if cache:
         cache.put(key, hit)
     return hit, False
 
 
-def _attempt(hit: dict, cached: bool, issues: list[str]) -> Attempt:
-    return Attempt(hit["text"], hit.get("reasoning"), tuple(issues), hit.get("prompt_tokens"),
-                   hit.get("completion_tokens"), hit.get("reasoning_tokens"), hit.get("cost_usd"),
-                   cached)
+def _attempt(hit: dict, cached: bool, issues: list[str]) -> LLMAttempt:
+    return LLMAttempt(hit["text"], hit.get("reasoning"), tuple(issues), hit.get("prompt_tokens"),
+                      hit.get("completion_tokens"), hit.get("reasoning_tokens"), hit.get("cost_usd"),
+                      hit.get("seconds"), cached)
 
 
 def _retry(messages: list[dict[str, str]], raw: str, issues: list[str]) -> list[dict[str, str]]:
@@ -465,22 +454,14 @@ def _retry(messages: list[dict[str, str]], raw: str, issues: list[str]) -> list[
                            issues="\n".join(f"- {issue}" for issue in issues))}]
 
 
-@dataclass(frozen=True)
-class AnnotationResult:
-    model: str
-    attempts: tuple[Attempt, ...]
-    annotation: TableAnnotation | None     # None: no attempt passed the annotation checks
-    lead: str | None                       # None: no attempt passed the lead checks
-
-
 def run_annotation(llm: _StructuredLLM, table: _Table, grid: Grid, context: tuple[ContextNode, ...],
                    lengths: Lengths, count: Callable[[str], int], cache: LLMCache | None,
                    extra_checks: Callable[[TableAnnotation], list[str]] = lambda _: [],
-                   retries: int = 1) -> AnnotationResult:
+                   retries: int = 1, use_lead: bool = False) -> TableLLMResult:
     """The annotation and the lead are judged separately; each keeps its latest passing attempt."""
     messages = build_messages("annotation", grid, context, lengths)
     digits = known_digits(grid, context)
-    attempts: list[Attempt] = []
+    attempts: list[LLMAttempt] = []
     annotation: TableAnnotation | None = None
     lead: str | None = None
     for _ in range(retries + 1):
@@ -504,21 +485,15 @@ def run_annotation(llm: _StructuredLLM, table: _Table, grid: Grid, context: tupl
         if not issues:
             break
         messages = _retry(messages, hit["text"], issues)
-    return AnnotationResult(llm.model, tuple(attempts), annotation, lead)
-
-
-@dataclass(frozen=True)
-class SummaryResult:
-    model: str
-    attempts: tuple[Attempt, ...]
-    summary: str | None
+    return TableLLMResult("annotation", llm.model, PROMPT_VERSION, REASONING_EFFORT, context,
+                          tuple(attempts), annotation=annotation, lead=lead, use_lead=use_lead)
 
 
 def run_summary(llm: _StructuredLLM, grid: Grid, context: tuple[ContextNode, ...], lengths: Lengths,
-                count: Callable[[str], int], cache: LLMCache | None, retries: int = 1) -> SummaryResult:
+                count: Callable[[str], int], cache: LLMCache | None, retries: int = 1) -> TableLLMResult:
     messages = build_messages("summary", grid, context, lengths)
     digits = known_digits(grid, context)
-    attempts: list[Attempt] = []
+    attempts: list[LLMAttempt] = []
     summary: str | None = None
     for _ in range(retries + 1):
         hit, cached = _call(llm, messages, "table_summary", SUMMARY_SCHEMA, cache)
@@ -534,136 +509,75 @@ def run_summary(llm: _StructuredLLM, grid: Grid, context: tuple[ContextNode, ...
             summary = text
             break
         messages = _retry(messages, hit["text"], issues)
-    return SummaryResult(llm.model, tuple(attempts), summary)
+    return TableLLMResult("summary", llm.model, PROMPT_VERSION, REASONING_EFFORT, context,
+                          tuple(attempts), summary=summary)
 
 
-# ---------------------------------------------------------------- chunk planning
+# ---------------------------------------------------------------- pipeline step
 
-@dataclass(frozen=True)
-class PlannedChunk:
-    text: str
-    context_line_ids: tuple[str, ...]      # header and title lines written again before the rows
-    line_ids: tuple[str, ...]              # the chunk's own lines, in table order
-    oversize: Literal["", "row", "context"] = ""   # a single line that does not fit, and why
+def _element_pairs(primary: PrimaryDocument) -> list[tuple[str, str]]:
+    pairs: list[tuple[str, str]] = []
+    for element in primary.elements:
+        if isinstance(element, PrimaryText):
+            pairs.append((element.kind, element.text))
+        elif isinstance(element, PrimaryList):
+            pairs.append(("list", "\n".join(item.text for item in element.items)))
+        else:
+            pairs.append(("table", ""))
+    return pairs
 
 
-def plan_chunks(serialized: SerializedTable, annotation: TableAnnotation | None,
-                fits: Callable[[str], bool]) -> tuple[PlannedChunk, ...]:
-    """Pack a table's lines into chunks.
+class TableLLMStep:
+    """Runs one LLM task over every prepared table of a document.
 
-    Without an annotation this is the rule packing: lines in order, the header line repeated
-    in chunks after it. With one: every chunk repeats the header rows and the titles of the
-    sections its first line lies in; sections are kept whole when they fit a chunk, and a
-    section that fits none is packed by its sub-sections and rows. A lead sentence is written
-    before each chunk by the caller; `fits` counts it.
-    """
-    lines = serialized.lines
-    position = {line.line_id: i for i, line in enumerate(lines)}
-    row_line = {line.source_rows[0]: line for line in lines if line.source_rows and line.kind != "unplaced_text"}
+    `annotation`: the structure annotation replaces the rule header and the table is re-rendered in
+    the configured form (markdown or labeled); a table whose annotation fails keeps the rule text.
+    The annotation is checked against both forms, so every annotation config shares one result.
+    `summary`: the summary is recorded; the chunker writes it instead of table chunks."""
 
-    def row_of(line: SerializedTableLine) -> float:
-        return line.source_rows[0] if line.source_rows and line.kind != "unplaced_text" else math.inf
+    def __init__(self, task: Literal["annotation", "summary"], llm: _StructuredLLM,
+                 counter: Any, max_tokens: int, cache: LLMCache | None, use_lead: bool = False):
+        self.task, self.llm, self.counter = task, llm, counter
+        self.max_tokens, self.cache, self.use_lead = max_tokens, cache, use_lead
 
-    if annotation is None:
-        rule_header = next((line for line in lines if line.kind == "header"), None)
-        body = list(lines)
-        sections: tuple[TableSection, ...] = ()
-        header_lines: list[SerializedTableLine] = []
-        header_start = header_end = 0
-    else:
-        rule_header = None
-        header = annotation.header_rows
-        header_start, header_end = (header[0], header[-1] + 1) if header else (0, 0)
-        header_lines = [line for line in lines if line.kind == "header"]
-        body = [line for line in lines if line.kind != "header" and row_of(line) >= header_end]
-        sections = annotation.sections
-
-    def context(first: SerializedTableLine) -> list[SerializedTableLine]:
-        if annotation is None:
-            return [rule_header] if rule_header and position[first.line_id] > position[rule_header.line_id] else []
-        r = row_of(first)
-        open_ = sorted((s for s in sections if s.first_row < r <= s.last_row), key=lambda s: s.first_row)
-        def titles(group): return [row_line[t] for s in group for t in s.title_rows if t < r]
-        above = [s for s in open_ if header_end and s.first_row < header_start]
-        return titles(above) + header_lines + titles([s for s in open_ if s not in above])
-
-    def render(chunk: list[SerializedTableLine]) -> str:
-        parts = [line.text for line in context(chunk[0])]
-        parts += [chunk[0].resumed_text()] + [line.text for line in chunk[1:]]
-        return "\n".join(parts)
-
-    def units(seq: list[SerializedTableLine], group: list[TableSection]) -> list[tuple]:
-        """("line", [line]) or ("section", lines, title lines, child units)."""
-        outer = [s for s in group if not any(o is not s and o.first_row <= s.first_row
-                                             and s.last_row <= o.last_row for o in group)]
-        out, i = [], 0
-        while i < len(seq):
-            s = next((s for s in outer if s.first_row == row_of(seq[i])), None)
-            if s is None:
-                out.append(("line", [seq[i]]))
-                i += 1
+    def process(self, primary: PrimaryDocument, prepared: tuple[PreparedTableContent, ...],
+                language: str, labeled: bool) -> tuple[PreparedTableContent, ...]:
+        from rag.ingest.tables.markdown_rows import serialize_markdown_rows
+        pairs = _element_pairs(primary)
+        position = {element.slot_id: i for i, element in enumerate(primary.elements)
+                    if isinstance(element, PrimaryTablePlaceholder)}
+        node_ids = {element.slot_id: element.element_id for element in primary.elements
+                    if isinstance(element, PrimaryTablePlaceholder)}
+        prefix = self.counter.count_passage("")
+        lengths = Lengths(language, self.max_tokens - prefix)   # type: ignore[arg-type]
+        # Validation leaves room for the longest accepted lead.
+        check_fits = lambda text: self.counter.count_passage(text) <= self.max_tokens - LEAD_MAX_TOKENS
+        out = []
+        for item in prepared:
+            table, node_id = item.adopted_table, node_ids[item.slot_id]
+            grid = render_grid(table)
+            context = table_context(pairs, position[item.slot_id], self.counter.count_text)
+            if self.task == "summary":
+                # Counted as the passage it becomes, so the summary chunk fits exactly.
+                passage = lambda text: self.counter.count_passage(text) - prefix
+                result = run_summary(self.llm, grid, context, lengths, passage, self.cache)
+                out.append(replace(item, llm=result))
                 continue
-            j = i
-            while j < len(seq) and row_of(seq[j]) <= s.last_row:
-                j += 1
-            n = sum(1 for line in seq[i:j] if row_of(line) in s.title_rows)
-            inner = [o for o in group if o is not s and s.first_row <= o.first_row and o.last_row <= s.last_row]
-            out.append(("section", seq[i:j], seq[i:i + n], units(seq[i + n:j], inner)))
-            i = j
-        return out
 
-    def opening(unit: tuple) -> list[SerializedTableLine]:
-        """What must share a chunk with the titles before `unit`: the whole unit when it fits a
-        chunk, else its own titles and the opening of its first part."""
-        if unit[0] == "line" or fits(render(unit[1])):
-            return unit[1]
-        return unit[2] + (opening(unit[3][0]) if unit[3] else [])
+            def extra(annotation: TableAnnotation) -> list[str]:
+                found: list[str] = []
+                for form in (False, True):
+                    serialized = serialize_markdown_rows(table, None, table_node_id=node_id,
+                                                         labeled=form, annotation=annotation)
+                    found += plan_issues(plan_chunks(serialized, annotation, check_fits), serialized)
+                return list(dict.fromkeys(found))
 
-    chunks: list[PlannedChunk] = []
-    current: list[SerializedTableLine] = []
-
-    def close() -> None:
-        nonlocal current
-        if current:
-            chunks.append(PlannedChunk(render(current), tuple(l.line_id for l in context(current[0])),
-                                       tuple(l.line_id for l in current)))
-        current = []
-
-    def place(unit: tuple) -> None:
-        nonlocal current
-        unit_lines = unit[1]
-        if current and fits(render(current + unit_lines)):
-            current = current + unit_lines
-            return
-        if fits(render(unit_lines)):
-            close()
-            current = list(unit_lines)
-            return
-        if unit[0] == "section":
-            titles, children = unit[2], unit[3]
-            # Titles stay in the current chunk only together with what they introduce first.
-            following = opening(children[0]) if children else []
-            if current and not fits(render(current + titles + following)):
-                close()
-            for title in titles:
-                place(("line", [title]))
-            for child in children:
-                place(child)
-            return
-        close()
-        line = unit_lines[0]
-        chunks.append(PlannedChunk(render([line]), tuple(l.line_id for l in context(line)),
-                                   (line.line_id,), "row" if not fits(line.text) else "context"))
-
-    below = [s for s in sections if s.first_row >= header_end]
-    for unit in units(body, below):
-        place(unit)
-    close()
-    return tuple(chunks)
-
-
-def plan_issues(chunks: tuple[PlannedChunk, ...], serialized: SerializedTable) -> list[str]:
-    """Rendering checks that the LLM can act on: repeated rows leaving no room for a row."""
-    rows = {line.line_id: line.source_rows for line in serialized.lines}
-    return [f"the header rows and section titles repeated before row {rows[c.line_ids[0]][0]} leave "
-            "no room for it in a chunk; repeat fewer rows" for c in chunks if c.oversize == "context"]
+            result = run_annotation(self.llm, table, grid, context, lengths, self.counter.count_text,
+                                    self.cache, extra, use_lead=self.use_lead)
+            if result.annotation is None:
+                out.append(replace(item, llm=result))
+                continue
+            serialized = serialize_markdown_rows(table, None, table_node_id=node_id, labeled=labeled,
+                                                 annotation=result.annotation)
+            out.append(replace(item, serialized_table=serialized, llm=result))
+        return tuple(out)

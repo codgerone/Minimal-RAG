@@ -67,7 +67,7 @@ def compose_document(
                                    prepared.serialized_table, prepared.whole_text,
                                    tuple(span for segment in prepared.segments
                                          for span in sources_by_slot[segment.slot_id]),
-                                   prepared.segments if merged else ()))
+                                   prepared.segments if merged else (), prepared.llm))
         else:
             raise DocumentCompositionError("unknown primary element")
     return ParsedDocument(source.document_id, source.document_name, source.relative_path,

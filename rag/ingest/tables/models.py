@@ -99,6 +99,7 @@ class PreparedTableContent:
     serialized_table: SerializedTable
     whole_text: str                         # markdown_rows_v1 text, returned when the whole table is
     segments: tuple[TableSegment, ...]
+    llm: TableLLMResult | None = None       # set when the assembly processes tables with an LLM
 
     def __post_init__(self) -> None:
         if not self.segments or self.segments[0].slot_id != self.slot_id:
@@ -627,6 +628,53 @@ class TableAnnotation:
 
     def title_rows(self) -> frozenset[int]:
         return frozenset(row for section in self.sections for row in section.title_rows)
+
+
+@dataclass(frozen=True)
+class TableContextNode:
+    """A node before a table, given to the LLM as context."""
+    kind: str
+    text: str
+
+
+@dataclass(frozen=True)
+class LLMAttempt:
+    """One LLM call as returned, with the issues validation found (empty when it passed)."""
+    raw: str
+    reasoning: str | None
+    issues: tuple[str, ...]
+    prompt_tokens: int | None
+    completion_tokens: int | None
+    reasoning_tokens: int | None
+    cost_usd: float | None
+    seconds: float | None
+    cached: bool
+
+
+@dataclass(frozen=True)
+class TableLLMResult:
+    """LLM processing of one table: the calls as facts, then what passed validation and is used.
+
+    `annotation`, `lead`, `summary` hold only what passed; None means it did not, and the table
+    falls back (rule text, no lead, rule table chunks). `use_lead` records the configuration."""
+    task: Literal["annotation", "summary"]
+    model: str
+    prompt_version: str
+    reasoning_effort: str
+    context: tuple[TableContextNode, ...]
+    attempts: tuple[LLMAttempt, ...]
+    annotation: TableAnnotation | None = None
+    lead: str | None = None
+    summary: str | None = None
+    use_lead: bool = False
+
+    @property
+    def fallback(self) -> bool:
+        return (self.annotation is None) if self.task == "annotation" else (self.summary is None)
+
+    @property
+    def applied_lead(self) -> str | None:
+        return self.lead if self.task == "annotation" and self.use_lead else None
 
 @dataclass(frozen=True)
 class StructuredTable:

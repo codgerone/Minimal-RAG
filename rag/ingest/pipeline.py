@@ -39,7 +39,8 @@ class ProcessedDocument:
 
 def process_document(source: SourceDocument, parser: Parser,
                      extractors: tuple[TableExtractor, ...],
-                     formatter: TableFormatter | None) -> ProcessedDocument:
+                     formatter: TableFormatter | None, table_llm=None) -> ProcessedDocument:
+    """`table_llm`: a TableLLMStep run over the prepared tables (rag/ingest/tables/llm_tables.py)."""
     parsed = parser.parse(source)
     primary = parsed.primary
     language = primary_language(primary)
@@ -64,6 +65,9 @@ def process_document(source: SourceDocument, parser: Parser,
     else:
         resolutions, grouping, scoring, prepared, warnings = (), None, None, (), ()
         continuations = None
+    if table_llm is not None and prepared:
+        assert formatter is not None
+        prepared = table_llm.process(primary, prepared, language, formatter.labeled)
     document = compose_document(source, primary, resolutions, prepared,
                                 bool(primary.table_slots), language, warnings)
     return ProcessedDocument(source, parsed, reports, resolutions, grouping, scoring,

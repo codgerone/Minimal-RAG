@@ -44,6 +44,8 @@ class AssemblyConfig:
     document_filter: bool = True   # limit retrieval to documents whose catalog code is in the question
     lexical: dict[str, Any] | None = None   # [lexical]: BM25 index analyzer settings; None = no BM25 index
     table_return_unit: str = "chunk"   # a hit on a table chunk returns that chunk, or the whole table
+    # [table_annotation] (use = "annotation", model, lead) or [table_summary] (use = "summary", model)
+    table_llm: Component | None = None
 
     def build_settings(self) -> dict[str, Any]:
         """Everything that changes index content. Retrieval, LLM and display settings are excluded."""
@@ -56,7 +58,21 @@ class AssemblyConfig:
             "embedder": self.embedder.as_dict(),
             # Only present when configured, so configs without a BM25 index keep their fingerprint.
             **({"lexical": self.lexical} if self.lexical is not None else {}),
+            **({"table_llm": {**self.table_llm.as_dict(), **_table_llm_rules()}}
+               if self.table_llm is not None else {}),
         }
+
+
+def _table_llm_rules() -> dict[str, Any]:
+    """Prompt, reasoning, length and context rules of LLM table processing (they change its output)."""
+    from rag.ingest.tables import llm_tables as rules
+    return {"prompt_version": rules.PROMPT_VERSION, "reasoning_effort": rules.REASONING_EFFORT,
+            "lead_words": rules.LEAD_WORDS, "lead_chars": rules.LEAD_CHARS,
+            "lead_max_tokens": rules.LEAD_MAX_TOKENS,
+            "summary_words_per_token": rules.SUMMARY_WORDS_PER_TOKEN,
+            "summary_chars_per_token": rules.SUMMARY_CHARS_PER_TOKEN,
+            "context_nodes": rules.CONTEXT_NODES, "context_node_tokens": rules.CONTEXT_NODE_TOKENS,
+            "context_skipped_kinds": sorted(rules.CONTEXT_SKIPPED_KINDS)}
 
 
 def _component(data: Any, section: str, file: Path) -> Component:
@@ -72,7 +88,8 @@ def load_config(path: Path) -> AssemblyConfig:
     except (OSError, tomllib.TOMLDecodeError) as exc:
         raise ConfigError(f"无法读取配置 {path.name}：{exc}") from exc
     known = {"name", "description", "parser", "table_extractors", "table_formatter",
-             "chunker", "embedder", "lexical", "retriever", "llm", "eval"}
+             "table_annotation", "table_summary", "chunker", "embedder", "lexical", "retriever",
+             "llm", "eval"}
     unknown = set(data) - known
     if unknown:
         raise ConfigError(f"{path.name}：未知配置项 {sorted(unknown)}")
@@ -109,6 +126,7 @@ def load_config(path: Path) -> AssemblyConfig:
         if not all(type(v) is bool for v in lexical.values()):
             raise ConfigError(f"{path.name}：lexical.stopwords、lexical.stemming 必须为 true 或 false")
     formatter = data.get("table_formatter")
+    table_llm = _table_llm(data, path)
     return AssemblyConfig(
         name, str(data.get("description", "")), path,
         _component(data["parser"], "parser", path),
@@ -118,8 +136,28 @@ def load_config(path: Path) -> AssemblyConfig:
         _component(data["embedder"], "embedder", path),
         retriever, top_k,
         _component(data["llm"], "llm", path),
-        eval_top_k, document_filter, lexical, table_return_unit,
+        eval_top_k, document_filter, lexical, table_return_unit, table_llm,
     )
+
+
+def _table_llm(data: dict[str, Any], path: Path) -> Component | None:
+    sections = [name for name in ("table_annotation", "table_summary") if name in data]
+    if not sections:
+        return None
+    if len(sections) > 1:
+        raise ConfigError(f"{path.name}：[table_annotation] 与 [table_summary] 只能选一个")
+    section = sections[0]
+    params = data[section]
+    allowed = {"model", "temperature"} | ({"lead"} if section == "table_annotation" else set())
+    if not isinstance(params, dict) or not isinstance(params.get("model"), str) or set(params) - allowed:
+        raise ConfigError(f"{path.name}：[{section}] 需要 model，只接受 {sorted(allowed)}")
+    if "lead" in params and type(params["lead"]) is not bool:
+        raise ConfigError(f"{path.name}：table_annotation.lead 必须为 true 或 false")
+    if "temperature" in params and not isinstance(params["temperature"], (int, float)):
+        raise ConfigError(f"{path.name}：{section}.temperature 必须是数字")
+    use = "annotation" if section == "table_annotation" else "summary"
+    defaults = {"lead": False} if use == "annotation" else {}
+    return Component(use, {**defaults, **params})
 
 
 def config_dir(workspace: Path) -> Path:

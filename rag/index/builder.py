@@ -74,7 +74,8 @@ def current_status(workspace: Workspace, assembly: Assembly,
 
 
 def prepare(source: SourceDocument, assembly: Assembly) -> Prepared:
-    processed = process_document(source, assembly.parser, assembly.extractors, assembly.formatter)
+    processed = process_document(source, assembly.parser, assembly.extractors, assembly.formatter,
+                                 assembly.table_llm)
     batch = attach_regions(assembly.chunker.chunk(processed.document), processed.document)
     vectors = assembly.embedder.encode_passages([chunk.text for chunk in batch.chunks])
     lexical = None

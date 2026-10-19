@@ -17,9 +17,10 @@ from rag.ingest.chunkers.tokens import E5TokenCounter  # noqa: E402
 from rag.ingest.language import document_language  # noqa: E402
 from rag.ingest.tables.header import detect_header  # noqa: E402
 from rag.ingest.tables.llm_tables import (  # noqa: E402
-    LEAD_MAX_TOKENS, LLMCache, Lengths, plan_chunks, plan_issues, render_grid, run_annotation,
+    LEAD_MAX_TOKENS, LLMCache, Lengths, render_grid, run_annotation,
     run_summary, table_context,
 )
+from rag.ingest.chunkers.table_plan import plan_chunks, plan_issues
 from rag.ingest.tables.markdown_rows import serialize_markdown_rows  # noqa: E402
 from rag.ingest.tables.models import StructuredTable, TableAnnotation, TableCell  # noqa: E402
 from rag.jsonio import dumps, write_atomic  # noqa: E402

@@ -9,12 +9,14 @@ from rag.ingest.tables.models import HeaderDecision, SerializedTable, Structured
 
 
 class TableFormatter(Protocol):
+    labeled: bool          # an LLM annotation re-renders the table in the same form
     def format(self, table: StructuredTable, header: HeaderDecision, *,
                table_node_id: str | None = None) -> SerializedTable: ...
 
 
 class MarkdownRowsFormatter:
     """`markdown_rows_v1`: header once, `| 值 | 值 |` rows, merged cells as `←` / `↑`."""
+    labeled = False
 
     def format(self, table: StructuredTable, header: HeaderDecision, *,
                table_node_id: str | None = None) -> SerializedTable:
@@ -23,6 +25,7 @@ class MarkdownRowsFormatter:
 
 class LabeledRowsFormatter:
     """`labeled_rows_v1`: as `markdown_rows_v1`, but single-column values read `列名: 值`, no header line."""
+    labeled = True
 
     def format(self, table: StructuredTable, header: HeaderDecision, *,
                table_node_id: str | None = None) -> SerializedTable:

@@ -103,6 +103,7 @@ class Assembly:
     embedder: Embedder
     chunker: Chunker
     lexical: Analyzer | None = None     # set when the config has [lexical]: ingest builds a BM25 index
+    table_llm: Any = None               # TableLLMStep, set when the config processes tables with an LLM
     _llm: LLM | None = field(default=None, repr=False)
 
     @property
@@ -161,4 +162,27 @@ def assemble(config: AssemblyConfig) -> Assembly:
     embedder = _make(EMBEDDERS, "embedder", config.embedder)
     chunker = _make(CHUNKERS, "chunker", config.chunker, embedder)
     lexical = Analyzer(**config.lexical) if config.lexical is not None else None
-    return Assembly(config, parser, extractors, formatter, embedder, chunker, lexical)
+    table_llm = _table_llm(config, formatter, chunker)
+    return Assembly(config, parser, extractors, formatter, embedder, chunker, lexical, table_llm)
+
+
+def _table_llm(config: AssemblyConfig, formatter: TableFormatter | None, chunker: Chunker) -> Any:
+    if config.table_llm is None:
+        return None
+    summary = config.table_llm.use == "summary"
+    if formatter is None or config.table_formatter is None:
+        raise ConfigError("[table_annotation] / [table_summary] 需要会产出表格的解析器")
+    if summary and config.table_formatter.use != "markdown_rows_v1":
+        raise ConfigError("[table_summary] 只能搭配 markdown_rows_v1（整表文本与退回都用它）")
+    if summary and config.table_return_unit == "chunk":
+        raise ConfigError("配置了 [table_summary] 时返回单元不能是 chunk（摘要不对应单元格）")
+    if not hasattr(chunker, "max_tokens"):
+        raise ConfigError("LLM 表格处理需要按 token 分块的分块器（structured_tokens）")
+    from rag.ingest.chunkers.tokens import E5TokenCounter
+    from rag.ingest.tables.llm_tables import LLMCache, TableLLMStep
+    params = config.table_llm.params
+    llm = OpenRouterLLM(model=params["model"], temperature=params.get("temperature", 0),
+                        env_override=False)
+    cache = LLMCache(config.path.parent.parent / ".rag" / "llm-cache")
+    return TableLLMStep(config.table_llm.use, llm, E5TokenCounter(), chunker.max_tokens,  # type: ignore[attr-defined]
+                        cache, use_lead=params.get("lead", False))

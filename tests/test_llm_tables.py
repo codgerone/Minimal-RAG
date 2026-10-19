@@ -3,9 +3,10 @@
 import json
 from dataclasses import dataclass
 
+from rag.ingest.chunkers.table_plan import plan_chunks
 from rag.ingest.language import document_language
 from rag.ingest.tables.llm_tables import (
-    Lengths, annotation_issues, plan_chunks, render_grid, run_annotation, table_context,
+    Lengths, annotation_issues, render_grid, run_annotation, table_context,
 )
 from rag.ingest.tables.markdown_rows import serialize_markdown_rows
 from rag.ingest.tables.models import ImplicitMerge, TableAnnotation, TableSection

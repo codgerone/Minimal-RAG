@@ -13,7 +13,7 @@ from typing import TYPE_CHECKING, Literal, TypeAlias
 
 if TYPE_CHECKING:
     from rag.ingest.tables.models import (
-        HeaderDecision, SerializedTable, StructuredTable, TableSegment, TableSlot,
+        HeaderDecision, SerializedTable, StructuredTable, TableLLMResult, TableSegment, TableSlot,
     )
 
 
@@ -31,9 +31,9 @@ ProcessingStage: TypeAlias = Literal[
     "table_header_detection", "table_serialization", "document_text_serialization",
     "structured_chunking", "artifact_staging", "artifact_cleanup", "index_publication",
 ]
-ContextKind: TypeAlias = Literal["none", "overlap", "table_header", "merged_cell",
+ContextKind: TypeAlias = Literal["none", "overlap", "table_header", "section_title", "merged_cell",
                                  "list_ancestor", "fallback_locator"]
-ChunkKind: TypeAlias = Literal["text", "list", "table"]
+ChunkKind: TypeAlias = Literal["text", "list", "table", "table_summary"]
 
 
 @dataclass(frozen=True)
@@ -208,6 +208,7 @@ class TableNode:
     sources: tuple[PageSpan, ...]
     # Pages of a table merged across pages, one per part in row order; empty for a single part.
     segments: tuple[TableSegment, ...] = ()
+    llm: TableLLMResult | None = None
 
     def spans_for_rows(self, rows: tuple[int, ...]) -> tuple[PageSpan, ...]:
         """The page spans holding these table rows; all of them when unknown."""
