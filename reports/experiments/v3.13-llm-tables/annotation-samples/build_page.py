@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
-from run_samples import MODELS, NO_TEMPERATURE, REAL  # noqa: E402
+from run_samples import MODELS as ALL_MODELS, NO_TEMPERATURE, REAL  # noqa: E402
 from synthetic import TABLES as SYNTHETIC, build  # noqa: E402
 
 from rag.ingest.tables.llm_tables import LEAD_MAX_TOKENS, Lengths  # noqa: E402
@@ -12,6 +12,7 @@ from rag.reports.html import badge, esc, page, text_block, write_assets  # noqa:
 
 HERE = Path(__file__).parent
 RESULTS = HERE / "results"
+MODELS = [m for m in ALL_MODELS if (RESULTS / m.replace("/", "__")).exists()]
 ROOT = "../../../"          # annotation-samples/ -> reports/
 KEYS = [(key, title) for key, _, _, title in REAL] + [(key, title) for key, title, *_ in SYNTHETIC]
 SHORT = {"po2519-qty": "PO 25-19 数量表", "contract-object": "c0004 合同标的",
@@ -20,29 +21,20 @@ FORMS = [("markdown", "LM（Markdown）"), ("labeled", "LL（表头映射）"),
          ("markdown_lead", "LM+（Markdown + 引导句）"), ("labeled_lead", "LL+（表头映射 + 引导句）")]
 
 FINDINGS = [  # 由助手逐项查看结果后写入（2026-10-19）
-    ("结论", "15 次结构标注最终全部通过，没有表退回规则。luna、gemini 全部一次通过；deepseek 在两张人造表上"
-     "第 1 次把有值的列（Inspection witness、计划日期）标成隐式合并，被校验拦下，重试后改正。"),
-    ("结论", "表头：3 个模型在 5 张表上判定的表头行都与规则表头判定一致。PO 25-19 的 4 个分组标题、"
-     "c0004 无分节，3 个模型一致且正确。"),
-    ("结论", "人造预算表：表头之上的全表标题、两层嵌套分节，3 个模型都判对；Subtotal、COSTO DIRECTO、Nota "
-     "都没有被当成节标题（“按含义判断”有效）。"),
-    ("问题", "人造预算表的两行节标题（02.01 及其下一行说明“(incluye suministro…)”）只有 gemini 标成两行；"
-     "luna、deepseek 只标了第一行，说明行被当成数据行，02.01 被切开时后一块不重复它。"
-     "luna 还把 Subtotal 01 划进了子节 01.02（应只属于 01）。两处都只影响重复哪些行，不产生错误数据。"),
-    ("结论", "人造交货计划、中文付款计划：隐式合并 8 段 + 8 段，3 个模型（deepseek 为重试后）全部判对；"
-     "都没有把“本来就没有值”的空格（Qty、Inspection witness、Remarks、数量）标成同上，也没有标解析出的纵向合并。"),
-    ("问题", "中文付款计划：3 个模型都把期次 6（质保金）划进了第二批。造表时我预期它不属于任何一批，"
-     "但这一行的归属本身有歧义，算预期不严谨，不判为模型错误。"),
-    ("结论", "引导句全部一次通过：19–24 个词（中文 35–41 字），23–38 token（第 1 轮为 30–69 token，9 次超 48）。"
-     "都不含位置信息；表前无关的上下文（电话号码、页码行）没有被写进引导句或摘要。"),
-    ("问题", "gemini 在人造预算表的引导句里写了表内标题中的编号 SED-114，违反“不照抄单元格的值”，代码校验不出"
-     "（数字在表中出现过）。"),
-    ("结论", "摘要全部一次通过：131–397 token，都不超上限，都写出了分组标题和标识各行的值。"),
-    ("问题", "块数比规则多：PO 25-19 的 LM 9 块（RM 5 块），LL 18 块（RL 12 块）。原因是每块预留 64 token 给引导句、"
-     "每块重复分组标题（52 token）与三行表头（180 token），而 LL 每行约 210 token，一块只放得下 1 行。"
-     "这是“每块自足”的代价，会使只返回命中 chunk 时每题返回的 token 变多，由全量评估的指标 3 衡量。"),
-    ("结论", "花费（5 张表，两次调用，含推理）：luna $0.0046、deepseek $0.0136、gemini $0.0561；"
-     "推理 token 2.9k、14.0k、8.4k。"),
+    ("结论", "5 张表的结构标注、引导句、摘要全部一次通过。提示词版本改变，缓存未命中，结构标注是重新调用的结果，"
+     "与第 2 轮逐项相同：两次独立调用结果一致。"),
+    ("结论", "引导句这次没有照抄单元格的值（第 2 轮预算表写了 SED-114，这次写“una subestación de distribución”）。"),
+    ("结论", "摘要第 4 条改后：交货计划写出了全部 11 种物品描述，付款计划写出了全部付款节点和交货内容，"
+     "不再只列编号 1.1–3.4、期次 1–6；没有用范围代替逐项列出。"),
+    ("问题", "人造预算表的摘要改列描述后，没有写 01.01.01 这类分项编号，放到第 13 项写“entre otras instalaciones”"
+     "（435 token，接近 508 的上限）。编号能不能指向一行，模型判为“只用来排序”；工程预算中有人会按分项编号提问，"
+     "这是第 4 条留给模型判断的边界情况。"),
+    ("问题", "人造交货计划的摘要写了“under Contract No. 045-2026-ELN”，来自上下文中被误认为正文的页眉"
+     "“Page 7 of 15 - Contract No. 045-2026-ELN”。合同号本身属实、不是位置信息，规则不禁止；记录在此。"),
+    ("结论", "块数：不带引导句用满 512 后，PO 25-19 的 LM 7 块、LL 13 块（第 2 轮固定预留 64 时为 9、18；规则 RM 5、RL 12）；"
+     "加引导句后 LM+ 7 块、LL+ 14 块。人造预算表 LM 5 / LL 6，加引导句 5 / 7。所有块含引导句都不超过 512 token，"
+     "四种写法的渲染检查都通过。"),
+    ("结论", "花费：5 张表两次调用合计 $0.0589（含推理 token）。"),
 ]
 
 
@@ -123,7 +115,7 @@ def overview(data: dict) -> str:
             else:
                 parts.append("标注 " + status(ann, ann["annotation"] is not None, "annotation"))
                 parts.append("引导句 " + status(ann, ann["lead"] is not None, "lead"))
-                checks = (out.get("markdown_checks") or []) + (out.get("labeled_checks") or [])
+                checks = [x for form, _ in FORMS for x in (out.get(form + "_checks") or [])]
                 if ann["annotation"] is not None:
                     parts.append("渲染检查 " + (badge("通过", "ok") if not checks else badge(f"{len(checks)} 项未通过", "bad")))
             parts.append("摘要 " + status(summ, bool(summ.get("summary"))))
@@ -139,7 +131,7 @@ def overview(data: dict) -> str:
             f'{"".join(rows)}</table></div>'
             f'<p class="meta">花费为 OpenRouter 实际计费，含重试与推理 token。"重试后通过"指第一次未通过校验，'
             f'把未通过的项反馈给模型后第二次通过；"未通过，退回规则"指重试后仍未通过，该表按提案 2.6 退回规则序列化'
-            f'（引导句未通过则不加引导句）。渲染检查由代码对 LM、LL 的每个 chunk 检查表头与节标题是否齐全。</p></div>')
+            f'（引导句未通过则不加引导句）。渲染检查由代码对 LM、LL、LM+、LL+ 的每个 chunk 检查表头与节标题是否齐全。</p></div>')
 
 
 def findings() -> str:
@@ -232,13 +224,12 @@ def table_panel(key: str, title: str, inp: dict, data: dict) -> str:
         fallback = out["fallback"]["annotation"]
         parts = []
         for form, label in FORMS:
-            base = form.removesuffix("_lead")
-            checks = None if fallback else out.get(base + "_checks")
+            checks = None if fallback else out.get(form + "_checks")
             note = "（退回规则）" if fallback else ""
             chunks = out.get(form)
             count = f"{len(chunks)} 块" if chunks else "无引导句"
             parts.append(f'<details><summary>{esc(label)}{note} · {count}</summary>'
-                         f'{chunks_html(chunks, checks if not form.endswith("_lead") else None)}</details>')
+                         f'{chunks_html(chunks, checks)}</details>')
         flag = badge("标注退回规则", "bad") if fallback else ""
         block.append(f'<div class="card"><b>{esc(m)}</b> {flag} · LM {len(out["markdown"])} 块 · '
                      f'LL {len(out["labeled"])} 块{"".join(parts)}</div>')
@@ -253,14 +244,15 @@ def main() -> None:
         f'<a href="#{key}" data-tab="{key}">{esc(SHORT[key])}</a>' for key, _ in KEYS]
     panels = [f'<section data-panel="overview">{findings()}{overview(data)}</section>']
     panels += [table_panel(key, title, inputs[key], data) for key, title in KEYS]
-    body = (f'<h1>V3.13 样例审核（第 2 轮）：结构标注、引导句、摘要</h1>'
-            f'<div class="sub">3 个模型 × 5 张表（2 张真实表、3 张人造样表），提示词 llm_tables_v3'
+    body = (f'<h1>V3.13 样例审核（第 3 轮）：结构标注、引导句、摘要</h1>'
+            f'<div class="sub">选定的 {esc(", ".join(MODELS))} × 5 张表（2 张真实表、3 张人造样表），提示词 llm_tables_v4'
             f'（docs/changes/v3.13-prompts.md），JSON Schema 严格模式，原生推理中档，预算 512 token。'
             f'请看：表头、分节、隐式合并是否判对；渲染出的每块是否单独看得懂；引导句与摘要是否准确、'
-            f'不含位置信息。第 1 轮（LLM 直接写记录）的结果保留在 ../samples/。</div>'
+            f'不含位置信息。不带引导句的块用满预算，带引导句的块把引导句计入长度，两者块边界可以不同。'
+            f'第 2 轮（3 个模型）见 <a href="round2.html">round2.html</a>；第 1 轮（LLM 直接写记录）见 ../samples/。</div>'
             f'<div class="tabs">{"".join(tabs)}</div>{"".join(panels)}')
     write_assets(HERE.parents[2])     # repo reports/
-    (HERE / "index.html").write_text(page("V3.13 样例审核（第 2 轮）", body, root=ROOT,
+    (HERE / "index.html").write_text(page("V3.13 样例审核（第 3 轮）", body, root=ROOT,
                                           crumbs=[("报告首页", ROOT + "index.html")]), encoding="utf-8")
 
 

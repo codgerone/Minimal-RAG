@@ -1,4 +1,5 @@
-"""第 2 轮样例：3 个模型 × 5 张表（2 张真实表 + 3 张人造样表），每张表两次调用（结构标注含引导句、摘要）。
+"""样例：模型 × 5 张表（2 张真实表 + 3 张人造样表），每张表两次调用（结构标注含引导句、摘要）。
+第 2 轮跑了 3 个模型（页面保留为 round2.html）；第 3 轮只跑选定的 gemini。
 
 用法（仓库根目录）：python reports/experiments/v3.13-llm-tables/annotation-samples/run_samples.py [模型...]
 真实表读取 .rag/indexes/structured/ 的解析结果；LLM 结果缓存在 .rag/llm-cache/，重跑不重复计费。
@@ -116,7 +117,8 @@ def main(models: list[str]) -> None:
     counter = E5TokenCounter()
     prefix = counter.count_passage("")
     rule_fits = lambda text: counter.count_passage(text) <= MAX_TOKENS
-    llm_fits = lambda text: counter.count_passage(text) <= MAX_TOKENS - LEAD_MAX_TOKENS
+    # Validation leaves room for the longest accepted lead; packing counts the actual one.
+    check_fits = lambda text: counter.count_passage(text) <= MAX_TOKENS - LEAD_MAX_TOKENS
     cache = LLMCache(Path(".rag/llm-cache"))
     inputs = {}
     for key, fragment, node_id, title in REAL:
@@ -150,7 +152,7 @@ def main(models: list[str]) -> None:
 
             def extra(annotation: TableAnnotation) -> list[str]:
                 found = []
-                for serialized, chunks in renderings(table, node_id, annotation, llm_fits).values():
+                for serialized, chunks in renderings(table, node_id, annotation, check_fits).values():
                     found += plan_issues(chunks, serialized)
                 return list(dict.fromkeys(found))
 
@@ -159,12 +161,18 @@ def main(models: list[str]) -> None:
                                         extra)
                 out["annotation"] = result
                 fallback = result.annotation is None
-                rendered = renderings(table, node_id, result.annotation, llm_fits if not fallback else rule_fits)
                 out["fallback"] = {"annotation": fallback, "lead": result.lead is None}
-                for name, (serialized, chunks) in rendered.items():
+                for name, (serialized, chunks) in renderings(table, node_id, result.annotation, rule_fits).items():
                     out[name] = chunk_records(chunks, counter)
-                    out[name + "_lead"] = chunk_records(chunks, counter, result.lead) if result.lead else None
                     out[name + "_checks"] = [] if fallback else checks(serialized, chunks, result.annotation)
+                if result.lead:
+                    lead = result.lead
+                    lead_fits = lambda text: counter.count_passage(lead + "\n" + text) <= MAX_TOKENS
+                    for name, (serialized, chunks) in renderings(table, node_id, result.annotation, lead_fits).items():
+                        out[name + "_lead"] = chunk_records(chunks, counter, lead)
+                        out[name + "_lead_checks"] = [] if fallback else checks(serialized, chunks, result.annotation)
+                else:
+                    out["markdown_lead"] = out["labeled_lead"] = None
             except Exception as exc:  # recorded, so one failing model does not stop the rest
                 out["annotation"] = {"error": f"{type(exc).__name__}: {exc}"}
             try:

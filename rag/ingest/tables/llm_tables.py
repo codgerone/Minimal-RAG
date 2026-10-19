@@ -22,9 +22,9 @@ from rag.ingest.tables.models import (
     ImplicitMerge, SerializedTable, SerializedTableLine, TableAnnotation, TableSection,
 )
 
-PROMPT_VERSION = "llm_tables_v3"
+PROMPT_VERSION = "llm_tables_v4"
 REASONING_EFFORT = "medium"
-LEAD_MAX_TOKENS = 64                  # accepted by code, and reserved in every chunk
+LEAD_MAX_TOKENS = 64                  # accepted by code; validation leaves this much room in a chunk
 LEAD_WORDS, LEAD_CHARS = 24, 48       # told to the model
 SUMMARY_WORDS_PER_TOKEN, SUMMARY_CHARS_PER_TOKEN = 0.5, 1.0
 CONTEXT_NODES, CONTEXT_NODE_TOKENS = 2, 200
@@ -185,9 +185,10 @@ Rules:
    numbers).
 3. State how the table is organized: what a row stands for, what the columns are (with their
    original labels), and any groups, subtotals or totals.
-4. Copy exactly the values that identify rows and groups, that is, the values a question would
-   use to point at a particular row. If they do not all fit, say what kinds there are and give
-   as many as fit, in the original order.
+4. Copy exactly the values that a question would use to point at a particular row or group. A
+   sequence number that only orders the rows (such as 1, 2, 3 or 1.1, 1.2) does not point at a
+   row by itself. If they do not all fit, say what kinds there are and give as many as fit, in
+   the original order. List them one by one; do not replace a run of values with a range.
 5. Do not list the other values the rows report; say only which kinds of values the table gives.
 6. Do not state anything that the table or the context does not support.
 
@@ -554,8 +555,7 @@ def plan_chunks(serialized: SerializedTable, annotation: TableAnnotation | None,
     in chunks after it. With one: every chunk repeats the header rows and the titles of the
     sections its first line lies in; sections are kept whole when they fit a chunk, and a
     section that fits none is packed by its sub-sections and rows. A lead sentence is written
-    before each chunk by the caller, so chunks are the same with and without it; `fits` leaves
-    room for it.
+    before each chunk by the caller; `fits` counts it.
     """
     lines = serialized.lines
     position = {line.line_id: i for i, line in enumerate(lines)}
