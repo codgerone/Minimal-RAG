@@ -7,6 +7,7 @@ from collections.abc import Callable
 
 from rag.ingest.tables.continuation import RULE_VERSION, detect_continuations, merge_tables
 from rag.ingest.tables.header import detect_header
+from rag.ingest.tables.markdown_rows import serialize_markdown_rows
 from rag.models import PageSpan, PrimaryDocument, PrimaryTablePlaceholder
 from rag.ingest.tables.models import (
     ContentResolution, ContinuationReport, HeaderDecision, PreparedTableContent, SerializedTable,
@@ -110,6 +111,9 @@ def prepare_tables(
             segments = (TableSegment(placeholder.slot_id, table.table_id,
                                      slots[placeholder.slot_id].page_number, 0, table.row_count or 0),)
         serialized = serializer(table, header, table_node_id=placeholder.element_id)
+        # Whatever text is chunked, a whole table is returned in markdown_rows_v1.
+        whole = (serialized.text if serialized.rule_version == "markdown_rows_v1" else
+                 serialize_markdown_rows(table, header, table_node_id=placeholder.element_id).text)
         prepared.append(PreparedTableContent(placeholder.slot_id, table.table_id,
-                                             table, header, serialized, segments))
+                                             table, header, serialized, whole, segments))
     return tuple(prepared), report

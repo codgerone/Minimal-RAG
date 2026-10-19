@@ -37,7 +37,7 @@ def table_id(document_id: str, node_id: str) -> str:
 
 
 def collect_tables(document: ParsedDocument, batch: ChunkBatch) -> list[StoredTable]:
-    """Each table node with its serialized text and the table chunks drawn from it.
+    """Each table node with its whole-table text (markdown_rows_v1) and the table chunks drawn from it.
     Table chunks hold exactly one table (the chunker never mixes a table with other content)."""
     nodes = {node.node_id: node for node in document.nodes if isinstance(node, TableNode)}
     members: dict[str, list[str]] = {node_id: [] for node_id in nodes}
@@ -52,7 +52,7 @@ def collect_tables(document: ParsedDocument, batch: ChunkBatch) -> list[StoredTa
     if empty:
         raise ValueError(f"表格没有对应的 chunk：{empty}")
     return [StoredTable(table_id(document.document_id, node_id), document.document_id,
-                        nodes[node_id].serialized.text, tuple(ids))
+                        nodes[node_id].whole_text, tuple(ids))
             for node_id, ids in members.items()]
 
 

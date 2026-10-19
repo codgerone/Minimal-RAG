@@ -97,6 +97,7 @@ class PreparedTableContent:
     adopted_table: StructuredTable          # the merged table when segments > 1
     header_decision: HeaderDecision
     serialized_table: SerializedTable
+    whole_text: str                         # markdown_rows_v1 text, returned when the whole table is
     segments: tuple[TableSegment, ...]
 
     def __post_init__(self) -> None:

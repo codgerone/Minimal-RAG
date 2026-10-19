@@ -54,6 +54,7 @@ def _table_node() -> TableNode:
     assert header.outcome == "identified"
     return TableNode("tbl", "s", "#/tables/0", "selected_winner", table, None, header,
                      serialize_markdown_rows(table, header, table_node_id="tbl", labeled=True),
+                     serialize_markdown_rows(table, header, table_node_id="tbl").text,
                      (PageSpan(1, BoundingBox(0, 0, 100, 30), "#/tables/0"),))
 
 

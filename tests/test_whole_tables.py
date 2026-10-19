@@ -25,7 +25,10 @@ def test_a_split_table_is_stored_once_with_its_full_text_and_all_its_chunks():
     assert len(table_chunks) == 2
     [stored] = collect_tables(document, batch)
     assert stored.table_id == table_id("d", "tbl")
-    assert stored.text == document.nodes[1].serialized.text
+    # The labeled text is chunked; the whole table is stored in markdown_rows_v1.
+    assert document.nodes[1].serialized.rule_version == "labeled_rows_v1"
+    assert stored.text == document.nodes[1].whole_text
+    assert stored.text.splitlines()[0] == "| Model | Qty |"
     assert stored.chunk_ids == tuple(table_chunks)
 
 

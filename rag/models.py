@@ -204,6 +204,7 @@ class TableNode:
     selection_ref: str | None
     header: HeaderDecision
     serialized: SerializedTable
+    whole_text: str                    # markdown_rows_v1 text, returned when the whole table is
     sources: tuple[PageSpan, ...]
     # Pages of a table merged across pages, one per part in row order; empty for a single part.
     segments: tuple[TableSegment, ...] = ()
