@@ -10,6 +10,7 @@ from typing import Any
 from rag.eval.dataset import Case, Dataset, load_dataset
 from rag.eval.judge import CaseEvidence, JudgeChunk, judge_case
 from rag.eval.metrics import METRICS, QuestionScore, aggregate, completion_ranks, score_question
+from rag.eval import table_metrics as tm
 from rag.index.builder import current_status, open_lexical, open_store, open_tables
 from rag.jsonio import read_json, write_json
 from rag.paths import Workspace
@@ -33,6 +34,8 @@ class CaseResult:
     scope: SearchScope
     required_k: dict[str, int]    # group → units needed in the full ranking; uncoverable groups left out
     fewest_units: dict[str, int]  # group → fewest return units any acceptable set spreads over
+    table: dict[str, Any] | None = None   # table evidence metrics, for table questions
+    leading_tokens: tuple[int, ...] = ()  # tokens of the leading return units of the full ranking
 
     @property
     def evidence_documents(self) -> set[str]:
@@ -127,16 +130,43 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int) -> Path
               if table_return_unit == "table" else {})
     from rag.ingest.chunkers.tokens import E5TokenCounter
     counter = E5TokenCounter()
+    token_cache: dict[str, int] = {}
+
+    def tokens_of(text: str) -> int:
+        if text not in token_cache:
+            token_cache[text] = counter.count_passage(text)
+        return token_cache[text]
+
+    table_boxes = _table_boxes(workspace, assembly.name)
+    table_excerpts = {x.excerpt_id for c in dataset.cases for x in c.excerpts
+                      if tm.is_table_excerpt(x, table_boxes)}
     results: list[CaseResult] = []
     for case in dataset.cases:
         scope = resolve_scope(case.question, catalog, enabled)
-        ranking = searcher.rank_all(case.question, scope.document_ids)
+        hits = searcher.rank_hits(case.question, scope.document_ids)
+        ranking = searcher.units_for(hits)
         units = ranking[:top_k]
         evidence = judge_case(case, chunks)
-        item = CaseResult(case, units, [counter.count_passage(u.text) for u in units], evidence,
+        groups = tm.table_groups(case, evidence, table_excerpts)
+        table = None
+        needed = tm.CURVE_K
+        if groups:
+            per_group, k2 = tm.required_units([u.chunk_ids for u in ranking], groups)
+            table = {"groups": [{"group_id": g.group_id, "excerpt_ids": list(g.excerpt_ids),
+                                 "chunk_rank": tm.chunk_rank([h.chunk.chunk_id for h in hits], g.any_word_chunks),
+                                 "required_k": per_group.get(g.group_id)} for g in groups],
+                     "required_k": k2}
+            needed = max(needed, k2 or 0)
+        leading = tuple(tokens_of(u.text) for u in ranking[:needed])
+        if table is not None:
+            table["tokens"] = sum(leading[:table["required_k"]]) if table["required_k"] else None
+        owner = lambda cid: owners.get(cid, cid)
+        item = CaseResult(case, units, [tokens_of(u.text) for u in units], evidence,
                           None, scope, completion_ranks([u.chunk_ids for u in ranking], evidence.groups),
                           {g.group_id: min(len({owners.get(c, c) for c in s}) for s in g.acceptable_sets)
-                           for g in evidence.groups if g.acceptable_sets})
+                           for g in evidence.groups if g.acceptable_sets}, table, leading)
+        if table is not None:
+            table["fewest_units"] = tm.fewest_units(evidence.groups, owner)
         if case.answerable:
             item = replace(item, score=score_question(
                 [u.chunk_ids for u in units], [u.document_id for u in units],
@@ -174,12 +204,66 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int) -> Path
         "returned_tokens": _tokens_summary([r for r in results if r.score is not None]),
         "document_scope": _scope_summary(results, enabled, catalog is not None),
         "documents": per_document,
+        "table_evidence": _table_summary(results, len(table_excerpts)),
+        "ingest_cost": _ingest_cost(workspace, assembly.name),
         "cases": [_case_json(r, names) for r in results],
     }
     write_json(folder / "result.json", result)
     from rag.reports.evaluation import latest_before, write_eval_report
     write_eval_report(workspace, folder, result, latest_before(workspace, result))
     return folder
+
+
+def _table_boxes(workspace: Workspace, config_name: str) -> list[tuple[int, tuple[float, float, float, float]]]:
+    """Every table's box on each of its pages, as the parser gave it."""
+    boxes = []
+    for path in sorted((workspace.index_dir(config_name) / "documents").glob("*/parsed.json")):
+        for node in read_json(path)["nodes"]:
+            if "table" in node:
+                boxes += [(s["page_number"], (s["bbox"]["x0"], s["bbox"]["y0"], s["bbox"]["x1"], s["bbox"]["y1"]))
+                          for s in node["sources"] if s.get("bbox")]
+    return boxes
+
+
+def _table_summary(results: list[CaseResult], excerpts: int) -> dict[str, Any]:
+    """Table questions, and the K curve: for K = 1..CURVE_K, complete questions, table-evidence
+    complete questions, and the tokens returned summed over answerable questions."""
+    answerable = [r for r in results if r.score is not None]
+    table = [r for r in answerable if r.table is not None]
+    curve = []
+    for k in range(1, tm.CURVE_K + 1):
+        complete = sum(len(r.required_k) == len(r.evidence.groups) and max(r.required_k.values(), default=0) <= k
+                       for r in answerable)
+        table_complete = sum(r.table["required_k"] is not None and r.table["required_k"] <= k for r in table)
+        curve.append({"k": k, "complete": complete, "table_complete": table_complete,
+                      "tokens": sum(sum(r.leading_tokens[:k]) for r in answerable)})
+    return {"excerpts": excerpts, "questions": len(table), "answerable": len(answerable),
+            "groups": sum(len(r.table["groups"]) for r in table), "curve": curve}
+
+
+def _ingest_cost(workspace: Workspace, config_name: str) -> dict[str, Any] | None:
+    """LLM table processing recorded at ingest: spend, call time, retries, degraded tables."""
+    tables = calls = retries = degraded = 0
+    cost = seconds = 0.0
+    found = False
+    for path in sorted((workspace.index_dir(config_name) / "documents").glob("*/parsed.json")):
+        for node in read_json(path)["nodes"]:
+            llm = node.get("llm") if "table" in node else None
+            if not llm:
+                continue
+            found = True
+            tables += 1
+            attempts = llm["attempts"]
+            calls += len(attempts)
+            retries += len(attempts) - 1
+            cost += sum(a["cost_usd"] or 0 for a in attempts)
+            seconds += sum(a["seconds"] or 0 for a in attempts)
+            passed = llm["annotation"] if llm["task"] == "annotation" else llm["summary"]
+            degraded += passed is None
+    if not found:
+        return None
+    return {"tables": tables, "calls": calls, "retries": retries, "degraded_tables": degraded,
+            "cost_usd": round(cost, 6), "seconds": round(seconds, 1)}
 
 
 def _tokens_summary(answerable: list[CaseResult]) -> dict[str, Any]:
@@ -235,6 +319,7 @@ def _case_json(item: CaseResult, names: dict[str, str]) -> dict[str, Any]:
                         for scheme, scheme_judged in zip(group.schemes, judged.schemes)],
         } for group, judged in zip(case.groups, item.evidence.groups)],
         "returned_tokens": sum(item.tokens),
+        "table": item.table,
         "hits": [{
             "rank": rank, "chunk_id": u.hit.chunk.chunk_id, "document_id": u.document_id,
             "document_name": u.hit.chunk.document_name, "pages": list(u.pages),
