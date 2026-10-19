@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass
-from typing import Literal, TypeAlias
+from typing import Literal, TypeAlias, get_args
 
 from rag.models import BoundingBox, PageSpan, ProcessingWarning
 
@@ -568,7 +568,7 @@ class Continuation:
 @dataclass(frozen=True)
 class SerializedTableLine:
     line_id: str
-    kind: Literal["header", "data", "unplaced_text"]
+    kind: Literal["header", "section_title", "data", "unplaced_text"]
     text: str
     source_rows: tuple[int, ...]
     source_cell_ids: tuple[str, ...]
@@ -581,7 +581,8 @@ class SerializedTableLine:
             text = text[:item.start] + item.text + text[item.end:]
         return text
 
-TableTextRule: TypeAlias = Literal["markdown_rows_v1", "labeled_rows_v1"]
+TableTextRule: TypeAlias = Literal["markdown_rows_v1", "labeled_rows_v1", "llm_markdown_v1",
+                                   "llm_labeled_v1"]
 
 @dataclass(frozen=True)
 class SerializedTable:
@@ -590,12 +591,41 @@ class SerializedTable:
     rule_version: TableTextRule
 
     def __post_init__(self) -> None:
-        if (self.rule_version not in ("markdown_rows_v1", "labeled_rows_v1")
+        if (self.rule_version not in get_args(TableTextRule)
                 or self.text != "\n".join(line.text for line in self.lines)):
             raise ValueError("serialized table body or rule invalid")
         ids = tuple(line.line_id for line in self.lines)
         if len(ids) != len(set(ids)):
             raise ValueError("duplicate serialized line ID")
+
+@dataclass(frozen=True)
+class TableSection:
+    """Rows introduced by a title: from the first title row to `last_row`, both inclusive."""
+    title_rows: tuple[int, ...]
+    last_row: int
+
+    @property
+    def first_row(self) -> int:
+        return self.title_rows[0]
+
+
+@dataclass(frozen=True)
+class ImplicitMerge:
+    """Empty cells below `first_row` in `column`, down to `last_row`, repeat its value."""
+    column: int
+    first_row: int
+    last_row: int
+
+
+@dataclass(frozen=True)
+class TableAnnotation:
+    """Structure judged by the LLM: what each chunk repeats, and blanks meaning "same as above"."""
+    header_rows: tuple[int, ...]
+    sections: tuple[TableSection, ...]
+    implicit_merges: tuple[ImplicitMerge, ...]
+
+    def title_rows(self) -> frozenset[int]:
+        return frozenset(row for section in self.sections for row in section.title_rows)
 
 @dataclass(frozen=True)
 class StructuredTable:

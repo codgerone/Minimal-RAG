@@ -7,13 +7,19 @@ two places only: no header line, and a value of a cell occupying a single column
 Merged cells are stated by structure only: the value sits at the cell's top-left position, covered
 positions to its right read `←`, covered positions below read `↑`. Lines carry where each cell's
 text sits and how a line is rewritten when it opens a chunk in the middle of a vertical merge.
+
+Given an LLM annotation instead of a header decision (`llm_markdown_v1`, `llm_labeled_v1`), the
+annotated header rows replace the detected header and are written as they are, one line per row
+(the labeled form writes none); section title rows carry no column names; blanks annotated as
+repeating the value above read `↑`, as a vertical merge does.
 """
 
 from __future__ import annotations
 
+from rag.ingest.tables.header import header_paths
 from rag.ingest.tables.models import (
     CellSpan, Continuation, HeaderDecision, SerializedTable, SerializedTableLine,
-    StructuredTable, TableCell,
+    StructuredTable, TableAnnotation, TableCell,
 )
 
 LEFT, UP, MISSING = "←", "↑", "〔缺失单元格〕"
@@ -45,15 +51,31 @@ class _Line:
 
 
 def serialize_markdown_rows(
-    table: StructuredTable, header: HeaderDecision, *, table_node_id: str | None = None,
-    labeled: bool = False,
+    table: StructuredTable, header: HeaderDecision | None, *, table_node_id: str | None = None,
+    labeled: bool = False, annotation: TableAnnotation | None = None,
 ) -> SerializedTable:
     owner = table_node_id or table.table_id
-    paths = {item.column_index: item for item in header.paths}
     columns = table.column_count or 0
-    identified = header.outcome == "identified"
-    header_start = header.header_start_row if identified else None
-    header_rows = set(range(header.header_start_row or 0, header.header_end_row or 0)) if identified else set()
+    title_rows: frozenset[int] = frozenset()
+    implicit: dict[tuple[int, int], tuple[int, int]] = {}   # blank position -> anchor position
+    if annotation is None:
+        assert header is not None
+        identified = header.outcome == "identified"
+        header_start = header.header_start_row if identified else None
+        header_rows = set(range(header.header_start_row or 0, header.header_end_row or 0)) if identified else set()
+        header_paths_ = header.paths
+        rule = "labeled_rows_v1" if labeled else "markdown_rows_v1"
+    else:
+        header_rows = set(annotation.header_rows)
+        header_start = None                                  # annotated header rows are written as rows
+        header_paths_ = (header_paths(table, min(header_rows), max(header_rows) + 1)
+                         if header_rows else ())
+        title_rows = annotation.title_rows()
+        for merge in annotation.implicit_merges:
+            for row in range(merge.first_row + 1, merge.last_row + 1):
+                implicit[(row, merge.column)] = (merge.first_row, merge.column)
+        rule = "llm_labeled_v1" if labeled else "llm_markdown_v1"
+    paths = {item.column_index: item for item in header_paths_}
 
     grid: dict[tuple[int, int], TableCell] = {}
     for cell in sorted(table.cells, key=lambda item: item.cell_id):
@@ -88,10 +110,17 @@ def serialize_markdown_rows(
         path = paths.get(col) if labeled and col is not None and cell.end_col_offset_idx == col + 1 else None
         return (_normalize(" / ".join(path.display_parts)), path.cell_ids) if path else ("", ())
 
-    def emit_row(row: int) -> None:
+    def emit_row(row: int, kind: str = "data") -> None:
         built, spans, cell_ids = _Line(), [], []
         continued: dict[str, list[int]] = {}           # merged cell from a data row above -> slots
         for col in range(columns):
+            if (row, col) in implicit:
+                built.add(UP)
+                spans.append(CellSpan((), *built.slots[-1]))
+                anchor = grid[implicit[(row, col)]]
+                if anchor.cell_id in anchors:
+                    continued.setdefault(anchor.cell_id, []).append(len(built.slots) - 1)
+                continue
             cell = grid.get((row, col))
             if cell is None:
                 built.add(MISSING)
@@ -99,7 +128,7 @@ def serialize_markdown_rows(
                 continue
             if cell.start_row_offset_idx == row and cell.start_col_offset_idx == col:
                 value = _normalize(cell.text)
-                label, label_cells = label_of(cell) if value else ("", ())
+                label, label_cells = label_of(cell) if value and kind == "data" else ("", ())
                 label_span = built.add(value, label)
                 start, end = built.slots[-1]
                 if label_span:
@@ -127,19 +156,20 @@ def serialize_markdown_rows(
             label = label_of(next(c for c in table.cells if c.cell_id == cell_id))[0]
             text = (f"{label}: " if label else "") + f"{UP} {value}" + f" | {LEFT}" * (len(slots) - 1)
             continuations.append(Continuation(start, end, text, anchor_line, anchor_start, anchor_end))
-        lines.append(SerializedTableLine(line_id(), "data", built.text, (row,), tuple(dict.fromkeys(cell_ids)),
+        lines.append(SerializedTableLine(line_id(), kind, built.text, (row,), tuple(dict.fromkeys(cell_ids)),
                                          tuple(spans), tuple(continuations)))
 
     for row in range(table.row_count or 0):
         if row == header_start and not labeled:
             emit_header()
         if row in header_rows:
+            if annotation is not None and not labeled:
+                emit_row(row, "header")
             continue
-        emit_row(row)
+        emit_row(row, "section_title" if row in title_rows else "data")
 
     if table.unplaced_text is not None:
         unplaced_ids = tuple(cell.cell_id for cell in table.cells if cell.start_row_offset_idx is None)
         lines.append(SerializedTableLine(line_id(), "unplaced_text", table.unplaced_text, (), unplaced_ids))
     result = tuple(lines)
-    return SerializedTable("\n".join(item.text for item in result), result,
-                           "labeled_rows_v1" if labeled else "markdown_rows_v1")
+    return SerializedTable("\n".join(item.text for item in result), result, rule)
