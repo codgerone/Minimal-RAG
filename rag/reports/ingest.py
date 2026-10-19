@@ -6,12 +6,13 @@ import shutil
 from collections import Counter
 from statistics import median
 
+from rag.eval.table_structure import differences, find_answer, load_answers
 from rag.index.manifest import DocumentEntry
 from rag.ingest.pipeline import ProcessedDocument
 from rag.ingest.tables import continuation as cont
 from rag.ingest.tables.models import (
     ContinuationEvaluation, GroupScoringResult, HeaderDecision, StructuredTable, TableAnnotation,
-    TableCandidate,
+    TableCandidate, TableLLMResult,
 )
 from rag.jsonio import write_atomic
 from rag.models import ChunkBatch, ListNode, TableNode, TextNode
@@ -254,7 +255,56 @@ def _continuation_card(item: ContinuationEvaluation, numbers: dict[str, int]) ->
             f'{body}</table></div></div>')
 
 
-def tables_page(processed: ProcessedDocument, entry: DocumentEntry, config_name: str) -> str:
+def _attempts(llm: TableLLMResult) -> str:
+    parts = []
+    for i, a in enumerate(llm.attempts, 1):
+        took = f" · {a.seconds:.1f} 秒" if a.seconds is not None else ""
+        head = (f"第 {i} 次调用：输入 {a.prompt_tokens} · 输出 {a.completion_tokens}（推理 {a.reasoning_tokens}）"
+                f" token · ${a.cost_usd or 0:.5f}{took}{'（缓存）' if a.cached else ''}")
+        issues = "".join(f"<li>{esc(x)}</li>" for x in a.issues)
+        verdict = (f'<ul class="meta">{issues}</ul>' if issues else
+                   f'<div class="meta">{badge("校验通过", "ok")}</div>')
+        parts.append(f'<div class="meta">{head}</div>{verdict}'
+                     f'<details><summary>第 {i} 次的原始输出与推理</summary>{text_block(a.raw, 1500)}'
+                     f'{text_block(a.reasoning or "（未返回推理内容）", 1500)}</details>')
+    return "".join(parts)
+
+
+def _llm_card(llm: TableLLMResult, table: StructuredTable, answers, sources) -> str:
+    """LLM processing of one table: whether the annotation is correct, the lead or summary, the calls."""
+    context = "".join(f'<div class="meta">[{esc(n.kind)}]</div>{text_block(n.text, 400)}' for n in llm.context)
+    calls = (f'<details><summary>调用与校验（{esc(llm.model)}，{len(llm.attempts)} 次）</summary>'
+             f'{_attempts(llm)}<div class="meta">交给 LLM 的上下文：</div>'
+             f'{context or "<div class=meta>(none)</div>"}</details>')
+    if llm.task == "summary":
+        body = (f'<div>{badge("摘要通过校验", "ok")} 本表入库一个摘要 chunk</div>{text_block(llm.summary)}'
+                if llm.summary is not None else
+                f'<div>{badge("摘要未通过校验", "bad")} 已退回 markdown_rows_v1 表格 chunk（降级完成）</div>')
+        return f'<div class="card"><h3>LLM 表格摘要</h3>{body}{calls}</div>'
+    if llm.annotation is None:
+        verdict = f'<div>{badge("标注未通过校验", "bad")} 已退回规则序列化（降级完成）</div>'
+        grid = ""
+    else:
+        answer = find_answer(answers, sources) if answers else None
+        if answer is None:
+            verdict = f'<div>{badge("没有对应的正确答案", "warn")} eval/table-structure/ 中找不到这张表</div>'
+        else:
+            wrong = differences(answer.annotation, llm.annotation)
+            verdict = (f'<div>{badge("结构标注正确", "ok")}</div>' if not wrong else
+                       f'<div>{badge("结构标注有误", "bad")}</div><ul>'
+                       + "".join(f"<li>{esc(x)}</li>" for x in wrong) + "</ul>")
+        grid = GRID_LEGEND + render_grid(table, annotation=llm.annotation)
+    if llm.lead is None:
+        lead = f'<div>{badge("引导句未通过校验", "bad")} 不加引导句</div>'
+    else:
+        used = "每个表格 chunk 开头写这句" if llm.use_lead else "本配置不加引导句"
+        lead = f'<div>引导句（{used}）：</div>{text_block(llm.lead)}'
+    return f'<div class="card"><h3>LLM 结构标注</h3>{verdict}{grid}{lead}{calls}</div>'
+
+
+def tables_page(processed: ProcessedDocument, entry: DocumentEntry, config_name: str,
+                answers=None) -> str:
+    """`answers`: the correct structure annotations of this document's tables, when there are any."""
     candidates = {c.candidate_id: c for r in processed.extraction_reports for c in r.candidates}
     admissions = ({a.candidate_id: a for a in processed.grouping.candidate_admission_results}
                   if processed.grouping else {})
@@ -264,6 +314,8 @@ def tables_page(processed: ProcessedDocument, entry: DocumentEntry, config_name:
     prepared = {segment.slot_id: p for p in processed.prepared_tables for segment in p.segments}
     slots = processed.parse.primary.table_slots
     numbers = {slot.slot_id: number for number, slot in enumerate(slots, start=1)}
+    node_sources = {node.slot_id: node.sources for node in processed.document.nodes
+                    if isinstance(node, TableNode)}
     evaluations = processed.continuations.evaluations if processed.continuations else ()
     merged = [p for p in processed.prepared_tables if len(p.segments) > 1]
     merged_line = "；".join("表 " + "、".join(str(numbers[seg.slot_id]) for seg in p.segments) + " 合并为一张表"
@@ -342,6 +394,8 @@ def tables_page(processed: ProcessedDocument, entry: DocumentEntry, config_name:
                f'<div class="grid">{"".join(cards[3:])}</div></details>' if len(cards) > 3 else "")
             + (f'<details><summary>本页未进入该表评分的其他候选（{len(page_candidates)}）</summary>'
                f'<table><tr><th>候选</th><th>原因</th></tr>{others}</table></details>' if page_candidates else "")
+            + ("" if continued or prep.llm is None else
+               _llm_card(prep.llm, prep.adopted_table, answers, node_sources.get(prep.slot_id, ())))
             + ("" if continued else
                f'<details><summary>入库文本（{len(prep.serialized_table.text)} 字符）</summary>'
                f'{text_block(prep.serialized_table.text)}</details>') + "</div>")
@@ -408,5 +462,6 @@ def write_document_reports(workspace: Workspace, config_name: str, processed: Pr
         shutil.rmtree(folder)
     write_atomic(folder / PAGE_NAMES[0], parse_page(processed, entry, config_name))
     if processed.parse.primary.table_slots:
-        write_atomic(folder / PAGE_NAMES[1], tables_page(processed, entry, config_name))
+        answers = load_answers(workspace.root / "eval" / "table-structure", processed.document.document_id)
+        write_atomic(folder / PAGE_NAMES[1], tables_page(processed, entry, config_name, answers))
     write_atomic(folder / PAGE_NAMES[2], chunks_page(processed, batch, entry, config_name))

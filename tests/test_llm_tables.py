@@ -175,3 +175,53 @@ def test_context_takes_two_nodes_before_the_table_and_keeps_the_end_of_long_ones
 def test_document_language_is_chinese_when_most_letters_are_cjk():
     assert document_language(["买方按下表所列节点支付合同价款 PO 25-19"]) == "chinese"
     assert document_language(["El precio de los medidores"]) == "spanish"
+
+
+def _llm_document(llm, annotation=None):
+    from rag.ingest.chunkers.structured import chunk_parsed_document
+    from rag.ingest.tables.header import detect_header
+    from rag.models import BoundingBox, PageSpan, ParsedDocument, TableNode
+    table = budget_table()
+    header = detect_header(table)
+    serialized = serialize_markdown_rows(table, None if annotation else header, table_node_id="tbl",
+                                         annotation=annotation)
+    node = TableNode("tbl", "s", "#/tables/0", "selected_winner", table, None, header, serialized,
+                     "| whole |", (PageSpan(1, BoundingBox(0, 0, 200, 300), "#/tables/0"),), (), llm)
+    document = ParsedDocument("d", "d.pdf", "d.pdf", "a" * 64, (node,), (), "english")
+
+    class Lines:
+        def count_passage(self, text):
+            return len(text.split("\n"))
+    return chunk_parsed_document(document, Lines(), max_input_tokens=9, overlap_tokens=0)
+
+
+def _result(task, **fields):
+    from rag.ingest.tables.models import TableLLMResult
+    return TableLLMResult(task, "m", "v", "medium", (), (), **fields)
+
+
+def test_chunks_repeat_section_titles_as_context_and_carry_the_lead():
+    batch = _llm_document(_result("annotation", annotation=BUDGET, lead="Budget by item.", use_lead=True),
+                          BUDGET)
+    assert all(c.kind == "table" and c.text.startswith("Budget by item.\n| Budget | ← | ← |")
+               for c in batch.chunks)
+    assert all(c.token_count <= 9 for c in batch.chunks)
+    # A chunk opening inside group A repeats the table title, the header rows and A's title.
+    inside = next(c for c in batch.chunks if "| A2.1 | Slab | 30 |" in c.text)
+    kinds = [s.context_kind for s in inside.sources]
+    assert kinds[:4] == ["section_title", "table_header", "table_header", "section_title"]
+
+
+def test_a_failed_lead_or_no_lead_setting_writes_none():
+    for llm in (_result("annotation", annotation=BUDGET, lead=None, use_lead=True),
+                _result("annotation", annotation=BUDGET, lead="Budget.", use_lead=False)):
+        assert not any(c.text.startswith("Budget") and not c.text.startswith("| Budget")
+                       for c in _llm_document(llm, BUDGET).chunks)
+
+
+def test_a_summary_replaces_the_table_chunks_and_covers_the_whole_table():
+    [chunk] = _llm_document(_result("summary", summary="Budget of civil and electrical works.")).chunks
+    assert chunk.kind == "table_summary" and chunk.text == "Budget of civil and electrical works."
+    assert chunk.sources[0].source_text_start is None and not chunk.sources[0].repeated_context
+    fallback = _llm_document(_result("summary", summary=None)).chunks
+    assert {c.kind for c in fallback} == {"table"}
