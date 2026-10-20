@@ -76,7 +76,7 @@ def build_parser() -> argparse.ArgumentParser:
     compare.add_argument("runs", nargs="+", metavar="RUN",
                          help="reports/eval/ 下的评估目录名；可写成 目录名=显示名（如 =V3.9），显示在该列设置之前")
     compare.add_argument("--name", required=True, help="对比页名称（目录名）")
-    command("report", "按已保存的结果重新生成评估报告和总入口 reports/index.html")
+    command("report", "按已入库的中间结果与已保存的评估结果，重新生成入库审核页、评估报告、对比页和总入口 reports/index.html")
     return parser
 
 
@@ -426,10 +426,12 @@ def _report(workspace: Workspace, args: argparse.Namespace) -> int:
     from rag.reports.compare import rerender_comparisons
     from rag.reports.evaluation import rerender_all
     from rag.reports.index_page import write_index_page
+    from rag.reports.ingest import rerender_ingest_reports
+    documents = rerender_ingest_reports(workspace)
     count = rerender_all(workspace)
     comparisons = rerender_comparisons(workspace)
     write_index_page(workspace)
-    _out(f"已重新生成 {count} 份评估报告、{comparisons} 份对比页和 reports/index.html")
+    _out(f"已重新生成 {documents} 份文档的入库审核页、{count} 份评估报告、{comparisons} 份对比页和 reports/index.html")
     return 0
 
 

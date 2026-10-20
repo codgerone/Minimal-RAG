@@ -8,7 +8,7 @@ from statistics import median
 
 from rag.eval.table_structure import differences, find_answer, load_answers
 from rag.index.manifest import DocumentEntry
-from rag.ingest.pipeline import ProcessedDocument
+from rag.index.audit import DocumentAudit
 from rag.ingest.tables import continuation as cont
 from rag.ingest.tables.models import (
     ContinuationEvaluation, GroupScoringResult, HeaderDecision, StructuredTable, TableAnnotation,
@@ -100,11 +100,11 @@ def render_grid(table: StructuredTable | TableCandidate, max_rows: int | None = 
             f'<button class="toggle" data-more="{label}" data-less="收起">{label}</button></div></div>')
 
 
-def _header(processed: ProcessedDocument, entry: DocumentEntry, config_name: str,
+def _header(processed: DocumentAudit, entry: DocumentEntry, config_name: str,
             current: int) -> str:
     links = []
     for index, name in enumerate(PAGE_NAMES):
-        if index == 1 and not processed.parse.primary.table_slots:
+        if index == 1 and not processed.table_slots:
             continue
         label = name.removesuffix(".html")
         links.append(f"<b>{esc(label)}</b>" if index == current else f'<a href="{esc(name)}">{esc(label)}</a>')
@@ -123,7 +123,7 @@ def _node_page(node) -> int:
     return node.sources[0].page_number if node.sources else 0
 
 
-def parse_page(processed: ProcessedDocument, entry: DocumentEntry, config_name: str) -> str:
+def parse_page(processed: DocumentAudit, entry: DocumentEntry, config_name: str) -> str:
     document = processed.document
     kinds = Counter(TEXT_KINDS.get(n.kind, n.kind) if isinstance(n, TextNode)
                     else "列表" if isinstance(n, ListNode) else "表格" for n in document.nodes)
@@ -132,7 +132,7 @@ def parse_page(processed: ProcessedDocument, entry: DocumentEntry, config_name: 
     warn_html = ("" if not warnings else "<div class='meta'>处理提示：" +
                  "；".join(f"{esc(code)} ×{n}" for code, n in warnings.items()) + "</div>")
     by_page: dict[int, list[str]] = {}
-    slot_number = {slot.slot_id: n for n, slot in enumerate(processed.parse.primary.table_slots, start=1)}
+    slot_number = {slot.slot_id: n for n, slot in enumerate(processed.table_slots, start=1)}
     for node in document.nodes:
         if isinstance(node, TextNode):
             html = f'{badge(TEXT_KINDS.get(node.kind, node.kind))}{text_block(node.text)}'
@@ -313,7 +313,7 @@ def _indexed_text(chunks: list, whole_text: str) -> str:
             f'</summary>{text_block(whole_text)}</details>')
 
 
-def tables_page(processed: ProcessedDocument, entry: DocumentEntry, config_name: str,
+def tables_page(processed: DocumentAudit, entry: DocumentEntry, config_name: str,
                 answers=None, batch: ChunkBatch | None = None) -> str:
     """`answers`: the correct structure annotations of this document's tables, when there are any."""
     candidates = {c.candidate_id: c for r in processed.extraction_reports for c in r.candidates}
@@ -323,7 +323,7 @@ def tables_page(processed: ProcessedDocument, entry: DocumentEntry, config_name:
     resolutions = {r.slot_id: r for r in processed.resolutions}
     # A table merged across pages is prepared once; every slot of it points to the merged result.
     prepared = {segment.slot_id: p for p in processed.prepared_tables for segment in p.segments}
-    slots = processed.parse.primary.table_slots
+    slots = processed.table_slots
     numbers = {slot.slot_id: number for number, slot in enumerate(slots, start=1)}
     node_sources = {node.slot_id: node.sources for node in processed.document.nodes
                     if isinstance(node, TableNode)}
@@ -426,7 +426,7 @@ def tables_page(processed: ProcessedDocument, entry: DocumentEntry, config_name:
     return page(f"表格 · {entry.document_name}", body, root="../../../", crumbs=_crumbs(config_name))
 
 
-def chunks_page(processed: ProcessedDocument, batch: ChunkBatch, entry: DocumentEntry,
+def chunks_page(processed: DocumentAudit, batch: ChunkBatch, entry: DocumentEntry,
                 config_name: str) -> str:
     chunks = batch.chunks
     lengths = [len(c.text) for c in chunks]
@@ -471,14 +471,33 @@ def chunks_page(processed: ProcessedDocument, batch: ChunkBatch, entry: Document
     return page(f"分块 · {entry.document_name}", body, root="../../../", crumbs=_crumbs(config_name))
 
 
-def write_document_reports(workspace: Workspace, config_name: str, processed: ProcessedDocument,
-                           batch: ChunkBatch, entry: DocumentEntry) -> None:
+def write_document_reports(workspace: Workspace, config_name: str, processed: DocumentAudit,
+                           entry: DocumentEntry) -> None:
+    batch = processed.batch
     write_assets(workspace.reports)
     folder = workspace.ingest_reports(config_name) / entry.folder
     if folder.exists():
         shutil.rmtree(folder)
     write_atomic(folder / PAGE_NAMES[0], parse_page(processed, entry, config_name))
-    if processed.parse.primary.table_slots:
+    if processed.table_slots:
         answers = load_answers(workspace.root / "eval" / "table-structure", processed.document.document_id)
         write_atomic(folder / PAGE_NAMES[1], tables_page(processed, entry, config_name, answers, batch))
     write_atomic(folder / PAGE_NAMES[2], chunks_page(processed, batch, entry, config_name))
+
+
+def rerender_ingest_reports(workspace: Workspace) -> int:
+    """Rebuild every indexed config's review pages from its intermediate results; return the page sets."""
+    from rag.index.audit import load_audit
+    from rag.index.manifest import Manifest
+    count = 0
+    root = workspace.root / ".rag" / "indexes"
+    for index_dir in sorted(root.iterdir()) if root.is_dir() else ():
+        manifest = Manifest.load(index_dir / "manifest.json")
+        if manifest is None:
+            continue
+        shutil.rmtree(workspace.ingest_reports(manifest.config_name), ignore_errors=True)
+        for entry in manifest.documents.values():
+            folder = index_dir / "documents" / entry.folder
+            write_document_reports(workspace, manifest.config_name, load_audit(folder), entry)
+            count += 1
+    return count
