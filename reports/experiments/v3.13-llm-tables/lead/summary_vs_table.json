@@ -1,0 +1,527 @@
+[
+ {
+  "case_id": "CONTRACT-105-Q002",
+  "group_id": "e1",
+  "question": "采购合同 CONT2025001 包含哪些 Ítem 的产品？各自的数量、单价及含税总金额是多少？合同总金额是多少？",
+  "RM": {
+   "vector_rank": 2,
+   "similarity": 0.5557,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 2,
+   "similarity": 0.5704,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "CONTRACT-105-Q002",
+  "group_id": "e2",
+  "question": "采购合同 CONT2025001 包含哪些 Ítem 的产品？各自的数量、单价及含税总金额是多少？合同总金额是多少？",
+  "RM": {
+   "vector_rank": 2,
+   "similarity": 0.5557,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 2,
+   "similarity": 0.5704,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "CONTRACT-105-Q002",
+  "group_id": "e3",
+  "question": "采购合同 CONT2025001 包含哪些 Ítem 的产品？各自的数量、单价及含税总金额是多少？合同总金额是多少？",
+  "RM": {
+   "vector_rank": 2,
+   "similarity": 0.5557,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 2,
+   "similarity": 0.5704,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "CONTRACT-105-Q002",
+  "group_id": "e4",
+  "question": "采购合同 CONT2025001 包含哪些 Ítem 的产品？各自的数量、单价及含税总金额是多少？合同总金额是多少？",
+  "RM": {
+   "vector_rank": 2,
+   "similarity": 0.5557,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 2,
+   "similarity": 0.5704,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "CONTRACT-105-Q002",
+  "group_id": "e5",
+  "question": "采购合同 CONT2025001 包含哪些 Ítem 的产品？各自的数量、单价及含税总金额是多少？合同总金额是多少？",
+  "RM": {
+   "vector_rank": 2,
+   "similarity": 0.5557,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 2,
+   "similarity": 0.5704,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "CONTRACT-105-Q003",
+  "group_id": "e1",
+  "question": "采购合同 CONT2025001 规定的总履约期限是多久？具体的交货地点在哪里？是否允许提前交货？",
+  "RM": {
+   "vector_rank": 3,
+   "similarity": 0.5735,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 2,
+   "similarity": 0.5814,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "CONTRACT-105-Q003",
+  "group_id": "e2",
+  "question": "采购合同 CONT2025001 规定的总履约期限是多久？具体的交货地点在哪里？是否允许提前交货？",
+  "RM": {
+   "vector_rank": 21,
+   "similarity": 0.4025,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 22,
+   "similarity": 0.407,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "CONTRACT-105-Q009",
+  "group_id": "e1",
+  "question": "采购合同 CONT2025001 的第 1 次交付（1era ENTREGA，合同签订后 170 天），具体的交付产品和数量是多少？",
+  "RM": {
+   "vector_rank": 1,
+   "similarity": 0.6701,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 1,
+   "similarity": 0.6585,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "CONTRACT-105-Q010",
+  "group_id": "e1",
+  "question": "采购合同 CONT2025001 是否规定分批交货？每个批次的具体交货日期分别是什么？",
+  "RM": {
+   "vector_rank": 1,
+   "similarity": 0.5735,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 1,
+   "similarity": 0.592,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "CONTRACT-105-Q010",
+  "group_id": "e2",
+  "question": "采购合同 CONT2025001 是否规定分批交货？每个批次的具体交货日期分别是什么？",
+  "RM": {
+   "vector_rank": 1,
+   "similarity": 0.5735,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 1,
+   "similarity": 0.592,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "E001-602-Q002",
+  "group_id": "e1",
+  "question": "发票 INVOICE-E001-602 中，HXE34K-S1的单价和数量分别是多少？",
+  "RM": {
+   "vector_rank": 1,
+   "similarity": 0.625,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 2,
+   "similarity": 0.5255,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "E001-602-Q002",
+  "group_id": "e2",
+  "question": "发票 INVOICE-E001-602 中，HXE34K-S1的单价和数量分别是多少？",
+  "RM": {
+   "vector_rank": 1,
+   "similarity": 0.625,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 2,
+   "similarity": 0.5255,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "PO-24-12-Q001",
+  "group_id": "e1",
+  "question": "订单 ORDER2025001 包含哪几款产品？单价、数量分别是多少？订单总金额是多少？",
+  "RM": {
+   "vector_rank": 1,
+   "similarity": 0.5069,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 1,
+   "similarity": 0.6025,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "PO-24-12-Q001",
+  "group_id": "e2",
+  "question": "订单 ORDER2025001 包含哪几款产品？单价、数量分别是多少？订单总金额是多少？",
+  "RM": {
+   "vector_rank": 1,
+   "similarity": 0.5069,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 1,
+   "similarity": 0.6025,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "PO-24-12-Q001",
+  "group_id": "e3",
+  "question": "订单 ORDER2025001 包含哪几款产品？单价、数量分别是多少？订单总金额是多少？",
+  "RM": {
+   "vector_rank": 1,
+   "similarity": 0.5069,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 1,
+   "similarity": 0.6025,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "PO-24-12-Q001",
+  "group_id": "e4",
+  "question": "订单 ORDER2025001 包含哪几款产品？单价、数量分别是多少？订单总金额是多少？",
+  "RM": {
+   "vector_rank": 1,
+   "similarity": 0.5069,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 1,
+   "similarity": 0.6025,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "PO-24-12-Q004",
+  "group_id": "e1",
+  "question": "订单 ORDER2025001 的总金额是否涵盖MDC ORCA的费用？如不包含，还需额外支付多少费用？付款的最后期限是什么？",
+  "RM": {
+   "vector_rank": 3,
+   "similarity": 0.4895,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 2,
+   "similarity": 0.525,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "PO-25-15-Q001",
+  "group_id": "e1",
+  "question": "订单 ORDER2025002 中，第四批次交付的具体日期是什么？交付的产品总金额达多少？",
+  "RM": {
+   "vector_rank": 1,
+   "similarity": 0.5854,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 1,
+   "similarity": 0.5306,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "PO-25-15-Q001",
+  "group_id": "e2",
+  "question": "订单 ORDER2025002 中，第四批次交付的具体日期是什么？交付的产品总金额达多少？",
+  "RM": {
+   "vector_rank": 1,
+   "similarity": 0.5854,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 1,
+   "similarity": 0.5306,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "PO-25-15-Q002",
+  "group_id": "e1",
+  "question": "订单 ORDER2025002 中，第六批次交付的具体日期是什么？交付的产品总金额达多少？",
+  "RM": {
+   "vector_rank": 1,
+   "similarity": 0.6001,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 1,
+   "similarity": 0.5426,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "PO-25-15-Q002",
+  "group_id": "e2",
+  "question": "订单 ORDER2025002 中，第六批次交付的具体日期是什么？交付的产品总金额达多少？",
+  "RM": {
+   "vector_rank": 1,
+   "similarity": 0.6001,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 1,
+   "similarity": 0.5426,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e1",
+  "question": "订单 ORDER2025003 中，ELCTO公司订购了哪些产品？每款产品的单价和数量是多少？订购的总金额是多少？交货的计划是怎么样的？请详细说明每批次交付的具体日期，及每批次交付的产品和数量明细。",
+  "RM": {
+   "vector_rank": 1,
+   "similarity": 0.64,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 2,
+   "similarity": 0.6205,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e2",
+  "question": "订单 ORDER2025003 中，ELCTO公司订购了哪些产品？每款产品的单价和数量是多少？订购的总金额是多少？交货的计划是怎么样的？请详细说明每批次交付的具体日期，及每批次交付的产品和数量明细。",
+  "RM": {
+   "vector_rank": 8,
+   "similarity": 0.5426,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 1,
+   "similarity": 0.6347,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e3",
+  "question": "订单 ORDER2025003 中，ELCTO公司订购了哪些产品？每款产品的单价和数量是多少？订购的总金额是多少？交货的计划是怎么样的？请详细说明每批次交付的具体日期，及每批次交付的产品和数量明细。",
+  "RM": {
+   "vector_rank": 1,
+   "similarity": 0.64,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 2,
+   "similarity": 0.6205,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e4",
+  "question": "订单 ORDER2025003 中，ELCTO公司订购了哪些产品？每款产品的单价和数量是多少？订购的总金额是多少？交货的计划是怎么样的？请详细说明每批次交付的具体日期，及每批次交付的产品和数量明细。",
+  "RM": {
+   "vector_rank": 1,
+   "similarity": 0.64,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 1,
+   "similarity": 0.6347,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e5",
+  "question": "订单 ORDER2025003 中，ELCTO公司订购了哪些产品？每款产品的单价和数量是多少？订购的总金额是多少？交货的计划是怎么样的？请详细说明每批次交付的具体日期，及每批次交付的产品和数量明细。",
+  "RM": {
+   "vector_rank": 6,
+   "similarity": 0.5876,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 3,
+   "similarity": 0.5884,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e6",
+  "question": "订单 ORDER2025003 中，ELCTO公司订购了哪些产品？每款产品的单价和数量是多少？订购的总金额是多少？交货的计划是怎么样的？请详细说明每批次交付的具体日期，及每批次交付的产品和数量明细。",
+  "RM": {
+   "vector_rank": 1,
+   "similarity": 0.64,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 2,
+   "similarity": 0.6205,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "PO-25-19-Q002",
+  "group_id": "e1",
+  "question": "订单 ORDER2025003 中，ElUC公司订购了多少件HXE34K-S1？总金额是多少？",
+  "RM": {
+   "vector_rank": 2,
+   "similarity": 0.5747,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 1,
+   "similarity": 0.5417,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "PO-25-19-Q002",
+  "group_id": "e2",
+  "question": "订单 ORDER2025003 中，ElUC公司订购了多少件HXE34K-S1？总金额是多少？",
+  "RM": {
+   "vector_rank": 2,
+   "similarity": 0.5747,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 1,
+   "similarity": 0.5417,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "PO-25-19-Q003",
+  "group_id": "e1",
+  "question": "订单 ORDER2025003 中，ENSA公司订购了哪些产品？每款产品的单价和数量是多少？订购的总金额是多少？交货的计划是怎么样的？请详细说明每批次交付的具体日期，及每批次交付的产品和数量明细。",
+  "RM": {
+   "vector_rank": 1,
+   "similarity": 0.6542,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 2,
+   "similarity": 0.5961,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "PO-25-19-Q003",
+  "group_id": "e2",
+  "question": "订单 ORDER2025003 中，ENSA公司订购了哪些产品？每款产品的单价和数量是多少？订购的总金额是多少？交货的计划是怎么样的？请详细说明每批次交付的具体日期，及每批次交付的产品和数量明细。",
+  "RM": {
+   "vector_rank": 8,
+   "similarity": 0.5338,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 1,
+   "similarity": 0.5975,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "PO-25-19-Q003",
+  "group_id": "e3",
+  "question": "订单 ORDER2025003 中，ENSA公司订购了哪些产品？每款产品的单价和数量是多少？订购的总金额是多少？交货的计划是怎么样的？请详细说明每批次交付的具体日期，及每批次交付的产品和数量明细。",
+  "RM": {
+   "vector_rank": 1,
+   "similarity": 0.6542,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 2,
+   "similarity": 0.5961,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "PO-25-19-Q003",
+  "group_id": "e4",
+  "question": "订单 ORDER2025003 中，ENSA公司订购了哪些产品？每款产品的单价和数量是多少？订购的总金额是多少？交货的计划是怎么样的？请详细说明每批次交付的具体日期，及每批次交付的产品和数量明细。",
+  "RM": {
+   "vector_rank": 1,
+   "similarity": 0.6542,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 1,
+   "similarity": 0.5975,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "PO-25-19-Q003",
+  "group_id": "e5",
+  "question": "订单 ORDER2025003 中，ENSA公司订购了哪些产品？每款产品的单价和数量是多少？订购的总金额是多少？交货的计划是怎么样的？请详细说明每批次交付的具体日期，及每批次交付的产品和数量明细。",
+  "RM": {
+   "vector_rank": 6,
+   "similarity": 0.5783,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 3,
+   "similarity": 0.5563,
+   "kind": "table_summary"
+  }
+ },
+ {
+  "case_id": "PO-25-19-Q003",
+  "group_id": "e6",
+  "question": "订单 ORDER2025003 中，ENSA公司订购了哪些产品？每款产品的单价和数量是多少？订购的总金额是多少？交货的计划是怎么样的？请详细说明每批次交付的具体日期，及每批次交付的产品和数量明细。",
+  "RM": {
+   "vector_rank": 1,
+   "similarity": 0.6542,
+   "kind": "table"
+  },
+  "S": {
+   "vector_rank": 2,
+   "similarity": 0.5961,
+   "kind": "table_summary"
+  }
+ }
+]
