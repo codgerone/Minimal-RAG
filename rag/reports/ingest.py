@@ -302,8 +302,19 @@ def _llm_card(llm: TableLLMResult, table: StructuredTable, answers, sources) -> 
     return f'<div class="card"><h3>LLM 结构标注</h3>{verdict}{grid}{lead}{calls}</div>'
 
 
+def _indexed_text(chunks: list, whole_text: str) -> str:
+    """What this table put into the index (its chunks as embedded, lead sentence or summary
+    included) and the text returned when the whole table is."""
+    kinds = {"table": "表格 chunk", "table_summary": "摘要 chunk"}
+    shown = "".join(f'<div class="meta">{kinds.get(c.kind, c.kind)} {i} / {len(chunks)} · {c.token_count} token</div>'
+                    f'{text_block(c.text)}' for i, c in enumerate(chunks, 1))
+    return (f'<details><summary>入库文本：本表的 {len(chunks)} 个 chunk（检索用，原样入库）</summary>{shown}</details>'
+            f'<details><summary>整表文本（命中本表、返回整表时交给回答的 LLM；markdown_rows_v1，{len(whole_text)} 字符）'
+            f'</summary>{text_block(whole_text)}</details>')
+
+
 def tables_page(processed: ProcessedDocument, entry: DocumentEntry, config_name: str,
-                answers=None) -> str:
+                answers=None, batch: ChunkBatch | None = None) -> str:
     """`answers`: the correct structure annotations of this document's tables, when there are any."""
     candidates = {c.candidate_id: c for r in processed.extraction_reports for c in r.candidates}
     admissions = ({a.candidate_id: a for a in processed.grouping.candidate_admission_results}
@@ -316,6 +327,13 @@ def tables_page(processed: ProcessedDocument, entry: DocumentEntry, config_name:
     numbers = {slot.slot_id: number for number, slot in enumerate(slots, start=1)}
     node_sources = {node.slot_id: node.sources for node in processed.document.nodes
                     if isinstance(node, TableNode)}
+    node_ids = {node.slot_id: node.node_id for node in processed.document.nodes
+                if isinstance(node, TableNode)}
+    table_chunks: dict[str, list] = {}
+    for chunk in (batch.chunks if batch else ()):
+        if chunk.kind in ("table", "table_summary"):
+            owner = next(s.node_id for s in chunk.sources if s.node_id in node_ids.values())
+            table_chunks.setdefault(owner, []).append(chunk)
     evaluations = processed.continuations.evaluations if processed.continuations else ()
     merged = [p for p in processed.prepared_tables if len(p.segments) > 1]
     merged_line = "；".join("表 " + "、".join(str(numbers[seg.slot_id]) for seg in p.segments) + " 合并为一张表"
@@ -396,9 +414,8 @@ def tables_page(processed: ProcessedDocument, entry: DocumentEntry, config_name:
                f'<table><tr><th>候选</th><th>原因</th></tr>{others}</table></details>' if page_candidates else "")
             + ("" if continued or prep.llm is None else
                _llm_card(prep.llm, prep.adopted_table, answers, node_sources.get(prep.slot_id, ())))
-            + ("" if continued else
-               f'<details><summary>入库文本（{len(prep.serialized_table.text)} 字符）</summary>'
-               f'{text_block(prep.serialized_table.text)}</details>') + "</div>")
+            + ("" if continued else _indexed_text(table_chunks.get(node_ids.get(prep.slot_id), []),
+                                                  prep.whole_text)) + "</div>")
     if evaluations:
         tabs.append('<a href="#cont" data-tab="cont">续表判定</a>')
         sections.append('<div data-panel="cont"><h2>续表判定</h2><div class="meta">阅读顺序中相邻、'
@@ -463,5 +480,5 @@ def write_document_reports(workspace: Workspace, config_name: str, processed: Pr
     write_atomic(folder / PAGE_NAMES[0], parse_page(processed, entry, config_name))
     if processed.parse.primary.table_slots:
         answers = load_answers(workspace.root / "eval" / "table-structure", processed.document.document_id)
-        write_atomic(folder / PAGE_NAMES[1], tables_page(processed, entry, config_name, answers))
+        write_atomic(folder / PAGE_NAMES[1], tables_page(processed, entry, config_name, answers, batch))
     write_atomic(folder / PAGE_NAMES[2], chunks_page(processed, batch, entry, config_name))
