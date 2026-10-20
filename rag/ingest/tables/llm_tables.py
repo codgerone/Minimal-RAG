@@ -14,14 +14,14 @@ import hashlib
 import json
 import re
 import time
-from dataclasses import dataclass, replace
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable, Literal, Protocol, Sequence
 
 from rag.ingest.chunkers.table_plan import plan_chunks, plan_issues
 from rag.ingest.tables.models import (
-    ImplicitMerge, LLMAttempt, PreparedTableContent, TableAnnotation, TableContextNode,
-    TableLLMResult, TableSection,
+    AdoptedTable, ImplicitMerge, LLMAttempt, TableAnnotation, TableContextNode, TableLLMResult,
+    TableSection, TableStructure,
 )
 from rag.models import PrimaryDocument, PrimaryList, PrimaryTablePlaceholder, PrimaryText
 
@@ -457,7 +457,7 @@ def _retry(messages: list[dict[str, str]], raw: str, issues: list[str]) -> list[
 def run_annotation(llm: _StructuredLLM, table: _Table, grid: Grid, context: tuple[ContextNode, ...],
                    lengths: Lengths, count: Callable[[str], int], cache: LLMCache | None,
                    extra_checks: Callable[[TableAnnotation], list[str]] = lambda _: [],
-                   retries: int = 1, use_lead: bool = False) -> TableLLMResult:
+                   retries: int = 1) -> TableLLMResult:
     """The annotation and the lead are judged separately; each keeps its latest passing attempt."""
     messages = build_messages("annotation", grid, context, lengths)
     digits = known_digits(grid, context)
@@ -486,7 +486,7 @@ def run_annotation(llm: _StructuredLLM, table: _Table, grid: Grid, context: tupl
             break
         messages = _retry(messages, hit["text"], issues)
     return TableLLMResult("annotation", llm.model, PROMPT_VERSION, REASONING_EFFORT, context,
-                          tuple(attempts), annotation=annotation, lead=lead, use_lead=use_lead)
+                          tuple(attempts), annotation=annotation, lead=lead)
 
 
 def run_summary(llm: _StructuredLLM, grid: Grid, context: tuple[ContextNode, ...], lengths: Lengths,
@@ -527,57 +527,73 @@ def _element_pairs(primary: PrimaryDocument) -> list[tuple[str, str]]:
     return pairs
 
 
-class TableLLMStep:
-    """Runs one LLM task over every prepared table of a document.
+class _Tables:
+    """Per document: each table's node ID, grid and preceding context, as the LLM steps read them."""
 
-    `annotation`: the structure annotation replaces the rule header and the table is re-rendered in
-    the configured form (markdown or labeled); a table whose annotation fails keeps the rule text.
-    The annotation is checked against both forms, so every annotation config shares one result.
-    `summary`: the summary is recorded; the chunker writes it instead of table chunks."""
+    def __init__(self, primary: PrimaryDocument, counter: Any):
+        self.pairs = _element_pairs(primary)
+        self.position = {element.slot_id: i for i, element in enumerate(primary.elements)
+                         if isinstance(element, PrimaryTablePlaceholder)}
+        self.node_ids = {element.slot_id: element.element_id for element in primary.elements
+                         if isinstance(element, PrimaryTablePlaceholder)}
+        self.counter = counter
 
-    def __init__(self, task: Literal["annotation", "summary"], llm: _StructuredLLM,
-                 counter: Any, max_tokens: int, cache: LLMCache | None, use_lead: bool = False):
-        self.task, self.llm, self.counter = task, llm, counter
-        self.max_tokens, self.cache, self.use_lead = max_tokens, cache, use_lead
+    def context(self, item: AdoptedTable) -> tuple[ContextNode, ...]:
+        return table_context(self.pairs, self.position[item.slot_id], self.counter.count_text)
 
-    def process(self, primary: PrimaryDocument, prepared: tuple[PreparedTableContent, ...],
-                language: str, labeled: bool) -> tuple[PreparedTableContent, ...]:
+
+class LLMAnnotationStructure:
+    """`llm_annotation`: the structure is the LLM's annotation when it passes validation, else the rule
+    header. The annotation is checked against both written forms (markdown and labeled), so every
+    config using this structure shares one result per table."""
+
+    def __init__(self, llm: _StructuredLLM, counter: Any, max_tokens: int, cache: LLMCache | None):
+        self.llm, self.counter, self.max_tokens, self.cache = llm, counter, max_tokens, cache
+
+    def structure(self, primary: PrimaryDocument, tables: tuple[AdoptedTable, ...],
+                  language: str) -> tuple[tuple[TableStructure, TableLLMResult | None], ...]:
         from rag.ingest.tables.markdown_rows import serialize_markdown_rows
-        pairs = _element_pairs(primary)
-        position = {element.slot_id: i for i, element in enumerate(primary.elements)
-                    if isinstance(element, PrimaryTablePlaceholder)}
-        node_ids = {element.slot_id: element.element_id for element in primary.elements
-                    if isinstance(element, PrimaryTablePlaceholder)}
-        prefix = self.counter.count_passage("")
-        lengths = Lengths(language, self.max_tokens - prefix)   # type: ignore[arg-type]
+        from rag.ingest.tables.structure import rule_structure
+        found = _Tables(primary, self.counter)
+        lengths = Lengths(language, self.max_tokens - self.counter.count_passage(""))  # type: ignore[arg-type]
         # Validation leaves room for the longest accepted lead.
         check_fits = lambda text: self.counter.count_passage(text) <= self.max_tokens - LEAD_MAX_TOKENS
-        out = []
-        for item in prepared:
-            table, node_id = item.adopted_table, node_ids[item.slot_id]
-            grid = render_grid(table)
-            context = table_context(pairs, position[item.slot_id], self.counter.count_text)
-            if self.task == "summary":
-                # Counted as the passage it becomes, so the summary chunk fits exactly.
-                passage = lambda text: self.counter.count_passage(text) - prefix
-                result = run_summary(self.llm, grid, context, lengths, passage, self.cache)
-                out.append(replace(item, llm=result))
-                continue
+        out: list[tuple[TableStructure, TableLLMResult | None]] = []
+        for item in tables:
+            table, node_id = item.adopted_table, found.node_ids[item.slot_id]
 
             def extra(annotation: TableAnnotation) -> list[str]:
-                found: list[str] = []
-                for form in (False, True):
-                    serialized = serialize_markdown_rows(table, None, table_node_id=node_id,
-                                                         labeled=form, annotation=annotation)
-                    found += plan_issues(plan_chunks(serialized, annotation, check_fits), serialized)
-                return list(dict.fromkeys(found))
+                candidate = annotated_structure(annotation)
+                issues: list[str] = []
+                for labeled in (False, True):
+                    serialized = serialize_markdown_rows(table, candidate, table_node_id=node_id, labeled=labeled)
+                    issues += plan_issues(plan_chunks(serialized, candidate, check_fits), serialized)
+                return list(dict.fromkeys(issues))
 
-            result = run_annotation(self.llm, table, grid, context, lengths, self.counter.count_text,
-                                    self.cache, extra, use_lead=self.use_lead)
-            if result.annotation is None:
-                out.append(replace(item, llm=result))
-                continue
-            serialized = serialize_markdown_rows(table, None, table_node_id=node_id, labeled=labeled,
-                                                 annotation=result.annotation)
-            out.append(replace(item, serialized_table=serialized, llm=result))
+            result = run_annotation(self.llm, table, render_grid(table), found.context(item), lengths,
+                                    self.counter.count_text, self.cache, extra)
+            out.append((annotated_structure(result.annotation) if result.annotation else
+                        rule_structure(item.header_decision), result))
         return tuple(out)
+
+
+def annotated_structure(annotation: TableAnnotation) -> TableStructure:
+    return TableStructure("llm_annotation", annotation.header_rows, annotation.sections,
+                          annotation.implicit_merges)
+
+
+class LLMSummary:
+    """`summary` index text: one paragraph per table that the index holds instead of its chunks."""
+
+    def __init__(self, llm: _StructuredLLM, counter: Any, max_tokens: int, cache: LLMCache | None):
+        self.llm, self.counter, self.max_tokens, self.cache = llm, counter, max_tokens, cache
+
+    def summarize(self, primary: PrimaryDocument, tables: tuple[AdoptedTable, ...],
+                  language: str) -> tuple[TableLLMResult, ...]:
+        found = _Tables(primary, self.counter)
+        prefix = self.counter.count_passage("")
+        lengths = Lengths(language, self.max_tokens - prefix)   # type: ignore[arg-type]
+        # Counted as the passage it becomes, so the summary chunk fits exactly.
+        passage = lambda text: self.counter.count_passage(text) - prefix
+        return tuple(run_summary(self.llm, render_grid(item.adopted_table), found.context(item), lengths,
+                                 passage, self.cache) for item in tables)

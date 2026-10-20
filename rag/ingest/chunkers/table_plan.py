@@ -8,7 +8,7 @@ from dataclasses import dataclass
 from typing import Callable, Literal
 
 from rag.ingest.tables.models import (
-    SerializedTable, SerializedTableLine, TableAnnotation, TableSection,
+    SerializedTable, SerializedTableLine, TableSection, TableStructure,
 )
 
 
@@ -20,16 +20,17 @@ class PlannedChunk:
     oversize: Literal["", "row", "context"] = ""   # a single line that does not fit, and why
 
 
-def plan_chunks(serialized: SerializedTable, annotation: TableAnnotation | None,
+def plan_chunks(serialized: SerializedTable, structure: TableStructure,
                 fits: Callable[[str], bool]) -> tuple[PlannedChunk, ...]:
     """Pack a table's lines into chunks.
 
-    Without an annotation this is the rule packing: lines in order, the header line repeated
-    in chunks after it. With one: every chunk repeats the header rows and the titles of the
+    For a rule structure this is the rule packing: lines in order, the header line repeated
+    in chunks after it. For an LLM annotation: every chunk repeats the header rows and the titles of the
     sections its first line lies in; sections are kept whole when they fit a chunk, and a
     section that fits none is packed by its sub-sections and rows. A lead sentence is written
     before each chunk by the caller; `fits` counts it.
     """
+    annotation = structure if structure.source == "llm_annotation" else None
     lines = serialized.lines
     position = {line.line_id: i for i, line in enumerate(lines)}
     row_line = {line.source_rows[0]: line for line in lines if line.source_rows and line.kind != "unplaced_text"}

@@ -406,7 +406,12 @@ def _anchors(workspace: Workspace, args: argparse.Namespace) -> int:
 def _config(workspace: Workspace, args: argparse.Namespace) -> int:
     if args.action == "list":
         for config in list_configs(workspace.root):
-            _out(f"{config.name:<14} {config.description}")
+            _out(f"{config.name:<28} {config.description}")
+        extra = list_configs(workspace.root, extra=True)[len(list_configs(workspace.root)):]
+        if extra:
+            _out("\nconfigs/extra/（不在 --all-configs 中，可用 --config 名称装配）：")
+            for config in extra:
+                _out(f"{config.name:<28} {config.description}")
         return 0
     from rag.registry import assemble
     config = resolve_config(workspace.root, args.name)

@@ -4,6 +4,8 @@ from rag.ingest.chunkers.structured import chunk_parsed_document
 from rag.ingest.regions import chunk_regions
 from rag.ingest.tables.header import detect_header
 from rag.ingest.tables.markdown_rows import serialize_markdown_rows
+from rag.ingest.tables.structure import rule_structure
+from rag.ingest.tables.llm_tables import annotated_structure
 from rag.ingest.tables.models import (
     GridPosition, HeaderDecision, HeaderPath, StructuredTable, TableCell,
 )
@@ -32,13 +34,13 @@ def grid(rows: list[list[str | None]], *, merged: tuple[TableCell, ...] = (),
 
 
 def text_of(table: StructuredTable) -> str:
-    return serialize_markdown_rows(table, detect_header(table), table_node_id="tbl").text
+    return serialize_markdown_rows(table, rule_structure(detect_header(table)), table_node_id="tbl").text
 
 
 def test_identified_header_is_one_line_and_rows_have_no_scaffolding():
     table = grid([["Model", "Qty"], ["HXE12ES", "1,000"], ["HXE13ES", "2,000"]])
     assert detect_header(table).outcome == "identified"
-    result = serialize_markdown_rows(table, detect_header(table), table_node_id="tbl")
+    result = serialize_markdown_rows(table, rule_structure(detect_header(table)), table_node_id="tbl")
     assert result.text == "| Model | Qty |\n| HXE12ES | 1,000 |\n| HXE13ES | 2,000 |"
     assert [line.kind for line in result.lines] == ["header", "data", "data"]
     assert result.rule_version == "markdown_rows_v1"
@@ -79,9 +81,10 @@ def first_row_header(table: StructuredTable) -> HeaderDecision:
 
 def _document(table: StructuredTable) -> tuple[ParsedDocument, TableNode]:
     header = first_row_header(table)
-    node = TableNode("tbl", "s", "#/tables/0", "selected_winner", table, None, header,
-                     serialize_markdown_rows(table, header, table_node_id="tbl"),
-                     serialize_markdown_rows(table, header, table_node_id="tbl").text,
+    node = TableNode("tbl", "s", "#/tables/0", "selected_winner", table, None, header, rule_structure(header),
+                     serialize_markdown_rows(table, rule_structure(header), table_node_id="tbl"),
+                     serialize_markdown_rows(table, rule_structure(header), table_node_id="tbl").text,
+                     "rows",
                      (PageSpan(1, BoundingBox(0, 0, 200, 100), "#/tables/0"),))
     return ParsedDocument("d", "d.pdf", "d.pdf", "a" * 64, (node,), (), "english"), node
 
@@ -112,7 +115,7 @@ def test_labeled_rows_put_column_names_on_single_column_values_only():
     total = cell("total", "Total CIF", 2, 0, cols=2)
     table = grid([["Model", "Qty", "Amount"], ["A", "", "5"], ["", "", "9"]], merged=(total,))
     header = first_row_header(table)
-    labeled = serialize_markdown_rows(table, header, table_node_id="tbl", labeled=True)
+    labeled = serialize_markdown_rows(table, rule_structure(header), table_node_id="tbl", labeled=True)
     assert labeled.text == "| Model: A |  | Amount: 5 |\n| Total CIF | ← | Amount: 9 |"
     assert labeled.rule_version == "labeled_rows_v1"
     first = labeled.lines[0]
@@ -124,8 +127,8 @@ def test_labeled_rows_without_header_equal_markdown_rows():
     table = grid([["产品", "数量"], ["A", '100"'], ["B", "200"]])
     header = detect_header(table)
     assert header.outcome == "undetermined"
-    plain = serialize_markdown_rows(table, header, table_node_id="tbl")
-    labeled = serialize_markdown_rows(table, header, table_node_id="tbl", labeled=True)
+    plain = serialize_markdown_rows(table, rule_structure(header), table_node_id="tbl")
+    labeled = serialize_markdown_rows(table, rule_structure(header), table_node_id="tbl", labeled=True)
     assert labeled.text == plain.text
 
 
@@ -133,7 +136,7 @@ def test_labeled_continuation_keeps_the_column_name():
     company = cell("company", "ENSA", 1, 0, rows=3)
     table = grid([["COMPANY", "MODEL"], ["", "HXE12ES"], ["", "HXE13ES"], ["", "HXE33K"]], merged=(company,))
     header = first_row_header(table)
-    line = serialize_markdown_rows(table, header, table_node_id="tbl", labeled=True).lines[2]
+    line = serialize_markdown_rows(table, rule_structure(header), table_node_id="tbl", labeled=True).lines[2]
     assert line.text == "| ↑ | MODEL: HXE33K |"
     assert line.resumed_text() == "| COMPANY: ↑ ENSA | MODEL: HXE33K |"
 
@@ -143,5 +146,18 @@ def test_blank_header_cell_gives_no_column_name():
     header = HeaderDecision("identified", "unique_supported_candidate", (), (), (), 0, 1,
                             (HeaderPath(0, ("c0_0",), ()), HeaderPath(1, ("c0_1",), ("Qty",))),
                             "table_header_v3", 8, 2)
-    assert serialize_markdown_rows(table, header, labeled=True).text == "| A | Qty: 1 |\n| B | Qty: 2 |"
-    assert serialize_markdown_rows(table, header).text.startswith("|  | Qty |")
+    assert serialize_markdown_rows(table, rule_structure(header), labeled=True).text == "| A | Qty: 1 |\n| B | Qty: 2 |"
+    assert serialize_markdown_rows(table, rule_structure(header)).text.startswith("|  | Qty |")
+
+
+def test_whole_table_text_writes_every_row_as_it_is_without_structure():
+    from rag.ingest.tables.markdown_rows import serialize_grid_rows
+    group = cell("group", "Delivery", 0, 1, cols=2)
+    table = grid([["Model", "", ""], ["", "1st", "2nd"], ["HXE12ES", "10", "20"]], merged=[group])
+    from rag.ingest.tables.models import TableStructure
+    with_header = serialize_markdown_rows(table, TableStructure("header_rules", (0, 1)), table_node_id="tbl")
+    assert with_header.text.startswith("| Model | Delivery / 1st | Delivery / 2nd |")
+    whole = serialize_grid_rows(table, table_node_id="tbl")
+    assert whole.rule_version == "grid_rows_v1"
+    assert whole.text == "| Model | Delivery | ← |\n|  | 1st | 2nd |\n| HXE12ES | 10 | 20 |"
+    assert {line.kind for line in whole.lines} == {"data"}

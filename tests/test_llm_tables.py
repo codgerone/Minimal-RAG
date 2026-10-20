@@ -9,6 +9,8 @@ from rag.ingest.tables.llm_tables import (
     Lengths, annotation_issues, render_grid, run_annotation, table_context,
 )
 from rag.ingest.tables.markdown_rows import serialize_markdown_rows
+from rag.ingest.tables.structure import rule_structure
+from rag.ingest.tables.llm_tables import annotated_structure
 from rag.ingest.tables.models import ImplicitMerge, TableAnnotation, TableSection
 from tests.test_markdown_rows import cell, grid
 
@@ -42,10 +44,10 @@ BUDGET = annotated(header=(1, 2), sections=[((0,), 14), ((3,), 11), ((4, 5), 7),
 
 def test_markdown_writes_header_rows_as_they_are_and_titles_without_labels():
     table = budget_table()
-    text = serialize_markdown_rows(table, None, table_node_id="t", annotation=BUDGET).text
+    text = serialize_markdown_rows(table, annotated_structure(BUDGET), table_node_id="t").text
     assert lines_of(text)[:4] == ["| Budget | ← | ← |", "| Code | Price | ← |", "| ↑ | Unit | Total |",
                                   "| A | Civil works | ← |"]
-    labeled = serialize_markdown_rows(table, None, table_node_id="t", labeled=True, annotation=BUDGET)
+    labeled = serialize_markdown_rows(table, annotated_structure(BUDGET), table_node_id="t", labeled=True)
     assert labeled.rule_version == "llm_labeled_v1"
     assert lines_of(labeled.text)[:3] == ["| Budget | ← | ← |", "| A | Civil works | ← |", "| A1 | Earthworks |  |"]
     assert "| Code: A1.1 | Price / Unit: Digging | Price / Total: 10 |" in lines_of(labeled.text)
@@ -53,8 +55,8 @@ def test_markdown_writes_header_rows_as_they_are_and_titles_without_labels():
 
 def test_every_chunk_repeats_header_and_the_titles_of_its_sections():
     table = budget_table()
-    serialized = serialize_markdown_rows(table, None, table_node_id="t", annotation=BUDGET)
-    chunks = plan_chunks(serialized, BUDGET, lambda text: len(text.split("\n")) <= 9)
+    serialized = serialize_markdown_rows(table, annotated_structure(BUDGET), table_node_id="t")
+    chunks = plan_chunks(serialized, annotated_structure(BUDGET), lambda text: len(text.split("\n")) <= 9)
     texts = [lines_of(c.text) for c in chunks]
     for lines in texts:
         assert lines[:3] == ["| Budget | ← | ← |", "| Code | Price | ← |", "| ↑ | Unit | Total |"]
@@ -69,8 +71,8 @@ def test_every_chunk_repeats_header_and_the_titles_of_its_sections():
 
 def test_a_section_too_big_for_a_chunk_is_split_and_its_two_title_rows_repeated():
     table = budget_table()
-    serialized = serialize_markdown_rows(table, None, table_node_id="t", annotation=BUDGET)
-    chunks = plan_chunks(serialized, BUDGET, lambda text: len(text.split("\n")) <= 7)
+    serialized = serialize_markdown_rows(table, annotated_structure(BUDGET), table_node_id="t")
+    chunks = plan_chunks(serialized, annotated_structure(BUDGET), lambda text: len(text.split("\n")) <= 7)
     second = next(lines_of(c.text) for c in chunks if "| A1.2 | Filling | 20 |" in lines_of(c.text)
                   and "| A1.1 | Digging | 10 |" not in lines_of(c.text))
     assert second[3:7] == ["| A | Civil works | ← |", "| A1 | Earthworks |  |", "|  | (incl. disposal) |  |",
@@ -80,22 +82,22 @@ def test_a_section_too_big_for_a_chunk_is_split_and_its_two_title_rows_repeated(
 def test_implicit_merge_reads_up_and_resumes_its_value_when_opening_a_chunk():
     table = grid([["Lot", "Item"], ["Lot 1", "a"], ["", "b"], ["", "c"], ["Lot 2", "d"]])
     annotation = annotated(header=(0,), merges=[(0, 1, 3)])
-    serialized = serialize_markdown_rows(table, None, table_node_id="t", annotation=annotation)
+    serialized = serialize_markdown_rows(table, annotated_structure(annotation), table_node_id="t")
     assert lines_of(serialized.text) == ["| Lot | Item |", "| Lot 1 | a |", "| ↑ | b |", "| ↑ | c |",
                                          "| Lot 2 | d |"]
-    chunks = plan_chunks(serialized, annotation, lambda text: len(text.split("\n")) <= 3)
+    chunks = plan_chunks(serialized, annotated_structure(annotation), lambda text: len(text.split("\n")) <= 3)
     assert [lines_of(c.text) for c in chunks] == [
         ["| Lot | Item |", "| Lot 1 | a |", "| ↑ | b |"], ["| Lot | Item |", "| ↑ Lot 1 | c |", "| Lot 2 | d |"]]
-    labeled = serialize_markdown_rows(table, None, table_node_id="t", labeled=True, annotation=annotation)
-    resumed = plan_chunks(labeled, annotation, lambda text: len(text.split("\n")) <= 2)[1]
+    labeled = serialize_markdown_rows(table, annotated_structure(annotation), table_node_id="t", labeled=True)
+    resumed = plan_chunks(labeled, annotated_structure(annotation), lambda text: len(text.split("\n")) <= 2)[1]
     assert lines_of(resumed.text)[0] == "| Lot: ↑ Lot 1 | Item: c |"
 
 
 def test_without_annotation_planning_is_the_rule_packing():
     table = grid([["Model", "Qty"], ["A", "1"], ["B", "2"], ["C", "3"]])
     from rag.ingest.tables.header import detect_header
-    serialized = serialize_markdown_rows(table, detect_header(table), table_node_id="t")
-    chunks = plan_chunks(serialized, None, lambda text: len(text.split("\n")) <= 3)
+    serialized = serialize_markdown_rows(table, rule_structure(detect_header(table)), table_node_id="t")
+    chunks = plan_chunks(serialized, rule_structure(detect_header(table)), lambda text: len(text.split("\n")) <= 3)
     assert [c.text for c in chunks] == ["| Model | Qty |\n| A | 1 |\n| B | 2 |", "| Model | Qty |\n| C | 3 |"]
 
 
@@ -177,16 +179,16 @@ def test_document_language_is_chinese_when_most_letters_are_cjk():
     assert document_language(["El precio de los medidores"]) == "spanish"
 
 
-def _llm_document(llm, annotation=None):
+def _llm_document(llm, annotation=None, index_text="rows"):
     from rag.ingest.chunkers.structured import chunk_parsed_document
     from rag.ingest.tables.header import detect_header
     from rag.models import BoundingBox, PageSpan, ParsedDocument, TableNode
     table = budget_table()
     header = detect_header(table)
-    serialized = serialize_markdown_rows(table, None if annotation else header, table_node_id="tbl",
-                                         annotation=annotation)
-    node = TableNode("tbl", "s", "#/tables/0", "selected_winner", table, None, header, serialized,
-                     "| whole |", (PageSpan(1, BoundingBox(0, 0, 200, 300), "#/tables/0"),), (), llm)
+    structure = annotated_structure(annotation) if annotation else rule_structure(header)
+    serialized = serialize_markdown_rows(table, structure, table_node_id="tbl")
+    node = TableNode("tbl", "s", "#/tables/0", "selected_winner", table, None, header, structure, serialized,
+                     "| whole |", index_text, (PageSpan(1, BoundingBox(0, 0, 200, 300), "#/tables/0"),), (), llm)
     document = ParsedDocument("d", "d.pdf", "d.pdf", "a" * 64, (node,), (), "english")
 
     class Lines:
@@ -201,8 +203,8 @@ def _result(task, **fields):
 
 
 def test_chunks_repeat_section_titles_as_context_and_carry_the_lead():
-    batch = _llm_document(_result("annotation", annotation=BUDGET, lead="Budget by item.", use_lead=True),
-                          BUDGET)
+    batch = _llm_document(_result("annotation", annotation=BUDGET, lead="Budget by item."), BUDGET,
+                          "rows_with_lead")
     assert all(c.kind == "table" and c.text.startswith("Budget by item.\n| Budget | ← | ← |")
                for c in batch.chunks)
     assert all(c.token_count <= 9 for c in batch.chunks)
@@ -213,15 +215,16 @@ def test_chunks_repeat_section_titles_as_context_and_carry_the_lead():
 
 
 def test_a_failed_lead_or_no_lead_setting_writes_none():
-    for llm in (_result("annotation", annotation=BUDGET, lead=None, use_lead=True),
-                _result("annotation", annotation=BUDGET, lead="Budget.", use_lead=False)):
+    for llm, index_text in ((_result("annotation", annotation=BUDGET, lead=None), "rows_with_lead"),
+                            (_result("annotation", annotation=BUDGET, lead="Budget."), "rows")):
         assert not any(c.text.startswith("Budget") and not c.text.startswith("| Budget")
-                       for c in _llm_document(llm, BUDGET).chunks)
+                       for c in _llm_document(llm, BUDGET, index_text).chunks)
 
 
 def test_a_summary_replaces_the_table_chunks_and_covers_the_whole_table():
-    [chunk] = _llm_document(_result("summary", summary="Budget of civil and electrical works.")).chunks
+    [chunk] = _llm_document(_result("summary", summary="Budget of civil and electrical works."),
+                            index_text="summary").chunks
     assert chunk.kind == "table_summary" and chunk.text == "Budget of civil and electrical works."
     assert chunk.sources[0].source_text_start is None and not chunk.sources[0].repeated_context
-    fallback = _llm_document(_result("summary", summary=None)).chunks
+    fallback = _llm_document(_result("summary", summary=None), index_text="summary").chunks
     assert {c.kind for c in fallback} == {"table"}

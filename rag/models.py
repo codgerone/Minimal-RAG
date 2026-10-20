@@ -13,7 +13,8 @@ from typing import TYPE_CHECKING, Literal, TypeAlias
 
 if TYPE_CHECKING:
     from rag.ingest.tables.models import (
-        HeaderDecision, SerializedTable, StructuredTable, TableLLMResult, TableSegment, TableSlot,
+        HeaderDecision, SerializedTable, StructuredTable, TableIndexText, TableLLMResult, TableSegment,
+        TableSlot, TableStructure,
     )
 
 
@@ -202,9 +203,11 @@ class TableNode:
     origin: Literal["selected_winner", "docling_native_fallback"]
     table: StructuredTable
     selection_ref: str | None
-    header: HeaderDecision
+    header: HeaderDecision             # the rule header, a fact even when the structure is the LLM's
+    structure: TableStructure          # what `serialized` is written from
     serialized: SerializedTable
-    whole_text: str                    # markdown_rows_v1 text, returned when the whole table is
+    whole_text: str                    # grid_rows_v1 text, returned when the whole table is
+    index_text: TableIndexText         # table rows, rows with a lead, or a summary in the index
     sources: tuple[PageSpan, ...]
     # Pages of a table merged across pages, one per part in row order; empty for a single part.
     segments: tuple[TableSegment, ...] = ()
@@ -231,10 +234,10 @@ class ParsedDocument:
     nodes: tuple[ParsedNode, ...]
     warnings: tuple[ProcessingWarning, ...]
     language: Literal["chinese", "spanish", "english"]   # decided after parsing, read by later stages
-    schema_version: str = "parsed_document_v4"
+    schema_version: str = "parsed_document_v5"
 
     def __post_init__(self) -> None:
-        if self.schema_version != "parsed_document_v4":
+        if self.schema_version != "parsed_document_v5":
             raise ValueError("unsupported parsed document schema")
         if self.language not in ("chinese", "spanish", "english"):
             raise ValueError("unsupported document language")

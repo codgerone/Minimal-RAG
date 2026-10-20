@@ -8,18 +8,19 @@ Merged cells are stated by structure only: the value sits at the cell's top-left
 positions to its right read `←`, covered positions below read `↑`. Lines carry where each cell's
 text sits and how a line is rewritten when it opens a chunk in the middle of a vertical merge.
 
-Given an LLM annotation instead of a header decision (`llm_markdown_v1`, `llm_labeled_v1`), the
-annotated header rows replace the detected header and are written as they are, one line per row
-(the labeled form writes none); section title rows carry no column names; blanks annotated as
-repeating the value above read `↑`, as a vertical merge does.
+Given a structure from an LLM annotation (`llm_markdown_v1`, `llm_labeled_v1`), the header rows
+are written as they are, one line per row (the labeled form writes none); section title rows carry
+no column names; blanks annotated as repeating the value above read `↑`, as a vertical merge does.
+
+`grid_rows_v1` writes every row as it is, with no structure: the text returned for a whole table.
 """
 
 from __future__ import annotations
 
 from rag.ingest.tables.header import header_paths
 from rag.ingest.tables.models import (
-    CellSpan, Continuation, HeaderDecision, SerializedTable, SerializedTableLine,
-    StructuredTable, TableAnnotation, TableCell,
+    CellSpan, Continuation, SerializedTable, SerializedTableLine, StructuredTable, TableCell,
+    TableStructure,
 )
 
 LEFT, UP, MISSING = "←", "↑", "〔缺失单元格〕"
@@ -50,31 +51,33 @@ class _Line:
         return label_span
 
 
+NO_STRUCTURE = TableStructure("header_rules", ())
+
+
+def serialize_grid_rows(table: StructuredTable, *, table_node_id: str | None = None) -> SerializedTable:
+    plain = serialize_markdown_rows(table, NO_STRUCTURE, table_node_id=table_node_id)
+    return SerializedTable(plain.text, plain.lines, "grid_rows_v1")
+
+
 def serialize_markdown_rows(
-    table: StructuredTable, header: HeaderDecision | None, *, table_node_id: str | None = None,
-    labeled: bool = False, annotation: TableAnnotation | None = None,
+    table: StructuredTable, structure: TableStructure, *, table_node_id: str | None = None,
+    labeled: bool = False,
 ) -> SerializedTable:
     owner = table_node_id or table.table_id
     columns = table.column_count or 0
-    title_rows: frozenset[int] = frozenset()
+    header_rows = set(structure.header_rows)
+    header_paths_ = (header_paths(table, min(header_rows), max(header_rows) + 1) if header_rows else ())
+    title_rows = structure.title_rows()
     implicit: dict[tuple[int, int], tuple[int, int]] = {}   # blank position -> anchor position
-    if annotation is None:
-        assert header is not None
-        identified = header.outcome == "identified"
-        header_start = header.header_start_row if identified else None
-        header_rows = set(range(header.header_start_row or 0, header.header_end_row or 0)) if identified else set()
-        header_paths_ = header.paths
-        rule = "labeled_rows_v1" if labeled else "markdown_rows_v1"
-    else:
-        header_rows = set(annotation.header_rows)
-        header_start = None                                  # annotated header rows are written as rows
-        header_paths_ = (header_paths(table, min(header_rows), max(header_rows) + 1)
-                         if header_rows else ())
-        title_rows = annotation.title_rows()
-        for merge in annotation.implicit_merges:
-            for row in range(merge.first_row + 1, merge.last_row + 1):
-                implicit[(row, merge.column)] = (merge.first_row, merge.column)
+    for merge in structure.implicit_merges:
+        for row in range(merge.first_row + 1, merge.last_row + 1):
+            implicit[(row, merge.column)] = (merge.first_row, merge.column)
+    rows_as_is = structure.source == "llm_annotation"         # header rows written as rows
+    header_start = None if rows_as_is or not header_rows else min(header_rows)
+    if rows_as_is:
         rule = "llm_labeled_v1" if labeled else "llm_markdown_v1"
+    else:
+        rule = "labeled_rows_v1" if labeled else "markdown_rows_v1"
     paths = {item.column_index: item for item in header_paths_}
 
     grid: dict[tuple[int, int], TableCell] = {}
@@ -163,7 +166,7 @@ def serialize_markdown_rows(
         if row == header_start and not labeled:
             emit_header()
         if row in header_rows:
-            if annotation is not None and not labeled:
+            if rows_as_is and not labeled:
                 emit_row(row, "header")
             continue
         emit_row(row, "section_title" if row in title_rows else "data")

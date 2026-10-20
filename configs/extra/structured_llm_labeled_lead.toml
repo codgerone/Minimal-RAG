@@ -1,5 +1,5 @@
-name = "structured_llm_labeled_lead_gemini38f"
-description = "LL+：LLM 结构标注 + 表头映射写法，每块加引导句"
+name = "structured_llm_labeled_lead"
+description = "LL+：LLM 结构标注 + 表头映射写法，每个表格 chunk 开头加引导句"
 
 [parser]
 use = "docling_layout"
@@ -16,12 +16,15 @@ use = "docling"
 [[table_extractors]]
 use = "unstructured"
 
-[table_formatter]
-use = "labeled_rows_v1"
-
-[table_annotation]          # 入库时用 LLM 处理表格（docs/changes/v3.13.md）
+[table_structure]  # 表格结构：header_rules 规则表头判定；llm_annotation LLM 结构标注（表头、分节、隐式合并）
+use = "llm_annotation"
 model = "google/gemini-3.8-flash"
-lead = true   # 每个表格 chunk 开头写引导句
+
+[table_formatter]  # 表格写法：markdown_rows 表头一行、各行竖线文本；labeled_rows 每格写成 列名: 值
+use = "labeled_rows"
+
+[table_index_text]  # 索引里放什么：rows 表格行；rows_with_lead 表格行，每块开头加引导句；summary 只放摘要
+use = "rows_with_lead"
 
 [chunker]
 use = "structured_tokens"

@@ -270,7 +270,7 @@ def _attempts(llm: TableLLMResult) -> str:
     return "".join(parts)
 
 
-def _llm_card(llm: TableLLMResult, table: StructuredTable, answers, sources) -> str:
+def _llm_card(llm: TableLLMResult, table: StructuredTable, answers, sources, index_text: str) -> str:
     """LLM processing of one table: whether the annotation is correct, the lead or summary, the calls."""
     context = "".join(f'<div class="meta">[{esc(n.kind)}]</div>{text_block(n.text, 400)}' for n in llm.context)
     calls = (f'<details><summary>调用与校验（{esc(llm.model)}，{len(llm.attempts)} 次）</summary>'
@@ -279,7 +279,7 @@ def _llm_card(llm: TableLLMResult, table: StructuredTable, answers, sources) -> 
     if llm.task == "summary":
         body = (f'<div>{badge("摘要通过校验", "ok")} 本表入库一个摘要 chunk</div>{text_block(llm.summary)}'
                 if llm.summary is not None else
-                f'<div>{badge("摘要未通过校验", "bad")} 已退回 markdown_rows_v1 表格 chunk（降级完成）</div>')
+                f'<div>{badge("摘要未通过校验", "bad")} 已退回表格 chunk（降级完成）</div>')
         return f'<div class="card"><h3>LLM 表格摘要</h3>{body}{calls}</div>'
     if llm.annotation is None:
         verdict = f'<div>{badge("标注未通过校验", "bad")} 已退回规则序列化（降级完成）</div>'
@@ -297,7 +297,7 @@ def _llm_card(llm: TableLLMResult, table: StructuredTable, answers, sources) -> 
     if llm.lead is None:
         lead = f'<div>{badge("引导句未通过校验", "bad")} 不加引导句</div>'
     else:
-        used = "每个表格 chunk 开头写这句" if llm.use_lead else "本配置不加引导句"
+        used = "每个表格 chunk 开头写这句" if index_text == "rows_with_lead" else "本配置不加引导句"
         lead = f'<div>引导句（{used}）：</div>{text_block(llm.lead)}'
     return f'<div class="card"><h3>LLM 结构标注</h3>{verdict}{grid}{lead}{calls}</div>'
 
@@ -309,7 +309,7 @@ def _indexed_text(chunks: list, whole_text: str) -> str:
     shown = "".join(f'<div class="meta">{kinds.get(c.kind, c.kind)} {i} / {len(chunks)} · {c.token_count} token</div>'
                     f'{text_block(c.text)}' for i, c in enumerate(chunks, 1))
     return (f'<details><summary>入库文本：本表的 {len(chunks)} 个 chunk（检索用，原样入库）</summary>{shown}</details>'
-            f'<details><summary>整表文本（命中本表、返回整表时交给回答的 LLM；markdown_rows_v1，{len(whole_text)} 字符）'
+            f'<details><summary>整表文本（命中本表、返回整表时交给回答的 LLM；原样写出各行，不含表头与结构判定，{len(whole_text)} 字符）'
             f'</summary>{text_block(whole_text)}</details>')
 
 
@@ -413,7 +413,8 @@ def tables_page(processed: DocumentAudit, entry: DocumentEntry, config_name: str
             + (f'<details><summary>本页未进入该表评分的其他候选（{len(page_candidates)}）</summary>'
                f'<table><tr><th>候选</th><th>原因</th></tr>{others}</table></details>' if page_candidates else "")
             + ("" if continued or prep.llm is None else
-               _llm_card(prep.llm, prep.adopted_table, answers, node_sources.get(prep.slot_id, ())))
+               _llm_card(prep.llm, prep.adopted_table, answers, node_sources.get(prep.slot_id, ()),
+                         prep.index_text))
             + ("" if continued else _indexed_text(table_chunks.get(node_ids.get(prep.slot_id), []),
                                                   prep.whole_text)) + "</div>")
     if evaluations:

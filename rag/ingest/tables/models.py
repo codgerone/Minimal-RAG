@@ -91,22 +91,42 @@ class ContinuationReport:
 
 
 @dataclass(frozen=True)
-class PreparedTableContent:
+class AdoptedTable:
+    """One table after adoption and continuation merging, with the rule header judged on it."""
     slot_id: str                            # the first slot of a merged chain
     table_id: str
     adopted_table: StructuredTable          # the merged table when segments > 1
     header_decision: HeaderDecision
-    serialized_table: SerializedTable
-    whole_text: str                         # markdown_rows_v1 text, returned when the whole table is
     segments: tuple[TableSegment, ...]
-    llm: TableLLMResult | None = None       # set when the assembly processes tables with an LLM
 
     def __post_init__(self) -> None:
-        if not self.segments or self.segments[0].slot_id != self.slot_id:
-            raise ValueError("prepared table segments must start with its own slot")
-        rows = [(item.start_row, item.end_row) for item in self.segments]
-        if rows[0][0] != 0 or any(a[1] != b[0] for a, b in zip(rows, rows[1:])) or any(s > e for s, e in rows):
-            raise ValueError("prepared table segments must tile the rows")
+        _check_segments(self.slot_id, self.segments)
+
+
+@dataclass(frozen=True)
+class PreparedTableContent:
+    """A table ready to be chunked: its structure, its text, and what the index holds for it."""
+    slot_id: str
+    table_id: str
+    adopted_table: StructuredTable
+    header_decision: HeaderDecision
+    structure: TableStructure               # what the text is written from
+    serialized_table: SerializedTable       # the text chunked into table chunks
+    whole_text: str                         # grid_rows_v1 text, returned when the whole table is
+    index_text: TableIndexText
+    segments: tuple[TableSegment, ...]
+    llm: TableLLMResult | None = None       # the LLM call behind the structure or the summary
+
+    def __post_init__(self) -> None:
+        _check_segments(self.slot_id, self.segments)
+
+
+def _check_segments(slot_id: str, segments: tuple[TableSegment, ...]) -> None:
+    if not segments or segments[0].slot_id != slot_id:
+        raise ValueError("prepared table segments must start with its own slot")
+    rows = [(item.start_row, item.end_row) for item in segments]
+    if rows[0][0] != 0 or any(a[1] != b[0] for a, b in zip(rows, rows[1:])) or any(s > e for s, e in rows):
+        raise ValueError("prepared table segments must tile the rows")
 
 @dataclass(frozen=True)
 class TableExtractionReport:
@@ -584,7 +604,9 @@ class SerializedTableLine:
         return text
 
 TableTextRule: TypeAlias = Literal["markdown_rows_v1", "labeled_rows_v1", "llm_markdown_v1",
-                                   "llm_labeled_v1"]
+                                   "llm_labeled_v1", "grid_rows_v1"]
+TableStructureSource: TypeAlias = Literal["header_rules", "llm_annotation"]
+TableIndexText: TypeAlias = Literal["rows", "rows_with_lead", "summary"]
 
 @dataclass(frozen=True)
 class SerializedTable:
@@ -631,6 +653,19 @@ class TableAnnotation:
 
 
 @dataclass(frozen=True)
+class TableStructure:
+    """The structure a table's text is written from: the rule header (`header_rules`, also when an
+    LLM annotation failed validation) or an LLM annotation that passed (`llm_annotation`)."""
+    source: TableStructureSource
+    header_rows: tuple[int, ...]
+    sections: tuple[TableSection, ...] = ()
+    implicit_merges: tuple[ImplicitMerge, ...] = ()
+
+    def title_rows(self) -> frozenset[int]:
+        return frozenset(row for section in self.sections for row in section.title_rows)
+
+
+@dataclass(frozen=True)
 class TableContextNode:
     """A node before a table, given to the LLM as context."""
     kind: str
@@ -656,7 +691,7 @@ class TableLLMResult:
     """LLM processing of one table: the calls as facts, then what passed validation and is used.
 
     `annotation`, `lead`, `summary` hold only what passed; None means it did not, and the table
-    falls back (rule text, no lead, rule table chunks). `use_lead` records the configuration."""
+    falls back (rule structure, no lead, table chunks)."""
     task: Literal["annotation", "summary"]
     model: str
     prompt_version: str
@@ -666,15 +701,10 @@ class TableLLMResult:
     annotation: TableAnnotation | None = None
     lead: str | None = None
     summary: str | None = None
-    use_lead: bool = False
 
     @property
     def fallback(self) -> bool:
         return (self.annotation is None) if self.task == "annotation" else (self.summary is None)
-
-    @property
-    def applied_lead(self) -> str | None:
-        return self.lead if self.task == "annotation" and self.use_lead else None
 
 @dataclass(frozen=True)
 class StructuredTable:

@@ -13,6 +13,7 @@ from rag.index.analyzer import Analyzer
 from rag.index.embedder import Embedder
 from rag.ingest.chunkers import Chunker
 from rag.ingest.parsers import Parser
+from rag.ingest.pipeline import TableSteps
 from rag.ingest.tables.extractors import TableExtractor
 from rag.ingest.tables.formatters import (
     LabeledRowsFormatter, MarkdownRowsFormatter, TableFormatter,
@@ -55,10 +56,13 @@ PARSERS: dict[str, Callable[..., Parser]] = {
 TABLE_EXTRACTORS: dict[str, Callable[..., TableExtractor]] = {
     name: _extractor(name) for name in ("pymupdf", "camelot", "docling", "unstructured")
 }
+TABLE_STRUCTURES = ("header_rules", "llm_annotation")
 TABLE_FORMATTERS: dict[str, Callable[..., TableFormatter]] = {
-    "markdown_rows_v1": MarkdownRowsFormatter,
-    "labeled_rows_v1": LabeledRowsFormatter,
+    "markdown_rows": MarkdownRowsFormatter,
+    "labeled_rows": LabeledRowsFormatter,
 }
+TABLE_INDEX_TEXTS = ("rows", "rows_with_lead", "summary")
+TABLE_LLM_PARAMS = {"model", "temperature"}   # llm_annotation and summary
 CHUNKERS: dict[str, Callable[..., Chunker]] = {
     "characters": _characters,
     "structured_tokens": _structured,
@@ -99,11 +103,10 @@ class Assembly:
     config: AssemblyConfig
     parser: Parser
     extractors: tuple[TableExtractor, ...]
-    formatter: TableFormatter | None
+    table_steps: TableSteps | None      # set when the parser produces tables
     embedder: Embedder
     chunker: Chunker
     lexical: Analyzer | None = None     # set when the config has [lexical]: ingest builds a BM25 index
-    table_llm: Any = None               # TableLLMStep, set when the config processes tables with an LLM
     _llm: LLM | None = field(default=None, repr=False)
 
     @property
@@ -152,37 +155,62 @@ def assemble(config: AssemblyConfig) -> Assembly:
                        for item in config.table_extractors)
     if extractors and not parser.provides_table_slots:
         raise ConfigError(f"解析器 {parser_name} 不提供表格位置，不能配置表格提取器")
-    formatter = None
-    if parser.provides_table_slots:
-        if config.table_formatter is None:
-            raise ConfigError(f"解析器 {parser_name} 会产出表格，需要配置 [table_formatter]")
-        formatter = _make(TABLE_FORMATTERS, "table_formatter", config.table_formatter)
-    elif config.table_formatter is not None:
-        raise ConfigError(f"解析器 {parser_name} 不产出表格，[table_formatter] 不会生效，请删除")
     embedder = _make(EMBEDDERS, "embedder", config.embedder)
     chunker = _make(CHUNKERS, "chunker", config.chunker, embedder)
     lexical = Analyzer(**config.lexical) if config.lexical is not None else None
-    table_llm = _table_llm(config, formatter, chunker)
-    return Assembly(config, parser, extractors, formatter, embedder, chunker, lexical, table_llm)
+    table_steps = _table_steps(config, parser, chunker)
+    return Assembly(config, parser, extractors, table_steps, embedder, chunker, lexical)
 
 
-def _table_llm(config: AssemblyConfig, formatter: TableFormatter | None, chunker: Chunker) -> Any:
-    if config.table_llm is None:
+def _table_steps(config: AssemblyConfig, parser: Parser, chunker: Chunker) -> TableSteps | None:
+    sections = {"table_structure": config.table_structure, "table_formatter": config.table_formatter,
+                "table_index_text": config.table_index_text}
+    if not parser.provides_table_slots:
+        given = [name for name, value in sections.items() if value is not None]
+        if given:
+            raise ConfigError(f"解析器 {config.parser.use} 不产出表格，{'、'.join(f'[{n}]' for n in given)} 不会生效，请删除")
         return None
-    summary = config.table_llm.use == "summary"
-    if formatter is None or config.table_formatter is None:
-        raise ConfigError("[table_annotation] / [table_summary] 需要会产出表格的解析器")
-    if summary and config.table_formatter.use != "markdown_rows_v1":
-        raise ConfigError("[table_summary] 只能搭配 markdown_rows_v1（整表文本与退回都用它）")
-    if summary and config.table_return_unit == "chunk":
-        raise ConfigError("配置了 [table_summary] 时返回单元不能是 chunk（摘要不对应单元格）")
-    if not hasattr(chunker, "max_tokens"):
+    missing = [name for name, value in sections.items() if value is None]
+    if missing:
+        raise ConfigError(f"解析器 {config.parser.use} 会产出表格，需要配置 {'、'.join(f'[{n}]' for n in missing)}")
+    structure, formatter_config, index_text = (config.table_structure, config.table_formatter,
+                                               config.table_index_text)
+    assert structure is not None and formatter_config is not None and index_text is not None
+    if structure.use not in TABLE_STRUCTURES:
+        raise ConfigError(f"[table_structure] 没有名为 {structure.use!r} 的实现，可选：{', '.join(TABLE_STRUCTURES)}")
+    if index_text.use not in TABLE_INDEX_TEXTS:
+        raise ConfigError(f"[table_index_text] 没有名为 {index_text.use!r} 的实现，可选：{', '.join(TABLE_INDEX_TEXTS)}")
+    formatter = _make(TABLE_FORMATTERS, "table_formatter", formatter_config)
+    for section, component, llm_use in (("table_structure", structure, "llm_annotation"),
+                                        ("table_index_text", index_text, "summary")):
+        allowed = TABLE_LLM_PARAMS if component.use == llm_use else set()
+        if set(component.params) - allowed or (component.use == llm_use and "model" not in component.params):
+            raise ConfigError(f"[{section}] {component.use} " + (f"需要 model，只接受 {sorted(allowed)}" if allowed
+                                                                else "不接受参数"))
+    if index_text.use == "rows_with_lead" and structure.use != "llm_annotation":
+        raise ConfigError("[table_index_text] rows_with_lead 需要 [table_structure] llm_annotation（引导句与结构标注同一次调用）")
+    if index_text.use == "summary" and structure.use != "header_rules":
+        raise ConfigError("[table_index_text] summary 只能搭配 [table_structure] header_rules")
+    if index_text.use == "summary" and config.table_return_unit == "chunk":
+        raise ConfigError("[table_index_text] summary 时返回单元不能是 chunk（摘要不对应单元格）")
+    uses_llm = structure.use == "llm_annotation" or index_text.use == "summary"
+    if uses_llm and not hasattr(chunker, "max_tokens"):
         raise ConfigError("LLM 表格处理需要按 token 分块的分块器（structured_tokens）")
-    from rag.ingest.chunkers.tokens import E5TokenCounter
-    from rag.ingest.tables.llm_tables import LLMCache, TableLLMStep
-    params = config.table_llm.params
-    llm = OpenRouterLLM(model=params["model"], temperature=params.get("temperature", 0),
-                        env_override=False)
-    cache = LLMCache(config.path.parent.parent / ".rag" / "llm-cache")
-    return TableLLMStep(config.table_llm.use, llm, E5TokenCounter(), chunker.max_tokens,  # type: ignore[attr-defined]
-                        cache, use_lead=params.get("lead", False))
+    from rag.ingest.tables.structure import HeaderRulesStructure
+    structurer: Any = HeaderRulesStructure()
+    summarizer = None
+    if uses_llm:
+        from rag.ingest.chunkers.tokens import E5TokenCounter
+        from rag.ingest.tables.llm_tables import LLMAnnotationStructure, LLMCache, LLMSummary
+        root = next(p for p in config.path.parents if p.name == "configs").parent
+        cache = LLMCache(root / ".rag" / "llm-cache")
+        llm_config = structure if structure.use == "llm_annotation" else index_text
+        llm = OpenRouterLLM(model=llm_config.params["model"], temperature=llm_config.params.get("temperature", 0),
+                            env_override=False)
+        step = (LLMAnnotationStructure if structure.use == "llm_annotation" else LLMSummary)(
+            llm, E5TokenCounter(), chunker.max_tokens, cache)  # type: ignore[attr-defined]
+        if structure.use == "llm_annotation":
+            structurer = step
+        else:
+            summarizer = step
+    return TableSteps(structurer, formatter, index_text.use, summarizer)  # type: ignore[arg-type]

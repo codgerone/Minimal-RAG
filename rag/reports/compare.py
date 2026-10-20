@@ -21,9 +21,9 @@ from rag.reports.table_compare import TableSpec, table_tabs
 from rag.reports.html import badge, esc, filters, hit_scores, page, pct, text_block, write_assets
 
 LEVELS = {"miss": (0, "✗ 未命中", "bad"), "partial": (1, "◐ 部分", "warn"), "complete": (2, "✓ 完整", "ok")}
-RECURRING_MIN = 3
+RECURRING_MIN = 3   # an irrelevant chunk listed when it is in the Top-K of at least this many questions
 # Table processing settings: runs that differ only in them are compared in one tab.
-TABLE_SETTINGS = ("table_formatter", "table_llm")   # an irrelevant chunk listed when it is in the Top-K of at least this many questions
+TABLE_SETTINGS = ("table_structure", "table_formatter", "table_index_text", "table_llm")
 
 
 class CompareError(RuntimeError):

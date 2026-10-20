@@ -4,7 +4,7 @@ from pathlib import Path
 from rag.ingest.assemble import compose_document
 from rag.ingest.regions import chunk_regions
 from rag.ingest.tables.continuation import column_geometry, text_width
-from rag.ingest.tables.markdown_rows import serialize_markdown_rows
+from test_tables import texts
 from rag.ingest.tables.models import (
     ContentResolution, StructuredTable, TableCell, TableSlot,
 )
@@ -68,9 +68,8 @@ def document(*items):
 
 def run(*items):
     primary, resolutions = document(*items)
-    prepared, report = prepare_tables(primary, (), resolutions, True,
-                                      serializer=lambda t, h, table_node_id: serialize_markdown_rows(
-                                          t, h, table_node_id=table_node_id, labeled=True))
+    adopted, report = prepare_tables(primary, (), resolutions, True)
+    prepared = texts(primary, adopted, labeled=True)
     source = SourceDocument("doc", "x.pdf", "x.pdf", Path("x.pdf"), "a" * 64)
     return report, compose_document(source, primary, resolutions, prepared, True, "english")
 

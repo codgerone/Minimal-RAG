@@ -259,20 +259,19 @@ def chunk_parsed_document(
                                start + local_start, start + resolved_end, repeated, context_kind)
 
         llm = node.llm
-        summary = llm.summary if llm is not None and llm.task == "summary" else None
+        summary = llm.summary if node.index_text == "summary" and llm is not None else None
         if summary is not None:
             # The summary replaces the table's chunks; its region is the whole table.
             drafts.append(("table_summary", summary,
                            (ChunkSource(node.node_id, node.sources, None, None, False, "none"),),
                            None, 0, 1))
             continue
-        annotation = llm.annotation if llm is not None and llm.task == "annotation" else None
-        lead = llm.applied_lead if llm is not None else None
+        lead = llm.lead if node.index_text == "rows_with_lead" and llm is not None else None
         opening = f"{lead}\n" if lead else ""
         line_by_id = {item.line_id: item for item in lines}
         kinds = {"header": "table_header", "section_title": "section_title"}
         table_parts: list[tuple[str, tuple[ChunkSource, ...]]] = []
-        for planned in plan_chunks(node.serialized, annotation,
+        for planned in plan_chunks(node.serialized, node.structure,
                                    lambda text: _fits(counter, opening + text, max_input_tokens)):
             if planned.oversize:
                 line = line_by_id[planned.line_ids[0]]

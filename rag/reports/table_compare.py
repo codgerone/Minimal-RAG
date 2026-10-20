@@ -186,10 +186,10 @@ def _contrasts(spec: TableSpec, runs: list[tuple[str, dict]], views: dict[str, d
         cards.setdefault(name, []).append(
             f"<tr><td class=nw>{esc(before)} → {esc(after)}</td>"
             f"<td class=nw>{moved(c['m1']['better'], c['m1']['worse'])} 有好有坏 {c['m1']['mixed']} "
-            f"<span class=meta>/ {n} · 比较前已全部排第 1 {c['m1']['floor']}</span></td>"
+            f"<span class=meta>/ {n} · 其中只有 {n - c['m1']['floor']} 题可能变好</span></td>"
             f"<td class=nw>{moved(c['m2']['better'], c['m2']['worse'])} <span class=meta>/ {n}</span></td>"
             f"<td class=nw>{moved(c['m3']['better'], c['m3']['worse'])} <span class=meta>/ {n} · "
-            f"其中所需单元数不变 {c['m3']['same_k']}</span></td>"
+            f"其中 {c['m3']['same_k']} 题排名没变、只是返回的单元变长或变短</span></td>"
             f"<td class=num>{_num(sa['m2_mean'])} → {_num(sb['m2_mean'])}</td>"
             f"<td class=num>{_num(sa['m3_mean'], 0)} → {_num(sb['m3_mean'], 0)}</td></tr>")
     if not cards:
@@ -200,8 +200,10 @@ def _contrasts(spec: TableSpec, runs: list[tuple[str, dict]], views: dict[str, d
         f'<th>指标 3：所需 token</th><th class=num>指标 2 平均</th><th class=num>指标 3 平均</th></tr>'
         f'{"".join(rows)}</table></div></div>' for name, rows in cards.items())
     return ('<h2>对照</h2><p class="meta">每组对照只差一个因素；计数单位都是表格题（“/ N”）。指标 1：一题中有表格证据组名次变小、'
-            '没有变大的为变好，反之为变差，两者都有为有好有坏；“比较前已全部排第 1”的题不可能变好。指标 2、3：所需单元数或 token '
-            '变小为变好；“其中所需单元数不变”是指标 3 变化只来自所返回单元的长度的题。判断以平均值为主，计数为辅。</p>' + body)
+            '没有变大的为变好，反之为变差，两者都有为有好有坏。比较前表格证据组已全部排第 1 的题只可能不变或变差，'
+            '所以“可能变好”的题少于 N，变差不受此限。指标 2、3：所需单元数或 token 变小为变好。指标 3 的变化有两个来源：'
+            '排名变了（所需单元数随之变化），或排名没变、返回的单元本身变长或变短（如每块多了引导句）；后者单独计数。'
+            '判断以平均值为主，计数为辅。</p>' + body)
 
 
 def _per_question(runs: list[tuple[str, dict]], views: dict[str, dict]) -> str:
