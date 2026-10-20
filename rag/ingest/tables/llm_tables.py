@@ -25,7 +25,7 @@ from rag.ingest.tables.models import (
 )
 from rag.models import PrimaryDocument, PrimaryList, PrimaryTablePlaceholder, PrimaryText
 
-PROMPT_VERSION = "llm_tables_v4"
+PROMPT_VERSION = "llm_tables_v5"
 REASONING_EFFORT = "medium"
 LEAD_MAX_TOKENS = 64                  # accepted by code; validation leaves this much room in a chunk
 LEAD_WORDS, LEAD_CHARS = 24, 48       # told to the model
@@ -163,7 +163,9 @@ Annotate:
 4. lead: one sentence in the document language, at most {lead_limit}, that tells a reader what
    the table is about: what it lists, what a row stands for and what the columns give. You may
    use the meaning of headings in the context. Do not mention where the table is in the
-   document (section, clause, article or table numbers, page numbers). Describe the table in
+   document (section, clause, article or table numbers, page numbers). Do not mention numbers
+   or codes that identify the document itself: the lead is matched to questions by meaning, and
+   such numbers do not help. Describe the table in
    general terms; do not copy values from its cells. Do not state anything that the table or
    the context does not support.
 
@@ -182,7 +184,9 @@ Rules:
    a target.
 2. State what the table is about. You may use the meaning of headings in the context. Do not
    mention where the table is in the document (section, clause, article or table numbers, page
-   numbers).
+   numbers). Do not mention numbers or codes that identify the document itself, unless they are
+   values in the table's cells: the summary is matched to questions by meaning, and such numbers
+   do not help.
 3. State how the table is organized: what a row stands for, what the columns are (with their
    original labels), and any groups, subtotals or totals.
 4. Copy exactly the values that a question would use to point at a particular row or group. A
