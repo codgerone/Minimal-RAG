@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from rag.eval.dataset import Case, Dataset, load_dataset
-from rag.eval.judge import CaseEvidence, JudgeChunk, judge_case
+from rag.eval.judge import CaseEvidence, GroupEvidence, JudgeChunk, judge_case
 from rag.eval.metrics import METRICS, QuestionScore, aggregate, completion_ranks, score_question
 from rag.eval import table_metrics as tm
 from rag.index.builder import current_status, open_lexical, open_store, open_tables
@@ -152,21 +152,28 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int) -> Path
         needed = tm.CURVE_K
         if groups:
             per_group, k2 = tm.required_units([u.chunk_ids for u in ranking], groups)
+            unit_of = lambda cid: owners.get(cid, cid)
             table = {"groups": [{"group_id": g.group_id, "excerpt_ids": list(g.excerpt_ids),
                                  "chunk_rank": tm.chunk_rank([h.chunk.chunk_id for h in hits], g.any_word_chunks),
-                                 "required_k": per_group.get(g.group_id)} for g in groups],
+                                 "required_k": per_group.get(g.group_id),
+                                 # the group's acceptable sets of table excerpts, as return units
+                                 "unit_sets": sorted({tuple(sorted({unit_of(c) for c in s})) for s in g.table_sets})}
+                                for g in groups],
                      "required_k": k2}
             needed = max(needed, k2 or 0)
         leading = tuple(tokens_of(u.text) for u in ranking[:needed])
         if table is not None:
             table["tokens"] = sum(leading[:table["required_k"]]) if table["required_k"] else None
+            table["leading_tokens"] = list(leading)
         owner = lambda cid: owners.get(cid, cid)
         item = CaseResult(case, units, [tokens_of(u.text) for u in units], evidence,
                           None, scope, completion_ranks([u.chunk_ids for u in ranking], evidence.groups),
                           {g.group_id: min(len({owners.get(c, c) for c in s}) for s in g.acceptable_sets)
                            for g in evidence.groups if g.acceptable_sets}, table, leading)
         if table is not None:
-            table["fewest_units"] = tm.fewest_units(evidence.groups, owner)
+            # Fewest return units covering the table evidence (same scope as metric 2).
+            table["fewest_units"] = tm.fewest_units(
+                [GroupEvidence(g.group_id, "coordinate", g.table_sets) for g in groups], owner)
         if case.answerable:
             item = replace(item, score=score_question(
                 [u.chunk_ids for u in units], [u.document_id for u in units],
