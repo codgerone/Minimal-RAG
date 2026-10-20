@@ -1,16 +1,18 @@
 """`markdown_rows_v1` and `labeled_rows_v1`: one Markdown pipe row per table row.
 
-`markdown_rows_v1` writes an identified header once as its own line. `labeled_rows_v1` differs in
-two places only: no header line, and a value of a cell occupying a single column is written as
-`列名: 值`. Blanks, markers and cells spanning several columns carry no column name.
+`markdown_rows_v1` writes the header rows once as one line of column paths: each column's header
+cells top down, joined by ` / `, so an upper label is repeated over every column it spans.
+`labeled_rows_v1` differs in two places only: no header line, and a value of a cell occupying a
+single column is written as `列名: 值`. Blanks, markers and cells spanning several columns carry no
+column name. The header rows come from the table's structure, whether the rule header or an LLM
+annotation; with no header rows every row is written as it is.
 
 Merged cells are stated by structure only: the value sits at the cell's top-left position, covered
 positions to its right read `←`, covered positions below read `↑`. Lines carry where each cell's
 text sits and how a line is rewritten when it opens a chunk in the middle of a vertical merge.
 
-Given a structure from an LLM annotation (`llm_markdown_v1`, `llm_labeled_v1`), the header rows
-are written as they are, one line per row (the labeled form writes none); section title rows carry
-no column names; blanks annotated as repeating the value above read `↑`, as a vertical merge does.
+A structure from an LLM annotation may also give section title rows, written as rows with no column
+names, and blanks that repeat the value above, written `↑` as a vertical merge is.
 
 `grid_rows_v1` writes every row as it is, with no structure: the text returned for a whole table.
 """
@@ -72,12 +74,8 @@ def serialize_markdown_rows(
     for merge in structure.implicit_merges:
         for row in range(merge.first_row + 1, merge.last_row + 1):
             implicit[(row, merge.column)] = (merge.first_row, merge.column)
-    rows_as_is = structure.source == "llm_annotation"         # header rows written as rows
-    header_start = None if rows_as_is or not header_rows else min(header_rows)
-    if rows_as_is:
-        rule = "llm_labeled_v1" if labeled else "llm_markdown_v1"
-    else:
-        rule = "labeled_rows_v1" if labeled else "markdown_rows_v1"
+    header_start = min(header_rows) if header_rows else None
+    rule = "labeled_rows_v1" if labeled else "markdown_rows_v1"
     paths = {item.column_index: item for item in header_paths_}
 
     grid: dict[tuple[int, int], TableCell] = {}
@@ -166,8 +164,6 @@ def serialize_markdown_rows(
         if row == header_start and not labeled:
             emit_header()
         if row in header_rows:
-            if rows_as_is and not labeled:
-                emit_row(row, "header")
             continue
         emit_row(row, "section_title" if row in title_rows else "data")
 

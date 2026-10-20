@@ -603,8 +603,7 @@ class SerializedTableLine:
             text = text[:item.start] + item.text + text[item.end:]
         return text
 
-TableTextRule: TypeAlias = Literal["markdown_rows_v1", "labeled_rows_v1", "llm_markdown_v1",
-                                   "llm_labeled_v1", "grid_rows_v1"]
+TableTextRule: TypeAlias = Literal["markdown_rows_v1", "labeled_rows_v1", "grid_rows_v1"]
 TableStructureSource: TypeAlias = Literal["header_rules", "llm_annotation"]
 TableIndexText: TypeAlias = Literal["rows", "rows_with_lead", "summary"]
 

@@ -42,13 +42,13 @@ def budget_table():
 BUDGET = annotated(header=(1, 2), sections=[((0,), 14), ((3,), 11), ((4, 5), 7), ((8,), 10), ((12,), 14)])
 
 
-def test_markdown_writes_header_rows_as_they_are_and_titles_without_labels():
+def test_markdown_writes_annotated_header_as_column_paths_and_titles_without_labels():
     table = budget_table()
     text = serialize_markdown_rows(table, annotated_structure(BUDGET), table_node_id="t").text
-    assert lines_of(text)[:4] == ["| Budget | ← | ← |", "| Code | Price | ← |", "| ↑ | Unit | Total |",
+    assert lines_of(text)[:3] == ["| Budget | ← | ← |", "| Code | Price / Unit | Price / Total |",
                                   "| A | Civil works | ← |"]
     labeled = serialize_markdown_rows(table, annotated_structure(BUDGET), table_node_id="t", labeled=True)
-    assert labeled.rule_version == "llm_labeled_v1"
+    assert labeled.rule_version == "labeled_rows_v1"
     assert lines_of(labeled.text)[:3] == ["| Budget | ← | ← |", "| A | Civil works | ← |", "| A1 | Earthworks |  |"]
     assert "| Code: A1.1 | Price / Unit: Digging | Price / Total: 10 |" in lines_of(labeled.text)
 
@@ -56,13 +56,13 @@ def test_markdown_writes_header_rows_as_they_are_and_titles_without_labels():
 def test_every_chunk_repeats_header_and_the_titles_of_its_sections():
     table = budget_table()
     serialized = serialize_markdown_rows(table, annotated_structure(BUDGET), table_node_id="t")
-    chunks = plan_chunks(serialized, annotated_structure(BUDGET), lambda text: len(text.split("\n")) <= 9)
+    chunks = plan_chunks(serialized, annotated_structure(BUDGET), lambda text: len(text.split("\n")) <= 8)
     texts = [lines_of(c.text) for c in chunks]
     for lines in texts:
-        assert lines[:3] == ["| Budget | ← | ← |", "| Code | Price | ← |", "| ↑ | Unit | Total |"]
+        assert lines[:2] == ["| Budget | ← | ← |", "| Code | Price / Unit | Price / Total |"]
     # Sub-group A2 opens a chunk: its parent A is repeated, its own title is in place.
     a2 = next(lines for lines in texts if "| A2.1 | Slab | 30 |" in lines)
-    assert a2[3:6] == ["| A | Civil works | ← |", "| A2 | Concrete |  |", "| A2.1 | Slab | 30 |"]
+    assert a2[2:5] == ["| A | Civil works | ← |", "| A2 | Concrete |  |", "| A2.1 | Slab | 30 |"]
     # The total row stays under group A's title; group B starts with its own title.
     total = next(lines for lines in texts if "|  | Subtotal A | 100 |" in lines)
     assert "| A | Civil works | ← |" in total
@@ -72,10 +72,10 @@ def test_every_chunk_repeats_header_and_the_titles_of_its_sections():
 def test_a_section_too_big_for_a_chunk_is_split_and_its_two_title_rows_repeated():
     table = budget_table()
     serialized = serialize_markdown_rows(table, annotated_structure(BUDGET), table_node_id="t")
-    chunks = plan_chunks(serialized, annotated_structure(BUDGET), lambda text: len(text.split("\n")) <= 7)
+    chunks = plan_chunks(serialized, annotated_structure(BUDGET), lambda text: len(text.split("\n")) <= 6)
     second = next(lines_of(c.text) for c in chunks if "| A1.2 | Filling | 20 |" in lines_of(c.text)
                   and "| A1.1 | Digging | 10 |" not in lines_of(c.text))
-    assert second[3:7] == ["| A | Civil works | ← |", "| A1 | Earthworks |  |", "|  | (incl. disposal) |  |",
+    assert second[2:6] == ["| A | Civil works | ← |", "| A1 | Earthworks |  |", "|  | (incl. disposal) |  |",
                            "| A1.2 | Filling | 20 |"]
 
 
@@ -194,7 +194,7 @@ def _llm_document(llm, annotation=None, index_text="rows"):
     class Lines:
         def count_passage(self, text):
             return len(text.split("\n"))
-    return chunk_parsed_document(document, Lines(), max_input_tokens=9, overlap_tokens=0)
+    return chunk_parsed_document(document, Lines(), max_input_tokens=8, overlap_tokens=0)
 
 
 def _result(task, **fields):
@@ -207,11 +207,11 @@ def test_chunks_repeat_section_titles_as_context_and_carry_the_lead():
                           "rows_with_lead")
     assert all(c.kind == "table" and c.text.startswith("Budget by item.\n| Budget | ← | ← |")
                for c in batch.chunks)
-    assert all(c.token_count <= 9 for c in batch.chunks)
+    assert all(c.token_count <= 8 for c in batch.chunks)
     # A chunk opening inside group A repeats the table title, the header rows and A's title.
     inside = next(c for c in batch.chunks if "| A2.1 | Slab | 30 |" in c.text)
     kinds = [s.context_kind for s in inside.sources]
-    assert kinds[:4] == ["section_title", "table_header", "table_header", "section_title"]
+    assert kinds[:3] == ["section_title", "table_header", "section_title"]
 
 
 def test_a_failed_lead_or_no_lead_setting_writes_none():
