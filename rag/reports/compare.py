@@ -17,10 +17,13 @@ from rag.eval.metrics import METRICS
 from rag.jsonio import read_json, write_atomic, write_json
 from rag.paths import Workspace
 from rag.reports.evaluation import unit_chunks
+from rag.reports.table_compare import TableSpec, table_tabs
 from rag.reports.html import badge, esc, filters, hit_scores, page, pct, text_block, write_assets
 
 LEVELS = {"miss": (0, "✗ 未命中", "bad"), "partial": (1, "◐ 部分", "warn"), "complete": (2, "✓ 完整", "ok")}
-RECURRING_MIN = 3   # an irrelevant chunk listed when it is in the Top-K of at least this many questions
+RECURRING_MIN = 3
+# Table processing settings: runs that differ only in them are compared in one tab.
+TABLE_SETTINGS = ("table_formatter", "table_llm")   # an irrelevant chunk listed when it is in the Top-K of at least this many questions
 
 
 class CompareError(RuntimeError):
@@ -33,7 +36,7 @@ def _status(case: dict[str, Any]) -> str:
 
 def _group_key(result: dict[str, Any]) -> str:
     settings = {k: v for k, v in result["build_settings"].items()
-                if k not in ("rules_version", "embedder", "embedder_identity", "lexical")}
+                if k not in ("rules_version", "embedder", "embedder_identity", "lexical", *TABLE_SETTINGS)}
     import json
     return json.dumps([settings, result["top_k"]], sort_keys=True, ensure_ascii=False)
 
@@ -240,11 +243,14 @@ def _recurring(runs: list[tuple[str, dict[str, Any]]]) -> str:
     return f'<div class="grid">{"".join(blocks)}</div>'
 
 
-def render(name: str, runs: list[tuple[str, dict[str, Any]]]) -> str:
+def render(name: str, runs: list[tuple[str, dict[str, Any]]], spec: TableSpec | None = None) -> str:
+    tabs, panels = [], []
+    for key, title, panel in table_tabs(runs, spec or TableSpec()):
+        tabs.append(f'<a href="#{key}" data-tab="{key}">{esc(title)}</a>')
+        panels.append(f'<div data-panel="{key}">{panel}</div>')
     groups: dict[str, list[tuple[str, dict[str, Any]]]] = {}
     for run in runs:
         groups.setdefault(_group_key(run[1]), []).append(run)
-    tabs, panels = [], []
     used: set[str] = set()
     for members in groups.values():
         tab = config = members[0][1]["config"]
@@ -277,12 +283,18 @@ def compare_dir(workspace: Workspace) -> Path:
     return workspace.reports / "compare"
 
 
-def write_comparison(workspace: Workspace, name: str, run_specs: list[str]) -> Path:
+def write_comparison(workspace: Workspace, name: str, run_specs: list[str],
+                     table_spec: dict[str, Any] | None = None) -> Path:
+    """`table_spec`: contrasts, excluded table evidence groups and notes (rag/reports/table_compare.py);
+    kept in runs.json so that `report` renders the page again."""
     runs = load_runs(workspace, run_specs)
     folder = compare_dir(workspace) / name
-    write_json(folder / "runs.json", {"name": name, "runs": [spec.strip() for spec in run_specs]})
+    record: dict[str, Any] = {"name": name, "runs": [spec.strip() for spec in run_specs]}
+    if table_spec:
+        record["table_spec"] = table_spec
+    write_json(folder / "runs.json", record)
     write_assets(workspace.reports)
-    write_atomic(folder / "index.html", render(name, runs))
+    write_atomic(folder / "index.html", render(name, runs, TableSpec.from_json(table_spec)))
     return folder
 
 
@@ -290,6 +302,6 @@ def rerender_comparisons(workspace: Workspace) -> int:
     count = 0
     for path in sorted(compare_dir(workspace).glob("*/runs.json")) if compare_dir(workspace).is_dir() else []:
         spec = read_json(path)
-        write_comparison(workspace, spec["name"], spec["runs"])
+        write_comparison(workspace, spec["name"], spec["runs"], spec.get("table_spec"))
         count += 1
     return count
