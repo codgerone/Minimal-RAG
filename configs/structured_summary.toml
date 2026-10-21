@@ -1,5 +1,5 @@
 name = "structured_summary"
-description = "S：规则表头判定 + Markdown 写法，索引只放 LLM 表格摘要（只能返回整表）"
+description = "S：索引只放 LLM 表格摘要（LLM 读原样网格，只能返回整表）；摘要不通过时按规则表头 + Markdown 退回表格 chunk"
 
 [parser]
 use = "docling_layout"

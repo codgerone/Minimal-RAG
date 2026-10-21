@@ -40,7 +40,9 @@ def write(tmp_path: Path, name="x", parser="pymupdf_pages", chunker="characters"
 
 def test_builtin_configs_are_valid_and_differ():
     names = [c.name for c in list_configs(ROOT, extra=True)]
-    assert names[:4] == ["structured", "structured_llm", "structured_llm_lead", "structured_summary"]
+    assert names[:7] == ["structured", "structured_labeled", "structured_llm", "structured_llm_labeled",
+                         "structured_llm_labeled_lead", "structured_llm_lead", "structured_summary"]
+    assert names[7:] == ["plain_text"]
     assemblies = [assemble(resolve_config(ROOT, name)) for name in names]   # extra/ resolved by name
     assert len({a.fingerprint() for a in assemblies}) == len(names)
     plain = assemblies[names.index("plain_text")]
