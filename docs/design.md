@@ -23,7 +23,7 @@
 
 1. **表格结构**（`[table_structure]`）：决定文本从什么结构写出——规则表头（`header_rules`），或 LLM 结构标注（`llm_annotation`，含表头行、分节、隐式合并；未通过校验时退回规则表头）。
 2. **入库文本**（`[table_formatter]`）：按结构写成 `markdown_rows` 或 `labeled_rows` 文本，分块器从它切出表格 chunk。另生成一份不经过任何结构判定的整表文本（`grid_rows_v1`），存入整表库，返回整表时交给回答 LLM。
-3. **表格检索文本**（`[table_index_text]`）：索引里为这张表放什么——表格行（`rows`），每块开头加引导句的表格行（`rows_with_lead`，引导句来自结构标注的同一次调用），或只放一个摘要（`summary`，另一次 LLM 调用）。
+3. **表格检索文本**（`[table_index_text]`）：索引里为这张表放什么——表格行（`rows`），每块开头加引导句的表格行（`rows_with_lead`，引导句来自结构标注的同一次调用），或只放一个摘要（`summary`，另一次 LLM 调用，LLM 读原样网格写出，不用前两个环节的结果；前两个环节只在摘要不通过、该表退回表格 chunk 时起作用）。
 
 规则见 [rules/table-text.md](rules/table-text.md)、[rules/table-llm.md](rules/table-llm.md)，原因见 [decisions/013-llm-tables.md](decisions/013-llm-tables.md)。
 
@@ -62,7 +62,7 @@
 
 ## 3. 配置与构建指纹
 
-`configs/*.toml` 是内置的标准装配（`ingest --all-configs`、`config list` 处理它们）；`configs/extra/*.toml` 是其余可装配的配置，同样按名称用 `--config` 选择，名称在两处之间不能重复。
+`configs/*.toml` 是内置装配：七种表格处理组合各一份，`ingest --all-configs` 重建它们，13 种查询组合（加上返回单元）都从这些索引评估（`scripts/eval_tables.sh`）。`configs/extra/*.toml` 是不参与 `--all-configs` 的配置，同样按名称用 `--config` 选择；名称在两处之间不能重复。
 
 配置中解析、表格（提取器与三个表格环节）、分块、编码相关的设置，加上编码器身份（模型名与版本）和 `RULES_VERSION`，一起计算出**构建指纹**，记录在索引的 `manifest.json` 中。用 LLM 的表格环节，其模型、提示词版本、推理强度、长度与上下文规则也进入指纹。配置了 `[lexical]` 时，其分析器设置（去停用词、词干化）也进入指纹；没有这一节的配置不建 BM25 索引，指纹也不含它。检索器 `[retriever] use`、命中表格时的返回单元 `table_return_unit`、检索的 `top_k`（问答用，默认 4）、文档过滤开关 `document_filter`、评估的 `[eval] top_k`（默认 3，与历史基线一致）、问答 LLM 设置不参与计算，修改它们不需要重建索引。
 

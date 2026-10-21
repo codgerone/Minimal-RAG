@@ -27,6 +27,7 @@ git checkout main         # 回到当前版本
 | V3.10 | 2026-10-15 | 标签 `v3.10` | 列表不再单独成块，列表项与相邻正文按预算合并，表格仍单独成块（[决策 010](../decisions/010-list-merge-and-budget-sweep.md)）；分块改动改为按多预算配对比较验收（448–576 token 五档，按净方向判定），写入 `rules/evaluation.md`；CONTRACT-105-Q004 在各预算下都由部分覆盖变为完整覆盖，单次评估少 1 题属于分界移动的随机扰动；Q002 纯向量变差的对照实验。提案与实施记录见 [changes/v3.10.md](changes/v3.10.md) |
 | V3.11 | 2026-10-16 | 标签 `v3.11` | 跨页续表检测与合并（[决策 011](../decisions/011-table-continuation.md)，规则 `rules/table-continuation.md`）：阅读顺序中相邻、分处相邻两页的两张表，按位置（页面上下 20%，两表之间去掉页眉页脚的文字每侧宽度 ≤ 120）、列几何（外沿重叠与列分界相对偏移，阈值来自全部候选表的实验）、列类型不冲突、后表认不出表头判定，续表与前表合并后再判定表头、文本化与分块；PO 25-19 的续表各行带上列名；PO-25-19-Q002 因表内分界移动、分组标题与所管行分开而变差（C2）。roadmap P2 分解为 P2.1–P2.5。提案与实施记录见 [changes/v3.11.md](changes/v3.11.md) |
 | V3.12 | 2026-10-16 | 标签 `v3.12` | 命中表格片段即返回整表（[决策 012](../decisions/012-whole-table-return.md)）：入库时把每张表的整表文本与成员 chunk 存入整表库 `tables.sqlite`（不向量化，同一 manifest 与 `status` 检查）；查询设置 `[retriever] table_return_unit`，检索排序后由返回单元一步把表格 chunk 换成整表，一张表只占一个位置，内置装配默认 `"table"`；评估按返回单元判定，另报每题返回 token 与逐证据组所需 K，对比页列出所需 K 的变化；新增 `--table-return-unit`。PO-25-19-Q001、Q002、Q003 变为完整覆盖。提案与实施记录见 [changes/v3.12.md](changes/v3.12.md) |
+| V3.13 | 2026-10-21 | 标签 `v3.13` | 用 LLM 处理表格（[决策 013](../decisions/013-llm-tables.md)，规则 `rules/table-llm.md`）：表格处理拆成表格结构（规则表头 / LLM 结构标注）、写法（Markdown / 表头映射）、表格检索文本（表格行 / 加引导句 / 摘要）三个环节，七种入库方式、13 种组合都保留为内置装配，标准对比 `scripts/eval_tables.sh`；LLM 只标注结构，表格文字由代码从原单元格写出；整表文本改为原样网格；多行表头写成一行列名路径；默认 `structured` 改为 Markdown 写法；入库审核页从保存的中间结果生成；对比页新增表格证据视图。返回整表时引导句、摘要使表格题所需单元略少，差距与 LLM 重新生成的扰动同一量级。提案与实施记录见 [changes/v3.13.md](changes/v3.13.md) |
 
 ## 检索效果基线
 
@@ -176,3 +177,18 @@ K=3，文档过滤开启，索引与 V3.9 相同（不重建）。纯向量见 V
 | `structured` 混合，只返回命中 chunk，K=6（等 token 对照） | 91.67% | 86.81% | 83.33% | 35.62% | 84.17% | 0.00% | 1939 | 24/24 |
 
 K=3，文档过滤开启，`max_tokens = 512`。指标按返回单元计（整表算一个结果，视为返回其全部 chunk）；每题返回 token 为全部题之和除以 24。chunk 与 V3.11 逐字节相同，`table_return_unit = "chunk"` 时评估与 V3.11 逐题相同。混合检索变好 3 题（PO-25-19-Q001、Q002、Q003）、变差 0 题；纯向量另有 CONTRACT-105-Q002 由未命中变为部分覆盖。K=3 时完整覆盖率上限 `structured` 由 22/24 升到 24/24，`plain_text` 17/24 不变。对比页：`reports/compare/v3.12-whole-table/`、`reports/compare/v3.12-whole-table-semantic/`。
+
+### V3.13（数据集 3.2.0：LLM 处理表格）
+
+| 装配（混合检索，返回整表） | 命中率 | 证据组召回 | 完整覆盖 | Chunk 精确率 | MRR | 跨文档污染 | 每题返回 token | 文档识别 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| `plain_text` | 50.00% | 40.28% | 33.33% | 51.39% | 80.56% | 0.00% | 220 | 24/24 |
+| `structured`（默认） | 95.83% | 85.42% | 75.00% | 48.61% | 87.50% | 0.00% | 1255 | 24/24 |
+| `structured_labeled` | 91.67% | 86.11% | 83.33% | 48.61% | 83.33% | 0.00% | 1263 | 24/24 |
+| `structured_llm` | 95.83% | 85.42% | 75.00% | 48.61% | 87.50% | 0.00% | 1255 | 24/24 |
+| `structured_llm_labeled` | 91.67% | 86.11% | 83.33% | 48.61% | 81.25% | 0.00% | 1263 | 24/24 |
+| `structured_llm_lead` | 95.83% | 88.19% | 83.33% | 51.39% | 84.72% | 0.00% | 1245 | 24/24 |
+| `structured_llm_labeled_lead` | 95.83% | 88.19% | 83.33% | 51.39% | 81.94% | 0.00% | 1245 | 24/24 |
+| `structured_summary` | 95.83% | 88.19% | 83.33% | 51.39% | 85.42% | 0.00% | 1171 | 24/24 |
+
+K=3，文档过滤开启，`max_tokens = 512`。`structured_labeled` 与 V3.12 的 `structured` 是同一种写法（表头映射），命中、完整覆盖与 V3.12 相同；整表文本改为原样网格，每题返回 token 1860 → 1263。默认 `structured` 改为 Markdown 写法后，完整覆盖少 PO-25-19-Q001、Q003（第 3、4 个返回单元次序互换），命中多 CONTRACT-105-Q010。表格证据指标（12 道表格题，排除 3 组）每题所需返回单元：`structured_llm_lead` 1.92，`structured`、`structured_llm`、`structured_summary` 2.08，`structured_llm_labeled_lead` 2.17，`structured_labeled` 2.33，`structured_llm_labeled` 2.42。`plain_text` 的评估运行于 2026-10-20（V3.13 的表格改动不影响它）。对比页：`reports/compare/v3.13-llm-tables/`。
