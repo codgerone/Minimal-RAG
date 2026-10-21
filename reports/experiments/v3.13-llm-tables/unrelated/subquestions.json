@@ -1,0 +1,1052 @@
+[
+ {
+  "config": "RM",
+  "case_id": "CONTRACT-105-Q003",
+  "group_id": "e1",
+  "subquestion": "采购合同 CONT2025001 规定的总履约期限是多久？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 3,
+   "required_units": 3
+  },
+  "sub": {
+   "chunk_rank": 3,
+   "required_units": 3
+  }
+ },
+ {
+  "config": "RM",
+  "case_id": "CONTRACT-105-Q003",
+  "group_id": "e2",
+  "subquestion": "采购合同 CONT2025001 规定的具体交货地点在哪里？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 21,
+   "required_units": 21
+  },
+  "sub": {
+   "chunk_rank": 13,
+   "required_units": 13
+  }
+ },
+ {
+  "config": "RM",
+  "case_id": "PO-24-12-Q004",
+  "group_id": "e1",
+  "subquestion": "订单 ORDER2025001 的总金额是否涵盖MDC ORCA的费用？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 3,
+   "required_units": 3
+  },
+  "sub": {
+   "chunk_rank": 3,
+   "required_units": 3
+  }
+ },
+ {
+  "config": "RM",
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e2",
+  "subquestion": "订单 ORDER2025003 中，每款产品的单价是多少？",
+  "reason": "C5 跨表连接（去掉公司名）",
+  "original": {
+   "chunk_rank": 8,
+   "required_units": 4
+  },
+  "sub": {
+   "chunk_rank": 3,
+   "required_units": 2
+  }
+ },
+ {
+  "config": "RM",
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e4",
+  "subquestion": "订单 ORDER2025003 中，ELCTO公司订购的总金额是多少？",
+  "reason": "C4 复合问题（仍需跨表，C5）",
+  "original": {
+   "chunk_rank": 1,
+   "required_units": 4
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 2
+  }
+ },
+ {
+  "config": "RM",
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e5",
+  "subquestion": "订单 ORDER2025003 中，每批次交付的具体日期是什么？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 6,
+   "required_units": 2
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 1
+  }
+ },
+ {
+  "config": "RM",
+  "case_id": "PO-25-19-Q003",
+  "group_id": "e2",
+  "subquestion": "订单 ORDER2025003 中，每款产品的单价是多少？",
+  "reason": "C5 跨表连接（去掉公司名）",
+  "original": {
+   "chunk_rank": 8,
+   "required_units": 4
+  },
+  "sub": {
+   "chunk_rank": 3,
+   "required_units": 2
+  }
+ },
+ {
+  "config": "RM",
+  "case_id": "PO-25-19-Q003",
+  "group_id": "e4",
+  "subquestion": "订单 ORDER2025003 中，ENSA公司订购的总金额是多少？",
+  "reason": "C4 复合问题（仍需跨表，C5）",
+  "original": {
+   "chunk_rank": 1,
+   "required_units": 4
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 2
+  }
+ },
+ {
+  "config": "RM",
+  "case_id": "PO-25-19-Q003",
+  "group_id": "e5",
+  "subquestion": "订单 ORDER2025003 中，每批次交付的具体日期是什么？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 6,
+   "required_units": 2
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 1
+  }
+ },
+ {
+  "config": "RM",
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e2",
+  "subquestion": "订单 ORDER2025003 中，ELCTO公司订购的产品单价分别是多少？",
+  "reason": "对照：保留公司名的单价子问题",
+  "original": {
+   "chunk_rank": 8,
+   "required_units": 4
+  },
+  "sub": {
+   "chunk_rank": 6,
+   "required_units": 2
+  }
+ },
+ {
+  "config": "RL",
+  "case_id": "CONTRACT-105-Q003",
+  "group_id": "e1",
+  "subquestion": "采购合同 CONT2025001 规定的总履约期限是多久？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 4,
+   "required_units": 4
+  },
+  "sub": {
+   "chunk_rank": 3,
+   "required_units": 3
+  }
+ },
+ {
+  "config": "RL",
+  "case_id": "CONTRACT-105-Q003",
+  "group_id": "e2",
+  "subquestion": "采购合同 CONT2025001 规定的具体交货地点在哪里？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 21,
+   "required_units": 20
+  },
+  "sub": {
+   "chunk_rank": 14,
+   "required_units": 13
+  }
+ },
+ {
+  "config": "RL",
+  "case_id": "PO-24-12-Q004",
+  "group_id": "e1",
+  "subquestion": "订单 ORDER2025001 的总金额是否涵盖MDC ORCA的费用？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 3,
+   "required_units": 3
+  },
+  "sub": {
+   "chunk_rank": 3,
+   "required_units": 3
+  }
+ },
+ {
+  "config": "RL",
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e2",
+  "subquestion": "订单 ORDER2025003 中，每款产品的单价是多少？",
+  "reason": "C5 跨表连接（去掉公司名）",
+  "original": {
+   "chunk_rank": 12,
+   "required_units": 3
+  },
+  "sub": {
+   "chunk_rank": 2,
+   "required_units": 2
+  }
+ },
+ {
+  "config": "RL",
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e4",
+  "subquestion": "订单 ORDER2025003 中，ELCTO公司订购的总金额是多少？",
+  "reason": "C4 复合问题（仍需跨表，C5）",
+  "original": {
+   "chunk_rank": 1,
+   "required_units": 3
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 2
+  }
+ },
+ {
+  "config": "RL",
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e5",
+  "subquestion": "订单 ORDER2025003 中，每批次交付的具体日期是什么？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 7,
+   "required_units": 2
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 1
+  }
+ },
+ {
+  "config": "RL",
+  "case_id": "PO-25-19-Q003",
+  "group_id": "e2",
+  "subquestion": "订单 ORDER2025003 中，每款产品的单价是多少？",
+  "reason": "C5 跨表连接（去掉公司名）",
+  "original": {
+   "chunk_rank": 14,
+   "required_units": 3
+  },
+  "sub": {
+   "chunk_rank": 2,
+   "required_units": 2
+  }
+ },
+ {
+  "config": "RL",
+  "case_id": "PO-25-19-Q003",
+  "group_id": "e4",
+  "subquestion": "订单 ORDER2025003 中，ENSA公司订购的总金额是多少？",
+  "reason": "C4 复合问题（仍需跨表，C5）",
+  "original": {
+   "chunk_rank": 1,
+   "required_units": 3
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 2
+  }
+ },
+ {
+  "config": "RL",
+  "case_id": "PO-25-19-Q003",
+  "group_id": "e5",
+  "subquestion": "订单 ORDER2025003 中，每批次交付的具体日期是什么？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 11,
+   "required_units": 2
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 1
+  }
+ },
+ {
+  "config": "RL",
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e2",
+  "subquestion": "订单 ORDER2025003 中，ELCTO公司订购的产品单价分别是多少？",
+  "reason": "对照：保留公司名的单价子问题",
+  "original": {
+   "chunk_rank": 12,
+   "required_units": 3
+  },
+  "sub": {
+   "chunk_rank": 10,
+   "required_units": 2
+  }
+ },
+ {
+  "config": "LM",
+  "case_id": "CONTRACT-105-Q003",
+  "group_id": "e1",
+  "subquestion": "采购合同 CONT2025001 规定的总履约期限是多久？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 3,
+   "required_units": 3
+  },
+  "sub": {
+   "chunk_rank": 3,
+   "required_units": 3
+  }
+ },
+ {
+  "config": "LM",
+  "case_id": "CONTRACT-105-Q003",
+  "group_id": "e2",
+  "subquestion": "采购合同 CONT2025001 规定的具体交货地点在哪里？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 21,
+   "required_units": 21
+  },
+  "sub": {
+   "chunk_rank": 13,
+   "required_units": 13
+  }
+ },
+ {
+  "config": "LM",
+  "case_id": "PO-24-12-Q004",
+  "group_id": "e1",
+  "subquestion": "订单 ORDER2025001 的总金额是否涵盖MDC ORCA的费用？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 3,
+   "required_units": 3
+  },
+  "sub": {
+   "chunk_rank": 3,
+   "required_units": 3
+  }
+ },
+ {
+  "config": "LM",
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e2",
+  "subquestion": "订单 ORDER2025003 中，每款产品的单价是多少？",
+  "reason": "C5 跨表连接（去掉公司名）",
+  "original": {
+   "chunk_rank": 10,
+   "required_units": 4
+  },
+  "sub": {
+   "chunk_rank": 4,
+   "required_units": 2
+  }
+ },
+ {
+  "config": "LM",
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e4",
+  "subquestion": "订单 ORDER2025003 中，ELCTO公司订购的总金额是多少？",
+  "reason": "C4 复合问题（仍需跨表，C5）",
+  "original": {
+   "chunk_rank": 1,
+   "required_units": 4
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 2
+  }
+ },
+ {
+  "config": "LM",
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e5",
+  "subquestion": "订单 ORDER2025003 中，每批次交付的具体日期是什么？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 7,
+   "required_units": 2
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 1
+  }
+ },
+ {
+  "config": "LM",
+  "case_id": "PO-25-19-Q003",
+  "group_id": "e2",
+  "subquestion": "订单 ORDER2025003 中，每款产品的单价是多少？",
+  "reason": "C5 跨表连接（去掉公司名）",
+  "original": {
+   "chunk_rank": 10,
+   "required_units": 4
+  },
+  "sub": {
+   "chunk_rank": 4,
+   "required_units": 2
+  }
+ },
+ {
+  "config": "LM",
+  "case_id": "PO-25-19-Q003",
+  "group_id": "e4",
+  "subquestion": "订单 ORDER2025003 中，ENSA公司订购的总金额是多少？",
+  "reason": "C4 复合问题（仍需跨表，C5）",
+  "original": {
+   "chunk_rank": 1,
+   "required_units": 4
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 2
+  }
+ },
+ {
+  "config": "LM",
+  "case_id": "PO-25-19-Q003",
+  "group_id": "e5",
+  "subquestion": "订单 ORDER2025003 中，每批次交付的具体日期是什么？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 8,
+   "required_units": 2
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 1
+  }
+ },
+ {
+  "config": "LM",
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e2",
+  "subquestion": "订单 ORDER2025003 中，ELCTO公司订购的产品单价分别是多少？",
+  "reason": "对照：保留公司名的单价子问题",
+  "original": {
+   "chunk_rank": 10,
+   "required_units": 4
+  },
+  "sub": {
+   "chunk_rank": 7,
+   "required_units": 2
+  }
+ },
+ {
+  "config": "LL",
+  "case_id": "CONTRACT-105-Q003",
+  "group_id": "e1",
+  "subquestion": "采购合同 CONT2025001 规定的总履约期限是多久？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 4,
+   "required_units": 4
+  },
+  "sub": {
+   "chunk_rank": 3,
+   "required_units": 3
+  }
+ },
+ {
+  "config": "LL",
+  "case_id": "CONTRACT-105-Q003",
+  "group_id": "e2",
+  "subquestion": "采购合同 CONT2025001 规定的具体交货地点在哪里？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 21,
+   "required_units": 20
+  },
+  "sub": {
+   "chunk_rank": 11,
+   "required_units": 11
+  }
+ },
+ {
+  "config": "LL",
+  "case_id": "PO-24-12-Q004",
+  "group_id": "e1",
+  "subquestion": "订单 ORDER2025001 的总金额是否涵盖MDC ORCA的费用？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 3,
+   "required_units": 3
+  },
+  "sub": {
+   "chunk_rank": 3,
+   "required_units": 3
+  }
+ },
+ {
+  "config": "LL",
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e2",
+  "subquestion": "订单 ORDER2025003 中，每款产品的单价是多少？",
+  "reason": "C5 跨表连接（去掉公司名）",
+  "original": {
+   "chunk_rank": 5,
+   "required_units": 3
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 1
+  }
+ },
+ {
+  "config": "LL",
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e4",
+  "subquestion": "订单 ORDER2025003 中，ELCTO公司订购的总金额是多少？",
+  "reason": "C4 复合问题（仍需跨表，C5）",
+  "original": {
+   "chunk_rank": 1,
+   "required_units": 3
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 2
+  }
+ },
+ {
+  "config": "LL",
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e5",
+  "subquestion": "订单 ORDER2025003 中，每批次交付的具体日期是什么？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 3,
+   "required_units": 2
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 1
+  }
+ },
+ {
+  "config": "LL",
+  "case_id": "PO-25-19-Q003",
+  "group_id": "e2",
+  "subquestion": "订单 ORDER2025003 中，每款产品的单价是多少？",
+  "reason": "C5 跨表连接（去掉公司名）",
+  "original": {
+   "chunk_rank": 13,
+   "required_units": 3
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 1
+  }
+ },
+ {
+  "config": "LL",
+  "case_id": "PO-25-19-Q003",
+  "group_id": "e4",
+  "subquestion": "订单 ORDER2025003 中，ENSA公司订购的总金额是多少？",
+  "reason": "C4 复合问题（仍需跨表，C5）",
+  "original": {
+   "chunk_rank": 1,
+   "required_units": 3
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 2
+  }
+ },
+ {
+  "config": "LL",
+  "case_id": "PO-25-19-Q003",
+  "group_id": "e5",
+  "subquestion": "订单 ORDER2025003 中，每批次交付的具体日期是什么？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 6,
+   "required_units": 2
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 1
+  }
+ },
+ {
+  "config": "LL",
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e2",
+  "subquestion": "订单 ORDER2025003 中，ELCTO公司订购的产品单价分别是多少？",
+  "reason": "对照：保留公司名的单价子问题",
+  "original": {
+   "chunk_rank": 5,
+   "required_units": 3
+  },
+  "sub": {
+   "chunk_rank": 6,
+   "required_units": 2
+  }
+ },
+ {
+  "config": "LM+",
+  "case_id": "CONTRACT-105-Q003",
+  "group_id": "e1",
+  "subquestion": "采购合同 CONT2025001 规定的总履约期限是多久？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 4,
+   "required_units": 4
+  },
+  "sub": {
+   "chunk_rank": 6,
+   "required_units": 6
+  }
+ },
+ {
+  "config": "LM+",
+  "case_id": "CONTRACT-105-Q003",
+  "group_id": "e2",
+  "subquestion": "采购合同 CONT2025001 规定的具体交货地点在哪里？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 20,
+   "required_units": 20
+  },
+  "sub": {
+   "chunk_rank": 12,
+   "required_units": 12
+  }
+ },
+ {
+  "config": "LM+",
+  "case_id": "PO-24-12-Q004",
+  "group_id": "e1",
+  "subquestion": "订单 ORDER2025001 的总金额是否涵盖MDC ORCA的费用？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 2,
+   "required_units": 2
+  },
+  "sub": {
+   "chunk_rank": 2,
+   "required_units": 2
+  }
+ },
+ {
+  "config": "LM+",
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e2",
+  "subquestion": "订单 ORDER2025003 中，每款产品的单价是多少？",
+  "reason": "C5 跨表连接（去掉公司名）",
+  "original": {
+   "chunk_rank": 8,
+   "required_units": 2
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 1
+  }
+ },
+ {
+  "config": "LM+",
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e4",
+  "subquestion": "订单 ORDER2025003 中，ELCTO公司订购的总金额是多少？",
+  "reason": "C4 复合问题（仍需跨表，C5）",
+  "original": {
+   "chunk_rank": 1,
+   "required_units": 2
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 2
+  }
+ },
+ {
+  "config": "LM+",
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e5",
+  "subquestion": "订单 ORDER2025003 中，每批次交付的具体日期是什么？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 9,
+   "required_units": 3
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 1
+  }
+ },
+ {
+  "config": "LM+",
+  "case_id": "PO-25-19-Q003",
+  "group_id": "e2",
+  "subquestion": "订单 ORDER2025003 中，每款产品的单价是多少？",
+  "reason": "C5 跨表连接（去掉公司名）",
+  "original": {
+   "chunk_rank": 8,
+   "required_units": 2
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 1
+  }
+ },
+ {
+  "config": "LM+",
+  "case_id": "PO-25-19-Q003",
+  "group_id": "e4",
+  "subquestion": "订单 ORDER2025003 中，ENSA公司订购的总金额是多少？",
+  "reason": "C4 复合问题（仍需跨表，C5）",
+  "original": {
+   "chunk_rank": 1,
+   "required_units": 2
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 2
+  }
+ },
+ {
+  "config": "LM+",
+  "case_id": "PO-25-19-Q003",
+  "group_id": "e5",
+  "subquestion": "订单 ORDER2025003 中，每批次交付的具体日期是什么？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 9,
+   "required_units": 3
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 1
+  }
+ },
+ {
+  "config": "LM+",
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e2",
+  "subquestion": "订单 ORDER2025003 中，ELCTO公司订购的产品单价分别是多少？",
+  "reason": "对照：保留公司名的单价子问题",
+  "original": {
+   "chunk_rank": 8,
+   "required_units": 2
+  },
+  "sub": {
+   "chunk_rank": 3,
+   "required_units": 2
+  }
+ },
+ {
+  "config": "LL+",
+  "case_id": "CONTRACT-105-Q003",
+  "group_id": "e1",
+  "subquestion": "采购合同 CONT2025001 规定的总履约期限是多久？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 5,
+   "required_units": 5
+  },
+  "sub": {
+   "chunk_rank": 5,
+   "required_units": 5
+  }
+ },
+ {
+  "config": "LL+",
+  "case_id": "CONTRACT-105-Q003",
+  "group_id": "e2",
+  "subquestion": "采购合同 CONT2025001 规定的具体交货地点在哪里？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 21,
+   "required_units": 20
+  },
+  "sub": {
+   "chunk_rank": 11,
+   "required_units": 11
+  }
+ },
+ {
+  "config": "LL+",
+  "case_id": "PO-24-12-Q004",
+  "group_id": "e1",
+  "subquestion": "订单 ORDER2025001 的总金额是否涵盖MDC ORCA的费用？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 2,
+   "required_units": 2
+  },
+  "sub": {
+   "chunk_rank": 2,
+   "required_units": 2
+  }
+ },
+ {
+  "config": "LL+",
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e2",
+  "subquestion": "订单 ORDER2025003 中，每款产品的单价是多少？",
+  "reason": "C5 跨表连接（去掉公司名）",
+  "original": {
+   "chunk_rank": 4,
+   "required_units": 2
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 1
+  }
+ },
+ {
+  "config": "LL+",
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e4",
+  "subquestion": "订单 ORDER2025003 中，ELCTO公司订购的总金额是多少？",
+  "reason": "C4 复合问题（仍需跨表，C5）",
+  "original": {
+   "chunk_rank": 1,
+   "required_units": 2
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 2
+  }
+ },
+ {
+  "config": "LL+",
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e5",
+  "subquestion": "订单 ORDER2025003 中，每批次交付的具体日期是什么？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 11,
+   "required_units": 3
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 1
+  }
+ },
+ {
+  "config": "LL+",
+  "case_id": "PO-25-19-Q003",
+  "group_id": "e2",
+  "subquestion": "订单 ORDER2025003 中，每款产品的单价是多少？",
+  "reason": "C5 跨表连接（去掉公司名）",
+  "original": {
+   "chunk_rank": 8,
+   "required_units": 2
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 1
+  }
+ },
+ {
+  "config": "LL+",
+  "case_id": "PO-25-19-Q003",
+  "group_id": "e4",
+  "subquestion": "订单 ORDER2025003 中，ENSA公司订购的总金额是多少？",
+  "reason": "C4 复合问题（仍需跨表，C5）",
+  "original": {
+   "chunk_rank": 1,
+   "required_units": 2
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 2
+  }
+ },
+ {
+  "config": "LL+",
+  "case_id": "PO-25-19-Q003",
+  "group_id": "e5",
+  "subquestion": "订单 ORDER2025003 中，每批次交付的具体日期是什么？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 15,
+   "required_units": 3
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 1
+  }
+ },
+ {
+  "config": "LL+",
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e2",
+  "subquestion": "订单 ORDER2025003 中，ELCTO公司订购的产品单价分别是多少？",
+  "reason": "对照：保留公司名的单价子问题",
+  "original": {
+   "chunk_rank": 4,
+   "required_units": 2
+  },
+  "sub": {
+   "chunk_rank": 3,
+   "required_units": 2
+  }
+ },
+ {
+  "config": "S",
+  "case_id": "CONTRACT-105-Q003",
+  "group_id": "e1",
+  "subquestion": "采购合同 CONT2025001 规定的总履约期限是多久？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 2,
+   "required_units": 2
+  },
+  "sub": {
+   "chunk_rank": 3,
+   "required_units": 3
+  }
+ },
+ {
+  "config": "S",
+  "case_id": "CONTRACT-105-Q003",
+  "group_id": "e2",
+  "subquestion": "采购合同 CONT2025001 规定的具体交货地点在哪里？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 22,
+   "required_units": 22
+  },
+  "sub": {
+   "chunk_rank": 11,
+   "required_units": 11
+  }
+ },
+ {
+  "config": "S",
+  "case_id": "PO-24-12-Q004",
+  "group_id": "e1",
+  "subquestion": "订单 ORDER2025001 的总金额是否涵盖MDC ORCA的费用？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 2,
+   "required_units": 2
+  },
+  "sub": {
+   "chunk_rank": 2,
+   "required_units": 2
+  }
+ },
+ {
+  "config": "S",
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e2",
+  "subquestion": "订单 ORDER2025003 中，每款产品的单价是多少？",
+  "reason": "C5 跨表连接（去掉公司名）",
+  "original": {
+   "chunk_rank": 2,
+   "required_units": 2
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 1
+  }
+ },
+ {
+  "config": "S",
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e4",
+  "subquestion": "订单 ORDER2025003 中，ELCTO公司订购的总金额是多少？",
+  "reason": "C4 复合问题（仍需跨表，C5）",
+  "original": {
+   "chunk_rank": 1,
+   "required_units": 2
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 2
+  }
+ },
+ {
+  "config": "S",
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e5",
+  "subquestion": "订单 ORDER2025003 中，每批次交付的具体日期是什么？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 3,
+   "required_units": 3
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 1
+  }
+ },
+ {
+  "config": "S",
+  "case_id": "PO-25-19-Q003",
+  "group_id": "e2",
+  "subquestion": "订单 ORDER2025003 中，每款产品的单价是多少？",
+  "reason": "C5 跨表连接（去掉公司名）",
+  "original": {
+   "chunk_rank": 2,
+   "required_units": 2
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 1
+  }
+ },
+ {
+  "config": "S",
+  "case_id": "PO-25-19-Q003",
+  "group_id": "e4",
+  "subquestion": "订单 ORDER2025003 中，ENSA公司订购的总金额是多少？",
+  "reason": "C4 复合问题（仍需跨表，C5）",
+  "original": {
+   "chunk_rank": 1,
+   "required_units": 2
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 2
+  }
+ },
+ {
+  "config": "S",
+  "case_id": "PO-25-19-Q003",
+  "group_id": "e5",
+  "subquestion": "订单 ORDER2025003 中，每批次交付的具体日期是什么？",
+  "reason": "C4 复合问题",
+  "original": {
+   "chunk_rank": 3,
+   "required_units": 3
+  },
+  "sub": {
+   "chunk_rank": 1,
+   "required_units": 1
+  }
+ },
+ {
+  "config": "S",
+  "case_id": "PO-25-19-Q001",
+  "group_id": "e2",
+  "subquestion": "订单 ORDER2025003 中，ELCTO公司订购的产品单价分别是多少？",
+  "reason": "对照：保留公司名的单价子问题",
+  "original": {
+   "chunk_rank": 2,
+   "required_units": 2
+  },
+  "sub": {
+   "chunk_rank": 2,
+   "required_units": 2
+  }
+ }
+]

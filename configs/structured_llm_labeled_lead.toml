@@ -1,0 +1,52 @@
+name = "structured_llm_labeled_lead"
+description = "LL+：LLM 结构标注 + 表头映射写法，每个表格 chunk 开头加引导句"
+
+[parser]
+use = "docling_layout"
+
+[[table_extractors]]
+use = "pymupdf"
+
+[[table_extractors]]
+use = "camelot"
+
+[[table_extractors]]
+use = "docling"
+
+[[table_extractors]]
+use = "unstructured"
+
+[table_structure]  # 表格结构：header_rules 规则表头判定；llm_annotation LLM 结构标注（表头、分节、隐式合并）
+use = "llm_annotation"
+model = "google/gemini-3.8-flash"
+
+[table_formatter]  # 表格写法：markdown_rows 表头一行、各行竖线文本；labeled_rows 每格写成 列名: 值
+use = "labeled_rows"
+
+[table_index_text]  # 索引里放什么：rows 表格行；rows_with_lead 表格行，每块开头加引导句；summary 只放摘要
+use = "rows_with_lead"
+
+[chunker]
+use = "structured_tokens"
+max_tokens = 512
+overlap_tokens = 32
+
+[embedder]
+use = "bge_m3"
+
+[lexical]          # BM25 倒排索引的分析器（规则见 docs/rules/lexical.md）
+stopwords = true   # 去西班牙文、英文停用词
+stemming = true    # 按文档语言词干化
+
+[retriever]
+use = "hybrid"     # 向量排名与 BM25 排名按 RRF 融合；semantic 为纯向量，bm25 为纯关键词
+top_k = 4          # search / ask / chat 返回的条数
+document_filter = true   # 问题中出现 documents/documents.toml 登记的标识编码时，只在对应文档内检索
+table_return_unit = "table"   # 命中表格 chunk 时返回整张表；"chunk" 只返回命中的 chunk
+
+[eval]
+top_k = 3          # 正式评估的 K，保持与历史基线可比
+
+[llm]
+use = "openrouter"
+model = "google/gemini-2.5-flash-lite"

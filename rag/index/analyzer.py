@@ -2,8 +2,8 @@
 
 Questions and chunks go through the same steps: normalise, split into words (connected
 alphanumeric runs are kept whole and also split into their parts), drop stopwords, and
-optionally stem. Stemming is language-specific; a document's language is decided once
-from its stopword counts.
+optionally stem. Stemming is language-specific and uses the document language decided after
+parsing (rag/ingest/language.py); Chinese is not stemmed.
 """
 
 from __future__ import annotations
@@ -15,8 +15,8 @@ from functools import cache
 from importlib import resources
 from typing import Iterable, Literal
 
-Language = Literal["spanish", "english"]
-LANGUAGES: tuple[Language, ...] = ("spanish", "english")
+Language = Literal["chinese", "spanish", "english"]
+LANGUAGES: tuple[Language, ...] = ("chinese", "spanish", "english")
 
 # Every Han character is its own word; separating them first also splits "合同CONTRATO".
 _HAN = re.compile(r"([㐀-䶿一-鿿豈-﫿\U00020000-\U0002ebef])")
@@ -57,10 +57,10 @@ def _stemmer(language: Language):
     return snowballstemmer.stemmer(language)
 
 
-def detect_language(texts: Iterable[str]) -> Language:
-    """The language whose stopwords occur more often; ties count as English."""
+def detect_language(texts: Iterable[str]) -> Literal["spanish", "english"]:
+    """Between Spanish and English, the language whose stopwords occur more often; ties count as English."""
     tokens = [w for text in texts for w in words(text)]
-    counts = {lang: sum(t in stopwords(lang) for t in tokens) for lang in LANGUAGES}
+    counts = {lang: sum(t in stopwords(lang) for t in tokens) for lang in ("spanish", "english")}
     return "spanish" if counts["spanish"] > counts["english"] else "english"
 
 
@@ -81,7 +81,7 @@ class Analyzer:
         for word in words(text):
             if word in dropped:
                 continue
-            if self.stemming and _LETTERS.fullmatch(word):
+            if self.stemming and language != "chinese" and _LETTERS.fullmatch(word):
                 word = _stemmer(language).stemWord(word)
             result[word] += 1
         return result

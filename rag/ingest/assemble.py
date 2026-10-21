@@ -20,6 +20,7 @@ def compose_document(
     resolutions: tuple[ContentResolution, ...],
     prepared_tables: tuple[PreparedTableContent, ...],
     branch_attached: bool,
+    language: str,
     additional_warnings: tuple[ProcessingWarning, ...] = (),
 ) -> ParsedDocument:
     if primary.document_id != source.document_id or primary.file_hash != source.file_hash:
@@ -63,11 +64,13 @@ def compose_document(
             nodes.append(TableNode(item.element_id, item.slot_id, item.source_ref,
                                    resolution.origin, prepared.adopted_table,
                                    resolution.selection_ref, prepared.header_decision,
-                                   prepared.serialized_table,
+                                   prepared.structure, prepared.serialized_table, prepared.whole_text,
+                                   prepared.index_text,
                                    tuple(span for segment in prepared.segments
                                          for span in sources_by_slot[segment.slot_id]),
-                                   prepared.segments if merged else ()))
+                                   prepared.segments if merged else (), prepared.llm))
         else:
             raise DocumentCompositionError("unknown primary element")
     return ParsedDocument(source.document_id, source.document_name, source.relative_path,
-                          source.file_hash, tuple(nodes), primary.warnings + additional_warnings)
+                          source.file_hash, tuple(nodes), primary.warnings + additional_warnings,
+                          language)

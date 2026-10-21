@@ -116,7 +116,8 @@ def _compare_section(workspace: Workspace) -> str:
 
 
 def write_index_page(workspace: Workspace) -> None:
-    configs = list_configs(workspace.root)
+    configs = [c for c in list_configs(workspace.root, extra=True)
+               if c.path.parent.name != "extra" or workspace.index_dir(c.name).is_dir()]
     sections = "".join(_config_section(workspace, config) for config in configs)
     body = (f'<h1>Minimal RAG 报告</h1><div class="sub">生成于 {datetime.now():%Y-%m-%d %H:%M} · '
             f'文档目录 documents/ · 评估数据 eval/ground-truth/</div>'

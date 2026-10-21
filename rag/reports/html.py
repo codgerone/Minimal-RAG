@@ -37,6 +37,9 @@ padding:8px 10px;margin:6px 0;font:13px/1.55 ui-monospace,Consolas,"Microsoft Ya
 table{border-collapse:collapse;width:100%;font-size:13px}
 th,td{border:1px solid var(--line);padding:4px 7px;text-align:left;vertical-align:top}
 th{background:var(--code);font-weight:600}td.hdr{background:#e3edff;font-weight:600;box-shadow:inset 0 0 0 1px #8fb0ee}td.num,th.num{text-align:right;white-space:nowrap}th.nw,td.nw{white-space:nowrap}
+td.sec,.legend .sec{background:#fff1d0;font-weight:600}td.anc,.legend .anc{background:#d9f2e0;box-shadow:inset 0 0 0 1px #7cc495}
+td.dup,.legend .dup{background:#eef8f1;color:var(--ok)}.legend .hdr{background:#e3edff}
+.legend span{display:inline-block;padding:0 8px;margin-right:6px;border-radius:4px}
 .scroll{overflow-x:auto;max-width:100%}
 details{margin:6px 0}summary{cursor:pointer;color:var(--muted);font-size:13px}
 .item{border-top:1px solid var(--line);padding:8px 0}.item:first-child{border-top:0}

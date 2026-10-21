@@ -1,29 +1,32 @@
-"""TableFormatter interface: turn an adopted table plus header decision into chunkable text."""
+"""TableFormatter interface: write an adopted table as chunkable text from its structure."""
 
 from __future__ import annotations
 
 from typing import Protocol
 
 from rag.ingest.tables.markdown_rows import serialize_markdown_rows
-from rag.ingest.tables.models import HeaderDecision, SerializedTable, StructuredTable
+from rag.ingest.tables.models import SerializedTable, StructuredTable, TableStructure
 
 
 class TableFormatter(Protocol):
-    def format(self, table: StructuredTable, header: HeaderDecision, *,
+    labeled: bool          # LLM annotations are validated against the form the formatter writes
+    def format(self, table: StructuredTable, structure: TableStructure, *,
                table_node_id: str | None = None) -> SerializedTable: ...
 
 
 class MarkdownRowsFormatter:
-    """`markdown_rows_v1`: header once, `| 值 | 值 |` rows, merged cells as `←` / `↑`."""
+    """`| 值 | 值 |` rows under the header, merged cells as `←` / `↑`."""
+    labeled = False
 
-    def format(self, table: StructuredTable, header: HeaderDecision, *,
+    def format(self, table: StructuredTable, structure: TableStructure, *,
                table_node_id: str | None = None) -> SerializedTable:
-        return serialize_markdown_rows(table, header, table_node_id=table_node_id)
+        return serialize_markdown_rows(table, structure, table_node_id=table_node_id)
 
 
 class LabeledRowsFormatter:
-    """`labeled_rows_v1`: as `markdown_rows_v1`, but single-column values read `列名: 值`, no header line."""
+    """As `markdown_rows`, but single-column values read `列名: 值`, no header line."""
+    labeled = True
 
-    def format(self, table: StructuredTable, header: HeaderDecision, *,
+    def format(self, table: StructuredTable, structure: TableStructure, *,
                table_node_id: str | None = None) -> SerializedTable:
-        return serialize_markdown_rows(table, header, table_node_id=table_node_id, labeled=True)
+        return serialize_markdown_rows(table, structure, table_node_id=table_node_id, labeled=True)

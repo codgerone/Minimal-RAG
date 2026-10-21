@@ -15,7 +15,7 @@ class CharacterCounter:
 
 def _document() -> ParsedDocument:
     text = TextNode("p", "paragraph", "Delivery schedule below.", (PageSpan(1, None, "p"),), None)
-    return ParsedDocument("d", "d.pdf", "d.pdf", "a" * 64, (text, _table_node()), ())
+    return ParsedDocument("d", "d.pdf", "d.pdf", "a" * 64, (text, _table_node()), (), "english")
 
 
 def test_a_split_table_is_stored_once_with_its_full_text_and_all_its_chunks():
@@ -25,7 +25,10 @@ def test_a_split_table_is_stored_once_with_its_full_text_and_all_its_chunks():
     assert len(table_chunks) == 2
     [stored] = collect_tables(document, batch)
     assert stored.table_id == table_id("d", "tbl")
-    assert stored.text == document.nodes[1].serialized.text
+    # The labeled text is chunked; the whole table is stored in markdown_rows_v1.
+    assert document.nodes[1].serialized.rule_version == "labeled_rows_v1"
+    assert stored.text == document.nodes[1].whole_text
+    assert stored.text.splitlines()[0] == "| Model | Qty |"
     assert stored.chunk_ids == tuple(table_chunks)
 
 
@@ -45,7 +48,7 @@ def test_store_maps_each_table_chunk_to_its_whole_table(tmp_path):
 
 def test_a_table_without_chunks_is_an_error():
     document = _document()
-    batch = chunk_parsed_document(ParsedDocument("d", "d.pdf", "d.pdf", "a" * 64, document.nodes[:1], ()),
+    batch = chunk_parsed_document(ParsedDocument("d", "d.pdf", "d.pdf", "a" * 64, document.nodes[:1], (), "english"),
                                   CharacterCounter(), max_input_tokens=40)
     with pytest.raises(ValueError, match="没有对应的 chunk"):
         collect_tables(document, batch)

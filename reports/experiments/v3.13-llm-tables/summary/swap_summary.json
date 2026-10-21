@@ -1,0 +1,597 @@
+[
+ {
+  "variant": "v5",
+  "case_id": "CONTRACT-105-Q002",
+  "required_k": 2,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 2,
+   "e3": 2,
+   "e4": 2,
+   "e5": 2
+  }
+ },
+ {
+  "variant": "v5",
+  "case_id": "CONTRACT-105-Q003",
+  "required_k": 19,
+  "chunk_rank": {
+   "e1": 4,
+   "e2": 19
+  }
+ },
+ {
+  "variant": "v5",
+  "case_id": "CONTRACT-105-Q009",
+  "required_k": 1,
+  "chunk_rank": {
+   "e1": 1
+  }
+ },
+ {
+  "variant": "v5",
+  "case_id": "CONTRACT-105-Q010",
+  "required_k": 1,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 1
+  }
+ },
+ {
+  "variant": "v5",
+  "case_id": "E001-602-Q002",
+  "required_k": 2,
+  "chunk_rank": {
+   "e1": 2,
+   "e2": 2
+  }
+ },
+ {
+  "variant": "v5",
+  "case_id": "PO-24-12-Q001",
+  "required_k": 1,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 1,
+   "e3": 1,
+   "e4": 1
+  }
+ },
+ {
+  "variant": "v5",
+  "case_id": "PO-24-12-Q004",
+  "required_k": 3,
+  "chunk_rank": {
+   "e1": 3
+  }
+ },
+ {
+  "variant": "v5",
+  "case_id": "PO-25-15-Q001",
+  "required_k": 2,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 1
+  }
+ },
+ {
+  "variant": "v5",
+  "case_id": "PO-25-15-Q002",
+  "required_k": 2,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 1
+  }
+ },
+ {
+  "variant": "v5",
+  "case_id": "PO-25-19-Q001",
+  "required_k": 3,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 2,
+   "e3": 1,
+   "e4": 1,
+   "e5": 3,
+   "e6": 1
+  }
+ },
+ {
+  "variant": "v5",
+  "case_id": "PO-25-19-Q002",
+  "required_k": 2,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 1
+  }
+ },
+ {
+  "variant": "v5",
+  "case_id": "PO-25-19-Q003",
+  "required_k": 3,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 3,
+   "e3": 1,
+   "e4": 1,
+   "e5": 2,
+   "e6": 1
+  }
+ },
+ {
+  "variant": "v4",
+  "case_id": "CONTRACT-105-Q002",
+  "required_k": 1,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 1,
+   "e3": 1,
+   "e4": 1,
+   "e5": 1
+  }
+ },
+ {
+  "variant": "v4",
+  "case_id": "CONTRACT-105-Q003",
+  "required_k": 22,
+  "chunk_rank": {
+   "e1": 2,
+   "e2": 22
+  }
+ },
+ {
+  "variant": "v4",
+  "case_id": "CONTRACT-105-Q009",
+  "required_k": 1,
+  "chunk_rank": {
+   "e1": 1
+  }
+ },
+ {
+  "variant": "v4",
+  "case_id": "CONTRACT-105-Q010",
+  "required_k": 1,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 1
+  }
+ },
+ {
+  "variant": "v4",
+  "case_id": "E001-602-Q002",
+  "required_k": 2,
+  "chunk_rank": {
+   "e1": 2,
+   "e2": 2
+  }
+ },
+ {
+  "variant": "v4",
+  "case_id": "PO-24-12-Q001",
+  "required_k": 1,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 1,
+   "e3": 1,
+   "e4": 1
+  }
+ },
+ {
+  "variant": "v4",
+  "case_id": "PO-24-12-Q004",
+  "required_k": 2,
+  "chunk_rank": {
+   "e1": 2
+  }
+ },
+ {
+  "variant": "v4",
+  "case_id": "PO-25-15-Q001",
+  "required_k": 2,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 1
+  }
+ },
+ {
+  "variant": "v4",
+  "case_id": "PO-25-15-Q002",
+  "required_k": 2,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 1
+  }
+ },
+ {
+  "variant": "v4",
+  "case_id": "PO-25-19-Q001",
+  "required_k": 3,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 2,
+   "e3": 1,
+   "e4": 1,
+   "e5": 3,
+   "e6": 1
+  }
+ },
+ {
+  "variant": "v4",
+  "case_id": "PO-25-19-Q002",
+  "required_k": 2,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 1
+  }
+ },
+ {
+  "variant": "v4",
+  "case_id": "PO-25-19-Q003",
+  "required_k": 3,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 2,
+   "e3": 1,
+   "e4": 1,
+   "e5": 3,
+   "e6": 1
+  }
+ },
+ {
+  "variant": "v4_no_number",
+  "case_id": "CONTRACT-105-Q002",
+  "required_k": 1,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 1,
+   "e3": 1,
+   "e4": 1,
+   "e5": 1
+  }
+ },
+ {
+  "variant": "v4_no_number",
+  "case_id": "CONTRACT-105-Q003",
+  "required_k": 22,
+  "chunk_rank": {
+   "e1": 2,
+   "e2": 22
+  }
+ },
+ {
+  "variant": "v4_no_number",
+  "case_id": "CONTRACT-105-Q009",
+  "required_k": 1,
+  "chunk_rank": {
+   "e1": 1
+  }
+ },
+ {
+  "variant": "v4_no_number",
+  "case_id": "CONTRACT-105-Q010",
+  "required_k": 1,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 1
+  }
+ },
+ {
+  "variant": "v4_no_number",
+  "case_id": "E001-602-Q002",
+  "required_k": 2,
+  "chunk_rank": {
+   "e1": 2,
+   "e2": 2
+  }
+ },
+ {
+  "variant": "v4_no_number",
+  "case_id": "PO-24-12-Q001",
+  "required_k": 1,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 1,
+   "e3": 1,
+   "e4": 1
+  }
+ },
+ {
+  "variant": "v4_no_number",
+  "case_id": "PO-24-12-Q004",
+  "required_k": 3,
+  "chunk_rank": {
+   "e1": 3
+  }
+ },
+ {
+  "variant": "v4_no_number",
+  "case_id": "PO-25-15-Q001",
+  "required_k": 2,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 1
+  }
+ },
+ {
+  "variant": "v4_no_number",
+  "case_id": "PO-25-15-Q002",
+  "required_k": 2,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 1
+  }
+ },
+ {
+  "variant": "v4_no_number",
+  "case_id": "PO-25-19-Q001",
+  "required_k": 3,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 2,
+   "e3": 1,
+   "e4": 1,
+   "e5": 3,
+   "e6": 1
+  }
+ },
+ {
+  "variant": "v4_no_number",
+  "case_id": "PO-25-19-Q002",
+  "required_k": 2,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 1
+  }
+ },
+ {
+  "variant": "v4_no_number",
+  "case_id": "PO-25-19-Q003",
+  "required_k": 3,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 3,
+   "e3": 1,
+   "e4": 1,
+   "e5": 2,
+   "e6": 1
+  }
+ },
+ {
+  "variant": "v4_no_code",
+  "case_id": "CONTRACT-105-Q002",
+  "required_k": 1,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 1,
+   "e3": 1,
+   "e4": 1,
+   "e5": 1
+  }
+ },
+ {
+  "variant": "v4_no_code",
+  "case_id": "CONTRACT-105-Q003",
+  "required_k": 22,
+  "chunk_rank": {
+   "e1": 2,
+   "e2": 22
+  }
+ },
+ {
+  "variant": "v4_no_code",
+  "case_id": "CONTRACT-105-Q009",
+  "required_k": 1,
+  "chunk_rank": {
+   "e1": 1
+  }
+ },
+ {
+  "variant": "v4_no_code",
+  "case_id": "CONTRACT-105-Q010",
+  "required_k": 1,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 1
+  }
+ },
+ {
+  "variant": "v4_no_code",
+  "case_id": "E001-602-Q002",
+  "required_k": 2,
+  "chunk_rank": {
+   "e1": 2,
+   "e2": 2
+  }
+ },
+ {
+  "variant": "v4_no_code",
+  "case_id": "PO-24-12-Q001",
+  "required_k": 1,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 1,
+   "e3": 1,
+   "e4": 1
+  }
+ },
+ {
+  "variant": "v4_no_code",
+  "case_id": "PO-24-12-Q004",
+  "required_k": 3,
+  "chunk_rank": {
+   "e1": 3
+  }
+ },
+ {
+  "variant": "v4_no_code",
+  "case_id": "PO-25-15-Q001",
+  "required_k": 2,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 1
+  }
+ },
+ {
+  "variant": "v4_no_code",
+  "case_id": "PO-25-15-Q002",
+  "required_k": 2,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 1
+  }
+ },
+ {
+  "variant": "v4_no_code",
+  "case_id": "PO-25-19-Q001",
+  "required_k": 3,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 2,
+   "e3": 1,
+   "e4": 1,
+   "e5": 3,
+   "e6": 1
+  }
+ },
+ {
+  "variant": "v4_no_code",
+  "case_id": "PO-25-19-Q002",
+  "required_k": 2,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 1
+  }
+ },
+ {
+  "variant": "v4_no_code",
+  "case_id": "PO-25-19-Q003",
+  "required_k": 3,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 2,
+   "e3": 1,
+   "e4": 1,
+   "e5": 3,
+   "e6": 1
+  }
+ },
+ {
+  "variant": "v4_no_words",
+  "case_id": "CONTRACT-105-Q002",
+  "required_k": 1,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 1,
+   "e3": 1,
+   "e4": 1,
+   "e5": 1
+  }
+ },
+ {
+  "variant": "v4_no_words",
+  "case_id": "CONTRACT-105-Q003",
+  "required_k": 22,
+  "chunk_rank": {
+   "e1": 2,
+   "e2": 22
+  }
+ },
+ {
+  "variant": "v4_no_words",
+  "case_id": "CONTRACT-105-Q009",
+  "required_k": 1,
+  "chunk_rank": {
+   "e1": 1
+  }
+ },
+ {
+  "variant": "v4_no_words",
+  "case_id": "CONTRACT-105-Q010",
+  "required_k": 1,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 1
+  }
+ },
+ {
+  "variant": "v4_no_words",
+  "case_id": "E001-602-Q002",
+  "required_k": 2,
+  "chunk_rank": {
+   "e1": 2,
+   "e2": 2
+  }
+ },
+ {
+  "variant": "v4_no_words",
+  "case_id": "PO-24-12-Q001",
+  "required_k": 1,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 1,
+   "e3": 1,
+   "e4": 1
+  }
+ },
+ {
+  "variant": "v4_no_words",
+  "case_id": "PO-24-12-Q004",
+  "required_k": 3,
+  "chunk_rank": {
+   "e1": 3
+  }
+ },
+ {
+  "variant": "v4_no_words",
+  "case_id": "PO-25-15-Q001",
+  "required_k": 2,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 1
+  }
+ },
+ {
+  "variant": "v4_no_words",
+  "case_id": "PO-25-15-Q002",
+  "required_k": 2,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 1
+  }
+ },
+ {
+  "variant": "v4_no_words",
+  "case_id": "PO-25-19-Q001",
+  "required_k": 3,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 3,
+   "e3": 1,
+   "e4": 1,
+   "e5": 2,
+   "e6": 1
+  }
+ },
+ {
+  "variant": "v4_no_words",
+  "case_id": "PO-25-19-Q002",
+  "required_k": 2,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 1
+  }
+ },
+ {
+  "variant": "v4_no_words",
+  "case_id": "PO-25-19-Q003",
+  "required_k": 4,
+  "chunk_rank": {
+   "e1": 1,
+   "e2": 4,
+   "e3": 1,
+   "e4": 1,
+   "e5": 2,
+   "e6": 1
+  }
+ }
+]

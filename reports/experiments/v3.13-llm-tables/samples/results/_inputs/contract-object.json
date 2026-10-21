@@ -1,0 +1,20 @@
+{
+  "title": "合同 c0004 合同标的",
+  "node_id": "node_7504dd672d005aae9ac0",
+  "language": "spanish",
+  "context": {
+    "heading": "III. CLÁUSULA TERCERA: Objeto del contrato. -",
+    "before": "El presente contrato tiene por objeto la ' COMPRA CORPORATIVA DE MEDIDORES PARA LAS EMPRESAS DE LA CORPORACION FONAFE ' según se detalla en el siguiente cuadro:"
+  },
+  "grid": "| row | c0 | c1 |\n| r0 | Ítem | Descripción |\n| r1 | 1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS |\n| r2 | 3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS |\n| r3 | 4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS |",
+  "rule_text": "| Ítem: 1 | Descripción: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS |\n| Ítem: 3 | Descripción: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS |\n| Ítem: 4 | Descripción: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS |",
+  "rule_chunks": [
+    "| Ítem: 1 | Descripción: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS |\n| Ítem: 3 | Descripción: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS |\n| Ítem: 4 | Descripción: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS |"
+  ],
+  "limits": {
+    "record_max_tokens": 460,
+    "lead_max_tokens": 48,
+    "summary_max_tokens": 508
+  },
+  "max_tokens": 512
+}

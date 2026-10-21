@@ -69,10 +69,14 @@ class UnitSearch:
 
     def rank_all(self, question: str, document_ids: Collection[str] | None = None) -> list[ResultUnit]:
         """Every unit in scope, best first (the retriever's full ranking, then mapped to units)."""
+        return self.units_for(self.rank_hits(question, document_ids))
+
+    def rank_hits(self, question: str, document_ids: Collection[str] | None = None) -> list[Hit]:
+        """Every chunk in scope, best first, before mapping to return units."""
         total = self.store.count(document_ids)
-        if total == 0:
-            return []
-        hits = self.retriever.retrieve(question, total, document_ids)
+        return self.retriever.retrieve(question, total, document_ids) if total else []
+
+    def units_for(self, hits: list[Hit]) -> list[ResultUnit]:
         return self._units(hits)
 
     def search(self, question: str, top_k: int,

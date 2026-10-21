@@ -1,0 +1,160 @@
+{
+  "annotation": {
+    "model": "google/gemini-3.8-flash",
+    "attempts": [
+      {
+        "raw": "{\n  \"header_rows\": [0],\n  \"sections\": [\n    {\n      \"title_rows\": [1],\n      \"last_row\": 6\n    },\n    {\n      \"title_rows\": [7],\n      \"last_row\": 12\n    }\n  ],\n  \"implicit_merges\": [\n    {\n      \"column\": 0,\n      \"first_row\": 3,\n      \"last_row\": 5\n    },\n    {\n      \"column\": 1,\n      \"first_row\": 3,\n      \"last_row\": 5\n    },\n    {\n      \"column\": 2,\n      \"first_row\": 3,\n      \"last_row\": 5\n    },\n    {\n      \"column\": 3,\n      \"first_row\": 3,\n      \"last_row\": 5\n    },\n    {\n      \"column\": 0,\n      \"first_row\": 8,\n      \"last_row\": 10\n    },\n    {\n      \"column\": 1,\n      \"first_row\": 8,\n      \"last_row\": 10\n    },\n    {\n      \"column\": 2,\n      \"first_row\": 8,\n      \"last_row\": 10\n    },\n    {\n      \"column\": 3,\n      \"first_row\": 8,\n      \"last_row\": 10\n    }\n  ],\n  \"lead\": \"本表列出各期付款节点、付款比例与金额，以及对应的交货内容、数量和计划日期。\"\n}",
+        "reasoning": "**Analyzing Table Structure**\n\nI've been examining the table's structural elements. Specifically, I am focused on the header rows and section delineations, identifying the scope of each section by column spans. I noticed an inconsistency, where the \"合计\" row (r13) isn't part of any primary section. I'm implicitly merging cells to understand the relationships.\n\n\n",
+        "issues": [],
+        "prompt_tokens": 1572,
+        "completion_tokens": 939,
+        "reasoning_tokens": 555,
+        "cost_usd": 0.00470025,
+        "cached": false
+      }
+    ],
+    "annotation": {
+      "header_rows": [
+        0
+      ],
+      "sections": [
+        {
+          "title_rows": [
+            1
+          ],
+          "last_row": 6
+        },
+        {
+          "title_rows": [
+            7
+          ],
+          "last_row": 12
+        }
+      ],
+      "implicit_merges": [
+        {
+          "column": 0,
+          "first_row": 3,
+          "last_row": 5
+        },
+        {
+          "column": 1,
+          "first_row": 3,
+          "last_row": 5
+        },
+        {
+          "column": 2,
+          "first_row": 3,
+          "last_row": 5
+        },
+        {
+          "column": 3,
+          "first_row": 3,
+          "last_row": 5
+        },
+        {
+          "column": 0,
+          "first_row": 8,
+          "last_row": 10
+        },
+        {
+          "column": 1,
+          "first_row": 8,
+          "last_row": 10
+        },
+        {
+          "column": 2,
+          "first_row": 8,
+          "last_row": 10
+        },
+        {
+          "column": 3,
+          "first_row": 8,
+          "last_row": 10
+        }
+      ]
+    },
+    "lead": "本表列出各期付款节点、付款比例与金额，以及对应的交货内容、数量和计划日期。"
+  },
+  "fallback": {
+    "annotation": false,
+    "lead": false
+  },
+  "markdown": [
+    {
+      "text": "| 期次 | 付款节点 | 付款比例 | 金额（元） | 对应交货内容 | 数量 | 计划日期 |\n| 第一批：单相智能电能表及表箱 | ← | ← | ← | ← | ← | ← |\n| 1 | 合同生效后预付款 | 10% | 1,286,400.00 | — |  | 2027年1月15日 |\n| 2 | 到货验收合格后 | 40% | 5,145,600.00 | 单相智能电能表 2 级 | 60,000 只 | 2027年3月31日 |\n| ↑ | ↑ | ↑ | ↑ | 单相表箱（透明聚碳酸酯） | 60,000 个 | 2027年3月31日 |\n| ↑ | ↑ | ↑ | ↑ | 封印及安装附件 | 60,000 套 | 2027年3月31日 |\n| 3 | 安装调试完成并经买方签认后 | 20% | 2,572,800.00 | 现场安装指导 |  | 2027年5月31日 |",
+      "tokens": 291,
+      "repeated": 1,
+      "lines": 6
+    },
+    {
+      "text": "| 期次 | 付款节点 | 付款比例 | 金额（元） | 对应交货内容 | 数量 | 计划日期 |\n| 第二批：三相智能电能表及互感器 | ← | ← | ← | ← | ← | ← |\n| 4 | 到货验收合格后 | 15% | 1,929,600.00 | 三相四线智能电能表 0.5S 级 | 3,000 只 | 2027年6月30日 |\n| ↑ | ↑ | ↑ | ↑ | 低压电流互感器 200/5A | 9,000 只 | 2027年6月30日 |\n| ↑ | ↑ | ↑ | ↑ | 联合接线盒 | 3,000 个 | 2027年6月30日 |\n| 5 | 系统联调完成后 | 10% | 1,286,400.00 | 采集终端及主站软件接入 | 150 套 | 2027年8月31日 |\n| 6 | 质保期满且无质量问题后 | 5% | 643,200.00 | 质量保证金 |  | 2029年8月31日 |\n| 合计 | ← | 100% | 12,864,000.00 |  |  |  |",
+      "tokens": 327,
+      "repeated": 1,
+      "lines": 7
+    }
+  ],
+  "markdown_checks": [],
+  "labeled": [
+    {
+      "text": "| 第一批：单相智能电能表及表箱 | ← | ← | ← | ← | ← | ← |\n| 期次: 1 | 付款节点: 合同生效后预付款 | 付款比例: 10% | 金额（元）: 1,286,400.00 | 对应交货内容: — |  | 计划日期: 2027年1月15日 |\n| 期次: 2 | 付款节点: 到货验收合格后 | 付款比例: 40% | 金额（元）: 5,145,600.00 | 对应交货内容: 单相智能电能表 2 级 | 数量: 60,000 只 | 计划日期: 2027年3月31日 |\n| ↑ | ↑ | ↑ | ↑ | 对应交货内容: 单相表箱（透明聚碳酸酯） | 数量: 60,000 个 | 计划日期: 2027年3月31日 |\n| ↑ | ↑ | ↑ | ↑ | 对应交货内容: 封印及安装附件 | 数量: 60,000 套 | 计划日期: 2027年3月31日 |\n| 期次: 3 | 付款节点: 安装调试完成并经买方签认后 | 付款比例: 20% | 金额（元）: 2,572,800.00 | 对应交货内容: 现场安装指导 |  | 计划日期: 2027年5月31日 |",
+      "tokens": 367,
+      "repeated": 0,
+      "lines": 6
+    },
+    {
+      "text": "| 第二批：三相智能电能表及互感器 | ← | ← | ← | ← | ← | ← |\n| 期次: 4 | 付款节点: 到货验收合格后 | 付款比例: 15% | 金额（元）: 1,929,600.00 | 对应交货内容: 三相四线智能电能表 0.5S 级 | 数量: 3,000 只 | 计划日期: 2027年6月30日 |\n| ↑ | ↑ | ↑ | ↑ | 对应交货内容: 低压电流互感器 200/5A | 数量: 9,000 只 | 计划日期: 2027年6月30日 |\n| ↑ | ↑ | ↑ | ↑ | 对应交货内容: 联合接线盒 | 数量: 3,000 个 | 计划日期: 2027年6月30日 |\n| 期次: 5 | 付款节点: 系统联调完成后 | 付款比例: 10% | 金额（元）: 1,286,400.00 | 对应交货内容: 采集终端及主站软件接入 | 数量: 150 套 | 计划日期: 2027年8月31日 |\n| 期次: 6 | 付款节点: 质保期满且无质量问题后 | 付款比例: 5% | 金额（元）: 643,200.00 | 对应交货内容: 质量保证金 |  | 计划日期: 2029年8月31日 |\n| 合计 | ← | 付款比例: 100% | 金额（元）: 12,864,000.00 |  |  |  |",
+      "tokens": 415,
+      "repeated": 0,
+      "lines": 7
+    }
+  ],
+  "labeled_checks": [],
+  "markdown_lead": [
+    {
+      "text": "本表列出各期付款节点、付款比例与金额，以及对应的交货内容、数量和计划日期。\n| 期次 | 付款节点 | 付款比例 | 金额（元） | 对应交货内容 | 数量 | 计划日期 |\n| 第一批：单相智能电能表及表箱 | ← | ← | ← | ← | ← | ← |\n| 1 | 合同生效后预付款 | 10% | 1,286,400.00 | — |  | 2027年1月15日 |\n| 2 | 到货验收合格后 | 40% | 5,145,600.00 | 单相智能电能表 2 级 | 60,000 只 | 2027年3月31日 |\n| ↑ | ↑ | ↑ | ↑ | 单相表箱（透明聚碳酸酯） | 60,000 个 | 2027年3月31日 |\n| ↑ | ↑ | ↑ | ↑ | 封印及安装附件 | 60,000 套 | 2027年3月31日 |\n| 3 | 安装调试完成并经买方签认后 | 20% | 2,572,800.00 | 现场安装指导 |  | 2027年5月31日 |",
+      "tokens": 316,
+      "repeated": 1,
+      "lines": 6
+    },
+    {
+      "text": "本表列出各期付款节点、付款比例与金额，以及对应的交货内容、数量和计划日期。\n| 期次 | 付款节点 | 付款比例 | 金额（元） | 对应交货内容 | 数量 | 计划日期 |\n| 第二批：三相智能电能表及互感器 | ← | ← | ← | ← | ← | ← |\n| 4 | 到货验收合格后 | 15% | 1,929,600.00 | 三相四线智能电能表 0.5S 级 | 3,000 只 | 2027年6月30日 |\n| ↑ | ↑ | ↑ | ↑ | 低压电流互感器 200/5A | 9,000 只 | 2027年6月30日 |\n| ↑ | ↑ | ↑ | ↑ | 联合接线盒 | 3,000 个 | 2027年6月30日 |\n| 5 | 系统联调完成后 | 10% | 1,286,400.00 | 采集终端及主站软件接入 | 150 套 | 2027年8月31日 |\n| 6 | 质保期满且无质量问题后 | 5% | 643,200.00 | 质量保证金 |  | 2029年8月31日 |\n| 合计 | ← | 100% | 12,864,000.00 |  |  |  |",
+      "tokens": 352,
+      "repeated": 1,
+      "lines": 7
+    }
+  ],
+  "markdown_lead_checks": [],
+  "labeled_lead": [
+    {
+      "text": "本表列出各期付款节点、付款比例与金额，以及对应的交货内容、数量和计划日期。\n| 第一批：单相智能电能表及表箱 | ← | ← | ← | ← | ← | ← |\n| 期次: 1 | 付款节点: 合同生效后预付款 | 付款比例: 10% | 金额（元）: 1,286,400.00 | 对应交货内容: — |  | 计划日期: 2027年1月15日 |\n| 期次: 2 | 付款节点: 到货验收合格后 | 付款比例: 40% | 金额（元）: 5,145,600.00 | 对应交货内容: 单相智能电能表 2 级 | 数量: 60,000 只 | 计划日期: 2027年3月31日 |\n| ↑ | ↑ | ↑ | ↑ | 对应交货内容: 单相表箱（透明聚碳酸酯） | 数量: 60,000 个 | 计划日期: 2027年3月31日 |\n| ↑ | ↑ | ↑ | ↑ | 对应交货内容: 封印及安装附件 | 数量: 60,000 套 | 计划日期: 2027年3月31日 |\n| 期次: 3 | 付款节点: 安装调试完成并经买方签认后 | 付款比例: 20% | 金额（元）: 2,572,800.00 | 对应交货内容: 现场安装指导 |  | 计划日期: 2027年5月31日 |",
+      "tokens": 392,
+      "repeated": 0,
+      "lines": 6
+    },
+    {
+      "text": "本表列出各期付款节点、付款比例与金额，以及对应的交货内容、数量和计划日期。\n| 第二批：三相智能电能表及互感器 | ← | ← | ← | ← | ← | ← |\n| 期次: 4 | 付款节点: 到货验收合格后 | 付款比例: 15% | 金额（元）: 1,929,600.00 | 对应交货内容: 三相四线智能电能表 0.5S 级 | 数量: 3,000 只 | 计划日期: 2027年6月30日 |\n| ↑ | ↑ | ↑ | ↑ | 对应交货内容: 低压电流互感器 200/5A | 数量: 9,000 只 | 计划日期: 2027年6月30日 |\n| ↑ | ↑ | ↑ | ↑ | 对应交货内容: 联合接线盒 | 数量: 3,000 个 | 计划日期: 2027年6月30日 |\n| 期次: 5 | 付款节点: 系统联调完成后 | 付款比例: 10% | 金额（元）: 1,286,400.00 | 对应交货内容: 采集终端及主站软件接入 | 数量: 150 套 | 计划日期: 2027年8月31日 |\n| 期次: 6 | 付款节点: 质保期满且无质量问题后 | 付款比例: 5% | 金额（元）: 643,200.00 | 对应交货内容: 质量保证金 |  | 计划日期: 2029年8月31日 |\n| 合计 | ← | 付款比例: 100% | 金额（元）: 12,864,000.00 |  |  |  |",
+      "tokens": 440,
+      "repeated": 0,
+      "lines": 7
+    }
+  ],
+  "labeled_lead_checks": [],
+  "summary": {
+    "model": "google/gemini-3.8-flash",
+    "attempts": [
+      {
+        "raw": "{\n  \"summary\": \"本表为合同付款与交货计划安排表。表格按交付批次分为“第一批：单相智能电能表及表箱”与“第二批：三相智能电能表及互感器”两个分组，末行设有“合计”。表格列包含：期次、付款节点、付款比例、金额（元）、对应交货内容、数量、计划日期。涉及的付款节点包括：合同生效后预付款、到货验收合格后、安装调试完成并经买方签认后、系统联调完成后、质保期满且无质量问题后。对应的交货内容包括：单相智能电能表 2 级、单相表箱（透明聚碳酸酯）、封印及安装附件、现场安装指导、三相四线智能电能表 0.5S 级、低压电流互感器 200/5A、联合接线盒、采集终端及主站软件接入、质量保证金。表中分别列明了各节点对应的付款比例、金额、交付数量及计划完成日期。\"\n}",
+        "reasoning": "**Analyzing Retrieval Parameters**\n\nI'm currently focused on how to retrieve a summary in Chinese that meets specific criteria. I need to generate a character count to stay under the 508 character limit. The content includes a payment and delivery schedule for two batches: single-phase and three-phase smart meters with their respective enclosures.\n\n\n**Refining Summary Details**\n\nI've added the \"合计\" (total) row to the structure. I've also focused on the columns: 期次, 付款节点, 付款比例, 金额 (元), 对应交货内容, 数量, and 计划日期. I'm now drafting the summary in Chinese, ensuring it accurately reflects the payment schedule and the delivery items: 单相智能电能表, 三相智能电能表, and related components. I'm making sure it’s under the character limit, and now focusing on the columns.\n\n\n**Detailing Payment Milestones**\n\nI'm now detailing the payment milestones which include pre-payment after contract effectiveness, payments after acceptance, installation and commissioning, system commissioning, and the end of the warranty period. The delivered items include single-phase smart meters, meter boxes, seals, installation accessories, on-site guidance, three-phase smart meters, current transformers, junction boxes, data acquisition terminals, main station software integration, and quality bond.\n\n\n",
+        "issues": [],
+        "prompt_tokens": 1302,
+        "completion_tokens": 1086,
+        "reasoning_tokens": 845,
+        "cost_usd": 0.005049,
+        "cached": false
+      }
+    ],
+    "summary": "本表为合同付款与交货计划安排表。表格按交付批次分为“第一批：单相智能电能表及表箱”与“第二批：三相智能电能表及互感器”两个分组，末行设有“合计”。表格列包含：期次、付款节点、付款比例、金额（元）、对应交货内容、数量、计划日期。涉及的付款节点包括：合同生效后预付款、到货验收合格后、安装调试完成并经买方签认后、系统联调完成后、质保期满且无质量问题后。对应的交货内容包括：单相智能电能表 2 级、单相表箱（透明聚碳酸酯）、封印及安装附件、现场安装指导、三相四线智能电能表 0.5S 级、低压电流互感器 200/5A、联合接线盒、采集终端及主站软件接入、质量保证金。表中分别列明了各节点对应的付款比例、金额、交付数量及计划完成日期。"
+  },
+  "summary_tokens": 242
+}

@@ -1,0 +1,100 @@
+{
+  "schema_version": "table_structure_v1",
+  "document_key": "签字-ORDER-PERU-25-19-FONAFE--5a4c36e0022f4917",
+  "document_id": "5a4c36e0022f4917",
+  "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+  "file_hash": "04d82628210338b261fbb0809d53bf5b2c85ca1f524940a0e3c9fcf712329e89",
+  "tables": [
+    {
+      "regions": [
+        {
+          "page": 1,
+          "bbox": [
+            70.1,
+            240.0,
+            524.9,
+            431.7
+          ]
+        }
+      ],
+      "header_rows": [
+        0,
+        1
+      ],
+      "sections": [],
+      "implicit_merges": []
+    },
+    {
+      "regions": [
+        {
+          "page": 2,
+          "bbox": [
+            70.1,
+            108.9,
+            532.1,
+            760.0
+          ]
+        },
+        {
+          "page": 3,
+          "bbox": [
+            70.2,
+            87.3,
+            532.3,
+            273.6
+          ]
+        }
+      ],
+      "header_rows": [
+        0,
+        1,
+        2
+      ],
+      "sections": [
+        {
+          "title_rows": [
+            3
+          ],
+          "last_row": 15
+        },
+        {
+          "title_rows": [
+            16
+          ],
+          "last_row": 19
+        },
+        {
+          "title_rows": [
+            20
+          ],
+          "last_row": 27
+        },
+        {
+          "title_rows": [
+            28
+          ],
+          "last_row": 35
+        }
+      ],
+      "implicit_merges": []
+    },
+    {
+      "regions": [
+        {
+          "page": 3,
+          "bbox": [
+            93.3,
+            344.5,
+            255.7,
+            454.9
+          ]
+        }
+      ],
+      "header_rows": [
+        0
+      ],
+      "sections": [],
+      "implicit_merges": []
+    }
+  ]
+}

@@ -1,0 +1,407 @@
+{
+  "annotation": {
+    "model": "deepseek/deepseek-v4.1-flash",
+    "attempts": [
+      {
+        "raw": "{\n  \"header_rows\": [0, 1, 2],\n  \"sections\": [\n    {\n      \"title_rows\": [3],\n      \"last_row\": 15\n    },\n    {\n      \"title_rows\": [16],\n      \"last_row\": 19\n    },\n    {\n      \"title_rows\": [20],\n      \"last_row\": 27\n    },\n    {\n      \"title_rows\": [28],\n      \"last_row\": 35\n    }\n  ],\n  \"implicit_merges\": [],\n  \"lead\": \"The table lists each electrical company's required quantities and delivery schedule for different meter items, by item, description, unit, total requirement, and delivery period.\"\n}",
+        "reasoning": "We need answer annotation. Need parse table. Need decide header rows, sections, implicit merges, lead. Need be careful.\n\nWe have table grid. Columns c0..c10. Rows r0-r35.\n\nLet's inspect structure.\n\nr0: COMPANY | ITEM | DESCRIPTION | UNIT | TOTAL REQUIREMENT | QTY AND DELIVERY SCHEDULE | ← | ← | ← | ← | ←\nr1: ↑ | ↑ | ↑ | ↑ | ↑ | 1st Delivery | 2nd Delivery | 3rd Delivery | 4th Delivery | 5th Delivery | 6th Delivery\nr2: ↑ | ↑ | ↑ | ↑ | ↑ | (At 170 days...) | ... | ... | ... | ... | ...\n\nSo header rows likely r0-r2. They are consecutive. r0 has merged c5-c10 \"QTY AND DELIVERY SCHEDULE\"; r1 subheaders; r2 parenthetical delivery timing. These are column labels. Header rows = [0,1,2].\n\nSections: There are item title rows: r3 \"ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES\" spanning all columns. r16 \"ITEM 2: ...\", r20 \"ITEM 3: ...\", r28 \"ITEM 4: ...\". These are section titles. Each section group from title row to last row before next title? Need last_row. For r3 section: rows r3-r15? Since r16 next title. Yes last_row 15. r16 section: r16-r19? r20 next title. last_row 19. r20 section: r20-r27? r28 next title. last_row 27. r28 section: r28-r35. last_row 35. These are sections. Are there nested? No. Title rows are single row each. Need list every section as own item. Could there be a title above header rows? No. The context title \"6. Quantity per electrical company:\" not in table. Not a row. So no.\n\nImplicit merges: empty cells that repeat value above in same column. Need identify columns where value written once and following rows blank. In table, many empty cells in delivery columns are not repeats? Need decide by meaning. The table has company rows under each item. Columns c0 company, c1 item, c2 description, c3 unit, c4 total requirement, c5-c10 delivery quantities. For each item section, c1 ITEM number and c2 description and c3 UNIT are repeated? Actually in rows r4-r15, c1=1, c2=Single Phase Meter 2 wires, c3=UNIT for every row. They are not empty. So no implicit merges there. c0 company unique. c4 total unique. c5-c10 delivery quantities: many empty cells. Are they empty because no delivery scheduled, not repeat above. They should not be marked as implicit merges. But there may be c1/c2/c3? They are filled in every row, not empty. c0? no.\n\nWhat about r0 header merged c5-c10: positions c6-c10 are \"←\" in same row, not empty. r1 c0-c4 are \"↑\" merged from r0? Actually r0 c0 COMPANY, r1 c0 ↑ means merged vertically? Wait grid: r0 c0 COMPANY, r1 c0 ↑, r2 c0 ↑. That indicates COMPANY cell spans r0-r2? But header rows: r0 has COMPANY, r1 c0 ↑, r2 c0 ↑. Similarly ITEM, DESCRIPTION, UNIT, TOTAL REQUIREMENT span r0-r2. That's merged header cells. Not implicit merges? They are not empty; they are ↑. We don't mark.\n\nr0 c5 \"QTY AND DELIVERY SCHEDULE\" spans c5-c10 horizontally, r1 c5 1st Delivery etc. r2 c5 parenthetical. So header.\n\nImplicit merges: Need check if any empty cells in c0? No. c1? all filled? r4-r15 c1=1, r17-r19 c1=2, r21-r27 c1=3, r29-r35 c1=4. All filled. c2 all filled. c3 all UNIT. c4 all filled. c5-c10 many empty but not repeats. Could there be c0 empty? no. So implicit_merges empty.\n\nBut wait: In r0, c6-c10 are \"←\" not empty. In r1, c0-c4 are \"↑\" not empty. In r2, c0-c4 are \"↑\". So no.\n\nLead: one sentence in English, at most 24 words, tells what table is about: lists quantity requirements and delivery schedules per electrical company for different meter items. Row stands for an electrical company's requirement for a meter item, columns give item, description, unit, total requirement, and delivery quantities by delivery period. Need not mention table number. Could be: \"This table lists the total required quantities and delivery schedules of various meter models for each electrical company.\" That's 15 words. Good. Maybe mention columns: company, item, description, unit, total requirement, and six delivery quantities. But max 24. \"It lists each electrical company's required quantities and delivery schedule for different meter items, with columns for item, description, unit, total requirement, and six deliveries.\" 24? Count: It(1) lists2 each3 electrical4 company's5 required6 quantities7 and8 delivery9 schedule10 for11 different12 meter13 items14 with15 columns16 for17 item18 description19 unit20 total21 requirement22 and23 six24 deliveries25. Too many. Simpler: \"The table lists each electrical company's required quantities and delivery schedule for different meter items, by item, description, unit, total requirement, and delivery period.\" Count: The1 table2 lists3 each4 electrical5 company's6 required7 quantities8 and9 delivery10 schedule11 for12 different13 meter14 items15 by16 item17 description18 unit19 total20 requirement21 and22 delivery23 period24. Good. But \"by item...\" maybe okay. Or \"It lists required quantities and delivery schedules per electrical company for various meter items, with columns for item, description, unit, total requirement, and six deliveries.\" Count: It1 lists2 required3 quantities4 and5 delivery6 schedules7 per8 electrical9 company10 for11 various12 meter13 items14 with15 columns16 for17 item18 description19 unit20 total21 requirement22 and23 six24 deliveries25. Too many. Use first.\n\nNeed ensure sections: title rows are r3, r16, r20, r28. last_row as above. Are these sections nested? No. But note r3 title row spans all columns. It is a section title. r16 etc. Good.\n\nHeader rows: r0-r2. Are r0-r2 all header? r2 contains delivery timing parenthetical, yes part of header. So header_rows [0,1,2].\n\nImplicit merges: Could there be implicit merge in c5-c10 for delivery schedule? No, empty means no quantity. But maybe in r5 ADINELSA: c5 empty, c6 5000, c7 empty, c8 5000, c9 empty, c10 empty. Not repeat. So none.\n\nBut wait: The table has c0 company names. In r4-r15, c1=1, c2=Single Phase Meter 2 wires, c3=UNIT. They are repeated in every row, not empty. So no implicit merges. However, in r0 header, c5 \"QTY AND DELIVERY SCHEDULE\" spans c5-c10, and r1 has subheaders. That's explicit merge. Not implicit.\n\nNeed output format? Likely JSON-like. We need provide annotation. The user asks \"Annotate:\" with fields. We should output in some structured format. Probably JSON. Need include header_rows, sections, implicit_merges, lead. Use integers.\n\nLet's craft final JSON.\n\nSections list:\n[\n {\"title_rows\":[3],\"last_row\":15},\n {\"title_rows\":[16],\"last_row\":19},\n {\"title_rows\":[20],\"last_row\":27},\n {\"title_rows\":[28],\"last_row\":35}\n]\n\nCheck if any section title above header? No.\n\nImplicit_merges: [].\n\nLead: \"The table lists each electrical company's required quantities and delivery schedule for different meter items, by item, description, unit, total requirement, and delivery period.\" Count 24? Let's count: The(1) table(2) lists(3) each(4) electrical(5) company's(6) required(7) quantities(8) and(9) delivery(10) schedule(11) for(12) different(13) meter(14) items(15) by(16) item(17) description(18) unit(19) total(20) requirement(21) and(22) delivery(23) period(24). Yes 24. Good. But \"by item, description...\" maybe awkward. Could be \"The table lists each electrical company's required quantities and delivery schedule for different meter items, with columns for item, description, unit, total requirement, and delivery period.\" Count: The1 table2 lists3 each4 electrical5 company's6 required7 quantities8 and9 delivery10 schedule11 for12 different13 meter14 items15 with16 columns17 for18 item19 description20 unit21 total22 requirement23 and24 delivery25 period26. Too many. So use first.\n\nNeed ensure no mention table number. Good.\n\nFinal answer only JSON.",
+        "issues": [],
+        "prompt_tokens": 2575,
+        "completion_tokens": 2210,
+        "reasoning_tokens": 2059,
+        "cost_usd": 0.0034245,
+        "cached": false
+      }
+    ],
+    "annotation": {
+      "header_rows": [
+        0,
+        1,
+        2
+      ],
+      "sections": [
+        {
+          "title_rows": [
+            3
+          ],
+          "last_row": 15
+        },
+        {
+          "title_rows": [
+            16
+          ],
+          "last_row": 19
+        },
+        {
+          "title_rows": [
+            20
+          ],
+          "last_row": 27
+        },
+        {
+          "title_rows": [
+            28
+          ],
+          "last_row": 35
+        }
+      ],
+      "implicit_merges": []
+    },
+    "lead": "The table lists each electrical company's required quantities and delivery schedule for different meter items, by item, description, unit, total requirement, and delivery period."
+  },
+  "fallback": {
+    "annotation": false,
+    "lead": false
+  },
+  "markdown": [
+    {
+      "text": "| COMPANY | ITEM | DESCRIPTION | UNIT | TOTAL REQUIREMENT | QTY AND DELIVERY SCHEDULE | ← | ← | ← | ← | ← |\n| ↑ | ↑ | ↑ | ↑ | ↑ | 1st Delivery | 2nd Delivery | 3rd Delivery | 4th Delivery | 5th Delivery | 6th Delivery |\n| ↑ | ↑ | ↑ | ↑ | ↑ | (At 170 days of contract signature) | (At 210 days of contract signature) | (At 330 days of contract signature) | (At 450 days of contract signature) | (At 570 days of contract signature) | (At 690 days of contract signature) |\n| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| ELUC | 1 | Single Phase Meter 2 wires | UNIT | 27,000 | 2,000 | 5,000 | 5,000 | 5,000 | 5,000 | 5,000 |\n| ADINELSA | 1 | Single Phase Meter 2 wires | UNIT | 10,000 |  | 5,000 |  | 5,000 |  |  |\n| ELSU | 1 | Single Phase Meter 2 wires | UNIT | 69,000 | 29,000 |  | 23,000 |  | 17,000 |  |\n| ELCTO | 1 | Single Phase Meter 2 wires | UNIT | 116,000 | 19,330 | 19,330 | 19,330 | 19,330 | 19,330 | 19,350 |",
+      "tokens": 419,
+      "repeated": 3,
+      "lines": 5
+    },
+    {
+      "text": "| COMPANY | ITEM | DESCRIPTION | UNIT | TOTAL REQUIREMENT | QTY AND DELIVERY SCHEDULE | ← | ← | ← | ← | ← |\n| ↑ | ↑ | ↑ | ↑ | ↑ | 1st Delivery | 2nd Delivery | 3rd Delivery | 4th Delivery | 5th Delivery | 6th Delivery |\n| ↑ | ↑ | ↑ | ↑ | ↑ | (At 170 days of contract signature) | (At 210 days of contract signature) | (At 330 days of contract signature) | (At 450 days of contract signature) | (At 570 days of contract signature) | (At 690 days of contract signature) |\n| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| ENOSA | 1 | Single Phase Meter 2 wires | UNIT | 108,630 | 18,105 | 18,105 | 18,105 | 18,105 | 18,105 | 18,105 |\n| HDNA | 1 | Single Phase Meter 2 wires | UNIT | 190,941 | 70,000 | 60,941 | 60,000 |  |  |  |\n| ENSA | 1 | Single Phase Meter 2 wires | UNIT | 132,180 | 24,330 | 23,630 | 21,880 | 21,680 | 20,480 | 20,180 |",
+      "tokens": 394,
+      "repeated": 4,
+      "lines": 3
+    },
+    {
+      "text": "| COMPANY | ITEM | DESCRIPTION | UNIT | TOTAL REQUIREMENT | QTY AND DELIVERY SCHEDULE | ← | ← | ← | ← | ← |\n| ↑ | ↑ | ↑ | ↑ | ↑ | 1st Delivery | 2nd Delivery | 3rd Delivery | 4th Delivery | 5th Delivery | 6th Delivery |\n| ↑ | ↑ | ↑ | ↑ | ↑ | (At 170 days of contract signature) | (At 210 days of contract signature) | (At 330 days of contract signature) | (At 450 days of contract signature) | (At 570 days of contract signature) | (At 690 days of contract signature) |\n| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| ELOR - LORETO | 1 | Single Phase Meter 2 wires | UNIT | 87,600 | 14,600 | 14,600 | 14,600 | 14,600 | 14,600 | 14,600 |\n| ELSE | 1 | Single Phase Meter 2 wires | UNIT | 120,000 | 15,000 | 15,000 | 15,000 | 25,000 | 25,000 | 25,000 |\n| SEAL | 1 | Single Phase Meter 2 wires | UNIT | 110,000 | 10,000 | 15,000 | 20,000 | 20,000 | 20,000 | 25,000 |",
+      "tokens": 393,
+      "repeated": 4,
+      "lines": 3
+    },
+    {
+      "text": "| COMPANY | ITEM | DESCRIPTION | UNIT | TOTAL REQUIREMENT | QTY AND DELIVERY SCHEDULE | ← | ← | ← | ← | ← |\n| ↑ | ↑ | ↑ | ↑ | ↑ | 1st Delivery | 2nd Delivery | 3rd Delivery | 4th Delivery | 5th Delivery | 6th Delivery |\n| ↑ | ↑ | ↑ | ↑ | ↑ | (At 170 days of contract signature) | (At 210 days of contract signature) | (At 330 days of contract signature) | (At 450 days of contract signature) | (At 570 days of contract signature) | (At 690 days of contract signature) |\n| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| ELOR - SAN MARTIN | 1 | Single Phase Meter 2 wires | UNIT | 92,400 | 15,400 | 15,400 | 15,400 | 15,400 | 15,400 | 15,400 |\n| ELOR - CAJAMARCA | 1 | Single Phase Meter 2 wires | UNIT | 67,305 | 11,217 | 11,217 | 11,217 | 11,217 | 11,217 | 11,220 |",
+      "tokens": 362,
+      "repeated": 4,
+      "lines": 2
+    },
+    {
+      "text": "| COMPANY | ITEM | DESCRIPTION | UNIT | TOTAL REQUIREMENT | QTY AND DELIVERY SCHEDULE | ← | ← | ← | ← | ← |\n| ↑ | ↑ | ↑ | ↑ | ↑ | 1st Delivery | 2nd Delivery | 3rd Delivery | 4th Delivery | 5th Delivery | 6th Delivery |\n| ↑ | ↑ | ↑ | ↑ | ↑ | (At 170 days of contract signature) | (At 210 days of contract signature) | (At 330 days of contract signature) | (At 450 days of contract signature) | (At 570 days of contract signature) | (At 690 days of contract signature) |\n| ITEM 2: SINGLE PHASE METER 3 WIRES - MODEL HXE13ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| ELCTO | 2 | Single Phase Meter 3 wires | UNIT | 94,000 | 16,000 | 16,000 | 15,500 | 15,500 | 15,500 | 15,500 |\n| ENOSA | 2 | Single Phase Meter 3 wires | UNIT | 5,220 | 870 | 870 | 870 | 870 | 870 | 870 |\n| ENSA | 2 | Single Phase Meter 3 wires | UNIT | 9,910 | 1,810 | 1,710 | 1,710 | 1,610 | 1,560 | 1,510 |",
+      "tokens": 390,
+      "repeated": 3,
+      "lines": 4
+    },
+    {
+      "text": "| COMPANY | ITEM | DESCRIPTION | UNIT | TOTAL REQUIREMENT | QTY AND DELIVERY SCHEDULE | ← | ← | ← | ← | ← |\n| ↑ | ↑ | ↑ | ↑ | ↑ | 1st Delivery | 2nd Delivery | 3rd Delivery | 4th Delivery | 5th Delivery | 6th Delivery |\n| ↑ | ↑ | ↑ | ↑ | ↑ | (At 170 days of contract signature) | (At 210 days of contract signature) | (At 330 days of contract signature) | (At 450 days of contract signature) | (At 570 days of contract signature) | (At 690 days of contract signature) |\n| ITEM 3: THREE PHASE METER 3 WIRES - MODEL HXE33K-S1 | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| ELUC | 3 | Three Phase 3 wires | UNIT | 150 | 150 |  |  |  |  |  |\n| ELSU | 3 | Three Phase 3 wires | UNIT | 300 | 100 |  | 100 |  | 100 |  |\n| ENOSA | 3 | Three Phase 3 wires | UNIT | 900 | 150 | 150 | 150 | 150 | 150 | 150 |\n| HDNA | 3 | Three Phase 3 wires | UNIT | 400 | 400 |  |  |  |  |  |\n| ENSA | 3 | Three Phase 3 wires | UNIT | 5,018 | 1,153 | 853 | 753 | 753 | 753 | 753 |",
+      "tokens": 439,
+      "repeated": 3,
+      "lines": 6
+    },
+    {
+      "text": "| COMPANY | ITEM | DESCRIPTION | UNIT | TOTAL REQUIREMENT | QTY AND DELIVERY SCHEDULE | ← | ← | ← | ← | ← |\n| ↑ | ↑ | ↑ | ↑ | ↑ | 1st Delivery | 2nd Delivery | 3rd Delivery | 4th Delivery | 5th Delivery | 6th Delivery |\n| ↑ | ↑ | ↑ | ↑ | ↑ | (At 170 days of contract signature) | (At 210 days of contract signature) | (At 330 days of contract signature) | (At 450 days of contract signature) | (At 570 days of contract signature) | (At 690 days of contract signature) |\n| ITEM 3: THREE PHASE METER 3 WIRES - MODEL HXE33K-S1 | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| ELSE | 3 | Three Phase 3 wires | UNIT | 1,500 |  |  | 750 |  |  | 750 |\n| ELPU | 3 | Three Phase 3 wires | UNIT | 100 |  |  |  | 100 |  |  |\n| ITEM 4: THREE PHASE METER 4 WIRES - MODEL HXE34K-S1 | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| ELUC | 4 | Three Phase 4 wires | UNIT | 2,000 | 1,000 |  |  | 1,000 |  |  |",
+      "tokens": 406,
+      "repeated": 4,
+      "lines": 4
+    },
+    {
+      "text": "| COMPANY | ITEM | DESCRIPTION | UNIT | TOTAL REQUIREMENT | QTY AND DELIVERY SCHEDULE | ← | ← | ← | ← | ← |\n| ↑ | ↑ | ↑ | ↑ | ↑ | 1st Delivery | 2nd Delivery | 3rd Delivery | 4th Delivery | 5th Delivery | 6th Delivery |\n| ↑ | ↑ | ↑ | ↑ | ↑ | (At 170 days of contract signature) | (At 210 days of contract signature) | (At 330 days of contract signature) | (At 450 days of contract signature) | (At 570 days of contract signature) | (At 690 days of contract signature) |\n| ITEM 4: THREE PHASE METER 4 WIRES - MODEL HXE34K-S1 | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| ENOSA | 4 | Three Phase 4 wires | UNIT | 4,848 | 808 | 808 | 808 | 808 | 808 | 808 |\n| HDNA | 4 | Three Phase 4 wires | UNIT | 22,986 | 12,000 | 10,986 |  |  |  |  |\n| ENSA | 4 | Three Phase 4 wires | UNIT | 10,804 | 2,234 | 1,734 | 1,734 | 1,734 | 1,734 | 1,634 |\n| ELSE | 4 | Three Phase 4 wires | UNIT | 2,600 | 300 | 300 | 500 | 500 | 500 | 500 |",
+      "tokens": 422,
+      "repeated": 4,
+      "lines": 4
+    },
+    {
+      "text": "| COMPANY | ITEM | DESCRIPTION | UNIT | TOTAL REQUIREMENT | QTY AND DELIVERY SCHEDULE | ← | ← | ← | ← | ← |\n| ↑ | ↑ | ↑ | ↑ | ↑ | 1st Delivery | 2nd Delivery | 3rd Delivery | 4th Delivery | 5th Delivery | 6th Delivery |\n| ↑ | ↑ | ↑ | ↑ | ↑ | (At 170 days of contract signature) | (At 210 days of contract signature) | (At 330 days of contract signature) | (At 450 days of contract signature) | (At 570 days of contract signature) | (At 690 days of contract signature) |\n| ITEM 4: THREE PHASE METER 4 WIRES - MODEL HXE34K-S1 | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| ELPU | 4 | Three Phase 4 wires | UNIT | 1,200 |  |  |  | 1,200 |  |  |\n| SEAL | 4 | Three Phase 4 wires | UNIT | 1,500 |  |  |  |  | 500 | 1,000 |",
+      "tokens": 318,
+      "repeated": 4,
+      "lines": 2
+    }
+  ],
+  "markdown_lead": [
+    {
+      "text": "The table lists each electrical company's required quantities and delivery schedule for different meter items, by item, description, unit, total requirement, and delivery period.\n| COMPANY | ITEM | DESCRIPTION | UNIT | TOTAL REQUIREMENT | QTY AND DELIVERY SCHEDULE | ← | ← | ← | ← | ← |\n| ↑ | ↑ | ↑ | ↑ | ↑ | 1st Delivery | 2nd Delivery | 3rd Delivery | 4th Delivery | 5th Delivery | 6th Delivery |\n| ↑ | ↑ | ↑ | ↑ | ↑ | (At 170 days of contract signature) | (At 210 days of contract signature) | (At 330 days of contract signature) | (At 450 days of contract signature) | (At 570 days of contract signature) | (At 690 days of contract signature) |\n| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| ELUC | 1 | Single Phase Meter 2 wires | UNIT | 27,000 | 2,000 | 5,000 | 5,000 | 5,000 | 5,000 | 5,000 |\n| ADINELSA | 1 | Single Phase Meter 2 wires | UNIT | 10,000 |  | 5,000 |  | 5,000 |  |  |\n| ELSU | 1 | Single Phase Meter 2 wires | UNIT | 69,000 | 29,000 |  | 23,000 |  | 17,000 |  |\n| ELCTO | 1 | Single Phase Meter 2 wires | UNIT | 116,000 | 19,330 | 19,330 | 19,330 | 19,330 | 19,330 | 19,350 |",
+      "tokens": 455,
+      "repeated": 3,
+      "lines": 5
+    },
+    {
+      "text": "The table lists each electrical company's required quantities and delivery schedule for different meter items, by item, description, unit, total requirement, and delivery period.\n| COMPANY | ITEM | DESCRIPTION | UNIT | TOTAL REQUIREMENT | QTY AND DELIVERY SCHEDULE | ← | ← | ← | ← | ← |\n| ↑ | ↑ | ↑ | ↑ | ↑ | 1st Delivery | 2nd Delivery | 3rd Delivery | 4th Delivery | 5th Delivery | 6th Delivery |\n| ↑ | ↑ | ↑ | ↑ | ↑ | (At 170 days of contract signature) | (At 210 days of contract signature) | (At 330 days of contract signature) | (At 450 days of contract signature) | (At 570 days of contract signature) | (At 690 days of contract signature) |\n| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| ENOSA | 1 | Single Phase Meter 2 wires | UNIT | 108,630 | 18,105 | 18,105 | 18,105 | 18,105 | 18,105 | 18,105 |\n| HDNA | 1 | Single Phase Meter 2 wires | UNIT | 190,941 | 70,000 | 60,941 | 60,000 |  |  |  |\n| ENSA | 1 | Single Phase Meter 2 wires | UNIT | 132,180 | 24,330 | 23,630 | 21,880 | 21,680 | 20,480 | 20,180 |",
+      "tokens": 430,
+      "repeated": 4,
+      "lines": 3
+    },
+    {
+      "text": "The table lists each electrical company's required quantities and delivery schedule for different meter items, by item, description, unit, total requirement, and delivery period.\n| COMPANY | ITEM | DESCRIPTION | UNIT | TOTAL REQUIREMENT | QTY AND DELIVERY SCHEDULE | ← | ← | ← | ← | ← |\n| ↑ | ↑ | ↑ | ↑ | ↑ | 1st Delivery | 2nd Delivery | 3rd Delivery | 4th Delivery | 5th Delivery | 6th Delivery |\n| ↑ | ↑ | ↑ | ↑ | ↑ | (At 170 days of contract signature) | (At 210 days of contract signature) | (At 330 days of contract signature) | (At 450 days of contract signature) | (At 570 days of contract signature) | (At 690 days of contract signature) |\n| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| ELOR - LORETO | 1 | Single Phase Meter 2 wires | UNIT | 87,600 | 14,600 | 14,600 | 14,600 | 14,600 | 14,600 | 14,600 |\n| ELSE | 1 | Single Phase Meter 2 wires | UNIT | 120,000 | 15,000 | 15,000 | 15,000 | 25,000 | 25,000 | 25,000 |\n| SEAL | 1 | Single Phase Meter 2 wires | UNIT | 110,000 | 10,000 | 15,000 | 20,000 | 20,000 | 20,000 | 25,000 |",
+      "tokens": 429,
+      "repeated": 4,
+      "lines": 3
+    },
+    {
+      "text": "The table lists each electrical company's required quantities and delivery schedule for different meter items, by item, description, unit, total requirement, and delivery period.\n| COMPANY | ITEM | DESCRIPTION | UNIT | TOTAL REQUIREMENT | QTY AND DELIVERY SCHEDULE | ← | ← | ← | ← | ← |\n| ↑ | ↑ | ↑ | ↑ | ↑ | 1st Delivery | 2nd Delivery | 3rd Delivery | 4th Delivery | 5th Delivery | 6th Delivery |\n| ↑ | ↑ | ↑ | ↑ | ↑ | (At 170 days of contract signature) | (At 210 days of contract signature) | (At 330 days of contract signature) | (At 450 days of contract signature) | (At 570 days of contract signature) | (At 690 days of contract signature) |\n| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| ELOR - SAN MARTIN | 1 | Single Phase Meter 2 wires | UNIT | 92,400 | 15,400 | 15,400 | 15,400 | 15,400 | 15,400 | 15,400 |\n| ELOR - CAJAMARCA | 1 | Single Phase Meter 2 wires | UNIT | 67,305 | 11,217 | 11,217 | 11,217 | 11,217 | 11,217 | 11,220 |",
+      "tokens": 398,
+      "repeated": 4,
+      "lines": 2
+    },
+    {
+      "text": "The table lists each electrical company's required quantities and delivery schedule for different meter items, by item, description, unit, total requirement, and delivery period.\n| COMPANY | ITEM | DESCRIPTION | UNIT | TOTAL REQUIREMENT | QTY AND DELIVERY SCHEDULE | ← | ← | ← | ← | ← |\n| ↑ | ↑ | ↑ | ↑ | ↑ | 1st Delivery | 2nd Delivery | 3rd Delivery | 4th Delivery | 5th Delivery | 6th Delivery |\n| ↑ | ↑ | ↑ | ↑ | ↑ | (At 170 days of contract signature) | (At 210 days of contract signature) | (At 330 days of contract signature) | (At 450 days of contract signature) | (At 570 days of contract signature) | (At 690 days of contract signature) |\n| ITEM 2: SINGLE PHASE METER 3 WIRES - MODEL HXE13ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| ELCTO | 2 | Single Phase Meter 3 wires | UNIT | 94,000 | 16,000 | 16,000 | 15,500 | 15,500 | 15,500 | 15,500 |\n| ENOSA | 2 | Single Phase Meter 3 wires | UNIT | 5,220 | 870 | 870 | 870 | 870 | 870 | 870 |\n| ENSA | 2 | Single Phase Meter 3 wires | UNIT | 9,910 | 1,810 | 1,710 | 1,710 | 1,610 | 1,560 | 1,510 |",
+      "tokens": 426,
+      "repeated": 3,
+      "lines": 4
+    },
+    {
+      "text": "The table lists each electrical company's required quantities and delivery schedule for different meter items, by item, description, unit, total requirement, and delivery period.\n| COMPANY | ITEM | DESCRIPTION | UNIT | TOTAL REQUIREMENT | QTY AND DELIVERY SCHEDULE | ← | ← | ← | ← | ← |\n| ↑ | ↑ | ↑ | ↑ | ↑ | 1st Delivery | 2nd Delivery | 3rd Delivery | 4th Delivery | 5th Delivery | 6th Delivery |\n| ↑ | ↑ | ↑ | ↑ | ↑ | (At 170 days of contract signature) | (At 210 days of contract signature) | (At 330 days of contract signature) | (At 450 days of contract signature) | (At 570 days of contract signature) | (At 690 days of contract signature) |\n| ITEM 3: THREE PHASE METER 3 WIRES - MODEL HXE33K-S1 | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| ELUC | 3 | Three Phase 3 wires | UNIT | 150 | 150 |  |  |  |  |  |\n| ELSU | 3 | Three Phase 3 wires | UNIT | 300 | 100 |  | 100 |  | 100 |  |\n| ENOSA | 3 | Three Phase 3 wires | UNIT | 900 | 150 | 150 | 150 | 150 | 150 | 150 |\n| HDNA | 3 | Three Phase 3 wires | UNIT | 400 | 400 |  |  |  |  |  |\n| ENSA | 3 | Three Phase 3 wires | UNIT | 5,018 | 1,153 | 853 | 753 | 753 | 753 | 753 |",
+      "tokens": 475,
+      "repeated": 3,
+      "lines": 6
+    },
+    {
+      "text": "The table lists each electrical company's required quantities and delivery schedule for different meter items, by item, description, unit, total requirement, and delivery period.\n| COMPANY | ITEM | DESCRIPTION | UNIT | TOTAL REQUIREMENT | QTY AND DELIVERY SCHEDULE | ← | ← | ← | ← | ← |\n| ↑ | ↑ | ↑ | ↑ | ↑ | 1st Delivery | 2nd Delivery | 3rd Delivery | 4th Delivery | 5th Delivery | 6th Delivery |\n| ↑ | ↑ | ↑ | ↑ | ↑ | (At 170 days of contract signature) | (At 210 days of contract signature) | (At 330 days of contract signature) | (At 450 days of contract signature) | (At 570 days of contract signature) | (At 690 days of contract signature) |\n| ITEM 3: THREE PHASE METER 3 WIRES - MODEL HXE33K-S1 | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| ELSE | 3 | Three Phase 3 wires | UNIT | 1,500 |  |  | 750 |  |  | 750 |\n| ELPU | 3 | Three Phase 3 wires | UNIT | 100 |  |  |  | 100 |  |  |\n| ITEM 4: THREE PHASE METER 4 WIRES - MODEL HXE34K-S1 | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| ELUC | 4 | Three Phase 4 wires | UNIT | 2,000 | 1,000 |  |  | 1,000 |  |  |",
+      "tokens": 442,
+      "repeated": 4,
+      "lines": 4
+    },
+    {
+      "text": "The table lists each electrical company's required quantities and delivery schedule for different meter items, by item, description, unit, total requirement, and delivery period.\n| COMPANY | ITEM | DESCRIPTION | UNIT | TOTAL REQUIREMENT | QTY AND DELIVERY SCHEDULE | ← | ← | ← | ← | ← |\n| ↑ | ↑ | ↑ | ↑ | ↑ | 1st Delivery | 2nd Delivery | 3rd Delivery | 4th Delivery | 5th Delivery | 6th Delivery |\n| ↑ | ↑ | ↑ | ↑ | ↑ | (At 170 days of contract signature) | (At 210 days of contract signature) | (At 330 days of contract signature) | (At 450 days of contract signature) | (At 570 days of contract signature) | (At 690 days of contract signature) |\n| ITEM 4: THREE PHASE METER 4 WIRES - MODEL HXE34K-S1 | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| ENOSA | 4 | Three Phase 4 wires | UNIT | 4,848 | 808 | 808 | 808 | 808 | 808 | 808 |\n| HDNA | 4 | Three Phase 4 wires | UNIT | 22,986 | 12,000 | 10,986 |  |  |  |  |\n| ENSA | 4 | Three Phase 4 wires | UNIT | 10,804 | 2,234 | 1,734 | 1,734 | 1,734 | 1,734 | 1,634 |\n| ELSE | 4 | Three Phase 4 wires | UNIT | 2,600 | 300 | 300 | 500 | 500 | 500 | 500 |",
+      "tokens": 458,
+      "repeated": 4,
+      "lines": 4
+    },
+    {
+      "text": "The table lists each electrical company's required quantities and delivery schedule for different meter items, by item, description, unit, total requirement, and delivery period.\n| COMPANY | ITEM | DESCRIPTION | UNIT | TOTAL REQUIREMENT | QTY AND DELIVERY SCHEDULE | ← | ← | ← | ← | ← |\n| ↑ | ↑ | ↑ | ↑ | ↑ | 1st Delivery | 2nd Delivery | 3rd Delivery | 4th Delivery | 5th Delivery | 6th Delivery |\n| ↑ | ↑ | ↑ | ↑ | ↑ | (At 170 days of contract signature) | (At 210 days of contract signature) | (At 330 days of contract signature) | (At 450 days of contract signature) | (At 570 days of contract signature) | (At 690 days of contract signature) |\n| ITEM 4: THREE PHASE METER 4 WIRES - MODEL HXE34K-S1 | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| ELPU | 4 | Three Phase 4 wires | UNIT | 1,200 |  |  |  | 1,200 |  |  |\n| SEAL | 4 | Three Phase 4 wires | UNIT | 1,500 |  |  |  |  | 500 | 1,000 |",
+      "tokens": 354,
+      "repeated": 4,
+      "lines": 2
+    }
+  ],
+  "markdown_checks": [],
+  "labeled": [
+    {
+      "text": "| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ELUC | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 27,000 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 2,000 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 5,000 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 5,000 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 5,000 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 5,000 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 5,000 |\n| COMPANY: ADINELSA | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 10,000 |  | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 5,000 |  | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 5,000 |  |  |",
+      "tokens": 366,
+      "repeated": 0,
+      "lines": 3
+    },
+    {
+      "text": "| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ELSU | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 69,000 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 29,000 |  | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 23,000 |  | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 17,000 |  |\n| COMPANY: ELCTO | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 116,000 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 19,330 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 19,330 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 19,330 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 19,330 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 19,330 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 19,350 |",
+      "tokens": 392,
+      "repeated": 1,
+      "lines": 2
+    },
+    {
+      "text": "| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ENOSA | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 108,630 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 18,105 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 18,105 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 18,105 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 18,105 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 18,105 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 18,105 |\n| COMPANY: HDNA | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 190,941 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 70,000 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 60,941 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 60,000 |  |  |  |",
+      "tokens": 402,
+      "repeated": 1,
+      "lines": 2
+    },
+    {
+      "text": "| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ENSA | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 132,180 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 24,330 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 23,630 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 21,880 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 21,680 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 20,480 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 20,180 |",
+      "tokens": 265,
+      "repeated": 1,
+      "lines": 1
+    },
+    {
+      "text": "| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ELOR - LORETO | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 87,600 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 14,600 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 14,600 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 14,600 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 14,600 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 14,600 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 14,600 |",
+      "tokens": 271,
+      "repeated": 1,
+      "lines": 1
+    },
+    {
+      "text": "| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ELSE | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 120,000 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 15,000 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 15,000 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 15,000 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 25,000 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 25,000 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 25,000 |",
+      "tokens": 260,
+      "repeated": 1,
+      "lines": 1
+    },
+    {
+      "text": "| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: SEAL | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 110,000 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 10,000 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 15,000 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 20,000 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 20,000 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 20,000 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 25,000 |",
+      "tokens": 259,
+      "repeated": 1,
+      "lines": 1
+    },
+    {
+      "text": "| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ELOR - SAN MARTIN | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 92,400 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 15,400 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 15,400 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 15,400 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 15,400 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 15,400 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 15,400 |",
+      "tokens": 271,
+      "repeated": 1,
+      "lines": 1
+    },
+    {
+      "text": "| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ELOR - CAJAMARCA | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 67,305 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 11,217 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 11,217 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 11,217 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 11,217 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 11,217 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 11,220 |",
+      "tokens": 277,
+      "repeated": 1,
+      "lines": 1
+    },
+    {
+      "text": "| ITEM 2: SINGLE PHASE METER 3 WIRES - MODEL HXE13ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ELCTO | ITEM: 2 | DESCRIPTION: Single Phase Meter 3 wires | UNIT: UNIT | TOTAL REQUIREMENT: 94,000 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 16,000 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 16,000 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 15,500 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 15,500 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 15,500 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 15,500 |",
+      "tokens": 265,
+      "repeated": 0,
+      "lines": 2
+    },
+    {
+      "text": "| ITEM 2: SINGLE PHASE METER 3 WIRES - MODEL HXE13ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ENOSA | ITEM: 2 | DESCRIPTION: Single Phase Meter 3 wires | UNIT: UNIT | TOTAL REQUIREMENT: 5,220 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 870 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 870 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 870 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 870 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 870 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 870 |",
+      "tokens": 261,
+      "repeated": 1,
+      "lines": 1
+    },
+    {
+      "text": "| ITEM 2: SINGLE PHASE METER 3 WIRES - MODEL HXE13ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ENSA | ITEM: 2 | DESCRIPTION: Single Phase Meter 3 wires | UNIT: UNIT | TOTAL REQUIREMENT: 9,910 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 1,810 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 1,710 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 1,710 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 1,610 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 1,560 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 1,510 |\n| ITEM 3: THREE PHASE METER 3 WIRES - MODEL HXE33K-S1 | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ELUC | ITEM: 3 | DESCRIPTION: Three Phase 3 wires | UNIT: UNIT | TOTAL REQUIREMENT: 150 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 150 |  |  |  |  |  |",
+      "tokens": 395,
+      "repeated": 1,
+      "lines": 3
+    },
+    {
+      "text": "| ITEM 3: THREE PHASE METER 3 WIRES - MODEL HXE33K-S1 | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ELSU | ITEM: 3 | DESCRIPTION: Three Phase 3 wires | UNIT: UNIT | TOTAL REQUIREMENT: 300 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 100 |  | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 100 |  | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 100 |  |\n| COMPANY: ENOSA | ITEM: 3 | DESCRIPTION: Three Phase 3 wires | UNIT: UNIT | TOTAL REQUIREMENT: 900 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 150 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 150 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 150 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 150 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 150 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 150 |",
+      "tokens": 381,
+      "repeated": 1,
+      "lines": 2
+    },
+    {
+      "text": "| ITEM 3: THREE PHASE METER 3 WIRES - MODEL HXE33K-S1 | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: HDNA | ITEM: 3 | DESCRIPTION: Three Phase 3 wires | UNIT: UNIT | TOTAL REQUIREMENT: 400 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 400 |  |  |  |  |  |\n| COMPANY: ENSA | ITEM: 3 | DESCRIPTION: Three Phase 3 wires | UNIT: UNIT | TOTAL REQUIREMENT: 5,018 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 1,153 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 853 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 753 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 753 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 753 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 753 |\n| COMPANY: ELSE | ITEM: 3 | DESCRIPTION: Three Phase 3 wires | UNIT: UNIT | TOTAL REQUIREMENT: 1,500 |  |  | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 750 |  |  | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 750 |",
+      "tokens": 447,
+      "repeated": 1,
+      "lines": 3
+    },
+    {
+      "text": "| ITEM 3: THREE PHASE METER 3 WIRES - MODEL HXE33K-S1 | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ELPU | ITEM: 3 | DESCRIPTION: Three Phase 3 wires | UNIT: UNIT | TOTAL REQUIREMENT: 100 |  |  |  | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 100 |  |  |\n| ITEM 4: THREE PHASE METER 4 WIRES - MODEL HXE34K-S1 | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ELUC | ITEM: 4 | DESCRIPTION: Three Phase 4 wires | UNIT: UNIT | TOTAL REQUIREMENT: 2,000 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 1,000 |  |  | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 1,000 |  |  |",
+      "tokens": 295,
+      "repeated": 1,
+      "lines": 3
+    },
+    {
+      "text": "| ITEM 4: THREE PHASE METER 4 WIRES - MODEL HXE34K-S1 | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ENOSA | ITEM: 4 | DESCRIPTION: Three Phase 4 wires | UNIT: UNIT | TOTAL REQUIREMENT: 4,848 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 808 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 808 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 808 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 808 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 808 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 808 |\n| COMPANY: HDNA | ITEM: 4 | DESCRIPTION: Three Phase 4 wires | UNIT: UNIT | TOTAL REQUIREMENT: 22,986 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 12,000 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 10,986 |  |  |  |  |",
+      "tokens": 369,
+      "repeated": 1,
+      "lines": 2
+    },
+    {
+      "text": "| ITEM 4: THREE PHASE METER 4 WIRES - MODEL HXE34K-S1 | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ENSA | ITEM: 4 | DESCRIPTION: Three Phase 4 wires | UNIT: UNIT | TOTAL REQUIREMENT: 10,804 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 2,234 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 1,734 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 1,734 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 1,734 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 1,734 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 1,634 |",
+      "tokens": 264,
+      "repeated": 1,
+      "lines": 1
+    },
+    {
+      "text": "| ITEM 4: THREE PHASE METER 4 WIRES - MODEL HXE34K-S1 | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ELSE | ITEM: 4 | DESCRIPTION: Three Phase 4 wires | UNIT: UNIT | TOTAL REQUIREMENT: 2,600 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 300 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 300 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 500 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 500 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 500 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 500 |\n| COMPANY: ELPU | ITEM: 4 | DESCRIPTION: Three Phase 4 wires | UNIT: UNIT | TOTAL REQUIREMENT: 1,200 |  |  |  | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 1,200 |  |  |\n| COMPANY: SEAL | ITEM: 4 | DESCRIPTION: Three Phase 4 wires | UNIT: UNIT | TOTAL REQUIREMENT: 1,500 |  |  |  |  | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 500 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 1,000 |",
+      "tokens": 446,
+      "repeated": 1,
+      "lines": 3
+    }
+  ],
+  "labeled_lead": [
+    {
+      "text": "The table lists each electrical company's required quantities and delivery schedule for different meter items, by item, description, unit, total requirement, and delivery period.\n| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ELUC | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 27,000 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 2,000 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 5,000 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 5,000 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 5,000 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 5,000 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 5,000 |\n| COMPANY: ADINELSA | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 10,000 |  | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 5,000 |  | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 5,000 |  |  |",
+      "tokens": 402,
+      "repeated": 0,
+      "lines": 3
+    },
+    {
+      "text": "The table lists each electrical company's required quantities and delivery schedule for different meter items, by item, description, unit, total requirement, and delivery period.\n| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ELSU | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 69,000 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 29,000 |  | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 23,000 |  | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 17,000 |  |\n| COMPANY: ELCTO | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 116,000 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 19,330 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 19,330 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 19,330 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 19,330 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 19,330 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 19,350 |",
+      "tokens": 428,
+      "repeated": 1,
+      "lines": 2
+    },
+    {
+      "text": "The table lists each electrical company's required quantities and delivery schedule for different meter items, by item, description, unit, total requirement, and delivery period.\n| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ENOSA | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 108,630 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 18,105 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 18,105 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 18,105 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 18,105 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 18,105 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 18,105 |\n| COMPANY: HDNA | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 190,941 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 70,000 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 60,941 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 60,000 |  |  |  |",
+      "tokens": 438,
+      "repeated": 1,
+      "lines": 2
+    },
+    {
+      "text": "The table lists each electrical company's required quantities and delivery schedule for different meter items, by item, description, unit, total requirement, and delivery period.\n| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ENSA | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 132,180 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 24,330 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 23,630 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 21,880 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 21,680 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 20,480 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 20,180 |",
+      "tokens": 301,
+      "repeated": 1,
+      "lines": 1
+    },
+    {
+      "text": "The table lists each electrical company's required quantities and delivery schedule for different meter items, by item, description, unit, total requirement, and delivery period.\n| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ELOR - LORETO | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 87,600 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 14,600 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 14,600 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 14,600 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 14,600 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 14,600 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 14,600 |",
+      "tokens": 307,
+      "repeated": 1,
+      "lines": 1
+    },
+    {
+      "text": "The table lists each electrical company's required quantities and delivery schedule for different meter items, by item, description, unit, total requirement, and delivery period.\n| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ELSE | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 120,000 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 15,000 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 15,000 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 15,000 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 25,000 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 25,000 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 25,000 |",
+      "tokens": 296,
+      "repeated": 1,
+      "lines": 1
+    },
+    {
+      "text": "The table lists each electrical company's required quantities and delivery schedule for different meter items, by item, description, unit, total requirement, and delivery period.\n| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: SEAL | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 110,000 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 10,000 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 15,000 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 20,000 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 20,000 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 20,000 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 25,000 |",
+      "tokens": 295,
+      "repeated": 1,
+      "lines": 1
+    },
+    {
+      "text": "The table lists each electrical company's required quantities and delivery schedule for different meter items, by item, description, unit, total requirement, and delivery period.\n| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ELOR - SAN MARTIN | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 92,400 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 15,400 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 15,400 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 15,400 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 15,400 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 15,400 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 15,400 |",
+      "tokens": 307,
+      "repeated": 1,
+      "lines": 1
+    },
+    {
+      "text": "The table lists each electrical company's required quantities and delivery schedule for different meter items, by item, description, unit, total requirement, and delivery period.\n| ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ELOR - CAJAMARCA | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 67,305 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 11,217 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 11,217 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 11,217 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 11,217 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 11,217 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 11,220 |",
+      "tokens": 313,
+      "repeated": 1,
+      "lines": 1
+    },
+    {
+      "text": "The table lists each electrical company's required quantities and delivery schedule for different meter items, by item, description, unit, total requirement, and delivery period.\n| ITEM 2: SINGLE PHASE METER 3 WIRES - MODEL HXE13ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ELCTO | ITEM: 2 | DESCRIPTION: Single Phase Meter 3 wires | UNIT: UNIT | TOTAL REQUIREMENT: 94,000 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 16,000 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 16,000 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 15,500 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 15,500 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 15,500 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 15,500 |",
+      "tokens": 301,
+      "repeated": 0,
+      "lines": 2
+    },
+    {
+      "text": "The table lists each electrical company's required quantities and delivery schedule for different meter items, by item, description, unit, total requirement, and delivery period.\n| ITEM 2: SINGLE PHASE METER 3 WIRES - MODEL HXE13ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ENOSA | ITEM: 2 | DESCRIPTION: Single Phase Meter 3 wires | UNIT: UNIT | TOTAL REQUIREMENT: 5,220 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 870 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 870 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 870 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 870 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 870 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 870 |",
+      "tokens": 297,
+      "repeated": 1,
+      "lines": 1
+    },
+    {
+      "text": "The table lists each electrical company's required quantities and delivery schedule for different meter items, by item, description, unit, total requirement, and delivery period.\n| ITEM 2: SINGLE PHASE METER 3 WIRES - MODEL HXE13ES | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ENSA | ITEM: 2 | DESCRIPTION: Single Phase Meter 3 wires | UNIT: UNIT | TOTAL REQUIREMENT: 9,910 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 1,810 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 1,710 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 1,710 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 1,610 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 1,560 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 1,510 |\n| ITEM 3: THREE PHASE METER 3 WIRES - MODEL HXE33K-S1 | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ELUC | ITEM: 3 | DESCRIPTION: Three Phase 3 wires | UNIT: UNIT | TOTAL REQUIREMENT: 150 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 150 |  |  |  |  |  |",
+      "tokens": 431,
+      "repeated": 1,
+      "lines": 3
+    },
+    {
+      "text": "The table lists each electrical company's required quantities and delivery schedule for different meter items, by item, description, unit, total requirement, and delivery period.\n| ITEM 3: THREE PHASE METER 3 WIRES - MODEL HXE33K-S1 | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ELSU | ITEM: 3 | DESCRIPTION: Three Phase 3 wires | UNIT: UNIT | TOTAL REQUIREMENT: 300 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 100 |  | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 100 |  | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 100 |  |\n| COMPANY: ENOSA | ITEM: 3 | DESCRIPTION: Three Phase 3 wires | UNIT: UNIT | TOTAL REQUIREMENT: 900 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 150 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 150 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 150 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 150 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 150 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 150 |",
+      "tokens": 417,
+      "repeated": 1,
+      "lines": 2
+    },
+    {
+      "text": "The table lists each electrical company's required quantities and delivery schedule for different meter items, by item, description, unit, total requirement, and delivery period.\n| ITEM 3: THREE PHASE METER 3 WIRES - MODEL HXE33K-S1 | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: HDNA | ITEM: 3 | DESCRIPTION: Three Phase 3 wires | UNIT: UNIT | TOTAL REQUIREMENT: 400 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 400 |  |  |  |  |  |\n| COMPANY: ENSA | ITEM: 3 | DESCRIPTION: Three Phase 3 wires | UNIT: UNIT | TOTAL REQUIREMENT: 5,018 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 1,153 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 853 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 753 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 753 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 753 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 753 |\n| COMPANY: ELSE | ITEM: 3 | DESCRIPTION: Three Phase 3 wires | UNIT: UNIT | TOTAL REQUIREMENT: 1,500 |  |  | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 750 |  |  | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 750 |",
+      "tokens": 483,
+      "repeated": 1,
+      "lines": 3
+    },
+    {
+      "text": "The table lists each electrical company's required quantities and delivery schedule for different meter items, by item, description, unit, total requirement, and delivery period.\n| ITEM 3: THREE PHASE METER 3 WIRES - MODEL HXE33K-S1 | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ELPU | ITEM: 3 | DESCRIPTION: Three Phase 3 wires | UNIT: UNIT | TOTAL REQUIREMENT: 100 |  |  |  | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 100 |  |  |\n| ITEM 4: THREE PHASE METER 4 WIRES - MODEL HXE34K-S1 | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ELUC | ITEM: 4 | DESCRIPTION: Three Phase 4 wires | UNIT: UNIT | TOTAL REQUIREMENT: 2,000 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 1,000 |  |  | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 1,000 |  |  |",
+      "tokens": 331,
+      "repeated": 1,
+      "lines": 3
+    },
+    {
+      "text": "The table lists each electrical company's required quantities and delivery schedule for different meter items, by item, description, unit, total requirement, and delivery period.\n| ITEM 4: THREE PHASE METER 4 WIRES - MODEL HXE34K-S1 | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ENOSA | ITEM: 4 | DESCRIPTION: Three Phase 4 wires | UNIT: UNIT | TOTAL REQUIREMENT: 4,848 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 808 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 808 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 808 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 808 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 808 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 808 |\n| COMPANY: HDNA | ITEM: 4 | DESCRIPTION: Three Phase 4 wires | UNIT: UNIT | TOTAL REQUIREMENT: 22,986 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 12,000 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 10,986 |  |  |  |  |",
+      "tokens": 405,
+      "repeated": 1,
+      "lines": 2
+    },
+    {
+      "text": "The table lists each electrical company's required quantities and delivery schedule for different meter items, by item, description, unit, total requirement, and delivery period.\n| ITEM 4: THREE PHASE METER 4 WIRES - MODEL HXE34K-S1 | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ENSA | ITEM: 4 | DESCRIPTION: Three Phase 4 wires | UNIT: UNIT | TOTAL REQUIREMENT: 10,804 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 2,234 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 1,734 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 1,734 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 1,734 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 1,734 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 1,634 |",
+      "tokens": 300,
+      "repeated": 1,
+      "lines": 1
+    },
+    {
+      "text": "The table lists each electrical company's required quantities and delivery schedule for different meter items, by item, description, unit, total requirement, and delivery period.\n| ITEM 4: THREE PHASE METER 4 WIRES - MODEL HXE34K-S1 | ← | ← | ← | ← | ← | ← | ← | ← | ← | ← |\n| COMPANY: ELSE | ITEM: 4 | DESCRIPTION: Three Phase 4 wires | UNIT: UNIT | TOTAL REQUIREMENT: 2,600 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At 170 days of contract signature): 300 | QTY AND DELIVERY SCHEDULE / 2nd Delivery / (At 210 days of contract signature): 300 | QTY AND DELIVERY SCHEDULE / 3rd Delivery / (At 330 days of contract signature): 500 | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 500 | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 500 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 500 |\n| COMPANY: ELPU | ITEM: 4 | DESCRIPTION: Three Phase 4 wires | UNIT: UNIT | TOTAL REQUIREMENT: 1,200 |  |  |  | QTY AND DELIVERY SCHEDULE / 4th Delivery / (At 450 days of contract signature): 1,200 |  |  |\n| COMPANY: SEAL | ITEM: 4 | DESCRIPTION: Three Phase 4 wires | UNIT: UNIT | TOTAL REQUIREMENT: 1,500 |  |  |  |  | QTY AND DELIVERY SCHEDULE / 5th Delivery / (At 570 days of contract signature): 500 | QTY AND DELIVERY SCHEDULE / 6th Delivery / (At 690 days of contract signature): 1,000 |",
+      "tokens": 482,
+      "repeated": 1,
+      "lines": 3
+    }
+  ],
+  "labeled_checks": [],
+  "summary": {
+    "model": "deepseek/deepseek-v4.1-flash",
+    "attempts": [
+      {
+        "raw": "{ \"summary\": \"This table presents the quantity per electrical company for meter procurement, organized by item groups. Each data row is one electrical company's requirement for a given meter item, with columns COMPANY, ITEM, DESCRIPTION, UNIT, TOTAL REQUIREMENT, and QTY AND DELIVERY SCHEDULE. The delivery schedule is split into six columns: 1st Delivery, 2nd Delivery, 3rd Delivery, 4th Delivery, 5th Delivery, and 6th Delivery, each with a timing note (at 170, 210, 330, 450, 570, and 690 days of contract signature, respectively). Rows are grouped under ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES; ITEM 2: SINGLE PHASE METER 3 WIRES - MODEL HXE13ES; ITEM 3: THREE PHASE METER 3 WIRES - MODEL HXE33K-S1; and ITEM 4: THREE PHASE METER 4 WIRES - MODEL HXE34K-S1. The company row identifiers are ELUC, ADINELSA, ELSU, ELCTO, ENOSA, HDNA, ENSA, ELOR - LORETO, ELSE, SEAL, ELOR - SAN MARTIN, ELOR - CAJAMARCA, and ELPU; item identifiers are 1, 2, 3, and 4 with descriptions Single Phase Meter 2 wires, Single Phase Meter 3 wires, Three Phase 3 wires, and Three Phase 4 wires. The table reports total requirement and per-delivery quantities; no subtotal or total rows are present.\" }",
+        "reasoning": "We need answer write retrieval summary. Need follow rules. Document language English. Need one paragraph max 254 words. State what table about. Organization: rows stand for? Columns labels. Groups/subtotals/totals. Copy exact values identifying rows and groups. Do not list other values rows report; say kinds. No unsupported.\n\nWe need parse table. It's \"Quantity per electrical company\" likely procurement delivery schedule for meters. Table has columns: COMPANY, ITEM, DESCRIPTION, UNIT, TOTAL REQUIREMENT, QTY AND DELIVERY SCHEDULE spanning 6 delivery columns: 1st Delivery ... 6th Delivery, with subheaders days. Rows grouped by ITEM 1-4 with item descriptions/models. Each row is an electrical company and item. Row identifiers: COMPANY values: ELUC, ADINELSA, ELSU, ELCTO, ENOSA, HDNA, ENSA, ELOR - LORETO, ELSE, SEAL, ELOR - SAN MARTIN, ELOR - CAJAMARCA, ELPU. ITEM values 1,2,3,4. DESCRIPTION values: Single Phase Meter 2 wires, Single Phase Meter 3 wires, Three Phase 3 wires, Three Phase 4 wires. Groups: ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES; ITEM 2: SINGLE PHASE METER 3 WIRES - MODEL HXE13ES; ITEM 3: THREE PHASE METER 3 WIRES - MODEL HXE33K-S1; ITEM 4: THREE PHASE METER 4 WIRES - MODEL HXE34K-S1. Need copy exact values that identify rows and groups. Could include all company names and item group labels. Also item numbers/descriptions. Need mention columns: COMPANY, ITEM, DESCRIPTION, UNIT, TOTAL REQUIREMENT, QTY AND DELIVERY SCHEDULE with 1st–6th Delivery and timing subheaders. Values kinds: total requirement and delivery quantities per delivery. Maybe unit is UNIT. No totals? There is TOTAL REQUIREMENT column, not total row. No subtotals/totals rows. Need mention no totals? Maybe \"There are no total rows.\" But rule 3 any groups, subtotals or totals. We can say no subtotal/total rows.\n\nNeed at most 254 words. Let's craft concise. Need one paragraph. Include exact row identifiers. If all company names fit? Let's count. Companies: ELUC, ADINELSA, ELSU, ELCTO, ENOSA, HDNA, ENSA, ELOR - LORETO, ELSE, SEAL, ELOR - SAN MARTIN, ELOR - CAJAMARCA, ELPU. That's 13. Groups 4. Descriptions 4. Column labels. Word count maybe ~200. Good.\n\nNeed not mention section/table numbers. Context title \"6. Quantity per electrical company:\" but don't mention table number. We can say \"This table lists quantities per electrical company...\" That's okay.\n\nNeed ensure no unsupported: \"delivery schedule at 170, 210, 330, 450, 570, 690 days of contract signature\" supported. \"UNIT\" column. \"TOTAL REQUIREMENT\" column. \"QTY AND DELIVERY SCHEDULE\" spanning six columns. Rows grouped by item. Each row is a company's requirement for a meter item. The table gives total requirement and quantities scheduled for each delivery. It does not give other values? It gives unit. We can say \"The table reports total requirement and per-delivery quantities; no subtotal or total rows are present.\" Is \"no subtotal or total rows\" supported? Yes no total row. But \"TOTAL REQUIREMENT\" is column, not total row. Fine.\n\nNeed copy exact values identifying rows and groups. We can list group labels and company names. Maybe item numbers and descriptions. The row identifiers are COMPANY and ITEM/DESCRIPTION. We can say \"Rows are identified by COMPANY (ELUC, ADINELSA, ELSU, ELCTO, ENOSA, HDNA, ENSA, ELOR - LORETO, ELSE, SEAL, ELOR - SAN MARTIN, ELOR - CAJAMARCA, ELPU) and by ITEM/DESCRIPTION (1 Single Phase Meter 2 wires; 2 Single Phase Meter 3 wires; 3 Three Phase 3 wires; 4 Three Phase 4 wires).\" Groups: \"ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES; ITEM 2: SINGLE PHASE METER 3 WIRES - MODEL HXE13ES; ITEM 3: THREE PHASE METER 3 WIRES - MODEL HXE33K-S1; ITEM 4: THREE PHASE METER 4 WIRES - MODEL HXE34K-S1.\" That's exact.\n\nNeed maybe \"COMPANY\" values include \"ELOR - LORETO\" etc. Good.\n\nPotential issue: The table has merged cells for group rows r3, r16, r20, r28. They are group headers. We can mention.\n\nNeed one paragraph. Let's draft:\n\n\"This table presents the quantity per electrical company for meter procurement, organized by item groups. Each data row is one electrical company's requirement for a given meter item, with columns COMPANY, ITEM, DESCRIPTION, UNIT, TOTAL REQUIREMENT, and QTY AND DELIVERY SCHEDULE. The delivery schedule is split into six columns: 1st Delivery, 2nd Delivery, 3rd Delivery, 4th Delivery, 5th Delivery, and 6th Delivery, each with a timing note (at 170, 210, 330, 450, 570, and 690 days of contract signature, respectively). Rows are grouped under ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES; ITEM 2: SINGLE PHASE METER 3 WIRES - MODEL HXE13ES; ITEM 3: THREE PHASE METER 3 WIRES - MODEL HXE33K-S1; and ITEM 4: THREE PHASE METER 4 WIRES - MODEL HXE34K-S1. The company row identifiers are ELUC, ADINELSA, ELSU, ELCTO, ENOSA, HDNA, ENSA, ELOR - LORETO, ELSE, SEAL, ELOR - SAN MARTIN, ELOR - CAJAMARCA, and ELPU; item identifiers are 1, 2, 3, and 4 with descriptions Single Phase Meter 2 wires, Single Phase Meter 3 wires, Three Phase 3 wires, and Three Phase 4 wires. The table reports total requirement and per-delivery quantities; no subtotal or total rows are present.\"\n\nWord count? Let's count roughly: This(1) table2 presents3 the4 quantity5 per6 electrical7 company8 for9 meter10 procurement11 organized12 by13 item14 groups15. Each16 data17 row18 is19 one20 electrical21 company's22 requirement23 for24 a25 given26 meter27 item28, with29 columns30 COMPANY31, ITEM32, DESCRIPTION33, UNIT34, TOTAL35 REQUIREMENT36, and37 QTY38 AND39 DELIVERY40 SCHEDULE41. The42 delivery43 schedule44 is45 split46 into47 six48 columns49: 1st50 Delivery51, 2nd52 Delivery53, 3rd54 Delivery55, 4th56 Delivery57, 5th58 Delivery59, and60 6th61 Delivery62, each63 with64 a65 timing66 note67 (at68 17069, 21070, 33071, 45072, 57073, and74 69075 days76 of77 contract78 signature79, respectively80). Rows81 are82 grouped83 under84 ITEM85 1:86 SINGLE87 PHASE88 METER89 2 90 WIRES91 -92 MODEL93 HXE12ES94; ITEM95 2:96 SINGLE97 PHASE98 METER99 3 100 WIRES101 -102 MODEL103 HXE13ES104; ITEM105 3:106 THREE107 PHASE108 METER109 3 110 WIRES111 -112 MODEL113 HXE33K-S1114; and115 ITEM116 4:117 THREE118 PHASE119 METER120 4 121 WIRES122 -123 MODEL124 HXE34K-S1125. The126 company127 row128 identifiers129 are130 ELUC131, ADINELSA132, ELSU133, ELCTO134, ENOSA135, HDNA136, ENSA137, ELOR138 -139 LORETO140, ELSE141, SEAL142, ELOR143 -144 SAN145 MARTIN146, ELOR147 -148 CAJAMARCA149, and150 ELPU151; item152 identifiers153 are154 1,155 2,156 3,157 and158 4 159 with160 descriptions161 Single162 Phase163 Meter164 2 165 wires166, Single167 Phase168 Meter169 3 170 wires171, Three172 Phase173 3 174 wires175, and176 Three177 Phase178 4 179 wires180. The181 table182 reports183 total184 requirement185 and186 per-delivery187 quantities188; no189 subtotal190 or191 total192 rows193 are194 present195. Under 254. Good.\n\nNeed maybe \"QTY AND DELIVERY SCHEDULE\" exact. Good.\n\nPotential issue: \"no subtotal or total rows are present\" maybe okay. But \"TOTAL REQUIREMENT\" column is not total row. Fine.\n\nNeed final only. Ensure one paragraph. No markdown? Fine.",
+        "issues": [],
+        "prompt_tokens": 2269,
+        "completion_tokens": 2488,
+        "reasoning_tokens": 1777,
+        "cost_usd": 0.0007026,
+        "cached": false
+      }
+    ],
+    "summary": "This table presents the quantity per electrical company for meter procurement, organized by item groups. Each data row is one electrical company's requirement for a given meter item, with columns COMPANY, ITEM, DESCRIPTION, UNIT, TOTAL REQUIREMENT, and QTY AND DELIVERY SCHEDULE. The delivery schedule is split into six columns: 1st Delivery, 2nd Delivery, 3rd Delivery, 4th Delivery, 5th Delivery, and 6th Delivery, each with a timing note (at 170, 210, 330, 450, 570, and 690 days of contract signature, respectively). Rows are grouped under ITEM 1: SINGLE PHASE METER 2 WIRES - MODEL HXE12ES; ITEM 2: SINGLE PHASE METER 3 WIRES - MODEL HXE13ES; ITEM 3: THREE PHASE METER 3 WIRES - MODEL HXE33K-S1; and ITEM 4: THREE PHASE METER 4 WIRES - MODEL HXE34K-S1. The company row identifiers are ELUC, ADINELSA, ELSU, ELCTO, ENOSA, HDNA, ENSA, ELOR - LORETO, ELSE, SEAL, ELOR - SAN MARTIN, ELOR - CAJAMARCA, and ELPU; item identifiers are 1, 2, 3, and 4 with descriptions Single Phase Meter 2 wires, Single Phase Meter 3 wires, Three Phase 3 wires, and Three Phase 4 wires. The table reports total requirement and per-delivery quantities; no subtotal or total rows are present."
+  },
+  "summary_tokens": 369
+}

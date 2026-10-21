@@ -1,0 +1,28 @@
+{
+  "schema_version": "table_structure_v1",
+  "document_key": "ORDER-PERU-24-12-ANDET--169a1f2133fe5643",
+  "document_id": "169a1f2133fe5643",
+  "document_name": "ORDER PERU 24-12 ANDET.pdf",
+  "file_hash": "27b3e11879c4adef8bd5cd1b91d1f29322179959196c0412815fc767563ad4d3",
+  "tables": [
+    {
+      "regions": [
+        {
+          "page": 1,
+          "bbox": [
+            70.0,
+            217.4,
+            525.0,
+            321.5
+          ]
+        }
+      ],
+      "header_rows": [
+        0,
+        1
+      ],
+      "sections": [],
+      "implicit_merges": []
+    }
+  ]
+}

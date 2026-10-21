@@ -1,0 +1,44 @@
+{
+  "title": "合同 c0004 合同标的",
+  "node_id": "node_7504dd672d005aae9ac0",
+  "language": "spanish",
+  "context": [
+    {
+      "kind": "title",
+      "text": "III. CLÁUSULA TERCERA: Objeto del contrato. -"
+    },
+    {
+      "kind": "paragraph",
+      "text": "El presente contrato tiene por objeto la ' COMPRA CORPORATIVA DE MEDIDORES PARA LAS EMPRESAS DE LA CORPORACION FONAFE ' según se detalla en el siguiente cuadro:"
+    }
+  ],
+  "grid": "| row | c0 | c1 |\n| r0 | Ítem | Descripción |\n| r1 | 1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS |\n| r2 | 3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS |\n| r3 | 4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS |",
+  "expected": null,
+  "rule_header_rows": [
+    0
+  ],
+  "rule_chunks": {
+    "markdown": [
+      {
+        "text": "| Ítem | Descripción |\n| 1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS |\n| 3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS |\n| 4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS |",
+        "tokens": 80,
+        "repeated": 0,
+        "lines": 4
+      }
+    ],
+    "labeled": [
+      {
+        "text": "| Ítem: 1 | Descripción: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS |\n| Ítem: 3 | Descripción: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS |\n| Ítem: 4 | Descripción: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS |",
+        "tokens": 88,
+        "repeated": 0,
+        "lines": 3
+      }
+    ]
+  },
+  "lengths": {
+    "language": "spanish",
+    "summary_max_tokens": 508
+  },
+  "max_tokens": 512,
+  "lead_max_tokens": 64
+}

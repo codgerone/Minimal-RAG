@@ -1,0 +1,47 @@
+{
+  "schema_version": "table_structure_v1",
+  "document_key": "ORDER-PERU-25-15-ANDET-VF--5883b02cd922a64f",
+  "document_id": "5883b02cd922a64f",
+  "document_name": "ORDER PERU 25-15 ANDET VF.pdf",
+  "file_hash": "af1613f91c9aa298133e5d1328db4040c5dc156968102b41bc4340e456fce7a6",
+  "tables": [
+    {
+      "regions": [
+        {
+          "page": 1,
+          "bbox": [
+            70.1,
+            205.4,
+            524.8,
+            469.5
+          ]
+        }
+      ],
+      "header_rows": [
+        0,
+        1
+      ],
+      "sections": [],
+      "implicit_merges": []
+    },
+    {
+      "regions": [
+        {
+          "page": 2,
+          "bbox": [
+            91.2,
+            119.2,
+            532.3,
+            327.7
+          ]
+        }
+      ],
+      "header_rows": [
+        0,
+        1
+      ],
+      "sections": [],
+      "implicit_merges": []
+    }
+  ]
+}

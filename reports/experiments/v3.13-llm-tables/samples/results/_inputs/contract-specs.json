@@ -1,0 +1,20 @@
+{
+  "title": "合同 c0006 技术规格",
+  "node_id": "node_af2e93dd3f6afeb30bcf",
+  "language": "spanish",
+  "context": {
+    "heading": "IV. CLÁUSULA CUARTA. - Alcance de especificaciones técnicas. -",
+    "before": "EL  CONTRATISTA se  obliga  a  la  entrega  de  los  bienes  objeto  del  presente  contrato,  de  acuerdo  con  las especificaciones técnicas detallas en su oferta, a las cuales las partes se remiten para efectos de la presente ejecución contractual:"
+  },
+  "grid": "| row | c0 | c1 | c2 |\n| r0 | Ítem | DESCRIPCIÓN | TABLA DE DATOS TÉCNICOS |\n| r1 | 1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 01 |\n| r2 | 3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS | Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 03 |\n| r3 | 4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 04 |",
+  "rule_text": "| Ítem: 1 | DESCRIPCIÓN: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 01 |\n| Ítem: 3 | DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS | TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 03 |\n| Ítem: 4 | DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 04 |",
+  "rule_chunks": [
+    "| Ítem: 1 | DESCRIPCIÓN: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 01 |\n| Ítem: 3 | DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS | TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 03 |\n| Ítem: 4 | DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 04 |"
+  ],
+  "limits": {
+    "record_max_tokens": 460,
+    "lead_max_tokens": 48,
+    "summary_max_tokens": 508
+  },
+  "max_tokens": 512
+}

@@ -1,0 +1,334 @@
+{
+  "records": {
+    "kind": "records",
+    "model": "anthropic/claude-haiku-5.5",
+    "prompt_version": "llm_tables_v1",
+    "attempts": [
+      {
+        "raw": "{\"segments\": [{\"records\": [{\"text\": \"TEM: 1; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS; UNIDAD DE MEDIDA: UNIDAD; REQUERIMIENTO TOTAL: 120,000; CANTIDAD Y CRONOGRAMA DE ENTREGAS – 1era ENTREGA (A 170 días de la firma del contrato): 15,000; 2da ENTREGA (A 210 días de la firma del contrato): 15,000; 3era ENTREGA (A 330 días de la firma del contrato): 15,000; 4ta ENTREGA (A 450 días de la firma del contrato): 25,000; 5ta ENTREGA (A 570 días de la firma del contrato): 25,000; 6ta ENTREGA (A 690 días de la firma del contrato): 25,000\", \"cells\": [\"r0c0\", \"r0c1\", \"r0c2\", \"r0c3\", \"r0c4\", \"r1c4\", \"r1c5\", \"r1c6\", \"r1c7\", \"r1c8\", \"r1c9\", \"r2c4\", \"r2c5\", \"r2c6\", \"r2c7\", \"r2c8\", \"r2c9\", \"r3c0\", \"r3c1\", \"r3c2\", \"r3c3\", \"r3c4\", \"r3c5\", \"r3c6\", \"r3c7\", \"r3c8\", \"r3c9\"]}, {\"text\": \"TEM: 3; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS; UNIDAD DE MEDIDA: UNIDAD; REQUERIMIENTO TOTAL: 1,500; CANTIDAD Y CRONOGRAMA DE ENTREGAS – 3era ENTREGA (A 330 días de la firma del contrato): 750; 6ta ENTREGA (A 690 días de la firma del contrato): 750\", \"cells\": [\"r0c0\", \"r0c1\", \"r0c2\", \"r0c3\", \"r0c4\", \"r1c4\", \"r1c5\", \"r1c6\", \"r1c7\", \"r1c8\", \"r1c9\", \"r2c4\", \"r2c5\", \"r2c6\", \"r2c7\", \"r2c8\", \"r2c9\", \"r4c0\", \"r4c1\", \"r4c2\", \"r4c3\", \"r4c6\", \"r4c9\"]}, {\"text\": \"TEM: 4; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS; UNIDAD DE MEDIDA: UNIDAD; REQUERIMIENTO TOTAL: 2,600; CANTIDAD Y CRONOGRAMA DE ENTREGAS – 1era ENTREGA (A 170 días de la firma del contrato): 300; 2da ENTREGA (A 210 días de la firma del contrato): 300; 3era ENTREGA (A 330 días de la firma del contrato): 500; 4ta ENTREGA (A 450 días de la firma del contrato): 500; 5ta ENTREGA (A 570 días de la firma del contrato): 500; 6ta ENTREGA (A 690 días de la firma del contrato): 500\", \"cells\": [\"r0c0\", \"r0c1\", \"r0c2\", \"r0c3\", \"r0c4\", \"r1c4\", \"r1c5\", \"r1c6\", \"r1c7\", \"r1c8\", \"r1c9\", \"r2c4\", \"r2c5\", \"r2c6\", \"r2c7\", \"r2c8\", \"r2c9\", \"r5c0\", \"r5c1\", \"r5c2\", \"r5c3\", \"r5c4\", \"r5c5\", \"r5c6\", \"r5c7\", \"r5c8\", \"r5c9\"]}]}]}",
+        "issues": [],
+        "prompt_tokens": 1572,
+        "completion_tokens": 2617,
+        "cost_usd": 0.0014657,
+        "cached": true
+      }
+    ],
+    "records": [
+      [
+        {
+          "text": "TEM: 1; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS; UNIDAD DE MEDIDA: UNIDAD; REQUERIMIENTO TOTAL: 120,000; CANTIDAD Y CRONOGRAMA DE ENTREGAS – 1era ENTREGA (A 170 días de la firma del contrato): 15,000; 2da ENTREGA (A 210 días de la firma del contrato): 15,000; 3era ENTREGA (A 330 días de la firma del contrato): 15,000; 4ta ENTREGA (A 450 días de la firma del contrato): 25,000; 5ta ENTREGA (A 570 días de la firma del contrato): 25,000; 6ta ENTREGA (A 690 días de la firma del contrato): 25,000",
+          "cell_ids": [
+            "pymupdf_lines_strict_p0005_t0001_r0000c0000_r0003c0001",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0001_r0003c0002",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0002_r0003c0003",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0003_r0003c0004",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0004_r0001c0010",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0004_r0002c0005",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0005_r0002c0006",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0006_r0002c0007",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0007_r0002c0008",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0008_r0002c0009",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0009_r0002c0010",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0004_r0003c0005",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0005_r0003c0006",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0006_r0003c0007",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0007_r0003c0008",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0008_r0003c0009",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0009_r0003c0010",
+            "pymupdf_lines_strict_p0005_t0001_r0003c0000_r0004c0001",
+            "pymupdf_lines_strict_p0005_t0001_r0003c0001_r0004c0002",
+            "pymupdf_lines_strict_p0005_t0001_r0003c0002_r0004c0003",
+            "pymupdf_lines_strict_p0005_t0001_r0003c0003_r0004c0004",
+            "pymupdf_lines_strict_p0005_t0001_r0003c0004_r0004c0005",
+            "pymupdf_lines_strict_p0005_t0001_r0003c0005_r0004c0006",
+            "pymupdf_lines_strict_p0005_t0001_r0003c0006_r0004c0007",
+            "pymupdf_lines_strict_p0005_t0001_r0003c0007_r0004c0008",
+            "pymupdf_lines_strict_p0005_t0001_r0003c0008_r0004c0009",
+            "pymupdf_lines_strict_p0005_t0001_r0003c0009_r0004c0010"
+          ]
+        },
+        {
+          "text": "TEM: 3; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS; UNIDAD DE MEDIDA: UNIDAD; REQUERIMIENTO TOTAL: 1,500; CANTIDAD Y CRONOGRAMA DE ENTREGAS – 3era ENTREGA (A 330 días de la firma del contrato): 750; 6ta ENTREGA (A 690 días de la firma del contrato): 750",
+          "cell_ids": [
+            "pymupdf_lines_strict_p0005_t0001_r0000c0000_r0003c0001",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0001_r0003c0002",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0002_r0003c0003",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0003_r0003c0004",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0004_r0001c0010",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0006_r0002c0007",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0009_r0002c0010",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0006_r0003c0007",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0009_r0003c0010",
+            "pymupdf_lines_strict_p0005_t0001_r0004c0000_r0005c0001",
+            "pymupdf_lines_strict_p0005_t0001_r0004c0001_r0005c0002",
+            "pymupdf_lines_strict_p0005_t0001_r0004c0002_r0005c0003",
+            "pymupdf_lines_strict_p0005_t0001_r0004c0003_r0005c0004",
+            "pymupdf_lines_strict_p0005_t0001_r0004c0006_r0005c0007",
+            "pymupdf_lines_strict_p0005_t0001_r0004c0009_r0005c0010"
+          ]
+        },
+        {
+          "text": "TEM: 4; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS; UNIDAD DE MEDIDA: UNIDAD; REQUERIMIENTO TOTAL: 2,600; CANTIDAD Y CRONOGRAMA DE ENTREGAS – 1era ENTREGA (A 170 días de la firma del contrato): 300; 2da ENTREGA (A 210 días de la firma del contrato): 300; 3era ENTREGA (A 330 días de la firma del contrato): 500; 4ta ENTREGA (A 450 días de la firma del contrato): 500; 5ta ENTREGA (A 570 días de la firma del contrato): 500; 6ta ENTREGA (A 690 días de la firma del contrato): 500",
+          "cell_ids": [
+            "pymupdf_lines_strict_p0005_t0001_r0000c0000_r0003c0001",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0001_r0003c0002",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0002_r0003c0003",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0003_r0003c0004",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0004_r0001c0010",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0004_r0002c0005",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0005_r0002c0006",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0006_r0002c0007",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0007_r0002c0008",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0008_r0002c0009",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0009_r0002c0010",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0004_r0003c0005",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0005_r0003c0006",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0006_r0003c0007",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0007_r0003c0008",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0008_r0003c0009",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0009_r0003c0010",
+            "pymupdf_lines_strict_p0005_t0001_r0005c0000_r0006c0001",
+            "pymupdf_lines_strict_p0005_t0001_r0005c0001_r0006c0002",
+            "pymupdf_lines_strict_p0005_t0001_r0005c0002_r0006c0003",
+            "pymupdf_lines_strict_p0005_t0001_r0005c0003_r0006c0004",
+            "pymupdf_lines_strict_p0005_t0001_r0005c0004_r0006c0005",
+            "pymupdf_lines_strict_p0005_t0001_r0005c0005_r0006c0006",
+            "pymupdf_lines_strict_p0005_t0001_r0005c0006_r0006c0007",
+            "pymupdf_lines_strict_p0005_t0001_r0005c0007_r0006c0008",
+            "pymupdf_lines_strict_p0005_t0001_r0005c0008_r0006c0009",
+            "pymupdf_lines_strict_p0005_t0001_r0005c0009_r0006c0010"
+          ]
+        }
+      ]
+    ],
+    "text": ""
+  },
+  "lead": {
+    "kind": "lead",
+    "model": "anthropic/claude-haiku-5.5",
+    "prompt_version": "llm_tables_v1",
+    "attempts": [
+      {
+        "raw": "{\"lead\": \"Esta tabla muestra el cronograma de entregas de medidores eléctricos (monofásicos y trifásicos) del contrato, indicando para cada tipo la unidad de medida, el requerimiento total y las cantidades a entregar en cada plazo en días calendarios desde la firma del contrato.\"}",
+        "issues": [
+          "63 tokens, over the limit of 48"
+        ],
+        "prompt_tokens": 1193,
+        "completion_tokens": 110,
+        "cost_usd": 0.0001743,
+        "cached": true
+      },
+      {
+        "raw": "{\"lead\": \"Esta tabla es el cronograma de entregas de medidores eléctricos del contrato, con la unidad de medida, el requerimiento total y las cantidades por entrega a los días calendarios de la firma.\"}",
+        "issues": [],
+        "prompt_tokens": 1345,
+        "completion_tokens": 77,
+        "cost_usd": 0.000173,
+        "cached": true
+      }
+    ],
+    "records": [],
+    "text": "Esta tabla es el cronograma de entregas de medidores eléctricos del contrato, con la unidad de medida, el requerimiento total y las cantidades por entrega a los días calendarios de la firma."
+  },
+  "summary": {
+    "kind": "summary",
+    "model": "anthropic/claude-haiku-5.5",
+    "prompt_version": "llm_tables_v1",
+    "attempts": [
+      {
+        "raw": "{\"summary\": \"Cronograma de entrega (sección CRONOGRAMA DE ENTREGA) de los bienes del contrato, que deben entregarse en un plazo de 690 días calendarios desde la firma del contrato, según el expediente de contratación. Cada fila corresponde a un ítem de medidores eléctricos, identificado por su número TEM y su DESCRIPCIÓN: 1 MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS, 3 MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS y 4 MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS. Las columnas son TEM, DESCRIPCIÓN, UNIDAD DE MEDIDA (UNIDAD), REQUERIMIENTO TOTAL y, bajo el encabezado CANTIDAD Y CRONOGRAMA DE ENTREGAS, seis entregas: 1era ENTREGA (a 170 días de la firma del contrato), 2da ENTREGA (210 días), 3era ENTREGA (330 días), 4ta ENTREGA (450 días), 5ta ENTREGA (570 días) y 6ta ENTREGA (690 días). Los valores numéricos son cantidades por ítem y por entrega; no hay filas de subtotales ni totales generales.\"}",
+        "issues": [],
+        "prompt_tokens": 1318,
+        "completion_tokens": 494,
+        "cost_usd": 0.0003788,
+        "cached": true
+      }
+    ],
+    "records": [],
+    "text": "Cronograma de entrega (sección CRONOGRAMA DE ENTREGA) de los bienes del contrato, que deben entregarse en un plazo de 690 días calendarios desde la firma del contrato, según el expediente de contratación. Cada fila corresponde a un ítem de medidores eléctricos, identificado por su número TEM y su DESCRIPCIÓN: 1 MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS, 3 MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS y 4 MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS. Las columnas son TEM, DESCRIPCIÓN, UNIDAD DE MEDIDA (UNIDAD), REQUERIMIENTO TOTAL y, bajo el encabezado CANTIDAD Y CRONOGRAMA DE ENTREGAS, seis entregas: 1era ENTREGA (a 170 días de la firma del contrato), 2da ENTREGA (210 días), 3era ENTREGA (330 días), 4ta ENTREGA (450 días), 5ta ENTREGA (570 días) y 6ta ENTREGA (690 días). Los valores numéricos son cantidades por ítem y por entrega; no hay filas de subtotales ni totales generales."
+  },
+  "chunks": [
+    {
+      "text": "TEM: 1; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS; UNIDAD DE MEDIDA: UNIDAD; REQUERIMIENTO TOTAL: 120,000; CANTIDAD Y CRONOGRAMA DE ENTREGAS – 1era ENTREGA (A 170 días de la firma del contrato): 15,000; 2da ENTREGA (A 210 días de la firma del contrato): 15,000; 3era ENTREGA (A 330 días de la firma del contrato): 15,000; 4ta ENTREGA (A 450 días de la firma del contrato): 25,000; 5ta ENTREGA (A 570 días de la firma del contrato): 25,000; 6ta ENTREGA (A 690 días de la firma del contrato): 25,000\nTEM: 3; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS; UNIDAD DE MEDIDA: UNIDAD; REQUERIMIENTO TOTAL: 1,500; CANTIDAD Y CRONOGRAMA DE ENTREGAS – 3era ENTREGA (A 330 días de la firma del contrato): 750; 6ta ENTREGA (A 690 días de la firma del contrato): 750\nTEM: 4; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS; UNIDAD DE MEDIDA: UNIDAD; REQUERIMIENTO TOTAL: 2,600; CANTIDAD Y CRONOGRAMA DE ENTREGAS – 1era ENTREGA (A 170 días de la firma del contrato): 300; 2da ENTREGA (A 210 días de la firma del contrato): 300; 3era ENTREGA (A 330 días de la firma del contrato): 500; 4ta ENTREGA (A 450 días de la firma del contrato): 500; 5ta ENTREGA (A 570 días de la firma del contrato): 500; 6ta ENTREGA (A 690 días de la firma del contrato): 500",
+      "records": [
+        {
+          "text": "TEM: 1; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS; UNIDAD DE MEDIDA: UNIDAD; REQUERIMIENTO TOTAL: 120,000; CANTIDAD Y CRONOGRAMA DE ENTREGAS – 1era ENTREGA (A 170 días de la firma del contrato): 15,000; 2da ENTREGA (A 210 días de la firma del contrato): 15,000; 3era ENTREGA (A 330 días de la firma del contrato): 15,000; 4ta ENTREGA (A 450 días de la firma del contrato): 25,000; 5ta ENTREGA (A 570 días de la firma del contrato): 25,000; 6ta ENTREGA (A 690 días de la firma del contrato): 25,000",
+          "cell_ids": [
+            "pymupdf_lines_strict_p0005_t0001_r0000c0000_r0003c0001",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0001_r0003c0002",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0002_r0003c0003",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0003_r0003c0004",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0004_r0001c0010",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0004_r0002c0005",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0005_r0002c0006",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0006_r0002c0007",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0007_r0002c0008",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0008_r0002c0009",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0009_r0002c0010",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0004_r0003c0005",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0005_r0003c0006",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0006_r0003c0007",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0007_r0003c0008",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0008_r0003c0009",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0009_r0003c0010",
+            "pymupdf_lines_strict_p0005_t0001_r0003c0000_r0004c0001",
+            "pymupdf_lines_strict_p0005_t0001_r0003c0001_r0004c0002",
+            "pymupdf_lines_strict_p0005_t0001_r0003c0002_r0004c0003",
+            "pymupdf_lines_strict_p0005_t0001_r0003c0003_r0004c0004",
+            "pymupdf_lines_strict_p0005_t0001_r0003c0004_r0004c0005",
+            "pymupdf_lines_strict_p0005_t0001_r0003c0005_r0004c0006",
+            "pymupdf_lines_strict_p0005_t0001_r0003c0006_r0004c0007",
+            "pymupdf_lines_strict_p0005_t0001_r0003c0007_r0004c0008",
+            "pymupdf_lines_strict_p0005_t0001_r0003c0008_r0004c0009",
+            "pymupdf_lines_strict_p0005_t0001_r0003c0009_r0004c0010"
+          ]
+        },
+        {
+          "text": "TEM: 3; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS; UNIDAD DE MEDIDA: UNIDAD; REQUERIMIENTO TOTAL: 1,500; CANTIDAD Y CRONOGRAMA DE ENTREGAS – 3era ENTREGA (A 330 días de la firma del contrato): 750; 6ta ENTREGA (A 690 días de la firma del contrato): 750",
+          "cell_ids": [
+            "pymupdf_lines_strict_p0005_t0001_r0000c0000_r0003c0001",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0001_r0003c0002",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0002_r0003c0003",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0003_r0003c0004",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0004_r0001c0010",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0006_r0002c0007",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0009_r0002c0010",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0006_r0003c0007",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0009_r0003c0010",
+            "pymupdf_lines_strict_p0005_t0001_r0004c0000_r0005c0001",
+            "pymupdf_lines_strict_p0005_t0001_r0004c0001_r0005c0002",
+            "pymupdf_lines_strict_p0005_t0001_r0004c0002_r0005c0003",
+            "pymupdf_lines_strict_p0005_t0001_r0004c0003_r0005c0004",
+            "pymupdf_lines_strict_p0005_t0001_r0004c0006_r0005c0007",
+            "pymupdf_lines_strict_p0005_t0001_r0004c0009_r0005c0010"
+          ]
+        },
+        {
+          "text": "TEM: 4; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS; UNIDAD DE MEDIDA: UNIDAD; REQUERIMIENTO TOTAL: 2,600; CANTIDAD Y CRONOGRAMA DE ENTREGAS – 1era ENTREGA (A 170 días de la firma del contrato): 300; 2da ENTREGA (A 210 días de la firma del contrato): 300; 3era ENTREGA (A 330 días de la firma del contrato): 500; 4ta ENTREGA (A 450 días de la firma del contrato): 500; 5ta ENTREGA (A 570 días de la firma del contrato): 500; 6ta ENTREGA (A 690 días de la firma del contrato): 500",
+          "cell_ids": [
+            "pymupdf_lines_strict_p0005_t0001_r0000c0000_r0003c0001",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0001_r0003c0002",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0002_r0003c0003",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0003_r0003c0004",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0004_r0001c0010",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0004_r0002c0005",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0005_r0002c0006",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0006_r0002c0007",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0007_r0002c0008",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0008_r0002c0009",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0009_r0002c0010",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0004_r0003c0005",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0005_r0003c0006",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0006_r0003c0007",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0007_r0003c0008",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0008_r0003c0009",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0009_r0003c0010",
+            "pymupdf_lines_strict_p0005_t0001_r0005c0000_r0006c0001",
+            "pymupdf_lines_strict_p0005_t0001_r0005c0001_r0006c0002",
+            "pymupdf_lines_strict_p0005_t0001_r0005c0002_r0006c0003",
+            "pymupdf_lines_strict_p0005_t0001_r0005c0003_r0006c0004",
+            "pymupdf_lines_strict_p0005_t0001_r0005c0004_r0006c0005",
+            "pymupdf_lines_strict_p0005_t0001_r0005c0005_r0006c0006",
+            "pymupdf_lines_strict_p0005_t0001_r0005c0006_r0006c0007",
+            "pymupdf_lines_strict_p0005_t0001_r0005c0007_r0006c0008",
+            "pymupdf_lines_strict_p0005_t0001_r0005c0008_r0006c0009",
+            "pymupdf_lines_strict_p0005_t0001_r0005c0009_r0006c0010"
+          ]
+        }
+      ],
+      "tokens": 409
+    }
+  ],
+  "chunks_with_lead": [
+    {
+      "text": "Esta tabla es el cronograma de entregas de medidores eléctricos del contrato, con la unidad de medida, el requerimiento total y las cantidades por entrega a los días calendarios de la firma.\nTEM: 1; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS; UNIDAD DE MEDIDA: UNIDAD; REQUERIMIENTO TOTAL: 120,000; CANTIDAD Y CRONOGRAMA DE ENTREGAS – 1era ENTREGA (A 170 días de la firma del contrato): 15,000; 2da ENTREGA (A 210 días de la firma del contrato): 15,000; 3era ENTREGA (A 330 días de la firma del contrato): 15,000; 4ta ENTREGA (A 450 días de la firma del contrato): 25,000; 5ta ENTREGA (A 570 días de la firma del contrato): 25,000; 6ta ENTREGA (A 690 días de la firma del contrato): 25,000\nTEM: 3; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS; UNIDAD DE MEDIDA: UNIDAD; REQUERIMIENTO TOTAL: 1,500; CANTIDAD Y CRONOGRAMA DE ENTREGAS – 3era ENTREGA (A 330 días de la firma del contrato): 750; 6ta ENTREGA (A 690 días de la firma del contrato): 750\nTEM: 4; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS; UNIDAD DE MEDIDA: UNIDAD; REQUERIMIENTO TOTAL: 2,600; CANTIDAD Y CRONOGRAMA DE ENTREGAS – 1era ENTREGA (A 170 días de la firma del contrato): 300; 2da ENTREGA (A 210 días de la firma del contrato): 300; 3era ENTREGA (A 330 días de la firma del contrato): 500; 4ta ENTREGA (A 450 días de la firma del contrato): 500; 5ta ENTREGA (A 570 días de la firma del contrato): 500; 6ta ENTREGA (A 690 días de la firma del contrato): 500",
+      "records": [
+        {
+          "text": "TEM: 1; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS; UNIDAD DE MEDIDA: UNIDAD; REQUERIMIENTO TOTAL: 120,000; CANTIDAD Y CRONOGRAMA DE ENTREGAS – 1era ENTREGA (A 170 días de la firma del contrato): 15,000; 2da ENTREGA (A 210 días de la firma del contrato): 15,000; 3era ENTREGA (A 330 días de la firma del contrato): 15,000; 4ta ENTREGA (A 450 días de la firma del contrato): 25,000; 5ta ENTREGA (A 570 días de la firma del contrato): 25,000; 6ta ENTREGA (A 690 días de la firma del contrato): 25,000",
+          "cell_ids": [
+            "pymupdf_lines_strict_p0005_t0001_r0000c0000_r0003c0001",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0001_r0003c0002",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0002_r0003c0003",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0003_r0003c0004",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0004_r0001c0010",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0004_r0002c0005",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0005_r0002c0006",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0006_r0002c0007",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0007_r0002c0008",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0008_r0002c0009",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0009_r0002c0010",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0004_r0003c0005",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0005_r0003c0006",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0006_r0003c0007",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0007_r0003c0008",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0008_r0003c0009",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0009_r0003c0010",
+            "pymupdf_lines_strict_p0005_t0001_r0003c0000_r0004c0001",
+            "pymupdf_lines_strict_p0005_t0001_r0003c0001_r0004c0002",
+            "pymupdf_lines_strict_p0005_t0001_r0003c0002_r0004c0003",
+            "pymupdf_lines_strict_p0005_t0001_r0003c0003_r0004c0004",
+            "pymupdf_lines_strict_p0005_t0001_r0003c0004_r0004c0005",
+            "pymupdf_lines_strict_p0005_t0001_r0003c0005_r0004c0006",
+            "pymupdf_lines_strict_p0005_t0001_r0003c0006_r0004c0007",
+            "pymupdf_lines_strict_p0005_t0001_r0003c0007_r0004c0008",
+            "pymupdf_lines_strict_p0005_t0001_r0003c0008_r0004c0009",
+            "pymupdf_lines_strict_p0005_t0001_r0003c0009_r0004c0010"
+          ]
+        },
+        {
+          "text": "TEM: 3; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS; UNIDAD DE MEDIDA: UNIDAD; REQUERIMIENTO TOTAL: 1,500; CANTIDAD Y CRONOGRAMA DE ENTREGAS – 3era ENTREGA (A 330 días de la firma del contrato): 750; 6ta ENTREGA (A 690 días de la firma del contrato): 750",
+          "cell_ids": [
+            "pymupdf_lines_strict_p0005_t0001_r0000c0000_r0003c0001",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0001_r0003c0002",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0002_r0003c0003",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0003_r0003c0004",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0004_r0001c0010",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0006_r0002c0007",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0009_r0002c0010",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0006_r0003c0007",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0009_r0003c0010",
+            "pymupdf_lines_strict_p0005_t0001_r0004c0000_r0005c0001",
+            "pymupdf_lines_strict_p0005_t0001_r0004c0001_r0005c0002",
+            "pymupdf_lines_strict_p0005_t0001_r0004c0002_r0005c0003",
+            "pymupdf_lines_strict_p0005_t0001_r0004c0003_r0005c0004",
+            "pymupdf_lines_strict_p0005_t0001_r0004c0006_r0005c0007",
+            "pymupdf_lines_strict_p0005_t0001_r0004c0009_r0005c0010"
+          ]
+        },
+        {
+          "text": "TEM: 4; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS; UNIDAD DE MEDIDA: UNIDAD; REQUERIMIENTO TOTAL: 2,600; CANTIDAD Y CRONOGRAMA DE ENTREGAS – 1era ENTREGA (A 170 días de la firma del contrato): 300; 2da ENTREGA (A 210 días de la firma del contrato): 300; 3era ENTREGA (A 330 días de la firma del contrato): 500; 4ta ENTREGA (A 450 días de la firma del contrato): 500; 5ta ENTREGA (A 570 días de la firma del contrato): 500; 6ta ENTREGA (A 690 días de la firma del contrato): 500",
+          "cell_ids": [
+            "pymupdf_lines_strict_p0005_t0001_r0000c0000_r0003c0001",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0001_r0003c0002",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0002_r0003c0003",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0003_r0003c0004",
+            "pymupdf_lines_strict_p0005_t0001_r0000c0004_r0001c0010",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0004_r0002c0005",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0005_r0002c0006",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0006_r0002c0007",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0007_r0002c0008",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0008_r0002c0009",
+            "pymupdf_lines_strict_p0005_t0001_r0001c0009_r0002c0010",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0004_r0003c0005",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0005_r0003c0006",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0006_r0003c0007",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0007_r0003c0008",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0008_r0003c0009",
+            "pymupdf_lines_strict_p0005_t0001_r0002c0009_r0003c0010",
+            "pymupdf_lines_strict_p0005_t0001_r0005c0000_r0006c0001",
+            "pymupdf_lines_strict_p0005_t0001_r0005c0001_r0006c0002",
+            "pymupdf_lines_strict_p0005_t0001_r0005c0002_r0006c0003",
+            "pymupdf_lines_strict_p0005_t0001_r0005c0003_r0006c0004",
+            "pymupdf_lines_strict_p0005_t0001_r0005c0004_r0006c0005",
+            "pymupdf_lines_strict_p0005_t0001_r0005c0005_r0006c0006",
+            "pymupdf_lines_strict_p0005_t0001_r0005c0006_r0006c0007",
+            "pymupdf_lines_strict_p0005_t0001_r0005c0007_r0006c0008",
+            "pymupdf_lines_strict_p0005_t0001_r0005c0008_r0006c0009",
+            "pymupdf_lines_strict_p0005_t0001_r0005c0009_r0006c0010"
+          ]
+        }
+      ],
+      "tokens": 454
+    }
+  ]
+}

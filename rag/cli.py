@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import getpass
 import os
 import sys
@@ -68,6 +69,7 @@ def build_parser() -> argparse.ArgumentParser:
     anchors = command("anchors", "在 PDF 上定位每段 excerpt，生成审核文件 tmp/anchor-review/")
     anchors.add_argument("--since", metavar="GIT_REF", help="审核页并排显示相对这个 git 版本改动过的 excerpt")
     anchors.add_argument("--write", action="store_true", help="把定位结果写入 eval/ground-truth（审核确认后再用）")
+    command("table-structure", "把 eval/table-structure 的表格结构答案画在已入库的表格上，生成核对页")
     config = command("config", "查看装配配置")
     config.add_argument("action", choices=["list", "show"])
     config.add_argument("name", nargs="?")
@@ -75,7 +77,9 @@ def build_parser() -> argparse.ArgumentParser:
     compare.add_argument("runs", nargs="+", metavar="RUN",
                          help="reports/eval/ 下的评估目录名；可写成 目录名=显示名（如 =V3.9），显示在该列设置之前")
     compare.add_argument("--name", required=True, help="对比页名称（目录名）")
-    command("report", "按已保存的结果重新生成评估报告和总入口 reports/index.html")
+    compare.add_argument("--table-spec", metavar="FILE",
+                         help="表格证据对照的说明文件（JSON：pairs 对照、excluded 排除的证据组、notes 结论），存入 runs.json")
+    command("report", "按已入库的中间结果与已保存的评估结果，重新生成入库审核页、评估报告、对比页和总入口 reports/index.html")
     return parser
 
 
@@ -347,6 +351,13 @@ def _eval(workspace: Workspace, args: argparse.Namespace) -> int:
     return 0
 
 
+def _table_structure(workspace: Workspace, args: argparse.Namespace) -> int:
+    from rag.reports.table_structure import write_answers_page
+    config = resolve_config(workspace.root, args.config)
+    _out(f"核对页：{write_answers_page(workspace, config.name)}")
+    return 0
+
+
 def _anchors(workspace: Workspace, args: argparse.Namespace) -> int:
     import json
     import subprocess
@@ -395,7 +406,12 @@ def _anchors(workspace: Workspace, args: argparse.Namespace) -> int:
 def _config(workspace: Workspace, args: argparse.Namespace) -> int:
     if args.action == "list":
         for config in list_configs(workspace.root):
-            _out(f"{config.name:<14} {config.description}")
+            _out(f"{config.name:<28} {config.description}")
+        extra = list_configs(workspace.root, extra=True)[len(list_configs(workspace.root)):]
+        if extra:
+            _out("\nconfigs/extra/（不在 --all-configs 中，可用 --config 名称装配）：")
+            for config in extra:
+                _out(f"{config.name:<28} {config.description}")
         return 0
     from rag.registry import assemble
     config = resolve_config(workspace.root, args.name)
@@ -408,7 +424,8 @@ def _config(workspace: Workspace, args: argparse.Namespace) -> int:
 def _compare(workspace: Workspace, args: argparse.Namespace) -> int:
     from rag.reports.compare import write_comparison
     from rag.reports.index_page import write_index_page
-    folder = write_comparison(workspace, args.name, args.runs)
+    spec = json.loads(Path(args.table_spec).read_text(encoding="utf-8")) if args.table_spec else None
+    folder = write_comparison(workspace, args.name, args.runs, spec)
     write_index_page(workspace)
     _out(f"对比页：{(folder / 'index.html').relative_to(workspace.root).as_posix()}")
     return 0
@@ -418,15 +435,17 @@ def _report(workspace: Workspace, args: argparse.Namespace) -> int:
     from rag.reports.compare import rerender_comparisons
     from rag.reports.evaluation import rerender_all
     from rag.reports.index_page import write_index_page
+    from rag.reports.ingest import rerender_ingest_reports
+    documents = rerender_ingest_reports(workspace)
     count = rerender_all(workspace)
     comparisons = rerender_comparisons(workspace)
     write_index_page(workspace)
-    _out(f"已重新生成 {count} 份评估报告、{comparisons} 份对比页和 reports/index.html")
+    _out(f"已重新生成 {documents} 份文档的入库审核页、{count} 份评估报告、{comparisons} 份对比页和 reports/index.html")
     return 0
 
 
 HANDLERS = {"status": _status, "ingest": _ingest, "chunks": _chunks, "search": _search,
-            "ask": _ask, "chat": _chat, "eval": _eval, "anchors": _anchors, "config": _config,
+            "ask": _ask, "chat": _chat, "eval": _eval, "anchors": _anchors, "table-structure": _table_structure, "config": _config,
             "compare": _compare, "report": _report}
 
 

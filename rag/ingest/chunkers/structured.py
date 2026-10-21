@@ -6,6 +6,7 @@ import re
 from dataclasses import dataclass
 from typing import Protocol
 
+from rag.ingest.chunkers.table_plan import plan_chunks
 from rag.models import (
     ChunkBatch, ChunkSource, DocumentChunk, ListNode, ParsedDocument,
     ProcessingWarning, TableNode, TextNode,
@@ -257,45 +258,27 @@ def chunk_parsed_document(
             return ChunkSource(node.node_id, node.spans_for_rows(serialized_line.source_rows),
                                start + local_start, start + resolved_end, repeated, context_kind)
 
-        table_parts: list[tuple[str, tuple[ChunkSource, ...]]] = []
-        current_lines: list[str] = []
-        current_sources: list[ChunkSource] = []
-        header_index = next((index for index, item in enumerate(lines) if item.kind == "header"), None)
-        header_line = lines[header_index] if header_index is not None else None
+        llm = node.llm
+        summary = llm.summary if node.index_text == "summary" and llm is not None else None
+        if summary is not None:
+            # The summary replaces the table's chunks; its region is the whole table.
+            drafts.append(("table_summary", summary,
+                           (ChunkSource(node.node_id, node.sources, None, None, False, "none"),),
+                           None, 0, 1))
+            continue
+        lead = llm.lead if node.index_text == "rows_with_lead" and llm is not None else None
+        opening = f"{lead}\n" if lead else ""
         line_by_id = {item.line_id: item for item in lines}
-        for line_index, line in enumerate(lines):
-            source = table_source(line)
-            proposed_lines = current_lines + [line.text]
-            proposed = "\n".join(proposed_lines)
-            if _fits(counter, proposed, max_input_tokens):
-                current_lines, current_sources = proposed_lines, current_sources + [source]
-                continue
-            if current_lines:
-                table_parts.append(("\n".join(current_lines), tuple(current_sources)))
-                current_lines, current_sources = [], []
-            context_lines = []
-            context_sources = []
-            if header_line and header_index is not None and line_index > header_index:
-                context_lines.append(header_line.text)
-                context_sources.append(table_source(header_line, repeated=True,
-                                                    context_kind="table_header"))
-            # A line opening a chunk inside a vertical merge gets the merged value back.
-            opening_text = line.resumed_text()
-            for item in line.continuations:
-                context_sources.append(table_source(line_by_id[item.anchor_line_id], repeated=True,
-                                                    context_kind="merged_cell",
-                                                    local_start=item.anchor_start,
-                                                    local_end=item.anchor_end))
-            prefix = "\n".join(context_lines)
-            contextual = f"{prefix}\n{opening_text}" if prefix else opening_text
-            if _fits(counter, contextual, max_input_tokens):
-                current_lines = [*context_lines, opening_text]
-                current_sources = [*context_sources, source]
-            else:
+        kinds = {"header": "table_header", "section_title": "section_title"}
+        table_parts: list[tuple[str, tuple[ChunkSource, ...]]] = []
+        for planned in plan_chunks(node.serialized, node.structure,
+                                   lambda text: _fits(counter, opening + text, max_input_tokens)):
+            if planned.oversize:
+                line = line_by_id[planned.line_ids[0]]
                 pieces = _split_text(line.text, counter, max_input_tokens, 0)
                 for rendered, start, end, _overlap_start, _overlap_end in pieces:
                     row_label = f"第{line.source_rows[0] + 1}行" if line.source_rows else "原始范围"
-                    locator = f"〔表格 {node.table.table_id}，{row_label}〕\n"
+                    locator = f"{opening}〔表格 {node.table.table_id}，{row_label}〕\n"
                     subparts = ((rendered, 0, len(rendered), None, None),)
                     if not _fits(counter, locator + rendered, max_input_tokens):
                         subparts = _split_text(rendered, _PrefixedCounter(counter, locator),
@@ -306,8 +289,17 @@ def chunk_parsed_document(
                         sources.append(table_source(line, local_start=start + substart,
                                                     local_end=start + subend))
                         table_parts.append((locator + subtext, tuple(sources)))
-        if current_lines:
-            table_parts.append(("\n".join(current_lines), tuple(current_sources)))
+                continue
+            sources = [table_source(line_by_id[line_id], repeated=True,
+                                    context_kind=kinds[line_by_id[line_id].kind])
+                       for line_id in planned.context_line_ids]
+            # A line opening a chunk inside a vertical merge gets the merged value back.
+            first = line_by_id[planned.line_ids[0]]
+            sources += [table_source(line_by_id[item.anchor_line_id], repeated=True,
+                                     context_kind="merged_cell", local_start=item.anchor_start,
+                                     local_end=item.anchor_end) for item in first.continuations]
+            sources += [table_source(line_by_id[line_id]) for line_id in planned.line_ids]
+            table_parts.append((opening + planned.text, tuple(sources)))
         total = len(table_parts)
         for index, (text, sources) in enumerate(table_parts):
             drafts.append(("table", text, sources, node.node_id if total > 1 else None, index, total))

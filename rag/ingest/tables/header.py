@@ -370,11 +370,19 @@ def detect_header(table: StructuredTable, *, sample_row_budget: int = 8,
         reason = "no_supported_candidate" if not supported else "ambiguous_candidates"
         return HeaderDecision("undetermined", reason, (), tuple(skipped), evaluations, None, None, (), RULE_VERSION, sample_row_budget, minimum_independent_observations)
     winner = supported[0]
+    return HeaderDecision("identified", "unique_supported_candidate", (), tuple(skipped), evaluations,
+                          winner.start_row, winner.end_row,
+                          header_paths(table, winner.start_row, winner.end_row), RULE_VERSION,
+                          sample_row_budget, minimum_independent_observations)
+
+
+def header_paths(table: StructuredTable, start: int, end: int) -> tuple[HeaderPath, ...]:
+    """Each column's label: the header cells over it in rows `start`..`end - 1`, top down."""
     paths: list[HeaderPath] = []
-    for col in range(table.column_count):
+    for col in range(table.column_count or 0):
         cells: list[TableCell] = []
         seen: set[str] = set()
-        for row in range(winner.start_row, winner.end_row):
+        for row in range(start, end):
             cell = _cell_at(table, row, col)
             if cell and cell.cell_id not in seen:
                 seen.add(cell.cell_id)
@@ -382,5 +390,4 @@ def detect_header(table: StructuredTable, *, sample_row_budget: int = 8,
         # Blank header cells contribute no part; a column with none has an empty path.
         parts = tuple(cell.text or "" for cell in cells if cell_shape(cell.text) != "empty")
         paths.append(HeaderPath(col, tuple(cell.cell_id for cell in cells), parts))
-    return HeaderDecision("identified", "unique_supported_candidate", (), tuple(skipped), evaluations,
-                          winner.start_row, winner.end_row, tuple(paths), RULE_VERSION, sample_row_budget, minimum_independent_observations)
+    return tuple(paths)

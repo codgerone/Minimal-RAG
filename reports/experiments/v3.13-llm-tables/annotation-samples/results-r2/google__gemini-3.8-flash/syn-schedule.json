@@ -1,0 +1,157 @@
+{
+  "annotation": {
+    "model": "google/gemini-3.8-flash",
+    "attempts": [
+      {
+        "raw": "{\n  \"header_rows\": [0],\n  \"sections\": [],\n  \"implicit_merges\": [\n    {\n      \"column\": 0,\n      \"first_row\": 1,\n      \"last_row\": 5\n    },\n    {\n      \"column\": 1,\n      \"first_row\": 1,\n      \"last_row\": 3\n    },\n    {\n      \"column\": 1,\n      \"first_row\": 4,\n      \"last_row\": 5\n    },\n    {\n      \"column\": 0,\n      \"first_row\": 6,\n      \"last_row\": 11\n    },\n    {\n      \"column\": 1,\n      \"first_row\": 6,\n      \"last_row\": 9\n    },\n    {\n      \"column\": 1,\n      \"first_row\": 10,\n      \"last_row\": 11\n    },\n    {\n      \"column\": 0,\n      \"first_row\": 12,\n      \"last_row\": 15\n    },\n    {\n      \"column\": 1,\n      \"first_row\": 12,\n      \"last_row\": 15\n    }\n  ],\n  \"lead\": \"Delivery and inspection schedule listing equipment items by lot, specifying destination warehouses, quantities, delivery dates, inspection witnesses, and remarks.\"\n}",
+        "reasoning": "**Analyzing Delivery Schedule**\n\nI'm currently focused on dissecting the equipment delivery schedule table. I've identified the header row and am noting the key columns: Lot, Destination, Item, Description, Qty, Dates, Witness, and Remarks. I'm trying to determine if there are sections, or if the table is a flat structure.\n\n\n**Defining Table Sections**\n\nI've realized the table structure isn't entirely flat. Columns c0 and c1 represent implicit merges. \"Lot\" values in c0 span multiple rows, and similarly, \"Destination\" values in c1 also group rows. I'm now establishing section boundaries based on these implicit merges. For instance, \"Lot 1\" covers rows 1 to 5, and \"Callao\" covers rows 1 to 3, and \"Arequipa\" covers rows 4 and 5. I'm working on how to precisely represent these groupings.\n\n\n",
+        "issues": [],
+        "prompt_tokens": 1767,
+        "completion_tokens": 1157,
+        "reasoning_tokens": 824,
+        "cost_usd": 0.005664,
+        "cached": false
+      }
+    ],
+    "annotation": {
+      "header_rows": [
+        0
+      ],
+      "sections": [],
+      "implicit_merges": [
+        {
+          "column": 0,
+          "first_row": 1,
+          "last_row": 5
+        },
+        {
+          "column": 1,
+          "first_row": 1,
+          "last_row": 3
+        },
+        {
+          "column": 1,
+          "first_row": 4,
+          "last_row": 5
+        },
+        {
+          "column": 0,
+          "first_row": 6,
+          "last_row": 11
+        },
+        {
+          "column": 1,
+          "first_row": 6,
+          "last_row": 9
+        },
+        {
+          "column": 1,
+          "first_row": 10,
+          "last_row": 11
+        },
+        {
+          "column": 0,
+          "first_row": 12,
+          "last_row": 15
+        },
+        {
+          "column": 1,
+          "first_row": 12,
+          "last_row": 15
+        }
+      ]
+    },
+    "lead": "Delivery and inspection schedule listing equipment items by lot, specifying destination warehouses, quantities, delivery dates, inspection witnesses, and remarks."
+  },
+  "fallback": {
+    "annotation": false,
+    "lead": false
+  },
+  "markdown": [
+    {
+      "text": "| Lot | Destination warehouse | Item | Description | Qty | Delivery date | Inspection witness | Remarks |\n| Lot 1 | Callao Central Warehouse, Av. Argentina 2850 | 1.1 | Single phase meter 2 wires, 5(60) A, class 1 | 12,000 | 15/03/2027 | Client QA |  |\n| ↑ | ↑ | 1.2 | Single phase meter 3 wires, 5(80) A, class 1 | 4,500 | 15/03/2027 | Client QA |  |\n| ↑ | ↑ | 1.3 | Meter box in polycarbonate with sealing screws | 16,500 | 15/03/2027 |  |  |\n| ↑ | Arequipa Regional Warehouse, Parque Industrial Mz. F | 1.4 | Single phase meter 2 wires, 5(60) A, class 1 | 6,000 | 30/03/2027 | Client QA |  |\n| ↑ | ↑ | 1.5 | Meter box in polycarbonate with sealing screws | 6,000 | 30/03/2027 |  |  |\n| Lot 2 | Callao Central Warehouse, Av. Argentina 2850 | 2.1 | Three phase meter 4 wires, 5(100) A, class 1, with RS-485 port | 1,200 | 20/05/2027 | Third-party inspector |  |\n| ↑ | ↑ | 2.2 | Three phase meter 3 wires, 5(100) A, class 1 |  |  |  | Cancelled by Addendum No. 2 |\n| ↑ | ↑ | 2.3 | Current transformer 200/5 A, class 0.5S | 3,600 | 20/05/2027 | Third-party inspector |  |",
+      "tokens": 424,
+      "repeated": 1,
+      "lines": 8
+    },
+    {
+      "text": "| Lot | Destination warehouse | Item | Description | Qty | Delivery date | Inspection witness | Remarks |\n| ↑ Lot 2 | ↑ Callao Central Warehouse, Av. Argentina 2850 | 2.4 | Test terminal block for indirect metering | 1,200 | 20/05/2027 |  |  |\n| ↑ | Trujillo Regional Warehouse, Av. Nicolás de Piérola 1210 | 2.5 | Three phase meter 4 wires, 5(100) A, class 1, with RS-485 port | 800 | 05/06/2027 | Third-party inspector |  |\n| ↑ | ↑ | 2.6 | Current transformer 200/5 A, class 0.5S | 2,400 | 05/06/2027 | Third-party inspector |  |\n| Lot 3 | Callao Central Warehouse, Av. Argentina 2850 | 3.1 | Data concentrator with PLC and 4G modem | 150 | 10/08/2027 | Client QA | Includes 2 years of firmware updates |\n| ↑ | ↑ | 3.2 | Head-end software licence, per 1,000 meters | 30 | ↑ |  |  |\n| ↑ | ↑ | 3.3 | Installation and commissioning kit for concentrator | 150 | ↑ |  |  |\n| ↑ | ↑ | 3.4 | Training of client staff, 5 days | 1 | 18/08/2027 |  | At the client's premises |",
+      "tokens": 358,
+      "repeated": 1,
+      "lines": 7
+    }
+  ],
+  "markdown_lead": [
+    {
+      "text": "Delivery and inspection schedule listing equipment items by lot, specifying destination warehouses, quantities, delivery dates, inspection witnesses, and remarks.\n| Lot | Destination warehouse | Item | Description | Qty | Delivery date | Inspection witness | Remarks |\n| Lot 1 | Callao Central Warehouse, Av. Argentina 2850 | 1.1 | Single phase meter 2 wires, 5(60) A, class 1 | 12,000 | 15/03/2027 | Client QA |  |\n| ↑ | ↑ | 1.2 | Single phase meter 3 wires, 5(80) A, class 1 | 4,500 | 15/03/2027 | Client QA |  |\n| ↑ | ↑ | 1.3 | Meter box in polycarbonate with sealing screws | 16,500 | 15/03/2027 |  |  |\n| ↑ | Arequipa Regional Warehouse, Parque Industrial Mz. F | 1.4 | Single phase meter 2 wires, 5(60) A, class 1 | 6,000 | 30/03/2027 | Client QA |  |\n| ↑ | ↑ | 1.5 | Meter box in polycarbonate with sealing screws | 6,000 | 30/03/2027 |  |  |\n| Lot 2 | Callao Central Warehouse, Av. Argentina 2850 | 2.1 | Three phase meter 4 wires, 5(100) A, class 1, with RS-485 port | 1,200 | 20/05/2027 | Third-party inspector |  |\n| ↑ | ↑ | 2.2 | Three phase meter 3 wires, 5(100) A, class 1 |  |  |  | Cancelled by Addendum No. 2 |\n| ↑ | ↑ | 2.3 | Current transformer 200/5 A, class 0.5S | 3,600 | 20/05/2027 | Third-party inspector |  |",
+      "tokens": 458,
+      "repeated": 1,
+      "lines": 8
+    },
+    {
+      "text": "Delivery and inspection schedule listing equipment items by lot, specifying destination warehouses, quantities, delivery dates, inspection witnesses, and remarks.\n| Lot | Destination warehouse | Item | Description | Qty | Delivery date | Inspection witness | Remarks |\n| ↑ Lot 2 | ↑ Callao Central Warehouse, Av. Argentina 2850 | 2.4 | Test terminal block for indirect metering | 1,200 | 20/05/2027 |  |  |\n| ↑ | Trujillo Regional Warehouse, Av. Nicolás de Piérola 1210 | 2.5 | Three phase meter 4 wires, 5(100) A, class 1, with RS-485 port | 800 | 05/06/2027 | Third-party inspector |  |\n| ↑ | ↑ | 2.6 | Current transformer 200/5 A, class 0.5S | 2,400 | 05/06/2027 | Third-party inspector |  |\n| Lot 3 | Callao Central Warehouse, Av. Argentina 2850 | 3.1 | Data concentrator with PLC and 4G modem | 150 | 10/08/2027 | Client QA | Includes 2 years of firmware updates |\n| ↑ | ↑ | 3.2 | Head-end software licence, per 1,000 meters | 30 | ↑ |  |  |\n| ↑ | ↑ | 3.3 | Installation and commissioning kit for concentrator | 150 | ↑ |  |  |\n| ↑ | ↑ | 3.4 | Training of client staff, 5 days | 1 | 18/08/2027 |  | At the client's premises |",
+      "tokens": 392,
+      "repeated": 1,
+      "lines": 7
+    }
+  ],
+  "markdown_checks": [],
+  "labeled": [
+    {
+      "text": "| Lot: Lot 1 | Destination warehouse: Callao Central Warehouse, Av. Argentina 2850 | Item: 1.1 | Description: Single phase meter 2 wires, 5(60) A, class 1 | Qty: 12,000 | Delivery date: 15/03/2027 | Inspection witness: Client QA |  |\n| ↑ | ↑ | Item: 1.2 | Description: Single phase meter 3 wires, 5(80) A, class 1 | Qty: 4,500 | Delivery date: 15/03/2027 | Inspection witness: Client QA |  |\n| ↑ | ↑ | Item: 1.3 | Description: Meter box in polycarbonate with sealing screws | Qty: 16,500 | Delivery date: 15/03/2027 |  |  |\n| ↑ | Destination warehouse: Arequipa Regional Warehouse, Parque Industrial Mz. F | Item: 1.4 | Description: Single phase meter 2 wires, 5(60) A, class 1 | Qty: 6,000 | Delivery date: 30/03/2027 | Inspection witness: Client QA |  |\n| ↑ | ↑ | Item: 1.5 | Description: Meter box in polycarbonate with sealing screws | Qty: 6,000 | Delivery date: 30/03/2027 |  |  |\n| Lot: Lot 2 | Destination warehouse: Callao Central Warehouse, Av. Argentina 2850 | Item: 2.1 | Description: Three phase meter 4 wires, 5(100) A, class 1, with RS-485 port | Qty: 1,200 | Delivery date: 20/05/2027 | Inspection witness: Third-party inspector |  |",
+      "tokens": 403,
+      "repeated": 0,
+      "lines": 6
+    },
+    {
+      "text": "| Lot: ↑ Lot 2 | Destination warehouse: ↑ Callao Central Warehouse, Av. Argentina 2850 | Item: 2.2 | Description: Three phase meter 3 wires, 5(100) A, class 1 |  |  |  | Remarks: Cancelled by Addendum No. 2 |\n| ↑ | ↑ | Item: 2.3 | Description: Current transformer 200/5 A, class 0.5S | Qty: 3,600 | Delivery date: 20/05/2027 | Inspection witness: Third-party inspector |  |\n| ↑ | ↑ | Item: 2.4 | Description: Test terminal block for indirect metering | Qty: 1,200 | Delivery date: 20/05/2027 |  |  |\n| ↑ | Destination warehouse: Trujillo Regional Warehouse, Av. Nicolás de Piérola 1210 | Item: 2.5 | Description: Three phase meter 4 wires, 5(100) A, class 1, with RS-485 port | Qty: 800 | Delivery date: 05/06/2027 | Inspection witness: Third-party inspector |  |\n| ↑ | ↑ | Item: 2.6 | Description: Current transformer 200/5 A, class 0.5S | Qty: 2,400 | Delivery date: 05/06/2027 | Inspection witness: Third-party inspector |  |\n| Lot: Lot 3 | Destination warehouse: Callao Central Warehouse, Av. Argentina 2850 | Item: 3.1 | Description: Data concentrator with PLC and 4G modem | Qty: 150 | Delivery date: 10/08/2027 | Inspection witness: Client QA | Remarks: Includes 2 years of firmware updates |\n| ↑ | ↑ | Item: 3.2 | Description: Head-end software licence, per 1,000 meters | Qty: 30 | ↑ |  |  |",
+      "tokens": 443,
+      "repeated": 0,
+      "lines": 7
+    },
+    {
+      "text": "| Lot: ↑ Lot 3 | Destination warehouse: ↑ Callao Central Warehouse, Av. Argentina 2850 | Item: 3.3 | Description: Installation and commissioning kit for concentrator | Qty: 150 | Delivery date: ↑ 10/08/2027 |  |  |\n| ↑ | ↑ | Item: 3.4 | Description: Training of client staff, 5 days | Qty: 1 | Delivery date: 18/08/2027 |  | Remarks: At the client's premises |",
+      "tokens": 123,
+      "repeated": 0,
+      "lines": 2
+    }
+  ],
+  "labeled_lead": [
+    {
+      "text": "Delivery and inspection schedule listing equipment items by lot, specifying destination warehouses, quantities, delivery dates, inspection witnesses, and remarks.\n| Lot: Lot 1 | Destination warehouse: Callao Central Warehouse, Av. Argentina 2850 | Item: 1.1 | Description: Single phase meter 2 wires, 5(60) A, class 1 | Qty: 12,000 | Delivery date: 15/03/2027 | Inspection witness: Client QA |  |\n| ↑ | ↑ | Item: 1.2 | Description: Single phase meter 3 wires, 5(80) A, class 1 | Qty: 4,500 | Delivery date: 15/03/2027 | Inspection witness: Client QA |  |\n| ↑ | ↑ | Item: 1.3 | Description: Meter box in polycarbonate with sealing screws | Qty: 16,500 | Delivery date: 15/03/2027 |  |  |\n| ↑ | Destination warehouse: Arequipa Regional Warehouse, Parque Industrial Mz. F | Item: 1.4 | Description: Single phase meter 2 wires, 5(60) A, class 1 | Qty: 6,000 | Delivery date: 30/03/2027 | Inspection witness: Client QA |  |\n| ↑ | ↑ | Item: 1.5 | Description: Meter box in polycarbonate with sealing screws | Qty: 6,000 | Delivery date: 30/03/2027 |  |  |\n| Lot: Lot 2 | Destination warehouse: Callao Central Warehouse, Av. Argentina 2850 | Item: 2.1 | Description: Three phase meter 4 wires, 5(100) A, class 1, with RS-485 port | Qty: 1,200 | Delivery date: 20/05/2027 | Inspection witness: Third-party inspector |  |",
+      "tokens": 437,
+      "repeated": 0,
+      "lines": 6
+    },
+    {
+      "text": "Delivery and inspection schedule listing equipment items by lot, specifying destination warehouses, quantities, delivery dates, inspection witnesses, and remarks.\n| Lot: ↑ Lot 2 | Destination warehouse: ↑ Callao Central Warehouse, Av. Argentina 2850 | Item: 2.2 | Description: Three phase meter 3 wires, 5(100) A, class 1 |  |  |  | Remarks: Cancelled by Addendum No. 2 |\n| ↑ | ↑ | Item: 2.3 | Description: Current transformer 200/5 A, class 0.5S | Qty: 3,600 | Delivery date: 20/05/2027 | Inspection witness: Third-party inspector |  |\n| ↑ | ↑ | Item: 2.4 | Description: Test terminal block for indirect metering | Qty: 1,200 | Delivery date: 20/05/2027 |  |  |\n| ↑ | Destination warehouse: Trujillo Regional Warehouse, Av. Nicolás de Piérola 1210 | Item: 2.5 | Description: Three phase meter 4 wires, 5(100) A, class 1, with RS-485 port | Qty: 800 | Delivery date: 05/06/2027 | Inspection witness: Third-party inspector |  |\n| ↑ | ↑ | Item: 2.6 | Description: Current transformer 200/5 A, class 0.5S | Qty: 2,400 | Delivery date: 05/06/2027 | Inspection witness: Third-party inspector |  |\n| Lot: Lot 3 | Destination warehouse: Callao Central Warehouse, Av. Argentina 2850 | Item: 3.1 | Description: Data concentrator with PLC and 4G modem | Qty: 150 | Delivery date: 10/08/2027 | Inspection witness: Client QA | Remarks: Includes 2 years of firmware updates |\n| ↑ | ↑ | Item: 3.2 | Description: Head-end software licence, per 1,000 meters | Qty: 30 | ↑ |  |  |",
+      "tokens": 477,
+      "repeated": 0,
+      "lines": 7
+    },
+    {
+      "text": "Delivery and inspection schedule listing equipment items by lot, specifying destination warehouses, quantities, delivery dates, inspection witnesses, and remarks.\n| Lot: ↑ Lot 3 | Destination warehouse: ↑ Callao Central Warehouse, Av. Argentina 2850 | Item: 3.3 | Description: Installation and commissioning kit for concentrator | Qty: 150 | Delivery date: ↑ 10/08/2027 |  |  |\n| ↑ | ↑ | Item: 3.4 | Description: Training of client staff, 5 days | Qty: 1 | Delivery date: 18/08/2027 |  | Remarks: At the client's premises |",
+      "tokens": 157,
+      "repeated": 0,
+      "lines": 2
+    }
+  ],
+  "labeled_checks": [],
+  "summary": {
+    "model": "google/gemini-3.8-flash",
+    "attempts": [
+      {
+        "raw": "{\n  \"summary\": \"This table details the delivery and inspection schedule for contract equipment and services. The table is organized by lot and destination warehouse, with columns for Lot, Destination warehouse, Item, Description, Qty, Delivery date, Inspection witness, and Remarks. Deliverables are grouped under Lot 1, Lot 2, and Lot 3 across warehouses including Callao Central Warehouse (Av. Argentina 2850), Arequipa Regional Warehouse (Parque Industrial Mz. F), and Trujillo Regional Warehouse (Av. Nicolás de Piérola 1210). Rows represent specific items: 1.1 Single phase meter 2 wires, 5(60) A, class 1; 1.2 Single phase meter 3 wires, 5(80) A, class 1; 1.3 Meter box in polycarbonate with sealing screws; 1.4 Single phase meter 2 wires, 5(60) A, class 1; 1.5 Meter box in polycarbonate with sealing screws; 2.1 Three phase meter 4 wires, 5(100) A, class 1, with RS-485 port; 2.2 Three phase meter 3 wires, 5(100) A, class 1; 2.3 Current transformer 200/5 A, class 0.5S; 2.4 Test terminal block for indirect metering; 2.5 Three phase meter 4 wires, 5(100) A, class 1, with RS-485 port; 2.6 Current transformer 200/5 A, class 0.5S; 3.1 Data concentrator with PLC and 4G modem; 3.2 Head-end software licence, per 1,000 meters; 3.3 Installation and commissioning kit for concentrator; and 3.4 Training of client staff, 5 days. Reported values specify quantities, scheduled delivery dates, witness entities (such as Client QA or Third-party inspector), and status or scope remarks.\"\n}",
+        "reasoning": "**Summarizing Annex B**\n\nI'm focusing on concisely summarizing the information in Annex B, specifically the delivery and inspection schedule for Contract No. 045-2026-ELN. I'm structuring the summary around the key columns: Lot, Destination Warehouse, Item Description, Quantity, Delivery Date, Inspection Witness, and Remarks. I aim to convey this data effectively for your review.\n\n\n**Detailing Logistics & Locations**\n\nI'm now detailing the logistics. Lot 3's items are allocated to Callao, Arequipa, and Trujillo warehouses. My focus is on matching items to each destination, and the item descriptions include single-phase meters, boxes, three-phase meters, transformers, and software. I am structuring the information in a JSON format.\n\n\n",
+        "issues": [],
+        "prompt_tokens": 1447,
+        "completion_tokens": 1163,
+        "reasoning_tokens": 713,
+        "cost_usd": 0.0054465,
+        "cached": false
+      }
+    ],
+    "summary": "This table details the delivery and inspection schedule for contract equipment and services. The table is organized by lot and destination warehouse, with columns for Lot, Destination warehouse, Item, Description, Qty, Delivery date, Inspection witness, and Remarks. Deliverables are grouped under Lot 1, Lot 2, and Lot 3 across warehouses including Callao Central Warehouse (Av. Argentina 2850), Arequipa Regional Warehouse (Parque Industrial Mz. F), and Trujillo Regional Warehouse (Av. Nicolás de Piérola 1210). Rows represent specific items: 1.1 Single phase meter 2 wires, 5(60) A, class 1; 1.2 Single phase meter 3 wires, 5(80) A, class 1; 1.3 Meter box in polycarbonate with sealing screws; 1.4 Single phase meter 2 wires, 5(60) A, class 1; 1.5 Meter box in polycarbonate with sealing screws; 2.1 Three phase meter 4 wires, 5(100) A, class 1, with RS-485 port; 2.2 Three phase meter 3 wires, 5(100) A, class 1; 2.3 Current transformer 200/5 A, class 0.5S; 2.4 Test terminal block for indirect metering; 2.5 Three phase meter 4 wires, 5(100) A, class 1, with RS-485 port; 2.6 Current transformer 200/5 A, class 0.5S; 3.1 Data concentrator with PLC and 4G modem; 3.2 Head-end software licence, per 1,000 meters; 3.3 Installation and commissioning kit for concentrator; and 3.4 Training of client staff, 5 days. Reported values specify quantities, scheduled delivery dates, witness entities (such as Client QA or Third-party inspector), and status or scope remarks."
+  },
+  "summary_tokens": 388
+}

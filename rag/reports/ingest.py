@@ -6,11 +6,13 @@ import shutil
 from collections import Counter
 from statistics import median
 
+from rag.eval.table_structure import differences, find_answer, load_answers
 from rag.index.manifest import DocumentEntry
-from rag.ingest.pipeline import ProcessedDocument
+from rag.index.audit import DocumentAudit
 from rag.ingest.tables import continuation as cont
 from rag.ingest.tables.models import (
-    ContinuationEvaluation, GroupScoringResult, HeaderDecision, StructuredTable, TableCandidate,
+    ContinuationEvaluation, GroupScoringResult, HeaderDecision, StructuredTable, TableAnnotation,
+    TableCandidate, TableLLMResult,
 )
 from rag.jsonio import write_atomic
 from rag.models import ChunkBatch, ListNode, TableNode, TextNode
@@ -20,7 +22,7 @@ from rag.reports.html import badge, esc, filters, page, pct, text_block, write_a
 TEXT_KINDS = {"title": "标题", "paragraph": "段落", "header": "页眉", "footer": "页脚",
               "footnote": "脚注", "caption": "图表标题", "table_note": "表注",
               "other_text": "其他文本"}
-CHUNK_KINDS = {"text": "正文", "list": "含列表", "table": "表格"}
+CHUNK_KINDS = {"text": "正文", "list": "含列表", "table": "表格", "table_summary": "表格摘要"}
 ADMISSION = {
     "matched_single_table_slot": "进入候选",
     "no_eligible_table_slot_on_page": "该页没有可对应的表格",
@@ -32,11 +34,20 @@ SELECTION = {"highest_total_score": "总分最高", "tool_priority_tiebreak": "�
 METRIC_LABELS = (("text_f1", "文本覆盖"), ("critical_token_integrity", "关键数字完整"),
                  ("shape_support", "行列形状共识"), ("blank_anomaly", "空白异常"))
 PAGE_NAMES = ("1-解析.html", "2-表格.html", "3-分块.html")
+LANGUAGE_NAMES = {"chinese": "中文", "spanish": "西班牙文", "english": "英文"}
+
+
+GRID_LEGEND = ('<div class="meta legend"><span class="hdr">表头行</span><span class="sec">节标题行</span>'
+               '<span class="anc">隐式合并的起始值</span><span class="dup">↑ 沿用上方的值</span></div>')
 
 
 def render_grid(table: StructuredTable | TableCandidate, max_rows: int | None = None,
-                header_rows: frozenset[int] = frozenset()) -> str:
-    """Draw a table from its cell grid, honouring merged cells; cells starting in `header_rows` are marked."""
+                header_rows: frozenset[int] = frozenset(),
+                annotation: TableAnnotation | None = None) -> str:
+    """Draw a table from its cell grid, honouring merged cells; cells starting in `header_rows` are marked.
+
+    With an annotation, its header rows, section title rows and implicit merges are marked instead
+    (blanks repeating the value above read `↑`), and every row starts with its grid row number."""
     rows = table.row_count or 0
     cols = table.column_count or 0
     placed = [c for c in table.cells if c.start_row_offset_idx is not None
@@ -45,13 +56,26 @@ def render_grid(table: StructuredTable | TableCandidate, max_rows: int | None = 
         loose = " | ".join(c.text or "" for c in table.cells)
         return f'<div class="meta">（无法排成网格）</div>{text_block(loose or table.unplaced_text or "")}'
     starts = {(c.start_row_offset_idx, c.start_col_offset_idx): c for c in placed}
+    titles: frozenset[int] = frozenset()
+    anchors: set[tuple[int, int]] = set()
+    repeats: set[tuple[int, int]] = set()
+    if annotation is not None:
+        header_rows = frozenset(annotation.header_rows)
+        titles = annotation.title_rows()
+        for merge in annotation.implicit_merges:
+            anchors.add((merge.first_row, merge.column))
+            repeats.update((row, merge.column) for row in range(merge.first_row + 1, merge.last_row + 1))
     covered: set[tuple[int, int]] = set()
     html_rows = []
     shown = rows if max_rows is None else min(rows, max_rows)
     for r in range(rows):
-        cells = []
+        cells = [f'<td class="meta nw">r{r}</td>'] if annotation is not None else []
         for col in range(cols):
             if (r, col) in covered:
+                continue
+            if (r, col) in repeats:
+                covered.add((r, col))
+                cells.append('<td class="dup">↑</td>')
                 continue
             cell = starts.get((r, col))
             if cell is None:
@@ -63,7 +87,8 @@ def render_grid(table: StructuredTable | TableCandidate, max_rows: int | None = 
                 for dc in range(cs):
                     covered.add((r + dr, col + dc))
             span = (f' rowspan="{rs}"' if rs > 1 else "") + (f' colspan="{cs}"' if cs > 1 else "")
-            mark = ' class="hdr"' if r in header_rows else ""
+            mark = (' class="hdr"' if r in header_rows else ' class="sec"' if r in titles
+                    else ' class="anc"' if (r, col) in anchors else "")
             cells.append(f"<td{span}{mark}>{esc(cell.text or '')}</td>")
         hidden = ' class="rest hidden"' if r >= shown else ""
         html_rows.append(f"<tr{hidden}>" + "".join(cells) + "</tr>")
@@ -75,17 +100,18 @@ def render_grid(table: StructuredTable | TableCandidate, max_rows: int | None = 
             f'<button class="toggle" data-more="{label}" data-less="收起">{label}</button></div></div>')
 
 
-def _header(processed: ProcessedDocument, entry: DocumentEntry, config_name: str,
+def _header(processed: DocumentAudit, entry: DocumentEntry, config_name: str,
             current: int) -> str:
     links = []
     for index, name in enumerate(PAGE_NAMES):
-        if index == 1 and not processed.parse.primary.table_slots:
+        if index == 1 and not processed.table_slots:
             continue
         label = name.removesuffix(".html")
         links.append(f"<b>{esc(label)}</b>" if index == current else f'<a href="{esc(name)}">{esc(label)}</a>')
     return (f"<h1>{esc(entry.document_name)}</h1>"
             f'<div class="sub">配置 {esc(config_name)} · {entry.page_count} 页 · '
-            f'{entry.chunk_count} 个 chunk · {entry.table_count} 张表 · 入库于 {esc(entry.built_at)}'
+            f'{entry.chunk_count} 个 chunk · {entry.table_count} 张表 · '
+            f'文档语言 {LANGUAGE_NAMES[processed.document.language]} · 入库于 {esc(entry.built_at)}'
             f'　|　{"　".join(links)}</div>')
 
 
@@ -97,7 +123,7 @@ def _node_page(node) -> int:
     return node.sources[0].page_number if node.sources else 0
 
 
-def parse_page(processed: ProcessedDocument, entry: DocumentEntry, config_name: str) -> str:
+def parse_page(processed: DocumentAudit, entry: DocumentEntry, config_name: str) -> str:
     document = processed.document
     kinds = Counter(TEXT_KINDS.get(n.kind, n.kind) if isinstance(n, TextNode)
                     else "列表" if isinstance(n, ListNode) else "表格" for n in document.nodes)
@@ -106,7 +132,7 @@ def parse_page(processed: ProcessedDocument, entry: DocumentEntry, config_name: 
     warn_html = ("" if not warnings else "<div class='meta'>处理提示：" +
                  "；".join(f"{esc(code)} ×{n}" for code, n in warnings.items()) + "</div>")
     by_page: dict[int, list[str]] = {}
-    slot_number = {slot.slot_id: n for n, slot in enumerate(processed.parse.primary.table_slots, start=1)}
+    slot_number = {slot.slot_id: n for n, slot in enumerate(processed.table_slots, start=1)}
     for node in document.nodes:
         if isinstance(node, TextNode):
             html = f'{badge(TEXT_KINDS.get(node.kind, node.kind))}{text_block(node.text)}'
@@ -229,7 +255,67 @@ def _continuation_card(item: ContinuationEvaluation, numbers: dict[str, int]) ->
             f'{body}</table></div></div>')
 
 
-def tables_page(processed: ProcessedDocument, entry: DocumentEntry, config_name: str) -> str:
+def _attempts(llm: TableLLMResult) -> str:
+    parts = []
+    for i, a in enumerate(llm.attempts, 1):
+        took = f" · {a.seconds:.1f} 秒" if a.seconds is not None else ""
+        head = (f"第 {i} 次调用：输入 {a.prompt_tokens} · 输出 {a.completion_tokens}（推理 {a.reasoning_tokens}）"
+                f" token · ${a.cost_usd or 0:.5f}{took}{'（缓存）' if a.cached else ''}")
+        issues = "".join(f"<li>{esc(x)}</li>" for x in a.issues)
+        verdict = (f'<ul class="meta">{issues}</ul>' if issues else
+                   f'<div class="meta">{badge("校验通过", "ok")}</div>')
+        parts.append(f'<div class="meta">{head}</div>{verdict}'
+                     f'<details><summary>第 {i} 次的原始输出与推理</summary>{text_block(a.raw, 1500)}'
+                     f'{text_block(a.reasoning or "（未返回推理内容）", 1500)}</details>')
+    return "".join(parts)
+
+
+def _llm_card(llm: TableLLMResult, table: StructuredTable, answers, sources, index_text: str) -> str:
+    """LLM processing of one table: whether the annotation is correct, the lead or summary, the calls."""
+    context = "".join(f'<div class="meta">[{esc(n.kind)}]</div>{text_block(n.text, 400)}' for n in llm.context)
+    calls = (f'<details><summary>调用与校验（{esc(llm.model)}，{len(llm.attempts)} 次）</summary>'
+             f'{_attempts(llm)}<div class="meta">交给 LLM 的上下文：</div>'
+             f'{context or "<div class=meta>(none)</div>"}</details>')
+    if llm.task == "summary":
+        body = (f'<div>{badge("摘要通过校验", "ok")} 本表入库一个摘要 chunk</div>{text_block(llm.summary)}'
+                if llm.summary is not None else
+                f'<div>{badge("摘要未通过校验", "bad")} 已退回表格 chunk（降级完成）</div>')
+        return f'<div class="card"><h3>LLM 表格摘要</h3>{body}{calls}</div>'
+    if llm.annotation is None:
+        verdict = f'<div>{badge("标注未通过校验", "bad")} 已退回规则序列化（降级完成）</div>'
+        grid = ""
+    else:
+        answer = find_answer(answers, sources) if answers else None
+        if answer is None:
+            verdict = f'<div>{badge("没有对应的正确答案", "warn")} eval/table-structure/ 中找不到这张表</div>'
+        else:
+            wrong = differences(answer.annotation, llm.annotation)
+            verdict = (f'<div>{badge("结构标注正确", "ok")}</div>' if not wrong else
+                       f'<div>{badge("结构标注有误", "bad")}</div><ul>'
+                       + "".join(f"<li>{esc(x)}</li>" for x in wrong) + "</ul>")
+        grid = GRID_LEGEND + render_grid(table, annotation=llm.annotation)
+    if llm.lead is None:
+        lead = f'<div>{badge("引导句未通过校验", "bad")} 不加引导句</div>'
+    else:
+        used = "每个表格 chunk 开头写这句" if index_text == "rows_with_lead" else "本配置不加引导句"
+        lead = f'<div>引导句（{used}）：</div>{text_block(llm.lead)}'
+    return f'<div class="card"><h3>LLM 结构标注</h3>{verdict}{grid}{lead}{calls}</div>'
+
+
+def _indexed_text(chunks: list, whole_text: str) -> str:
+    """What this table put into the index (its chunks as embedded, lead sentence or summary
+    included) and the text returned when the whole table is."""
+    kinds = {"table": "表格 chunk", "table_summary": "摘要 chunk"}
+    shown = "".join(f'<div class="meta">{kinds.get(c.kind, c.kind)} {i} / {len(chunks)} · {c.token_count} token</div>'
+                    f'{text_block(c.text)}' for i, c in enumerate(chunks, 1))
+    return (f'<details><summary>入库文本：本表的 {len(chunks)} 个 chunk（检索用，原样入库）</summary>{shown}</details>'
+            f'<details><summary>整表文本（命中本表、返回整表时交给回答的 LLM；原样写出各行，不含表头与结构判定，{len(whole_text)} 字符）'
+            f'</summary>{text_block(whole_text)}</details>')
+
+
+def tables_page(processed: DocumentAudit, entry: DocumentEntry, config_name: str,
+                answers=None, batch: ChunkBatch | None = None) -> str:
+    """`answers`: the correct structure annotations of this document's tables, when there are any."""
     candidates = {c.candidate_id: c for r in processed.extraction_reports for c in r.candidates}
     admissions = ({a.candidate_id: a for a in processed.grouping.candidate_admission_results}
                   if processed.grouping else {})
@@ -237,8 +323,17 @@ def tables_page(processed: ProcessedDocument, entry: DocumentEntry, config_name:
     resolutions = {r.slot_id: r for r in processed.resolutions}
     # A table merged across pages is prepared once; every slot of it points to the merged result.
     prepared = {segment.slot_id: p for p in processed.prepared_tables for segment in p.segments}
-    slots = processed.parse.primary.table_slots
+    slots = processed.table_slots
     numbers = {slot.slot_id: number for number, slot in enumerate(slots, start=1)}
+    node_sources = {node.slot_id: node.sources for node in processed.document.nodes
+                    if isinstance(node, TableNode)}
+    node_ids = {node.slot_id: node.node_id for node in processed.document.nodes
+                if isinstance(node, TableNode)}
+    table_chunks: dict[str, list] = {}
+    for chunk in (batch.chunks if batch else ()):
+        if chunk.kind in ("table", "table_summary"):
+            owner = next(s.node_id for s in chunk.sources if s.node_id in node_ids.values())
+            table_chunks.setdefault(owner, []).append(chunk)
     evaluations = processed.continuations.evaluations if processed.continuations else ()
     merged = [p for p in processed.prepared_tables if len(p.segments) > 1]
     merged_line = "；".join("表 " + "、".join(str(numbers[seg.slot_id]) for seg in p.segments) + " 合并为一张表"
@@ -317,9 +412,11 @@ def tables_page(processed: ProcessedDocument, entry: DocumentEntry, config_name:
                f'<div class="grid">{"".join(cards[3:])}</div></details>' if len(cards) > 3 else "")
             + (f'<details><summary>本页未进入该表评分的其他候选（{len(page_candidates)}）</summary>'
                f'<table><tr><th>候选</th><th>原因</th></tr>{others}</table></details>' if page_candidates else "")
-            + ("" if continued else
-               f'<details><summary>入库文本（{len(prep.serialized_table.text)} 字符）</summary>'
-               f'{text_block(prep.serialized_table.text)}</details>') + "</div>")
+            + ("" if continued or prep.llm is None else
+               _llm_card(prep.llm, prep.adopted_table, answers, node_sources.get(prep.slot_id, ()),
+                         prep.index_text))
+            + ("" if continued else _indexed_text(table_chunks.get(node_ids.get(prep.slot_id), []),
+                                                  prep.whole_text)) + "</div>")
     if evaluations:
         tabs.append('<a href="#cont" data-tab="cont">续表判定</a>')
         sections.append('<div data-panel="cont"><h2>续表判定</h2><div class="meta">阅读顺序中相邻、'
@@ -330,7 +427,7 @@ def tables_page(processed: ProcessedDocument, entry: DocumentEntry, config_name:
     return page(f"表格 · {entry.document_name}", body, root="../../../", crumbs=_crumbs(config_name))
 
 
-def chunks_page(processed: ProcessedDocument, batch: ChunkBatch, entry: DocumentEntry,
+def chunks_page(processed: DocumentAudit, batch: ChunkBatch, entry: DocumentEntry,
                 config_name: str) -> str:
     chunks = batch.chunks
     lengths = [len(c.text) for c in chunks]
@@ -375,13 +472,33 @@ def chunks_page(processed: ProcessedDocument, batch: ChunkBatch, entry: Document
     return page(f"分块 · {entry.document_name}", body, root="../../../", crumbs=_crumbs(config_name))
 
 
-def write_document_reports(workspace: Workspace, config_name: str, processed: ProcessedDocument,
-                           batch: ChunkBatch, entry: DocumentEntry) -> None:
+def write_document_reports(workspace: Workspace, config_name: str, processed: DocumentAudit,
+                           entry: DocumentEntry) -> None:
+    batch = processed.batch
     write_assets(workspace.reports)
     folder = workspace.ingest_reports(config_name) / entry.folder
     if folder.exists():
         shutil.rmtree(folder)
     write_atomic(folder / PAGE_NAMES[0], parse_page(processed, entry, config_name))
-    if processed.parse.primary.table_slots:
-        write_atomic(folder / PAGE_NAMES[1], tables_page(processed, entry, config_name))
+    if processed.table_slots:
+        answers = load_answers(workspace.root / "eval" / "table-structure", processed.document.document_id)
+        write_atomic(folder / PAGE_NAMES[1], tables_page(processed, entry, config_name, answers, batch))
     write_atomic(folder / PAGE_NAMES[2], chunks_page(processed, batch, entry, config_name))
+
+
+def rerender_ingest_reports(workspace: Workspace) -> int:
+    """Rebuild every indexed config's review pages from its intermediate results; return the page sets."""
+    from rag.index.audit import load_audit
+    from rag.index.manifest import Manifest
+    count = 0
+    root = workspace.root / ".rag" / "indexes"
+    for index_dir in sorted(root.iterdir()) if root.is_dir() else ():
+        manifest = Manifest.load(index_dir / "manifest.json")
+        if manifest is None:
+            continue
+        shutil.rmtree(workspace.ingest_reports(manifest.config_name), ignore_errors=True)
+        for entry in manifest.documents.values():
+            folder = index_dir / "documents" / entry.folder
+            write_document_reports(workspace, manifest.config_name, load_audit(folder), entry)
+            count += 1
+    return count

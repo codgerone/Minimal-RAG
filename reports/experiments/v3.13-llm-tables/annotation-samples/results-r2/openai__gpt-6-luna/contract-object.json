@@ -1,0 +1,80 @@
+{
+  "annotation": {
+    "model": "openai/gpt-6-luna",
+    "attempts": [
+      {
+        "raw": "{\"header_rows\":[0],\"sections\":[],\"implicit_merges\":[],\"lead\":\"La tabla lista los medidores incluidos en la compra corporativa, con cada fila identificando un ítem y su descripción.\"}",
+        "reasoning": "**Creating JSON schema**\n\nI need to create a JSON schema with the header labeled r0 and no sections. The lead Spanish sentence should be 24 words or fewer and describe the table clearly. I'll make sure it lists the items from the corporate purchase along with their descriptions. The sentence I have in mind is “La tabla lista los medidores incluidos en la compra corporativa, con cada fila identificando un ítem y su descripción.” I’ll aim for around 17 counts!",
+        "issues": [],
+        "prompt_tokens": 1062,
+        "completion_tokens": 119,
+        "reasoning_tokens": 67,
+        "cost_usd": 0.000192175,
+        "cached": false
+      }
+    ],
+    "annotation": {
+      "header_rows": [
+        0
+      ],
+      "sections": [],
+      "implicit_merges": []
+    },
+    "lead": "La tabla lista los medidores incluidos en la compra corporativa, con cada fila identificando un ítem y su descripción."
+  },
+  "fallback": {
+    "annotation": false,
+    "lead": false
+  },
+  "markdown": [
+    {
+      "text": "| Ítem | Descripción |\n| 1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS |\n| 3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS |\n| 4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS |",
+      "tokens": 80,
+      "repeated": 1,
+      "lines": 3
+    }
+  ],
+  "markdown_lead": [
+    {
+      "text": "La tabla lista los medidores incluidos en la compra corporativa, con cada fila identificando un ítem y su descripción.\n| Ítem | Descripción |\n| 1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS |\n| 3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS |\n| 4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS |",
+      "tokens": 108,
+      "repeated": 1,
+      "lines": 3
+    }
+  ],
+  "markdown_checks": [],
+  "labeled": [
+    {
+      "text": "| Ítem: 1 | Descripción: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS |\n| Ítem: 3 | Descripción: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS |\n| Ítem: 4 | Descripción: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS |",
+      "tokens": 88,
+      "repeated": 0,
+      "lines": 3
+    }
+  ],
+  "labeled_lead": [
+    {
+      "text": "La tabla lista los medidores incluidos en la compra corporativa, con cada fila identificando un ítem y su descripción.\n| Ítem: 1 | Descripción: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS |\n| Ítem: 3 | Descripción: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS |\n| Ítem: 4 | Descripción: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS |",
+      "tokens": 116,
+      "repeated": 0,
+      "lines": 3
+    }
+  ],
+  "labeled_checks": [],
+  "summary": {
+    "model": "openai/gpt-6-luna",
+    "attempts": [
+      {
+        "raw": "{\"summary\":\"La tabla detalla medidores incluidos en la compra corporativa para las empresas de la Corporación FONAFE. Cada fila corresponde a un ítem; las columnas, con los rótulos originales, son «Ítem» y «Descripción». Los ítems son 1, 3 y 4, correspondientes, respectivamente, a «MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS», «MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS» y «MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS». No hay grupos ni totales.\"}",
+        "reasoning": "**Creating a summary in Spanish**\n\nI need to create a concise JSON summary paragraph in Spanish, focusing on specific item rows and their descriptions, particularly those with identifiers 1, 3, and 4, related to corporate meter purchases. I should avoid including other values and ensure descriptions directly identify rows or groups. It seems crucial to mention the types of descriptions since the table is about them. I must retain original column labels while keeping everything clear and straightforward.",
+        "issues": [],
+        "prompt_tokens": 671,
+        "completion_tokens": 264,
+        "reasoning_tokens": 117,
+        "cost_usd": 0.0001991,
+        "cached": false
+      }
+    ],
+    "summary": "La tabla detalla medidores incluidos en la compra corporativa para las empresas de la Corporación FONAFE. Cada fila corresponde a un ítem; las columnas, con los rótulos originales, son «Ítem» y «Descripción». Los ítems son 1, 3 y 4, correspondientes, respectivamente, a «MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS», «MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS» y «MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS». No hay grupos ni totales."
+  },
+  "summary_tokens": 137
+}

@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any
 
 # Bump when a built-in algorithm changes its output, so existing indexes are flagged stale.
-RULES_VERSION = "v3.11"
+RULES_VERSION = "v3.13"
 DEFAULT_CONFIG = "structured"
 TABLE_RETURN_UNITS = ("chunk", "table")
 
@@ -44,6 +44,8 @@ class AssemblyConfig:
     document_filter: bool = True   # limit retrieval to documents whose catalog code is in the question
     lexical: dict[str, Any] | None = None   # [lexical]: BM25 index analyzer settings; None = no BM25 index
     table_return_unit: str = "chunk"   # a hit on a table chunk returns that chunk, or the whole table
+    table_structure: Component | None = None    # [table_structure]: header_rules / llm_annotation
+    table_index_text: Component | None = None   # [table_index_text]: rows / rows_with_lead / summary
 
     def build_settings(self) -> dict[str, Any]:
         """Everything that changes index content. Retrieval, LLM and display settings are excluded."""
@@ -51,12 +53,40 @@ class AssemblyConfig:
             "rules_version": RULES_VERSION,
             "parser": self.parser.as_dict(),
             "table_extractors": [item.as_dict() for item in self.table_extractors],
+            "table_structure": _with_rules(self.table_structure, "llm_annotation", _annotation_rules),
             "table_formatter": self.table_formatter.as_dict() if self.table_formatter else None,
+            "table_index_text": _with_rules(self.table_index_text, "summary", _summary_rules),
             "chunker": self.chunker.as_dict(),
             "embedder": self.embedder.as_dict(),
             # Only present when configured, so configs without a BM25 index keep their fingerprint.
             **({"lexical": self.lexical} if self.lexical is not None else {}),
         }
+
+
+def _with_rules(component: Component | None, llm_use: str, rules: Any) -> dict[str, Any] | None:
+    if component is None:
+        return None
+    return {**component.as_dict(), **(rules() if component.use == llm_use else {})}
+
+
+def _llm_rules() -> dict[str, Any]:
+    """Prompt, reasoning and context rules of LLM table processing (they change its output)."""
+    from rag.ingest.tables import llm_tables as rules
+    return {"prompt_version": rules.PROMPT_VERSION, "reasoning_effort": rules.REASONING_EFFORT,
+            "context_nodes": rules.CONTEXT_NODES, "context_node_tokens": rules.CONTEXT_NODE_TOKENS,
+            "context_skipped_kinds": sorted(rules.CONTEXT_SKIPPED_KINDS)}
+
+
+def _annotation_rules() -> dict[str, Any]:
+    from rag.ingest.tables import llm_tables as rules
+    return {**_llm_rules(), "lead_words": rules.LEAD_WORDS, "lead_chars": rules.LEAD_CHARS,
+            "lead_max_tokens": rules.LEAD_MAX_TOKENS}
+
+
+def _summary_rules() -> dict[str, Any]:
+    from rag.ingest.tables import llm_tables as rules
+    return {**_llm_rules(), "summary_words_per_token": rules.SUMMARY_WORDS_PER_TOKEN,
+            "summary_chars_per_token": rules.SUMMARY_CHARS_PER_TOKEN}
 
 
 def _component(data: Any, section: str, file: Path) -> Component:
@@ -71,8 +101,8 @@ def load_config(path: Path) -> AssemblyConfig:
         data = tomllib.loads(path.read_text(encoding="utf-8"))
     except (OSError, tomllib.TOMLDecodeError) as exc:
         raise ConfigError(f"无法读取配置 {path.name}：{exc}") from exc
-    known = {"name", "description", "parser", "table_extractors", "table_formatter",
-             "chunker", "embedder", "lexical", "retriever", "llm", "eval"}
+    known = {"name", "description", "parser", "table_extractors", "table_structure", "table_formatter",
+             "table_index_text", "chunker", "embedder", "lexical", "retriever", "llm", "eval"}
     unknown = set(data) - known
     if unknown:
         raise ConfigError(f"{path.name}：未知配置项 {sorted(unknown)}")
@@ -108,17 +138,19 @@ def load_config(path: Path) -> AssemblyConfig:
         lexical = {"stopwords": lexical.get("stopwords", True), "stemming": lexical.get("stemming", True)}
         if not all(type(v) is bool for v in lexical.values()):
             raise ConfigError(f"{path.name}：lexical.stopwords、lexical.stemming 必须为 true 或 false")
-    formatter = data.get("table_formatter")
+    table_sections = {name: _component(data[name], name, path) if name in data else None
+                      for name in ("table_structure", "table_formatter", "table_index_text")}
     return AssemblyConfig(
         name, str(data.get("description", "")), path,
         _component(data["parser"], "parser", path),
         tuple(_component(item, "table_extractors", path) for item in extractors),
-        _component(formatter, "table_formatter", path) if formatter is not None else None,
+        table_sections["table_formatter"],
         _component(data["chunker"], "chunker", path),
         _component(data["embedder"], "embedder", path),
         retriever, top_k,
         _component(data["llm"], "llm", path),
         eval_top_k, document_filter, lexical, table_return_unit,
+        table_sections["table_structure"], table_sections["table_index_text"],
     )
 
 
@@ -126,14 +158,22 @@ def config_dir(workspace: Path) -> Path:
     return workspace / "configs"
 
 
-def list_configs(workspace: Path) -> list[AssemblyConfig]:
-    return [load_config(path) for path in sorted(config_dir(workspace).glob("*.toml"))]
+def _config_paths(workspace: Path, extra: bool) -> list[Path]:
+    """configs/*.toml are the standard set; configs/extra/*.toml can be assembled by name too."""
+    paths = sorted(config_dir(workspace).glob("*.toml"))
+    return paths + (sorted((config_dir(workspace) / "extra").glob("*.toml")) if extra else [])
+
+
+def list_configs(workspace: Path, extra: bool = False) -> list[AssemblyConfig]:
+    return [load_config(path) for path in _config_paths(workspace, extra)]
 
 
 def resolve_config(workspace: Path, name: str | None) -> AssemblyConfig:
     chosen = name or os.environ.get("RAG_CONFIG") or DEFAULT_CONFIG
-    path = config_dir(workspace) / f"{chosen}.toml"
-    if not path.is_file():
-        available = ", ".join(p.stem for p in sorted(config_dir(workspace).glob("*.toml")))
+    found = [path for path in _config_paths(workspace, True) if path.stem == chosen]
+    if len(found) > 1:
+        raise ConfigError(f"配置名 {chosen!r} 在 configs/ 与 configs/extra/ 中重复")
+    if not found:
+        available = ", ".join(p.stem for p in _config_paths(workspace, True))
         raise ConfigError(f"找不到配置 {chosen!r}。可用配置：{available or '无'}")
-    return load_config(path)
+    return load_config(found[0])

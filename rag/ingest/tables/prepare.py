@@ -1,5 +1,5 @@
 """Prepare the adopted tables: adopt one per slot, merge cross-page continuations, then judge
-headers and serialize each resulting table."""
+the rule header of each resulting table."""
 
 from __future__ import annotations
 
@@ -9,8 +9,8 @@ from rag.ingest.tables.continuation import RULE_VERSION, detect_continuations, m
 from rag.ingest.tables.header import detect_header
 from rag.models import PageSpan, PrimaryDocument, PrimaryTablePlaceholder
 from rag.ingest.tables.models import (
-    ContentResolution, ContinuationReport, HeaderDecision, PreparedTableContent, SerializedTable,
-    StructuredTable, TableCandidate, TableExtractionReport, TableSegment,
+    AdoptedTable, ContentResolution, ContinuationReport, HeaderDecision, StructuredTable,
+    TableCandidate, TableExtractionReport, TableSegment,
 )
 
 
@@ -38,9 +38,8 @@ def prepare_tables(
     branch_attached: bool,
     *,
     header_detector: Callable[[StructuredTable], HeaderDecision] = detect_header,
-    serializer: Callable[..., SerializedTable],
-) -> tuple[tuple[PreparedTableContent, ...], ContinuationReport]:
-    """Resolve IDs once; header and text rules operate on the adopted (or merged) structure."""
+) -> tuple[tuple[AdoptedTable, ...], ContinuationReport]:
+    """Resolve IDs once; the header rule operates on the adopted (or merged) structure."""
     if not branch_attached:
         if reports or resolutions or primary.table_slots:
             raise TablePreparationError("detached table branch has table evidence")
@@ -95,7 +94,7 @@ def prepare_tables(
     chained = {slot_id: chain for chain in report.chains for slot_id in chain}
     slots = {slot.slot_id: slot for slot in primary.table_slots}
 
-    prepared: list[PreparedTableContent] = []
+    prepared: list[AdoptedTable] = []
     for placeholder in placeholders:
         chain = chained.get(placeholder.slot_id)
         if chain and chain[0] != placeholder.slot_id:
@@ -109,7 +108,5 @@ def prepare_tables(
             header = headers[placeholder.slot_id]
             segments = (TableSegment(placeholder.slot_id, table.table_id,
                                      slots[placeholder.slot_id].page_number, 0, table.row_count or 0),)
-        serialized = serializer(table, header, table_node_id=placeholder.element_id)
-        prepared.append(PreparedTableContent(placeholder.slot_id, table.table_id,
-                                             table, header, serialized, segments))
+        prepared.append(AdoptedTable(placeholder.slot_id, table.table_id, table, header, segments))
     return tuple(prepared), report

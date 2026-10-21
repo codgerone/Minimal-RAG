@@ -4,6 +4,8 @@ from dataclasses import replace
 
 from rag.ingest.regions import chunk_regions
 from rag.ingest.tables.markdown_rows import serialize_markdown_rows
+from rag.ingest.tables.structure import rule_structure
+from rag.ingest.tables.llm_tables import annotated_structure
 from rag.ingest.tables.header import detect_header
 from rag.ingest.tables.models import StructuredTable, TableCell
 from rag.models import (
@@ -20,7 +22,7 @@ def chunk(sources, fragment_index=0, fragment_count=1, parent=None) -> DocumentC
 
 
 def document(*nodes) -> ParsedDocument:
-    return ParsedDocument("d", "d.pdf", "d.pdf", "a" * 64, tuple(nodes), ())
+    return ParsedDocument("d", "d.pdf", "d.pdf", "a" * 64, tuple(nodes), (), "english")
 
 
 def test_text_with_word_positions_gives_the_words_in_the_chunk_range():
@@ -52,8 +54,10 @@ def _table_node() -> TableNode:
     table = StructuredTable("t", "pymupdf", "lines", 3, 2, cells, (), None, (), ())
     header = detect_header(table)
     assert header.outcome == "identified"
-    return TableNode("tbl", "s", "#/tables/0", "selected_winner", table, None, header,
-                     serialize_markdown_rows(table, header, table_node_id="tbl", labeled=True),
+    return TableNode("tbl", "s", "#/tables/0", "selected_winner", table, None, header, rule_structure(header),
+                     serialize_markdown_rows(table, rule_structure(header), table_node_id="tbl", labeled=True),
+                     serialize_markdown_rows(table, rule_structure(header), table_node_id="tbl").text,
+                     "rows",
                      (PageSpan(1, BoundingBox(0, 0, 100, 30), "#/tables/0"),))
 
 

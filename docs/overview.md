@@ -1,10 +1,10 @@
-# 系统概览（V3.11）
+# 系统概览（V3.13）
 
 ## 这是什么
 
 一个本地运行的 PDF 知识库 RAG 系统：把 `documents/` 里的 PDF（合同、订单、发票等）解析、切块后建立向量索引和 BM25 倒排索引，然后支持混合检索、依据证据的问答，以及用人工标注的题目评估检索效果。
 
-系统的每个关键环节都可以替换（解析器、表格提取器、表格文本化、分块器、编码器、检索器、LLM）。用一个配置文件选择各环节的实现，就得到一份"装配"；不同装配各自建索引，可以放在一起比较效果。它也是 Sales Operations Agent 的检索模块原型。
+系统的每个关键环节都可以替换（解析器、表格提取器、表格结构、表格写法、表格检索文本、分块器、编码器、检索器、LLM）。用一个配置文件选择各环节的实现，就得到一份"装配"；不同装配各自建索引，可以放在一起比较效果。它也是 Sales Operations Agent 的检索模块原型。
 
 ## 能做什么
 
@@ -18,9 +18,9 @@
 | `python -m rag chat` | 连续提问（每轮独立检索，不记忆上下文） |
 | `python -m rag eval` | 用标注题目评估检索效果并生成报告（K 取配置中的 `[eval] top_k`，内置为 3） |
 | `python -m rag anchors` | 在 PDF 上定位标注的 excerpt，生成高亮审核文件；核对后加 `--write` 写入标注 |
-| `python -m rag config list` / `config show NAME` | 查看装配配置 |
-| `python -m rag compare RUN... --name NAME` | 把几次评估并排对比（每组第一次为基线），生成 `reports/compare/NAME/` |
-| `python -m rag report` | 重新生成报告首页 |
+| `python -m rag config list` / `config show NAME` | 查看装配配置（`configs/` 的七份内置装配与 `configs/extra/` 的 `plain_text`） |
+| `python -m rag compare RUN... --name NAME` | 把几次评估并排对比（每组第一次为基线），生成 `reports/compare/NAME/`；`--table-spec` 给出表格证据的对照组、排除组与结论 |
+| `python -m rag report` | 由已保存的结果重新生成入库审核页、评估报告、对比页和报告首页（不重新入库、不重新评估） |
 
 `search`、`ask`、`chat` 会按问题中的标识编码限定检索范围（见下节）；`--document` 可手动指定只在某个文档内检索。`search`、`ask`、`chat`、`eval` 可加 `--retriever semantic|bm25|hybrid` 临时换检索器，加 `--table-return-unit chunk|table` 临时改变命中表格时的返回方式，都不需要重建索引。
 
@@ -41,14 +41,25 @@ codes = ["ORDER2025001"]
 - 配置 `[retriever] document_filter = false` 可关闭过滤；改标识表和开关都不需要重建索引。
 - 规则细节：[rules/document-filter.md](rules/document-filter.md)。
 
-## 两份内置装配
+## 内置装配
 
-| | `plain_text` | `structured` |
-|---|---|---|
-| 解析 | PyMuPDF 按页取文本 | Docling 版面解析（标题、段落、列表、表格、阅读顺序） |
-| 表格 | 不处理 | 四个工具九种策略提取，评分选出最佳结构；跨页的续表与前表合并成一张表（见 [rules/table-continuation.md](rules/table-continuation.md)）；判定表头后写成带列名的 Markdown 行（`labeled_rows_v1`，见 [rules/table-text.md](rules/table-text.md)） |
-| 分块 | 每页内 300 字符、重叠 50 | 按阅读顺序把正文、列表项合并成块，表格单独成块，每块不超过 512 token（按 multilingual-e5 分词器计数，见 [rules/chunking.md](rules/chunking.md)） |
-| 索引 / 检索 | bge-m3 向量索引 + BM25 倒排索引，混合检索；按标识编码限定文档；问答取 Top-4，评估取 Top-3 | 同左；命中表格时返回整张表 |
+`configs/` 中的七份装配只在表格处理上不同，其余相同：Docling 版面解析；四个工具九种策略提取表格、评分选出最佳结构，跨页的续表与前表合并（[rules/table-continuation.md](rules/table-continuation.md)）；按阅读顺序把正文、列表项合并成块，表格单独成块，每块不超过 512 token（按 multilingual-e5 分词器计数，[rules/chunking.md](rules/chunking.md)）；bge-m3 向量索引 + BM25 倒排索引，混合检索；按标识编码限定文档；命中表格时返回整张表；问答取 Top-4，评估取 Top-3。不指定 `--config` 时用 `structured`。
+
+| 装配 | 表格结构 | 表格写法 | 索引中放什么 | 入库时调用 LLM |
+|---|---|---|---|---|
+| `structured`（默认） | 规则判定表头 | Markdown 行，表头写成一行列名路径 | 表格行 | 否 |
+| `structured_labeled` | 规则判定表头 | 表头映射：每格写成"列名: 值" | 表格行 | 否 |
+| `structured_llm` | LLM 结构标注（表头、分节、隐式合并），不通过时退回规则 | Markdown 行；分节标题重复进该节的每一块 | 表格行 | 是 |
+| `structured_llm_labeled` | 同上 | 表头映射 | 表格行 | 是 |
+| `structured_llm_lead` | 同上 | Markdown 行 | 表格行，每块开头加一句引导句 | 是（与标注同一次调用） |
+| `structured_llm_labeled_lead` | 同上 | 表头映射 | 同上 | 是（同上） |
+| `structured_summary` | 不判定：LLM 读原样表格写摘要 | — | 每张表只放一段摘要 | 是 |
+
+`structured_summary` 的摘要不通过校验时，该表按规则表头、Markdown 行退回为表格 chunk。返回单元是查询设置，同一份索引可以只返回命中的 chunk（`--table-return-unit chunk`）或返回整表，因此七份装配给出 13 种组合（摘要只能返回整表）；`bash scripts/eval_tables.sh <名称>` 依次评估这 13 种组合并生成对比页。
+
+表格怎么写见 [rules/table-text.md](rules/table-text.md)，LLM 怎么处理表格见 [rules/table-llm.md](rules/table-llm.md)。返回整表时交给回答 LLM 的整表文本，七份装配相同：每行原样写出，不含结构判定。入库用的 LLM 是 `google/gemini-3.8-flash`，结果缓存在 `.rag/llm-cache/`，重建索引时不重复计费。
+
+`configs/extra/plain_text` 同样可以用 `--config` 选择：PyMuPDF 按页取文本，每页内 300 字符、重叠 50，不处理表格；不在 `ingest --all-configs` 中。
 
 新建装配：复制 `configs/structured.toml` 改几行即可，启动时会校验组合是否合法。
 
@@ -66,16 +77,24 @@ BM25 只能匹配问题中照抄原文的词（外文术语、型号、公司名
 
 **命中表格即返回整表**（`[retriever] table_return_unit = "table"`，内置装配默认）：检索命中表格的任一块时，返回整张表，同一张表在结果中只占一个位置，名次取它排名最靠前的一块，空出的位置由后面的结果补上。整表文本在入库时存入整表库（不做向量化）。长表格被切成多块后，分组标题、合计行与数据行分处不同块，整表交给 LLM 才能看懂（[决策 012](decisions/012-whole-table-return.md)）。代价是返回的文本变长：本库最大的表约 5000 token，对表格大小不设上限。
 
-## 当前效果（K=3，5 份 PDF，24 道题，数据集 3.2.0，混合检索）
+## 当前效果（K=3，5 份 PDF，24 道题，数据集 3.2.0，混合检索，返回整表）
 
-| 装配 | 命中率 | 完整覆盖 | 证据组召回 | MRR | Chunk 精确率 | 跨文档污染 | 文档识别 |
-|---|---:|---:|---:|---:|---:|---:|---:|
-| plain_text | 50.0% | 33.3% | 40.3% | 80.6% | 51.4% | 0.0% | 24/24 |
-| structured | 91.7% | 83.3% | 86.1% | 83.3% | 48.6% | 0.0% | 24/24 |
+| 装配 | 命中率 | 完整覆盖 | 证据组召回 | MRR | Chunk 精确率 | 跨文档污染 | 文档识别 | 每题返回 token |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| plain_text | 50.0% | 33.3% | 40.3% | 80.6% | 51.4% | 0.0% | 24/24 | 220 |
+| structured（默认） | 95.8% | 75.0% | 85.4% | 87.5% | 48.6% | 0.0% | 24/24 | 1255 |
+| structured_labeled | 91.7% | 83.3% | 86.1% | 83.3% | 48.6% | 0.0% | 24/24 | 1263 |
+| structured_llm | 95.8% | 75.0% | 85.4% | 87.5% | 48.6% | 0.0% | 24/24 | 1255 |
+| structured_llm_labeled | 91.7% | 83.3% | 86.1% | 81.2% | 48.6% | 0.0% | 24/24 | 1263 |
+| structured_llm_lead | 95.8% | 83.3% | 88.2% | 84.7% | 51.4% | 0.0% | 24/24 | 1245 |
+| structured_llm_labeled_lead | 95.8% | 83.3% | 88.2% | 81.9% | 51.4% | 0.0% | 24/24 | 1245 |
+| structured_summary | 95.8% | 83.3% | 88.2% | 85.4% | 51.4% | 0.0% | 24/24 | 1171 |
 
-返回整表时，结果按"返回单元"计：一张整表算一个结果，视为返回了它的全部 chunk；Chunk 精确率、跨文档污染也按结果计。每题返回的文本（按 multilingual-e5 分词器计数）：structured 全部题之和除以 24 为 1860 token，最多 5627；plain_text 为 220、最多 314。
+返回整表时，结果按"返回单元"计：一张整表算一个结果，视为返回了它的全部 chunk；Chunk 精确率、跨文档污染也按结果计。每题返回 token 是全部题返回文本之和（按 multilingual-e5 分词器计数）除以 24；structured 每题最多 2365。
 
-同一数据集上用纯向量检索：plain_text 58.3% / 29.2% / 39.2% / 77.8% / 45.8%，structured 91.7% / 79.2% / 83.6% / 80.6% / 47.2%（次序为命中率、完整覆盖、证据组召回、MRR、Chunk 精确率）。
+表格题另看表格证据指标（[rules/evaluation.md](rules/evaluation.md)"表格证据指标"），以 12 道表格题、排除 3 个与表格入库无关的证据组计，每题所需返回单元数：structured_llm_lead 1.92，structured、structured_llm、structured_summary 2.08，structured_llm_labeled_lead 2.17，structured_labeled 2.33，structured_llm_labeled 2.42；13 种组合的对比见 `reports/compare/v3.13-llm-tables/`。
+
+V3.12 测量的纯向量检索（表格写法为当时的表头映射）：plain_text 58.3% / 29.2% / 39.2% / 77.8% / 45.8%，structured 91.7% / 79.2% / 83.6% / 80.6% / 47.2%（次序为命中率、完整覆盖、证据组召回、MRR、Chunk 精确率）。
 
 证据对应的 chunk 按 PDF 坐标判定：excerpt 写了什么，就要求检索到包含这些内容的全部 chunk。部分证据组需要的结果数超过 3，K=3 时不可能被覆盖，因此完整覆盖率的上限为 plain_text 17/24、structured 24/24（报告中标出这些证据组）。
 
@@ -97,6 +116,8 @@ V3.11 把跨页的续表与前表合并成一张表（[决策 011](decisions/011
 
 V3.12 在命中表格时返回整张表（[决策 012](decisions/012-whole-table-return.md)），chunk 不变。structured 混合检索完整覆盖由 17/24 升到 20/24，变好的是 PO 25-19 的三道题，没有题变差：PO-25-19-Q001、Q003 的表格证据组原先要前 12–14 个结果才能找全，现在前 1–3 个；V3.11 变差的 Q002 恢复。每题返回 token 由 1149 增到 1860。只多返回几块也能得到相近的总分（不返回整表、K=6 时完整覆盖同为 20/24，每题 1939 token），但多覆盖的是 CONTRACT-105-Q001、Q007 和 PO-25-19-Q002，PO-25-19-Q001、Q003 在 K=6 下仍找不全。纯向量完整覆盖由 16/24 升到 19/24。plain_text 没有表格，结果不变。逐题对比与所需 K 的变化见 `reports/compare/v3.12-whole-table/`。
 
+V3.13 用 LLM 处理表格（[决策 013](decisions/013-llm-tables.md)）：表格处理拆成表格结构、写法、表格检索文本三个环节，七份装配覆盖全部组合。LLM 只标注结构（表头、分节、隐式合并），chunk 中的表格文字全部由代码从原单元格写出；12 张表的标注全部正确，但只有 PO 25-19 数量表有分节，其余表与规则判出的表头相同，返回整表时 structured_llm 与 structured 逐题相同。引导句使表格题所需返回单元由 2.08 降到 1.92；摘要在排除 3 组后为 2.08，不排除时最少（3.42 对 3.58）。这些差距只有 1–3 题，与 LLM 重新生成一次文字带来的变动同一量级，引导句与摘要分不出优劣。默认装配改为 Markdown 写法（只返回命中 chunk 时明显优于表头映射，返回整表时相近），完整覆盖由 20/24 变为 18/24，少的是 PO-25-19-Q001、Q003：两题需要的第 3、4 个返回单元次序互换；命中由 22 升到 23。整表文本改为原样网格写出，每题返回 token 由 1860 降到 1255。
+
 ## 不做什么（当前范围外）
 
 扫描件 OCR、图片理解、重排模型、从文档内容自动抽取编号、按文档属性（类型、客户、日期）过滤、多轮对话记忆、Agent/工具调用、Web 界面。
@@ -113,8 +134,10 @@ V3.12 在命中表格时返回整张表（[决策 012](decisions/012-whole-table
 |---|---|---|
 | `documents/` | 你的 PDF | 否 |
 | `documents/documents.toml` | 文档标识表：每份 PDF 的标识编码 | 否 |
-| `configs/` | 装配配置 | 是 |
+| `configs/`、`configs/extra/` | 装配配置：七份内置装配；`extra/` 放不参与 `--all-configs` 的 `plain_text` | 是 |
 | `eval/ground-truth/` | 人工标注的问题、信息项与证据，以及每段证据在 PDF 上的已确认位置 | 是 |
 | `reports/` | 给人看的报告：`index.html` 入口、`ingest/` 入库审核页、`eval/` 评估报告 | 评估报告进 git，入库审核页不进 |
-| `.rag/indexes/<配置名>/` | 机器数据：`manifest.json`、向量库 `chroma/`、BM25 倒排索引 `bm25.sqlite`、整表库 `tables.sqlite`、各文档中间结果 JSON（含 chunk 来源区域） | 否 |
+| `.rag/indexes/<配置名>/` | 机器数据：`manifest.json`、向量库 `chroma/`、BM25 倒排索引 `bm25.sqlite`、整表库 `tables.sqlite`、各文档中间结果 JSON（含 chunk 来源区域、表格结构与 LLM 调用记录；审核页由它生成） | 否 |
+| `.rag/llm-cache/` | 入库时表格 LLM 调用的缓存 | 否 |
+| `eval/table-structure/` | 测试集表格的结构标注正确答案（审核页据此判定 LLM 标注是否正确） | 是 |
 | `tmp/anchor-review/` | excerpt 定位审核文件（临时） | 否 |

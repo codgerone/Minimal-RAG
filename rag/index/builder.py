@@ -12,7 +12,7 @@ import shutil
 from dataclasses import dataclass
 from typing import Callable, Literal
 
-from rag.index.analyzer import detect_language
+from rag.index.audit import load_audit, write_audit
 from rag.index.lexical import LexicalChunk, LexicalStore
 from rag.index.manifest import DocumentEntry, Manifest, now
 from rag.index.status import IndexStatus, check_status
@@ -21,7 +21,6 @@ from rag.index.tables import StoredTable, TableStore, collect_tables
 from rag.ingest.regions import attach_regions
 from rag.ingest.pipeline import ProcessedDocument, process_document
 from rag.ingest.sources import discover, select
-from rag.jsonio import write_json
 from rag.models import ChunkBatch, SourceDocument
 from rag.paths import Workspace, readable_name
 from rag.registry import Assembly
@@ -75,12 +74,12 @@ def current_status(workspace: Workspace, assembly: Assembly,
 
 
 def prepare(source: SourceDocument, assembly: Assembly) -> Prepared:
-    processed = process_document(source, assembly.parser, assembly.extractors, assembly.formatter)
+    processed = process_document(source, assembly.parser, assembly.extractors, assembly.table_steps)
     batch = attach_regions(assembly.chunker.chunk(processed.document), processed.document)
     vectors = assembly.embedder.encode_passages([chunk.text for chunk in batch.chunks])
     lexical = None
     if assembly.lexical is not None:
-        language = detect_language(chunk.text for chunk in batch.chunks)
+        language = processed.document.language
         lexical = [LexicalChunk(chunk.chunk_id, language, assembly.lexical.terms(chunk.text, language))
                    for chunk in batch.chunks]
     entry = DocumentEntry(source.document_id, source.document_name, source.relative_path,
@@ -103,30 +102,10 @@ def _stored(prepared: Prepared) -> list[StoredChunk]:
             for chunk in prepared.batch.chunks]
 
 
-def write_audit_files(folder, prepared: Prepared) -> None:
-    """Intermediate results of every stage, for debugging and the HTML reports."""
-    processed = prepared.processed
-    if folder.exists():
-        shutil.rmtree(folder)
-    write_json(folder / "parse-native.json", processed.parse.native)
-    write_json(folder / "parsed.json", processed.document)
-    if processed.parse.primary.table_slots:
-        write_json(folder / "tables.json", {
-            "slots": processed.parse.primary.table_slots,
-            "extraction_reports": processed.extraction_reports,
-            "grouping": processed.grouping,
-            "scoring": processed.scoring,
-            "resolutions": processed.resolutions,
-            "continuations": processed.continuations,
-            "prepared_tables": processed.prepared_tables,
-        })
-    write_json(folder / "chunks.json", prepared.batch)
-
-
-def _write_reports(workspace: Workspace, assembly: Assembly, prepared: Prepared) -> None:
+def _write_reports(workspace: Workspace, config_name: str, entry: DocumentEntry) -> None:
     from rag.reports.ingest import write_document_reports
-    write_document_reports(workspace, assembly.name, prepared.processed, prepared.batch,
-                           prepared.entry)
+    audit = load_audit(workspace.index_dir(config_name) / "documents" / entry.folder)
+    write_document_reports(workspace, config_name, audit, entry)
 
 
 def _new_manifest(assembly: Assembly) -> Manifest:
@@ -181,7 +160,7 @@ def ingest(workspace: Workspace, assembly: Assembly, *, file: str | None = None,
             prepared = prepare(item.source, assembly)
             if item.entry is not None and item.entry.folder != prepared.entry.folder:
                 shutil.rmtree(index_dir / "documents" / item.entry.folder, ignore_errors=True)
-            write_audit_files(index_dir / "documents" / prepared.entry.folder, prepared)
+            write_audit(index_dir / "documents" / prepared.entry.folder, prepared.processed, prepared.batch)
             store.replace_document(item.source.document_id, _stored(prepared), prepared.vectors)
             if lexical is not None:
                 lexical.replace_document(item.source.document_id, prepared.lexical or [])
@@ -192,7 +171,7 @@ def ingest(workspace: Workspace, assembly: Assembly, *, file: str | None = None,
             outcomes.append(DocumentOutcome(item.relative_path, "failed",
                                             error=f"{type(exc).__name__}: {exc}"))
             continue
-        _write_reports(workspace, assembly, prepared)
+        _write_reports(workspace, assembly.name, prepared.entry)
         action: Action = "added" if item.entry is None else "updated"
         outcomes.append(DocumentOutcome(item.relative_path, action, len(prepared.batch.chunks)))
     return outcomes
@@ -214,7 +193,7 @@ def _rebuild_all(workspace: Workspace, assembly: Assembly,
         progress(f"处理 {source.relative_path} …")
         try:
             prepared = prepare(source, assembly)
-            write_audit_files(staging / prepared.entry.folder, prepared)
+            write_audit(staging / prepared.entry.folder, prepared.processed, prepared.batch)
         except Exception as exc:
             shutil.rmtree(staging, ignore_errors=True)
             raise IngestError(f"全量重建中止，现有索引未改动：{source.relative_path} 处理失败"
@@ -246,7 +225,7 @@ def _rebuild_all(workspace: Workspace, assembly: Assembly,
 
     shutil.rmtree(workspace.ingest_reports(assembly.name), ignore_errors=True)
     for prepared in prepared_all:
-        _write_reports(workspace, assembly, prepared)
+        _write_reports(workspace, assembly.name, prepared.entry)
         outcomes.append(DocumentOutcome(prepared.source.relative_path, "rebuilt",
                                         len(prepared.batch.chunks)))
     return sorted(outcomes, key=lambda item: item.relative_path.casefold())

@@ -1,0 +1,163 @@
+{
+  "records": {
+    "kind": "records",
+    "model": "anthropic/claude-haiku-5.5",
+    "prompt_version": "llm_tables_v1",
+    "attempts": [
+      {
+        "raw": "{\"segments\": [{\"records\": [{\"text\": \"Cláusula Tercera: Objeto del contrato (compra corporativa de medidores para las empresas de la Corporación FONAFE). Ítem: 1; Descripción: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS\", \"cells\": [\"r0c0\", \"r0c1\", \"r1c0\", \"r1c1\"]}, {\"text\": \"Cláusula Tercera: Objeto del contrato (compra corporativa de medidores para las empresas de la Corporación FONAFE). Ítem: 3; Descripción: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS\", \"cells\": [\"r0c0\", \"r0c1\", \"r2c0\", \"r2c1\"]}, {\"text\": \"Cláusula Tercera: Objeto del contrato (compra corporativa de medidores para las empresas de la Corporación FONAFE). Ítem: 4; Descripción: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS\", \"cells\": [\"r0c0\", \"r0c1\", \"r3c0\", \"r3c1\"]}]}]}",
+        "issues": [],
+        "prompt_tokens": 1118,
+        "completion_tokens": 693,
+        "cost_usd": 0.0004583,
+        "cached": true
+      }
+    ],
+    "records": [
+      [
+        {
+          "text": "Cláusula Tercera: Objeto del contrato (compra corporativa de medidores para las empresas de la Corporación FONAFE). Ítem: 1; Descripción: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS",
+          "cell_ids": [
+            "pymupdf_lines_strict_p0002_t0001_r0000c0000_r0001c0001",
+            "pymupdf_lines_strict_p0002_t0001_r0000c0001_r0001c0002",
+            "pymupdf_lines_strict_p0002_t0001_r0001c0000_r0002c0001",
+            "pymupdf_lines_strict_p0002_t0001_r0001c0001_r0002c0002"
+          ]
+        },
+        {
+          "text": "Cláusula Tercera: Objeto del contrato (compra corporativa de medidores para las empresas de la Corporación FONAFE). Ítem: 3; Descripción: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS",
+          "cell_ids": [
+            "pymupdf_lines_strict_p0002_t0001_r0000c0000_r0001c0001",
+            "pymupdf_lines_strict_p0002_t0001_r0000c0001_r0001c0002",
+            "pymupdf_lines_strict_p0002_t0001_r0002c0000_r0003c0001",
+            "pymupdf_lines_strict_p0002_t0001_r0002c0001_r0003c0002"
+          ]
+        },
+        {
+          "text": "Cláusula Tercera: Objeto del contrato (compra corporativa de medidores para las empresas de la Corporación FONAFE). Ítem: 4; Descripción: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS",
+          "cell_ids": [
+            "pymupdf_lines_strict_p0002_t0001_r0000c0000_r0001c0001",
+            "pymupdf_lines_strict_p0002_t0001_r0000c0001_r0001c0002",
+            "pymupdf_lines_strict_p0002_t0001_r0003c0000_r0004c0001",
+            "pymupdf_lines_strict_p0002_t0001_r0003c0001_r0004c0002"
+          ]
+        }
+      ]
+    ],
+    "text": ""
+  },
+  "lead": {
+    "kind": "lead",
+    "model": "anthropic/claude-haiku-5.5",
+    "prompt_version": "llm_tables_v1",
+    "attempts": [
+      {
+        "raw": "{\"lead\": \"Cuadro que enumera, por número de ítem, los tipos de medidores eléctricos que constituyen el objeto de la compra corporativa para las empresas de la Corporación FONAFE, según la Cláusula Tercera del contrato.\"}",
+        "issues": [
+          "51 tokens, over the limit of 48"
+        ],
+        "prompt_tokens": 739,
+        "completion_tokens": 89,
+        "cost_usd": 0.0001184,
+        "cached": true
+      },
+      {
+        "raw": "{\"lead\": \"Cuadro que enumera, por número de ítem, los tipos de medidores eléctricos objeto de la compra corporativa para las empresas de FONAFE, según la Cláusula Tercera del contrato.\"}",
+        "issues": [],
+        "prompt_tokens": 870,
+        "completion_tokens": 78,
+        "cost_usd": 0.000126,
+        "cached": true
+      }
+    ],
+    "records": [],
+    "text": "Cuadro que enumera, por número de ítem, los tipos de medidores eléctricos objeto de la compra corporativa para las empresas de FONAFE, según la Cláusula Tercera del contrato."
+  },
+  "summary": {
+    "kind": "summary",
+    "model": "anthropic/claude-haiku-5.5",
+    "prompt_version": "llm_tables_v1",
+    "attempts": [
+      {
+        "raw": "{\"summary\": \"Cuadro de la Cláusula Tercera (Objeto del contrato) de un contrato de 'COMPRA CORPORATIVA DE MEDIDORES PARA LAS EMPRESAS DE LA CORPORACION FONAFE', que detalla los bienes objeto de la compra. Cada fila corresponde a un ítem de la compra. Las columnas son 'Ítem' y 'Descripción'. No hay grupos, subtotales ni totales. Los valores de ítem presentes son 1, 3 y 4; las descripciones son: 'MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS' (ítem 1), 'MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS' (ítem 3) y 'MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS' (ítem 4). Búsquedas útiles: medidor electrónico monofásico 2 hilos, medidor trifásico 3 hilos, medidor trifásico 4 hilos, objeto del contrato, compra corporativa de medidores, FONAFE.\"}",
+        "issues": [],
+        "prompt_tokens": 864,
+        "completion_tokens": 411,
+        "cost_usd": 0.0002919,
+        "cached": true
+      }
+    ],
+    "records": [],
+    "text": "Cuadro de la Cláusula Tercera (Objeto del contrato) de un contrato de 'COMPRA CORPORATIVA DE MEDIDORES PARA LAS EMPRESAS DE LA CORPORACION FONAFE', que detalla los bienes objeto de la compra. Cada fila corresponde a un ítem de la compra. Las columnas son 'Ítem' y 'Descripción'. No hay grupos, subtotales ni totales. Los valores de ítem presentes son 1, 3 y 4; las descripciones son: 'MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS' (ítem 1), 'MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS' (ítem 3) y 'MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS' (ítem 4). Búsquedas útiles: medidor electrónico monofásico 2 hilos, medidor trifásico 3 hilos, medidor trifásico 4 hilos, objeto del contrato, compra corporativa de medidores, FONAFE."
+  },
+  "chunks": [
+    {
+      "text": "Cláusula Tercera: Objeto del contrato (compra corporativa de medidores para las empresas de la Corporación FONAFE). Ítem: 1; Descripción: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS\nCláusula Tercera: Objeto del contrato (compra corporativa de medidores para las empresas de la Corporación FONAFE). Ítem: 3; Descripción: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS\nCláusula Tercera: Objeto del contrato (compra corporativa de medidores para las empresas de la Corporación FONAFE). Ítem: 4; Descripción: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS",
+      "records": [
+        {
+          "text": "Cláusula Tercera: Objeto del contrato (compra corporativa de medidores para las empresas de la Corporación FONAFE). Ítem: 1; Descripción: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS",
+          "cell_ids": [
+            "pymupdf_lines_strict_p0002_t0001_r0000c0000_r0001c0001",
+            "pymupdf_lines_strict_p0002_t0001_r0000c0001_r0001c0002",
+            "pymupdf_lines_strict_p0002_t0001_r0001c0000_r0002c0001",
+            "pymupdf_lines_strict_p0002_t0001_r0001c0001_r0002c0002"
+          ]
+        },
+        {
+          "text": "Cláusula Tercera: Objeto del contrato (compra corporativa de medidores para las empresas de la Corporación FONAFE). Ítem: 3; Descripción: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS",
+          "cell_ids": [
+            "pymupdf_lines_strict_p0002_t0001_r0000c0000_r0001c0001",
+            "pymupdf_lines_strict_p0002_t0001_r0000c0001_r0001c0002",
+            "pymupdf_lines_strict_p0002_t0001_r0002c0000_r0003c0001",
+            "pymupdf_lines_strict_p0002_t0001_r0002c0001_r0003c0002"
+          ]
+        },
+        {
+          "text": "Cláusula Tercera: Objeto del contrato (compra corporativa de medidores para las empresas de la Corporación FONAFE). Ítem: 4; Descripción: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS",
+          "cell_ids": [
+            "pymupdf_lines_strict_p0002_t0001_r0000c0000_r0001c0001",
+            "pymupdf_lines_strict_p0002_t0001_r0000c0001_r0001c0002",
+            "pymupdf_lines_strict_p0002_t0001_r0003c0000_r0004c0001",
+            "pymupdf_lines_strict_p0002_t0001_r0003c0001_r0004c0002"
+          ]
+        }
+      ],
+      "tokens": 166
+    }
+  ],
+  "chunks_with_lead": [
+    {
+      "text": "Cuadro que enumera, por número de ítem, los tipos de medidores eléctricos objeto de la compra corporativa para las empresas de FONAFE, según la Cláusula Tercera del contrato.\nCláusula Tercera: Objeto del contrato (compra corporativa de medidores para las empresas de la Corporación FONAFE). Ítem: 1; Descripción: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS\nCláusula Tercera: Objeto del contrato (compra corporativa de medidores para las empresas de la Corporación FONAFE). Ítem: 3; Descripción: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS\nCláusula Tercera: Objeto del contrato (compra corporativa de medidores para las empresas de la Corporación FONAFE). Ítem: 4; Descripción: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS",
+      "records": [
+        {
+          "text": "Cláusula Tercera: Objeto del contrato (compra corporativa de medidores para las empresas de la Corporación FONAFE). Ítem: 1; Descripción: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS",
+          "cell_ids": [
+            "pymupdf_lines_strict_p0002_t0001_r0000c0000_r0001c0001",
+            "pymupdf_lines_strict_p0002_t0001_r0000c0001_r0001c0002",
+            "pymupdf_lines_strict_p0002_t0001_r0001c0000_r0002c0001",
+            "pymupdf_lines_strict_p0002_t0001_r0001c0001_r0002c0002"
+          ]
+        },
+        {
+          "text": "Cláusula Tercera: Objeto del contrato (compra corporativa de medidores para las empresas de la Corporación FONAFE). Ítem: 3; Descripción: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS",
+          "cell_ids": [
+            "pymupdf_lines_strict_p0002_t0001_r0000c0000_r0001c0001",
+            "pymupdf_lines_strict_p0002_t0001_r0000c0001_r0001c0002",
+            "pymupdf_lines_strict_p0002_t0001_r0002c0000_r0003c0001",
+            "pymupdf_lines_strict_p0002_t0001_r0002c0001_r0003c0002"
+          ]
+        },
+        {
+          "text": "Cláusula Tercera: Objeto del contrato (compra corporativa de medidores para las empresas de la Corporación FONAFE). Ítem: 4; Descripción: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS",
+          "cell_ids": [
+            "pymupdf_lines_strict_p0002_t0001_r0000c0000_r0001c0001",
+            "pymupdf_lines_strict_p0002_t0001_r0000c0001_r0001c0002",
+            "pymupdf_lines_strict_p0002_t0001_r0003c0000_r0004c0001",
+            "pymupdf_lines_strict_p0002_t0001_r0003c0001_r0004c0002"
+          ]
+        }
+      ],
+      "tokens": 210
+    }
+  ]
+}

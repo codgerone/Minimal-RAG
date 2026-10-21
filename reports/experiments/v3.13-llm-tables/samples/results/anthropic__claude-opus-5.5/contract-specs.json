@@ -1,0 +1,171 @@
+{
+  "records": {
+    "kind": "records",
+    "model": "anthropic/claude-opus-5.5",
+    "prompt_version": "llm_tables_v1",
+    "attempts": [
+      {
+        "raw": "{\"segments\": [{\"records\": [{\"text\": \"Ítem: 1; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 01\", \"cells\": [\"r0c0\", \"r0c1\", \"r0c2\", \"r1c0\", \"r1c1\", \"r1c2\"]}, {\"text\": \"Ítem: 3; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 03\", \"cells\": [\"r0c0\", \"r0c1\", \"r0c2\", \"r2c0\", \"r2c1\", \"r2c2\"]}, {\"text\": \"Ítem: 4; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 04\", \"cells\": [\"r0c0\", \"r0c1\", \"r0c2\", \"r3c0\", \"r3c1\", \"r3c2\"]}]}]}",
+        "issues": [],
+        "prompt_tokens": 1274,
+        "completion_tokens": 497,
+        "cost_usd": 0.015036,
+        "cached": false
+      }
+    ],
+    "records": [
+      [
+        {
+          "text": "Ítem: 1; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 01",
+          "cell_ids": [
+            "pymupdf_lines_p0003_t0001_r0000c0000_r0001c0001",
+            "pymupdf_lines_p0003_t0001_r0000c0001_r0001c0002",
+            "pymupdf_lines_p0003_t0001_r0000c0002_r0001c0003",
+            "pymupdf_lines_p0003_t0001_r0001c0000_r0002c0001",
+            "pymupdf_lines_p0003_t0001_r0001c0001_r0002c0002",
+            "pymupdf_lines_p0003_t0001_r0001c0002_r0002c0003"
+          ]
+        },
+        {
+          "text": "Ítem: 3; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 03",
+          "cell_ids": [
+            "pymupdf_lines_p0003_t0001_r0000c0000_r0001c0001",
+            "pymupdf_lines_p0003_t0001_r0000c0001_r0001c0002",
+            "pymupdf_lines_p0003_t0001_r0000c0002_r0001c0003",
+            "pymupdf_lines_p0003_t0001_r0002c0000_r0003c0001",
+            "pymupdf_lines_p0003_t0001_r0002c0001_r0003c0002",
+            "pymupdf_lines_p0003_t0001_r0002c0002_r0003c0003"
+          ]
+        },
+        {
+          "text": "Ítem: 4; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 04",
+          "cell_ids": [
+            "pymupdf_lines_p0003_t0001_r0000c0000_r0001c0001",
+            "pymupdf_lines_p0003_t0001_r0000c0001_r0001c0002",
+            "pymupdf_lines_p0003_t0001_r0000c0002_r0001c0003",
+            "pymupdf_lines_p0003_t0001_r0003c0000_r0004c0001",
+            "pymupdf_lines_p0003_t0001_r0003c0001_r0004c0002",
+            "pymupdf_lines_p0003_t0001_r0003c0002_r0004c0003"
+          ]
+        }
+      ]
+    ],
+    "text": ""
+  },
+  "lead": {
+    "kind": "lead",
+    "model": "anthropic/claude-opus-5.5",
+    "prompt_version": "llm_tables_v1",
+    "attempts": [
+      {
+        "raw": "{\"lead\": \"Tabla de la Cláusula Cuarta del contrato que relaciona cada ítem de medidores electrónicos a entregar con la ubicación de sus datos técnicos en la oferta del contratista.\"}",
+        "issues": [],
+        "prompt_tokens": 895,
+        "completion_tokens": 77,
+        "cost_usd": 0.00512,
+        "cached": false
+      }
+    ],
+    "records": [],
+    "text": "Tabla de la Cláusula Cuarta del contrato que relaciona cada ítem de medidores electrónicos a entregar con la ubicación de sus datos técnicos en la oferta del contratista."
+  },
+  "summary": {
+    "kind": "summary",
+    "model": "anthropic/claude-opus-5.5",
+    "prompt_version": "llm_tables_v1",
+    "attempts": [
+      {
+        "raw": "{\"summary\": \"Tabla de la Cláusula Cuarta (Alcance de especificaciones técnicas) del contrato. Relaciona los bienes que EL CONTRATISTA se obliga a entregar con la ubicación de sus especificaciones técnicas dentro de la oferta presentada. Cada fila corresponde a un ítem del contrato. Las columnas son «Ítem», «DESCRIPCIÓN» y «TABLA DE DATOS TÉCNICOS»; esta última remite a las páginas de la oferta del contratista donde están los datos técnicos de cada ítem. Los ítems listados son 1 (MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS), 3 (MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS) y 4 (MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS). No aparece el ítem 2.\"}",
+        "issues": [],
+        "prompt_tokens": 1020,
+        "completion_tokens": 344,
+        "cost_usd": 0.01096,
+        "cached": false
+      }
+    ],
+    "records": [],
+    "text": "Tabla de la Cláusula Cuarta (Alcance de especificaciones técnicas) del contrato. Relaciona los bienes que EL CONTRATISTA se obliga a entregar con la ubicación de sus especificaciones técnicas dentro de la oferta presentada. Cada fila corresponde a un ítem del contrato. Las columnas son «Ítem», «DESCRIPCIÓN» y «TABLA DE DATOS TÉCNICOS»; esta última remite a las páginas de la oferta del contratista donde están los datos técnicos de cada ítem. Los ítems listados son 1 (MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS), 3 (MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS) y 4 (MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS). No aparece el ítem 2."
+  },
+  "chunks": [
+    {
+      "text": "Ítem: 1; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 01\nÍtem: 3; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 03\nÍtem: 4; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 04",
+      "records": [
+        {
+          "text": "Ítem: 1; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 01",
+          "cell_ids": [
+            "pymupdf_lines_p0003_t0001_r0000c0000_r0001c0001",
+            "pymupdf_lines_p0003_t0001_r0000c0001_r0001c0002",
+            "pymupdf_lines_p0003_t0001_r0000c0002_r0001c0003",
+            "pymupdf_lines_p0003_t0001_r0001c0000_r0002c0001",
+            "pymupdf_lines_p0003_t0001_r0001c0001_r0002c0002",
+            "pymupdf_lines_p0003_t0001_r0001c0002_r0002c0003"
+          ]
+        },
+        {
+          "text": "Ítem: 3; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 03",
+          "cell_ids": [
+            "pymupdf_lines_p0003_t0001_r0000c0000_r0001c0001",
+            "pymupdf_lines_p0003_t0001_r0000c0001_r0001c0002",
+            "pymupdf_lines_p0003_t0001_r0000c0002_r0001c0003",
+            "pymupdf_lines_p0003_t0001_r0002c0000_r0003c0001",
+            "pymupdf_lines_p0003_t0001_r0002c0001_r0003c0002",
+            "pymupdf_lines_p0003_t0001_r0002c0002_r0003c0003"
+          ]
+        },
+        {
+          "text": "Ítem: 4; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 04",
+          "cell_ids": [
+            "pymupdf_lines_p0003_t0001_r0000c0000_r0001c0001",
+            "pymupdf_lines_p0003_t0001_r0000c0001_r0001c0002",
+            "pymupdf_lines_p0003_t0001_r0000c0002_r0001c0003",
+            "pymupdf_lines_p0003_t0001_r0003c0000_r0004c0001",
+            "pymupdf_lines_p0003_t0001_r0003c0001_r0004c0002",
+            "pymupdf_lines_p0003_t0001_r0003c0002_r0004c0003"
+          ]
+        }
+      ],
+      "tokens": 169
+    }
+  ],
+  "chunks_with_lead": [
+    {
+      "text": "Tabla de la Cláusula Cuarta del contrato que relaciona cada ítem de medidores electrónicos a entregar con la ubicación de sus datos técnicos en la oferta del contratista.\nÍtem: 1; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 01\nÍtem: 3; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 03\nÍtem: 4; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 04",
+      "records": [
+        {
+          "text": "Ítem: 1; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 01",
+          "cell_ids": [
+            "pymupdf_lines_p0003_t0001_r0000c0000_r0001c0001",
+            "pymupdf_lines_p0003_t0001_r0000c0001_r0001c0002",
+            "pymupdf_lines_p0003_t0001_r0000c0002_r0001c0003",
+            "pymupdf_lines_p0003_t0001_r0001c0000_r0002c0001",
+            "pymupdf_lines_p0003_t0001_r0001c0001_r0002c0002",
+            "pymupdf_lines_p0003_t0001_r0001c0002_r0002c0003"
+          ]
+        },
+        {
+          "text": "Ítem: 3; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 03",
+          "cell_ids": [
+            "pymupdf_lines_p0003_t0001_r0000c0000_r0001c0001",
+            "pymupdf_lines_p0003_t0001_r0000c0001_r0001c0002",
+            "pymupdf_lines_p0003_t0001_r0000c0002_r0001c0003",
+            "pymupdf_lines_p0003_t0001_r0002c0000_r0003c0001",
+            "pymupdf_lines_p0003_t0001_r0002c0001_r0003c0002",
+            "pymupdf_lines_p0003_t0001_r0002c0002_r0003c0003"
+          ]
+        },
+        {
+          "text": "Ítem: 4; DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS; TABLA DE DATOS TÉCNICOS: Página 25 a 33 de la oferta presentada por EL CONTRATISTA para el Ítem 04",
+          "cell_ids": [
+            "pymupdf_lines_p0003_t0001_r0000c0000_r0001c0001",
+            "pymupdf_lines_p0003_t0001_r0000c0001_r0001c0002",
+            "pymupdf_lines_p0003_t0001_r0000c0002_r0001c0003",
+            "pymupdf_lines_p0003_t0001_r0003c0000_r0004c0001",
+            "pymupdf_lines_p0003_t0001_r0003c0001_r0004c0002",
+            "pymupdf_lines_p0003_t0001_r0003c0002_r0004c0003"
+          ]
+        }
+      ],
+      "tokens": 208
+    }
+  ]
+}
