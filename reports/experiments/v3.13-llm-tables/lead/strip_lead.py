@@ -24,6 +24,8 @@ from rag.query.scope import load_catalog, resolve_scope
 from rag.registry import assemble
 
 HERE = Path(__file__).parent
+# Run on the indexes before prompt v5 and the path header (config names of that time; now
+# structured_llm_lead / structured_llm_labeled_lead). Rerunning on today's indexes gives different numbers.
 CONFIGS = {"LM+": "structured_llm_md_lead_gemini38f", "LL+": "structured_llm_labeled_lead_gemini38f"}
 
 

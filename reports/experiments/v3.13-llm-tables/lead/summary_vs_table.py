@@ -22,6 +22,7 @@ from rag.query.scope import load_catalog, resolve_scope
 from rag.registry import assemble
 
 HERE = Path(__file__).parent
+# Run on the indexes before prompt v5 (config names of that time; now structured / structured_summary).
 CONFIGS = {"RM": "structured_markdown_rows", "S": "structured_summary_gemini38f"}
 
 

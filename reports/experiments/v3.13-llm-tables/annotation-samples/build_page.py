@@ -246,7 +246,7 @@ def main() -> None:
     panels += [table_panel(key, title, inputs[key], data) for key, title in KEYS]
     body = (f'<h1>V3.13 样例审核（第 3 轮）：结构标注、引导句、摘要</h1>'
             f'<div class="sub">选定的 {esc(", ".join(MODELS))} × 5 张表（2 张真实表、3 张人造样表），提示词 llm_tables_v4'
-            f'（docs/changes/v3.13-prompts.md），JSON Schema 严格模式，原生推理中档，预算 512 token。'
+            f'（docs/archive/changes/v3.13-prompts.md），JSON Schema 严格模式，原生推理中档，预算 512 token。'
             f'请看：表头、分节、隐式合并是否判对；渲染出的每块是否单独看得懂；引导句与摘要是否准确、'
             f'不含位置信息。不带引导句的块用满预算，带引导句的块把引导句计入长度，两者块边界可以不同。'
             f'第 2 轮（3 个模型）见 <a href="round2.html">round2.html</a>；第 1 轮（LLM 直接写记录）见 ../samples/。</div>'

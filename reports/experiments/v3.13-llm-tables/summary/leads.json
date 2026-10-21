@@ -1,0 +1,86 @@
+[
+ {
+  "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R]",
+  "table": 0,
+  "table_id": "pymupdf_lines_strict_p0002_t0001",
+  "v5": "Detalle de los ítems y descripciones de los medidores electrónicos objeto del contrato de compra corporativa.",
+  "v4": "Lista de ítems y descripción de los tipos de medidores electrónicos objeto de contratación."
+ },
+ {
+  "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R]",
+  "table": 1,
+  "table_id": "pymupdf_lines_p0003_t0001",
+  "v5": "Relación de ítems contractuales con su descripción y referencia a las tablas de datos técnicos de la oferta.",
+  "v4": "Detalla los ítems a entregar, su descripción técnica y la referencia a las tablas de datos técnicos en la oferta del contratista."
+ },
+ {
+  "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R]",
+  "table": 2,
+  "table_id": "pymupdf_lines_p0004_t0001",
+  "v5": "Detalle de ítems de medidores electrónicos adquiridos, especificando descripción, cantidad, precio unitario con IGV y precio total en dólares.",
+  "v4": "Detalla los ítems de medidores electrónicos con su descripción, cantidad, precio unitario y precio total en dólares estadounidenses."
+ },
+ {
+  "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R]",
+  "table": 3,
+  "table_id": "pymupdf_lines_strict_p0005_t0001",
+  "v5": "Cronograma de entrega de medidores electrónicos detallando el requerimiento total y las cantidades programadas en seis entregas según plazos contractuales.",
+  "v4": "Cronograma de entrega por ítem, descripción, unidad de medida y cantidades distribuidas a lo largo de seis entregas programadas."
+ },
+ {
+  "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R]",
+  "table": 4,
+  "table_id": "pymupdf_lines_strict_p0005_t0002",
+  "v5": "Tabla que detalla la empresa y la dirección del lugar de entrega de los bienes.",
+  "v4": "Detalle del almacén y lugar de entrega de los bienes de la empresa."
+ },
+ {
+  "document": "E001-602",
+  "table": 0,
+  "table_id": "docling_accurate_p0001_t0001",
+  "v5": "Detalle de productos facturados con cantidad, unidad de medida, código, descripción técnica y valor unitario.",
+  "v4": "Detalla los productos adquiridos, indicando cantidad, unidad de medida, código, descripción técnica y valor unitario."
+ },
+ {
+  "document": "ORDER PERU 24-12 ANDET",
+  "table": 0,
+  "table_id": "pymupdf_lines_strict_p0001_t0001",
+  "v5": "Purchase order item details listing goods descriptions, quantities, unit prices, and total CIF amounts.",
+  "v4": "Details of ordered items showing goods descriptions, quantities, unit prices, and total amounts under CIF Callao terms."
+ },
+ {
+  "document": "ORDER PERU 25-15 ANDET VF",
+  "table": 0,
+  "table_id": "pymupdf_lines_strict_p0001_t0001",
+  "v5": "Purchase order item details specifying goods descriptions, quantities, unit prices, and total CIF Callao amounts in USD.",
+  "v4": "Details of purchase order items, listing description of goods, quantity, unit price, and total amount."
+ },
+ {
+  "document": "ORDER PERU 25-15 ANDET VF",
+  "table": 1,
+  "table_id": "pymupdf_lines_strict_p0002_t0001",
+  "v5": "Delivery schedule showing planned dates and delivery quantities for various meter models and meterboxes across multiple shipments.",
+  "v4": "Delivery schedule specifying delivery quantities per meter model across multiple delivery dates."
+ },
+ {
+  "document": "签字-ORDER PERU 25-19 FONAFE",
+  "table": 0,
+  "table_id": "pymupdf_lines_strict_p0001_t0001",
+  "v5": "Details of the purchase order listing goods descriptions, quantities, unit prices, and total amounts.",
+  "v4": "Details of ordered meter items, specifying descriptions, quantities, unit prices, and total amounts in USD."
+ },
+ {
+  "document": "签字-ORDER PERU 25-19 FONAFE",
+  "table": 1,
+  "table_id": "pymupdf_lines_strict_p0002_t0001+pymupdf_lines_strict_p0003_t0001",
+  "v5": "Total requirements and delivery schedules of electric meters across six delivery stages, broken down by meter item and electrical company.",
+  "v4": "Total requirements and delivery schedules for various electricity meter models broken down by electrical company across six delivery phases."
+ },
+ {
+  "document": "签字-ORDER PERU 25-19 FONAFE",
+  "table": 2,
+  "table_id": "pymupdf_lines_strict_p0003_t0002",
+  "v5": "A schedule specifying delivery batches and their respective DDP delivery dates.",
+  "v4": "Delivery schedule detailing sequential delivery milestones and their corresponding DDP dates."
+ }
+]

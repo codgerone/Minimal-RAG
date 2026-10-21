@@ -168,7 +168,7 @@ def main() -> None:
     panels = [f'<section data-panel="overview">{findings()}{overview(data, price)}</section>']
     panels += [table_panel(key, title, inputs[key], data) for key, _, _, title in TABLES]
     body = (f'<h1>V3.13 样例审核：LLM 序列化、引导句、摘要</h1>'
-            f'<div class="sub">8 个模型 × 4 张表，提示词 llm_tables_v1（docs/changes/v3.13-prompts.md）。'
+            f'<div class="sub">8 个模型 × 4 张表，提示词 llm_tables_v1（docs/archive/changes/v3.13-prompts.md）。'
             f'请看：记录是否自足、分组标题与合计是否判对、数值是否原样；引导句能否区分 c0004 与 c0006；'
             f'摘要是否写出标识各行的值。</div><div class="tabs">{"".join(tabs)}</div>{"".join(panels)}')
     write_assets(HERE.parents[2])     # repo reports/

@@ -1,7 +1,7 @@
 """Test material for the header writing experiment: 12 made-up tables, 4 questions each, and prose
 paragraphs that compete with them.
 
-Design (docs/changes/v3.13.md, header writing): header depth 2 / 3 × columns few / medium / many
+Design (docs/decisions/013-llm-tables.md, header writing): header depth 2 / 3 × columns few / medium / many
 × length short (one chunk) / long (three chunks or more); half Spanish, half English; questions in
 Chinese. Question kinds: `group` asks for an upper header group, `cell` for one row under a leaf
 column, `topic` for what the table is about, `rows` for the row entities it lists.
