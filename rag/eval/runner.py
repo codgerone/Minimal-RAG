@@ -97,10 +97,43 @@ def _metrics_dict(scores: list[QuestionScore]) -> dict[str, Any]:
                   "denominator": ratios[key].denominator} for key, _, _ in METRICS}
 
 
-def run_evaluation(workspace: Workspace, assembly: Assembly, budgets: Sequence[int]) -> list[Path]:
-    """Each question runs through the query execution once; every budget B scores the first B
-    units of its return order and is written as its own run (folder `..._k<B>_...`)."""
-    budgets = sorted(set(budgets))
+@dataclass
+class EvalContext:
+    """What scoring an assembly's query executions needs, checked and opened once."""
+    dataset: Dataset
+    sources: dict[str, Any]       # document_id → indexed source
+    changed: list[str]            # documents whose PDF changed since labelling
+    chunks: list[JudgeChunk]
+    enabled: bool                 # document filter
+    catalog: Any
+    searcher: UnitSearch
+    owners: dict[str, str]        # chunk_id → table_id, when whole tables are returned
+    tokens_of: Any                # text → token count
+
+    def scope(self, question: str) -> SearchScope:
+        return resolve_scope(question, self.catalog, self.enabled)
+
+    def warm_up(self) -> None:
+        """Loads the encoder, so that its start-up is not timed as the first retrieval."""
+        if self.dataset.cases:
+            first = self.dataset.cases[0].question
+            execution.plain(self.searcher, first, self.scope(first).document_ids)
+
+
+class _TokenCounter:
+    def __init__(self):
+        from rag.ingest.chunkers.tokens import E5TokenCounter
+        self._counter = E5TokenCounter()
+        self._cache: dict[str, int] = {}
+
+    def __call__(self, text: str) -> int:
+        if text not in self._cache:
+            self._cache[text] = self._counter.count_passage(text)
+        return self._cache[text]
+
+
+def prepare(workspace: Workspace, assembly: Assembly) -> EvalContext:
+    """Checks the index and the labels are usable together and opens what scoring needs."""
     status = current_status(workspace, assembly)
     if not status.queryable:
         raise EvalError(f"配置 {assembly.name} 的索引不可用（{status.state}），请先运行 ingest")
@@ -134,21 +167,21 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, budgets: Sequence[i
                           tables, table_return_unit)
     owners = ({cid: t.table_id for cid, t in tables.tables_for_chunks([c.chunk_id for c in chunks]).items()}
               if table_return_unit == "table" else {})
-    from rag.ingest.chunkers.tokens import E5TokenCounter
-    counter = E5TokenCounter()
-    token_cache: dict[str, int] = {}
+    return EvalContext(dataset, sources, changed, chunks, enabled, catalog, searcher, owners, _TokenCounter())
 
-    def tokens_of(text: str) -> int:
-        if text not in token_cache:
-            token_cache[text] = counter.count_passage(text)
-        return token_cache[text]
 
+def run_evaluation(workspace: Workspace, assembly: Assembly, budgets: Sequence[int]) -> list[Path]:
+    """Each question runs through the query execution once; every budget B scores the first B
+    units of its return order and is written as its own run (folder `..._k<B>_...`)."""
+    budgets = sorted(set(budgets))
+    ctx = prepare(workspace, assembly)
+    dataset, sources, changed, chunks = ctx.dataset, ctx.sources, ctx.changed, ctx.chunks
+    enabled, catalog, searcher, owners, tokens_of = ctx.enabled, ctx.catalog, ctx.searcher, ctx.owners, ctx.tokens_of
+    table_return_unit = assembly.config.table_return_unit
     table_boxes = _table_boxes(workspace, assembly.name)
     table_excerpts = {(c.case_id, x.excerpt_id) for c in dataset.cases for x in c.excerpts
                       if tm.is_table_excerpt(x, table_boxes.get(x.document_id, []))}
-    if dataset.cases:   # loads the encoder, so that its start-up is not timed as the first retrieval
-        first = dataset.cases[0].question
-        execution.plain(searcher, first, resolve_scope(first, catalog, enabled).document_ids)
+    ctx.warm_up()
     prepared: list[tuple[CaseResult, execution.QueryRun]] = []
     for case in dataset.cases:
         scope = resolve_scope(case.question, catalog, enabled)
