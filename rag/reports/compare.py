@@ -1,8 +1,8 @@
 """Comparison page: several evaluation runs side by side, changes against a baseline run.
 
-Runs with the same build settings apart from the rules version, the embedder and the BM25 analyzer
-(and the same K) share a tab, whatever their retriever and table return unit; the first run given in each tab is its
-baseline. A run may be given a display name (`<run>=<name>`, e.g. `V3.9`), shown before its settings. A question improves when its status moves up
+Runs with the same build settings apart from the rules version, the embedder, the BM25 analyzer and
+the table processing (and the same K) share a tab, whatever their retriever and table return unit; the first run given in each tab is its
+baseline. When the tabs differ only in K, they are titled by K. A run may be given a display name (`<run>=<name>`, e.g. `V3.9`), shown before its settings. A question improves when its status moves up
 (未命中 < 部分覆盖 < 完整覆盖) against the baseline and regresses when it moves down.
 """
 
@@ -252,12 +252,18 @@ def render(name: str, runs: list[tuple[str, dict[str, Any]]], spec: TableSpec | 
     for run in runs:
         groups.setdefault(_group_key(run[1]), []).append(run)
     used: set[str] = set()
+    # groups that differ only in K (budgets of the same runs) are titled by K
+    keyed = [(members[0][1]["config"], members[0][1]["top_k"]) for members in groups.values()]
+    by_k = len({c for c, _ in keyed}) == 1 and len({k for _, k in keyed}) == len(keyed) > 1
     for members in groups.values():
         tab = config = members[0][1]["config"]
+        title = tab
+        if by_k:
+            tab, title = f"k{members[0][1]['top_k']}", f"K={members[0][1]['top_k']}"
         while tab in used:   # same config in two groups (e.g. different chunk budgets)
-            tab = f"{config}_{len(used) + 1}"
+            tab = title = f"{config}_{len(used) + 1}"
         used.add(tab)
-        tabs.append(f'<a href="#{esc(tab)}" data-tab="{esc(tab)}">{esc(tab)}</a>')
+        tabs.append(f'<a href="#{esc(tab)}" data-tab="{esc(tab)}">{esc(title)}</a>')
         matrix, cards, tags_of = _matrix(members, tab)
         top_k = members[0][1]["top_k"]
         bar = filters([("all", "全部", len(tags_of)),

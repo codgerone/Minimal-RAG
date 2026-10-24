@@ -74,3 +74,14 @@ def test_display_names_are_shown_and_kept_for_rerendering(workspace):
     page = (folder / "index.html").read_text(encoding="utf-8")
     assert "V3.9 · small" in page and "large" in page
     assert "display_name" not in read_json(workspace.eval_reports() / "a" / "result.json")
+
+
+def test_tabs_differing_only_in_k_are_titled_by_k():
+    runs = []
+    for k in (3, 6):
+        for name, model in (("a", "small"), ("b", "large")):
+            result = run("structured", model, {"q1": "miss"})
+            result["top_k"] = k
+            runs.append((f"{name}{k}", result))
+    page = render("x", runs)
+    assert 'data-tab="k3"' in page and 'data-tab="k6"' in page and ">K=6</a>" in page
