@@ -1,60 +1,65 @@
-"""Query planning: one LLM call writes the sub-questions of a question and every phrasing of each.
+"""Query planning by LLM, in two separate steps.
 
-Two plans per question: with decomposition (P3.1 on) the question is split into sub-questions,
-one information item each; without it the question itself is the only sub-question. Either way
-each sub-question gets the same phrasings: rewrite, one translation and one HyDE passage per
-document language in scope, and a step-back question. Every phrasing is written from the
-sub-question itself, so the phrasings are independent of each other. Rules: docs/changes/v3.14.md.
+1. Decomposition (P3.1, optional): one call splits the question into questions, one information
+   item each. Without it the question itself is the only question.
+2. Phrasing (P3.2.x): one call per question writes its phrasings: rewrite, a translation into each
+   document language that differs from the question's, a HyDE passage in each document language,
+   and a step-back question. A phrasing depends only on the question text and the document
+   languages, so the same question is phrased once (cached) whatever produced it.
+
+Rules: docs/changes/v3.14.md.
 """
 
 from __future__ import annotations
 
 import json
 import time
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Protocol
 
-PROMPT_VERSION = "query_plan_v2"
+PROMPT_VERSION = "query_plan_v5"
 REASONING_EFFORT = "medium"
-MAX_SUB_QUESTIONS = 6
 
-SYSTEM_PROMPT = """You plan retrieval queries for a question about business documents (contracts, purchase orders, invoices). The question is answered from passages retrieved from the documents listed in the input; you never answer it.
+DECOMPOSE_PROMPT = """You split a question into separate questions for document retrieval. You never answer the question.
 
-For each sub-question write these phrasings, each written from the sub-question itself (none is derived from another phrasing):
-- question: the sub-question as a full sentence in the language of the user's question.
-- rewrite: the sub-question in the language of the user's question, as a statement or noun phrase: drop document identifier codes (contract, order and invoice numbers), question words and filler; keep entity names, model numbers, company names, numbers and terms quoted from the documents verbatim.
-- translations: the question field translated into each listed document language as a question, using the terms such documents use; keep entity names, model numbers, company names and numbers untranslated; drop document identifier codes.
-- hyde: for each listed document language, a short passage (one or two sentences, or one table row) written as the answer would appear in such a document, in that language and the document's style; write unknown numbers, amounts and dates as placeholders such as [NUMBER], [AMOUNT], [DATE]; keep entity names from the question verbatim.
-- step_back: in the language of the user's question, a broader but still concrete question about the same kind of document (contract, purchase order or invoice, as listed): drop the qualifiers that do not change where the answer is written (for a specific company, product or batch, ask about all of them); never ask what such documents usually contain.
+Rules:
+- Write one question per information item the question explicitly asks for. Items asked for together, joined by a conjunction or listed one after another, are separate items. When the question asks for something and then spells out what it should include, the spelled-out parts are the items, not the general request. A question asking for one item gives one question.
+- Each question must stand alone: repeat every qualifier of the original question that applies to it (the entities, conditions, time ranges and the document it refers to), word for word. A qualifier stated once and left out of later parts of the original question still applies to those parts: write it into every question it applies to.
+- Ask for what can be read from the documents, not for conclusions computed from it.
+- Do not add questions about anything the original question does not ask for.
+- Write the questions in the language of the original question.
 
-Write one translation and one hyde passage for every listed document language, each language once."""
+The input is the original question. Answer with the list of questions."""
 
-DECOMPOSE_PROMPT = """Split the question into sub-questions:
-- one sub-question per information item the question explicitly asks for; every item listed with "and", "、" or "和" is a separate item (unit price and quantity are two items; delivery dates and the products delivered in each batch are two items); a question asking for one thing gives one sub-question;
-- each sub-question stands alone: repeat every qualifier of the question that applies to it (company, product, batch, document) word for word;
-- ask for facts that can be read from the documents, not for conclusions computed from them (for a total, ask for the total as written; do not ask for the parts to add up);
-- do not add sub-questions for premises the question does not ask about;
-- at most """ + str(MAX_SUB_QUESTIONS) + """ sub-questions."""
+PHRASE_PROMPT = """You write alternative phrasings of a question for document retrieval. Passages are retrieved from documents written in the languages listed in the input; the input may also list codes that identify those documents. You never answer the question.
 
-WHOLE_PROMPT = """Do not split the question: it is the only sub-question, and its question field repeats the user's question."""
+Write each phrasing from the question itself; none is derived from another phrasing:
+- question_language: the language of the question, named in lowercase English.
+- rewrite: in the language of the question, the question as a statement or noun phrase. Drop question words, filler and the listed document codes; keep names, other codes, numbers and quoted terms verbatim.
+- translations: for each listed document language that differs from the language of the question, the question translated into that language as a question, in the terms documents in that language would use. Keep names, other codes and numbers as written; drop the listed document codes. Write no translation into the language the question is already in.
+- hyde: for each listed document language, a short passage in that language written as the answer would appear in such a document. Write unknown values (numbers, amounts, dates, names not given in the question) as placeholders in square brackets; keep the names given in the question verbatim; leave out the listed document codes.
+- step_back: in the language of the question, a broader but still concrete question about the same documents: drop the qualifiers that narrow the question to one instance (one entity, item or period) when the answer for every instance would be written in the same place. Leave out the listed document codes. Never ask for general knowledge or what such documents usually contain.
+
+The input gives the document languages, the document codes when there are any, and the question."""
 
 RETRY_TEMPLATE = """Your answer did not pass these checks:
 {issues}
-Answer again with the whole plan."""
+Answer again in full."""
 
 
 @dataclass(frozen=True)
 class Phrasing:
-    kind: str        # question | rewrite | translation | hyde | step_back
+    kind: str            # question | rewrite | translation | hyde | step_back
     text: str
-    language: str = ""   # document language, for translation and hyde
+    language: str = ""   # target language, for translation and hyde
 
 
 @dataclass(frozen=True)
-class SubQuestion:
-    question: str
+class Question:
+    text: str
     phrasings: tuple[Phrasing, ...]   # the question itself first
+    degraded: str | None = None       # why only the question itself is used
 
     def of(self, kinds: set[str]) -> list[Phrasing]:
         return [p for p in self.phrasings if p.kind in kinds]
@@ -63,19 +68,17 @@ class SubQuestion:
 @dataclass(frozen=True)
 class PlanCost:
     calls: int
-    seconds: float
+    seconds: float      # LLM time of the calls made now (cached calls count 0)
     cost_usd: float
-    cached: bool
 
 
 @dataclass(frozen=True)
 class Plan:
     question: str
     decomposed: bool
-    sub_questions: tuple[SubQuestion, ...]
+    questions: tuple[Question, ...]
     cost: PlanCost
-    degraded: str | None = None   # why the plan fell back to the question alone
-    attempts: tuple[dict[str, Any], ...] = field(default=(), compare=False)
+    degraded: str | None = None   # why decomposition fell back to the question itself
 
 
 class StructuredLLM(Protocol):
@@ -85,65 +88,68 @@ class StructuredLLM(Protocol):
                             schema: dict[str, Any], reasoning_effort: str) -> Any: ...
 
 
-def _phrasings_schema(languages: list[str]) -> dict[str, Any]:
+DECOMPOSE_SCHEMA = {"type": "object", "additionalProperties": False, "required": ["questions"],
+                    "properties": {"questions": {"type": "array", "items": {"type": "string"}}}}
+
+
+def phrase_schema(languages: list[str]) -> dict[str, Any]:
     by_language = {"type": "array", "items": {
         "type": "object", "additionalProperties": False, "required": ["language", "text"],
         "properties": {"language": {"type": "string", "enum": languages}, "text": {"type": "string"}}}}
     return {"type": "object", "additionalProperties": False,
-            "required": ["question", "rewrite", "translations", "hyde", "step_back"],
-            "properties": {"question": {"type": "string"}, "rewrite": {"type": "string"},
+            "required": ["question_language", "rewrite", "translations", "hyde", "step_back"],
+            "properties": {"question_language": {"type": "string"}, "rewrite": {"type": "string"},
                            "translations": by_language, "hyde": by_language, "step_back": {"type": "string"}}}
 
 
-def schema(languages: list[str]) -> dict[str, Any]:
-    return {"type": "object", "additionalProperties": False, "required": ["sub_questions"],
-            "properties": {"sub_questions": {"type": "array", "items": _phrasings_schema(languages)}}}
+def decompose_messages(question: str) -> list[dict[str, str]]:
+    return [{"role": "system", "content": DECOMPOSE_PROMPT},
+            {"role": "user", "content": f"Question: {question}"}]
 
 
-def messages(question: str, documents: list[tuple[str, str]], decompose: bool) -> list[dict[str, str]]:
-    """`documents`: (name, language) of each document in scope."""
-    listed = "\n".join(f"- {name} (language: {language})" for name, language in documents)
-    languages = ", ".join(sorted({language for _, language in documents}))
-    return [{"role": "system", "content": SYSTEM_PROMPT + "\n\n" + (DECOMPOSE_PROMPT if decompose else WHOLE_PROMPT)},
-            {"role": "user", "content": f"Documents:\n{listed}\nDocument languages: {languages}\n\nQuestion: {question}"}]
+def phrase_messages(question: str, languages: list[str], codes: list[str]) -> list[dict[str, str]]:
+    lines = [f"Document languages: {', '.join(languages)}"]
+    if codes:
+        lines.append(f"Document codes: {', '.join(codes)}")
+    return [{"role": "system", "content": PHRASE_PROMPT},
+            {"role": "user", "content": "\n".join(lines + [f"Question: {question}"])}]
 
 
-def check(raw: str, question: str, languages: list[str], decompose: bool) -> tuple[tuple[SubQuestion, ...], list[str]]:
-    """The sub-questions, and the checks the answer fails (empty when it passes)."""
+def check_decomposition(raw: str) -> tuple[list[str], list[str]]:
+    """The questions, and the checks the answer fails (empty when it passes)."""
+    try:
+        questions = [str(q).strip() for q in json.loads(raw)["questions"]]
+    except (ValueError, KeyError, TypeError):
+        return [], ["the answer is not the JSON object of the schema"]
+    issues = (["there is no question"] if not questions else []) + \
+             (["a question is empty"] if any(not q for q in questions) else [])
+    return questions, issues
+
+
+def check_phrasings(raw: str, question: str, languages: list[str]) -> tuple[Question, list[str]]:
     try:
         data = json.loads(raw)
-        items = data["sub_questions"]
+        own = str(data["question_language"]).strip().lower()
+        rewrite, step_back = str(data["rewrite"]).strip(), str(data["step_back"]).strip()
+        translations, hyde = data["translations"], data["hyde"]
     except (ValueError, KeyError, TypeError):
-        return (), ["the answer is not the JSON object of the schema"]
+        return Question(question, (Phrasing("question", question),)), ["the answer is not the JSON object of the schema"]
     issues = []
-    if not items:
-        issues.append("there is no sub-question")
-    if decompose and len(items) > MAX_SUB_QUESTIONS:
-        issues.append(f"more than {MAX_SUB_QUESTIONS} sub-questions")
-    if not decompose and len(items) != 1:
-        issues.append("the question must be the only sub-question")
-    subs = []
-    for n, item in enumerate(items, start=1):
-        for name in ("question", "rewrite", "step_back"):
-            if not str(item.get(name, "")).strip():
-                issues.append(f"sub-question {n}: {name} is empty")
-        for name in ("translations", "hyde"):
-            got = [x["language"] for x in item.get(name, [])]
-            if sorted(got) != sorted(languages) or any(not x["text"].strip() for x in item.get(name, [])):
-                issues.append(f"sub-question {n}: {name} needs one non-empty text per language "
-                              f"({', '.join(languages)}), got {', '.join(got) or 'none'}")
-        text = question if not decompose else item.get("question", "").strip()
-        subs.append(SubQuestion(text, (
-            Phrasing("question", text),
-            Phrasing("rewrite", item.get("rewrite", "").strip()),
-            *(Phrasing("translation", x["text"].strip(), x["language"]) for x in item.get("translations", [])),
-            *(Phrasing("hyde", x["text"].strip(), x["language"]) for x in item.get("hyde", [])),
-            Phrasing("step_back", item.get("step_back", "").strip()))))
-    return tuple(subs), issues
-
-
-def fallback(question: str) -> tuple[SubQuestion, ...]:
-    return (SubQuestion(question, (Phrasing("question", question),)),)
+    for name, value in (("question_language", own), ("rewrite", rewrite), ("step_back", step_back)):
+        if not value:
+            issues.append(f"{name} is empty")
+    wanted = sorted(l for l in languages if l != own)
+    for name, items, expected in (("translations", translations, wanted), ("hyde", hyde, sorted(languages))):
+        got = [x["language"] for x in items]
+        if sorted(got) != expected or any(not x["text"].strip() for x in items):
+            issues.append(f"{name} needs one non-empty text for each of: {', '.join(expected) or 'none'}; "
+                          f"got {', '.join(got) or 'none'}")
+    return Question(question, (
+        Phrasing("question", question),
+        Phrasing("rewrite", rewrite),
+        *(Phrasing("translation", x["text"].strip(), x["language"]) for x in translations),
+        *(Phrasing("hyde", x["text"].strip(), x["language"]) for x in hyde),
+        Phrasing("step_back", step_back))), issues
 
 
 class Planner:
@@ -151,31 +157,50 @@ class Planner:
         self.llm = llm
         self.cache = cache   # rag.ingest.tables.llm_tables.LLMCache
 
-    def plan(self, question: str, documents: list[tuple[str, str]], decompose: bool,
+    def plan(self, question: str, languages: list[str], decompose: bool, codes: list[str] = (),
              generation: int = 0) -> Plan:
-        """`generation` > 0: an independent generation, cached apart from generation 0."""
-        languages = sorted({language for _, language in documents})
-        sch = schema(languages)
-        msgs = messages(question, documents, decompose)
-        attempts: list[dict[str, Any]] = []
+        """`languages`: the languages of the documents in scope; `codes`: the identifier codes the
+        scope was found by (rag/query/scope.py). `generation` > 0: an independent generation,
+        cached apart from generation 0."""
+        languages, codes = sorted(set(languages)), sorted(set(codes))
+        calls: list[dict[str, Any]] = []
+        texts, degraded = [question], None
+        if decompose:
+            got, issues, made = self._ask(decompose_messages(question), "decomposition", DECOMPOSE_SCHEMA,
+                                          check_decomposition, generation)
+            calls += made
+            if issues:
+                degraded = "; ".join(issues)
+            else:
+                texts = list(dict.fromkeys(got))
+        questions = []
+        for text in texts:
+            phrased, issues, made = self._ask(phrase_messages(text, languages, codes), "phrasings",
+                                              phrase_schema(languages),
+                                              lambda raw, t=text: check_phrasings(raw, t, languages), generation)
+            calls += made
+            questions.append(phrased if not issues else
+                             Question(text, (Phrasing("question", text),), "; ".join(issues)))
+        fresh = [c for c in calls if not c["cached"]]
+        cost = PlanCost(len(calls), sum(c.get("seconds") or 0 for c in fresh),
+                        sum(c.get("cost_usd") or 0 for c in fresh))
+        return Plan(question, decompose, tuple(questions), cost, degraded)
+
+    def _ask(self, msgs, name, sch, check, generation):
+        """Calls, checks, retries once with the failed checks; returns (result, issues, calls)."""
+        made = []
         for _ in range(2):
-            hit = self._call(msgs, sch, generation)
-            subs, issues = check(hit["text"], question, languages, decompose)
-            attempts.append({**hit, "issues": issues})
+            hit = self._call(msgs, name, sch, generation)
+            result, issues = check(hit["text"])
+            made.append(hit)
             if not issues:
                 break
             msgs = msgs + [{"role": "assistant", "content": hit["text"]},
                            {"role": "user", "content": RETRY_TEMPLATE.format(
                                issues="\n".join(f"- {i}" for i in issues))}]
-        cost = PlanCost(len(attempts), sum(a.get("seconds") or 0 for a in attempts if not a["cached"]),
-                        sum(a.get("cost_usd") or 0 for a in attempts if not a["cached"]),
-                        all(a["cached"] for a in attempts))
-        if attempts[-1]["issues"]:
-            return Plan(question, decompose, fallback(question), cost,
-                        "; ".join(attempts[-1]["issues"]), tuple(attempts))
-        return Plan(question, decompose, subs, cost, None, tuple(attempts))
+        return result, issues, made
 
-    def _call(self, msgs: list[dict[str, str]], sch: dict[str, Any], generation: int) -> dict[str, Any]:
+    def _call(self, msgs, name, sch, generation) -> dict[str, Any]:
         extra = {"generation": generation} if generation else {}
         key = (self.cache.key(self.llm.model, msgs, sch, REASONING_EFFORT, PROMPT_VERSION, **extra)
                if self.cache else "")
@@ -183,7 +208,7 @@ class Planner:
         if hit is not None:
             return {**hit, "cached": True}
         started = time.perf_counter()
-        done = self.llm.complete_structured(msgs, "query_plan", sch, REASONING_EFFORT)
+        done = self.llm.complete_structured(msgs, name, sch, REASONING_EFFORT)
         hit = {"text": done.text, "reasoning": done.reasoning, "prompt_tokens": done.prompt_tokens,
                "completion_tokens": done.completion_tokens, "reasoning_tokens": done.reasoning_tokens,
                "cost_usd": done.cost_usd, "seconds": round(time.perf_counter() - started, 2)}
