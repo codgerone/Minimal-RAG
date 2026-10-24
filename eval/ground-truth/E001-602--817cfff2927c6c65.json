@@ -315,6 +315,14 @@
           ]
         }
       ]
+    },
+    {
+      "case_id": "E001-602-Q003",
+      "question": "发票 INVOICE-E001-602 采用什么贸易术语（如 CIF、FOB）？其中运费是多少？",
+      "answerable": false,
+      "reference_answer": "发票未写明贸易术语，也未单列运费。",
+      "excerpts": [],
+      "evidence_groups": []
     }
   ]
 }
