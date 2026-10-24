@@ -21,6 +21,13 @@ def _positive(value: str) -> int:
     return number
 
 
+def _budgets(value: str) -> list[int]:
+    try:
+        return sorted({_positive(part) for part in value.split(",")})
+    except ValueError:
+        raise argparse.ArgumentTypeError("写成逗号分隔的正整数，如 3,6,9,12")
+
+
 def _retriever_option(sub: argparse.ArgumentParser) -> None:
     from rag.config import TABLE_RETURN_UNITS
     from rag.registry import RETRIEVERS
@@ -64,7 +71,10 @@ def build_parser() -> argparse.ArgumentParser:
     chat.add_argument("--top-k", type=_positive)
     _retriever_option(chat)
     evaluate = command("eval", "用 eval/ground-truth 的标注问题评估检索效果，生成报告")
-    evaluate.add_argument("--top-k", type=_positive, help="默认取配置文件 [eval] top_k")
+    budget = evaluate.add_mutually_exclusive_group()
+    budget.add_argument("--top-k", type=_positive, help="默认取配置文件 [eval] top_k")
+    budget.add_argument("--budgets", type=_budgets, metavar="B1,B2,...",
+                        help="几档预算（返回单元数），每题检索一次，每档各出一份评估，如 3,6,9,12")
     _retriever_option(evaluate)
     anchors = command("anchors", "在 PDF 上定位每段 excerpt，生成审核文件 tmp/anchor-review/")
     anchors.add_argument("--since", metavar="GIT_REF", help="审核页并排显示相对这个 git 版本改动过的 excerpt")
@@ -322,22 +332,33 @@ def _chat(workspace: Workspace, args: argparse.Namespace) -> int:
 
 def _eval(workspace: Workspace, args: argparse.Namespace) -> int:
     from rag.eval.runner import run_evaluation
-    from rag.jsonio import read_json
     from rag.reports.index_page import write_index_page
     assembly = _query_assembly(workspace, args)
-    top_k = args.top_k or assembly.config.eval_top_k
-    folder = run_evaluation(workspace, assembly, top_k)
+    budgets = args.budgets or [args.top_k or assembly.config.eval_top_k]
+    folders = run_evaluation(workspace, assembly, budgets)
+    for folder in folders:
+        _eval_summary(workspace, assembly, folder)
+    write_index_page(workspace)
+    for folder in folders:
+        _out(f"报告：{(folder / 'index.html').relative_to(workspace.root).as_posix()}")
+    return 0
+
+
+def _eval_summary(workspace: Workspace, assembly, folder) -> None:
+    from rag.jsonio import read_json
     result = read_json(folder / "result.json")
     metrics = result["metrics"]
     modes = result["evidence_modes"]
     returned = "整表" if assembly.config.table_return_unit == "table" else "命中的 chunk"
-    _out(f"配置 {assembly.name} · K={top_k} · 命中表格时返回{returned} · {result['dataset']['answerable']} 道可回答问题")
+    _out(f"配置 {assembly.name} · K={result['top_k']} · 命中表格时返回{returned} · {result['dataset']['answerable']} 道可回答问题")
     for key, label in (("hit_rate", "命中率"), ("complete_coverage", "完整覆盖率"),
                        ("group_recall", "证据组召回"), ("mrr", "MRR"),
                        ("chunk_precision", "Chunk 精确率"), ("cross_document", "跨文档污染")):
         _out(f"  {label}：{metrics[key]['value']:.2%}")
     tokens = result["returned_tokens"]
     _out(f"  每题返回 token：{tokens['value']:.0f}（最多 {tokens['max']}）")
+    cost = result["query_cost"]
+    _out(f"  每题检索：{cost['retrievals']['value']:.1f} 次，{cost['retrieval_seconds']['value'] * 1000:.0f} ms")
     scope = result["document_scope"]
     if scope["enabled"] and scope["catalog"]:
         ratio = scope["identified_correctly"]
@@ -346,9 +367,6 @@ def _eval(workspace: Workspace, args: argparse.Namespace) -> int:
         _out("  文档过滤：" + ("已关闭" if not scope["enabled"] else "未配置文档标识表，全库检索"))
     if modes["fallback"]:
         _out(f"证据映射：{modes['coordinate']} 段 excerpt 按坐标判定，{modes['fallback']} 段文字兜底，请在报告中抽查")
-    write_index_page(workspace)
-    _out(f"报告：{(folder / 'index.html').relative_to(workspace.root).as_posix()}")
-    return 0
 
 
 def _table_structure(workspace: Workspace, args: argparse.Namespace) -> int:
