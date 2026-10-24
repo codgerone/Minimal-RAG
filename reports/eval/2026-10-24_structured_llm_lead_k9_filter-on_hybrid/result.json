@@ -71,7 +71,7 @@
     "9": "2026-10-24_structured_llm_lead_k9_filter-on_hybrid",
     "12": "2026-10-24_structured_llm_lead_k12_filter-on_hybrid"
   },
-  "created_at": "2026-10-24T10:49:55+08:00",
+  "created_at": "2026-10-24T11:43:45+08:00",
   "dataset": {
     "version": "3.3.0",
     "fingerprint": "2a1dc6de8d926b98aa27a639e1fab61699b76c4bf38d35a49a5f4cde7e756f70",
@@ -130,10 +130,10 @@
       "max": 1
     },
     "retrieval_seconds": {
-      "total": 7.578760999866063,
+      "total": 8.266971499979263,
       "denominator": 32,
-      "value": 0.23683628124581446,
-      "max": 0.28433789999689907
+      "value": 0.258342859374352,
+      "max": 0.3223874999966938
     },
     "llm_calls": {
       "total": 0,
@@ -600,7 +600,7 @@
       "returned_tokens": 3915,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.2155,
+        "retrieval_seconds": 0.2638,
         "llm_calls": 0
       },
       "table": null,
@@ -1178,7 +1178,7 @@
       "returned_tokens": 3261,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.2496,
+        "retrieval_seconds": 0.2672,
         "llm_calls": 0
       },
       "table": {
@@ -1715,7 +1715,7 @@
       "returned_tokens": 3409,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.2252,
+        "retrieval_seconds": 0.2978,
         "llm_calls": 0
       },
       "table": {
@@ -2137,7 +2137,7 @@
       "returned_tokens": 4107,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.237,
+        "retrieval_seconds": 0.2696,
         "llm_calls": 0
       },
       "table": null,
@@ -2532,7 +2532,7 @@
       "returned_tokens": 3572,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.2583,
+        "retrieval_seconds": 0.2979,
         "llm_calls": 0
       },
       "table": null,
@@ -2882,7 +2882,7 @@
       "returned_tokens": 4271,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.2349,
+        "retrieval_seconds": 0.2737,
         "llm_calls": 0
       },
       "table": null,
@@ -3304,7 +3304,7 @@
       "returned_tokens": 3927,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.2306,
+        "retrieval_seconds": 0.2709,
         "llm_calls": 0
       },
       "table": null,
@@ -3655,7 +3655,7 @@
       "returned_tokens": 4048,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.282,
+        "retrieval_seconds": 0.2986,
         "llm_calls": 0
       },
       "table": null,
@@ -3962,7 +3962,7 @@
       "returned_tokens": 3408,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.2506,
+        "retrieval_seconds": 0.2604,
         "llm_calls": 0
       },
       "table": {
@@ -4353,7 +4353,7 @@
       "returned_tokens": 3419,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.2188,
+        "retrieval_seconds": 0.2355,
         "llm_calls": 0
       },
       "table": {
@@ -4822,7 +4822,7 @@
       "returned_tokens": 3245,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.2612,
+        "retrieval_seconds": 0.2863,
         "llm_calls": 0
       },
       "table": null,
@@ -5241,7 +5241,7 @@
       "returned_tokens": 3741,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.2603,
+        "retrieval_seconds": 0.2939,
         "llm_calls": 0
       },
       "table": {
@@ -5632,7 +5632,7 @@
       "returned_tokens": 3852,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.2513,
+        "retrieval_seconds": 0.2737,
         "llm_calls": 0
       },
       "table": null,
@@ -5986,7 +5986,7 @@
       "returned_tokens": 3454,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.2278,
+        "retrieval_seconds": 0.2643,
         "llm_calls": 0
       },
       "table": {
@@ -6482,7 +6482,7 @@
       "returned_tokens": 905,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.234,
+        "retrieval_seconds": 0.2549,
         "llm_calls": 0
       },
       "table": null,
@@ -6666,7 +6666,7 @@
       "returned_tokens": 905,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.2249,
+        "retrieval_seconds": 0.2431,
         "llm_calls": 0
       },
       "table": {
@@ -6813,7 +6813,7 @@
       "returned_tokens": 905,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.2459,
+        "retrieval_seconds": 0.249,
         "llm_calls": 0
       },
       "table": null,
@@ -7049,7 +7049,7 @@
       "returned_tokens": 1018,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.2461,
+        "retrieval_seconds": 0.2457,
         "llm_calls": 0
       },
       "table": {
@@ -7295,7 +7295,7 @@
       "returned_tokens": 1018,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.2166,
+        "retrieval_seconds": 0.2186,
         "llm_calls": 0
       },
       "table": null,
@@ -7504,7 +7504,7 @@
       "returned_tokens": 1018,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.2051,
+        "retrieval_seconds": 0.2324,
         "llm_calls": 0
       },
       "table": null,
@@ -7759,7 +7759,7 @@
       "returned_tokens": 1018,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.2332,
+        "retrieval_seconds": 0.2638,
         "llm_calls": 0
       },
       "table": {
@@ -7968,7 +7968,7 @@
       "returned_tokens": 1018,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.2163,
+        "retrieval_seconds": 0.2187,
         "llm_calls": 0
       },
       "table": null,
@@ -8150,7 +8150,7 @@
       "returned_tokens": 1018,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.1975,
+        "retrieval_seconds": 0.2161,
         "llm_calls": 0
       },
       "table": null,
@@ -8394,7 +8394,7 @@
       "returned_tokens": 1309,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.2236,
+        "retrieval_seconds": 0.253,
         "llm_calls": 0
       },
       "table": {
@@ -8705,7 +8705,7 @@
       "returned_tokens": 1309,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.2169,
+        "retrieval_seconds": 0.2246,
         "llm_calls": 0
       },
       "table": {
@@ -9152,7 +9152,7 @@
       "returned_tokens": 3609,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.2843,
+        "retrieval_seconds": 0.2911,
         "llm_calls": 0
       },
       "table": {
@@ -9621,7 +9621,7 @@
       "returned_tokens": 3614,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.2295,
+        "retrieval_seconds": 0.2297,
         "llm_calls": 0
       },
       "table": {
@@ -10234,7 +10234,7 @@
       "returned_tokens": 3609,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.2785,
+        "retrieval_seconds": 0.3224,
         "llm_calls": 0
       },
       "table": {
@@ -10677,7 +10677,7 @@
       "returned_tokens": 3953,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.2065,
+        "retrieval_seconds": 0.2233,
         "llm_calls": 0
       },
       "table": null,
@@ -11072,7 +11072,7 @@
       "returned_tokens": 4126,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.2378,
+        "retrieval_seconds": 0.2357,
         "llm_calls": 0
       },
       "table": {
@@ -11548,7 +11548,7 @@
       "returned_tokens": 3838,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.2437,
+        "retrieval_seconds": 0.2344,
         "llm_calls": 0
       },
       "table": {
@@ -11990,7 +11990,7 @@
       "returned_tokens": 3488,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.2293,
+        "retrieval_seconds": 0.2398,
         "llm_calls": 0
       },
       "table": {
@@ -12287,7 +12287,7 @@
       "returned_tokens": 3953,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.2171,
+        "retrieval_seconds": 0.234,
         "llm_calls": 0
       },
       "table": null,
@@ -12655,7 +12655,7 @@
       "returned_tokens": 3808,
       "query_cost": {
         "retrievals": 1,
-        "retrieval_seconds": 0.2519,
+        "retrieval_seconds": 0.266,
         "llm_calls": 0
       },
       "table": {
