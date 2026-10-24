@@ -68,8 +68,9 @@ body.no-scroll{overflow:hidden}
 .seg button{font:inherit;font-size:13px;padding:2px 9px;border-radius:12px;cursor:pointer;
 border:1px solid var(--line);background:var(--panel);color:var(--text)}
 .seg button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
-.pick{display:grid;grid-template-columns:1fr auto 1fr;gap:10px 16px;align-items:start}
-.pick-side{display:flex;flex-direction:column;gap:2px}.pick-side label{font-size:14px;cursor:pointer}
-.pick-vs{font-size:20px;font-weight:600;color:var(--muted);align-self:center}
-.pick-foot,.pick>.meta{grid-column:1/-1}
-@media (max-width:620px){.pick{grid-template-columns:1fr}.pick-vs{align-self:start}}
+.pick{display:flex;flex-direction:column;gap:4px}
+.pick.bad{border-color:var(--bad);background:var(--bad-bg);box-shadow:0 0 0 2px var(--bad-bg)}
+.pick.warn{border-color:var(--warn);background:var(--warn-bg)}
+.pick-row{display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px}
+.pick-row b{min-width:34px}.pick-row label{font-size:14px;cursor:pointer;white-space:nowrap}
+.pick-vs{font-weight:600;color:var(--muted);padding-left:2px}

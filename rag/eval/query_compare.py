@@ -89,8 +89,11 @@ def case_facts(ctx: EvalContext, case, run: execution.QueryRun) -> dict[str, Any
         "tokens": [ctx.tokens_of(s.unit.text) for s in leading],
         "units": [unit_key(s.unit) for s in leading],
         "relevant": [any(c in relevant for c in s.unit.chunk_ids) for s in leading],
-        "cost": {"retrievals": run.cost.retrievals, "retrieval_seconds": round(run.cost.retrieval_seconds, 4),
-                 "llm_calls": run.cost.llm_calls},
+        "cost": {"retrievals": run.cost.retrievals, "llm_calls": run.cost.llm_calls,
+                 "llm_seconds": round(run.cost.llm_seconds, 4),
+                 "retrieval_seconds": round(run.cost.retrieval_seconds, 4),
+                 "rerank_seconds": round(run.cost.rerank_seconds, 4),
+                 "llm_cost_usd": round(run.cost.llm_cost_usd, 6)},
     }
 
 

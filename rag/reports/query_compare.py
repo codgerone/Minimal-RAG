@@ -48,13 +48,14 @@ function status(f,k){
   return cov===f.needed.length?'complete':cov?'partial':'miss';
 }
 function metrics(fs,k){
-  var ids=Object.keys(fs),n=ids.length,m={hit:0,complete:0,mrr:0,tokens:0,retrievals:0,ms:0,llm:0};
+  var ids=Object.keys(fs),n=ids.length,m={hit:0,complete:0,mrr:0,tokens:0,retrievals:0,ms:0,usd:0};
   ids.forEach(function(id){var f=fs[id],s=status(f,k);
     m.hit+=s!=='miss';m.complete+=s==='complete';
     if(f.first_relevant!==null&&f.first_relevant<=k)m.mrr+=1/f.first_relevant;
     m.tokens+=f.tokens.slice(0,k).reduce(function(a,b){return a+b},0);
-    m.retrievals+=f.cost.retrievals;m.ms+=f.cost.retrieval_seconds*1000;m.llm+=f.cost.llm_calls;});
-  ['mrr','tokens','retrievals','ms','llm'].forEach(function(x){m[x]=n?m[x]/n:0});
+    var c=f.cost;m.retrievals+=c.retrievals;m.usd+=c.llm_cost_usd||0;
+    m.ms+=((c.llm_seconds||0)+c.retrieval_seconds+(c.rerank_seconds||0))*1000;});
+  ['mrr','tokens','retrievals','ms','usd'].forEach(function(x){m[x]=n?m[x]/n:0});
   return m;
 }
 function moves(lf,rf,k){
@@ -64,15 +65,17 @@ function moves(lf,rf,k){
     better+=!a&&b;worse+=a&&!b;});
   return [better,worse];
 }
-var FMT={hit:function(v){return v.toFixed(0)},complete:function(v){return v.toFixed(0)},
+var N=D.cases.length;
+var FMT={hit:function(v){return v.toFixed(0)+'/'+N},complete:function(v){return v.toFixed(0)+'/'+N},
   mrr:function(v){return (v*100).toFixed(1)+'%'},tokens:function(v){return v.toFixed(0)},
-  retrievals:function(v){return v.toFixed(1)},ms:function(v){return v.toFixed(0)},llm:function(v){return v.toFixed(1)}};
-var LOWER={tokens:1,retrievals:1,ms:1,llm:1};   // smaller is better
+  retrievals:function(v){return v.toFixed(1)},ms:function(v){return v.toFixed(0)},usd:function(v){return '$'+v.toFixed(4)}};
+var DFMT={hit:function(v){return v.toFixed(0)},complete:function(v){return v.toFixed(0)}};   // changes: no total
+var LOWER={tokens:1,retrievals:1,ms:1,usd:1};   // smaller is better
 function cell(kind,l,r){
   var f=FMT[kind];
   if(l===undefined)return '<td class="num">'+f(r)+'</td>';
   var d=r-l,cls=Math.abs(d)<1e-9?'same':((d>0)!==!!LOWER[kind]?'up':'down');
-  var ds=Math.abs(d)<1e-9?'±0':(d>0?'+':'−')+f(Math.abs(d));
+  var ds=Math.abs(d)<1e-9?'±0':(d>0?'+':'−')+(DFMT[kind]||f)(Math.abs(d));
   return '<td class="num"><div class="meta">'+f(l)+' → '+f(r)+'</div><div class="'+cls+'">'+ds+'</div></td>';
 }
 function ingest(c){
@@ -87,21 +90,24 @@ function renderPicker(){
   });
   var e=error(),msg=document.getElementById('qc-msg'),lk=key(S.L),rk=key(S.R);
   var label=function(set){return set.size?[...set].sort(function(a,b){return MODS.indexOf(a)-MODS.indexOf(b)}).join(' + '):'V3.13（无模块）'};
-  if(e){msg.innerHTML='<span class="badge bad">标签不合法</span> '+esc(e);return 'bad'}
+  var card=document.querySelector('.pick');card.classList.remove('bad','warn');
+  if(e){card.classList.add('bad');msg.innerHTML='<span class="badge bad">配置不合法</span> '+esc(e);return 'bad'}
   var missing=[];
   if(!D.configs[lk])missing.push('左侧 '+label(S.L));
   if(!D.configs[rk]&&rk!==lk)missing.push('右侧 '+label(S.R));
-  if(missing.length){msg.innerHTML='<span class="badge warn">尚未评估</span> '+esc(missing.join('；'));return 'missing'}
-  msg.innerHTML=(!S.L.size&&!S.R.size)?'<span class="badge">V3.13 基线</span> 两侧全空，每格只显示 V3.13 的数值'
-    :'<span class="badge ok">比较</span> '+esc(label(S.L))+' <b>vs</b> '+esc(label(S.R))+'：每格依次为左侧 → 右侧与变化';
+  if(missing.length){card.classList.add('warn');msg.innerHTML='<span class="badge warn">尚未评估</span> '+esc(missing.join('；'));return 'missing'}
+  msg.innerHTML=(!S.L.size&&!S.R.size)?'<span class="badge">V3.13 基线</span>'
+    :'<span class="badge ok">比较</span> '+esc(label(S.L))+' <b>vs</b> '+esc(label(S.R));
   return 'ok';
 }
 function renderMatrix(base){
   var k=S.km,lk=key(S.L),rk=key(S.R);
   var cols=[['hit','命中题数'],['complete','完整覆盖题数'],['mrr','MRR'],['tokens','每题返回 token']];
-  var cost=[['retrievals','每题检索次数'],['ms','每题检索耗时（ms）'],['llm','每题 LLM 调用']];
+  var cost=[['retrievals','每题检索次数','检索器调用次数：子问题数 × 启用的写法数，加原问题一路'],
+    ['ms','每题查询耗时（ms）','规划（LLM）+ 检索 + 重排的耗时，不含作答'],
+    ['usd','每题 LLM 费用','查询侧 LLM（规划）的费用，不含作答']];
   var head='<tr><th>组合</th>'+cols.map(function(c){return '<th class="num">'+c[1]+'</th>'}).join('')
-    +(base?'':'<th class="num">变好</th><th class="num">变差</th>')+cost.map(function(c){return '<th class="num">'+c[1]+'</th>'}).join('')+'</tr>';
+    +(base?'':'<th class="num">变好</th><th class="num">变差</th>')+cost.map(function(c){return '<th class="num" title="'+c[2]+'">'+c[1]+'</th>'}).join('')+'</tr>';
   var rows=D.combos.map(function(c){
     var rf=facts(rk,c.label),r=metrics(rf,k),l=base?undefined:metrics(facts(lk,c.label),k);
     var mv=base?null:moves(facts(lk,c.label),rf,k);
@@ -201,7 +207,7 @@ readHash();render();
 def render(data: dict[str, Any]) -> str:
     modules = data["modules"]
     boxes = lambda side: "".join(
-        f'<label class="nw"><input type="checkbox" value="{esc(m["id"])}"> {esc(m["id"])} {esc(m["name"])}</label>'
+        f'<label><input type="checkbox" value="{esc(m["id"])}"> {esc(m["id"])} {esc(m["name"])}</label>'
         for m in modules)
     docs = {c["document_id"]: c["document_name"] for c in data["cases"]}
     doc_bar = ('<div class="seg" data-doc>文档 <button type="button" data-v="all" class="on">全部</button>'
@@ -216,17 +222,17 @@ def render(data: dict[str, Any]) -> str:
         f'<div class="sub">{esc(data["created_at"])} · 数据集 {esc(data["dataset"]["version"])}，'
         f'{data["dataset"]["answerable"]} 道可回答题 · {len(data["combos"])} 种组合（混合检索、文档过滤开启）'
         f' · 已评估的模块配置：{esc("、".join(evaluated))}</div>'
-        f'<div class="card pick"><div class="pick-side" data-side="L"><b>左侧</b>{boxes("L")}</div>'
-        f'<div class="pick-vs">vs</div><div class="pick-side" data-side="R"><b>右侧</b>{boxes("R")}</div>'
+        f'<div class="card pick"><div class="pick-row" data-side="L"><b>左侧</b>{boxes("L")}</div>'
+        f'<div class="pick-vs">vs</div><div class="pick-row" data-side="R"><b>右侧</b>{boxes("R")}</div>'
         f'<div class="pick-foot"><span id="qc-msg"></span> <button type="button" id="qc-reset" class="expand-btn">清空两侧</button></div>'
-        f'<div class="meta">两侧全空显示 V3.13；否则左侧必须是右侧的真子集，变化即右侧多出的模块带来的效果。'
+        f'<div class="meta">两侧全空显示 V3.13；否则左侧必须是右侧的真子集，每格依次为左侧 → 右侧与变化，变化即右侧多出的模块带来的效果。'
         f'每种组合只与它自己比较。</div></div>'
         f'<section data-module="matrix"><h2>整体指标矩阵</h2>{k_bar("km")}'
         f'<div class="meta">命中：至少一个证据组补全；完整覆盖：全部证据组补全；变好 / 变差：左侧未完整覆盖、右侧完整覆盖的题数 / 反之。'
-        f'MRR 与查询成本按 {data["dataset"]["answerable"]} 道可回答题平均。悬停组合名看入库成本（左右两侧相同）。</div>'
+        f'MRR、token 与查询成本按 {data["dataset"]["answerable"]} 道可回答题平均；悬停列名看成本的定义，悬停组合名看入库成本（左右两侧相同）。</div>'
         f'<div class="scroll" data-grid><div class="qc-body"></div></div></section>'
         f'<section data-module="curve"><h2>K–完整覆盖曲线</h2>'
-        f'<div class="meta">每格为该 K 下完整覆盖的题数。</div>'
+        f'<div class="meta">每格为该 K 下完整覆盖的题数（共 {data["dataset"]["answerable"]} 道可回答题）。</div>'
         f'<div class="scroll" data-grid><div class="qc-body"></div></div></section>'
         f'<section data-module="cases"><h2>逐题变化</h2>{k_bar("kc")}{doc_bar}'
         f'<label class="meta"><input type="checkbox" id="qc-changed"> 只看完整覆盖有变化的题</label>'

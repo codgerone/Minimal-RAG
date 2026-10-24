@@ -26,7 +26,10 @@ class Selected:
 class QueryCost:
     retrievals: int             # retriever calls
     retrieval_seconds: float    # wall time of those calls, summed
-    llm_calls: int = 0
+    llm_calls: int = 0          # query-side LLM calls (planning)
+    llm_seconds: float = 0.0
+    llm_cost_usd: float = 0.0
+    rerank_seconds: float = 0.0
 
 
 @dataclass(frozen=True)

@@ -1,6 +1,6 @@
 {
   "name": "v3.14",
-  "created_at": "2026-10-24T14:13:43+08:00",
+  "created_at": "2026-10-24T14:43:34+08:00",
   "dataset": {
     "version": "3.3.0",
     "fingerprint": "2a1dc6de8d926b98aa27a639e1fab61699b76c4bf38d35a49a5f4cde7e756f70",
@@ -828,8 +828,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3672,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2422,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q002": {
@@ -909,8 +912,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3011,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3067,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q003": {
@@ -988,8 +994,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2789,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2921,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q004": {
@@ -1066,8 +1075,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2927,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.33,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q005": {
@@ -1145,8 +1157,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2958,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3095,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q006": {
@@ -1223,8 +1238,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2955,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2736,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q007": {
@@ -1302,8 +1320,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.268,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2821,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q008": {
@@ -1380,8 +1401,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2609,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3162,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q009": {
@@ -1457,8 +1481,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2637,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3274,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q010": {
@@ -1535,8 +1562,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2533,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2543,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q011": {
@@ -1614,8 +1644,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2681,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2929,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q012": {
@@ -1691,8 +1724,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2711,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3109,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q013": {
@@ -1769,8 +1805,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2657,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3446,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q014": {
@@ -1847,8 +1886,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2607,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3061,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "E001-602-Q001": {
@@ -1875,8 +1917,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2553,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2955,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "E001-602-Q002": {
@@ -1902,8 +1947,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.237,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.4322,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q001": {
@@ -1934,8 +1982,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2473,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3519,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q002": {
@@ -1963,8 +2014,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2593,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2728,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q003": {
@@ -1993,8 +2047,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2513,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2552,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q004": {
@@ -2024,8 +2081,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2878,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2819,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q005": {
@@ -2053,8 +2113,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2324,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2797,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q006": {
@@ -2082,8 +2145,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2275,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2482,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-15-Q001": {
@@ -2115,8 +2181,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.254,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2776,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-15-Q002": {
@@ -2148,8 +2217,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2403,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2395,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q001": {
@@ -2215,8 +2287,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3132,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2959,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q002": {
@@ -2278,8 +2353,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2549,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3069,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q003": {
@@ -2345,8 +2423,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3299,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3559,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q004": {
@@ -2407,8 +2488,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2218,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2343,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q005": {
@@ -2470,8 +2554,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2521,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2734,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q006": {
@@ -2533,8 +2620,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2681,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2723,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q007": {
@@ -2595,8 +2685,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2469,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2631,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q009": {
@@ -2658,8 +2751,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2504,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2959,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         }
       },
@@ -2738,8 +2834,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2391,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2523,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q002": {
@@ -2819,8 +2918,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2696,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2865,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q003": {
@@ -2898,8 +3000,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2679,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2603,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q004": {
@@ -2976,8 +3081,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2564,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2721,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q005": {
@@ -3055,8 +3163,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2748,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3033,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q006": {
@@ -3133,8 +3244,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2834,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2824,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q007": {
@@ -3212,8 +3326,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2422,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2991,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q008": {
@@ -3290,8 +3407,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.284,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2977,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q009": {
@@ -3367,8 +3487,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3013,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2797,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q010": {
@@ -3445,8 +3568,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.294,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2974,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q011": {
@@ -3524,8 +3650,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2846,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3131,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q012": {
@@ -3601,8 +3730,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3233,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.315,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q013": {
@@ -3679,8 +3811,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2855,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3112,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q014": {
@@ -3757,8 +3892,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2645,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2737,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "E001-602-Q001": {
@@ -3785,8 +3923,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2897,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3047,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "E001-602-Q002": {
@@ -3812,8 +3953,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2598,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2931,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q001": {
@@ -3844,8 +3988,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2886,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2755,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q002": {
@@ -3873,8 +4020,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2335,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2497,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q003": {
@@ -3903,8 +4053,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2297,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2392,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q004": {
@@ -3934,8 +4087,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2846,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2973,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q005": {
@@ -3963,8 +4119,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2296,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2495,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q006": {
@@ -3992,8 +4151,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2217,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2581,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-15-Q001": {
@@ -4025,8 +4187,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.252,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2744,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-15-Q002": {
@@ -4058,8 +4223,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2629,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2763,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q001": {
@@ -4113,8 +4281,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3269,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.385,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q002": {
@@ -4164,8 +4335,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2421,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2911,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q003": {
@@ -4219,8 +4393,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3023,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3692,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q004": {
@@ -4269,8 +4446,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2188,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2583,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q005": {
@@ -4320,8 +4500,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2479,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2983,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q006": {
@@ -4371,8 +4554,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2642,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.317,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q007": {
@@ -4421,8 +4607,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2796,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2809,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q009": {
@@ -4472,8 +4661,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2434,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2926,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         }
       },
@@ -4552,8 +4744,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2265,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2608,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q002": {
@@ -4633,8 +4828,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2985,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2714,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q003": {
@@ -4712,8 +4910,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2943,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2523,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q004": {
@@ -4790,8 +4991,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2794,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2676,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q005": {
@@ -4869,8 +5073,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2746,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2927,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q006": {
@@ -4947,8 +5154,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2689,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2832,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q007": {
@@ -5026,8 +5236,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2602,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2673,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q008": {
@@ -5104,8 +5317,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2598,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2844,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q009": {
@@ -5181,8 +5397,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2614,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2574,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q010": {
@@ -5259,8 +5478,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3131,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2519,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q011": {
@@ -5338,8 +5560,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3283,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2902,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q012": {
@@ -5415,8 +5640,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2973,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2952,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q013": {
@@ -5493,8 +5721,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2653,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2934,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q014": {
@@ -5571,8 +5802,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.261,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2563,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "E001-602-Q001": {
@@ -5599,8 +5833,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.257,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2744,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "E001-602-Q002": {
@@ -5626,8 +5863,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2923,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2627,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q001": {
@@ -5658,8 +5898,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2946,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2444,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q002": {
@@ -5687,8 +5930,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2174,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2322,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q003": {
@@ -5717,8 +5963,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2275,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2482,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q004": {
@@ -5748,8 +5997,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2523,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2829,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q005": {
@@ -5777,8 +6029,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.261,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2328,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q006": {
@@ -5806,8 +6061,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2241,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2381,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-15-Q001": {
@@ -5839,8 +6097,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2672,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2461,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-15-Q002": {
@@ -5872,8 +6133,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2565,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2411,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q001": {
@@ -5954,8 +6218,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3087,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3121,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q002": {
@@ -6032,8 +6299,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2617,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2666,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q003": {
@@ -6114,8 +6384,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3098,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3135,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q004": {
@@ -6191,8 +6464,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2286,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2263,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q005": {
@@ -6269,8 +6545,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2443,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2664,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q006": {
@@ -6347,8 +6626,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2587,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2727,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q007": {
@@ -6424,8 +6706,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3443,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2652,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q009": {
@@ -6502,8 +6787,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2492,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2894,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         }
       },
@@ -6582,8 +6870,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2349,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2482,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q002": {
@@ -6663,8 +6954,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2853,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2837,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q003": {
@@ -6742,8 +7036,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2756,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2766,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q004": {
@@ -6820,8 +7117,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2546,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2658,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q005": {
@@ -6899,8 +7199,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2776,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2818,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q006": {
@@ -6977,8 +7280,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2785,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2723,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q007": {
@@ -7056,8 +7362,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2725,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2784,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q008": {
@@ -7134,8 +7443,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3153,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2901,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q009": {
@@ -7211,8 +7523,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2883,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2705,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q010": {
@@ -7289,8 +7604,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2693,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2443,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q011": {
@@ -7368,8 +7686,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3065,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2878,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q012": {
@@ -7445,8 +7766,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3068,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2999,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q013": {
@@ -7523,8 +7847,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2658,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2802,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q014": {
@@ -7601,8 +7928,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3096,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2572,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "E001-602-Q001": {
@@ -7629,8 +7959,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2454,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2844,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "E001-602-Q002": {
@@ -7656,8 +7989,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2565,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3061,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q001": {
@@ -7688,8 +8024,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.258,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2802,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q002": {
@@ -7717,8 +8056,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2247,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2403,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q003": {
@@ -7747,8 +8089,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2308,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2523,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q004": {
@@ -7778,8 +8123,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2837,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.267,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q005": {
@@ -7807,8 +8155,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2183,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2239,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q006": {
@@ -7836,8 +8187,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2313,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2429,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-15-Q001": {
@@ -7869,8 +8223,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2259,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2548,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-15-Q002": {
@@ -7902,8 +8259,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2401,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.248,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q001": {
@@ -7957,8 +8317,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3252,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3029,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q002": {
@@ -8008,8 +8371,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2522,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2703,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q003": {
@@ -8063,8 +8429,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3209,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3635,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q004": {
@@ -8113,8 +8482,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2202,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2533,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q005": {
@@ -8164,8 +8536,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2723,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2934,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q006": {
@@ -8215,8 +8590,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2881,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2606,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q007": {
@@ -8265,8 +8643,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2669,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2614,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q009": {
@@ -8316,8 +8697,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3237,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2819,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         }
       },
@@ -8396,8 +8780,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2627,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.256,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q002": {
@@ -8477,8 +8864,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.264,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2805,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q003": {
@@ -8556,8 +8946,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2358,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2679,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q004": {
@@ -8634,8 +9027,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2559,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2681,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q005": {
@@ -8713,8 +9109,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2724,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2951,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q006": {
@@ -8791,8 +9190,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2724,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2825,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q007": {
@@ -8870,8 +9272,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2377,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2965,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q008": {
@@ -8948,8 +9353,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2637,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2864,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q009": {
@@ -9025,8 +9433,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2496,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2737,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q010": {
@@ -9103,8 +9514,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2626,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2608,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q011": {
@@ -9182,8 +9596,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2868,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q012": {
@@ -9259,8 +9676,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2705,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3158,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q013": {
@@ -9337,8 +9757,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.24,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3164,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q014": {
@@ -9415,8 +9838,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2431,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2787,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "E001-602-Q001": {
@@ -9443,8 +9869,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2452,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2648,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "E001-602-Q002": {
@@ -9470,8 +9899,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2542,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2848,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q001": {
@@ -9502,8 +9934,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2284,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2645,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q002": {
@@ -9531,8 +9966,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2288,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2366,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q003": {
@@ -9561,8 +9999,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2409,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2426,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q004": {
@@ -9592,8 +10033,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2562,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2781,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q005": {
@@ -9621,8 +10065,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2484,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.28,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q006": {
@@ -9650,8 +10097,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2697,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2374,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-15-Q001": {
@@ -9683,8 +10133,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3064,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2514,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-15-Q002": {
@@ -9716,8 +10169,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.246,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2472,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q001": {
@@ -9789,8 +10245,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2974,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3245,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q002": {
@@ -9858,8 +10317,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.258,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2799,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q003": {
@@ -9931,8 +10393,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3091,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3427,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q004": {
@@ -9999,8 +10464,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2285,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2284,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q005": {
@@ -10068,8 +10536,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2834,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2626,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q006": {
@@ -10137,8 +10608,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3012,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2721,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q007": {
@@ -10205,8 +10679,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3135,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2694,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q009": {
@@ -10274,8 +10751,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3231,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2772,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         }
       },
@@ -10354,8 +10834,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2397,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2559,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q002": {
@@ -10435,8 +10918,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2743,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2859,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q003": {
@@ -10514,8 +11000,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2416,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2794,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q004": {
@@ -10592,8 +11081,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2737,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2706,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q005": {
@@ -10671,8 +11163,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3001,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.296,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q006": {
@@ -10749,8 +11244,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2915,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2819,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q007": {
@@ -10828,8 +11326,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2805,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3003,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q008": {
@@ -10906,8 +11407,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.32,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3076,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q009": {
@@ -10983,8 +11487,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2604,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.29,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q010": {
@@ -11061,8 +11568,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2795,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2731,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q011": {
@@ -11140,8 +11650,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3247,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3027,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q012": {
@@ -11217,8 +11730,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2874,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3288,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q013": {
@@ -11295,8 +11811,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2758,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3118,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q014": {
@@ -11373,8 +11892,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2771,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2745,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "E001-602-Q001": {
@@ -11401,8 +11923,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2751,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3083,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "E001-602-Q002": {
@@ -11428,8 +11953,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.268,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3134,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q001": {
@@ -11460,8 +11988,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2483,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3005,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q002": {
@@ -11489,8 +12020,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2304,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2882,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q003": {
@@ -11519,8 +12053,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2345,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2615,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q004": {
@@ -11550,8 +12087,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.286,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3028,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q005": {
@@ -11579,8 +12119,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2967,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.286,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q006": {
@@ -11608,8 +12151,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2275,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.4153,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-15-Q001": {
@@ -11641,8 +12187,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2413,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2899,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-15-Q002": {
@@ -11674,8 +12223,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2387,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2662,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q001": {
@@ -11729,8 +12281,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3196,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.533,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q002": {
@@ -11780,8 +12335,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.275,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3252,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q003": {
@@ -11835,8 +12393,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3148,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3817,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q004": {
@@ -11885,8 +12446,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.239,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2623,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q005": {
@@ -11936,8 +12500,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2606,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2802,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q006": {
@@ -11987,8 +12554,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2776,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2721,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q007": {
@@ -12037,8 +12607,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2669,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2531,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q009": {
@@ -12088,8 +12661,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2798,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2802,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         }
       },
@@ -12168,8 +12744,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2436,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2424,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q002": {
@@ -12249,8 +12828,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3108,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2894,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q003": {
@@ -12328,8 +12910,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2807,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2716,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q004": {
@@ -12406,8 +12991,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2923,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2872,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q005": {
@@ -12485,8 +13073,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3013,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2942,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q006": {
@@ -12563,8 +13154,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2801,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2838,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q007": {
@@ -12642,8 +13236,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2578,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2691,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q008": {
@@ -12720,8 +13317,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2728,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3097,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q009": {
@@ -12797,8 +13397,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2591,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2979,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q010": {
@@ -12875,8 +13478,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2546,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2695,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q011": {
@@ -12954,8 +13560,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2991,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2882,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q012": {
@@ -13031,8 +13640,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2879,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3125,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q013": {
@@ -13109,8 +13721,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3154,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2868,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q014": {
@@ -13187,8 +13802,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3175,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2602,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "E001-602-Q001": {
@@ -13215,8 +13833,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2945,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2668,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "E001-602-Q002": {
@@ -13242,8 +13863,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2904,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2553,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q001": {
@@ -13274,8 +13898,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2825,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2769,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q002": {
@@ -13303,8 +13930,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2302,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2477,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q003": {
@@ -13333,8 +13963,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.4017,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2436,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q004": {
@@ -13364,8 +13997,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3339,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2624,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q005": {
@@ -13393,8 +14029,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2663,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2417,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q006": {
@@ -13422,8 +14061,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2702,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2479,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-15-Q001": {
@@ -13455,8 +14097,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2905,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2951,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-15-Q002": {
@@ -13488,8 +14133,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2789,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2483,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q001": {
@@ -13570,8 +14218,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3981,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3296,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q002": {
@@ -13648,8 +14299,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2732,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2679,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q003": {
@@ -13730,8 +14384,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2985,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3321,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q004": {
@@ -13807,8 +14464,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2706,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2431,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q005": {
@@ -13885,8 +14545,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2872,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2551,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q006": {
@@ -13963,8 +14626,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2794,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2889,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q007": {
@@ -14040,8 +14706,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2714,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2838,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q009": {
@@ -14118,8 +14787,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2796,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3134,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         }
       },
@@ -14198,8 +14870,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2785,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2657,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q002": {
@@ -14279,8 +14954,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2647,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.306,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q003": {
@@ -14358,8 +15036,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2693,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3328,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q004": {
@@ -14436,8 +15117,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2652,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.4547,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q005": {
@@ -14515,8 +15199,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2808,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.4678,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q006": {
@@ -14593,8 +15280,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2755,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3512,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q007": {
@@ -14672,8 +15362,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2647,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3018,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q008": {
@@ -14750,8 +15443,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2787,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3131,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q009": {
@@ -14827,8 +15523,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2681,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.283,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q010": {
@@ -14905,8 +15604,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2807,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3503,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q011": {
@@ -14984,8 +15686,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3385,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.4038,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q012": {
@@ -15061,8 +15766,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3374,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3234,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q013": {
@@ -15139,8 +15847,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.45,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3252,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q014": {
@@ -15217,8 +15928,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.5115,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3046,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "E001-602-Q001": {
@@ -15245,8 +15959,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.5119,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3171,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "E001-602-Q002": {
@@ -15272,8 +15989,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.4578,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3001,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q001": {
@@ -15304,8 +16024,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.398,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2779,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q002": {
@@ -15333,8 +16056,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.4292,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.244,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q003": {
@@ -15363,8 +16089,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.5012,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2616,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q004": {
@@ -15394,8 +16123,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3552,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3009,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q005": {
@@ -15423,8 +16155,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.337,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.243,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q006": {
@@ -15452,8 +16187,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3058,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.229,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-15-Q001": {
@@ -15485,8 +16223,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3029,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2645,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-15-Q002": {
@@ -15518,8 +16259,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.325,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2634,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q001": {
@@ -15573,8 +16317,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.6381,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3553,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q002": {
@@ -15624,8 +16371,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.4513,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.265,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q003": {
@@ -15679,8 +16429,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.4395,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3152,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q004": {
@@ -15729,8 +16482,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3001,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2326,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q005": {
@@ -15780,8 +16536,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3722,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2759,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q006": {
@@ -15831,8 +16590,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3235,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2733,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q007": {
@@ -15881,8 +16643,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2838,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2658,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q009": {
@@ -15932,8 +16697,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3674,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2999,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         }
       },
@@ -16012,8 +16780,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2505,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.286,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q002": {
@@ -16093,8 +16864,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2722,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.272,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q003": {
@@ -16172,8 +16946,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.257,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2547,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q004": {
@@ -16250,8 +17027,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2868,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2738,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q005": {
@@ -16329,8 +17109,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.4205,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2891,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q006": {
@@ -16407,8 +17190,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3013,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3218,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q007": {
@@ -16486,8 +17272,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2968,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2882,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q008": {
@@ -16564,8 +17353,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.4332,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2856,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q009": {
@@ -16641,8 +17433,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3548,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2739,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q010": {
@@ -16719,8 +17514,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2629,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2581,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q011": {
@@ -16798,8 +17596,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3135,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.325,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q012": {
@@ -16875,8 +17676,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2939,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2947,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q013": {
@@ -16953,8 +17757,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2891,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3119,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q014": {
@@ -17031,8 +17838,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2597,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2599,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "E001-602-Q001": {
@@ -17059,8 +17869,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2645,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2863,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "E001-602-Q002": {
@@ -17086,8 +17899,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2929,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2768,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q001": {
@@ -17118,8 +17934,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2912,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2658,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q002": {
@@ -17147,8 +17966,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2574,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2494,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q003": {
@@ -17177,8 +17999,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.289,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2445,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q004": {
@@ -17208,8 +18033,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3328,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3113,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q005": {
@@ -17237,8 +18065,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2883,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.235,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q006": {
@@ -17266,8 +18097,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3613,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2362,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-15-Q001": {
@@ -17299,8 +18133,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2777,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2374,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-15-Q002": {
@@ -17332,8 +18169,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2527,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2612,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q001": {
@@ -17405,8 +18245,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3655,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3378,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q002": {
@@ -17474,8 +18317,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2933,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2644,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q003": {
@@ -17547,8 +18393,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3567,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3288,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q004": {
@@ -17615,8 +18464,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.235,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2486,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q005": {
@@ -17684,8 +18536,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2783,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2864,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q006": {
@@ -17753,8 +18608,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2752,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3025,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q007": {
@@ -17821,8 +18679,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2659,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2606,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q009": {
@@ -17890,8 +18751,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.308,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2582,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         }
       },
@@ -17970,8 +18834,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2715,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2733,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q002": {
@@ -18051,8 +18918,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2603,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2813,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q003": {
@@ -18130,8 +19000,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2918,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2538,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q004": {
@@ -18208,8 +19081,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2916,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2932,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q005": {
@@ -18287,8 +19163,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2841,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3163,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q006": {
@@ -18365,8 +19244,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2648,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3228,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q007": {
@@ -18444,8 +19326,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2541,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2985,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q008": {
@@ -18522,8 +19407,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2915,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2837,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q009": {
@@ -18599,8 +19487,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2768,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2637,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q010": {
@@ -18677,8 +19568,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2537,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2923,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q011": {
@@ -18756,8 +19650,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2816,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.359,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q012": {
@@ -18833,8 +19730,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3071,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3306,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q013": {
@@ -18911,8 +19811,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2852,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.302,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q014": {
@@ -18989,8 +19892,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.257,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2949,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "E001-602-Q001": {
@@ -19017,8 +19923,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2648,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2633,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "E001-602-Q002": {
@@ -19044,8 +19953,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3039,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2549,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q001": {
@@ -19076,8 +19988,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2934,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.246,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q002": {
@@ -19105,8 +20020,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2323,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2243,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q003": {
@@ -19135,8 +20053,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2268,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2642,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q004": {
@@ -19166,8 +20087,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2601,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2863,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q005": {
@@ -19195,8 +20119,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2218,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2349,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q006": {
@@ -19224,8 +20151,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2236,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2333,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-15-Q001": {
@@ -19257,8 +20187,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2633,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2376,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-15-Q002": {
@@ -19290,8 +20223,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2492,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2594,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q001": {
@@ -19345,8 +20281,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3181,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.325,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q002": {
@@ -19396,8 +20335,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.279,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2619,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q003": {
@@ -19451,8 +20393,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3559,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3183,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q004": {
@@ -19501,8 +20446,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2336,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2217,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q005": {
@@ -19552,8 +20500,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2708,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.296,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q006": {
@@ -19603,8 +20554,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2812,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2511,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q007": {
@@ -19653,8 +20607,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2555,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2506,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q009": {
@@ -19704,8 +20661,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2663,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2659,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         }
       },
@@ -19784,8 +20744,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2486,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2535,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q002": {
@@ -19865,8 +20828,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2495,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2933,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q003": {
@@ -19944,8 +20910,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2381,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2656,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q004": {
@@ -20022,8 +20991,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2538,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.284,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q005": {
@@ -20101,8 +21073,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.305,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2908,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q006": {
@@ -20179,8 +21154,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3011,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2919,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q007": {
@@ -20258,8 +21236,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2724,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2875,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q008": {
@@ -20336,8 +21317,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2699,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2962,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q009": {
@@ -20413,8 +21397,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3174,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2843,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q010": {
@@ -20491,8 +21478,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2994,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.272,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q011": {
@@ -20570,8 +21560,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3054,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3243,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q012": {
@@ -20647,8 +21640,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2727,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2954,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q013": {
@@ -20725,8 +21721,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2482,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2869,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q014": {
@@ -20803,8 +21802,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2572,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2798,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "E001-602-Q001": {
@@ -20834,8 +21836,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2548,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2797,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "E001-602-Q002": {
@@ -20864,8 +21869,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2385,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2927,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q001": {
@@ -20896,8 +21904,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2441,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2669,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q002": {
@@ -20925,8 +21936,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2217,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2418,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q003": {
@@ -20955,8 +21969,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2905,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2541,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q004": {
@@ -20986,8 +22003,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.376,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2868,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q005": {
@@ -21015,8 +22035,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2536,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2587,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q006": {
@@ -21044,8 +22067,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2302,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2375,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-15-Q001": {
@@ -21077,8 +22103,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2478,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2568,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-15-Q002": {
@@ -21110,8 +22139,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2888,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2616,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q001": {
@@ -21192,8 +22224,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.4289,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3292,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q002": {
@@ -21270,8 +22305,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2644,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2653,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q003": {
@@ -21352,8 +22390,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3169,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3229,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q004": {
@@ -21429,8 +22470,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2442,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2366,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q005": {
@@ -21507,8 +22551,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2731,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2626,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q006": {
@@ -21585,8 +22632,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2538,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3079,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q007": {
@@ -21662,8 +22712,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2536,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2991,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q009": {
@@ -21740,8 +22793,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2614,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2692,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         }
       },
@@ -21820,8 +22876,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2433,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2601,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q002": {
@@ -21901,8 +22960,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2648,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2991,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q003": {
@@ -21980,8 +23042,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2725,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.277,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q004": {
@@ -22058,8 +23123,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.248,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.275,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q005": {
@@ -22137,8 +23205,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.295,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2911,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q006": {
@@ -22215,8 +23286,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2925,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3018,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q007": {
@@ -22294,8 +23368,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2609,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3042,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q008": {
@@ -22372,8 +23449,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2851,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3488,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q009": {
@@ -22449,8 +23529,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2619,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3111,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q010": {
@@ -22527,8 +23610,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2697,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2945,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q011": {
@@ -22606,8 +23692,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3067,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3117,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q012": {
@@ -22683,8 +23772,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2854,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3273,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q013": {
@@ -22761,8 +23853,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3274,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.298,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q014": {
@@ -22839,8 +23934,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3407,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2733,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "E001-602-Q001": {
@@ -22867,8 +23965,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2553,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3033,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "E001-602-Q002": {
@@ -22894,8 +23995,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2466,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2641,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q001": {
@@ -22926,8 +24030,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2687,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2639,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q002": {
@@ -22955,8 +24062,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.256,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2424,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q003": {
@@ -22985,8 +24095,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2553,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2512,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q004": {
@@ -23016,8 +24129,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.284,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2993,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q005": {
@@ -23045,8 +24161,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2615,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2438,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q006": {
@@ -23074,8 +24193,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2884,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2425,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-15-Q001": {
@@ -23107,8 +24229,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2367,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2658,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-15-Q002": {
@@ -23140,8 +24265,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2362,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2523,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q001": {
@@ -23195,8 +24323,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3211,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3642,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q002": {
@@ -23246,8 +24377,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2549,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2678,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q003": {
@@ -23301,8 +24435,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2921,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3341,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q004": {
@@ -23351,8 +24488,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2187,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2476,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q005": {
@@ -23402,8 +24542,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2898,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2893,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q006": {
@@ -23453,8 +24596,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.25,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2826,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q007": {
@@ -23503,8 +24649,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2545,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2852,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q009": {
@@ -23554,8 +24703,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2568,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2816,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         }
       },
@@ -23634,8 +24786,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2581,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2778,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q002": {
@@ -23715,8 +24870,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2578,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2762,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q003": {
@@ -23794,8 +24952,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.243,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2969,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q004": {
@@ -23872,8 +25033,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2627,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2776,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q005": {
@@ -23951,8 +25115,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3302,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.32,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q006": {
@@ -24029,8 +25196,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2913,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2854,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q007": {
@@ -24108,8 +25278,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3496,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2723,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q008": {
@@ -24186,8 +25359,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3263,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2864,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q009": {
@@ -24263,8 +25439,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3342,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2505,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q010": {
@@ -24341,8 +25520,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3067,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2728,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q011": {
@@ -24420,8 +25602,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3398,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2896,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q012": {
@@ -24497,8 +25682,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3065,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3471,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q013": {
@@ -24575,8 +25763,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.258,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3164,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "CONTRACT-105-Q014": {
@@ -24653,8 +25844,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2659,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2852,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "E001-602-Q001": {
@@ -24681,8 +25875,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2623,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.4355,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "E001-602-Q002": {
@@ -24708,8 +25905,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2872,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3255,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q001": {
@@ -24740,8 +25940,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2672,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2716,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q002": {
@@ -24769,8 +25972,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.266,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2505,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q003": {
@@ -24799,8 +26005,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.259,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2784,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q004": {
@@ -24830,8 +26039,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2732,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2541,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q005": {
@@ -24859,8 +26071,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2818,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2337,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-24-12-Q006": {
@@ -24888,8 +26103,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.235,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2324,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-15-Q001": {
@@ -24921,8 +26139,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2758,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.244,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-15-Q002": {
@@ -24954,8 +26175,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2823,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2638,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q001": {
@@ -25009,8 +26233,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3736,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3121,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q002": {
@@ -25060,8 +26287,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2813,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2604,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q003": {
@@ -25115,8 +26345,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.3666,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3211,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q004": {
@@ -25165,8 +26398,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2538,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2338,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q005": {
@@ -25216,8 +26452,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2904,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3601,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q006": {
@@ -25267,8 +26506,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2576,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.4115,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q007": {
@@ -25317,8 +26559,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.254,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.2941,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         },
         "PO-25-19-Q009": {
@@ -25368,8 +26613,11 @@
           ],
           "cost": {
             "retrievals": 1,
-            "retrieval_seconds": 0.2568,
-            "llm_calls": 0
+            "llm_calls": 0,
+            "llm_seconds": 0.0,
+            "retrieval_seconds": 0.3553,
+            "rerank_seconds": 0.0,
+            "llm_cost_usd": 0.0
           }
         }
       }
