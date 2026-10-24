@@ -87,6 +87,8 @@ def build_parser() -> argparse.ArgumentParser:
     compare.add_argument("runs", nargs="+", metavar="RUN",
                          help="reports/eval/ 下的评估目录名；可写成 目录名=显示名（如 =V3.9），显示在该列设置之前")
     compare.add_argument("--name", required=True, help="对比页名称（目录名）")
+    compare.add_argument("--no-table-evidence", action="store_true",
+                         help="不显示表格证据标签页（不以表格处理为对象的对比，如查询侧的改动）")
     compare.add_argument("--table-spec", metavar="FILE",
                          help="表格证据对照的说明文件（JSON：pairs 对照、excluded 排除的证据组、notes 结论），存入 runs.json")
     command("report", "按已入库的中间结果与已保存的评估结果，重新生成入库审核页、评估报告、对比页和总入口 reports/index.html")
@@ -443,7 +445,7 @@ def _compare(workspace: Workspace, args: argparse.Namespace) -> int:
     from rag.reports.compare import write_comparison
     from rag.reports.index_page import write_index_page
     spec = json.loads(Path(args.table_spec).read_text(encoding="utf-8")) if args.table_spec else None
-    folder = write_comparison(workspace, args.name, args.runs, spec)
+    folder = write_comparison(workspace, args.name, args.runs, spec, not args.no_table_evidence)
     write_index_page(workspace)
     _out(f"对比页：{(folder / 'index.html').relative_to(workspace.root).as_posix()}")
     return 0

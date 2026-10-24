@@ -85,3 +85,16 @@ def test_tabs_differing_only_in_k_are_titled_by_k():
             runs.append((f"{name}{k}", result))
     page = render("x", runs)
     assert 'data-tab="k3"' in page and 'data-tab="k6"' in page and ">K=6</a>" in page
+
+
+def test_improvement_and_regression_are_counted_against_the_baseline():
+    from rag.reports.compare import _coverage_moves
+    base = run("structured", "small", {"q1": "miss", "q2": "complete", "q3": "partial", "q4": "complete"})
+    other = run("structured", "large", {"q1": "complete", "q2": "partial", "q3": "partial", "q4": "complete"})
+    assert _coverage_moves(base, other) == ((1, 2), (1, 2))
+
+
+def test_table_evidence_tab_can_be_left_out_and_is_saved(workspace):
+    write_json(workspace.eval_reports() / "a" / "result.json", run("structured", "small", {"q1": "miss"}))
+    folder = write_comparison(workspace, "v", ["a"], table_evidence=False)
+    assert read_json(folder / "runs.json")["table_evidence"] is False

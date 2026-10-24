@@ -264,10 +264,24 @@ def _definitions(run: dict[str, Any]) -> str:
             f'<li><b>平均与中位数</b>：平均会被个别很差的题拉高，中位数不受影响；三者一起看。</li></ul></div>')
 
 
+def one_per_execution(runs: list[tuple[str, dict[str, Any]]]) -> list[tuple[str, dict[str, Any]]]:
+    """The table evidence is measured on the full ranking, the same for every budget of a run:
+    one run per query execution (runs written together at several budgets count once)."""
+    seen: set[frozenset[str]] = set()
+    unique = []
+    for name, result in runs:
+        execution = frozenset((result.get("budget_runs") or {name: name}).values())
+        if execution not in seen:
+            seen.add(execution)
+            unique.append((name, result))
+    return unique
+
+
 def table_tabs(runs: list[tuple[str, dict[str, Any]]], spec: TableSpec) -> list[tuple[str, str, str]]:
     """(tab id, tab title, panel html) for the table evidence views; empty when no run records them."""
     if not all(r.get("table_evidence") for _, r in runs):
         return []
+    runs = one_per_execution(runs)
     notes = "".join(f"<li>{badge(kind, 'bad' if kind == '问题' else 'ok')} {esc(text)}</li>" for kind, text in spec.notes)
     head = (f'<div class="card"><h3>结论</h3><ul>{notes}</ul></div>' if notes else "") + _definitions(runs[0][1])
     tabs = []
