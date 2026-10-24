@@ -115,12 +115,22 @@ def _compare_section(workspace: Workspace) -> str:
     return f'<h2>评估对比</h2><div class="scroll"><table><tr><th>对比</th><th>包含的评估</th></tr>{rows}</table></div>'
 
 
+def _query_section(workspace: Workspace) -> str:
+    from rag.reports.query_compare import query_dir
+    pages = sorted(query_dir(workspace).glob("*/data.json")) if query_dir(workspace).is_dir() else []
+    if not pages:
+        return ""
+    rows = "".join(f'<tr><td><a href="query/{esc(quote(p.parent.name))}/index.html">{esc(p.parent.name)}</a></td></tr>'
+                   for p in pages)
+    return f'<h2>查询侧对比</h2><div class="scroll"><table><tr><th>对比页</th></tr>{rows}</table></div>'
+
+
 def write_index_page(workspace: Workspace) -> None:
     configs = [c for c in list_configs(workspace.root, extra=True)
                if c.path.parent.name != "extra" or workspace.index_dir(c.name).is_dir()]
     sections = "".join(_config_section(workspace, config) for config in configs)
     body = (f'<h1>Minimal RAG 报告</h1><div class="sub">生成于 {datetime.now():%Y-%m-%d %H:%M} · '
             f'文档目录 documents/ · 评估数据 eval/ground-truth/</div>'
-            f'{_compare_section(workspace)}{_eval_section(workspace)}{sections}')
+            f'{_query_section(workspace)}{_compare_section(workspace)}{_eval_section(workspace)}{sections}')
     write_assets(workspace.reports)
     write_atomic(workspace.reports / "index.html", page("Minimal RAG 报告", body, root=""))

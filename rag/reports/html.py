@@ -73,6 +73,15 @@ border:1px solid var(--line);background:var(--panel);color:var(--text)}
 .overlay-body table{width:max-content;min-width:100%;font-size:14px;background:var(--panel)}
 .overlay-body td{min-width:80px;max-width:420px}
 body.no-scroll{overflow:hidden}
+.seg{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin:8px 0;font-size:13px;color:var(--muted)}
+.seg button{font:inherit;font-size:13px;padding:2px 9px;border-radius:12px;cursor:pointer;
+border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.seg button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.pick{display:grid;grid-template-columns:1fr auto 1fr;gap:10px 16px;align-items:start}
+.pick-side{display:flex;flex-direction:column;gap:2px}.pick-side label{font-size:14px;cursor:pointer}
+.pick-vs{font-size:20px;font-weight:600;color:var(--muted);align-self:center}
+.pick-foot,.pick>.meta{grid-column:1/-1}
+@media (max-width:620px){.pick{grid-template-columns:1fr}.pick-vs{align-self:start}}
 """
 
 SCRIPT = """

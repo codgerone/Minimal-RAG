@@ -43,7 +43,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     def command(name: str, help_text: str) -> argparse.ArgumentParser:
         sub = commands.add_parser(name, help=help_text, description=help_text)
-        if name not in ("config", "compare"):
+        if name not in ("config", "compare", "query-compare"):
             sub.add_argument("--config", metavar="NAME",
                              help="装配配置名（configs/NAME.toml），默认 structured 或环境变量 RAG_CONFIG")
         return sub
@@ -91,6 +91,8 @@ def build_parser() -> argparse.ArgumentParser:
                          help="不显示表格证据标签页（不以表格处理为对象的对比，如查询侧的改动）")
     compare.add_argument("--table-spec", metavar="FILE",
                          help="表格证据对照的说明文件（JSON：pairs 对照、excluded 排除的证据组、notes 结论），存入 runs.json")
+    query = command("query-compare", "13 种组合 × 查询侧模块配置逐题评估，生成查询侧对比页 reports/query/NAME/")
+    query.add_argument("--name", required=True, help="对比页名称（目录名）")
     command("report", "按已入库的中间结果与已保存的评估结果，重新生成入库审核页、评估报告、对比页和总入口 reports/index.html")
     return parser
 
@@ -459,14 +461,28 @@ def _report(workspace: Workspace, args: argparse.Namespace) -> int:
     documents = rerender_ingest_reports(workspace)
     count = rerender_all(workspace)
     comparisons = rerender_comparisons(workspace)
+    from rag.reports.query_compare import rerender_query_pages
+    queries = rerender_query_pages(workspace)
     write_index_page(workspace)
-    _out(f"已重新生成 {documents} 份文档的入库审核页、{count} 份评估报告、{comparisons} 份对比页和 reports/index.html")
+    _out(f"已重新生成 {documents} 份文档的入库审核页、{count} 份评估报告、{comparisons} 份对比页、"
+         f"{queries} 份查询侧对比页和 reports/index.html")
+    return 0
+
+
+def _query_compare(workspace: Workspace, args: argparse.Namespace) -> int:
+    from rag.eval.query_compare import COMBOS, collect
+    from rag.reports.index_page import write_index_page
+    from rag.reports.query_compare import write_query_page
+    _out(f"{len(COMBOS)} 种组合：{'、'.join(c.label for c in COMBOS)}")
+    folder = write_query_page(workspace, collect(workspace, args.name))
+    write_index_page(workspace)
+    _out(f"查询侧对比页：{(folder / 'index.html').relative_to(workspace.root).as_posix()}")
     return 0
 
 
 HANDLERS = {"status": _status, "ingest": _ingest, "chunks": _chunks, "search": _search,
             "ask": _ask, "chat": _chat, "eval": _eval, "anchors": _anchors, "table-structure": _table_structure, "config": _config,
-            "compare": _compare, "report": _report}
+            "compare": _compare, "query-compare": _query_compare, "report": _report}
 
 
 def main(argv: Sequence[str] | None = None, *, workspace_root: Path | None = None) -> int:
