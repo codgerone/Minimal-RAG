@@ -1,0 +1,25 @@
+{
+  "name": "v3.14-baselines",
+  "runs": [
+    "2026-10-24_structured_k3_filter-on_hybrid_table=RM-T",
+    "2026-10-24_structured_k6_filter-on_hybrid_table=RM-T",
+    "2026-10-24_structured_k9_filter-on_hybrid_table=RM-T",
+    "2026-10-24_structured_k12_filter-on_hybrid_table=RM-T",
+    "2026-10-24_structured_llm_k3_filter-on_hybrid_table=LM-T",
+    "2026-10-24_structured_llm_k6_filter-on_hybrid_table=LM-T",
+    "2026-10-24_structured_llm_k9_filter-on_hybrid_table=LM-T",
+    "2026-10-24_structured_llm_k12_filter-on_hybrid_table=LM-T",
+    "2026-10-24_structured_llm_lead_k3_filter-on_hybrid_table=LM+-T",
+    "2026-10-24_structured_llm_lead_k6_filter-on_hybrid_table=LM+-T",
+    "2026-10-24_structured_llm_lead_k9_filter-on_hybrid_table=LM+-T",
+    "2026-10-24_structured_llm_lead_k12_filter-on_hybrid_table=LM+-T",
+    "2026-10-24_structured_llm_k3_filter-on_hybrid=LM-C",
+    "2026-10-24_structured_llm_k6_filter-on_hybrid=LM-C",
+    "2026-10-24_structured_llm_k9_filter-on_hybrid=LM-C",
+    "2026-10-24_structured_llm_k12_filter-on_hybrid=LM-C",
+    "2026-10-24_structured_llm_lead_k3_filter-on_hybrid=LM+-C",
+    "2026-10-24_structured_llm_lead_k6_filter-on_hybrid=LM+-C",
+    "2026-10-24_structured_llm_lead_k9_filter-on_hybrid=LM+-C",
+    "2026-10-24_structured_llm_lead_k12_filter-on_hybrid=LM+-C"
+  ]
+}
