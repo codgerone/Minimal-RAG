@@ -175,6 +175,17 @@ def case_facts(evidence, run: execution.QueryRun, table: UnitTable) -> tuple[dic
     return facts, process
 
 
+def excerpts_held(evidence, run: execution.QueryRun, table: UnitTable) -> dict[str, list[str]]:
+    """Evidence unit index → the excerpts any of whose acceptable chunks it holds."""
+    held: dict[str, list[str]] = {}
+    for unit in run.units:
+        ids = set(unit.chunk_ids)
+        found = [x for x, e in evidence.excerpts.items() if any(ids & c for c in e.acceptable_sets)]
+        if found:
+            held[str(table.of(unit))] = found
+    return held
+
+
 def collect(workspace: Workspace, name: str, combos: tuple[Combo, ...] = COMBOS,
             planner: Planner | None = None, progress=None) -> dict[str, Any]:
     """Runs every evaluated configuration on every combination. Returns the page data, with the
@@ -186,6 +197,7 @@ def collect(workspace: Workspace, name: str, combos: tuple[Combo, ...] = COMBOS,
     facts: dict[str, dict[str, Any]] = {k: {} for k in keys}
     process: dict[str, dict[str, Any]] = {k: {} for k in keys}
     units: dict[str, list] = {}
+    holds: dict[str, dict[str, Any]] = {}   # combo → case → evidence unit index → excerpt ids
     plans: dict[str, dict[str, Any]] = {}
     combo_info, dataset = [], None
     for combo in combos:
@@ -196,6 +208,7 @@ def collect(workspace: Workspace, name: str, combos: tuple[Combo, ...] = COMBOS,
         languages_of = document_languages(workspace.index_dir(combo.config))
         search = MemoSearch(ctx.searcher)
         table = UnitTable(ctx.tokens_of)
+        holds[combo.label] = {}
         for key in keys:
             facts[key][combo.label] = {}
             process[key][combo.label] = {}
@@ -218,6 +231,8 @@ def collect(workspace: Workspace, name: str, combos: tuple[Combo, ...] = COMBOS,
                     run = execution.plain(search, case.question, documents)
                 facts[key][combo.label][case.case_id], process[key][combo.label][case.case_id] = \
                     case_facts(evidence, run, table)
+                if not config:
+                    holds[combo.label][case.case_id] = excerpts_held(evidence, run, table)
         units[combo.label] = table.rows
         combo_info.append({"label": combo.label, "config": combo.config,
                            "table_return_unit": combo.table_return_unit,
@@ -227,14 +242,17 @@ def collect(workspace: Workspace, name: str, combos: tuple[Combo, ...] = COMBOS,
     assert dataset is not None
     cases = [{"case_id": c.case_id, "document_id": c.document_id, "document_name": c.document_name,
               "question": c.question,
-              "groups": [{"group_id": g.group_id, "information_item": g.information_item} for g in c.groups]}
+              "groups": [{"group_id": g.group_id, "information_item": g.information_item} for g in c.groups],
+              "excerpts": [{"excerpt_id": x.excerpt_id, "text": x.text[:TEXT_LIMIT],
+                            "groups": sorted({g.group_id for g in c.groups for sc in g.schemes
+                                              if x.excerpt_id in sc.excerpt_ids})} for x in c.excerpts]}
              for c in dataset.cases if c.answerable]
     return {"name": name, "created_at": datetime.now().astimezone().isoformat(timespec="seconds"),
             "dataset": {"version": dataset.version, "fingerprint": dataset.fingerprint,
                         "questions": len(dataset.cases), "answerable": len(cases)},
             "modules": [{"id": m, "name": n} for m, n in MODULES], "evaluated": list(EVALUATED),
             "ks": list(KS), "threshold": CHANGE_THRESHOLD, "plan_model": PLAN_MODEL,
-            "combos": combo_info, "cases": cases, "plans": plans, "units": units,
+            "combos": combo_info, "cases": cases, "plans": plans, "units": units, "holds": holds,
             "configs": facts, "process": process}
 
 
