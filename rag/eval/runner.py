@@ -18,7 +18,7 @@ from rag.query import execution
 from rag.query.execution import QueryCost
 from rag.query.retriever import build_retriever
 from rag.query.scope import SearchScope, load_catalog, resolve_scope
-from rag.query.units import ResultUnit, UnitSearch
+from rag.query.units import ResultUnit, RetrievalCache, UnitSearch
 from rag.registry import Assembly
 
 
@@ -117,7 +117,7 @@ class EvalContext:
         """Loads the encoder, so that its start-up is not timed as the first retrieval."""
         if self.dataset.cases:
             first = self.dataset.cases[0].question
-            execution.plain(self.searcher, first, self.scope(first).document_ids)
+            self.searcher.warm_up(first, self.scope(first).document_ids)
 
 
 class _TokenCounter:
@@ -132,8 +132,10 @@ class _TokenCounter:
         return self._cache[text]
 
 
-def prepare(workspace: Workspace, assembly: Assembly) -> EvalContext:
-    """Checks the index and the labels are usable together and opens what scoring needs."""
+def prepare(workspace: Workspace, assembly: Assembly, cache_retrievals: bool = False) -> EvalContext:
+    """Checks the index and the labels are usable together and opens what scoring needs.
+    `cache_retrievals`: keep each retrieval's ranking on disk (.rag/retrieval-cache/), for
+    experiments that run the same query texts many times."""
     status = current_status(workspace, assembly)
     if not status.queryable:
         raise EvalError(f"配置 {assembly.name} 的索引不可用（{status.state}），请先运行 ingest")
@@ -163,8 +165,10 @@ def prepare(workspace: Workspace, assembly: Assembly) -> EvalContext:
                if enabled else None)
     table_return_unit = assembly.config.table_return_unit
     tables = open_tables(workspace, assembly.name)
+    cache = (RetrievalCache(workspace.root / ".rag" / "retrieval-cache", workspace.index_dir(assembly.name),
+                            assembly.config.retriever.use) if cache_retrievals else None)
     searcher = UnitSearch(build_retriever(assembly, store, open_lexical(workspace, assembly)), store,
-                          tables, table_return_unit)
+                          tables, table_return_unit, cache)
     owners = ({cid: t.table_id for cid, t in tables.tables_for_chunks([c.chunk_id for c in chunks]).items()}
               if table_return_unit == "table" else {})
     return EvalContext(dataset, sources, changed, chunks, enabled, catalog, searcher, owners, _TokenCounter())

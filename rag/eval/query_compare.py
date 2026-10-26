@@ -72,10 +72,6 @@ def comparison_error(left: Iterable[str], right: Iterable[str]) -> str | None:
     return None
 
 
-def unit_key(unit) -> str:
-    return unit.table.table_id if unit.table else unit.hit.chunk.chunk_id
-
-
 def case_facts(ctx: EvalContext, case, run: execution.QueryRun) -> dict[str, Any]:
     evidence = judge_case(case, ctx.chunks)
     order = [u.chunk_ids for u in run.units]
@@ -87,7 +83,7 @@ def case_facts(ctx: EvalContext, case, run: execution.QueryRun) -> dict[str, Any
         "needed": [needed.get(g.group_id) for g in evidence.groups],
         "first_relevant": first,
         "tokens": [ctx.tokens_of(s.unit.text) for s in leading],
-        "units": [unit_key(s.unit) for s in leading],
+        "units": [s.unit.key for s in leading],
         "relevant": [any(c in relevant for c in s.unit.chunk_ids) for s in leading],
         "cost": {"retrievals": run.cost.retrievals, "llm_calls": run.cost.llm_calls,
                  "llm_seconds": round(run.cost.llm_seconds, 4),
@@ -111,7 +107,7 @@ def collect_combo(workspace: Workspace, combo: Combo) -> dict[str, Any]:
         facts[case.case_id] = case_facts(ctx, case, run)
         for s in run.order[:LEADING]:
             u = s.unit
-            units.setdefault(unit_key(u), {"text": u.text[:TEXT_LIMIT], "pages": list(u.pages),
+            units.setdefault(u.key, {"text": u.text[:TEXT_LIMIT], "pages": list(u.pages),
                                            "table": u.table is not None})
     return {"facts": facts, "units": units, "ingest_cost": _ingest_cost(workspace, combo.config),
             "dataset": ctx.dataset}
