@@ -15,7 +15,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable, Protocol
 
-PROMPT_VERSION = "query_plan_v6"
+PROMPT_VERSION = "query_plan_v7"
 REASONING_EFFORT = "medium"
 
 DECOMPOSE_SYSTEM = """You split a question into separate questions for document retrieval. You never answer the question.
@@ -33,8 +33,8 @@ DECOMPOSE_USER = "Question: {question}"
 
 PHRASE_SYSTEM = """You write alternative phrasings of questions for document retrieval. You never answer the questions.
 
-The documents searched are written in: {languages}.{codes}
-
+The documents searched are written in: {languages}.
+{codes}
 The input is a list of questions, each with an id. For each question write the following phrasings, each from the question itself (no phrasing is derived from another):
 - rewrite: in the language of the question, the question as a statement or noun phrase without question words and filler; keep names, codes, numbers and quoted terms verbatim.
 - translations: the question translated into each of {languages}, as a question, in the terms documents in that language use; skip a language the question is already written in; keep names, codes and numbers as written.
@@ -43,7 +43,7 @@ The input is a list of questions, each with an id. For each question write the f
 
 Answer with one entry per question, with its id."""
 
-PHRASE_CODES = " These codes identify the documents searched; leave them out of every phrasing: {codes}."
+PHRASE_CODES = "These codes identify the documents searched; leave them out of every phrasing below: {codes}.\n"
 
 RETRY_TEMPLATE = """Your answer did not pass these checks:
 {issues}
