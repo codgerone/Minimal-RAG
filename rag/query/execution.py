@@ -50,8 +50,7 @@ def plain(searcher: UnitSearch, question: str,
           document_ids: Collection[str] | None = None) -> QueryRun:
     """The question retrieved once; the return order is its full ranking."""
     start = time.perf_counter()
-    hits = searcher.rank_hits(question, document_ids)
-    units = searcher.units_for(hits)
+    ranking = searcher.rank(question, document_ids)
     seconds = time.perf_counter() - start
-    return QueryRun(tuple(Selected(u, question) for u in units),
-                    tuple(h.chunk.chunk_id for h in hits), QueryCost(1, seconds))
+    return QueryRun(tuple(Selected(u, question) for u in ranking.units),
+                    ranking.chunk_ids, QueryCost(1, seconds))

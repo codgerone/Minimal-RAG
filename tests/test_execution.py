@@ -1,7 +1,7 @@
 from rag.index.store import StoredChunk
 from rag.query.execution import plain
 from rag.query.retriever import Hit
-from rag.query.units import ResultUnit
+from rag.query.units import ResultUnit, UnitRanking
 
 
 def chunk(cid):
@@ -13,12 +13,10 @@ class FakeSearch:
     def __init__(self):
         self.calls = 0
 
-    def rank_hits(self, question, document_ids=None):
+    def rank(self, text, document_ids=None):
         self.calls += 1
-        return [Hit(chunk(c), 1.0 / n) for n, c in enumerate(("c1", "t1", "t2"), start=1)]
-
-    def units_for(self, hits):
-        return [ResultUnit(hits[0]), ResultUnit(hits[1])]
+        hits = [Hit(chunk(c), 1.0 / n) for n, c in enumerate(("c1", "t1", "t2"), start=1)]
+        return UnitRanking((ResultUnit(hits[0]), ResultUnit(hits[1])), ("c1", "t1", "t2"))
 
 
 def test_plain_execution_returns_the_full_ranking_once_and_a_budget_takes_its_head():

@@ -57,8 +57,15 @@ def to_units(hits: list[Hit], tables: dict[str, StoredTable],
     return units
 
 
+@dataclass(frozen=True)
+class UnitRanking:
+    """One retrieval: every return unit in scope, best first."""
+    units: tuple[ResultUnit, ...]
+    chunk_ids: tuple[str, ...]   # the retriever's chunk ranking the units were mapped from
+
+
 class UnitSearch:
-    """A retriever followed by the return-unit step."""
+    """One retrieval: the retriever ranks the chunks, the return-unit step maps them to units."""
 
     def __init__(self, retriever: Retriever, store: ChromaStore, tables: TableStore,
                  table_return_unit: str):
@@ -67,23 +74,18 @@ class UnitSearch:
         self.tables = tables
         self.whole_tables = table_return_unit == "table"
 
-    def rank_all(self, question: str, document_ids: Collection[str] | None = None) -> list[ResultUnit]:
-        """Every unit in scope, best first (the retriever's full ranking, then mapped to units)."""
-        return self.units_for(self.rank_hits(question, document_ids))
-
-    def rank_hits(self, question: str, document_ids: Collection[str] | None = None) -> list[Hit]:
-        """Every chunk in scope, best first, before mapping to return units."""
+    def rank(self, text: str, document_ids: Collection[str] | None = None) -> UnitRanking:
+        """The full ranking of the units in scope."""
         total = self.store.count(document_ids)
-        return self.retriever.retrieve(question, total, document_ids) if total else []
+        hits = self.retriever.retrieve(text, total, document_ids) if total else []
+        return UnitRanking(tuple(self._units(hits)), tuple(h.chunk.chunk_id for h in hits))
 
-    def units_for(self, hits: list[Hit]) -> list[ResultUnit]:
-        return self._units(hits)
-
-    def search(self, question: str, top_k: int,
+    def search(self, text: str, top_k: int,
                document_ids: Collection[str] | None = None) -> list[ResultUnit]:
+        """The first top_k units of the ranking."""
         if not self.whole_tables:
-            return [ResultUnit(hit) for hit in self.retriever.retrieve(question, top_k, document_ids)]
-        return self.rank_all(question, document_ids)[:top_k]
+            return [ResultUnit(hit) for hit in self.retriever.retrieve(text, top_k, document_ids)]
+        return list(self.rank(text, document_ids).units[:top_k])
 
     def _units(self, hits: list[Hit]) -> list[ResultUnit]:
         if not self.whole_tables:
