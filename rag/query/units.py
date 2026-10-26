@@ -70,7 +70,7 @@ def to_units(hits: list[Hit], tables: dict[str, StoredTable],
 class UnitRanking:
     """One retrieval: every return unit in scope, best first."""
     units: tuple[ResultUnit, ...]
-    chunk_ids: tuple[str, ...]   # the retriever's chunk ranking the units were mapped from
+    chunk_ids: tuple[str, ...]   # provenance only: the retriever's chunk ranking the units were mapped from
     seconds: float               # retrieval time (for a cached ranking, the time it took when made)
 
 

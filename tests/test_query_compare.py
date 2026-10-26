@@ -30,3 +30,14 @@ def test_metrics_at_k_derive_from_needed_units_first_relevant_rank_and_tokens():
 def test_the_thirteen_standard_combinations():
     labels = [c.label for c in COMBOS]
     assert len(labels) == 13 == len(set(labels)) and labels[-1] == "S-T"
+
+
+def test_evidence_change_is_the_log_ratio_of_positions_with_a_dead_zone():
+    import math
+    from rag.eval.query_compare import direction, evidence_change
+    assert math.isclose(evidence_change({"T": 9, "c": 7}, {"T": 4, "c": 8}), math.log(9 / 4) + math.log(7 / 8))
+    assert direction(evidence_change({"c": 7}, {"c": 4})) == 1
+    assert direction(evidence_change({"c": 6}, {"c": 4})) == 0       # exactly ln 1.5: no change
+    assert direction(evidence_change({"c": 3}, {"c": 4})) == 0       # a one-place shift after rank 2
+    assert direction(evidence_change({"c": 1}, {"c": 2})) == -1
+    assert direction(evidence_change({"a": 9, "b": 7}, {"a": 4, "b": 8})) == 1

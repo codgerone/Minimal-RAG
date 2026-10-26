@@ -9,6 +9,7 @@ Metrics at K (rag.reports.query_compare and the page script) follow docs/rules/e
 
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass
 from datetime import datetime
 from typing import Any, Iterable
@@ -70,6 +71,26 @@ def comparison_error(left: Iterable[str], right: Iterable[str]) -> str | None:
         return (f"左侧的 {'、'.join(extra)} 不在右侧" if extra
                 else "右侧必须比左侧至少多选一个模块")
     return None
+
+
+CHANGE_THRESHOLD = math.log(1.5)   # experiment parameter (docs/changes/v3.14.md, question 3)
+
+
+def evidence_positions(evidence, run: execution.QueryRun) -> dict[str, int]:
+    """Evidence unit → its position in the return order: the units holding any chunk of any
+    acceptable set of any excerpt."""
+    chunks = {c for x in evidence.excerpts.values() for s in x.acceptable_sets for c in s}
+    return {u.key: n for n, u in enumerate(run.units, start=1) if chunks & set(u.chunk_ids)}
+
+
+def evidence_change(left: dict[str, int], right: dict[str, int]) -> float:
+    """Σ ln(left position / right position) over the evidence units (both sides rank the same units)."""
+    return sum(math.log(left[k] / right[k]) for k in left if k in right)
+
+
+def direction(change: float) -> int:
+    """1 better, -1 worse, 0 no change."""
+    return 1 if change > CHANGE_THRESHOLD else -1 if change < -CHANGE_THRESHOLD else 0
 
 
 def case_facts(ctx: EvalContext, case, run: execution.QueryRun) -> dict[str, Any]:
