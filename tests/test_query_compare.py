@@ -18,13 +18,23 @@ def test_left_must_be_a_proper_subset_of_right_unless_both_are_empty():
     assert "至少多选" in comparison_error(["P3.1"], ["P3.1"])
 
 
-def test_metrics_at_k_derive_from_needed_units_first_relevant_rank_and_tokens():
-    facts = {"q1": {"needed": [1, 4], "first_relevant": 1, "tokens": [10, 20, 30, 40]},
-             "q2": {"needed": [None], "first_relevant": 2, "tokens": [5, 5]},
-             "q3": {"needed": [2], "first_relevant": 2, "tokens": [1, 1, 1]}}
-    assert metrics_at(facts, 3) == {"hit": 2, "complete": 1, "mrr": (1 + 0.5 + 0.5) / 3,
-                                    "tokens": (60 + 10 + 3) / 3}
-    assert metrics_at(facts, 4)["complete"] == 2 and metrics_at(facts, 1)["hit"] == 1
+def test_metrics_at_k_derive_from_needed_units_and_the_unit_table_tokens():
+    units = [{"tokens": t} for t in (10, 20, 30, 40, 5, 1)]
+    facts = {"q1": {"n": [1, 4], "u": [0, 1, 2, 3]},
+             "q2": {"n": [None], "u": [4, 4]},
+             "q3": {"n": [2], "u": [5, 5, 5]}}
+    assert metrics_at(facts, units, 3) == {"hit": 2, "complete": 1, "tokens": (60 + 10 + 3) / 3}
+    assert metrics_at(facts, units, 4)["complete"] == 2 and metrics_at(facts, units, 1)["hit"] == 1
+
+
+def test_the_32_evaluated_configurations_and_their_settings():
+    from rag.eval.query_compare import evaluated_configs, settings_for
+    configs = evaluated_configs()
+    assert len(configs) == 32 and configs[0] == () and all("P3.3" not in c for c in configs)
+    decompose, settings = settings_for(("P3.1", "P3.2.2", "P3.2.3"))
+    assert decompose and settings.original_route and settings.phrasings == {"translation", "hyde"}
+    decompose, settings = settings_for(("P3.2.1",))
+    assert not decompose and not settings.original_route and settings.phrasings == {"rewrite"}
 
 
 def test_the_thirteen_standard_combinations():

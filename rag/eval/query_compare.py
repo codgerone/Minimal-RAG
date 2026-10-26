@@ -1,10 +1,13 @@
 """Facts for the query comparison page: every combination × module configuration × question.
 
 A combination is an index (configs/) with a table return unit; a module configuration is a set
-of the query-side modules (P3.1, P3.2.1–P3.2.4, P3.3; the empty set is V3.13). Per question only
-what any K can be derived from is kept: each evidence group's needed units in the return order,
-the rank of the first relevant unit, the tokens and keys of the leading units, and the cost.
-Metrics at K (rag.reports.query_compare and the page script) follow docs/rules/evaluation.md.
+of the query-side modules (P3.1, P3.2.1–P3.2.4, P3.3; the empty set is V3.13; P3.3 is not
+evaluated). Every configuration runs on the frozen plans (generation 0, cached): two per question,
+without and with decomposition; with decomposition the original-question route is always on
+(decision 014). Per question only what any K and any pair of configurations can be derived from
+is kept: each evidence group's needed units, the position of every evidence unit, the leading
+units (indices into the combination's unit table) and the cost. Where each leading unit came from
+is kept apart, per configuration (`process`). Rules: docs/changes/v3.14.md.
 """
 
 from __future__ import annotations
@@ -12,13 +15,15 @@ from __future__ import annotations
 import math
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Any, Iterable
+from itertools import combinations
+from typing import Any, Collection, Iterable
 
-from rag.eval.metrics import completion_ranks
 from rag.eval.judge import judge_case
-from rag.eval.runner import EvalContext, _ingest_cost, prepare
+from rag.eval.metrics import completion_ranks
+from rag.eval.runner import _ingest_cost, prepare
 from rag.paths import Workspace
 from rag.query import execution
+from rag.query.planning import Plan, Planner, document_languages
 
 MODULES = (   # id, name
     ("P3.1", "分解"),
@@ -93,58 +98,132 @@ def direction(change: float) -> int:
     return 1 if change > CHANGE_THRESHOLD else -1 if change < -CHANGE_THRESHOLD else 0
 
 
-def case_facts(ctx: EvalContext, case, run: execution.QueryRun) -> dict[str, Any]:
-    evidence = judge_case(case, ctx.chunks)
-    order = [u.chunk_ids for u in run.units]
-    needed = completion_ranks(order, evidence.groups)
-    relevant = {cid for g in evidence.groups for s in g.acceptable_sets for cid in s}
-    first = next((rank for rank, ids in enumerate(order, start=1) if any(c in relevant for c in ids)), None)
+PLAN_MODEL = "google/gemini-3.8-flash"   # docs/changes/v3.14.md, question 1
+PHRASING_OF = {"P3.2.1": "rewrite", "P3.2.2": "translation", "P3.2.3": "hyde", "P3.2.4": "step_back"}
+EVALUATED = ("P3.1", *PHRASING_OF)   # P3.3 (reranking) is set aside
+
+
+def evaluated_configs() -> list[tuple[str, ...]]:
+    """Every subset of the evaluated modules, the empty set first."""
+    return [c for n in range(len(EVALUATED) + 1) for c in combinations(EVALUATED, n)]
+
+
+def settings_for(config: Collection[str]) -> tuple[bool, execution.QuerySettings]:
+    """(decompose, settings) of a module configuration."""
+    decompose = "P3.1" in config
+    return decompose, execution.QuerySettings(frozenset(PHRASING_OF[m] for m in config if m in PHRASING_OF),
+                                              original_route=decompose)
+
+
+def make_planner(workspace: Workspace) -> Planner:
+    from rag.ingest.tables.llm_tables import LLMCache
+    from rag.query.llm import OpenRouterLLM
+    return Planner(OpenRouterLLM(model=PLAN_MODEL, temperature=0, env_override=False),
+                   LLMCache(workspace.root / ".rag" / "llm-cache"))
+
+
+def plan_json(plan: Plan) -> dict[str, Any]:
+    return {"questions": [{"id": q.id, "text": q.text,
+                           "phrasings": [{"kind": x.kind, "language": x.language, "text": x.text}
+                                         for x in q.phrasings]} for q in plan.questions],
+            "degraded": list(plan.degraded)}
+
+
+class MemoSearch:
+    """Remembers each ranking within one combination: configurations repeat the same texts."""
+
+    def __init__(self, searcher):
+        self.searcher = searcher
+        self.memo: dict[tuple[str, tuple[str, ...] | None], Any] = {}
+
+    def rank(self, text: str, document_ids: Collection[str] | None = None):
+        key = (text, None if document_ids is None else tuple(sorted(document_ids)))
+        if key not in self.memo:
+            self.memo[key] = self.searcher.rank(text, document_ids)
+        return self.memo[key]
+
+
+class UnitTable:
+    """The units of one combination the page needs, each kept once; facts refer to them by index."""
+
+    def __init__(self, tokens_of):
+        self.tokens_of = tokens_of
+        self.rows: list[dict[str, Any]] = []
+        self.index: dict[str, int] = {}
+
+    def of(self, unit) -> int:
+        if unit.key not in self.index:
+            self.index[unit.key] = len(self.rows)
+            self.rows.append({"key": unit.key, "text": unit.text[:TEXT_LIMIT], "pages": list(unit.pages),
+                              "table": unit.table is not None, "tokens": self.tokens_of(unit.text)})
+        return self.index[unit.key]
+
+
+def case_facts(evidence, run: execution.QueryRun, table: UnitTable) -> tuple[dict[str, Any], list[Any]]:
+    """The facts of one run, and where each leading unit came from."""
+    units = run.units
+    needed = completion_ranks([u.chunk_ids for u in units], evidence.groups)
+    by_key = {u.key: u for u in units}
     leading = run.order[:LEADING]
-    return {
-        "needed": [needed.get(g.group_id) for g in evidence.groups],
-        "first_relevant": first,
-        "tokens": [ctx.tokens_of(s.unit.text) for s in leading],
-        "units": [s.unit.key for s in leading],
-        "relevant": [any(c in relevant for c in s.unit.chunk_ids) for s in leading],
-        "cost": {"retrievals": run.cost.retrievals, "llm_calls": run.cost.llm_calls,
-                 "llm_seconds": round(run.cost.llm_seconds, 4),
-                 "retrieval_seconds": round(run.cost.retrieval_seconds, 4),
-                 "rerank_seconds": round(run.cost.rerank_seconds, 4),
-                 "llm_cost_usd": round(run.cost.llm_cost_usd, 6)},
-    }
+    cost = run.cost
+    facts = {"n": [needed.get(g.group_id) for g in evidence.groups],
+             "u": [table.of(s.unit) for s in leading],
+             "e": {str(table.of(by_key[k])): p for k, p in evidence_positions(evidence, run).items()},
+             "c": [cost.retrievals, round(cost.retrieval_seconds, 4), cost.llm_calls,
+                   round(cost.llm_seconds, 2), round(cost.llm_cost_usd, 6)]}
+    process = [[s.question_id, s.round, [list(r) for r in s.ranks]] for s in leading]
+    return facts, process
 
 
-def collect_combo(workspace: Workspace, combo: Combo) -> dict[str, Any]:
-    """The plain execution (V3.13) of every question on one combination."""
+def collect(workspace: Workspace, name: str, combos: tuple[Combo, ...] = COMBOS,
+            planner: Planner | None = None, progress=None) -> dict[str, Any]:
+    """Runs every evaluated configuration on every combination. Returns the page data, with the
+    per-configuration process detail under "process"."""
     from rag.cli import _assembly
-    assembly = _assembly(workspace, combo.config, "hybrid", combo.table_return_unit)
-    ctx = prepare(workspace, assembly)
-    ctx.warm_up()
-    facts, units = {}, {}
-    for case in ctx.dataset.cases:
-        if not case.answerable:
-            continue
-        run = execution.plain(ctx.searcher, case.question, ctx.scope(case.question).document_ids)
-        facts[case.case_id] = case_facts(ctx, case, run)
-        for s in run.order[:LEADING]:
-            u = s.unit
-            units.setdefault(u.key, {"text": u.text[:TEXT_LIMIT], "pages": list(u.pages),
-                                           "table": u.table is not None})
-    return {"facts": facts, "units": units, "ingest_cost": _ingest_cost(workspace, combo.config),
-            "dataset": ctx.dataset}
-
-
-def collect(workspace: Workspace, name: str, combos: tuple[Combo, ...] = COMBOS) -> dict[str, Any]:
-    configs: dict[str, dict[str, Any]] = {config_key(()): {}}
-    units: dict[str, Any] = {}
+    planner = planner or make_planner(workspace)
+    configs = evaluated_configs()
+    keys = [config_key(c) for c in configs]
+    facts: dict[str, dict[str, Any]] = {k: {} for k in keys}
+    process: dict[str, dict[str, Any]] = {k: {} for k in keys}
+    units: dict[str, list] = {}
+    plans: dict[str, dict[str, Any]] = {}
     combo_info, dataset = [], None
     for combo in combos:
-        got = collect_combo(workspace, combo)
-        dataset = got["dataset"]
-        configs[config_key(())][combo.label] = got["facts"]
-        units[combo.label] = got["units"]
+        ctx = prepare(workspace, _assembly(workspace, combo.config, "hybrid", combo.table_return_unit),
+                      cache_retrievals=True)
+        ctx.warm_up()
+        dataset = ctx.dataset
+        languages_of = document_languages(workspace.index_dir(combo.config))
+        search = MemoSearch(ctx.searcher)
+        table = UnitTable(ctx.tokens_of)
+        for key in keys:
+            facts[key][combo.label] = {}
+            process[key][combo.label] = {}
+        for case in ctx.dataset.cases:
+            if not case.answerable:
+                continue
+            scope = ctx.scope(case.question)
+            documents = scope.document_ids
+            languages = sorted({languages_of[d] for d in (documents or languages_of)})
+            pair = {d: planner.plan(case.question, languages, d, list(scope.codes)) for d in (False, True)}
+            plans.setdefault(case.case_id, {
+                "scope": {"documents": list(documents or []), "languages": languages, "codes": list(scope.codes)},
+                "plain": plan_json(pair[False]), "decomposed": plan_json(pair[True])})
+            evidence = judge_case(case, ctx.chunks)
+            for config, key in zip(configs, keys):
+                if config:
+                    decompose, settings = settings_for(config)
+                    run = execution.planned(search, pair[decompose], settings, documents)
+                else:
+                    run = execution.plain(search, case.question, documents)
+                facts[key][combo.label][case.case_id], process[key][combo.label][case.case_id] = \
+                    case_facts(evidence, run, table)
+        units[combo.label] = table.rows
         combo_info.append({"label": combo.label, "config": combo.config,
-                           "table_return_unit": combo.table_return_unit, "ingest_cost": got["ingest_cost"]})
+                           "table_return_unit": combo.table_return_unit,
+                           "ingest_cost": _ingest_cost(workspace, combo.config)})
+        if progress:
+            progress(combo.label)
     assert dataset is not None
     cases = [{"case_id": c.case_id, "document_id": c.document_id, "document_name": c.document_name,
               "question": c.question,
@@ -153,21 +232,20 @@ def collect(workspace: Workspace, name: str, combos: tuple[Combo, ...] = COMBOS)
     return {"name": name, "created_at": datetime.now().astimezone().isoformat(timespec="seconds"),
             "dataset": {"version": dataset.version, "fingerprint": dataset.fingerprint,
                         "questions": len(dataset.cases), "answerable": len(cases)},
-            "modules": [{"id": m, "name": n} for m, n in MODULES], "ks": list(KS),
-            "combos": combo_info, "cases": cases, "configs": configs, "units": units}
+            "modules": [{"id": m, "name": n} for m, n in MODULES], "evaluated": list(EVALUATED),
+            "ks": list(KS), "threshold": CHANGE_THRESHOLD, "plan_model": PLAN_MODEL,
+            "combos": combo_info, "cases": cases, "plans": plans, "units": units,
+            "configs": facts, "process": process}
 
 
-def metrics_at(facts: dict[str, dict[str, Any]], k: int) -> dict[str, float]:
-    """Over answerable questions: hit and complete counts, MRR, tokens per question at K."""
+def metrics_at(facts: dict[str, dict[str, Any]], units: list[dict[str, Any]], k: int) -> dict[str, float]:
+    """Over answerable questions: hit and complete counts, tokens per question at K."""
     n = len(facts)
     hit = complete = 0
-    rr = tokens = 0.0
+    tokens = 0.0
     for f in facts.values():
-        covered = [x for x in f["needed"] if x is not None and x <= k]
+        covered = [x for x in f["n"] if x is not None and x <= k]
         hit += bool(covered)
-        complete += len(covered) == len(f["needed"])
-        if f["first_relevant"] is not None and f["first_relevant"] <= k:
-            rr += 1 / f["first_relevant"]
-        tokens += sum(f["tokens"][:k])
-    return {"hit": hit, "complete": complete, "mrr": rr / n if n else 0.0,
-            "tokens": tokens / n if n else 0.0}
+        complete += len(covered) == len(f["n"])
+        tokens += sum(units[i]["tokens"] for i in f["u"][:k])
+    return {"hit": hit, "complete": complete, "tokens": tokens / n if n else 0.0}
