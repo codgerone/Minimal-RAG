@@ -14,7 +14,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Collection, Protocol, Sequence
 
-from rag.query.planning import Phrasing, Plan
+from rag.query.planning import NO_COST, Phrasing, Plan
 from rag.query.retriever import RRF_K
 from rag.query.units import ResultUnit, UnitSearch
 
@@ -161,5 +161,6 @@ def planned(searcher: UnitSearch, plan: Plan, settings: QuerySettings,
     position = [{u.key: n for n, u in enumerate(r.units)} for r in routes]
     order = tuple(Selected(p.unit, routes[p.route].text, p.round, routes[p.route].question_id,
                            routes[p.route].ranks[position[p.route][p.unit.key]]) for p in picks)
-    return QueryRun(order, (), QueryCost(retrievals, seconds, plan.cost.calls,
-                                         plan.cost.seconds, plan.cost.cost_usd))
+    # LLM cost: only the planning steps this configuration uses
+    llm = (plan.decomposition if plan.decomposed else NO_COST) + (plan.phrasing if settings.phrasings else NO_COST)
+    return QueryRun(order, (), QueryCost(retrievals, seconds, llm.calls, llm.seconds, llm.cost_usd))

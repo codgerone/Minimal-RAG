@@ -30,7 +30,7 @@
 
 ## 实验
 
-- 规划：提示词 `query_plan_v7`，模型 `google/gemini-3.8-flash`，34 题各做分解一次（缓存，34 题合计 $0.21，无降级）。32 道可回答题中 27 题拆成 2 个及以上子问题，最多 7 个。
+- 规划：提示词 `query_plan_v7`，模型 `google/gemini-3.8-flash`，34 题各做分解一次（缓存；分解规划含拆解与写法两次调用，34 题合计 $0.17，无降级）。32 道可回答题中 27 题拆成 2 个及以上子问题，最多 7 个。
 - 检索：每个子问题只用原句（不开写法），混合检索，返回单元排名；13 种组合。
 - 脚本与数据：`reports/experiments/v3.14-original-route/`（`run_plans.py`、`run_route.py`、`summary.json`、`tables.md`）。
 

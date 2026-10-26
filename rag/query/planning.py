@@ -70,8 +70,14 @@ class Question:
 @dataclass(frozen=True)
 class PlanCost:
     calls: int
-    seconds: float      # LLM time of the calls made now (cached calls count 0)
-    cost_usd: float
+    seconds: float      # LLM time of the calls; a cached call counts the time it took when made
+    cost_usd: float     # likewise
+
+    def __add__(self, other: "PlanCost") -> "PlanCost":
+        return PlanCost(self.calls + other.calls, self.seconds + other.seconds, self.cost_usd + other.cost_usd)
+
+
+NO_COST = PlanCost(0, 0.0, 0.0)
 
 
 @dataclass(frozen=True)
@@ -79,8 +85,13 @@ class Plan:
     question: str
     decomposed: bool
     questions: tuple[Question, ...]    # the question list with each question's phrasings
-    cost: PlanCost
+    decomposition: PlanCost            # the decomposition step (NO_COST without decomposition)
+    phrasing: PlanCost                 # the phrasing step
     degraded: tuple[str, ...] = ()     # steps that fell back: why
+
+    @property
+    def cost(self) -> PlanCost:
+        return self.decomposition + self.phrasing
 
 
 class StructuredLLM(Protocol):
@@ -177,13 +188,13 @@ class Planner:
         scope was found by (rag/query/scope.py). `generation` > 0: an independent generation,
         cached apart from generation 0."""
         languages, codes = sorted(set(languages)), sorted(set(codes))
-        calls: list[dict[str, Any]] = []
         degraded: list[str] = []
         texts = [question]
+        decomposition = NO_COST
         if decompose:
             got, issues, made = self._ask(decompose_messages(question), "decomposition", DECOMPOSE_SCHEMA,
                                           check_decomposition, generation)
-            calls += made
+            decomposition = _cost(made)
             if issues:
                 degraded.append("decomposition: " + "; ".join(issues))
             else:
@@ -192,14 +203,10 @@ class Planner:
         phrased, issues, made = self._ask(phrase_messages(listed, languages, codes), "phrasings",
                                           phrase_schema(languages),
                                           lambda raw: check_phrasings(raw, listed, languages), generation)
-        calls += made
         if issues:
             degraded.append("phrasings: " + "; ".join(issues))
             phrased = [Question(q["id"], q["text"], (Phrasing("question", q["text"]),)) for q in listed]
-        fresh = [c for c in calls if not c["cached"]]
-        cost = PlanCost(len(calls), sum(c.get("seconds") or 0 for c in fresh),
-                        sum(c.get("cost_usd") or 0 for c in fresh))
-        return Plan(question, decompose, tuple(phrased), cost, tuple(degraded))
+        return Plan(question, decompose, tuple(phrased), decomposition, _cost(made), tuple(degraded))
 
     def _ask(self, msgs: list[dict[str, str]], name: str, sch: dict[str, Any],
              check: Callable[[str], tuple[Any, list[str]]], generation: int):
@@ -231,6 +238,11 @@ class Planner:
         if self.cache:
             self.cache.put(key, hit)
         return {**hit, "cached": False}
+
+
+def _cost(calls: list[dict[str, Any]]) -> PlanCost:
+    """The calls' cost as recorded when each was made, cached or not."""
+    return PlanCost(len(calls), sum(c.get("seconds") or 0 for c in calls), sum(c.get("cost_usd") or 0 for c in calls))
 
 
 def document_languages(index_dir: Path) -> dict[str, str]:

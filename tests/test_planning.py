@@ -98,3 +98,14 @@ def test_plans_are_cached_and_independent_generations_are_cached_apart():
     assert llm.calls == 1
     planner.plan("Q", ["spanish"], False, generation=1)
     assert llm.calls == 2
+
+
+def test_a_cached_plan_reports_the_cost_recorded_when_made_split_by_step():
+    llm = FakeLLM([json.dumps({"questions": ["a", "b"]}), answer(entry("Q1"), entry("Q2"))])
+    planner = Planner(llm, MemoryCache())
+    fresh = planner.plan("Q", ["spanish"], True)
+    cached = planner.plan("Q", ["spanish"], True)
+    assert llm.calls == 2
+    assert cached.decomposition == fresh.decomposition and cached.phrasing == fresh.phrasing
+    assert (cached.decomposition.calls, cached.decomposition.cost_usd) == (1, 0.001)
+    assert cached.cost.calls == 2 and abs(cached.cost.cost_usd - 0.002) < 1e-12

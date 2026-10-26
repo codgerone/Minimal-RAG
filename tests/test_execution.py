@@ -82,7 +82,8 @@ def question(qid, letters, rewrite):
 
 def make_plan(decomposed):
     questions = (question("Q1", "ab", "ba"), question("Q2", "cd", "dc")) if decomposed else (question("Q1", "ab", "ba"),)
-    return Plan("orig xa", decomposed, questions, PlanCost(2, 3.0, 0.01))
+    return Plan("orig xa", decomposed, questions, PlanCost(1, 1.0, 0.004) if decomposed else PlanCost(0, 0.0, 0.0),
+                PlanCost(1, 2.0, 0.006))
 
 
 def test_planned_retrieves_each_enabled_phrasing_once_and_selects_across_questions():
@@ -91,6 +92,8 @@ def test_planned_retrieves_each_enabled_phrasing_once_and_selects_across_questio
     assert searcher.texts == ["Q1 ab", "Q1r ba", "Q2 cd", "Q2r dc", "orig xa"]
     assert run.cost.retrievals == 5 and run.cost.retrieval_seconds == 1.25
     assert (run.cost.llm_calls, run.cost.llm_seconds, run.cost.llm_cost_usd) == (2, 3.0, 0.01)
+    only_decomposed = planned(TextSearch(), make_plan(True), QuerySettings(original_route=True))
+    assert (only_decomposed.cost.llm_calls, only_decomposed.cost.llm_cost_usd) == (1, 0.004)
     # Q1 fuses to a, b; Q2 to c, d; the original route ranks x, a and comes last in each round
     assert [(s.unit.key, s.question_id, s.round) for s in run.order] == [
         ("a", "Q1", 1), ("c", "Q2", 1), ("x", ORIGINAL, 1), ("b", "Q1", 2), ("d", "Q2", 2)]
