@@ -83,6 +83,11 @@ border:1px solid var(--line);background:var(--panel);color:var(--text)}
 .pick-row{display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px}
 .pick-row b{min-width:34px}.pick-row label{font-size:14px;cursor:pointer;white-space:nowrap}
 .pick-vs{font-weight:600;color:var(--muted);padding-left:2px}
+.cfg-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:760px){.cfg-grid{grid-template-columns:1fr}}
+.cfg{border:1px solid var(--line);border-radius:6px;padding:6px 10px;font-size:14px}.cfg-side{font-weight:600;margin-bottom:2px}
+.cfg-row{display:flex;flex-wrap:wrap;gap:2px 14px;margin-top:4px}.cfg-row label,.cfg-sub label{cursor:pointer;white-space:nowrap}
+.cfg-sub{margin:2px 0 4px 22px;font-size:13px;color:var(--muted)}.cfg-sub label{margin-right:10px;color:var(--text)}
+.cfg label.off{color:var(--muted);cursor:not-allowed}
 td.hm{text-align:right;white-space:nowrap;cursor:pointer}td.hm:hover{box-shadow:inset 0 0 0 2px var(--accent)}
 td.hm.good{background:var(--ok-bg);color:var(--ok);font-weight:600}
 td.hm.badc{background:var(--bad-bg);color:var(--bad);font-weight:600}
