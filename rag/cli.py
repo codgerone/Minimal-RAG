@@ -476,10 +476,12 @@ def _query_compare(workspace: Workspace, args: argparse.Namespace) -> int:
     from rag.reports.query_compare import write_query_page
     _out(f"{len(COMBOS)} 种组合：{'、'.join(c.label for c in COMBOS)}")
     data = collect(workspace, args.name)
+    folder = write_query_page(workspace, data)
     if all((workspace.root / PERTURBATION_MAPPING.format(generation=g)).is_file() for g in PERTURBATION_GENERATIONS):
         _out(f"扰动测试：第 {'、'.join(map(str, PERTURBATION_GENERATIONS))} 次生成")
+        del data["process"]   # written above; the second write keeps the process files
         data["perturbation"] = collect_perturbation(workspace)
-    folder = write_query_page(workspace, data)
+        folder = write_query_page(workspace, data)
     write_index_page(workspace)
     _out(f"查询侧对比页：{(folder / 'index.html').relative_to(workspace.root).as_posix()}")
     return 0

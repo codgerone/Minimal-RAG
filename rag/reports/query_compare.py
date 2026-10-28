@@ -597,8 +597,9 @@ def write_query_page(workspace: Workspace, data: dict[str, Any]) -> Path:
     main = {k: v for k, v in data.items() if k != "process"}
     write_atomic(folder / "data.json", _embed(main) + "\n")
     _write_facts(folder, main)
-    shutil.rmtree(folder / "process", ignore_errors=True)
-    for key, detail in data["process"].items():
+    if "process" in data:   # without it the process files already written are kept
+        shutil.rmtree(folder / "process", ignore_errors=True)
+    for key, detail in data.get("process", {}).items():
         write_atomic(folder / "process" / script_file(key), _script("QC_PROCESS", key, detail))
     write_assets(workspace.reports)
     write_atomic(folder / "index.html", render(_shared(main)))

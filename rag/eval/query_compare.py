@@ -283,11 +283,13 @@ def routed_facts(case, evidence, run: execution.QueryRun, routes_of: dict[str, l
 
 
 def collect(workspace: Workspace, name: str, combos: tuple[Combo, ...] = COMBOS,
-            planner: Planner | None = None, progress=None, generation: int = 0) -> dict[str, Any]:
+            planner: Planner | None = None, progress=None, generation: int = 0,
+            ranks_only: bool = False) -> dict[str, Any]:
     """Runs every evaluated configuration on every combination, on the plans of `generation` (0 is
     the frozen one). Returns the page data: the facts under "configs" and the process detail under
     "process", both by configuration key; a configuration some question cannot run is left out and
-    listed under "unavailable" with why."""
+    listed under "unavailable" with why. `ranks_only`: keep only each question's completion ranks
+    ("n"), no process detail (the perturbation layer needs nothing more)."""
     from rag.cli import _assembly
     planner = planner or make_planner(workspace)
     configs = evaluated_configs()
@@ -338,7 +340,10 @@ def collect(workspace: Workspace, name: str, combos: tuple[Combo, ...] = COMBOS,
                         continue
                 done = (case_facts(evidence, run, table, labels) if config.merged
                         else routed_facts(case, evidence, run, annotated["mapping"], table, labels))
-                facts[config.key][combo.label][case.case_id], process[config.key][combo.label][case.case_id] = done
+                if ranks_only:
+                    facts[config.key][combo.label][case.case_id] = {"n": done[0]["n"]}
+                else:
+                    facts[config.key][combo.label][case.case_id], process[config.key][combo.label][case.case_id] = done
                 if not config.key:
                     holds[combo.label][case.case_id] = excerpts_held(evidence, run, table)
         units[combo.label] = table.rows
@@ -375,7 +380,7 @@ def collect_perturbation(workspace: Workspace, combos: tuple[Combo, ...] = COMBO
     out: dict[str, Any] = {"generations": list(PERTURBATION_GENERATIONS), "plans": {}, "decomposition": {},
                            "configs": {}}
     for generation in PERTURBATION_GENERATIONS:
-        data = collect(workspace, f"g{generation}", combos, progress=progress, generation=generation)
+        data = collect(workspace, f"g{generation}", combos, progress=progress, generation=generation, ranks_only=True)
         g = str(generation)
         out["plans"][g] = {c: {"decomposed": [q["text"] for q in p["decomposed"]["questions"]],
                                "degraded": p["decomposed"]["degraded"] + p["plain"]["degraded"]}
