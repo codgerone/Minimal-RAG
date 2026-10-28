@@ -13,10 +13,11 @@ when the query process is shown.
 from __future__ import annotations
 
 import json
+import shutil
 from pathlib import Path
 from typing import Any
 
-from rag.jsonio import read_json, write_atomic, write_json
+from rag.jsonio import read_json, write_atomic
 from rag.paths import Workspace
 from rag.reports.html import esc, page, write_assets
 
@@ -27,9 +28,9 @@ def query_dir(workspace: Workspace) -> Path:
     return workspace.reports / "query"
 
 
-def process_file(key: str) -> str:
-    """process/<file>.js of a configuration key ('' is V3.13)."""
-    return (key.replace("+", "_") or "none") + ".js"
+def script_file(key: str) -> str:
+    """facts/<file> and process/<file> of a configuration key ('' is V3.13)."""
+    return (key or "none") + ".js"
 
 
 SCRIPT = r"""
@@ -512,18 +513,33 @@ def _embed(data: dict[str, Any]) -> str:
     return json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
 
 
+def _script(name: str, key: str, value: Any) -> str:
+    return f"window.{name}=window.{name}||{{}};window.{name}[{json.dumps(key)}]=" + _embed(value) + ";\n"
+
+
+def _write_facts(folder: Path, configs: dict[str, Any]) -> None:
+    shutil.rmtree(folder / "facts", ignore_errors=True)
+    for key, facts in configs.items():
+        write_atomic(folder / "facts" / script_file(key), _script("QC_FACTS", key, facts))
+
+
+def _shared(data: dict[str, Any]) -> dict[str, Any]:
+    """The page's embedded data: the configurations' keys instead of their facts."""
+    return {**{k: v for k, v in data.items() if k != "configs"}, "available": sorted(data["configs"])}
+
+
 def write_query_page(workspace: Workspace, data: dict[str, Any]) -> Path:
-    """index.html with the main data embedded, data.json (the same data) and process/<config>.js."""
+    """data.json (machine data: everything but the process detail), index.html with the data every
+    configuration shares embedded, facts/<config>.js and process/<config>.js."""
     folder = query_dir(workspace) / data["name"]
-    process = data.get("process", {})
     main = {k: v for k, v in data.items() if k != "process"}
-    write_json(folder / "data.json", main)
-    for key, detail in process.items():
-        write_atomic(folder / "process" / process_file(key),
-                     f"window.QC_PROCESS=window.QC_PROCESS||{{}};window.QC_PROCESS[{json.dumps(key)}]="
-                     + _embed(detail) + ";\n")
+    write_atomic(folder / "data.json", _embed(main) + "\n")
+    _write_facts(folder, main["configs"])
+    shutil.rmtree(folder / "process", ignore_errors=True)
+    for key, detail in data["process"].items():
+        write_atomic(folder / "process" / script_file(key), _script("QC_PROCESS", key, detail))
     write_assets(workspace.reports)
-    write_atomic(folder / "index.html", render(main))
+    write_atomic(folder / "index.html", render(_shared(main)))
     return folder
 
 
@@ -531,6 +547,8 @@ def rerender_query_pages(workspace: Workspace) -> int:
     folder = query_dir(workspace)
     count = 0
     for path in sorted(folder.glob("*/data.json")) if folder.is_dir() else []:
-        write_atomic(path.parent / "index.html", render(read_json(path)))
+        data = read_json(path)
+        _write_facts(path.parent, data["configs"])
+        write_atomic(path.parent / "index.html", render(_shared(data)))
         count += 1
     return count

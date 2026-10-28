@@ -1,14 +1,15 @@
-"""Facts for the query comparison page: every combination × module configuration × question.
+"""Facts for the query comparison page: every combination × query configuration × question.
 
-A combination is an index (configs/) with a table return unit; a module configuration is a set
-of the query-side modules (P3.1, P3.2.1–P3.2.4, P3.3; the empty set is V3.13; P3.3 is not
+A combination is an index (configs/) with a table return unit; a query configuration is a choice
+of the query-side modules with their options (QueryConfig: decomposition with its merge and the
+original-question route, phrasings with their fusion; the empty configuration is V3.13; P3.3 is not
 evaluated). Every configuration runs on the frozen plans (generation 0, cached): two per question,
-without and with decomposition; with decomposition the original-question route is always on
-(decision 014). Per question only what any K and any pair of configurations can be derived from
-is kept: each evidence group's needed units and the first unit holding any of its evidence, the
-position of every evidence unit, the leading units (indices into the combination's unit table)
-and the cost. Where each leading unit came from
-is kept apart, per configuration (`process`). Rules: docs/changes/v3.14.md.
+without and with decomposition. Per question only what any K and any pair of configurations can be
+derived from is kept: each information item's completion rank and first-unit rank, the position of
+every evidence unit, the leading units (indices into the combination's unit table) and the cost.
+Without a merge there is no return order: an item's ranks are taken over the rankings of the
+sub-questions annotated for it (DECOMPOSITION_MAPPING). Where each leading unit came from is kept
+apart, per configuration (`process`). Rules: docs/changes/v3.14.md.
 """
 
 from __future__ import annotations
@@ -57,47 +58,11 @@ COMBOS = tuple(
     for unit in ("chunk", "table")) + (Combo("S-T", "structured_summary", "table"),)
 
 
-def config_key(modules: Iterable[str]) -> str:
-    """The key of a module configuration: its module ids in MODULES order joined by '+'."""
-    chosen = set(modules)
-    unknown = chosen - {m for m, _ in MODULES}
-    if unknown:
-        raise ValueError(f"未知模块：{sorted(unknown)}")
-    return "+".join(m for m, _ in MODULES if m in chosen)
-
-
-def comparison_error(left: Iterable[str], right: Iterable[str]) -> str | None:
-    """None when `left vs right` can be compared: both empty (V3.13), or left a proper subset of right."""
-    left, right = set(left), set(right)
-    if not left and not right:
-        return None
-    if not right:
-        return "右侧为空时左侧也必须为空"
-    if not left < right:
-        extra = sorted(left - right)
-        return (f"左侧的 {'、'.join(extra)} 不在右侧" if extra
-                else "右侧必须比左侧至少多选一个模块")
-    return None
-
-
-CHANGE_THRESHOLD = math.log(1.5)   # experiment parameter (docs/changes/v3.14.md, question 3)
-
-
 def evidence_positions(evidence, run: execution.QueryRun) -> dict[str, int]:
     """Evidence unit → its position in the return order: the units holding any chunk of any
     acceptable set of any excerpt."""
     chunks = {c for x in evidence.excerpts.values() for s in x.acceptable_sets for c in s}
     return {u.key: n for n, u in enumerate(run.units, start=1) if chunks & set(u.chunk_ids)}
-
-
-def evidence_change(left: dict[str, int], right: dict[str, int]) -> float:
-    """Σ ln(left position / right position) over the evidence units (both sides rank the same units)."""
-    return sum(math.log(left[k] / right[k]) for k in left if k in right)
-
-
-def direction(change: float) -> int:
-    """1 better, -1 worse, 0 no change. Retired 2026-10-28; kept until the page moves to `verdict`."""
-    return 1 if change > CHANGE_THRESHOLD else -1 if change < -CHANGE_THRESHOLD else 0
 
 
 # The rule since 2026-10-28 (docs/changes/v3.14.md, question 3): completion vectors by dominance.
@@ -134,20 +99,72 @@ PLAN_MODEL = "google/gemini-3.8-flash"   # docs/changes/v3.14.md, question 1
 # Sub-question ↔ information item annotation of the frozen plans (docs/changes/v3.14.md, "分层评估")
 DECOMPOSITION_MAPPING = "reports/experiments/v3.14-decomposition/mapping.json"
 PHRASING_OF = {"P3.2.1": "rewrite", "P3.2.2": "translation", "P3.2.3": "hyde", "P3.2.4": "step_back"}
-EVALUATED = ("P3.1", *PHRASING_OF)   # P3.3 (reranking) is set aside
+MERGES = {"rr": "round_robin", "rrf": "rrf"}   # key code → execution.SELECTORS
 
 
-def evaluated_configs() -> list[tuple[str, ...]]:
-    """Every subset of the evaluated modules, the empty set first."""
-    return [c for n in range(len(EVALUATED) + 1) for c in combinations(EVALUATED, n)]
+@dataclass(frozen=True)
+class QueryConfig:
+    """One query configuration (docs/changes/v3.14.md, "分层评估")."""
+    decompose: bool = False
+    merge: str | None = None          # with decomposition: rr | rrf; None: unmerged (evaluation only)
+    original_route: bool = False      # with a merge
+    phrasings: tuple[str, ...] = ()   # P3.2.x module ids, in module order
+    fuse: bool = True                 # with phrasings; False: exactly one phrasing, in place of the question
+
+    def __post_init__(self):
+        if self.merge is not None and (not self.decompose or self.merge not in MERGES):
+            raise ValueError(f"合并方式不合法：{self.merge}")
+        if self.original_route and self.merge is None:
+            raise ValueError("原问题一路只在选了合并方式时可开")
+        if list(self.phrasings) != [m for m in PHRASING_OF if m in self.phrasings]:
+            raise ValueError(f"写法须按模块顺序且不重复：{self.phrasings}")
+        if not self.fuse and len(self.phrasings) != 1:
+            raise ValueError("不融合时只能选一种写法")
+
+    @property
+    def merged(self) -> bool:
+        """Whether the configuration has a return order."""
+        return not self.decompose or self.merge is not None
+
+    @property
+    def key(self) -> str:
+        """Readable and safe in file names and URLs: 'P3.1@rr-o_P3.2.1+P3.2.2@rrf'; '' is V3.13.
+        Without '@' a part has no merge (decomposition) or no fusion (phrasing)."""
+        parts = []
+        if self.decompose:
+            parts.append("P3.1" + (f"@{self.merge}" if self.merge else "") + ("-o" if self.original_route else ""))
+        if self.phrasings:
+            parts.append("+".join(self.phrasings) + ("@rrf" if self.fuse else ""))
+        return "_".join(parts)
+
+    @classmethod
+    def parse(cls, key: str) -> "QueryConfig":
+        fields: dict[str, Any] = {}
+        for part in filter(None, key.split("_")):
+            body, _, option = part.partition("@")
+            if body == "P3.1":
+                merge, _, route = option.partition("-")
+                fields.update(decompose=True, merge=merge or None, original_route=route == "o")
+            else:
+                fields.update(phrasings=tuple(body.split("+")), fuse=option == "rrf")
+        config = cls(**fields)
+        if config.key != key:
+            raise ValueError(f"配置键不合法：{key}")
+        return config
+
+    def settings(self) -> execution.QuerySettings:
+        return execution.QuerySettings(frozenset(PHRASING_OF[m] for m in self.phrasings), self.fuse,
+                                       MERGES[self.merge] if self.merge else None, self.original_route)
 
 
-def settings_for(config: Collection[str]) -> tuple[bool, execution.QuerySettings]:
-    """(decompose, settings) of a module configuration."""
-    decompose = "P3.1" in config
-    return decompose, execution.QuerySettings(frozenset(PHRASING_OF[m] for m in config if m in PHRASING_OF),
-                                              merge="round_robin" if decompose else None,
-                                              original_route=decompose)
+def evaluated_configs() -> list[QueryConfig]:
+    """Phrasing states (none; RRF over each non-empty subset; each phrasing unfused) × decomposition
+    states (none; unmerged; round robin and global RRF, each without and with the original route)."""
+    ids = list(PHRASING_OF)
+    phrasings = [((), True)] + [(c, True) for n in range(1, len(ids) + 1) for c in combinations(ids, n)]         + [((m,), False) for m in ids]
+    decompositions = [dict(), dict(decompose=True)] + [dict(decompose=True, merge=m, original_route=o)
+                                                       for m in MERGES for o in (False, True)]
+    return [QueryConfig(**d, phrasings=p, fuse=f) for p, f in phrasings for d in decompositions]
 
 
 def make_planner(workspace: Workspace) -> Planner:
@@ -194,7 +211,23 @@ class UnitTable:
         return self.index[unit.key]
 
 
-def case_facts(evidence, run: execution.QueryRun, table: UnitTable) -> tuple[dict[str, Any], list[Any]]:
+class Labels:
+    """Phrasing labels ("question", "translation:english", …), each kept once; process detail refers
+    to them by index."""
+
+    def __init__(self):
+        self.rows: list[str] = []
+
+    def ranks(self, ranks) -> list[list[int]]:
+        out = []
+        for name, rank in ranks:
+            if name not in self.rows:
+                self.rows.append(name)
+            out.append([self.rows.index(name), rank])
+        return out
+
+
+def case_facts(evidence, run: execution.QueryRun, table: UnitTable, labels: Labels) -> tuple[dict[str, Any], list[Any]]:
     """The facts of one run, and where each leading unit came from."""
     units = run.units
     needed = completion_ranks([u.chunk_ids for u in units], evidence.groups)
@@ -208,7 +241,7 @@ def case_facts(evidence, run: execution.QueryRun, table: UnitTable) -> tuple[dic
              "e": {str(table.of(by_key[k])): p for k, p in evidence_positions(evidence, run).items()},
              "c": [cost.retrievals, round(cost.retrieval_seconds, 4), cost.llm_calls,
                    round(cost.llm_seconds, 2), round(cost.llm_cost_usd, 6)]}
-    process = [[s.question_id, s.round, [list(r) for r in s.ranks]] for s in leading]
+    process = [[s.question_id, s.round, labels.ranks(s.ranks)] for s in leading]
     return facts, process
 
 
@@ -223,39 +256,45 @@ def excerpts_held(evidence, run: execution.QueryRun, table: UnitTable) -> dict[s
     return held
 
 
-def retrieval_layer(search, case, evidence, plan: Plan, annotated: dict[str, Any],
-                    documents) -> dict[str, list[int | None]]:
-    """P3.1 retrieval layer: each group's completion rank in the original question's ranking ("o"),
-    in its own sub-questions' rankings ("m"; an omitted group takes all) and in all of them ("i")."""
-    ids = lambda text: [u.chunk_ids for u in search.rank(text, documents).units]
-    routes = {q.id: ids(q.text) for q in plan.questions}
-    original = ids(case.question)
-    out: dict[str, list[int | None]] = {"o": [], "m": [], "i": []}
+def routed_facts(case, evidence, run: execution.QueryRun, routes_of: dict[str, list[str]],
+                 table: UnitTable, labels: Labels) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Unmerged: no return order. An item's completion and first-unit ranks over the rankings of its
+    sub-questions (routes_of: group → question ids; empty, an omitted item, takes all); the leading
+    units of every ranking as the process."""
+    rankings = {r.question_id: [u.chunk_ids for u in r.units] for r in run.routes}
+    groups = {g.group_id: g for g in evidence.groups}
+    n, f = [], []
     for group in case.groups:
+        mine = [rankings[q] for q in (routes_of[group.group_id] or rankings)]
         schemes = [[evidence.excerpts[x].acceptable_sets for x in s.excerpt_ids] for s in group.schemes]
-        mine = annotated["mapping"][group.group_id] or list(routes)
-        out["o"].append(routed_completion_rank([original], schemes))
-        out["m"].append(routed_completion_rank([routes[q] for q in mine], schemes))
-        out["i"].append(routed_completion_rank(list(routes.values()), schemes))
-    return out
+        n.append(routed_completion_rank(mine, schemes))
+        firsts = [first_ranks(units, [groups[group.group_id]]).get(group.group_id) for units in mine]
+        f.append(min((x for x in firsts if x is not None), default=None))
+    cost = run.cost
+    facts = {"n": n, "f": f, "c": [cost.retrievals, round(cost.retrieval_seconds, 4), cost.llm_calls,
+                                   round(cost.llm_seconds, 2), round(cost.llm_cost_usd, 6)]}
+    process = {"routes": [[r.question_id, [[table.of(u), labels.ranks(ranks)]
+                                           for u, ranks in zip(r.units[:LEADING], r.ranks)]]
+                          for r in run.routes]}
+    return facts, process
 
 
 def collect(workspace: Workspace, name: str, combos: tuple[Combo, ...] = COMBOS,
             planner: Planner | None = None, progress=None) -> dict[str, Any]:
-    """Runs every evaluated configuration on every combination. Returns the page data, with the
-    per-configuration process detail under "process"."""
+    """Runs every evaluated configuration on every combination. Returns the page data: the facts
+    under "configs" and the process detail under "process", both by configuration key; a
+    configuration some question cannot run is left out and listed under "unavailable" with why."""
     from rag.cli import _assembly
     planner = planner or make_planner(workspace)
     configs = evaluated_configs()
-    keys = [config_key(c) for c in configs]
-    facts: dict[str, dict[str, Any]] = {k: {} for k in keys}
-    process: dict[str, dict[str, Any]] = {k: {} for k in keys}
+    facts: dict[str, dict[str, Any]] = {c.key: {} for c in configs}
+    process: dict[str, dict[str, Any]] = {c.key: {} for c in configs}
+    unavailable: dict[str, list[str]] = {}
     units: dict[str, list] = {}
     holds: dict[str, dict[str, Any]] = {}   # combo → case → evidence unit index → excerpt ids
     plans: dict[str, dict[str, Any]] = {}
-    path = workspace.root / DECOMPOSITION_MAPPING
-    mapping = read_json(path)["cases"] if path.is_file() else {}
-    layers: dict[str, dict[str, Any]] = {}
+    mapping = read_json(workspace.root / DECOMPOSITION_MAPPING)["cases"]
+    labels = Labels()
     combo_info, dataset = [], None
     for combo in combos:
         ctx = prepare(workspace, _assembly(workspace, combo.config, "hybrid", combo.table_return_unit),
@@ -266,10 +305,9 @@ def collect(workspace: Workspace, name: str, combos: tuple[Combo, ...] = COMBOS,
         search = MemoSearch(ctx.searcher)
         table = UnitTable(ctx.tokens_of)
         holds[combo.label] = {}
-        layers[combo.label] = {}
-        for key in keys:
-            facts[key][combo.label] = {}
-            process[key][combo.label] = {}
+        for config in configs:
+            facts[config.key][combo.label] = {}
+            process[config.key][combo.label] = {}
         for case in ctx.dataset.cases:
             if not case.answerable:
                 continue
@@ -281,19 +319,22 @@ def collect(workspace: Workspace, name: str, combos: tuple[Combo, ...] = COMBOS,
                 "scope": {"documents": list(documents or []), "languages": languages, "codes": list(scope.codes)},
                 "plain": plan_json(pair[False]), "decomposed": plan_json(pair[True])})
             evidence = judge_case(case, ctx.chunks)
-            annotated = mapping.get(case.case_id)
-            if annotated and annotated["subquestions"] == {q.id: q.text for q in pair[True].questions}:
-                layers[combo.label][case.case_id] = retrieval_layer(search, case, evidence, pair[True],
-                                                                    annotated, documents)
-            for config, key in zip(configs, keys):
-                if config:
-                    decompose, settings = settings_for(config)
-                    run = execution.planned(search, pair[decompose], settings, documents)
-                else:
+            annotated = mapping[case.case_id]
+            if annotated["subquestions"] != {q.id: q.text for q in pair[True].questions}:
+                raise ValueError(f"{case.case_id}：对应标注的子问题与冻结的规划不一致")
+            for config in configs:
+                if not config.key:
                     run = execution.plain(search, case.question, documents)
-                facts[key][combo.label][case.case_id], process[key][combo.label][case.case_id] = \
-                    case_facts(evidence, run, table)
-                if not config:
+                else:
+                    try:
+                        run = execution.planned(search, pair[config.decompose], config.settings(), documents)
+                    except execution.Unavailable as e:
+                        unavailable.setdefault(config.key, []).append(f"{combo.label} {case.case_id}：{e}")
+                        continue
+                done = (case_facts(evidence, run, table, labels) if config.merged
+                        else routed_facts(case, evidence, run, annotated["mapping"], table, labels))
+                facts[config.key][combo.label][case.case_id], process[config.key][combo.label][case.case_id] = done
+                if not config.key:
                     holds[combo.label][case.case_id] = excerpts_held(evidence, run, table)
         units[combo.label] = table.rows
         combo_info.append({"label": combo.label, "config": combo.config,
@@ -302,6 +343,9 @@ def collect(workspace: Workspace, name: str, combos: tuple[Combo, ...] = COMBOS,
         if progress:
             progress(combo.label)
     assert dataset is not None
+    for key in unavailable:
+        facts.pop(key)
+        process.pop(key)
     cases = [{"case_id": c.case_id, "document_id": c.document_id, "document_name": c.document_name,
               "question": c.question,
               "groups": [{"group_id": g.group_id, "information_item": g.information_item} for g in c.groups],
@@ -312,10 +356,10 @@ def collect(workspace: Workspace, name: str, combos: tuple[Combo, ...] = COMBOS,
     return {"name": name, "created_at": datetime.now().astimezone().isoformat(timespec="seconds"),
             "dataset": {"version": dataset.version, "fingerprint": dataset.fingerprint,
                         "questions": len(dataset.cases), "answerable": len(cases)},
-            "modules": [{"id": m, "name": n} for m, n in MODULES], "evaluated": list(EVALUATED),
-            "ks": list(KS), "threshold": CHANGE_THRESHOLD, "plan_model": PLAN_MODEL,
+            "modules": [{"id": m, "name": n} for m, n in MODULES], "ks": list(KS), "plan_model": PLAN_MODEL,
             "combos": combo_info, "cases": cases, "plans": plans, "units": units, "holds": holds,
-            "configs": facts, "process": process, "layers": layers,
+            "phrasing_labels": labels.rows,
+            "configs": facts, "process": process, "unavailable": unavailable,
             "decomposition": {k: {x: v[x] for x in ("mapping", "extra", "multi", "lost_qualifier", "note")}
                               for k, v in mapping.items()}}
 
