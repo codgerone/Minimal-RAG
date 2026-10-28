@@ -146,6 +146,7 @@ def settings_for(config: Collection[str]) -> tuple[bool, execution.QuerySettings
     """(decompose, settings) of a module configuration."""
     decompose = "P3.1" in config
     return decompose, execution.QuerySettings(frozenset(PHRASING_OF[m] for m in config if m in PHRASING_OF),
+                                              merge="round_robin" if decompose else None,
                                               original_route=decompose)
 
 

@@ -4,8 +4,10 @@ The return order is every unit the query would hand back, in the order the units
 selected, each with where it came from and the round it came in. A budget of B returns the
 first B units. The plain execution retrieves the question once; its return order is the full
 ranking of the question. The planned execution runs a plan (rag/query/planning.py): each
-question's text and enabled phrasings are retrieved once each, the unit rankings of one
-question are fused by RRF, and a selector takes units from the questions' rankings.
+question's text and enabled phrasings are retrieved once each and the unit rankings of one
+question are fused by RRF, or, unfused, one phrasing is retrieved in place of the question's
+text; a selector (round robin or global RRF) merges the questions' rankings into the return
+order. Unmerged (evaluation only), a decomposed plan has its rankings and no return order.
 Rules: docs/changes/v3.14.md.
 """
 
@@ -41,10 +43,20 @@ class QueryCost:
 
 
 @dataclass(frozen=True)
+class Fused:
+    """One question's ranking: its units, best first, each with its rank per phrasing."""
+    question_id: str
+    text: str
+    units: tuple[ResultUnit, ...]
+    ranks: tuple[tuple[tuple[str, int], ...], ...]   # per unit
+
+
+@dataclass(frozen=True)
 class QueryRun:
-    order: tuple[Selected, ...]
+    order: tuple[Selected, ...]    # empty when unmerged
     chunk_order: tuple[str, ...]   # plain only: the retriever's chunk ranking
     cost: QueryCost
+    routes: tuple[Fused, ...] = ()   # planned only: each question's ranking, the original route last
 
     def first(self, budget: int) -> list[ResultUnit]:
         return [s.unit for s in self.order[:budget]]
@@ -63,19 +75,10 @@ def plain(searcher: UnitSearch, question: str,
 
 
 @dataclass(frozen=True)
-class Fused:
-    """One question's ranking: its units, best first, each with its rank per phrasing."""
-    question_id: str
-    text: str
-    units: tuple[ResultUnit, ...]
-    ranks: tuple[tuple[tuple[str, int], ...], ...]   # per unit
-
-
-@dataclass(frozen=True)
 class Pick:
     route: int       # index of the ranking the unit was taken from
     unit: ResultUnit
-    round: int
+    round: int       # round robin: the round; global RRF: 0
 
 
 class Selector(Protocol):
@@ -105,10 +108,36 @@ class RoundRobin:
         return picks
 
 
+class GlobalRRF:
+    """One ranking by RRF over all rankings (fuse); a unit is taken from the ranking where it
+    ranks best, the earlier ranking on ties."""
+
+    def select(self, rankings: Sequence[Sequence[ResultUnit]]) -> list[Pick]:
+        units, ranks = fuse([(str(route), ranking) for route, ranking in enumerate(rankings)])
+        return [Pick(int(min(r, key=lambda x: (x[1], int(x[0])))[0]), u, 0) for u, r in zip(units, ranks)]
+
+
+SELECTORS: dict[str, Selector] = {"round_robin": RoundRobin(), "rrf": GlobalRRF()}
+
+
+class Unavailable(ValueError):
+    """The settings cannot run on this plan; the message says why."""
+
+
 @dataclass(frozen=True)
 class QuerySettings:
-    phrasings: frozenset[str] = frozenset()   # enabled beside the question itself: rewrite, translation, hyde, step_back
-    original_route: bool = False              # with decomposition: the original question as the last route
+    phrasings: frozenset[str] = frozenset()   # rewrite, translation, hyde, step_back
+    fuse_phrasings: bool = True               # RRF over the question and its phrasings; False: the one phrasing in place of the question
+    merge: str | None = None                  # with decomposition: round_robin | rrf; None: unmerged (evaluation only)
+    original_route: bool = False              # with a merge: the original question as one more ranking (round robin: last in each round)
+
+    def __post_init__(self):
+        if not self.fuse_phrasings and len(self.phrasings) != 1:
+            raise ValueError("不融合时只能选一种写法")
+        if self.merge is not None and self.merge not in SELECTORS:
+            raise ValueError(f"未知合并方式：{self.merge}")
+        if self.original_route and self.merge is None:
+            raise ValueError("原问题一路只在选了合并方式时使用")
 
 
 def label(phrasing: Phrasing) -> str:
@@ -132,19 +161,24 @@ def fuse(rankings: Sequence[tuple[str, Sequence[ResultUnit]]]) -> tuple[list[Res
 
 
 def planned(searcher: UnitSearch, plan: Plan, settings: QuerySettings,
-            document_ids: Collection[str] | None = None,
-            selector: Selector | None = None) -> QueryRun:
+            document_ids: Collection[str] | None = None) -> QueryRun:
     """Runs a plan: every question's own text and enabled phrasings retrieved once each and
-    fused per question; with decomposition and the original route, the original question
-    retrieved once more as the last route; the selector merges the routes."""
-    if settings.original_route and not plan.decomposed:
-        raise ValueError("原问题一路只在分解时使用")
+    fused per question (unfused: its one phrasing alone); with decomposition, the merge selects
+    the return order from the questions' rankings, the original question's ranking last when
+    the original route is on, and without a merge there is no return order. Raises Unavailable
+    when an unfused phrasing does not have exactly one text for a question."""
+    if not plan.decomposed and (settings.merge or settings.original_route):
+        raise ValueError("合并方式与原问题一路只在分解时使用")
     retrievals, seconds = 0, 0.0
     routes: list[Fused] = []
-    kinds = {"question", *settings.phrasings}
+    kinds = {"question", *settings.phrasings} if settings.fuse_phrasings else set(settings.phrasings)
     for question in plan.questions:
+        texts = question.of(kinds)
+        if not settings.fuse_phrasings and len(texts) != 1:
+            raise Unavailable(f"{question.id} 的写法 {next(iter(settings.phrasings))} 有 {len(texts)} 段文字，"
+                              "不融合时须恰好一段")
         rankings = []
-        for phrasing in question.of(kinds):
+        for phrasing in texts:
             ranking = searcher.rank(phrasing.text, document_ids)
             retrievals += 1
             seconds += ranking.seconds
@@ -157,10 +191,14 @@ def planned(searcher: UnitSearch, plan: Plan, settings: QuerySettings,
         seconds += ranking.seconds
         routes.append(Fused(ORIGINAL, plan.question, ranking.units,
                             tuple((("question", r),) for r in range(1, len(ranking.units) + 1))))
-    picks = (selector or RoundRobin()).select([r.units for r in routes])
+    if plan.decomposed and settings.merge is None:
+        picks: list[Pick] = []
+    else:   # without decomposition the one ranking is handed back as it is
+        picks = SELECTORS[settings.merge or "round_robin"].select([r.units for r in routes])
     position = [{u.key: n for n, u in enumerate(r.units)} for r in routes]
     order = tuple(Selected(p.unit, routes[p.route].text, p.round, routes[p.route].question_id,
                            routes[p.route].ranks[position[p.route][p.unit.key]]) for p in picks)
     # LLM cost: only the planning steps this configuration uses
     llm = (plan.decomposition if plan.decomposed else NO_COST) + (plan.phrasing if settings.phrasings else NO_COST)
-    return QueryRun(order, (), QueryCost(retrievals, seconds, llm.calls, llm.seconds, llm.cost_usd))
+    return QueryRun(order, (), QueryCost(retrievals, seconds, llm.calls, llm.seconds, llm.cost_usd),
+                    tuple(routes))

@@ -4,7 +4,8 @@ import pytest
 
 from rag.index.store import StoredChunk
 from rag.index.tables import StoredTable
-from rag.query.execution import (ORIGINAL, QuerySettings, RoundRobin, fuse, plain, planned)
+from rag.query.execution import (ORIGINAL, GlobalRRF, QuerySettings, RoundRobin, Unavailable, fuse,
+                                 plain, planned)
 from rag.query.planning import Phrasing, Plan, PlanCost, Question
 from rag.query.retriever import Hit
 from rag.query.units import ResultUnit, RetrievalCache, UnitRanking, UnitSearch
@@ -88,11 +89,11 @@ def make_plan(decomposed):
 
 def test_planned_retrieves_each_enabled_phrasing_once_and_selects_across_questions():
     searcher = TextSearch()
-    run = planned(searcher, make_plan(True), QuerySettings(frozenset({"rewrite"}), original_route=True))
+    run = planned(searcher, make_plan(True), QuerySettings(frozenset({"rewrite"}), merge="round_robin", original_route=True))
     assert searcher.texts == ["Q1 ab", "Q1r ba", "Q2 cd", "Q2r dc", "orig xa"]
     assert run.cost.retrievals == 5 and run.cost.retrieval_seconds == 1.25
     assert (run.cost.llm_calls, run.cost.llm_seconds, run.cost.llm_cost_usd) == (2, 3.0, 0.01)
-    only_decomposed = planned(TextSearch(), make_plan(True), QuerySettings(original_route=True))
+    only_decomposed = planned(TextSearch(), make_plan(True), QuerySettings(merge="round_robin", original_route=True))
     assert (only_decomposed.cost.llm_calls, only_decomposed.cost.llm_cost_usd) == (1, 0.004)
     # Q1 fuses to a, b; Q2 to c, d; the original route ranks x, a and comes last in each round
     assert [(s.unit.key, s.question_id, s.round) for s in run.order] == [
@@ -107,6 +108,43 @@ def test_planned_without_decomposition_and_phrasings_is_the_plain_ranking():
     assert [s.unit.key for s in run.order] == ["a", "b"] and run.cost.retrievals == 1
     with pytest.raises(ValueError):
         planned(TextSearch(), make_plan(False), QuerySettings(original_route=True))
+    with pytest.raises(ValueError):
+        planned(TextSearch(), make_plan(False), QuerySettings(merge="rrf"))
+
+
+def test_global_rrf_fuses_the_rankings_and_takes_each_unit_from_its_best_ranking():
+    picks = GlobalRRF().select([[unit("a"), unit("b")], [unit("b"), unit("c")], [unit("c")]])
+    # b: 1/62 + 1/61, c: 1/62 + 1/61 (ties by key), a: 1/61
+    assert [(p.unit.key, p.route, p.round) for p in picks] == [("b", 1, 0), ("c", 2, 0), ("a", 0, 0)]
+
+
+def test_planned_with_global_rrf_counts_the_original_route_as_one_ranking():
+    run = planned(TextSearch(), make_plan(True), QuerySettings(merge="rrf", original_route=True))
+    # Q1 a b, Q2 c d, original x a: a is in two rankings
+    assert [(s.unit.key, s.question_id, s.round) for s in run.order] == [
+        ("a", "Q1", 0), ("c", "Q2", 0), ("x", ORIGINAL, 0), ("b", "Q1", 0), ("d", "Q2", 0)]
+
+
+def test_unmerged_decomposition_keeps_each_ranking_and_has_no_return_order():
+    run = planned(TextSearch(), make_plan(True), QuerySettings(frozenset({"rewrite"})))
+    assert run.order == () and run.cost.retrievals == 4
+    assert [(r.question_id, [u.key for u in r.units]) for r in run.routes] == [("Q1", ["a", "b"]), ("Q2", ["c", "d"])]
+    with pytest.raises(ValueError):
+        QuerySettings(original_route=True)
+
+
+def test_an_unfused_phrasing_is_retrieved_in_place_of_the_question():
+    searcher = TextSearch()
+    run = planned(searcher, make_plan(False), QuerySettings(frozenset({"rewrite"}), fuse_phrasings=False))
+    assert searcher.texts == ["Q1r ba"] and [s.unit.key for s in run.order] == ["b", "a"]
+    assert run.order[0].ranks == (("rewrite", 1),) and run.cost.llm_calls == 1
+    with pytest.raises(ValueError):
+        QuerySettings(frozenset({"rewrite", "hyde"}), fuse_phrasings=False)
+
+
+def test_an_unfused_phrasing_without_exactly_one_text_is_unavailable():
+    with pytest.raises(Unavailable, match="Q1"):
+        planned(TextSearch(), make_plan(False), QuerySettings(frozenset({"translation"}), fuse_phrasings=False))
 
 
 class CountingRetriever:
