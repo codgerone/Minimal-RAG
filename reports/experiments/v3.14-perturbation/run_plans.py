@@ -6,6 +6,9 @@ Writes plans.json next to this script: per generation and question, both plans a
 sub-questions are the same as generation 0's.
 Run: python reports/experiments/v3.14-perturbation/run_plans.py [generation …]
 (with generations given, only those are planned, e.g. to fill the cache in parallel, and nothing is written)
+Two processes must never plan the same generation at the same time: both call the model and the later
+answer overwrites the cached one, so plans.json may not match the cache. Rerunning without arguments
+rebuilds plans.json from the cache.
 """
 
 from __future__ import annotations

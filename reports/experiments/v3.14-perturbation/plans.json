@@ -4,7 +4,7 @@
   "phrasings": "query_plan_v7"
  },
  "model": "google/gemini-3.8-flash",
- "usd": 0.8969,
+ "usd": 0.9049,
  "generations": {
   "1": {
    "CONTRACT-105-Q001": {
@@ -5804,22 +5804,22 @@
         {
          "kind": "rewrite",
          "language": "",
-         "text": "发票规定的付款到期日"
+         "text": "发票付款到期日"
         },
         {
          "kind": "translation",
          "language": "spanish",
-         "text": "¿Cuál es la fecha de vencimiento de pago de la factura?"
+         "text": "¿Cuál es la fecha de vencimiento para el pago de la factura?"
         },
         {
          "kind": "hyde",
          "language": "spanish",
-         "text": "Fecha de vencimiento: [fecha]. Por favor, realice el pago antes de la fecha límite estipulada."
+         "text": "Fecha de vencimiento: [fecha]. El pago debe efectuarse a más tardar el [fecha]."
         },
         {
          "kind": "step_back",
          "language": "",
-         "text": "发票中的付款条件和日期有哪些？"
+         "text": "发票的付款条件和重要日期是什么？"
         }
        ]
       },
@@ -5835,7 +5835,7 @@
         {
          "kind": "rewrite",
          "language": "",
-         "text": "发票需要支付的金额"
+         "text": "发票应付金额"
         },
         {
          "kind": "translation",
@@ -5845,12 +5845,12 @@
         {
          "kind": "hyde",
          "language": "spanish",
-         "text": "Total a pagar: [importe] EUR. Importe total adeudado según los términos establecidos."
+         "text": "Importe total a pagar: [importe] [moneda]. Total factura: [importe]."
         },
         {
          "kind": "step_back",
          "language": "",
-         "text": "发票明细中的金额和总额是多少？"
+         "text": "发票的结算总额和明细金额是多少？"
         }
        ]
       },
@@ -5871,17 +5871,17 @@
         {
          "kind": "translation",
          "language": "spanish",
-         "text": "¿A cuánto ascienden los impuestos de la factura?"
+         "text": "¿A cuánto ascienden los impuestos incluidos en la factura?"
         },
         {
          "kind": "hyde",
          "language": "spanish",
-         "text": "IVA ([porcentaje]%): [importe] EUR. Cuota tributaria total aplicable: [importe] EUR."
+         "text": "Impuestos aplicables: IVA [porcentaje]% por un importe de [monto]. Total impuestos: [monto]."
         },
         {
          "kind": "step_back",
          "language": "",
-         "text": "发票的各项收费及税款构成是怎样的？"
+         "text": "发票包含哪些税额和费用细项？"
         }
        ]
       }
@@ -5951,7 +5951,7 @@
         {
          "kind": "hyde",
          "language": "spanish",
-         "text": "HXE34K-S1 Precio Unitario: [precio unitario] USD."
+         "text": "HXE34K-S1 Precio Unitario: [precio]"
         },
         {
          "kind": "step_back",
@@ -5977,12 +5977,12 @@
         {
          "kind": "translation",
          "language": "spanish",
-         "text": "¿Cuál es la cantidad de HXE34K-S1?"
+         "text": "¿Cuál es la cantidad facturada de HXE34K-S1?"
         },
         {
          "kind": "hyde",
          "language": "spanish",
-         "text": "HXE34K-S1 Cantidad: [cantidad] unidades."
+         "text": "HXE34K-S1 Cantidad: [cantidad]"
         },
         {
          "kind": "step_back",
@@ -6016,17 +6016,17 @@
         {
          "kind": "translation",
          "language": "english",
-         "text": "Which products are included in the order, what are their respective unit prices and quantities, and what is the total order amount?"
+         "text": "What products are included in the order, what are their respective unit prices and quantities, and what is the total order amount?"
         },
         {
          "kind": "hyde",
          "language": "english",
-         "text": "The order includes [Product Name] with a quantity of [Quantity] at [Price] each, and [Product Name] with a quantity of [Quantity] at [Price] each. The total amount for the order is [Total Amount]."
+         "text": "The order includes [Product Name] (Quantity: [Quantity], Unit Price: $[Price]) and [Product Name] (Quantity: [Quantity], Unit Price: $[Price]). The total order amount is $[Total Amount]."
         },
         {
          "kind": "step_back",
          "language": "",
-         "text": "各个订单包含的产品明细、单价、数量以及订单总金额是多少？"
+         "text": "订单明细中的产品、单价、数量和结算总额分别是多少？"
         }
        ]
       }
@@ -6047,7 +6047,7 @@
         {
          "kind": "rewrite",
          "language": "",
-         "text": "订单包含的产品款式"
+         "text": "订单包含的产品"
         },
         {
          "kind": "translation",
@@ -6062,7 +6062,7 @@
         {
          "kind": "step_back",
          "language": "",
-         "text": "订单的完整明细信息是什么？"
+         "text": "订单的完整明细内容是什么？"
         }
        ]
       },
@@ -6088,12 +6088,12 @@
         {
          "kind": "hyde",
          "language": "english",
-         "text": "The unit prices for the items in the order are: [Product A] at $[Amount] each, and [Product B] at $[Amount] each."
+         "text": "The unit price for [Product Name] is $[Amount], and [Product Name] is priced at $[Amount] each."
         },
         {
          "kind": "step_back",
          "language": "",
-         "text": "订单明细中的各项费用和价格是多少？"
+         "text": "订单的商品清单与价格明细是什么？"
         }
        ]
       },
@@ -6119,12 +6119,12 @@
         {
          "kind": "hyde",
          "language": "english",
-         "text": "The quantities for the ordered products are [Number] units of [Product A] and [Number] units of [Product B]."
+         "text": "The ordered quantities are [Quantity] units of [Product Name] and [Quantity] units of [Product Name]."
         },
         {
          "kind": "step_back",
          "language": "",
-         "text": "订单的行项目明细是什么？"
+         "text": "订单的商品清单与数量明细是什么？"
         }
        ]
       },
@@ -6140,7 +6140,7 @@
         {
          "kind": "rewrite",
          "language": "",
-         "text": "订单的总金额"
+         "text": "订单总金额"
         },
         {
          "kind": "translation",
@@ -6150,12 +6150,12 @@
         {
          "kind": "hyde",
          "language": "english",
-         "text": "The grand total amount for the order is $[Amount], including tax and shipping."
+         "text": "The total amount for the order is $[Total Amount]."
         },
         {
          "kind": "step_back",
          "language": "",
-         "text": "订单的费用明细与结算汇总情况如何？"
+         "text": "订单的各项收费与汇总金额是什么？"
         }
        ]
       }
@@ -6220,17 +6220,17 @@
         {
          "kind": "translation",
          "language": "english",
-         "text": "What is the delivery schedule and timeline for the order?"
+         "text": "What is the delivery schedule for the order?"
         },
         {
          "kind": "hyde",
          "language": "english",
-         "text": "The scheduled delivery timeline indicates that initial shipment is set for [Date], with final delivery expected by [Date]. Milestones include production completion on [Date] and dispatch by [Date]."
+         "text": "The delivery schedule for the order indicates that shipping will commence on [Date], with estimated arrival at the destination by [Date]."
         },
         {
          "kind": "step_back",
          "language": "",
-         "text": "所有订单的交货时间排程和交付计划是什么？"
+         "text": "所有订单的交货时间安排是什么？"
         }
        ]
       }
@@ -6396,53 +6396,53 @@
         {
          "kind": "rewrite",
          "language": "",
-         "text": "订单总金额包含MDC ORCA费用的情况"
+         "text": "订单总金额涵盖MDC ORCA费用情况"
         },
         {
          "kind": "translation",
          "language": "english",
-         "text": "Does the total amount of the order cover the MDC ORCA fees?"
+         "text": "Does the total order amount cover the MDC ORCA fees?"
         },
         {
          "kind": "hyde",
          "language": "english",
-         "text": "The total amount of the order [covers / does not cover] the MDC ORCA fees, which are listed under [item description] for [amount]."
+         "text": "The total amount of the order [includes / does not include] the fee for MDC ORCA."
         },
         {
          "kind": "step_back",
          "language": "",
-         "text": "订单总金额涵盖了哪些费用项目？"
+         "text": "订单的总金额由哪些具体费用项目构成？"
         }
        ]
       },
       {
        "id": "Q2",
-       "text": "如果订单 ORDER2025001 的总金额不涵盖MDC ORCA的费用，还需额外支付多少费用？",
+       "text": "如果订单 ORDER2025001 的总金额不包含MDC ORCA的费用，还需额外支付多少费用？",
        "phrasings": [
         {
          "kind": "question",
          "language": "",
-         "text": "如果订单 ORDER2025001 的总金额不涵盖MDC ORCA的费用，还需额外支付多少费用？"
+         "text": "如果订单 ORDER2025001 的总金额不包含MDC ORCA的费用，还需额外支付多少费用？"
         },
         {
          "kind": "rewrite",
          "language": "",
-         "text": "订单总金额不涵盖MDC ORCA费用时需额外支付的金额"
+         "text": "订单总金额未包含MDC ORCA费用时需额外支付的费用数额"
         },
         {
          "kind": "translation",
          "language": "english",
-         "text": "If the total amount of the order does not cover the MDC ORCA fees, how much additional fee must be paid?"
+         "text": "How much additional fee must be paid if the total order amount does not include the MDC ORCA fees?"
         },
         {
          "kind": "hyde",
          "language": "english",
-         "text": "Because the total amount does not include the MDC ORCA charges, an additional fee of [amount] is required."
+         "text": "Because MDC ORCA is excluded from the order total, an additional fee of [amount] is required."
         },
         {
          "kind": "step_back",
          "language": "",
-         "text": "订单中各项未包含项目的额外收费明细是多少？"
+         "text": "订单各项服务或产品的单独收费标准是多少？"
         }
        ]
       },
@@ -6458,29 +6458,29 @@
         {
          "kind": "rewrite",
          "language": "",
-         "text": "订单付款截止日期"
+         "text": "订单付款最后期限"
         },
         {
          "kind": "translation",
          "language": "english",
-         "text": "What is the payment deadline for the order?"
+         "text": "What is the deadline for payment of the order?"
         },
         {
          "kind": "hyde",
          "language": "english",
-         "text": "The final payment deadline for the order is [date]."
+         "text": "The full payment deadline for the order is [date]."
         },
         {
          "kind": "step_back",
          "language": "",
-         "text": "订单的付款条款和各项时间节点是什么？"
+         "text": "订单相关的关键时间节点和交付日期有哪些？"
         }
        ]
       }
      ],
      "degraded": []
     },
-    "same_subquestions": false
+    "same_subquestions": true
    },
    "PO-24-12-Q005": {
     "plain": {
@@ -6895,22 +6895,22 @@
         {
          "kind": "rewrite",
          "language": "",
-         "text": "ELCTO公司订购的产品清单"
+         "text": "ELCTO公司订购的产品名称与清单"
         },
         {
          "kind": "translation",
          "language": "english",
-         "text": "Which products did ELCTO order?"
+         "text": "Which products were ordered by ELCTO?"
         },
         {
          "kind": "hyde",
          "language": "english",
-         "text": "The purchase order for customer ELCTO specifies the following ordered items: [Product A], [Product B], and [Product C]."
+         "text": "The order placed by ELCTO includes the following products: [Product A], [Product B], and [Product C]."
         },
         {
          "kind": "step_back",
          "language": "",
-         "text": "订购了哪些产品？"
+         "text": "ELCTO公司订单的行项目信息是什么？"
         }
        ]
       },
@@ -6926,22 +6926,22 @@
         {
          "kind": "rewrite",
          "language": "",
-         "text": "ELCTO公司订购的各产品单价"
+         "text": "ELCTO公司订购的各项产品单价"
         },
         {
          "kind": "translation",
          "language": "english",
-         "text": "What is the unit price for each product ordered by ELCTO?"
+         "text": "What is the unit price of each product ordered by ELCTO?"
         },
         {
          "kind": "hyde",
          "language": "english",
-         "text": "Item pricing details for buyer ELCTO: [Product Name] at a unit price of $[Amount] per unit."
+         "text": "For the items ordered by ELCTO, the unit price for [Product A] is [Price] and the unit price for [Product B] is [Price]."
         },
         {
          "kind": "step_back",
          "language": "",
-         "text": "订购产品的单价信息是什么？"
+         "text": "ELCTO公司订单的产品定价与单价明细是什么？"
         }
        ]
       },
@@ -6957,22 +6957,22 @@
         {
          "kind": "rewrite",
          "language": "",
-         "text": "ELCTO公司订购的每款产品数量"
+         "text": "ELCTO公司订购的各项产品数量"
         },
         {
          "kind": "translation",
          "language": "english",
-         "text": "What are the quantities ordered for each product by ELCTO?"
+         "text": "What are the quantities ordered by ELCTO for each product?"
         },
         {
          "kind": "hyde",
          "language": "english",
-         "text": "Quantity breakdown for ELCTO: [Product Name] - [Quantity] units."
+         "text": "ELCTO ordered [Quantity] units of [Product A] and [Quantity] units of [Product B]."
         },
         {
          "kind": "step_back",
          "language": "",
-         "text": "订购各产品的数量是多少？"
+         "text": "ELCTO公司订单的采购产品及数量明细是什么？"
         }
        ]
       },
@@ -6988,7 +6988,7 @@
         {
          "kind": "rewrite",
          "language": "",
-         "text": "ELCTO公司订购总金额"
+         "text": "ELCTO公司订购的总金额"
         },
         {
          "kind": "translation",
@@ -6998,112 +6998,112 @@
         {
          "kind": "hyde",
          "language": "english",
-         "text": "The total order value for customer ELCTO amounts to $[Amount] USD."
+         "text": "The total monetary amount for the order from ELCTO is [Currency] [Total Amount], including applicable taxes."
         },
         {
          "kind": "step_back",
          "language": "",
-         "text": "订单的财务汇总和金额详情是什么？"
+         "text": "ELCTO公司订单的财务结算明细是什么？"
         }
        ]
       },
       {
        "id": "Q5",
-       "text": "订单 ORDER2025003 中，ELCTO公司的交货计划中每批次交付的具体日期是什么？",
+       "text": "订单 ORDER2025003 中，ELCTO公司每批次交付的具体日期是什么？",
        "phrasings": [
         {
          "kind": "question",
          "language": "",
-         "text": "订单 ORDER2025003 中，ELCTO公司的交货计划中每批次交付的具体日期是什么？"
+         "text": "订单 ORDER2025003 中，ELCTO公司每批次交付的具体日期是什么？"
         },
         {
          "kind": "rewrite",
          "language": "",
-         "text": "ELCTO公司交货计划各批次具体交付日期"
+         "text": "ELCTO公司各批次交付的具体日期"
         },
         {
          "kind": "translation",
          "language": "english",
-         "text": "What are the specific delivery dates for each batch in the delivery schedule for ELCTO?"
+         "text": "What are the specific delivery dates for each batch delivered to ELCTO?"
         },
         {
          "kind": "hyde",
          "language": "english",
-         "text": "Delivery schedule for ELCTO: Batch 1 is scheduled for delivery on [Date], followed by Batch 2 on [Date]."
+         "text": "The delivery schedule for ELCTO outlines that Batch 1 is scheduled for delivery on [Date], and Batch 2 is scheduled for [Date]."
         },
         {
          "kind": "step_back",
          "language": "",
-         "text": "交货计划的批次与时间安排是什么？"
+         "text": "ELCTO公司订单的交付安排是什么？"
         }
        ]
       },
       {
        "id": "Q6",
-       "text": "订单 ORDER2025003 中，ELCTO公司的交货计划中每批次交付的产品明细是什么？",
+       "text": "订单 ORDER2025003 中，ELCTO公司每批次交付的产品是什么？",
        "phrasings": [
         {
          "kind": "question",
          "language": "",
-         "text": "订单 ORDER2025003 中，ELCTO公司的交货计划中每批次交付的产品明细是什么？"
+         "text": "订单 ORDER2025003 中，ELCTO公司每批次交付的产品是什么？"
         },
         {
          "kind": "rewrite",
          "language": "",
-         "text": "ELCTO公司交货计划每批次交付产品明细"
+         "text": "ELCTO公司各批次交付的产品类别及名称"
         },
         {
          "kind": "translation",
          "language": "english",
-         "text": "What is the breakdown of products to be delivered in each batch under ELCTO's delivery schedule?"
+         "text": "What products are delivered in each batch to ELCTO?"
         },
         {
          "kind": "hyde",
          "language": "english",
-         "text": "The delivery schedule for ELCTO outlines the following batch contents: Batch [Number] includes [Product 1] and [Product 2]."
+         "text": "Under the batch delivery schedule for ELCTO, the first batch consists of [Product A], and the second batch consists of [Product B]."
         },
         {
          "kind": "step_back",
          "language": "",
-         "text": "交货计划中各批次的产品配置与明细是什么？"
+         "text": "ELCTO公司订单的交付计划明细是什么？"
         }
        ]
       },
       {
        "id": "Q7",
-       "text": "订单 ORDER2025003 中，ELCTO公司的交货计划中每批次交付的数量明细是多少？",
+       "text": "订单 ORDER2025003 中，ELCTO公司每批次交付的产品数量明细是多少？",
        "phrasings": [
         {
          "kind": "question",
          "language": "",
-         "text": "订单 ORDER2025003 中，ELCTO公司的交货计划中每批次交付的数量明细是多少？"
+         "text": "订单 ORDER2025003 中，ELCTO公司每批次交付的产品数量明细是多少？"
         },
         {
          "kind": "rewrite",
          "language": "",
-         "text": "ELCTO公司交货计划各批次交付数量明细"
+         "text": "ELCTO公司各批次交付的产品数量明细"
         },
         {
          "kind": "translation",
          "language": "english",
-         "text": "What are the quantities to be delivered per batch according to the delivery schedule for ELCTO?"
+         "text": "What is the quantity breakdown of products delivered in each batch to ELCTO?"
         },
         {
          "kind": "hyde",
          "language": "english",
-         "text": "Delivery installment breakdown for ELCTO specifies Batch 1 with [Number] units and Batch 2 with [Number] units."
+         "text": "The delivery plan for ELCTO specifies that Batch 1 includes [Quantity] units of [Product A], while Batch 2 includes [Quantity] units of [Product B]."
         },
         {
          "kind": "step_back",
          "language": "",
-         "text": "交货计划中各批次的数量分配是多少？"
+         "text": "ELCTO公司订单的批次履约计划是什么？"
         }
        ]
       }
      ],
      "degraded": []
     },
-    "same_subquestions": false
+    "same_subquestions": true
    },
    "PO-25-19-Q002": {
     "plain": {
@@ -7492,17 +7492,17 @@
         {
          "kind": "translation",
          "language": "english",
-         "text": "What are the customer's payment terms for the order?"
+         "text": "What are the customer's payment terms?"
         },
         {
          "kind": "hyde",
          "language": "english",
-         "text": "Payment Terms: Payment for the order shall be made according to [Payment Terms, e.g., Net 30 days], payable via [Payment Method]."
+         "text": "Payment Terms: [Net 30 days]. Invoices are payable within [30] days from the date of issue via [wire transfer/bank transfer]."
         },
         {
          "kind": "step_back",
          "language": "",
-         "text": "订单的付款条件是什么？"
+         "text": "各项订单的客户付款条件是什么？"
         }
        ]
       }
@@ -7921,17 +7921,17 @@
         {
          "kind": "translation",
          "language": "english",
-         "text": "Which power company has additional requirements for serial numbers?"
+         "text": "Which power company is the only one with additional serial number requirements?"
         },
         {
          "kind": "hyde",
          "language": "english",
-         "text": "Among the purchasing utilities, [Power Company Name] is the only power company requiring additional specific formatting or tracking for serial numbers."
+         "text": "[Company Name] is the only power utility with special serial number requirements specified in the order, requiring [serial number specifications]."
         },
         {
          "kind": "step_back",
          "language": "",
-         "text": "各电力公司对序列号的具体要求分别是什么？"
+         "text": "各电力公司对序列号分别有哪些要求？"
         }
        ]
       },
@@ -7947,53 +7947,53 @@
         {
          "kind": "rewrite",
          "language": "",
-         "text": "对序列号有额外要求的电力公司订购的产品"
+         "text": "对序列号有额外要求的电力公司订购的产品名称与型号"
         },
         {
          "kind": "translation",
          "language": "english",
-         "text": "Which products were ordered by the power company that has additional serial number requirements?"
+         "text": "Which products were ordered by the only power company that has additional serial number requirements?"
         },
         {
          "kind": "hyde",
          "language": "english",
-         "text": "The power company with special serial number requirements ordered the following products: [Product Name 1], [Product Name 2], and [Product Name 3]."
+         "text": "The power company requiring special serial numbers ordered the following items: [Product A], [Product B], and [Product C]."
         },
         {
          "kind": "step_back",
          "language": "",
-         "text": "各电力公司分别订购了哪些产品？"
+         "text": "订单中各电力公司分别订购了哪些产品？"
         }
        ]
       },
       {
        "id": "Q3",
-       "text": "订单 ORDER2025003 中，唯一对序列号有额外要求的电力公司订购的产品各订购了多少台？",
+       "text": "订单 ORDER2025003 中，唯一对序列号有额外要求的电力公司各产品订购了多少台？",
        "phrasings": [
         {
          "kind": "question",
          "language": "",
-         "text": "订单 ORDER2025003 中，唯一对序列号有额外要求的电力公司订购的产品各订购了多少台？"
+         "text": "订单 ORDER2025003 中，唯一对序列号有额外要求的电力公司各产品订购了多少台？"
         },
         {
          "kind": "rewrite",
          "language": "",
-         "text": "对序列号有额外要求的电力公司订购的各产品数量"
+         "text": "对序列号有额外要求的电力公司各产品的订购数量"
         },
         {
          "kind": "translation",
          "language": "english",
-         "text": "What are the quantities ordered for each product by the power company with additional serial number requirements?"
+         "text": "How many units of each product were ordered by the only power company with additional serial number requirements?"
         },
         {
          "kind": "hyde",
          "language": "english",
-         "text": "The order quantities for the power company requesting specific serial number handling are [Quantity 1] units of [Product Name 1] and [Quantity 2] units of [Product Name 2]."
+         "text": "For the utility with additional serial number requirements, the order details include [Number] units of [Product A] and [Number] units of [Product B]."
         },
         {
          "kind": "step_back",
          "language": "",
-         "text": "各电力公司分别订购了多少台各款产品？"
+         "text": "订单中各电力公司订购的产品数量分别是多少？"
         }
        ]
       }
