@@ -95,8 +95,38 @@ def evidence_change(left: dict[str, int], right: dict[str, int]) -> float:
 
 
 def direction(change: float) -> int:
-    """1 better, -1 worse, 0 no change."""
+    """1 better, -1 worse, 0 no change. Retired 2026-10-28; kept until the page moves to `verdict`."""
     return 1 if change > CHANGE_THRESHOLD else -1 if change < -CHANGE_THRESHOLD else 0
+
+
+# The rule since 2026-10-28 (docs/changes/v3.14.md, question 3): completion vectors by dominance.
+
+def completion_vector(needed: Iterable[int | None]) -> list[float]:
+    """The groups' completion ranks in ascending order; never complete counts as after every rank."""
+    return sorted(math.inf if n is None else n for n in needed)
+
+
+def verdict(left: list[float], right: list[float]) -> str:
+    """"better", "worse", "mixed" or "same" for the right side, place by place."""
+    earlier = any(r < l for l, r in zip(left, right))
+    later = any(r > l for l, r in zip(left, right))
+    return "mixed" if earlier and later else "better" if earlier else "worse" if later else "same"
+
+
+def leads(left: list[float], right: list[float]) -> dict[str, list[tuple[int, int]]]:
+    """The K ranges in which each side has more groups complete."""
+    top = int(max([x for x in left + right if x != math.inf], default=1))
+    out: dict[str, list[tuple[int, int]]] = {"left": [], "right": []}
+    for k in range(1, top + 1):
+        a, b = sum(x <= k for x in left), sum(x <= k for x in right)
+        side = "left" if a > b else "right" if b > a else None
+        if side:
+            ranges = out[side]
+            if ranges and ranges[-1][1] == k - 1:
+                ranges[-1] = (ranges[-1][0], k)
+            else:
+                ranges.append((k, k))
+    return out
 
 
 PLAN_MODEL = "google/gemini-3.8-flash"   # docs/changes/v3.14.md, question 1

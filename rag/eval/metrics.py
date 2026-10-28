@@ -55,6 +55,35 @@ def completion_ranks(units: list[tuple[str, ...]], evidence: list[GroupEvidence]
     return completion
 
 
+def routed_completion_rank(routes: list[list[tuple[str, ...]]],
+                           schemes: list[list[tuple[frozenset[str], ...]]]) -> int | None:
+    """Completion rank of one group over several rankings (routes): an excerpt's rank is the best,
+    over the routes and over its acceptable chunk sets, of the rank by which the whole set is in that
+    route; a scheme's is the worst of its excerpts'; the group's is the best of its schemes'. None:
+    never complete. With one route this equals completion_ranks.
+
+    `schemes`: per scheme, per excerpt, the excerpt's acceptable chunk sets."""
+    firsts = []
+    for units in routes:
+        ranks: dict[str, int] = {}
+        for rank, chunk_ids in enumerate(units, start=1):
+            for chunk_id in chunk_ids:
+                ranks.setdefault(chunk_id, rank)
+        firsts.append(ranks)
+
+    def excerpt_rank(sets: tuple[frozenset[str], ...]) -> int | None:
+        reached = [max(ranks[c] for c in s) for ranks in firsts for s in sets
+                   if s and all(c in ranks for c in s)]
+        return min(reached) if reached else None
+
+    best = None
+    for scheme in schemes:
+        parts = [excerpt_rank(sets) for sets in scheme]
+        if parts and all(p is not None for p in parts):
+            best = max(parts) if best is None else min(best, max(parts))
+    return best
+
+
 def first_ranks(units: list[tuple[str, ...]], evidence: list[GroupEvidence]) -> dict[str, int]:
     """Group → the rank of the first unit holding any chunk of any of its acceptable sets;
     groups with no such unit are left out."""

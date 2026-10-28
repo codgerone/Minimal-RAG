@@ -51,3 +51,13 @@ def test_evidence_change_is_the_log_ratio_of_positions_with_a_dead_zone():
     assert direction(evidence_change({"c": 3}, {"c": 4})) == 0       # a one-place shift after rank 2
     assert direction(evidence_change({"c": 1}, {"c": 2})) == -1
     assert direction(evidence_change({"a": 9, "b": 7}, {"a": 4, "b": 8})) == 1
+
+
+def test_completion_vectors_compare_by_dominance_and_report_the_leading_k_ranges():
+    import math
+    from rag.eval.query_compare import completion_vector, leads, verdict
+    assert completion_vector([5, None, 2]) == [2, 5, math.inf]
+    assert verdict([2, 3, 5], [1, 3, 5]) == "better" and verdict([1, 3], [1, 4]) == "worse"
+    assert verdict([2, 3, 5], [1, 5, 6]) == "mixed" and verdict([1, 2], [1, 2]) == "same"
+    assert verdict([1, math.inf], [1, 9]) == "better"
+    assert leads([2, 3, 5], [1, 5, 6]) == {"left": [(3, 5)], "right": [(1, 1)]}

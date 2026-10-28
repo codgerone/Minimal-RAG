@@ -126,3 +126,16 @@ def test_run_name_shows_config_k_and_filter_state():
     assert run_name("structured", 3, True, "semantic").endswith("_structured_k3_filter-on")
     assert run_name("plain_text", 5, False, "semantic").endswith("_plain_text_k5_filter-off")
     assert run_name("structured", 3, True, "hybrid", "table").endswith("_structured_k3_filter-on_hybrid_table")
+
+
+def test_routed_completion_takes_each_excerpt_from_its_best_route_and_the_worst_excerpt_per_scheme():
+    from rag.eval.metrics import completion_ranks, routed_completion_rank
+    x1, x2 = (frozenset({"a"}),), (frozenset({"b"}), frozenset({"c", "d"}))
+    route1 = [("a",), ("x",), ("y",), ("b",)]
+    route2 = [("c",), ("d",), ("a",)]
+    assert routed_completion_rank([route1], [[x1, x2]]) == 4
+    assert routed_completion_rank([route1, route2], [[x1, x2]]) == 2      # a at 1 in route 1, c+d by 2 in route 2
+    assert routed_completion_rank([route1, route2], [[x1, x2], [x1]]) == 1
+    assert routed_completion_rank([[("x",)]], [[x1]]) is None
+    group = GroupEvidence("e1", "coordinate", (frozenset({"a", "b"}), frozenset({"a", "c", "d"})))
+    assert routed_completion_rank([route1], [[x1, x2]]) == completion_ranks(route1, [group])["e1"]
