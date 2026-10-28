@@ -228,7 +228,7 @@ function renderClass(base){
     +'<div class="meta">返回整表（7 种）：'+countText(counts(T))+'。返回命中 chunk（6 种）：'+countText(counts(C))+'。</div>'
     +(both?'<div class="meta">最坏退化的题：'+(wl.length?wl.map(function(id){return '<button type="button" class="lnk down" data-act="goto" data-case="'+esc(id)+'" data-combo="'+worst[id].c+'">'+esc(id)+'</button>（'+worst[id].n+' 种组合）'}).join('，'):'无')+'</div>'
       :'<div class="meta">最坏退化不计算：'+unmergedNote().replace(/<[^>]+>/g,'')+'不合并时信息项的名次在它对应的子问题各路中计算（未对应的按全部子问题），对应关系见模块 5。</div>')
-    +'<div class="meta">13 种组合共用同一批题，组合数只表示一致程度，不作投票；是否采用由助手按拍板问题 5 写明理由、你拍板（决策 015）。判定在冻结的规划（第 0 次生成）上得出，待扰动测试核对。</div></div>'
+    +'<div class="meta">13 种组合共用同一批题，组合数只表示一致程度，不作投票；是否采用由助手按拍板问题 5 写明理由、你拍板（决策 015）。判定在冻结的规划（第 0 次生成）上得出'+(P?'，稳定性见每格下方。':'，待扰动测试核对。')+'</div></div>'
     +'<table>'+head+body+'</table>';
 }
 
