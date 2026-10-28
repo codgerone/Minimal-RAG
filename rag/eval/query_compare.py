@@ -20,8 +20,9 @@ from itertools import combinations
 from typing import Any, Collection, Iterable
 
 from rag.eval.judge import judge_case
-from rag.eval.metrics import completion_ranks, first_ranks
+from rag.eval.metrics import completion_ranks, first_ranks, routed_completion_rank
 from rag.eval.runner import _ingest_cost, prepare
+from rag.jsonio import read_json
 from rag.paths import Workspace
 from rag.query import execution
 from rag.query.planning import Plan, Planner, document_languages
@@ -130,6 +131,8 @@ def leads(left: list[float], right: list[float]) -> dict[str, list[tuple[int, in
 
 
 PLAN_MODEL = "google/gemini-3.8-flash"   # docs/changes/v3.14.md, question 1
+# Sub-question ↔ information item annotation of the frozen plans (docs/changes/v3.14.md, "分层评估")
+DECOMPOSITION_MAPPING = "reports/experiments/v3.14-decomposition/mapping.json"
 PHRASING_OF = {"P3.2.1": "rewrite", "P3.2.2": "translation", "P3.2.3": "hyde", "P3.2.4": "step_back"}
 EVALUATED = ("P3.1", *PHRASING_OF)   # P3.3 (reranking) is set aside
 
@@ -219,6 +222,23 @@ def excerpts_held(evidence, run: execution.QueryRun, table: UnitTable) -> dict[s
     return held
 
 
+def retrieval_layer(search, case, evidence, plan: Plan, annotated: dict[str, Any],
+                    documents) -> dict[str, list[int | None]]:
+    """P3.1 retrieval layer: each group's completion rank in the original question's ranking ("o"),
+    in its own sub-questions' rankings ("m"; an omitted group takes all) and in all of them ("i")."""
+    ids = lambda text: [u.chunk_ids for u in search.rank(text, documents).units]
+    routes = {q.id: ids(q.text) for q in plan.questions}
+    original = ids(case.question)
+    out: dict[str, list[int | None]] = {"o": [], "m": [], "i": []}
+    for group in case.groups:
+        schemes = [[evidence.excerpts[x].acceptable_sets for x in s.excerpt_ids] for s in group.schemes]
+        mine = annotated["mapping"][group.group_id] or list(routes)
+        out["o"].append(routed_completion_rank([original], schemes))
+        out["m"].append(routed_completion_rank([routes[q] for q in mine], schemes))
+        out["i"].append(routed_completion_rank(list(routes.values()), schemes))
+    return out
+
+
 def collect(workspace: Workspace, name: str, combos: tuple[Combo, ...] = COMBOS,
             planner: Planner | None = None, progress=None) -> dict[str, Any]:
     """Runs every evaluated configuration on every combination. Returns the page data, with the
@@ -232,6 +252,9 @@ def collect(workspace: Workspace, name: str, combos: tuple[Combo, ...] = COMBOS,
     units: dict[str, list] = {}
     holds: dict[str, dict[str, Any]] = {}   # combo → case → evidence unit index → excerpt ids
     plans: dict[str, dict[str, Any]] = {}
+    path = workspace.root / DECOMPOSITION_MAPPING
+    mapping = read_json(path)["cases"] if path.is_file() else {}
+    layers: dict[str, dict[str, Any]] = {}
     combo_info, dataset = [], None
     for combo in combos:
         ctx = prepare(workspace, _assembly(workspace, combo.config, "hybrid", combo.table_return_unit),
@@ -242,6 +265,7 @@ def collect(workspace: Workspace, name: str, combos: tuple[Combo, ...] = COMBOS,
         search = MemoSearch(ctx.searcher)
         table = UnitTable(ctx.tokens_of)
         holds[combo.label] = {}
+        layers[combo.label] = {}
         for key in keys:
             facts[key][combo.label] = {}
             process[key][combo.label] = {}
@@ -256,6 +280,10 @@ def collect(workspace: Workspace, name: str, combos: tuple[Combo, ...] = COMBOS,
                 "scope": {"documents": list(documents or []), "languages": languages, "codes": list(scope.codes)},
                 "plain": plan_json(pair[False]), "decomposed": plan_json(pair[True])})
             evidence = judge_case(case, ctx.chunks)
+            annotated = mapping.get(case.case_id)
+            if annotated and annotated["subquestions"] == {q.id: q.text for q in pair[True].questions}:
+                layers[combo.label][case.case_id] = retrieval_layer(search, case, evidence, pair[True],
+                                                                    annotated, documents)
             for config, key in zip(configs, keys):
                 if config:
                     decompose, settings = settings_for(config)
@@ -286,7 +314,9 @@ def collect(workspace: Workspace, name: str, combos: tuple[Combo, ...] = COMBOS,
             "modules": [{"id": m, "name": n} for m, n in MODULES], "evaluated": list(EVALUATED),
             "ks": list(KS), "threshold": CHANGE_THRESHOLD, "plan_model": PLAN_MODEL,
             "combos": combo_info, "cases": cases, "plans": plans, "units": units, "holds": holds,
-            "configs": facts, "process": process}
+            "configs": facts, "process": process, "layers": layers,
+            "decomposition": {k: {x: v[x] for x in ("mapping", "extra", "multi", "lost_qualifier", "note")}
+                              for k, v in mapping.items()}}
 
 
 def metrics_at(facts: dict[str, dict[str, Any]], units: list[dict[str, Any]], k: int) -> dict[str, float]:
