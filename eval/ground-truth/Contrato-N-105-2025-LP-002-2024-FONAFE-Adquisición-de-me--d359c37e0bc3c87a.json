@@ -2480,7 +2480,19 @@
       "evidence_groups": [
         {
           "evidence_group_id": "e1",
-          "information_item": "第 1 次交付的产品和数量",
+          "information_item": "第 1 次交付的产品",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "第 1 次交付的数量",
           "schemes": [
             {
               "scheme_id": "s1",
@@ -3386,7 +3398,21 @@
         },
         {
           "evidence_group_id": "e2",
-          "information_item": "该环节的负责人及职务",
+          "information_item": "该环节负责人的姓名",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2"
+              ]
+            }
+          ],
+          "note": "先由 x1 得出是验收合格（conformidad），再在第十二条查出具人"
+        },
+        {
+          "evidence_group_id": "e3",
+          "information_item": "该环节负责人的职务",
           "schemes": [
             {
               "scheme_id": "s1",

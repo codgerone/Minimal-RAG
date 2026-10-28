@@ -297,7 +297,20 @@
         },
         {
           "evidence_group_id": "e6",
-          "information_item": "各批次交付的产品和数量",
+          "information_item": "各批次交付的产品",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2",
+                "x3"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e7",
+          "information_item": "各批次交付的数量",
           "schemes": [
             {
               "scheme_id": "s1",
@@ -873,7 +886,22 @@
         },
         {
           "evidence_group_id": "e6",
-          "information_item": "各批次交付的产品和数量",
+          "information_item": "各批次交付的产品",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2",
+                "x3",
+                "x4",
+                "x5"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e7",
+          "information_item": "各批次交付的数量",
           "schemes": [
             {
               "scheme_id": "s1",
@@ -1649,19 +1677,22 @@
       "evidence_groups": [
         {
           "evidence_group_id": "e1",
-          "information_item": "对序列号有额外要求的公司",
+          "information_item": "该公司订购的产品",
           "schemes": [
             {
               "scheme_id": "s1",
               "excerpt_ids": [
-                "x1"
+                "x1",
+                "x2",
+                "x3"
               ]
             }
-          ]
+          ],
+          "note": "先由 x1 得出是 SEAL，再在各 ITEM 段落中查 SEAL 的行"
         },
         {
           "evidence_group_id": "e2",
-          "information_item": "该公司订购的产品及数量",
+          "information_item": "该公司订购的数量",
           "schemes": [
             {
               "scheme_id": "s1",
