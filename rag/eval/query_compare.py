@@ -98,6 +98,9 @@ def leads(left: list[float], right: list[float]) -> dict[str, list[tuple[int, in
 PLAN_MODEL = "google/gemini-3.8-flash"   # docs/changes/v3.14.md, question 1
 # Sub-question ↔ information item annotation of the frozen plans (docs/changes/v3.14.md, "分层评估")
 DECOMPOSITION_MAPPING = "reports/experiments/v3.14-decomposition/mapping.json"
+# The same for the independent generations 1–3 of the perturbation test ("冻结与复现")
+PERTURBATION_MAPPING = "reports/experiments/v3.14-perturbation/mapping_g{generation}.json"
+PERTURBATION_GENERATIONS = (1, 2, 3)
 PHRASING_OF = {"P3.2.1": "rewrite", "P3.2.2": "translation", "P3.2.3": "hyde", "P3.2.4": "step_back"}
 MERGES = {"rr": "round_robin", "rrf": "rrf"}   # key code → execution.SELECTORS
 
@@ -280,10 +283,11 @@ def routed_facts(case, evidence, run: execution.QueryRun, routes_of: dict[str, l
 
 
 def collect(workspace: Workspace, name: str, combos: tuple[Combo, ...] = COMBOS,
-            planner: Planner | None = None, progress=None) -> dict[str, Any]:
-    """Runs every evaluated configuration on every combination. Returns the page data: the facts
-    under "configs" and the process detail under "process", both by configuration key; a
-    configuration some question cannot run is left out and listed under "unavailable" with why."""
+            planner: Planner | None = None, progress=None, generation: int = 0) -> dict[str, Any]:
+    """Runs every evaluated configuration on every combination, on the plans of `generation` (0 is
+    the frozen one). Returns the page data: the facts under "configs" and the process detail under
+    "process", both by configuration key; a configuration some question cannot run is left out and
+    listed under "unavailable" with why."""
     from rag.cli import _assembly
     planner = planner or make_planner(workspace)
     configs = evaluated_configs()
@@ -293,7 +297,8 @@ def collect(workspace: Workspace, name: str, combos: tuple[Combo, ...] = COMBOS,
     units: dict[str, list] = {}
     holds: dict[str, dict[str, Any]] = {}   # combo → case → evidence unit index → excerpt ids
     plans: dict[str, dict[str, Any]] = {}
-    mapping = read_json(workspace.root / DECOMPOSITION_MAPPING)["cases"]
+    mapping = read_json(workspace.root / (PERTURBATION_MAPPING.format(generation=generation) if generation
+                                          else DECOMPOSITION_MAPPING))["cases"]
     labels = Labels()
     combo_info, dataset = [], None
     for combo in combos:
@@ -314,7 +319,7 @@ def collect(workspace: Workspace, name: str, combos: tuple[Combo, ...] = COMBOS,
             scope = ctx.scope(case.question)
             documents = scope.document_ids
             languages = sorted({languages_of[d] for d in (documents or languages_of)})
-            pair = {d: planner.plan(case.question, languages, d, list(scope.codes)) for d in (False, True)}
+            pair = {d: planner.plan(case.question, languages, d, list(scope.codes), generation) for d in (False, True)}
             plans.setdefault(case.case_id, {
                 "scope": {"documents": list(documents or []), "languages": languages, "codes": list(scope.codes)},
                 "plain": plan_json(pair[False]), "decomposed": plan_json(pair[True])})
@@ -357,11 +362,29 @@ def collect(workspace: Workspace, name: str, combos: tuple[Combo, ...] = COMBOS,
             "dataset": {"version": dataset.version, "fingerprint": dataset.fingerprint,
                         "questions": len(dataset.cases), "answerable": len(cases)},
             "modules": [{"id": m, "name": n} for m, n in MODULES], "ks": list(KS), "plan_model": PLAN_MODEL,
-            "combos": combo_info, "cases": cases, "plans": plans, "units": units, "holds": holds,
+            "generation": generation, "combos": combo_info, "cases": cases, "plans": plans, "units": units, "holds": holds,
             "phrasing_labels": labels.rows,
             "configs": facts, "process": process, "unavailable": unavailable,
             "decomposition": {k: {x: v[x] for x in ("mapping", "extra", "multi", "lost_qualifier", "note")}
                               for k, v in mapping.items()}}
+
+
+def collect_perturbation(workspace: Workspace, combos: tuple[Combo, ...] = COMBOS, progress=None) -> dict[str, Any]:
+    """The independent generations: per generation the plans, the decomposition annotation and each
+    configuration's completion ranks ("n"), which is what the perturbation layer needs."""
+    out: dict[str, Any] = {"generations": list(PERTURBATION_GENERATIONS), "plans": {}, "decomposition": {},
+                           "configs": {}}
+    for generation in PERTURBATION_GENERATIONS:
+        data = collect(workspace, f"g{generation}", combos, progress=progress, generation=generation)
+        g = str(generation)
+        out["plans"][g] = {c: {"decomposed": [q["text"] for q in p["decomposed"]["questions"]],
+                               "degraded": p["decomposed"]["degraded"] + p["plain"]["degraded"]}
+                           for c, p in data["plans"].items()}
+        out["decomposition"][g] = data["decomposition"]
+        for key, by_combo in data["configs"].items():
+            out["configs"].setdefault(key, {})[g] = {combo: {case: f["n"] for case, f in cases.items()}
+                                                    for combo, cases in by_combo.items()}
+    return out
 
 
 def metrics_at(facts: dict[str, dict[str, Any]], units: list[dict[str, Any]], k: int) -> dict[str, float]:

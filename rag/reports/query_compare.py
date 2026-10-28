@@ -50,7 +50,8 @@ var ORDER=['better','worse','mixed','same'];
 function blank(){return {d:false,merge:null,o:false,ph:new Set(),fuse:true}}
 var S={L:blank(),R:blank(),km:3,doc:'all',all:false,focus:null,cell:null,flip:null,
   pq:D.cases[0].case_id,pc:D.combos[0].label};
-window.QC_FACTS=window.QC_FACTS||{};window.QC_PROCESS=window.QC_PROCESS||{};
+window.QC_FACTS=window.QC_FACTS||{};window.QC_PROCESS=window.QC_PROCESS||{};window.QC_PERTURB=window.QC_PERTURB||{};
+var PT=D.perturbation||null,PAV=new Set(PT?PT.available:[]),GENS=[0].concat(PT?PT.generations:[]);
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 
 /* ---------- configurations (key grammar: rag/eval/query_compare.py QueryConfig.key) ---------- */
@@ -94,7 +95,7 @@ function readHash(){
 }
 function writeHash(){history.replaceState(null,'','#L='+encodeURIComponent(key(S.L))+'&R='+encodeURIComponent(key(S.R))+'&k='+S.km+(S.cell?'&cell='+S.cell.q+'@'+S.cell.c:''))}
 function load(kind,k){
-  var store=kind==='facts'?window.QC_FACTS:window.QC_PROCESS;
+  var store={facts:window.QC_FACTS,process:window.QC_PROCESS,perturb:window.QC_PERTURB}[kind];
   if(store[k]!==undefined||document.querySelector('script[data-'+kind+'="'+k+'"]'))return;
   var s=document.createElement('script');s.setAttribute('data-'+kind,k);
   s.src=kind+'/'+(k||'none')+'.js';
@@ -103,6 +104,15 @@ function load(kind,k){
   document.head.appendChild(s);
 }
 function facts(k,combo){return window.QC_FACTS[k][combo]}
+/* perturbation layer: generation 0 (frozen) and the independent generations */
+function pert(){var a=key(S.L),b=key(S.R);return !!(PT&&window.QC_PERTURB[a]&&window.QC_PERTURB[b])}
+function nOf(k,g,combo,id){return g===0?facts(k,combo)[id].n:window.QC_PERTURB[k][String(g)][combo][id]}
+function gverdicts(lk,rk_,combo,id){return GENS.map(function(g){return verdict(vec(nOf(lk,g,combo,id)),vec(nOf(rk_,g,combo,id)))})}
+function stable(vs){return vs.every(function(v){return v===vs[0]})}
+function span(xs){var a=Math.min.apply(null,xs),b=Math.max.apply(null,xs);return a===b?''+a:a+'–'+b}
+function flips(ds){return Math.min.apply(null,ds)<0&&Math.max.apply(null,ds)>0}
+function perGen(fn){return GENS.map(function(g){return fn(g)})}
+function view(k,g,combo){var out={};Object.keys(facts(k,combo)).forEach(function(id){out[id]={n:nOf(k,g,combo,id)}});return out}
 function complete(f,k){return f.n.every(function(x){return x!==null&&x<=k})}
 function hit(f,k){return f.n.some(function(x){return x!==null&&x<=k})}
 /* the rule (proposal v3.14, question 3): completion vectors compared place by place */
@@ -177,35 +187,44 @@ function renderPicker(){
   if(missing.length){card.classList.add('warn');
     msg.innerHTML='<span class="badge warn">不可用</span> '+missing.map(function(x){var why=(D.unavailable||{})[x[0]];
       return esc(x[1]+' '+label(parse(x[0]))+'：'+(why?why.join('；'):'未评估'))}).join('<br>');return 'missing'}
-  [lk,rk_].forEach(function(k){load('facts',k)});
-  if(!window.QC_FACTS[lk]||!window.QC_FACTS[rk_]){
+  [lk,rk_].forEach(function(k){load('facts',k);if(PAV.has(k))load('perturb',k)});
+  var waiting=[lk,rk_].some(function(k){return PAV.has(k)&&window.QC_PERTURB[k]===undefined});
+  if(!window.QC_FACTS[lk]||!window.QC_FACTS[rk_]||waiting){
     var gone=[lk,rk_].filter(function(k){return window.QC_FACTS[k]===null});
     msg.innerHTML=gone.length?'<span class="badge bad">缺数据文件</span> facts/'+esc((gone[0]||'none')+'.js'):'正在加载逐题事实…';
     return gone.length?'bad':'loading'}
+  var pnote=!PT?'':pert()?'<div class="meta">扰动标注：第 0 次（冻结）与第 '+PT.generations.join('、')+' 次独立生成，共 '+GENS.length+' 次。</div>'
+    :'<div class="meta">扰动标注：'+esc([[lk,'左侧'],[rk_,'右侧']].filter(function(x){return !PAV.has(x[0])}).map(function(x){return x[1]}).join('、'))+'没有独立生成的数据，不显示。</div>';
   if(base){msg.innerHTML='<span class="badge">V3.13 基线</span>';return 'ok'}
   msg.innerHTML='<span class="badge ok">比较</span> '+esc(label(S.L))+' <b>vs</b> '+esc(label(S.R))
-    +'<div class="meta">两侧差别：'+esc(diffs(S.L,S.R).join('；'))+'</div>';
+    +'<div class="meta">两侧差别：'+esc(diffs(S.L,S.R).join('；'))+'</div>'+pnote;
   return 'ok';
 }
 
 /* ---------- module 1: better / worse ---------- */
 function renderClass(base){
   if(base)return '<div class="meta">两侧全空时为 V3.13 基线，没有比较。在右侧勾选配置，即为相对 V3.13 的效果；两侧只差一个因素时，看到的就是这个因素单独的效果。</div>';
-  var lk=key(S.L),rk_=key(S.R),all=[],T=[],C=[],worst={},both=merged(S.L)&&merged(S.R);
+  var lk=key(S.L),rk_=key(S.R),all=[],T=[],C=[],worst={},both=merged(S.L)&&merged(S.R),P=pert(),st={better:0,worse:0,mixed:0,same:0};
   var body=D.combos.map(function(c){
     var j=judge(lk,rk_,c.label),ids=Object.keys(j),n=counts(ids.map(function(id){return j[id]}));
+    var sn={better:0,worse:0,mixed:0,same:0},gc=[];
+    if(P){ids.forEach(function(id){var vs=gverdicts(lk,rk_,c.label,id);if(stable(vs)){sn[vs[0]]++;st[vs[0]]++}});
+      gc=GENS.map(function(g){return counts(ids.map(function(id){return verdict(vec(nOf(lk,g,c.label,id)),vec(nOf(rk_,g,c.label,id)))}))})}
     var lf=facts(lk,c.label),rf=facts(rk_,c.label);
     var reg=both?ids.filter(function(id){return regress(lf[id],rf[id]).length}):[];
     reg.forEach(function(id){worst[id]=worst[id]||{n:0,c:c.label};worst[id].n++});
     ids.forEach(function(id){all.push(j[id]);(c.table_return_unit==='table'?T:C).push(j[id])});
     var btn=function(v){return n[v]&&v!=='same'?'<button type="button" class="lnk '+(v==='better'?'up':v==='worse'?'down':'')+'" data-act="focus" data-combo="'+c.label+'" data-v="'+v+'">'+n[v]+'</button>':''+n[v]};
-    return '<tr>'+comboHead(c)+ORDER.map(function(v){return '<td class="num">'+btn(v)+'</td>'}).join('')
+    var cell=function(v){return '<td class="num"'+(P?' title="'+GENS.length+' 次生成的题数：'+span(gc.map(function(x){return x[v]}))+'"':'')+'>'+btn(v)
+      +(P?'<div class="meta">稳定 '+sn[v]+'</div>':'')+'</td>'};
+    return '<tr>'+comboHead(c)+ORDER.map(cell).join('')
       +(both?'<td class="num">'+(reg.length?'<button type="button" class="lnk down" data-act="focus" data-combo="'+c.label+'" data-v="regress">'+reg.length+'</button>':'0')+'</td>':'')+'</tr>';
   }).join('');
   var head='<tr><th>组合</th><th class="num">变好 ▲</th><th class="num">变差 ▼</th><th class="num">各有优势 ◆</th><th class="num">不变</th>'
     +(both?'<th class="num" title="验收 K（'+ACC.join('、')+'）中任一档由完整覆盖变为不完整的题">最坏退化</th>':'')+'</tr>';
   var wl=Object.keys(worst).sort();
   return '<div class="card"><b>13 种组合合计（题次）：</b>'+countText(counts(all))
+    +(P?'<div class="meta">其中在 '+GENS.length+' 次生成下判定都相同（稳定）的：'+countText(st)+'。每格下方为稳定的题数，悬停看 '+GENS.length+' 次生成的题数范围。</div>':'')
     +'<div class="meta">返回整表（7 种）：'+countText(counts(T))+'。返回命中 chunk（6 种）：'+countText(counts(C))+'。</div>'
     +(both?'<div class="meta">最坏退化的题：'+(wl.length?wl.map(function(id){return '<button type="button" class="lnk down" data-act="goto" data-case="'+esc(id)+'" data-combo="'+worst[id].c+'">'+esc(id)+'</button>（'+worst[id].n+' 种组合）'}).join('，'):'无')+'</div>'
       :'<div class="meta">最坏退化不计算：'+unmergedNote().replace(/<[^>]+>/g,'')+'不合并时信息项的名次在它对应的子问题各路中计算（未对应的按全部子问题），对应关系见模块 5。</div>')
@@ -216,7 +235,7 @@ function renderClass(base){
 /* ---------- module 2: heat map ---------- */
 function renderHeat(base){
   if(base)return '<div class="meta">两侧全空时没有比较。</div>';
-  var lk=key(S.L),rk_=key(S.R),out=[],doc=null,dirs={};
+  var lk=key(S.L),rk_=key(S.R),out=[],doc=null,dirs={},P=pert();
   D.combos.forEach(function(c){dirs[c.label]=judge(lk,rk_,c.label)});
   var head='<tr><th>题目</th>'+D.combos.map(function(c){return '<th class="num">'+esc(c.label)+'</th>'}).join('')+'</tr>';
   var shown=0;
@@ -234,7 +253,9 @@ function renderHeat(base){
     var cells=D.combos.map(function(c){
       var v=dirs[c.label][id],sel=S.cell&&S.cell.q===id&&S.cell.c===c.label?' sel':'';
       var l=vec(facts(lk,c.label)[id].n),r=vec(facts(rk_,c.label)[id].n);
-      return '<td class="hm center '+VC[v]+sel+'" title="'+esc(VN[v]+'：'+l.map(rk).join('·')+' → '+r.map(rk).join('·'))+'" data-act="cell" data-case="'+esc(id)+'" data-combo="'+c.label+'">'+VS[v]+'</td>';
+      var vs=P?gverdicts(lk,rk_,c.label,id):null,un=vs&&!stable(vs);
+      return '<td class="hm center '+VC[v]+sel+(un?' unst':'')+'" title="'+esc(VN[v]+'：'+l.map(rk).join('·')+' → '+r.map(rk).join('·')
+        +(vs?'；'+GENS.length+' 次生成：'+vs.map(function(x){return VS[x]}).join(' ')+(un?'（不稳定）':'（稳定）'):''))+'" data-act="cell" data-case="'+esc(id)+'" data-combo="'+c.label+'">'+VS[v]+(un?'<sup>?</sup>':'')+'</td>';
     }).join('');
     out.push('<tr><td><b>'+esc(id)+'</b><div class="meta">'+esc(q.question)+'</div></td>'+cells+'</tr>');
     if(picked)out.push('<tr><td colspan="'+(D.combos.length+1)+'">'+cellDetail(id,S.cell.c,lk,rk_)+'</td></tr>');
@@ -263,7 +284,7 @@ function cellDetail(id,combo,lk,rk_){
     return '<tr><td>'+esc(g.group_id+' '+g.information_item)+'</td><td class="num">'+arrow(lf.f[i],rf.f[i])+'</td><td class="num">'+arrow(lf.n[i],rf.n[i])+'</td></tr>';
   }).join('');
   var head='<div class="card"><b>'+esc(combo)+'</b> <span class="badge '+VB[v]+'">'+VN[v]+'</span> 凑齐向量 '+vecHtml(l,r)
-    +(v==='mixed'?'<div class="meta">'+leadText(l,r)+'</div>':'');
+    +(v==='mixed'?'<div class="meta">'+leadText(l,r)+'</div>':'')+(pert()?genDetail(id,combo,lk,rk_):'');
   var itemTable='<div class="scroll"><table><tr><th>信息项</th><th class="num">首块名次 左 → 右</th><th class="num">凑齐名次 左 → 右</th></tr>'+items+'</table></div>';
   if(!both)return head+'</div>'+itemTable+unmergedNote()+'<div class="meta">不合并一侧的名次是信息项在它对应的子问题各路中的名次；各子问题的排名见模块 5（选这道题和这个组合）。</div>';
   var proc=window.QC_PROCESS[rk_];if(proc===undefined)load('process',rk_);
@@ -282,6 +303,15 @@ function cellDetail(id,combo,lk,rk_){
   return head+'<div class="meta">验收 K 下完整覆盖：'+(flips.length?flips.join('，'):'没有翻转')+'</div></div>'+itemTable
     +'<div class="scroll"><table><tr><th>证据单元</th><th>承载的 excerpt · 信息项</th><th class="num">名次 左 → 右</th><th>右侧来源（'+(S.R.d?'子问题'+(S.R.merge==='rr'?' · 第几圈':'')+' · ':'')+'名次最好的写法；悬停看各写法）</th></tr>'+rows+'</table></div>'
     +'<div class="meta">绿色为右侧提前、红色为推后。悬停证据单元看正文开头，悬停 excerpt 看原文。</div>';
+}
+
+function genDetail(id,combo,lk,rk_){
+  var rows=GENS.map(function(g){
+    var l=vec(nOf(lk,g,combo,id)),r=vec(nOf(rk_,g,combo,id)),v=verdict(l,r);
+    var sub=g&&(S.L.d||S.R.d)?(PT.plans[String(g)][id]||{}).decomposed:null;
+    return '<tr><td class="nw">第 '+g+' 次'+(g?'':'（冻结）')+'</td><td><span class="badge '+VB[v]+'">'+VN[v]+'</span> '+vecHtml(l,r)+'</td><td class="meta">'
+      +(sub?esc(sub.join(' ｜ ')):g?'':'子问题见模块 5')+'</td></tr>'}).join('');
+  return '<div class="scroll"><table><tr><th>生成</th><th>判定 · 凑齐向量 左 → 右</th><th>子问题（开 P3.1 时，第 1–'+PT.generations.length+' 次）</th></tr>'+rows+'</table></div>';
 }
 
 /* ---------- module 3: matrix ---------- */
@@ -316,11 +346,14 @@ function renderMatrix(base){
         +cost.map(function(x){return '<td class="num">'+fmt(r[x[0]],x[2])+'</td>'}).join('')+'</tr>');
       return;
     }
-    var lf=facts(lk,c.label),l=totals(lf,k,units);
+    var lf=facts(lk,c.label),l=totals(lf,k,units),P=pert();
     var count=function(metric){
       var f=flipped(lf,rf,k,TEST[metric]);
+      var ds=P?perGen(function(g){var a=view(lk,g,c.label),b=view(rk_,g,c.label),t=TEST[metric];
+        return Object.keys(b).filter(function(id){return t(b[id],k)}).length-Object.keys(a).filter(function(id){return t(a[id],k)}).length}):null;
+      var pr=ds?'<div class="meta" title="'+GENS.length+' 次生成的差值">Δ '+span(ds)+'</div>':'';
       var btn=function(ids,d,cls,sym){return ids.length?'<button type="button" class="lnk '+cls+'" data-act="flip" data-combo="'+c.label+'" data-metric="'+metric+'" data-dir="'+d+'">'+sym+ids.length+'</button>':'<span class="same">'+sym+'0</span>'};
-      return '<td class="num">'+l[metric]+' → '+r[metric]+'<div>（'+btn(f[0],1,'up','+')+' / '+btn(f[1],-1,'down','−')+'）</div></td>';
+      return '<td class="num'+(ds&&flips(ds)?' pgray':'')+'">'+l[metric]+' → '+r[metric]+'<div>（'+btn(f[0],1,'up','+')+' / '+btn(f[1],-1,'down','−')+'）</div>'+pr+'</td>';
     };
     var diff=function(name,d,lower){var v=r[name]-l[name],cls=Math.abs(v)<1e-9?'same':(v>0)!==lower?'up':'down';
       return '<td class="num"><div class="meta">'+fmt(l[name],d)+' → '+fmt(r[name],d)+'</div><div class="'+cls+'">'+sign(v,d)+'</div></td>'};
@@ -345,7 +378,9 @@ function curve(base,count){
       var r=count(facts(rk_,c.label),k);
       if(base)return '<td class="num">'+r+'</td>';
       var l=count(facts(lk,c.label),k),v=r-l;
-      return '<td class="num"><div class="meta">'+l+' → '+r+'</div><div class="'+(v>0?'up':v<0?'down':'same')+'">'+sign(v,0)+'</div></td>';
+      var ds=pert()?perGen(function(g){return count(view(rk_,g,c.label),k)-count(view(lk,g,c.label),k)}):null,gr=ds&&flips(ds);
+      return '<td class="num'+(gr?' pgray':'')+'"'+(ds?' title="'+GENS.length+' 次生成的差值：'+span(ds)+'"':'')+'><div class="meta">'+l+' → '+r+'</div><div class="'+(v>0?'up':v<0?'down':'same')+'">'+sign(v,0)+'</div>'
+        +(ds?'<div class="meta">'+span(ds)+'</div>':'')+'</td>';
     }).join('')+'</tr>';
   }).join('');
   return '<table>'+head+rows+'</table>';
@@ -518,7 +553,10 @@ def render(data: dict[str, Any]) -> str:
         + section("process", "5. 查询过程", "",
                   '右侧配置下一道题的检索范围、规划（只列该配置启用的写法）、子问题与信息项的对应（开 P3.1 时）与前 20 个返回单元的来源；'
                   '不合并时分别列出各子问题的排名。来源明细按配置单独存放，切换时加载。')
-        + '<div class="card meta">扰动：3 次独立生成作为模块 1–4 上的标注层，扰动测试完成后加入。</div>'
+        + ('<div class="card meta">扰动标注（模块 1–4）：两侧都有独立生成的数据时，每题在第 0 次（冻结）与各次独立生成下分别判定，都相同为稳定；'
+           '模块 1 每格下方为稳定的题数，模块 2 不稳定的格标 ?，模块 3、4 写出各次生成的差值范围，范围内可能反号的格标灰。'
+           '每次生成的判定与子问题在模块 2 的展开中列出。</div>' if data.get("perturbation") else
+           '<div class="card meta">扰动：3 次独立生成作为模块 1–4 上的标注层，扰动测试完成后加入。</div>')
         + f'<script type="application/json" id="qc-data">{_embed(data)}</script>'
         + f'<script>{SCRIPT.replace("__ACC__", json.dumps(list(ACCEPTANCE_KS)))}</script>')
     return page(f"查询侧对比 · {data['name']}", body, root="../../", crumbs=[("报告首页", "../../index.html")])
@@ -533,15 +571,23 @@ def _script(name: str, key: str, value: Any) -> str:
     return f"window.{name}=window.{name}||{{}};window.{name}[{json.dumps(key)}]=" + _embed(value) + ";\n"
 
 
-def _write_facts(folder: Path, configs: dict[str, Any]) -> None:
-    shutil.rmtree(folder / "facts", ignore_errors=True)
-    for key, facts in configs.items():
-        write_atomic(folder / "facts" / script_file(key), _script("QC_FACTS", key, facts))
+def _write_facts(folder: Path, data: dict[str, Any]) -> None:
+    """facts/<config>.js, and perturb/<config>.js with the independent generations' completion ranks."""
+    for sub, name, configs in (("facts", "QC_FACTS", data["configs"]),
+                               ("perturb", "QC_PERTURB", data.get("perturbation", {}).get("configs", {}))):
+        shutil.rmtree(folder / sub, ignore_errors=True)
+        for key, facts in configs.items():
+            write_atomic(folder / sub / script_file(key), _script(name, key, facts))
 
 
 def _shared(data: dict[str, Any]) -> dict[str, Any]:
     """The page's embedded data: the configurations' keys instead of their facts."""
-    return {**{k: v for k, v in data.items() if k != "configs"}, "available": sorted(data["configs"])}
+    shared = {k: v for k, v in data.items() if k not in ("configs", "perturbation")}
+    shared["available"] = sorted(data["configs"])
+    if "perturbation" in data:
+        shared["perturbation"] = {**{k: v for k, v in data["perturbation"].items() if k != "configs"},
+                                  "available": sorted(data["perturbation"]["configs"])}
+    return shared
 
 
 def write_query_page(workspace: Workspace, data: dict[str, Any]) -> Path:
@@ -550,7 +596,7 @@ def write_query_page(workspace: Workspace, data: dict[str, Any]) -> Path:
     folder = query_dir(workspace) / data["name"]
     main = {k: v for k, v in data.items() if k != "process"}
     write_atomic(folder / "data.json", _embed(main) + "\n")
-    _write_facts(folder, main["configs"])
+    _write_facts(folder, main)
     shutil.rmtree(folder / "process", ignore_errors=True)
     for key, detail in data["process"].items():
         write_atomic(folder / "process" / script_file(key), _script("QC_PROCESS", key, detail))
@@ -564,7 +610,7 @@ def rerender_query_pages(workspace: Workspace) -> int:
     count = 0
     for path in sorted(folder.glob("*/data.json")) if folder.is_dir() else []:
         data = read_json(path)
-        _write_facts(path.parent, data["configs"])
+        _write_facts(path.parent, data)
         write_atomic(path.parent / "index.html", render(_shared(data)))
         count += 1
     return count

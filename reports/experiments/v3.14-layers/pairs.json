@@ -1,7 +1,7 @@
 {
  "groups": [
   {
-   "name": "原问题一路 关 → 开（rr）",
+   "name": "原问题一路 关 → 开（轮流取）",
    "pairs": [
     {
      "context": "无写法",
@@ -513,7 +513,7 @@
      }
     },
     {
-     "context": "P3.2.1（不融合）",
+     "context": "改写（不融合）",
      "left": "P3.1@rr_P3.2.1",
      "right": "P3.1@rr-o_P3.2.1",
      "merged": true,
@@ -1021,7 +1021,7 @@
      }
     },
     {
-     "context": "P3.2.1（RRF）",
+     "context": "改写（RRF）",
      "left": "P3.1@rr_P3.2.1@rrf",
      "right": "P3.1@rr-o_P3.2.1@rrf",
      "merged": true,
@@ -1531,7 +1531,7 @@
      }
     },
     {
-     "context": "P3.2.2（不融合）",
+     "context": "翻译（不融合）",
      "left": "P3.1@rr_P3.2.2",
      "right": "P3.1@rr-o_P3.2.2",
      "merged": true,
@@ -2065,7 +2065,7 @@
      }
     },
     {
-     "context": "P3.2.2（RRF）",
+     "context": "翻译（RRF）",
      "left": "P3.1@rr_P3.2.2@rrf",
      "right": "P3.1@rr-o_P3.2.2@rrf",
      "merged": true,
@@ -2593,7 +2593,7 @@
      }
     },
     {
-     "context": "P3.2.3（不融合）",
+     "context": "HyDE（不融合）",
      "left": "P3.1@rr_P3.2.3",
      "right": "P3.1@rr-o_P3.2.3",
      "merged": true,
@@ -3116,7 +3116,7 @@
      }
     },
     {
-     "context": "P3.2.3（RRF）",
+     "context": "HyDE（RRF）",
      "left": "P3.1@rr_P3.2.3@rrf",
      "right": "P3.1@rr-o_P3.2.3@rrf",
      "merged": true,
@@ -3621,7 +3621,7 @@
      }
     },
     {
-     "context": "P3.2.4（不融合）",
+     "context": "step-back（不融合）",
      "left": "P3.1@rr_P3.2.4",
      "right": "P3.1@rr-o_P3.2.4",
      "merged": true,
@@ -4151,7 +4151,7 @@
      }
     },
     {
-     "context": "P3.2.4（RRF）",
+     "context": "step-back（RRF）",
      "left": "P3.1@rr_P3.2.4@rrf",
      "right": "P3.1@rr-o_P3.2.4@rrf",
      "merged": true,
@@ -4664,7 +4664,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2（RRF）",
+     "context": "改写 + 翻译（RRF）",
      "left": "P3.1@rr_P3.2.1+P3.2.2@rrf",
      "right": "P3.1@rr-o_P3.2.1+P3.2.2@rrf",
      "merged": true,
@@ -5189,7 +5189,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.3（RRF）",
+     "context": "改写 + HyDE（RRF）",
      "left": "P3.1@rr_P3.2.1+P3.2.3@rrf",
      "right": "P3.1@rr-o_P3.2.1+P3.2.3@rrf",
      "merged": true,
@@ -5711,7 +5711,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.4（RRF）",
+     "context": "改写 + step-back（RRF）",
      "left": "P3.1@rr_P3.2.1+P3.2.4@rrf",
      "right": "P3.1@rr-o_P3.2.1+P3.2.4@rrf",
      "merged": true,
@@ -6237,7 +6237,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.3（RRF）",
+     "context": "翻译 + HyDE（RRF）",
      "left": "P3.1@rr_P3.2.2+P3.2.3@rrf",
      "right": "P3.1@rr-o_P3.2.2+P3.2.3@rrf",
      "merged": true,
@@ -6751,7 +6751,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.4（RRF）",
+     "context": "翻译 + step-back（RRF）",
      "left": "P3.1@rr_P3.2.2+P3.2.4@rrf",
      "right": "P3.1@rr-o_P3.2.2+P3.2.4@rrf",
      "merged": true,
@@ -7260,7 +7260,7 @@
      }
     },
     {
-     "context": "P3.2.3+P3.2.4（RRF）",
+     "context": "HyDE + step-back（RRF）",
      "left": "P3.1@rr_P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rr-o_P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -7794,7 +7794,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.3（RRF）",
+     "context": "改写 + 翻译 + HyDE（RRF）",
      "left": "P3.1@rr_P3.2.1+P3.2.2+P3.2.3@rrf",
      "right": "P3.1@rr-o_P3.2.1+P3.2.2+P3.2.3@rrf",
      "merged": true,
@@ -8332,7 +8332,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.4（RRF）",
+     "context": "改写 + 翻译 + step-back（RRF）",
      "left": "P3.1@rr_P3.2.1+P3.2.2+P3.2.4@rrf",
      "right": "P3.1@rr-o_P3.2.1+P3.2.2+P3.2.4@rrf",
      "merged": true,
@@ -8847,7 +8847,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.3+P3.2.4（RRF）",
+     "context": "改写 + HyDE + step-back（RRF）",
      "left": "P3.1@rr_P3.2.1+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rr-o_P3.2.1+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -9371,7 +9371,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.3+P3.2.4（RRF）",
+     "context": "翻译 + HyDE + step-back（RRF）",
      "left": "P3.1@rr_P3.2.2+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rr-o_P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -9897,7 +9897,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.3+P3.2.4（RRF）",
+     "context": "改写 + 翻译 + HyDE + step-back（RRF）",
      "left": "P3.1@rr_P3.2.1+P3.2.2+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rr-o_P3.2.1+P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -10421,7 +10421,7 @@
    ]
   },
   {
-   "name": "原问题一路 关 → 开（rrf）",
+   "name": "原问题一路 关 → 开（全局 RRF）",
    "pairs": [
     {
      "context": "无写法",
@@ -10980,7 +10980,7 @@
      }
     },
     {
-     "context": "P3.2.1（不融合）",
+     "context": "改写（不融合）",
      "left": "P3.1@rrf_P3.2.1",
      "right": "P3.1@rrf-o_P3.2.1",
      "merged": true,
@@ -11526,7 +11526,7 @@
      }
     },
     {
-     "context": "P3.2.1（RRF）",
+     "context": "改写（RRF）",
      "left": "P3.1@rrf_P3.2.1@rrf",
      "right": "P3.1@rrf-o_P3.2.1@rrf",
      "merged": true,
@@ -12047,7 +12047,7 @@
      }
     },
     {
-     "context": "P3.2.2（不融合）",
+     "context": "翻译（不融合）",
      "left": "P3.1@rrf_P3.2.2",
      "right": "P3.1@rrf-o_P3.2.2",
      "merged": true,
@@ -12598,7 +12598,7 @@
      }
     },
     {
-     "context": "P3.2.2（RRF）",
+     "context": "翻译（RRF）",
      "left": "P3.1@rrf_P3.2.2@rrf",
      "right": "P3.1@rrf-o_P3.2.2@rrf",
      "merged": true,
@@ -13197,7 +13197,7 @@
      }
     },
     {
-     "context": "P3.2.3（不融合）",
+     "context": "HyDE（不融合）",
      "left": "P3.1@rrf_P3.2.3",
      "right": "P3.1@rrf-o_P3.2.3",
      "merged": true,
@@ -13796,7 +13796,7 @@
      }
     },
     {
-     "context": "P3.2.3（RRF）",
+     "context": "HyDE（RRF）",
      "left": "P3.1@rrf_P3.2.3@rrf",
      "right": "P3.1@rrf-o_P3.2.3@rrf",
      "merged": true,
@@ -14362,7 +14362,7 @@
      }
     },
     {
-     "context": "P3.2.4（不融合）",
+     "context": "step-back（不融合）",
      "left": "P3.1@rrf_P3.2.4",
      "right": "P3.1@rrf-o_P3.2.4",
      "merged": true,
@@ -14922,7 +14922,7 @@
      }
     },
     {
-     "context": "P3.2.4（RRF）",
+     "context": "step-back（RRF）",
      "left": "P3.1@rrf_P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.4@rrf",
      "merged": true,
@@ -15506,7 +15506,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2（RRF）",
+     "context": "改写 + 翻译（RRF）",
      "left": "P3.1@rrf_P3.2.1+P3.2.2@rrf",
      "right": "P3.1@rrf-o_P3.2.1+P3.2.2@rrf",
      "merged": true,
@@ -16065,7 +16065,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.3（RRF）",
+     "context": "改写 + HyDE（RRF）",
      "left": "P3.1@rrf_P3.2.1+P3.2.3@rrf",
      "right": "P3.1@rrf-o_P3.2.1+P3.2.3@rrf",
      "merged": true,
@@ -16611,7 +16611,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.4（RRF）",
+     "context": "改写 + step-back（RRF）",
      "left": "P3.1@rrf_P3.2.1+P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.1+P3.2.4@rrf",
      "merged": true,
@@ -17181,7 +17181,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.3（RRF）",
+     "context": "翻译 + HyDE（RRF）",
      "left": "P3.1@rrf_P3.2.2+P3.2.3@rrf",
      "right": "P3.1@rrf-o_P3.2.2+P3.2.3@rrf",
      "merged": true,
@@ -17784,7 +17784,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.4（RRF）",
+     "context": "翻译 + step-back（RRF）",
      "left": "P3.1@rrf_P3.2.2+P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.2+P3.2.4@rrf",
      "merged": true,
@@ -18370,7 +18370,7 @@
      }
     },
     {
-     "context": "P3.2.3+P3.2.4（RRF）",
+     "context": "HyDE + step-back（RRF）",
      "left": "P3.1@rrf_P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -18968,7 +18968,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.3（RRF）",
+     "context": "改写 + 翻译 + HyDE（RRF）",
      "left": "P3.1@rrf_P3.2.1+P3.2.2+P3.2.3@rrf",
      "right": "P3.1@rrf-o_P3.2.1+P3.2.2+P3.2.3@rrf",
      "merged": true,
@@ -19546,7 +19546,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.4（RRF）",
+     "context": "改写 + 翻译 + step-back（RRF）",
      "left": "P3.1@rrf_P3.2.1+P3.2.2+P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.1+P3.2.2+P3.2.4@rrf",
      "merged": true,
@@ -20116,7 +20116,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.3+P3.2.4（RRF）",
+     "context": "改写 + HyDE + step-back（RRF）",
      "left": "P3.1@rrf_P3.2.1+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.1+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -20698,7 +20698,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.3+P3.2.4（RRF）",
+     "context": "翻译 + HyDE + step-back（RRF）",
      "left": "P3.1@rrf_P3.2.2+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -21267,7 +21267,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.3+P3.2.4（RRF）",
+     "context": "改写 + 翻译 + HyDE + step-back（RRF）",
      "left": "P3.1@rrf_P3.2.1+P3.2.2+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.1+P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -22438,7 +22438,7 @@
      }
     },
     {
-     "context": "P3.2.1（不融合）",
+     "context": "改写（不融合）",
      "left": "P3.1@rr_P3.2.1",
      "right": "P3.1@rrf_P3.2.1",
      "merged": true,
@@ -23036,7 +23036,7 @@
      }
     },
     {
-     "context": "P3.2.1（RRF）",
+     "context": "改写（RRF）",
      "left": "P3.1@rr_P3.2.1@rrf",
      "right": "P3.1@rrf_P3.2.1@rrf",
      "merged": true,
@@ -23622,7 +23622,7 @@
      }
     },
     {
-     "context": "P3.2.2（不融合）",
+     "context": "翻译（不融合）",
      "left": "P3.1@rr_P3.2.2",
      "right": "P3.1@rrf_P3.2.2",
      "merged": true,
@@ -24262,7 +24262,7 @@
      }
     },
     {
-     "context": "P3.2.2（RRF）",
+     "context": "翻译（RRF）",
      "left": "P3.1@rr_P3.2.2@rrf",
      "right": "P3.1@rrf_P3.2.2@rrf",
      "merged": true,
@@ -24862,7 +24862,7 @@
      }
     },
     {
-     "context": "P3.2.3（不融合）",
+     "context": "HyDE（不融合）",
      "left": "P3.1@rr_P3.2.3",
      "right": "P3.1@rrf_P3.2.3",
      "merged": true,
@@ -25479,7 +25479,7 @@
      }
     },
     {
-     "context": "P3.2.3（RRF）",
+     "context": "HyDE（RRF）",
      "left": "P3.1@rr_P3.2.3@rrf",
      "right": "P3.1@rrf_P3.2.3@rrf",
      "merged": true,
@@ -26081,7 +26081,7 @@
      }
     },
     {
-     "context": "P3.2.4（不融合）",
+     "context": "step-back（不融合）",
      "left": "P3.1@rr_P3.2.4",
      "right": "P3.1@rrf_P3.2.4",
      "merged": true,
@@ -26697,7 +26697,7 @@
      }
     },
     {
-     "context": "P3.2.4（RRF）",
+     "context": "step-back（RRF）",
      "left": "P3.1@rr_P3.2.4@rrf",
      "right": "P3.1@rrf_P3.2.4@rrf",
      "merged": true,
@@ -27304,7 +27304,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2（RRF）",
+     "context": "改写 + 翻译（RRF）",
      "left": "P3.1@rr_P3.2.1+P3.2.2@rrf",
      "right": "P3.1@rrf_P3.2.1+P3.2.2@rrf",
      "merged": true,
@@ -27905,7 +27905,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.3（RRF）",
+     "context": "改写 + HyDE（RRF）",
      "left": "P3.1@rr_P3.2.1+P3.2.3@rrf",
      "right": "P3.1@rrf_P3.2.1+P3.2.3@rrf",
      "merged": true,
@@ -28502,7 +28502,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.4（RRF）",
+     "context": "改写 + step-back（RRF）",
      "left": "P3.1@rr_P3.2.1+P3.2.4@rrf",
      "right": "P3.1@rrf_P3.2.1+P3.2.4@rrf",
      "merged": true,
@@ -29094,7 +29094,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.3（RRF）",
+     "context": "翻译 + HyDE（RRF）",
      "left": "P3.1@rr_P3.2.2+P3.2.3@rrf",
      "right": "P3.1@rrf_P3.2.2+P3.2.3@rrf",
      "merged": true,
@@ -29684,7 +29684,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.4（RRF）",
+     "context": "翻译 + step-back（RRF）",
      "left": "P3.1@rr_P3.2.2+P3.2.4@rrf",
      "right": "P3.1@rrf_P3.2.2+P3.2.4@rrf",
      "merged": true,
@@ -30312,7 +30312,7 @@
      }
     },
     {
-     "context": "P3.2.3+P3.2.4（RRF）",
+     "context": "HyDE + step-back（RRF）",
      "left": "P3.1@rr_P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rrf_P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -30937,7 +30937,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.3（RRF）",
+     "context": "改写 + 翻译 + HyDE（RRF）",
      "left": "P3.1@rr_P3.2.1+P3.2.2+P3.2.3@rrf",
      "right": "P3.1@rrf_P3.2.1+P3.2.2+P3.2.3@rrf",
      "merged": true,
@@ -31550,7 +31550,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.4（RRF）",
+     "context": "改写 + 翻译 + step-back（RRF）",
      "left": "P3.1@rr_P3.2.1+P3.2.2+P3.2.4@rrf",
      "right": "P3.1@rrf_P3.2.1+P3.2.2+P3.2.4@rrf",
      "merged": true,
@@ -32150,7 +32150,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.3+P3.2.4（RRF）",
+     "context": "改写 + HyDE + step-back（RRF）",
      "left": "P3.1@rr_P3.2.1+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rrf_P3.2.1+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -32764,7 +32764,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.3+P3.2.4（RRF）",
+     "context": "翻译 + HyDE + step-back（RRF）",
      "left": "P3.1@rr_P3.2.2+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rrf_P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -33394,7 +33394,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.3+P3.2.4（RRF）",
+     "context": "改写 + 翻译 + HyDE + step-back（RRF）",
      "left": "P3.1@rr_P3.2.1+P3.2.2+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rrf_P3.2.1+P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -34576,7 +34576,7 @@
      }
     },
     {
-     "context": "P3.2.1（不融合）",
+     "context": "改写（不融合）",
      "left": "P3.1@rr-o_P3.2.1",
      "right": "P3.1@rrf-o_P3.2.1",
      "merged": true,
@@ -35159,7 +35159,7 @@
      }
     },
     {
-     "context": "P3.2.1（RRF）",
+     "context": "改写（RRF）",
      "left": "P3.1@rr-o_P3.2.1@rrf",
      "right": "P3.1@rrf-o_P3.2.1@rrf",
      "merged": true,
@@ -35716,7 +35716,7 @@
      }
     },
     {
-     "context": "P3.2.2（不融合）",
+     "context": "翻译（不融合）",
      "left": "P3.1@rr-o_P3.2.2",
      "right": "P3.1@rrf-o_P3.2.2",
      "merged": true,
@@ -36341,7 +36341,7 @@
      }
     },
     {
-     "context": "P3.2.2（RRF）",
+     "context": "翻译（RRF）",
      "left": "P3.1@rr-o_P3.2.2@rrf",
      "right": "P3.1@rrf-o_P3.2.2@rrf",
      "merged": true,
@@ -36962,7 +36962,7 @@
      }
     },
     {
-     "context": "P3.2.3（不融合）",
+     "context": "HyDE（不融合）",
      "left": "P3.1@rr-o_P3.2.3",
      "right": "P3.1@rrf-o_P3.2.3",
      "merged": true,
@@ -37584,7 +37584,7 @@
      }
     },
     {
-     "context": "P3.2.3（RRF）",
+     "context": "HyDE（RRF）",
      "left": "P3.1@rr-o_P3.2.3@rrf",
      "right": "P3.1@rrf-o_P3.2.3@rrf",
      "merged": true,
@@ -38185,7 +38185,7 @@
      }
     },
     {
-     "context": "P3.2.4（不融合）",
+     "context": "step-back（不融合）",
      "left": "P3.1@rr-o_P3.2.4",
      "right": "P3.1@rrf-o_P3.2.4",
      "merged": true,
@@ -38812,7 +38812,7 @@
      }
     },
     {
-     "context": "P3.2.4（RRF）",
+     "context": "step-back（RRF）",
      "left": "P3.1@rr-o_P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.4@rrf",
      "merged": true,
@@ -39440,7 +39440,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2（RRF）",
+     "context": "改写 + 翻译（RRF）",
      "left": "P3.1@rr-o_P3.2.1+P3.2.2@rrf",
      "right": "P3.1@rrf-o_P3.2.1+P3.2.2@rrf",
      "merged": true,
@@ -40036,7 +40036,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.3（RRF）",
+     "context": "改写 + HyDE（RRF）",
      "left": "P3.1@rr-o_P3.2.1+P3.2.3@rrf",
      "right": "P3.1@rrf-o_P3.2.1+P3.2.3@rrf",
      "merged": true,
@@ -40606,7 +40606,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.4（RRF）",
+     "context": "改写 + step-back（RRF）",
      "left": "P3.1@rr-o_P3.2.1+P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.1+P3.2.4@rrf",
      "merged": true,
@@ -41184,7 +41184,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.3（RRF）",
+     "context": "翻译 + HyDE（RRF）",
      "left": "P3.1@rr-o_P3.2.2+P3.2.3@rrf",
      "right": "P3.1@rrf-o_P3.2.2+P3.2.3@rrf",
      "merged": true,
@@ -41773,7 +41773,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.4（RRF）",
+     "context": "翻译 + step-back（RRF）",
      "left": "P3.1@rr-o_P3.2.2+P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.2+P3.2.4@rrf",
      "merged": true,
@@ -42399,7 +42399,7 @@
      }
     },
     {
-     "context": "P3.2.3+P3.2.4（RRF）",
+     "context": "HyDE + step-back（RRF）",
      "left": "P3.1@rr-o_P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -43009,7 +43009,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.3（RRF）",
+     "context": "改写 + 翻译 + HyDE（RRF）",
      "left": "P3.1@rr-o_P3.2.1+P3.2.2+P3.2.3@rrf",
      "right": "P3.1@rrf-o_P3.2.1+P3.2.2+P3.2.3@rrf",
      "merged": true,
@@ -43604,7 +43604,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.4（RRF）",
+     "context": "改写 + 翻译 + step-back（RRF）",
      "left": "P3.1@rr-o_P3.2.1+P3.2.2+P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.1+P3.2.2+P3.2.4@rrf",
      "merged": true,
@@ -44199,7 +44199,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.3+P3.2.4（RRF）",
+     "context": "改写 + HyDE + step-back（RRF）",
      "left": "P3.1@rr-o_P3.2.1+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.1+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -44808,7 +44808,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.3+P3.2.4（RRF）",
+     "context": "翻译 + HyDE + step-back（RRF）",
      "left": "P3.1@rr-o_P3.2.2+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -45421,7 +45421,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.3+P3.2.4（RRF）",
+     "context": "改写 + 翻译 + HyDE + step-back（RRF）",
      "left": "P3.1@rr-o_P3.2.1+P3.2.2+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.1+P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -46008,7 +46008,7 @@
    ]
   },
   {
-   "name": "不合并 → rr",
+   "name": "分解不合并 → 轮流取",
    "pairs": [
     {
      "context": "无写法",
@@ -46292,7 +46292,7 @@
      }
     },
     {
-     "context": "P3.2.1（不融合）",
+     "context": "改写（不融合）",
      "left": "P3.1_P3.2.1",
      "right": "P3.1@rr_P3.2.1",
      "merged": false,
@@ -46579,7 +46579,7 @@
      }
     },
     {
-     "context": "P3.2.1（RRF）",
+     "context": "改写（RRF）",
      "left": "P3.1_P3.2.1@rrf",
      "right": "P3.1@rr_P3.2.1@rrf",
      "merged": false,
@@ -46867,7 +46867,7 @@
      }
     },
     {
-     "context": "P3.2.2（不融合）",
+     "context": "翻译（不融合）",
      "left": "P3.1_P3.2.2",
      "right": "P3.1@rr_P3.2.2",
      "merged": false,
@@ -47179,7 +47179,7 @@
      }
     },
     {
-     "context": "P3.2.2（RRF）",
+     "context": "翻译（RRF）",
      "left": "P3.1_P3.2.2@rrf",
      "right": "P3.1@rr_P3.2.2@rrf",
      "merged": false,
@@ -47500,7 +47500,7 @@
      }
     },
     {
-     "context": "P3.2.3（不融合）",
+     "context": "HyDE（不融合）",
      "left": "P3.1_P3.2.3",
      "right": "P3.1@rr_P3.2.3",
      "merged": false,
@@ -47817,7 +47817,7 @@
      }
     },
     {
-     "context": "P3.2.3（RRF）",
+     "context": "HyDE（RRF）",
      "left": "P3.1_P3.2.3@rrf",
      "right": "P3.1@rr_P3.2.3@rrf",
      "merged": false,
@@ -48129,7 +48129,7 @@
      }
     },
     {
-     "context": "P3.2.4（不融合）",
+     "context": "step-back（不融合）",
      "left": "P3.1_P3.2.4",
      "right": "P3.1@rr_P3.2.4",
      "merged": false,
@@ -48428,7 +48428,7 @@
      }
     },
     {
-     "context": "P3.2.4（RRF）",
+     "context": "step-back（RRF）",
      "left": "P3.1_P3.2.4@rrf",
      "right": "P3.1@rr_P3.2.4@rrf",
      "merged": false,
@@ -48724,7 +48724,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2（RRF）",
+     "context": "改写 + 翻译（RRF）",
      "left": "P3.1_P3.2.1+P3.2.2@rrf",
      "right": "P3.1@rr_P3.2.1+P3.2.2@rrf",
      "merged": false,
@@ -49020,7 +49020,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.3（RRF）",
+     "context": "改写 + HyDE（RRF）",
      "left": "P3.1_P3.2.1+P3.2.3@rrf",
      "right": "P3.1@rr_P3.2.1+P3.2.3@rrf",
      "merged": false,
@@ -49318,7 +49318,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.4（RRF）",
+     "context": "改写 + step-back（RRF）",
      "left": "P3.1_P3.2.1+P3.2.4@rrf",
      "right": "P3.1@rr_P3.2.1+P3.2.4@rrf",
      "merged": false,
@@ -49605,7 +49605,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.3（RRF）",
+     "context": "翻译 + HyDE（RRF）",
      "left": "P3.1_P3.2.2+P3.2.3@rrf",
      "right": "P3.1@rr_P3.2.2+P3.2.3@rrf",
      "merged": false,
@@ -49914,7 +49914,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.4（RRF）",
+     "context": "翻译 + step-back（RRF）",
      "left": "P3.1_P3.2.2+P3.2.4@rrf",
      "right": "P3.1@rr_P3.2.2+P3.2.4@rrf",
      "merged": false,
@@ -50202,7 +50202,7 @@
      }
     },
     {
-     "context": "P3.2.3+P3.2.4（RRF）",
+     "context": "HyDE + step-back（RRF）",
      "left": "P3.1_P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rr_P3.2.3+P3.2.4@rrf",
      "merged": false,
@@ -50500,7 +50500,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.3（RRF）",
+     "context": "改写 + 翻译 + HyDE（RRF）",
      "left": "P3.1_P3.2.1+P3.2.2+P3.2.3@rrf",
      "right": "P3.1@rr_P3.2.1+P3.2.2+P3.2.3@rrf",
      "merged": false,
@@ -50811,7 +50811,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.4（RRF）",
+     "context": "改写 + 翻译 + step-back（RRF）",
      "left": "P3.1_P3.2.1+P3.2.2+P3.2.4@rrf",
      "right": "P3.1@rr_P3.2.1+P3.2.2+P3.2.4@rrf",
      "merged": false,
@@ -51107,7 +51107,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.3+P3.2.4（RRF）",
+     "context": "改写 + HyDE + step-back（RRF）",
      "left": "P3.1_P3.2.1+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rr_P3.2.1+P3.2.3+P3.2.4@rrf",
      "merged": false,
@@ -51406,7 +51406,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.3+P3.2.4（RRF）",
+     "context": "翻译 + HyDE + step-back（RRF）",
      "left": "P3.1_P3.2.2+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rr_P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": false,
@@ -51718,7 +51718,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.3+P3.2.4（RRF）",
+     "context": "改写 + 翻译 + HyDE + step-back（RRF）",
      "left": "P3.1_P3.2.1+P3.2.2+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rr_P3.2.1+P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": false,
@@ -52008,7 +52008,7 @@
    ]
   },
   {
-   "name": "不合并 → rr+o",
+   "name": "分解不合并 → 轮流取 + 原问题一路",
    "pairs": [
     {
      "context": "无写法",
@@ -52296,7 +52296,7 @@
      }
     },
     {
-     "context": "P3.2.1（不融合）",
+     "context": "改写（不融合）",
      "left": "P3.1_P3.2.1",
      "right": "P3.1@rr-o_P3.2.1",
      "merged": false,
@@ -52588,7 +52588,7 @@
      }
     },
     {
-     "context": "P3.2.1（RRF）",
+     "context": "改写（RRF）",
      "left": "P3.1_P3.2.1@rrf",
      "right": "P3.1@rr-o_P3.2.1@rrf",
      "merged": false,
@@ -52881,7 +52881,7 @@
      }
     },
     {
-     "context": "P3.2.2（不融合）",
+     "context": "翻译（不融合）",
      "left": "P3.1_P3.2.2",
      "right": "P3.1@rr-o_P3.2.2",
      "merged": false,
@@ -53205,7 +53205,7 @@
      }
     },
     {
-     "context": "P3.2.2（RRF）",
+     "context": "翻译（RRF）",
      "left": "P3.1_P3.2.2@rrf",
      "right": "P3.1@rr-o_P3.2.2@rrf",
      "merged": false,
@@ -53540,7 +53540,7 @@
      }
     },
     {
-     "context": "P3.2.3（不融合）",
+     "context": "HyDE（不融合）",
      "left": "P3.1_P3.2.3",
      "right": "P3.1@rr-o_P3.2.3",
      "merged": false,
@@ -53860,7 +53860,7 @@
      }
     },
     {
-     "context": "P3.2.3（RRF）",
+     "context": "HyDE（RRF）",
      "left": "P3.1_P3.2.3@rrf",
      "right": "P3.1@rr-o_P3.2.3@rrf",
      "merged": false,
@@ -54181,7 +54181,7 @@
      }
     },
     {
-     "context": "P3.2.4（不融合）",
+     "context": "step-back（不融合）",
      "left": "P3.1_P3.2.4",
      "right": "P3.1@rr-o_P3.2.4",
      "merged": false,
@@ -54486,7 +54486,7 @@
      }
     },
     {
-     "context": "P3.2.4（RRF）",
+     "context": "step-back（RRF）",
      "left": "P3.1_P3.2.4@rrf",
      "right": "P3.1@rr-o_P3.2.4@rrf",
      "merged": false,
@@ -54791,7 +54791,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2（RRF）",
+     "context": "改写 + 翻译（RRF）",
      "left": "P3.1_P3.2.1+P3.2.2@rrf",
      "right": "P3.1@rr-o_P3.2.1+P3.2.2@rrf",
      "merged": false,
@@ -55095,7 +55095,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.3（RRF）",
+     "context": "改写 + HyDE（RRF）",
      "left": "P3.1_P3.2.1+P3.2.3@rrf",
      "right": "P3.1@rr-o_P3.2.1+P3.2.3@rrf",
      "merged": false,
@@ -55399,7 +55399,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.4（RRF）",
+     "context": "改写 + step-back（RRF）",
      "left": "P3.1_P3.2.1+P3.2.4@rrf",
      "right": "P3.1@rr-o_P3.2.1+P3.2.4@rrf",
      "merged": false,
@@ -55695,7 +55695,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.3（RRF）",
+     "context": "翻译 + HyDE（RRF）",
      "left": "P3.1_P3.2.2+P3.2.3@rrf",
      "right": "P3.1@rr-o_P3.2.2+P3.2.3@rrf",
      "merged": false,
@@ -56011,7 +56011,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.4（RRF）",
+     "context": "翻译 + step-back（RRF）",
      "left": "P3.1_P3.2.2+P3.2.4@rrf",
      "right": "P3.1@rr-o_P3.2.2+P3.2.4@rrf",
      "merged": false,
@@ -56307,7 +56307,7 @@
      }
     },
     {
-     "context": "P3.2.3+P3.2.4（RRF）",
+     "context": "HyDE + step-back（RRF）",
      "left": "P3.1_P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rr-o_P3.2.3+P3.2.4@rrf",
      "merged": false,
@@ -56610,7 +56610,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.3（RRF）",
+     "context": "改写 + 翻译 + HyDE（RRF）",
      "left": "P3.1_P3.2.1+P3.2.2+P3.2.3@rrf",
      "right": "P3.1@rr-o_P3.2.1+P3.2.2+P3.2.3@rrf",
      "merged": false,
@@ -56928,7 +56928,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.4（RRF）",
+     "context": "改写 + 翻译 + step-back（RRF）",
      "left": "P3.1_P3.2.1+P3.2.2+P3.2.4@rrf",
      "right": "P3.1@rr-o_P3.2.1+P3.2.2+P3.2.4@rrf",
      "merged": false,
@@ -57232,7 +57232,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.3+P3.2.4（RRF）",
+     "context": "改写 + HyDE + step-back（RRF）",
      "left": "P3.1_P3.2.1+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rr-o_P3.2.1+P3.2.3+P3.2.4@rrf",
      "merged": false,
@@ -57538,7 +57538,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.3+P3.2.4（RRF）",
+     "context": "翻译 + HyDE + step-back（RRF）",
      "left": "P3.1_P3.2.2+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rr-o_P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": false,
@@ -57853,7 +57853,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.3+P3.2.4（RRF）",
+     "context": "改写 + 翻译 + HyDE + step-back（RRF）",
      "left": "P3.1_P3.2.1+P3.2.2+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rr-o_P3.2.1+P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": false,
@@ -58150,7 +58150,7 @@
    ]
   },
   {
-   "name": "不合并 → rrf",
+   "name": "分解不合并 → 全局 RRF",
    "pairs": [
     {
      "context": "无写法",
@@ -58445,7 +58445,7 @@
      }
     },
     {
-     "context": "P3.2.1（不融合）",
+     "context": "改写（不融合）",
      "left": "P3.1_P3.2.1",
      "right": "P3.1@rrf_P3.2.1",
      "merged": false,
@@ -58739,7 +58739,7 @@
      }
     },
     {
-     "context": "P3.2.1（RRF）",
+     "context": "改写（RRF）",
      "left": "P3.1_P3.2.1@rrf",
      "right": "P3.1@rrf_P3.2.1@rrf",
      "merged": false,
@@ -59033,7 +59033,7 @@
      }
     },
     {
-     "context": "P3.2.2（不融合）",
+     "context": "翻译（不融合）",
      "left": "P3.1_P3.2.2",
      "right": "P3.1@rrf_P3.2.2",
      "merged": false,
@@ -59332,7 +59332,7 @@
      }
     },
     {
-     "context": "P3.2.2（RRF）",
+     "context": "翻译（RRF）",
      "left": "P3.1_P3.2.2@rrf",
      "right": "P3.1@rrf_P3.2.2@rrf",
      "merged": false,
@@ -59655,7 +59655,7 @@
      }
     },
     {
-     "context": "P3.2.3（不融合）",
+     "context": "HyDE（不融合）",
      "left": "P3.1_P3.2.3",
      "right": "P3.1@rrf_P3.2.3",
      "merged": false,
@@ -59973,7 +59973,7 @@
      }
     },
     {
-     "context": "P3.2.3（RRF）",
+     "context": "HyDE（RRF）",
      "left": "P3.1_P3.2.3@rrf",
      "right": "P3.1@rrf_P3.2.3@rrf",
      "merged": false,
@@ -60288,7 +60288,7 @@
      }
     },
     {
-     "context": "P3.2.4（不融合）",
+     "context": "step-back（不融合）",
      "left": "P3.1_P3.2.4",
      "right": "P3.1@rrf_P3.2.4",
      "merged": false,
@@ -60596,7 +60596,7 @@
      }
     },
     {
-     "context": "P3.2.4（RRF）",
+     "context": "step-back（RRF）",
      "left": "P3.1_P3.2.4@rrf",
      "right": "P3.1@rrf_P3.2.4@rrf",
      "merged": false,
@@ -60897,7 +60897,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2（RRF）",
+     "context": "改写 + 翻译（RRF）",
      "left": "P3.1_P3.2.1+P3.2.2@rrf",
      "right": "P3.1@rrf_P3.2.1+P3.2.2@rrf",
      "merged": false,
@@ -61205,7 +61205,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.3（RRF）",
+     "context": "改写 + HyDE（RRF）",
      "left": "P3.1_P3.2.1+P3.2.3@rrf",
      "right": "P3.1@rrf_P3.2.1+P3.2.3@rrf",
      "merged": false,
@@ -61512,7 +61512,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.4（RRF）",
+     "context": "改写 + step-back（RRF）",
      "left": "P3.1_P3.2.1+P3.2.4@rrf",
      "right": "P3.1@rrf_P3.2.1+P3.2.4@rrf",
      "merged": false,
@@ -61802,7 +61802,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.3（RRF）",
+     "context": "翻译 + HyDE（RRF）",
      "left": "P3.1_P3.2.2+P3.2.3@rrf",
      "right": "P3.1@rrf_P3.2.2+P3.2.3@rrf",
      "merged": false,
@@ -62111,7 +62111,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.4（RRF）",
+     "context": "翻译 + step-back（RRF）",
      "left": "P3.1_P3.2.2+P3.2.4@rrf",
      "right": "P3.1@rrf_P3.2.2+P3.2.4@rrf",
      "merged": false,
@@ -62418,7 +62418,7 @@
      }
     },
     {
-     "context": "P3.2.3+P3.2.4（RRF）",
+     "context": "HyDE + step-back（RRF）",
      "left": "P3.1_P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rrf_P3.2.3+P3.2.4@rrf",
      "merged": false,
@@ -62723,7 +62723,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.3（RRF）",
+     "context": "改写 + 翻译 + HyDE（RRF）",
      "left": "P3.1_P3.2.1+P3.2.2+P3.2.3@rrf",
      "right": "P3.1@rrf_P3.2.1+P3.2.2+P3.2.3@rrf",
      "merged": false,
@@ -63034,7 +63034,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.4（RRF）",
+     "context": "改写 + 翻译 + step-back（RRF）",
      "left": "P3.1_P3.2.1+P3.2.2+P3.2.4@rrf",
      "right": "P3.1@rrf_P3.2.1+P3.2.2+P3.2.4@rrf",
      "merged": false,
@@ -63336,7 +63336,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.3+P3.2.4（RRF）",
+     "context": "改写 + HyDE + step-back（RRF）",
      "left": "P3.1_P3.2.1+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rrf_P3.2.1+P3.2.3+P3.2.4@rrf",
      "merged": false,
@@ -63647,7 +63647,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.3+P3.2.4（RRF）",
+     "context": "翻译 + HyDE + step-back（RRF）",
      "left": "P3.1_P3.2.2+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rrf_P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": false,
@@ -63960,7 +63960,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.3+P3.2.4（RRF）",
+     "context": "改写 + 翻译 + HyDE + step-back（RRF）",
      "left": "P3.1_P3.2.1+P3.2.2+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rrf_P3.2.1+P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": false,
@@ -64264,7 +64264,7 @@
    ]
   },
   {
-   "name": "不合并 → rrf+o",
+   "name": "分解不合并 → 全局 RRF + 原问题一路",
    "pairs": [
     {
      "context": "无写法",
@@ -64545,7 +64545,7 @@
      }
     },
     {
-     "context": "P3.2.1（不融合）",
+     "context": "改写（不融合）",
      "left": "P3.1_P3.2.1",
      "right": "P3.1@rrf-o_P3.2.1",
      "merged": false,
@@ -64843,7 +64843,7 @@
      }
     },
     {
-     "context": "P3.2.1（RRF）",
+     "context": "改写（RRF）",
      "left": "P3.1_P3.2.1@rrf",
      "right": "P3.1@rrf-o_P3.2.1@rrf",
      "merged": false,
@@ -65138,7 +65138,7 @@
      }
     },
     {
-     "context": "P3.2.2（不融合）",
+     "context": "翻译（不融合）",
      "left": "P3.1_P3.2.2",
      "right": "P3.1@rrf-o_P3.2.2",
      "merged": false,
@@ -65459,7 +65459,7 @@
      }
     },
     {
-     "context": "P3.2.2（RRF）",
+     "context": "翻译（RRF）",
      "left": "P3.1_P3.2.2@rrf",
      "right": "P3.1@rrf-o_P3.2.2@rrf",
      "merged": false,
@@ -65783,7 +65783,7 @@
      }
     },
     {
-     "context": "P3.2.3（不融合）",
+     "context": "HyDE（不融合）",
      "left": "P3.1_P3.2.3",
      "right": "P3.1@rrf-o_P3.2.3",
      "merged": false,
@@ -66115,7 +66115,7 @@
      }
     },
     {
-     "context": "P3.2.3（RRF）",
+     "context": "HyDE（RRF）",
      "left": "P3.1_P3.2.3@rrf",
      "right": "P3.1@rrf-o_P3.2.3@rrf",
      "merged": false,
@@ -66441,7 +66441,7 @@
      }
     },
     {
-     "context": "P3.2.4（不融合）",
+     "context": "step-back（不融合）",
      "left": "P3.1_P3.2.4",
      "right": "P3.1@rrf-o_P3.2.4",
      "merged": false,
@@ -66751,7 +66751,7 @@
      }
     },
     {
-     "context": "P3.2.4（RRF）",
+     "context": "step-back（RRF）",
      "left": "P3.1_P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.4@rrf",
      "merged": false,
@@ -67068,7 +67068,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2（RRF）",
+     "context": "改写 + 翻译（RRF）",
      "left": "P3.1_P3.2.1+P3.2.2@rrf",
      "right": "P3.1@rrf-o_P3.2.1+P3.2.2@rrf",
      "merged": false,
@@ -67374,7 +67374,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.3（RRF）",
+     "context": "改写 + HyDE（RRF）",
      "left": "P3.1_P3.2.1+P3.2.3@rrf",
      "right": "P3.1@rrf-o_P3.2.1+P3.2.3@rrf",
      "merged": false,
@@ -67684,7 +67684,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.4（RRF）",
+     "context": "改写 + step-back（RRF）",
      "left": "P3.1_P3.2.1+P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.1+P3.2.4@rrf",
      "merged": false,
@@ -67975,7 +67975,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.3（RRF）",
+     "context": "翻译 + HyDE（RRF）",
      "left": "P3.1_P3.2.2+P3.2.3@rrf",
      "right": "P3.1@rrf-o_P3.2.2+P3.2.3@rrf",
      "merged": false,
@@ -68295,7 +68295,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.4（RRF）",
+     "context": "翻译 + step-back（RRF）",
      "left": "P3.1_P3.2.2+P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.2+P3.2.4@rrf",
      "merged": false,
@@ -68598,7 +68598,7 @@
      }
     },
     {
-     "context": "P3.2.3+P3.2.4（RRF）",
+     "context": "HyDE + step-back（RRF）",
      "left": "P3.1_P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.3+P3.2.4@rrf",
      "merged": false,
@@ -68906,7 +68906,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.3（RRF）",
+     "context": "改写 + 翻译 + HyDE（RRF）",
      "left": "P3.1_P3.2.1+P3.2.2+P3.2.3@rrf",
      "right": "P3.1@rrf-o_P3.2.1+P3.2.2+P3.2.3@rrf",
      "merged": false,
@@ -69227,7 +69227,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.4（RRF）",
+     "context": "改写 + 翻译 + step-back（RRF）",
      "left": "P3.1_P3.2.1+P3.2.2+P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.1+P3.2.2+P3.2.4@rrf",
      "merged": false,
@@ -69536,7 +69536,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.3+P3.2.4（RRF）",
+     "context": "改写 + HyDE + step-back（RRF）",
      "left": "P3.1_P3.2.1+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.1+P3.2.3+P3.2.4@rrf",
      "merged": false,
@@ -69849,7 +69849,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.3+P3.2.4（RRF）",
+     "context": "翻译 + HyDE + step-back（RRF）",
      "left": "P3.1_P3.2.2+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": false,
@@ -70177,7 +70177,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.3+P3.2.4（RRF）",
+     "context": "改写 + 翻译 + HyDE + step-back（RRF）",
      "left": "P3.1_P3.2.1+P3.2.2+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.1+P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": false,
@@ -70774,7 +70774,7 @@
      }
     },
     {
-     "context": "P3.2.1（不融合）",
+     "context": "改写（不融合）",
      "left": "P3.2.1",
      "right": "P3.1_P3.2.1",
      "merged": false,
@@ -71060,7 +71060,7 @@
      }
     },
     {
-     "context": "P3.2.1（RRF）",
+     "context": "改写（RRF）",
      "left": "P3.2.1@rrf",
      "right": "P3.1_P3.2.1@rrf",
      "merged": false,
@@ -71351,7 +71351,7 @@
      }
     },
     {
-     "context": "P3.2.2（不融合）",
+     "context": "翻译（不融合）",
      "left": "P3.2.2",
      "right": "P3.1_P3.2.2",
      "merged": false,
@@ -71654,7 +71654,7 @@
      }
     },
     {
-     "context": "P3.2.2（RRF）",
+     "context": "翻译（RRF）",
      "left": "P3.2.2@rrf",
      "right": "P3.1_P3.2.2@rrf",
      "merged": false,
@@ -71965,7 +71965,7 @@
      }
     },
     {
-     "context": "P3.2.3（不融合）",
+     "context": "HyDE（不融合）",
      "left": "P3.2.3",
      "right": "P3.1_P3.2.3",
      "merged": false,
@@ -72287,7 +72287,7 @@
      }
     },
     {
-     "context": "P3.2.3（RRF）",
+     "context": "HyDE（RRF）",
      "left": "P3.2.3@rrf",
      "right": "P3.1_P3.2.3@rrf",
      "merged": false,
@@ -72615,7 +72615,7 @@
      }
     },
     {
-     "context": "P3.2.4（不融合）",
+     "context": "step-back（不融合）",
      "left": "P3.2.4",
      "right": "P3.1_P3.2.4",
      "merged": false,
@@ -72916,7 +72916,7 @@
      }
     },
     {
-     "context": "P3.2.4（RRF）",
+     "context": "step-back（RRF）",
      "left": "P3.2.4@rrf",
      "right": "P3.1_P3.2.4@rrf",
      "merged": false,
@@ -73223,7 +73223,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2（RRF）",
+     "context": "改写 + 翻译（RRF）",
      "left": "P3.2.1+P3.2.2@rrf",
      "right": "P3.1_P3.2.1+P3.2.2@rrf",
      "merged": false,
@@ -73525,7 +73525,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.3（RRF）",
+     "context": "改写 + HyDE（RRF）",
      "left": "P3.2.1+P3.2.3@rrf",
      "right": "P3.1_P3.2.1+P3.2.3@rrf",
      "merged": false,
@@ -73827,7 +73827,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.4（RRF）",
+     "context": "改写 + step-back（RRF）",
      "left": "P3.2.1+P3.2.4@rrf",
      "right": "P3.1_P3.2.1+P3.2.4@rrf",
      "merged": false,
@@ -74124,7 +74124,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.3（RRF）",
+     "context": "翻译 + HyDE（RRF）",
      "left": "P3.2.2+P3.2.3@rrf",
      "right": "P3.1_P3.2.2+P3.2.3@rrf",
      "merged": false,
@@ -74438,7 +74438,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.4（RRF）",
+     "context": "翻译 + step-back（RRF）",
      "left": "P3.2.2+P3.2.4@rrf",
      "right": "P3.1_P3.2.2+P3.2.4@rrf",
      "merged": false,
@@ -74737,7 +74737,7 @@
      }
     },
     {
-     "context": "P3.2.3+P3.2.4（RRF）",
+     "context": "HyDE + step-back（RRF）",
      "left": "P3.2.3+P3.2.4@rrf",
      "right": "P3.1_P3.2.3+P3.2.4@rrf",
      "merged": false,
@@ -75040,7 +75040,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.3（RRF）",
+     "context": "改写 + 翻译 + HyDE（RRF）",
      "left": "P3.2.1+P3.2.2+P3.2.3@rrf",
      "right": "P3.1_P3.2.1+P3.2.2+P3.2.3@rrf",
      "merged": false,
@@ -75358,7 +75358,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.4（RRF）",
+     "context": "改写 + 翻译 + step-back（RRF）",
      "left": "P3.2.1+P3.2.2+P3.2.4@rrf",
      "right": "P3.1_P3.2.1+P3.2.2+P3.2.4@rrf",
      "merged": false,
@@ -75662,7 +75662,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.3+P3.2.4（RRF）",
+     "context": "改写 + HyDE + step-back（RRF）",
      "left": "P3.2.1+P3.2.3+P3.2.4@rrf",
      "right": "P3.1_P3.2.1+P3.2.3+P3.2.4@rrf",
      "merged": false,
@@ -75965,7 +75965,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.3+P3.2.4（RRF）",
+     "context": "翻译 + HyDE + step-back（RRF）",
      "left": "P3.2.2+P3.2.3+P3.2.4@rrf",
      "right": "P3.1_P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": false,
@@ -76285,7 +76285,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.3+P3.2.4（RRF）",
+     "context": "改写 + 翻译 + HyDE + step-back（RRF）",
      "left": "P3.2.1+P3.2.2+P3.2.3+P3.2.4@rrf",
      "right": "P3.1_P3.2.1+P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": false,
@@ -76578,7 +76578,7 @@
    ]
   },
   {
-   "name": "分解 不开 → rr",
+   "name": "分解 不开 → 轮流取",
    "pairs": [
     {
      "context": "无写法",
@@ -77158,7 +77158,7 @@
      }
     },
     {
-     "context": "P3.2.1（不融合）",
+     "context": "改写（不融合）",
      "left": "P3.2.1",
      "right": "P3.1@rr_P3.2.1",
      "merged": true,
@@ -77728,7 +77728,7 @@
      }
     },
     {
-     "context": "P3.2.1（RRF）",
+     "context": "改写（RRF）",
      "left": "P3.2.1@rrf",
      "right": "P3.1@rr_P3.2.1@rrf",
      "merged": true,
@@ -78321,7 +78321,7 @@
      }
     },
     {
-     "context": "P3.2.2（不融合）",
+     "context": "翻译（不融合）",
      "left": "P3.2.2",
      "right": "P3.1@rr_P3.2.2",
      "merged": true,
@@ -78909,7 +78909,7 @@
      }
     },
     {
-     "context": "P3.2.2（RRF）",
+     "context": "翻译（RRF）",
      "left": "P3.2.2@rrf",
      "right": "P3.1@rr_P3.2.2@rrf",
      "merged": true,
@@ -79518,7 +79518,7 @@
      }
     },
     {
-     "context": "P3.2.3（不融合）",
+     "context": "HyDE（不融合）",
      "left": "P3.2.3",
      "right": "P3.1@rr_P3.2.3",
      "merged": true,
@@ -80128,7 +80128,7 @@
      }
     },
     {
-     "context": "P3.2.3（RRF）",
+     "context": "HyDE（RRF）",
      "left": "P3.2.3@rrf",
      "right": "P3.1@rr_P3.2.3@rrf",
      "merged": true,
@@ -80744,7 +80744,7 @@
      }
     },
     {
-     "context": "P3.2.4（不融合）",
+     "context": "step-back（不融合）",
      "left": "P3.2.4",
      "right": "P3.1@rr_P3.2.4",
      "merged": true,
@@ -81326,7 +81326,7 @@
      }
     },
     {
-     "context": "P3.2.4（RRF）",
+     "context": "step-back（RRF）",
      "left": "P3.2.4@rrf",
      "right": "P3.1@rr_P3.2.4@rrf",
      "merged": true,
@@ -81919,7 +81919,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2（RRF）",
+     "context": "改写 + 翻译（RRF）",
      "left": "P3.2.1+P3.2.2@rrf",
      "right": "P3.1@rr_P3.2.1+P3.2.2@rrf",
      "merged": true,
@@ -82488,7 +82488,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.3（RRF）",
+     "context": "改写 + HyDE（RRF）",
      "left": "P3.2.1+P3.2.3@rrf",
      "right": "P3.1@rr_P3.2.1+P3.2.3@rrf",
      "merged": true,
@@ -83081,7 +83081,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.4（RRF）",
+     "context": "改写 + step-back（RRF）",
      "left": "P3.2.1+P3.2.4@rrf",
      "right": "P3.1@rr_P3.2.1+P3.2.4@rrf",
      "merged": true,
@@ -83674,7 +83674,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.3（RRF）",
+     "context": "翻译 + HyDE（RRF）",
      "left": "P3.2.2+P3.2.3@rrf",
      "right": "P3.1@rr_P3.2.2+P3.2.3@rrf",
      "merged": true,
@@ -84253,7 +84253,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.4（RRF）",
+     "context": "翻译 + step-back（RRF）",
      "left": "P3.2.2+P3.2.4@rrf",
      "right": "P3.1@rr_P3.2.2+P3.2.4@rrf",
      "merged": true,
@@ -84832,7 +84832,7 @@
      }
     },
     {
-     "context": "P3.2.3+P3.2.4（RRF）",
+     "context": "HyDE + step-back（RRF）",
      "left": "P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rr_P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -85439,7 +85439,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.3（RRF）",
+     "context": "改写 + 翻译 + HyDE（RRF）",
      "left": "P3.2.1+P3.2.2+P3.2.3@rrf",
      "right": "P3.1@rr_P3.2.1+P3.2.2+P3.2.3@rrf",
      "merged": true,
@@ -86045,7 +86045,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.4（RRF）",
+     "context": "改写 + 翻译 + step-back（RRF）",
      "left": "P3.2.1+P3.2.2+P3.2.4@rrf",
      "right": "P3.1@rr_P3.2.1+P3.2.2+P3.2.4@rrf",
      "merged": true,
@@ -86615,7 +86615,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.3+P3.2.4（RRF）",
+     "context": "改写 + HyDE + step-back（RRF）",
      "left": "P3.2.1+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rr_P3.2.1+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -87208,7 +87208,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.3+P3.2.4（RRF）",
+     "context": "翻译 + HyDE + step-back（RRF）",
      "left": "P3.2.2+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rr_P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -87803,7 +87803,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.3+P3.2.4（RRF）",
+     "context": "改写 + 翻译 + HyDE + step-back（RRF）",
      "left": "P3.2.1+P3.2.2+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rr_P3.2.1+P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -88386,7 +88386,7 @@
    ]
   },
   {
-   "name": "分解 不开 → rr+o",
+   "name": "分解 不开 → 轮流取 + 原问题一路",
    "pairs": [
     {
      "context": "无写法",
@@ -88967,7 +88967,7 @@
      }
     },
     {
-     "context": "P3.2.1（不融合）",
+     "context": "改写（不融合）",
      "left": "P3.2.1",
      "right": "P3.1@rr-o_P3.2.1",
      "merged": true,
@@ -89539,7 +89539,7 @@
      }
     },
     {
-     "context": "P3.2.1（RRF）",
+     "context": "改写（RRF）",
      "left": "P3.2.1@rrf",
      "right": "P3.1@rr-o_P3.2.1@rrf",
      "merged": true,
@@ -90123,7 +90123,7 @@
      }
     },
     {
-     "context": "P3.2.2（不融合）",
+     "context": "翻译（不融合）",
      "left": "P3.2.2",
      "right": "P3.1@rr-o_P3.2.2",
      "merged": true,
@@ -90729,7 +90729,7 @@
      }
     },
     {
-     "context": "P3.2.2（RRF）",
+     "context": "翻译（RRF）",
      "left": "P3.2.2@rrf",
      "right": "P3.1@rr-o_P3.2.2@rrf",
      "merged": true,
@@ -91341,7 +91341,7 @@
      }
     },
     {
-     "context": "P3.2.3（不融合）",
+     "context": "HyDE（不融合）",
      "left": "P3.2.3",
      "right": "P3.1@rr-o_P3.2.3",
      "merged": true,
@@ -91973,7 +91973,7 @@
      }
     },
     {
-     "context": "P3.2.3（RRF）",
+     "context": "HyDE（RRF）",
      "left": "P3.2.3@rrf",
      "right": "P3.1@rr-o_P3.2.3@rrf",
      "merged": true,
@@ -92592,7 +92592,7 @@
      }
     },
     {
-     "context": "P3.2.4（不融合）",
+     "context": "step-back（不融合）",
      "left": "P3.2.4",
      "right": "P3.1@rr-o_P3.2.4",
      "merged": true,
@@ -93173,7 +93173,7 @@
      }
     },
     {
-     "context": "P3.2.4（RRF）",
+     "context": "step-back（RRF）",
      "left": "P3.2.4@rrf",
      "right": "P3.1@rr-o_P3.2.4@rrf",
      "merged": true,
@@ -93764,7 +93764,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2（RRF）",
+     "context": "改写 + 翻译（RRF）",
      "left": "P3.2.1+P3.2.2@rrf",
      "right": "P3.1@rr-o_P3.2.1+P3.2.2@rrf",
      "merged": true,
@@ -94351,7 +94351,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.3（RRF）",
+     "context": "改写 + HyDE（RRF）",
      "left": "P3.2.1+P3.2.3@rrf",
      "right": "P3.1@rr-o_P3.2.1+P3.2.3@rrf",
      "merged": true,
@@ -94951,7 +94951,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.4（RRF）",
+     "context": "改写 + step-back（RRF）",
      "left": "P3.2.1+P3.2.4@rrf",
      "right": "P3.1@rr-o_P3.2.1+P3.2.4@rrf",
      "merged": true,
@@ -95535,7 +95535,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.3（RRF）",
+     "context": "翻译 + HyDE（RRF）",
      "left": "P3.2.2+P3.2.3@rrf",
      "right": "P3.1@rr-o_P3.2.2+P3.2.3@rrf",
      "merged": true,
@@ -96118,7 +96118,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.4（RRF）",
+     "context": "翻译 + step-back（RRF）",
      "left": "P3.2.2+P3.2.4@rrf",
      "right": "P3.1@rr-o_P3.2.2+P3.2.4@rrf",
      "merged": true,
@@ -96698,7 +96698,7 @@
      }
     },
     {
-     "context": "P3.2.3+P3.2.4（RRF）",
+     "context": "HyDE + step-back（RRF）",
      "left": "P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rr-o_P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -97306,7 +97306,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.3（RRF）",
+     "context": "改写 + 翻译 + HyDE（RRF）",
      "left": "P3.2.1+P3.2.2+P3.2.3@rrf",
      "right": "P3.1@rr-o_P3.2.1+P3.2.2+P3.2.3@rrf",
      "merged": true,
@@ -97908,7 +97908,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.4（RRF）",
+     "context": "改写 + 翻译 + step-back（RRF）",
      "left": "P3.2.1+P3.2.2+P3.2.4@rrf",
      "right": "P3.1@rr-o_P3.2.1+P3.2.2+P3.2.4@rrf",
      "merged": true,
@@ -98483,7 +98483,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.3+P3.2.4（RRF）",
+     "context": "改写 + HyDE + step-back（RRF）",
      "left": "P3.2.1+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rr-o_P3.2.1+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -99082,7 +99082,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.3+P3.2.4（RRF）",
+     "context": "翻译 + HyDE + step-back（RRF）",
      "left": "P3.2.2+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rr-o_P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -99685,7 +99685,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.3+P3.2.4（RRF）",
+     "context": "改写 + 翻译 + HyDE + step-back（RRF）",
      "left": "P3.2.1+P3.2.2+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rr-o_P3.2.1+P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -100279,7 +100279,7 @@
    ]
   },
   {
-   "name": "分解 不开 → rrf",
+   "name": "分解 不开 → 全局 RRF",
    "pairs": [
     {
      "context": "无写法",
@@ -100877,7 +100877,7 @@
      }
     },
     {
-     "context": "P3.2.1（不融合）",
+     "context": "改写（不融合）",
      "left": "P3.2.1",
      "right": "P3.1@rrf_P3.2.1",
      "merged": true,
@@ -101447,7 +101447,7 @@
      }
     },
     {
-     "context": "P3.2.1（RRF）",
+     "context": "改写（RRF）",
      "left": "P3.2.1@rrf",
      "right": "P3.1@rrf_P3.2.1@rrf",
      "merged": true,
@@ -102037,7 +102037,7 @@
      }
     },
     {
-     "context": "P3.2.2（不融合）",
+     "context": "翻译（不融合）",
      "left": "P3.2.2",
      "right": "P3.1@rrf_P3.2.2",
      "merged": true,
@@ -102633,7 +102633,7 @@
      }
     },
     {
-     "context": "P3.2.2（RRF）",
+     "context": "翻译（RRF）",
      "left": "P3.2.2@rrf",
      "right": "P3.1@rrf_P3.2.2@rrf",
      "merged": true,
@@ -103243,7 +103243,7 @@
      }
     },
     {
-     "context": "P3.2.3（不融合）",
+     "context": "HyDE（不融合）",
      "left": "P3.2.3",
      "right": "P3.1@rrf_P3.2.3",
      "merged": true,
@@ -103855,7 +103855,7 @@
      }
     },
     {
-     "context": "P3.2.3（RRF）",
+     "context": "HyDE（RRF）",
      "left": "P3.2.3@rrf",
      "right": "P3.1@rrf_P3.2.3@rrf",
      "merged": true,
@@ -104471,7 +104471,7 @@
      }
     },
     {
-     "context": "P3.2.4（不融合）",
+     "context": "step-back（不融合）",
      "left": "P3.2.4",
      "right": "P3.1@rrf_P3.2.4",
      "merged": true,
@@ -105088,7 +105088,7 @@
      }
     },
     {
-     "context": "P3.2.4（RRF）",
+     "context": "step-back（RRF）",
      "left": "P3.2.4@rrf",
      "right": "P3.1@rrf_P3.2.4@rrf",
      "merged": true,
@@ -105713,7 +105713,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2（RRF）",
+     "context": "改写 + 翻译（RRF）",
      "left": "P3.2.1+P3.2.2@rrf",
      "right": "P3.1@rrf_P3.2.1+P3.2.2@rrf",
      "merged": true,
@@ -106299,7 +106299,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.3（RRF）",
+     "context": "改写 + HyDE（RRF）",
      "left": "P3.2.1+P3.2.3@rrf",
      "right": "P3.1@rrf_P3.2.1+P3.2.3@rrf",
      "merged": true,
@@ -106893,7 +106893,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.4（RRF）",
+     "context": "改写 + step-back（RRF）",
      "left": "P3.2.1+P3.2.4@rrf",
      "right": "P3.1@rrf_P3.2.1+P3.2.4@rrf",
      "merged": true,
@@ -107476,7 +107476,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.3（RRF）",
+     "context": "翻译 + HyDE（RRF）",
      "left": "P3.2.2+P3.2.3@rrf",
      "right": "P3.1@rrf_P3.2.2+P3.2.3@rrf",
      "merged": true,
@@ -108057,7 +108057,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.4（RRF）",
+     "context": "翻译 + step-back（RRF）",
      "left": "P3.2.2+P3.2.4@rrf",
      "right": "P3.1@rrf_P3.2.2+P3.2.4@rrf",
      "merged": true,
@@ -108680,7 +108680,7 @@
      }
     },
     {
-     "context": "P3.2.3+P3.2.4（RRF）",
+     "context": "HyDE + step-back（RRF）",
      "left": "P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rrf_P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -109320,7 +109320,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.3（RRF）",
+     "context": "改写 + 翻译 + HyDE（RRF）",
      "left": "P3.2.1+P3.2.2+P3.2.3@rrf",
      "right": "P3.1@rrf_P3.2.1+P3.2.2+P3.2.3@rrf",
      "merged": true,
@@ -109929,7 +109929,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.4（RRF）",
+     "context": "改写 + 翻译 + step-back（RRF）",
      "left": "P3.2.1+P3.2.2+P3.2.4@rrf",
      "right": "P3.1@rrf_P3.2.1+P3.2.2+P3.2.4@rrf",
      "merged": true,
@@ -110538,7 +110538,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.3+P3.2.4（RRF）",
+     "context": "改写 + HyDE + step-back（RRF）",
      "left": "P3.2.1+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rrf_P3.2.1+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -111156,7 +111156,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.3+P3.2.4（RRF）",
+     "context": "翻译 + HyDE + step-back（RRF）",
      "left": "P3.2.2+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rrf_P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -111793,7 +111793,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.3+P3.2.4（RRF）",
+     "context": "改写 + 翻译 + HyDE + step-back（RRF）",
      "left": "P3.2.1+P3.2.2+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rrf_P3.2.1+P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -112412,7 +112412,7 @@
    ]
   },
   {
-   "name": "分解 不开 → rrf+o",
+   "name": "分解 不开 → 全局 RRF + 原问题一路",
    "pairs": [
     {
      "context": "无写法",
@@ -112975,7 +112975,7 @@
      }
     },
     {
-     "context": "P3.2.1（不融合）",
+     "context": "改写（不融合）",
      "left": "P3.2.1",
      "right": "P3.1@rrf-o_P3.2.1",
      "merged": true,
@@ -113546,7 +113546,7 @@
      }
     },
     {
-     "context": "P3.2.1（RRF）",
+     "context": "改写（RRF）",
      "left": "P3.2.1@rrf",
      "right": "P3.1@rrf-o_P3.2.1@rrf",
      "merged": true,
@@ -114107,7 +114107,7 @@
      }
     },
     {
-     "context": "P3.2.2（不融合）",
+     "context": "翻译（不融合）",
      "left": "P3.2.2",
      "right": "P3.1@rrf-o_P3.2.2",
      "merged": true,
@@ -114705,7 +114705,7 @@
      }
     },
     {
-     "context": "P3.2.2（RRF）",
+     "context": "翻译（RRF）",
      "left": "P3.2.2@rrf",
      "right": "P3.1@rrf-o_P3.2.2@rrf",
      "merged": true,
@@ -115318,7 +115318,7 @@
      }
     },
     {
-     "context": "P3.2.3（不融合）",
+     "context": "HyDE（不融合）",
      "left": "P3.2.3",
      "right": "P3.1@rrf-o_P3.2.3",
      "merged": true,
@@ -115936,7 +115936,7 @@
      }
     },
     {
-     "context": "P3.2.3（RRF）",
+     "context": "HyDE（RRF）",
      "left": "P3.2.3@rrf",
      "right": "P3.1@rrf-o_P3.2.3@rrf",
      "merged": true,
@@ -116562,7 +116562,7 @@
      }
     },
     {
-     "context": "P3.2.4（不融合）",
+     "context": "step-back（不融合）",
      "left": "P3.2.4",
      "right": "P3.1@rrf-o_P3.2.4",
      "merged": true,
@@ -117161,7 +117161,7 @@
      }
     },
     {
-     "context": "P3.2.4（RRF）",
+     "context": "step-back（RRF）",
      "left": "P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.4@rrf",
      "merged": true,
@@ -117766,7 +117766,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2（RRF）",
+     "context": "改写 + 翻译（RRF）",
      "left": "P3.2.1+P3.2.2@rrf",
      "right": "P3.1@rrf-o_P3.2.1+P3.2.2@rrf",
      "merged": true,
@@ -118339,7 +118339,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.3（RRF）",
+     "context": "改写 + HyDE（RRF）",
      "left": "P3.2.1+P3.2.3@rrf",
      "right": "P3.1@rrf-o_P3.2.1+P3.2.3@rrf",
      "merged": true,
@@ -118910,7 +118910,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.4（RRF）",
+     "context": "改写 + step-back（RRF）",
      "left": "P3.2.1+P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.1+P3.2.4@rrf",
      "merged": true,
@@ -119478,7 +119478,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.3（RRF）",
+     "context": "翻译 + HyDE（RRF）",
      "left": "P3.2.2+P3.2.3@rrf",
      "right": "P3.1@rrf-o_P3.2.2+P3.2.3@rrf",
      "merged": true,
@@ -120058,7 +120058,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.4（RRF）",
+     "context": "翻译 + step-back（RRF）",
      "left": "P3.2.2+P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.2+P3.2.4@rrf",
      "merged": true,
@@ -120662,7 +120662,7 @@
      }
     },
     {
-     "context": "P3.2.3+P3.2.4（RRF）",
+     "context": "HyDE + step-back（RRF）",
      "left": "P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -121262,7 +121262,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.3（RRF）",
+     "context": "改写 + 翻译 + HyDE（RRF）",
      "left": "P3.2.1+P3.2.2+P3.2.3@rrf",
      "right": "P3.1@rrf-o_P3.2.1+P3.2.2+P3.2.3@rrf",
      "merged": true,
@@ -121852,7 +121852,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.4（RRF）",
+     "context": "改写 + 翻译 + step-back（RRF）",
      "left": "P3.2.1+P3.2.2+P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.1+P3.2.2+P3.2.4@rrf",
      "merged": true,
@@ -122447,7 +122447,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.3+P3.2.4（RRF）",
+     "context": "改写 + HyDE + step-back（RRF）",
      "left": "P3.2.1+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.1+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -123061,7 +123061,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.3+P3.2.4（RRF）",
+     "context": "翻译 + HyDE + step-back（RRF）",
      "left": "P3.2.2+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -123664,7 +123664,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.3+P3.2.4（RRF）",
+     "context": "改写 + 翻译 + HyDE + step-back（RRF）",
      "left": "P3.2.1+P3.2.2+P3.2.3+P3.2.4@rrf",
      "right": "P3.1@rrf-o_P3.2.1+P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -124260,7 +124260,7 @@
    ]
   },
   {
-   "name": "P3.2.1 不开 → RRF",
+   "name": "P3.2.1 改写 不开 → RRF",
    "pairs": [
     {
      "context": "不分解",
@@ -124791,7 +124791,7 @@
      }
     },
     {
-     "context": "不合并",
+     "context": "分解不合并",
      "left": "P3.1",
      "right": "P3.1_P3.2.1@rrf",
      "merged": false,
@@ -125062,7 +125062,7 @@
      }
     },
     {
-     "context": "rr",
+     "context": "分解轮流取",
      "left": "P3.1@rr",
      "right": "P3.1@rr_P3.2.1@rrf",
      "merged": true,
@@ -125566,7 +125566,7 @@
      }
     },
     {
-     "context": "rr+o",
+     "context": "分解轮流取 + 原问题一路",
      "left": "P3.1@rr-o",
      "right": "P3.1@rr-o_P3.2.1@rrf",
      "merged": true,
@@ -126062,7 +126062,7 @@
      }
     },
     {
-     "context": "rrf",
+     "context": "分解全局 RRF",
      "left": "P3.1@rrf",
      "right": "P3.1@rrf_P3.2.1@rrf",
      "merged": true,
@@ -126626,7 +126626,7 @@
      }
     },
     {
-     "context": "rrf+o",
+     "context": "分解全局 RRF + 原问题一路",
      "left": "P3.1@rrf-o",
      "right": "P3.1@rrf-o_P3.2.1@rrf",
      "merged": true,
@@ -127161,7 +127161,7 @@
    ]
   },
   {
-   "name": "P3.2.1 不开 → 不融合",
+   "name": "P3.2.1 改写 不开 → 不融合",
    "pairs": [
     {
      "context": "不分解",
@@ -127721,7 +127721,7 @@
      }
     },
     {
-     "context": "不合并",
+     "context": "分解不合并",
      "left": "P3.1",
      "right": "P3.1_P3.2.1",
      "merged": false,
@@ -128015,7 +128015,7 @@
      }
     },
     {
-     "context": "rr",
+     "context": "分解轮流取",
      "left": "P3.1@rr",
      "right": "P3.1@rr_P3.2.1",
      "merged": true,
@@ -128553,7 +128553,7 @@
      }
     },
     {
-     "context": "rr+o",
+     "context": "分解轮流取 + 原问题一路",
      "left": "P3.1@rr-o",
      "right": "P3.1@rr-o_P3.2.1",
      "merged": true,
@@ -129078,7 +129078,7 @@
      }
     },
     {
-     "context": "rrf",
+     "context": "分解全局 RRF",
      "left": "P3.1@rrf",
      "right": "P3.1@rrf_P3.2.1",
      "merged": true,
@@ -129642,7 +129642,7 @@
      }
     },
     {
-     "context": "rrf+o",
+     "context": "分解全局 RRF + 原问题一路",
      "left": "P3.1@rrf-o",
      "right": "P3.1@rrf-o_P3.2.1",
      "merged": true,
@@ -130189,7 +130189,7 @@
    ]
   },
   {
-   "name": "P3.2.1 不融合 → RRF",
+   "name": "P3.2.1 改写 不融合 → RRF",
    "pairs": [
     {
      "context": "不分解",
@@ -130731,7 +130731,7 @@
      }
     },
     {
-     "context": "不合并",
+     "context": "分解不合并",
      "left": "P3.1_P3.2.1",
      "right": "P3.1_P3.2.1@rrf",
      "merged": false,
@@ -131013,7 +131013,7 @@
      }
     },
     {
-     "context": "rr",
+     "context": "分解轮流取",
      "left": "P3.1@rr_P3.2.1",
      "right": "P3.1@rr_P3.2.1@rrf",
      "merged": true,
@@ -131552,7 +131552,7 @@
      }
     },
     {
-     "context": "rr+o",
+     "context": "分解轮流取 + 原问题一路",
      "left": "P3.1@rr-o_P3.2.1",
      "right": "P3.1@rr-o_P3.2.1@rrf",
      "merged": true,
@@ -132078,7 +132078,7 @@
      }
     },
     {
-     "context": "rrf",
+     "context": "分解全局 RRF",
      "left": "P3.1@rrf_P3.2.1",
      "right": "P3.1@rrf_P3.2.1@rrf",
      "merged": true,
@@ -132638,7 +132638,7 @@
      }
     },
     {
-     "context": "rrf+o",
+     "context": "分解全局 RRF + 原问题一路",
      "left": "P3.1@rrf-o_P3.2.1",
      "right": "P3.1@rrf-o_P3.2.1@rrf",
      "merged": true,
@@ -133163,7 +133163,7 @@
    ]
   },
   {
-   "name": "P3.2.1 加入其他写法（RRF，不分解）",
+   "name": "P3.2.1 改写 加入其他写法（RRF，不分解）",
    "pairs": [
     {
      "context": "无写法",
@@ -133694,7 +133694,7 @@
      }
     },
     {
-     "context": "P3.2.2（RRF）",
+     "context": "翻译（RRF）",
      "left": "P3.2.2@rrf",
      "right": "P3.2.1+P3.2.2@rrf",
      "merged": true,
@@ -134276,7 +134276,7 @@
      }
     },
     {
-     "context": "P3.2.3（RRF）",
+     "context": "HyDE（RRF）",
      "left": "P3.2.3@rrf",
      "right": "P3.2.1+P3.2.3@rrf",
      "merged": true,
@@ -134852,7 +134852,7 @@
      }
     },
     {
-     "context": "P3.2.4（RRF）",
+     "context": "step-back（RRF）",
      "left": "P3.2.4@rrf",
      "right": "P3.2.1+P3.2.4@rrf",
      "merged": true,
@@ -135438,7 +135438,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.3（RRF）",
+     "context": "翻译 + HyDE（RRF）",
      "left": "P3.2.2+P3.2.3@rrf",
      "right": "P3.2.1+P3.2.2+P3.2.3@rrf",
      "merged": true,
@@ -135982,7 +135982,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.4（RRF）",
+     "context": "翻译 + step-back（RRF）",
      "left": "P3.2.2+P3.2.4@rrf",
      "right": "P3.2.1+P3.2.2+P3.2.4@rrf",
      "merged": true,
@@ -136533,7 +136533,7 @@
      }
     },
     {
-     "context": "P3.2.3+P3.2.4（RRF）",
+     "context": "HyDE + step-back（RRF）",
      "left": "P3.2.3+P3.2.4@rrf",
      "right": "P3.2.1+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -137078,7 +137078,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.3+P3.2.4（RRF）",
+     "context": "翻译 + HyDE + step-back（RRF）",
      "left": "P3.2.2+P3.2.3+P3.2.4@rrf",
      "right": "P3.2.1+P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -137635,7 +137635,7 @@
    ]
   },
   {
-   "name": "P3.2.2 不开 → RRF",
+   "name": "P3.2.2 翻译 不开 → RRF",
    "pairs": [
     {
      "context": "不分解",
@@ -138217,7 +138217,7 @@
      }
     },
     {
-     "context": "不合并",
+     "context": "分解不合并",
      "left": "P3.1",
      "right": "P3.1_P3.2.2@rrf",
      "merged": false,
@@ -138550,7 +138550,7 @@
      }
     },
     {
-     "context": "rr",
+     "context": "分解轮流取",
      "left": "P3.1@rr",
      "right": "P3.1@rr_P3.2.2@rrf",
      "merged": true,
@@ -139157,7 +139157,7 @@
      }
     },
     {
-     "context": "rr+o",
+     "context": "分解轮流取 + 原问题一路",
      "left": "P3.1@rr-o",
      "right": "P3.1@rr-o_P3.2.2@rrf",
      "merged": true,
@@ -139734,7 +139734,7 @@
      }
     },
     {
-     "context": "rrf",
+     "context": "分解全局 RRF",
      "left": "P3.1@rrf",
      "right": "P3.1@rrf_P3.2.2@rrf",
      "merged": true,
@@ -140354,7 +140354,7 @@
      }
     },
     {
-     "context": "rrf+o",
+     "context": "分解全局 RRF + 原问题一路",
      "left": "P3.1@rrf-o",
      "right": "P3.1@rrf-o_P3.2.2@rrf",
      "merged": true,
@@ -140942,7 +140942,7 @@
    ]
   },
   {
-   "name": "P3.2.2 不开 → 不融合",
+   "name": "P3.2.2 翻译 不开 → 不融合",
    "pairs": [
     {
      "context": "不分解",
@@ -141567,7 +141567,7 @@
      }
     },
     {
-     "context": "不合并",
+     "context": "分解不合并",
      "left": "P3.1",
      "right": "P3.1_P3.2.2",
      "merged": false,
@@ -141904,7 +141904,7 @@
      }
     },
     {
-     "context": "rr",
+     "context": "分解轮流取",
      "left": "P3.1@rr",
      "right": "P3.1@rr_P3.2.2",
      "merged": true,
@@ -142535,7 +142535,7 @@
      }
     },
     {
-     "context": "rr+o",
+     "context": "分解轮流取 + 原问题一路",
      "left": "P3.1@rr-o",
      "right": "P3.1@rr-o_P3.2.2",
      "merged": true,
@@ -143155,7 +143155,7 @@
      }
     },
     {
-     "context": "rrf",
+     "context": "分解全局 RRF",
      "left": "P3.1@rrf",
      "right": "P3.1@rrf_P3.2.2",
      "merged": true,
@@ -143802,7 +143802,7 @@
      }
     },
     {
-     "context": "rrf+o",
+     "context": "分解全局 RRF + 原问题一路",
      "left": "P3.1@rrf-o",
      "right": "P3.1@rrf-o_P3.2.2",
      "merged": true,
@@ -144420,7 +144420,7 @@
    ]
   },
   {
-   "name": "P3.2.2 不融合 → RRF",
+   "name": "P3.2.2 翻译 不融合 → RRF",
    "pairs": [
     {
      "context": "不分解",
@@ -145004,7 +145004,7 @@
      }
     },
     {
-     "context": "不合并",
+     "context": "分解不合并",
      "left": "P3.1_P3.2.2",
      "right": "P3.1_P3.2.2@rrf",
      "merged": false,
@@ -145320,7 +145320,7 @@
      }
     },
     {
-     "context": "rr",
+     "context": "分解轮流取",
      "left": "P3.1@rr_P3.2.2",
      "right": "P3.1@rr_P3.2.2@rrf",
      "merged": true,
@@ -145933,7 +145933,7 @@
      }
     },
     {
-     "context": "rr+o",
+     "context": "分解轮流取 + 原问题一路",
      "left": "P3.1@rr-o_P3.2.2",
      "right": "P3.1@rr-o_P3.2.2@rrf",
      "merged": true,
@@ -146530,7 +146530,7 @@
      }
     },
     {
-     "context": "rrf",
+     "context": "分解全局 RRF",
      "left": "P3.1@rrf_P3.2.2",
      "right": "P3.1@rrf_P3.2.2@rrf",
      "merged": true,
@@ -147115,7 +147115,7 @@
      }
     },
     {
-     "context": "rrf+o",
+     "context": "分解全局 RRF + 原问题一路",
      "left": "P3.1@rrf-o_P3.2.2",
      "right": "P3.1@rrf-o_P3.2.2@rrf",
      "merged": true,
@@ -147698,7 +147698,7 @@
    ]
   },
   {
-   "name": "P3.2.2 加入其他写法（RRF，不分解）",
+   "name": "P3.2.2 翻译 加入其他写法（RRF，不分解）",
    "pairs": [
     {
      "context": "无写法",
@@ -148280,7 +148280,7 @@
      }
     },
     {
-     "context": "P3.2.1（RRF）",
+     "context": "改写（RRF）",
      "left": "P3.2.1@rrf",
      "right": "P3.2.1+P3.2.2@rrf",
      "merged": true,
@@ -148829,7 +148829,7 @@
      }
     },
     {
-     "context": "P3.2.3（RRF）",
+     "context": "HyDE（RRF）",
      "left": "P3.2.3@rrf",
      "right": "P3.2.2+P3.2.3@rrf",
      "merged": true,
@@ -149403,7 +149403,7 @@
      }
     },
     {
-     "context": "P3.2.4（RRF）",
+     "context": "step-back（RRF）",
      "left": "P3.2.4@rrf",
      "right": "P3.2.2+P3.2.4@rrf",
      "merged": true,
@@ -149956,7 +149956,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.3（RRF）",
+     "context": "改写 + HyDE（RRF）",
      "left": "P3.2.1+P3.2.3@rrf",
      "right": "P3.2.1+P3.2.2+P3.2.3@rrf",
      "merged": true,
@@ -150489,7 +150489,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.4（RRF）",
+     "context": "改写 + step-back（RRF）",
      "left": "P3.2.1+P3.2.4@rrf",
      "right": "P3.2.1+P3.2.2+P3.2.4@rrf",
      "merged": true,
@@ -151030,7 +151030,7 @@
      }
     },
     {
-     "context": "P3.2.3+P3.2.4（RRF）",
+     "context": "HyDE + step-back（RRF）",
      "left": "P3.2.3+P3.2.4@rrf",
      "right": "P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -151581,7 +151581,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.3+P3.2.4（RRF）",
+     "context": "改写 + HyDE + step-back（RRF）",
      "left": "P3.2.1+P3.2.3+P3.2.4@rrf",
      "right": "P3.2.1+P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -152123,7 +152123,7 @@
    ]
   },
   {
-   "name": "P3.2.3 不开 → RRF",
+   "name": "P3.2.3 HyDE 不开 → RRF",
    "pairs": [
     {
      "context": "不分解",
@@ -152709,7 +152709,7 @@
      }
     },
     {
-     "context": "不合并",
+     "context": "分解不合并",
      "left": "P3.1",
      "right": "P3.1_P3.2.3@rrf",
      "merged": false,
@@ -153035,7 +153035,7 @@
      }
     },
     {
-     "context": "rr",
+     "context": "分解轮流取",
      "left": "P3.1@rr",
      "right": "P3.1@rr_P3.2.3@rrf",
      "merged": true,
@@ -153613,7 +153613,7 @@
      }
     },
     {
-     "context": "rr+o",
+     "context": "分解轮流取 + 原问题一路",
      "left": "P3.1@rr-o",
      "right": "P3.1@rr-o_P3.2.3@rrf",
      "merged": true,
@@ -154190,7 +154190,7 @@
      }
     },
     {
-     "context": "rrf",
+     "context": "分解全局 RRF",
      "left": "P3.1@rrf",
      "right": "P3.1@rrf_P3.2.3@rrf",
      "merged": true,
@@ -154779,7 +154779,7 @@
      }
     },
     {
-     "context": "rrf+o",
+     "context": "分解全局 RRF + 原问题一路",
      "left": "P3.1@rrf-o",
      "right": "P3.1@rrf-o_P3.2.3@rrf",
      "merged": true,
@@ -155345,7 +155345,7 @@
    ]
   },
   {
-   "name": "P3.2.3 不开 → 不融合",
+   "name": "P3.2.3 HyDE 不开 → 不融合",
    "pairs": [
     {
      "context": "不分解",
@@ -155955,7 +155955,7 @@
      }
     },
     {
-     "context": "不合并",
+     "context": "分解不合并",
      "left": "P3.1",
      "right": "P3.1_P3.2.3",
      "merged": false,
@@ -156290,7 +156290,7 @@
      }
     },
     {
-     "context": "rr",
+     "context": "分解轮流取",
      "left": "P3.1@rr",
      "right": "P3.1@rr_P3.2.3",
      "merged": true,
@@ -156904,7 +156904,7 @@
      }
     },
     {
-     "context": "rr+o",
+     "context": "分解轮流取 + 原问题一路",
      "left": "P3.1@rr-o",
      "right": "P3.1@rr-o_P3.2.3",
      "merged": true,
@@ -157510,7 +157510,7 @@
      }
     },
     {
-     "context": "rrf",
+     "context": "分解全局 RRF",
      "left": "P3.1@rrf",
      "right": "P3.1@rrf_P3.2.3",
      "merged": true,
@@ -158134,7 +158134,7 @@
      }
     },
     {
-     "context": "rrf+o",
+     "context": "分解全局 RRF + 原问题一路",
      "left": "P3.1@rrf-o",
      "right": "P3.1@rrf-o_P3.2.3",
      "merged": true,
@@ -158717,7 +158717,7 @@
    ]
   },
   {
-   "name": "P3.2.3 不融合 → RRF",
+   "name": "P3.2.3 HyDE 不融合 → RRF",
    "pairs": [
     {
      "context": "不分解",
@@ -159318,7 +159318,7 @@
      }
     },
     {
-     "context": "不合并",
+     "context": "分解不合并",
      "left": "P3.1_P3.2.3",
      "right": "P3.1_P3.2.3@rrf",
      "merged": false,
@@ -159638,7 +159638,7 @@
      }
     },
     {
-     "context": "rr",
+     "context": "分解轮流取",
      "left": "P3.1@rr_P3.2.3",
      "right": "P3.1@rr_P3.2.3@rrf",
      "merged": true,
@@ -160269,7 +160269,7 @@
      }
     },
     {
-     "context": "rr+o",
+     "context": "分解轮流取 + 原问题一路",
      "left": "P3.1@rr-o_P3.2.3",
      "right": "P3.1@rr-o_P3.2.3@rrf",
      "merged": true,
@@ -160880,7 +160880,7 @@
      }
     },
     {
-     "context": "rrf",
+     "context": "分解全局 RRF",
      "left": "P3.1@rrf_P3.2.3",
      "right": "P3.1@rrf_P3.2.3@rrf",
      "merged": true,
@@ -161510,7 +161510,7 @@
      }
     },
     {
-     "context": "rrf+o",
+     "context": "分解全局 RRF + 原问题一路",
      "left": "P3.1@rrf-o_P3.2.3",
      "right": "P3.1@rrf-o_P3.2.3@rrf",
      "merged": true,
@@ -162124,7 +162124,7 @@
    ]
   },
   {
-   "name": "P3.2.3 加入其他写法（RRF，不分解）",
+   "name": "P3.2.3 HyDE 加入其他写法（RRF，不分解）",
    "pairs": [
     {
      "context": "无写法",
@@ -162710,7 +162710,7 @@
      }
     },
     {
-     "context": "P3.2.1（RRF）",
+     "context": "改写（RRF）",
      "left": "P3.2.1@rrf",
      "right": "P3.2.1+P3.2.3@rrf",
      "merged": true,
@@ -163258,7 +163258,7 @@
      }
     },
     {
-     "context": "P3.2.2（RRF）",
+     "context": "翻译（RRF）",
      "left": "P3.2.2@rrf",
      "right": "P3.2.2+P3.2.3@rrf",
      "merged": true,
@@ -163831,7 +163831,7 @@
      }
     },
     {
-     "context": "P3.2.4（RRF）",
+     "context": "step-back（RRF）",
      "left": "P3.2.4@rrf",
      "right": "P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -164376,7 +164376,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2（RRF）",
+     "context": "改写 + 翻译（RRF）",
      "left": "P3.2.1+P3.2.2@rrf",
      "right": "P3.2.1+P3.2.2+P3.2.3@rrf",
      "merged": true,
@@ -164925,7 +164925,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.4（RRF）",
+     "context": "改写 + step-back（RRF）",
      "left": "P3.2.1+P3.2.4@rrf",
      "right": "P3.2.1+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -165452,7 +165452,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.4（RRF）",
+     "context": "翻译 + step-back（RRF）",
      "left": "P3.2.2+P3.2.4@rrf",
      "right": "P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -165977,7 +165977,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.4（RRF）",
+     "context": "改写 + 翻译 + step-back（RRF）",
      "left": "P3.2.1+P3.2.2+P3.2.4@rrf",
      "right": "P3.2.1+P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -166512,7 +166512,7 @@
    ]
   },
   {
-   "name": "P3.2.4 不开 → RRF",
+   "name": "P3.2.4 step-back 不开 → RRF",
    "pairs": [
     {
      "context": "不分解",
@@ -167118,7 +167118,7 @@
      }
     },
     {
-     "context": "不合并",
+     "context": "分解不合并",
      "left": "P3.1",
      "right": "P3.1_P3.2.4@rrf",
      "merged": false,
@@ -167428,7 +167428,7 @@
      }
     },
     {
-     "context": "rr",
+     "context": "分解轮流取",
      "left": "P3.1@rr",
      "right": "P3.1@rr_P3.2.4@rrf",
      "merged": true,
@@ -168038,7 +168038,7 @@
      }
     },
     {
-     "context": "rr+o",
+     "context": "分解轮流取 + 原问题一路",
      "left": "P3.1@rr-o",
      "right": "P3.1@rr-o_P3.2.4@rrf",
      "merged": true,
@@ -168627,7 +168627,7 @@
      }
     },
     {
-     "context": "rrf",
+     "context": "分解全局 RRF",
      "left": "P3.1@rrf",
      "right": "P3.1@rrf_P3.2.4@rrf",
      "merged": true,
@@ -169249,7 +169249,7 @@
      }
     },
     {
-     "context": "rrf+o",
+     "context": "分解全局 RRF + 原问题一路",
      "left": "P3.1@rrf-o",
      "right": "P3.1@rrf-o_P3.2.4@rrf",
      "merged": true,
@@ -169838,7 +169838,7 @@
    ]
   },
   {
-   "name": "P3.2.4 不开 → 不融合",
+   "name": "P3.2.4 step-back 不开 → 不融合",
    "pairs": [
     {
      "context": "不分解",
@@ -170447,7 +170447,7 @@
      }
     },
     {
-     "context": "不合并",
+     "context": "分解不合并",
      "left": "P3.1",
      "right": "P3.1_P3.2.4",
      "merged": false,
@@ -170750,7 +170750,7 @@
      }
     },
     {
-     "context": "rr",
+     "context": "分解轮流取",
      "left": "P3.1@rr",
      "right": "P3.1@rr_P3.2.4",
      "merged": true,
@@ -171365,7 +171365,7 @@
      }
     },
     {
-     "context": "rr+o",
+     "context": "分解轮流取 + 原问题一路",
      "left": "P3.1@rr-o",
      "right": "P3.1@rr-o_P3.2.4",
      "merged": true,
@@ -171977,7 +171977,7 @@
      }
     },
     {
-     "context": "rrf",
+     "context": "分解全局 RRF",
      "left": "P3.1@rrf",
      "right": "P3.1@rrf_P3.2.4",
      "merged": true,
@@ -172612,7 +172612,7 @@
      }
     },
     {
-     "context": "rrf+o",
+     "context": "分解全局 RRF + 原问题一路",
      "left": "P3.1@rrf-o",
      "right": "P3.1@rrf-o_P3.2.4",
      "merged": true,
@@ -173234,7 +173234,7 @@
    ]
   },
   {
-   "name": "P3.2.4 不融合 → RRF",
+   "name": "P3.2.4 step-back 不融合 → RRF",
    "pairs": [
     {
      "context": "不分解",
@@ -173822,7 +173822,7 @@
      }
     },
     {
-     "context": "不合并",
+     "context": "分解不合并",
      "left": "P3.1_P3.2.4",
      "right": "P3.1_P3.2.4@rrf",
      "merged": false,
@@ -174126,7 +174126,7 @@
      }
     },
     {
-     "context": "rr",
+     "context": "分解轮流取",
      "left": "P3.1@rr_P3.2.4",
      "right": "P3.1@rr_P3.2.4@rrf",
      "merged": true,
@@ -174723,7 +174723,7 @@
      }
     },
     {
-     "context": "rr+o",
+     "context": "分解轮流取 + 原问题一路",
      "left": "P3.1@rr-o_P3.2.4",
      "right": "P3.1@rr-o_P3.2.4@rrf",
      "merged": true,
@@ -175312,7 +175312,7 @@
      }
     },
     {
-     "context": "rrf",
+     "context": "分解全局 RRF",
      "left": "P3.1@rrf_P3.2.4",
      "right": "P3.1@rrf_P3.2.4@rrf",
      "merged": true,
@@ -175881,7 +175881,7 @@
      }
     },
     {
-     "context": "rrf+o",
+     "context": "分解全局 RRF + 原问题一路",
      "left": "P3.1@rrf-o_P3.2.4",
      "right": "P3.1@rrf-o_P3.2.4@rrf",
      "merged": true,
@@ -176442,7 +176442,7 @@
    ]
   },
   {
-   "name": "P3.2.4 加入其他写法（RRF，不分解）",
+   "name": "P3.2.4 step-back 加入其他写法（RRF，不分解）",
    "pairs": [
     {
      "context": "无写法",
@@ -177048,7 +177048,7 @@
      }
     },
     {
-     "context": "P3.2.1（RRF）",
+     "context": "改写（RRF）",
      "left": "P3.2.1@rrf",
      "right": "P3.2.1+P3.2.4@rrf",
      "merged": true,
@@ -177614,7 +177614,7 @@
      }
     },
     {
-     "context": "P3.2.2（RRF）",
+     "context": "翻译（RRF）",
      "left": "P3.2.2@rrf",
      "right": "P3.2.2+P3.2.4@rrf",
      "merged": true,
@@ -178209,7 +178209,7 @@
      }
     },
     {
-     "context": "P3.2.3（RRF）",
+     "context": "HyDE（RRF）",
      "left": "P3.2.3@rrf",
      "right": "P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -178796,7 +178796,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2（RRF）",
+     "context": "改写 + 翻译（RRF）",
      "left": "P3.2.1+P3.2.2@rrf",
      "right": "P3.2.1+P3.2.2+P3.2.4@rrf",
      "merged": true,
@@ -179336,7 +179336,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.3（RRF）",
+     "context": "改写 + HyDE（RRF）",
      "left": "P3.2.1+P3.2.3@rrf",
      "right": "P3.2.1+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -179885,7 +179885,7 @@
      }
     },
     {
-     "context": "P3.2.2+P3.2.3（RRF）",
+     "context": "翻译 + HyDE（RRF）",
      "left": "P3.2.2+P3.2.3@rrf",
      "right": "P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": true,
@@ -180450,7 +180450,7 @@
      }
     },
     {
-     "context": "P3.2.1+P3.2.2+P3.2.3（RRF）",
+     "context": "改写 + 翻译 + HyDE（RRF）",
      "left": "P3.2.1+P3.2.2+P3.2.3@rrf",
      "right": "P3.2.1+P3.2.2+P3.2.3+P3.2.4@rrf",
      "merged": true,

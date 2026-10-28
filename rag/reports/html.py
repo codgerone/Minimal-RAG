@@ -94,6 +94,8 @@ td.hm.badc{background:var(--bad-bg);color:var(--bad);font-weight:600}
 td.hm.mix{background:var(--warn-bg);color:var(--warn);font-weight:600}
 td.hm.flat{color:var(--muted)}td.hm.sel{box-shadow:inset 0 0 0 2px var(--accent)}
 td.hm.center{text-align:center}
+td.hm.unst{outline:1px dashed var(--warn);outline-offset:-4px}td.hm sup{font-size:10px;color:var(--warn)}
+td.pgray{background:#eceef1}td.pgray .up,td.pgray .down{color:var(--muted)}
 th.acc{background:#e3edff}
 .lnk{border:0;background:none;padding:0 2px;font:inherit;color:var(--accent);cursor:pointer}
 .lnk:hover{text-decoration:underline}

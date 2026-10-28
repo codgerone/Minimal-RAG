@@ -92,8 +92,10 @@ def key(**kw) -> str:
 
 
 PHRASING_STATES = sorted({(c.phrasings, c.fuse) for c in evaluated_configs()}, key=lambda x: (len(x[0]), x))
-DECOMPOSITIONS = {"不分解": {}, "不合并": dict(decompose=True),
-                  **{f"{m}{'+o' if o else ''}": dict(decompose=True, merge=m, original_route=o)
+MERGE_NAMES = {"rr": "轮流取", "rrf": "全局 RRF"}
+NAMES = {"P3.2.1": "改写", "P3.2.2": "翻译", "P3.2.3": "HyDE", "P3.2.4": "step-back"}
+DECOMPOSITIONS = {"不分解": {}, "分解不合并": dict(decompose=True),
+                  **{f"分解{MERGE_NAMES[m]}{' + 原问题一路' if o else ''}": dict(decompose=True, merge=m, original_route=o)
                      for m in ("rr", "rrf") for o in (False, True)}}
 
 
@@ -105,57 +107,59 @@ def group(name: str, pairs: list[tuple[str, str, str]]) -> dict:
 def ph_name(phrasings, fuse) -> str:
     if not phrasings:
         return "无写法"
-    return "+".join(phrasings) + ("（RRF）" if fuse else "（不融合）")
-
-
-groups = []
-# 1. the original route: off → on, per merge, across phrasing states
-for merge in ("rr", "rrf"):
-    groups.append(group(f"原问题一路 关 → 开（{merge}）", [
-        (ph_name(p, f), key(decompose=True, merge=merge, phrasings=p, fuse=f),
-         key(decompose=True, merge=merge, original_route=True, phrasings=p, fuse=f)) for p, f in PHRASING_STATES]))
-# 2. merge: round robin → global RRF, without and with the original route
-for o in (False, True):
-    groups.append(group(f"轮流取 → 全局 RRF（原问题一路{'开' if o else '关'}）", [
-        (ph_name(p, f), key(decompose=True, merge="rr", original_route=o, phrasings=p, fuse=f),
-         key(decompose=True, merge="rrf", original_route=o, phrasings=p, fuse=f)) for p, f in PHRASING_STATES]))
-# 3. unmerged → merged
-for name, d in DECOMPOSITIONS.items():
-    if d.get("merge"):
-        groups.append(group(f"不合并 → {name}", [
-            (ph_name(p, f), key(decompose=True, phrasings=p, fuse=f), key(**d, phrasings=p, fuse=f))
-            for p, f in PHRASING_STATES]))
-# 4. decomposition off → on (each decomposition state), across phrasing states
-for name, d in DECOMPOSITIONS.items():
-    if d:
-        groups.append(group(f"分解 不开 → {name}", [
-            (ph_name(p, f), key(phrasings=p, fuse=f), key(**d, phrasings=p, fuse=f)) for p, f in PHRASING_STATES]))
-# 5. each phrasing: off → RRF, off → unfused, unfused → RRF; per decomposition state
-for m in PHRASING_OF:
-    for (pa, fa), (pb, fb), title in ((((), True), ((m,), True), "不开 → RRF"),
-                                      (((), True), ((m,), False), "不开 → 不融合"),
-                                      (((m,), False), ((m,), True), "不融合 → RRF")):
-        groups.append(group(f"{m} {title}", [
-            (name, key(**d, phrasings=pa, fuse=fa), key(**d, phrasings=pb, fuse=fb)) for name, d in DECOMPOSITIONS.items()]))
-    # marginal: added to the other phrasings under RRF
-    others = [p for p, f in PHRASING_STATES if f and m not in p]
-    groups.append(group(f"{m} 加入其他写法（RRF，不分解）", [
-        (ph_name(p, True), key(phrasings=p, fuse=True) if p else "",
-         key(phrasings=tuple(x for x in PHRASING_OF if x in p or x == m), fuse=True)) for p in others]))
-
-(HERE / "pairs.json").write_text(json.dumps({"groups": groups}, ensure_ascii=False, indent=1), encoding="utf-8")
+    return " + ".join(NAMES[m] for m in phrasings) + ("（RRF）" if fuse else "（不融合）")
 
 
 def line(t):
     return f"+{t.get('better', 0)} −{t.get('worse', 0)} ◆{t.get('mixed', 0)} ={t.get('same', 0)}"
 
 
-for g in groups:
-    print("##", g["name"])
-    for p in g["pairs"]:
-        reg = sum(len(r.get("regress", [])) for r in p["combos"].values()) if p["merged"] else "—"
-        c = p["cost"]
-        q = {k: len(v) for k, v in p["consistency"].items()}
-        print(f"  {p['context']:<34} 合计 {line(p['total']):<22} 整表 {line(p['table']):<20} chunk {line(p['chunk']):<20}"
-              f" 题：一致变好 {q['better']} 一致变差 {q['worse']} 一致各有优势 {q['mixed']} 方向不一 {q['split']}"
-              f" 退化题次 {reg}  检索 {c['left'][0]:.1f}→{c['right'][0]:.1f}")
+def main() -> None:
+    groups = []
+    # 1. the original route: off → on, per merge, across phrasing states
+    for merge in ("rr", "rrf"):
+        groups.append(group(f"原问题一路 关 → 开（{MERGE_NAMES[merge]}）", [
+            (ph_name(p, f), key(decompose=True, merge=merge, phrasings=p, fuse=f),
+             key(decompose=True, merge=merge, original_route=True, phrasings=p, fuse=f)) for p, f in PHRASING_STATES]))
+    # 2. merge: round robin → global RRF, without and with the original route
+    for o in (False, True):
+        groups.append(group(f"轮流取 → 全局 RRF（原问题一路{'开' if o else '关'}）", [
+            (ph_name(p, f), key(decompose=True, merge="rr", original_route=o, phrasings=p, fuse=f),
+             key(decompose=True, merge="rrf", original_route=o, phrasings=p, fuse=f)) for p, f in PHRASING_STATES]))
+    # 3. unmerged → merged
+    for name, d in DECOMPOSITIONS.items():
+        if d.get("merge"):
+            groups.append(group(f"{name.replace('分解', '分解不合并 → ', 1)}", [
+                (ph_name(p, f), key(decompose=True, phrasings=p, fuse=f), key(**d, phrasings=p, fuse=f))
+                for p, f in PHRASING_STATES]))
+    # 4. decomposition off → on (each decomposition state), across phrasing states
+    for name, d in DECOMPOSITIONS.items():
+        if d:
+            groups.append(group(f"分解 不开 → {name.removeprefix('分解')}", [
+                (ph_name(p, f), key(phrasings=p, fuse=f), key(**d, phrasings=p, fuse=f)) for p, f in PHRASING_STATES]))
+    # 5. each phrasing: off → RRF, off → unfused, unfused → RRF; per decomposition state
+    for m in PHRASING_OF:
+        for (pa, fa), (pb, fb), title in ((((), True), ((m,), True), "不开 → RRF"),
+                                          (((), True), ((m,), False), "不开 → 不融合"),
+                                          (((m,), False), ((m,), True), "不融合 → RRF")):
+            groups.append(group(f"{m} {NAMES[m]} {title}", [
+                (name, key(**d, phrasings=pa, fuse=fa), key(**d, phrasings=pb, fuse=fb)) for name, d in DECOMPOSITIONS.items()]))
+        # marginal: added to the other phrasings under RRF
+        others = [p for p, f in PHRASING_STATES if f and m not in p]
+        groups.append(group(f"{m} {NAMES[m]} 加入其他写法（RRF，不分解）", [
+            (ph_name(p, True), key(phrasings=p, fuse=True) if p else "",
+             key(phrasings=tuple(x for x in PHRASING_OF if x in p or x == m), fuse=True)) for p in others]))
+    (HERE / "pairs.json").write_text(json.dumps({"groups": groups}, ensure_ascii=False, indent=1), encoding="utf-8")
+    for g in groups:
+        print("##", g["name"])
+        for p in g["pairs"]:
+            reg = sum(len(r.get("regress", [])) for r in p["combos"].values()) if p["merged"] else "—"
+            c = p["cost"]
+            q = {k: len(v) for k, v in p["consistency"].items()}
+            print(f"  {p['context']:<34} 合计 {line(p['total']):<22} 整表 {line(p['table']):<20} chunk {line(p['chunk']):<20}"
+                  f" 题：一致变好 {q['better']} 一致变差 {q['worse']} 一致各有优势 {q['mixed']} 方向不一 {q['split']}"
+                  f" 退化题次 {reg}  检索 {c['left'][0]:.1f}→{c['right'][0]:.1f}")
+
+
+if __name__ == "__main__":
+    main()
