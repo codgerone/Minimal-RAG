@@ -114,6 +114,13 @@ def test_a_whole_table_unit_counts_as_all_its_chunks_at_its_rank():
     assert (score.relevant, score.returned, score.first_relevant_rank) == (1, 3, 2)
 
 
+def test_first_ranks_are_the_first_unit_holding_any_chunk_of_a_group():
+    from rag.eval.metrics import first_ranks
+    evidence = [GroupEvidence("e1", "coordinate", (frozenset({"b", "c"}), frozenset({"d"}))),
+                GroupEvidence("e2", "coordinate", (frozenset({"z"}),))]
+    assert first_ranks([("x",), ("c",), ("d",), ("b",)], evidence) == {"e1": 2}
+
+
 def test_run_name_shows_config_k_and_filter_state():
     from rag.eval.runner import run_name
     assert run_name("structured", 3, True, "semantic").endswith("_structured_k3_filter-on")

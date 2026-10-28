@@ -5,8 +5,9 @@ of the query-side modules (P3.1, P3.2.1–P3.2.4, P3.3; the empty set is V3.13; 
 evaluated). Every configuration runs on the frozen plans (generation 0, cached): two per question,
 without and with decomposition; with decomposition the original-question route is always on
 (decision 014). Per question only what any K and any pair of configurations can be derived from
-is kept: each evidence group's needed units, the position of every evidence unit, the leading
-units (indices into the combination's unit table) and the cost. Where each leading unit came from
+is kept: each evidence group's needed units and the first unit holding any of its evidence, the
+position of every evidence unit, the leading units (indices into the combination's unit table)
+and the cost. Where each leading unit came from
 is kept apart, per configuration (`process`). Rules: docs/changes/v3.14.md.
 """
 
@@ -19,7 +20,7 @@ from itertools import combinations
 from typing import Any, Collection, Iterable
 
 from rag.eval.judge import judge_case
-from rag.eval.metrics import completion_ranks
+from rag.eval.metrics import completion_ranks, first_ranks
 from rag.eval.runner import _ingest_cost, prepare
 from rag.paths import Workspace
 from rag.query import execution
@@ -163,10 +164,12 @@ def case_facts(evidence, run: execution.QueryRun, table: UnitTable) -> tuple[dic
     """The facts of one run, and where each leading unit came from."""
     units = run.units
     needed = completion_ranks([u.chunk_ids for u in units], evidence.groups)
+    first = first_ranks([u.chunk_ids for u in units], evidence.groups)
     by_key = {u.key: u for u in units}
     leading = run.order[:LEADING]
     cost = run.cost
     facts = {"n": [needed.get(g.group_id) for g in evidence.groups],
+             "f": [first.get(g.group_id) for g in evidence.groups],
              "u": [table.of(s.unit) for s in leading],
              "e": {str(table.of(by_key[k])): p for k, p in evidence_positions(evidence, run).items()},
              "c": [cost.retrievals, round(cost.retrieval_seconds, 4), cost.llm_calls,

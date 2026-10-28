@@ -55,6 +55,18 @@ def completion_ranks(units: list[tuple[str, ...]], evidence: list[GroupEvidence]
     return completion
 
 
+def first_ranks(units: list[tuple[str, ...]], evidence: list[GroupEvidence]) -> dict[str, int]:
+    """Group → the rank of the first unit holding any chunk of any of its acceptable sets;
+    groups with no such unit are left out."""
+    first: dict[str, int] = {}
+    for group in evidence:
+        chunks = {cid for chunk_set in group.acceptable_sets for cid in chunk_set}
+        rank = next((r for r, chunk_ids in enumerate(units, start=1) if chunks.intersection(chunk_ids)), None)
+        if rank is not None:
+            first[group.group_id] = rank
+    return first
+
+
 def score_question(units: list[tuple[str, ...]], unit_documents: list[str],
                    evidence: list[GroupEvidence], evidence_documents: set[str]) -> QuestionScore:
     relevant_ids = {cid for group in evidence for chunk_set in group.acceptable_sets for cid in chunk_set}
