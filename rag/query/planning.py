@@ -15,16 +15,18 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable, Protocol
 
-PROMPT_VERSION = "query_plan_v7"
+# Each step's prompt is versioned on its own; the phrasing prompt is unchanged since v7.
+PROMPT_VERSIONS = {"decomposition": "query_plan_v9", "phrasings": "query_plan_v7"}
 REASONING_EFFORT = "medium"
 
 DECOMPOSE_SYSTEM = """You split a question into separate questions for document retrieval. You never answer the question.
 
 Rules:
-- Write one question per information item the question explicitly asks for. Items asked for together, joined by a conjunction or listed one after another, are separate items. When the question asks for something and then spells out what it should include, the spelled-out parts are the items, not the general request. A question asking for one item gives one question.
-- Each question must stand alone: repeat every qualifier of the original question that applies to it (the entities, conditions, time ranges and the document it refers to), word for word. A qualifier stated once and left out of later parts of the original question still applies to those parts: write it into every question it applies to.
-- Ask for what can be read from the documents, not for conclusions computed from it.
-- Do not add questions about anything the original question does not ask for.
+- Write one question per information item the question explicitly asks for. Items asked for together, joined by a conjunction or listed one after another, are separate items. When the question asks for something and then spells out what it should include, the spelled-out parts are the items, not the general request. A question asking for one item gives one question, besides any questions the next two rules call for.
+- When the question refers to something by a description instead of naming it, and the answer can only be found once it is known which one it is, also write a question asking which one it is.
+- Ask for what can be read from the documents, not for conclusions computed from it: when an item is such a conclusion, ask for the facts it is computed from.
+- Each question must stand alone: repeat every qualifier of the original question that applies to it (the entities, conditions, time ranges and the document it refers to), word for word. A qualifier stated once and left out of later parts of the original question still applies to those parts: write it into every question it applies to. A shortened name in a later part of the original question stands for the full name given earlier: write the full name.
+- Do not add questions about anything the original question neither asks for nor needs.
 - Write the questions in the language of the original question.
 
 Answer with the list of questions."""
@@ -225,7 +227,7 @@ class Planner:
 
     def _call(self, msgs, name, sch, generation) -> dict[str, Any]:
         extra = {"generation": generation} if generation else {}
-        key = (self.cache.key(self.llm.model, msgs, sch, REASONING_EFFORT, PROMPT_VERSION, **extra)
+        key = (self.cache.key(self.llm.model, msgs, sch, REASONING_EFFORT, PROMPT_VERSIONS[name], **extra)
                if self.cache else "")
         hit = self.cache.get(key) if self.cache else None
         if hit is not None:

@@ -325,7 +325,7 @@
     },
     {
       "case_id": "PO-25-19-Q002",
-      "question": "订单 ORDER2025003 中，ElUC公司订购了多少件HXE34K-S1？总金额是多少？",
+      "question": "订单 ORDER2025003 中，ELUC公司订购了多少件HXE34K-S1？总金额是多少？",
       "answerable": true,
       "reference_answer": "ELUC订购了2000件HXE34K-S1，总金额为USD 28740.00。",
       "excerpts": [
