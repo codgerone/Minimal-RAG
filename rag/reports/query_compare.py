@@ -47,7 +47,7 @@ var CASE={};D.cases.forEach(function(q){CASE[q.case_id]=q});
 var VN={better:'变好',worse:'变差',mixed:'各有优势',same:'不变'},VS={better:'▲',worse:'▼',mixed:'◆',same:'·'},
     VC={better:'good',worse:'badc',mixed:'mix',same:'flat'},VB={better:'ok',worse:'bad',mixed:'warn',same:''};
 var ORDER=['better','worse','mixed','same'];
-function blank(){return {d:false,merge:null,o:false,ph:new Set(),fuse:true}}
+function blank(){return {d:false,merge:null,o:false,s:false,ph:new Set(),fuse:true}}   // fuse: the original text is one of the retrieval texts
 var S={L:blank(),R:blank(),km:3,doc:'all',all:false,focus:null,cell:null,flip:null,
   pq:D.cases[0].case_id,pc:D.combos[0].label};
 window.QC_FACTS=window.QC_FACTS||{};window.QC_PROCESS=window.QC_PROCESS||{};window.QC_PERTURB=window.QC_PERTURB||{};
@@ -58,21 +58,25 @@ function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;
 function phs(c){return PH.filter(function(m){return c.ph.has(m)})}
 function key(c){var p=[];
   if(c.d)p.push('P3.1'+(c.merge?'@'+c.merge:'')+(c.o?'-o':''));
+  if(c.s)p.push('P3.2.0');
   if(c.ph.size)p.push(phs(c).join('+')+(c.fuse?'@rrf':''));
   return p.join('_')}
 function parse(k){var c=blank();
   (k||'').split('_').filter(Boolean).forEach(function(part){
     var i=part.indexOf('@'),body=i<0?part:part.slice(0,i),opt=i<0?'':part.slice(i+1);
     if(body==='P3.1'){var m=opt.split('-');c.d=true;c.merge=MERGE[m[0]]?m[0]:null;c.o=!!c.merge&&m[1]==='o'}
+    else if(body==='P3.2.0')c.s=true;
     else{body.split('+').forEach(function(x){if(PH.indexOf(x)>=0)c.ph.add(x)});c.fuse=opt==='rrf'||c.ph.size>1}
   });
   return c}
 function merged(c){return !c.d||!!c.merge}
 function decLabel(c){return c.merge?MERGE[c.merge]+(c.o?' + 原问题一路':''):'不合并'}
-function phLabel(c){return phs(c).map(function(m){return MNAME[m]}).join(' + ')+'（'+(c.fuse?'RRF':'不融合')+'）'}
+function textsLabel(c){var t=(c.fuse?['原句']:[]).concat(phs(c).map(function(m){return MNAME[m]}));
+  return t.join(' + ')+(t.length>1?'（RRF）':'')}
 function label(c){var p=[];
   if(c.d)p.push('P3.1 分解（'+decLabel(c)+'）');
-  if(c.ph.size)p.push(phLabel(c));
+  if(c.s)p.push('去编码');
+  if(c.ph.size)p.push(textsLabel(c));
   return p.length?p.join(' · '):'V3.13（无模块）'}
 function diffs(L,R){
   var out=[];
@@ -81,9 +85,8 @@ function diffs(L,R){
     if(L.merge!==R.merge)out.push('合并方式：'+(MERGE[L.merge]||'不合并')+' → '+(MERGE[R.merge]||'不合并'));
     if(L.o!==R.o)out.push('原问题一路：'+(L.o?'开':'关')+' → '+(R.o?'开':'关'));
   }
-  var a=phs(L).join('+'),b=phs(R).join('+');
-  if(a!==b)out.push('写法：'+(L.ph.size?phLabel(L):'无')+' → '+(R.ph.size?phLabel(R):'无'));
-  else if(L.ph.size&&L.fuse!==R.fuse)out.push('融合方式：'+(L.fuse?'RRF':'不融合')+' → '+(R.fuse?'RRF':'不融合'));
+  if(L.s!==R.s)out.push('去编码：'+(L.s?'开':'关')+' → '+(R.s?'开':'关'));
+  if(textsLabel(L)!==textsLabel(R))out.push('检索文本：'+textsLabel(L)+' → '+textsLabel(R));
   return out}
 
 function readHash(){
@@ -157,25 +160,27 @@ function opt(side,type,name,value,checked,enabled,text,why){
   return '<label class="'+(enabled?'':'off')+'"'+(why?' title="'+esc(why)+'"':'')+'><input type="'+type+'" data-side="'+side+'" data-f="'+name+'" value="'+value+'"'
     +(type==='radio'?' name="'+side+'-'+name+'"':'')+(checked?' checked':'')+(enabled?'':' disabled')+'> '+text+'</label>';
 }
+/* three steps along the data flow (proposal v3.14, "分层评估"): questions -> each question's
+   retrieval texts -> merge across questions */
 function sidePicker(side){
-  var c=S[side],one=!c.fuse&&c.ph.size===1;
-  var dec='<div class="cfg-row">'+opt(side,'checkbox','d','1',c.d,true,'<b>P3.1</b> 分解')+'</div>'
-    +'<div class="cfg-sub">合并方式：'
-    +opt(side,'radio','merge','',c.d&&!c.merge,c.d,'不选（不合并，只用于评估）',c.d?'':'先勾选 P3.1')
-    +opt(side,'radio','merge','rr',c.merge==='rr',c.d,'轮流取',c.d?'':'先勾选 P3.1')
-    +opt(side,'radio','merge','rrf',c.merge==='rrf',c.d,'全局 RRF',c.d?'':'先勾选 P3.1')
-    +'<br>'+opt(side,'checkbox','o','1',c.o,!!c.merge,'原问题一路'+(c.merge==='rrf'?'（作为一条排名参与融合）':'（每圈最后）'),c.merge?'':'选了合并方式才可开')
-    +(c.merge?'':'<span class="meta">选了合并方式才可开</span>')+'</div>';
-  var ph='<div class="cfg-row">'+PH.map(function(m){
-      var en=!(one&&!c.ph.has(m));
-      return opt(side,'checkbox','ph',m,c.ph.has(m),en,'<b>'+m+'</b> '+esc(MNAME[m]),en?'':'不融合时只能勾一种写法');
+  var c=S[side],solo=!c.fuse;   // without the original text exactly one phrasing is retrieved
+  var step1='<div class="cfg-step">① 问题 <span class="meta">检索用哪些问题</span></div><div class="cfg-row">'
+    +opt(side,'radio','d','0',!c.d,true,'不分解（原问题）')+opt(side,'radio','d','1',c.d,true,'<b>P3.1</b> 分解（子问题）')+'</div>';
+  var step2='<div class="cfg-step">② 每个问题的检索文本 <span class="meta">对 ① 的每个问题分别处理</span></div>'
+    +'<div class="cfg-row">'+opt(side,'checkbox','s','1',c.s,true,'<b>P3.2.0</b> 去编码（作用于下面勾选的全部文本）')+'</div>'
+    +'<div class="cfg-row">'+opt(side,'checkbox','orig','1',c.fuse,!c.fuse||c.ph.size===1,'原句（'+(c.d?'该子问题':'原问题')+'）',
+        c.fuse&&c.ph.size!==1?'不含原句时须恰好勾一种写法':'')
+    +PH.map(function(m){var en=!(solo&&!c.ph.has(m));
+      return opt(side,'checkbox','ph',m,c.ph.has(m),en,'<b>'+m+'</b> '+esc(MNAME[m]),en?'':'不含原句时只能勾一种写法');
     }).join('')+'</div>'
-    +'<div class="cfg-sub">融合方式：'
-    +opt(side,'radio','fuse','1',c.ph.size&&c.fuse,c.ph.size>0,'RRF（原句 + 勾选的写法）',c.ph.size?'':'先勾选写法')
-    +opt(side,'radio','fuse','0',c.ph.size&&!c.fuse,c.ph.size===1,'不选（不融合：一种写法代替原句）',c.ph.size===1?'':c.ph.size?'不融合时只能勾一种写法':'先勾选写法')
-    +'</div>';
-  var rr='<div class="cfg-row"><label class="off" title="搁置，未评估"><input type="checkbox" disabled> <b>P3.3</b> 重排</label> <span class="badge warn">搁置，未评估</span></div>';
-  return '<div class="cfg"><div class="cfg-side">'+(side==='L'?'左侧':'右侧')+'</div>'+dec+ph+rr+'</div>';
+    +'<div class="cfg-sub meta">只勾 1 条：直接用它检索；勾 2 条以上：各检索一次后 RRF 融合（须含原句）。当前：'+esc(textsLabel(c))+'</div>';
+  var step3='<div class="cfg-step">③ 跨问题合并 <span class="meta">'+(c.d?'把各子问题的排名合成返回顺序':'仅分解时可用')+'</span></div><div class="cfg-row">'
+    +opt(side,'radio','merge','',c.d&&!c.merge,c.d,'不合并（逐个子问题评估）',c.d?'':'先选 P3.1 分解')
+    +opt(side,'radio','merge','rr',c.merge==='rr',c.d,'轮流取',c.d?'':'先选 P3.1 分解')
+    +opt(side,'radio','merge','rrf',c.merge==='rrf',c.d,'全局 RRF',c.d?'':'先选 P3.1 分解')+'</div>'
+    +'<div class="cfg-sub">'+opt(side,'checkbox','o','1',c.o,!!c.merge,'原问题一路（原问题原句，带编码，不经过 ②；'+(c.merge==='rrf'?'作为一条排名参与融合':'每圈最后')+'）',c.merge?'':'选了合并方式才可开')+'</div>';
+  var rr='<div class="cfg-step">④ <label class="off" title="搁置，未评估"><input type="checkbox" disabled> <b>P3.3</b> 重排</label> <span class="badge warn">搁置，未评估</span></div>';
+  return '<div class="cfg"><div class="cfg-side">'+(side==='L'?'左侧':'右侧')+'</div>'+step1+step2+step3+rr+'</div>';
 }
 function renderPicker(){
   document.getElementById('qc-sides').innerHTML=sidePicker('L')+sidePicker('R');
@@ -429,7 +434,8 @@ function renderProcess(){
     cfg.ph.forEach(function(m){kinds[KIND[m]]=1});
     planHtml=(cfg.d?'<div class="meta">分解为 '+p.questions.length+' 个子问题；'+(cfg.merge?'合并方式：'+MERGE[cfg.merge]+(cfg.o?'，另有原问题一路（'+(cfg.merge==='rr'?'每圈最后':'作为一条排名参与融合')+'）':'')
         :'不合并：各子问题的排名分别列出，没有返回顺序')+'。</div>':'<div class="meta">不分解：原问题是唯一的问题。</div>')
-      +(cfg.ph.size?'<div class="meta">'+(cfg.fuse?'每个问题的原句与启用的写法各检索一次，按 RRF 融合。':'不融合：每个问题只用 '+esc(MNAME[phs(cfg)[0]])+' 检索一次，代替原句。')+'</div>':'')
+      +(cfg.ph.size?'<div class="meta">'+(cfg.fuse?'每个问题的原句与启用的写法各检索一次，按 RRF 融合。':'每个问题只用 '+esc(MNAME[phs(cfg)[0]])+' 检索一次，代替原句。')+'</div>':'')
+      +(cfg.s?'<div class="meta">去编码：下列文字在检索前删去标识编码 '+esc(scope.codes.join('、')||'（无）')+'（原问题一路不删）。</div>':'')
       +(p.degraded.length?'<div class="meta down">规划降级：'+esc(p.degraded.join('；'))+'</div>':'')
       +p.questions.map(function(x){
         return '<div class="item"><b>'+esc(x.id)+'</b> '+esc(x.text)+(kinds.question?'':' <span class="meta">（原句不检索）</span>')+x.phrasings.filter(function(f){return kinds[f.kind]&&f.kind!=='question'}).map(function(f){
@@ -479,11 +485,12 @@ function render(){
 function scrollTo(id){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})}
 function setOption(box){
   var c=S[box.dataset.side],f=box.dataset.f;
-  if(f==='d'){c.d=box.checked;if(!c.d){c.merge=null;c.o=false}}
+  if(f==='d'){c.d=box.value==='1';if(!c.d){c.merge=null;c.o=false}}
+  else if(f==='s')c.s=box.checked;
+  else if(f==='orig')c.fuse=box.checked;
   else if(f==='merge'){c.merge=box.value||null;if(!c.merge)c.o=false}
   else if(f==='o')c.o=box.checked;
   else if(f==='ph'){box.checked?c.ph.add(box.value):c.ph.delete(box.value);if(c.ph.size!==1)c.fuse=true}
-  else if(f==='fuse')c.fuse=box.value==='1';
 }
 document.addEventListener('change',function(e){
   var t=e.target;
