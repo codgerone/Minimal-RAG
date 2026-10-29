@@ -1,6 +1,5 @@
-"""Review page: what each query-side measure does on its own, why some questions get worse or mixed, and
-which questions suit it (proposal v3.14, 2026-10-29). Conclusions first; every cause names its
-experiment, or "未验证".
+"""Evidence page for module 1 of the comparison page (module.py): the single-factor table, the per-question
+verdicts in the four generations and experiments A–E (proposal v3.14, 2026-10-29).
 
 Reads pairs.json, features.json and the experiments exp_*.json next to this script, and the v8 plans.
 Writes index.html next to this script. Run: python reports/experiments/v3.14-factors/review.py
@@ -21,9 +20,11 @@ HERE = Path(__file__).resolve().parent
 PAIRS = json.loads((HERE / "pairs.json").read_text(encoding="utf-8"))
 FEAT = json.loads((HERE / "features.json").read_text(encoding="utf-8"))
 CODES = json.loads((HERE / "exp_codes.json").read_text(encoding="utf-8"))
+CODES2 = json.loads((HERE / "exp_codes2.json").read_text(encoding="utf-8"))
 CHAN = json.loads((HERE / "exp_channels.json").read_text(encoding="utf-8"))
 NOISE = json.loads((HERE / "exp_noise.json").read_text(encoding="utf-8"))
 STEP = json.loads((HERE / "exp_stepback.json").read_text(encoding="utf-8"))
+STEP2 = json.loads((HERE / "exp_stepback2.json").read_text(encoding="utf-8"))
 TERMS = json.loads((HERE / "exp_terms.json").read_text(encoding="utf-8"))
 PLANS = json.loads((HERE.parent / "v3.14-phrasings-v8/plans.json").read_text(encoding="utf-8"))
 PAGE = "../../query/v3.14/index.html"
@@ -110,54 +111,6 @@ def card(title: str, body: str, kind: str = "") -> str:
 
 
 # ---------------------------------------------------------------- conclusions
-
-CONCLUSIONS = [
-    ("P3.2.0 去编码", "建议固定启用", "ok", """
-<p><b>作用</b>：只删去文档过滤识别出的标识编码，不调用 LLM、没有随机性（同一输入结果恒定）。原问题上 13 组合 × 32 题：▲82 ▼51 ◆1；
-按信息项：<b>证据在正文的信息项从未变差（↑134 ↓0）</b>，变差全部发生在证据在表格的信息项（↑60 ↓78），且多为 1–2 名。</p>
-<p><b>原因（已验证，实验 A）</b>：编码是用户分配的字符串，不出现在文档里，BM25 匹配不到，作用只经过向量。把编码换成别的写法对照：
-① 合同类正文题（Q001、Q003、Q004、Q007）只要换掉真实编码的数字（换成其他数字、只剩字母、无意义词）就和删去一样变好——真实编码的数字串（含 2025）把向量拉向含同样数字的块（如保函编号 3012025041885 的 c0003）；
-② 表格题只在 PO-25-19-Q005 上得到干净的结论：换成别的数字、保留年份都与原样相同（e2 第 4），只剩字母与删去相同（第 6）——带数字的编码让向量偏向数字密集的表格。
-CONTRACT-105-Q010 换数字反而更好、只剩字母则一项变好一项变差；PO-25-19-Q001、Q003 在实验的 3 个组合上删去几乎不变（变差出现在其他组合，各 1–2 名）。表格题变差的机制只在 1 题上验证，其余<b>未验证</b>。</p>
-<p><b>是不是措施本身的问题</b>：表格信息项的小幅变差是"去掉了一个碰巧有利的噪声"，不是去编码引入的新错误；正文信息项的改善是去掉了有害的噪声。两者都来自编码本身不是文档内容。</p>
-<p><b>稳定性</b>：作用于原句时 4 次生成结果相同（▲8 ▼7 ◆2 题）。作用于 LLM 写法时随写法变化：翻译去编码 4 次按题 ▲8/9/8/6、▼2/3/4/4，没有一题 4 次都变差；HyDE 去编码第 0 次 ▲3 ▼6、其余 3 次 ▲7 ▼2–4，有 4 题在不同生成中翻转。方向总体有利，但对写法的效果有一部分是随机的。</p>
-<p><b>适用条件</b>：编码按规则由用户分配、不出现在文档中（<code>rules/document-filter.md</code>）。若用户登记了文档里真实出现的编号，删去会丢掉一个 BM25 可匹配的词——本数据中没有这种编码，<b>未验证</b>。</p>"""),
-    ("P3.2.2 翻译", "建议启用，但只与原句 RRF 融合使用", "ok", """
-<p><b>关键事实（已验证，实验 B）</b>：中文问题在英语、西语文档上几乎没有 BM25 匹配（只匹配题面里的拉丁字母词），<b>V3.13 的"混合检索"对中文问题实际上就是向量检索</b>。翻译成文档语言后，BM25 通道才真正起作用。所以翻译的效果 = 向量通道的语言变化 + 新加入的 BM25 通道。</p>
-<p><b>单独使用</b>（两侧去编码）：▲130 ▼83 ◆16；按信息项 表 ↑104 ↓127、文 ↑132 ↓39。通道拆分（RM-T、RM-C）：只看向量时 表 ↑21 ↓14、文 ↑12 ↓18；加上 BM25 后 表 ↑15 ↓21、文 ↑20 ↓6。
-<b>BM25 通道帮正文、伤表格</b>：表格单元以数字、型号为主，问题里的通用词（delivery、date、amount、entrega、fecha）在说明性正文里更多。</p>
-<p><b>变差的题</b>：PO-25-15-Q001/Q002（条件说明段 c0002、c0004 含 delivery 等词，BM25 排第 1–2，表格 1→3）、CONTRACT-105-Q010（BM25 把价格条款 c0010 等提前，证据在 BM25 排 10、20）、PO-25-19-Q007（向量变好 3→2，BM25 排 10，混合后 6）、PO-25-19-Q001 e5、E001-602-Q001（两个通道都把发票抬头 c0000 排到第 1，证据 1→2；抬头为什么胜出<b>未验证</b>）。
-变差题的译文逐条看过，都忠实于原题，没有误译；但译文用通用说法（"fourth delivery batch""Batch 1"），文档表格写的是"4th Delivery""1st Delivery"。
-<b>只把这个短语换成文档用词（已验证，实验 E）</b>：BM25 中证据名次 PO-25-19-Q007 10→2、PO-25-15-Q001/Q002 5→3；混合检索 Q007 6→2（好于中文原句的 3），PO-25-15 两题 3→2/1 但 e2 仍为 4（说明性正文的干扰仍在）。
-所以变差有两个来源：① 加入词汇匹配通道后说明性正文胜过表格——固有代价；② 翻译不看文档，写不出文档特有的标签——同样是"只凭问题翻译"的固有局限，提示词无法通用地解决（"用该语言文档的术语"已写在提示词里）。</p>
-<p><b>题目特性</b>：变好集中在证据为正文条款的题（合同 Q003、Q011–Q014，PO 24-12 的说明类题）；变差集中在证据全在表格、且文档有大量说明性正文的题（PO 25-15、PO 25-19、发票）。检索前无法知道证据在不在表格，<b>没有可在查询时使用的路由规则</b>。</p>
-<p><b>怎么启用</b>：与原句 RRF 融合时 BM25 通道只占一半权重：原句 → 原句 + 翻译 ▲147 ▼58（单独替换原句时 ▲150 ▼83），损失明显减少而收益基本保留。</p>
-<p><b>稳定性（4 次独立生成）</b>：单独使用按题 ▲10/10/10/10、▼5/6/4/8；4 次都变好 9 题、都变差 3 题（CONTRACT-105-Q009、PO-25-15-Q001、Q002），PO-25-19 的 5 道表格题 4 次都是 ◆，没有一题翻转。
-上面列的变差题中 E001-602-Q001 在 3/4 次变差、CONTRACT-105-Q010 在 2/4 次变差（另 2 次为 ◆）、PO-25-19-Q007 在 3/4 次为 ◆（1 次变好），属于"多数时候"而不是"每次"；CONTRACT-105-Q009 第 0 次未列出，但 4 次都变差（原因<b>未验证</b>）。
-与原句融合：题次 ▲147–154 ▼58–72，按题 4 次都变好 10 题、都变差 5 题、无翻转——<b>方向稳定，变差的题也稳定</b>，是固有代价而非随机。</p>"""),
-    ("P3.2.3 HyDE", "可与翻译同样以 RRF 融合使用；单独使用不建议", "warn", """
-<p>HyDE 写的是文档语言的假想答案，与翻译同样打开 BM25 通道，规律相同但对表格更不利：单独使用（两侧去编码）▲109 ▼137 ◆23；按信息项 表 ↑80 ↓202、文 ↑121 ↓73。
-通道拆分：只看向量 表 ↑13 ↓18、文 ↑8 ↓20；加上 BM25 后 表 ↑9 ↓37、文 ↑22 ↓10（已验证，实验 B）。假想段落是叙述句，形似正文条款而不像表格行（<b>未验证</b>）。</p>
-<p>与原句 RRF 融合：▲162 ▼88，净收益为各措施中最大；4 次生成题次 ▲143–162 ▼69–88，按题 4 次都变好 9 题、都变差 3 题（PO-25-15-Q001、Q002、PO-25-19-Q006），无翻转。在子问题上融合则第 0 次 ▲101 ▼136，另三次 ▲97–132 ▼78–126，不稳定。</p>
-<p><b>单独使用不稳定</b>：按题 ▼8/9/6/11，第 3 次生成明显更差（▲5 ▼11）；4 次都变差 4 题，PO-24-12-Q003 一次变好三次变差。假想答案每次写法不同，随机性大于翻译。</p>
-<p><b>与翻译叠加</b>（原句 + 翻译 → 原句 + 翻译 + HyDE，带编码）：4 次按题 ▲6/9/5/8 ▼5/5/3/5，其余多为 ◆；每次净值略正，但幅度接近措辞噪声（实验 C），<b>不能确认叠加有额外收益</b>。</p>"""),
-    ("P3.2.1 改写", "建议不采用", "bad", """
-<p>改写仍是中文，不改变 BM25 通道。原问题上（两侧带编码）13 组合中 4 种看到的题：15/32 题有变化，▲24 ▼23，正负相当。</p>
-<p><b>与措辞噪声无法区分（已验证，实验 C）</b>：不改意思的机械改动（问号改句号、句子倒序）就会使 9/32、10/23 题的判定改变；"句子倒序"▲17 ▼8 ◆6。改写变化的题数与方向都落在这个范围内。
-它的变化是向量对措辞的敏感，不是改写本身有作用；额外花一次 LLM 调用没有可确认的收益。</p>
-<p><b>稳定性</b>：4 次生成题次 ▲59–74 ▼44–69，按题 4 次一致的只有 ▲4 ▼4，另有 CONTRACT-105-Q014 翻转——与"噪声"的判断一致。</p>"""),
-    ("P3.2.4 step-back", "建议不采用", "bad", """
-<p>单独使用（两侧去编码）▲43 ▼183 ◆34，在所有措施中最差；向量通道 表 ↑2 ↓43、文 ↑4 ↓38。</p>
-<p><b>原因（已验证，实验 D）</b>：step-back 按定义去掉把问题限定到单个实例的条件，而这些条件正是题面里的公司名、型号和西语条款名（ELUC、HXE34K-S1、Garantía Técnico-Comercial）；对中文问题它们还是仅有的 BM25 锚点。
-把被去掉的词原样补回（其余不动），混合检索下 9 道变差题中 6 道完全恢复到原句水平、CONTRACT-105-Q002 大部分恢复；PO-25-19-Q001、Q003 不恢复（它们的 step-back 还改写了"交货计划"的问法，原因<b>未验证</b>）。<b>这是措施本身的固有缺陷</b>：它要去掉的恰是检索最需要的词。</p>
-<p><b>稳定性</b>：4 次生成题次 ▼129–194，均远多于 ▲；按题 4 次都变差 5 题、都变好 3 题，无翻转。缺陷稳定存在，不是某次写法的偶然。</p>
-<p>它变好的题：CONTRACT-105-Q011 的提升来自去掉"Ítem"——这个词在 BM25 中匹配到错误的块（补回后又退到 12 名），属于碰巧；CONTRACT-105-Q012、PO-25-19-Q007 的答案在通用条款里（按批次统一规定），去掉具体批次反而贴近原文。这类题检索前无法识别。</p>"""),
-    ("P3.1 分解", "维持上次结论：条件启用候选（V3.15 补救）", "warn", """
-<p>检索层（不合并，每个信息项在对应子问题中）：▲111 ▼38 ◆39；按信息项 表 ↑139 ↓81、文 ↑104 ↓26，对表格信息项尤其有利。去编码后 ▲106 ▼53 ◆22。
-变差的原因上次已逐条做过对照实验（<code>reports/experiments/v3.14-decomposition-diagnosis/</code>）：A 答案需计算或推断、不是拆解导致；B 证据单元的表示问题；C 拆解丢了所指或限定条件（真正的拆解缺陷，补回后不差于原问题）；D 第二跳依赖第一跳。</p>
-<p><b>稳定性</b>：检索层 4 次题次 ▲104–116 ▼36–45，按题 4 次都变好 6 题、都变差 2 题（E001-602-Q002、PO-24-12-Q001），无翻转；合并层的损失（轮流取 ▼101–121、全局 RRF ▼111–133）4 次都在。</p>
-<p>分解的主要损失在合并层：不合并 → 轮流取 ▲35 ▼101、→ 全局 RRF ▲32 ▼117（每个子问题的第 1 名必占一位、隐含前提拆成多问被稀释，上次已验证）。</p>"""),
-]
 
 SIDE_FINDINGS = """
 <ul>
@@ -269,7 +222,26 @@ def exp_codes() -> str:
             + '</tr>' + "".join(rows) + '</table></div>'
             '<p><b>读法</b>：后 5 题中合同 4 题换成别的数字也变好 → 有害的是真实编码这串数字（发票题换数字不变好、换成无意义词才变好，原因未验证）；'
             'PO-25-19-Q005 换数字与原样相同、只剩字母与删去相同 → 有利的是"带数字"这一形式；其余 3 道表格题结论不一致。'
-            '"无意义词"在 9 题上都不差于删去，但这不是可用的做法（用什么词替换没有依据）。</p>')
+            '"无意义词"在 9 题上都不差于删去，但这不是可用的做法（用什么词替换没有依据）。</p>'
+            + exp_codes2())
+
+
+def exp_codes2() -> str:
+    names = ["原样", "删去", "换数字", "保留年份", "只有字母", "无意义词"]
+    combos = list(next(iter(CODES2.values()))["原样"]["ranks"])
+    rows = []
+    for case, d in CODES2.items():
+        for i, combo in enumerate(combos):
+            base = d["原样"]["ranks"][combo]
+            cells = "".join(f'<td class="num nw">{mark(ver(base, d[n]["ranks"][combo]))} {ns(d[n]["ranks"][combo])}</td>' for n in names)
+            rows.append(f'<tr>{f"<td rowspan={len(combos)} class=nw>{esc(case)}</td>" if i == 0 else ""}<td class="nw">{combo}</td>{cells}</tr>')
+    return ('<h3>第二部分：其余去编码后变差的题</h3>'
+            '<p>上面 3 个组合看不到这些题的变化（它们只在带引导句、摘要的入库方式上变差），所以在变差的组合上重做（<code>exp_codes2.py</code>）。</p>'
+            '<div class="scroll"><table><tr><th>题</th><th>组合</th>' + "".join(f'<th class="num">{n}</th>' for n in names)
+            + '</tr>' + "".join(rows) + '</table></div>'
+            '<p><b>读法</b>：CONTRACT-105-Q014、PO-25-19-Q001、PO-25-19-Q003（LL-C 除外）换成别的数字或保留年份时接近原样、只剩字母时接近删去 → 与 PO-25-19-Q005 相同，有利的是"带数字"。'
+            'PO-25-19-Q002、PO-25-19-Q007、PO-24-12-Q004 用任何内容占住编码的位置（含无意义词）都接近原样，只有删去（以及部分组合上的只剩字母）变差 → 不是数字的作用，'
+            '是删去一个词改变了句子，属于向量对措辞的敏感（与实验 C 同类）。PO-25-19-Q009 在这些组合上删去反而变好（只剩字母最好），与合同正文题同向。</p>')
 
 
 def exp_channels(kind: str) -> str:
@@ -312,7 +284,10 @@ def exp_noise() -> str:
                     f'<span class="up">▲{c["better"]}</span> <span class="down">▼{c["worse"]}</span> ◆{c["mixed"]}</td></tr>')
     return ('<p>对原问题做只改形式、不改意思的机械改动（由代码完成，不调用 LLM），与各措施在相同的 4 个组合（RM-T、RM-C、LM-C、LL-T）上比较。'
             '"句子倒序"只适用于含多句的 23 题。判定为题次（4 组合 × 题）。</p><div class="scroll"><table><tr><th>改动</th>'
-            '<th class="num">判定有变化的题</th><th>判定（题次）</th></tr>' + "".join(rows) + '</table></div>')
+            '<th class="num">判定有变化的题</th><th>判定（题次）</th></tr>' + "".join(rows) + '</table></div>'
+            '<p><b>读法</b>：按总量，改写变化的题数落在这个范围内；但逐题看，改写在 4 次生成中都变差的题（PO-24-12-Q003、Q005、PO-25-19-Q006 等）'
+            '在这些机械改动下判定都不变——它们对"改成名词短语"这种改法敏感，而不是对任意改动敏感。所以本实验只能说明改写的总量与措辞噪声同量级，'
+            '不能把单题的变差归为随机噪声。</p>')
 
 
 def exp_step() -> str:
@@ -329,7 +304,24 @@ def exp_step() -> str:
     return ('<p>step-back 文本去掉了题面中的拉丁字母词（公司、型号、西语条款名）的题：把去掉的词原样加在括号里补回，其余不动（两侧去编码，RM-T）。</p>'
             f'<p class="sub">例（PO-25-19-Q002）：step-back「{esc(sample["step-back"])}」→ 补回「{esc(sample["补回"])}」</p>'
             '<div class="scroll"><table><tr><th>题</th><th>被去掉的词</th><th class="num">原句（混合）</th><th class="num">step-back（混合）</th>'
-            '<th class="num">补回（混合）</th><th class="num">只用向量：step-back → 补回</th></tr>' + "".join(rows) + '</table></div>')
+            '<th class="num">补回（混合）</th><th class="num">只用向量：step-back → 补回</th></tr>' + "".join(rows) + '</table></div>'
+            + exp_step2())
+
+
+def exp_step2() -> str:
+    combos = list(next(iter(STEP2.values()))["n"]["原句"])
+    rows = "".join(
+        f'<tr><td class="nw">{esc(case)}</td><td>{esc("、".join(d["texts"]["dropped"]))}</td>'
+        + "".join(f'<td class="num nw">{" / ".join(ns(d["n"][n][c]) for c in combos)}</td>' for n in ("原句", "step-back", "补回")) + '</tr>'
+        for case, d in STEP2.items())
+    return ('<h3>第二部分：去掉的中文限定</h3>'
+            '<p>没有拉丁字母词的题，step-back 去掉的是中文限定（哪一批、哪家公司、哪种担保）。把去掉的限定原样加在括号里补回（<code>exp_stepback2.py</code>，限定由人从题面读出，是本实验的输入）。'
+            f'每格依次为 {" / ".join(combos)} 的凑齐名次（混合检索，两侧去编码）。</p>'
+            '<div class="scroll"><table><tr><th>题</th><th>补回的限定</th><th class="num">原句</th><th class="num">step-back</th><th class="num">补回</th></tr>'
+            + rows + '</table></div>'
+            '<p><b>读法</b>：PO-25-19-Q009、CONTRACT-105-Q014 补回后恢复到原句，PO-25-19-Q005 补回后好于原句，CONTRACT-105-Q010 部分恢复；'
+            'PO-25-15-Q001/Q002 补回"第四批次""第六批次"不恢复——表格写的是"4th Delivery""6th Delivery"，中文批次词本来就匹配不到（与实验 E 同一原因），'
+            'step-back 的损失在别处，' '<span class="down">未验证</span>。</p>')
 
 
 def exp_terms() -> str:
@@ -371,7 +363,6 @@ def v8_check() -> str:
 
 
 def main() -> None:
-    concl = "".join(card(f'{esc(name)} <span class="badge {kind}">{esc(cat)}</span>', body) for name, cat, kind, body in CONCLUSIONS)
     tabs = [("summary", "单因素总表", summary_table()), ("heat", "逐题 × 措施", heat()),
             ("stab", "4 次生成稳定性", stability()),
             ("codes", "实验 A：编码替换", exp_codes()),
@@ -384,15 +375,12 @@ def main() -> None:
     nav = '<div class="tabs">' + "".join(f'<a href="#{t}" data-tab="{t}">{esc(n)}</a>' for t, n, _ in tabs) + '</div>'
     panels = "".join(f'<div data-panel="{t}" class="card">{body}</div>' for t, _, body in tabs)
     body = (
-        '<h1>查询侧各措施的单独效果与变差原因</h1>'
+        '<h1>查询侧各措施单独效果的依据</h1>'
         '<div class="sub">V3.14 · 2026-10-29 · 写法提示词 v8 · 第 0–3 次独立生成 · 13 组合 × 32 题 · 判定为凑齐向量的支配关系（提案问题 3）</div>'
         + card('怎么读', '<p>每个措施只和"只差它一个因素"的配置比较：一个问题只用一条检索文本（不融合），分解时不合并（每个信息项看它对应的子问题）。'
-               '融合、合并单列为"组合方式"。每条原因注明验证它的实验；没做实验的标"未验证"。'
-               '变好是设计预期，下面只解释变差与各有优势。</p>'
-               '<p>数字默认取第 0 次生成；每个结论另写 4 次独立生成（0–3，同一提示词各自调用 LLM）中的稳定性，逐题见"4 次生成稳定性"标签。'
-               '结论的方向在 4 次中都成立；个别题的变差只在部分生成中出现时已注明。</p>')
-        + '<h2>结论</h2>' + concl
-        + card('附带发现', SIDE_FINDINGS)
+               '融合、合并单列为"组合方式"。总表的数字默认取第 0 次生成，另列第 1–3 次与 4 次一致的题数；逐题见"4 次生成稳定性"标签。</p>')
+        + card('结论', f'<p>各措施的结论（建议、单独效果、逐题的变差原因、适合的题、随机性、是不是措施本身的问题）写在'
+               f'<a href="{PAGE}#m-analysis">V3.14 对比页的模块 1</a>（<code>module.py</code> 生成）。本页是它引用的依据：单因素总表、逐题判定与实验 A–E。</p>')
         + '<h2>依据</h2>' + nav + panels)
     write_assets(ROOT / "reports")
     (HERE / "index.html").write_text(page("查询侧措施的单独效果", body, root="../../",

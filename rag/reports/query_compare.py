@@ -232,7 +232,7 @@ function renderClass(base){
     +(P?'<div class="meta">其中在 '+GENS.length+' 次生成下判定都相同（稳定）的：'+countText(st)+'。每格下方为稳定的题数，悬停看 '+GENS.length+' 次生成的题数范围。</div>':'')
     +'<div class="meta">返回整表（7 种）：'+countText(counts(T))+'。返回命中 chunk（6 种）：'+countText(counts(C))+'。</div>'
     +(both?'<div class="meta">最坏退化的题：'+(wl.length?wl.map(function(id){return '<button type="button" class="lnk down" data-act="goto" data-case="'+esc(id)+'" data-combo="'+worst[id].c+'">'+esc(id)+'</button>（'+worst[id].n+' 种组合）'}).join('，'):'无')+'</div>'
-      :'<div class="meta">最坏退化不计算：'+unmergedNote().replace(/<[^>]+>/g,'')+'不合并时信息项的名次在它对应的子问题各路中计算（未对应的按全部子问题），对应关系见模块 5。</div>')
+      :'<div class="meta">最坏退化不计算：'+unmergedNote().replace(/<[^>]+>/g,'')+'不合并时信息项的名次在它对应的子问题各路中计算（未对应的按全部子问题），对应关系见模块 __PROC__。</div>')
     +'<div class="meta">13 种组合共用同一批题，组合数只表示一致程度，不作投票；是否采用由助手按拍板问题 5 写明理由、你拍板（决策 015）。判定在冻结的规划（第 0 次生成）上得出'+(P?'，稳定性见每格下方。':'，待扰动测试核对。')+'</div></div>'
     +'<table>'+head+body+'</table>';
 }
@@ -291,7 +291,7 @@ function cellDetail(id,combo,lk,rk_){
   var head='<div class="card"><b>'+esc(combo)+'</b> <span class="badge '+VB[v]+'">'+VN[v]+'</span> 凑齐向量 '+vecHtml(l,r)
     +(v==='mixed'?'<div class="meta">'+leadText(l,r)+'</div>':'')+(pert()?genDetail(id,combo,lk,rk_):'');
   var itemTable='<div class="scroll"><table><tr><th>信息项</th><th class="num">首块名次 左 → 右</th><th class="num">凑齐名次 左 → 右</th></tr>'+items+'</table></div>';
-  if(!both)return head+'</div>'+itemTable+unmergedNote()+'<div class="meta">不合并一侧的名次是信息项在它对应的子问题各路中的名次；各子问题的排名见模块 5（选这道题和这个组合）。</div>';
+  if(!both)return head+'</div>'+itemTable+unmergedNote()+'<div class="meta">不合并一侧的名次是信息项在它对应的子问题各路中的名次；各子问题的排名见模块 __PROC__（选这道题和这个组合）。</div>';
   var proc=window.QC_PROCESS[rk_];if(proc===undefined)load('process',rk_);
   var ids=Object.keys(lf.e).sort(function(a,b){return rf.e[a]-rf.e[b]});
   var rows=ids.map(function(i){
@@ -315,7 +315,7 @@ function genDetail(id,combo,lk,rk_){
     var l=vec(nOf(lk,g,combo,id)),r=vec(nOf(rk_,g,combo,id)),v=verdict(l,r);
     var sub=g&&(S.L.d||S.R.d)?(PT.plans[String(g)][id]||{}).decomposed:null;
     return '<tr><td class="nw">第 '+g+' 次'+(g?'':'（冻结）')+'</td><td><span class="badge '+VB[v]+'">'+VN[v]+'</span> '+vecHtml(l,r)+'</td><td class="meta">'
-      +(sub?esc(sub.join(' ｜ ')):g?'':'子问题见模块 5')+'</td></tr>'}).join('');
+      +(sub?esc(sub.join(' ｜ ')):g?'':'子问题见模块 __PROC__')+'</td></tr>'}).join('');
   return '<div class="scroll"><table><tr><th>生成</th><th>判定 · 凑齐向量 左 → 右</th><th>子问题（开 P3.1 时，第 1–'+PT.generations.length+' 次）</th></tr>'+rows+'</table></div>';
 }
 
@@ -521,7 +521,9 @@ readHash();render();
 """
 
 
-def render(data: dict[str, Any]) -> str:
+def render(data: dict[str, Any], analysis: str | None = None) -> str:
+    """`analysis`: an HTML fragment shown as module 1 (the written analysis of a comparison, made by an
+    experiment script next to the data), or None."""
     docs = {c["document_id"]: c["document_name"] for c in data["cases"]}
     doc_bar = ('<div class="seg" data-doc>文档 <button type="button" data-v="all" class="on">全部</button>'
                + "".join(f'<button type="button" data-v="{esc(d)}">{esc(n)}</button>' for d, n in docs.items())
@@ -532,40 +534,45 @@ def render(data: dict[str, Any]) -> str:
     section = lambda mid, title, extra, note: (
         f'<section id="m-{mid}" data-module="{mid}"><h2>{title}</h2>{extra}<div class="meta">{note}</div>'
         f'<div class="scroll" data-grid><div class="qc-body"></div></div></section>')
-    nav = ('<div class="card meta">模块：<a href="#m-class">1 变好、变差</a> · <a href="#m-heat">2 逐题变化</a> · '
-           '<a href="#m-matrix">3 指标矩阵</a> · <a href="#m-curve">4 K 曲线</a> · <a href="#m-process">5 查询过程</a></div>')
+    first = 2 if analysis else 1
+    nav = ('<div class="card meta">模块：' + ('<a href="#m-analysis">1 各措施的单独效果（分析结论）</a> · ' if analysis else '')
+           + ' · '.join(f'<a href="#m-{mid}">{first + i} {name}</a>' for i, (mid, name) in enumerate(
+               (("class", "变好、变差"), ("heat", "逐题变化"), ("matrix", "指标矩阵"), ("curve", "K 曲线"), ("process", "查询过程")))) + '</div>')
+    num = lambda i: first + i
     body = (
         f'<h1>查询侧对比 · {esc(data["name"])}</h1>'
         f'<div class="sub">{esc(data["created_at"])} · 数据集 {esc(data["dataset"]["version"])}，{n} 道可回答题 · '
         f'{len(data["combos"])} 种组合（混合检索、文档过滤开启）· 已评估 {len(data["available"])} 种配置'
         f'（检索文本 20 种状态 × 去编码 2 × 分解 6 种状态；P3.3 搁置）· 规划：{esc(data["plan_model"])}，'
         f'拆解提示词 v9、写法提示词 v8，冻结的第 0 次生成</div>'
-        + nav +
-        '<div class="card pick"><div id="qc-sides" class="cfg-grid"></div>'
+        + nav
+        + (f'<section id="m-analysis"><h2>1. 各措施的单独效果（分析结论）</h2>{analysis}</section>'
+           '<h2>对比工具</h2>' if analysis else '')
+        + '<div class="card pick"><div id="qc-sides" class="cfg-grid"></div>'
         '<div class="pick-foot"><span id="qc-msg"></span> <button type="button" id="qc-reset" class="expand-btn">清空两侧</button></div>'
         '<div class="meta">两侧全空显示 V3.13；否则两侧配置不同即可比较，两侧只差一个因素时看到的就是它单独的效果。'
         '每种组合只与它自己比较。分解不选合并方式（不合并）时没有返回顺序，只用于评估：信息项的名次在它对应的子问题各路中计算。</div></div>'
-        + section("class", "1. 变好、变差与最坏退化", "",
+        + section("class", f"{num(0)}. 变好、变差与最坏退化", "",
                   '一题的判定（提案 v3.14 拍板问题 3）：各信息项的凑齐名次（某个方案全部证据到位时的名次）升序排成凑齐向量，两侧逐位比较。'
                   '右侧每一位都不晚于左侧且至少一位更早为变好，反之为变差，有早有晚为各有优势，完全相同为不变；与 K 无关，不设阈值。'
                   '最坏退化：验收 K 中任一档由完整覆盖变为不完整（任一侧不合并时不计算）。点题数到逐题变化看是哪些题。')
-        + section("heat", "2. 逐题变化", f'{doc_bar}<label class="meta"><input type="checkbox" id="qc-all"> 显示全部题（默认只显示在任一组合中有变化的题）</label>',
+        + section("heat", f"{num(1)}. 逐题变化", f'{doc_bar}<label class="meta"><input type="checkbox" id="qc-all"> 显示全部题（默认只显示在任一组合中有变化的题）</label>',
                   '每格为该题在该组合下的判定：▲ 变好（绿）、▼ 变差（红）、◆ 各有优势（黄）、· 不变；悬停看两侧凑齐向量。'
                   '点一格展开：凑齐向量、各有优势时各自领先的 K 区间、每个信息项的首块名次与凑齐名次、每个证据单元的名次与右侧来源（两侧都有返回顺序时）。')
-        + section("matrix", "3. 整体指标矩阵", k_bar,
+        + section("matrix", f"{num(2)}. 整体指标矩阵", k_bar,
                   f'完整覆盖：全部信息项凑齐；命中：至少一个信息项凑齐。每格为左侧 → 右侧，括号内为选定 K 下由否变是（+）/ 由是变否（−）的题数，点击列出这些题。'
                   f'token 与成本按 {n} 道可回答题平均；悬停列名看成本的定义，悬停组合名看入库成本（左右两侧相同）。任一侧不合并时不显示。')
-        + section("curve", "4. K 曲线", "",
+        + section("curve", f"{num(3)}. K 曲线", "",
                   '上表为该 K 下完整覆盖的题数，下表为该 K 下已凑齐的信息项总数；蓝色表头为验收用的 K。任一侧不合并时不显示。')
-        + section("process", "5. 查询过程", "",
+        + section("process", f"{num(4)}. 查询过程", "",
                   '右侧配置下一道题的检索范围、规划（只列该配置启用的写法）、子问题与信息项的对应（开 P3.1 时）与前 20 个返回单元的来源；'
                   '不合并时分别列出各子问题的排名。来源明细按配置单独存放，切换时加载。')
-        + ('<div class="card meta">扰动标注（模块 1–4）：两侧都有独立生成的数据时，每题在第 0 次（冻结）与各次独立生成下分别判定，都相同为稳定；'
-           '模块 1 每格下方为稳定的题数，模块 2 不稳定的格标 ?，模块 3、4 写出各次生成的差值范围，范围内可能反号的格标灰。'
-           '每次生成的判定与子问题在模块 2 的展开中列出。</div>' if data.get("perturbation") else
-           '<div class="card meta">扰动：3 次独立生成作为模块 1–4 上的标注层，扰动测试完成后加入。</div>')
+        + (f'<div class="card meta">扰动标注（模块 {num(0)}–{num(3)}）：两侧都有独立生成的数据时，每题在第 0 次（冻结）与各次独立生成下分别判定，都相同为稳定；'
+           f'模块 {num(0)} 每格下方为稳定的题数，模块 {num(1)} 不稳定的格标 ?，模块 {num(2)}、{num(3)} 写出各次生成的差值范围，范围内可能反号的格标灰。'
+           f'每次生成的判定与子问题在模块 {num(1)} 的展开中列出。</div>' if data.get("perturbation") else
+           f'<div class="card meta">扰动：3 次独立生成作为模块 {num(0)}–{num(3)} 上的标注层，扰动测试完成后加入。</div>')
         + f'<script type="application/json" id="qc-data">{_embed(data)}</script>'
-        + f'<script>{SCRIPT.replace("__ACC__", json.dumps(list(ACCEPTANCE_KS)))}</script>')
+        + f'<script>{SCRIPT.replace("__ACC__", json.dumps(list(ACCEPTANCE_KS))).replace("__PROC__", str(num(4)))}</script>')
     return page(f"查询侧对比 · {data['name']}", body, root="../../", crumbs=[("报告首页", "../../index.html")])
 
 
@@ -609,8 +616,13 @@ def write_query_page(workspace: Workspace, data: dict[str, Any]) -> Path:
     for key, detail in data.get("process", {}).items():
         write_atomic(folder / "process" / script_file(key), _script("QC_PROCESS", key, detail))
     write_assets(workspace.reports)
-    write_atomic(folder / "index.html", render(_shared(main)))
+    write_atomic(folder / "index.html", render(_shared(main), _analysis(folder)))
     return folder
+
+
+def _analysis(folder: Path) -> str | None:
+    path = folder / "analysis.html"
+    return path.read_text(encoding="utf-8") if path.is_file() else None
 
 
 def rerender_query_pages(workspace: Workspace) -> int:
@@ -619,6 +631,6 @@ def rerender_query_pages(workspace: Workspace) -> int:
     for path in sorted(folder.glob("*/data.json")) if folder.is_dir() else []:
         data = read_json(path)
         _write_facts(path.parent, data)
-        write_atomic(path.parent / "index.html", render(_shared(data)))
+        write_atomic(path.parent / "index.html", render(_shared(data), _analysis(path.parent)))
         count += 1
     return count

@@ -67,6 +67,13 @@ def comparisons() -> list[dict]:
         for m, name in KINDS.items():
             add("RRF 融合", "组合方式", f"{where} · 原句 → 原句 + {name}", key(d), key(d, kinds=(m,), fuse=True))
             add("RRF 融合", "组合方式", f"{where} · {name} → 原句 + {name}", key(d, kinds=(m,)), key(d, kinds=(m,), fuse=True))
+            add("RRF 融合", "组合方式", f"{where} · 两侧去编码 · 原句 → 原句 + {name}",
+                key(d, strip=True), key(d, strip=True, kinds=(m,), fuse=True))
+        # stacking HyDE on translation, both fused with the original text
+        for strip in (False, True):
+            tag = "去编码" if strip else "带编码"
+            add("RRF 融合", "组合方式", f"{where} · {tag} · 原句 + 翻译 → 原句 + 翻译 + HyDE",
+                key(d, strip=strip, kinds=("P3.2.2",), fuse=True), key(d, strip=strip, kinds=("P3.2.2", "P3.2.3"), fuse=True))
     for merge in ("rr", "rrf"):
         name = {"rr": "轮流取", "rrf": "全局 RRF"}[merge]
         add("合并", "组合方式", f"不合并 → {name}", key(True), key(True, merge))
