@@ -1,0 +1,507 @@
+{
+ "CONTRACT-105-Q001": {
+  "document": "d359c37e0bc3c87a",
+  "language": "spanish",
+  "codes": [
+   "CONT2025001"
+  ],
+  "items": 2,
+  "type": "原题",
+  "latin_words": [],
+  "table_items": [
+   false,
+   false
+  ]
+ },
+ "CONTRACT-105-Q002": {
+  "document": "d359c37e0bc3c87a",
+  "language": "spanish",
+  "codes": [
+   "CONT2025001"
+  ],
+  "items": 5,
+  "type": "原题",
+  "latin_words": [
+   "Ítem"
+  ],
+  "table_items": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ]
+ },
+ "CONTRACT-105-Q003": {
+  "document": "d359c37e0bc3c87a",
+  "language": "spanish",
+  "codes": [
+   "CONT2025001"
+  ],
+  "items": 3,
+  "type": "原题",
+  "latin_words": [],
+  "table_items": [
+   true,
+   true,
+   false
+  ]
+ },
+ "CONTRACT-105-Q004": {
+  "document": "d359c37e0bc3c87a",
+  "language": "spanish",
+  "codes": [
+   "CONT2025001"
+  ],
+  "items": 2,
+  "type": "原题",
+  "latin_words": [
+   "Ítem",
+   "Garantía",
+   "fiel",
+   "cumplimiento"
+  ],
+  "table_items": [
+   false,
+   false
+  ]
+ },
+ "CONTRACT-105-Q005": {
+  "document": "d359c37e0bc3c87a",
+  "language": "spanish",
+  "codes": [
+   "CONT2025001"
+  ],
+  "items": 3,
+  "type": "原题",
+  "latin_words": [
+   "Garantía",
+   "Técnico-Comercial"
+  ],
+  "table_items": [
+   false,
+   false,
+   false
+  ]
+ },
+ "CONTRACT-105-Q006": {
+  "document": "d359c37e0bc3c87a",
+  "language": "spanish",
+  "codes": [
+   "CONT2025001"
+  ],
+  "items": 2,
+  "type": "原题",
+  "latin_words": [
+   "Falla",
+   "Repetitiva"
+  ],
+  "table_items": [
+   false,
+   false
+  ]
+ },
+ "CONTRACT-105-Q007": {
+  "document": "d359c37e0bc3c87a",
+  "language": "spanish",
+  "codes": [
+   "CONT2025001"
+  ],
+  "items": 3,
+  "type": "原题",
+  "latin_words": [],
+  "table_items": [
+   false,
+   false,
+   false
+  ]
+ },
+ "CONTRACT-105-Q008": {
+  "document": "d359c37e0bc3c87a",
+  "language": "spanish",
+  "codes": [
+   "CONT2025001"
+  ],
+  "items": 2,
+  "type": "原题",
+  "latin_words": [
+   "Penalidad",
+   "por",
+   "Mora"
+  ],
+  "table_items": [
+   false,
+   false
+  ]
+ },
+ "CONTRACT-105-Q009": {
+  "document": "d359c37e0bc3c87a",
+  "language": "spanish",
+  "codes": [
+   "CONT2025001"
+  ],
+  "items": 2,
+  "type": "原题",
+  "latin_words": [
+   "era",
+   "ENTREGA"
+  ],
+  "table_items": [
+   true,
+   true
+  ]
+ },
+ "CONTRACT-105-Q010": {
+  "document": "d359c37e0bc3c87a",
+  "language": "spanish",
+  "codes": [
+   "CONT2025001"
+  ],
+  "items": 2,
+  "type": "原题",
+  "latin_words": [],
+  "table_items": [
+   true,
+   true
+  ]
+ },
+ "CONTRACT-105-Q011": {
+  "document": "d359c37e0bc3c87a",
+  "language": "spanish",
+  "codes": [
+   "CONT2025001"
+  ],
+  "items": 3,
+  "type": "分解题",
+  "latin_words": [
+   "Ítem"
+  ],
+  "table_items": [
+   false,
+   false,
+   false
+  ]
+ },
+ "CONTRACT-105-Q012": {
+  "document": "d359c37e0bc3c87a",
+  "language": "spanish",
+  "codes": [
+   "CONT2025001"
+  ],
+  "items": 1,
+  "type": "隐含前提",
+  "latin_words": [],
+  "table_items": [
+   true
+  ]
+ },
+ "CONTRACT-105-Q013": {
+  "document": "d359c37e0bc3c87a",
+  "language": "spanish",
+  "codes": [
+   "CONT2025001"
+  ],
+  "items": 3,
+  "type": "回答上的多跳",
+  "latin_words": [],
+  "table_items": [
+   false,
+   false,
+   false
+  ]
+ },
+ "CONTRACT-105-Q014": {
+  "document": "d359c37e0bc3c87a",
+  "language": "spanish",
+  "codes": [
+   "CONT2025001"
+  ],
+  "items": 2,
+  "type": "回答上的多跳",
+  "latin_words": [],
+  "table_items": [
+   false,
+   true
+  ]
+ },
+ "E001-602-Q001": {
+  "document": "817cfff2927c6c65",
+  "language": "spanish",
+  "codes": [
+   "INVOICE-E001-602"
+  ],
+  "items": 3,
+  "type": "原题",
+  "latin_words": [],
+  "table_items": [
+   false,
+   false,
+   false
+  ]
+ },
+ "E001-602-Q002": {
+  "document": "817cfff2927c6c65",
+  "language": "spanish",
+  "codes": [
+   "INVOICE-E001-602"
+  ],
+  "items": 2,
+  "type": "原题",
+  "latin_words": [
+   "HXE",
+   "K-S"
+  ],
+  "table_items": [
+   true,
+   true
+  ]
+ },
+ "PO-24-12-Q001": {
+  "document": "169a1f2133fe5643",
+  "language": "english",
+  "codes": [
+   "ORDER2025001"
+  ],
+  "items": 4,
+  "type": "原题",
+  "latin_words": [],
+  "table_items": [
+   true,
+   true,
+   true,
+   true
+  ]
+ },
+ "PO-24-12-Q002": {
+  "document": "169a1f2133fe5643",
+  "language": "english",
+  "codes": [
+   "ORDER2025001"
+  ],
+  "items": 1,
+  "type": "原题",
+  "latin_words": [],
+  "table_items": [
+   false
+  ]
+ },
+ "PO-24-12-Q003": {
+  "document": "169a1f2133fe5643",
+  "language": "english",
+  "codes": [
+   "ORDER2025001"
+  ],
+  "items": 2,
+  "type": "原题",
+  "latin_words": [],
+  "table_items": [
+   false,
+   false
+  ]
+ },
+ "PO-24-12-Q004": {
+  "document": "169a1f2133fe5643",
+  "language": "english",
+  "codes": [
+   "ORDER2025001"
+  ],
+  "items": 3,
+  "type": "原题",
+  "latin_words": [
+   "MDC",
+   "ORCA"
+  ],
+  "table_items": [
+   true,
+   false,
+   false
+  ]
+ },
+ "PO-24-12-Q005": {
+  "document": "169a1f2133fe5643",
+  "language": "english",
+  "codes": [
+   "ORDER2025001"
+  ],
+  "items": 1,
+  "type": "原题",
+  "latin_words": [],
+  "table_items": [
+   false
+  ]
+ },
+ "PO-24-12-Q006": {
+  "document": "169a1f2133fe5643",
+  "language": "english",
+  "codes": [
+   "ORDER2025001"
+  ],
+  "items": 1,
+  "type": "原题",
+  "latin_words": [],
+  "table_items": [
+   false
+  ]
+ },
+ "PO-25-15-Q001": {
+  "document": "5883b02cd922a64f",
+  "language": "english",
+  "codes": [
+   "ORDER2025002"
+  ],
+  "items": 2,
+  "type": "原题",
+  "latin_words": [],
+  "table_items": [
+   true,
+   true
+  ]
+ },
+ "PO-25-15-Q002": {
+  "document": "5883b02cd922a64f",
+  "language": "english",
+  "codes": [
+   "ORDER2025002"
+  ],
+  "items": 2,
+  "type": "原题",
+  "latin_words": [],
+  "table_items": [
+   true,
+   true
+  ]
+ },
+ "PO-25-19-Q001": {
+  "document": "5a4c36e0022f4917",
+  "language": "english",
+  "codes": [
+   "ORDER2025003"
+  ],
+  "items": 7,
+  "type": "原题",
+  "latin_words": [
+   "ELCTO"
+  ],
+  "table_items": [
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true
+  ]
+ },
+ "PO-25-19-Q002": {
+  "document": "5a4c36e0022f4917",
+  "language": "english",
+  "codes": [
+   "ORDER2025003"
+  ],
+  "items": 2,
+  "type": "原题",
+  "latin_words": [
+   "ELUC",
+   "HXE",
+   "K-S"
+  ],
+  "table_items": [
+   true,
+   true
+  ]
+ },
+ "PO-25-19-Q003": {
+  "document": "5a4c36e0022f4917",
+  "language": "english",
+  "codes": [
+   "ORDER2025003"
+  ],
+  "items": 7,
+  "type": "原题",
+  "latin_words": [
+   "ENSA"
+  ],
+  "table_items": [
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true
+  ]
+ },
+ "PO-25-19-Q004": {
+  "document": "5a4c36e0022f4917",
+  "language": "english",
+  "codes": [
+   "ORDER2025003"
+  ],
+  "items": 1,
+  "type": "原题",
+  "latin_words": [],
+  "table_items": [
+   false
+  ]
+ },
+ "PO-25-19-Q005": {
+  "document": "5a4c36e0022f4917",
+  "language": "english",
+  "codes": [
+   "ORDER2025003"
+  ],
+  "items": 2,
+  "type": "分解题",
+  "latin_words": [
+   "HDNA"
+  ],
+  "table_items": [
+   true,
+   true
+  ]
+ },
+ "PO-25-19-Q006": {
+  "document": "5a4c36e0022f4917",
+  "language": "english",
+  "codes": [
+   "ORDER2025003"
+  ],
+  "items": 2,
+  "type": "回答上的多跳",
+  "latin_words": [
+   "ELPU",
+   "DDP"
+  ],
+  "table_items": [
+   true,
+   true
+  ]
+ },
+ "PO-25-19-Q007": {
+  "document": "5a4c36e0022f4917",
+  "language": "english",
+  "codes": [
+   "ORDER2025003"
+  ],
+  "items": 1,
+  "type": "隐含前提",
+  "latin_words": [],
+  "table_items": [
+   true
+  ]
+ },
+ "PO-25-19-Q009": {
+  "document": "5a4c36e0022f4917",
+  "language": "english",
+  "codes": [
+   "ORDER2025003"
+  ],
+  "items": 2,
+  "type": "检索多跳",
+  "latin_words": [],
+  "table_items": [
+   true,
+   true
+  ]
+ }
+}
