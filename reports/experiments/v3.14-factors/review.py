@@ -85,6 +85,26 @@ def mark(v: str) -> str:
     return f'<span class="{cls}">{s}</span>'
 
 
+def qv(cells: dict, g: int) -> str:
+    """A question's verdict in generation g: the one direction its changed combinations share, or mixed."""
+    s = {x["v"][g] for x in cells.values()} - {"same"}
+    return "same" if not s else s.pop() if len(s) == 1 else "mixed"
+
+
+def qstab(c: dict) -> dict:
+    """Question-level verdicts in the four generations: counts per generation, the questions with the
+    same verdict in all four, and the questions that are better in one generation and worse in another."""
+    per = {q: [qv(cells, g) for g in range(4)] for q, cells in c["cells"].items()}
+    return {"per": per,
+            "gens": [{v: sum(1 for x in per.values() if x[g] == v) for v in ("better", "worse", "mixed")} for g in range(4)],
+            "stable": {v: [q for q, x in per.items() if len(set(x)) == 1 and x[0] == v] for v in ("better", "worse", "mixed")},
+            "flip": [q for q, x in per.items() if "better" in x and "worse" in x]}
+
+
+def seq(vs) -> str:
+    return "".join(mark(v) for v in vs)
+
+
 def card(title: str, body: str, kind: str = "") -> str:
     return f'<div class="card {kind}"><h3>{title}</h3>{body}</div>'
 
@@ -100,6 +120,7 @@ CONCLUSIONS = [
 ② 表格题只在 PO-25-19-Q005 上得到干净的结论：换成别的数字、保留年份都与原样相同（e2 第 4），只剩字母与删去相同（第 6）——带数字的编码让向量偏向数字密集的表格。
 CONTRACT-105-Q010 换数字反而更好、只剩字母则一项变好一项变差；PO-25-19-Q001、Q003 在实验的 3 个组合上删去几乎不变（变差出现在其他组合，各 1–2 名）。表格题变差的机制只在 1 题上验证，其余<b>未验证</b>。</p>
 <p><b>是不是措施本身的问题</b>：表格信息项的小幅变差是"去掉了一个碰巧有利的噪声"，不是去编码引入的新错误；正文信息项的改善是去掉了有害的噪声。两者都来自编码本身不是文档内容。</p>
+<p><b>稳定性</b>：作用于原句时 4 次生成结果相同（▲8 ▼7 ◆2 题）。作用于 LLM 写法时随写法变化：翻译去编码 4 次按题 ▲8/9/8/6、▼2/3/4/4，没有一题 4 次都变差；HyDE 去编码第 0 次 ▲3 ▼6、其余 3 次 ▲7 ▼2–4，有 4 题在不同生成中翻转。方向总体有利，但对写法的效果有一部分是随机的。</p>
 <p><b>适用条件</b>：编码按规则由用户分配、不出现在文档中（<code>rules/document-filter.md</code>）。若用户登记了文档里真实出现的编号，删去会丢掉一个 BM25 可匹配的词——本数据中没有这种编码，<b>未验证</b>。</p>"""),
     ("P3.2.2 翻译", "建议启用，但只与原句 RRF 融合使用", "ok", """
 <p><b>关键事实（已验证，实验 B）</b>：中文问题在英语、西语文档上几乎没有 BM25 匹配（只匹配题面里的拉丁字母词），<b>V3.13 的"混合检索"对中文问题实际上就是向量检索</b>。翻译成文档语言后，BM25 通道才真正起作用。所以翻译的效果 = 向量通道的语言变化 + 新加入的 BM25 通道。</p>
@@ -110,23 +131,31 @@ CONTRACT-105-Q010 换数字反而更好、只剩字母则一项变好一项变�
 <b>只把这个短语换成文档用词（已验证，实验 E）</b>：BM25 中证据名次 PO-25-19-Q007 10→2、PO-25-15-Q001/Q002 5→3；混合检索 Q007 6→2（好于中文原句的 3），PO-25-15 两题 3→2/1 但 e2 仍为 4（说明性正文的干扰仍在）。
 所以变差有两个来源：① 加入词汇匹配通道后说明性正文胜过表格——固有代价；② 翻译不看文档，写不出文档特有的标签——同样是"只凭问题翻译"的固有局限，提示词无法通用地解决（"用该语言文档的术语"已写在提示词里）。</p>
 <p><b>题目特性</b>：变好集中在证据为正文条款的题（合同 Q003、Q011–Q014，PO 24-12 的说明类题）；变差集中在证据全在表格、且文档有大量说明性正文的题（PO 25-15、PO 25-19、发票）。检索前无法知道证据在不在表格，<b>没有可在查询时使用的路由规则</b>。</p>
-<p><b>怎么启用</b>：与原句 RRF 融合时 BM25 通道只占一半权重：原句 → 原句 + 翻译 ▲147 ▼58（单独替换原句时 ▲150 ▼83），损失明显减少而收益基本保留。</p>"""),
+<p><b>怎么启用</b>：与原句 RRF 融合时 BM25 通道只占一半权重：原句 → 原句 + 翻译 ▲147 ▼58（单独替换原句时 ▲150 ▼83），损失明显减少而收益基本保留。</p>
+<p><b>稳定性（4 次独立生成）</b>：单独使用按题 ▲10/10/10/10、▼5/6/4/8；4 次都变好 9 题、都变差 3 题（CONTRACT-105-Q009、PO-25-15-Q001、Q002），PO-25-19 的 5 道表格题 4 次都是 ◆，没有一题翻转。
+上面列的变差题中 E001-602-Q001 在 3/4 次变差、CONTRACT-105-Q010 在 2/4 次变差（另 2 次为 ◆）、PO-25-19-Q007 在 3/4 次为 ◆（1 次变好），属于"多数时候"而不是"每次"；CONTRACT-105-Q009 第 0 次未列出，但 4 次都变差（原因<b>未验证</b>）。
+与原句融合：题次 ▲147–154 ▼58–72，按题 4 次都变好 10 题、都变差 5 题、无翻转——<b>方向稳定，变差的题也稳定</b>，是固有代价而非随机。</p>"""),
     ("P3.2.3 HyDE", "可与翻译同样以 RRF 融合使用；单独使用不建议", "warn", """
 <p>HyDE 写的是文档语言的假想答案，与翻译同样打开 BM25 通道，规律相同但对表格更不利：单独使用（两侧去编码）▲109 ▼137 ◆23；按信息项 表 ↑80 ↓202、文 ↑121 ↓73。
 通道拆分：只看向量 表 ↑13 ↓18、文 ↑8 ↓20；加上 BM25 后 表 ↑9 ↓37、文 ↑22 ↓10（已验证，实验 B）。假想段落是叙述句，形似正文条款而不像表格行（<b>未验证</b>）。</p>
-<p>与原句 RRF 融合：▲162 ▼88，净收益为各措施中最大；在子问题上融合则 ▲101 ▼136，不再有利。与翻译叠加的效果需扰动测试确认（见页底"未完成"）。</p>"""),
+<p>与原句 RRF 融合：▲162 ▼88，净收益为各措施中最大；4 次生成题次 ▲143–162 ▼69–88，按题 4 次都变好 9 题、都变差 3 题（PO-25-15-Q001、Q002、PO-25-19-Q006），无翻转。在子问题上融合则第 0 次 ▲101 ▼136，另三次 ▲97–132 ▼78–126，不稳定。</p>
+<p><b>单独使用不稳定</b>：按题 ▼8/9/6/11，第 3 次生成明显更差（▲5 ▼11）；4 次都变差 4 题，PO-24-12-Q003 一次变好三次变差。假想答案每次写法不同，随机性大于翻译。</p>
+<p><b>与翻译叠加</b>（原句 + 翻译 → 原句 + 翻译 + HyDE，带编码）：4 次按题 ▲6/9/5/8 ▼5/5/3/5，其余多为 ◆；每次净值略正，但幅度接近措辞噪声（实验 C），<b>不能确认叠加有额外收益</b>。</p>"""),
     ("P3.2.1 改写", "建议不采用", "bad", """
 <p>改写仍是中文，不改变 BM25 通道。原问题上（两侧带编码）13 组合中 4 种看到的题：15/32 题有变化，▲24 ▼23，正负相当。</p>
 <p><b>与措辞噪声无法区分（已验证，实验 C）</b>：不改意思的机械改动（问号改句号、句子倒序）就会使 9/32、10/23 题的判定改变；"句子倒序"▲17 ▼8 ◆6。改写变化的题数与方向都落在这个范围内。
-它的变化是向量对措辞的敏感，不是改写本身有作用；额外花一次 LLM 调用没有可确认的收益。</p>"""),
+它的变化是向量对措辞的敏感，不是改写本身有作用；额外花一次 LLM 调用没有可确认的收益。</p>
+<p><b>稳定性</b>：4 次生成题次 ▲59–74 ▼44–69，按题 4 次一致的只有 ▲4 ▼4，另有 CONTRACT-105-Q014 翻转——与"噪声"的判断一致。</p>"""),
     ("P3.2.4 step-back", "建议不采用", "bad", """
 <p>单独使用（两侧去编码）▲43 ▼183 ◆34，在所有措施中最差；向量通道 表 ↑2 ↓43、文 ↑4 ↓38。</p>
 <p><b>原因（已验证，实验 D）</b>：step-back 按定义去掉把问题限定到单个实例的条件，而这些条件正是题面里的公司名、型号和西语条款名（ELUC、HXE34K-S1、Garantía Técnico-Comercial）；对中文问题它们还是仅有的 BM25 锚点。
 把被去掉的词原样补回（其余不动），混合检索下 9 道变差题中 6 道完全恢复到原句水平、CONTRACT-105-Q002 大部分恢复；PO-25-19-Q001、Q003 不恢复（它们的 step-back 还改写了"交货计划"的问法，原因<b>未验证</b>）。<b>这是措施本身的固有缺陷</b>：它要去掉的恰是检索最需要的词。</p>
+<p><b>稳定性</b>：4 次生成题次 ▼129–194，均远多于 ▲；按题 4 次都变差 5 题、都变好 3 题，无翻转。缺陷稳定存在，不是某次写法的偶然。</p>
 <p>它变好的题：CONTRACT-105-Q011 的提升来自去掉"Ítem"——这个词在 BM25 中匹配到错误的块（补回后又退到 12 名），属于碰巧；CONTRACT-105-Q012、PO-25-19-Q007 的答案在通用条款里（按批次统一规定），去掉具体批次反而贴近原文。这类题检索前无法识别。</p>"""),
     ("P3.1 分解", "维持上次结论：条件启用候选（V3.15 补救）", "warn", """
 <p>检索层（不合并，每个信息项在对应子问题中）：▲111 ▼38 ◆39；按信息项 表 ↑139 ↓81、文 ↑104 ↓26，对表格信息项尤其有利。去编码后 ▲106 ▼53 ◆22。
 变差的原因上次已逐条做过对照实验（<code>reports/experiments/v3.14-decomposition-diagnosis/</code>）：A 答案需计算或推断、不是拆解导致；B 证据单元的表示问题；C 拆解丢了所指或限定条件（真正的拆解缺陷，补回后不差于原问题）；D 第二跳依赖第一跳。</p>
+<p><b>稳定性</b>：检索层 4 次题次 ▲104–116 ▼36–45，按题 4 次都变好 6 题、都变差 2 题（E001-602-Q002、PO-24-12-Q001），无翻转；合并层的损失（轮流取 ▼101–121、全局 RRF ▼111–133）4 次都在。</p>
 <p>分解的主要损失在合并层：不合并 → 轮流取 ▲35 ▼101、→ 全局 RRF ▲32 ▼117（每个子问题的第 1 名必占一位、隐含前提拆成多问被稀释，上次已验证）。</p>"""),
 ]
 
@@ -148,11 +177,53 @@ def summary_table() -> str:
             layer_seen = c["layer"]
             rows.append(f'<tr><th colspan="5" style="background:var(--code)">{esc(layer_seen)}</th></tr>')
         cnt, q = counts(c)
+        later = " ".join(f'<span class="up">{c["counts"][g]["better"]}</span>/<span class="down">{c["counts"][g]["worse"]}</span>'
+                         for g in ("1", "2", "3"))
+        s = qstab(c)
+        st = (f'<span class="up">▲{len(s["stable"]["better"])}</span> <span class="down">▼{len(s["stable"]["worse"])}</span> '
+              f'◆{len(s["stable"]["mixed"])}' + (f' · 翻转 {len(s["flip"])}' if s["flip"] else ""))
         rows.append(f'<tr><td class="nw"><b>{esc(c["factor"])}</b></td><td>{esc(c["context"])}</td>'
-                    f'<td class="nw">{cnt}</td><td class="num">{q}</td><td class="nw">{item_split(c)} · {link(c)}</td></tr>')
-    return ('<p class="sub">每行两侧只差一个因素（左 → 右）。题次 = 13 组合 × 32 题，第 0 次生成；"变化题数"为至少一个组合判定不是"不变"的题数；'
-            '最后一列按信息项计（所有组合），分证据在表格 / 正文。</p><div class="scroll"><table><tr><th>因素</th><th>固定的条件</th>'
-            '<th>判定（题次）</th><th class="num">变化题数</th><th>信息项名次（表 / 文）</th></tr>' + "".join(rows) + '</table></div>')
+                    f'<td class="nw">{cnt}</td><td class="num">{q}</td><td class="nw">{later}</td><td class="nw">{st}</td>'
+                    f'<td class="nw">{item_split(c)} · {link(c)}</td></tr>')
+    return ('<p class="sub">每行两侧只差一个因素（左 → 右）。题次 = 13 组合 × 32 题；"判定""变化题数""信息项名次"为第 0 次生成，'
+            '"变化题数"为至少一个组合判定不是"不变"的题数；"第 1–3 次"为另三次独立生成的 ▲/▼ 题次；'
+            '"4 次一致（题）"按题计：一题在某次生成中有变化的组合同向即为该方向，否则为 ◆，4 次相同才计入，"翻转"为某次变好、另一次变差的题数；'
+            '信息项名次按信息项计（所有组合），分证据在表格 / 正文。</p><div class="scroll"><table><tr><th>因素</th><th>固定的条件</th>'
+            '<th>判定（题次）</th><th class="num">变化题数</th><th>第 1–3 次</th><th>4 次一致（题）</th><th>信息项名次（表 / 文）</th></tr>'
+            + "".join(rows) + '</table></div>')
+
+
+STAB = [("P3.2.0", "原问题 · 原句", "去编码"), ("P3.2.1", "原问题 · 两侧带编码", "改写"),
+        ("P3.2.2", "原问题 · 两侧去编码", "翻译"), ("P3.2.3", "原问题 · 两侧去编码", "HyDE"),
+        ("P3.2.4", "原问题 · 两侧去编码", "step-back"), ("P3.1", "原句 · 带编码", "分解"),
+        ("RRF 融合", "原问题 · 原句 → 原句 + 翻译", "原句+翻译"), ("RRF 融合", "原问题 · 原句 → 原句 + HyDE", "原句+HyDE"),
+        ("P3.2.0", "原问题 · 翻译", "翻译去编码"), ("P3.2.0", "原问题 · HyDE", "HyDE 去编码")]
+
+
+def stability() -> str:
+    comps = [(comp(f, x), n) for f, x, n in STAB]
+    stabs = [qstab(c) for c, _ in comps]
+    head = "".join(f'<th class="nw">{esc(n)}</th>' for _, n in comps)
+    summary = "".join(
+        f'<tr><td class="nw">{esc(n)}</td>'
+        + "".join(f'<td class="num nw"><span class="up">{d["better"]}</span>/<span class="down">{d["worse"]}</span>/{d["mixed"]}</td>' for d in s["gens"])
+        + f'<td class="nw"><span class="up">▲{len(s["stable"]["better"])}</span> <span class="down">▼{len(s["stable"]["worse"])}</span> ◆{len(s["stable"]["mixed"])}</td>'
+        f'<td>{esc("、".join(s["flip"])) or "—"}</td></tr>' for (c, n), s in zip(comps, stabs))
+    rows = []
+    for case in comps[0][0]["cells"]:
+        cells = []
+        for s in stabs:
+            vs = s["per"][case]
+            bg = ("" if set(vs) == {"same"} else "var(--ok-bg)" if set(vs) == {"better"} else
+                  "var(--bad-bg)" if set(vs) == {"worse"} else "var(--warn-bg)")
+            cells.append(f'<td class="nw" style="background:{bg}">{seq(vs)}</td>')
+        rows.append(f'<tr><td class="nw">{esc(case)}</td>{"".join(cells)}</tr>')
+    return ('<p class="sub">按题计的判定在 4 次独立生成（0–3）中的变化。一题在某次生成中有变化的组合同向即为该方向，否则为 ◆。'
+            '去编码作用于原句时不经过 LLM，4 次相同是必然的。</p>'
+            '<div class="scroll"><table><tr><th>措施</th><th class="num">第 0 次 ▲/▼/◆</th><th class="num">第 1 次</th>'
+            '<th class="num">第 2 次</th><th class="num">第 3 次</th><th>4 次一致（题）</th><th>翻转的题</th></tr>' + summary + '</table></div>'
+            '<p class="sub">逐题：每格 4 个符号依次为第 0–3 次生成；4 次都变好标绿、都变差标红，其余有变化标黄。</p>'
+            f'<div class="scroll"><table><tr><th>题</th>{head}</tr>' + "".join(rows) + '</table></div>')
 
 
 HEAT = [("P3.2.0", "原问题 · 原句", "去编码"), ("P3.2.1", "原问题 · 两侧去编码", "改写"),
@@ -302,6 +373,7 @@ def v8_check() -> str:
 def main() -> None:
     concl = "".join(card(f'{esc(name)} <span class="badge {kind}">{esc(cat)}</span>', body) for name, cat, kind, body in CONCLUSIONS)
     tabs = [("summary", "单因素总表", summary_table()), ("heat", "逐题 × 措施", heat()),
+            ("stab", "4 次生成稳定性", stability()),
             ("codes", "实验 A：编码替换", exp_codes()),
             ("chan-tr", "实验 B：翻译的通道拆分", exp_channels("translation")),
             ("chan-hy", "实验 B：HyDE 的通道拆分", exp_channels("hyde")),
@@ -313,12 +385,12 @@ def main() -> None:
     panels = "".join(f'<div data-panel="{t}" class="card">{body}</div>' for t, _, body in tabs)
     body = (
         '<h1>查询侧各措施的单独效果与变差原因</h1>'
-        '<div class="sub">V3.14 · 2026-10-29 · 写法提示词 v8 · 第 0 次生成 · 13 组合 × 32 题 · 判定为凑齐向量的支配关系（提案问题 3）</div>'
+        '<div class="sub">V3.14 · 2026-10-29 · 写法提示词 v8 · 第 0–3 次独立生成 · 13 组合 × 32 题 · 判定为凑齐向量的支配关系（提案问题 3）</div>'
         + card('怎么读', '<p>每个措施只和"只差它一个因素"的配置比较：一个问题只用一条检索文本（不融合），分解时不合并（每个信息项看它对应的子问题）。'
                '融合、合并单列为"组合方式"。每条原因注明验证它的实验；没做实验的标"未验证"。'
                '变好是设计预期，下面只解释变差与各有优势。</p>'
-               '<p class="down"><b>未完成</b>：3 次独立生成（扰动测试）在收集时因系统内存不足被终止，本页只有第 0 次生成。'
-               '去编码与机械改动不经过 LLM，结果恒定；翻译、HyDE、改写、step-back、分解的稳定性待重跑后补上。</p>')
+               '<p>数字默认取第 0 次生成；每个结论另写 4 次独立生成（0–3，同一提示词各自调用 LLM）中的稳定性，逐题见"4 次生成稳定性"标签。'
+               '结论的方向在 4 次中都成立；个别题的变差只在部分生成中出现时已注明。</p>')
         + '<h2>结论</h2>' + concl
         + card('附带发现', SIDE_FINDINGS)
         + '<h2>依据</h2>' + nav + panels)
