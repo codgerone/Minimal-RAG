@@ -23,7 +23,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[3]
 HERE = Path(__file__).resolve().parent
 PAGE = ROOT / "reports/query/v3.14"
-GENS = ("0", "1", "2", "3")
+# The independent generations count only when the page data holds them (the perturbation run of
+# 2026-10-29 was stopped for lack of memory; perturb/*.js on disk are then from the v7 phrasings).
+GENS = ("0", "1", "2", "3") if "perturbation" in json.loads((PAGE / "data.json").read_text(encoding="utf-8")) else ("0",)
 KINDS = {"P3.2.1": "改写", "P3.2.2": "翻译", "P3.2.3": "HyDE", "P3.2.4": "step-back"}
 
 
@@ -92,7 +94,8 @@ def ranks_by_gen(k: str) -> dict:
     """generation → combo → case → completion ranks."""
     facts = load("facts", k)
     out = {"0": {c: {q: f["n"] for q, f in cases.items()} for c, cases in facts.items()}}
-    out.update(load("perturb", k))
+    if len(GENS) > 1:
+        out.update(load("perturb", k))
     return out
 
 

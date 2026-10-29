@@ -538,8 +538,8 @@ def render(data: dict[str, Any]) -> str:
         f'<h1>查询侧对比 · {esc(data["name"])}</h1>'
         f'<div class="sub">{esc(data["created_at"])} · 数据集 {esc(data["dataset"]["version"])}，{n} 道可回答题 · '
         f'{len(data["combos"])} 种组合（混合检索、文档过滤开启）· 已评估 {len(data["available"])} 种配置'
-        f'（写法 20 种状态 × 分解 6 种状态；P3.3 搁置）· 规划：{esc(data["plan_model"])}，'
-        f'拆解提示词 v9、写法提示词 v7，冻结的第 0 次生成</div>'
+        f'（检索文本 20 种状态 × 去编码 2 × 分解 6 种状态；P3.3 搁置）· 规划：{esc(data["plan_model"])}，'
+        f'拆解提示词 v9、写法提示词 v8，冻结的第 0 次生成</div>'
         + nav +
         '<div class="card pick"><div id="qc-sides" class="cfg-grid"></div>'
         '<div class="pick-foot"><span id="qc-msg"></span> <button type="button" id="qc-reset" class="expand-btn">清空两侧</button></div>'

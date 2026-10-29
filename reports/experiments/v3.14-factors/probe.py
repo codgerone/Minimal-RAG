@@ -22,13 +22,14 @@ ROOT = Path(__file__).resolve().parents[3]
 
 
 class Probe:
-    def __init__(self, combos=None):
+    def __init__(self, combos=None, retriever: str = "hybrid"):
+        """`retriever`: hybrid (as evaluated), or semantic / bm25 to see one side of the hybrid."""
         self.workspace = Workspace(ROOT)
         self.ctx = {}
         for combo in COMBOS:
             if combos and combo.label not in combos:
                 continue
-            ctx = prepare(self.workspace, _assembly(self.workspace, combo.config, "hybrid", combo.table_return_unit),
+            ctx = prepare(self.workspace, _assembly(self.workspace, combo.config, retriever, combo.table_return_unit),
                           cache_retrievals=True)
             ctx.warm_up()
             self.ctx[combo.label] = ctx
