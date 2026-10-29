@@ -8,7 +8,8 @@ question's text and enabled phrasings are retrieved once each and the unit ranki
 question are fused by RRF, or, unfused, one phrasing is retrieved in place of the question's
 text; a selector (round robin or global RRF) merges the questions' rankings into the return
 order. Unmerged (evaluation only), a decomposed plan has its rankings and no return order.
-Rules: docs/changes/v3.14.md.
+With codes stripped (P3.2.0) every text a question is retrieved by has the identifier codes removed
+first; the original-question route keeps them. Rules: docs/changes/v3.14.md.
 """
 
 from __future__ import annotations
@@ -18,6 +19,7 @@ from typing import Collection, Protocol, Sequence
 
 from rag.query.planning import NO_COST, Phrasing, Plan
 from rag.query.retriever import RRF_K
+from rag.query.scope import strip_codes
 from rag.query.units import ResultUnit, UnitSearch
 
 ORIGINAL = "original"   # question id of the original-question route
@@ -130,6 +132,7 @@ class QuerySettings:
     fuse_phrasings: bool = True               # RRF over the question and its phrasings; False: the one phrasing in place of the question
     merge: str | None = None                  # with decomposition: round_robin | rrf; None: unmerged (evaluation only)
     original_route: bool = False              # with a merge: the original question as one more ranking (round robin: last in each round)
+    strip_codes: bool = False                 # P3.2.0: the identifier codes removed from every text of every question
 
     def __post_init__(self):
         if not self.fuse_phrasings and len(self.phrasings) != 1:
@@ -161,12 +164,13 @@ def fuse(rankings: Sequence[tuple[str, Sequence[ResultUnit]]]) -> tuple[list[Res
 
 
 def planned(searcher: UnitSearch, plan: Plan, settings: QuerySettings,
-            document_ids: Collection[str] | None = None) -> QueryRun:
+            document_ids: Collection[str] | None = None, codes: Collection[str] = ()) -> QueryRun:
     """Runs a plan: every question's own text and enabled phrasings retrieved once each and
     fused per question (unfused: its one phrasing alone); with decomposition, the merge selects
     the return order from the questions' rankings, the original question's ranking last when
     the original route is on, and without a merge there is no return order. Raises Unavailable
-    when an unfused phrasing does not have exactly one text for a question."""
+    when an unfused phrasing does not have exactly one text for a question. `codes`: the identifier
+    codes the scope was found by, removed when settings.strip_codes."""
     if not plan.decomposed and (settings.merge or settings.original_route):
         raise ValueError("合并方式与原问题一路只在分解时使用")
     retrievals, seconds = 0, 0.0
@@ -179,7 +183,8 @@ def planned(searcher: UnitSearch, plan: Plan, settings: QuerySettings,
                               "不融合时须恰好一段")
         rankings = []
         for phrasing in texts:
-            ranking = searcher.rank(phrasing.text, document_ids)
+            text = strip_codes(phrasing.text, codes)[0] if settings.strip_codes else phrasing.text
+            ranking = searcher.rank(text, document_ids)
             retrievals += 1
             seconds += ranking.seconds
             rankings.append((label(phrasing), ranking.units))

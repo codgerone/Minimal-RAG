@@ -15,8 +15,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable, Protocol
 
-# Each step's prompt is versioned on its own; the phrasing prompt is unchanged since v7.
-PROMPT_VERSIONS = {"decomposition": "query_plan_v9", "phrasings": "query_plan_v7"}
+# Each step's prompt is versioned on its own. Phrasing v8 (2026-10-29): v7 without the line asking to
+# leave the identifier codes out; removing them is the P3.2.0 switch (rag/query/scope.py strip_codes).
+PROMPT_VERSIONS = {"decomposition": "query_plan_v9", "phrasings": "query_plan_v8"}
 REASONING_EFFORT = "medium"
 
 DECOMPOSE_SYSTEM = """You split a question into separate questions for document retrieval. You never answer the question.
@@ -36,7 +37,6 @@ DECOMPOSE_USER = "Question: {question}"
 PHRASE_SYSTEM = """You write alternative phrasings of questions for document retrieval. You never answer the questions.
 
 The documents searched are written in: {languages}.
-{codes}
 The input is a list of questions, each with an id. For each question write the following phrasings, each from the question itself (no phrasing is derived from another):
 - rewrite: in the language of the question, the question as a statement or noun phrase without question words and filler; keep names, codes, numbers and quoted terms verbatim.
 - translations: the question translated into each of {languages}, as a question, in the terms documents in that language use; skip a language the question is already written in; keep names, codes and numbers as written.
@@ -44,8 +44,6 @@ The input is a list of questions, each with an id. For each question write the f
 - step_back: in the language of the question, a broader but still concrete question about the same documents: drop the qualifiers that narrow the question to one instance (one entity, item or period) when the answer for every instance would be written in the same place; never ask for general knowledge or what such documents usually contain.
 
 Answer with one entry per question, with its id."""
-
-PHRASE_CODES = "These codes identify the documents searched; leave them out of every phrasing below: {codes}.\n"
 
 RETRY_TEMPLATE = """Your answer did not pass these checks:
 {issues}
@@ -129,10 +127,8 @@ def question_list(texts: list[str]) -> list[dict[str, str]]:
     return [{"id": f"Q{n}", "text": text} for n, text in enumerate(texts, start=1)]
 
 
-def phrase_messages(questions: list[dict[str, str]], languages: list[str], codes: list[str]) -> list[dict[str, str]]:
-    system = PHRASE_SYSTEM.format(languages=", ".join(languages),
-                                  codes=PHRASE_CODES.format(codes=", ".join(codes)) if codes else "")
-    return [{"role": "system", "content": system},
+def phrase_messages(questions: list[dict[str, str]], languages: list[str]) -> list[dict[str, str]]:
+    return [{"role": "system", "content": PHRASE_SYSTEM.format(languages=", ".join(languages))},
             {"role": "user", "content": json.dumps({"questions": questions}, ensure_ascii=False)}]
 
 
@@ -184,12 +180,10 @@ class Planner:
         self.llm = llm
         self.cache = cache   # rag.ingest.tables.llm_tables.LLMCache
 
-    def plan(self, question: str, languages: list[str], decompose: bool, codes: list[str] = (),
-             generation: int = 0) -> Plan:
-        """`languages`: the languages of the documents in scope; `codes`: the identifier codes the
-        scope was found by (rag/query/scope.py). `generation` > 0: an independent generation,
-        cached apart from generation 0."""
-        languages, codes = sorted(set(languages)), sorted(set(codes))
+    def plan(self, question: str, languages: list[str], decompose: bool, *, generation: int = 0) -> Plan:
+        """`languages`: the languages of the documents in scope. `generation` > 0: an independent
+        generation, cached apart from generation 0."""
+        languages = sorted(set(languages))
         degraded: list[str] = []
         texts = [question]
         decomposition = NO_COST
@@ -202,7 +196,7 @@ class Planner:
             else:
                 texts = list(dict.fromkeys(got))
         listed = question_list(texts)
-        phrased, issues, made = self._ask(phrase_messages(listed, languages, codes), "phrasings",
+        phrased, issues, made = self._ask(phrase_messages(listed, languages), "phrasings",
                                           phrase_schema(languages),
                                           lambda raw: check_phrasings(raw, listed, languages), generation)
         if issues:

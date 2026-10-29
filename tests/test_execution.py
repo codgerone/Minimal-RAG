@@ -184,3 +184,10 @@ def test_a_cached_retrieval_returns_the_same_ranking_and_time_without_calling_th
     UnitSearch(retriever, TwoChunkStore(), None, "chunk",
                RetrievalCache(tmp_path / "cache", index, "hybrid")).rank("q", ["d"])
     assert retriever.calls == 4
+
+
+def test_stripping_codes_removes_them_from_every_text_but_not_from_the_original_route():
+    searcher = TextSearch()
+    planned(searcher, make_plan(True), QuerySettings(frozenset({"rewrite"}), merge="round_robin",
+                                                    original_route=True, strip_codes=True), codes=["Q1", "Q2"])
+    assert searcher.texts == ["ab", "r ba", "cd", "r dc", "orig xa"]

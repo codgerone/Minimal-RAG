@@ -1,9 +1,10 @@
 """Facts for the query comparison page: every combination × query configuration × question.
 
 A combination is an index (configs/) with a table return unit; a query configuration is a choice
-of the query-side modules with their options (QueryConfig: decomposition with its merge and the
-original-question route, phrasings with their fusion; the empty configuration is V3.13; P3.3 is not
-evaluated). Every configuration runs on the frozen plans (generation 0, cached): two per question,
+of the query-side modules with their options (QueryConfig: the questions, i.e. decomposition or not;
+each question's retrieval texts, i.e. codes stripped or not and the original text and phrasings, fused
+when more than one; the merge across questions and the original-question route; the empty
+configuration is V3.13; P3.3 is not evaluated). Every configuration runs on the frozen plans (generation 0, cached): two per question,
 without and with decomposition. Per question only what any K and any pair of configurations can be
 derived from is kept: each information item's completion rank and first-unit rank, the position of
 every evidence unit, the leading units (indices into the combination's unit table) and the cost.
@@ -30,6 +31,7 @@ from rag.query.planning import Plan, Planner, document_languages
 
 MODULES = (   # id, name
     ("P3.1", "分解"),
+    ("P3.2.0", "去编码"),
     ("P3.2.1", "改写"),
     ("P3.2.2", "翻译"),
     ("P3.2.3", "HyDE"),
@@ -111,8 +113,9 @@ class QueryConfig:
     decompose: bool = False
     merge: str | None = None          # with decomposition: rr | rrf; None: unmerged (evaluation only)
     original_route: bool = False      # with a merge
-    phrasings: tuple[str, ...] = ()   # P3.2.x module ids, in module order
+    phrasings: tuple[str, ...] = ()   # P3.2.1–P3.2.4 module ids, in module order
     fuse: bool = True                 # with phrasings; False: exactly one phrasing, in place of the question
+    strip: bool = False               # P3.2.0: identifier codes removed from every retrieval text
 
     def __post_init__(self):
         if self.merge is not None and (not self.decompose or self.merge not in MERGES):
@@ -131,11 +134,13 @@ class QueryConfig:
 
     @property
     def key(self) -> str:
-        """Readable and safe in file names and URLs: 'P3.1@rr-o_P3.2.1+P3.2.2@rrf'; '' is V3.13.
+        """Readable and safe in file names and URLs: 'P3.1@rr-o_P3.2.0_P3.2.1+P3.2.2@rrf'; '' is V3.13.
         Without '@' a part has no merge (decomposition) or no fusion (phrasing)."""
         parts = []
         if self.decompose:
             parts.append("P3.1" + (f"@{self.merge}" if self.merge else "") + ("-o" if self.original_route else ""))
+        if self.strip:
+            parts.append("P3.2.0")
         if self.phrasings:
             parts.append("+".join(self.phrasings) + ("@rrf" if self.fuse else ""))
         return "_".join(parts)
@@ -148,6 +153,8 @@ class QueryConfig:
             if body == "P3.1":
                 merge, _, route = option.partition("-")
                 fields.update(decompose=True, merge=merge or None, original_route=route == "o")
+            elif body == "P3.2.0" and not option:
+                fields.update(strip=True)
             else:
                 fields.update(phrasings=tuple(body.split("+")), fuse=option == "rrf")
         config = cls(**fields)
@@ -157,17 +164,19 @@ class QueryConfig:
 
     def settings(self) -> execution.QuerySettings:
         return execution.QuerySettings(frozenset(PHRASING_OF[m] for m in self.phrasings), self.fuse,
-                                       MERGES[self.merge] if self.merge else None, self.original_route)
+                                       MERGES[self.merge] if self.merge else None, self.original_route, self.strip)
 
 
 def evaluated_configs() -> list[QueryConfig]:
-    """Phrasing states (none; RRF over each non-empty subset; each phrasing unfused) × decomposition
-    states (none; unmerged; round robin and global RRF, each without and with the original route)."""
+    """Phrasing states (none; RRF over each non-empty subset; each phrasing unfused) × codes kept or
+    stripped × decomposition states (none; unmerged; round robin and global RRF, each without and with
+    the original route)."""
     ids = list(PHRASING_OF)
     phrasings = [((), True)] + [(c, True) for n in range(1, len(ids) + 1) for c in combinations(ids, n)]         + [((m,), False) for m in ids]
     decompositions = [dict(), dict(decompose=True)] + [dict(decompose=True, merge=m, original_route=o)
                                                        for m in MERGES for o in (False, True)]
-    return [QueryConfig(**d, phrasings=p, fuse=f) for p, f in phrasings for d in decompositions]
+    return [QueryConfig(**d, phrasings=p, fuse=f, strip=s) for s in (False, True) for p, f in phrasings
+            for d in decompositions]
 
 
 def make_planner(workspace: Workspace) -> Planner:
@@ -321,7 +330,7 @@ def collect(workspace: Workspace, name: str, combos: tuple[Combo, ...] = COMBOS,
             scope = ctx.scope(case.question)
             documents = scope.document_ids
             languages = sorted({languages_of[d] for d in (documents or languages_of)})
-            pair = {d: planner.plan(case.question, languages, d, list(scope.codes), generation) for d in (False, True)}
+            pair = {d: planner.plan(case.question, languages, d, generation=generation) for d in (False, True)}
             plans.setdefault(case.case_id, {
                 "scope": {"documents": list(documents or []), "languages": languages, "codes": list(scope.codes)},
                 "plain": plan_json(pair[False]), "decomposed": plan_json(pair[True])})
@@ -334,7 +343,7 @@ def collect(workspace: Workspace, name: str, combos: tuple[Combo, ...] = COMBOS,
                     run = execution.plain(search, case.question, documents)
                 else:
                     try:
-                        run = execution.planned(search, pair[config.decompose], config.settings(), documents)
+                        run = execution.planned(search, pair[config.decompose], config.settings(), documents, scope.codes)
                     except execution.Unavailable as e:
                         unavailable.setdefault(config.key, []).append(f"{combo.label} {case.case_id}：{e}")
                         continue

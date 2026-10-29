@@ -10,6 +10,9 @@ def test_config_keys_are_readable_and_parse_back():
     assert QueryConfig(True).key == "P3.1" and not QueryConfig(True).merged
     assert QueryConfig(phrasings=("P3.2.3",), fuse=False).key == "P3.2.3"
     assert QueryConfig.parse("P3.1@rrf_P3.2.4") == QueryConfig(True, "rrf", False, ("P3.2.4",), False)
+    stripped = QueryConfig(True, None, False, ("P3.2.2",), True, True)
+    assert stripped.key == "P3.1_P3.2.0_P3.2.2@rrf" and QueryConfig.parse(stripped.key) == stripped
+    assert QueryConfig.parse("P3.2.0") == QueryConfig(strip=True) and QueryConfig.parse("P3.2.0").settings().strip_codes
     with pytest.raises(ValueError):
         QueryConfig.parse("P3.2.2+P3.2.1@rrf")
 
@@ -30,11 +33,12 @@ def test_metrics_at_k_derive_from_needed_units_and_the_unit_table_tokens():
     assert metrics_at(facts, units, 4)["complete"] == 2 and metrics_at(facts, units, 1)["hit"] == 1
 
 
-def test_the_120_evaluated_configurations_and_their_settings():
+def test_the_240_evaluated_configurations_and_their_settings():
     configs = evaluated_configs()
     keys = [c.key for c in configs]
-    assert len(configs) == 120 == len(set(keys)) and keys[0] == ""
-    assert sum(not c.merged for c in configs) == 20 and sum(c.phrasings != () and not c.fuse for c in configs) == 24
+    assert len(configs) == 240 == len(set(keys)) and keys[0] == ""
+    assert sum(not c.merged for c in configs) == 40 and sum(c.phrasings != () and not c.fuse for c in configs) == 48
+    assert sum(c.strip for c in configs) == 120
     settings = QueryConfig.parse("P3.1@rrf-o_P3.2.2+P3.2.3@rrf").settings()
     assert settings.merge == "rrf" and settings.original_route and settings.phrasings == {"translation", "hyde"}
     settings = QueryConfig.parse("P3.2.1").settings()

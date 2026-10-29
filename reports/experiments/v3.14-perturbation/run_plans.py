@@ -37,7 +37,7 @@ def main(generations: tuple[int, ...]) -> None:
         out[str(generation)] = {}
         for case_id, stored in data["plans"].items():
             scope = stored["scope"]
-            pair = {d: planner.plan(questions[case_id], scope["languages"], d, scope["codes"], generation)
+            pair = {d: planner.plan(questions[case_id], scope["languages"], d, generation=generation)
                     for d in (False, True)}
             cost += sum(p.cost.cost_usd for p in pair.values())
             texts = [q.text for q in pair[True].questions]

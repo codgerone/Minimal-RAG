@@ -19,10 +19,9 @@ def answer(*entries):
 def test_the_question_list_is_the_same_structure_with_or_without_decomposition():
     assert question_list(["Q"]) == [{"id": "Q1", "text": "Q"}]
     assert question_list(["a", "b"]) == [{"id": "Q1", "text": "a"}, {"id": "Q2", "text": "b"}]
-    system, user = phrase_messages(question_list(["a"]), ["english", "spanish"], ["C1"])
-    assert "written in: english, spanish." in system["content"] and "C1" in system["content"]
+    system, user = phrase_messages(question_list(["a"]), ["english", "spanish"])
+    assert "written in: english, spanish." in system["content"] and "codes" not in system["content"].split("- rewrite")[0]
     assert json.loads(user["content"]) == {"questions": [{"id": "Q1", "text": "a"}]}
-    assert "identify the documents" not in phrase_messages(question_list(["a"]), ["spanish"], [])[0]["content"]
 
 
 def test_phrasings_are_matched_by_id_and_start_with_the_question():

@@ -11,7 +11,7 @@ import tomllib
 import unicodedata
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Literal
+from typing import Collection, Literal
 
 from rag.config import ConfigError
 from rag.ingest.sources import document_id
@@ -121,3 +121,24 @@ def describe(scope: SearchScope, names: dict[str, str]) -> str:
               "no_catalog": f"未配置文档标识表 documents/{CATALOG_FILE}",
               "disabled": "文档过滤已关闭"}[scope.kind]
     return f"检索范围：全库（{reason}）"
+
+
+def strip_codes(text: str, codes: Collection[str]) -> tuple[str, int]:
+    """The text with every occurrence of the codes removed (P3.2.0, docs/changes/v3.14.md), and how
+    many were removed. An occurrence is found as in identification: the normalized code inside the
+    normalized text; it spans from its first to its last letter or digit. Brackets left empty are
+    removed and runs of whitespace merged."""
+    kept = [(n, ch) for n, raw in enumerate(text) for ch in normalize(raw)]
+    flat = "".join(ch for _, ch in kept)
+    spans: list[tuple[int, int]] = []
+    for code in {normalize(c) for c in codes}:
+        start = flat.find(code)
+        while start >= 0:
+            spans.append((kept[start][0], kept[start + len(code) - 1][0] + 1))
+            start = flat.find(code, start + len(code))
+    if not spans:
+        return text, 0
+    drop = set().union(*(range(a, b) for a, b in spans))
+    out = "".join(ch for n, ch in enumerate(text) if n not in drop)
+    out = re.sub(r"[(（\[【]\s*[)）\]】]", "", out)
+    return re.sub(r"\s{2,}", " ", out).strip(), len(spans)
