@@ -17,7 +17,7 @@ from typing import Collection
 
 from rag.index.store import ChromaStore
 from rag.index.tables import StoredTable, TableStore
-from rag.query.retriever import Hit, Retriever
+from rag.query.retriever import Hit, HybridRetriever, Retriever
 
 
 @dataclass(frozen=True)
@@ -77,7 +77,9 @@ class UnitRanking:
 class RetrievalCache:
     """The retriever's full ranking per (index, retriever, scope, text), on disk. The index is
     identified by its manifest, which every ingest rewrites. A cached ranking keeps the time the
-    retriever took, so costs read the same on every rerun; the return-unit step runs again."""
+    retriever took, so costs read the same on every rerun; the return-unit step runs again. A hybrid
+    ranking is stored with both channels' ranks and fused again with the current BM25 weight when
+    read, so the weight is not part of the key."""
 
     def __init__(self, folder: Path, index_dir: Path, retriever: str):
         self.folder = folder
@@ -125,6 +127,8 @@ class UnitSearch:
         else:
             chunks = self.store.get_chunks([row["chunk_id"] for row in cached["hits"]])
             hits = [Hit(chunks[row.pop("chunk_id")], **row) for row in cached["hits"]]
+            if isinstance(self.retriever, HybridRetriever):
+                hits = self.retriever.refuse(hits)
             retrieval = cached["seconds"]
         start = time.perf_counter()
         units = tuple(self._units(hits))

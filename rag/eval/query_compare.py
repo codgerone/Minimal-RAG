@@ -293,15 +293,17 @@ def routed_facts(case, evidence, run: execution.QueryRun, routes_of: dict[str, l
 
 def collect(workspace: Workspace, name: str, combos: tuple[Combo, ...] = COMBOS,
             planner: Planner | None = None, progress=None, generation: int = 0,
-            ranks_only: bool = False) -> dict[str, Any]:
+            ranks_only: bool = False, configs: list[QueryConfig] | None = None,
+            bm25_weight: float = 1.0) -> dict[str, Any]:
     """Runs every evaluated configuration on every combination, on the plans of `generation` (0 is
     the frozen one). Returns the page data: the facts under "configs" and the process detail under
     "process", both by configuration key; a configuration some question cannot run is left out and
     listed under "unavailable" with why. `ranks_only`: keep only each question's completion ranks
-    ("n"), no process detail (the perturbation layer needs nothing more)."""
+    ("n"), no process detail (the perturbation layer needs nothing more). `configs`: a subset of the
+    evaluated configurations; `bm25_weight`: the hybrid retriever's α (docs/decisions/017-bm25-weight.md)."""
     from rag.cli import _assembly
     planner = planner or make_planner(workspace)
-    configs = evaluated_configs()
+    configs = configs or evaluated_configs()
     facts: dict[str, dict[str, Any]] = {c.key: {} for c in configs}
     process: dict[str, dict[str, Any]] = {c.key: {} for c in configs}
     unavailable: dict[str, list[str]] = {}
@@ -313,7 +315,7 @@ def collect(workspace: Workspace, name: str, combos: tuple[Combo, ...] = COMBOS,
     labels = Labels()
     combo_info, dataset = [], None
     for combo in combos:
-        ctx = prepare(workspace, _assembly(workspace, combo.config, "hybrid", combo.table_return_unit),
+        ctx = prepare(workspace, _assembly(workspace, combo.config, "hybrid", combo.table_return_unit, bm25_weight),
                       cache_retrievals=True)
         ctx.warm_up()
         dataset = ctx.dataset

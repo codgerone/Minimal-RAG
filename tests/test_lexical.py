@@ -126,6 +126,19 @@ def test_reciprocal_rank_fusion_adds_both_rankings_and_breaks_ties_by_chunk_id()
     assert [h.chunk.chunk_id for h in tied] == ["c1", "c2"]
 
 
+def test_the_bm25_weight_scales_the_lexical_term_and_zero_leaves_the_semantic_order():
+    semantic = FakeSemantic(["c1", "c2", "c3", "c4"])
+    lexical = FakeBM25([("c3", 7.0)])
+    half = HybridRetriever(semantic, lexical, 0.5).retrieve("q", 4)
+    assert half[0].chunk.chunk_id == "c3"
+    assert half[0].score == pytest.approx(1 / (RRF_K + 3) + 0.5 / (RRF_K + 1))
+    none = HybridRetriever(semantic, lexical, 0.0).retrieve("q", 4)
+    assert [h.chunk.chunk_id for h in none] == ["c1", "c2", "c3", "c4"]
+    # Fusing the full equal-weight ranking again with another weight gives that weight's ranking.
+    full = HybridRetriever(semantic, lexical).retrieve("q", 4)
+    assert HybridRetriever(semantic, lexical, 0.5).refuse(full) == half
+
+
 # --- configuration and index consistency ----------------------------------------
 
 def test_lexical_section_enters_the_fingerprint_only_when_present(tmp_path):

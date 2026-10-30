@@ -51,11 +51,14 @@ class CaseResult:
 
 
 def run_name(config_name: str, top_k: int, document_filter: bool, retriever: str,
-             table_return_unit: str = "chunk") -> str:
-    """Folder name: date, config, K, filter state, (unless semantic) the retriever and (when
-    whole tables are returned) `_table`, so a run reads without opening it."""
+             table_return_unit: str = "chunk", bm25_weight: float = 1.0) -> str:
+    """Folder name: date, config, K, filter state, (unless semantic) the retriever with its BM25
+    weight when hybrid and not 1, and (when whole tables are returned) `_table`, so a run reads
+    without opening it."""
     state = "filter-on" if document_filter else "filter-off"
     suffix = "" if retriever == "semantic" else f"_{retriever}"
+    if retriever == "hybrid" and bm25_weight != 1:
+        suffix += f"-bm25w{bm25_weight:g}"
     if table_return_unit == "table":
         suffix += "_table"
     return f"{datetime.now():%Y-%m-%d}_{config_name}_k{top_k}_{state}{suffix}"
@@ -228,7 +231,8 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, budgets: Sequence[i
     folders = {}
     for budget in budgets:
         folders[budget] = _run_folder(workspace, run_name(assembly.name, budget, enabled,
-                                                          assembly.config.retriever.use, table_return_unit))
+                                                          assembly.config.retriever.use, table_return_unit,
+                                                          assembly.config.bm25_weight))
     for budget in budgets:
         results = []
         for item, run in prepared:
@@ -262,6 +266,7 @@ def _write_run(workspace: Workspace, assembly: Assembly, folder: Path, top_k: in
         "fingerprint": assembly.fingerprint(),
         "build_settings": assembly.build_settings(),
         "retriever": assembly.config.retriever.use,
+        "bm25_weight": assembly.config.bm25_weight,
         "table_return_unit": table_return_unit,
         "top_k": top_k,
         "query_execution": "plain",

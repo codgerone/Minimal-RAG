@@ -4,7 +4,7 @@
 > - 配置含 `[lexical]` 一节时，入库为每个 chunk 建 BM25 倒排索引（`.rag/indexes/<配置名>/bm25.sqlite`）；`[lexical]` 的设置进入构建指纹。
 > - 问题与 chunk 经同一分析器变为词：规范化 → 切词 → 去停用词（可关）→ 词干化（可开）。
 > - BM25 的 IDF 与平均 chunk 长度按全库统计，检索范围只决定哪些 chunk 参与排序。
-> - `hybrid` 用倒数排名融合（RRF）合并向量排名与 BM25 排名。
+> - `hybrid` 用倒数排名融合（RRF）合并向量排名与 BM25 排名，BM25 一项乘以权重 α（`[retriever] bm25_weight`，默认 1，查询设置）。
 > - 检索器 `bm25`、`hybrid` 要求配置 `[lexical]`；`semantic` 不使用 BM25 索引。
 
 代码：`rag/index/analyzer.py`（分析器）、`rag/index/lexical.py`（索引与打分）、`rag/query/retriever.py`（检索器）。
@@ -44,7 +44,7 @@ idf(t)   = ln(1 + (N − n(t) + 0.5) / (n(t) + 0.5))
 
 1. 向量排名：检索范围内全部 chunk 按（余弦距离升序，chunk ID 升序）排名。
 2. BM25 排名：同上一节，只含得分大于 0 的 chunk。
-3. 融合得分 = 1 / (60 + 向量名次) + 1 / (60 + BM25 名次)；不在 BM25 排名中的 chunk 只计第一项。
+3. 融合得分 = 1 / (60 + 向量名次) + α / (60 + BM25 名次)；不在 BM25 排名中的 chunk 只计第一项。α = 0 时与向量检索的排名相同。
 4. 按（融合得分降序，chunk ID 升序）取前 K 个。
 
 每条命中记录向量名次与相似度、BM25 名次与得分（无则为空）、融合得分。

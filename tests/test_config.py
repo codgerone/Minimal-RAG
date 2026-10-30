@@ -56,6 +56,18 @@ def test_query_settings_do_not_change_fingerprint(tmp_path):
     assert assemble(load_config(path)).fingerprint() == first.fingerprint()
 
 
+def test_bm25_weight_is_a_query_setting(tmp_path):
+    first = assemble(load_config(write(tmp_path)))
+    assert first.config.bm25_weight == 1.0
+    path = write(tmp_path)
+    path.write_text(path.read_text(encoding="utf-8").replace("top_k = 4", "top_k = 4\nbm25_weight = 0.5"),
+                    encoding="utf-8")
+    weighted = load_config(path)
+    assert weighted.bm25_weight == 0.5 and assemble(weighted).fingerprint() == first.fingerprint()
+    path.write_text(path.read_text(encoding="utf-8").replace("0.5", "-1"), encoding="utf-8")
+    with pytest.raises(ConfigError):
+        load_config(path)
+
 def test_build_settings_change_fingerprint(tmp_path):
     first = assemble(load_config(write(tmp_path)))
     second = assemble(load_config(write(tmp_path, extra="").with_name("x.toml")))

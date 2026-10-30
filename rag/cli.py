@@ -35,6 +35,15 @@ def _retriever_option(sub: argparse.ArgumentParser) -> None:
                      help="本次改用这个检索器（默认取配置文件 [retriever] use；bm25、hybrid 需要配置 [lexical]）")
     sub.add_argument("--table-return-unit", choices=TABLE_RETURN_UNITS,
                      help="命中表格 chunk 时返回该 chunk 还是整张表（默认取配置文件 [retriever] table_return_unit）")
+    sub.add_argument("--bm25-weight", type=_weight,
+                     help="混合检索中 BM25 排名的权重 α（默认取配置文件 [retriever] bm25_weight，未写为 1）")
+
+
+def _weight(value: str) -> float:
+    number = float(value)
+    if number < 0:
+        raise argparse.ArgumentTypeError("必须为非负数")
+    return number
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -102,8 +111,8 @@ def _out(text: str = "") -> None:
 
 
 def _assembly(workspace: Workspace, name: str | None, retriever: str | None = None,
-              table_return_unit: str | None = None):
-    """`retriever` and `table_return_unit` replace the config's query settings for this command."""
+              table_return_unit: str | None = None, bm25_weight: float | None = None):
+    """`retriever`, `table_return_unit` and `bm25_weight` replace the config's query settings for this command."""
     from dataclasses import replace
     from rag.registry import assemble
     config = resolve_config(workspace.root, name)
@@ -111,11 +120,13 @@ def _assembly(workspace: Workspace, name: str | None, retriever: str | None = No
         config = replace(config, retriever=replace(config.retriever, use=retriever))
     if table_return_unit is not None:
         config = replace(config, table_return_unit=table_return_unit)
+    if bm25_weight is not None:
+        config = replace(config, bm25_weight=bm25_weight)
     return assemble(config)
 
 
 def _query_assembly(workspace: Workspace, args: argparse.Namespace):
-    return _assembly(workspace, args.config, args.retriever, args.table_return_unit)
+    return _assembly(workspace, args.config, args.retriever, args.table_return_unit, args.bm25_weight)
 
 
 def _status(workspace: Workspace, args: argparse.Namespace) -> int:
