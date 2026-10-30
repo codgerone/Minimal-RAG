@@ -1,0 +1,2227 @@
+[
+ {
+  "case": "CONTRACT-105-Q002",
+  "sub": "Q1",
+  "item": "e1",
+  "name": "换成文档用词（单数）",
+  "old": "ítems",
+  "new": "ítem",
+  "texts": {
+   "中文子问题": "采购合同 包含哪些 Ítem 的产品？",
+   "译文": "¿Qué ítems de productos incluye el contrato de compra ?",
+   "换成文档用词（单数）": "¿Qué ítem de productos incluye el contrato de compra ?"
+  },
+  "n": {
+   "semantic": {
+    "中文子问题": {
+     "RM-T": {
+      "n": 4,
+      "units": {
+       "node_af2e93dd3f6afeb30bcf": 4,
+       "node_73df07d05cf37ea3c86e": 6,
+       "node_20cd734a3c6fa194a0e7": 19,
+       "node_7504dd672d005aae9ac0": 21
+      },
+      "top": [
+       "c0010",
+       "c0015",
+       "c0005",
+       "node_af2e93dd3f6afeb30bcf"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_af2e93dd3f6afeb30bcf": 1,
+       "node_7504dd672d005aae9ac0": 2,
+       "node_73df07d05cf37ea3c86e": 6,
+       "node_20cd734a3c6fa194a0e7": 8
+      },
+      "top": [
+       "node_af2e93dd3f6afeb30bcf",
+       "node_7504dd672d005aae9ac0",
+       "c0010",
+       "c0015"
+      ]
+     }
+    },
+    "译文": {
+     "RM-T": {
+      "n": 4,
+      "units": {
+       "node_73df07d05cf37ea3c86e": 4,
+       "node_af2e93dd3f6afeb30bcf": 11,
+       "node_20cd734a3c6fa194a0e7": 18,
+       "node_7504dd672d005aae9ac0": 21
+      },
+      "top": [
+       "c0010",
+       "c0015",
+       "c0018",
+       "node_73df07d05cf37ea3c86e"
+      ]
+     },
+     "LM+-T": {
+      "n": 2,
+      "units": {
+       "node_7504dd672d005aae9ac0": 2,
+       "node_af2e93dd3f6afeb30bcf": 4,
+       "node_20cd734a3c6fa194a0e7": 16,
+       "node_73df07d05cf37ea3c86e": 17
+      },
+      "top": [
+       "c0010",
+       "node_7504dd672d005aae9ac0",
+       "c0015",
+       "node_af2e93dd3f6afeb30bcf"
+      ]
+     }
+    },
+    "换成文档用词（单数）": {
+     "RM-T": {
+      "n": 4,
+      "units": {
+       "node_af2e93dd3f6afeb30bcf": 4,
+       "node_73df07d05cf37ea3c86e": 6,
+       "node_20cd734a3c6fa194a0e7": 16,
+       "node_7504dd672d005aae9ac0": 21
+      },
+      "top": [
+       "c0010",
+       "c0015",
+       "c0018",
+       "node_af2e93dd3f6afeb30bcf"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_7504dd672d005aae9ac0": 1,
+       "node_af2e93dd3f6afeb30bcf": 3,
+       "node_20cd734a3c6fa194a0e7": 8,
+       "node_73df07d05cf37ea3c86e": 17
+      },
+      "top": [
+       "node_7504dd672d005aae9ac0",
+       "c0010",
+       "node_af2e93dd3f6afeb30bcf",
+       "c0015"
+      ]
+     }
+    }
+   },
+   "bm25": {
+    "中文子问题": {
+     "RM-T": {
+      "n": 1,
+      "units": {
+       "node_af2e93dd3f6afeb30bcf": 1,
+       "node_20cd734a3c6fa194a0e7": 2,
+       "node_7504dd672d005aae9ac0": 3
+      },
+      "top": [
+       "node_af2e93dd3f6afeb30bcf",
+       "node_20cd734a3c6fa194a0e7",
+       "node_7504dd672d005aae9ac0",
+       "c0008"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_af2e93dd3f6afeb30bcf": 1,
+       "node_20cd734a3c6fa194a0e7": 2,
+       "node_7504dd672d005aae9ac0": 3
+      },
+      "top": [
+       "node_af2e93dd3f6afeb30bcf",
+       "node_20cd734a3c6fa194a0e7",
+       "node_7504dd672d005aae9ac0",
+       "c0008"
+      ]
+     }
+    },
+    "译文": {
+     "RM-T": {
+      "n": 13,
+      "units": {
+       "node_73df07d05cf37ea3c86e": 13,
+       "node_af2e93dd3f6afeb30bcf": 14
+      },
+      "top": [
+       "c0000",
+       "c0001",
+       "c0008",
+       "c0003"
+      ]
+     },
+     "LM+-T": {
+      "n": 2,
+      "units": {
+       "node_7504dd672d005aae9ac0": 2,
+       "node_af2e93dd3f6afeb30bcf": 6,
+       "node_20cd734a3c6fa194a0e7": 8,
+       "node_73df07d05cf37ea3c86e": 16
+      },
+      "top": [
+       "c0000",
+       "node_7504dd672d005aae9ac0",
+       "c0001",
+       "c0008"
+      ]
+     }
+    },
+    "换成文档用词（单数）": {
+     "RM-T": {
+      "n": 6,
+      "units": {
+       "node_af2e93dd3f6afeb30bcf": 6,
+       "node_20cd734a3c6fa194a0e7": 11,
+       "node_73df07d05cf37ea3c86e": 16,
+       "node_7504dd672d005aae9ac0": 20
+      },
+      "top": [
+       "c0008",
+       "c0001",
+       "c0000",
+       "c0003"
+      ]
+     },
+     "LM+-T": {
+      "n": 2,
+      "units": {
+       "node_7504dd672d005aae9ac0": 2,
+       "node_af2e93dd3f6afeb30bcf": 7,
+       "node_73df07d05cf37ea3c86e": 16,
+       "node_20cd734a3c6fa194a0e7": 17
+      },
+      "top": [
+       "c0008",
+       "node_7504dd672d005aae9ac0",
+       "c0001",
+       "c0000"
+      ]
+     }
+    }
+   },
+   "hybrid": {
+    "中文子问题": {
+     "RM-T": {
+      "n": 1,
+      "units": {
+       "node_af2e93dd3f6afeb30bcf": 1,
+       "node_20cd734a3c6fa194a0e7": 6,
+       "node_7504dd672d005aae9ac0": 7,
+       "node_73df07d05cf37ea3c86e": 12
+      },
+      "top": [
+       "node_af2e93dd3f6afeb30bcf",
+       "c0015",
+       "c0002",
+       "c0018"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_af2e93dd3f6afeb30bcf": 1,
+       "node_7504dd672d005aae9ac0": 2,
+       "node_20cd734a3c6fa194a0e7": 4,
+       "node_73df07d05cf37ea3c86e": 11
+      },
+      "top": [
+       "node_af2e93dd3f6afeb30bcf",
+       "node_7504dd672d005aae9ac0",
+       "c0015",
+       "node_20cd734a3c6fa194a0e7"
+      ]
+     }
+    },
+    "译文": {
+     "RM-T": {
+      "n": 7,
+      "units": {
+       "node_73df07d05cf37ea3c86e": 7,
+       "node_af2e93dd3f6afeb30bcf": 16,
+       "node_20cd734a3c6fa194a0e7": 20,
+       "node_7504dd672d005aae9ac0": 21
+      },
+      "top": [
+       "c0000",
+       "c0010",
+       "c0018",
+       "c0015"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_7504dd672d005aae9ac0": 1,
+       "node_af2e93dd3f6afeb30bcf": 4,
+       "node_20cd734a3c6fa194a0e7": 12,
+       "node_73df07d05cf37ea3c86e": 18
+      },
+      "top": [
+       "node_7504dd672d005aae9ac0",
+       "c0000",
+       "c0010",
+       "node_af2e93dd3f6afeb30bcf"
+      ]
+     }
+    },
+    "换成文档用词（单数）": {
+     "RM-T": {
+      "n": 4,
+      "units": {
+       "node_af2e93dd3f6afeb30bcf": 4,
+       "node_73df07d05cf37ea3c86e": 11,
+       "node_20cd734a3c6fa194a0e7": 16,
+       "node_7504dd672d005aae9ac0": 21
+      },
+      "top": [
+       "c0010",
+       "c0000",
+       "c0015",
+       "node_af2e93dd3f6afeb30bcf"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_7504dd672d005aae9ac0": 1,
+       "node_af2e93dd3f6afeb30bcf": 3,
+       "node_20cd734a3c6fa194a0e7": 13,
+       "node_73df07d05cf37ea3c86e": 19
+      },
+      "top": [
+       "node_7504dd672d005aae9ac0",
+       "c0010",
+       "node_af2e93dd3f6afeb30bcf",
+       "c0000"
+      ]
+     }
+    }
+   }
+  }
+ },
+ {
+  "case": "CONTRACT-105-Q001",
+  "sub": "Q1",
+  "item": "e1",
+  "name": "换成文档用词",
+  "old": "partes firmantes",
+  "new": "otorgantes",
+  "texts": {
+   "中文子问题": "采购合同 的签署双方分别是谁？",
+   "译文": "¿Quiénes son las partes firmantes del contrato de adquisición ?",
+   "换成文档用词": "¿Quiénes son las otorgantes del contrato de adquisición ?"
+  },
+  "n": {
+   "semantic": {
+    "中文子问题": {
+     "RM-T": {
+      "n": 5,
+      "units": {
+       "c0000": 1,
+       "c0001": 5
+      },
+      "top": [
+       "c0000",
+       "c0002",
+       "c0007",
+       "c0016"
+      ]
+     },
+     "LM+-T": {
+      "n": 5,
+      "units": {
+       "c0000": 1,
+       "c0001": 5
+      },
+      "top": [
+       "c0000",
+       "c0002",
+       "c0007",
+       "c0016"
+      ]
+     }
+    },
+    "译文": {
+     "RM-T": {
+      "n": 7,
+      "units": {
+       "c0000": 1,
+       "c0001": 7
+      },
+      "top": [
+       "c0000",
+       "c0015",
+       "c0010",
+       "c0016"
+      ]
+     },
+     "LM+-T": {
+      "n": 7,
+      "units": {
+       "c0000": 1,
+       "c0001": 7
+      },
+      "top": [
+       "c0000",
+       "c0015",
+       "c0010",
+       "c0016"
+      ]
+     }
+    },
+    "换成文档用词": {
+     "RM-T": {
+      "n": 4,
+      "units": {
+       "c0000": 1,
+       "c0001": 4
+      },
+      "top": [
+       "c0000",
+       "c0002",
+       "c0016",
+       "c0001"
+      ]
+     },
+     "LM+-T": {
+      "n": 4,
+      "units": {
+       "c0000": 1,
+       "c0001": 4
+      },
+      "top": [
+       "c0000",
+       "c0002",
+       "c0016",
+       "c0001"
+      ]
+     }
+    }
+   },
+   "bm25": {
+    "中文子问题": {
+     "RM-T": {
+      "n": null,
+      "units": {},
+      "top": []
+     },
+     "LM+-T": {
+      "n": null,
+      "units": {},
+      "top": []
+     }
+    },
+    "译文": {
+     "RM-T": {
+      "n": 12,
+      "units": {
+       "c0000": 7,
+       "c0001": 12
+      },
+      "top": [
+       "c0020",
+       "c0007",
+       "c0021",
+       "c0018"
+      ]
+     },
+     "LM+-T": {
+      "n": 12,
+      "units": {
+       "c0000": 6,
+       "c0001": 12
+      },
+      "top": [
+       "c0020",
+       "c0007",
+       "c0021",
+       "c0018"
+      ]
+     }
+    },
+    "换成文档用词": {
+     "RM-T": {
+      "n": 19,
+      "units": {
+       "c0000": 3,
+       "c0001": 19
+      },
+      "top": [
+       "c0016",
+       "c0011",
+       "c0000",
+       "c0017"
+      ]
+     },
+     "LM+-T": {
+      "n": 20,
+      "units": {
+       "c0000": 3,
+       "c0001": 20
+      },
+      "top": [
+       "c0016",
+       "c0011",
+       "c0000",
+       "c0017"
+      ]
+     }
+    }
+   },
+   "hybrid": {
+    "中文子问题": {
+     "RM-T": {
+      "n": 5,
+      "units": {
+       "c0000": 1,
+       "c0001": 5
+      },
+      "top": [
+       "c0000",
+       "c0002",
+       "c0007",
+       "c0016"
+      ]
+     },
+     "LM+-T": {
+      "n": 5,
+      "units": {
+       "c0000": 1,
+       "c0001": 5
+      },
+      "top": [
+       "c0000",
+       "c0002",
+       "c0007",
+       "c0016"
+      ]
+     }
+    },
+    "译文": {
+     "RM-T": {
+      "n": 10,
+      "units": {
+       "c0000": 2,
+       "c0001": 10
+      },
+      "top": [
+       "c0020",
+       "c0000",
+       "c0010",
+       "c0015"
+      ]
+     },
+     "LM+-T": {
+      "n": 10,
+      "units": {
+       "c0000": 1,
+       "c0001": 10
+      },
+      "top": [
+       "c0000",
+       "c0020",
+       "c0010",
+       "c0015"
+      ]
+     }
+    },
+    "换成文档用词": {
+     "RM-T": {
+      "n": 12,
+      "units": {
+       "c0000": 1,
+       "c0001": 12
+      },
+      "top": [
+       "c0000",
+       "c0016",
+       "c0011",
+       "c0019"
+      ]
+     },
+     "LM+-T": {
+      "n": 12,
+      "units": {
+       "c0000": 1,
+       "c0001": 12
+      },
+      "top": [
+       "c0000",
+       "c0016",
+       "c0011",
+       "c0019"
+      ]
+     }
+    }
+   }
+  }
+ },
+ {
+  "case": "PO-24-12-Q001",
+  "sub": "Q1",
+  "item": "e1",
+  "name": "去掉误匹配的通用词",
+  "old": " in order ?",
+  "new": "?",
+  "texts": {
+   "中文子问题": "订单 包含哪几款产品？",
+   "译文": "Which products are included in order ?",
+   "去掉误匹配的通用词": "Which products are included?"
+  },
+  "n": {
+   "semantic": {
+    "中文子问题": {
+     "RM-T": {
+      "n": 3,
+      "units": {
+       "node_9c8c62a215da6880bb30": 3
+      },
+      "top": [
+       "c0003",
+       "c0002",
+       "node_9c8c62a215da6880bb30",
+       "c0000"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30",
+       "c0003",
+       "c0002",
+       "c0000"
+      ]
+     }
+    },
+    "译文": {
+     "RM-T": {
+      "n": 3,
+      "units": {
+       "node_9c8c62a215da6880bb30": 3
+      },
+      "top": [
+       "c0003",
+       "c0002",
+       "node_9c8c62a215da6880bb30",
+       "c0000"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30",
+       "c0003",
+       "c0002",
+       "c0000"
+      ]
+     }
+    },
+    "去掉误匹配的通用词": {
+     "RM-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30",
+       "c0003",
+       "c0002",
+       "c0000"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30",
+       "c0003",
+       "c0002",
+       "c0000"
+      ]
+     }
+    }
+   },
+   "bm25": {
+    "中文子问题": {
+     "RM-T": {
+      "n": null,
+      "units": {},
+      "top": []
+     },
+     "LM+-T": {
+      "n": null,
+      "units": {},
+      "top": []
+     }
+    },
+    "译文": {
+     "RM-T": {
+      "n": null,
+      "units": {},
+      "top": [
+       "c0003",
+       "c0000",
+       "c0002"
+      ]
+     },
+     "LM+-T": {
+      "n": 3,
+      "units": {
+       "node_9c8c62a215da6880bb30": 3
+      },
+      "top": [
+       "c0003",
+       "c0000",
+       "node_9c8c62a215da6880bb30",
+       "c0002"
+      ]
+     }
+    },
+    "去掉误匹配的通用词": {
+     "RM-T": {
+      "n": null,
+      "units": {},
+      "top": []
+     },
+     "LM+-T": {
+      "n": null,
+      "units": {},
+      "top": []
+     }
+    }
+   },
+   "hybrid": {
+    "中文子问题": {
+     "RM-T": {
+      "n": 3,
+      "units": {
+       "node_9c8c62a215da6880bb30": 3
+      },
+      "top": [
+       "c0003",
+       "c0002",
+       "node_9c8c62a215da6880bb30",
+       "c0000"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30",
+       "c0003",
+       "c0002",
+       "c0000"
+      ]
+     }
+    },
+    "译文": {
+     "RM-T": {
+      "n": 4,
+      "units": {
+       "node_9c8c62a215da6880bb30": 4
+      },
+      "top": [
+       "c0003",
+       "c0002",
+       "c0000",
+       "node_9c8c62a215da6880bb30"
+      ]
+     },
+     "LM+-T": {
+      "n": 2,
+      "units": {
+       "node_9c8c62a215da6880bb30": 2
+      },
+      "top": [
+       "c0003",
+       "node_9c8c62a215da6880bb30",
+       "c0000",
+       "c0002"
+      ]
+     }
+    },
+    "去掉误匹配的通用词": {
+     "RM-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30",
+       "c0003",
+       "c0002",
+       "c0000"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30",
+       "c0003",
+       "c0002",
+       "c0000"
+      ]
+     }
+    }
+   }
+  }
+ },
+ {
+  "case": "PO-24-12-Q001",
+  "sub": "Q1",
+  "item": "e1",
+  "name": "换成文档用词",
+  "old": "products",
+  "new": "goods",
+  "texts": {
+   "中文子问题": "订单 包含哪几款产品？",
+   "译文": "Which products are included in order ?",
+   "换成文档用词": "Which goods are included in order ?"
+  },
+  "n": {
+   "semantic": {
+    "中文子问题": {
+     "RM-T": {
+      "n": 3,
+      "units": {
+       "node_9c8c62a215da6880bb30": 3
+      },
+      "top": [
+       "c0003",
+       "c0002",
+       "node_9c8c62a215da6880bb30",
+       "c0000"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30",
+       "c0003",
+       "c0002",
+       "c0000"
+      ]
+     }
+    },
+    "译文": {
+     "RM-T": {
+      "n": 3,
+      "units": {
+       "node_9c8c62a215da6880bb30": 3
+      },
+      "top": [
+       "c0003",
+       "c0002",
+       "node_9c8c62a215da6880bb30",
+       "c0000"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30",
+       "c0003",
+       "c0002",
+       "c0000"
+      ]
+     }
+    },
+    "换成文档用词": {
+     "RM-T": {
+      "n": 3,
+      "units": {
+       "node_9c8c62a215da6880bb30": 3
+      },
+      "top": [
+       "c0003",
+       "c0002",
+       "node_9c8c62a215da6880bb30",
+       "c0000"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30",
+       "c0003",
+       "c0002",
+       "c0000"
+      ]
+     }
+    }
+   },
+   "bm25": {
+    "中文子问题": {
+     "RM-T": {
+      "n": null,
+      "units": {},
+      "top": []
+     },
+     "LM+-T": {
+      "n": null,
+      "units": {},
+      "top": []
+     }
+    },
+    "译文": {
+     "RM-T": {
+      "n": null,
+      "units": {},
+      "top": [
+       "c0003",
+       "c0000",
+       "c0002"
+      ]
+     },
+     "LM+-T": {
+      "n": 3,
+      "units": {
+       "node_9c8c62a215da6880bb30": 3
+      },
+      "top": [
+       "c0003",
+       "c0000",
+       "node_9c8c62a215da6880bb30",
+       "c0002"
+      ]
+     }
+    },
+    "换成文档用词": {
+     "RM-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30",
+       "c0003",
+       "c0000",
+       "c0002"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30",
+       "c0003",
+       "c0000",
+       "c0002"
+      ]
+     }
+    }
+   },
+   "hybrid": {
+    "中文子问题": {
+     "RM-T": {
+      "n": 3,
+      "units": {
+       "node_9c8c62a215da6880bb30": 3
+      },
+      "top": [
+       "c0003",
+       "c0002",
+       "node_9c8c62a215da6880bb30",
+       "c0000"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30",
+       "c0003",
+       "c0002",
+       "c0000"
+      ]
+     }
+    },
+    "译文": {
+     "RM-T": {
+      "n": 4,
+      "units": {
+       "node_9c8c62a215da6880bb30": 4
+      },
+      "top": [
+       "c0003",
+       "c0002",
+       "c0000",
+       "node_9c8c62a215da6880bb30"
+      ]
+     },
+     "LM+-T": {
+      "n": 2,
+      "units": {
+       "node_9c8c62a215da6880bb30": 2
+      },
+      "top": [
+       "c0003",
+       "node_9c8c62a215da6880bb30",
+       "c0000",
+       "c0002"
+      ]
+     }
+    },
+    "换成文档用词": {
+     "RM-T": {
+      "n": 2,
+      "units": {
+       "node_9c8c62a215da6880bb30": 2
+      },
+      "top": [
+       "c0003",
+       "node_9c8c62a215da6880bb30",
+       "c0002",
+       "c0000"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30",
+       "c0003",
+       "c0000",
+       "c0002"
+      ]
+     }
+    }
+   }
+  }
+ },
+ {
+  "case": "PO-24-12-Q001",
+  "sub": "Q3",
+  "item": "e3",
+  "name": "去掉误匹配的通用词",
+  "old": " in order ?",
+  "new": "?",
+  "texts": {
+   "中文子问题": "订单 中产品的数量是多少？",
+   "译文": "What is the quantity of the products in order ?",
+   "去掉误匹配的通用词": "What is the quantity of the products?"
+  },
+  "n": {
+   "semantic": {
+    "中文子问题": {
+     "RM-T": {
+      "n": 2,
+      "units": {
+       "node_9c8c62a215da6880bb30": 2
+      },
+      "top": [
+       "c0002",
+       "node_9c8c62a215da6880bb30",
+       "c0003",
+       "c0000"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30",
+       "c0002",
+       "c0003",
+       "c0000"
+      ]
+     }
+    },
+    "译文": {
+     "RM-T": {
+      "n": 3,
+      "units": {
+       "node_9c8c62a215da6880bb30": 3
+      },
+      "top": [
+       "c0002",
+       "c0003",
+       "node_9c8c62a215da6880bb30",
+       "c0000"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30",
+       "c0002",
+       "c0003",
+       "c0000"
+      ]
+     }
+    },
+    "去掉误匹配的通用词": {
+     "RM-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30",
+       "c0002",
+       "c0003",
+       "c0000"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30",
+       "c0002",
+       "c0003",
+       "c0000"
+      ]
+     }
+    }
+   },
+   "bm25": {
+    "中文子问题": {
+     "RM-T": {
+      "n": null,
+      "units": {},
+      "top": []
+     },
+     "LM+-T": {
+      "n": null,
+      "units": {},
+      "top": []
+     }
+    },
+    "译文": {
+     "RM-T": {
+      "n": null,
+      "units": {},
+      "top": [
+       "c0003",
+       "c0000",
+       "c0002"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30",
+       "c0003",
+       "c0000",
+       "c0002"
+      ]
+     }
+    },
+    "去掉误匹配的通用词": {
+     "RM-T": {
+      "n": null,
+      "units": {},
+      "top": []
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30"
+      ]
+     }
+    }
+   },
+   "hybrid": {
+    "中文子问题": {
+     "RM-T": {
+      "n": 2,
+      "units": {
+       "node_9c8c62a215da6880bb30": 2
+      },
+      "top": [
+       "c0002",
+       "node_9c8c62a215da6880bb30",
+       "c0003",
+       "c0000"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30",
+       "c0002",
+       "c0003",
+       "c0000"
+      ]
+     }
+    },
+    "译文": {
+     "RM-T": {
+      "n": 4,
+      "units": {
+       "node_9c8c62a215da6880bb30": 4
+      },
+      "top": [
+       "c0003",
+       "c0002",
+       "c0000",
+       "node_9c8c62a215da6880bb30"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30",
+       "c0003",
+       "c0002",
+       "c0000"
+      ]
+     }
+    },
+    "去掉误匹配的通用词": {
+     "RM-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30",
+       "c0002",
+       "c0003",
+       "c0000"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30",
+       "c0002",
+       "c0003",
+       "c0000"
+      ]
+     }
+    }
+   }
+  }
+ },
+ {
+  "case": "PO-24-12-Q001",
+  "sub": "Q3",
+  "item": "e3",
+  "name": "换成文档用词",
+  "old": "quantity",
+  "new": "Qty",
+  "texts": {
+   "中文子问题": "订单 中产品的数量是多少？",
+   "译文": "What is the quantity of the products in order ?",
+   "换成文档用词": "What is the Qty of the products in order ?"
+  },
+  "n": {
+   "semantic": {
+    "中文子问题": {
+     "RM-T": {
+      "n": 2,
+      "units": {
+       "node_9c8c62a215da6880bb30": 2
+      },
+      "top": [
+       "c0002",
+       "node_9c8c62a215da6880bb30",
+       "c0003",
+       "c0000"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30",
+       "c0002",
+       "c0003",
+       "c0000"
+      ]
+     }
+    },
+    "译文": {
+     "RM-T": {
+      "n": 3,
+      "units": {
+       "node_9c8c62a215da6880bb30": 3
+      },
+      "top": [
+       "c0002",
+       "c0003",
+       "node_9c8c62a215da6880bb30",
+       "c0000"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30",
+       "c0002",
+       "c0003",
+       "c0000"
+      ]
+     }
+    },
+    "换成文档用词": {
+     "RM-T": {
+      "n": 2,
+      "units": {
+       "node_9c8c62a215da6880bb30": 2
+      },
+      "top": [
+       "c0002",
+       "node_9c8c62a215da6880bb30",
+       "c0003",
+       "c0000"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30",
+       "c0002",
+       "c0003",
+       "c0000"
+      ]
+     }
+    }
+   },
+   "bm25": {
+    "中文子问题": {
+     "RM-T": {
+      "n": null,
+      "units": {},
+      "top": []
+     },
+     "LM+-T": {
+      "n": null,
+      "units": {},
+      "top": []
+     }
+    },
+    "译文": {
+     "RM-T": {
+      "n": null,
+      "units": {},
+      "top": [
+       "c0003",
+       "c0000",
+       "c0002"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30",
+       "c0003",
+       "c0000",
+       "c0002"
+      ]
+     }
+    },
+    "换成文档用词": {
+     "RM-T": {
+      "n": 2,
+      "units": {
+       "node_9c8c62a215da6880bb30": 2
+      },
+      "top": [
+       "c0003",
+       "node_9c8c62a215da6880bb30",
+       "c0000",
+       "c0002"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30",
+       "c0003",
+       "c0000",
+       "c0002"
+      ]
+     }
+    }
+   },
+   "hybrid": {
+    "中文子问题": {
+     "RM-T": {
+      "n": 2,
+      "units": {
+       "node_9c8c62a215da6880bb30": 2
+      },
+      "top": [
+       "c0002",
+       "node_9c8c62a215da6880bb30",
+       "c0003",
+       "c0000"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30",
+       "c0002",
+       "c0003",
+       "c0000"
+      ]
+     }
+    },
+    "译文": {
+     "RM-T": {
+      "n": 4,
+      "units": {
+       "node_9c8c62a215da6880bb30": 4
+      },
+      "top": [
+       "c0003",
+       "c0002",
+       "c0000",
+       "node_9c8c62a215da6880bb30"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30",
+       "c0003",
+       "c0002",
+       "c0000"
+      ]
+     }
+    },
+    "换成文档用词": {
+     "RM-T": {
+      "n": 2,
+      "units": {
+       "node_9c8c62a215da6880bb30": 2
+      },
+      "top": [
+       "c0003",
+       "node_9c8c62a215da6880bb30",
+       "c0002",
+       "c0000"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "node_9c8c62a215da6880bb30": 1
+      },
+      "top": [
+       "node_9c8c62a215da6880bb30",
+       "c0003",
+       "c0002",
+       "c0000"
+      ]
+     }
+    }
+   }
+  }
+ },
+ {
+  "case": "PO-24-12-Q004",
+  "sub": "Q3",
+  "item": "e3",
+  "name": "补回所指",
+  "old": "payment deadline for order",
+  "new": "payment deadline for the MDC ORCA fee in order",
+  "texts": {
+   "中文子问题": "订单 付款的最后期限是什么？",
+   "译文": "What is the payment deadline for order ?",
+   "补回所指": "What is the payment deadline for the MDC ORCA fee in order ?"
+  },
+  "n": {
+   "semantic": {
+    "中文子问题": {
+     "RM-T": {
+      "n": 1,
+      "units": {
+       "c0002": 1
+      },
+      "top": [
+       "c0002",
+       "c0003",
+       "c0000",
+       "node_9c8c62a215da6880bb30"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "c0002": 1
+      },
+      "top": [
+       "c0002",
+       "c0003",
+       "node_9c8c62a215da6880bb30",
+       "c0000"
+      ]
+     }
+    },
+    "译文": {
+     "RM-T": {
+      "n": 2,
+      "units": {
+       "c0002": 2
+      },
+      "top": [
+       "c0003",
+       "c0002",
+       "node_9c8c62a215da6880bb30",
+       "c0000"
+      ]
+     },
+     "LM+-T": {
+      "n": 2,
+      "units": {
+       "c0002": 2
+      },
+      "top": [
+       "c0003",
+       "c0002",
+       "node_9c8c62a215da6880bb30",
+       "c0000"
+      ]
+     }
+    },
+    "补回所指": {
+     "RM-T": {
+      "n": 1,
+      "units": {
+       "c0002": 1
+      },
+      "top": [
+       "c0002",
+       "c0003",
+       "node_9c8c62a215da6880bb30",
+       "c0000"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "c0002": 1
+      },
+      "top": [
+       "c0002",
+       "c0003",
+       "node_9c8c62a215da6880bb30",
+       "c0000"
+      ]
+     }
+    }
+   },
+   "bm25": {
+    "中文子问题": {
+     "RM-T": {
+      "n": null,
+      "units": {},
+      "top": []
+     },
+     "LM+-T": {
+      "n": null,
+      "units": {},
+      "top": []
+     }
+    },
+    "译文": {
+     "RM-T": {
+      "n": 2,
+      "units": {
+       "c0002": 2
+      },
+      "top": [
+       "c0003",
+       "c0002",
+       "c0000"
+      ]
+     },
+     "LM+-T": {
+      "n": 2,
+      "units": {
+       "c0002": 2
+      },
+      "top": [
+       "c0003",
+       "c0002",
+       "c0000",
+       "node_9c8c62a215da6880bb30"
+      ]
+     }
+    },
+    "补回所指": {
+     "RM-T": {
+      "n": 1,
+      "units": {
+       "c0002": 1
+      },
+      "top": [
+       "c0002",
+       "c0003",
+       "c0000"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "c0002": 1
+      },
+      "top": [
+       "c0002",
+       "c0003",
+       "c0000",
+       "node_9c8c62a215da6880bb30"
+      ]
+     }
+    }
+   },
+   "hybrid": {
+    "中文子问题": {
+     "RM-T": {
+      "n": 1,
+      "units": {
+       "c0002": 1
+      },
+      "top": [
+       "c0002",
+       "c0003",
+       "c0000",
+       "node_9c8c62a215da6880bb30"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "c0002": 1
+      },
+      "top": [
+       "c0002",
+       "c0003",
+       "node_9c8c62a215da6880bb30",
+       "c0000"
+      ]
+     }
+    },
+    "译文": {
+     "RM-T": {
+      "n": 2,
+      "units": {
+       "c0002": 2
+      },
+      "top": [
+       "c0003",
+       "c0002",
+       "c0000",
+       "node_9c8c62a215da6880bb30"
+      ]
+     },
+     "LM+-T": {
+      "n": 2,
+      "units": {
+       "c0002": 2
+      },
+      "top": [
+       "c0003",
+       "c0002",
+       "c0000",
+       "node_9c8c62a215da6880bb30"
+      ]
+     }
+    },
+    "补回所指": {
+     "RM-T": {
+      "n": 1,
+      "units": {
+       "c0002": 1
+      },
+      "top": [
+       "c0002",
+       "c0003",
+       "c0000",
+       "node_9c8c62a215da6880bb30"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "c0002": 1
+      },
+      "top": [
+       "c0002",
+       "c0003",
+       "c0000",
+       "node_9c8c62a215da6880bb30"
+      ]
+     }
+    }
+   }
+  }
+ },
+ {
+  "case": "E001-602-Q001",
+  "sub": "Q3",
+  "item": "e3",
+  "name": "换成文档用词",
+  "old": "impuestos",
+  "new": "IGV",
+  "texts": {
+   "中文子问题": "发票 中包含多少税费？",
+   "译文": "¿Qué cantidad de impuestos incluye la factura ?",
+   "换成文档用词": "¿Qué cantidad de IGV incluye la factura ?"
+  },
+  "n": {
+   "semantic": {
+    "中文子问题": {
+     "RM-T": {
+      "n": 1,
+      "units": {
+       "c0002": 1
+      },
+      "top": [
+       "c0002",
+       "c0000",
+       "node_577d8597c13629ecd059"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "c0002": 1
+      },
+      "top": [
+       "c0002",
+       "node_577d8597c13629ecd059",
+       "c0000"
+      ]
+     }
+    },
+    "译文": {
+     "RM-T": {
+      "n": 1,
+      "units": {
+       "c0002": 1
+      },
+      "top": [
+       "c0002",
+       "c0000",
+       "node_577d8597c13629ecd059"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "c0002": 1
+      },
+      "top": [
+       "c0002",
+       "node_577d8597c13629ecd059",
+       "c0000"
+      ]
+     }
+    },
+    "换成文档用词": {
+     "RM-T": {
+      "n": 1,
+      "units": {
+       "c0002": 1
+      },
+      "top": [
+       "c0002",
+       "node_577d8597c13629ecd059",
+       "c0000"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "c0002": 1
+      },
+      "top": [
+       "c0002",
+       "node_577d8597c13629ecd059",
+       "c0000"
+      ]
+     }
+    }
+   },
+   "bm25": {
+    "中文子问题": {
+     "RM-T": {
+      "n": null,
+      "units": {},
+      "top": []
+     },
+     "LM+-T": {
+      "n": null,
+      "units": {},
+      "top": []
+     }
+    },
+    "译文": {
+     "RM-T": {
+      "n": 2,
+      "units": {
+       "c0002": 2
+      },
+      "top": [
+       "c0000",
+       "c0002",
+       "node_577d8597c13629ecd059"
+      ]
+     },
+     "LM+-T": {
+      "n": 3,
+      "units": {
+       "c0002": 3
+      },
+      "top": [
+       "node_577d8597c13629ecd059",
+       "c0000",
+       "c0002"
+      ]
+     }
+    },
+    "换成文档用词": {
+     "RM-T": {
+      "n": 1,
+      "units": {
+       "c0002": 1
+      },
+      "top": [
+       "c0002",
+       "c0000",
+       "node_577d8597c13629ecd059"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "c0002": 1
+      },
+      "top": [
+       "c0002",
+       "node_577d8597c13629ecd059",
+       "c0000"
+      ]
+     }
+    }
+   },
+   "hybrid": {
+    "中文子问题": {
+     "RM-T": {
+      "n": 1,
+      "units": {
+       "c0002": 1
+      },
+      "top": [
+       "c0002",
+       "c0000",
+       "node_577d8597c13629ecd059"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "c0002": 1
+      },
+      "top": [
+       "c0002",
+       "node_577d8597c13629ecd059",
+       "c0000"
+      ]
+     }
+    },
+    "译文": {
+     "RM-T": {
+      "n": 2,
+      "units": {
+       "c0002": 2
+      },
+      "top": [
+       "c0000",
+       "c0002",
+       "node_577d8597c13629ecd059"
+      ]
+     },
+     "LM+-T": {
+      "n": 2,
+      "units": {
+       "c0002": 2
+      },
+      "top": [
+       "node_577d8597c13629ecd059",
+       "c0002",
+       "c0000"
+      ]
+     }
+    },
+    "换成文档用词": {
+     "RM-T": {
+      "n": 1,
+      "units": {
+       "c0002": 1
+      },
+      "top": [
+       "c0002",
+       "c0000",
+       "node_577d8597c13629ecd059"
+      ]
+     },
+     "LM+-T": {
+      "n": 1,
+      "units": {
+       "c0002": 1
+      },
+      "top": [
+       "c0002",
+       "node_577d8597c13629ecd059",
+       "c0000"
+      ]
+     }
+    }
+   }
+  }
+ },
+ {
+  "case": "PO-25-19-Q006",
+  "sub": "Q2",
+  "item": "e2",
+  "name": "去掉所有格",
+  "old": "ELPU's",
+  "new": "ELPU",
+  "texts": {
+   "中文子问题": "订单 中，ELPU 公司货物安排交付批次的 DDP 日期是哪天？",
+   "译文": "What is the DDP date for the delivery batch of ELPU's goods in order ?",
+   "去掉所有格": "What is the DDP date for the delivery batch of ELPU goods in order ?"
+  },
+  "n": {
+   "semantic": {
+    "中文子问题": {
+     "RM-T": {
+      "n": 3,
+      "units": {
+       "node_19b7da13e3375fc7a6ed": 1,
+       "node_ea2f030118e96505f55e": 3
+      },
+      "top": [
+       "node_19b7da13e3375fc7a6ed",
+       "c0010",
+       "node_ea2f030118e96505f55e",
+       "c0014"
+      ]
+     },
+     "LM+-T": {
+      "n": 3,
+      "units": {
+       "node_19b7da13e3375fc7a6ed": 1,
+       "node_ea2f030118e96505f55e": 3
+      },
+      "top": [
+       "node_19b7da13e3375fc7a6ed",
+       "c0012",
+       "node_ea2f030118e96505f55e",
+       "c0016"
+      ]
+     }
+    },
+    "译文": {
+     "RM-T": {
+      "n": 3,
+      "units": {
+       "node_19b7da13e3375fc7a6ed": 1,
+       "node_ea2f030118e96505f55e": 3
+      },
+      "top": [
+       "node_19b7da13e3375fc7a6ed",
+       "c0010",
+       "node_ea2f030118e96505f55e",
+       "c0014"
+      ]
+     },
+     "LM+-T": {
+      "n": 3,
+      "units": {
+       "node_19b7da13e3375fc7a6ed": 1,
+       "node_ea2f030118e96505f55e": 3
+      },
+      "top": [
+       "node_19b7da13e3375fc7a6ed",
+       "c0012",
+       "node_ea2f030118e96505f55e",
+       "c0016"
+      ]
+     }
+    },
+    "去掉所有格": {
+     "RM-T": {
+      "n": 3,
+      "units": {
+       "node_19b7da13e3375fc7a6ed": 1,
+       "node_ea2f030118e96505f55e": 3
+      },
+      "top": [
+       "node_19b7da13e3375fc7a6ed",
+       "c0010",
+       "node_ea2f030118e96505f55e",
+       "c0014"
+      ]
+     },
+     "LM+-T": {
+      "n": 3,
+      "units": {
+       "node_19b7da13e3375fc7a6ed": 1,
+       "node_ea2f030118e96505f55e": 3
+      },
+      "top": [
+       "node_19b7da13e3375fc7a6ed",
+       "c0012",
+       "node_ea2f030118e96505f55e",
+       "c0016"
+      ]
+     }
+    }
+   },
+   "bm25": {
+    "中文子问题": {
+     "RM-T": {
+      "n": 2,
+      "units": {
+       "node_19b7da13e3375fc7a6ed": 1,
+       "node_ea2f030118e96505f55e": 2
+      },
+      "top": [
+       "node_19b7da13e3375fc7a6ed",
+       "node_ea2f030118e96505f55e",
+       "c0010"
+      ]
+     },
+     "LM+-T": {
+      "n": 2,
+      "units": {
+       "node_19b7da13e3375fc7a6ed": 1,
+       "node_ea2f030118e96505f55e": 2
+      },
+      "top": [
+       "node_19b7da13e3375fc7a6ed",
+       "node_ea2f030118e96505f55e",
+       "c0012"
+      ]
+     }
+    },
+    "译文": {
+     "RM-T": {
+      "n": 7,
+      "units": {
+       "node_19b7da13e3375fc7a6ed": 3,
+       "node_ea2f030118e96505f55e": 7
+      },
+      "top": [
+       "c0010",
+       "c0012",
+       "node_19b7da13e3375fc7a6ed",
+       "c0011"
+      ]
+     },
+     "LM+-T": {
+      "n": 6,
+      "units": {
+       "node_19b7da13e3375fc7a6ed": 2,
+       "node_ea2f030118e96505f55e": 6
+      },
+      "top": [
+       "c0012",
+       "node_19b7da13e3375fc7a6ed",
+       "c0014",
+       "c0013"
+      ]
+     }
+    },
+    "去掉所有格": {
+     "RM-T": {
+      "n": 4,
+      "units": {
+       "node_19b7da13e3375fc7a6ed": 2,
+       "node_ea2f030118e96505f55e": 4
+      },
+      "top": [
+       "c0010",
+       "node_19b7da13e3375fc7a6ed",
+       "c0012",
+       "node_ea2f030118e96505f55e"
+      ]
+     },
+     "LM+-T": {
+      "n": 4,
+      "units": {
+       "node_19b7da13e3375fc7a6ed": 1,
+       "node_ea2f030118e96505f55e": 4
+      },
+      "top": [
+       "node_19b7da13e3375fc7a6ed",
+       "c0012",
+       "c0014",
+       "node_ea2f030118e96505f55e"
+      ]
+     }
+    }
+   },
+   "hybrid": {
+    "中文子问题": {
+     "RM-T": {
+      "n": 2,
+      "units": {
+       "node_19b7da13e3375fc7a6ed": 1,
+       "node_ea2f030118e96505f55e": 2
+      },
+      "top": [
+       "node_19b7da13e3375fc7a6ed",
+       "node_ea2f030118e96505f55e",
+       "c0010",
+       "c0014"
+      ]
+     },
+     "LM+-T": {
+      "n": 2,
+      "units": {
+       "node_19b7da13e3375fc7a6ed": 1,
+       "node_ea2f030118e96505f55e": 2
+      },
+      "top": [
+       "node_19b7da13e3375fc7a6ed",
+       "node_ea2f030118e96505f55e",
+       "c0012",
+       "c0016"
+      ]
+     }
+    },
+    "译文": {
+     "RM-T": {
+      "n": 3,
+      "units": {
+       "node_19b7da13e3375fc7a6ed": 2,
+       "node_ea2f030118e96505f55e": 3
+      },
+      "top": [
+       "c0010",
+       "node_19b7da13e3375fc7a6ed",
+       "node_ea2f030118e96505f55e",
+       "c0012"
+      ]
+     },
+     "LM+-T": {
+      "n": 3,
+      "units": {
+       "node_19b7da13e3375fc7a6ed": 1,
+       "node_ea2f030118e96505f55e": 3
+      },
+      "top": [
+       "node_19b7da13e3375fc7a6ed",
+       "c0012",
+       "node_ea2f030118e96505f55e",
+       "c0014"
+      ]
+     }
+    },
+    "去掉所有格": {
+     "RM-T": {
+      "n": 3,
+      "units": {
+       "node_19b7da13e3375fc7a6ed": 1,
+       "node_ea2f030118e96505f55e": 3
+      },
+      "top": [
+       "node_19b7da13e3375fc7a6ed",
+       "c0010",
+       "node_ea2f030118e96505f55e",
+       "c0012"
+      ]
+     },
+     "LM+-T": {
+      "n": 3,
+      "units": {
+       "node_19b7da13e3375fc7a6ed": 1,
+       "node_ea2f030118e96505f55e": 3
+      },
+      "top": [
+       "node_19b7da13e3375fc7a6ed",
+       "c0012",
+       "node_ea2f030118e96505f55e",
+       "c0014"
+      ]
+     }
+    }
+   }
+  }
+ }
+]

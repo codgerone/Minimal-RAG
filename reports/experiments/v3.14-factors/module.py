@@ -17,7 +17,7 @@ from collections import Counter
 from urllib.parse import quote
 
 from rag.reports.html import esc
-from review import CHAN, FEAT, NOISE, ROOT, SIDE_FINDINGS, STEP, comp, mark, qstab
+from review import CHAN, FEAT, NOISE, ROOT, SIDE_FINDINGS, STEP, SUBTR, comp, mark, qstab
 
 OUT = ROOT / "reports/query/v3.14/analysis.html"
 EVIDENCE = "../../experiments/v3.14-factors/index.html"
@@ -70,7 +70,22 @@ def stepback(case: str) -> str:
             f'→ 补回 {ranks(n["补回"]["RM-T"])}')
 
 
+def subchannel(case: str) -> str:
+    """Generation 0, RM-T, codes stripped: per information item whose hybrid rank changed, its Chinese
+    sub-question → the translation on each retriever (exp_subtrans.py)."""
+    d = SUBTR[case]
+    out = []
+    for item, subs in d["mapping"].items():
+        for s in subs:
+            r = d["subquestions"][s]["ranks"]
+            a, b = (tuple(r[k][ret]["RM-T"][item]["n"] for ret in ("semantic", "bm25", "hybrid")) for k in ("question", "translation"))
+            if a[2] != b[2]:
+                out.append(f'{item}←{s} {"/".join(ranks([x]) for x in a)} → {"/".join(ranks([x]) for x in b)}')
+    return "<br>".join(out) or "RM-T 第 0 次不变"
+
+
 EXTRA = {"channel": ("通道名次（第 0 次 · RM-T · 去编码）", None), "noise": ("机械改动的判定（RM-T）", noise),
+         "subchannel": ("变化的信息项（第 0 次 · RM-T）：中文子问题 → 译文，向量/BM25/混合", subchannel),
          "step": ("补回被去掉的词（混合 · RM-T）", stepback)}
 
 
@@ -143,15 +158,52 @@ PO-25-19-Q002、Q007、PO-24-12-Q004 用任何内容（含无意义词）占住�
         "id": "translation", "name": "P3.2.2 翻译", "badge": ("建议启用，只与原句 RRF 融合", "ok"),
         "pair": ("P3.2.2", "原问题 · 两侧去编码"),
         "fused": ("RRF 融合", "原问题 · 两侧去编码 · 原句 → 原句 + 翻译"),
-        "forms": [("单独（代替原句）", "P3.2.2", "原问题 · 两侧去编码"), ("与原句融合", "RRF 融合", "原问题 · 两侧去编码 · 原句 → 原句 + 翻译")],
+        "forms": [("原问题上（译文代替原句）", "P3.2.2", "原问题 · 两侧去编码"),
+                  ("子问题上（译文代替子问题，不合并）", "P3.2.2", "子问题（不合并） · 两侧去编码")],
         "extra": "channel", "kind": "translation",
+        "tables": [
+            {"title": "原问题上", "forms": [0]},
+            {"title": "子问题上（不合并）", "forms": [1], "extra": "subchannel", "causes_key": "sub_causes",
+             "intro": """<p>左侧是中文子问题，右侧是该子问题的译文，两侧都去编码；每个信息项看标注给它的子问题。与原问题上相比，4 次都变差的题 3 → 6，各有优势 5 → 7；
+证据在正文的信息项由 ↑132 ↓39 变为 ↑89 ↓70，正文上的优势明显变小（第 0 次，13 组合）。逐题原因来自实验 F（依据页）：子问题译文的通道拆分、BM25 逐词得分与只改一处的对照。</p>
+<p><b>子问题上新出现的变差，机制相同：子问题短、只问一项，译文中能在文档里匹配上的词很少。</b>问到的那个词不是证据单元的用词时，BM25 只能靠 order、contrato、factura 这类到处都有的通用词打分，
+排在前面的是碰巧含这些词的正文块，混合后证据被挤后。原问题把几项一起问，总有某个词是证据单元的用词（PO-24-12-Q001 原问题译文里的 unit price、total amount 正是表头），所以原问题上不受影响。
+已验证的三种情况：① 译文的词不是文档的词（products、quantity 对表头 Goods of Description、Qty；impuestos 对发票的 IGV），换成文档用词后恢复；
+② 中文子问题原样引用了文档的拉丁字母词，译文改了词形（Ítem → ítems，西语词干化不把 items 归并为 item，复数只匹配合同标题所在的正文块），改回单数后部分恢复；
+③ 证据单元本身不含问题的词（CONTRACT-105-Q001 的 c0001 是续接的第二方当事人段落），换成文档的条款标题也不能恢复。</p>
+<p><b>翻译使分解的缺陷显现</b>：PO-24-12-Q004 e3 的子问题丢了所指（分解 C 类）。中文子问题没有 BM25 匹配，只靠向量仍排第 1；译文引入 BM25 后，payment 匹配到另一条付款条款，补回所指后恢复。</p>
+<p><b>其余变差与原问题上的原因相同</b>（实验 B、E）：BM25 让说明性正文排到表格前、译文写不出表格的标签。CONTRACT-105-Q007、PO-25-19-Q009 的中文子问题本身好于原问题，译文回到原问题的水平，相对子问题记为变差。</p>
+<p><b>各有优势的原因</b>：同一题中，译文的词正好是证据单元用词的信息项提前（PO-24-12-Q004 e1 的 MDC ORCA fees、CONTRACT-105-Q010 e1 的 entregas parciales、CONTRACT-105-Q002 e2 的 cantidad），不是的退后。
+子问题只问一项，命中与否接近全有或全无，所以 ◆ 比原问题多。</p>"""},
+        ],
         "why": "把问题译成文档语言。中文问题在英语、西语文档上几乎没有 BM25 匹配（只匹配题面的拉丁字母词），<b>V3.13 的混合检索对中文问题实际上就是向量检索</b>（实验 B）。翻译后 BM25 才起作用，所以翻译的效果 = 向量换了语言 + 新加入的 BM25 通道：",
         "reading": """<p><b>BM25 通道帮正文、伤表格（已验证，实验 B 通道拆分）</b>：表格单元以数字、型号为主，问题里的通用词（delivery、date、amount、entrega、fecha）在说明性正文里更多，BM25 把说明段排到表格前面。</p>
 <p><b>译文不会用文档的标签（已验证，实验 E）</b>：变差题的译文逐条看过，都忠实于原题；但译文写"fourth delivery batch""Batch 1"，文档表格写"4th Delivery""1st Delivery"。只把这个短语换成文档用词，BM25 中证据 PO-25-19-Q007 10→2、PO-25-15-Q001/Q002 5→3。</p>
-<p>与原句 RRF 融合时 BM25 通道只占一半权重，损失减少而收益基本保留（见上面第二行数字）。</p>""",
+<p>与原句 RRF 融合时 BM25 通道只占一半权重，损失减少而收益基本保留——这是组合方式的效果，见"融合与合并"标签页，不算翻译本身的作用。</p>""",
         "suit": "适合：证据为正文条款的题（合同 Q003、Q011–Q014，PO 24-12 的说明类题，4 次都变好）。不适合：证据全在表格、且文档有大量说明性正文的题（PO 25-15、PO 25-19、发票）。检索前无法知道证据在不在表格，<b>没有可在查询时使用的路由规则</b>，所以只能靠与原句融合来限制损失。",
         "random": "方向稳定：单独使用与融合都没有一题在不同生成中翻转。变差的题大多 4 次都变差；少数题只在部分生成中变差（表中逐题可见），这部分是译文措辞的随机性。",
-        "itself": "两个来源都是措施固有的：① 加入词汇匹配通道后说明性正文胜过表格；② 翻译只看问题、不看文档，写不出文档特有的标签——提示词里已要求用该语言文档的术语，无法通用地解决。",
+        "itself": "两个来源都是措施固有的：① 加入词汇匹配通道后说明性正文胜过表格；② 翻译只看问题、不看文档，写不出文档特有的标签——提示词里已要求用该语言文档的术语，无法通用地解决。用在子问题上时②更突出：子问题只问一项，没有其他词兜底；另有一题是分解丢了所指，被翻译显现出来（分解的缺陷，不是翻译的）。",
+        "sub_causes": {
+            "PO-24-12-Q001": "e1 3→4、e3 2→4（RM 等组合）：表头是 Goods of Description、Qty，译文的 products、quantity 匹配不到，BM25 只靠 order 匹配正文块 c0003（descending order 等），表格不在 BM25 结果里，混合后正文块提前。换成 goods、Qty 后 BM25 排 1–2、混合回到 2（实验 F，已验证）。原问题的译文含 unit price、total amount，正是表头的词，所以原问题上不变（BM25 逐词得分）",
+            "CONTRACT-105-Q001": "e1 5→10：证据 c0001（续接的第二方当事人段落）除 contrato 外不含译文的任何词，BM25 排 12，排在前面的是含 partes、contrato 的条款（c0020 争议解决等）。换成文档的条款标题 otorgantes 不能恢复（该词只在 c0000）（实验 F，BM25 部分已验证）；向量 5→7 的原因" + UNTESTED,
+            "CONTRACT-105-Q002": "e1 1→7：中文子问题原样引用 Ítem，BM25 直接匹配表格；译文写 ítems，词干化不归并为 item，只匹配合同标题所在的正文块。改回单数后 BM25 13→6、混合 7→4（实验 F，已验证），其余差距来自 contrato、compra、productos 等通用词（BM25 逐词得分）。e2 2→1：译文的 cantidad 使 BM25 把表格排第 1。e5 合同总金额属分解 A 类（合同中没有合计数）",
+            "PO-24-12-Q004": "e3 1→2：子问题丢了所指（MDC ORCA 费用，分解 C 类），译文的 payment 匹配另一条付款条款 c0003（Hexing Peru Payment to China）；补回 MDC ORCA 后三个通道都回到 1（实验 F，已验证）。e1 3→2：译文的 MDC ORCA fees 直接匹配 c0002。带引导句的组合上 e2 1→2 的原因" + UNTESTED,
+            "E001-602-Q001": "第 0 次 e3 1→2：impuestos 不是发票的用词（发票写 IGV），BM25 只靠 factura 匹配，发票抬头 c0000 含 factura 更多而排第 1；换成 IGV 后三个通道都回到 1（实验 F，已验证）。第 1–3 次不变",
+            "CONTRACT-105-Q007": "中文子问题 e3 排 1，好于原问题（2）；译文中 BM25 把付款条件条款 c0010（含 pago、plazo、compra）排在付款期限条款 c0011 前，混合 1→2，回到原问题的水平。两条款都讲付款，属于多个单元回答相近内容（BM25 逐词得分）",
+            "PO-25-19-Q009": "中文子问题 1·1，好于原问题（2·2）；译文中 serial、number、requirements 使 BM25 把序列号说明段 c0002 与正文块 c0010 排在分配表前（表格 BM25 4–6），混合回到 2·2。与原问题同一机制（实验 B；BM25 逐词得分）",
+            "PO-25-19-Q006": "e2 2→3：中文子问题里的 ELPU、DDP 直接匹配表格（BM25 2）；译文加入 date、delivery、batch、goods，这些词在说明性正文 c0010、c0012 里更多，表格退到 BM25 7。与原问题同一机制（实验 B；BM25 逐词得分）。另：ELPU's 被切出 s，去掉所有格后 BM25 7→4，但混合仍为 3，不是本题变差的原因（实验 F，已验证）",
+            "PO-25-15-Q001": "同原问题：fourth batch 不是表格标签 4th Delivery，BM25 把条件说明段排在前面，证据 BM25 排 4（实验 B、E 在原问题上已验证，子问题上现象相同）",
+            "PO-25-15-Q002": "同 PO-25-15-Q001（sixth batch 对 6th Delivery）",
+            "CONTRACT-105-Q010": "e1 5→3：entregas parciales 使 BM25 把交货表排第 2；e2 10→13：fechas、entrega、lote 在正文条款里更多，交货表在 BM25 排 7。与原问题同一机制（实验 B；BM25 逐词得分）",
+            "PO-25-19-Q001": "随生成而变。第 0 次 RM-T 不变；交货日期 e5 的译文在 BM25 中把交货说明段排在交货表前，其余信息项的译文（unit price、quantity、公司名）直接匹配分配表、价格表而提前。与原问题同一机制（实验 B）；各次生成的逐项原因" + UNTESTED,
+            "PO-25-19-Q003": "e5 2→5（RM-T）：交货日期的译文在 BM25 中把交货说明段 c0011、c0010、c0012 排在交货表前（交货表 BM25 5）；其他信息项随生成提前或退后。与原问题同一机制（实验 B）；各次生成的逐项原因" + UNTESTED,
+            "PO-25-19-Q007": "只有一个信息项，子问题与原问题相同，结果与原问题相同：Batch 1 对 1st Delivery（实验 E，已验证）",
+            "PO-25-19-Q002": "与原问题同为 ◆；逐项原因" + UNTESTED,
+            "CONTRACT-105-Q009": "只在 LL+、S 组合变差 1 名，RM-T 第 0 次不变，" + UNTESTED,
+            "CONTRACT-105-Q003": "第 0、2 次变好（e2 11→5，lugar、entrega 匹配交货地点所在的表格），第 1、3 次为 ◆，" + UNTESTED,
+            "CONTRACT-105-Q004": "第 0、3 次不变，第 1、2 次变差，" + UNTESTED,
+            "CONTRACT-105-Q014": "只在第 0 次的 LL-C、LL-T 变差，e2 在 18–21 名，K 内无影响，" + UNTESTED,
+        },
         "causes": {
             "PO-25-15-Q001": "条件说明段 c0002、c0004 含 delivery 等词，BM25 排第 1–2，表格退后（实验 B）；译文\"fourth delivery batch\"与表格标签\"4th Delivery\"不同，换成文档用词 BM25 5→3、e2 仍为 4（实验 E）。已验证，融合后仍 4 次变差",
             "PO-25-15-Q002": "同 PO-25-15-Q001（\"sixth batch\" vs \"6th Delivery\"，实验 B、E，已验证）",
@@ -293,7 +345,11 @@ def measure(m: dict) -> str:
         '</table>'
         '<p class="meta">逐题：所有在任一列、任一次生成中变差（▼）或各有优势（◆）的题；每格 4 个符号依次为第 0–3 次生成的按题判定'
         '（一题在该次生成中有变化的组合同向即为该方向，否则 ◆）。先列变差次数多的题。</p>'
-        + question_table(forms, causes, m["extra"], m.get("kind"), m.get("later")))
+        + "".join(
+            (f'<h4>{esc(t["title"])}</h4>' if len(m.get("tables", ())) > 1 else "") + t.get("intro", "")
+            + question_table([forms[i] for i in t["forms"]], m[t["causes_key"]] if "causes_key" in t else causes,
+                             t.get("extra", m["extra"]), m.get("kind"), m.get("later"))
+            for t in m.get("tables", [{"forms": list(range(len(forms)))}])))
 
 
 def overview() -> str:
@@ -335,7 +391,7 @@ def main() -> None:
         '<p><b>怎么读</b>：每个措施只和"只差它一个因素"的配置比较——一个问题只用一条检索文本（不融合）、分解时不合并（每个信息项看它对应的子问题），'
         '避免把几种因素的影响混在一起。数字为 13 组合 × 32 题；每个措施都在 4 次独立生成（0–3）中重算，看效果是否随 LLM 每次写法不同而变化；注意 4 次写法几乎相同时（改写）稳定是必然的，不能据此判断措施有真实作用。'
         '每条原因注明验证它的实验，没做实验的标<span class="down">未验证</span>。实验数据与逐项依据见'
-        f'<a href="{EVIDENCE}" target="_blank">各措施单独效果的依据页</a>（实验 A–E）。</p>'
+        f'<a href="{EVIDENCE}" target="_blank">各措施单独效果的依据页</a>（实验 A–F）。</p>'
         + overview() + '</div>'
         '<div class="card">' + nav + panels + '</div>'
         '<div class="card"><h3>附带发现</h3>' + SIDE_FINDINGS + '</div>'

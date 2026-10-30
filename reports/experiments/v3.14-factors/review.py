@@ -26,6 +26,8 @@ NOISE = json.loads((HERE / "exp_noise.json").read_text(encoding="utf-8"))
 STEP = json.loads((HERE / "exp_stepback.json").read_text(encoding="utf-8"))
 STEP2 = json.loads((HERE / "exp_stepback2.json").read_text(encoding="utf-8"))
 TERMS = json.loads((HERE / "exp_terms.json").read_text(encoding="utf-8"))
+SUBTR = json.loads((HERE / "exp_subtrans.json").read_text(encoding="utf-8"))
+SUBTR2 = json.loads((HERE / "exp_subtrans2.json").read_text(encoding="utf-8"))
 PLANS = json.loads((HERE.parent / "v3.14-phrasings-v8/plans.json").read_text(encoding="utf-8"))
 PAGE = "../../query/v3.14/index.html"
 DOCS = {"d359": "合同 CONT2025001（西语）", "5a4c": "订单 PO 25-19（英语）", "169a": "订单 PO 24-12（英语）",
@@ -115,6 +117,7 @@ def card(title: str, body: str, kind: str = "") -> str:
 SIDE_FINDINGS = """
 <ul>
 <li><b>V3.13 的混合检索对中文问题等于向量检索</b>（实验 B）：32 题中只有题面含拉丁字母词（公司名、型号、西语条款名）的 15 题有 BM25 匹配。这类词也会误导：CONTRACT-105-Q011 只用向量时证据排 1、3、3，混合后排 13（"Ítem"匹配到别的块）。这是现有系统的特性，与本版措施无关，记入 roadmap 供以后处理。</li>
+<li><b>英语所有格被切出一个 s</b>（实验 F）：分析器把 ELPU's 切成 elpu 与 s，s 不在停用词表里，出现在 49 个块中的 13 个，给这些块都加分。PO-25-19-Q006 去掉所有格后证据在 BM25 中 7→4，混合名次不变。属于现有分析器的问题，与本版措施无关，可记入 roadmap。</li>
 <li><b>问号改句号</b>就使 9/32 题变好（▲32 ◆1，无变差）：bge-m3 对陈述句与文档更接近。改写的"写成陈述句"可能有一点真实作用，但被其余改动的噪声淹没（实验 C）。</li>
 <li><b>13 种组合几乎总是同向</b>（一题要么 13 组合都变好，要么都变差）：效果由检索文本决定，与表格入库方式无关。因此有效样本是 32 道题，不是 416 个组合 × 题。</li>
 </ul>"""
@@ -339,6 +342,43 @@ def exp_terms() -> str:
             '<p>向量通道对这处用词不敏感，差别全在 BM25：词汇匹配要求用词与文档一致。</p>')
 
 
+def exp_subtrans() -> str:
+    rows = []
+    for case, d in SUBTR.items():
+        for item, subs in d["mapping"].items():
+            for sq in subs:
+                r = d["subquestions"][sq]["ranks"]
+                a = [r["question"][ret]["RM-T"][item]["n"] for ret in ("semantic", "bm25", "hybrid")]
+                b = [r["translation"][ret]["RM-T"][item]["n"] for ret in ("semantic", "bm25", "hybrid")]
+                if a[2] == b[2]:
+                    continue
+                t = d["subquestions"][sq]["texts"]
+                rows.append(f'<tr><td class="nw">{esc(case)}</td><td class="nw">{item} ← {sq}</td>'
+                            f'<td>{esc(t["question"])}<br><span class="meta">{esc(t["translation"])}</span></td>'
+                            f'<td class="num nw">{" / ".join(rk(x) for x in a)}</td>'
+                            f'<td class="num nw">{mark(ver([a[2]], [b[2]]))} {" / ".join(rk(x) for x in b)}</td></tr>')
+    tests = []
+    for v in SUBTR2:
+        names = list(v["texts"])
+        cells = "".join(f'<td class="num nw">{" / ".join(rk(v["n"][ret][n][c]["n"]) for ret in ("semantic", "bm25", "hybrid"))}</td>'
+                        for n in names for c in ("RM-T",))
+        tests.append(f'<tr><td class="nw">{esc(v["case"])}</td><td class="nw">{v["item"]} ← {v["sub"]}</td><td>{esc(v["name"])}：'
+                     f'{esc(v["old"])} → {esc(v["new"])}</td>{cells}</tr>')
+    return ('<p>对照"P3.2.2 · 子问题（不合并） · 两侧去编码"：分解后不合并，每个信息项看标注给它的子问题；左侧中文子问题、右侧它的译文，都去编码（<code>exp_subtrans.py</code>，第 0 次生成）。'
+            '下表列出 RM-T 上混合名次有变化的信息项，每格为 向量 / BM25 / 混合 的凑齐名次，符号是混合名次的变化。中文子问题只有含拉丁字母词时才有 BM25 匹配。</p>'
+            '<div class="scroll"><table><tr><th>题</th><th>信息项 ← 子问题</th><th>中文子问题 / 译文</th><th class="num">中文：向量 / BM25 / 混合</th>'
+            '<th class="num">译文</th></tr>' + "".join(rows) + '</table></div>'
+            '<h3>第二部分：只改一处的对照</h3>'
+            '<p>先用 BM25 逐词得分（<code>bm25_explain.py</code>，与索引相同的公式）找出把正文块排到证据前面的词，再只改译文中的一处（<code>exp_subtrans2.py</code>，RM-T；LM+-T 见 exp_subtrans2.json）。'
+            '每格为 向量 / BM25 / 混合。</p>'
+            '<div class="scroll"><table><tr><th>题</th><th>信息项</th><th>改动</th><th class="num">中文子问题</th><th class="num">译文</th>'
+            '<th class="num">改后</th></tr>' + "".join(tests) + '</table></div>'
+            '<p><b>读法</b>：换成文档用词（goods、Qty、IGV）或补回所指（MDC ORCA）后都恢复到中文子问题的水平；ítems 改回单数部分恢复（混合 7→4）。'
+            'PO-24-12-Q001 "去掉误匹配的通用词"（删去 in order）使向量也变了（3→1），不能单独说明 BM25 的作用，只作参考；BM25 的作用由逐词得分直接看出：'
+            '译文唯一能匹配的词是 order，只出现在正文块里。CONTRACT-105-Q001 换成条款标题 otorgantes <b>没有恢复</b>（BM25 12→19）：该词只在 c0000，证据 c0001 本身不含问题的词。'
+            '去掉所有格只改善 BM25，混合不变。</p>')
+
+
 def v8_check() -> str:
     rows = []
     for g, cases in PLANS["generations"].items():
@@ -371,6 +411,7 @@ def main() -> None:
             ("noise", "实验 C：措辞噪声基线", exp_noise()),
             ("step", "实验 D：step-back 补回", exp_step()),
             ("terms", "实验 E：译文换成文档用词", exp_terms()),
+            ("subtr", "实验 F：子问题上的翻译", exp_subtrans()),
             ("v8", "v8 写法核对", v8_check())]
     nav = '<div class="tabs">' + "".join(f'<a href="#{t}" data-tab="{t}">{esc(n)}</a>' for t, n, _ in tabs) + '</div>'
     panels = "".join(f'<div data-panel="{t}" class="card">{body}</div>' for t, _, body in tabs)
@@ -380,7 +421,7 @@ def main() -> None:
         + card('怎么读', '<p>每个措施只和"只差它一个因素"的配置比较：一个问题只用一条检索文本（不融合），分解时不合并（每个信息项看它对应的子问题）。'
                '融合、合并单列为"组合方式"。总表的数字默认取第 0 次生成，另列第 1–3 次与 4 次一致的题数；逐题见"4 次生成稳定性"标签。</p>')
         + card('结论', f'<p>各措施的结论（建议、单独效果、逐题的变差原因、适合的题、随机性、是不是措施本身的问题）写在'
-               f'<a href="{PAGE}#m-analysis">V3.14 对比页的模块 1</a>（<code>module.py</code> 生成）。本页是它引用的依据：单因素总表、逐题判定与实验 A–E。</p>')
+               f'<a href="{PAGE}#m-analysis">V3.14 对比页的模块 1</a>（<code>module.py</code> 生成）。本页是它引用的依据：单因素总表、逐题判定与实验 A–F。</p>')
         + '<h2>依据</h2>' + nav + panels)
     write_assets(ROOT / "reports")
     (HERE / "index.html").write_text(page("查询侧措施的单独效果", body, root="../../",
