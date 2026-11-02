@@ -21,6 +21,13 @@ def _positive(value: str) -> int:
     return number
 
 
+def _budgets(value: str) -> list[int]:
+    try:
+        return sorted({_positive(part) for part in value.split(",")})
+    except ValueError:
+        raise argparse.ArgumentTypeError("写成逗号分隔的正整数，如 3,6,9,12")
+
+
 def _retriever_option(sub: argparse.ArgumentParser) -> None:
     from rag.config import TABLE_RETURN_UNITS
     from rag.registry import RETRIEVERS
@@ -28,6 +35,15 @@ def _retriever_option(sub: argparse.ArgumentParser) -> None:
                      help="本次改用这个检索器（默认取配置文件 [retriever] use；bm25、hybrid 需要配置 [lexical]）")
     sub.add_argument("--table-return-unit", choices=TABLE_RETURN_UNITS,
                      help="命中表格 chunk 时返回该 chunk 还是整张表（默认取配置文件 [retriever] table_return_unit）")
+    sub.add_argument("--bm25-weight", type=_weight,
+                     help="混合检索中 BM25 排名的权重 α（默认取配置文件 [retriever] bm25_weight，未写为 1）")
+
+
+def _weight(value: str) -> float:
+    number = float(value)
+    if number < 0:
+        raise argparse.ArgumentTypeError("必须为非负数")
+    return number
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -36,7 +52,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     def command(name: str, help_text: str) -> argparse.ArgumentParser:
         sub = commands.add_parser(name, help=help_text, description=help_text)
-        if name not in ("config", "compare"):
+        if name not in ("config", "compare", "query-compare"):
             sub.add_argument("--config", metavar="NAME",
                              help="装配配置名（configs/NAME.toml），默认 structured 或环境变量 RAG_CONFIG")
         return sub
@@ -64,7 +80,10 @@ def build_parser() -> argparse.ArgumentParser:
     chat.add_argument("--top-k", type=_positive)
     _retriever_option(chat)
     evaluate = command("eval", "用 eval/ground-truth 的标注问题评估检索效果，生成报告")
-    evaluate.add_argument("--top-k", type=_positive, help="默认取配置文件 [eval] top_k")
+    budget = evaluate.add_mutually_exclusive_group()
+    budget.add_argument("--top-k", type=_positive, help="默认取配置文件 [eval] top_k")
+    budget.add_argument("--budgets", type=_budgets, metavar="B1,B2,...",
+                        help="几档预算（返回单元数），每题检索一次，每档各出一份评估，如 3,6,9,12")
     _retriever_option(evaluate)
     anchors = command("anchors", "在 PDF 上定位每段 excerpt，生成审核文件 tmp/anchor-review/")
     anchors.add_argument("--since", metavar="GIT_REF", help="审核页并排显示相对这个 git 版本改动过的 excerpt")
@@ -77,8 +96,12 @@ def build_parser() -> argparse.ArgumentParser:
     compare.add_argument("runs", nargs="+", metavar="RUN",
                          help="reports/eval/ 下的评估目录名；可写成 目录名=显示名（如 =V3.9），显示在该列设置之前")
     compare.add_argument("--name", required=True, help="对比页名称（目录名）")
+    compare.add_argument("--no-table-evidence", action="store_true",
+                         help="不显示表格证据标签页（不以表格处理为对象的对比，如查询侧的改动）")
     compare.add_argument("--table-spec", metavar="FILE",
                          help="表格证据对照的说明文件（JSON：pairs 对照、excluded 排除的证据组、notes 结论），存入 runs.json")
+    query = command("query-compare", "13 种组合 × 查询侧模块配置逐题评估，生成查询侧对比页 reports/query/NAME/")
+    query.add_argument("--name", required=True, help="对比页名称（目录名）")
     command("report", "按已入库的中间结果与已保存的评估结果，重新生成入库审核页、评估报告、对比页和总入口 reports/index.html")
     return parser
 
@@ -88,8 +111,8 @@ def _out(text: str = "") -> None:
 
 
 def _assembly(workspace: Workspace, name: str | None, retriever: str | None = None,
-              table_return_unit: str | None = None):
-    """`retriever` and `table_return_unit` replace the config's query settings for this command."""
+              table_return_unit: str | None = None, bm25_weight: float | None = None):
+    """`retriever`, `table_return_unit` and `bm25_weight` replace the config's query settings for this command."""
     from dataclasses import replace
     from rag.registry import assemble
     config = resolve_config(workspace.root, name)
@@ -97,11 +120,13 @@ def _assembly(workspace: Workspace, name: str | None, retriever: str | None = No
         config = replace(config, retriever=replace(config.retriever, use=retriever))
     if table_return_unit is not None:
         config = replace(config, table_return_unit=table_return_unit)
+    if bm25_weight is not None:
+        config = replace(config, bm25_weight=bm25_weight)
     return assemble(config)
 
 
 def _query_assembly(workspace: Workspace, args: argparse.Namespace):
-    return _assembly(workspace, args.config, args.retriever, args.table_return_unit)
+    return _assembly(workspace, args.config, args.retriever, args.table_return_unit, args.bm25_weight)
 
 
 def _status(workspace: Workspace, args: argparse.Namespace) -> int:
@@ -322,22 +347,33 @@ def _chat(workspace: Workspace, args: argparse.Namespace) -> int:
 
 def _eval(workspace: Workspace, args: argparse.Namespace) -> int:
     from rag.eval.runner import run_evaluation
-    from rag.jsonio import read_json
     from rag.reports.index_page import write_index_page
     assembly = _query_assembly(workspace, args)
-    top_k = args.top_k or assembly.config.eval_top_k
-    folder = run_evaluation(workspace, assembly, top_k)
+    budgets = args.budgets or [args.top_k or assembly.config.eval_top_k]
+    folders = run_evaluation(workspace, assembly, budgets)
+    for folder in folders:
+        _eval_summary(workspace, assembly, folder)
+    write_index_page(workspace)
+    for folder in folders:
+        _out(f"报告：{(folder / 'index.html').relative_to(workspace.root).as_posix()}")
+    return 0
+
+
+def _eval_summary(workspace: Workspace, assembly, folder) -> None:
+    from rag.jsonio import read_json
     result = read_json(folder / "result.json")
     metrics = result["metrics"]
     modes = result["evidence_modes"]
     returned = "整表" if assembly.config.table_return_unit == "table" else "命中的 chunk"
-    _out(f"配置 {assembly.name} · K={top_k} · 命中表格时返回{returned} · {result['dataset']['answerable']} 道可回答问题")
+    _out(f"配置 {assembly.name} · K={result['top_k']} · 命中表格时返回{returned} · {result['dataset']['answerable']} 道可回答问题")
     for key, label in (("hit_rate", "命中率"), ("complete_coverage", "完整覆盖率"),
                        ("group_recall", "证据组召回"), ("mrr", "MRR"),
                        ("chunk_precision", "Chunk 精确率"), ("cross_document", "跨文档污染")):
         _out(f"  {label}：{metrics[key]['value']:.2%}")
     tokens = result["returned_tokens"]
     _out(f"  每题返回 token：{tokens['value']:.0f}（最多 {tokens['max']}）")
+    cost = result["query_cost"]
+    _out(f"  每题检索：{cost['retrievals']['value']:.1f} 次，{cost['retrieval_seconds']['value'] * 1000:.0f} ms")
     scope = result["document_scope"]
     if scope["enabled"] and scope["catalog"]:
         ratio = scope["identified_correctly"]
@@ -346,9 +382,6 @@ def _eval(workspace: Workspace, args: argparse.Namespace) -> int:
         _out("  文档过滤：" + ("已关闭" if not scope["enabled"] else "未配置文档标识表，全库检索"))
     if modes["fallback"]:
         _out(f"证据映射：{modes['coordinate']} 段 excerpt 按坐标判定，{modes['fallback']} 段文字兜底，请在报告中抽查")
-    write_index_page(workspace)
-    _out(f"报告：{(folder / 'index.html').relative_to(workspace.root).as_posix()}")
-    return 0
 
 
 def _table_structure(workspace: Workspace, args: argparse.Namespace) -> int:
@@ -425,7 +458,7 @@ def _compare(workspace: Workspace, args: argparse.Namespace) -> int:
     from rag.reports.compare import write_comparison
     from rag.reports.index_page import write_index_page
     spec = json.loads(Path(args.table_spec).read_text(encoding="utf-8")) if args.table_spec else None
-    folder = write_comparison(workspace, args.name, args.runs, spec)
+    folder = write_comparison(workspace, args.name, args.runs, spec, not args.no_table_evidence)
     write_index_page(workspace)
     _out(f"对比页：{(folder / 'index.html').relative_to(workspace.root).as_posix()}")
     return 0
@@ -439,14 +472,35 @@ def _report(workspace: Workspace, args: argparse.Namespace) -> int:
     documents = rerender_ingest_reports(workspace)
     count = rerender_all(workspace)
     comparisons = rerender_comparisons(workspace)
+    from rag.reports.query_compare import rerender_query_pages
+    queries = rerender_query_pages(workspace)
     write_index_page(workspace)
-    _out(f"已重新生成 {documents} 份文档的入库审核页、{count} 份评估报告、{comparisons} 份对比页和 reports/index.html")
+    _out(f"已重新生成 {documents} 份文档的入库审核页、{count} 份评估报告、{comparisons} 份对比页、"
+         f"{queries} 份查询侧对比页和 reports/index.html")
+    return 0
+
+
+def _query_compare(workspace: Workspace, args: argparse.Namespace) -> int:
+    from rag.eval.query_compare import (COMBOS, PERTURBATION_GENERATIONS, PERTURBATION_MAPPING, collect,
+                                        collect_perturbation)
+    from rag.reports.index_page import write_index_page
+    from rag.reports.query_compare import write_query_page
+    _out(f"{len(COMBOS)} 种组合：{'、'.join(c.label for c in COMBOS)}")
+    data = collect(workspace, args.name)
+    folder = write_query_page(workspace, data)
+    if all((workspace.root / PERTURBATION_MAPPING.format(generation=g)).is_file() for g in PERTURBATION_GENERATIONS):
+        _out(f"扰动测试：第 {'、'.join(map(str, PERTURBATION_GENERATIONS))} 次生成")
+        del data["process"]   # written above; the second write keeps the process files
+        data["perturbation"] = collect_perturbation(workspace)
+        folder = write_query_page(workspace, data)
+    write_index_page(workspace)
+    _out(f"查询侧对比页：{(folder / 'index.html').relative_to(workspace.root).as_posix()}")
     return 0
 
 
 HANDLERS = {"status": _status, "ingest": _ingest, "chunks": _chunks, "search": _search,
             "ask": _ask, "chat": _chat, "eval": _eval, "anchors": _anchors, "table-structure": _table_structure, "config": _config,
-            "compare": _compare, "report": _report}
+            "compare": _compare, "query-compare": _query_compare, "report": _report}
 
 
 def main(argv: Sequence[str] | None = None, *, workspace_root: Path | None = None) -> int:

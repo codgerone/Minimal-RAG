@@ -297,7 +297,20 @@
         },
         {
           "evidence_group_id": "e6",
-          "information_item": "各批次交付的产品和数量",
+          "information_item": "各批次交付的产品",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2",
+                "x3"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e7",
+          "information_item": "各批次交付的数量",
           "schemes": [
             {
               "scheme_id": "s1",
@@ -312,7 +325,7 @@
     },
     {
       "case_id": "PO-25-19-Q002",
-      "question": "订单 ORDER2025003 中，ElUC公司订购了多少件HXE34K-S1？总金额是多少？",
+      "question": "订单 ORDER2025003 中，ELUC公司订购了多少件HXE34K-S1？总金额是多少？",
       "answerable": true,
       "reference_answer": "ELUC订购了2000件HXE34K-S1，总金额为USD 28740.00。",
       "excerpts": [
@@ -873,7 +886,22 @@
         },
         {
           "evidence_group_id": "e6",
-          "information_item": "各批次交付的产品和数量",
+          "information_item": "各批次交付的产品",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2",
+                "x3",
+                "x4",
+                "x5"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e7",
+          "information_item": "各批次交付的数量",
           "schemes": [
             {
               "scheme_id": "s1",
@@ -945,6 +973,737 @@
               ]
             }
           ]
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-19-Q005",
+      "question": "订单 ORDER2025003 中，HDNA 公司订购数量最多的是哪一款产品？这款产品的订单单价是多少？",
+      "answerable": true,
+      "reference_answer": "HDNA 订购了三款产品：Item 1 单相两线表 190,941 台、Item 3 三相三线表 400 台、Item 4 三相四线表 22,986 台，数量最多的是 Item 1 单相两线表（型号 HXE12ES）。该型号的订单单价为 USD 4.56（CIF Callao）。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "relative_path": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "page_numbers": [
+            2
+          ],
+          "text": "HDNA | 1 | Single Phase Meter 2 wires | UNIT | 190,941",
+          "anchor": {
+            "text_sha256": "b4b0d67aecda3053",
+            "pieces": [
+              {
+                "text": "HDNA",
+                "words": [
+                  "2 84.26 344.27 101.36 351.23"
+                ]
+              },
+              {
+                "text": "1",
+                "words": [
+                  "2 132.02 344.27 135.55 351.23"
+                ]
+              },
+              {
+                "text": "Single Phase Meter 2 wires",
+                "words": [
+                  "2 156.62 335.75 173.39 342.71",
+                  "2 174.97 335.75 191.86 342.71",
+                  "2 156.62 344.27 174.27 351.23",
+                  "2 156.62 352.91 160.15 359.87",
+                  "2 161.67 352.91 176.84 359.87"
+                ]
+              },
+              {
+                "text": "UNIT",
+                "words": [
+                  "2 217.01 344.27 231.08 351.23"
+                ]
+              },
+              {
+                "text": "190,941",
+                "words": [
+                  "2 260.21 344.27 283.16 351.23"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "relative_path": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "page_numbers": [
+            2
+          ],
+          "text": "HDNA | 3 | Three Phase 3 wires | UNIT | 400",
+          "anchor": {
+            "text_sha256": "0215b3e3ec1f337e",
+            "pieces": [
+              {
+                "text": "HDNA",
+                "words": [
+                  "2 84.26 704.56 101.36 711.52"
+                ]
+              },
+              {
+                "text": "3",
+                "words": [
+                  "2 132.02 704.56 135.55 711.52"
+                ]
+              },
+              {
+                "text": "Three Phase 3 wires",
+                "words": [
+                  "2 156.62 700.36 173.02 707.32",
+                  "2 174.62 700.36 191.50 707.32",
+                  "2 193.07 700.36 196.60 707.32",
+                  "2 156.62 708.88 171.80 715.84"
+                ]
+              },
+              {
+                "text": "UNIT",
+                "words": [
+                  "2 217.01 704.56 231.08 711.52"
+                ]
+              },
+              {
+                "text": "400",
+                "words": [
+                  "2 266.45 704.56 277.05 711.52"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x3",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "relative_path": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "page_numbers": [
+            3
+          ],
+          "text": "HDNA | 4 | Three Phase 4 wires | UNIT | 22,986",
+          "anchor": {
+            "text_sha256": "3be67c206071a309",
+            "pieces": [
+              {
+                "text": "HDNA",
+                "words": [
+                  "3 84.26 176.00 101.36 182.96"
+                ]
+              },
+              {
+                "text": "4",
+                "words": [
+                  "3 132.02 176.00 135.55 182.96"
+                ]
+              },
+              {
+                "text": "Three Phase 4 wires",
+                "words": [
+                  "3 156.62 171.68 173.02 178.64",
+                  "3 174.62 171.68 191.50 178.64",
+                  "3 193.07 171.68 196.60 178.64",
+                  "3 156.62 180.20 171.80 187.16"
+                ]
+              },
+              {
+                "text": "UNIT",
+                "words": [
+                  "3 217.01 176.00 231.08 182.96"
+                ]
+              },
+              {
+                "text": "22,986",
+                "words": [
+                  "3 262.01 176.00 281.37 182.96"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x4",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "relative_path": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "page_numbers": [
+            1
+          ],
+          "text": "1 | Single Phase 02 Wires meter Model: HXE12ES | 1´131,056.00 | USD 4.56",
+          "anchor": {
+            "text_sha256": "0af7a7c2cb8476cc",
+            "pieces": [
+              {
+                "text": "1",
+                "words": [
+                  "1 83.66 284.32 89.20 295.42"
+                ]
+              },
+              {
+                "text": "Single Phase 02 Wires meter Model: HXE12ES",
+                "words": [
+                  "1 104.90 278.56 132.62 289.66",
+                  "1 135.39 278.56 163.67 289.66",
+                  "1 166.52 278.56 177.60 289.66",
+                  "1 180.53 278.56 205.92 289.66",
+                  "1 208.82 278.56 234.34 289.66",
+                  "1 104.90 290.08 134.78 301.18",
+                  "1 137.55 290.08 182.73 301.18"
+                ]
+              },
+              {
+                "text": "1´131,056.00",
+                "words": [
+                  "1 284.23 284.32 343.05 295.42"
+                ]
+              },
+              {
+                "text": "USD 4.56",
+                "words": [
+                  "1 365.47 284.32 386.47 295.42",
+                  "1 389.26 284.32 408.72 295.42"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "订购数量最多的产品",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2",
+                "x3"
+              ]
+            }
+          ],
+          "note": "需比较 HDNA 在三个 ITEM 段落中的三行"
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "该产品的订单单价",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2",
+                "x3",
+                "x4"
+              ]
+            }
+          ],
+          "note": "先由 x1–x3 得出 Item 1，再在单价表按 Item 1 / HXE12ES 查单价"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-19-Q006",
+      "question": "订单 ORDER2025003 中，ELPU 公司的货物安排在第几批次交付？该批次的 DDP 日期是哪天？",
+      "answerable": true,
+      "reference_answer": "ELPU 订购 Item 3 三相三线表 100 台和 Item 4 三相四线表 1,200 台，都安排在第 4 批次（签约后 450 天）交付；第 4 批次的 DDP 日期为 2026 年 12 月 5 日。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "relative_path": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "page_numbers": [
+            3
+          ],
+          "text": "ELPU | 3 | Three Phase 3 wires | UNIT | 100 | 100",
+          "locate_hint": "4th Delivery",
+          "anchor": {
+            "text_sha256": "f527eafeaeeaa9f2",
+            "pieces": [
+              {
+                "text": "ELPU",
+                "words": [
+                  "3 85.70 96.32 100.13 103.28"
+                ]
+              },
+              {
+                "text": "3",
+                "words": [
+                  "3 132.02 96.32 135.55 103.28"
+                ]
+              },
+              {
+                "text": "Three Phase 3 wires",
+                "words": [
+                  "3 156.62 92.12 173.02 99.08",
+                  "3 174.62 92.12 191.50 99.08",
+                  "3 193.07 92.12 196.60 99.08",
+                  "3 156.62 100.64 171.80 107.60"
+                ]
+              },
+              {
+                "text": "UNIT",
+                "words": [
+                  "3 217.01 96.32 231.08 103.28"
+                ]
+              },
+              {
+                "text": "100",
+                "words": [
+                  "3 266.45 96.32 277.05 103.28",
+                  "3 430.06 96.32 440.66 103.28"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "relative_path": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "page_numbers": [
+            3
+          ],
+          "text": "ELPU | 4 | Three Phase 4 wires | UNIT | 1,200 | 1,200",
+          "locate_hint": "4th Delivery",
+          "anchor": {
+            "text_sha256": "f17a6ca242702bc0",
+            "pieces": [
+              {
+                "text": "ELPU",
+                "words": [
+                  "3 85.70 238.40 100.13 245.36"
+                ]
+              },
+              {
+                "text": "4",
+                "words": [
+                  "3 132.02 238.40 135.55 245.36"
+                ]
+              },
+              {
+                "text": "Three Phase 4 wires",
+                "words": [
+                  "3 156.62 234.08 173.02 241.04",
+                  "3 174.62 234.08 191.50 241.04",
+                  "3 193.07 234.08 196.60 241.04",
+                  "3 156.62 242.60 171.80 249.56"
+                ]
+              },
+              {
+                "text": "UNIT",
+                "words": [
+                  "3 217.01 238.40 231.08 245.36"
+                ]
+              },
+              {
+                "text": "1,200",
+                "words": [
+                  "3 263.81 238.40 279.69 245.36",
+                  "3 427.42 238.40 443.30 245.36"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x3",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "relative_path": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "page_numbers": [
+            2
+          ],
+          "text": "4th Delivery",
+          "table_header": true,
+          "anchor": {
+            "text_sha256": "1fa142c602a9a8d1",
+            "pieces": [
+              {
+                "text": "4th Delivery",
+                "words": [
+                  "2 429.82 129.83 440.98 137.87",
+                  "2 421.66 139.55 449.20 147.59"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x4",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "relative_path": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "page_numbers": [
+            3
+          ],
+          "text": "4 | 4TH DELIVERY | 05/12/2026",
+          "anchor": {
+            "text_sha256": "dea86d79d5bae9c1",
+            "pieces": [
+              {
+                "text": "4",
+                "words": [
+                  "3 97.34 411.65 102.94 422.69"
+                ]
+              },
+              {
+                "text": "4TH DELIVERY",
+                "words": [
+                  "3 110.78 411.65 128.66 422.69",
+                  "3 131.05 411.65 173.60 422.69"
+                ]
+              },
+              {
+                "text": "05/12/2026",
+                "words": [
+                  "3 190.01 411.65 243.25 422.69"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "ELPU 的交付批次",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2",
+                "x3"
+              ]
+            }
+          ],
+          "note": "两行的数量都落在 4th Delivery 列，批次由表头（x3）得出"
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "该批次的 DDP 日期",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2",
+                "x3",
+                "x4"
+              ]
+            }
+          ],
+          "note": "先由 x1–x3 得出第 4 批次，再在交货日期表查第 4 批次"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-19-Q007",
+      "question": "订单 ORDER2025003 中，第 1 批次的货物最晚需要在什么时候运抵秘鲁？",
+      "answerable": true,
+      "reference_answer": "第 1 批次的 DDP 日期为 2026 年 2 月 28 日，这是客户要求货物到达其仓库的最晚日期；Hexing Peru 在货物运抵秘鲁后约需 10 天办理清关和境内配送，因此第 1 批次的货物最晚约需在 2026 年 2 月 18 日前运抵秘鲁。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "relative_path": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "page_numbers": [
+            3
+          ],
+          "text": "1 | 1ST DELIVERY | 28/02/2026",
+          "anchor": {
+            "text_sha256": "fa5ff61c05a0f769",
+            "pieces": [
+              {
+                "text": "1",
+                "words": [
+                  "3 97.34 365.21 102.94 376.25"
+                ]
+              },
+              {
+                "text": "1ST DELIVERY",
+                "words": [
+                  "3 111.62 365.21 127.69 376.25",
+                  "3 130.09 365.21 172.64 376.25"
+                ]
+              },
+              {
+                "text": "28/02/2026",
+                "words": [
+                  "3 190.01 365.21 243.25 376.25"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "relative_path": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "page_numbers": [
+            3
+          ],
+          "text": "The delivery date is the maximum date required by customer in warehouse, Hexing Peru needs around 10 days after the goods arrive to Peru for customs and internal deliveries.",
+          "anchor": {
+            "text_sha256": "a510f2c5a6dc930d",
+            "pieces": [
+              {
+                "text": "The delivery date is the maximum date required by customer in warehouse, Hexing Peru needs around 10 days after the goods arrive to Peru for customs and internal deliveries.",
+                "words": [
+                  "3 88.94 475.40 104.50 485.44",
+                  "3 106.93 475.40 137.90 485.44",
+                  "3 140.36 475.40 157.83 485.44",
+                  "3 160.26 475.40 166.79 485.44",
+                  "3 169.25 475.40 181.70 485.44",
+                  "3 184.13 475.40 223.16 485.44",
+                  "3 225.51 475.40 243.08 485.44",
+                  "3 245.53 475.40 278.56 485.44",
+                  "3 280.99 475.40 290.53 485.44",
+                  "3 292.86 475.40 329.90 485.44",
+                  "3 332.30 475.40 339.34 485.44",
+                  "3 341.77 475.40 388.28 485.44",
+                  "3 390.71 475.40 418.74 485.44",
+                  "3 421.54 475.40 440.58 485.44",
+                  "3 443.01 475.40 467.52 485.44",
+                  "3 469.98 475.40 498.00 485.44",
+                  "3 500.43 475.40 510.46 485.44",
+                  "3 512.89 475.40 531.66 485.44",
+                  "3 88.94 485.73 107.03 495.76",
+                  "3 109.54 485.73 121.99 495.76",
+                  "3 124.52 485.73 148.95 495.76",
+                  "3 151.50 485.73 174.03 495.76",
+                  "3 176.46 485.73 183.97 495.76",
+                  "3 186.51 485.73 205.45 495.76",
+                  "3 207.98 485.73 218.43 495.76",
+                  "3 220.93 485.73 254.47 495.76",
+                  "3 256.93 485.73 271.99 495.76",
+                  "3 274.42 485.73 303.98 495.76",
+                  "3 306.40 485.73 346.90 495.76"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "第 1 批次最晚运抵秘鲁的日期",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2"
+              ]
+            }
+          ],
+          "note": "日期 = DDP 日期（x1）− 清关与境内配送约 10 天（x2）；问题未提到清关时间"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-19-Q008",
+      "question": "订单 ORDER2025003 中，HXE33K-S1 电表的质保期是多久？",
+      "answerable": false,
+      "reference_answer": "订单中没有关于质保期的约定。",
+      "excerpts": [],
+      "evidence_groups": []
+    },
+    {
+      "case_id": "PO-25-19-Q009",
+      "question": "订单 ORDER2025003 中，唯一对序列号有额外要求的电力公司订购了哪些产品？各订购多少台？",
+      "answerable": true,
+      "reference_answer": "唯一对序列号有额外要求的是 SEAL（需另加 NIM 编码，待确认）。SEAL 订购了 Item 1 单相两线表（HXE12ES）110,000 台和 Item 4 三相四线表（HXE34K-S1）1,500 台，未订购 Item 2、Item 3。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "relative_path": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "page_numbers": [
+            1
+          ],
+          "text": "All utilities have no special requirements regarding serial numbers; the factory serial number is applied. The only exception is SEAL, which requires an additional NIM code (to be confirmed).",
+          "anchor": {
+            "text_sha256": "8c7408e621a55497",
+            "pieces": [
+              {
+                "text": "All utilities have no special requirements regarding serial numbers; the factory serial number is applied. The only exception is SEAL, which requires an additional NIM code (to be confirmed).",
+                "words": [
+                  "1 155.30 602.36 165.21 612.40",
+                  "1 167.87 602.36 195.28 612.40",
+                  "1 197.83 602.36 217.36 612.40",
+                  "1 220.02 602.36 229.95 612.40",
+                  "1 232.60 602.36 260.50 612.40",
+                  "1 263.17 602.36 315.61 612.40",
+                  "1 318.31 602.36 356.16 612.40",
+                  "1 358.69 602.36 380.25 612.40",
+                  "1 382.91 602.36 420.31 612.40",
+                  "1 422.96 602.36 435.41 612.40",
+                  "1 438.06 602.36 465.11 612.40",
+                  "1 467.68 602.36 489.10 612.40",
+                  "1 491.77 602.36 522.22 612.40",
+                  "1 524.86 602.36 531.28 612.40",
+                  "1 88.94 612.71 120.56 622.75",
+                  "1 122.86 612.71 138.30 622.75",
+                  "1 140.83 612.71 157.33 622.75",
+                  "1 159.79 612.71 198.35 622.75",
+                  "1 200.78 612.71 207.31 622.75",
+                  "1 209.77 612.71 235.30 622.75",
+                  "1 237.83 612.71 260.83 622.75",
+                  "1 263.35 612.71 295.81 622.75",
+                  "1 298.36 612.71 308.31 622.75",
+                  "1 310.84 612.71 349.29 622.75",
+                  "1 351.83 612.71 368.32 622.75",
+                  "1 370.69 612.71 390.31 622.75",
+                  "1 392.73 612.71 403.26 622.75",
+                  "1 405.79 612.71 415.73 622.75",
+                  "1 418.26 612.71 463.23 622.75"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "relative_path": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "page_numbers": [
+            2
+          ],
+          "text": "SEAL | 1 | Single Phase Meter 2 wires | UNIT | 110,000",
+          "anchor": {
+            "text_sha256": "8d56f027162deec2",
+            "pieces": [
+              {
+                "text": "SEAL",
+                "words": [
+                  "2 86.06 450.85 99.66 457.81"
+                ]
+              },
+              {
+                "text": "1",
+                "words": [
+                  "2 132.02 450.85 135.55 457.81"
+                ]
+              },
+              {
+                "text": "Single Phase Meter 2 wires",
+                "words": [
+                  "2 156.62 442.33 173.39 449.29",
+                  "2 174.97 442.33 191.86 449.29",
+                  "2 156.62 450.85 174.27 457.81",
+                  "2 156.62 459.37 160.15 466.33",
+                  "2 161.67 459.37 176.84 466.33"
+                ]
+              },
+              {
+                "text": "UNIT",
+                "words": [
+                  "2 217.01 450.85 231.08 457.81"
+                ]
+              },
+              {
+                "text": "110,000",
+                "words": [
+                  "2 260.21 450.85 283.16 457.81"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x3",
+          "document_id": "5a4c36e0022f4917",
+          "document_name": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "relative_path": "签字-ORDER PERU 25-19 FONAFE.pdf",
+          "page_numbers": [
+            3
+          ],
+          "text": "SEAL | 4 | Three Phase 4 wires | UNIT | 1,500",
+          "anchor": {
+            "text_sha256": "44604624359943d0",
+            "pieces": [
+              {
+                "text": "SEAL",
+                "words": [
+                  "3 86.06 259.19 99.66 266.15"
+                ]
+              },
+              {
+                "text": "4",
+                "words": [
+                  "3 132.02 259.19 135.55 266.15"
+                ]
+              },
+              {
+                "text": "Three Phase 4 wires",
+                "words": [
+                  "3 156.62 254.96 173.02 261.92",
+                  "3 174.62 254.96 191.50 261.92",
+                  "3 193.07 254.96 196.60 261.92",
+                  "3 156.62 263.51 171.80 270.47"
+                ]
+              },
+              {
+                "text": "UNIT",
+                "words": [
+                  "3 217.01 259.19 231.08 266.15"
+                ]
+              },
+              {
+                "text": "1,500",
+                "words": [
+                  "3 263.81 259.19 279.69 266.15"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "该公司订购的产品",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2",
+                "x3"
+              ]
+            }
+          ],
+          "note": "先由 x1 得出是 SEAL，再在各 ITEM 段落中查 SEAL 的行"
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "该公司订购的数量",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2",
+                "x3"
+              ]
+            }
+          ],
+          "note": "先由 x1 得出是 SEAL，再在各 ITEM 段落中查 SEAL 的行"
         }
       ]
     }

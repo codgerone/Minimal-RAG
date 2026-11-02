@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass, replace
 from datetime import datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, Sequence
 
 from rag.eval.dataset import Case, Dataset, load_dataset
 from rag.eval.judge import CaseEvidence, GroupEvidence, JudgeChunk, judge_case
@@ -14,9 +14,11 @@ from rag.eval import table_metrics as tm
 from rag.index.builder import current_status, open_lexical, open_store, open_tables
 from rag.jsonio import read_json, write_json
 from rag.paths import Workspace
+from rag.query import execution
+from rag.query.execution import QueryCost
 from rag.query.retriever import build_retriever
 from rag.query.scope import SearchScope, load_catalog, resolve_scope
-from rag.query.units import ResultUnit, UnitSearch
+from rag.query.units import ResultUnit, RetrievalCache, UnitSearch
 from rag.registry import Assembly
 
 
@@ -36,6 +38,7 @@ class CaseResult:
     fewest_units: dict[str, int]  # group → fewest return units any acceptable set spreads over
     table: dict[str, Any] | None = None   # table evidence metrics, for table questions
     leading_tokens: tuple[int, ...] = ()  # tokens of the leading return units of the full ranking
+    cost: QueryCost | None = None         # what the query execution spent on this question
 
     @property
     def evidence_documents(self) -> set[str]:
@@ -48,11 +51,14 @@ class CaseResult:
 
 
 def run_name(config_name: str, top_k: int, document_filter: bool, retriever: str,
-             table_return_unit: str = "chunk") -> str:
-    """Folder name: date, config, K, filter state, (unless semantic) the retriever and (when
-    whole tables are returned) `_table`, so a run reads without opening it."""
+             table_return_unit: str = "chunk", bm25_weight: float = 1.0) -> str:
+    """Folder name: date, config, K, filter state, (unless semantic) the retriever with its BM25
+    weight when hybrid and not 1, and (when whole tables are returned) `_table`, so a run reads
+    without opening it."""
     state = "filter-on" if document_filter else "filter-off"
     suffix = "" if retriever == "semantic" else f"_{retriever}"
+    if retriever == "hybrid" and bm25_weight != 1:
+        suffix += f"-bm25w{bm25_weight:g}"
     if table_return_unit == "table":
         suffix += "_table"
     return f"{datetime.now():%Y-%m-%d}_{config_name}_k{top_k}_{state}{suffix}"
@@ -94,7 +100,45 @@ def _metrics_dict(scores: list[QuestionScore]) -> dict[str, Any]:
                   "denominator": ratios[key].denominator} for key, _, _ in METRICS}
 
 
-def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int) -> Path:
+@dataclass
+class EvalContext:
+    """What scoring an assembly's query executions needs, checked and opened once."""
+    dataset: Dataset
+    sources: dict[str, Any]       # document_id → indexed source
+    changed: list[str]            # documents whose PDF changed since labelling
+    chunks: list[JudgeChunk]
+    enabled: bool                 # document filter
+    catalog: Any
+    searcher: UnitSearch
+    owners: dict[str, str]        # chunk_id → table_id, when whole tables are returned
+    tokens_of: Any                # text → token count
+
+    def scope(self, question: str) -> SearchScope:
+        return resolve_scope(question, self.catalog, self.enabled)
+
+    def warm_up(self) -> None:
+        """Loads the encoder, so that its start-up is not timed as the first retrieval."""
+        if self.dataset.cases:
+            first = self.dataset.cases[0].question
+            self.searcher.warm_up(first, self.scope(first).document_ids)
+
+
+class _TokenCounter:
+    def __init__(self):
+        from rag.ingest.chunkers.tokens import E5TokenCounter
+        self._counter = E5TokenCounter()
+        self._cache: dict[str, int] = {}
+
+    def __call__(self, text: str) -> int:
+        if text not in self._cache:
+            self._cache[text] = self._counter.count_passage(text)
+        return self._cache[text]
+
+
+def prepare(workspace: Workspace, assembly: Assembly, cache_retrievals: bool = False) -> EvalContext:
+    """Checks the index and the labels are usable together and opens what scoring needs.
+    `cache_retrievals`: keep each retrieval's ranking on disk (.rag/retrieval-cache/), for
+    experiments that run the same query texts many times."""
     status = current_status(workspace, assembly)
     if not status.queryable:
         raise EvalError(f"配置 {assembly.name} 的索引不可用（{status.state}），请先运行 ingest")
@@ -124,28 +168,32 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int) -> Path
                if enabled else None)
     table_return_unit = assembly.config.table_return_unit
     tables = open_tables(workspace, assembly.name)
+    cache = (RetrievalCache(workspace.root / ".rag" / "retrieval-cache", workspace.index_dir(assembly.name),
+                            assembly.config.retriever.use) if cache_retrievals else None)
     searcher = UnitSearch(build_retriever(assembly, store, open_lexical(workspace, assembly)), store,
-                          tables, table_return_unit)
+                          tables, table_return_unit, cache)
     owners = ({cid: t.table_id for cid, t in tables.tables_for_chunks([c.chunk_id for c in chunks]).items()}
               if table_return_unit == "table" else {})
-    from rag.ingest.chunkers.tokens import E5TokenCounter
-    counter = E5TokenCounter()
-    token_cache: dict[str, int] = {}
+    return EvalContext(dataset, sources, changed, chunks, enabled, catalog, searcher, owners, _TokenCounter())
 
-    def tokens_of(text: str) -> int:
-        if text not in token_cache:
-            token_cache[text] = counter.count_passage(text)
-        return token_cache[text]
 
+def run_evaluation(workspace: Workspace, assembly: Assembly, budgets: Sequence[int]) -> list[Path]:
+    """Each question runs through the query execution once; every budget B scores the first B
+    units of its return order and is written as its own run (folder `..._k<B>_...`)."""
+    budgets = sorted(set(budgets))
+    ctx = prepare(workspace, assembly)
+    dataset, sources, changed, chunks = ctx.dataset, ctx.sources, ctx.changed, ctx.chunks
+    enabled, catalog, searcher, owners, tokens_of = ctx.enabled, ctx.catalog, ctx.searcher, ctx.owners, ctx.tokens_of
+    table_return_unit = assembly.config.table_return_unit
     table_boxes = _table_boxes(workspace, assembly.name)
     table_excerpts = {(c.case_id, x.excerpt_id) for c in dataset.cases for x in c.excerpts
                       if tm.is_table_excerpt(x, table_boxes.get(x.document_id, []))}
-    results: list[CaseResult] = []
+    ctx.warm_up()
+    prepared: list[tuple[CaseResult, execution.QueryRun]] = []
     for case in dataset.cases:
         scope = resolve_scope(case.question, catalog, enabled)
-        hits = searcher.rank_hits(case.question, scope.document_ids)
-        ranking = searcher.units_for(hits)
-        units = ranking[:top_k]
+        run = execution.plain(searcher, case.question, scope.document_ids)
+        ranking = run.units
         evidence = judge_case(case, chunks)
         groups = tm.table_groups(case, evidence, {x for c, x in table_excerpts if c == case.case_id})
         table = None
@@ -154,7 +202,7 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int) -> Path
             per_group, k2 = tm.required_units([u.chunk_ids for u in ranking], groups)
             unit_of = lambda cid: owners.get(cid, cid)
             table = {"groups": [{"group_id": g.group_id, "excerpt_ids": list(g.excerpt_ids),
-                                 "chunk_rank": tm.chunk_rank([h.chunk.chunk_id for h in hits], g.any_word_chunks),
+                                 "chunk_rank": tm.chunk_rank(list(run.chunk_order), g.any_word_chunks),
                                  "required_k": per_group.get(g.group_id),
                                  # the group's acceptable sets of table excerpts, as return units
                                  "unit_sets": sorted({tuple(sorted({unit_of(c) for c in s})) for s in g.table_sets})}
@@ -166,26 +214,45 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int) -> Path
             table["tokens"] = sum(leading[:table["required_k"]]) if table["required_k"] else None
             table["leading_tokens"] = list(leading)
         owner = lambda cid: owners.get(cid, cid)
-        item = CaseResult(case, units, [tokens_of(u.text) for u in units], evidence,
+        item = CaseResult(case, [], [], evidence,
                           None, scope, completion_ranks([u.chunk_ids for u in ranking], evidence.groups),
                           {g.group_id: min(len({owners.get(c, c) for c in s}) for s in g.acceptable_sets)
-                           for g in evidence.groups if g.acceptable_sets}, table, leading)
+                           for g in evidence.groups if g.acceptable_sets}, table, leading, run.cost)
         if table is not None:
             # Fewest return units covering the table evidence (same scope as metric 2).
             table["fewest_units"] = tm.fewest_units(
                 [GroupEvidence(g.group_id, "coordinate", g.table_sets) for g in groups], owner)
-        if case.answerable:
-            item = replace(item, score=score_question(
-                [u.chunk_ids for u in units], [u.document_id for u in units],
-                evidence.groups, item.evidence_documents))
-        results.append(item)
+        prepared.append((item, run))
 
-    unmapped = [f"{r.case.case_id}/{x}：{e.problem}" for r in results
+    unmapped = [f"{r.case.case_id}/{x}：{e.problem}" for r, _ in prepared
                 for x, e in r.evidence.excerpts.items() if e.mode == "unmapped"]
     if unmapped:
         raise EvalError("以下 excerpt 找不到对应 chunk，评估结果会失真：" + "；".join(unmapped))
-    folder = _run_folder(workspace, run_name(assembly.name, top_k, enabled, assembly.config.retriever.use,
-                                             table_return_unit))
+    folders = {}
+    for budget in budgets:
+        folders[budget] = _run_folder(workspace, run_name(assembly.name, budget, enabled,
+                                                          assembly.config.retriever.use, table_return_unit,
+                                                          assembly.config.bm25_weight))
+    for budget in budgets:
+        results = []
+        for item, run in prepared:
+            units = run.first(budget)
+            item = replace(item, units=units, tokens=[tokens_of(u.text) for u in units])
+            if item.case.answerable:
+                item = replace(item, score=score_question(
+                    [u.chunk_ids for u in units], [u.document_id for u in units],
+                    item.evidence.groups, item.evidence_documents))
+            results.append(item)
+        _write_run(workspace, assembly, folders[budget], budget, folders, results, dataset, sources,
+                   changed, enabled, catalog is not None, len(table_excerpts))
+    return [folders[b] for b in budgets]
+
+
+def _write_run(workspace: Workspace, assembly: Assembly, folder: Path, top_k: int,
+               folders: dict[int, Path], results: list[CaseResult], dataset: Dataset,
+               sources: dict[str, Any], changed: list[str], enabled: bool, has_catalog: bool,
+               table_excerpts: int) -> None:
+    table_return_unit = assembly.config.table_return_unit
     names = {doc_id: source.document_name for doc_id, source in sources.items()}
     scored = [r.score for r in results if r.score is not None]
     per_document: dict[str, Any] = {}
@@ -199,8 +266,12 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int) -> Path
         "fingerprint": assembly.fingerprint(),
         "build_settings": assembly.build_settings(),
         "retriever": assembly.config.retriever.use,
+        "bm25_weight": assembly.config.bm25_weight,
         "table_return_unit": table_return_unit,
         "top_k": top_k,
+        "query_execution": "plain",
+        # the runs written from the same query executions, one per budget
+        "budget_runs": {str(b): f.name for b, f in folders.items()},
         "created_at": datetime.now().astimezone().isoformat(timespec="seconds"),
         "dataset": {"version": dataset.version, "fingerprint": dataset.fingerprint,
                     "questions": len(dataset.cases), "answerable": len(scored),
@@ -209,16 +280,16 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, top_k: int) -> Path
                            for mode in ("coordinate", "fallback", "unmapped")},   # counted per excerpt
         "metrics": _metrics_dict(scored),
         "returned_tokens": _tokens_summary([r for r in results if r.score is not None]),
-        "document_scope": _scope_summary(results, enabled, catalog is not None),
+        "query_cost": _cost_summary([r for r in results if r.score is not None]),
+        "document_scope": _scope_summary(results, enabled, has_catalog),
         "documents": per_document,
-        "table_evidence": _table_summary(results, len(table_excerpts)),
+        "table_evidence": _table_summary(results, table_excerpts),
         "ingest_cost": _ingest_cost(workspace, assembly.name),
         "cases": [_case_json(r, names) for r in results],
     }
     write_json(folder / "result.json", result)
     from rag.reports.evaluation import latest_before, write_eval_report
     write_eval_report(workspace, folder, result, latest_before(workspace, result))
-    return folder
 
 
 def _table_boxes(workspace: Workspace, config_name: str) -> dict[str, list[tuple[int, tuple[float, float, float, float]]]]:
@@ -283,6 +354,18 @@ def _tokens_summary(answerable: list[CaseResult]) -> dict[str, Any]:
             "max": max(per_question, default=0)}
 
 
+def _cost_summary(answerable: list[CaseResult]) -> dict[str, Any]:
+    """Query execution cost per answerable question: the sum over questions / N, and the largest.
+    The same for every budget of a run (the return order is built once)."""
+    def summary(values: list[float]) -> dict[str, Any]:
+        return {"total": sum(values), "denominator": len(values),
+                "value": sum(values) / len(values) if values else None, "max": max(values, default=0)}
+    costs = [r.cost for r in answerable if r.cost]
+    return {"retrievals": summary([c.retrievals for c in costs]),
+            "retrieval_seconds": summary([c.retrieval_seconds for c in costs]),
+            "llm_calls": summary([c.llm_calls for c in costs])}
+
+
 def _scope_summary(results: list[CaseResult], enabled: bool, has_catalog: bool) -> dict[str, Any]:
     """Document identification over answerable questions: identified set == evidence documents."""
     answerable = [r for r in results if r.score is not None]
@@ -328,6 +411,9 @@ def _case_json(item: CaseResult, names: dict[str, str]) -> dict[str, Any]:
                         for scheme, scheme_judged in zip(group.schemes, judged.schemes)],
         } for group, judged in zip(case.groups, item.evidence.groups)],
         "returned_tokens": sum(item.tokens),
+        "query_cost": ({"retrievals": item.cost.retrievals,
+                        "retrieval_seconds": round(item.cost.retrieval_seconds, 4),
+                        "llm_calls": item.cost.llm_calls} if item.cost else None),
         "table": item.table,
         "hits": [{
             "rank": rank, "chunk_id": u.hit.chunk.chunk_id, "document_id": u.document_id,

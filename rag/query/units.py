@@ -8,12 +8,16 @@ results move up. Other chunks, and every chunk with "chunk", are returned as the
 
 from __future__ import annotations
 
+import hashlib
+import json
+import time
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Collection
 
 from rag.index.store import ChromaStore
 from rag.index.tables import StoredTable, TableStore
-from rag.query.retriever import Hit, Retriever
+from rag.query.retriever import Hit, HybridRetriever, Retriever
 
 
 @dataclass(frozen=True)
@@ -39,6 +43,11 @@ class ResultUnit:
     def document_id(self) -> str:
         return self.hit.chunk.document_id
 
+    @property
+    def key(self) -> str:
+        """The unit's identity: the table for a whole table, otherwise the chunk."""
+        return self.table.table_id if self.table else self.hit.chunk.chunk_id
+
 
 def to_units(hits: list[Hit], tables: dict[str, StoredTable],
              pages: dict[str, tuple[int, ...]] | None = None) -> list[ResultUnit]:
@@ -57,33 +66,89 @@ def to_units(hits: list[Hit], tables: dict[str, StoredTable],
     return units
 
 
+@dataclass(frozen=True)
+class UnitRanking:
+    """One retrieval: every return unit in scope, best first."""
+    units: tuple[ResultUnit, ...]
+    chunk_ids: tuple[str, ...]   # provenance only: the retriever's chunk ranking the units were mapped from
+    seconds: float               # retrieval time (for a cached ranking, the time it took when made)
+
+
+class RetrievalCache:
+    """The retriever's full ranking per (index, retriever, scope, text), on disk. The index is
+    identified by its manifest, which every ingest rewrites. A cached ranking keeps the time the
+    retriever took, so costs read the same on every rerun; the return-unit step runs again. A hybrid
+    ranking is stored with both channels' ranks and fused again with the current BM25 weight when
+    read, so the weight is not part of the key."""
+
+    def __init__(self, folder: Path, index_dir: Path, retriever: str):
+        self.folder = folder
+        manifest = (index_dir / "manifest.json").read_bytes()
+        self.index = f"{index_dir.name}:{hashlib.sha256(manifest).hexdigest()}:{retriever}"
+
+    def _path(self, text: str, document_ids: Collection[str] | None) -> Path:
+        blob = json.dumps({"index": self.index, "text": text,
+                           "documents": None if document_ids is None else sorted(document_ids)},
+                          ensure_ascii=False, sort_keys=True)
+        return self.folder / f"{hashlib.sha256(blob.encode('utf-8')).hexdigest()}.json"
+
+    def get(self, text: str, document_ids: Collection[str] | None) -> dict | None:
+        path = self._path(text, document_ids)
+        return json.loads(path.read_text(encoding="utf-8")) if path.exists() else None
+
+    def put(self, text: str, document_ids: Collection[str] | None, hits: list[Hit], seconds: float) -> None:
+        from rag.jsonio import write_atomic
+        rows = [{"chunk_id": h.chunk.chunk_id, "score": h.score, "semantic_rank": h.semantic_rank,
+                 "similarity": h.similarity, "lexical_rank": h.lexical_rank, "bm25": h.bm25} for h in hits]
+        write_atomic(self._path(text, document_ids),
+                     json.dumps({"seconds": seconds, "hits": rows}, ensure_ascii=False))
+
+
 class UnitSearch:
-    """A retriever followed by the return-unit step."""
+    """One retrieval: the retriever ranks the chunks, the return-unit step maps them to units."""
 
     def __init__(self, retriever: Retriever, store: ChromaStore, tables: TableStore,
-                 table_return_unit: str):
+                 table_return_unit: str, cache: RetrievalCache | None = None):
         self.retriever = retriever
         self.store = store
         self.tables = tables
         self.whole_tables = table_return_unit == "table"
+        self.cache = cache
 
-    def rank_all(self, question: str, document_ids: Collection[str] | None = None) -> list[ResultUnit]:
-        """Every unit in scope, best first (the retriever's full ranking, then mapped to units)."""
-        return self.units_for(self.rank_hits(question, document_ids))
+    def rank(self, text: str, document_ids: Collection[str] | None = None) -> UnitRanking:
+        """The full ranking of the units in scope."""
+        cached = self.cache.get(text, document_ids) if self.cache else None
+        if cached is None:
+            start = time.perf_counter()
+            hits = self._rank_chunks(text, document_ids)
+            retrieval = time.perf_counter() - start
+            if self.cache:
+                self.cache.put(text, document_ids, hits, retrieval)
+        else:
+            chunks = self.store.get_chunks([row["chunk_id"] for row in cached["hits"]])
+            hits = [Hit(chunks[row.pop("chunk_id")], **row) for row in cached["hits"]]
+            if isinstance(self.retriever, HybridRetriever):
+                hits = self.retriever.refuse(hits)
+            retrieval = cached["seconds"]
+        start = time.perf_counter()
+        units = tuple(self._units(hits))
+        return UnitRanking(units, tuple(h.chunk.chunk_id for h in hits),
+                           retrieval + time.perf_counter() - start)
 
-    def rank_hits(self, question: str, document_ids: Collection[str] | None = None) -> list[Hit]:
-        """Every chunk in scope, best first, before mapping to return units."""
+    def warm_up(self, text: str, document_ids: Collection[str] | None = None) -> None:
+        """Loads the encoder outside any timed or cached retrieval."""
+        self._rank_chunks(text, document_ids)
+
+    def _rank_chunks(self, text: str, document_ids: Collection[str] | None) -> list[Hit]:
         total = self.store.count(document_ids)
-        return self.retriever.retrieve(question, total, document_ids) if total else []
+        return self.retriever.retrieve(text, total, document_ids) if total else []
 
-    def units_for(self, hits: list[Hit]) -> list[ResultUnit]:
-        return self._units(hits)
-
-    def search(self, question: str, top_k: int,
+    def search(self, text: str, top_k: int,
                document_ids: Collection[str] | None = None) -> list[ResultUnit]:
+        """The first top_k units of the ranking."""
         if not self.whole_tables:
-            return [ResultUnit(hit) for hit in self.retriever.retrieve(question, top_k, document_ids)]
-        return self.rank_all(question, document_ids)[:top_k]
+            return [ResultUnit(hit) for hit in self.retriever.retrieve(text, top_k, document_ids)]
+        return list(self.rank(text, document_ids).units[:top_k])
 
     def _units(self, hits: list[Hit]) -> list[ResultUnit]:
         if not self.whole_tables:

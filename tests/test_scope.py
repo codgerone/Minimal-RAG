@@ -90,3 +90,11 @@ def test_retrieval_is_limited_to_the_document_set(workspace, fake_assembly, thre
     assert store.count(allowed) == len(store.list_chunks(allowed[0])) + len(store.list_chunks(allowed[1]))
     assert retriever.retrieve("invoice total", 3, ()) == []
     assert {h.chunk.document_id for h in retriever.retrieve("invoice total", 3)} >= set(ids(three_pdfs, "a.pdf"))
+
+
+def test_strip_codes_removes_every_occurrence_found_as_in_identification():
+    from rag.query.scope import strip_codes
+    assert strip_codes("订单 ORDER2025003 中的单价", ["ORDER2025003"]) == ("订单 中的单价", 1)
+    assert strip_codes("order 2025-003 和合同（CONT2025001）", ["ORDER2025003", "CONT2025001"]) == ("和合同", 2)
+    assert strip_codes("Total of INVOICE-E001-602 and invoice e001 602", ["INVOICE-E001-602"]) == ("Total of and", 2)
+    assert strip_codes("no code", ["CONT2025001"]) == ("no code", 0)

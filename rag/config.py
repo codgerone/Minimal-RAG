@@ -46,6 +46,7 @@ class AssemblyConfig:
     table_return_unit: str = "chunk"   # a hit on a table chunk returns that chunk, or the whole table
     table_structure: Component | None = None    # [table_structure]: header_rules / llm_annotation
     table_index_text: Component | None = None   # [table_index_text]: rows / rows_with_lead / summary
+    bm25_weight: float = 1.0   # hybrid: weight α of the BM25 ranking in the fusion (docs/rules/lexical.md)
 
     def build_settings(self) -> dict[str, Any]:
         """Everything that changes index content. Retrieval, LLM and display settings are excluded."""
@@ -125,6 +126,9 @@ def load_config(path: Path) -> AssemblyConfig:
     table_return_unit = retriever.params.pop("table_return_unit", "chunk")
     if table_return_unit not in TABLE_RETURN_UNITS:
         raise ConfigError(f"{path.name}：retriever.table_return_unit 只能是 \"chunk\" 或 \"table\"")
+    bm25_weight = retriever.params.pop("bm25_weight", 1.0)
+    if type(bm25_weight) not in (int, float) or bm25_weight < 0:
+        raise ConfigError(f"{path.name}：retriever.bm25_weight 必须为非负数")
     evaluation = data.get("eval", {})
     if not isinstance(evaluation, dict) or set(evaluation) - {"top_k"}:
         raise ConfigError(f"{path.name}：[eval] 只接受 top_k")
@@ -150,7 +154,7 @@ def load_config(path: Path) -> AssemblyConfig:
         retriever, top_k,
         _component(data["llm"], "llm", path),
         eval_top_k, document_filter, lexical, table_return_unit,
-        table_sections["table_structure"], table_sections["table_index_text"],
+        table_sections["table_structure"], table_sections["table_index_text"], float(bm25_weight),
     )
 
 

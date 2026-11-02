@@ -1,0 +1,88 @@
+== RM-T CONTRACT-105-Q001 e1 签署双方 | excerpts ['x1', 'x2']: ELECTRO SUR ESTE S.A.A., identificada con RUC. Nº 2011654428; HEXING ELECTRICAL COMPANY S.A.C., identificada con RUC. Nº 2
+   原问题   1:c0000* 2:c0002 3:c0003 4:c0001* 5:c0007 6:c0021 7:c0016 8:c0015
+   Q1       1:c0000* 2:c0002 3:c0003 4:c0007 5:c0001* 6:c0016 7:c0015 8:c0019
+     证据单元 c0000: 'CONTRATO N° 105 - 2025\n\nCOMPRA CORPORATIVA DE MEDIDORES PARA LAS EMPRESAS DE LA CORPORACIÓN FONAFE -ÍTEMS 1, 3 Y 4\n\n(LICITACIÓN PÚBLICA N° LP-002-2024'
+     证据单元 c0001: '1.2 HEXING  ELECTRICAL  COMPANY  S.A.C., identificada con RUC.  Nº  20546102115,  cuya  razón  social  se encuentra inscrita en la Partida Electrónica'
+== RM-T CONTRACT-105-Q002 e5 合同总金额 | excerpts ['x3', 'x4']: El monto total del presente se detalla a continuación:
+Ítem ; Ítem 1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | 120,000
+   原问题   1:node_20cd734a3c6fa194a0e7* 2:node_af2e93dd3f6afeb30bcf+ 3:c0002 4:c0008* 5:c0015 6:c0001 7:node_7504dd672d005aae9ac0+ 8:c0018
+   Q5       1:c0003 2:c0000 3:c0002 4:node_73df07d05cf37ea3c86e+ 5:node_20cd734a3c6fa194a0e7* 6:c0010 7:c0001 8:c0015
+     证据单元 c0008: 'Cuando se produzcan fallas repetitivas en medidores de un mismo lote de producción, que sean imputables al CONTRATISTA , deberá cambiar todos los medi'
+     证据单元 node_20cd734a3c6fa194a0e7: '| ÍTEM | DESCRIPCIÓN | CANTIDAD | PRECIO UNITARIO CON IGV (US$) | PRECIO TOTAL (US$) |\n| Ítem 1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | 120,000 '
+== RM-T CONTRACT-105-Q002 e2 各 Ítem 的数量 | excerpts ['x4', 'x5']: Ítem 1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | 120,000; 1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | UNIDAD | 120
+   原问题   1:node_20cd734a3c6fa194a0e7* 2:node_af2e93dd3f6afeb30bcf+ 3:c0002 4:c0008+ 5:c0015 6:c0001 7:node_7504dd672d005aae9ac0+ 8:c0018
+   Q2       1:node_af2e93dd3f6afeb30bcf+ 2:node_20cd734a3c6fa194a0e7* 3:c0002 4:c0008+ 5:c0015 6:c0001 7:node_7504dd672d005aae9ac0+ 8:c0018
+     证据单元 node_73df07d05cf37ea3c86e: '| TEM | DESCRIPCIÓN | UNIDAD DE MEDIDA | REQUERIMI ENTO TOTAL | CANTIDAD Y CRONOGRAMA DE ENTREGAS | ← | ← | ← | ← | ← |\n| ↑ | ↑ | ↑ | ↑ | 1era ENTREG '
+     证据单元 node_20cd734a3c6fa194a0e7: '| ÍTEM | DESCRIPCIÓN | CANTIDAD | PRECIO UNITARIO CON IGV (US$) | PRECIO TOTAL (US$) |\n| Ítem 1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | 120,000 '
+== RM-T CONTRACT-105-Q010 e1 是否分批交货 | excerpts ['x1']: 1era ENTREGA (A 170 días de la firma del contrato) | 2da ENT
+   原问题   1:node_73df07d05cf37ea3c86e* 2:c0003 3:c0002 4:c0016 5:c0011 6:c0010 7:c0007 8:c0013
+   Q1       1:c0010 2:c0002 3:node_73df07d05cf37ea3c86e* 4:c0003 5:c0016 6:c0013 7:c0000 8:c0011
+     证据单元 node_73df07d05cf37ea3c86e: '| TEM | DESCRIPCIÓN | UNIDAD DE MEDIDA | REQUERIMI ENTO TOTAL | CANTIDAD Y CRONOGRAMA DE ENTREGAS | ← | ← | ← | ← | ← |\n| ↑ | ↑ | ↑ | ↑ | 1era ENTREG '
+== RM-T PO-24-12-Q001 e1 包含哪几款产品 | excerpts ['x1']: C&I Meter Cl 0.2S 3&4 Wires meter with modem 4G 2 pulses Mod
+   原问题   1:node_9c8c62a215da6880bb30* 2:c0003 3:c0002 4:c0000
+   Q1       1:c0003 2:c0002 3:node_9c8c62a215da6880bb30* 4:c0000
+     证据单元 node_9c8c62a215da6880bb30: '| Item | Goods of Description | Qty | Unit price | Total Amount |\n| ↑ | ↑ | ↑ | (CIF Callao) | (USD) |\n| 1 | C&I Meter Cl 0.2S 3&4 Wires meter with mo'
+== RM-T PO-24-12-Q004 e3 付款最后期限 | excerpts ['x1']: MDC ORCA: 10,000.00 USD (one-time purchase), payment due: Au
+   原问题   1:c0002* 2:c0003 3:node_9c8c62a215da6880bb30+ 4:c0000
+   Q3       1:c0003 2:c0002* 3:c0000 4:node_9c8c62a215da6880bb30+
+     证据单元 c0002: '(Hexing Peru margin 12%)\n\nSpecial conditions:\n\n1. Technical Requirements\n\nAttach technical specifications signed by ANDET\n\n2. Serial Number: According'
+== RM-T PO-25-19-Q002 e2 总金额 | excerpts ['x1', 'x2']: Three Phase 04 Wires meter Model: HXE34K-S1 | USD 14.37; ELUC | HXE34K-S1 | 2,000 | 1,000 | 1,000
+   原问题   1:node_ea2f030118e96505f55e* 2:node_ed426693f938b67e96b0* 3:c0000 4:c0008 5:c0011 6:c0010 7:c0014 8:c0002
+   Q2       1:node_ea2f030118e96505f55e* 2:node_ed426693f938b67e96b0* 3:c0008 4:c0010 5:node_19b7da13e3375fc7a6ed 6:c0000 7:c0014 8:c0011
+     证据单元 node_ea2f030118e96505f55e: '| COMPANY | ITEM | DESCRIPTION | UNIT | TOTAL REQUIREMENT | QTY AND DELIVERY SCHEDULE | ← | ← | ← | ← | ← |\n| ↑ | ↑ | ↑ | ↑ | ↑ | 1st Delivery | 2nd D'
+     证据单元 node_ed426693f938b67e96b0: '| Item | Goods of Description | Qty | Unit price | Total Amount |\n| ↑ | ↑ | ↑ | (CIF CALLAO) | (USD) |\n| 1 | Single Phase 02 Wires meter Model: HXE12E'
+== RM-T PO-25-19-Q006 e2 该批次的 DDP 日期 | excerpts ['x1', 'x2', 'x3', 'x4']: ELPU | 3 | Three Phase 3 wires | UNIT | 100 | 100; ELPU | 4 | Three Phase 4 wires | UNIT | 1,200 | 1,200; 4th Delivery; 4 | 4TH DELIVERY | 05/12/2026
+   原问题   1:node_19b7da13e3375fc7a6ed* 2:node_ea2f030118e96505f55e* 3:c0010 4:c0014 5:c0008 6:c0012 7:c0000 8:c0011
+   Q2       1:node_19b7da13e3375fc7a6ed* 2:node_ea2f030118e96505f55e* 3:c0010 4:c0014 5:c0008 6:c0012 7:c0000 8:c0011
+     证据单元 node_ea2f030118e96505f55e: '| COMPANY | ITEM | DESCRIPTION | UNIT | TOTAL REQUIREMENT | QTY AND DELIVERY SCHEDULE | ← | ← | ← | ← | ← |\n| ↑ | ↑ | ↑ | ↑ | ↑ | 1st Delivery | 2nd D'
+     证据单元 node_19b7da13e3375fc7a6ed: '|  | DELIVERIES | DDP DATE |\n| 1 | 1ST DELIVERY | 28/02/2026 |\n| 2 | 2ND DELIVERY | 09/04/2026 |\n| 3 | 3RD DELIVERY | 07/08/2026 |\n| 4 | 4TH DELIVERY '
+== RM-T E001-602-Q002 e1 HXE34K-S1 的单价 | excerpts ['x1']: 500.00 | HXE34K-S1 | MEDIDOR TRIFASICO HXE34K-S1, 4HILOS, 10
+   原问题   1:node_577d8597c13629ecd059* 2:c0000 3:c0002
+   Q1       1:node_577d8597c13629ecd059* 2:c0000 3:c0002
+     证据单元 node_577d8597c13629ecd059: '| Cantidad | Unidad Medida | Código | Descripción | Valor Unitario |\n| 20000.00 | UNIDAD | HXE12ES | MEDIDOR MONOFASICO HXE12ES,2HILOS ,5(60)A,220V,CL'
+== RL-C CONTRACT-105-Q001 e1 签署双方 | excerpts ['x1', 'x2']: ELECTRO SUR ESTE S.A.A., identificada con RUC. Nº 2011654428; HEXING ELECTRICAL COMPANY S.A.C., identificada con RUC. Nº 2
+   原问题   1:c0000* 2:c0002 3:c0003 4:c0001* 5:c0007 6:c0022 7:c0017 8:c0016
+   Q1       1:c0000* 2:c0002 3:c0003 4:c0007 5:c0001* 6:c0017 7:c0016 8:c0020
+     证据单元 c0000: 'CONTRATO N° 105 - 2025\n\nCOMPRA CORPORATIVA DE MEDIDORES PARA LAS EMPRESAS DE LA CORPORACIÓN FONAFE -ÍTEMS 1, 3 Y 4\n\n(LICITACIÓN PÚBLICA N° LP-002-2024'
+     证据单元 c0001: '1.2 HEXING  ELECTRICAL  COMPANY  S.A.C., identificada con RUC.  Nº  20546102115,  cuya  razón  social  se encuentra inscrita en la Partida Electrónica'
+== RL-C CONTRACT-105-Q002 e5 合同总金额 | excerpts ['x3', 'x4']: El monto total del presente se detalla a continuación:
+Ítem ; Ítem 1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | 120,000
+   原问题   1:c0009* 2:c0006+ 3:c0002 4:c0016 5:c0008* 6:c0001 7:c0004+ 8:c0019
+   Q5       1:c0003 2:c0000 3:c0002 4:c0012+ 5:c0010 6:c0009* 7:c0001 8:c0016
+     证据单元 c0008: 'Cuando se produzcan fallas repetitivas en medidores de un mismo lote de producción, que sean imputables al CONTRATISTA , deberá cambiar todos los medi'
+     证据单元 c0009: '| ÍTEM: Ítem 1 | DESCRIPCIÓN: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | CANTIDAD: 120,000 | PRECIO UNITARIO CON IGV (US$): 6.1124 | PRECIO TOTAL (US'
+== RL-C CONTRACT-105-Q002 e2 各 Ítem 的数量 | excerpts ['x4', 'x5']: Ítem 1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | 120,000; 1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | UNIDAD | 120
+   原问题   1:c0009* 2:c0006+ 3:c0002 4:c0016 5:c0008+ 6:c0001 7:c0004+ 8:c0019
+   Q2       1:c0006+ 2:c0009* 3:c0002 4:c0008+ 5:c0016 6:c0001 7:c0004+ 8:c0019
+     证据单元 c0012: '| TEM: 1 | DESCRIPCIÓN: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | UNIDAD DE MEDIDA: UNIDAD | REQUERIMI ENTO TOTAL: 120,000 | CANTIDAD Y CRONOGRAMA D'
+     证据单元 c0013: '| TEM: 4 | DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | UNIDAD DE MEDIDA: UNIDAD | REQUERIMI ENTO TOTAL: 2,600 | CANTIDAD Y CRONOGRAMA DE E'
+     证据单元 c0009: '| ÍTEM: Ítem 1 | DESCRIPCIÓN: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | CANTIDAD: 120,000 | PRECIO UNITARIO CON IGV (US$): 6.1124 | PRECIO TOTAL (US'
+== RL-C CONTRACT-105-Q010 e1 是否分批交货 | excerpts ['x1']: 1era ENTREGA (A 170 días de la firma del contrato) | 2da ENT
+   原问题   1:c0003 2:c0002 3:c0017 4:c0011 5:c0012* 6:c0013* 7:c0010 8:c0007
+   Q1       1:c0010 2:c0002 3:c0003 4:c0017 5:c0014 6:c0000 7:c0011 8:c0012*
+     证据单元 c0012: '| TEM: 1 | DESCRIPCIÓN: MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | UNIDAD DE MEDIDA: UNIDAD | REQUERIMI ENTO TOTAL: 120,000 | CANTIDAD Y CRONOGRAMA D'
+     证据单元 c0013: '| TEM: 4 | DESCRIPCIÓN: MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | UNIDAD DE MEDIDA: UNIDAD | REQUERIMI ENTO TOTAL: 2,600 | CANTIDAD Y CRONOGRAMA DE E'
+== RL-C PO-24-12-Q001 e1 包含哪几款产品 | excerpts ['x1']: C&I Meter Cl 0.2S 3&4 Wires meter with modem 4G 2 pulses Mod
+   原问题   1:c0001* 2:c0003 3:c0002 4:c0000
+   Q1       1:c0003 2:c0002 3:c0001* 4:c0000
+     证据单元 c0001: '| Item | Goods of Description | Qty | Unit price | Total Amount |\n| ↑ | ↑ | ↑ | (CIF Callao) | (USD) |\n| 1 | C&I Meter Cl 0.2S 3&4 Wires meter with mo'
+== RL-C PO-24-12-Q004 e3 付款最后期限 | excerpts ['x1']: MDC ORCA: 10,000.00 USD (one-time purchase), payment due: Au
+   原问题   1:c0002* 2:c0003 3:c0001+ 4:c0000
+   Q3       1:c0003 2:c0002* 3:c0000 4:c0001+
+     证据单元 c0002: '(Hexing Peru margin 12%)\n\nSpecial conditions:\n\n1. Technical Requirements\n\nAttach technical specifications signed by ANDET\n\n2. Serial Number: According'
+== RL-C PO-25-19-Q002 e2 总金额 | excerpts ['x1', 'x2']: Three Phase 04 Wires meter Model: HXE34K-S1 | USD 14.37; ELUC | HXE34K-S1 | 2,000 | 1,000 | 1,000
+   原问题   1:c0011* 2:c0003 3:c0012* 4:c0001* 5:c0010 6:c0009 7:c0008 8:c0004
+   Q2       1:c0012* 2:c0010 3:c0003 4:c0008 5:c0004 6:c0007 7:c0006 8:c0013
+     证据单元 c0012: '| COMPANY: ELUC | ITEM: 4 | DESCRIPTION: Three Phase 4 wires | UNIT: UNIT | TOTAL REQUIREMENT: 2,000 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At '
+     证据单元 c0011: '| COMPANY: ENSA | ITEM: 3 | DESCRIPTION: Three Phase 3 wires | UNIT: UNIT | TOTAL REQUIREMENT: 5,018 | QTY AND DELIVERY SCHEDULE / 1st Delivery / (At '
+     证据单元 c0001: '| Item: 1 | Goods of Description: Single Phase 02 Wires meter Model: HXE12ES | Qty: 1´131,056.00 | Unit price / (CIF CALLAO): USD 4.56 | Total Amount '
+== RL-C PO-25-19-Q006 e2 该批次的 DDP 日期 | excerpts ['x1', 'x2', 'x3', 'x4']: ELPU | 3 | Three Phase 3 wires | UNIT | 100 | 100; ELPU | 4 | Three Phase 4 wires | UNIT | 1,200 | 1,200; 4th Delivery; 4 | 4TH DELIVERY | 05/12/2026
+   原问题   1:c0016* 2:c0011* 3:c0013* 4:c0017 5:c0010* 6:c0012* 7:c0004* 8:c0008*
+   Q2       1:c0016* 2:c0017 3:c0011* 4:c0013* 5:c0010* 6:c0012* 7:c0008* 8:c0004*
+     证据单元 c0004: '| COMPANY: ELCTO | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 116,000 | QTY AND DELIVERY SCHEDULE / 1st Deliv'
+     证据单元 c0008: '| COMPANY: ELOR - CAJAMARCA | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 67,305 | QTY AND DELIVERY SCHEDULE /'
+     证据单元 c0006: '| COMPANY: ELOR - LORETO | ITEM: 1 | DESCRIPTION: Single Phase Meter 2 wires | UNIT: UNIT | TOTAL REQUIREMENT: 87,600 | QTY AND DELIVERY SCHEDULE / 1s'
+== RL-C E001-602-Q002 e1 HXE34K-S1 的单价 | excerpts ['x1']: 500.00 | HXE34K-S1 | MEDIDOR TRIFASICO HXE34K-S1, 4HILOS, 10
+   原问题   1:c0001* 2:c0000 3:c0002
+   Q1       1:c0000 2:c0001* 3:c0002
+     证据单元 c0001: '| Cantidad: 20000.00 | Unidad Medida: UNIDAD | Código: HXE12ES | Descripción: MEDIDOR MONOFASICO HXE12ES,2HILOS ,5(60)A,220V,CLASE 1, CONEXION | Valor'

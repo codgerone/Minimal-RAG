@@ -1,0 +1,23 @@
+13 种组合：RM-C、RM-T、RL-C、RL-T、LM-C、LM-T、LL-C、LL-T、LM+-C、LM+-T、LL+-C、LL+-T、S-T
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 22502.99it/s]
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 16002.70it/s]
+[transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (1750 > 512). Running this sequence through the model will result in indexing errors
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 12741.31it/s]
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 38540.44it/s]
+[transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (1750 > 512). Running this sequence through the model will result in indexing errors
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 14947.30it/s]
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 17294.73it/s]
+[transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (1750 > 512). Running this sequence through the model will result in indexing errors
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 23334.18it/s]
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 22458.00it/s]
+[transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (1750 > 512). Running this sequence through the model will result in indexing errors
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 14685.49it/s]
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 15655.92it/s]
+[transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (1750 > 512). Running this sequence through the model will result in indexing errors
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 21422.15it/s]
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 15616.71it/s]
+[transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (1750 > 512). Running this sequence through the model will result in indexing errors
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 15582.13it/s]
+[transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (1750 > 512). Running this sequence through the model will result in indexing errors
+扰动测试：第 1、2、3 次生成
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 16174.90it/s]

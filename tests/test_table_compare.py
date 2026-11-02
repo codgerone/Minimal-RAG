@@ -31,3 +31,10 @@ def test_cost_is_per_table_and_per_call():
     assert cost["usd"] == 0.005 and cost["seconds"] == 2.5 and cost["calls"] == 1.25
     assert cost["usd_call"] == 0.004 and cost["seconds_call"] == 2.0
     assert per_table_cost({"ingest_cost": None}) is None
+
+
+def test_budgets_of_one_query_execution_are_shown_once():
+    from rag.reports.table_compare import one_per_execution
+    budgets = {"3": "a_k3", "6": "a_k6"}
+    runs = [("a_k3", {"budget_runs": budgets}), ("a_k6", {"budget_runs": budgets}), ("b", {})]
+    assert [name for name, _ in one_per_execution(runs)] == ["a_k3", "b"]

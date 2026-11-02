@@ -167,6 +167,28 @@ def _tokens_tile(result: dict[str, Any], previous: dict[str, Any] | None) -> str
             f'<div class="d same">最多 {tokens["max"]}</div>{change}</div>')
 
 
+def _budget_links(result: dict[str, Any]) -> str:
+    """Tabs to the runs written from the same query executions at other budgets."""
+    runs = result.get("budget_runs") or {}
+    if len(runs) < 2:
+        return ""
+    from urllib.parse import quote
+    links = "".join(
+        f'<a href="../{esc(quote(name))}/index.html"{" class=on" if int(b) == result["top_k"] else ""}>K={esc(b)}</a>'
+        for b, name in sorted(runs.items(), key=lambda kv: int(kv[0])))
+    return f'<div class="tabs">{links}</div><div class="meta">同一次检索，各档只取返回顺序的前 K 个结果。</div>'
+
+
+def _cost_text(result: dict[str, Any]) -> str:
+    cost = result.get("query_cost")
+    if not cost or cost["retrievals"]["value"] is None:
+        return ""
+    text = (f' · 每题检索 {cost["retrievals"]["value"]:.1f} 次、{cost["retrieval_seconds"]["value"] * 1000:.0f} ms')
+    if cost["llm_calls"]["total"]:
+        text += f'、LLM 调用 {cost["llm_calls"]["value"]:.1f} 次'
+    return text
+
+
 def _hit_html(hit: dict[str, Any], groups: list[dict[str, Any]], retriever: str) -> str:
     chunks = unit_chunks(hit)
     matched = [g["group_id"] for g in groups if any(c in s for c in chunks for s in g["acceptable_sets"])]
@@ -250,8 +272,8 @@ def render(result: dict[str, Any], previous: dict[str, Any] | None) -> str:
             f'<div class="sub">{esc(result["created_at"])} · {result["dataset"]["answerable"]} 道可回答问题'
             f'（数据集 {esc(result["dataset"]["version"])}）· 检索器 {esc(result.get("retriever", "semantic"))}'
             f' · 命中表格时返回{table_return_label(result)}'
-            f' · 文档过滤{filter_state(result)}'
-            f' · 构建指纹 {esc(result["fingerprint"][:12])}</div>'
+            f' · 文档过滤{filter_state(result)}{_cost_text(result)}'
+            f' · 构建指纹 {esc(result["fingerprint"][:12])}</div>{_budget_links(result)}'
             f'<div class="tiles">{tiles}</div>{notice_html}'
             f'<h2>按文档</h2>{doc_table}'
             f'<details><summary>本次使用的构建配置</summary><pre>{esc(_pretty(settings))}</pre></details>'

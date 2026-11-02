@@ -1,0 +1,32 @@
+CONTRACT-105-Q001 {'问号改句号': ['better', 'better', 'better', 'better'], '前加请问': ['same', 'same', 'same', 'same'], '句子倒序': ['better', 'better', 'better', 'better']}
+CONTRACT-105-Q002 {'问号改句号': ['same', 'same', 'same', 'same'], '前加请问': ['same', 'same', 'same', 'same'], '句子倒序': ['same', 'same', 'same', 'same']}
+CONTRACT-105-Q003 {'问号改句号': ['better', 'better', 'better', 'better'], '前加请问': ['worse', 'worse', 'worse', 'mixed'], '句子倒序': ['better', 'better', 'better', 'better']}
+CONTRACT-105-Q004 {'问号改句号': ['better', 'better', 'better', 'better'], '前加请问': ['same', 'same', 'same', 'same']}
+CONTRACT-105-Q005 {'问号改句号': ['same', 'same', 'same', 'same'], '前加请问': ['same', 'same', 'same', 'same'], '句子倒序': ['same', 'same', 'same', 'same']}
+CONTRACT-105-Q006 {'问号改句号': ['same', 'same', 'same', 'same'], '前加请问': ['same', 'same', 'same', 'same'], '句子倒序': ['same', 'same', 'same', 'same']}
+CONTRACT-105-Q007 {'问号改句号': ['better', 'better', 'better', 'better'], '前加请问': ['same', 'same', 'same', 'same'], '句子倒序': ['mixed', 'mixed', 'mixed', 'mixed']}
+CONTRACT-105-Q008 {'问号改句号': ['same', 'same', 'same', 'same'], '前加请问': ['same', 'same', 'same', 'same'], '句子倒序': ['same', 'same', 'same', 'same']}
+CONTRACT-105-Q009 {'问号改句号': ['same', 'same', 'same', 'same'], '前加请问': ['same', 'same', 'same', 'same']}
+CONTRACT-105-Q010 {'问号改句号': ['better', 'better', 'better', 'mixed'], '前加请问': ['same', 'same', 'same', 'better'], '句子倒序': ['same', 'same', 'same', 'better']}
+CONTRACT-105-Q011 {'问号改句号': ['same', 'same', 'same', 'same'], '前加请问': ['same', 'same', 'same', 'same'], '句子倒序': ['worse', 'worse', 'worse', 'worse']}
+CONTRACT-105-Q012 {'问号改句号': ['same', 'same', 'same', 'same'], '前加请问': ['same', 'same', 'same', 'same']}
+CONTRACT-105-Q013 {'问号改句号': ['same', 'same', 'same', 'same'], '前加请问': ['same', 'same', 'same', 'same'], '句子倒序': ['same', 'same', 'same', 'same']}
+CONTRACT-105-Q014 {'问号改句号': ['better', 'better', 'better', 'same'], '前加请问': ['same', 'same', 'same', 'same'], '句子倒序': ['better', 'better', 'better', 'better']}
+E001-602-Q001 {'问号改句号': ['same', 'same', 'same', 'same'], '前加请问': ['same', 'same', 'same', 'same'], '句子倒序': ['same', 'same', 'same', 'same']}
+E001-602-Q002 {'问号改句号': ['same', 'same', 'same', 'same'], '前加请问': ['same', 'same', 'same', 'same']}
+PO-24-12-Q001 {'问号改句号': ['same', 'same', 'same', 'same'], '前加请问': ['same', 'same', 'same', 'same'], '句子倒序': ['same', 'same', 'same', 'same']}
+PO-24-12-Q002 {'问号改句号': ['same', 'same', 'same', 'same'], '前加请问': ['same', 'same', 'same', 'same']}
+PO-24-12-Q003 {'问号改句号': ['same', 'same', 'same', 'same'], '前加请问': ['same', 'same', 'same', 'same'], '句子倒序': ['same', 'same', 'same', 'same']}
+PO-24-12-Q004 {'问号改句号': ['same', 'same', 'same', 'same'], '前加请问': ['same', 'same', 'same', 'same'], '句子倒序': ['same', 'same', 'same', 'same']}
+PO-24-12-Q005 {'问号改句号': ['same', 'same', 'same', 'same'], '前加请问': ['same', 'same', 'same', 'same']}
+PO-24-12-Q006 {'问号改句号': ['same', 'same', 'same', 'same'], '前加请问': ['same', 'same', 'same', 'same']}
+PO-25-15-Q001 {'问号改句号': ['same', 'same', 'same', 'same'], '前加请问': ['same', 'same', 'same', 'same'], '句子倒序': ['same', 'same', 'same', 'same']}
+PO-25-15-Q002 {'问号改句号': ['same', 'same', 'same', 'same'], '前加请问': ['same', 'same', 'same', 'same'], '句子倒序': ['same', 'same', 'same', 'same']}
+PO-25-19-Q001 {'问号改句号': ['better', 'better', 'better', 'better'], '前加请问': ['same', 'same', 'same', 'same'], '句子倒序': ['worse', 'mixed', 'mixed', 'worse']}
+PO-25-19-Q002 {'问号改句号': ['same', 'same', 'same', 'same'], '前加请问': ['same', 'same', 'same', 'same'], '句子倒序': ['same', 'same', 'same', 'same']}
+PO-25-19-Q003 {'问号改句号': ['better', 'better', 'better', 'same'], '前加请问': ['same', 'same', 'same', 'worse'], '句子倒序': ['same', 'same', 'better', 'worse']}
+PO-25-19-Q004 {'问号改句号': ['same', 'same', 'same', 'same'], '前加请问': ['same', 'same', 'same', 'same']}
+PO-25-19-Q005 {'问号改句号': ['better', 'better', 'better', 'same'], '前加请问': ['same', 'same', 'same', 'same'], '句子倒序': ['better', 'better', 'better', 'same']}
+PO-25-19-Q006 {'问号改句号': ['same', 'same', 'same', 'same'], '前加请问': ['same', 'same', 'same', 'same'], '句子倒序': ['same', 'same', 'same', 'same']}
+PO-25-19-Q007 {'问号改句号': ['same', 'same', 'same', 'same'], '前加请问': ['same', 'same', 'same', 'same']}
+PO-25-19-Q009 {'问号改句号': ['same', 'same', 'same', 'same'], '前加请问': ['same', 'same', 'same', 'same'], '句子倒序': ['same', 'worse', 'same', 'same']}

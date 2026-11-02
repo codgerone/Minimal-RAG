@@ -73,6 +73,35 @@ border:1px solid var(--line);background:var(--panel);color:var(--text)}
 .overlay-body table{width:max-content;min-width:100%;font-size:14px;background:var(--panel)}
 .overlay-body td{min-width:80px;max-width:420px}
 body.no-scroll{overflow:hidden}
+.seg{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin:8px 0;font-size:13px;color:var(--muted)}
+.seg button{font:inherit;font-size:13px;padding:2px 9px;border-radius:12px;cursor:pointer;
+border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.seg button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.pick{display:flex;flex-direction:column;gap:4px}
+.pick.bad{border-color:var(--bad);background:var(--bad-bg);box-shadow:0 0 0 2px var(--bad-bg)}
+.pick.warn{border-color:var(--warn);background:var(--warn-bg)}
+.pick-row{display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px}
+.pick-row b{min-width:34px}.pick-row label{font-size:14px;cursor:pointer;white-space:nowrap}
+.pick-vs{font-weight:600;color:var(--muted);padding-left:2px}
+.cfg-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:760px){.cfg-grid{grid-template-columns:1fr}}
+.cfg{border:1px solid var(--line);border-radius:6px;padding:6px 10px;font-size:14px}.cfg-side{font-weight:600;margin-bottom:2px}
+.cfg-row{display:flex;flex-wrap:wrap;gap:2px 14px;margin-top:4px}.cfg-row label,.cfg-sub label{cursor:pointer;white-space:nowrap}
+.cfg-sub{margin:2px 0 4px 22px;font-size:13px;color:var(--muted)}.cfg-sub label{margin-right:10px;color:var(--text)}
+.cfg-step{margin-top:8px;font-weight:600;font-size:13px}.cfg-step .meta{font-weight:400;margin-left:6px}
+table.kv th{width:9em;text-align:left;vertical-align:top;white-space:nowrap}
+.cfg label.off{color:var(--muted);cursor:not-allowed}
+td.hm{text-align:right;white-space:nowrap;cursor:pointer}td.hm:hover{box-shadow:inset 0 0 0 2px var(--accent)}
+td.hm.good{background:var(--ok-bg);color:var(--ok);font-weight:600}
+td.hm.badc{background:var(--bad-bg);color:var(--bad);font-weight:600}
+td.hm.mix{background:var(--warn-bg);color:var(--warn);font-weight:600}
+td.hm.flat{color:var(--muted)}td.hm.sel{box-shadow:inset 0 0 0 2px var(--accent)}
+td.hm.center{text-align:center}
+td.hm.unst{outline:1px dashed var(--warn);outline-offset:-4px}td.hm sup{font-size:10px;color:var(--warn)}
+td.pgray{background:#eceef1}td.pgray .up,td.pgray .down{color:var(--muted)}
+th.acc{background:#e3edff}
+.lnk{border:0;background:none;padding:0 2px;font:inherit;color:var(--accent);cursor:pointer}
+.lnk:hover{text-decoration:underline}
+select{font:inherit;font-size:13px;padding:2px 6px;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
 """
 
 SCRIPT = """

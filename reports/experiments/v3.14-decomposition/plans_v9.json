@@ -1,0 +1,3017 @@
+{
+ "prompt": {
+  "decomposition": "query_plan_v9",
+  "phrasings": "query_plan_v7"
+ },
+ "model": "google/gemini-3.8-flash",
+ "usd": 0.2205,
+ "plain_calls": 1,
+ "plans": {
+  "CONTRACT-105-Q001": {
+   "v7": [
+    "采购合同 CONT2025001 的签署双方分别是谁？",
+    "采购合同 CONT2025001 签署双方各自的法定代表人是谁？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "采购合同 CONT2025001 的签署双方分别是谁？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 的签署双方分别是谁？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "采购合同签署双方"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Quiénes son las partes firmantes del contrato de compra?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "El presente contrato se celebra por una parte por [nombre del comprador], y por la otra parte por [nombre del proveedor], actuando conjuntamente como las Partes."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "合同的签约各方及基本信息是什么？"
+       }
+      ]
+     },
+     {
+      "id": "Q2",
+      "text": "采购合同 CONT2025001 签署双方各自的法定代表人是谁？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 签署双方各自的法定代表人是谁？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "采购合同签署双方各自的法定代表人"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Quiénes son los representantes legales de cada una de las partes en el contrato de compra?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "La parte compradora comparece representada legalmente por [nombre del representante legal], y la parte proveedora comparece representada legalmente por [nombre del representante legal]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "合同签署双方的代表人和主体信息是什么？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": true
+  },
+  "CONTRACT-105-Q002": {
+   "v7": [
+    "采购合同 CONT2025001 包含哪些 Ítem 的产品？",
+    "采购合同 CONT2025001 包含的各 Ítem 产品的数量是多少？",
+    "采购合同 CONT2025001 包含的各 Ítem 产品的单价是多少？",
+    "采购合同 CONT2025001 包含的各 Ítem 产品的含税总金额是多少？",
+    "采购合同 CONT2025001 的合同总金额是多少？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "采购合同 CONT2025001 包含哪些 Ítem 的产品？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 包含哪些 Ítem 的产品？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "采购合同包含的 Ítem 产品清单"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Qué productos o ítems están incluidos en el contrato de compra?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "Los productos correspondientes a cada ítem del contrato de compraventa son los siguientes: Ítem 1: [descripción del producto], Ítem 2: [descripción del producto]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同的标的物及产品明细是什么？"
+       }
+      ]
+     },
+     {
+      "id": "Q2",
+      "text": "采购合同 CONT2025001 中各 Ítem 产品的数量是多少？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 中各 Ítem 产品的数量是多少？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "采购合同各 Ítem 产品的数量"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Cuál es la cantidad de producto establecida para cada ítem en el contrato de compra?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "El detalle de cantidades por ítem en el contrato es el siguiente: Ítem 1 comprende [cantidad] unidades y el Ítem 2 comprende [cantidad] unidades."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同的产品明细表和供货量信息是什么？"
+       }
+      ]
+     },
+     {
+      "id": "Q3",
+      "text": "采购合同 CONT2025001 中各 Ítem 产品的单价是多少？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 中各 Ítem 产品的单价是多少？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "采购合同各 Ítem 产品的单价"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Cuál es el precio unitario de los productos de cada ítem en el contrato de compra?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "Los precios unitarios acordados en el contrato son: Ítem 1 a [precio unitario] por unidad e Ítem 2 a [precio unitario] por unidad."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同的价格条款与费用明细是什么？"
+       }
+      ]
+     },
+     {
+      "id": "Q4",
+      "text": "采购合同 CONT2025001 中各 Ítem 产品的含税总金额是多少？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 中各 Ítem 产品的含税总金额是多少？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "采购合同各 Ítem 产品的含税总金额"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Cuál es el importe total con impuestos de cada ítem en el contrato de compra?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "El valor total con impuestos incluidos para cada ítem del contrato es: Ítem 1: [monto con impuestos], Ítem 2: [monto con impuestos]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同各项产品的计费与税务明细是什么？"
+       }
+      ]
+     },
+     {
+      "id": "Q5",
+      "text": "采购合同 CONT2025001 的合同总金额是多少？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 的合同总金额是多少？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "采购合同的总金额"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Cuál es el monto total del contrato de compra?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "El valor total del contrato asciende a la cantidad de [monto total] [moneda], incluidos todos los impuestos y gravámenes aplicables."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同的整体结算与付款条款是什么？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": true
+  },
+  "CONTRACT-105-Q003": {
+   "v7": [
+    "采购合同 CONT2025001 规定的总履约期限是多久？",
+    "采购合同 CONT2025001 规定的具体交货地点在哪里？",
+    "采购合同 CONT2025001 是否允许提前交货？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "采购合同 CONT2025001 规定的总履约期限是多久？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 规定的总履约期限是多久？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "采购合同规定的总履约期限"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Cuál es el plazo total de ejecución estipulado en el contrato de adquisición?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "El plazo total de ejecución del presente contrato de adquisición será de [número] [días/meses], contados a partir de [evento o fecha de inicio]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同对于时间期限和履约进度是如何规定的？"
+       }
+      ]
+     },
+     {
+      "id": "Q2",
+      "text": "采购合同 CONT2025001 规定的具体交货地点在哪里？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 规定的具体交货地点在哪里？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "采购合同规定的具体交货地点"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Cuál es el lugar específico de entrega establecido en el contrato de adquisición?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "El lugar de entrega de los bienes objeto del presente contrato será en [dirección/instalaciones de recepción designadas]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同对交付相关的条件和要求是如何规定的？"
+       }
+      ]
+     },
+     {
+      "id": "Q3",
+      "text": "采购合同 CONT2025001 规定是否允许提前交货？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 规定是否允许提前交货？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "采购合同关于是否允许提前交货的规定"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Estipula el contrato de adquisición si se permite la entrega anticipada?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "La entrega anticipada de los bienes [se autoriza / no se autoriza], [sujeta a la aprobación previa y por escrito de la parte compradora]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同关于交货时间管理与进度变更有何规定？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": true
+  },
+  "CONTRACT-105-Q004": {
+   "v7": [
+    "采购合同 CONT2025001 中，关于各 Ítem 的履约保证金（Garantía de fiel cumplimiento）金额是如何规定的？",
+    "采购合同 CONT2025001 中，关于各 Ítem 的履约保证金（Garantía de fiel cumplimiento）出具机构是如何规定的？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "采购合同 CONT2025001 中，关于各 Ítem 的履约保证金（Garantía de fiel cumplimiento）金额是如何规定的？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 中，关于各 Ítem 的履约保证金（Garantía de fiel cumplimiento）金额是如何规定的？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "采购合同中各 Ítem 的履约保证金（Garantía de fiel cumplimiento）金额规定"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Cómo se estipula el monto de la Garantía de fiel cumplimiento para cada ítem en el contrato de adquisición?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "El monto de la Garantía de fiel cumplimiento para cada ítem se establece de la siguiente manera: para el Ítem [1], el monto asciende a [monto], y para los ítems sucesivos corresponde al [porcentaje]% del valor total adjudicado."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同中关于履约保证金（Garantía de fiel cumplimiento）的相关条款规定是什么？"
+       }
+      ]
+     },
+     {
+      "id": "Q2",
+      "text": "采购合同 CONT2025001 中，关于各 Ítem 的履约保证金（Garantía de fiel cumplimiento）出具机构是如何规定的？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 中，关于各 Ítem 的履约保证金（Garantía de fiel cumplimiento）出具机构是如何规定的？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "采购合同中各 Ítem 的履约保证金（Garantía de fiel cumplimiento）出具机构规定"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Qué entidad emisora se exige para la Garantía de fiel cumplimiento de cada ítem en el contrato de adquisición?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "La Garantía de fiel cumplimiento de contrato para cada ítem deberá ser emitida por [entidad bancaria o aseguradora autorizada], legalmente establecida en [país]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同中关于履约保证金（Garantía de fiel cumplimiento）的出具要求是什么？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": true
+  },
+  "CONTRACT-105-Q005": {
+   "v7": [
+    "采购合同 CONT2025001 中，技术商业质保期（Garantía Técnico-Comercial）的期限是多久？",
+    "采购合同 CONT2025001 中，在技术商业质保期（Garantía Técnico-Comercial）内发生故障时，承包商的响应时限是多少？",
+    "采购合同 CONT2025001 中，在技术商业质保期（Garantía Técnico-Comercial）内发生故障时，承包商的修复时限是多少？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "采购合同 CONT2025001 中，技术商业质保期（Garantía Técnico-Comercial）的期限是多久？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 中，技术商业质保期（Garantía Técnico-Comercial）的期限是多久？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "技术商业质保期（Garantía Técnico-Comercial）的期限"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Cuál es la duración del periodo de Garantía Técnico-Comercial en el contrato de adquisición?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "El plazo de la Garantía Técnico-Comercial establecida en el contrato tendrá una duración de [número] meses a partir de la fecha de recepción definitiva."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同中各项质保条款的期限规定是怎样的？"
+       }
+      ]
+     },
+     {
+      "id": "Q2",
+      "text": "采购合同 CONT2025001 中，在技术商业质保期（Garantía Técnico-Comercial）内发生故障时，承包商的响应时限是多少？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 中，在技术商业质保期（Garantía Técnico-Comercial）内发生故障时，承包商的响应时限是多少？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "技术商业质保期（Garantía Técnico-Comercial）内发生故障时承包商的响应时限"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "Durante la Garantía Técnico-Comercial, ¿cuál es el plazo de respuesta del contratista en caso de avería o fallo?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "En caso de falla o desperfecto durante el período de Garantía Técnico-Comercial, el contratista deberá dar respuesta en un plazo máximo de [número] horas contadas a partir de la notificación."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同中对于质保期内服务支持的时效要求是怎样的？"
+       }
+      ]
+     },
+     {
+      "id": "Q3",
+      "text": "采购合同 CONT2025001 中，在技术商业质保期（Garantía Técnico-Comercial）内发生故障时，承包商的修复时限是多少？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 中，在技术商业质保期（Garantía Técnico-Comercial）内发生故障时，承包商的修复时限是多少？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "技术商业质保期（Garantía Técnico-Comercial）内发生故障时承包商的修复时限"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "En caso de falla durante la Garantía Técnico-Comercial, ¿cuál es el plazo de reparación o solución exigido al contratista?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "Ante la ocurrencia de averías durante la Garantía Técnico-Comercial, el contratista estará obligado a reparar o subsanar el defecto en un plazo que no excederá de [número] días hábiles."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同中质保期内故障处理与维修时限的规定是怎样的？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": true
+  },
+  "CONTRACT-105-Q006": {
+   "v7": [
+    "采购合同 CONT2025001 中，对“重复性故障”（Falla Repetitiva）的认定标准是什么？",
+    "采购合同 CONT2025001 中，出现“重复性故障”（Falla Repetitiva）时承包商需要承担什么责任？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "采购合同 CONT2025001 中，对“重复性故障”（Falla Repetitiva）的认定标准是什么？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 中，对“重复性故障”（Falla Repetitiva）的认定标准是什么？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "采购合同中“重复性故障”（Falla Repetitiva）的认定标准"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Cuál es el criterio de definición de \"Falla Repetitiva\" en el contrato de adquisición?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "Se entenderá por \"Falla Repetitiva\" aquella avería, defecto o mal funcionamiento que se presente en más de [número] ocasiones dentro de un período de [número] días/meses, o que afecte al mismo componente crítico de manera reiterada."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同中对于故障类型的分类与认定标准是什么？"
+       }
+      ]
+     },
+     {
+      "id": "Q2",
+      "text": "采购合同 CONT2025001 中，出现“重复性故障”（Falla Repetitiva）时承包商需要承担什么责任？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 中，出现“重复性故障”（Falla Repetitiva）时承包商需要承担什么责任？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "采购合同中出现“重复性故障”（Falla Repetitiva）时承包商需承担的责任"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Qué responsabilidades debe asumir el contratista en caso de presentarse una \"Falla Repetitiva\" en el contrato de adquisición?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "En caso de ocurrir una \"Falla Repetitiva\", el contratista estará obligado a [reemplazar la totalidad del equipo / subsanar la falla] dentro de un plazo de [número] días sin costo adicional para el comprador, quedando sujeto además al pago de una penalidad de [monto/porcentaje]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同中承包商对于设备故障需承担哪些保证责任与违约责任？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": true
+  },
+  "CONTRACT-105-Q007": {
+   "v7": [
+    "采购合同 CONT2025001 中，买方办理支付流程的前提条件有哪些？",
+    "采购合同 CONT2025001 中，出具验收合格证明的具体时限要求是什么？",
+    "采购合同 CONT2025001 中，付款的具体时限要求是什么？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "采购合同 CONT2025001 中，买方办理支付流程的前提条件有哪些？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 中，买方办理支付流程的前提条件有哪些？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "采购合同中买方办理支付流程的前提条件"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Cuáles son las condiciones previas para que el comprador inicie el proceso de pago en el contrato de compraventa?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "Para que el comprador proceda con el trámite del pago correspondiente, será requisito indispensable y condición previa la entrega de [factura comercial/acta de recepción/garantía de cumplimiento] debidamente aprobada por [cargo/entidad]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同中关于付款流程的各项条件和规定是什么？"
+       }
+      ]
+     },
+     {
+      "id": "Q2",
+      "text": "采购合同 CONT2025001 中，出具验收合格证明的具体时限要求是什么？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 中，出具验收合格证明的具体时限要求是什么？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "采购合同中出具验收合格证明的具体时限要求"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Cuál es el plazo específico establecido en el contrato de compraventa para la emisión del certificado de recepción de conformidad?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "El comprador emitirá el certificado de conformidad o acta de recepción dentro de los [número] días hábiles siguientes a la finalización de las pruebas de inspección y entrega de los bienes."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同中关于验收程序的各项时限与要求是什么？"
+       }
+      ]
+     },
+     {
+      "id": "Q3",
+      "text": "采购合同 CONT2025001 中，付款的具体时限要求是什么？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 中，付款的具体时限要求是什么？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "采购合同中付款的具体时限要求"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Cuál es el plazo específico establecido para realizar el pago en el contrato de compraventa?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "El pago se efectuará dentro de un plazo de [número] días naturales a partir de la recepción y conformidad de la factura correspondiente y del certificado de recepción."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同中付款的具体期限与结算安排是什么？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": true
+  },
+  "CONTRACT-105-Q008": {
+   "v7": [
+    "采购合同 CONT2025001 中，如果承包商发生未经证明的延迟交货，延期罚金（Penalidad por Mora）的计算公式是什么？",
+    "采购合同 CONT2025001 中，如果承包商发生未经证明的延迟交货，延期罚金（Penalidad por Mora）的最高上限是多少？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "采购合同 CONT2025001 中，如果承包商发生未经证明的延迟交货，延期罚金（Penalidad por Mora）的计算公式是什么？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 中，如果承包商发生未经证明的延迟交货，延期罚金（Penalidad por Mora）的计算公式是什么？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "采购合同中承包商发生未经证明延迟交货时延期罚金（Penalidad por Mora）的计算公式"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Cuál es la fórmula de cálculo de la penalidad por mora en caso de retraso injustificado en la entrega por parte del contratista?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "En caso de retraso injustificado del contratista en la entrega de los bienes, la penalidad por mora se calculará de acuerdo con la siguiente fórmula: Penalidad diaria = [fórmula de cálculo de penalidad]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同中对承包商违约和罚则的具体规定是什么？"
+       }
+      ]
+     },
+     {
+      "id": "Q2",
+      "text": "采购合同 CONT2025001 中，如果承包商发生未经证明的延迟交货，延期罚金（Penalidad por Mora）的最高上限是多少？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 中，如果承包商发生未经证明的延迟交货，延期罚金（Penalidad por Mora）的最高上限是多少？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "采购合同中承包商发生未经证明延迟交货时延期罚金（Penalidad por Mora）的最高上限"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Cuál es el límite o monto máximo aplicable para la penalidad por mora por retraso injustificado en la entrega del contratista?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "El monto máximo acumulado por concepto de penalidad por mora aplicable al contratista por retraso injustificado no podrá exceder del [porcentaje]% del valor total del contrato."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同中对承包商延迟履约罚金的限额与违约处理规定是什么？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": true
+  },
+  "CONTRACT-105-Q009": {
+   "v7": [
+    "采购合同 CONT2025001 的第 1 次交付（1era ENTREGA，合同签订后 170 天），具体的交付产品是什么？",
+    "采购合同 CONT2025001 的第 1 次交付（1era ENTREGA，合同签订后 170 天），具体的交付数量是多少？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "采购合同 CONT2025001 的第 1 次交付（1era ENTREGA，合同签订后 170 天），具体的交付产品是什么？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 的第 1 次交付（1era ENTREGA，合同签订后 170 天），具体的交付产品是什么？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "第 1 次交付（1era ENTREGA，合同签订后 170 天）具体的交付产品"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Cuáles son los productos específicos correspondientes a la 1era ENTREGA (170 días posteriores a la firma del contrato)?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "Para la 1era ENTREGA, a realizarse a los 170 días calendario contados a partir de la suscripción del contrato, el proveedor deberá entregar [descripción y especificación del producto o bien]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同各批次交付的具体产品是什么？"
+       }
+      ]
+     },
+     {
+      "id": "Q2",
+      "text": "采购合同 CONT2025001 的第 1 次交付（1era ENTREGA，合同签订后 170 天），具体的交付数量是多少？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 的第 1 次交付（1era ENTREGA，合同签订后 170 天），具体的交付数量是多少？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "第 1 次交付（1era ENTREGA，合同签订后 170 天）具体的交付数量"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Cuál es la cantidad específica a entregar en la 1era ENTREGA (170 días posteriores a la firma del contrato)?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "El cronograma de entregas establece que para la 1era ENTREGA, a los 170 días posteriores a la formalización del contrato, la cantidad requerida es de [cantidad y unidad de medida]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同各批次交付的具体数量是多少？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": true
+  },
+  "CONTRACT-105-Q010": {
+   "v7": [
+    "采购合同 CONT2025001 是否规定分批交货？",
+    "采购合同 CONT2025001 每个批次的具体交货日期分别是什么？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "采购合同 CONT2025001 是否规定分批交货？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 是否规定分批交货？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "采购合同分批交货规定"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿El contrato de compra prevé entregas parciales o por lotes?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "Las entregas del suministro objeto del contrato se realizarán en entregas parciales de acuerdo con el calendario acordado entre las partes."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同关于交货方式有何规定？"
+       }
+      ]
+     },
+     {
+      "id": "Q2",
+      "text": "采购合同 CONT2025001 每个批次的具体交货日期分别是什么？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 每个批次的具体交货日期分别是什么？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "采购合同各批次具体交货日期"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Cuáles son las fechas específicas de entrega para cada uno de los lotes del contrato de compra?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "El calendario de entregas estipula que el lote [número] se entregará el [fecha], mientras que el lote [número] deberá ser entregado a más tardar el [fecha]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同关于交货时间与进度安排有何规定？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": true
+  },
+  "CONTRACT-105-Q011": {
+   "v7": [
+    "采购合同 CONT2025001 中，延期罚金在必要时可以从哪一项担保的执行款中收取？",
+    "采购合同 CONT2025001 中，延期罚金在必要时可以从其执行款中收取的担保对应 Ítem 4 的金额是多少？",
+    "采购合同 CONT2025001 中，延期罚金在必要时可以从其执行款中收取的担保由哪家机构出具？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "采购合同 CONT2025001 中，延期罚金在必要时可以从哪一项担保的执行款中收取？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 中，延期罚金在必要时可以从哪一项担保的执行款中收取？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "采购合同中必要时可用于扣除延期罚金的执行款所对应的担保项目"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿De la ejecución de qué garantía se cobrarán, si es necesario, las penalidades por mora?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "Las penalidades por mora se harán efectivas, si fuera necesario, con cargo a la ejecución de la garantía de [garantía aplicable, p. ej. fiel cumplimiento]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同中延期罚金的收取和执行方式有哪些规定？"
+       }
+      ]
+     },
+     {
+      "id": "Q2",
+      "text": "采购合同 CONT2025001 中，延期罚金在必要时可以从其执行款中收取的担保对应 Ítem 4 的金额是多少？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 中，延期罚金在必要时可以从其执行款中收取的担保对应 Ítem 4 的金额是多少？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "采购合同中必要时可从中扣除延期罚金执行款的担保对应 Ítem 4 的具体金额"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Cuál es el monto correspondiente al Ítem 4 de la garantía cuya ejecución permite cobrar las penalidades por mora?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "El monto de la garantía de [garantía aplicable] correspondiente al Ítem 4 asciende a [monto y moneda]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同中各项担保对应各 Ítem 的金额分别是多少？"
+       }
+      ]
+     },
+     {
+      "id": "Q3",
+      "text": "采购合同 CONT2025001 中，延期罚金在必要时可以从其执行款中收取的担保由哪家机构出具？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 中，延期罚金在必要时可以从其执行款中收取的担保由哪家机构出具？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "采购合同中必要时可从中扣除延期罚金执行款的担保出具机构名称"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Qué entidad emite la garantía de cuya ejecución se pueden cobrar las penalidades por mora?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "La garantía ejecutable para el cobro de penalidades ha sido emitida por [nombre de la entidad financiera o aseguradora]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同中各项担保的出具机构分别包括哪些？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": true
+  },
+  "CONTRACT-105-Q012": {
+   "v7": [
+    "采购合同 CONT2025001 中承包商交付第 6 批次货物的最后期限是如何规定的？",
+    "采购合同 CONT2025001 中需要做测试的货物验收期限是如何规定的？",
+    "采购合同 CONT2025001 中第 6 批次货物付清货款的期限是如何规定的？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "采购合同 CONT2025001 规定的承包商交付第 6 批次货物的最后期限是什么？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 规定的承包商交付第 6 批次货物的最后期限是什么？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "采购合同中承包商交付第 6 批次货物的最后期限"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Cuál es la fecha límite estipulada para que el contratista entregue el lote 6 de bienes?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "El contratista deberá efectuar la entrega correspondiente al lote 6 a más tardar el [fecha límite], conforme al cronograma de entregas establecido en el contrato."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同规定的各批次货物交付期限是什么？"
+       }
+      ]
+     },
+     {
+      "id": "Q2",
+      "text": "采购合同 CONT2025001 中，如果货物验收需要做测试，测试及验收的期限规定是多久？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 中，如果货物验收需要做测试，测试及验收的期限规定是多久？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "采购合同中货物验收需要做测试时的测试及验收期限规定"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Cuál es el plazo estipulado para la realización de pruebas y la aceptación en caso de que los bienes requieran pruebas de recepción?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "En caso de requerirse pruebas para la recepción de los bienes, el período para llevar a cabo dichas pruebas y la consiguiente aceptación será de [número] días contados a partir de [evento/fecha]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同中关于货物验收流程和各项期限的规定是什么？"
+       }
+      ]
+     },
+     {
+      "id": "Q3",
+      "text": "采购合同 CONT2025001 中，买方在货物验收后付清第 6 批次货款的期限规定是多久？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 中，买方在货物验收后付清第 6 批次货款的期限规定是多久？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "采购合同中买方在货物验收后付清第 6 批次货款的期限规定"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Cuál es el plazo establecido para que el comprador liquide el pago del lote 6 tras la aceptación de los bienes?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "El comprador deberá liquidar el pago correspondiente al lote 6 dentro de los [número] días posteriores a la emisión del acta de aceptación de los bienes."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同中买方在货物验收后付清各批次货款的付款期限规定是多久？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": true
+  },
+  "CONTRACT-105-Q013": {
+   "v7": [
+    "采购合同 CONT2025001 中，买方付款的 10 天期限从哪个环节完成后开始计算？",
+    "采购合同 CONT2025001 中，买方付款的 10 天期限起算所依据的环节负责人的姓名是什么？",
+    "采购合同 CONT2025001 中，买方付款的 10 天期限起算所依据的环节负责人的职务是什么？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "采购合同 CONT2025001 中，买方付款的 10 天期限从哪个环节完成后开始计算？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 中，买方付款的 10 天期限从哪个环节完成后开始计算？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "买方付款的 10 天期限开始计算的前提环节"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿A partir de la finalización de qué etapa se computa el plazo de 10 días para el pago por parte del comprador?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "El plazo de 10 días para el pago por parte del comprador se computará a partir de la finalización de [etapa o trámite correspondientes]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同中买方付款的期限及起算条件是什么？"
+       }
+      ]
+     },
+     {
+      "id": "Q2",
+      "text": "采购合同 CONT2025001 中，买方付款的 10 天期限从其完成后开始计算的环节负责人的姓名是什么？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 中，买方付款的 10 天期限从其完成后开始计算的环节负责人的姓名是什么？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "买方付款 10 天期限起算环节负责人的姓名"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Cuál es el nombre del responsable de la etapa a partir de cuya finalización se computa el plazo de 10 días para el pago del comprador?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "El responsable encargado de [etapa correspondiente] es [Nombre y Apellido]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同中各履约环节负责人的姓名分别是什么？"
+       }
+      ]
+     },
+     {
+      "id": "Q3",
+      "text": "采购合同 CONT2025001 中，买方付款的 10 天期限从其完成后开始计算的环节负责人的职务是什么？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 中，买方付款的 10 天期限从其完成后开始计算的环节负责人的职务是什么？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "买方付款 10 天期限起算环节负责人的职务"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Cuál es el cargo del responsable de la etapa a partir de cuya finalización se computa el plazo de 10 días para el pago del comprador?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "El responsable de supervisar [etapa correspondiente] desempeña el cargo de [Cargo]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同中各履约环节负责人的职务分别是什么？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": true
+  },
+  "CONTRACT-105-Q014": {
+   "v7": [
+    "采购合同 CONT2025001 中，技术商务担保的期限从货物到达什么地方开始计算？",
+    "采购合同 CONT2025001 中，技术商务担保期限从货物到达开始计算的地点的具体地址是什么？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "采购合同 CONT2025001 中，技术商务担保的期限从货物到达什么地方开始计算？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 中，技术商务担保的期限从货物到达什么地方开始计算？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "采购合同技术商务担保期限起算的货物到达地点"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿A partir de la llegada de las mercancías a qué lugar comienza a computarse el plazo de la garantía técnico-comercial en el contrato de compraventa?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "El plazo de vigencia de la garantía técnico-comercial comenzará a regir a partir de la llegada y recepción de los bienes en [nombre del almacén o instalación de destino]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同中各类担保的起算条件和期限是如何规定的？"
+       }
+      ]
+     },
+     {
+      "id": "Q2",
+      "text": "采购合同 CONT2025001 中，技术商务担保期限开始计算时货物到达的地方的具体地址是什么？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "采购合同 CONT2025001 中，技术商务担保期限开始计算时货物到达的地方的具体地址是什么？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "采购合同技术商务担保期限起算货物到达地点的具体地址"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Cuál es la dirección exacta del lugar de llegada de las mercancías donde empieza a regir el plazo de la garantía técnico-comercial en el contrato de compraventa?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "El punto de llegada de las mercancías para el cómputo de la garantía técnico-comercial se encuentra ubicado en [calle, número, ciudad, código postal]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "采购合同中约定的货物交付及送达地点和地址有哪些？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": true
+  },
+  "E001-602-Q001": {
+   "v7": [
+    "发票 INVOICE-E001-602 规定的付款到期日是什么时候？",
+    "发票 INVOICE-E001-602 需要支付多少金额？",
+    "发票 INVOICE-E001-602 包含多少税费？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "发票 INVOICE-E001-602 规定的付款到期日是什么时候？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "发票 INVOICE-E001-602 规定的付款到期日是什么时候？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "发票规定的付款到期日"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Cuál es la fecha de vencimiento para el pago de la factura?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "Fecha de vencimiento: [fecha]. Por favor, realice el pago antes de esta fecha."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "发票的关键日期和付款条款是什么？"
+       }
+      ]
+     },
+     {
+      "id": "Q2",
+      "text": "发票 INVOICE-E001-602 需要支付多少金额？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "发票 INVOICE-E001-602 需要支付多少金额？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "发票需要支付的金额"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Cuál es el importe total a pagar de la factura?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "Importe total a pagar: [monto] [moneda]. Total factura: [monto]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "发票的各项金额明细是多少？"
+       }
+      ]
+     },
+     {
+      "id": "Q3",
+      "text": "发票 INVOICE-E001-602 中包含多少税费？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "发票 INVOICE-E001-602 中包含多少税费？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "发票包含的税费金额"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Cuánto es el importe de impuestos o IVA incluido en la factura?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "Base imponible: [monto]. IVA ([porcentaje]%): [monto]. Total impuestos: [monto]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "发票的税费和费用构成是什么？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": true
+  },
+  "E001-602-Q002": {
+   "v7": [
+    "发票 INVOICE-E001-602 中，HXE34K-S1的单价是多少？",
+    "发票 INVOICE-E001-602 中，HXE34K-S1的数量是多少？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "发票 INVOICE-E001-602 中，HXE34K-S1的单价是多少？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "发票 INVOICE-E001-602 中，HXE34K-S1的单价是多少？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "HXE34K-S1的单价"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Cuál es el precio unitario de HXE34K-S1?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "Artículo HXE34K-S1 Precio Unitario: [precio unitario] USD."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "发票中各产品的单价是多少？"
+       }
+      ]
+     },
+     {
+      "id": "Q2",
+      "text": "发票 INVOICE-E001-602 中，HXE34K-S1的数量是多少？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "发票 INVOICE-E001-602 中，HXE34K-S1的数量是多少？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "HXE34K-S1的数量"
+       },
+       {
+        "kind": "translation",
+        "language": "spanish",
+        "text": "¿Cuál es la cantidad de HXE34K-S1?"
+       },
+       {
+        "kind": "hyde",
+        "language": "spanish",
+        "text": "Descripción: HXE34K-S1 Cantidad: [cantidad] unidades."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "发票中各产品的数量是多少？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": true
+  },
+  "PO-24-12-Q001": {
+   "v7": [
+    "订单 ORDER2025001 包含哪几款产品？",
+    "订单 ORDER2025001 包含产品的单价是多少？",
+    "订单 ORDER2025001 包含产品的数量是多少？",
+    "订单 ORDER2025001 的订单总金额是多少？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "订单 ORDER2025001 包含哪几款产品？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025001 包含哪几款产品？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "订单包含的产品"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "Which products are included in the order?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "The order includes the following items: [Product A] and [Product B]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "订单中包含哪些明细项目？"
+       }
+      ]
+     },
+     {
+      "id": "Q2",
+      "text": "订单 ORDER2025001 中产品的单价是多少？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025001 中产品的单价是多少？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "订单中各产品的单价"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "What is the unit price of each product in the order?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "The unit price for [Product Item] is [Currency] [Amount]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "订单中各项产品的定价与明细金额是多少？"
+       }
+      ]
+     },
+     {
+      "id": "Q3",
+      "text": "订单 ORDER2025001 中产品的数量是多少？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025001 中产品的数量是多少？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "订单中产品的数量"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "What are the quantities of the products in the order?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "The quantity ordered for [Product Item] is [Number] units."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "订单中各项产品的订购数量及明细是多少？"
+       }
+      ]
+     },
+     {
+      "id": "Q4",
+      "text": "订单 ORDER2025001 的订单总金额是多少？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025001 的订单总金额是多少？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "订单总金额"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "What is the total amount of the order?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "The total amount for the order is [Currency] [Total Amount]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "订单的费用明细及结算金额是多少？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": true
+  },
+  "PO-24-12-Q002": {
+   "v7": [
+    "订单 ORDER2025001 的交货时间规划是什么？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "订单 ORDER2025001 的交货时间规划是什么？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025001 的交货时间规划是什么？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "订单交货时间规划"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "What is the delivery schedule for the order?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "The delivery schedule specifies that initial shipment is slated for [Date], with complete delivery to the designated location expected by [Date] under [Milestone/Terms]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "所有批次订单的交货时间规划是什么？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": true
+  },
+  "PO-24-12-Q003": {
+   "v7": [
+    "订单 ORDER2025001 分几批交付？",
+    "订单 ORDER2025001 每批次的具体交付日期是什么？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "订单 ORDER2025001 分几批交付？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025001 分几批交付？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "订单交付批次数"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "How many batches or shipments will the order be delivered in?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "The order is scheduled to be delivered in [number] separate batches."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "订单的交付方式与批次规划是怎样的？"
+       }
+      ]
+     },
+     {
+      "id": "Q2",
+      "text": "订单 ORDER2025001 每批次的具体交付日期是什么？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025001 每批次的具体交付日期是什么？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "订单各批次具体交付日期"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "What are the specific delivery dates for each batch of the order?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "The delivery dates for each batch are scheduled as follows: Batch 1 on [Date], Batch 2 on [Date], and the final batch on [Date]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "订单的整体交付进度与时间表是怎样的？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": true
+  },
+  "PO-24-12-Q004": {
+   "v7": [
+    "订单 ORDER2025001 的总金额是否涵盖MDC ORCA的费用？",
+    "如不包含MDC ORCA的费用，订单 ORDER2025001 还需额外支付多少费用？",
+    "订单 ORDER2025001 付款的最后期限是什么？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "订单 ORDER2025001 的总金额是否涵盖MDC ORCA的费用？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025001 的总金额是否涵盖MDC ORCA的费用？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "订单总金额涵盖MDC ORCA费用情况"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "Does the total order amount cover the cost of MDC ORCA?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "The total amount of the order [covers / does not cover] the MDC ORCA fees, which are listed as [amount]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "订单的费用构成明细包含哪些项目？"
+       }
+      ]
+     },
+     {
+      "id": "Q2",
+      "text": "如果订单 ORDER2025001 的总金额不包含MDC ORCA的费用，还需额外支付多少费用？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "如果订单 ORDER2025001 的总金额不包含MDC ORCA的费用，还需额外支付多少费用？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "订单总金额不包含MDC ORCA费用时需额外支付的金额"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "If the total order amount does not include the cost for MDC ORCA, how much additional fee must be paid?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "Since the MDC ORCA fee is excluded from the order total, an additional payment of [amount] is required."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "各项未包含在订单总额内的附加服务及相关费用是多少？"
+       }
+      ]
+     },
+     {
+      "id": "Q3",
+      "text": "订单 ORDER2025001 付款的最后期限是什么？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025001 付款的最后期限是什么？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "订单付款截止日期"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "What is the payment deadline for the order?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "The final payment deadline for the order is [date]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "订单的付款时间节点与结算条款是什么？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": true
+  },
+  "PO-24-12-Q005": {
+   "v7": [
+    "订单 ORDER2025001 的运维服务如何收费？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "订单 ORDER2025001 的运维服务是什么？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025001 的运维服务是什么？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "订单运维服务内容"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "What is the operations and maintenance service for the order?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "The operations and maintenance services for the order include [24/7 technical support, system monitoring, and periodic software updates]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "订单包含哪些服务内容？"
+       }
+      ]
+     },
+     {
+      "id": "Q2",
+      "text": "订单 ORDER2025001 的运维服务如何收费？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025001 的运维服务如何收费？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "订单运维服务收费标准与方式"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "How are the operations and maintenance services billed for the order?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "The operations and maintenance service fee is charged [annually at a rate of $[amount] / on a monthly basis based on [billing method]]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "订单的各项服务费用如何收取？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": true
+  },
+  "PO-24-12-Q006": {
+   "v7": [
+    "订单 ORDER2025001 的付款条件是什么？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "订单 ORDER2025001 的付款条件是什么？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025001 的付款条件是什么？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "订单付款条件"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "What are the payment terms for the order?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "The payment terms for the order are [Net 30 days], payable via [wire transfer] upon receipt of invoice."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "订单的支付与结算条款是什么？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": true
+  },
+  "PO-25-15-Q001": {
+   "v7": [
+    "订单 ORDER2025002 中，第四批次交付的具体日期是什么？",
+    "订单 ORDER2025002 中，第四批次交付的产品总金额达多少？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "订单 ORDER2025002 中，第四批次交付的具体日期是什么？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025002 中，第四批次交付的具体日期是什么？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "第四批次交付的具体日期"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "What is the specific delivery date for the fourth batch?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "The fourth delivery batch is scheduled for delivery on [date]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "订单各批次交付的具体日期是什么？"
+       }
+      ]
+     },
+     {
+      "id": "Q2",
+      "text": "订单 ORDER2025002 中，第四批次交付的产品总金额达多少？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025002 中，第四批次交付的产品总金额达多少？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "第四批次交付的产品总金额"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "What is the total product amount for the fourth delivery batch?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "The total amount for the fourth delivery batch is [amount]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "订单各批次交付的产品总金额分别是多少？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": true
+  },
+  "PO-25-15-Q002": {
+   "v7": [
+    "订单 ORDER2025002 中，第六批次交付的具体日期是什么？",
+    "订单 ORDER2025002 中，第六批次交付的产品总金额达多少？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "订单 ORDER2025002 中，第六批次交付的具体日期是什么？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025002 中，第六批次交付的具体日期是什么？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "订单第六批次交付的具体日期"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "What is the specific delivery date for the sixth batch of the order?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "The delivery date for the sixth batch is scheduled for [Date]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "订单各批次的交付日期安排是什么？"
+       }
+      ]
+     },
+     {
+      "id": "Q2",
+      "text": "订单 ORDER2025002 中，第六批次交付的产品总金额达多少？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025002 中，第六批次交付的产品总金额达多少？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "订单第六批次交付的产品总金额"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "What is the total product amount for the sixth batch delivery of the order?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "The total value of products delivered in the sixth batch is [Currency] [Amount]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "订单各批次交付的金额分别是多少？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": true
+  },
+  "PO-25-19-Q001": {
+   "v7": [
+    "订单 ORDER2025003 中，ELCTO公司订购了哪些产品？",
+    "订单 ORDER2025003 中，ELCTO公司订购的每款产品的单价是多少？",
+    "订单 ORDER2025003 中，ELCTO公司订购的每款产品的数量是多少？",
+    "订单 ORDER2025003 中，ELCTO公司订购的总金额是多少？",
+    "订单 ORDER2025003 中，ELCTO公司交货计划中每批次交付的具体日期是什么？",
+    "订单 ORDER2025003 中，ELCTO公司交货计划中每批次交付的产品是什么？",
+    "订单 ORDER2025003 中，ELCTO公司交货计划中每批次交付的数量是多少？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "订单 ORDER2025003 中，ELCTO公司订购了哪些产品？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025003 中，ELCTO公司订购了哪些产品？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "ELCTO公司订购的产品列表"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "Which products did ELCTO order?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "Customer: ELCTO. Ordered items include: 1. [Product Name A] 2. [Product Name B] 3. [Product Name C]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "ELCTO公司的订单包含哪些详细信息？"
+       }
+      ]
+     },
+     {
+      "id": "Q2",
+      "text": "订单 ORDER2025003 中，ELCTO公司订购的每款产品的单价是多少？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025003 中，ELCTO公司订购的每款产品的单价是多少？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "ELCTO公司订购的各产品单价"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "What is the unit price of each product ordered by ELCTO?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "Itemized Pricing for ELCTO: [Product Name A]: $[Amount] per unit; [Product Name B]: $[Amount] per unit."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "ELCTO公司订单的各项价格明细是多少？"
+       }
+      ]
+     },
+     {
+      "id": "Q3",
+      "text": "订单 ORDER2025003 中，ELCTO公司订购的每款产品的数量是多少？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025003 中，ELCTO公司订购的每款产品的数量是多少？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "ELCTO公司订购的每款产品数量"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "What is the quantity of each product ordered by ELCTO?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "Order details for ELCTO: [Product Name A] - Quantity: [Quantity]; [Product Name B] - Quantity: [Quantity]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "ELCTO公司订单的产品和数量明细是什么？"
+       }
+      ]
+     },
+     {
+      "id": "Q4",
+      "text": "订单 ORDER2025003 中，ELCTO公司订购的总金额是多少？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025003 中，ELCTO公司订购的总金额是多少？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "ELCTO公司订单总金额"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "What is the total order amount for ELCTO?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "Customer: ELCTO. Subtotal: $[Amount]. Tax: $[Amount]. Total Order Value: $[Amount]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "ELCTO公司订单的财务和结算信息是什么？"
+       }
+      ]
+     },
+     {
+      "id": "Q5",
+      "text": "订单 ORDER2025003 中，ELCTO公司每批次交付的具体日期是什么？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025003 中，ELCTO公司每批次交付的具体日期是什么？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "ELCTO公司各批次交付具体日期"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "What are the specific delivery dates for each batch for ELCTO?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "Delivery schedule for ELCTO: Batch 1 Delivery Date: [Date]; Batch 2 Delivery Date: [Date]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "ELCTO公司订单的交付安排是什么？"
+       }
+      ]
+     },
+     {
+      "id": "Q6",
+      "text": "订单 ORDER2025003 中，ELCTO公司每批次交付的产品是什么？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025003 中，ELCTO公司每批次交付的产品是什么？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "ELCTO公司各批次交付的产品"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "What products are delivered in each batch for ELCTO?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "Shipment breakdown for ELCTO: Batch 1 contains [Product Name A]; Batch 2 contains [Product Name B]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "ELCTO公司订单的批次发货详情是什么？"
+       }
+      ]
+     },
+     {
+      "id": "Q7",
+      "text": "订单 ORDER2025003 中，ELCTO公司每批次交付的产品数量明细是多少？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025003 中，ELCTO公司每批次交付的产品数量明细是多少？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "ELCTO公司每批次交付产品数量明细"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "What is the quantity breakdown of products delivered in each batch for ELCTO?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "Delivery batch breakdown for ELCTO: Batch 1: [Product Name A] - [Quantity] units; Batch 2: [Product Name B] - [Quantity] units."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "ELCTO公司订单的交付计划明细是什么？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": true
+  },
+  "PO-25-19-Q002": {
+   "v7": [
+    "订单 ORDER2025003 中，ElUC公司订购了多少件HXE34K-S1？",
+    "订单 ORDER2025003 中，ElUC公司的总金额是多少？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "订单 ORDER2025003 中，ELUC公司订购了多少件HXE34K-S1？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025003 中，ELUC公司订购了多少件HXE34K-S1？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "ELUC公司订购HXE34K-S1的数量"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "How many units of HXE34K-S1 did ELUC order?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "ELUC placed an order for [number] units of HXE34K-S1."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "ELUC公司订购了哪些产品及各产品的数量是多少？"
+       }
+      ]
+     },
+     {
+      "id": "Q2",
+      "text": "订单 ORDER2025003 中，ELUC公司订购的总金额是多少？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025003 中，ELUC公司订购的总金额是多少？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "ELUC公司订购的总金额"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "What is the total order amount for ELUC?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "The total amount for the order placed by ELUC is [currency] [amount]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "订单的费用构成和总金额是多少？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": false
+  },
+  "PO-25-19-Q003": {
+   "v7": [
+    "订单 ORDER2025003 中，ENSA公司订购了哪些产品？",
+    "订单 ORDER2025003 中，ENSA公司订购的每款产品的单价是多少？",
+    "订单 ORDER2025003 中，ENSA公司订购的每款产品的数量是多少？",
+    "订单 ORDER2025003 中，ENSA公司订购的总金额是多少？",
+    "订单 ORDER2025003 中，每批次交付的具体日期是什么？",
+    "订单 ORDER2025003 中，每批次交付的产品明细是什么？",
+    "订单 ORDER2025003 中，每批次交付的数量明细是多少？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "订单 ORDER2025003 中，ENSA公司订购了哪些产品？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025003 中，ENSA公司订购了哪些产品？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "ENSA公司订购的产品列表及名称"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "What products did ENSA order?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "The purchase order from ENSA includes the following products: [Product 1], [Product 2], and [Product 3]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "订单的详细商品明细是什么？"
+       }
+      ]
+     },
+     {
+      "id": "Q2",
+      "text": "订单 ORDER2025003 中，ENSA公司订购的每款产品的单价是多少？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025003 中，ENSA公司订购的每款产品的单价是多少？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "ENSA公司订购的每款产品的单价"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "What is the unit price for each product ordered by ENSA?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "The unit price of each item ordered by ENSA is as follows: [Product 1] at $[Price] per unit, [Product 2] at $[Price] per unit."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "订单中所有产品的价格和金额明细是什么？"
+       }
+      ]
+     },
+     {
+      "id": "Q3",
+      "text": "订单 ORDER2025003 中，ENSA公司订购的每款产品的数量是多少？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025003 中，ENSA公司订购的每款产品的数量是多少？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "ENSA公司订购的每款产品数量"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "What is the quantity ordered by ENSA for each product?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "ENSA placed an order for [Quantity] units of [Product 1] and [Quantity] units of [Product 2]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "订单的各项产品采购数量和规格是什么？"
+       }
+      ]
+     },
+     {
+      "id": "Q4",
+      "text": "订单 ORDER2025003 中，ENSA公司订购的总金额是多少？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025003 中，ENSA公司订购的总金额是多少？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "ENSA公司订购的总金额"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "What is the total order amount for ENSA?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "The total purchase order amount for ENSA is $[Amount], including all line items."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "订单的财务汇总和总计金额是多少？"
+       }
+      ]
+     },
+     {
+      "id": "Q5",
+      "text": "订单 ORDER2025003 中，ENSA公司每批次交货的具体日期是什么？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025003 中，ENSA公司每批次交货的具体日期是什么？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "ENSA公司各批次交货的具体日期"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "What are the specific delivery dates for each batch for ENSA?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "The shipment schedule for ENSA specifies Batch 1 delivery on [Date] and Batch 2 delivery on [Date]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "订单的完整交付排程和交货计划是什么？"
+       }
+      ]
+     },
+     {
+      "id": "Q6",
+      "text": "订单 ORDER2025003 中，ENSA公司每批次交付的产品是什么？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025003 中，ENSA公司每批次交付的产品是什么？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "ENSA公司各批次交付的产品名称及明细"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "What products are delivered in each batch for ENSA?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "Under the delivery schedule for ENSA, the first batch consists of [Product Name], while the second batch consists of [Product Name]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "订单的分批交付明细和内容是什么？"
+       }
+      ]
+     },
+     {
+      "id": "Q7",
+      "text": "订单 ORDER2025003 中，ENSA公司每批次交付的产品数量是多少？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025003 中，ENSA公司每批次交付的产品数量是多少？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "ENSA公司各批次交付的产品数量"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "What is the quantity of products delivered in each batch for ENSA?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "Delivery batch breakdown for ENSA: Batch 1 contains [Quantity] units, and Batch 2 contains [Quantity] units."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "订单的分批运输及发货安排是什么？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": true
+  },
+  "PO-25-19-Q004": {
+   "v7": [
+    "订单 ORDER2025003，客户的付款条件是什么？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "订单 ORDER2025003，客户的付款条件是什么？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025003，客户的付款条件是什么？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "客户付款条件"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "What are the customer's payment terms?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "The payment terms for the customer are [Payment Terms, e.g., Net 30 days] payable within [number] days from the invoice date."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "各订单的付款条件是什么？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": true
+  },
+  "PO-25-19-Q005": {
+   "v7": [
+    "订单 ORDER2025003 中，HDNA 公司订购数量最多的是哪一款产品？",
+    "订单 ORDER2025003 中，HDNA 公司订购数量最多的产品的订单单价是多少？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "订单 ORDER2025003 中，HDNA 公司订购数量最多的是哪一款产品？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025003 中，HDNA 公司订购数量最多的是哪一款产品？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "HDNA 公司订购数量最多的产品"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "Which product was ordered in the largest quantity by HDNA?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "In the order for HDNA, the item ordered in the highest quantity is [Product Name] with a quantity of [Quantity]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "HDNA 公司的订单中订购了哪些产品及其数量？"
+       }
+      ]
+     },
+     {
+      "id": "Q2",
+      "text": "订单 ORDER2025003 中，HDNA 公司订购数量最多的产品的订单单价是多少？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025003 中，HDNA 公司订购数量最多的产品的订单单价是多少？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "HDNA 公司订购数量最多产品的订单单价"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "What is the unit price of the product ordered in the largest quantity by HDNA?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "The product ordered in the largest quantity by HDNA, [Product Name], has a unit price of [Price]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "HDNA 公司的订单中各项产品的订购数量与单价是多少？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": true
+  },
+  "PO-25-19-Q006": {
+   "v7": [
+    "订单 ORDER2025003 中，ELPU 公司的货物安排在第几批次交付？",
+    "订单 ORDER2025003 中，ELPU 公司的货物交付批次的 DDP 日期是哪天？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "订单 ORDER2025003 中，ELPU 公司的货物安排在第几批次交付？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025003 中，ELPU 公司的货物安排在第几批次交付？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "ELPU 公司货物的交付批次安排"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "Which delivery batch is scheduled for the shipment of ELPU?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "The shipment for ELPU is scheduled to be delivered in batch [batch number]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "各货物的交付批次是如何安排的？"
+       }
+      ]
+     },
+     {
+      "id": "Q2",
+      "text": "订单 ORDER2025003 中，ELPU 公司货物安排交付批次的 DDP 日期是哪天？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025003 中，ELPU 公司货物安排交付批次的 DDP 日期是哪天？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "ELPU 公司货物交付批次的 DDP 日期"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "What is the DDP date for the delivery batch of ELPU goods?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "The DDP date for the delivery batch containing goods for ELPU is [date]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "各交付批次的 DDP 日期分别是哪天？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": true
+  },
+  "PO-25-19-Q007": {
+   "v7": [
+    "订单 ORDER2025003 中，第 1 批次的货物最晚需要在什么时候运抵秘鲁？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "订单 ORDER2025003 中，第 1 批次的货物最晚需要在什么时候运抵秘鲁？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025003 中，第 1 批次的货物最晚需要在什么时候运抵秘鲁？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "第 1 批次货物运抵秘鲁的最晚时间"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "What is the latest arrival date for the first batch of goods to reach Peru?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "The delivery of the first batch of goods to Peru must be completed no later than [Date]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "各批次货物最晚需要在什么时候运抵秘鲁？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": true
+  },
+  "PO-25-19-Q009": {
+   "v7": [
+    "订单 ORDER2025003 中，唯一对序列号有额外要求的电力公司订购了哪些产品？",
+    "订单 ORDER2025003 中，唯一对序列号有额外要求的电力公司订购的产品各订购了多少台？"
+   ],
+   "plan": {
+    "questions": [
+     {
+      "id": "Q1",
+      "text": "订单 ORDER2025003 中，唯一对序列号有额外要求的是哪家电力公司？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025003 中，唯一对序列号有额外要求的是哪家电力公司？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "唯一对序列号有额外要求的电力公司名称"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "Which power company is the only one with additional requirements for serial numbers?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "Special Instructions / Serial Number Requirements: [Power Company Name] is the only utility client specifying additional custom formatting and tracking requirements for all assigned serial numbers."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "各电力公司对序列号分别有哪些额外要求？"
+       }
+      ]
+     },
+     {
+      "id": "Q2",
+      "text": "订单 ORDER2025003 中，唯一对序列号有额外要求的电力公司订购了哪些产品？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025003 中，唯一对序列号有额外要求的电力公司订购了哪些产品？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "唯一对序列号有额外要求的电力公司订购的产品名称与型号"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "Which products were ordered by the only power company that has additional serial number requirements?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "Customer: [Power Company Name]. Special Serial Number Requirements: Yes. Ordered Items: [Product Model A], [Product Model B], and [Product Model C]."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "各电力公司分别订购了哪些产品？"
+       }
+      ]
+     },
+     {
+      "id": "Q3",
+      "text": "订单 ORDER2025003 中，唯一对序列号有额外要求的电力公司各订购了多少台产品？",
+      "phrasings": [
+       {
+        "kind": "question",
+        "language": "",
+        "text": "订单 ORDER2025003 中，唯一对序列号有额外要求的电力公司各订购了多少台产品？"
+       },
+       {
+        "kind": "rewrite",
+        "language": "",
+        "text": "唯一对序列号有额外要求的电力公司订购各产品的数量"
+       },
+       {
+        "kind": "translation",
+        "language": "english",
+        "text": "How many units of each product were ordered by the only power company with additional serial number requirements?"
+       },
+       {
+        "kind": "hyde",
+        "language": "english",
+        "text": "Client: [Power Company Name] (Special Serial Number Requirements: Specified). Order quantities: [Product Name 1] - [Quantity] units, [Product Name 2] - [Quantity] units."
+       },
+       {
+        "kind": "step_back",
+        "language": "",
+        "text": "各电力公司分别订购了多少台产品？"
+       }
+      ]
+     }
+    ],
+    "degraded": []
+   },
+   "plain_unchanged": true
+  }
+ }
+}

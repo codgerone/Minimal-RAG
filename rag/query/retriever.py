@@ -6,7 +6,7 @@ rank and raw score each underlying ranking gave it, so a result can be traced ba
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import Collection, Protocol
 
 from rag.index.analyzer import Analyzer
@@ -101,12 +101,22 @@ class BM25Retriever:
 
 
 class HybridRetriever:
-    """Reciprocal rank fusion: score = Σ 1 / (RRF_K + rank) over the semantic ranking of
-    all chunks in scope and the BM25 ranking of the chunks with a BM25 score > 0."""
+    """Reciprocal rank fusion: score = 1 / (RRF_K + semantic rank) + α / (RRF_K + BM25 rank) over the
+    semantic ranking of all chunks in scope and the BM25 ranking of the chunks with a BM25 score > 0;
+    α is `bm25_weight`."""
 
-    def __init__(self, semantic: SemanticRetriever, lexical: BM25Retriever):
+    def __init__(self, semantic: SemanticRetriever, lexical: BM25Retriever, bm25_weight: float = 1.0):
         self.semantic = semantic
         self.lexical = lexical
+        self.bm25_weight = bm25_weight
+
+    def fused(self, semantic_rank: int, lexical_rank: int | None) -> float:
+        return 1 / (RRF_K + semantic_rank) + (self.bm25_weight / (RRF_K + lexical_rank) if lexical_rank else 0.0)
+
+    def refuse(self, hits: list[Hit]) -> list[Hit]:
+        """Hits that carry both channels' ranks, scored and ordered again with this retriever's α."""
+        rescored = [replace(h, score=self.fused(h.semantic_rank, h.lexical_rank)) for h in hits]
+        return sorted(rescored, key=lambda hit: (-hit.score, hit.chunk.chunk_id))
 
     def retrieve(self, question: str, top_k: int,
                  document_ids: Collection[str] | None = None) -> list[Hit]:
@@ -117,8 +127,7 @@ class HybridRetriever:
         hits = []
         for rank, (chunk, similarity) in enumerate(dense, start=1):
             lexical_rank, bm25 = sparse.get(chunk.chunk_id, (None, None))
-            score = 1 / (RRF_K + rank) + (1 / (RRF_K + lexical_rank) if lexical_rank else 0.0)
-            hits.append(Hit(chunk, score, rank, similarity, lexical_rank, bm25))
+            hits.append(Hit(chunk, self.fused(rank, lexical_rank), rank, similarity, lexical_rank, bm25))
         return sorted(hits, key=lambda hit: (-hit.score, hit.chunk.chunk_id))[:top_k]
 
 
@@ -130,4 +139,4 @@ def build_retriever(assembly, store: ChromaStore, lexical: LexicalStore | None) 
         return semantic
     assert lexical is not None and assembly.lexical is not None
     bm25 = BM25Retriever(assembly.lexical, lexical, store)
-    return bm25 if use == "bm25" else HybridRetriever(semantic, bm25)
+    return bm25 if use == "bm25" else HybridRetriever(semantic, bm25, assembly.config.bm25_weight)

@@ -415,9 +415,12 @@ class _StructuredLLM(Protocol):
 class LLMCache:
     folder: Path
 
-    def key(self, model: str, messages: list[dict[str, str]], schema: dict[str, Any]) -> str:
+    def key(self, model: str, messages: list[dict[str, str]], schema: dict[str, Any],
+            reasoning_effort: str = REASONING_EFFORT, prompt_version: str = PROMPT_VERSION,
+            **extra: Any) -> str:
+        """`extra`: further inputs that tell otherwise equal calls apart (e.g. an independent generation)."""
         blob = json.dumps({"model": model, "messages": messages, "schema": schema,
-                           "reasoning_effort": REASONING_EFFORT, "prompt_version": PROMPT_VERSION},
+                           "reasoning_effort": reasoning_effort, "prompt_version": prompt_version, **extra},
                           ensure_ascii=False, sort_keys=True)
         return hashlib.sha256(blob.encode("utf-8")).hexdigest()
 

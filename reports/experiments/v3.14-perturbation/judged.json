@@ -1,0 +1,922 @@
+{
+ "1": {
+  "CONTRACT-105-Q002": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ],
+    "e3": [
+     "Q3"
+    ],
+    "e4": [
+     "Q4"
+    ],
+    "e5": [
+     "Q5"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "CONTRACT-105-Q003": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ],
+    "e3": [
+     "Q3"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "CONTRACT-105-Q005": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ],
+    "e3": [
+     "Q3"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "CONTRACT-105-Q012": {
+   "mapping": {
+    "e1": [
+     "Q1",
+     "Q2",
+     "Q3"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": "三问各问 e1 方案中的一个作答前提"
+  },
+  "CONTRACT-105-Q013": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ],
+    "e3": [
+     "Q3"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "CONTRACT-105-Q014": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "E001-602-Q001": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ],
+    "e3": [
+     "Q3"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "PO-24-12-Q001": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ],
+    "e3": [
+     "Q3"
+    ],
+    "e4": [
+     "Q4"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "PO-24-12-Q004": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ],
+    "e3": [
+     "Q3"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "PO-24-12-Q005": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "PO-25-19-Q001": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ],
+    "e3": [
+     "Q3"
+    ],
+    "e4": [
+     "Q4"
+    ],
+    "e5": [
+     "Q5"
+    ],
+    "e6": [
+     "Q6"
+    ],
+    "e7": [
+     "Q7"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "PO-25-19-Q003": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ],
+    "e3": [
+     "Q3"
+    ],
+    "e4": [
+     "Q4"
+    ],
+    "e5": [
+     "Q5"
+    ],
+    "e6": [
+     "Q6"
+    ],
+    "e7": [
+     "Q7"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [
+    "Q5",
+    "Q6",
+    "Q7"
+   ],
+   "note": "Q5–Q7 未写 ENSA 公司：丢失限定条件"
+  },
+  "PO-25-19-Q006": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "PO-25-19-Q009": {
+   "mapping": {
+    "e1": [
+     "Q1",
+     "Q2"
+    ],
+    "e2": [
+     "Q1",
+     "Q3"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [
+    "Q1"
+   ],
+   "lost_qualifier": [],
+   "note": "Q1 问哪家公司：两项方案共有的作答前提"
+  }
+ },
+ "2": {
+  "CONTRACT-105-Q002": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ],
+    "e3": [
+     "Q3"
+    ],
+    "e4": [
+     "Q4"
+    ],
+    "e5": [
+     "Q5"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "CONTRACT-105-Q003": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ],
+    "e3": [
+     "Q3"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "CONTRACT-105-Q008": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "CONTRACT-105-Q009": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "CONTRACT-105-Q012": {
+   "mapping": {
+    "e1": [
+     "Q1",
+     "Q2",
+     "Q3"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": "三问各问 e1 方案中的一个作答前提"
+  },
+  "CONTRACT-105-Q013": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ],
+    "e3": [
+     "Q3"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "CONTRACT-105-Q014": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "E001-602-Q001": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ],
+    "e3": [
+     "Q3"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "PO-24-12-Q001": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ],
+    "e3": [
+     "Q3"
+    ],
+    "e4": [
+     "Q4"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "PO-24-12-Q004": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ],
+    "e3": [
+     "Q3"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "PO-24-12-Q005": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "PO-25-15-Q001": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "PO-25-19-Q001": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ],
+    "e3": [
+     "Q3"
+    ],
+    "e4": [
+     "Q4"
+    ],
+    "e5": [
+     "Q5"
+    ],
+    "e6": [
+     "Q6"
+    ],
+    "e7": [
+     "Q7"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "PO-25-19-Q003": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ],
+    "e3": [
+     "Q3"
+    ],
+    "e4": [
+     "Q4"
+    ],
+    "e5": [
+     "Q5"
+    ],
+    "e6": [
+     "Q6"
+    ],
+    "e7": [
+     "Q7"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "PO-25-19-Q004": {
+   "mapping": {
+    "e1": [
+     "Q2"
+    ]
+   },
+   "omitted": [],
+   "extra": [
+    "Q1"
+   ],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": "Q1 问客户是谁：找付款条件不需要先知道客户，多余子问题"
+  },
+  "PO-25-19-Q006": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "PO-25-19-Q009": {
+   "mapping": {
+    "e1": [
+     "Q1",
+     "Q2"
+    ],
+    "e2": [
+     "Q1",
+     "Q3"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [
+    "Q1"
+   ],
+   "lost_qualifier": [],
+   "note": "Q1 问哪家公司：两项方案共有的作答前提"
+  }
+ },
+ "3": {
+  "CONTRACT-105-Q002": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ],
+    "e3": [
+     "Q3"
+    ],
+    "e4": [
+     "Q4"
+    ],
+    "e5": [
+     "Q5"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "CONTRACT-105-Q006": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "CONTRACT-105-Q011": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ],
+    "e3": [
+     "Q3"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "CONTRACT-105-Q012": {
+   "mapping": {
+    "e1": [
+     "Q1",
+     "Q2",
+     "Q3"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": "三问各问 e1 方案中的一个作答前提"
+  },
+  "CONTRACT-105-Q013": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ],
+    "e3": [
+     "Q3"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "CONTRACT-105-Q014": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "E001-602-Q001": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ],
+    "e3": [
+     "Q3"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "PO-24-12-Q001": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ],
+    "e3": [
+     "Q3"
+    ],
+    "e4": [
+     "Q4"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "PO-24-12-Q004": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ],
+    "e3": [
+     "Q3"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "PO-24-12-Q005": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "PO-25-15-Q002": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "PO-25-19-Q001": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ],
+    "e3": [
+     "Q3"
+    ],
+    "e4": [
+     "Q4"
+    ],
+    "e5": [
+     "Q5"
+    ],
+    "e6": [
+     "Q6"
+    ],
+    "e7": [
+     "Q7"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "PO-25-19-Q002": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "PO-25-19-Q003": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ],
+    "e3": [
+     "Q3"
+    ],
+    "e4": [
+     "Q4"
+    ],
+    "e5": [
+     "Q5"
+    ],
+    "e6": [
+     "Q6"
+    ],
+    "e7": [
+     "Q7"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "PO-25-19-Q004": {
+   "mapping": {
+    "e1": [
+     "Q2"
+    ]
+   },
+   "omitted": [],
+   "extra": [
+    "Q1"
+   ],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": "Q1 问客户是谁：找付款条件不需要先知道客户，多余子问题"
+  },
+  "PO-25-19-Q005": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q1",
+     "Q2"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [
+    "Q1"
+   ],
+   "lost_qualifier": [],
+   "note": "Q1 问各产品的数量（算出“最多”所依据的事实），也是 e2 的作答前提；Q2 问各产品单价，含所求产品"
+  },
+  "PO-25-19-Q006": {
+   "mapping": {
+    "e1": [
+     "Q1"
+    ],
+    "e2": [
+     "Q2"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [],
+   "lost_qualifier": [],
+   "note": ""
+  },
+  "PO-25-19-Q009": {
+   "mapping": {
+    "e1": [
+     "Q1",
+     "Q2"
+    ],
+    "e2": [
+     "Q1",
+     "Q3"
+    ]
+   },
+   "omitted": [],
+   "extra": [],
+   "multi": [
+    "Q1"
+   ],
+   "lost_qualifier": [],
+   "note": "Q1 问哪家公司：两项方案共有的作答前提"
+  }
+ }
+}

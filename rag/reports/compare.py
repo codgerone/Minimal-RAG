@@ -1,8 +1,8 @@
 """Comparison page: several evaluation runs side by side, changes against a baseline run.
 
-Runs with the same build settings apart from the rules version, the embedder and the BM25 analyzer
-(and the same K) share a tab, whatever their retriever and table return unit; the first run given in each tab is its
-baseline. A run may be given a display name (`<run>=<name>`, e.g. `V3.9`), shown before its settings. A question improves when its status moves up
+Runs with the same build settings apart from the rules version, the embedder, the BM25 analyzer and
+the table processing (and the same K) share a tab, whatever their retriever and table return unit; the first run given in each tab is its
+baseline. When the tabs differ only in K, they are titled by K. A run may be given a display name (`<run>=<name>`, e.g. `V3.9`), shown before its settings. A question improves when its status moves up
 (未命中 < 部分覆盖 < 完整覆盖) against the baseline and regresses when it moves down.
 """
 
@@ -96,6 +96,16 @@ def _changes(base: dict[str, Any], other: dict[str, Any]) -> dict[str, int]:
     return result
 
 
+def _coverage_moves(base: dict[str, Any], other: dict[str, Any]) -> tuple[tuple[int, int], tuple[int, int]]:
+    """((gained, base incomplete), (lost, base complete)) over answerable questions."""
+    before = {c["case_id"]: c["complete"] for c in base["cases"] if c["answerable"]}
+    after = {c["case_id"]: c["complete"] for c in other["cases"] if c["case_id"] in before}
+    incomplete = [cid for cid, done in before.items() if not done]
+    complete = [cid for cid, done in before.items() if done]
+    return ((sum(after[c] for c in incomplete), len(incomplete)),
+            (sum(not after[c] for c in complete), len(complete)))
+
+
 def _delta(now: float | None, before: float | None, better_up: bool) -> str:
     if now is None or before is None or abs(now - before) < 1e-9:
         return ""
@@ -119,17 +129,26 @@ def _summary(runs: list[tuple[str, dict[str, Any]]]) -> str:
         moved = ("基线" if index == 0 else
                  f'<span class="up">↑{sum(v > 0 for v in changes.values())}</span> / '
                  f'<span class="down">↓{sum(v < 0 for v in changes.values())}</span>')
+        gained, lost = _coverage_moves(base, result)
+        faces = ("基线" if index == 0 else
+                 f'<span class="up">{gained[0]}</span> / {gained[1]}'
+                 f'<div class="meta">失去 <span class="down">{lost[0]}</span> / {lost[1]}</div>')
         counts = (f'{result["metrics"]["hit_rate"]["numerator"]:.0f} / '
                   f'{result["metrics"]["complete_coverage"]["numerator"]:.0f}')
         tokens = result.get("returned_tokens")
         token_cell = f'{tokens["value"]:.0f}<div class="meta">最多 {tokens["max"]}</div>' if tokens else "—"
         rows.append(f'<tr><td><b>{esc(_model(result))}</b><div class="meta">{_run_link(name)} · 数据集 '
                     f'{esc(result["dataset"]["version"])}</div></td><td class="num">{counts}</td>{cells}'
-                    f'<td class="num">{token_cell}</td><td class="num">{moved}</td></tr>')
+                    f'<td class="num">{token_cell}</td><td class="num">{faces}</td><td class="num">{moved}</td></tr>')
     head = "".join(f'<th class="num">{esc(label)}</th>' for _, label, _ in METRICS)
     return (f'<div class="scroll"><table><tr><th>设置 / 运行</th><th class="num">命中 / 完整覆盖（题）</th>'
-            f'{head}<th class="num">每题返回 token</th><th class="num">较基线 变好 / 变差</th></tr>'
-            f'{"".join(rows)}</table></div>')
+            f'{head}<th class="num">每题返回 token</th>'
+            f'<th class="num" title="改善面：基线未完整覆盖的题中，本运行完整覆盖的题数；回归面：基线完整覆盖的题中，本运行未完整覆盖的题数">'
+            f'改善面 / 回归面</th><th class="num">较基线 变好 / 变差</th></tr>'
+            f'{"".join(rows)}</table></div>'
+            f'<div class="meta">改善面：基线未完整覆盖的 N 题中，本运行完整覆盖 x 题，记为 x / N；'
+            f'回归面：基线完整覆盖的 M 题中，本运行未完整覆盖 y 题，记为"失去 y / M"。'
+            f'变好 / 变差按 未命中 &lt; 部分覆盖 &lt; 完整覆盖 的状态比较。</div>')
 
 
 def _required_k(runs: list[tuple[str, dict[str, Any]]], tab: str) -> str:
@@ -243,21 +262,28 @@ def _recurring(runs: list[tuple[str, dict[str, Any]]]) -> str:
     return f'<div class="grid">{"".join(blocks)}</div>'
 
 
-def render(name: str, runs: list[tuple[str, dict[str, Any]]], spec: TableSpec | None = None) -> str:
+def render(name: str, runs: list[tuple[str, dict[str, Any]]], spec: TableSpec | None = None,
+           table_evidence: bool = True) -> str:
     tabs, panels = [], []
-    for key, title, panel in table_tabs(runs, spec or TableSpec()):
+    for key, title, panel in table_tabs(runs, spec or TableSpec()) if table_evidence else ():
         tabs.append(f'<a href="#{key}" data-tab="{key}">{esc(title)}</a>')
         panels.append(f'<div data-panel="{key}">{panel}</div>')
     groups: dict[str, list[tuple[str, dict[str, Any]]]] = {}
     for run in runs:
         groups.setdefault(_group_key(run[1]), []).append(run)
     used: set[str] = set()
+    # groups that differ only in K (budgets of the same runs) are titled by K
+    keyed = [(members[0][1]["config"], members[0][1]["top_k"]) for members in groups.values()]
+    by_k = len({c for c, _ in keyed}) == 1 and len({k for _, k in keyed}) == len(keyed) > 1
     for members in groups.values():
         tab = config = members[0][1]["config"]
+        title = tab
+        if by_k:
+            tab, title = f"k{members[0][1]['top_k']}", f"K={members[0][1]['top_k']}"
         while tab in used:   # same config in two groups (e.g. different chunk budgets)
-            tab = f"{config}_{len(used) + 1}"
+            tab = title = f"{config}_{len(used) + 1}"
         used.add(tab)
-        tabs.append(f'<a href="#{esc(tab)}" data-tab="{esc(tab)}">{esc(tab)}</a>')
+        tabs.append(f'<a href="#{esc(tab)}" data-tab="{esc(tab)}">{esc(title)}</a>')
         matrix, cards, tags_of = _matrix(members, tab)
         top_k = members[0][1]["top_k"]
         bar = filters([("all", "全部", len(tags_of)),
@@ -284,7 +310,7 @@ def compare_dir(workspace: Workspace) -> Path:
 
 
 def write_comparison(workspace: Workspace, name: str, run_specs: list[str],
-                     table_spec: dict[str, Any] | None = None) -> Path:
+                     table_spec: dict[str, Any] | None = None, table_evidence: bool = True) -> Path:
     """`table_spec`: contrasts, excluded table evidence groups and notes (rag/reports/table_compare.py);
     kept in runs.json so that `report` renders the page again."""
     runs = load_runs(workspace, run_specs)
@@ -292,9 +318,11 @@ def write_comparison(workspace: Workspace, name: str, run_specs: list[str],
     record: dict[str, Any] = {"name": name, "runs": [spec.strip() for spec in run_specs]}
     if table_spec:
         record["table_spec"] = table_spec
+    if not table_evidence:
+        record["table_evidence"] = False
     write_json(folder / "runs.json", record)
     write_assets(workspace.reports)
-    write_atomic(folder / "index.html", render(name, runs, TableSpec.from_json(table_spec)))
+    write_atomic(folder / "index.html", render(name, runs, TableSpec.from_json(table_spec), table_evidence))
     return folder
 
 
@@ -302,6 +330,7 @@ def rerender_comparisons(workspace: Workspace) -> int:
     count = 0
     for path in sorted(compare_dir(workspace).glob("*/runs.json")) if compare_dir(workspace).is_dir() else []:
         spec = read_json(path)
-        write_comparison(workspace, spec["name"], spec["runs"], spec.get("table_spec"))
+        write_comparison(workspace, spec["name"], spec["runs"], spec.get("table_spec"),
+                         spec.get("table_evidence", True))
         count += 1
     return count
