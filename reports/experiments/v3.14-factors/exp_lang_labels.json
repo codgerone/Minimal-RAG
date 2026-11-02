@@ -1,0 +1,50 @@
+{
+ "PO-25-15-Q001": {
+  "原文": {
+   "text": "fourth batch delivery date and total product amount",
+   "bm25": [
+    3,
+    3
+   ],
+   "hybrid": [
+    2,
+    2
+   ]
+  },
+  "换成表格标签": {
+   "text": "4th Delivery date and total product amount",
+   "bm25": [
+    1,
+    2
+   ],
+   "hybrid": [
+    1,
+    2
+   ]
+  }
+ },
+ "PO-25-15-Q002": {
+  "原文": {
+   "text": "delivery date and total product amount for the sixth batch delivery under order",
+   "bm25": [
+    4,
+    4
+   ],
+   "hybrid": [
+    2,
+    3
+   ]
+  },
+  "换成表格标签": {
+   "text": "delivery date and total product amount for the 6th Delivery under order",
+   "bm25": [
+    2,
+    3
+   ],
+   "hybrid": [
+    1,
+    3
+   ]
+  }
+ }
+}

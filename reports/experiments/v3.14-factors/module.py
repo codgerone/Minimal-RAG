@@ -17,7 +17,7 @@ from collections import Counter
 from urllib.parse import quote
 
 from rag.reports.html import esc
-from review import CHAN, FEAT, NOISE, ROOT, SIDE_FINDINGS, STEP, SUBTR, comp, mark, qstab
+from review import CHAN, FEAT, NOISE, PAIRS, ROOT, SIDE_FINDINGS, STEP, SUBTR, comp, mark, qstab
 
 OUT = ROOT / "reports/query/v3.14/analysis.html"
 EVIDENCE = "../../experiments/v3.14-factors/index.html"
@@ -314,6 +314,67 @@ PO-25-19-Q002、Q007、PO-24-12-Q004 用任何内容（含无意义词）占住�
     },
 ]
 
+# V3.14.1: the language of the rewrite and the step-back (docs/archive/changes/v3.14.1.md)
+LANG_STEPS = ("问题语言 → 文档语言", "问题语言 → 两种", "文档语言 → 两种")
+LANG_FORMS = (("单独（代替原句）· 原问题", "原问题 · 两侧去编码 · {name}单独 · {step}"),
+              ("单独（代替原句）· 子问题（不合并）", "子问题（不合并） · 两侧去编码 · {name}单独 · {step}"),
+              ("与原句融合", "原问题 · 两侧去编码 · 原句 + {name} · {step}"),
+              ("叠加在原句 + 翻译上", "原问题 · 两侧去编码 · 原句 + 翻译 + {name} · {step}"))
+LANGUAGE_READING = {   # measure id → the written reading (2026-11-02, after the results)
+    "rewrite": """<p><b>改写用文档语言写明显更好，方向稳定</b>：单独使用、原问题上，问题语言 → 文档语言 4 次一致 ▲10 ▼4、无翻转；
+相对去编码原句，文档语言的改写为 ▲8 ▼4、无翻转（问题语言的改写为 ▲3 ▼4），与翻译（▲9 ▼3）相当；文档语言的改写与翻译直接比较以各有优势为主（稳定 ▲3 ▼1）。</p>
+<p><b>机制与翻译相同（实验 G 通道拆分，已验证）</b>：问题语言的改写在这些文档上几乎没有 BM25 匹配，混合检索等于向量检索；文档语言的改写打开 BM25 通道，
+变好的 10 题中，BM25 通道把证据排到前列（逐题名次见下表）。变差的 4 题是翻译在 V3.14 中变差的同一类：BM25 把说明性正文排在表格前，或改写的说法不是表格的标签
+（PO-25-15 的 fourth batch 对 4th Delivery，换成表格标签后恢复，已验证）。</p>
+<p><b>两种介于两者之间</b>：问题语言一条排名没有 BM25 匹配，与文档语言的排名 RRF 后，后者的作用减半。文档语言 → 两种 的变差题正是 问题语言 → 文档语言 的变好题，变好题正是其变差题（见下表）。
+与原句融合、叠加在原句 + 翻译上，结论相同。子问题上（不合并）方向相同但弱（▲7 ▼6，翻转 2）。</p>""",
+    "stepback": """<p><b>step-back 的语言作用小且不稳定</b>：单独使用、原问题上，问题语言 → 文档语言 4 次一致 ▲3 ▼2、翻转 4 题；问题语言 → 两种 ▲3 ▼1、翻转 1 题；文档语言 → 两种 ▲2 ▼1、翻转 4 题。
+数据不能区分三种语言。相对去编码原句，文档语言的 step-back 为 ▲6 ▼7（问题语言为 ▲3 ▼5），V3.14 发现的缺陷（去掉的限定条件正是检索最需要的词）与语言无关，仍然存在。
+各题变化的原因""" + UNTESTED + """。</p>""",
+}
+G = "（实验 G，已验证）"
+_LANG_CH = __import__("json").loads((ROOT / "reports/experiments/v3.14-factors/exp_lang_channels.json").read_text(encoding="utf-8"))
+LANGUAGE_CAUSES = {   # measure id → question → cause
+    "rewrite": {
+        "PO-25-15-Q001": "文档语言改写写 fourth batch，表格标签是 4th Delivery；BM25 把条件说明段 c0002 等排在前，证据 BM25 3·3，混合 1·2 → 2·2。换成 4th Delivery 后 BM25 1·2、混合 1·2，恢复" + G + "。与翻译相同（实验 E）",
+        "PO-25-15-Q002": "同 PO-25-15-Q001（sixth batch 对 6th Delivery）：BM25 4·4，混合 1·2 → 2·3；换成表格标签后混合 1·3，部分恢复" + G,
+        "PO-25-19-Q006": "问题语言改写保留 ELPU、DDP，BM25 已直接匹配表格（2·2）；文档语言改写加入 delivery、batch、goods，表格在 BM25 中退到 6·6，说明性正文 c0010、c0012 排前，混合 2·2 → 3·3（通道拆分，实验 G）；逐词得分" + UNTESTED,
+        "CONTRACT-105-Q007": "BM25 把付款条件条款 c0010 排在付款期限条款 c0011 前，混合 2·1·1 → 1·2·2：一项提前、两项退后（通道拆分，实验 G）；两条款都讲付款，与翻译在子问题上的情况相同",
+    },
+}
+for q in ("CONTRACT-105-Q002", "CONTRACT-105-Q003", "CONTRACT-105-Q011", "CONTRACT-105-Q012", "CONTRACT-105-Q013",
+          "CONTRACT-105-Q014", "PO-24-12-Q001", "PO-24-12-Q002", "PO-24-12-Q005", "PO-24-12-Q006"):
+    _ch = _LANG_CH[q]
+    _r = lambda kind, ret: ranks(_ch[kind][ret]["RM-T"]["n"])
+    LANGUAGE_CAUSES["rewrite"][q] = (f'问题语言 → 文档语言 4 次都变好：BM25 中证据 {_r("rewrite:question", "bm25")} → {_r("rewrite:document", "bm25")}，'
+                                     f'混合 {_r("rewrite:question", "hybrid")} → {_r("rewrite:document", "hybrid")}（RM-T，第 0 次，实验 G）；'
+                                     '文档语言 → 两种 变差：两种中问题语言一条没有 BM25 匹配，文档语言排名的作用减半')
+
+
+def language_block(m: dict) -> str:
+    """How the language the measure is written in changes retrieval: the three language pairs in each form,
+    then, per question, the verdicts of the pairs used alone on the original question."""
+    mod = {"rewrite": "P3.2.1", "stepback": "P3.2.4"}[m["id"]]
+    name = {"rewrite": "改写", "stepback": "step-back"}[m["id"]]
+    rows = []
+    for label, context in LANG_FORMS:
+        cells = "".join(f'<td>{here(c, step)}<br>{nums(c)}</td>'
+                        for step in LANG_STEPS for c in [comp(f"语言 {mod}", context.format(name=name, step=step))])
+        rows.append(f'<tr><th class="nw">{esc(label)}</th>{cells}</tr>')
+    table = ('<div class="scroll"><table><tr><th>用法（两侧去编码）</th>'
+             + "".join(f'<th>{esc(x)}</th>' for x in LANG_STEPS) + '</tr>' + "".join(rows) + '</table></div>')
+    forms = [(step, comp(f"语言 {mod}", LANG_FORMS[0][1].format(name=name, step=step))) for step in LANG_STEPS]
+    refs = [c for c in PAIRS if c["factor"] == f"语言 {mod}" and c["layer"] == "参考"]
+    ref = ('<p class="meta">参考：' + "；".join(f'{here(c, c["context"].split(" · ")[-1])} {nums(c)}' for c in refs) + '</p>') if refs else ""
+    return (f'<h4>用什么语言写（V3.14.1 补充）</h4>'
+            f'<p class="meta">问题语言为 V3.14 的写法（写法提示词 v8）；文档语言由另一次调用写出（提示词 lang v1，规则相同，只是用文档语言与文档的术语）；'
+            f'两种为两段文本各检索一次后 RRF 融合。每格为左 → 右的对照，点击在本页设置两侧。'
+            f'实验 G（通道拆分与换成表格标签）的数据在依据页目录的 exp_lang_channels.json、exp_lang_labels.json。</p>'
+            + LANGUAGE_READING.get(m["id"], "") + table + ref
+            + '<p class="meta">逐题：单独使用、原问题上的三组对照中，任一次生成变差（▼）或各有优势（◆）的题。</p>'
+            + question_table(forms, LANGUAGE_CAUSES.get(m["id"], {}), None, None))
+
+
 COMBINE = [("RRF 融合", "原问题 · 两侧去编码 · 原句 → 原句 + 翻译"), ("RRF 融合", "原问题 · 两侧去编码 · 原句 → 原句 + HyDE"),
            ("RRF 融合", "原问题 · 去编码 · 原句 + 翻译 → 原句 + 翻译 + HyDE"),
            ("RRF 融合", "原问题 · 两侧去编码 · 原句 → 原句 + 改写"), ("RRF 融合", "原问题 · 两侧去编码 · 原句 → 原句 + step-back"),
@@ -349,7 +410,8 @@ def measure(m: dict) -> str:
             (f'<h4>{esc(t["title"])}</h4>' if len(m.get("tables", ())) > 1 else "") + t.get("intro", "")
             + question_table([forms[i] for i in t["forms"]], m[t["causes_key"]] if "causes_key" in t else causes,
                              t.get("extra", m["extra"]), m.get("kind"), m.get("later"))
-            for t in m.get("tables", [{"forms": list(range(len(forms)))}])))
+            for t in m.get("tables", [{"forms": list(range(len(forms)))}]))
+        + (language_block(m) if m["id"] in ("rewrite", "stepback") else ""))
 
 
 def overview() -> str:

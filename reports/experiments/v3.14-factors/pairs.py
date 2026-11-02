@@ -27,16 +27,20 @@ PAGE = ROOT / "reports/query/v3.14"
 # 2026-10-29 was stopped for lack of memory; perturb/*.js on disk are then from the v7 phrasings).
 GENS = ("0", "1", "2", "3") if "perturbation" in json.loads((PAGE / "data.json").read_text(encoding="utf-8")) else ("0",)
 KINDS = {"P3.2.1": "改写", "P3.2.2": "翻译", "P3.2.3": "HyDE", "P3.2.4": "step-back"}
+# V3.14.1: the language a rewrite or step-back is written in ("" the question's, d the documents', qd both)
+LANG = {"": "问题语言", "d": "文档语言", "qd": "两种"}
+LANG_PAIRS = (("", "d"), ("", "qd"), ("d", "qd"))
 
 
-def key(decompose=False, merge=None, route=False, strip=False, kinds=(), fuse=False) -> str:
+def key(decompose=False, merge=None, route=False, strip=False, kinds=(), fuse=False, lang=None) -> str:
+    """`lang`: module → language code, for P3.2.1 and P3.2.4."""
     parts = []
     if decompose:
         parts.append("P3.1" + (f"@{merge}" if merge else "") + ("-o" if route else ""))
     if strip:
         parts.append("P3.2.0")
     if kinds:
-        parts.append("+".join(kinds) + ("@rrf" if fuse else ""))
+        parts.append("+".join(m + (f"~{lang[m]}" if lang and lang.get(m) else "") for m in kinds) + ("@rrf" if fuse else ""))
     return "_".join(parts)
 
 
@@ -74,6 +78,26 @@ def comparisons() -> list[dict]:
             tag = "去编码" if strip else "带编码"
             add("RRF 融合", "组合方式", f"{where} · {tag} · 原句 + 翻译 → 原句 + 翻译 + HyDE",
                 key(d, strip=strip, kinds=("P3.2.2",), fuse=True), key(d, strip=strip, kinds=("P3.2.2", "P3.2.3"), fuse=True))
+    # V3.14.1: the language of the rewrite and the step-back, codes stripped on both sides; alone (in place of the
+    # original text, on the original question and on the sub-questions unmerged), fused with the original text,
+    # and stacked on the original text + translation
+    for m in ("P3.2.1", "P3.2.4"):
+        name = KINDS[m]
+        stacked = tuple(sorted((m, "P3.2.2")))
+        for a, b in LANG_PAIRS:
+            step = f"{LANG[a]} → {LANG[b]}"
+            for d, where in ((False, "原问题"), (True, "子问题（不合并）")):
+                add(f"语言 {m}", "单因素", f"{where} · 两侧去编码 · {name}单独 · {step}",
+                    key(d, strip=True, kinds=(m,), lang={m: a}), key(d, strip=True, kinds=(m,), lang={m: b}))
+            add(f"语言 {m}", "组合方式", f"原问题 · 两侧去编码 · 原句 + {name} · {step}",
+                key(strip=True, kinds=(m,), fuse=True, lang={m: a}), key(strip=True, kinds=(m,), fuse=True, lang={m: b}))
+            add(f"语言 {m}", "组合方式", f"原问题 · 两侧去编码 · 原句 + 翻译 + {name} · {step}",
+                key(strip=True, kinds=stacked, fuse=True, lang={m: a}), key(strip=True, kinds=stacked, fuse=True, lang={m: b}))
+        # reference: against the original text, and the document-language rewrite against the translation
+        add(f"语言 {m}", "参考", f"原问题 · 两侧去编码 · 原句 → {name}（文档语言）",
+            key(strip=True), key(strip=True, kinds=(m,), lang={m: "d"}))
+    add("语言 P3.2.1", "参考", "原问题 · 两侧去编码 · 翻译 → 改写（文档语言）",
+        key(strip=True, kinds=("P3.2.2",)), key(strip=True, kinds=("P3.2.1",), lang={"P3.2.1": "d"}))
     for merge in ("rr", "rrf"):
         name = {"rr": "轮流取", "rrf": "全局 RRF"}[merge]
         add("合并", "组合方式", f"不合并 → {name}", key(True), key(True, merge))

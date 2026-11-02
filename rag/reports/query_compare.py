@@ -41,13 +41,14 @@ var MNAME={};D.modules.forEach(function(m){MNAME[m.id]=m.name});
 var KIND={'P3.2.1':'rewrite','P3.2.2':'translation','P3.2.3':'hyde','P3.2.4':'step_back'};
 var KNAME={question:'原句',rewrite:'改写',translation:'翻译',hyde:'HyDE',step_back:'step-back'};
 var MERGE={rr:'轮流取',rrf:'全局 RRF'};
+var LANGM=['P3.2.1','P3.2.4'],LNAME={'':'问题语言',d:'文档语言',qd:'两种'};   // V3.14.1: the language a rewrite or step-back is written in
 var N=D.cases.length,ACC=__ACC__,AVAIL=new Set(D.available);
 var GROUPS=D.cases.reduce(function(a,q){return a+q.groups.length},0);
 var CASE={};D.cases.forEach(function(q){CASE[q.case_id]=q});
 var VN={better:'变好',worse:'变差',mixed:'各有优势',same:'不变'},VS={better:'▲',worse:'▼',mixed:'◆',same:'·'},
     VC={better:'good',worse:'badc',mixed:'mix',same:'flat'},VB={better:'ok',worse:'bad',mixed:'warn',same:''};
 var ORDER=['better','worse','mixed','same'];
-function blank(){return {d:false,merge:null,o:false,s:false,ph:new Set(),fuse:true}}   // fuse: the original text is one of the retrieval texts
+function blank(){return {d:false,merge:null,o:false,s:false,ph:new Set(),fuse:true,lang:{}}}   // fuse: the original text is one of the retrieval texts
 var S={L:blank(),R:blank(),km:3,doc:'all',all:false,focus:null,cell:null,flip:null,
   pq:D.cases[0].case_id,pc:D.combos[0].label};
 window.QC_FACTS=window.QC_FACTS||{};window.QC_PROCESS=window.QC_PROCESS||{};window.QC_PERTURB=window.QC_PERTURB||{};
@@ -59,20 +60,21 @@ function phs(c){return PH.filter(function(m){return c.ph.has(m)})}
 function key(c){var p=[];
   if(c.d)p.push('P3.1'+(c.merge?'@'+c.merge:'')+(c.o?'-o':''));
   if(c.s)p.push('P3.2.0');
-  if(c.ph.size)p.push(phs(c).join('+')+(c.fuse?'@rrf':''));
+  if(c.ph.size)p.push(phs(c).map(function(m){return m+(c.lang[m]?'~'+c.lang[m]:'')}).join('+')+(c.fuse?'@rrf':''));
   return p.join('_')}
 function parse(k){var c=blank();
   (k||'').split('_').filter(Boolean).forEach(function(part){
     var i=part.indexOf('@'),body=i<0?part:part.slice(0,i),opt=i<0?'':part.slice(i+1);
     if(body==='P3.1'){var m=opt.split('-');c.d=true;c.merge=MERGE[m[0]]?m[0]:null;c.o=!!c.merge&&m[1]==='o'}
     else if(body==='P3.2.0')c.s=true;
-    else{body.split('+').forEach(function(x){if(PH.indexOf(x)>=0)c.ph.add(x)});c.fuse=opt==='rrf'||c.ph.size>1}
+    else{body.split('+').forEach(function(x){var y=x.split('~');if(PH.indexOf(y[0])>=0){c.ph.add(y[0]);if(y[1]&&LANGM.indexOf(y[0])>=0)c.lang[y[0]]=y[1]}});c.fuse=opt==='rrf'||c.ph.size>1}
   });
   return c}
 function merged(c){return !c.d||!!c.merge}
 function decLabel(c){return c.merge?MERGE[c.merge]+(c.o?' + 原问题一路':''):'不合并'}
-function textsLabel(c){var t=(c.fuse?['原句']:[]).concat(phs(c).map(function(m){return MNAME[m]}));
-  return t.join(' + ')+(t.length>1?'（RRF）':'')}
+function phName(c,m){return MNAME[m]+(LANGM.indexOf(m)>=0?'（'+LNAME[c.lang[m]||'']+'）':'')}
+function textsLabel(c){var t=(c.fuse?['原句']:[]).concat(phs(c).map(function(m){return phName(c,m)}));
+  return t.join(' + ')+(t.length>1||(t.length===1&&c.lang[phs(c)[0]]==='qd')?'（RRF）':'')}
 function label(c){var p=[];
   if(c.d)p.push('P3.1 分解（'+decLabel(c)+'）');
   if(c.s)p.push('去编码');
@@ -173,7 +175,11 @@ function sidePicker(side){
     +PH.map(function(m){var en=!(solo&&!c.ph.has(m));
       return opt(side,'checkbox','ph',m,c.ph.has(m),en,'<b>'+m+'</b> '+esc(MNAME[m]),en?'':'不含原句时只能勾一种写法');
     }).join('')+'</div>'
-    +'<div class="cfg-sub meta">只勾 1 条：直接用它检索；勾 2 条以上：各检索一次后 RRF 融合（须含原句）。当前：'+esc(textsLabel(c))+'</div>';
+    +LANGM.map(function(m){var on=c.ph.has(m),v=c.lang[m]||'';
+      return '<div class="cfg-sub'+(on?'':' off')+'">'+esc(MNAME[m])+' 的语言：'+['','d','qd'].map(function(x){
+        return '<label class="'+(on?'':'off')+'"'+(on?'':' title="勾选 '+m+' 后可选"')+'><input type="radio" name="'+side+'-lang-'+m+'" data-side="'+side+'" data-f="lang" data-m="'+m+'" value="'+x+'"'
+          +(on&&v===x?' checked':'')+(on?'':' disabled')+'> '+LNAME[x]+(x==='qd'?'（RRF）':x===''?'（V3.14）':'')+'</label>'}).join('')+'</div>'}).join('')
+    +'<div class="cfg-sub meta">只勾 1 种写法：直接用它的文本检索，文本多于一段时（如"两种"）各检索一次后 RRF；勾 2 条以上：全部文本各检索一次后 RRF 融合（须含原句）。当前：'+esc(textsLabel(c))+'</div>';
   var step3='<div class="cfg-step">③ 跨问题合并 <span class="meta">'+(c.d?'把各子问题的排名合成返回顺序':'仅分解时可用')+'</span></div><div class="cfg-row">'
     +opt(side,'radio','merge','',c.d&&!c.merge,c.d,'不合并（逐个子问题评估）',c.d?'':'先选 P3.1 分解')
     +opt(side,'radio','merge','rr',c.merge==='rr',c.d,'轮流取',c.d?'':'先选 P3.1 分解')
@@ -431,14 +437,17 @@ function renderProcess(){
   else{
     var p=cfg.d?plan.decomposed:plan.plain,kinds={};
     if(cfg.fuse)kinds.question=1;
-    cfg.ph.forEach(function(m){kinds[KIND[m]]=1});
+    cfg.ph.forEach(function(m){kinds[KIND[m]]=cfg.lang[m]||'q'});
+    var shown=function(f){var v=kinds[f.kind];if(!v||f.kind==='question')return false;
+      if(f.kind!=='rewrite'&&f.kind!=='step_back')return true;
+      return v==='qd'||(v==='q')===!f.language};
     planHtml=(cfg.d?'<div class="meta">分解为 '+p.questions.length+' 个子问题；'+(cfg.merge?'合并方式：'+MERGE[cfg.merge]+(cfg.o?'，另有原问题一路（'+(cfg.merge==='rr'?'每圈最后':'作为一条排名参与融合')+'）':'')
         :'不合并：各子问题的排名分别列出，没有返回顺序')+'。</div>':'<div class="meta">不分解：原问题是唯一的问题。</div>')
-      +(cfg.ph.size?'<div class="meta">'+(cfg.fuse?'每个问题的原句与启用的写法各检索一次，按 RRF 融合。':'每个问题只用 '+esc(MNAME[phs(cfg)[0]])+' 检索一次，代替原句。')+'</div>':'')
+      +(cfg.ph.size?'<div class="meta">'+(cfg.fuse?'每个问题的原句与启用的写法各检索一次，按 RRF 融合。':'每个问题只用 '+esc(phName(cfg,phs(cfg)[0]))+' 检索，代替原句；多于一段文字时各检索一次后 RRF 融合。')+'</div>':'')
       +(cfg.s?'<div class="meta">去编码：下列文字在检索前删去标识编码 '+esc(scope.codes.join('、')||'（无）')+'（原问题一路不删）。</div>':'')
       +(p.degraded.length?'<div class="meta down">规划降级：'+esc(p.degraded.join('；'))+'</div>':'')
       +p.questions.map(function(x){
-        return '<div class="item"><b>'+esc(x.id)+'</b> '+esc(x.text)+(kinds.question?'':' <span class="meta">（原句不检索）</span>')+x.phrasings.filter(function(f){return kinds[f.kind]&&f.kind!=='question'}).map(function(f){
+        return '<div class="item"><b>'+esc(x.id)+'</b> '+esc(x.text)+(kinds.question?'':' <span class="meta">（原句不检索）</span>')+x.phrasings.filter(shown).map(function(f){
           return '<div class="meta">'+esc(KNAME[f.kind]+(f.language?'（'+f.language+'）':''))+'：'+esc(f.text)+'</div>'}).join('')+'</div>';
       }).join('');
   }
@@ -490,7 +499,8 @@ function setOption(box){
   else if(f==='orig')c.fuse=box.checked;
   else if(f==='merge'){c.merge=box.value||null;if(!c.merge)c.o=false}
   else if(f==='o')c.o=box.checked;
-  else if(f==='ph'){box.checked?c.ph.add(box.value):c.ph.delete(box.value);if(c.ph.size!==1)c.fuse=true}
+  else if(f==='ph'){if(box.checked)c.ph.add(box.value);else{c.ph.delete(box.value);delete c.lang[box.value]}if(c.ph.size!==1)c.fuse=true}
+  else if(f==='lang'){if(box.value)c.lang[box.dataset.m]=box.value;else delete c.lang[box.dataset.m]}
 }
 document.addEventListener('change',function(e){
   var t=e.target;
@@ -543,8 +553,8 @@ def render(data: dict[str, Any], analysis: str | None = None) -> str:
         f'<h1>查询侧对比 · {esc(data["name"])}</h1>'
         f'<div class="sub">{esc(data["created_at"])} · 数据集 {esc(data["dataset"]["version"])}，{n} 道可回答题 · '
         f'{len(data["combos"])} 种组合（混合检索、文档过滤开启）· 已评估 {len(data["available"])} 种配置'
-        f'（检索文本 20 种状态 × 去编码 2 × 分解 6 种状态；P3.3 搁置）· 规划：{esc(data["plan_model"])}，'
-        f'拆解提示词 v9、写法提示词 v8，冻结的第 0 次生成</div>'
+        f'（检索文本 32 种状态：V3.14 的 20 种，加 V3.14.1 改写、step-back 用文档语言或两种的 12 种；× 去编码 2 × 分解 6 种状态；P3.3 搁置）'
+        f'· 规划：{esc(data["plan_model"])}，拆解提示词 v9、写法提示词 v8、文档语言写法提示词 lang v1，冻结的第 0 次生成</div>'
         + nav
         + (f'<section id="m-analysis"><h2>1. 各措施的单独效果（分析结论）</h2>{analysis}</section>'
            '<h2>对比工具</h2>' if analysis else '')
