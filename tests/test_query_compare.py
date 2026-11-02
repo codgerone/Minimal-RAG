@@ -15,6 +15,13 @@ def test_config_keys_are_readable_and_parse_back():
     assert QueryConfig.parse("P3.2.0") == QueryConfig(strip=True) and QueryConfig.parse("P3.2.0").settings().strip_codes
     with pytest.raises(ValueError):
         QueryConfig.parse("P3.2.2+P3.2.1@rrf")
+    lang = QueryConfig(phrasings=("P3.2.2", "P3.2.4"), strip=True, languages=(("P3.2.4", "qd"),))
+    assert lang.key == "P3.2.0_P3.2.2+P3.2.4~qd@rrf" and QueryConfig.parse(lang.key) == lang
+    assert lang.settings().languages == {("step_back", "both")}
+    assert QueryConfig.parse("P3.2.1~d").settings().languages == {("rewrite", "document")}
+    for bad in ("P3.2.2~d", "P3.2.1~x", "P3.2.1~q"):
+        with pytest.raises(ValueError):
+            QueryConfig.parse(bad)
 
 
 def test_invalid_configurations_are_rejected():
@@ -33,12 +40,17 @@ def test_metrics_at_k_derive_from_needed_units_and_the_unit_table_tokens():
     assert metrics_at(facts, units, 4)["complete"] == 2 and metrics_at(facts, units, 1)["hit"] == 1
 
 
-def test_the_240_evaluated_configurations_and_their_settings():
+def test_the_384_evaluated_configurations_and_their_settings():
     configs = evaluated_configs()
     keys = [c.key for c in configs]
-    assert len(configs) == 240 == len(set(keys)) and keys[0] == ""
-    assert sum(not c.merged for c in configs) == 40 and sum(c.phrasings != () and not c.fuse for c in configs) == 48
-    assert sum(c.strip for c in configs) == 120
+    assert len(configs) == 384 == len(set(keys)) and keys[0] == ""
+    v314 = [c for c in configs if not c.languages]
+    assert len(v314) == 240 and sum(not c.merged for c in v314) == 40
+    assert sum(c.phrasings != () and not c.fuse for c in v314) == 48 and sum(c.strip for c in v314) == 120
+    added = {c.key for c in configs if c.languages and c.strip and not c.decompose}
+    assert added == {f"P3.2.0_{p}" for m in ("P3.2.1", "P3.2.4") for v in ("d", "qd")
+                     for p in (f"{m}~{v}", f"{m}~{v}@rrf",
+                               f"P3.2.1~{v}+P3.2.2@rrf" if m == "P3.2.1" else f"P3.2.2+P3.2.4~{v}@rrf")}
     settings = QueryConfig.parse("P3.1@rrf-o_P3.2.2+P3.2.3@rrf").settings()
     assert settings.merge == "rrf" and settings.original_route and settings.phrasings == {"translation", "hyde"}
     settings = QueryConfig.parse("P3.2.1").settings()

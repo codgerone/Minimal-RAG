@@ -105,6 +105,8 @@ PERTURBATION_MAPPING = "reports/experiments/v3.14-perturbation/mapping_g{generat
 PERTURBATION_GENERATIONS = (1, 2, 3)
 PHRASING_OF = {"P3.2.1": "rewrite", "P3.2.2": "translation", "P3.2.3": "hyde", "P3.2.4": "step_back"}
 MERGES = {"rr": "round_robin", "rrf": "rrf"}   # key code → execution.SELECTORS
+# V3.14.1: the language a rewrite or step-back is written in; the question's language has no code
+LANGUAGE_OF = {"d": "document", "qd": "both"}
 
 
 @dataclass(frozen=True)
@@ -116,8 +118,13 @@ class QueryConfig:
     phrasings: tuple[str, ...] = ()   # P3.2.1–P3.2.4 module ids, in module order
     fuse: bool = True                 # with phrasings; False: exactly one phrasing, in place of the question
     strip: bool = False               # P3.2.0: identifier codes removed from every retrieval text
+    languages: tuple[tuple[str, str], ...] = ()   # (P3.2.1 | P3.2.4, d | qd), in module order; absent: the question's language
 
     def __post_init__(self):
+        mods = [m for m, _ in self.languages]
+        if (mods != [m for m in self.phrasings if m in mods] or any(m not in ("P3.2.1", "P3.2.4") for m in mods)
+                or any(v not in LANGUAGE_OF for _, v in self.languages)):
+            raise ValueError(f"写法语言不合法：{self.languages}")
         if self.merge is not None and (not self.decompose or self.merge not in MERGES):
             raise ValueError(f"合并方式不合法：{self.merge}")
         if self.original_route and self.merge is None:
@@ -142,7 +149,9 @@ class QueryConfig:
         if self.strip:
             parts.append("P3.2.0")
         if self.phrasings:
-            parts.append("+".join(self.phrasings) + ("@rrf" if self.fuse else ""))
+            lang = dict(self.languages)
+            parts.append("+".join(m + (f"~{lang[m]}" if m in lang else "") for m in self.phrasings)
+                         + ("@rrf" if self.fuse else ""))
         return "_".join(parts)
 
     @classmethod
@@ -156,7 +165,9 @@ class QueryConfig:
             elif body == "P3.2.0" and not option:
                 fields.update(strip=True)
             else:
-                fields.update(phrasings=tuple(body.split("+")), fuse=option == "rrf")
+                mods = [x.partition("~") for x in body.split("+")]
+                fields.update(phrasings=tuple(m for m, _, _ in mods), fuse=option == "rrf",
+                              languages=tuple((m, v) for m, _, v in mods if v))
         config = cls(**fields)
         if config.key != key:
             raise ValueError(f"配置键不合法：{key}")
@@ -164,19 +175,24 @@ class QueryConfig:
 
     def settings(self) -> execution.QuerySettings:
         return execution.QuerySettings(frozenset(PHRASING_OF[m] for m in self.phrasings), self.fuse,
-                                       MERGES[self.merge] if self.merge else None, self.original_route, self.strip)
+                                       MERGES[self.merge] if self.merge else None, self.original_route, self.strip,
+                                       frozenset((PHRASING_OF[m], LANGUAGE_OF[v]) for m, v in self.languages))
 
 
 def evaluated_configs() -> list[QueryConfig]:
-    """Phrasing states (none; RRF over each non-empty subset; each phrasing unfused) × codes kept or
-    stripped × decomposition states (none; unmerged; round robin and global RRF, each without and with
-    the original route)."""
+    """Phrasing states × codes kept or stripped × decomposition states (none; unmerged; round robin and
+    global RRF, each without and with the original route). Phrasing states (V3.14): none; RRF over each
+    non-empty subset; each phrasing unfused; all in the question's language. Added in V3.14.1, for the
+    rewrite and the step-back each in the document languages and in both: unfused, fused with the
+    original text, and fused with the original text and the translation (docs/archive/changes/v3.14.1.md)."""
     ids = list(PHRASING_OF)
-    phrasings = [((), True)] + [(c, True) for n in range(1, len(ids) + 1) for c in combinations(ids, n)]         + [((m,), False) for m in ids]
+    phrasings = [((), True, ())] + [(c, True, ()) for n in range(1, len(ids) + 1) for c in combinations(ids, n)]         + [((m,), False, ()) for m in ids]
+    phrasings += [(p, f, ((m, v),)) for m in ("P3.2.1", "P3.2.4") for v in LANGUAGE_OF
+                  for p, f in (((m,), False), ((m,), True), (tuple(sorted((m, "P3.2.2"))), True))]
     decompositions = [dict(), dict(decompose=True)] + [dict(decompose=True, merge=m, original_route=o)
                                                        for m in MERGES for o in (False, True)]
-    return [QueryConfig(**d, phrasings=p, fuse=f, strip=s) for s in (False, True) for p, f in phrasings
-            for d in decompositions]
+    return [QueryConfig(**d, phrasings=p, fuse=f, strip=s, languages=lang) for s in (False, True)
+            for p, f, lang in phrasings for d in decompositions]
 
 
 def make_planner(workspace: Workspace) -> Planner:
@@ -332,7 +348,8 @@ def collect(workspace: Workspace, name: str, combos: tuple[Combo, ...] = COMBOS,
             scope = ctx.scope(case.question)
             documents = scope.document_ids
             languages = sorted({languages_of[d] for d in (documents or languages_of)})
-            pair = {d: planner.plan(case.question, languages, d, generation=generation) for d in (False, True)}
+            pair = {d: planner.add_languages(planner.plan(case.question, languages, d, generation=generation),
+                                             languages, generation=generation) for d in (False, True)}
             plans.setdefault(case.case_id, {
                 "scope": {"documents": list(documents or []), "languages": languages, "codes": list(scope.codes)},
                 "plain": plan_json(pair[False]), "decomposed": plan_json(pair[True])})
