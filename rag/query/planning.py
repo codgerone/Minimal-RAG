@@ -11,13 +11,16 @@ from __future__ import annotations
 
 import json
 import time
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Any, Callable, Protocol
 
 # Each step's prompt is versioned on its own. Phrasing v8 (2026-10-29): v7 without the line asking to
 # leave the identifier codes out; removing them is the P3.2.0 switch (rag/query/scope.py strip_codes).
-PROMPT_VERSIONS = {"decomposition": "query_plan_v9", "phrasings": "query_plan_v8"}
+# Document-language phrasings (V3.14.1): the rewrite and step-back written in each document language,
+# by a call of their own, so the question-language phrasings of v8 stay as they are.
+PROMPT_VERSIONS = {"decomposition": "query_plan_v9", "phrasings": "query_plan_v8",
+                   "languages": "query_plan_lang_v1"}
 REASONING_EFFORT = "medium"
 
 DECOMPOSE_SYSTEM = """You split a question into separate questions for document retrieval. You never answer the question.
@@ -42,6 +45,15 @@ The input is a list of questions, each with an id. For each question write the f
 - translations: the question translated into each of {languages}, as a question, in the terms documents in that language use; skip a language the question is already written in; keep names, codes and numbers as written.
 - hyde: for each of {languages}, a short passage in that language written as the answer would appear in such a document; write unknown values (numbers, amounts, dates, names not given in the question) as placeholders in square brackets; keep the names given in the question verbatim.
 - step_back: in the language of the question, a broader but still concrete question about the same documents: drop the qualifiers that narrow the question to one instance (one entity, item or period) when the answer for every instance would be written in the same place; never ask for general knowledge or what such documents usually contain.
+
+Answer with one entry per question, with its id."""
+
+LANGUAGES_SYSTEM = """You write alternative phrasings of questions for document retrieval. You never answer the questions.
+
+The documents searched are written in: {languages}.
+The input is a list of questions, each with an id. For each question and for each of {languages} the question is not already written in, write the following phrasings in that language, each from the question itself (no phrasing is derived from another):
+- rewrite: the question as a statement or noun phrase without question words and filler, in the terms documents in that language use; keep names, codes and numbers as written.
+- step_back: a broader but still concrete question about the same documents, in the terms documents in that language use: drop the qualifiers that narrow the question to one instance (one entity, item or period) when the answer for every instance would be written in the same place; never ask for general knowledge or what such documents usually contain.
 
 Answer with one entry per question, with its id."""
 
@@ -88,10 +100,12 @@ class Plan:
     decomposition: PlanCost            # the decomposition step (NO_COST without decomposition)
     phrasing: PlanCost                 # the phrasing step
     degraded: tuple[str, ...] = ()     # steps that fell back: why
+    languages: tuple[str, ...] = ()    # the document languages in scope, with the document-language phrasings
+    language_phrasing: PlanCost = NO_COST   # the document-language phrasing step (NO_COST until it is run)
 
     @property
     def cost(self) -> PlanCost:
-        return self.decomposition + self.phrasing
+        return self.decomposition + self.phrasing + self.language_phrasing
 
 
 class StructuredLLM(Protocol):
@@ -115,6 +129,46 @@ def phrase_schema(languages: list[str]) -> dict[str, Any]:
                             "translations": by_language, "hyde": by_language, "step_back": {"type": "string"}}}
     return {"type": "object", "additionalProperties": False, "required": ["phrasings"],
             "properties": {"phrasings": {"type": "array", "items": entry}}}
+
+
+def languages_schema(languages: list[str]) -> dict[str, Any]:
+    by_language = {"type": "array", "items": {
+        "type": "object", "additionalProperties": False, "required": ["language", "text"],
+        "properties": {"language": {"type": "string", "enum": languages}, "text": {"type": "string"}}}}
+    entry = {"type": "object", "additionalProperties": False, "required": ["id", "rewrite", "step_back"],
+             "properties": {"id": {"type": "string"}, "rewrite": by_language, "step_back": by_language}}
+    return {"type": "object", "additionalProperties": False, "required": ["phrasings"],
+            "properties": {"phrasings": {"type": "array", "items": entry}}}
+
+
+def languages_messages(questions: list[dict[str, str]], languages: list[str]) -> list[dict[str, str]]:
+    return [{"role": "system", "content": LANGUAGES_SYSTEM.format(languages=", ".join(languages))},
+            {"role": "user", "content": json.dumps({"questions": questions}, ensure_ascii=False)}]
+
+
+def check_languages(raw: str, questions: list[dict[str, str]]) -> tuple[dict[str, list[Phrasing]], list[str]]:
+    """Question id → its document-language rewrites and step-backs; a language the question is
+    already written in may be skipped."""
+    try:
+        entries = {str(e["id"]): e for e in json.loads(raw)["phrasings"]}
+    except (ValueError, KeyError, TypeError):
+        return {}, ["the answer is not the JSON object of the schema"]
+    issues = []
+    ids = [q["id"] for q in questions]
+    if sorted(entries) != sorted(ids):
+        issues.append(f"the answer needs one entry for each id: {', '.join(ids)}")
+    result: dict[str, list[Phrasing]] = {}
+    for q in questions:
+        e = entries.get(q["id"])
+        if e is None:
+            continue
+        for name in ("rewrite", "step_back"):
+            got = [x["language"] for x in e[name]]
+            if len(set(got)) != len(got) or any(not x["text"].strip() for x in e[name]):
+                issues.append(f"{q['id']}: {name} needs at most one non-empty text per language")
+        result[q["id"]] = [Phrasing(name, x["text"].strip(), x["language"])
+                           for name in ("rewrite", "step_back") for x in e[name]]
+    return result, issues
 
 
 def decompose_messages(question: str) -> list[dict[str, str]]:
@@ -203,6 +257,20 @@ class Planner:
             degraded.append("phrasings: " + "; ".join(issues))
             phrased = [Question(q["id"], q["text"], (Phrasing("question", q["text"]),)) for q in listed]
         return Plan(question, decompose, tuple(phrased), decomposition, _cost(made), tuple(degraded))
+
+    def add_languages(self, plan: Plan, languages: list[str], *, generation: int = 0) -> Plan:
+        """The plan with each question's rewrite and step-back in every document language added (a
+        separate call; the question-language phrasings stay). Degraded: none added, and why."""
+        languages = sorted(set(languages))
+        listed = [{"id": q.id, "text": q.text} for q in plan.questions]
+        got, issues, made = self._ask(languages_messages(listed, languages), "languages",
+                                      languages_schema(languages),
+                                      lambda raw: check_languages(raw, listed), generation)
+        if issues:
+            return replace(plan, degraded=plan.degraded + ("languages: " + "; ".join(issues),),
+                           languages=tuple(languages), language_phrasing=_cost(made))
+        questions = tuple(Question(q.id, q.text, q.phrasings + tuple(got.get(q.id, ()))) for q in plan.questions)
+        return replace(plan, questions=questions, languages=tuple(languages), language_phrasing=_cost(made))
 
     def _ask(self, msgs: list[dict[str, str]], name: str, sch: dict[str, Any],
              check: Callable[[str], tuple[Any, list[str]]], generation: int):
