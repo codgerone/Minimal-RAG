@@ -4,7 +4,7 @@ The two steps meet in one structure, the question list: with decomposition it is
 the decomposition call returns, without it the original question alone. The phrasing call takes
 the question list (JSON, each question with an id) and returns the phrasings of every question,
 by id. Retrieval then runs each enabled phrasing of each question (rag/query/execution.py).
-Rules: docs/changes/v3.14.md.
+Rules: docs/rules/query-planning.md.
 """
 
 from __future__ import annotations

@@ -1,4 +1,4 @@
-# 系统设计（V3.13）
+# 系统设计（V3.14）
 
 ## 1. 数据主链
 
@@ -15,7 +15,10 @@
 查询   问题 ─→ 检索范围（文档标识表）─┬─→ Embedder ─→ 范围内向量排名 ─┐
                                     └─→ Analyzer ─→ 范围内 BM25 排名 ─┴─→ Retriever（选用一路或 RRF 融合，确定性排序）─→ 返回单元（整表库）─→ Prompt ─→ LLM ─→ 回答
 评估   标注题目（含 excerpt 坐标）─→ 同一检索范围、Retriever 与返回单元 ─→ 证据判定（excerpt 坐标 × chunk 来源区域）─→ 指标 ─→ 评估报告 ─→ 对比页
+查询侧对比  问题 ─→ 规划（LLM：分解、写法）─→ 每个问题的检索文本（去编码）─→ 各自检索 ─→ 问题内 RRF 融合 ─→ 跨问题合并（轮流取 / 全局 RRF / 不合并）─→ 凑齐名次 ─→ 查询侧对比页
 ```
+
+**查询侧模块**（分解、去编码、写法、融合、合并，[rules/query-planning.md](rules/query-planning.md)）只在查询侧对比中使用；`ask`、`chat`、`eval` 仍用原问题检索一次。规划与检索执行分开：规划输出问题列表与每个问题的各写法（`rag/query/planning.py`），检索执行按配置取用其中一部分（`rag/query/execution.py`）。各模块的评估结论与在多轮检索中的用法见 [decisions/015-query-modules.md](decisions/015-query-modules.md)。
 
 各阶段的数据模型定义在 `rag/models.py`（文档与 chunk）和 `rag/ingest/tables/models.py`（表格证据）。设计原则：解析器、工具和 LLM 的原始结果是"事实"，不会被后续阶段原地修改；选优、表头、结构标注是否采用这类判断单独记录，审核页可以逐层追溯。
 
@@ -42,12 +45,13 @@
 | Embedder | `rag/index/embedder.py` | `bge_m3`、`e5_small`、`e5_large_instruct`、`qwen3_embedding_0_6b` |
 | Retriever | `rag/query/retriever.py` | `semantic`、`bm25`、`hybrid` |
 | LLM | `rag/query/llm.py` | `openrouter` |
+| 跨问题合并（Selector） | `rag/query/execution.py` | `round_robin`、`rrf` |
 
 表格检索文本的三种取值由分块器按名称处理，只有 `summary` 需要一个 LLM 步骤对象（`LLMSummary`），所以没有单独的 `Protocol`。
 
 编码器都是固定版本（revision）的 sentence-transformers 模型，按 float32 加载，查询与文档各加固定前缀或指令，向量 L2 归一化；编码前用模型自己的分词器检查 chunk 不超过其输入上限，超过则报错而不截断。模型选择见 [decisions/008-embedder-bge-m3.md](decisions/008-embedder-bge-m3.md)。
 
-文档语言判定、表格选优、续表判定、规则表头判定、检索范围识别、向量库（Chroma）、BM25 分析器与倒排索引、整表库与返回单元目前都只有一种实现，作为普通模块存在，等出现第二种实现时再抽象成接口。
+文档语言判定、表格选优、续表判定、规则表头判定、检索范围识别、向量库（Chroma）、BM25 分析器与倒排索引、整表库与返回单元、查询规划（LLM）、问题内融合（RRF）目前都只有一种实现，作为普通模块存在，等出现第二种实现时再抽象成接口。
 
 **新增一种实现**：写一个满足接口的类，在 `registry.py` 对应的字典里登记一个名字，然后在配置文件里 `use = "名字"` 即可，主流程不用改。
 
@@ -64,7 +68,7 @@
 
 `configs/*.toml` 是内置装配：七种表格处理组合各一份，`ingest --all-configs` 重建它们，13 种查询组合（加上返回单元）都从这些索引评估（`scripts/eval_tables.sh`）。`configs/extra/*.toml` 是不参与 `--all-configs` 的配置，同样按名称用 `--config` 选择；名称在两处之间不能重复。
 
-配置中解析、表格（提取器与三个表格环节）、分块、编码相关的设置，加上编码器身份（模型名与版本）和 `RULES_VERSION`，一起计算出**构建指纹**，记录在索引的 `manifest.json` 中。用 LLM 的表格环节，其模型、提示词版本、推理强度、长度与上下文规则也进入指纹。配置了 `[lexical]` 时，其分析器设置（去停用词、词干化）也进入指纹；没有这一节的配置不建 BM25 索引，指纹也不含它。检索器 `[retriever] use`、命中表格时的返回单元 `table_return_unit`、检索的 `top_k`（问答用，默认 4）、文档过滤开关 `document_filter`、评估的 `[eval] top_k`（默认 3，与历史基线一致）、问答 LLM 设置不参与计算，修改它们不需要重建索引。
+配置中解析、表格（提取器与三个表格环节）、分块、编码相关的设置，加上编码器身份（模型名与版本）和 `RULES_VERSION`，一起计算出**构建指纹**，记录在索引的 `manifest.json` 中。用 LLM 的表格环节，其模型、提示词版本、推理强度、长度与上下文规则也进入指纹。配置了 `[lexical]` 时，其分析器设置（去停用词、词干化）也进入指纹；没有这一节的配置不建 BM25 索引，指纹也不含它。检索器 `[retriever] use`、命中表格时的返回单元 `table_return_unit`、混合检索中 BM25 排名的权重 `bm25_weight`（默认 1，[decisions/017-bm25-weight.md](decisions/017-bm25-weight.md)）、检索的 `top_k`（问答用，默认 4）、文档过滤开关 `document_filter`、评估的 `[eval] top_k`（默认 3，与历史基线一致）、问答 LLM 设置不参与计算，修改它们不需要重建索引。
 
 配置改动导致指纹变化后，`status` 会显示"配置已改变"，这时需要用 `ingest --force` 全量重建。内置算法的输出发生变化时，要同步提升 `rag/config.py` 中的 `RULES_VERSION`；LLM 提示词改动时提升 `rag/ingest/tables/llm_tables.py` 中的 `PROMPT_VERSION`。
 
@@ -97,7 +101,9 @@
 
 `compare` 把几次评估并排生成 `reports/compare/<名称>/`：构建设置只差规则版本、编码器、BM25 分析器与表格环节、K 相同的评估放在同一标签页（检索器、返回单元可以不同），第一次为基线，每列标明规则版本、编码器、检索器和是否返回整表，可另给显示名（`目录名=显示名`）；分块预算等其他构建设置不同的评估分在不同标签页，因此多预算配对比较按预算分页；每题状态按 未命中 < 部分覆盖 < 完整覆盖 比较，标出变好、变差，列出所需 K 有变化的证据组，并列出在 ≥3 题 Top-K 中出现的不相关结果。评估记录了表格证据时，另有"表格证据"标签页：指标 1–3 总表、支配判定、对照、逐题、K 曲线；`--table-spec` 文件给出对照组、排除的证据组与结论。`runs.json` 记录输入。
 
-**报告由已保存的结果生成**：`report` 从各索引的中间结果重新生成入库审核页，从 `result.json` 重新生成评估页，从 `runs.json` 重新生成对比页，再生成入口 `reports/index.html`。改了页面的样式或结构，运行 `report` 即可，不需要重新入库或评估。
+`eval --budgets` 每题检索一次、取全量排名，按每档预算各出一份评估。`query-compare` 在 13 种组合上评估全部查询侧配置，生成 `reports/query/<名称>/`：比较两种查询方式按凑齐向量的支配关系判定变好、变差（[rules/evaluation.md](rules/evaluation.md)"查询侧的比较"），页面由使用者选择两侧配置。每条检索文本在每份索引上的全量排名缓存在 `.rag/retrieval-cache/`（以索引的 manifest 识别；混合检索存两个通道的名次，读出时按当前 BM25 权重重新融合），规划调用缓存在 `.rag/llm-cache/`。
+
+**报告由已保存的结果生成**：`report` 从各索引的中间结果重新生成入库审核页，从 `result.json` 重新生成评估页，从 `runs.json` 重新生成对比页，重新生成查询侧对比页，再生成入口 `reports/index.html`。改了页面的样式或结构，运行 `report` 即可，不需要重新入库或评估。
 
 ## 7. 代码地图
 
@@ -111,8 +117,8 @@ rag/
   paths.py         目录约定（.rag/ 与 reports/）
   ingest/          sources（发现 PDF）、parsers/、language（文档语言）、tables/（提取、选优、续表、表头、结构、写法、LLM）、chunkers/、assemble、pipeline
   index/           embedder、store（Chroma）、analyzer 与 lexical（BM25）、tables（整表库）、audit（中间结果）、manifest、status、builder
-  query/           scope（检索范围）、retriever、units（返回单元）、prompt、llm
-  eval/            dataset、judge、metrics、table_metrics、table_structure（结构标注答案）、runner
-  reports/         html（页面外壳；样式与脚本写入 reports/assets/）、ingest（入库审核页）、evaluation、compare 与 table_compare（对比页）、index_page
+  query/           scope（检索范围、去编码）、retriever、units（返回单元与检索缓存）、planning（规划）、execution（检索执行、融合与合并）、prompt、llm
+  eval/            dataset、judge、metrics、table_metrics、table_structure（结构标注答案）、runner、query_compare（查询侧对比数据）
+  reports/         html（页面外壳；样式与脚本写入 reports/assets/）、ingest（入库审核页）、evaluation、compare 与 table_compare（对比页）、query_compare（查询侧对比页）、index_page
 tests/             算法、装配校验、索引一致性、检索范围、检索、评估、报告
 ```

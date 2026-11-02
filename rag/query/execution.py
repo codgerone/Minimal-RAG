@@ -9,7 +9,7 @@ question are fused by RRF, or, unfused, one phrasing is retrieved in place of th
 text; a selector (round robin or global RRF) merges the questions' rankings into the return
 order. Unmerged (evaluation only), a decomposed plan has its rankings and no return order.
 With codes stripped (P3.2.0) every text a question is retrieved by has the identifier codes removed
-first; the original-question route keeps them. Rules: docs/changes/v3.14.md.
+first; the original-question route keeps them. Rules: docs/rules/query-planning.md.
 """
 
 from __future__ import annotations

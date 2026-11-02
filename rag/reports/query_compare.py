@@ -4,7 +4,7 @@ The data every configuration shares (questions, plans, decomposition annotation,
 embedded in the page; each configuration's per-question facts (rag/eval/query_compare.py) are in
 facts/<config>.js and where its returned units came from in process/<config>.js, loaded when the
 configuration is ticked. Both sides empty shows V3.13; otherwise any two different configurations
-compare. Modules (docs/changes/v3.14.md): better / worse questions (completion vectors by
+compare. Modules (docs/archive/changes/v3.14.md): better / worse questions (completion vectors by
 dominance, independent of K), a heat map of the per-question verdict, the matrix and the curves at
 K, and the query process of the right side. Without a merge there is no return order: the matrix,
 the curves and the worst regressions are not shown.

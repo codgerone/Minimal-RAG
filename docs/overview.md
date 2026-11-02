@@ -1,4 +1,4 @@
-# 系统概览（V3.13）
+# 系统概览（V3.14）
 
 ## 这是什么
 
@@ -16,13 +16,14 @@
 | `python -m rag search "问题"` | 检索，显示检索范围、命中的 chunk 及其在向量与 BM25 两路的名次 |
 | `python -m rag ask "问题"` | 检索后让 LLM 依据证据回答；`--debug` 显示命中内容和完整 Prompt |
 | `python -m rag chat` | 连续提问（每轮独立检索，不记忆上下文） |
-| `python -m rag eval` | 用标注题目评估检索效果并生成报告（K 取配置中的 `[eval] top_k`，内置为 3） |
+| `python -m rag eval` | 用标注题目评估检索效果并生成报告（K 取配置中的 `[eval] top_k`，内置为 3）；`--budgets 3,6,9,12` 每题检索一次、每档 K 各出一份报告 |
 | `python -m rag anchors` | 在 PDF 上定位标注的 excerpt，生成高亮审核文件；核对后加 `--write` 写入标注 |
 | `python -m rag config list` / `config show NAME` | 查看装配配置（`configs/` 的七份内置装配与 `configs/extra/` 的 `plain_text`） |
 | `python -m rag compare RUN... --name NAME` | 把几次评估并排对比（每组第一次为基线），生成 `reports/compare/NAME/`；`--table-spec` 给出表格证据的对照组、排除组与结论 |
+| `python -m rag query-compare --name NAME` | 在 13 种组合上评估查询侧模块（分解、去编码、写法、融合、合并）的全部配置，生成查询侧对比页 `reports/query/NAME/`（[rules/query-planning.md](rules/query-planning.md)）；规划调用 LLM，结果缓存 |
 | `python -m rag report` | 由已保存的结果重新生成入库审核页、评估报告、对比页和报告首页（不重新入库、不重新评估） |
 
-`search`、`ask`、`chat` 会按问题中的标识编码限定检索范围（见下节）；`--document` 可手动指定只在某个文档内检索。`search`、`ask`、`chat`、`eval` 可加 `--retriever semantic|bm25|hybrid` 临时换检索器，加 `--table-return-unit chunk|table` 临时改变命中表格时的返回方式，都不需要重建索引。
+`search`、`ask`、`chat` 会按问题中的标识编码限定检索范围（见下节）；`--document` 可手动指定只在某个文档内检索。`search`、`ask`、`chat`、`eval` 可加 `--retriever semantic|bm25|hybrid` 临时换检索器，加 `--table-return-unit chunk|table` 临时改变命中表格时的返回方式，加 `--bm25-weight α` 临时改变混合检索中 BM25 的权重，都不需要重建索引。
 
 所有命令都可以加 `--config NAME` 选择装配，默认使用 `structured`（也可以用环境变量 `RAG_CONFIG` 指定）。
 
@@ -69,7 +70,7 @@ codes = ["ORDER2025001"]
 
 | 检索器 | 排序依据 |
 |---|---|
-| `hybrid`（内置装配默认） | 向量排名与 BM25 排名按倒数排名融合（RRF） |
+| `hybrid`（内置装配默认） | 向量排名与 BM25 排名按倒数排名融合（RRF）；BM25 一项的权重为 `[retriever] bm25_weight`，默认 1 |
 | `semantic` | 向量相似度 |
 | `bm25` | BM25 关键词得分 |
 
@@ -77,20 +78,36 @@ BM25 只能匹配问题中照抄原文的词（外文术语、型号、公司名
 
 **命中表格即返回整表**（`[retriever] table_return_unit = "table"`，内置装配默认）：检索命中表格的任一块时，返回整张表，同一张表在结果中只占一个位置，名次取它排名最靠前的一块，空出的位置由后面的结果补上。整表文本在入库时存入整表库（不做向量化）。长表格被切成多块后，分组标题、合计行与数据行分处不同块，整表交给 LLM 才能看懂（[决策 012](decisions/012-whole-table-return.md)）。代价是返回的文本变长：本库最大的表约 5000 token，对表格大小不设上限。
 
-## 当前效果（K=3，5 份 PDF，24 道题，数据集 3.2.0，混合检索，返回整表）
+## 当前效果（K=3，5 份 PDF，数据集 3.4.1：34 题，32 道可回答，混合检索，返回整表）
 
 | 装配 | 命中率 | 完整覆盖 | 证据组召回 | MRR | Chunk 精确率 | 跨文档污染 | 文档识别 | 每题返回 token |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| plain_text | 50.0% | 33.3% | 40.3% | 80.6% | 51.4% | 0.0% | 24/24 | 220 |
-| structured（默认） | 95.8% | 75.0% | 85.4% | 87.5% | 48.6% | 0.0% | 24/24 | 1255 |
-| structured_labeled | 91.7% | 83.3% | 86.1% | 83.3% | 48.6% | 0.0% | 24/24 | 1263 |
-| structured_llm | 95.8% | 75.0% | 85.4% | 87.5% | 48.6% | 0.0% | 24/24 | 1255 |
-| structured_llm_labeled | 91.7% | 83.3% | 86.1% | 81.2% | 48.6% | 0.0% | 24/24 | 1263 |
-| structured_llm_lead | 95.8% | 83.3% | 88.2% | 84.7% | 51.4% | 0.0% | 24/24 | 1245 |
-| structured_llm_labeled_lead | 95.8% | 83.3% | 88.2% | 81.9% | 51.4% | 0.0% | 24/24 | 1245 |
-| structured_summary | 95.8% | 83.3% | 88.2% | 85.4% | 51.4% | 0.0% | 24/24 | 1171 |
+| plain_text | 46.9% | 25.0% | 34.4% | 78.6% | 52.1% | 0.0% | 32/32 | 215 |
+| structured（默认） | 93.8% | 68.8% | 81.0% | 87.0% | 50.0% | 0.0% | 32/32 | 1403 |
+| structured_labeled | 90.6% | 78.1% | 82.8% | 83.9% | 51.0% | 0.0% | 32/32 | 1401 |
+| structured_llm | 93.8% | 68.8% | 81.0% | 87.0% | 50.0% | 0.0% | 32/32 | 1403 |
+| structured_llm_labeled | 90.6% | 78.1% | 82.8% | 83.9% | 51.0% | 0.0% | 32/32 | 1402 |
+| structured_llm_lead | 93.8% | 78.1% | 84.4% | 84.9% | 53.1% | 0.0% | 32/32 | 1391 |
+| structured_llm_labeled_lead | 93.8% | 78.1% | 84.4% | 84.4% | 53.1% | 0.0% | 32/32 | 1391 |
+| structured_summary | 90.6% | 75.0% | 81.2% | 87.5% | 52.1% | 0.0% | 32/32 | 1302 |
 
-返回整表时，结果按"返回单元"计：一张整表算一个结果，视为返回了它的全部 chunk；Chunk 精确率、跨文档污染也按结果计。每题返回 token 是全部题返回文本之和（按 multilingual-e5 分词器计数）除以 24；structured 每题最多 2365。
+返回整表时，结果按"返回单元"计：一张整表算一个结果，视为返回了它的全部 chunk；Chunk 精确率、跨文档污染也按结果计。每题返回 token 是全部可回答题返回文本之和（按 multilingual-e5 分词器计数）除以 32；structured 每题最多 2603。
+
+13 种组合在 K = 3、6、9、12 下的完整覆盖题数（`bash scripts/eval_tables.sh --budgets 3,6,9,12`，对比页 `reports/compare/v3.14-baseline/`；R/L 为规则 / LLM 表格结构，M/L 为 Markdown / 表头映射写法，+ 为引导句，S 为摘要，-C / -T 为返回命中 chunk / 整表）：
+
+| 组合 | K = 3 | K = 6 | K = 9 | K = 12 |
+|---|---:|---:|---:|---:|
+| RM-C、RM-T | 19、22 | 24、27 | 28、28 | 29、29 |
+| RL-C、RL-T | 19、25 | 24、27 | 25、28 | 27、29 |
+| LM-C、LM-T | 19、22 | 22、27 | 25、28 | 29、29 |
+| LL-C、LL-T | 18、25 | 23、27 | 25、28 | 27、29 |
+| LM+-C、LM+-T | 20、25 | 24、27 | 28、28 | 29、29 |
+| LL+-C、LL+-T | 19、25 | 24、27 | 26、28 | 28、29 |
+| S-T | 24 | 26 | 28 | 29 |
+
+K = 12 时各组合都未完整覆盖 CONTRACT-105-Q003（交货地点）、Q011（罚金条款）、Q014（交货地点）。
+
+以下各段为各版本测量时的数据集上的结果（V3.13 及以前为数据集 3.2.0、24 题）。
 
 表格题另看表格证据指标（[rules/evaluation.md](rules/evaluation.md)"表格证据指标"），以 12 道表格题、排除 3 个与表格入库无关的证据组计，每题所需返回单元数：structured_llm_lead 1.92，structured、structured_llm、structured_summary 2.08，structured_llm_labeled_lead 2.17，structured_labeled 2.33，structured_llm_labeled 2.42；13 种组合的对比见 `reports/compare/v3.13-llm-tables/`。
 
@@ -118,14 +135,18 @@ V3.12 在命中表格时返回整张表（[决策 012](decisions/012-whole-table
 
 V3.13 用 LLM 处理表格（[决策 013](decisions/013-llm-tables.md)）：表格处理拆成表格结构、写法、表格检索文本三个环节，七份装配覆盖全部组合。LLM 只标注结构（表头、分节、隐式合并），chunk 中的表格文字全部由代码从原单元格写出；12 张表的标注全部正确，但只有 PO 25-19 数量表有分节，其余表与规则判出的表头相同，返回整表时 structured_llm 与 structured 逐题相同。引导句使表格题所需返回单元由 2.08 降到 1.92；摘要在排除 3 组后为 2.08，不排除时最少（3.42 对 3.58）。这些差距只有 1–3 题，与 LLM 重新生成一次文字带来的变动同一量级，引导句与摘要分不出优劣。默认装配改为 Markdown 写法（只返回命中 chunk 时明显优于表头映射，返回整表时相近），完整覆盖由 20/24 变为 18/24，少的是 PO-25-19-Q001、Q003：两题需要的第 3、4 个返回单元次序互换；命中由 22 升到 23。整表文本改为原样网格写出，每题返回 token 由 1860 降到 1255。
 
+V3.14 在查询侧对分解、去编码、改写、翻译、HyDE、step-back、融合与合并方式、混合检索的 BM25 权重逐项摸底（[决策 015](decisions/015-query-modules.md)、[016](decisions/016-strip-codes-switch.md)、[017](decisions/017-bm25-weight.md)），默认配置不变。数据集扩为 34 题（新增分解题、多跳题、隐含前提题与无答案题）。按凑齐向量的支配关系、4 次 LLM 生成逐题判定：去编码 + 原句 + 译文 RRF 相对原问题检索一次，32 题中 12 题 4 次都变好、5 题都变差；改写、step-back 变差不少于变好；HyDE、预先分解以各有优势为主；分解的收益在合成一个返回顺序后被抵消。这些结论用于 V3.15 多轮检索。逐题对比见 `reports/query/v3.14/`，各措施的逐题原因见 `reports/experiments/v3.14-factors/`。
+
 ## 不做什么（当前范围外）
 
 扫描件 OCR、图片理解、重排模型、从文档内容自动抽取编号、按文档属性（类型、客户、日期）过滤、多轮对话记忆、Agent/工具调用、Web 界面。
 
+`ask`、`chat` 不分解问题、不改写问题、不做多轮检索：查询侧模块只在 `query-compare` 中实验，结论见[决策 015](decisions/015-query-modules.md)，多轮检索是 V3.15（[changes/v3.15.md](changes/v3.15.md)）。
+
 ## 怎么验收
 
 1. 打开 `reports/index.html`：每份装配都显示"可用"，文档都是"已入库"，向量索引、倒排索引、整表库都是"完整"。点进解析、表格、分块页，抽查内容是否与 PDF 一致。
-2. 打开最新的评估报告：指标不低于上表；文档识别准确率 24/24；"含文字兜底"为 0，或者已抽查确认。
+2. 打开最新的评估报告：指标不低于上表；文档识别准确率 32/32；"含文字兜底"为 0，或者已抽查确认。
 3. `uv run pytest` 全部通过。
 
 ## 数据放在哪里

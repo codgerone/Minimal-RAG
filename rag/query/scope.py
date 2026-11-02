@@ -124,7 +124,7 @@ def describe(scope: SearchScope, names: dict[str, str]) -> str:
 
 
 def strip_codes(text: str, codes: Collection[str]) -> tuple[str, int]:
-    """The text with every occurrence of the codes removed (P3.2.0, docs/changes/v3.14.md), and how
+    """The text with every occurrence of the codes removed (P3.2.0, docs/rules/query-planning.md), and how
     many were removed. An occurrence is found as in identification: the normalized code inside the
     normalized text; it spans from its first to its last letter or digit. Brackets left empty are
     removed and runs of whitespace merged."""

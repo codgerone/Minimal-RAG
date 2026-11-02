@@ -10,7 +10,7 @@ derived from is kept: each information item's completion rank and first-unit ran
 every evidence unit, the leading units (indices into the combination's unit table) and the cost.
 Without a merge there is no return order: an item's ranks are taken over the rankings of the
 sub-questions annotated for it (DECOMPOSITION_MAPPING). Where each leading unit came from is kept
-apart, per configuration (`process`). Rules: docs/changes/v3.14.md.
+apart, per configuration (`process`). Rules: docs/archive/changes/v3.14.md.
 """
 
 from __future__ import annotations
@@ -67,7 +67,7 @@ def evidence_positions(evidence, run: execution.QueryRun) -> dict[str, int]:
     return {u.key: n for n, u in enumerate(run.units, start=1) if chunks & set(u.chunk_ids)}
 
 
-# The rule since 2026-10-28 (docs/changes/v3.14.md, question 3): completion vectors by dominance.
+# The rule since 2026-10-28 (docs/archive/changes/v3.14.md, question 3): completion vectors by dominance.
 
 def completion_vector(needed: Iterable[int | None]) -> list[float]:
     """The groups' completion ranks in ascending order; never complete counts as after every rank."""
@@ -97,8 +97,8 @@ def leads(left: list[float], right: list[float]) -> dict[str, list[tuple[int, in
     return out
 
 
-PLAN_MODEL = "google/gemini-3.8-flash"   # docs/changes/v3.14.md, question 1
-# Sub-question ↔ information item annotation of the frozen plans (docs/changes/v3.14.md, "分层评估")
+PLAN_MODEL = "google/gemini-3.8-flash"   # docs/archive/changes/v3.14.md, question 1
+# Sub-question ↔ information item annotation of the frozen plans (docs/archive/changes/v3.14.md, "分层评估")
 DECOMPOSITION_MAPPING = "reports/experiments/v3.14-decomposition/mapping.json"
 # The same for the independent generations 1–3 of the perturbation test ("冻结与复现")
 PERTURBATION_MAPPING = "reports/experiments/v3.14-perturbation/mapping_g{generation}.json"
@@ -109,7 +109,7 @@ MERGES = {"rr": "round_robin", "rrf": "rrf"}   # key code → execution.SELECTOR
 
 @dataclass(frozen=True)
 class QueryConfig:
-    """One query configuration (docs/changes/v3.14.md, "分层评估")."""
+    """One query configuration (docs/archive/changes/v3.14.md, "分层评估")."""
     decompose: bool = False
     merge: str | None = None          # with decomposition: rr | rrf; None: unmerged (evaluation only)
     original_route: bool = False      # with a merge
