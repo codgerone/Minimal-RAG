@@ -30,8 +30,9 @@ from rag.query.planning import document_languages
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
-VARIANTS = {"q": "P3.1_P3.2.0_P3.2.1", "d": "P3.1_P3.2.0_P3.2.1~d", "qd": "P3.1_P3.2.0_P3.2.1~qd"}
-PAIRS = (("q", "d"), ("q", "qd"), ("d", "qd"))
+VARIANTS = {f"{m}:{v}": f"P3.1_P3.2.0_{m}" + (f"~{v}" if v != "q" else "")
+            for m in ("P3.2.1", "P3.2.4") for v in ("q", "d", "qd")}
+PAIRS = tuple((f"{m}:{a}", f"{m}:{b}") for m in ("P3.2.1", "P3.2.4") for a, b in (("q", "d"), ("q", "qd"), ("d", "qd")))
 
 
 def verdict(left, right) -> str:
