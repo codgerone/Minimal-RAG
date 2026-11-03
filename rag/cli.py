@@ -39,6 +39,16 @@ def _retriever_option(sub: argparse.ArgumentParser) -> None:
                      help="混合检索中 BM25 排名的权重 α（默认取配置文件 [retriever] bm25_weight，未写为 1）")
 
 
+def _generations(value: str) -> list[int]:
+    try:
+        numbers = sorted({int(part) for part in value.split(",")})
+    except ValueError:
+        raise argparse.ArgumentTypeError("写成逗号分隔的非负整数，如 0,1,2,3")
+    if any(n < 0 for n in numbers):
+        raise argparse.ArgumentTypeError("写成逗号分隔的非负整数，如 0,1,2,3")
+    return numbers
+
+
 def _weight(value: str) -> float:
     number = float(value)
     if number < 0:
@@ -87,6 +97,12 @@ def build_parser() -> argparse.ArgumentParser:
     budget.add_argument("--budgets", type=_budgets, metavar="B1,B2,...",
                         help="几档预算（返回单元数），每题检索一次，每档各出一份评估，如 3,6,9,12")
     _retriever_option(evaluate)
+    evaluate.add_argument("--multi-round", metavar="NAME",
+                          help="多轮检索评估：每题按配置 [multi_round] 的上限运行，各档上限从同一次运行截取，"
+                               "生成 reports/multi_round/NAME/")
+    evaluate.add_argument("--cases", metavar="ID,ID,...", help="多轮检索评估只跑这些题")
+    evaluate.add_argument("--generations", type=_generations, default=None, metavar="0,1,2,3",
+                          help="多轮检索评估的独立生成编号（默认 0,1,2,3）")
     anchors = command("anchors", "在 PDF 上定位每段 excerpt，生成审核文件 tmp/anchor-review/")
     anchors.add_argument("--since", metavar="GIT_REF", help="审核页并排显示相对这个 git 版本改动过的 excerpt")
     anchors.add_argument("--write", action="store_true", help="把定位结果写入 eval/ground-truth（审核确认后再用）")
@@ -386,6 +402,8 @@ def _eval(workspace: Workspace, args: argparse.Namespace) -> int:
     from rag.eval.runner import run_evaluation
     from rag.reports.index_page import write_index_page
     assembly = _query_assembly(workspace, args)
+    if args.multi_round:
+        return _eval_multi_round(workspace, assembly, args)
     budgets = args.budgets or [args.top_k or assembly.config.eval_top_k]
     folders = run_evaluation(workspace, assembly, budgets)
     for folder in folders:
@@ -393,6 +411,22 @@ def _eval(workspace: Workspace, args: argparse.Namespace) -> int:
     write_index_page(workspace)
     for folder in folders:
         _out(f"报告：{(folder / 'index.html').relative_to(workspace.root).as_posix()}")
+    return 0
+
+
+def _eval_multi_round(workspace: Workspace, assembly, args: argparse.Namespace) -> int:
+    from rag.eval.multi_round import GENERATIONS, collect
+    from rag.reports.multi_round import write_pages
+    _require_queryable(workspace, assembly)
+    cases = [c.strip() for c in args.cases.split(",") if c.strip()] if args.cases else None
+    generations = args.generations if args.generations is not None else list(GENERATIONS)
+
+    def progress(case_id, generation, facts):
+        _out(f"  {case_id} 第 {generation} 次生成：{facts['termination']}，{len(facts['calls'])} 次调用")
+
+    data = collect(workspace, args.multi_round, assembly, cases, generations, progress=progress)
+    folder = write_pages(workspace, data)
+    _out(f"多轮检索评估：{(folder / 'index.html').relative_to(workspace.root).as_posix()}")
     return 0
 
 
@@ -511,9 +545,11 @@ def _report(workspace: Workspace, args: argparse.Namespace) -> int:
     comparisons = rerender_comparisons(workspace)
     from rag.reports.query_compare import rerender_query_pages
     queries = rerender_query_pages(workspace)
+    from rag.reports.multi_round import rerender as rerender_multi_round
+    multi = rerender_multi_round(workspace)
     write_index_page(workspace)
     _out(f"已重新生成 {documents} 份文档的入库审核页、{count} 份评估报告、{comparisons} 份对比页、"
-         f"{queries} 份查询侧对比页和 reports/index.html")
+         f"{queries} 份查询侧对比页、{multi} 份多轮检索评估页和 reports/index.html")
     return 0
 
 
