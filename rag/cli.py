@@ -76,6 +76,8 @@ def build_parser() -> argparse.ArgumentParser:
         _retriever_option(sub)
         if name == "ask":
             sub.add_argument("--debug", action="store_true", help="显示检索命中和发给 LLM 的完整消息")
+            sub.add_argument("--multi-round", action="store_true",
+                             help="多轮检索：LLM 读材料判断、派生子问题、兜底检索后作答（设置见配置 [multi_round]）")
     chat = command("chat", "多次提问（每轮独立检索，不保留对话记忆）")
     chat.add_argument("--top-k", type=_positive)
     _retriever_option(chat)
@@ -238,10 +240,13 @@ class _Scoper:
         self.catalog = load_catalog(workspace.documents, sources) if self.enabled else None
 
     def __call__(self, question: str):
+        return self.scope(question).document_ids
+
+    def scope(self, question: str):
         from rag.query.scope import describe, resolve_scope
         scope = resolve_scope(question, self.catalog, self.enabled, self.user_document)
         _out(describe(scope, self.names))
-        return scope.document_ids
+        return scope
 
 
 def _searcher(workspace: Workspace, assembly):
@@ -315,9 +320,39 @@ def _answer(workspace: Workspace, assembly, searcher, question: str, top_k: int,
             llm.api_key = key
 
 
+def _ask_multi_round(workspace: Workspace, assembly, args: argparse.Namespace) -> None:
+    from rag.ingest.tables.llm_tables import LLMCache
+    from rag.query.llm import OpenRouterLLM
+    from rag.query.multi_round.planner import Caller
+    from rag.query.multi_round.runner import run
+    from rag.query.multi_round.state import SCHEDULE_A, Schedule
+    from rag.query.planning import document_languages
+    settings = assembly.config.multi_round
+    scope = _Scoper(workspace, assembly, args.document).scope(args.question)
+    languages_of = document_languages(workspace.index_dir(assembly.name))
+    languages = sorted({languages_of[d] for d in (scope.document_ids or languages_of)})
+    caller = Caller(OpenRouterLLM(model=settings.model, temperature=0, env_override=False),
+                    LLMCache(workspace.root / ".rag" / "llm-cache"))
+    schedule = Schedule(settings.fallback_schedule) if settings.fallback_schedule else SCHEDULE_A
+    record = run(args.question, _searcher(workspace, assembly), scope.document_ids, scope.codes, languages, caller,
+                 settings.max_llm_calls, settings.units_per_attempt, schedule)
+    if args.debug:
+        for q in record.questions:
+            _out(f"{q.id}（{q.parent_id or '原问题'}）[{q.status.value}{'：' + q.abandon_reason if q.abandon_reason else ''}] {q.text}"
+                 f"
+    证据：{'、'.join(q.evidence) or '无'}；{q.note}")
+    seconds = sum(c.seconds for c in record.calls)
+    _out(f"[多轮检索：{len(record.calls)} 次 LLM 调用，{seconds:.1f} 秒，终止：{record.termination}，"
+         f"交给 LLM 的单元 {len(record.table.order)} 个]")
+    _out(record.answer)
+
+
 def _ask(workspace: Workspace, args: argparse.Namespace) -> int:
     assembly = _query_assembly(workspace, args)
     _require_queryable(workspace, assembly)
+    if args.multi_round:
+        _ask_multi_round(workspace, assembly, args)
+        return 0
     _answer(workspace, assembly, _searcher(workspace, assembly), args.question,
             args.top_k or assembly.config.top_k, _Scoper(workspace, assembly, args.document), args.debug)
     return 0

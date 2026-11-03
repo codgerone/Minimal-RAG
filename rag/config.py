@@ -28,6 +28,15 @@ class Component:
 
 
 @dataclass(frozen=True)
+class MultiRoundConfig:
+    """[multi_round]: query settings of multi-round retrieval (docs/changes/v3.15.md "配置"); not fingerprinted."""
+    max_llm_calls: int = 5                                   # the answering call included
+    fallback_schedule: tuple[tuple[str, ...], ...] = ()      # fallback groups by attempt; () = arrangement A (one group of every mode)
+    units_per_attempt: int = 3                               # K per question, mode and retrieval
+    model: str = "google/gemini-3.8-flash"
+
+
+@dataclass(frozen=True)
 class AssemblyConfig:
     name: str
     description: str
@@ -47,6 +56,7 @@ class AssemblyConfig:
     table_structure: Component | None = None    # [table_structure]: header_rules / llm_annotation
     table_index_text: Component | None = None   # [table_index_text]: rows / rows_with_lead / summary
     bm25_weight: float = 1.0   # hybrid: weight α of the BM25 ranking in the fusion (docs/rules/lexical.md)
+    multi_round: MultiRoundConfig = MultiRoundConfig()
 
     def build_settings(self) -> dict[str, Any]:
         """Everything that changes index content. Retrieval, LLM and display settings are excluded."""
@@ -103,7 +113,7 @@ def load_config(path: Path) -> AssemblyConfig:
     except (OSError, tomllib.TOMLDecodeError) as exc:
         raise ConfigError(f"无法读取配置 {path.name}：{exc}") from exc
     known = {"name", "description", "parser", "table_extractors", "table_structure", "table_formatter",
-             "table_index_text", "chunker", "embedder", "lexical", "retriever", "llm", "eval"}
+             "table_index_text", "chunker", "embedder", "lexical", "retriever", "llm", "eval", "multi_round"}
     unknown = set(data) - known
     if unknown:
         raise ConfigError(f"{path.name}：未知配置项 {sorted(unknown)}")
@@ -155,7 +165,36 @@ def load_config(path: Path) -> AssemblyConfig:
         _component(data["llm"], "llm", path),
         eval_top_k, document_filter, lexical, table_return_unit,
         table_sections["table_structure"], table_sections["table_index_text"], float(bm25_weight),
+        _multi_round(data.get("multi_round", {}), path),
     )
+
+
+def _multi_round(data: Any, path: Path) -> MultiRoundConfig:
+    if not isinstance(data, dict) or set(data) - {"max_llm_calls", "fallback_schedule", "units_per_attempt", "model"}:
+        raise ConfigError(f"{path.name}：[multi_round] 只接受 max_llm_calls、fallback_schedule、units_per_attempt、model")
+    default = MultiRoundConfig()
+    calls = data.get("max_llm_calls", default.max_llm_calls)
+    k = data.get("units_per_attempt", default.units_per_attempt)
+    if type(calls) is not int or calls < 2:
+        raise ConfigError(f"{path.name}：multi_round.max_llm_calls 必须为不小于 2 的整数")
+    if type(k) is not int or k <= 0:
+        raise ConfigError(f"{path.name}：multi_round.units_per_attempt 必须为正整数")
+    schedule = data.get("fallback_schedule", "A")
+    if schedule == "A":
+        groups: tuple[tuple[str, ...], ...] = ()
+    elif isinstance(schedule, list) and all(isinstance(g, list) and all(isinstance(m, str) for m in g) for g in schedule):
+        groups = tuple(tuple(g) for g in schedule)
+        from rag.query.multi_round.state import Schedule
+        try:
+            Schedule(groups)
+        except ValueError as exc:
+            raise ConfigError(f"{path.name}：multi_round.fallback_schedule：{exc}") from exc
+    else:
+        raise ConfigError(f'{path.name}：multi_round.fallback_schedule 只能是 "A" 或兜底方式分组的列表')
+    model = data.get("model", default.model)
+    if not isinstance(model, str) or not model:
+        raise ConfigError(f"{path.name}：multi_round.model 必须为非空字符串")
+    return MultiRoundConfig(calls, groups, k, model)
 
 
 def config_dir(workspace: Path) -> Path:
