@@ -1,8 +1,7 @@
 """Re-counting of the decision 015 comparisons (and the V3.14.1 language comparisons) with the 13
-combinations averaged (2026-11-02): per generation, the number of questions better / worse / mixed in
-each combination, averaged over the 13 combinations; per question, its direction in a generation is the
-sign of (combinations better − combinations worse), stable when the same in all four generations, a flip
-when positive in one and negative in another. The retired rule (one direction shared by every changed
+combinations averaged (2026-11-02, rules/evaluation.md): per generation, the number of questions better /
+worse / mixed / same in each combination, averaged over the 13 combinations; stable (better or worse in all
+four generations) and flips (better in one, worse in another) counted in each combination and averaged. The retired rule (one direction shared by every changed
 combination, otherwise mixed) is computed alongside, to check each row against decision 015.
 
 Reads reports/query/v3.14/{facts,perturb}; writes recount.json next to this script.
@@ -75,8 +74,11 @@ def count(left: str, right: str) -> dict:
             per[q] = "same" if not s else s.pop() if len(s) == 1 else "mixed"
         old.append(per)
     old_q = {q: [old[i][q] for i in range(4)] for q in cases}
+    stable = {x: sum(all(v[g][q][i] == x for g in GENS) for q in cases for i in range(n)) / n for x in ("better", "worse")}
+    flips = sum(any(v[g][q][i] == "better" for g in GENS) and any(v[g][q][i] == "worse" for g in GENS)
+                for q in cases for i in range(n)) / n
     return {
-        "avg": avg,
+        "avg": avg, "stable_avg": stable, "flips_avg": flips,
         "net": [a["better"] - a["worse"] for a in avg],
         "per_question": {q: [[vs.count(x) for x in ("better", "worse", "mixed")] for vs in (v[g][q] for g in GENS)] for q in cases},
         "stable": {"better": [q for q, s in sign.items() if all(x > 0 for x in s)],
@@ -96,7 +98,7 @@ def main() -> None:
         print(f"{row}\n  旧：逐组合 {' '.join(f'{a}/{b}' for a, b in o['combo'])}  逐题 {' '.join('/'.join(map(str, g)) for g in o['gens'])}  稳定 {o['stable'][0]}/{o['stable'][1]}")
         mean = {k: sum(a[k] for a in x['avg']) / 4 for k in ('better', 'worse', 'mixed')}
         print(f"  新：平均 {mean['better']:.1f}/{mean['worse']:.1f}/{mean['mixed']:.1f}  净值 {sum(x['net'])/4:+.1f}（{min(x['net']):+.1f}…{max(x['net']):+.1f}）"
-              f"  稳定 ▲{len(x['stable']['better'])} ▼{len(x['stable']['worse'])}  翻转 {len(x['flip'])}")
+              f"  4 次都变好 {x['stable_avg']['better']:.1f} 都变差 {x['stable_avg']['worse']:.1f} 翻转 {x['flips_avg']:.1f}")
 
 
 if __name__ == "__main__":
