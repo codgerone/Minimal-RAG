@@ -331,16 +331,18 @@ def _ask_multi_round(workspace: Workspace, assembly, args: argparse.Namespace) -
     scope = _Scoper(workspace, assembly, args.document).scope(args.question)
     languages_of = document_languages(workspace.index_dir(assembly.name))
     languages = sorted({languages_of[d] for d in (scope.document_ids or languages_of)})
+    scoper = _Scoper(workspace, assembly, args.document)
     caller = Caller(OpenRouterLLM(model=settings.model, temperature=0, env_override=False),
-                    LLMCache(workspace.root / ".rag" / "llm-cache"))
+                    LLMCache(workspace.root / ".rag" / "llm-cache"),
+                    scope={"documents": [scoper.names[d] for d in (scope.document_ids or scoper.names)],
+                           "identifier_codes": list(scope.codes)})
     schedule = Schedule(settings.fallback_schedule) if settings.fallback_schedule else SCHEDULE_A
     record = run(args.question, _searcher(workspace, assembly), scope.document_ids, scope.codes, languages, caller,
                  settings.max_llm_calls, settings.units_per_attempt, schedule)
     if args.debug:
         for q in record.questions:
             _out(f"{q.id}（{q.parent_id or '原问题'}）[{q.status.value}{'：' + q.abandon_reason if q.abandon_reason else ''}] {q.text}"
-                 f"
-    证据：{'、'.join(q.evidence) or '无'}；{q.note}")
+                 f"\n    证据：{'、'.join(q.evidence) or '无'}；{q.note}")
     seconds = sum(c.seconds for c in record.calls)
     _out(f"[多轮检索：{len(record.calls)} 次 LLM 调用，{seconds:.1f} 秒，终止：{record.termination}，"
          f"交给 LLM 的单元 {len(record.table.order)} 个]")
