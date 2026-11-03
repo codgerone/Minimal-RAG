@@ -17,7 +17,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Collection, Protocol, Sequence
 
-from rag.query.planning import NO_COST, Phrasing, Plan
+from rag.query.planning import NO_COST, Phrasing, Plan, Question
 from rag.query.retriever import RRF_K
 from rag.query.scope import strip_codes
 from rag.query.units import ResultUnit, UnitSearch
@@ -119,6 +119,27 @@ class GlobalRRF:
         return [Pick(int(min(r, key=lambda x: (x[1], int(x[0])))[0]), u, 0) for u, r in zip(units, ranks)]
 
 
+LANGUAGE_KINDS = ("rewrite", "step_back")   # written in the question's language or in the document languages
+
+
+def texts_of(question: Question, kind: str, variant: str, languages: Sequence[str]) -> list[Phrasing]:
+    """The texts of one phrasing. Rewrite and step-back: in the question's language (variant
+    "question"), in each document language ("document"; a language the question is already written
+    in, which has no text of its own, is stood for by the question-language text) or both. Other
+    phrasings have one variant."""
+    own = [p for p in question.phrasings if p.kind == kind]
+    if kind not in LANGUAGE_KINDS:
+        return own
+    asked = [p for p in own if not p.language]
+    written = [p for p in own if p.language]
+    if variant == "question":
+        return asked
+    document = written + (asked if len({p.language for p in written}) < len(languages) else [])
+    if variant == "document":
+        return document
+    return asked + [p for p in document if p not in asked]
+
+
 SELECTORS: dict[str, Selector] = {"round_robin": RoundRobin(), "rrf": GlobalRRF()}
 
 
@@ -133,14 +154,21 @@ class QuerySettings:
     merge: str | None = None                  # with decomposition: round_robin | rrf; None: unmerged (evaluation only)
     original_route: bool = False              # with a merge: the original question as one more ranking (round robin: last in each round)
     strip_codes: bool = False                 # P3.2.0: the identifier codes removed from every text of every question
+    languages: frozenset[tuple[str, str]] = frozenset()   # (rewrite | step_back, document | both); absent: the question's language
 
     def __post_init__(self):
         if not self.fuse_phrasings and len(self.phrasings) != 1:
             raise ValueError("不融合时只能选一种写法")
+        for kind, variant in self.languages:
+            if kind not in LANGUAGE_KINDS or kind not in self.phrasings or variant not in ("document", "both"):
+                raise ValueError(f"写法语言不合法：{kind} {variant}")
         if self.merge is not None and self.merge not in SELECTORS:
             raise ValueError(f"未知合并方式：{self.merge}")
         if self.original_route and self.merge is None:
             raise ValueError("原问题一路只在选了合并方式时使用")
+
+
+KIND_ORDER = ["question", "rewrite", "translation", "hyde", "step_back"]   # the order the planner writes them in
 
 
 def label(phrasing: Phrasing) -> str:
@@ -168,19 +196,20 @@ def planned(searcher: UnitSearch, plan: Plan, settings: QuerySettings,
     """Runs a plan: every question's own text and enabled phrasings retrieved once each and
     fused per question (unfused: its one phrasing alone); with decomposition, the merge selects
     the return order from the questions' rankings, the original question's ranking last when
-    the original route is on, and without a merge there is no return order. Raises Unavailable
-    when an unfused phrasing does not have exactly one text for a question. `codes`: the identifier
+    the original route is on, and without a merge there is no return order. An unfused phrasing with
+    several texts (languages) has them fused by RRF; it raises Unavailable when it has no text for a
+    question. `codes`: the identifier
     codes the scope was found by, removed when settings.strip_codes."""
     if not plan.decomposed and (settings.merge or settings.original_route):
         raise ValueError("合并方式与原问题一路只在分解时使用")
     retrievals, seconds = 0, 0.0
     routes: list[Fused] = []
-    kinds = {"question", *settings.phrasings} if settings.fuse_phrasings else set(settings.phrasings)
+    kinds = ["question"] * settings.fuse_phrasings + sorted(settings.phrasings, key=KIND_ORDER.index)
+    variant = dict(settings.languages)
     for question in plan.questions:
-        texts = question.of(kinds)
-        if not settings.fuse_phrasings and len(texts) != 1:
-            raise Unavailable(f"{question.id} 的写法 {next(iter(settings.phrasings))} 有 {len(texts)} 段文字，"
-                              "不融合时须恰好一段")
+        texts = [t for kind in kinds for t in texts_of(question, kind, variant.get(kind, "question"), plan.languages)]
+        if not settings.fuse_phrasings and not texts:
+            raise Unavailable(f"{question.id} 没有写法 {next(iter(settings.phrasings))} 的文字")
         rankings = []
         for phrasing in texts:
             text = strip_codes(phrasing.text, codes)[0] if settings.strip_codes else phrasing.text
@@ -204,6 +233,7 @@ def planned(searcher: UnitSearch, plan: Plan, settings: QuerySettings,
     order = tuple(Selected(p.unit, routes[p.route].text, p.round, routes[p.route].question_id,
                            routes[p.route].ranks[position[p.route][p.unit.key]]) for p in picks)
     # LLM cost: only the planning steps this configuration uses
-    llm = (plan.decomposition if plan.decomposed else NO_COST) + (plan.phrasing if settings.phrasings else NO_COST)
+    llm = ((plan.decomposition if plan.decomposed else NO_COST) + (plan.phrasing if settings.phrasings else NO_COST)
+           + (plan.language_phrasing if settings.languages else NO_COST))
     return QueryRun(order, (), QueryCost(retrievals, seconds, llm.calls, llm.seconds, llm.cost_usd),
                     tuple(routes))

@@ -1,7 +1,7 @@
 import json
 
-from rag.query.planning import (Planner, check_decomposition, check_phrasings, phrase_messages,
-                                question_list)
+from rag.query.planning import (Planner, check_decomposition, check_languages, check_phrasings, languages_messages,
+                                phrase_messages, question_list)
 
 
 def entry(qid, translations=("spanish",), hyde=("spanish",), **over):
@@ -108,3 +108,32 @@ def test_a_cached_plan_reports_the_cost_recorded_when_made_split_by_step():
     assert cached.decomposition == fresh.decomposition and cached.phrasing == fresh.phrasing
     assert (cached.decomposition.calls, cached.decomposition.cost_usd) == (1, 0.001)
     assert cached.cost.calls == 2 and abs(cached.cost.cost_usd - 0.002) < 1e-12
+
+
+def lang_entry(qid, rewrite=("spanish",), step_back=("spanish",)):
+    return {"id": qid, "rewrite": [{"language": l, "text": f"r-{l}"} for l in rewrite],
+            "step_back": [{"language": l, "text": f"s-{l}"} for l in step_back]}
+
+
+def test_document_language_phrasings_are_checked_per_question_and_language():
+    listed = question_list(["a"])
+    got, issues = check_languages(json.dumps({"phrasings": [lang_entry("Q1")]}), listed)
+    assert issues == [] and [(p.kind, p.language, p.text) for p in got["Q1"]] == [
+        ("rewrite", "spanish", "r-spanish"), ("step_back", "spanish", "s-spanish")]
+    assert check_languages(json.dumps({"phrasings": [lang_entry("Q1", rewrite=())]}), listed)[1] == []
+    _, issues = check_languages(json.dumps({"phrasings": [lang_entry("Q1", rewrite=("spanish", "spanish"))]}), listed)
+    assert any("rewrite" in i for i in issues)
+    system, _ = languages_messages(listed, ["english", "spanish"])
+    assert "written in: english, spanish." in system["content"]
+
+
+def test_document_language_phrasings_are_added_to_the_plan_by_a_call_of_their_own():
+    llm = FakeLLM([answer(entry("Q1")), json.dumps({"phrasings": [lang_entry("Q1")]})])
+    planner = Planner(llm, MemoryCache())
+    plan = planner.add_languages(planner.plan("Q", ["spanish"], False), ["spanish"])
+    assert [(p.kind, p.language) for p in plan.questions[0].phrasings][-2:] == [("rewrite", "spanish"), ("step_back", "spanish")]
+    assert plan.languages == ("spanish",) and plan.language_phrasing.calls == 1 and plan.cost.calls == 2
+    assert json.loads(llm.seen[1][1]["content"]) == {"questions": [{"id": "Q1", "text": "Q"}]}
+    degraded = Planner(FakeLLM([answer(entry("Q1")), "{}", "{}"]), None)
+    plan = degraded.add_languages(degraded.plan("Q", ["spanish"], False), ["spanish"])
+    assert plan.degraded[-1].startswith("languages") and len(plan.questions[0].phrasings) == 5

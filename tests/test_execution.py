@@ -142,7 +142,7 @@ def test_an_unfused_phrasing_is_retrieved_in_place_of_the_question():
         QuerySettings(frozenset({"rewrite", "hyde"}), fuse_phrasings=False)
 
 
-def test_an_unfused_phrasing_without_exactly_one_text_is_unavailable():
+def test_an_unfused_phrasing_without_a_text_is_unavailable():
     with pytest.raises(Unavailable, match="Q1"):
         planned(TextSearch(), make_plan(False), QuerySettings(frozenset({"translation"}), fuse_phrasings=False))
 
@@ -191,3 +191,43 @@ def test_stripping_codes_removes_them_from_every_text_but_not_from_the_original_
     planned(searcher, make_plan(True), QuerySettings(frozenset({"rewrite"}), merge="round_robin",
                                                     original_route=True, strip_codes=True), codes=["Q1", "Q2"])
     assert searcher.texts == ["ab", "r ba", "cd", "r dc", "orig xa"]
+
+
+def language_plan(written=("spanish",), languages=("spanish",)):
+    q = Question("Q1", "Q1 ab", (Phrasing("question", "Q1 ab"), Phrasing("rewrite", "Q1r ba"),
+                                 *(Phrasing("rewrite", f"Q1{l[:2]} ca", l) for l in written),
+                                 Phrasing("step_back", "Q1s ab")))
+    return Plan("orig", False, (q,), PlanCost(0, 0.0, 0.0), PlanCost(1, 2.0, 0.006),
+                languages=languages, language_phrasing=PlanCost(1, 1.0, 0.002))
+
+
+def test_rewrite_in_the_question_language_the_document_languages_or_both():
+    for variant, texts in (("question", ["Q1r ba"]), ("document", ["Q1sp ca"]), ("both", ["Q1r ba", "Q1sp ca"])):
+        searcher = TextSearch()
+        languages = frozenset({("rewrite", variant)} - {("rewrite", "question")})
+        run = planned(searcher, language_plan(), QuerySettings(frozenset({"rewrite"}), fuse_phrasings=False, languages=languages))
+        assert searcher.texts == texts
+        assert run.cost.llm_calls == (2 if languages else 1)
+    # unfused with two texts: RRF over them, without the original text
+    run = planned(TextSearch(), language_plan(), QuerySettings(frozenset({"rewrite"}), fuse_phrasings=False,
+                                                               languages=frozenset({("rewrite", "both")})))
+    assert [s.unit.key for s in run.order] == ["a", "b", "c"]   # a twice; b, c tie, by key
+    searcher = TextSearch()
+    planned(searcher, language_plan(), QuerySettings(frozenset({"rewrite", "step_back"}), languages=frozenset({("rewrite", "document")})))
+    assert searcher.texts == ["Q1 ab", "Q1sp ca", "Q1s ab"]
+
+
+def test_a_document_language_the_question_is_written_in_is_stood_for_by_the_question_language_text():
+    searcher = TextSearch()
+    plan = language_plan(written=("spanish",), languages=("english", "spanish"))
+    planned(searcher, plan, QuerySettings(frozenset({"rewrite"}), fuse_phrasings=False, languages=frozenset({("rewrite", "document")})))
+    assert searcher.texts == ["Q1sp ca", "Q1r ba"]
+    searcher = TextSearch()
+    planned(searcher, plan, QuerySettings(frozenset({"rewrite"}), fuse_phrasings=False, languages=frozenset({("rewrite", "both")})))
+    assert searcher.texts == ["Q1r ba", "Q1sp ca"]
+
+
+def test_a_language_variant_needs_its_phrasing_and_applies_only_to_rewrite_and_step_back():
+    for kind, variant in (("translation", "both"), ("rewrite", "question"), ("step_back", "both")):
+        with pytest.raises(ValueError):
+            QuerySettings(frozenset({"rewrite", "translation"}), languages=frozenset({(kind, variant)}))

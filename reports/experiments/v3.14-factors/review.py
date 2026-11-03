@@ -88,16 +88,36 @@ def mark(v: str) -> str:
     return f'<span class="{cls}">{s}</span>'
 
 
-def qv(cells: dict, g: int) -> str:
-    """A question's verdict in generation g: the one direction its changed combinations share, or mixed."""
+def qv_retired(cells: dict, g: int) -> str:
+    """The rule until 2026-11-02: the one direction every changed combination shares, otherwise mixed."""
     s = {x["v"][g] for x in cells.values()} - {"same"}
     return "same" if not s else s.pop() if len(s) == 1 else "mixed"
 
 
 def qstab(c: dict) -> dict:
-    """Question-level verdicts in the four generations: counts per generation, the questions with the
-    same verdict in all four, and the questions that are better in one generation and worse in another."""
-    per = {q: [qv(cells, g) for g in range(4)] for q, cells in c["cells"].items()}
+    """By the rule of 2026-11-02 (rules/evaluation.md "跨组合汇总"): every combination counts on its own and the
+    counts are averaged over the combinations. Per generation the questions better / worse / mixed / same
+    ("gens") and the net; stable (better, or worse, in all four generations) and flips (better in one, worse
+    in another); per question and generation, how many combinations are better / worse / mixed ("counts");
+    the questions better (worse) in every combination and generation ("all")."""
+    cells = c["cells"]
+    n = len(next(iter(cells.values())))
+    gens = [{v: sum(x["v"][g] == v for cs in cells.values() for x in cs.values()) / n
+             for v in ("better", "worse", "mixed", "same")} for g in range(4)]
+    stable = {v: sum(all(x["v"][g] == v for g in range(4)) for cs in cells.values() for x in cs.values()) / n
+              for v in ("better", "worse")}
+    flips = sum("better" in x["v"] and "worse" in x["v"] for cs in cells.values() for x in cs.values()) / n
+    counts = {q: [[sum(x["v"][g] == v for x in cs.values()) for v in ("better", "worse", "mixed")] for g in range(4)]
+              for q, cs in cells.items()}
+    every = {v: [q for q, cs in cells.items() if all(x["v"][g] == v for x in cs.values() for g in range(4))]
+             for v in ("better", "worse")}
+    return {"gens": gens, "net": [x["better"] - x["worse"] for x in gens], "stable": stable, "flips": flips,
+            "counts": counts, "all": every}
+
+
+def qstab_retired(c: dict) -> dict:
+    """qstab by the rule until 2026-11-02 (qv_retired), as this evidence page was written."""
+    per = {q: [qv_retired(cells, g) for g in range(4)] for q, cells in c["cells"].items()}
     return {"per": per,
             "gens": [{v: sum(1 for x in per.values() if x[g] == v) for v in ("better", "worse", "mixed")} for g in range(4)],
             "stable": {v: [q for q, x in per.items() if len(set(x)) == 1 and x[0] == v] for v in ("better", "worse", "mixed")},
@@ -135,7 +155,7 @@ def summary_table() -> str:
         cnt, q = counts(c)
         later = " ".join(f'<span class="up">{c["counts"][g]["better"]}</span>/<span class="down">{c["counts"][g]["worse"]}</span>'
                          for g in ("1", "2", "3"))
-        s = qstab(c)
+        s = qstab_retired(c)
         st = (f'<span class="up">▲{len(s["stable"]["better"])}</span> <span class="down">▼{len(s["stable"]["worse"])}</span> '
               f'◆{len(s["stable"]["mixed"])}' + (f' · 翻转 {len(s["flip"])}' if s["flip"] else ""))
         rows.append(f'<tr><td class="nw"><b>{esc(c["factor"])}</b></td><td>{esc(c["context"])}</td>'
@@ -158,7 +178,7 @@ STAB = [("P3.2.0", "原问题 · 原句", "去编码"), ("P3.2.1", "原问题 ·
 
 def stability() -> str:
     comps = [(comp(f, x), n) for f, x, n in STAB]
-    stabs = [qstab(c) for c, _ in comps]
+    stabs = [qstab_retired(c) for c, _ in comps]
     head = "".join(f'<th class="nw">{esc(n)}</th>' for _, n in comps)
     summary = "".join(
         f'<tr><td class="nw">{esc(n)}</td>'
@@ -419,7 +439,9 @@ def main() -> None:
         '<h1>查询侧各措施单独效果的依据</h1>'
         '<div class="sub">V3.14 · 2026-10-29 · 写法提示词 v8 · 第 0–3 次独立生成 · 13 组合 × 32 题 · 判定为凑齐向量的支配关系（提案问题 3）</div>'
         + card('怎么读', '<p>每个措施只和"只差它一个因素"的配置比较：一个问题只用一条检索文本（不融合），分解时不合并（每个信息项看它对应的子问题）。'
-               '融合、合并单列为"组合方式"。总表的数字默认取第 0 次生成，另列第 1–3 次与 4 次一致的题数；逐题见"4 次生成稳定性"标签。</p>')
+               '融合、合并单列为"组合方式"。总表的数字默认取第 0 次生成，另列第 1–3 次与 4 次一致的题数；逐题见"4 次生成稳定性"标签。</p>'
+               '<p class="sub"><b>统计口径</b>：本页按 2026-11-02 之前的口径（一题在一次生成中，有变化的组合同向才取该方向，否则为 ◆），是 V3.14 各项实验的原始记录。'
+               '2026-11-02 起改为按 13 组合取平均，现行数字见对比页模块 1 与决策 015 补充。</p>')
         + card('结论', f'<p>各措施的结论（建议、单独效果、逐题的变差原因、适合的题、随机性、是不是措施本身的问题）写在'
                f'<a href="{PAGE}#m-analysis">V3.14 对比页的模块 1</a>（<code>module.py</code> 生成）。本页是它引用的依据：单因素总表、逐题判定与实验 A–F。</p>')
         + '<h2>依据</h2>' + nav + panels)
