@@ -1,0 +1,54 @@
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 16079.74it/s]
+RM-C
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 17367.44it/s]
+RM-T
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 19254.84it/s]
+RL-C
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 15402.42it/s]
+RL-T
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 14556.96it/s]
+LM-C
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 18402.26it/s]
+LM-T
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 15901.53it/s]
+LL-C
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 18899.79it/s]
+LL-T
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 20380.69it/s]
+LM+-C
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 28692.42it/s]
+LM+-T
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 15761.39it/s]
+LL+-C
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 17167.82it/s]
+LL+-T
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 15668.78it/s]
+S-T
+去编码 original +2.4（+2.4…+2.4） | sub +5.6（+3.5…+6.5） | pooled +8.0（+5.8…+8.8）
+分解 original +4.2（+3.8…+4.8）
+翻译 original +3.6（+2.0…+4.9） | sub +3.4（+1.2…+5.6） | pooled +7.0（+4.8…+9.1）
+翻译 + 原句 RRF original +5.3（+4.8…+5.8） | sub +7.0（+4.3…+8.8） | pooled +12.3（+9.2…+13.7）
+HyDE original -1.5（-3.1…+0.9） | sub -2.2（-4.1…-0.3） | pooled -3.7（-6.2…-0.9）
+HyDE + 原句 RRF original +2.4（+0.9…+4.2） | sub +3.3（+0.6…+4.6） | pooled +5.7（+3.6…+8.5）
+改写（问题语言） original -1.6（-3.1…+0.0） | sub -2.2（-3.2…-0.2） | pooled -3.8（-5.5…-0.2）
+改写（文档语言） original +4.6（+3.8…+5.2） | sub +1.3（-0.8…+4.1） | pooled +5.9（+3.8…+8.4）
+改写（两种 RRF） original +4.3（+3.9…+4.8） | sub +2.5（-0.1…+3.8） | pooled +6.8（+4.2…+8.1）
+改写（两种 RRF）+ 原句 RRF original +5.9（+5.5…+6.2） | sub +5.9（+4.4…+8.9） | pooled +11.8（+9.9…+14.9）
+step-back（问题语言） original -8.9（-10.9…-5.5） | sub -20.2（-26.2…-12.8） | pooled -29.1（-37.0…-23.8）
+step-back（文档语言） original -3.5（-5.5…-1.2） | sub -17.0（-23.1…-6.3） | pooled -20.4（-26.2…-10.3）
+step-back（两种 RRF） original -4.0（-4.8…-2.8） | sub -18.8（-23.8…-15.8） | pooled -22.8（-28.1…-20.1）
+step-back（两种 RRF）+ 原句 RRF original -2.8（-4.4…-1.7） | sub -7.6（-11.2…-3.4） | pooled -10.5（-15.5…-6.8）
+翻译 → 翻译 + 原句 RRF original -1.0（-1.5…-0.1） | sub +2.0（+1.4…+2.7） | pooled +0.9（-0.2…+1.8）
+HyDE → HyDE + 原句 RRF original +1.4（+0.4…+2.9） | sub +2.8（+1.7…+3.8） | pooled +4.2（+2.3…+5.8）
+改写（问题语言） → 改写（文档语言） original +5.8（+5.2…+7.0） | sub +3.1（+1.5…+5.5） | pooled +8.9（+6.9…+10.6）
+改写（问题语言） → 改写（两种 RRF） original +6.1（+5.8…+6.4） | sub +5.8（+4.8…+7.2） | pooled +11.9（+10.6…+13.0）
+改写（文档语言） → 改写（两种 RRF） original -2.5（-3.7…-1.5） | sub +0.1（-1.1…+2.2） | pooled -2.4（-3.8…+0.3）
+改写（两种 RRF） → 改写（两种 RRF）+ 原句 RRF original -2.4（-3.4…+0.0） | sub -0.5（-2.8…+3.3） | pooled -2.9（-6.2…+0.6）
+step-back（问题语言） → step-back（文档语言） original +4.9（-0.6…+9.1） | sub +3.3（-12.1…+14.5） | pooled +8.3（-3.0…+18.8）
+step-back（问题语言） → step-back（两种 RRF） original +7.8（+6.1…+10.1） | sub +5.7（-8.2…+14.1） | pooled +13.4（+1.9…+20.8）
+step-back（文档语言） → step-back（两种 RRF） original +0.7（-2.1…+5.2） | sub +2.6（-6.0…+16.7） | pooled +3.3（-6.2…+14.6）
+step-back（两种 RRF） → step-back（两种 RRF）+ 原句 RRF original +3.3（+1.6…+4.0） | sub +20.8（+17.4…+23.6） | pooled +24.1（+21.0…+27.5）
+翻译 → 改写（文档语言） original +3.0（+1.3…+4.3） | sub -0.4（-4.7…+3.2） | pooled +2.7（-1.3…+6.3）
+翻译 + 原句 RRF → 改写（两种 RRF）+ 原句 RRF original -1.6（-2.5…+0.9） | sub -3.0（-4.8…+1.3） | pooled -4.6（-7.2…-1.2）
+噪声 original {'问号改句号': 4.5, '前加请问': 2.1, '句子倒序': 2.7}
+噪声 sub {'问号改句号': 4.3, '前加请问': 4.9}

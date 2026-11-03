@@ -88,15 +88,6 @@ def mark(v: str) -> str:
     return f'<span class="{cls}">{s}</span>'
 
 
-def qv(cells: dict, g: int) -> str:
-    """A question's direction in generation g (rule of 2026-11-02, docs/rules/evaluation.md): better when more
-    of the 13 combinations are better than worse, worse when fewer, mixed when as many and something changed,
-    same when nothing changed."""
-    vs = [x["v"][g] for x in cells.values()]
-    b, w = vs.count("better"), vs.count("worse")
-    return "better" if b > w else "worse" if w > b else "same" if vs.count("same") == len(vs) else "mixed"
-
-
 def qv_retired(cells: dict, g: int) -> str:
     """The rule until 2026-11-02: the one direction every changed combination shares, otherwise mixed."""
     s = {x["v"][g] for x in cells.values()} - {"same"}
@@ -104,17 +95,24 @@ def qv_retired(cells: dict, g: int) -> str:
 
 
 def qstab(c: dict) -> dict:
-    """Per generation, the number of questions better / worse / mixed in each combination, averaged over the
-    combinations ("gens"), and better minus worse ("net"); per question its direction in each generation
-    (qv), the questions with the same direction in all four ("stable") and the questions better in one
-    generation and worse in another ("flip")."""
-    per = {q: [qv(cells, g) for g in range(4)] for q, cells in c["cells"].items()}
-    n = len(next(iter(c["cells"].values())))
-    gens = [{v: sum(cells[x]["v"][g] == v for cells in c["cells"].values() for x in cells) / n
-             for v in ("better", "worse", "mixed")} for g in range(4)]
-    return {"per": per, "gens": gens, "net": [x["better"] - x["worse"] for x in gens],
-            "stable": {v: [q for q, x in per.items() if len(set(x)) == 1 and x[0] == v] for v in ("better", "worse", "mixed")},
-            "flip": [q for q, x in per.items() if "better" in x and "worse" in x]}
+    """By the rule of 2026-11-02 (rules/evaluation.md "跨组合汇总"): every combination counts on its own and the
+    counts are averaged over the combinations. Per generation the questions better / worse / mixed / same
+    ("gens") and the net; stable (better, or worse, in all four generations) and flips (better in one, worse
+    in another); per question and generation, how many combinations are better / worse / mixed ("counts");
+    the questions better (worse) in every combination and generation ("all")."""
+    cells = c["cells"]
+    n = len(next(iter(cells.values())))
+    gens = [{v: sum(x["v"][g] == v for cs in cells.values() for x in cs.values()) / n
+             for v in ("better", "worse", "mixed", "same")} for g in range(4)]
+    stable = {v: sum(all(x["v"][g] == v for g in range(4)) for cs in cells.values() for x in cs.values()) / n
+              for v in ("better", "worse")}
+    flips = sum("better" in x["v"] and "worse" in x["v"] for cs in cells.values() for x in cs.values()) / n
+    counts = {q: [[sum(x["v"][g] == v for x in cs.values()) for v in ("better", "worse", "mixed")] for g in range(4)]
+              for q, cs in cells.items()}
+    every = {v: [q for q, cs in cells.items() if all(x["v"][g] == v for x in cs.values() for g in range(4))]
+             for v in ("better", "worse")}
+    return {"gens": gens, "net": [x["better"] - x["worse"] for x in gens], "stable": stable, "flips": flips,
+            "counts": counts, "all": every}
 
 
 def qstab_retired(c: dict) -> dict:

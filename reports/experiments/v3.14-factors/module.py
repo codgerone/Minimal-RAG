@@ -1,5 +1,7 @@
-"""Module 1 of the comparison page (reports/query/v3.14/): what each query-side measure does on its own,
-measure by measure, with fixed items: recommendation, effect alone, every question that got worse or
+"""Module 1 of the comparison page (reports/query/v3.14/), "各措施的效果分析": a total table of measures 0–13 at three
+levels (the original question, each sub-question, both pooled) from reports/experiments/v3.14-average/levels.json,
+with a reference, the wording noise floor and direct comparisons; then, per group, a collapsible detailed analysis
+with fixed items: recommendation, effect alone, every question that got worse or
 mixed (its verdicts in the four generations, the channel ranks, the cause and whether it was tested),
 which questions suit it, randomness, and whether the losses come from the measure itself.
 
@@ -37,15 +39,14 @@ def net(x: float) -> str:
 
 
 def nums(c: dict) -> str:
-    """The comparison's numbers by the rule of 2026-11-02: per generation, questions better / worse / mixed
-    averaged over the 13 combinations; the net (better − worse), its mean and range over the four
-    generations; the questions with the same direction in all four, and the flips."""
+    """The comparison's numbers by the rule of 2026-11-02 (rules/evaluation.md): per generation, questions better /
+    worse / mixed averaged over the 13 combinations; the net, its mean and range over the four generations; stable
+    and flips counted per combination and averaged."""
     s = qstab(c)
     gens = " ".join(f'<span class="up">{d["better"]:.1f}</span>/<span class="down">{d["worse"]:.1f}</span>/{d["mixed"]:.1f}' for d in s["gens"])
-    flip = f'，翻转 {len(s["flip"])} 题' if s["flip"] else "，无翻转"
     return (f'净值 {net(sum(s["net"]) / 4)}（第 0–3 次 {min(s["net"]):+.1f} … {max(s["net"]):+.1f}）；'
-            f'13 组合平均的题数 ▲/▼/◆，第 0–3 次：{gens}；按题方向 4 次一致 '
-            f'<span class="up">▲{len(s["stable"]["better"])}</span> <span class="down">▼{len(s["stable"]["worse"])}</span>{flip}')
+            f'13 组合平均的题数 ▲/▼/◆，第 0–3 次：{gens}；4 次都变好 <span class="up">{s["stable"]["better"]:.1f}</span> / '
+            f'都变差 <span class="down">{s["stable"]["worse"]:.1f}</span>（翻转 {s["flips"]:.1f}）')
 
 
 def ranks(n) -> str:
@@ -95,35 +96,30 @@ EXTRA = {"channel": ("通道名次（第 0 次 · RM-T · 去编码）", None), 
          "step": ("补回被去掉的词（混合 · RM-T）", stepback)}
 
 
-def tally(c: dict, q: str) -> str:
-    """Per generation, how many of the 13 combinations are better / worse / mixed for the question."""
-    cells = c["cells"][q].values()
-    return "；".join(f'第 {g} 次 ▲{sum(x["v"][g] == "better" for x in cells)} ▼{sum(x["v"][g] == "worse" for x in cells)} '
-                    f'◆{sum(x["v"][g] == "mixed" for x in cells)}' for g in range(4))
-
-
 def question_table(forms: list[tuple[str, dict]], causes: dict[str, str], extra: str | None, kind: str | None,
                    later: str | None = None) -> str:
-    """`later`: the cause shown for a question that is neither worse nor mixed in the first column (the
-    measure alone) but only in the others."""
+    """Every question with a worse or mixed combination in any column and generation; each cell gives, for
+    generations 0–3, how many of the 13 combinations are better / worse. `later`: the cause shown for a
+    question that has none in the first column (the measure alone) but only in the others."""
     stabs = [(label, qstab(c)) for label, c in forms]
-    cases = [q for q in forms[0][1]["cells"]
-             if any(set(s["per"][q]) & {"worse", "mixed"} for _, s in stabs)]
-    head = "".join(f'<th class="nw">{esc(label)}<br><span class="meta">第 0–3 次</span></th>' for label, _ in stabs)
+    bad = lambda s, q: any(x[1] or x[2] for x in s["counts"][q])
+    cases = [q for q in forms[0][1]["cells"] if any(bad(s, q) for _, s in stabs)]
+    head = "".join(f'<th class="nw">{esc(label)}<br><span class="meta">第 0–3 次 变好/变差（组合数）</span></th>' for label, _ in stabs)
     if extra:
         head += f'<th>{esc(EXTRA[extra][0])}</th>'
     rows = []
-    for q in sorted(cases, key=lambda q: (-sum(s["per"][q].count("worse") for _, s in stabs), q)):
+    for q in sorted(cases, key=lambda q: (-sum(x[1] for _, s in stabs for x in s["counts"][q]), q)):
         f = FEAT[q]
         tab = sum(f["table_items"])
-        cells = "".join(f'<td class="nw" title="{tally(c, q)}">{"".join(mark(v) for v in s["per"][q])}</td>'
-                        for (_, c), (_, s) in zip(forms, stabs))
+        cells = "".join('<td class="nw">' + " · ".join(
+            f'<span class="up">{b}</span>/<span class="down">{w}</span>' + (f'<span class="meta">◆{m}</span>' if m else "")
+            for b, w, m in s["counts"][q]) + "</td>" for _, s in stabs)
         if extra == "channel":
             cells += f'<td class="nw meta">{channel(kind, q)}</td>'
         elif extra:
             cells += f'<td class="meta">{EXTRA[extra][1](q)}</td>'
         rows.append(f'<tr><td class="nw">{esc(q)}<br><span class="meta">{esc(DOC[f["document"][:4]])} · 证据在表 {tab}/{f["items"]}</span></td>'
-                    f'{cells}<td>{causes.get(q, later if later and not set(stabs[0][1]["per"][q]) & {"worse", "mixed"} else UNTESTED)}</td></tr>')
+                    f'{cells}<td>{causes.get(q, later if later and not bad(stabs[0][1], q) else UNTESTED)}</td></tr>')
     return ('<div class="scroll"><table><tr><th>题</th>' + head + '<th>原因</th></tr>' + "".join(rows) + '</table></div>')
 
 
@@ -154,7 +150,7 @@ MEASURES = [
 表格题有两种情况（实验 A 第二部分）：PO-25-19-Q001、Q003、Q005、CONTRACT-105-Q014 中带数字的编码让向量偏向数字密集的表格，删去后表格退后；
 PO-25-19-Q002、Q007、PO-24-12-Q004 用任何内容（含无意义词）占住编码的位置都与原样接近，只是删去一个词改变了句子——属于向量对措辞的敏感，与实验 C 同类。</p>""",
         "suit": "适合：证据在正文的题（信息项全部不变或变好）。不适合：证据在数字密集表格的题（小幅变差）。检索前无法知道证据在哪里，无法按题切换。",
-        "random": "作用于原句时不经过 LLM，同一输入 4 次结果相同，没有随机性。作用于 LLM 写法时，效果随写法变化（右两列）：净值平均为正（翻译上 +2.7，HyDE 上 +2.1），但各次生成差别大（翻译上 −0.2 … +4.8，HyDE 上 −1.4 … +7.0），翻转的题多（7、10 题）。",
+        "random": "作用于原句时不经过 LLM，同一输入 4 次结果相同，没有随机性。作用于 LLM 写法时，效果随写法变化（右两列）：净值平均为正（翻译上 +2.7，HyDE 上 +2.1），但各次生成差别大（翻译上 −0.2 … +4.8，HyDE 上 −1.4 … +7.0），翻转较多（按组合平均 3.4、2.6 题）。",
         "itself": "表格题的变差是去掉了一个碰巧有利的噪声，不是去编码引入了错误；前提是编码不出现在文档中（规则如此）。若用户登记了文档里真实出现的编号，删去会丢掉一个 BM25 可匹配的词——本数据中没有这种编码，<b>未验证</b>。",
         "causes": {
             "PO-25-19-Q005": "带数字的编码让向量偏向数字密集的表格，删去后表格退后；换成其他数字与原样相同、只剩字母与删去相同（实验 A，已验证）",
@@ -178,7 +174,7 @@ PO-25-19-Q002、Q007、PO-24-12-Q004 用任何内容（含无意义词）占住�
         "tables": [
             {"title": "原问题上", "forms": [0]},
             {"title": "子问题上（不合并）", "forms": [1], "extra": "subchannel", "causes_key": "sub_causes",
-             "intro": """<p>左侧是中文子问题，右侧是该子问题的译文，两侧都去编码；每个信息项看标注给它的子问题。与原问题上相比，净值 +3.6 → +1.0，4 次都变差的题 6 → 9；
+             "intro": """<p>左侧是中文子问题，右侧是该子问题的译文，两侧都去编码；每个信息项看标注给它的子问题。与原问题上相比，净值 +3.6 → +1.0，4 次都变差 3.5 → 6.2 题（按组合平均）；
 证据在正文的信息项由 ↑132 ↓39 变为 ↑89 ↓70，正文上的优势明显变小（第 0 次，13 组合）。逐题原因来自实验 F（依据页）：子问题译文的通道拆分、BM25 逐词得分与只改一处的对照。</p>
 <p><b>子问题上新出现的变差，机制相同：子问题短、只问一项，译文中能在文档里匹配上的词很少。</b>问到的那个词不是证据单元的用词时，BM25 只能靠 order、contrato、factura 这类到处都有的通用词打分，
 排在前面的是碰巧含这些词的正文块，混合后证据被挤后。原问题把几项一起问，总有某个词是证据单元的用词（PO-24-12-Q001 原问题译文里的 unit price、total amount 正是表头），所以原问题上不受影响。
@@ -195,7 +191,7 @@ PO-25-19-Q002、Q007、PO-24-12-Q004 用任何内容（含无意义词）占住�
 <p><b>译文不会用文档的标签（已验证，实验 E）</b>：变差题的译文逐条看过，都忠实于原题；但译文写"fourth delivery batch""Batch 1"，文档表格写"4th Delivery""1st Delivery"。只把这个短语换成文档用词，BM25 中证据 PO-25-19-Q007 10→2、PO-25-15-Q001/Q002 5→3。</p>
 <p>与原句 RRF 融合时 BM25 通道只占一半权重，损失减少而收益基本保留——这是组合方式的效果，见"融合与合并"标签页，不算翻译本身的作用。</p>""",
         "suit": "适合：证据为正文条款的题（合同 Q003、Q011–Q014，PO 24-12 的说明类题，4 次都变好）。不适合：证据全在表格、且文档有大量说明性正文的题（PO 25-15、PO 25-19、发票）。检索前无法知道证据在不在表格，<b>没有可在查询时使用的路由规则</b>，所以只能靠与原句融合来限制损失。",
-        "random": "净值 4 次都为正（单独 +2.0 … +4.9，融合 +4.8 … +5.8）。单独使用有 3 题、融合有 1 题在不同生成中翻转；变差的题大多 4 次都变差，少数题只在部分生成中变差（表中逐题可见），这部分是译文措辞的随机性。",
+        "random": "净值 4 次都为正（单独 +2.0 … +4.9，融合 +4.8 … +5.8）。翻转按组合平均：单独 1.1 题、融合 0.6 题；变差的题大多 4 次都变差，少数题只在部分生成中变差（表中逐题可见），这部分是译文措辞的随机性。",
         "itself": "两个来源都是措施固有的：① 加入词汇匹配通道后说明性正文胜过表格；② 翻译只看问题、不看文档，写不出文档特有的标签——提示词里已要求用该语言文档的术语，无法通用地解决。用在子问题上时②更突出：子问题只问一项，没有其他词兜底；另有一题是分解丢了所指，被翻译显现出来（分解的缺陷，不是翻译的）。",
         "sub_causes": {
             "PO-24-12-Q001": "e1 3→4、e3 2→4（RM 等组合）：表头是 Goods of Description、Qty，译文的 products、quantity 匹配不到，BM25 只靠 order 匹配正文块 c0003（descending order 等），表格不在 BM25 结果里，混合后正文块提前。换成 goods、Qty 后 BM25 排 1–2、混合回到 2（实验 F，已验证）。原问题的译文含 unit price、total amount，正是表头的词，所以原问题上不变（BM25 逐词得分）",
@@ -240,10 +236,10 @@ PO-25-19-Q002、Q007、PO-24-12-Q004 用任何内容（含无意义词）占住�
         "extra": "channel", "kind": "hyde",
         "why": "写一段文档语言的假想答案去检索。与翻译一样打开 BM25 通道：",
         "reading": """<p>规律与翻译相同，但对表格更不利（实验 B：加上 BM25 后表格信息项 ↑9 ↓37）。假想段落是叙述句，形似正文条款而不像表格行——这一解释<b>未验证</b>。</p>
-<p>与原句融合后净值 4 次都为正（+0.9 … +4.2），但 7 题在不同生成中翻转。叠加在"原句 + 翻译"之上时，净值 4 次都略为正（+0.8 … +2.3），平均约 2 题，7 题翻转；
+<p>与原句融合后净值 4 次都为正（+0.9 … +4.2），但翻转 2.7 题（按组合平均）。叠加在"原句 + 翻译"之上时，净值 4 次都略为正（+0.8 … +2.3），平均约 2 题，翻转 3.1 题；
 这个幅度是否超出措辞噪声（实验 C 用的是此前的统计口径），""" + UNTESTED + """，所以<b>仍不能确认叠加有额外收益</b>。</p>""",
         "suit": "与翻译相同：适合证据为正文条款的题，不适合证据在表格的题；检索前无法区分。",
-        "random": "单独使用时各次生成的净值为 −2.2、−1.6、+0.9、−3.1，方向不定，第 3 次最差：每次假想答案写法不同。与原句融合后净值 4 次都为正，但翻转的题反而更多（3 → 7）。",
+        "random": "单独使用时各次生成的净值为 −2.2、−1.6、+0.9、−3.1，方向不定，第 3 次最差：每次假想答案写法不同。与原句融合后净值 4 次都为正，但翻转反而更多（1.5 → 2.7 题，按组合平均）。",
         "itself": "对表格不利是措施固有的（BM25 通道 + 叙述体文本）；假想答案的内容可能与文档不符，这是 HyDE 的定义所致，无法通过提示词消除。",
         "causes": {
             "PO-25-15-Q001": "BM25 把条件说明段 c0002 排第 1，证据 4，混合 1·2→3·3（实验 B，第 0 次）；与翻译同一机制，融合后仍 4 次变差",
@@ -262,7 +258,7 @@ PO-25-19-Q002、Q007、PO-24-12-Q004 用任何内容（含无意义词）占住�
         "why": "把问题改写成更规范的中文。改写仍是中文，不改变 BM25 通道，只改变向量：",
         "reading": """<p><b>改写做的事几乎是固定的</b>：把问句改成名词短语（"…如何收费？"→"…收费标准与计费方式"），4 次生成的改写几乎逐字相同（逐题核对 8 道题的 4 次改写）。
 所以它在 4 次中稳定，只说明 LLM 每次写得一样，不能说明改写有真实作用。</p>
-<p><b>整体没有方向</b>：带编码时净值 +0.6（−0.2 … +1.8），去编码时 −1.6（−3.1 … 0.0）；4 次都变好与都变差的题一样多（4 / 4）。不改意思的机械改动（问号改句号、句子倒序）也会使 9/32、10/23 题的判定改变（实验 C），改写的总量在这个范围内。
+<p><b>整体没有方向</b>：带编码时净值 +0.6（−0.2 … +1.8），去编码时 −1.6（−3.1 … 0.0）；去编码时 4 次都变好 2.7 题、都变差 1.8 题（按组合平均）。不改意思的机械改动（问号改句号、句子倒序）也会使 9/32、10/23 题的判定改变（实验 C），改写的总量在这个范围内。
 但逐题看，<b>改写变差的题在机械改动下多数不变</b>（表中右列），即这几题对"改成名词短语"这种改法敏感，而不是对任意改动敏感；改成名词短语为什么让这些题的证据退后 1 名，""" + UNTESTED + """。</p>
 <p>与原句融合也是变差多于变好。</p>""",
         "suit": "找不到稳定适合的题型：4 次都变好与都变差的题数相当。",
@@ -282,7 +278,7 @@ PO-25-19-Q002、Q007、PO-24-12-Q004 用任何内容（含无意义词）占住�
 没有拉丁字母词的题，step-back 去掉的是中文限定（哪一批、哪家公司、哪种担保）；补回这些限定后 PO-25-19-Q009、CONTRACT-105-Q014、PO-25-19-Q005 恢复，CONTRACT-105-Q010 部分恢复（实验 D 第二部分，已验证）。</p>
 <p>与原句融合仍是变差多于变好。</p>""",
         "suit": "变好的题：答案在通用条款里、按批次统一规定的题（CONTRACT-105-Q012、PO-25-19-Q007），去掉具体批次反而贴近原文；CONTRACT-105-Q011 的提升来自去掉误导 BM25 的\"Ítem\"，属于碰巧。这类题检索前无法识别。",
-        "random": "净值 4 次都明显为负（−10.9 … −5.5），只有 1 题翻转：缺陷稳定存在，不是某次写法的偶然。",
+        "random": "净值 4 次都明显为负（−10.9 … −5.5），翻转 0.2 题（按组合平均）：缺陷稳定存在，不是某次写法的偶然。",
         "itself": "<b>是措施本身的固有缺陷</b>：它要去掉的恰是检索最需要的词。",
         "causes": {
             "E001-602-Q002": "去掉型号 HXE34K-S1，补回后恢复（实验 D，已验证）",
@@ -313,7 +309,7 @@ PO-25-19-Q002、Q007、PO-24-12-Q004 用任何内容（含无意义词）占住�
         "reading": """<p>检索层对表格信息项尤其有利。<b>主要损失在合并层</b>（表中第三列，轮流取相对不合并）：每个子问题的第 1 名必占一位（即使不是证据）、多路一致的单元没有加分、隐含前提拆成多问被稀释（上次已验证，<code>reports/experiments/v3.14-decomposition-diagnosis/</code>）。</p>
 <p>检索层的变差上次逐题做过对照实验，分四类：A 答案不写在文档里、需计算或推断（不是拆解导致）；B 证据单元的表示问题；C 拆解丢了所指或限定条件（真正的拆解缺陷）；D 第二跳依赖第一跳。</p>""",
         "suit": "不适合：答案需从多个数计算或推断的题（A）、第二跳依赖第一跳结果的题（D）——已验证。变好的题有什么共同特征" + UNTESTED + "。",
-        "random": "检索层净值 4 次都为正（带编码 +4.5 … +6.2，去编码 +3.8 … +4.8），各 1 题翻转；拆解每次不同，个别题的子问题丢限定条件属于生成波动。",
+        "random": "检索层净值 4 次都为正（带编码 +4.5 … +6.2，去编码 +3.8 … +4.8），翻转 0.4、0.1 题（按组合平均）；拆解每次不同，个别题的子问题丢限定条件属于生成波动。",
         "itself": "C 类是拆解本身的缺陷（补回后不差于原问题）；A、B、D 不是拆解导致的，拆解只是没能补救。合并层的损失是合并方式的问题，留给 V3.15。",
         "causes": {
             "CONTRACT-105-Q002": "A：e5 合同总金额在合同中没有合计数；子问题改问所依据的事实（各 Ítem 总价）后 13 组合都回到第 1（已验证）",
@@ -336,15 +332,15 @@ LANG_FORMS = (("单独（代替原句）· 原问题", "原问题 · 两侧去�
               ("与原句融合", "原问题 · 两侧去编码 · 原句 + {name} · {step}"),
               ("叠加在原句 + 翻译上", "原问题 · 两侧去编码 · 原句 + 翻译 + {name} · {step}"))
 LANGUAGE_READING = {   # measure id → the written reading (2026-11-02, after the results; numbers by the averaged rule)
-    "rewrite": """<p><b>改写用文档语言写明显好于问题语言</b>：单独使用、原问题上，问题语言 → 文档语言 净值 +5.8（4 次 +5.2 … +7.0），4 次一致 ▲12 ▼7、翻转 2 题。
-相对去编码原句，文档语言的改写净值 +4.6（+3.8 … +5.2），问题语言的改写 −1.6，翻译 +3.6；文档语言的改写与翻译直接比较 +3.0（+1.3 … +4.3），但 9 题翻转。</p>
+    "rewrite": """<p><b>改写用文档语言写明显好于问题语言</b>：单独使用、原问题上，问题语言 → 文档语言 净值 +5.8（4 次 +5.2 … +7.0），4 次都变好 9.2 题、都变差 4.9 题，翻转 0.8 题（按组合平均）。
+相对去编码原句，文档语言的改写净值 +4.6（+3.8 … +5.2），问题语言的改写 −1.6，翻译 +3.6；文档语言的改写与翻译直接比较 +3.0（+1.3 … +4.3），但翻转 3.6 题。</p>
 <p><b>机制与翻译相同（实验 G 通道拆分，已验证）</b>：问题语言的改写在这些文档上几乎没有 BM25 匹配，混合检索等于向量检索；文档语言的改写打开 BM25 通道，
 4 次都变好的题中，BM25 通道把证据排到前列（逐题名次见下表）。4 次都变差的题中已查 4 题，是翻译在 V3.14 中变差的同一类：BM25 把说明性正文排在表格前，或改写的说法不是表格的标签
 （PO-25-15 的 fourth batch 对 4th Delivery，换成表格标签后恢复，已验证）；其余各题的原因""" + UNTESTED + """。</p>
 <p><b>两种</b>：问题语言 → 两种 净值 +6.1（+5.8 … +6.4）；文档语言 → 两种 −2.5（−3.7 … −1.5），原问题上只用文档语言更好。两种中问题语言一条没有 BM25 匹配，RRF 后文档语言排名的作用减半。
 子问题上（不合并）问题语言 → 文档语言 +1.2、→ 两种 +3.7，文档语言 → 两种 −0.3，接近持平；每个子问题单独判定的结果在依据页目录的 exp_lang_subq.json。
 2026-11-02 用户决定 V3.15 中改写按两种：测试集题目少，原问题上文档语言的优势可能受此影响。</p>""",
-    "stepback": """<p><b>step-back 的语言</b>：单独使用、原问题上，问题语言 → 文档语言 净值 +4.9（−0.6 … +9.1），翻转 11 题；问题语言 → 两种 +7.8（+6.1 … +10.1），翻转 4 题；文档语言 → 两种 +0.7（−2.1 … +5.2）。
+    "stepback": """<p><b>step-back 的语言</b>：单独使用、原问题上，问题语言 → 文档语言 净值 +4.9（−0.6 … +9.1），翻转 6.5 题；问题语言 → 两种 +7.8（+6.1 … +10.1），翻转 2.0 题；文档语言 → 两种 +0.7（−2.1 … +5.2）。
 子问题上（不合并）分别为 −0.5、+1.1、+2.9，各次生成差别大。只有两种相对问题语言在原问题上 4 次都为正；汇总原问题与子问题后也是两种最稳定（依据页目录 exp_lang_subq.json），2026-11-02 用户决定 V3.15 中 step-back 按两种。
 相对去编码原句，文档语言的 step-back 净值 −3.5（问题语言 −8.9）：V3.14 发现的缺陷（去掉的限定条件正是检索最需要的词）与语言无关，仍然存在。各题变化的原因""" + UNTESTED + """。</p>""",
 }
@@ -364,7 +360,7 @@ def channel_cause(q: str, kind: str, stable: str) -> str:
     """The measured ranks of a question with no written cause (RM-T, generation 0)."""
     ch = _LANG_CH[q]
     r = lambda name, ret: ranks(ch[f"{kind}:{name}"][ret]["RM-T"]["n"])
-    head = {"better": "问题语言 → 文档语言 4 次都变好", "worse": "问题语言 → 文档语言 4 次都变差"}.get(stable, "")
+    head = {"better": "问题语言 → 文档语言 13 组合 × 4 次都变好", "worse": "问题语言 → 文档语言 13 组合 × 4 次都变差"}.get(stable, "")
     return ((head + "：" if head else "") + f'BM25 中证据 {r("question", "bm25")} → {r("document", "bm25")}，'
             f'混合 {r("question", "hybrid")} → {r("document", "hybrid")}（RM-T，第 0 次，实验 G）'
             + ("" if stable == "better" else "；原因" + UNTESTED))
@@ -390,7 +386,7 @@ def language_block(m: dict) -> str:
             f'两种为两段文本各检索一次后 RRF 融合。每格为左 → 右的对照，点击在本页设置两侧。'
             f'实验 G（通道拆分与换成表格标签）的数据在依据页目录的 exp_lang_channels.json、exp_lang_labels.json。</p>'
             + LANGUAGE_READING.get(m["id"], "") + table + ref
-            + '<p class="meta">逐题：单独使用、原问题上的三组对照中，任一次生成方向为变差（▼）或持平（◆）的题。</p>'
+            + '<p class="meta">逐题：单独使用、原问题上的三组对照中，任一次生成有组合变差或各有优势的题。</p>'
             + question_table(forms, language_causes(m["id"], forms[0][1]), None, None))
 
 
@@ -398,7 +394,7 @@ def language_causes(mid: str, c: dict) -> dict[str, str]:
     """The written causes; every other question gets its measured channel ranks."""
     kind = {"rewrite": "rewrite", "stepback": "step_back"}[mid]
     s = qstab(c)
-    stable = {q: v for v in ("better", "worse") for q in s["stable"][v]}
+    stable = {q: v for v in ("better", "worse") for q in s["all"][v]}
     out = {q: channel_cause(q, kind, stable.get(q, "")) for q in c["cells"]}
     out.update(LANGUAGE_CAUSES.get(mid, {}))
     return out
@@ -422,19 +418,19 @@ def measure(m: dict) -> str:
     lines = [f'<tr><th class="nw">{esc(label)}</th><td>{here(fc, (fc["left"] or "V3.13") + " → " + fc["right"])}<br>{nums(fc)}</td></tr>'
              for label, fc in forms]
     s = qstab(c)
-    listed = "；".join(f'4 次都{name}：{esc("、".join(s["stable"][v])) or "无"}' for v, name in (("better", "变好"), ("worse", "变差")))
+    listed = "；".join(f'13 组合 × 4 次都{name}：{esc("、".join(s["all"][v])) or "无"}' for v, name in (("better", "变好"), ("worse", "变差")))
     return (
         f'<h3>{esc(m["name"])} <span class="badge {m["badge"][1]}">{esc(m["badge"][0])}</span></h3>'
         '<table class="kv">'
         f'<tr><th class="nw">做什么、效果</th><td>{m["why"]}<br>{item_split(c)}（第 0 次，单独使用）</td></tr>'
         + "".join(lines)
         + f'<tr><th class="nw">变差、各有优势的原因</th><td>{m["reading"]}</td></tr>'
-        f'<tr><th class="nw">适合 / 不适合的题</th><td>{m["suit"]}<br><span class="meta">单独使用时{listed}</span></td></tr>'
+        f'<tr><th class="nw">适合 / 不适合的题</th><td>{m["suit"]}<br><span class="meta">单独使用时 {listed}</span></td></tr>'
         f'<tr><th class="nw">随机性</th><td>{m["random"]}</td></tr>'
         f'<tr><th class="nw">是不是措施本身的问题</th><td>{m["itself"]}</td></tr>'
         '</table>'
-        '<p class="meta">逐题：所有在任一列、任一次生成中方向为变差（▼）或持平（◆）的题；每格 4 个符号依次为第 0–3 次生成中该题的方向'
-        '（13 组合中变好的多于变差为 ▲，少于为 ▼，相等且有变化为 ◆，悬停看各组合的题数）。先列变差次数多的题。</p>'
+        '<p class="meta">逐题（原问题层级）：任一列、任一次生成中有组合变差或各有优势的题；每格依次为第 0–3 次生成中变好 / 变差的组合数（◆ 为各有优势的组合数）。'
+        '先列变差组合数多的题。</p>'
         + "".join(
             (f'<h4>{esc(t["title"])}</h4>' if len(m.get("tables", ())) > 1 else "") + t.get("intro", "")
             + question_table([forms[i] for i in t["forms"]], m[t["causes_key"]] if "causes_key" in t else causes,
@@ -443,23 +439,166 @@ def measure(m: dict) -> str:
         + (language_block(m) if m["id"] in ("rewrite", "stepback") else ""))
 
 
-def overview() -> str:
+LEVELS = (("original", "原问题"), ("sub", "子问题"), ("pooled", "汇总"))
+LEVEL_DATA = __import__("json").loads((ROOT / "reports/experiments/v3.14-average/levels.json").read_text(encoding="utf-8"))
+BY_ID = {m["id"]: m for m in LEVEL_DATA["measures"]}
+GROUPS = [   # id, title, measures, the detailed analysis (MEASURES id)
+    ("strip", "0 去编码", [0], "strip"), ("decompose", "1 分解", [1], "decompose"),
+    ("translation", "2–3 翻译", [2, 3], "translation"), ("hyde", "4–5 HyDE", [4, 5], "hyde"),
+    ("rewrite", "6–9 改写", [6, 7, 8, 9], "rewrite"), ("stepback", "10–13 step-back", [10, 11, 12, 13], "stepback")]
+ADVICE = {   # measure → (recommendation, badge class); decision 015 and its addendum
+    0: ("固定启用", "ok"), 1: ("V3.15：由 LLM 派生子问题，不合并", "ok"),
+    2: ("V3.15：Q0 兜底时补上翻译", "warn"), 3: ("V3.15：新问题第 1 次检索", "ok"),
+    4: ("V3.15：兜底方式", "warn"), 5: ("参考", ""),
+    6: ("不用（V3.15 按两种）", ""), 7: ("不用（V3.15 按两种）", ""), 8: ("V3.15：兜底方式", "warn"), 9: ("参考", ""),
+    10: ("不用（V3.15 按两种）", ""), 11: ("不用（V3.15 按两种）", ""), 12: ("V3.15：兜底方式", "warn"), 13: ("参考", ""),
+}
+_ITSELF = {m["id"]: m["itself"] for m in MEASURES}
+WORSE = {   # measure → whether its losses come from the measure itself
+    0: _ITSELF["strip"], 1: _ITSELF["decompose"], 2: _ITSELF["translation"],
+    3: "与原句 RRF 融合后 BM25 通道只占一半权重，翻译的变差减少、变好基本保留（组合方式的效果，V3.14）。",
+    4: _ITSELF["hyde"],
+    5: "与原句融合后净值为正；仍变差的题与翻译同类（BM25 通道 + 叙述体文本，实验 B）。",
+    6: _ITSELF["rewrite"],
+    7: "变差与翻译同类：BM25 把说明性正文排到表格前，或改写的说法不是表格的标签（实验 G 已验证 4 题）；其余各题" + UNTESTED + "。",
+    8: "问题语言一条没有 BM25 匹配（实验 G），RRF 后文档语言排名的作用减半，效果介于两者之间。",
+    9: "与原句融合的作用未单独分析，" + UNTESTED + "。",
+    10: _ITSELF["stepback"],
+    11: "缺陷（去掉的限定条件正是检索最需要的词）与语言无关；语言的作用小，各次生成差别大。",
+    12: "同上；两种相对问题语言在原问题上 4 次净值都为正，是三种语言中最稳定的。",
+    13: "与原句融合的作用未单独分析，" + UNTESTED + "。",
+}
+
+
+def mean(x: dict, v: str) -> float:
+    return sum(g[v] for g in x["gens"]) / len(x["gens"])
+
+
+def bar(x: float, scale: float = 10.0) -> str:
+    """A small bar for the net: right of the centre line when positive, left when negative."""
+    width = min(abs(x) / scale, 1) * 40
+    side = "left:50%" if x >= 0 else "right:50%"
+    color = "var(--ok)" if x > 0 else "var(--bad)"
+    return (f'<span style="display:inline-block;position:relative;width:80px;height:8px;background:var(--line);vertical-align:middle;margin-left:6px">'
+            f'<span style="position:absolute;{side};top:0;height:8px;width:{width:.0f}px;background:{color}"></span>'
+            f'<span style="position:absolute;left:50%;top:-2px;height:12px;width:1px;background:var(--muted)"></span></span>')
+
+
+def cells(x: dict) -> str:
+    """变好 / 变差 / 各有优势 / 不变 (means over the generations), net (range), stable (flips)."""
+    nets = x["net"]
+    m = sum(nets) / len(nets)
+    rng = f'（{min(nets):+.1f} … {max(nets):+.1f}）' if len(nets) > 1 else ""
+    stable = (f'<span class="up">{x["stable"]["better"]:.1f}</span> / <span class="down">{x["stable"]["worse"]:.1f}</span>'
+              f'<span class="meta">（翻转 {x["flips"]:.1f}）</span>') if len(nets) > 1 else '<span class="meta">—</span>'
+    return (f'<td class="num">{mean(x, "better"):.1f}</td><td class="num">{mean(x, "worse"):.1f}</td>'
+            f'<td class="num">{mean(x, "mixed"):.1f}</td><td class="num">{mean(x, "same"):.1f}</td>'
+            f'<td class="nw">{net(m)}<span class="meta">{rng}</span>{bar(m)}</td><td class="nw">{stable}</td>')
+
+
+HEAD = ('<th class="num">变好</th><th class="num">变差</th><th class="num">各有优势</th><th class="num">不变</th>'
+        '<th>净值（4 次范围）</th><th class="nw">4 次都变好 / 都变差<br><span class="meta">（翻转）</span></th>')
+
+
+def level_note(x: dict, level: str) -> str:
+    n = sum(x["questions"]) / len(x["questions"])
+    return f'<span class="meta">{n:.0f} 个' + (f'，稳定按 {x["stable_questions"]} 个' if level != "original" else "") + '</span>'
+
+
+def link(m: dict) -> str:
+    return here({"left": m["left"], "right": m["right"]}, f'{m["id"]} {m["name"]}')
+
+
+def advice(mid: int) -> str:
+    text, cls = ADVICE[mid]
+    return f'<span class="badge {cls}">{esc(text)}</span>'
+
+
+def by_level(group: list) -> str:
+    """Within a group, the measures next to each other at each level; the recommendation and the analysis of
+    the losses on the original-question rows."""
     rows = []
-    for m in MEASURES:
-        s = qstab(comp(*m["pair"]))
-        fused = ""
-        if "fused" in m:
-            f = qstab(comp(*m["fused"]))
-            fused = f'<br>与原句融合：{net(sum(f["net"]) / 4)}（{min(f["net"]):+.1f} … {max(f["net"]):+.1f}）'
-        mean = {v: sum(x[v] for x in s["gens"]) / 4 for v in ("better", "worse", "mixed")}
-        rows.append(f'<tr><td class="nw"><a href="#a-{m["id"]}" data-atab="{m["id"]}">{esc(m["name"])}</a></td>'
-                    f'<td><span class="badge {m["badge"][1]}">{esc(m["badge"][0])}</span></td>'
-                    f'<td class="nw"><span class="up">▲{mean["better"]:.1f}</span> <span class="down">▼{mean["worse"]:.1f}</span> ◆{mean["mixed"]:.1f}'
-                    f' · 净值 {net(sum(s["net"]) / 4)}（{min(s["net"]):+.1f} … {max(s["net"]):+.1f}）{fused}</td>'
-                    f'<td class="nw"><span class="up">▲{len(s["stable"]["better"])}</span> <span class="down">▼{len(s["stable"]["worse"])}</span>'
-                    f'{" · 翻转 " + str(len(s["flip"])) if s["flip"] else ""}</td><td>{m["itself"]}</td></tr>')
-    return ('<div class="scroll"><table><tr><th>措施</th><th>建议</th><th>单独使用（13 组合平均的题数，4 次生成平均；净值及其 4 次范围）</th><th>按题方向 4 次一致（题）</th>'
-            '<th>变差是不是措施本身的问题</th></tr>' + "".join(rows) + '</table></div>')
+    for level, title in LEVELS:
+        ms = [BY_ID[i] for i in group if level in BY_ID[i]]
+        for k, m in enumerate(ms):
+            x = m[level]
+            lead = (f'<td rowspan="{len(ms)}" class="nw"><b>{title}</b><br>{level_note(x, level)}</td>' if k == 0 else "")
+            extra = (f'<td>{advice(m["id"])}</td><td class="meta">{WORSE[m["id"]]}</td>' if level == "original"
+                     else '<td></td><td></td>')
+            rows.append(f'<tr>{lead}<td class="nw">{link(m)}</td>{cells(x)}{extra}</tr>')
+    return "".join(rows)
+
+
+def by_measure(group: list) -> str:
+    """Each measure with its levels together."""
+    rows = []
+    for i in group:
+        m = BY_ID[i]
+        levels = [(lv, t) for lv, t in LEVELS if lv in m]
+        for k, (level, title) in enumerate(levels):
+            x = m[level]
+            lead = (f'<td rowspan="{len(levels)}" class="nw">{link(m)}</td>' if k == 0 else "")
+            tail = (f'<td rowspan="{len(levels)}">{advice(i)}</td><td rowspan="{len(levels)}" class="meta">{WORSE[i]}</td>'
+                    if k == 0 else "")
+            rows.append(f'<tr>{lead}<td class="nw">{title} {level_note(x, level)}</td>{cells(x)}{tail}</tr>')
+    return "".join(rows)
+
+
+def total_table() -> str:
+    tail = '<th style="min-width:110px">建议（V3.15 中的用法）</th><th style="min-width:360px">变差是不是措施本身的问题</th>'
+    a = ['<tr><th>层级</th><th>措施（点击在本页设置两侧）</th>' + HEAD + tail + '</tr>']
+    b = ['<tr><th>措施（点击在本页设置两侧）</th><th>层级</th>' + HEAD + tail + '</tr>']
+    for _, title, group, _ in GROUPS:
+        sep = f'<tr><th colspan="10" style="background:#eef1f5">{esc(title)}</th></tr>'
+        a.append(sep + by_level(group))
+        b.append(sep + by_measure(group))
+    return ('<div class="seg" data-mview>排列：<button type="button" data-v="level" class="on">按层级（组内措施相邻）</button>'
+            '<button type="button" data-v="measure">按措施（三个层级相邻）</button></div>'
+            '<div class="scroll" data-mtable="level"><table>' + "".join(a) + '</table></div>'
+            '<div class="scroll hidden" data-mtable="measure"><table>' + "".join(b) + '</table></div>')
+
+
+def scale_table() -> str:
+    """The reference (an effect known to be real) and the wording noise floor."""
+    ref = LEVEL_DATA["reference"]
+    rows = [f'<tr><td class="nw">{here(ref, ref["name"])}</td><td class="nw">原问题 {level_note(ref["original"], "original")}</td>{cells(ref["original"])}</tr>']
+    for level, title in (("original", "原问题"), ("sub", "子问题（第 0 次的分解）")):
+        for name, x in LEVEL_DATA["noise"][level].items():
+            rows.append(f'<tr><td class="nw">噪声：{esc(name)}</td><td class="nw">{title} {level_note(x, "original")}</td>{cells(x)}</tr>')
+    return ('<div class="scroll"><table><tr><th>参照</th><th>层级</th>' + HEAD + '</tr>' + "".join(rows) + '</table></div>')
+
+
+def direct_table() -> str:
+    rows = []
+    for d in LEVEL_DATA["direct"]:
+        cell = ""
+        for level, _ in LEVELS:
+            x = d[level]
+            m = sum(x["net"]) / 4
+            cell += (f'<td class="nw">{net(m)}<span class="meta">（{min(x["net"]):+.1f} … {max(x["net"]):+.1f}）</span>{bar(m)}<br>'
+                     f'<span class="meta">▲{mean(x, "better"):.1f} ▼{mean(x, "worse"):.1f} ◆{mean(x, "mixed"):.1f} · '
+                     f'4 次都 ▲{x["stable"]["better"]:.1f} ▼{x["stable"]["worse"]:.1f}（翻转 {x["flips"]:.1f}）</span></td>')
+        cross = "（跨组）" if (d["from"], d["to"]) in ((2, 7), (3, 9)) else ""
+        rows.append(f'<tr><td class="nw">{here(d, d["name"])}{cross}</td>{cell}</tr>')
+    return ('<div class="scroll"><table><tr><th>对照（左 → 右，净值为正表示右侧更好）</th>'
+            + "".join(f'<th>{t}</th>' for _, t in LEVELS) + '</tr>' + "".join(rows) + '</table></div>')
+
+
+def per_generation(group: list) -> str:
+    """The detail behind the total table: each generation of each measure and level."""
+    rows = []
+    for i in group:
+        m = BY_ID[i]
+        for level, title in LEVELS:
+            if level not in m:
+                continue
+            x = m[level]
+            gens = "".join(f'<td class="nw"><span class="up">{g["better"]:.1f}</span> / <span class="down">{g["worse"]:.1f}</span> / '
+                           f'{g["mixed"]:.1f} · {net(n)}<span class="meta">（{q} 个）</span></td>'
+                           for g, n, q in zip(x["gens"], x["net"], x["questions"]))
+            rows.append(f'<tr><td class="nw">{m["id"]} {esc(m["name"])}</td><td>{title}</td>{gens}</tr>')
+    return ('<h4>逐次生成（13 组合平均的 变好 / 变差 / 各有优势 · 净值）</h4><div class="scroll"><table><tr><th>措施</th><th>层级</th>'
+            + "".join(f'<th>第 {g} 次</th>' for g in range(4)) + '</tr>' + "".join(rows) + '</table></div>')
 
 
 def combine() -> str:
@@ -471,27 +610,32 @@ def combine() -> str:
 
 
 def main() -> None:
-    tabs = [(m["id"], m["name"], measure(m)) for m in MEASURES] + [("combine", "融合与合并", combine())]
-    on, hidden = ' class="on"', ' class="hidden"'
-    nav = '<div class="seg" data-atabs>' + "".join(
-        f'<button type="button" data-v="{t}"{on if i == 0 else ""}>{esc(n)}</button>' for i, (t, n, _) in enumerate(tabs)) + '</div>'
-    panels = "".join(f'<div data-apanel="{t}" id="a-{t}"{"" if i == 0 else hidden}>{body}</div>'
-                     for i, (t, _, body) in enumerate(tabs))
+    analysis = {m["id"]: m for m in MEASURES}
+    details = "".join(
+        f'<details class="card" id="a-{gid}"><summary><b>{esc(title)}：详细分析</b></summary>'
+        + per_generation(group) + measure(analysis[mid]) + '</details>'
+        for gid, title, group, mid in GROUPS)
+    details += ('<details class="card" id="a-other"><summary><b>其他对照：叠加、合并方式、附带发现</b></summary>'
+                + combine() + '<h3>附带发现</h3>' + SIDE_FINDINGS + '</details>')
     html = (
         '<div class="card">'
-        '<p><b>怎么读</b>：每个措施只和"只差它一个因素"的配置比较——一个问题只用一条检索文本（不融合）、分解时不合并（每个信息项看它对应的子问题），'
-        '避免把几种因素的影响混在一起。数字为 13 组合 × 32 题：每种组合各自判定每题变好、变差、各有优势或不变，题数按 13 组合取平均，净值 = 变好 − 变差（2026-11-02 起的统计口径；此前按"有变化的组合同向才取该方向"汇总，见决策 015 补充）；一题在一次生成中的方向：13 组合中变好的多于变差为变好，少于为变差；每个措施都在 4 次独立生成（0–3）中重算，看效果是否随 LLM 每次写法不同而变化；注意 4 次写法几乎相同时（改写）稳定是必然的，不能据此判断措施有真实作用。'
-        '每条原因注明验证它的实验，没做实验的标<span class="down">未验证</span>。实验数据与逐项依据见'
-        f'<a href="{EVIDENCE}" target="_blank">各措施单独效果的依据页</a>（实验 A–F）。</p>'
-        + overview() + '</div>'
-        '<div class="card">' + nav + panels + '</div>'
-        '<div class="card"><h3>附带发现</h3>' + SIDE_FINDINGS + '</div>'
-        '<script>(function(){var bs=document.querySelectorAll("[data-atabs] button");function show(v){'
-        'bs.forEach(function(b){b.classList.toggle("on",b.dataset.v===v)});'
-        'document.querySelectorAll("[data-apanel]").forEach(function(p){p.classList.toggle("hidden",p.dataset.apanel!==v)})}'
-        'bs.forEach(function(b){b.addEventListener("click",function(){show(b.dataset.v)})});'
-        'document.querySelectorAll("[data-atab]").forEach(function(a){a.addEventListener("click",function(e){e.preventDefault();show(a.dataset.atab);'
-        'document.querySelector("[data-atabs]").scrollIntoView({behavior:"smooth"})})})})();</script>')
+        '<p><b>怎么读</b>：每个措施只和"只差它一个因素"的配置比较。0 去编码以带编码为基线，1 分解以去编码的原问题为基线（按原题判定，不合并）；'
+        '2–13 都在去编码的基础上，以同一层级的原句为基线：原问题层级是去编码的原问题，子问题层级是去编码的子问题本身（每个子问题单独判定，只看它自己的排名与标注给它的信息项）；'
+        '汇总把两个层级的题数逐次相加。"+ 原句 RRF"指与被检索的那个问题本身的原句融合。'
+        '统计口径（2026-11-02 起，rules/evaluation.md）：13 种组合各自判定、各自计数，再按组合取平均；净值 = 变好 − 变差，括号内为 4 次独立生成（0–3）中的最小与最大；'
+        '"4 次都变好 / 都变差"与翻转也按组合计数后取平均。子问题在各次生成中不同，稳定与翻转只在 4 次生成文字相同的子问题上计数。'
+        '净值都是相对各自基线的，两个措施谁更好要看下方的直接对比。</p>'
+        '<h3>尺度参照</h3><p class="meta">最终配置是 V3.14 中确实有效的改动；噪声是代码做的、不改意思的措辞改动（不调用 LLM，只有一次结果），'
+        '净值落在噪声范围内的措施，效果与措辞噪声分不开。这些改动大多使题变好、很少变差：句式本身就会系统地影响向量检索，'
+        '所以噪声的净值不在 0 附近；看一个措施时，既要看净值是否超出噪声，也要看它变差的题数是否明显多于噪声的变差题数。</p>'
+        + scale_table()
+        + '<h3>总表</h3>' + total_table()
+        + '<h3>直接对比</h3>' + direct_table()
+        + f'<p class="meta">每条原因注明验证它的实验，没做实验的标<span class="down">未验证</span>。实验 A–F 的原始记录见<a href="{EVIDENCE}" target="_blank">依据页</a>（按此前的统计口径）。</p>'
+        '</div>' + details
+        + '<script>(function(){document.querySelectorAll("[data-mview] button").forEach(function(b){b.addEventListener("click",function(){'
+        'document.querySelectorAll("[data-mview] button").forEach(function(x){x.classList.toggle("on",x===b)});'
+        'document.querySelectorAll("[data-mtable]").forEach(function(t){t.classList.toggle("hidden",t.dataset.mtable!==b.dataset.v)})})})})();</script>')
     OUT.write_text(html, encoding="utf-8")
     print(OUT)
 

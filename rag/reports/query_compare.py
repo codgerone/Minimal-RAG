@@ -545,7 +545,7 @@ def render(data: dict[str, Any], analysis: str | None = None) -> str:
         f'<section id="m-{mid}" data-module="{mid}"><h2>{title}</h2>{extra}<div class="meta">{note}</div>'
         f'<div class="scroll" data-grid><div class="qc-body"></div></div></section>')
     first = 2 if analysis else 1
-    nav = ('<div class="card meta">模块：' + ('<a href="#m-analysis">1 各措施的单独效果（分析结论）</a> · ' if analysis else '')
+    nav = ('<div class="card meta">模块：' + ('<a href="#m-analysis">1 各措施的效果分析</a> · ' if analysis else '')
            + ' · '.join(f'<a href="#m-{mid}">{first + i} {name}</a>' for i, (mid, name) in enumerate(
                (("class", "变好、变差"), ("heat", "逐题变化"), ("matrix", "指标矩阵"), ("curve", "K 曲线"), ("process", "查询过程")))) + '</div>')
     num = lambda i: first + i
@@ -556,7 +556,7 @@ def render(data: dict[str, Any], analysis: str | None = None) -> str:
         f'（检索文本 32 种状态：V3.14 的 20 种，加 V3.14.1 改写、step-back 用文档语言或两种的 12 种；× 去编码 2 × 分解 6 种状态；P3.3 搁置）'
         f'· 规划：{esc(data["plan_model"])}，拆解提示词 v9、写法提示词 v8、文档语言写法提示词 lang v1，冻结的第 0 次生成</div>'
         + nav
-        + (f'<section id="m-analysis"><h2>1. 各措施的单独效果（分析结论）</h2>{analysis}</section>'
+        + (f'<section id="m-analysis"><h2>1. 各措施的效果分析</h2>{analysis}</section>'
            '<h2>对比工具</h2>' if analysis else '')
         + '<div class="card pick"><div id="qc-sides" class="cfg-grid"></div>'
         '<div class="pick-foot"><span id="qc-msg"></span> <button type="button" id="qc-reset" class="expand-btn">清空两侧</button></div>'
