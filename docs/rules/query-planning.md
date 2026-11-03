@@ -3,7 +3,7 @@
 ## 规则摘要
 
 - 查询侧模块把一个问题变成若干条检索文本，各检索一次，再合成每个问题的排名，必要时合成一个返回顺序。
-- 现行 `ask`、`chat`、`eval` 不使用这些模块：用原问题检索一次。模块只在 `query-compare`（查询侧对比页）中使用，V3.15 的多轮检索复用其中的去编码、写法与融合（[决策 015](../decisions/015-query-modules.md)）。
+- 本文的预先规划只在 `query-compare`（查询侧对比页）中使用。纯检索一路用原问题检索一次；多轮检索一路复用其中的去编码、写法与融合，由 LLM 读过材料后再写（[multi-round.md](multi-round.md)，[决策 015](../decisions/015-query-modules.md)、[018](../decisions/018-multi-round-retrieval.md)）。
 - **规划**由 LLM 完成，分两步：
   - 分解（可选）：得到问题列表；
   - 写法：为列表中的每个问题写出改写、译文、HyDE、step-back。

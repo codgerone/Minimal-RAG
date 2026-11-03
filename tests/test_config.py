@@ -131,3 +131,35 @@ def test_structured_chunk_budget_is_counted_with_e5_tokenizer():
     from rag.ingest.chunkers.tokens import E5TokenCounter
     structured = assemble(resolve_config(ROOT, "structured"))
     assert isinstance(structured.chunker.counter, E5TokenCounter)
+
+
+def test_multi_round_is_a_query_setting_with_defaults_and_checks(tmp_path):
+    first = assemble(load_config(write(tmp_path)))
+    mr = first.config.multi_round
+    assert (mr.max_llm_calls, mr.fallback_schedule, mr.units_per_attempt, mr.model) == (3, (), 3, "google/gemini-3.8-flash")
+    path = write(tmp_path)
+    text = path.read_text(encoding="utf-8")
+    path.write_text(text + '[multi_round]\nmax_llm_calls = 5\nfallback_schedule = [["continue", "rewrite"], ["hyde"]]\n',
+                    encoding="utf-8")
+    custom = load_config(path)
+    assert custom.multi_round.fallback_schedule == (("continue", "rewrite"), ("hyde",))
+    assert assemble(custom).fingerprint() == first.fingerprint()
+    for bad in ('max_llm_calls = 1', 'fallback_schedule = "C"', 'fallback_schedule = [["guess"]]', 'units_per_attempt = 0', 'x = 1'):
+        path.write_text(text + f"[multi_round]\n{bad}\n", encoding="utf-8")
+        with pytest.raises(ConfigError):
+            load_config(path)
+
+
+def test_query_mode_chooses_the_path_and_is_not_fingerprinted(tmp_path):
+    first = assemble(load_config(write(tmp_path)))
+    assert first.config.query_mode == "retrieval"
+    path = write(tmp_path)
+    text = path.read_text(encoding="utf-8")
+    path.write_text(text + '[query]\nmode = "multi_round"\n', encoding="utf-8")
+    multi = load_config(path)
+    assert multi.query_mode == "multi_round"
+    assert assemble(multi).fingerprint() == first.fingerprint()
+    for bad in ('mode = "agent"', 'x = 1'):
+        path.write_text(text + f"[query]\n{bad}\n", encoding="utf-8")
+        with pytest.raises(ConfigError):
+            load_config(path)

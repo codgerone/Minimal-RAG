@@ -1,4 +1,4 @@
-# 系统设计（V3.14）
+# 系统设计（V3.15）
 
 ## 1. 数据主链
 
@@ -12,13 +12,26 @@
                                                                                        ├─→ Analyzer ─→ SQLite（BM25 倒排索引）
                                                                                        ├─→ 整表库（整表文本与成员 chunk）
                                                                                        └─→ 中间结果 JSON ─→ 入库审核页
-查询   问题 ─→ 检索范围（文档标识表）─┬─→ Embedder ─→ 范围内向量排名 ─┐
-                                    └─→ Analyzer ─→ 范围内 BM25 排名 ─┴─→ Retriever（选用一路或 RRF 融合，确定性排序）─→ 返回单元（整表库）─→ Prompt ─→ LLM ─→ 回答
+检索   检索文本 ─→ 检索范围（文档标识表）─┬─→ Embedder ─→ 范围内向量排名 ─┐
+                                        └─→ Analyzer ─→ 范围内 BM25 排名 ─┴─→ Retriever（选用一路或 RRF 融合，确定性排序）─→ 返回单元（整表库）
+查询   [query] mode = retrieval：   问题 ─→ 检索 ─→ Top-K ─→ Prompt ─→ 问答 LLM ─→ 回答
+       [query] mode = multi_round： 问题 ─→ 第 1 轮检索（去编码原句）─→ ┌─ 规划调用（LLM：判断、接受证据、动作、新问题、兜底文本）←─┐
+                                                                     └─→ 代码：校验、更新问题列表与状态 ─→ 待检索问题各自检索 ─┘
+                                                                         Q0 已回答 / 无待检索问题 / 到上限 ─→ 回答
 评估   标注题目（含 excerpt 坐标）─→ 同一检索范围、Retriever 与返回单元 ─→ 证据判定（excerpt 坐标 × chunk 来源区域）─→ 指标 ─→ 评估报告 ─→ 对比页
+多轮评估  标注题目 ─→ 多轮检索（最高上限运行一次）─→ 展示序列与已接受的证据 ─→ 各档上限截取 ─→ 凑齐、判断准确性、按方式的找回、成本 ─→ 多轮检索评估页
 查询侧对比  问题 ─→ 规划（LLM：分解、写法）─→ 每个问题的检索文本（去编码）─→ 各自检索 ─→ 问题内 RRF 融合 ─→ 跨问题合并（轮流取 / 全局 RRF / 不合并）─→ 凑齐名次 ─→ 查询侧对比页
 ```
 
-**查询侧模块**（分解、去编码、写法、融合、合并，[rules/query-planning.md](rules/query-planning.md)）只在查询侧对比中使用；`ask`、`chat`、`eval` 仍用原问题检索一次。规划与检索执行分开：规划输出问题列表与每个问题的各写法（`rag/query/planning.py`），检索执行按配置取用其中一部分（`rag/query/execution.py`）。各模块的评估结论与在多轮检索中的用法见 [decisions/015-query-modules.md](decisions/015-query-modules.md)。
+**两路查询**：`[query] mode` 选择纯检索（`retrieval`，原问题检索一次，内置默认）或多轮检索（`multi_round`）；`ask`、`chat`、`eval` 按它走。两路共用同一检索（检索范围、Retriever、返回单元），区别只在检索之前与之后：多轮检索由 LLM 读材料决定下一轮检索什么，最后由同一模型作答（[decisions/018-multi-round-retrieval.md](decisions/018-multi-round-retrieval.md)）。
+
+**多轮检索**（[rules/multi-round.md](rules/multi-round.md)，`rag/query/multi_round/`）按事实与判断分开：
+- `state.py`：问题列表、状态与转移、LLM 输出的校验；代码写编号、上级、检索记录、已接受的证据与状态，LLM 只给判断与文本。
+- `retrieval.py`：按检索次数选方式（第 1 次 / 兜底），各方式各自检索、方式内 RRF、跳过已交给 LLM 的单元取满 K 个；单元表记下每个单元第一次交给 LLM 的调用、返回它的问题与方式、接受它的问题。
+- `planner.py`：提示词、输出 schema、每次调用的输入组装（问题列表、已接受的证据、本轮新材料）、校验不合格重试一次后降级、按生成编号缓存、服务端临时失败的重试。
+- `runner.py`：循环与终止；规划提示词不含剩余调用数，所以较低上限的结果从同一次运行截取（`answer_at`）。
+
+**查询侧模块**（分解、去编码、写法、融合、合并，[rules/query-planning.md](rules/query-planning.md)）的预先规划只在查询侧对比中使用；多轮检索复用其中的去编码与 RRF 融合（`rag/query/execution.py`）。规划与检索执行分开：规划输出问题列表与每个问题的各写法（`rag/query/planning.py`），检索执行按配置取用其中一部分。各模块的评估结论见 [decisions/015-query-modules.md](decisions/015-query-modules.md)。
 
 各阶段的数据模型定义在 `rag/models.py`（文档与 chunk）和 `rag/ingest/tables/models.py`（表格证据）。设计原则：解析器、工具和 LLM 的原始结果是"事实"，不会被后续阶段原地修改；选优、表头、结构标注是否采用这类判断单独记录，审核页可以逐层追溯。
 
@@ -51,7 +64,7 @@
 
 编码器都是固定版本（revision）的 sentence-transformers 模型，按 float32 加载，查询与文档各加固定前缀或指令，向量 L2 归一化；编码前用模型自己的分词器检查 chunk 不超过其输入上限，超过则报错而不截断。模型选择见 [decisions/008-embedder-bge-m3.md](decisions/008-embedder-bge-m3.md)。
 
-文档语言判定、表格选优、续表判定、规则表头判定、检索范围识别、向量库（Chroma）、BM25 分析器与倒排索引、整表库与返回单元、查询规划（LLM）、问题内融合（RRF）目前都只有一种实现，作为普通模块存在，等出现第二种实现时再抽象成接口。
+文档语言判定、表格选优、续表判定、规则表头判定、检索范围识别、向量库（Chroma）、BM25 分析器与倒排索引、整表库与返回单元、查询规划（LLM）、问题内融合（RRF）、多轮检索目前都只有一种实现，作为普通模块存在，等出现第二种实现时再抽象成接口。
 
 **新增一种实现**：写一个满足接口的类，在 `registry.py` 对应的字典里登记一个名字，然后在配置文件里 `use = "名字"` 即可，主流程不用改。
 
@@ -68,7 +81,7 @@
 
 `configs/*.toml` 是内置装配：七种表格处理组合各一份，`ingest --all-configs` 重建它们，13 种查询组合（加上返回单元）都从这些索引评估（`scripts/eval_tables.sh`）。`configs/extra/*.toml` 是不参与 `--all-configs` 的配置，同样按名称用 `--config` 选择；名称在两处之间不能重复。
 
-配置中解析、表格（提取器与三个表格环节）、分块、编码相关的设置，加上编码器身份（模型名与版本）和 `RULES_VERSION`，一起计算出**构建指纹**，记录在索引的 `manifest.json` 中。用 LLM 的表格环节，其模型、提示词版本、推理强度、长度与上下文规则也进入指纹。配置了 `[lexical]` 时，其分析器设置（去停用词、词干化）也进入指纹；没有这一节的配置不建 BM25 索引，指纹也不含它。检索器 `[retriever] use`、命中表格时的返回单元 `table_return_unit`、混合检索中 BM25 排名的权重 `bm25_weight`（默认 1，[decisions/017-bm25-weight.md](decisions/017-bm25-weight.md)）、检索的 `top_k`（问答用，默认 4）、文档过滤开关 `document_filter`、评估的 `[eval] top_k`（默认 3，与历史基线一致）、问答 LLM 设置不参与计算，修改它们不需要重建索引。
+配置中解析、表格（提取器与三个表格环节）、分块、编码相关的设置，加上编码器身份（模型名与版本）和 `RULES_VERSION`，一起计算出**构建指纹**，记录在索引的 `manifest.json` 中。用 LLM 的表格环节，其模型、提示词版本、推理强度、长度与上下文规则也进入指纹。配置了 `[lexical]` 时，其分析器设置（去停用词、词干化）也进入指纹；没有这一节的配置不建 BM25 索引，指纹也不含它。检索器 `[retriever] use`、命中表格时的返回单元 `table_return_unit`、混合检索中 BM25 排名的权重 `bm25_weight`（默认 1，[decisions/017-bm25-weight.md](decisions/017-bm25-weight.md)）、检索的 `top_k`（问答用，默认 4）、文档过滤开关 `document_filter`、评估的 `[eval] top_k`（默认 3，与历史基线一致）、问答 LLM 设置、查询的一路 `[query] mode` 与多轮检索设置 `[multi_round]` 不参与计算，修改它们不需要重建索引。
 
 配置改动导致指纹变化后，`status` 会显示"配置已改变"，这时需要用 `ingest --force` 全量重建。内置算法的输出发生变化时，要同步提升 `rag/config.py` 中的 `RULES_VERSION`；LLM 提示词改动时提升 `rag/ingest/tables/llm_tables.py` 中的 `PROMPT_VERSION`。
 
@@ -80,7 +93,7 @@
 
 **中间结果**（`documents/<文档名>/`）：解析器原始输出、组装后的文档（含表格结构与 LLM 调用记录）、表格选优与续表的全部证据、chunk 及其来源区域。它们按类型存成 JSON，可以原样读回（`rag/index/audit.py`）；入库审核页和评估都从这里读取，不重新处理 PDF。
 
-**LLM 缓存**：`.rag/llm-cache/` 按请求内容缓存表格 LLM 调用的结果，不属于任何索引，全量重建时保留并复用（[rules/table-llm.md](rules/table-llm.md)）。
+**LLM 缓存**：`.rag/llm-cache/` 按请求内容缓存表格处理、查询规划与多轮检索的 LLM 调用结果，不属于任何索引，全量重建时保留并复用（[rules/table-llm.md](rules/table-llm.md)）。
 
 - **manifest 是唯一的入库记录，并且最后写入**（先写临时文件再原子替换）。单个文档的入库顺序是：处理 → 写中间结果 → 替换该文档的向量 → 替换该文档的 BM25 记录 → 替换该文档的整表 → 更新 manifest → 由中间结果生成审核页。
 - **状态由事实比对得出**（`rag/index/status.py`）：PDF 哈希与 manifest 不同，记为"已修改"；manifest 中的 chunk ID 集合与向量库、BM25 索引或中间结果对不上，记为"不完整"，并分别记录两份索引是否完整。中途崩溃最多只会留下"需要重做"的文档，再运行一次 `ingest` 即可修复。所有数据都由 PDF 派生，所以不需要事务日志或回滚。
@@ -103,7 +116,9 @@
 
 `eval --budgets` 每题检索一次、取全量排名，按每档预算各出一份评估。`query-compare` 在 13 种组合上评估全部查询侧配置，生成 `reports/query/<名称>/`：比较两种查询方式按凑齐向量的支配关系判定变好、变差（[rules/evaluation.md](rules/evaluation.md)"查询侧的比较"），页面由使用者选择两侧配置。每条检索文本在每份索引上的全量排名缓存在 `.rag/retrieval-cache/`（以索引的 manifest 识别；混合检索存两个通道的名次，读出时按当前 BM25 权重重新融合），规划调用缓存在 `.rag/llm-cache/`。
 
-**报告由已保存的结果生成**：`report` 从各索引的中间结果重新生成入库审核页，从 `result.json` 重新生成评估页，从 `runs.json` 重新生成对比页，重新生成查询侧对比页，再生成入口 `reports/index.html`。改了页面的样式或结构，运行 `report` 即可，不需要重新入库或评估。
+多轮检索一路的 `eval` 生成 `reports/multi_round/<名称>/`（[rules/evaluation.md](rules/evaluation.md)"多轮检索的评估"）：每题、每次生成按 `[multi_round] max_llm_calls` 运行一次，题之间并行调用 LLM、检索串行；运行事实（展示序列及每个单元的 chunk、token 与来源，每次调用的记录、输出与调用后的问题列表，各档上限的答案，两个单轮基线的凑齐名次与前列单元）存为 `data/runs.json`，各档上限的指标由页面从中计算；另有逐题页。
+
+**报告由已保存的结果生成**：`report` 从各索引的中间结果重新生成入库审核页，从 `result.json` 重新生成评估页，从 `runs.json` 重新生成对比页与多轮检索评估页，重新生成查询侧对比页，再生成入口 `reports/index.html`。改了页面的样式或结构，运行 `report` 即可，不需要重新入库或评估。
 
 ## 7. 代码地图
 
@@ -117,8 +132,8 @@ rag/
   paths.py         目录约定（.rag/ 与 reports/）
   ingest/          sources（发现 PDF）、parsers/、language（文档语言）、tables/（提取、选优、续表、表头、结构、写法、LLM）、chunkers/、assemble、pipeline
   index/           embedder、store（Chroma）、analyzer 与 lexical（BM25）、tables（整表库）、audit（中间结果）、manifest、status、builder
-  query/           scope（检索范围、去编码）、retriever、units（返回单元与检索缓存）、planning（规划）、execution（检索执行、融合与合并）、prompt、llm
-  eval/            dataset、judge、metrics、table_metrics、table_structure（结构标注答案）、runner、query_compare（查询侧对比数据）
-  reports/         html（页面外壳；样式与脚本写入 reports/assets/）、ingest（入库审核页）、evaluation、compare 与 table_compare（对比页）、query_compare（查询侧对比页）、index_page
+  query/           scope（检索范围、去编码）、retriever、units（返回单元与检索缓存）、planning（规划）、execution（检索执行、融合与合并）、prompt、llm、multi_round/（state、retrieval、planner、runner）
+  eval/            dataset、judge、metrics、table_metrics、table_structure（结构标注答案）、runner、query_compare（查询侧对比数据）、multi_round（多轮检索评估的运行事实）
+  reports/         html（页面外壳；样式与脚本写入 reports/assets/）、ingest（入库审核页）、evaluation、compare 与 table_compare（对比页）、query_compare（查询侧对比页）、multi_round（多轮检索评估页与逐题页）、index_page
 tests/             算法、装配校验、索引一致性、检索范围、检索、评估、报告
 ```
