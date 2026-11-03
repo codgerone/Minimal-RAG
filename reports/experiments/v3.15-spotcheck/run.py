@@ -166,24 +166,34 @@ def result(r: dict) -> str:
             + (f'<div class="meta">其中 {esc("、".join(seen))} 的证据交给过 LLM 但未被接受</div>' if seen else ""))
 
 
+def llm_calls(r: dict) -> str:
+    plan = sum(c["kind"] == "plan" for c in r["calls"])
+    answer = len(r["calls"]) - plan
+    return f'规划 {plan}' + (f' + 作答 {answer}' if answer else "")
+
+
 def timing(r: dict) -> str:
     rounds = "、".join(f'{n} 次 {s * 1000:.0f} ms' for n, s in r["rounds"])
-    calls = "<br>".join(f'第 {i} 次{"规划" if c["kind"] == "plan" else "作答"}：{c["seconds"]:.1f} 秒 · {c["prompt_tokens"]} / {c["completion_tokens"]}（{c["reasoning_tokens"]}）'
+    calls = "".join(f'<div style="white-space:nowrap">第 {i} 次{"规划" if c["kind"] == "plan" else "作答"}：{c["seconds"]:.1f} 秒 · {c["prompt_tokens"]} / {c["completion_tokens"]}（{c["reasoning_tokens"]}）</div>'
                         for i, c in enumerate(r["calls"], start=1))
     total = sum(c["seconds"] for c in r["calls"]) + sum(s for _, s in r["rounds"])
-    return f'<b>合计 {total:.1f} 秒</b><div class="meta">检索：{rounds}</div><div class="meta">{calls}</div>'
+    return (f'<b>合计 {total:.1f} 秒</b><div class="meta" style="white-space:nowrap">检索：{rounds}</div>'
+            f'<div class="meta">{calls}</div>')
 
 
 def render(data: dict) -> str:
     from rag.query.multi_round.planner import ANSWER_SYSTEM, PLAN_SYSTEM, RETRY_TEMPLATE, PROMPT_VERSIONS, plan_schema
     rows = []
     for r in data["runs"]:
-        rows.append(f'<tr><td class="nw"><b>{esc(r["case"])}</b><div class="meta">{esc(r["why"])}</div></td><td>{esc(r["question"])}</td>'
-                    f'<td>{result(r)}</td><td class="nw">{TERMINATION[r["termination"]]}</td>'
-                    f'<td class="nw">{esc(r["q0"]["status"])}{"：" + esc(r["q0"]["abandon_reason"]) if r["q0"]["abandon_reason"] else ""}</td>'
-                    f'<td class="nw">{timing(r)}</td><td class="num">{len(r["order"])}</td></tr>')
-    summary = ('<table><tr><th>题</th><th style="min-width:260px">问题</th><th>结果</th><th>终止原因</th><th>Q0 最终状态</th>'
-               '<th>耗时（检索 / LLM）与 token</th><th>交给 LLM 的单元</th></tr>' + "".join(rows) + '</table>'
+        q0 = esc(r["q0"]["status"]) + ("：" + esc(r["q0"]["abandon_reason"]) if r["q0"]["abandon_reason"] else "")
+        rows.append(f'<tr><td style="min-width:300px"><b>{esc(r["case"])}</b> <span class="meta">{esc(r["why"])}</span>'
+                    f'<div>{esc(r["question"])}</div></td>'
+                    f'<td style="min-width:150px">{result(r)}</td>'
+                    f'<td class="nw">{TERMINATION[r["termination"]]}<div class="meta">Q0：{q0}</div></td>'
+                    f'<td class="num">{len(r["calls"])}<div class="meta" style="white-space:nowrap">{llm_calls(r)}</div></td>'
+                    f'<td>{timing(r)}</td><td class="num">{len(r["order"])}</td></tr>')
+    summary = ('<div class="scroll"><table><tr><th>题</th><th>结果</th><th>终止原因<div class="meta">Q0 最终状态</div></th>'
+               '<th>LLM 调用</th><th>耗时与 token<div class="meta">输入 / 输出（其中推理）</div></th><th>交给 LLM 的单元</th></tr>' + "".join(rows) + '</table></div>'
                '<p class="meta">结果按已接受的单元是否覆盖标注的证据判定（信息项 e1、e2…）；答案文字本身对不对本版不评估。'
                '耗时：检索为各轮检索的次数与时间（命中缓存时记录首次检索的时间）；LLM 为各次调用的时间，token 为输入 / 输出（其中推理）。</p>')
     prompts = ('<div class="card"><h2>提示词模板（原文）</h2>'
