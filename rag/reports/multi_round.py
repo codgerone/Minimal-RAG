@@ -91,7 +91,7 @@ def at_limit(case: dict[str, Any], run: dict[str, Any], limit: int, baselines: d
         "outputs": outputs(calls[:cut] if cut else calls),
     }
     if not case["answerable"]:
-        out["result"] = "misjudged" if answered else "correct_none"
+        out["result"] = "none_answered" if answered else "correct_none"
         return out
     missing = [g["id"] for g, ok in zip(groups, out["acc_cov"]) if not ok]
     out["missing"] = missing
@@ -282,8 +282,7 @@ def problem_lists(data, ev, limit) -> str:
             names = {x["id"]: x["item"] for x in case["groups"]}
             link = f'<a href="cases/{esc(case["case_id"])}.html">{esc(case["case_id"])}</a>'
             if f["result"] == "misjudged":
-                what = ("本题无答案" if not case["answerable"] else
-                        "缺 " + "；".join(f'{esc(x)} {esc(names[x])}' for x in f["missing"]))
+                what = "缺 " + "；".join(f'{esc(x)} {esc(names[x])}' for x in f["missing"])
                 mis.append(f'<tr><td class="nw">{link}</td><td class="num">{g}</td><td>{what}</td></tr>')
             if case["answerable"] and f["rejected"]:
                 rej.append(f'<tr><td class="nw">{link}</td><td class="num">{g}</td><td>{"；".join(esc(x) + " " + esc(names[x]) for x in f["rejected"])}</td>'
@@ -306,7 +305,7 @@ def item_cell(case, f, k) -> str:
 
 
 RESULT = {"complete": ("已回答，证据凑齐", "ok"), "misjudged": ("误判可回答", "bad"), "unanswered": ("未回答", "warn"),
-          "correct_none": ("未回答（无答案，正确）", "ok")}
+          "correct_none": ("未回答（无答案）", "ok"), "none_answered": ("判为可回答（无答案题，看答案是否说明没有）", "warn")}
 
 
 def case_table(data, ev, limit) -> str:
@@ -374,9 +373,11 @@ def none_table(data, ev, limit) -> str:
             label, kind = RESULT[f["result"]]
             rows += (f'<tr><td class="nw"><a href="cases/{esc(case["case_id"])}.html">{esc(case["case_id"])}</a></td><td class="num">{g}</td>'
                      f'<td><span class="badge {kind}">{label}</span></td><td class="nw">{TERMINATION[f["termination"]]}</td>'
-                     f'<td class="num">{f["plan"] + f["answer_calls"]}</td><td class="num">${f["cost"]:.4f}</td></tr>')
+                     f'<td class="num">{f["plan"] + f["answer_calls"]}</td><td class="num">${f["cost"]:.4f}</td>'
+                     f'<td><pre style="white-space:pre-wrap">{esc(f["answer"])}</pre></td></tr>')
     qs = "".join(f'<li><b>{esc(c["case_id"])}</b>：{esc(c["question"])}</li>' for c in data["cases"] if not c["answerable"])
-    return (f'<ul>{qs}</ul><table><tr><th>题</th><th>生成</th><th>结果</th><th>终止原因</th><th>LLM 调用</th><th>花费</th></tr>{rows}</table>')
+    return (f'<ul>{qs}</ul><p class="meta">无答案题没有标注证据：Q0 判为可回答不一定是错，答案说明材料中没有即为正确；答案对不对本版不评估，请看答案。</p>'
+            f'<table><tr><th>题</th><th>生成</th><th>结果</th><th>终止原因</th><th>LLM 调用</th><th>花费</th><th>答案</th></tr>{rows}</table>')
 
 
 def withdrawals(data, ev, limit) -> str:
@@ -480,9 +481,9 @@ def case_page(data: dict[str, Any], ev: dict[str, Any], case: dict[str, Any]) ->
             f'<div class="meta">{TERMINATION[facts[L]["termination"]]}</div></td><td><pre style="white-space:pre-wrap">{esc(facts[L]["answer"])}</pre></td></tr>'
             for L in sorted(ev["limits"], reverse=True))
         final = run["calls"][-1]["list"]
-        flist = "".join(f'<tr><td class="nw">{esc(q["id"])}</td><td class="nw">{esc(q["parent"] or "—")}</td><td>{esc(q["text"])}</td>'
+        flist = "".join(f'<tr><td class="nw">{esc(q["id"])}</td><td class="nw">{esc(q["parent"] or "—")}</td><td style="min-width:320px">{esc(q["text"])}</td>'
                         f'<td class="nw">{esc(q["status"])}{"：" + esc(q["abandon_reason"]) if q["abandon_reason"] else ""}</td>'
-                        f'<td class="nw">{esc("、".join(q["evidence"]) or "—")}</td></tr>' for q in final)
+                        f'<td class="meta" style="word-break:break-all;min-width:220px">{esc("、".join(q["evidence"]) or "—")}</td></tr>' for q in final)
         calls = ""
         for n, c in enumerate(run["calls"], start=1):
             try:
