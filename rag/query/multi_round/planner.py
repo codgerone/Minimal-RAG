@@ -171,6 +171,10 @@ def messages(system: str, payload: dict[str, Any]) -> list[dict[str, str]]:
 
 # ---------------------------------------------------------------- calls
 
+TRANSIENT = ("rate_limited", "timeout", "upstream_failed")   # failures of the service, not of the request
+TRANSIENT_WAITS = (5, 20, 60)                                 # seconds before each retry of a transient failure
+
+
 @dataclass
 class Call:
     """One LLM call of a run, as recorded (retry included)."""
@@ -234,8 +238,16 @@ class Caller:
         hit = self.cache.get(key) if self.cache else None
         if hit is not None:
             return {**hit, "cached": True}
-        started = time.perf_counter()
-        done = self.llm.complete_structured(msgs, f"multi_round_{kind}", schema, REASONING_EFFORT)
+        from rag.query.llm import LLMError
+        for wait in TRANSIENT_WAITS + (None,):
+            started = time.perf_counter()
+            try:
+                done = self.llm.complete_structured(msgs, f"multi_round_{kind}", schema, REASONING_EFFORT)
+                break
+            except LLMError as exc:
+                if exc.code not in TRANSIENT or wait is None:
+                    raise
+                time.sleep(wait)
         hit = {"text": done.text, "reasoning": done.reasoning, "prompt_tokens": done.prompt_tokens,
                "completion_tokens": done.completion_tokens, "reasoning_tokens": done.reasoning_tokens,
                "cost_usd": done.cost_usd, "seconds": round(time.perf_counter() - started, 2)}
