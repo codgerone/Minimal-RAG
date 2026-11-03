@@ -49,6 +49,13 @@ def _generations(value: str) -> list[int]:
     return numbers
 
 
+def _query_mode_option(sub: argparse.ArgumentParser) -> None:
+    from rag.config import QUERY_MODES
+    sub.add_argument("--query-mode", choices=QUERY_MODES,
+                     help="本次改用这一路查询：retrieval 原问题检索一次；multi_round 多轮检索（LLM 规划，设置见 [multi_round]）。"
+                          "默认取配置文件 [query] mode，未写为 retrieval")
+
+
 def _weight(value: str) -> float:
     number = float(value)
     if number < 0:
@@ -85,21 +92,21 @@ def build_parser() -> argparse.ArgumentParser:
         sub.add_argument("--document", help="只在这个文档内检索")
         _retriever_option(sub)
         if name == "ask":
-            sub.add_argument("--debug", action="store_true", help="显示检索命中和发给 LLM 的完整消息")
-            sub.add_argument("--multi-round", action="store_true",
-                             help="多轮检索：LLM 读材料判断、派生子问题、兜底检索后作答（设置见配置 [multi_round]）")
+            sub.add_argument("--debug", action="store_true", help="显示检索命中和发给 LLM 的完整消息（多轮检索时显示问题列表）")
+            _query_mode_option(sub)
     chat = command("chat", "多次提问（每轮独立检索，不保留对话记忆）")
     chat.add_argument("--top-k", type=_positive)
     _retriever_option(chat)
+    _query_mode_option(chat)
     evaluate = command("eval", "用 eval/ground-truth 的标注问题评估检索效果，生成报告")
     budget = evaluate.add_mutually_exclusive_group()
     budget.add_argument("--top-k", type=_positive, help="默认取配置文件 [eval] top_k")
     budget.add_argument("--budgets", type=_budgets, metavar="B1,B2,...",
                         help="几档预算（返回单元数），每题检索一次，每档各出一份评估，如 3,6,9,12")
     _retriever_option(evaluate)
-    evaluate.add_argument("--multi-round", metavar="NAME",
-                          help="多轮检索评估：每题按配置 [multi_round] 的上限运行，各档上限从同一次运行截取，"
-                               "生成 reports/multi_round/NAME/")
+    _query_mode_option(evaluate)
+    evaluate.add_argument("--name", help="多轮检索评估页的名称（reports/multi_round/NAME/），默认为配置名；"
+                                         "每题按 [multi_round] 的上限运行，更低的上限从同一次运行截取")
     evaluate.add_argument("--cases", metavar="ID,ID,...", help="多轮检索评估只跑这些题")
     evaluate.add_argument("--generations", type=_generations, default=None, metavar="0,1,2,3",
                           help="多轮检索评估的独立生成编号（默认 0,1,2,3）")
@@ -129,8 +136,9 @@ def _out(text: str = "") -> None:
 
 
 def _assembly(workspace: Workspace, name: str | None, retriever: str | None = None,
-              table_return_unit: str | None = None, bm25_weight: float | None = None):
-    """`retriever`, `table_return_unit` and `bm25_weight` replace the config's query settings for this command."""
+              table_return_unit: str | None = None, bm25_weight: float | None = None,
+              query_mode: str | None = None):
+    """`retriever`, `table_return_unit`, `bm25_weight` and `query_mode` replace the config's query settings for this command."""
     from dataclasses import replace
     from rag.registry import assemble
     config = resolve_config(workspace.root, name)
@@ -140,11 +148,14 @@ def _assembly(workspace: Workspace, name: str | None, retriever: str | None = No
         config = replace(config, table_return_unit=table_return_unit)
     if bm25_weight is not None:
         config = replace(config, bm25_weight=bm25_weight)
+    if query_mode is not None:
+        config = replace(config, query_mode=query_mode)
     return assemble(config)
 
 
 def _query_assembly(workspace: Workspace, args: argparse.Namespace):
-    return _assembly(workspace, args.config, args.retriever, args.table_return_unit, args.bm25_weight)
+    return _assembly(workspace, args.config, args.retriever, args.table_return_unit, args.bm25_weight,
+                     getattr(args, "query_mode", None))
 
 
 def _status(workspace: Workspace, args: argparse.Namespace) -> int:
@@ -336,40 +347,47 @@ def _answer(workspace: Workspace, assembly, searcher, question: str, top_k: int,
             llm.api_key = key
 
 
-def _ask_multi_round(workspace: Workspace, assembly, args: argparse.Namespace) -> None:
-    from rag.ingest.tables.llm_tables import LLMCache
-    from rag.query.llm import OpenRouterLLM
-    from rag.query.multi_round.planner import Caller
-    from rag.query.multi_round.runner import run
-    from rag.query.multi_round.state import SCHEDULE_A, Schedule
-    from rag.query.planning import document_languages
-    settings = assembly.config.multi_round
-    scope = _Scoper(workspace, assembly, args.document).scope(args.question)
-    languages_of = document_languages(workspace.index_dir(assembly.name))
-    languages = sorted({languages_of[d] for d in (scope.document_ids or languages_of)})
-    scoper = _Scoper(workspace, assembly, args.document)
-    caller = Caller(OpenRouterLLM(model=settings.model, temperature=0, env_override=False),
-                    LLMCache(workspace.root / ".rag" / "llm-cache"),
-                    scope={"documents": [scoper.names[d] for d in (scope.document_ids or scoper.names)],
-                           "identifier_codes": list(scope.codes)})
-    schedule = Schedule(settings.fallback_schedule) if settings.fallback_schedule else SCHEDULE_A
-    record = run(args.question, _searcher(workspace, assembly), scope.document_ids, scope.codes, languages, caller,
-                 settings.max_llm_calls, settings.units_per_attempt, schedule)
-    if args.debug:
-        for q in record.questions:
-            _out(f"{q.id}（{q.parent_id or '原问题'}）[{q.status.value}{'：' + q.abandon_reason if q.abandon_reason else ''}] {q.text}"
-                 f"\n    证据：{'、'.join(q.evidence) or '无'}；{q.note}")
-    seconds = sum(c.seconds for c in record.calls)
-    _out(f"[多轮检索：{len(record.calls)} 次 LLM 调用，{seconds:.1f} 秒，终止：{record.termination}，"
-         f"交给 LLM 的单元 {len(record.table.order)} 个]")
-    _out(record.answer)
+class _MultiRound:
+    """The multi-round query path of an assembly (settings: [multi_round])."""
+
+    def __init__(self, workspace: Workspace, assembly, document: str | None = None):
+        from rag.ingest.tables.llm_tables import LLMCache
+        from rag.query.llm import OpenRouterLLM
+        from rag.query.multi_round.state import SCHEDULE_A, Schedule
+        from rag.query.planning import document_languages
+        self.settings = assembly.config.multi_round
+        self.scoper = _Scoper(workspace, assembly, document)
+        self.languages_of = document_languages(workspace.index_dir(assembly.name))
+        self.searcher = _searcher(workspace, assembly)
+        self.llm = OpenRouterLLM(model=self.settings.model, temperature=0, env_override=False)
+        self.cache = LLMCache(workspace.root / ".rag" / "llm-cache")
+        self.schedule = Schedule(self.settings.fallback_schedule) if self.settings.fallback_schedule else SCHEDULE_A
+
+    def ask(self, question: str, debug: bool = False) -> None:
+        from rag.query.multi_round.planner import Caller
+        from rag.query.multi_round.runner import run
+        scope = self.scoper.scope(question)
+        languages = sorted({self.languages_of[d] for d in (scope.document_ids or self.languages_of)})
+        names = self.scoper.names
+        caller = Caller(self.llm, self.cache, scope={"documents": [names[d] for d in (scope.document_ids or names)],
+                                                     "identifier_codes": list(scope.codes)})
+        record = run(question, self.searcher, scope.document_ids, scope.codes, languages, caller,
+                     self.settings.max_llm_calls, self.settings.units_per_attempt, self.schedule)
+        if debug:
+            for q in record.questions:
+                _out(f"{q.id}（{q.parent_id or '原问题'}）[{q.status.value}{'：' + q.abandon_reason if q.abandon_reason else ''}] {q.text}"
+                     f"\n    证据：{'、'.join(q.evidence) or '无'}；{q.note}")
+        seconds = sum(c.seconds for c in record.calls)
+        _out(f"[多轮检索：{len(record.calls)} 次 LLM 调用，{seconds:.1f} 秒，终止：{record.termination}，"
+             f"交给 LLM 的单元 {len(record.table.order)} 个]")
+        _out(record.answer)
 
 
 def _ask(workspace: Workspace, args: argparse.Namespace) -> int:
     assembly = _query_assembly(workspace, args)
     _require_queryable(workspace, assembly)
-    if args.multi_round:
-        _ask_multi_round(workspace, assembly, args)
+    if assembly.config.query_mode == "multi_round":
+        _MultiRound(workspace, assembly, args.document).ask(args.question, args.debug)
         return 0
     _answer(workspace, assembly, _searcher(workspace, assembly), args.question,
             args.top_k or assembly.config.top_k, _Scoper(workspace, assembly, args.document), args.debug)
@@ -380,9 +398,15 @@ def _chat(workspace: Workspace, args: argparse.Namespace) -> int:
     from rag.query.llm import LLMError
     assembly = _query_assembly(workspace, args)
     _require_queryable(workspace, assembly)
-    searcher = _searcher(workspace, assembly)
-    scoper = _Scoper(workspace, assembly)
-    _out(f"配置 {assembly.name}，模型 {assembly.llm().model}。输入问题，空行或 exit 退出。")
+    multi = assembly.config.query_mode == "multi_round"
+    if multi:
+        path = _MultiRound(workspace, assembly)
+        _out(f"配置 {assembly.name}，多轮检索，模型 {path.settings.model}，LLM 调用上限 {path.settings.max_llm_calls}。"
+             "输入问题，空行或 exit 退出。")
+    else:
+        searcher = _searcher(workspace, assembly)
+        scoper = _Scoper(workspace, assembly)
+        _out(f"配置 {assembly.name}，模型 {assembly.llm().model}。输入问题，空行或 exit 退出。")
     while True:
         try:
             question = input("\n问题> ").strip()
@@ -391,8 +415,11 @@ def _chat(workspace: Workspace, args: argparse.Namespace) -> int:
         if not question or question.lower() in {"exit", "quit"}:
             break
         try:
-            _answer(workspace, assembly, searcher, question,
-                    args.top_k or assembly.config.top_k, scoper, False)
+            if multi:
+                path.ask(question)
+            else:
+                _answer(workspace, assembly, searcher, question,
+                        args.top_k or assembly.config.top_k, scoper, False)
         except LLMError as exc:
             _out(f"回答失败：{exc}")
     return 0
@@ -402,8 +429,11 @@ def _eval(workspace: Workspace, args: argparse.Namespace) -> int:
     from rag.eval.runner import run_evaluation
     from rag.reports.index_page import write_index_page
     assembly = _query_assembly(workspace, args)
-    if args.multi_round:
+    if assembly.config.query_mode == "multi_round":
         return _eval_multi_round(workspace, assembly, args)
+    if args.name or args.cases or args.generations is not None:
+        raise ConfigError("--name、--cases、--generations 只用于多轮检索评估"
+                          "（[query] mode = \"multi_round\" 或 --query-mode multi_round）")
     budgets = args.budgets or [args.top_k or assembly.config.eval_top_k]
     folders = run_evaluation(workspace, assembly, budgets)
     for folder in folders:
@@ -424,7 +454,7 @@ def _eval_multi_round(workspace: Workspace, assembly, args: argparse.Namespace) 
     def progress(case_id, generation, facts):
         _out(f"  {case_id} 第 {generation} 次生成：{facts['termination']}，{len(facts['calls'])} 次调用")
 
-    data = collect(workspace, args.multi_round, assembly, cases, generations, progress=progress)
+    data = collect(workspace, args.name or assembly.name, assembly, cases, generations, progress=progress)
     folder = write_pages(workspace, data)
     _out(f"多轮检索评估：{(folder / 'index.html').relative_to(workspace.root).as_posix()}")
     return 0
