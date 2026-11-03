@@ -1,8 +1,8 @@
-# 系统概览（V3.14）
+# 系统概览（V3.15）
 
 ## 这是什么
 
-一个本地运行的 PDF 知识库 RAG 系统：把 `documents/` 里的 PDF（合同、订单、发票等）解析、切块后建立向量索引和 BM25 倒排索引，然后支持混合检索、依据证据的问答，以及用人工标注的题目评估检索效果。
+一个本地运行的 PDF 知识库 RAG 系统：把 `documents/` 里的 PDF（合同、订单、发票等）解析、切块后建立向量索引和 BM25 倒排索引，然后支持混合检索、依据证据的问答，以及用人工标注的题目评估检索效果。问答有两路：纯检索（原问题检索一次后作答），以及多轮检索（LLM 读过检索到的材料后，为还缺的部分派生子问题或换方式再检索，再作答）。
 
 系统的每个关键环节都可以替换（解析器、表格提取器、表格结构、表格写法、表格检索文本、分块器、编码器、检索器、LLM）。用一个配置文件选择各环节的实现，就得到一份"装配"；不同装配各自建索引，可以放在一起比较效果。它也是 Sales Operations Agent 的检索模块原型。
 
@@ -14,14 +14,16 @@
 | `python -m rag ingest` | 入库新增或修改过的 PDF；`--force` 全量重建，`--prune` 清理已删除的文档，`--all-configs` 对所有配置执行 |
 | `python -m rag chunks` | 浏览已入库的 chunk（可按 `--document`、`--page` 筛选） |
 | `python -m rag search "问题"` | 检索，显示检索范围、命中的 chunk 及其在向量与 BM25 两路的名次 |
-| `python -m rag ask "问题"` | 检索后让 LLM 依据证据回答；`--debug` 显示命中内容和完整 Prompt |
-| `python -m rag chat` | 连续提问（每轮独立检索，不记忆上下文） |
-| `python -m rag eval` | 用标注题目评估检索效果并生成报告（K 取配置中的 `[eval] top_k`，内置为 3）；`--budgets 3,6,9,12` 每题检索一次、每档 K 各出一份报告 |
+| `python -m rag ask "问题"` | 检索后让 LLM 依据证据回答；`--debug` 显示命中内容和完整 Prompt（多轮检索时显示问题列表） |
+| `python -m rag chat` | 连续提问（每个问题独立检索，不记忆上下文） |
+| `python -m rag eval` | 用标注题目评估检索效果并生成报告（K 取配置中的 `[eval] top_k`，内置为 3）；`--budgets 3,6,9,12` 每题检索一次、每档 K 各出一份报告。多轮检索一路时生成多轮检索评估页 `reports/multi_round/NAME/`（`--name`，默认配置名；`--cases`、`--generations` 只跑部分题或部分生成） |
 | `python -m rag anchors` | 在 PDF 上定位标注的 excerpt，生成高亮审核文件；核对后加 `--write` 写入标注 |
 | `python -m rag config list` / `config show NAME` | 查看装配配置（`configs/` 的七份内置装配与 `configs/extra/` 的 `plain_text`） |
 | `python -m rag compare RUN... --name NAME` | 把几次评估并排对比（每组第一次为基线），生成 `reports/compare/NAME/`；`--table-spec` 给出表格证据的对照组、排除组与结论 |
 | `python -m rag query-compare --name NAME` | 在 13 种组合上评估查询侧模块（分解、去编码、写法、融合、合并）的全部配置，生成查询侧对比页 `reports/query/NAME/`（[rules/query-planning.md](rules/query-planning.md)）；规划调用 LLM，结果缓存 |
 | `python -m rag report` | 由已保存的结果重新生成入库审核页、评估报告、对比页和报告首页（不重新入库、不重新评估） |
+
+`ask`、`chat`、`eval` 走哪一路由配置 `[query] mode` 决定（见"两路查询"），加 `--query-mode retrieval|multi_round` 可临时换路。
 
 `search`、`ask`、`chat` 会按问题中的标识编码限定检索范围（见下节）；`--document` 可手动指定只在某个文档内检索。`search`、`ask`、`chat`、`eval` 可加 `--retriever semantic|bm25|hybrid` 临时换检索器，加 `--table-return-unit chunk|table` 临时改变命中表格时的返回方式，加 `--bm25-weight α` 临时改变混合检索中 BM25 的权重，都不需要重建索引。
 
@@ -78,6 +80,24 @@ BM25 只能匹配问题中照抄原文的词（外文术语、型号、公司名
 
 **命中表格即返回整表**（`[retriever] table_return_unit = "table"`，内置装配默认）：检索命中表格的任一块时，返回整张表，同一张表在结果中只占一个位置，名次取它排名最靠前的一块，空出的位置由后面的结果补上。整表文本在入库时存入整表库（不做向量化）。长表格被切成多块后，分组标题、合计行与数据行分处不同块，整表交给 LLM 才能看懂（[决策 012](decisions/012-whole-table-return.md)）。代价是返回的文本变长：本库最大的表约 5000 token，对表格大小不设上限。
 
+## 两路查询
+
+| 一路 | `[query] mode` | 怎么做 | 每题耗时与花费 |
+|---|---|---|---|
+| 纯检索（内置默认） | `retrieval` | 原问题检索一次，取 Top-K 交给问答 LLM 作答 | 检索约 1 秒；作答一次 |
+| 多轮检索 | `multi_round` | 第 1 轮用去掉标识编码的原问题检索；之后每次由 LLM 读材料，判断哪些问题可回答、接受哪些材料为证据，为还不能回答的问题派生子问题（如先查出型号再问单价）或换方式再检索，最后作答 | 约 22 秒、$0.014（规划模型 `google/gemini-3.8-flash`） |
+
+多轮检索的设置在 `[multi_round]`，都是查询设置，改动不需要重建索引：
+
+| 设置 | 含义 | 默认 |
+|---|---|---|
+| `max_llm_calls` | LLM 调用上限，含作答调用 | 3 |
+| `units_per_attempt` | 每个问题、每种方式、每次检索交给 LLM 的单元数（跳过已交过的） | 3 |
+| `fallback_schedule` | 兜底检索的安排：`"A"` 为一次用完全部方式；也可写成分组列表，每组一次检索 | `"A"` |
+| `model` | 规划与作答的模型 | `google/gemini-3.8-flash` |
+
+一个问题最多检索两次：第 1 次，以及一次兜底（往下取、改写、HyDE、step-back 同时检索，原问题另加补上翻译）。LLM 只给判断与文字，问题列表、状态与检索由代码维护；每次调用的结果缓存在 `.rag/llm-cache/`。规则见 [rules/multi-round.md](rules/multi-round.md)，取舍见[决策 018](decisions/018-multi-round-retrieval.md)。
+
 ## 当前效果（K=3，5 份 PDF，数据集 3.4.1：34 题，32 道可回答，混合检索，返回整表）
 
 | 装配 | 命中率 | 完整覆盖 | 证据组召回 | MRR | Chunk 精确率 | 跨文档污染 | 文档识别 | 每题返回 token |
@@ -107,6 +127,8 @@ BM25 只能匹配问题中照抄原文的词（外文术语、型号、公司名
 
 K = 12 时各组合都未完整覆盖 CONTRACT-105-Q003（交货地点）、Q011（罚金条款）、Q014（交货地点）。
 
+**多轮检索**（V3.15，structured 返回整表，数据集 3.4.1，4 次 LLM 生成的平均，`reports/multi_round/a-v3/`）：上限 3 时交给 LLM 的材料对 30/32 题凑齐全部信息项，凑齐 78/80 个信息项；单轮按同样的 token 截取，原问题检索一次为 25 题、去编码 + 原句 + 译文为 26 题。每题平均调用 LLM 1.4 次（多数题第一次调用即作答）、交给 LLM 约 1800 token。误判可回答（判为可回答但证据未凑齐）1 题：CONTRACT-105-Q010 需用签约日期换算各批次日期，LLM 按原文的"签约后 N 天"作答。答案正确性尚未评估。
+
 以下各段为各版本测量时的数据集上的结果（V3.13 及以前为数据集 3.2.0、24 题）。
 
 表格题另看表格证据指标（[rules/evaluation.md](rules/evaluation.md)"表格证据指标"），以 12 道表格题、排除 3 个与表格入库无关的证据组计，每题所需返回单元数：structured_llm_lead 1.92，structured、structured_llm、structured_summary 2.08，structured_llm_labeled_lead 2.17，structured_labeled 2.33，structured_llm_labeled 2.42；13 种组合的对比见 `reports/compare/v3.13-llm-tables/`。
@@ -135,13 +157,15 @@ V3.12 在命中表格时返回整张表（[决策 012](decisions/012-whole-table
 
 V3.13 用 LLM 处理表格（[决策 013](decisions/013-llm-tables.md)）：表格处理拆成表格结构、写法、表格检索文本三个环节，七份装配覆盖全部组合。LLM 只标注结构（表头、分节、隐式合并），chunk 中的表格文字全部由代码从原单元格写出；12 张表的标注全部正确，但只有 PO 25-19 数量表有分节，其余表与规则判出的表头相同，返回整表时 structured_llm 与 structured 逐题相同。引导句使表格题所需返回单元由 2.08 降到 1.92；摘要在排除 3 组后为 2.08，不排除时最少（3.42 对 3.58）。这些差距只有 1–3 题，与 LLM 重新生成一次文字带来的变动同一量级，引导句与摘要分不出优劣。默认装配改为 Markdown 写法（只返回命中 chunk 时明显优于表头映射，返回整表时相近），完整覆盖由 20/24 变为 18/24，少的是 PO-25-19-Q001、Q003：两题需要的第 3、4 个返回单元次序互换；命中由 22 升到 23。整表文本改为原样网格写出，每题返回 token 由 1860 降到 1255。
 
+V3.15 加入多轮检索作为第二路查询（[决策 018](decisions/018-multi-round-retrieval.md)），默认仍为纯检索。收益主要来自 LLM 读过第一轮材料后派生的子问题（多跳、复合问题）；兜底检索只在 5 题中出现，各兜底方式之间尚分不出高下。上限 4、5 只比 3 多 1 题（CONTRACT-105-Q003 的交货地点在第 3 轮检索才凑齐），上限 2 只剩第一轮材料、明显变差。
+
 V3.14 在查询侧对分解、去编码、改写、翻译、HyDE、step-back、融合与合并方式、混合检索的 BM25 权重逐项摸底（[决策 015](decisions/015-query-modules.md)、[016](decisions/016-strip-codes-switch.md)、[017](decisions/017-bm25-weight.md)），默认配置不变。数据集扩为 34 题（新增分解题、多跳题、隐含前提题与无答案题）。按凑齐向量的支配关系、4 次 LLM 生成逐题判定：去编码 + 原句 + 译文 RRF 相对原问题检索一次，32 题中 12 题 4 次都变好、5 题都变差；改写、step-back 变差不少于变好；HyDE、预先分解以各有优势为主；分解的收益在合成一个返回顺序后被抵消。这些结论用于 V3.15 多轮检索。逐题对比见 `reports/query/v3.14/`，各措施的逐题原因见 `reports/experiments/v3.14-factors/`。
 
 ## 不做什么（当前范围外）
 
 扫描件 OCR、图片理解、重排模型、从文档内容自动抽取编号、按文档属性（类型、客户、日期）过滤、多轮对话记忆、Agent/工具调用、Web 界面。
 
-`ask`、`chat` 不分解问题、不改写问题、不做多轮检索：查询侧模块只在 `query-compare` 中实验，结论见[决策 015](decisions/015-query-modules.md)，多轮检索是 V3.15（[changes/v3.15.md](changes/v3.15.md)）。
+纯检索一路不分解、不改写问题；预先分解、改写等查询侧模块只在 `query-compare` 中实验（[决策 015](decisions/015-query-modules.md)），多轮检索一路由 LLM 读过材料后再派生子问题、写兜底文本。最终答案的正确性尚未评估。
 
 ## 怎么验收
 
@@ -157,8 +181,8 @@ V3.14 在查询侧对分解、去编码、改写、翻译、HyDE、step-back、�
 | `documents/documents.toml` | 文档标识表：每份 PDF 的标识编码 | 否 |
 | `configs/`、`configs/extra/` | 装配配置：七份内置装配；`extra/` 放不参与 `--all-configs` 的 `plain_text` | 是 |
 | `eval/ground-truth/` | 人工标注的问题、信息项与证据，以及每段证据在 PDF 上的已确认位置 | 是 |
-| `reports/` | 给人看的报告：`index.html` 入口、`ingest/` 入库审核页、`eval/` 评估报告 | 评估报告进 git，入库审核页不进 |
+| `reports/` | 给人看的报告：`index.html` 入口、`ingest/` 入库审核页、`eval/` 评估报告、`multi_round/` 多轮检索评估页（`data/runs.json` 为运行事实，页面由它生成） | 评估报告、多轮检索评估页进 git，入库审核页不进 |
 | `.rag/indexes/<配置名>/` | 机器数据：`manifest.json`、向量库 `chroma/`、BM25 倒排索引 `bm25.sqlite`、整表库 `tables.sqlite`、各文档中间结果 JSON（含 chunk 来源区域、表格结构与 LLM 调用记录；审核页由它生成） | 否 |
-| `.rag/llm-cache/` | 入库时表格 LLM 调用的缓存 | 否 |
+| `.rag/llm-cache/` | LLM 调用的缓存：入库时的表格处理、查询规划、多轮检索 | 否 |
 | `eval/table-structure/` | 测试集表格的结构标注正确答案（审核页据此判定 LLM 标注是否正确） | 是 |
 | `tmp/anchor-review/` | excerpt 定位审核文件（临时） | 否 |

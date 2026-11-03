@@ -1,6 +1,6 @@
 """One multi-round run: round 1 retrieves Q0 without an LLM; then each planning call judges and plans, code
 applies it and retrieves the pending questions, until Q0 is answered, nothing is pending, or the call limit
-leaves room only for the answering call. Rules: docs/changes/v3.15.md "流程".
+leaves room only for the answering call. Rules: docs/rules/multi-round.md.
 
 The planning prompt does not say how many calls are left, so the state before call n of a run with limit L
 is the state of a run with limit n, for every n ≤ L: one run at the highest limit gives every lower limit by

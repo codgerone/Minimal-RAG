@@ -5,7 +5,7 @@ texts each have the identifier codes of Q0 removed and are retrieved once; sever
 fused by RRF into the mode's ranking. Each mode returns K units, skipping units handed to the LLM in an
 earlier round; a unit two questions or modes return in the same round is handed once, with both sources.
 "continue" goes on down the question's first ranking from where its last take stopped.
-Rules: docs/changes/v3.15.md "检索方式".
+Rules: docs/rules/multi-round.md "检索方式".
 """
 
 from __future__ import annotations

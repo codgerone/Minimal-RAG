@@ -2,7 +2,7 @@
 
 The LLM gives judgements; this module checks them and turns them into states. Code writes the facts (ids,
 parents, attempts, accepted evidence, states); the LLM writes texts, notes, gaps and actions. Rules:
-docs/changes/v3.15.md "数据结构", "状态".
+docs/rules/multi-round.md "问题与状态".
 """
 
 from __future__ import annotations

@@ -125,12 +125,22 @@ def _query_section(workspace: Workspace) -> str:
     return f'<h2>查询侧对比</h2><div class="scroll"><table><tr><th>对比页</th></tr>{rows}</table></div>'
 
 
+def _multi_round_section(workspace: Workspace) -> str:
+    root = workspace.reports / "multi_round"
+    pages = sorted(root.glob("*/data/runs.json")) if root.is_dir() else []
+    if not pages:
+        return ""
+    rows = "".join(f'<tr><td><a href="multi_round/{esc(quote(p.parent.parent.name))}/index.html">{esc(p.parent.parent.name)}</a></td></tr>'
+                   for p in pages)
+    return f'<h2>多轮检索评估</h2><div class="scroll"><table><tr><th>评估页</th></tr>{rows}</table></div>'
+
+
 def write_index_page(workspace: Workspace) -> None:
     configs = [c for c in list_configs(workspace.root, extra=True)
                if c.path.parent.name != "extra" or workspace.index_dir(c.name).is_dir()]
     sections = "".join(_config_section(workspace, config) for config in configs)
     body = (f'<h1>Minimal RAG 报告</h1><div class="sub">生成于 {datetime.now():%Y-%m-%d %H:%M} · '
             f'文档目录 documents/ · 评估数据 eval/ground-truth/</div>'
-            f'{_query_section(workspace)}{_compare_section(workspace)}{_eval_section(workspace)}{sections}')
+            f'{_multi_round_section(workspace)}{_query_section(workspace)}{_compare_section(workspace)}{_eval_section(workspace)}{sections}')
     write_assets(workspace.reports)
     write_atomic(workspace.reports / "index.html", page("Minimal RAG 报告", body, root=""))

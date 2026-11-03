@@ -2,7 +2,7 @@
 
 Every call is independent, without conversation history: what the LLM needs to carry over is in the question
 list (its own notes included), which the input writes out each time with the evidence and the new material.
-Rules: docs/changes/v3.15.md "LLM 的输出", "交给 LLM 的输入".
+Rules: docs/rules/multi-round.md "调用的输入与输出".
 """
 
 from __future__ import annotations

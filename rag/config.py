@@ -30,7 +30,7 @@ class Component:
 
 @dataclass(frozen=True)
 class MultiRoundConfig:
-    """[multi_round]: query settings of multi-round retrieval (docs/changes/v3.15.md "配置"); not fingerprinted."""
+    """[multi_round]: query settings of multi-round retrieval (docs/rules/multi-round.md); not fingerprinted."""
     max_llm_calls: int = 3                                   # the answering call included
     fallback_schedule: tuple[tuple[str, ...], ...] = ()      # fallback groups by attempt; () = arrangement A (one group of every mode)
     units_per_attempt: int = 3                               # K per question, mode and retrieval

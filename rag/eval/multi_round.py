@@ -6,7 +6,7 @@ Only facts are kept (reports/multi_round/NAME/data/runs.json); every metric is c
 information item's acceptable chunk sets. Per run: the units in the order first handed to the LLM, with their
 chunks, tokens, sources and the call they were first handed to; each call's record, output and the question
 list after it; the answer and termination of every limit. Per baseline: each item's completion rank in the
-full ranking and the leading units' chunks and tokens. Rules: docs/changes/v3.15.md "评估".
+full ranking and the leading units' chunks and tokens. Rules: docs/rules/evaluation.md "多轮检索的评估".
 """
 
 from __future__ import annotations
@@ -25,7 +25,7 @@ from rag.query import execution
 from rag.query.planning import document_languages
 
 GENERATIONS = (0, 1, 2, 3)
-# Single-round baselines (docs/changes/v3.15.md "评估" 2): the V3.14 default, and its best measured
+# Single-round baselines (docs/rules/evaluation.md "多轮检索的评估"): the V3.14 default, and its best measured
 # single-round configuration (codes stripped, original text + translation, RRF; decision 015)
 BASELINES = (("default", "V3.14 默认（原问题检索一次）", ""),
              ("strip_translation", "去编码 + 原句 + 译文 RRF", "P3.2.0_P3.2.2@rrf"))

@@ -1,4 +1,4 @@
-"""The multi-round evaluation page (reports/multi_round/NAME/): every metric of docs/changes/v3.15.md "评估",
+"""The multi-round evaluation page (reports/multi_round/NAME/): every metric of docs/rules/evaluation.md "多轮检索的评估",
 computed from the stored facts (rag/eval/multi_round.py), per call limit.
 
 At limit L a run made more than L − 1 planning calls is cut before planning call L: what was handed to the
