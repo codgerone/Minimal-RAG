@@ -75,12 +75,14 @@ def collect() -> dict:
             "case": case_id, "why": why, "question": case.question, "answerable": case.answerable,
             "scope": {"documents": list(scope.document_ids or []), "codes": list(scope.codes), "languages": languages},
             "termination": record.termination, "answer": record.answer, "groups": groups,
+            "q0": {"status": record.questions["Q0"].status.value, "abandon_reason": record.questions["Q0"].abandon_reason},
+            "rounds": record.rounds,
             "units": {u: {"text": e.unit.text, "document": e.unit.hit.chunk.document_name, "pages": list(e.unit.pages),
                           "call": e.call, "table": e.unit.table is not None, "sources": e.sources, "items": held[u]}
                       for u, e in record.table.entries.items()},
             "order": record.table.order,
             "calls": [{"kind": c.kind, "messages": c.messages, "texts": c.texts, "prompt_tokens": c.prompt_tokens,
-                       "completion_tokens": c.completion_tokens, "seconds": c.seconds, "cost_usd": c.cost_usd,
+                       "completion_tokens": c.completion_tokens, "reasoning_tokens": c.reasoning_tokens, "seconds": c.seconds, "cost_usd": c.cost_usd,
                        "degraded": c.degraded, "cached": c.cached, "new": new, "list": lst}
                       for c, new, lst in zip(record.calls, record.new_units, record.lists)]})
         print(case_id, record.termination, len(record.calls), flush=True)
@@ -145,20 +147,47 @@ def call_block(n: int, call: dict, run: dict) -> str:
     return f'<details class="card" open><summary><b>{head}</b></summary>{body}</details>'
 
 
+TERMINATION = {"answered": "Q0 已回答", "limit": "达到调用上限", "nothing_pending": "没有待检索的问题"}
+
+
+def result(r: dict) -> str:
+    """Answered or not, and whether the accepted evidence covers the annotated items."""
+    answered = r["q0"]["status"] == "answered"
+    groups = r["groups"]
+    missing = [g["id"] for g in groups if not g["accepted"]]
+    if not r["answerable"]:
+        return ('<span class="badge ok">未回答：本题无答案，正确</span>' if not answered
+                else '<span class="badge bad">已回答：本题无答案，误判可回答</span>')
+    if answered:
+        return (f'<span class="badge ok">已回答，证据凑齐 {len(groups)}/{len(groups)}</span>' if not missing else
+                f'<span class="badge bad">已回答，证据未凑齐：缺 {esc("、".join(missing))}（误判可回答）</span>')
+    seen = [g for g in missing if next(x for x in groups if x["id"] == g)["handed"]]
+    return (f'<span class="badge warn">未回答（漏答）：缺 {esc("、".join(missing))}</span>'
+            + (f'<div class="meta">其中 {esc("、".join(seen))} 的证据交给过 LLM 但未被接受</div>' if seen else ""))
+
+
+def timing(r: dict) -> str:
+    rounds = "、".join(f'{n} 次 {s * 1000:.0f} ms' for n, s in r["rounds"])
+    calls = "<br>".join(f'第 {i} 次{"规划" if c["kind"] == "plan" else "作答"}：{c["seconds"]:.1f} 秒 · {c["prompt_tokens"]} / {c["completion_tokens"]}（{c["reasoning_tokens"]}）'
+                        for i, c in enumerate(r["calls"], start=1))
+    total = sum(c["seconds"] for c in r["calls"]) + sum(s for _, s in r["rounds"])
+    return f'<b>合计 {total:.1f} 秒</b><div class="meta">检索：{rounds}</div><div class="meta">{calls}</div>'
+
+
 def render(data: dict) -> str:
     from rag.query.multi_round.planner import ANSWER_SYSTEM, PLAN_SYSTEM, RETRY_TEMPLATE, PROMPT_VERSIONS, plan_schema
     rows = []
     for r in data["runs"]:
-        cov = ("、".join(f'{g["id"]}{"✓" if g["accepted"] else ("（交出未接受）" if g["handed"] else "✗")}' for g in r["groups"]) or "—（无答案题）")
-        secs = sum(c["seconds"] for c in r["calls"])
-        tokens = sum(c["prompt_tokens"] for c in r["calls"])
         rows.append(f'<tr><td class="nw"><b>{esc(r["case"])}</b><div class="meta">{esc(r["why"])}</div></td><td>{esc(r["question"])}</td>'
-                    f'<td class="nw">{esc(r["termination"])}</td><td class="num">{len(r["calls"])}</td><td class="num">{secs:.0f}</td>'
-                    f'<td class="num">{tokens}</td><td class="num">{len(r["order"])}</td><td>{esc(cov)}</td></tr>')
-    summary = ('<table><tr><th>题</th><th>问题</th><th>终止</th><th>调用</th><th>秒</th><th>输入 token</th><th>交给 LLM 的单元</th>'
-               '<th>信息项：已接受的证据是否凑齐（✓），或只在交出的单元中凑齐</th></tr>' + "".join(rows) + '</table>')
+                    f'<td>{result(r)}</td><td class="nw">{TERMINATION[r["termination"]]}</td>'
+                    f'<td class="nw">{esc(r["q0"]["status"])}{"：" + esc(r["q0"]["abandon_reason"]) if r["q0"]["abandon_reason"] else ""}</td>'
+                    f'<td class="nw">{timing(r)}</td><td class="num">{len(r["order"])}</td></tr>')
+    summary = ('<table><tr><th>题</th><th style="min-width:260px">问题</th><th>结果</th><th>终止原因</th><th>Q0 最终状态</th>'
+               '<th>耗时（检索 / LLM）与 token</th><th>交给 LLM 的单元</th></tr>' + "".join(rows) + '</table>'
+               '<p class="meta">结果按已接受的单元是否覆盖标注的证据判定（信息项 e1、e2…）；答案文字本身对不对本版不评估。'
+               '耗时：检索为各轮检索的次数与时间（命中缓存时记录首次检索的时间）；LLM 为各次调用的时间，token 为输入 / 输出（其中推理）。</p>')
     prompts = ('<div class="card"><h2>提示词模板（原文）</h2>'
-               f'<p class="meta">规划 {PROMPT_VERSIONS["plan"]}、作答 {PROMPT_VERSIONS["answer"]}；{{languages}} 由代码填入检索范围内的文档语言。'
+               f'<p class="meta">规划 {PROMPT_VERSIONS["plan"]}、作答 {PROMPT_VERSIONS["answer"]}；{{languages}} 由代码填入检索范围内的文档语言；问题列表中的 retrieval_method_left、retry_texts、open_sub_questions 由代码给出。'
                '每次调用独立，不带对话历史；用户消息是 JSON（检索范围、问题列表、已接受的证据、本轮新材料、需判断的问题）。</p>'
                f'<h3>规划</h3><pre style="white-space:pre-wrap">{esc(PLAN_SYSTEM)}</pre>'
                f'<h3>作答（调用次数到上限或没有待检索的问题时）</h3><pre style="white-space:pre-wrap">{esc(ANSWER_SYSTEM)}</pre>'

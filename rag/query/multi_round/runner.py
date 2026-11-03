@@ -37,6 +37,7 @@ class Run:
     lists: list[list[dict[str, Any]]] = field(default_factory=list)   # the question list after each call
     new_units: list[list[str]] = field(default_factory=list)          # per call: the units handed to it for the first time
     snapshots: list[Snapshot] = field(default_factory=list)
+    rounds: list[tuple[int, float]] = field(default_factory=list)      # per retrieval round: retriever calls, seconds
     termination: str = ""         # answered | nothing_pending | limit
     answer: str = ""
 
@@ -59,6 +60,7 @@ def run(question: str, search: Any, document_ids: Collection[str] | None, codes:
     retrieval = Retrieval(search, document_ids, codes, k)
     record = Run(question, max_calls, ql, table)
     new = retrieval.round(ql, 1, 1, table)
+    record.rounds.append((retrieval.retrievals, retrieval.seconds))
     round_no = 1
     while True:
         n = len(record.calls) + 1
@@ -84,7 +86,9 @@ def run(question: str, search: Any, document_ids: Collection[str] | None, codes:
             record.lists.append(question_list(ql))
             return record
         round_no += 1
+        done, spent = retrieval.retrievals, retrieval.seconds
         new = retrieval.round(ql, round_no, n + 1, table)
+        record.rounds.append((retrieval.retrievals - done, retrieval.seconds - spent))
 
 
 def plan_calls(record: Run) -> int:

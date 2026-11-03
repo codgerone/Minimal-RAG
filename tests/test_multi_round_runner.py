@@ -94,6 +94,9 @@ def test_the_input_holds_the_question_list_the_evidence_the_new_material_and_who
                       plan(judge(Q0, True, accept=["a"]), judge("Q1", True), answer="ans")])
     second = json.loads(llm.seen[1][1][1]["content"])
     assert second["scope"] == {"documents": [], "identifier_codes": []}
+    first = json.loads(llm.seen[0][1][1]["content"])
+    assert first["questions"][0]["retry_texts"] == ["rewrite", "hyde", "step_back", "translation"]
+    assert second["questions"][1]["retry_texts"] == ["rewrite", "hyde", "step_back"]   # translation is Q0's alone
     assert [q["id"] for q in second["questions"]] == [Q0, "Q1"] and second["questions"][0]["note"] == "note Q0"
     assert [e["id"] for e in second["evidence"]] == ["a"] and second["evidence"][0]["accepted_by"] == [Q0]
     assert [m["id"] for m in second["new_material"]] == ["c", "d"] and second["new_material"][0]["returned_by"] == ["Q1 first (rank 1)"]

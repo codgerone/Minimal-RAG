@@ -63,6 +63,8 @@ class Retrieval:
         self.document_ids = document_ids
         self.codes = codes
         self.k = k
+        self.retrievals = 0       # retriever calls so far
+        self.seconds = 0.0        # their time (a cached ranking counts the time it took when made)
 
     def texts(self, q: Question, mode: str) -> list[str]:
         """The texts a mode retrieves for a question, before the codes are removed."""
@@ -74,8 +76,12 @@ class Retrieval:
 
     def ranking(self, texts: list[str]) -> tuple[list[ResultUnit], list[tuple[tuple[int, int], ...]]]:
         """The mode's ranking: each text retrieved once, several fused by RRF; per unit its rank in each text."""
-        rankings = [(str(i), self.search.rank(strip_codes(t, self.codes)[0], self.document_ids).units)
-                    for i, t in enumerate(texts)]
+        rankings = []
+        for i, t in enumerate(texts):
+            got = self.search.rank(strip_codes(t, self.codes)[0], self.document_ids)
+            self.retrievals += 1
+            self.seconds += got.seconds
+            rankings.append((str(i), got.units))
         units, ranks = fuse(rankings)
         return units, [tuple((int(name), r) for name, r in rs) for rs in ranks]
 
