@@ -1,7 +1,7 @@
 import pytest
 
-from rag.query.multi_round.state import (FIRST, Q0, SCHEDULE_A, Attempt, Judgement, NewQuestion, PlanOutput, QuestionList,
-                                          Schedule, Status, Withdrawal)
+from rag.query.multi_round.state import (FIRST, Q0, SCHEDULE_A, Attempt, Judgement, ModeRun, NewQuestion, PlanOutput,
+                                          QuestionList, Schedule, Status, Withdrawal)
 
 LANGS = ["spanish"]
 TEXTS = {"rewrite": (("question", "r"), ("spanish", "r-es")), "hyde": (("spanish", "h"),),
@@ -10,7 +10,7 @@ TEXTS = {"rewrite": (("question", "r"), ("spanish", "r-es")), "hyde": (("spanish
 
 def retrieve(ql, *ids):
     for qid in ids:
-        ql.retrieved(qid, Attempt(1, FIRST, [ql[qid].text]))
+        ql.retrieved(qid, Attempt(1, [ModeRun(FIRST, [ql[qid].text])]))
 
 
 def run(ql, out, handed=frozenset({"u1", "u2"})):
@@ -74,7 +74,7 @@ def test_retry_needs_the_fallback_texts_and_a_method_left():
     assert any("hyde" in i for i in issues)
     _, issues, _ = run(ql, PlanOutput((no(Q0, "retry", fallback=TEXTS),)))
     assert issues == [] and ql[Q0].status == Status.PENDING and ql[Q0].fallback["hyde"] == [("spanish", "h")]
-    ql.retrieved(Q0, Attempt(2, "rewrite", ["r"]))
+    ql.retrieved(Q0, Attempt(2, [ModeRun("rewrite", ["r"])]))
     _, issues, _ = run(ql, PlanOutput((no(Q0, "retry", fallback=TEXTS),)))
     assert any("no retrieval method left" in i for i in issues)   # arrangement A: two attempts
 
@@ -178,7 +178,7 @@ def test_stop_ends_a_question_only_when_nothing_is_left_to_try():
     _, issues, _ = run(ql, PlanOutput((no(Q0, "stop"),)))
     assert any("stop is only" in i for i in issues)
     run(ql, PlanOutput((no(Q0, "retry", fallback=TEXTS),)))
-    ql.retrieved(Q0, Attempt(2, "rewrite", ["r"]))
+    ql.retrieved(Q0, Attempt(2, [ModeRun("rewrite", ["r"])]))
     _, issues, _ = run(ql, PlanOutput((no(Q0, "stop"),)))
     assert issues == [] and (ql[Q0].status, ql[Q0].abandon_reason) == (Status.ABANDONED, "exhausted")
 

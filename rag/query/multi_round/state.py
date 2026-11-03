@@ -61,19 +61,26 @@ SCHEDULE_A = Schedule((FALLBACK_MODES + Q0_ONLY,))
 
 @dataclass(frozen=True)
 class Handed:
-    """One unit handed to the LLM by an attempt: which text it came from and its rank there."""
+    """One unit a mode returned: its rank in the mode's ranking, and its rank in each text's ranking (for a
+    mode fused from several texts)."""
     unit_id: str
-    query: int      # index into Attempt.queries (for a fused mode, the text where it ranks best)
     rank: int
+    ranks: tuple[tuple[int, int], ...] = ()   # (index into ModeRun.queries, rank in that text's ranking)
+
+
+@dataclass
+class ModeRun:
+    mode: str
+    queries: list[str]               # the texts retrieved (codes removed), one ranking each, fused when several
+    units: list[Handed] = field(default_factory=list)   # the K units it returned
+    cursor: int = 0                  # how far down the mode's ranking units have been taken
 
 
 @dataclass
 class Attempt:
+    """One retrieval of a question: every mode its attempt number calls for."""
     round: int                       # the global retrieval round
-    mode: str
-    queries: list[str]               # the texts retrieved (codes removed), one ranking each
-    units: list[Handed] = field(default_factory=list)
-    cursor: int = 0                  # how far down the mode's ranking units have been taken
+    runs: list[ModeRun] = field(default_factory=list)
 
 
 @dataclass
