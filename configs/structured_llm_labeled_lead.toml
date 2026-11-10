@@ -1,6 +1,10 @@
 name = "structured_llm_labeled_lead"
 description = "LL+：LLM 结构标注 + 表头映射写法，每个表格 chunk 开头加引导句"
 
+[ocr]              # 没有文字层的扫描页先 OCR：rapidocr 只认字，结构由解析器从派生的文字层 PDF 恢复（规则见 docs/rules/ocr.md）
+use = "rapidocr"
+dpi = 300          # 扫描页的渲染分辨率
+
 [parser]
 use = "docling_layout"
 

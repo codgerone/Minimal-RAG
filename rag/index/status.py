@@ -20,7 +20,7 @@ IndexState = Literal["not_built", "config_changed", "ready"]
 STATE_LABELS = {
     "current": "已入库", "new": "未入库", "changed": "PDF 已修改，需更新",
     "incomplete": "索引不完整，需重建", "missing": "PDF 已删除，可清理",
-    "unreadable": "无可用文本（扫描件或损坏）",
+    "unreadable": "无可用文本（扫描件需配置 [ocr]，或文件损坏）",
 }
 
 
@@ -71,12 +71,13 @@ def _complete(entry: DocumentEntry, ids: set[str], workspace: Workspace, config_
 def check_status(workspace: Workspace, config_name: str, fingerprint: str,
                  sources: tuple[SourceDocument, ...], store: ChromaStore,
                  lexical: LexicalStore | None = None,
-                 tables: TableStore | None = None) -> IndexStatus:
+                 tables: TableStore | None = None, *, ocr: bool = False) -> IndexStatus:
     """`lexical` is the BM25 index when the config has one; its chunk IDs are checked like the vectors'.
-    `tables` is the whole-table store; each document must hold as many tables as the manifest records."""
+    `tables` is the whole-table store; each document must hold as many tables as the manifest records.
+    `ocr`: the config has [ocr], so documents with scanned pages are readable."""
     manifest = Manifest.load(workspace.index_dir(config_name) / "manifest.json")
     if manifest is None:
-        documents = tuple(DocumentStatus("new" if has_text(s) else "unreadable", s, None)
+        documents = tuple(DocumentStatus("new" if has_text(s, ocr=ocr) else "unreadable", s, None)
                           for s in sources)
         return IndexStatus(config_name, "not_built", fingerprint, None, documents)
     stored_ids = store.ids_by_document()
@@ -94,9 +95,9 @@ def check_status(workspace: Workspace, config_name: str, fingerprint: str,
             if lexical_ids is not None:
                 lexical_ok = _complete(entry, lexical_ids.get(source.document_id, set()), workspace, config_name)
         if entry is None:
-            state: DocumentState = "new" if has_text(source) else "unreadable"
+            state: DocumentState = "new" if has_text(source, ocr=ocr) else "unreadable"
         elif entry.file_hash != source.file_hash:
-            state = "changed" if has_text(source) else "unreadable"
+            state = "changed" if has_text(source, ocr=ocr) else "unreadable"
         elif not vectors or lexical_ok is False or tables_ok is False:
             state = "incomplete"
         else:

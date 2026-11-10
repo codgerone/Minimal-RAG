@@ -1,12 +1,15 @@
-"""Process one PDF: parse → document language → (extract → select → merge continuations → rule
+"""Process one PDF: classify pages → (OCR scanned pages → text-layer PDF) → parse → document language → (extract → select → merge continuations → rule
 header → table structure → table text → index text) → assemble."""
 
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import Callable
 
 from rag.ingest.assemble import compose_document
 from rag.ingest.language import primary_language
+from rag.ingest.ocr.models import DocumentPages
+from rag.ingest.ocr.pages import classify_pages
 from rag.ingest.parsers import ParseResult, Parser
 from rag.ingest.tables.extractors import TableExtractor
 from rag.ingest.tables.formatters import TableFormatter
@@ -34,7 +37,8 @@ class TableSteps:
 
 @dataclass(frozen=True)
 class ProcessedDocument:
-    """Everything one document's processing produced, kept for audit reports."""
+    """Everything one document's processing produced, kept for audit reports.
+    `source` carries the text-layer PDF as its parse file when the document was OCR'd."""
     source: SourceDocument
     parse: ParseResult
     extraction_reports: tuple[TableExtractionReport, ...]
@@ -44,6 +48,7 @@ class ProcessedDocument:
     prepared_tables: tuple[PreparedTableContent, ...]
     continuations: ContinuationReport | None
     document: ParsedDocument
+    pages: DocumentPages
 
     @property
     def has_table_branch(self) -> bool:
@@ -52,7 +57,13 @@ class ProcessedDocument:
 
 def process_document(source: SourceDocument, parser: Parser,
                      extractors: tuple[TableExtractor, ...],
-                     table_steps: TableSteps | None) -> ProcessedDocument:
+                     table_steps: TableSteps | None, ocr: object | None = None,
+                     progress: Callable[[str], None] = lambda message: None) -> ProcessedDocument:
+    """`ocr` is an OcrStep (rag/ingest/ocr/step.py); without it scanned pages stay unread."""
+    if ocr is not None:
+        source, pages = ocr.prepare(source, progress)  # type: ignore[attr-defined]
+    else:
+        pages = DocumentPages(classify_pages(source.absolute_path), None)
     parsed = parser.parse(source)
     primary = parsed.primary
     language = primary_language(primary)
@@ -80,7 +91,7 @@ def process_document(source: SourceDocument, parser: Parser,
     document = compose_document(source, primary, resolutions, prepared,
                                 bool(primary.table_slots), language, warnings)
     return ProcessedDocument(source, parsed, reports, resolutions, grouping, scoring,
-                             prepared, continuations, document)
+                             prepared, continuations, document, pages)
 
 
 def table_texts(primary, adopted: tuple[AdoptedTable, ...], language: str,

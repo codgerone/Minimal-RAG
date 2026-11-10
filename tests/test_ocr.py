@@ -168,3 +168,48 @@ def test_pages_without_scans_skip_ocr(tmp_path: Path, engine: RapidOcrEngine) ->
     prepared, pages = OcrStep("rapidocr", engine, 300, tmp_path / "ocr").prepare(source)
     assert prepared is source and pages.ocr_key is None and pages.document_type == "digital"
     assert not (tmp_path / "ocr").exists()
+
+
+# ---- [ocr] config, fingerprint, status, ingest -------------------------------------------------
+
+def test_ocr_config_validation_and_fingerprint(tmp_path: Path) -> None:
+    from test_config import write
+    from rag.config import ConfigError, load_config
+    from rag.registry import assemble
+    plain = assemble(load_config(write(tmp_path, name="plain")))
+    assert "ocr" not in plain.build_settings() and "ocr_identity" not in plain.build_settings()
+    (tmp_path / "configs").mkdir()
+    path = write(tmp_path / "configs", name="scan", extra='[ocr]\nuse = "rapidocr"\n')
+    with_ocr = assemble(load_config(path))
+    assert with_ocr.build_settings()["ocr"] == {"use": "rapidocr", "dpi": 300}
+    assert with_ocr.build_settings()["ocr_identity"]["models"]["rec"] == "PP-OCRv6_rec_small.onnx"
+    assert with_ocr.ocr.root == tmp_path / ".rag" / "ocr"
+    for bad in ('[ocr]\nuse = "rapidocr"\ndpi = 20\n', '[ocr]\nuse = "rapidocr"\nlang = "es"\n'):
+        with pytest.raises(ConfigError):
+            load_config(write(tmp_path, name="bad", extra=bad))
+    with pytest.raises(ConfigError, match="没有名为"):
+        assemble(load_config(write(tmp_path / "configs", name="other", extra='[ocr]\nuse = "tesseract"\n')))
+
+
+def _scanned_only(path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with fitz.open() as document:
+        _scanned_page(document, _image_of_text(), 420, 300)
+        document.save(path)
+
+
+def test_status_and_ingest_of_scanned_pdf(workspace, fake_assembly, engine: RapidOcrEngine) -> None:
+    import dataclasses as dc
+    from rag.index.audit import load_audit
+    from rag.index.builder import current_status, ingest
+    _scanned_only(workspace.documents / "scan.pdf")
+    assert current_status(workspace, fake_assembly).documents[0].state == "unreadable"
+    assembly = dc.replace(fake_assembly, ocr=OcrStep("rapidocr", engine, 300, workspace.root / ".rag" / "ocr"))
+    assert current_status(workspace, assembly).documents[0].state == "new"
+    outcome = ingest(workspace, assembly)[0]
+    assert outcome.action == "added" and outcome.chunk_count >= 1
+    entry = current_status(workspace, assembly).documents[0].entry
+    audit = load_audit(workspace.index_dir("fake") / "documents" / entry.folder)
+    assert audit.pages is not None and audit.pages.document_type == "scanned" and audit.pages.ocr_key
+    text = " ".join(chunk.text for chunk in audit.batch.chunks)
+    assert "1,234.50" in text and "102-2025" in text
