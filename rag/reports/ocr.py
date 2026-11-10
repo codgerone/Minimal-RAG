@@ -84,9 +84,9 @@ def _lines(item: PageOcr) -> str:
 def _crop(item: PageOcr, image: str, line, word) -> str:
     """The line around a low-confidence word, cut from the page image by CSS; the word is outlined."""
     scale = IMAGE_WIDTH / item.width_pt
-    pad = 4
-    x0, y0 = max(0.0, line.box.x0 - pad), max(0.0, line.box.y0 - pad)
-    x1, y1 = min(item.width_pt, line.box.x1 + pad), min(item.height_pt, line.box.y1 + pad)
+    pad_x, pad_y = 60, 6     # points of context around the line
+    x0, y0 = max(0.0, line.box.x0 - pad_x), max(0.0, line.box.y0 - pad_y)
+    x1, y1 = min(item.width_pt, line.box.x1 + pad_x), min(item.height_pt, line.box.y1 + pad_y)
     mark = (f'<span class="ocr-mark" style="left:{(word.box.x0 - x0) * scale:.0f}px;top:{(word.box.y0 - y0) * scale:.0f}px;'
             f'width:{(word.box.x1 - word.box.x0) * scale:.0f}px;height:{(word.box.y1 - word.box.y0) * scale:.0f}px"></span>')
     return (f'<div class="scroll"><div class="ocr-crop" style="width:{(x1 - x0) * scale:.0f}px;'
