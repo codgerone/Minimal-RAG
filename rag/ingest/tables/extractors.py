@@ -34,7 +34,7 @@ class PageStrategyExtractor:
     adapters: dict[tuple[str, str], StrategyAdapter]
 
     def extract(self, source: SourceDocument, shared: object | None) -> TableExtractionReport:
-        with fitz.open(source.absolute_path) as pdf:
+        with fitz.open(source.pdf_path) as pdf:
             page_count = len(pdf)
         return run_extractor(source, page_count, tool=self.tool, strategies=self.strategies,
                              adapters={strategy: self.adapters[(self.tool, strategy)]

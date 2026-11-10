@@ -20,8 +20,8 @@ class PdfEvidenceError(RuntimeError):
 def read_page_words(source: SourceDocument, page_number: int) -> tuple[PdfPageWord, ...]:
     if type(page_number) is not int or page_number <= 0:
         raise PdfEvidenceError("page number must be one-based")
-    content = source.absolute_path.read_bytes()
-    if hashlib.sha256(content).hexdigest() != source.file_hash:
+    content = source.pdf_path.read_bytes()
+    if hashlib.sha256(content).hexdigest() != source.pdf_hash:
         raise PdfEvidenceError("PDF evidence source hash differs from registry")
     with fitz.open(stream=content, filetype="pdf") as pdf:
         if page_number > len(pdf):
@@ -44,8 +44,8 @@ def read_page_words(source: SourceDocument, page_number: int) -> tuple[PdfPageWo
 def read_page_geometry(source: SourceDocument, page_number: int) -> tuple[float, float]:
     if type(page_number) is not int or page_number <= 0:
         raise PdfEvidenceError("page number must be one-based")
-    content = source.absolute_path.read_bytes()
-    if hashlib.sha256(content).hexdigest() != source.file_hash:
+    content = source.pdf_path.read_bytes()
+    if hashlib.sha256(content).hexdigest() != source.pdf_hash:
         raise PdfEvidenceError("PDF evidence source hash differs from registry")
     with fitz.open(stream=content, filetype="pdf") as pdf:
         if page_number > len(pdf):
@@ -55,8 +55,8 @@ def read_page_geometry(source: SourceDocument, page_number: int) -> tuple[float,
 
 
 def read_document_geometry(source: SourceDocument) -> tuple[tuple[float, float], ...]:
-    content = source.absolute_path.read_bytes()
-    if hashlib.sha256(content).hexdigest() != source.file_hash:
+    content = source.pdf_path.read_bytes()
+    if hashlib.sha256(content).hexdigest() != source.pdf_hash:
         raise PdfEvidenceError("PDF evidence source hash differs from registry")
     with fitz.open(stream=content, filetype="pdf") as pdf:
         return tuple((float(page.rect.width), float(page.rect.height)) for page in pdf)
