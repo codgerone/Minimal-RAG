@@ -32,7 +32,13 @@ def page_size(page: fitz.Page, ocr: PageOcr) -> tuple[float, float]:
     return (height, width) if ocr.orientation in (90, 270) else (width, height)
 
 
+FONT_NAME = "ocr"
+
+
 def _write_words(target: fitz.Page, ocr: PageOcr, font: fitz.Font) -> None:
+    # One font resource per page that every word refers to: a resource per word makes parsers
+    # load the font hundreds of times per page (Docling took ~11× longer and gigabytes of memory).
+    target.insert_font(fontname=FONT_NAME, fontbuffer=font.buffer)
     span = font.ascender - font.descender
     for word in ocr.words:
         box = word.box
@@ -41,9 +47,8 @@ def _write_words(target: fitz.Page, ocr: PageOcr, font: fitz.Font) -> None:
         if size <= 0 or natural <= 0:
             raise OcrSelfCheckError(f"第 {ocr.page_number} 页的词 {word.text!r} 无法写入（框高或字宽为 0）")
         baseline = fitz.Point(box.x0, box.y0 + size * font.ascender)
-        writer = fitz.TextWriter(target.rect)
-        writer.append(baseline, word.text + " ", font=font, fontsize=size)
-        writer.write_text(target, render_mode=3, morph=(baseline, fitz.Matrix((box.x1 - box.x0) / natural, 1)))
+        target.insert_text(baseline, word.text + " ", fontname=FONT_NAME, fontsize=size, render_mode=3,
+                           morph=(baseline, fitz.Matrix((box.x1 - box.x0) / natural, 1)))
 
 
 def build_text_layer_pdf(source_pdf: Path, facts: OcrFacts, output: Path) -> None:

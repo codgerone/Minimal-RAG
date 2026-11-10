@@ -132,6 +132,8 @@ def test_step_ocrs_scanned_pages_once_and_derives_checked_pdf(tmp_path: Path, mi
     facts = step.facts(source, pages.pages)
     assert [p.page_number for p in facts.ocr_pages] == [2]
     assert self_check(prepared.pdf_path, facts) == []
+    with fitz.open(prepared.pdf_path) as derived:
+        assert len(derived[1].get_fonts()) == 1      # one font resource per scanned page
 
     calls = []
     original_recognize = engine.recognize
