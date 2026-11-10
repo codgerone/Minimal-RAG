@@ -213,3 +213,16 @@ def test_status_and_ingest_of_scanned_pdf(workspace, fake_assembly, engine: Rapi
     assert audit.pages is not None and audit.pages.document_type == "scanned" and audit.pages.ocr_key
     text = " ".join(chunk.text for chunk in audit.batch.chunks)
     assert "1,234.50" in text and "102-2025" in text
+
+
+def test_ingest_writes_ocr_review_page(workspace, fake_assembly, engine: RapidOcrEngine) -> None:
+    import dataclasses as dc
+    from rag.index.builder import ingest
+    _scanned_only(workspace.documents / "scan.pdf")
+    assembly = dc.replace(fake_assembly, ocr=OcrStep("rapidocr", engine, 300, workspace.root / ".rag" / "ocr"))
+    ingest(workspace, assembly)
+    folder = workspace.ingest_reports("fake") / "scan"
+    html = (folder / "0-OCR.html").read_text(encoding="utf-8")
+    assert "扫描 PDF" in html and "自检通过" in html and "1,234.50" in html
+    assert 'href="0-OCR.html"' in (folder / "1-解析.html").read_text(encoding="utf-8")
+    assert list((workspace.reports / "ocr").glob("*/p001.jpg"))
