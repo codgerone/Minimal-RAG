@@ -70,7 +70,7 @@ def current_status(workspace: Workspace, assembly: Assembly,
     sources = discover(workspace.documents) if sources is None else sources
     return check_status(workspace, assembly.name, assembly.fingerprint(), sources,
                         open_store(workspace, assembly.name), open_lexical(workspace, assembly),
-                        open_tables(workspace, assembly.name), ocr=assembly.ocr is not None)
+                        open_tables(workspace, assembly.name), ocr=_reads_scans(assembly))
 
 
 def prepare(source: SourceDocument, assembly: Assembly,
@@ -189,7 +189,7 @@ def _rebuild_all(workspace: Workspace, assembly: Assembly,
     outcomes: list[DocumentOutcome] = []
     from rag.ingest.sources import has_text
     for source in sources:
-        if not has_text(source, ocr=assembly.ocr is not None):
+        if not has_text(source, ocr=_reads_scans(assembly)):
             outcomes.append(DocumentOutcome(source.relative_path, "unreadable"))
             continue
         progress(f"处理 {source.relative_path} …")
@@ -231,3 +231,8 @@ def _rebuild_all(workspace: Workspace, assembly: Assembly,
         outcomes.append(DocumentOutcome(prepared.source.relative_path, "rebuilt",
                                         len(prepared.batch.chunks)))
     return sorted(outcomes, key=lambda item: item.relative_path.casefold())
+
+
+def _reads_scans(assembly) -> bool:
+    """Scanned pages are readable with an [ocr] step, or (V4.1 experiment only) a parser that OCRs itself."""
+    return assembly.ocr is not None or getattr(assembly.parser, "does_ocr", False)
