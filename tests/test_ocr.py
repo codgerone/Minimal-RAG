@@ -10,7 +10,7 @@ import pytest
 from rag.ingest.ocr import EngineLine, EngineWord
 from rag.ingest.ocr.models import DocumentPages, PageClass
 from rag.ingest.ocr.pages import classify_pages
-from rag.ingest.ocr.rapidocr_engine import RapidOcrEngine
+from rag.ingest.ocr.rapidocr_engine import RapidOcrEngine, higher_confidence
 from rag.ingest.ocr.recognize import recognize_page, render, skew_of, straighten
 from rag.ingest.ocr.step import OcrStep
 from rag.ingest.ocr.text_layer import build_text_layer_pdf, self_check
@@ -116,6 +116,29 @@ def test_straighten_turns_back_measured_skew(engine: RapidOcrEngine) -> None:
     assert abs(corrected) < 0.3
 
 
+def _line(text: str, x: float, confidence: float) -> EngineLine:
+    quad = ((x, 0.0), (x + 50, 0.0), (x + 50, 10.0), (x, 10.0))
+    return EngineLine(text, quad, confidence, (EngineWord(text, quad, confidence),))
+
+
+def test_higher_confidence_per_box_in_detection_order() -> None:
+    on = (_line("a-on", 0, 0.9), _line("b-on", 100, 0.6), _line("c-on", 200, 0.7))
+    off = (_line("a-off", 0, 0.9), _line("b-off", 100, 0.95), _line("d-off", 300, 0.8))
+    assert [l.text for l in higher_confidence(on, off)] == ["a-off", "b-off", "c-on", "d-off"]
+    with pytest.raises(RuntimeError):
+        higher_confidence((_line("x", 100, 0.9), _line("y", 0, 0.9)), (_line("y", 0, 0.9), _line("x", 100, 0.9)))
+
+
+def test_engine_reads_vertical_and_horizontal_text(engine: RapidOcrEngine) -> None:
+    with fitz.open() as scratch:
+        page = _text_page(scratch, 420, 300)
+        page.insert_text((380, 260), "REQUERIMIENTO", fontsize=14, rotate=90)   # bottom-to-top
+        image = render(page, 300)
+    texts = [line.text for line in engine.recognize(image)]
+    assert "REQUERIMIENTO" in texts
+    assert any("102-2025" in text for text in texts) and any("1,234.50" in text for text in texts)
+
+
 def test_step_ocrs_scanned_pages_once_and_derives_checked_pdf(tmp_path: Path, mixed_pdf: Path,
                                                                engine: RapidOcrEngine) -> None:
     source = _source(mixed_pdf)
@@ -185,6 +208,7 @@ def test_ocr_config_validation_and_fingerprint(tmp_path: Path) -> None:
     with_ocr = assemble(load_config(path))
     assert with_ocr.build_settings()["ocr"] == {"use": "rapidocr", "dpi": 300}
     assert with_ocr.build_settings()["ocr_identity"]["models"]["rec"] == "PP-OCRv6_rec_small.onnx"
+    assert with_ocr.build_settings()["ocr_identity"]["line_orientation"] == "cls_on_off_higher_confidence"
     assert with_ocr.ocr.root == tmp_path / ".rag" / "ocr"
     for bad in ('[ocr]\nuse = "rapidocr"\ndpi = 20\n', '[ocr]\nuse = "rapidocr"\nlang = "es"\n'):
         with pytest.raises(ConfigError):
