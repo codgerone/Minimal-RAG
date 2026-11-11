@@ -1,0 +1,10 @@
+{
+  "name": "v4.1-ocr",
+  "runs": [
+    "2026-11-11_v41_e0_k3_filter-on_hybrid_table=E0",
+    "2026-11-11_v41_e1_k3_filter-on_hybrid_table=E1",
+    "2026-11-11_v41_e2_k3_filter-on_hybrid_table=E2",
+    "2026-11-11_v41_e3_k3_filter-on_hybrid_table=E3",
+    "2026-11-11_v41_e3d_k3_filter-on_hybrid_table=E3d"
+  ]
+}

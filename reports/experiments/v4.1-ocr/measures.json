@@ -1,0 +1,3294 @@
+{
+ "ocr": {
+  "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf": {
+   "E1": {
+    "total": {
+     "matched": 4620,
+     "reference": 4694,
+     "recognised": 4817,
+     "digit_matched": 250,
+     "digit_reference": 264
+    },
+    "pages": {
+     "1": {
+      "matched": 557,
+      "reference": 597,
+      "recognised": 586,
+      "digit_matched": 57,
+      "digit_reference": 71
+     },
+     "2": {
+      "matched": 429,
+      "reference": 443,
+      "recognised": 445,
+      "digit_matched": 38,
+      "digit_reference": 38
+     },
+     "3": {
+      "matched": 619,
+      "reference": 621,
+      "recognised": 636,
+      "digit_matched": 23,
+      "digit_reference": 23
+     },
+     "4": {
+      "matched": 443,
+      "reference": 447,
+      "recognised": 458,
+      "digit_matched": 27,
+      "digit_reference": 27
+     },
+     "5": {
+      "matched": 478,
+      "reference": 481,
+      "recognised": 495,
+      "digit_matched": 44,
+      "digit_reference": 44
+     },
+     "6": {
+      "matched": 613,
+      "reference": 617,
+      "recognised": 629,
+      "digit_matched": 28,
+      "digit_reference": 28
+     },
+     "7": {
+      "matched": 509,
+      "reference": 513,
+      "recognised": 528,
+      "digit_matched": 19,
+      "digit_reference": 19
+     },
+     "8": {
+      "matched": 564,
+      "reference": 567,
+      "recognised": 582,
+      "digit_matched": 3,
+      "digit_reference": 3
+     },
+     "9": {
+      "matched": 408,
+      "reference": 408,
+      "recognised": 458,
+      "digit_matched": 11,
+      "digit_reference": 11
+     }
+    }
+   },
+   "E3": {
+    "total": {
+     "matched": 4624,
+     "reference": 4694,
+     "recognised": 4817,
+     "digit_matched": 252,
+     "digit_reference": 264
+    },
+    "pages": {
+     "1": {
+      "matched": 560,
+      "reference": 597,
+      "recognised": 585,
+      "digit_matched": 59,
+      "digit_reference": 71
+     },
+     "2": {
+      "matched": 429,
+      "reference": 443,
+      "recognised": 445,
+      "digit_matched": 38,
+      "digit_reference": 38
+     },
+     "3": {
+      "matched": 619,
+      "reference": 621,
+      "recognised": 636,
+      "digit_matched": 23,
+      "digit_reference": 23
+     },
+     "4": {
+      "matched": 443,
+      "reference": 447,
+      "recognised": 458,
+      "digit_matched": 27,
+      "digit_reference": 27
+     },
+     "5": {
+      "matched": 480,
+      "reference": 481,
+      "recognised": 496,
+      "digit_matched": 44,
+      "digit_reference": 44
+     },
+     "6": {
+      "matched": 613,
+      "reference": 617,
+      "recognised": 629,
+      "digit_matched": 28,
+      "digit_reference": 28
+     },
+     "7": {
+      "matched": 509,
+      "reference": 513,
+      "recognised": 528,
+      "digit_matched": 19,
+      "digit_reference": 19
+     },
+     "8": {
+      "matched": 564,
+      "reference": 567,
+      "recognised": 582,
+      "digit_matched": 3,
+      "digit_reference": 3
+     },
+     "9": {
+      "matched": 407,
+      "reference": 408,
+      "recognised": 458,
+      "digit_matched": 11,
+      "digit_reference": 11
+     }
+    }
+   },
+   "E3d": {
+    "total": {
+     "matched": 4139,
+     "reference": 4694,
+     "recognised": 4627,
+     "digit_matched": 239,
+     "digit_reference": 264
+    },
+    "pages": {
+     "1": {
+      "matched": 490,
+      "reference": 597,
+      "recognised": 551,
+      "digit_matched": 53,
+      "digit_reference": 71
+     },
+     "2": {
+      "matched": 397,
+      "reference": 443,
+      "recognised": 422,
+      "digit_matched": 36,
+      "digit_reference": 38
+     },
+     "3": {
+      "matched": 582,
+      "reference": 621,
+      "recognised": 615,
+      "digit_matched": 23,
+      "digit_reference": 23
+     },
+     "4": {
+      "matched": 386,
+      "reference": 447,
+      "recognised": 437,
+      "digit_matched": 27,
+      "digit_reference": 27
+     },
+     "5": {
+      "matched": 450,
+      "reference": 481,
+      "recognised": 486,
+      "digit_matched": 44,
+      "digit_reference": 44
+     },
+     "6": {
+      "matched": 534,
+      "reference": 617,
+      "recognised": 603,
+      "digit_matched": 25,
+      "digit_reference": 28
+     },
+     "7": {
+      "matched": 492,
+      "reference": 513,
+      "recognised": 520,
+      "digit_matched": 19,
+      "digit_reference": 19
+     },
+     "8": {
+      "matched": 447,
+      "reference": 567,
+      "recognised": 526,
+      "digit_matched": 3,
+      "digit_reference": 3
+     },
+     "9": {
+      "matched": 361,
+      "reference": 408,
+      "recognised": 467,
+      "digit_matched": 9,
+      "digit_reference": 11
+     }
+    }
+   },
+   "consistency": {
+    "1": {
+     "matched": 577,
+     "e1": 586,
+     "e3": 585,
+     "only_e1": [
+      "05'00'",
+      "11:29:57-05'00'",
+      "4”,",
+      "a",
+      "a",
+      "b",
+      "j",
+      "nº20116544289,",
+      "川"
+     ],
+     "only_e3": [
+      "-05'00'",
+      ".00.50-",
+      "11:29:57",
+      "20116544289,",
+      "4\",",
+      "echa:2025.09.23",
+      "jibaja",
+      "n°"
+     ]
+    },
+    "2": {
+     "matched": 445,
+     "e1": 445,
+     "e3": 445,
+     "only_e1": [],
+     "only_e3": []
+    },
+    "3": {
+     "matched": 636,
+     "e1": 636,
+     "e3": 636,
+     "only_e1": [],
+     "only_e3": []
+    },
+    "4": {
+     "matched": 458,
+     "e1": 458,
+     "e3": 458,
+     "only_e1": [],
+     "only_e3": []
+    },
+    "5": {
+     "matched": 494,
+     "e1": 495,
+     "e3": 496,
+     "only_e1": [
+      "https://app.else.com.pe/mesadepartes/o"
+     ],
+     "only_e3": [
+      "https://app.else.com.pe/mesadepartes/",
+      "o"
+     ]
+    },
+    "6": {
+     "matched": 629,
+     "e1": 629,
+     "e3": 629,
+     "only_e1": [],
+     "only_e3": []
+    },
+    "7": {
+     "matched": 528,
+     "e1": 528,
+     "e3": 528,
+     "only_e1": [],
+     "only_e3": []
+    },
+    "8": {
+     "matched": 582,
+     "e1": 582,
+     "e3": 582,
+     "only_e1": [],
+     "only_e3": []
+    },
+    "9": {
+     "matched": 457,
+     "e1": 458,
+     "e3": 458,
+     "only_e1": [
+      "contratista”"
+     ],
+     "only_e3": [
+      "contratista\""
+     ]
+    }
+   }
+  },
+  "E001-602.pdf": {
+   "E1": {
+    "total": {
+     "matched": 314,
+     "reference": 336,
+     "recognised": 323,
+     "digit_matched": 73,
+     "digit_reference": 82
+    },
+    "pages": {
+     "1": {
+      "matched": 314,
+      "reference": 336,
+      "recognised": 323,
+      "digit_matched": 73,
+      "digit_reference": 82
+     }
+    }
+   },
+   "E3": {
+    "total": {
+     "matched": 306,
+     "reference": 336,
+     "recognised": 319,
+     "digit_matched": 70,
+     "digit_reference": 82
+    },
+    "pages": {
+     "1": {
+      "matched": 306,
+      "reference": 336,
+      "recognised": 319,
+      "digit_matched": 70,
+      "digit_reference": 82
+     }
+    }
+   },
+   "E3d": {
+    "total": {
+     "matched": 305,
+     "reference": 336,
+     "recognised": 322,
+     "digit_matched": 76,
+     "digit_reference": 82
+    },
+    "pages": {
+     "1": {
+      "matched": 305,
+      "reference": 336,
+      "recognised": 322,
+      "digit_matched": 76,
+      "digit_reference": 82
+     }
+    }
+   },
+   "consistency": {
+    "1": {
+     "matched": 315,
+     "e1": 323,
+     "e3": 319,
+     "only_e1": [
+      "$",
+      "$",
+      "$",
+      "0.00",
+      "0.00",
+      "331,432.50",
+      "cuota",
+      "nº"
+     ],
+     "only_e3": [
+      "$0.00",
+      "$0.00",
+      "$331,432.50",
+      "nºcuota"
+     ]
+    }
+   }
+  },
+  "ORDER PERU 24-12 ANDET.pdf": {
+   "E1": {
+    "total": {
+     "matched": 522,
+     "reference": 543,
+     "recognised": 528,
+     "digit_matched": 63,
+     "digit_reference": 66
+    },
+    "pages": {
+     "1": {
+      "matched": 367,
+      "reference": 381,
+      "recognised": 371,
+      "digit_matched": 53,
+      "digit_reference": 54
+     },
+     "2": {
+      "matched": 155,
+      "reference": 162,
+      "recognised": 157,
+      "digit_matched": 10,
+      "digit_reference": 12
+     }
+    }
+   },
+   "E3": {
+    "total": {
+     "matched": 522,
+     "reference": 543,
+     "recognised": 528,
+     "digit_matched": 63,
+     "digit_reference": 66
+    },
+    "pages": {
+     "1": {
+      "matched": 367,
+      "reference": 381,
+      "recognised": 371,
+      "digit_matched": 53,
+      "digit_reference": 54
+     },
+     "2": {
+      "matched": 155,
+      "reference": 162,
+      "recognised": 157,
+      "digit_matched": 10,
+      "digit_reference": 12
+     }
+    }
+   },
+   "E3d": {
+    "total": {
+     "matched": 493,
+     "reference": 543,
+     "recognised": 512,
+     "digit_matched": 64,
+     "digit_reference": 66
+    },
+    "pages": {
+     "1": {
+      "matched": 351,
+      "reference": 381,
+      "recognised": 359,
+      "digit_matched": 54,
+      "digit_reference": 54
+     },
+     "2": {
+      "matched": 142,
+      "reference": 162,
+      "recognised": 153,
+      "digit_matched": 10,
+      "digit_reference": 12
+     }
+    }
+   },
+   "consistency": {
+    "1": {
+     "matched": 368,
+     "e1": 371,
+     "e3": 371,
+     "only_e1": [
+      "cl",
+      "网",
+      "能"
+     ],
+     "only_e3": [
+      "ci",
+      "o",
+      "网能"
+     ]
+    },
+    "2": {
+     "matched": 157,
+     "e1": 157,
+     "e3": 157,
+     "only_e1": [],
+     "only_e3": []
+    }
+   }
+  },
+  "ORDER PERU 25-15 ANDET VF.pdf": {
+   "E1": {
+    "total": {
+     "matched": 511,
+     "reference": 552,
+     "recognised": 515,
+     "digit_matched": 104,
+     "digit_reference": 106
+    },
+    "pages": {
+     "1": {
+      "matched": 218,
+      "reference": 220,
+      "recognised": 221,
+      "digit_matched": 52,
+      "digit_reference": 52
+     },
+     "2": {
+      "matched": 293,
+      "reference": 332,
+      "recognised": 294,
+      "digit_matched": 52,
+      "digit_reference": 54
+     }
+    }
+   },
+   "E3": {
+    "total": {
+     "matched": 500,
+     "reference": 552,
+     "recognised": 502,
+     "digit_matched": 104,
+     "digit_reference": 106
+    },
+    "pages": {
+     "1": {
+      "matched": 207,
+      "reference": 220,
+      "recognised": 208,
+      "digit_matched": 52,
+      "digit_reference": 52
+     },
+     "2": {
+      "matched": 293,
+      "reference": 332,
+      "recognised": 294,
+      "digit_matched": 52,
+      "digit_reference": 54
+     }
+    }
+   },
+   "E3d": {
+    "total": {
+     "matched": 498,
+     "reference": 552,
+     "recognised": 516,
+     "digit_matched": 105,
+     "digit_reference": 106
+    },
+    "pages": {
+     "1": {
+      "matched": 219,
+      "reference": 220,
+      "recognised": 221,
+      "digit_matched": 52,
+      "digit_reference": 52
+     },
+     "2": {
+      "matched": 279,
+      "reference": 332,
+      "recognised": 295,
+      "digit_matched": 53,
+      "digit_reference": 54
+     }
+    }
+   },
+   "consistency": {
+    "1": {
+     "matched": 208,
+     "e1": 221,
+     "e3": 208,
+     "only_e1": [
+      "(high",
+      "also",
+      "certificates",
+      "digitak",
+      "initial",
+      "meter:",
+      "per",
+      "please).",
+      "quality",
+      "reports",
+      "two",
+      "vrfication",
+      "yes"
+     ],
+     "only_e3": []
+    },
+    "2": {
+     "matched": 294,
+     "e1": 294,
+     "e3": 294,
+     "only_e1": [],
+     "only_e3": []
+    }
+   }
+  },
+  "签字-ORDER PERU 25-19 FONAFE.pdf": {
+   "E1": {
+    "total": {
+     "matched": 2406,
+     "reference": 2450,
+     "recognised": 2458,
+     "digit_matched": 401,
+     "digit_reference": 408
+    },
+    "pages": {
+     "1": {
+      "matched": 287,
+      "reference": 293,
+      "recognised": 293,
+      "digit_matched": 46,
+      "digit_reference": 49
+     },
+     "2": {
+      "matched": 416,
+      "reference": 416,
+      "recognised": 417,
+      "digit_matched": 191,
+      "digit_reference": 191
+     },
+     "3": {
+      "matched": 431,
+      "reference": 443,
+      "recognised": 438,
+      "digit_matched": 90,
+      "digit_reference": 90
+     },
+     "4": {
+      "matched": 49,
+      "reference": 49,
+      "recognised": 50,
+      "digit_matched": 9,
+      "digit_reference": 9
+     },
+     "5": {
+      "matched": 389,
+      "reference": 397,
+      "recognised": 397,
+      "digit_matched": 25,
+      "digit_reference": 27
+     },
+     "6": {
+      "matched": 834,
+      "reference": 852,
+      "recognised": 863,
+      "digit_matched": 40,
+      "digit_reference": 42
+     }
+    }
+   },
+   "E3": {
+    "total": {
+     "matched": 2403,
+     "reference": 2450,
+     "recognised": 2455,
+     "digit_matched": 399,
+     "digit_reference": 408
+    },
+    "pages": {
+     "1": {
+      "matched": 284,
+      "reference": 293,
+      "recognised": 292,
+      "digit_matched": 44,
+      "digit_reference": 49
+     },
+     "2": {
+      "matched": 416,
+      "reference": 416,
+      "recognised": 417,
+      "digit_matched": 191,
+      "digit_reference": 191
+     },
+     "3": {
+      "matched": 431,
+      "reference": 443,
+      "recognised": 438,
+      "digit_matched": 90,
+      "digit_reference": 90
+     },
+     "4": {
+      "matched": 49,
+      "reference": 49,
+      "recognised": 50,
+      "digit_matched": 9,
+      "digit_reference": 9
+     },
+     "5": {
+      "matched": 389,
+      "reference": 397,
+      "recognised": 396,
+      "digit_matched": 25,
+      "digit_reference": 27
+     },
+     "6": {
+      "matched": 834,
+      "reference": 852,
+      "recognised": 862,
+      "digit_matched": 40,
+      "digit_reference": 42
+     }
+    }
+   },
+   "E3d": {
+    "total": {
+     "matched": 2226,
+     "reference": 2450,
+     "recognised": 2360,
+     "digit_matched": 392,
+     "digit_reference": 408
+    },
+    "pages": {
+     "1": {
+      "matched": 265,
+      "reference": 293,
+      "recognised": 287,
+      "digit_matched": 43,
+      "digit_reference": 49
+     },
+     "2": {
+      "matched": 416,
+      "reference": 416,
+      "recognised": 417,
+      "digit_matched": 191,
+      "digit_reference": 191
+     },
+     "3": {
+      "matched": 414,
+      "reference": 443,
+      "recognised": 424,
+      "digit_matched": 88,
+      "digit_reference": 90
+     },
+     "4": {
+      "matched": 47,
+      "reference": 49,
+      "recognised": 49,
+      "digit_matched": 8,
+      "digit_reference": 9
+     },
+     "5": {
+      "matched": 291,
+      "reference": 397,
+      "recognised": 352,
+      "digit_matched": 23,
+      "digit_reference": 27
+     },
+     "6": {
+      "matched": 793,
+      "reference": 852,
+      "recognised": 831,
+      "digit_matched": 39,
+      "digit_reference": 42
+     }
+    }
+   },
+   "consistency": {
+    "1": {
+     "matched": 286,
+     "e1": 293,
+     "e3": 292,
+     "only_e1": [
+      "002-2024-fonafe-1”",
+      "1131,056.00",
+      "25-19-hpe",
+      "n°",
+      "shangchengindustrial",
+      "sub.:",
+      "“public"
+     ],
+     "only_e3": [
+      "002-2024-fonafe-1\"",
+      "1'131,056.00",
+      "industrial",
+      "n°25-19-hpe",
+      "shangcheng",
+      "sub.:“public"
+     ]
+    },
+    "2": {
+     "matched": 417,
+     "e1": 417,
+     "e3": 417,
+     "only_e1": [],
+     "only_e3": []
+    },
+    "3": {
+     "matched": 438,
+     "e1": 438,
+     "e3": 438,
+     "only_e1": [],
+     "only_e3": []
+    },
+    "4": {
+     "matched": 50,
+     "e1": 50,
+     "e3": 50,
+     "only_e1": [],
+     "only_e3": []
+    },
+    "5": {
+     "matched": 395,
+     "e1": 397,
+     "e3": 396,
+     "only_e1": [
+      "网",
+      "能"
+     ],
+     "only_e3": [
+      "网能"
+     ]
+    },
+    "6": {
+     "matched": 862,
+     "e1": 863,
+     "e3": 862,
+     "only_e1": [
+      "•"
+     ],
+     "only_e3": []
+    }
+   }
+  }
+ },
+ "tables": {
+  "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R]": {
+   "tables": [
+    {
+     "table_id": "pymupdf_lines_strict_p0002_t0001",
+     "tool": "pymupdf",
+     "page": 2,
+     "pages": [
+      2
+     ],
+     "rows": 4,
+     "columns": 2,
+     "routes": {
+      "E1": {
+       "iou": 0.9981879271002411,
+       "same_structure": true,
+       "cer": 0.0,
+       "cer_basis": "cells",
+       "edit_distance": 0,
+       "characters": 139,
+       "rows": 4,
+       "columns": 2,
+       "tool": "camelot",
+       "pages": [
+        2
+       ],
+       "layout_only_e0": 0,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E2": {
+       "iou": 0.9981879271002411,
+       "same_structure": true,
+       "cer": 0.0,
+       "cer_basis": "cells",
+       "edit_distance": 0,
+       "characters": 139,
+       "rows": 4,
+       "columns": 2,
+       "tool": "docling",
+       "pages": [
+        2
+       ],
+       "layout_only_e0": 0,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E3": {
+       "iou": 0.9981879271002411,
+       "same_structure": true,
+       "cer": 0.0,
+       "cer_basis": "cells",
+       "edit_distance": 0,
+       "characters": 139,
+       "rows": 4,
+       "columns": 2,
+       "tool": "docling",
+       "pages": [
+        2
+       ],
+       "layout_only_e0": 0,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E3d": {
+       "iou": 0.9981879271002411,
+       "same_structure": true,
+       "cer": 0.0,
+       "cer_basis": "cells",
+       "edit_distance": 0,
+       "characters": 139,
+       "rows": 4,
+       "columns": 2,
+       "tool": "docling",
+       "pages": [
+        2
+       ],
+       "layout_only_e0": 0,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      }
+     }
+    },
+    {
+     "table_id": "pymupdf_lines_p0003_t0001",
+     "tool": "pymupdf",
+     "page": 3,
+     "pages": [
+      3
+     ],
+     "rows": 4,
+     "columns": 3,
+     "routes": {
+      "E1": {
+       "iou": 0.9954276770894506,
+       "same_structure": true,
+       "cer": 0.0,
+       "cer_basis": "cells",
+       "edit_distance": 0,
+       "characters": 381,
+       "rows": 4,
+       "columns": 3,
+       "tool": "camelot",
+       "pages": [
+        3
+       ],
+       "layout_only_e0": 0,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E2": {
+       "iou": 0.9954276770894506,
+       "same_structure": true,
+       "cer": 0.0,
+       "cer_basis": "cells",
+       "edit_distance": 0,
+       "characters": 381,
+       "rows": 4,
+       "columns": 3,
+       "tool": "docling",
+       "pages": [
+        3
+       ],
+       "layout_only_e0": 0,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E3": {
+       "iou": 0.9954276770894506,
+       "same_structure": true,
+       "cer": 0.0,
+       "cer_basis": "cells",
+       "edit_distance": 0,
+       "characters": 381,
+       "rows": 4,
+       "columns": 3,
+       "tool": "docling",
+       "pages": [
+        3
+       ],
+       "layout_only_e0": 0,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E3d": {
+       "iou": 0.9954276770894506,
+       "same_structure": true,
+       "cer": 0.0,
+       "cer_basis": "cells",
+       "edit_distance": 0,
+       "characters": 381,
+       "rows": 4,
+       "columns": 3,
+       "tool": "docling",
+       "pages": [
+        3
+       ],
+       "layout_only_e0": 0,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      }
+     }
+    },
+    {
+     "table_id": "pymupdf_lines_p0004_t0001",
+     "tool": "pymupdf",
+     "page": 4,
+     "pages": [
+      4
+     ],
+     "rows": 4,
+     "columns": 5,
+     "routes": {
+      "E1": {
+       "iou": 0.9972892629305736,
+       "same_structure": true,
+       "cer": 0.0,
+       "cer_basis": "cells",
+       "edit_distance": 0,
+       "characters": 274,
+       "rows": 4,
+       "columns": 5,
+       "tool": "camelot",
+       "pages": [
+        4
+       ],
+       "layout_only_e0": 0,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E2": {
+       "iou": 0.9972892629305736,
+       "same_structure": true,
+       "cer": 0.0,
+       "cer_basis": "cells",
+       "edit_distance": 0,
+       "characters": 274,
+       "rows": 4,
+       "columns": 5,
+       "tool": "docling",
+       "pages": [
+        4
+       ],
+       "layout_only_e0": 0,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E3": {
+       "iou": 0.9972892629305736,
+       "same_structure": true,
+       "cer": 0.0,
+       "cer_basis": "cells",
+       "edit_distance": 0,
+       "characters": 274,
+       "rows": 4,
+       "columns": 5,
+       "tool": "docling",
+       "pages": [
+        4
+       ],
+       "layout_only_e0": 0,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E3d": {
+       "iou": 0.9972892629305736,
+       "same_structure": true,
+       "cer": 0.010948905109489052,
+       "cer_basis": "cells",
+       "edit_distance": 3,
+       "characters": 274,
+       "rows": 4,
+       "columns": 5,
+       "tool": "docling",
+       "pages": [
+        4
+       ],
+       "layout_only_e0": 0,
+       "layout_only_route": 0,
+       "cell_diffs": [
+        {
+         "cell": [
+          0,
+          3
+         ],
+         "original": "PRECIO UNITARIO CON IGV (US$)",
+         "recognised": "PRECIO UNITARIO CON IGV ($sn)"
+        }
+       ],
+       "cell_diff_count": 1
+      }
+     }
+    },
+    {
+     "table_id": "pymupdf_lines_strict_p0005_t0001",
+     "tool": "pymupdf",
+     "page": 5,
+     "pages": [
+      5
+     ],
+     "rows": 6,
+     "columns": 10,
+     "routes": {
+      "E1": {
+       "iou": 0.9963330715629164,
+       "same_structure": true,
+       "cer": 0.0,
+       "cer_basis": "cells",
+       "edit_distance": 0,
+       "characters": 597,
+       "rows": 6,
+       "columns": 10,
+       "tool": "camelot",
+       "pages": [
+        5
+       ],
+       "layout_only_e0": 0,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E2": {
+       "iou": 0.9963330715629164,
+       "same_structure": false,
+       "cer": 0.12752721617418353,
+       "cer_basis": "whole_table",
+       "edit_distance": 82,
+       "characters": 643,
+       "rows": 6,
+       "columns": 10,
+       "tool": "docling",
+       "pages": [
+        5
+       ],
+       "layout_only_e0": 8,
+       "layout_only_route": 7,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E3": {
+       "iou": 0.9963330715629164,
+       "same_structure": false,
+       "cer": 0.12597200622083982,
+       "cer_basis": "whole_table",
+       "edit_distance": 81,
+       "characters": 643,
+       "rows": 6,
+       "columns": 10,
+       "tool": "docling",
+       "pages": [
+        5
+       ],
+       "layout_only_e0": 8,
+       "layout_only_route": 8,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E3d": {
+       "iou": 0.9963330715629164,
+       "same_structure": false,
+       "cer": 0.12597200622083982,
+       "cer_basis": "whole_table",
+       "edit_distance": 81,
+       "characters": 643,
+       "rows": 6,
+       "columns": 10,
+       "tool": "docling",
+       "pages": [
+        5
+       ],
+       "layout_only_e0": 8,
+       "layout_only_route": 8,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      }
+     }
+    },
+    {
+     "table_id": "pymupdf_lines_strict_p0005_t0002",
+     "tool": "pymupdf",
+     "page": 5,
+     "pages": [
+      5
+     ],
+     "rows": 2,
+     "columns": 2,
+     "routes": {
+      "E1": {
+       "iou": 0.9828998119930094,
+       "same_structure": false,
+       "cer": 0.017857142857142856,
+       "cer_basis": "whole_table",
+       "edit_distance": 2,
+       "characters": 112,
+       "rows": 2,
+       "columns": 2,
+       "tool": "docling",
+       "pages": [
+        5
+       ],
+       "layout_only_e0": 1,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E2": {
+       "iou": 0.9828998119930094,
+       "same_structure": false,
+       "cer": 0.017857142857142856,
+       "cer_basis": "whole_table",
+       "edit_distance": 2,
+       "characters": 112,
+       "rows": 2,
+       "columns": 2,
+       "tool": "docling",
+       "pages": [
+        5
+       ],
+       "layout_only_e0": 1,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E3": {
+       "iou": 0.9828998119930094,
+       "same_structure": false,
+       "cer": 0.008928571428571428,
+       "cer_basis": "whole_table",
+       "edit_distance": 1,
+       "characters": 112,
+       "rows": 2,
+       "columns": 2,
+       "tool": "docling",
+       "pages": [
+        5
+       ],
+       "layout_only_e0": 1,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E3d": {
+       "iou": 0.9828998119930094,
+       "same_structure": false,
+       "cer": 0.008928571428571428,
+       "cer_basis": "whole_table",
+       "edit_distance": 1,
+       "characters": 112,
+       "rows": 2,
+       "columns": 2,
+       "tool": "docling",
+       "pages": [
+        5
+       ],
+       "layout_only_e0": 1,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      }
+     }
+    }
+   ],
+   "counts": {
+    "E1": 5,
+    "E2": 5,
+    "E3": 5,
+    "E3d": 5
+   },
+   "e0_count": 5
+  },
+  "E001-602": {
+   "tables": [
+    {
+     "table_id": "docling_accurate_p0001_t0001",
+     "tool": "docling",
+     "page": 1,
+     "pages": [
+      1
+     ],
+     "rows": 7,
+     "columns": 5,
+     "routes": {
+      "E1": {
+       "iou": 0.9982093566236189,
+       "same_structure": true,
+       "cer": 0.0,
+       "cer_basis": "cells",
+       "edit_distance": 0,
+       "characters": 747,
+       "rows": 7,
+       "columns": 5,
+       "tool": "docling",
+       "pages": [
+        1
+       ],
+       "layout_only_e0": 0,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E2": {
+       "iou": 0.9982093566236189,
+       "same_structure": true,
+       "cer": 0.0,
+       "cer_basis": "cells",
+       "edit_distance": 0,
+       "characters": 747,
+       "rows": 7,
+       "columns": 5,
+       "tool": "docling",
+       "pages": [
+        1
+       ],
+       "layout_only_e0": 0,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E3": {
+       "iou": 0.9982093566236189,
+       "same_structure": true,
+       "cer": 0.0,
+       "cer_basis": "cells",
+       "edit_distance": 0,
+       "characters": 747,
+       "rows": 7,
+       "columns": 5,
+       "tool": "docling",
+       "pages": [
+        1
+       ],
+       "layout_only_e0": 0,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E3d": {
+       "iou": 0.9982093566236189,
+       "same_structure": true,
+       "cer": 0.0,
+       "cer_basis": "cells",
+       "edit_distance": 0,
+       "characters": 747,
+       "rows": 7,
+       "columns": 5,
+       "tool": "docling",
+       "pages": [
+        1
+       ],
+       "layout_only_e0": 0,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      }
+     }
+    }
+   ],
+   "counts": {
+    "E1": 1,
+    "E2": 1,
+    "E3": 1,
+    "E3d": 1
+   },
+   "e0_count": 1
+  },
+  "ORDER PERU 24-12 ANDET": {
+   "tables": [
+    {
+     "table_id": "pymupdf_lines_strict_p0001_t0001",
+     "tool": "pymupdf",
+     "page": 1,
+     "pages": [
+      1
+     ],
+     "rows": 4,
+     "columns": 5,
+     "routes": {
+      "E1": {
+       "iou": 0.9942680674050655,
+       "same_structure": true,
+       "cer": 0.0,
+       "cer_basis": "cells",
+       "edit_distance": 0,
+       "characters": 198,
+       "rows": 4,
+       "columns": 5,
+       "tool": "camelot",
+       "pages": [
+        1
+       ],
+       "layout_only_e0": 0,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E2": {
+       "iou": 0.9942680674050655,
+       "same_structure": false,
+       "cer": 0.11374407582938388,
+       "cer_basis": "whole_table",
+       "edit_distance": 24,
+       "characters": 211,
+       "rows": 3,
+       "columns": 5,
+       "tool": "docling",
+       "pages": [
+        1
+       ],
+       "layout_only_e0": 9,
+       "layout_only_route": 7,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E3": {
+       "iou": 0.9942680674050655,
+       "same_structure": false,
+       "cer": 0.11848341232227488,
+       "cer_basis": "whole_table",
+       "edit_distance": 25,
+       "characters": 211,
+       "rows": 3,
+       "columns": 5,
+       "tool": "docling",
+       "pages": [
+        1
+       ],
+       "layout_only_e0": 9,
+       "layout_only_route": 7,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E3d": {
+       "iou": 0.9942680674050655,
+       "same_structure": false,
+       "cer": 0.11848341232227488,
+       "cer_basis": "whole_table",
+       "edit_distance": 25,
+       "characters": 211,
+       "rows": 3,
+       "columns": 5,
+       "tool": "docling",
+       "pages": [
+        1
+       ],
+       "layout_only_e0": 9,
+       "layout_only_route": 7,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      }
+     }
+    }
+   ],
+   "counts": {
+    "E1": 1,
+    "E2": 1,
+    "E3": 1,
+    "E3d": 1
+   },
+   "e0_count": 1
+  },
+  "ORDER PERU 25-15 ANDET VF": {
+   "tables": [
+    {
+     "table_id": "pymupdf_lines_strict_p0001_t0001",
+     "tool": "pymupdf",
+     "page": 1,
+     "pages": [
+      1
+     ],
+     "rows": 9,
+     "columns": 5,
+     "routes": {
+      "E1": {
+       "iou": 0.9980170063811862,
+       "same_structure": true,
+       "cer": 0.0,
+       "cer_basis": "cells",
+       "edit_distance": 0,
+       "characters": 526,
+       "rows": 9,
+       "columns": 5,
+       "tool": "camelot",
+       "pages": [
+        1
+       ],
+       "layout_only_e0": 0,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E2": {
+       "iou": 0.9980170063811862,
+       "same_structure": true,
+       "cer": 0.0,
+       "cer_basis": "cells",
+       "edit_distance": 0,
+       "characters": 526,
+       "rows": 9,
+       "columns": 5,
+       "tool": "docling",
+       "pages": [
+        1
+       ],
+       "layout_only_e0": 0,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E3": {
+       "iou": 0.9980170063811862,
+       "same_structure": true,
+       "cer": 0.0,
+       "cer_basis": "cells",
+       "edit_distance": 0,
+       "characters": 526,
+       "rows": 9,
+       "columns": 5,
+       "tool": "docling",
+       "pages": [
+        1
+       ],
+       "layout_only_e0": 0,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E3d": {
+       "iou": 0.9980170063811862,
+       "same_structure": true,
+       "cer": 0.0,
+       "cer_basis": "cells",
+       "edit_distance": 0,
+       "characters": 526,
+       "rows": 9,
+       "columns": 5,
+       "tool": "docling",
+       "pages": [
+        1
+       ],
+       "layout_only_e0": 0,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      }
+     }
+    },
+    {
+     "table_id": "pymupdf_lines_strict_p0002_t0001",
+     "tool": "pymupdf",
+     "page": 2,
+     "pages": [
+      2
+     ],
+     "rows": 8,
+     "columns": 7,
+     "routes": {
+      "E1": {
+       "iou": 0.9970988529425727,
+       "same_structure": true,
+       "cer": 0.029411764705882353,
+       "cer_basis": "cells",
+       "edit_distance": 10,
+       "characters": 340,
+       "rows": 8,
+       "columns": 7,
+       "tool": "camelot",
+       "pages": [
+        2
+       ],
+       "layout_only_e0": 0,
+       "layout_only_route": 0,
+       "cell_diffs": [
+        {
+         "cell": [
+          2,
+          2
+         ],
+         "original": "-",
+         "recognised": ""
+        },
+        {
+         "cell": [
+          3,
+          5
+         ],
+         "original": "-",
+         "recognised": ""
+        },
+        {
+         "cell": [
+          3,
+          6
+         ],
+         "original": "-",
+         "recognised": ""
+        },
+        {
+         "cell": [
+          4,
+          4
+         ],
+         "original": "-",
+         "recognised": ""
+        },
+        {
+         "cell": [
+          4,
+          6
+         ],
+         "original": "-",
+         "recognised": ""
+        },
+        {
+         "cell": [
+          5,
+          6
+         ],
+         "original": "-",
+         "recognised": ""
+        },
+        {
+         "cell": [
+          6,
+          2
+         ],
+         "original": "-",
+         "recognised": ""
+        },
+        {
+         "cell": [
+          7,
+          4
+         ],
+         "original": "-",
+         "recognised": ""
+        },
+        {
+         "cell": [
+          7,
+          5
+         ],
+         "original": "-",
+         "recognised": ""
+        },
+        {
+         "cell": [
+          7,
+          6
+         ],
+         "original": "-",
+         "recognised": ""
+        }
+       ],
+       "cell_diff_count": 10
+      },
+      "E2": {
+       "iou": 0.9970988529425727,
+       "same_structure": false,
+       "cer": 0.06345177664974619,
+       "cer_basis": "whole_table",
+       "edit_distance": 25,
+       "characters": 394,
+       "rows": 8,
+       "columns": 7,
+       "tool": "docling",
+       "pages": [
+        2
+       ],
+       "layout_only_e0": 15,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E3": {
+       "iou": 0.9970988529425727,
+       "same_structure": false,
+       "cer": 0.06345177664974619,
+       "cer_basis": "whole_table",
+       "edit_distance": 25,
+       "characters": 394,
+       "rows": 8,
+       "columns": 7,
+       "tool": "docling",
+       "pages": [
+        2
+       ],
+       "layout_only_e0": 15,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E3d": {
+       "iou": 0.9970988529425727,
+       "same_structure": false,
+       "cer": 0.06345177664974619,
+       "cer_basis": "whole_table",
+       "edit_distance": 25,
+       "characters": 394,
+       "rows": 8,
+       "columns": 7,
+       "tool": "docling",
+       "pages": [
+        2
+       ],
+       "layout_only_e0": 15,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      }
+     }
+    }
+   ],
+   "counts": {
+    "E1": 2,
+    "E2": 2,
+    "E3": 2,
+    "E3d": 2
+   },
+   "e0_count": 2
+  },
+  "签字-ORDER PERU 25-19 FONAFE": {
+   "tables": [
+    {
+     "table_id": "pymupdf_lines_strict_p0001_t0001",
+     "tool": "pymupdf",
+     "page": 1,
+     "pages": [
+      1
+     ],
+     "rows": 7,
+     "columns": 5,
+     "routes": {
+      "E1": {
+       "iou": 0.9971420108985823,
+       "same_structure": true,
+       "cer": 0.007407407407407408,
+       "cer_basis": "cells",
+       "edit_distance": 3,
+       "characters": 405,
+       "rows": 7,
+       "columns": 5,
+       "tool": "camelot",
+       "pages": [
+        1
+       ],
+       "layout_only_e0": 0,
+       "layout_only_route": 0,
+       "cell_diffs": [
+        {
+         "cell": [
+          2,
+          2
+         ],
+         "original": "1´131,056.00",
+         "recognised": "1131,056.00"
+        },
+        {
+         "cell": [
+          2,
+          4
+         ],
+         "original": "USD 5’157,615.36",
+         "recognised": "USD 5'157,615.36"
+        },
+        {
+         "cell": [
+          6,
+          4
+         ],
+         "original": "USD 6’485,009.14",
+         "recognised": "USD 6'485,009.14"
+        }
+       ],
+       "cell_diff_count": 3
+      },
+      "E2": {
+       "iou": 0.9971420108985823,
+       "same_structure": true,
+       "cer": 0.007407407407407408,
+       "cer_basis": "cells",
+       "edit_distance": 3,
+       "characters": 405,
+       "rows": 7,
+       "columns": 5,
+       "tool": "docling",
+       "pages": [
+        1
+       ],
+       "layout_only_e0": 0,
+       "layout_only_route": 0,
+       "cell_diffs": [
+        {
+         "cell": [
+          2,
+          2
+         ],
+         "original": "1´131,056.00",
+         "recognised": "1131,056.00"
+        },
+        {
+         "cell": [
+          2,
+          4
+         ],
+         "original": "USD 5’157,615.36",
+         "recognised": "USD 5'157,615.36"
+        },
+        {
+         "cell": [
+          6,
+          4
+         ],
+         "original": "USD 6’485,009.14",
+         "recognised": "USD 6'485,009.14"
+        }
+       ],
+       "cell_diff_count": 3
+      },
+      "E3": {
+       "iou": 0.9971420108985823,
+       "same_structure": true,
+       "cer": 0.007407407407407408,
+       "cer_basis": "cells",
+       "edit_distance": 3,
+       "characters": 405,
+       "rows": 7,
+       "columns": 5,
+       "tool": "docling",
+       "pages": [
+        1
+       ],
+       "layout_only_e0": 0,
+       "layout_only_route": 0,
+       "cell_diffs": [
+        {
+         "cell": [
+          2,
+          2
+         ],
+         "original": "1´131,056.00",
+         "recognised": "1'131,056.00"
+        },
+        {
+         "cell": [
+          2,
+          4
+         ],
+         "original": "USD 5’157,615.36",
+         "recognised": "USD 5'157,615.36"
+        },
+        {
+         "cell": [
+          6,
+          4
+         ],
+         "original": "USD 6’485,009.14",
+         "recognised": "USD 6'485,009.14"
+        }
+       ],
+       "cell_diff_count": 3
+      },
+      "E3d": {
+       "iou": 0.9971420108985823,
+       "same_structure": true,
+       "cer": 0.007407407407407408,
+       "cer_basis": "cells",
+       "edit_distance": 3,
+       "characters": 405,
+       "rows": 7,
+       "columns": 5,
+       "tool": "docling",
+       "pages": [
+        1
+       ],
+       "layout_only_e0": 0,
+       "layout_only_route": 0,
+       "cell_diffs": [
+        {
+         "cell": [
+          2,
+          2
+         ],
+         "original": "1´131,056.00",
+         "recognised": "1'131,056.00"
+        },
+        {
+         "cell": [
+          2,
+          4
+         ],
+         "original": "USD 5’157,615.36",
+         "recognised": "USD 5'157,615.36"
+        },
+        {
+         "cell": [
+          6,
+          4
+         ],
+         "original": "USD 6’485,009.14",
+         "recognised": "USD 6'485,009.14"
+        }
+       ],
+       "cell_diff_count": 3
+      }
+     }
+    },
+    {
+     "table_id": "pymupdf_lines_strict_p0002_t0001+pymupdf_lines_strict_p0003_t0001",
+     "tool": "pymupdf",
+     "page": 2,
+     "pages": [
+      2,
+      3
+     ],
+     "rows": 36,
+     "columns": 11,
+     "routes": {
+      "E1": {
+       "iou": 0.9983204780522896,
+       "same_structure": false,
+       "cer": 0.00916030534351145,
+       "cer_basis": "whole_table",
+       "edit_distance": 24,
+       "characters": 2620,
+       "rows": 36,
+       "columns": 11,
+       "tool": "camelot",
+       "pages": [
+        2,
+        3
+       ],
+       "layout_only_e0": 11,
+       "layout_only_route": 1,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E2": {
+       "iou": 0.9983204780522896,
+       "same_structure": false,
+       "cer": 0.26641221374045804,
+       "cer_basis": "whole_table",
+       "edit_distance": 698,
+       "characters": 2620,
+       "rows": 26,
+       "columns": 11,
+       "tool": "docling",
+       "pages": [
+        2
+       ],
+       "layout_only_e0": 163,
+       "layout_only_route": 37,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E3": {
+       "iou": 0.9983204780522896,
+       "same_structure": false,
+       "cer": 0.2694656488549618,
+       "cer_basis": "whole_table",
+       "edit_distance": 706,
+       "characters": 2620,
+       "rows": 26,
+       "columns": 11,
+       "tool": "docling",
+       "pages": [
+        2
+       ],
+       "layout_only_e0": 163,
+       "layout_only_route": 37,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E3d": {
+       "iou": 0.9983204780522896,
+       "same_structure": false,
+       "cer": 0.26259541984732826,
+       "cer_basis": "whole_table",
+       "edit_distance": 688,
+       "characters": 2620,
+       "rows": 26,
+       "columns": 11,
+       "tool": "docling",
+       "pages": [
+        2
+       ],
+       "layout_only_e0": 163,
+       "layout_only_route": 37,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      }
+     }
+    },
+    {
+     "table_id": "pymupdf_lines_strict_p0003_t0002",
+     "tool": "pymupdf",
+     "page": 3,
+     "pages": [
+      3
+     ],
+     "rows": 7,
+     "columns": 3,
+     "routes": {
+      "E1": {
+       "iou": 0.9935582905214427,
+       "same_structure": false,
+       "cer": 0.005681818181818182,
+       "cer_basis": "whole_table",
+       "edit_distance": 1,
+       "characters": 176,
+       "rows": 7,
+       "columns": 2,
+       "tool": "docling",
+       "pages": [
+        3
+       ],
+       "layout_only_e0": 7,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E2": {
+       "iou": 0.9935582905214427,
+       "same_structure": false,
+       "cer": 0.005681818181818182,
+       "cer_basis": "whole_table",
+       "edit_distance": 1,
+       "characters": 176,
+       "rows": 7,
+       "columns": 2,
+       "tool": "docling",
+       "pages": [
+        3
+       ],
+       "layout_only_e0": 7,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E3": {
+       "iou": 0.9935582905214427,
+       "same_structure": false,
+       "cer": 0.005681818181818182,
+       "cer_basis": "whole_table",
+       "edit_distance": 1,
+       "characters": 176,
+       "rows": 7,
+       "columns": 2,
+       "tool": "docling",
+       "pages": [
+        3
+       ],
+       "layout_only_e0": 7,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      },
+      "E3d": {
+       "iou": 0.9935582905214427,
+       "same_structure": false,
+       "cer": 0.005681818181818182,
+       "cer_basis": "whole_table",
+       "edit_distance": 1,
+       "characters": 176,
+       "rows": 7,
+       "columns": 2,
+       "tool": "docling",
+       "pages": [
+        3
+       ],
+       "layout_only_e0": 7,
+       "layout_only_route": 0,
+       "cell_diffs": [],
+       "cell_diff_count": 0
+      }
+     }
+    }
+   ],
+   "counts": {
+    "E1": 3,
+    "E2": 4,
+    "E3": 4,
+    "E3d": 4
+   },
+   "e0_count": 3
+  }
+ },
+ "retrieval": {
+  "E0": {
+   "run": "2026-11-11_v41_e0_k3_filter-on_hybrid_table",
+   "metrics": {
+    "hit_rate": {
+     "value": 0.9375,
+     "numerator": 30,
+     "denominator": 32
+    },
+    "complete_coverage": {
+     "value": 0.6875,
+     "numerator": 22,
+     "denominator": 32
+    },
+    "group_recall": {
+     "value": 0.8102678571428572,
+     "numerator": 25.92857142857143,
+     "denominator": 32
+    },
+    "mrr": {
+     "value": 0.8697916666666667,
+     "numerator": 27.833333333333336,
+     "denominator": 32
+    },
+    "chunk_precision": {
+     "value": 0.4999999999999999,
+     "numerator": 15.999999999999996,
+     "denominator": 32
+    },
+    "cross_document": {
+     "value": 0.0,
+     "numerator": 0.0,
+     "denominator": 32
+    }
+   },
+   "returned_tokens": {
+    "total": 44887,
+    "denominator": 32,
+    "value": 1402.71875,
+    "max": 2603
+   },
+   "evidence_modes": {
+    "coordinate": 85,
+    "fallback": 0,
+    "unmapped": 0
+   },
+   "cases": {
+    "CONTRACT-105-Q001": {
+     "complete": false,
+     "hit": false,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q002": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q003": {
+     "complete": false,
+     "hit": true,
+     "rank": 2,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q004": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q005": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q006": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q007": {
+     "complete": false,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q008": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q009": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q010": {
+     "complete": false,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q011": {
+     "complete": false,
+     "hit": false,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q012": {
+     "complete": true,
+     "hit": true,
+     "rank": 3,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q013": {
+     "complete": false,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q014": {
+     "complete": false,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "E001-602-Q001": {
+     "complete": true,
+     "hit": true,
+     "rank": 2,
+     "document": "E001-602.pdf"
+    },
+    "E001-602-Q002": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "E001-602.pdf"
+    },
+    "PO-24-12-Q001": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "ORDER PERU 24-12 ANDET.pdf"
+    },
+    "PO-24-12-Q002": {
+     "complete": true,
+     "hit": true,
+     "rank": 2,
+     "document": "ORDER PERU 24-12 ANDET.pdf"
+    },
+    "PO-24-12-Q003": {
+     "complete": true,
+     "hit": true,
+     "rank": 2,
+     "document": "ORDER PERU 24-12 ANDET.pdf"
+    },
+    "PO-24-12-Q004": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "ORDER PERU 24-12 ANDET.pdf"
+    },
+    "PO-24-12-Q005": {
+     "complete": true,
+     "hit": true,
+     "rank": 2,
+     "document": "ORDER PERU 24-12 ANDET.pdf"
+    },
+    "PO-24-12-Q006": {
+     "complete": true,
+     "hit": true,
+     "rank": 2,
+     "document": "ORDER PERU 24-12 ANDET.pdf"
+    },
+    "PO-25-15-Q001": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "ORDER PERU 25-15 ANDET VF.pdf"
+    },
+    "PO-25-15-Q002": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "ORDER PERU 25-15 ANDET VF.pdf"
+    },
+    "PO-25-19-Q001": {
+     "complete": false,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q002": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q003": {
+     "complete": false,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q004": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q005": {
+     "complete": false,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q006": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q007": {
+     "complete": true,
+     "hit": true,
+     "rank": 2,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q009": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    }
+   }
+  },
+  "E1": {
+   "run": "2026-11-11_v41_e1_k3_filter-on_hybrid_table",
+   "metrics": {
+    "hit_rate": {
+     "value": 1.0,
+     "numerator": 32,
+     "denominator": 32
+    },
+    "complete_coverage": {
+     "value": 0.75,
+     "numerator": 24,
+     "denominator": 32
+    },
+    "group_recall": {
+     "value": 0.8727678571428572,
+     "numerator": 27.92857142857143,
+     "denominator": 32
+    },
+    "mrr": {
+     "value": 0.8854166666666667,
+     "numerator": 28.333333333333336,
+     "denominator": 32
+    },
+    "chunk_precision": {
+     "value": 0.4999999999999999,
+     "numerator": 15.999999999999996,
+     "denominator": 32
+    },
+    "cross_document": {
+     "value": 0.0,
+     "numerator": 0.0,
+     "denominator": 32
+    }
+   },
+   "returned_tokens": {
+    "total": 45380,
+    "denominator": 32,
+    "value": 1418.125,
+    "max": 2571
+   },
+   "evidence_modes": {
+    "coordinate": 85,
+    "fallback": 0,
+    "unmapped": 0
+   },
+   "cases": {
+    "CONTRACT-105-Q001": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q002": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q003": {
+     "complete": false,
+     "hit": true,
+     "rank": 2,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q004": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q005": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q006": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q007": {
+     "complete": false,
+     "hit": true,
+     "rank": 2,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q008": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q009": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q010": {
+     "complete": false,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q011": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q012": {
+     "complete": true,
+     "hit": true,
+     "rank": 3,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q013": {
+     "complete": false,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q014": {
+     "complete": false,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "E001-602-Q001": {
+     "complete": true,
+     "hit": true,
+     "rank": 2,
+     "document": "E001-602.pdf"
+    },
+    "E001-602-Q002": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "E001-602.pdf"
+    },
+    "PO-24-12-Q001": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "ORDER PERU 24-12 ANDET.pdf"
+    },
+    "PO-24-12-Q002": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "ORDER PERU 24-12 ANDET.pdf"
+    },
+    "PO-24-12-Q003": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "ORDER PERU 24-12 ANDET.pdf"
+    },
+    "PO-24-12-Q004": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "ORDER PERU 24-12 ANDET.pdf"
+    },
+    "PO-24-12-Q005": {
+     "complete": true,
+     "hit": true,
+     "rank": 2,
+     "document": "ORDER PERU 24-12 ANDET.pdf"
+    },
+    "PO-24-12-Q006": {
+     "complete": true,
+     "hit": true,
+     "rank": 2,
+     "document": "ORDER PERU 24-12 ANDET.pdf"
+    },
+    "PO-25-15-Q001": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "ORDER PERU 25-15 ANDET VF.pdf"
+    },
+    "PO-25-15-Q002": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "ORDER PERU 25-15 ANDET VF.pdf"
+    },
+    "PO-25-19-Q001": {
+     "complete": false,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q002": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q003": {
+     "complete": false,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q004": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q005": {
+     "complete": false,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q006": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q007": {
+     "complete": true,
+     "hit": true,
+     "rank": 2,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q009": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    }
+   }
+  },
+  "E2": {
+   "run": "2026-11-11_v41_e2_k3_filter-on_hybrid_table",
+   "metrics": {
+    "hit_rate": {
+     "value": 0.96875,
+     "numerator": 31,
+     "denominator": 32
+    },
+    "complete_coverage": {
+     "value": 0.75,
+     "numerator": 24,
+     "denominator": 32
+    },
+    "group_recall": {
+     "value": 0.8526785714285715,
+     "numerator": 27.28571428571429,
+     "denominator": 32
+    },
+    "mrr": {
+     "value": 0.8281249999999999,
+     "numerator": 26.499999999999996,
+     "denominator": 32
+    },
+    "chunk_precision": {
+     "value": 0.5208333333333333,
+     "numerator": 16.666666666666664,
+     "denominator": 32
+    },
+    "cross_document": {
+     "value": 0.0,
+     "numerator": 0.0,
+     "denominator": 32
+    }
+   },
+   "returned_tokens": {
+    "total": 45170,
+    "denominator": 32,
+    "value": 1411.5625,
+    "max": 2636
+   },
+   "evidence_modes": {
+    "coordinate": 85,
+    "fallback": 0,
+    "unmapped": 0
+   },
+   "cases": {
+    "CONTRACT-105-Q001": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q002": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q003": {
+     "complete": false,
+     "hit": true,
+     "rank": 2,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q004": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q005": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q006": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q007": {
+     "complete": false,
+     "hit": true,
+     "rank": 3,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q008": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q009": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q010": {
+     "complete": false,
+     "hit": false,
+     "rank": null,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q011": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q012": {
+     "complete": true,
+     "hit": true,
+     "rank": 3,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q013": {
+     "complete": false,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q014": {
+     "complete": false,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "E001-602-Q001": {
+     "complete": true,
+     "hit": true,
+     "rank": 2,
+     "document": "E001-602.pdf"
+    },
+    "E001-602-Q002": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "E001-602.pdf"
+    },
+    "PO-24-12-Q001": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "ORDER PERU 24-12 ANDET.pdf"
+    },
+    "PO-24-12-Q002": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "ORDER PERU 24-12 ANDET.pdf"
+    },
+    "PO-24-12-Q003": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "ORDER PERU 24-12 ANDET.pdf"
+    },
+    "PO-24-12-Q004": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "ORDER PERU 24-12 ANDET.pdf"
+    },
+    "PO-24-12-Q005": {
+     "complete": true,
+     "hit": true,
+     "rank": 2,
+     "document": "ORDER PERU 24-12 ANDET.pdf"
+    },
+    "PO-24-12-Q006": {
+     "complete": true,
+     "hit": true,
+     "rank": 2,
+     "document": "ORDER PERU 24-12 ANDET.pdf"
+    },
+    "PO-25-15-Q001": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "ORDER PERU 25-15 ANDET VF.pdf"
+    },
+    "PO-25-15-Q002": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "ORDER PERU 25-15 ANDET VF.pdf"
+    },
+    "PO-25-19-Q001": {
+     "complete": false,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q002": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q003": {
+     "complete": false,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q004": {
+     "complete": true,
+     "hit": true,
+     "rank": 3,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q005": {
+     "complete": false,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q006": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q007": {
+     "complete": true,
+     "hit": true,
+     "rank": 2,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q009": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    }
+   }
+  },
+  "E3": {
+   "run": "2026-11-11_v41_e3_k3_filter-on_hybrid_table",
+   "metrics": {
+    "hit_rate": {
+     "value": 1.0,
+     "numerator": 32,
+     "denominator": 32
+    },
+    "complete_coverage": {
+     "value": 0.75,
+     "numerator": 24,
+     "denominator": 32
+    },
+    "group_recall": {
+     "value": 0.8683035714285715,
+     "numerator": 27.78571428571429,
+     "denominator": 32
+    },
+    "mrr": {
+     "value": 0.8385416666666666,
+     "numerator": 26.833333333333332,
+     "denominator": 32
+    },
+    "chunk_precision": {
+     "value": 0.5416666666666666,
+     "numerator": 17.333333333333332,
+     "denominator": 32
+    },
+    "cross_document": {
+     "value": 0.0,
+     "numerator": 0.0,
+     "denominator": 32
+    }
+   },
+   "returned_tokens": {
+    "total": 45326,
+    "denominator": 32,
+    "value": 1416.4375,
+    "max": 2638
+   },
+   "evidence_modes": {
+    "coordinate": 85,
+    "fallback": 0,
+    "unmapped": 0
+   },
+   "cases": {
+    "CONTRACT-105-Q001": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q002": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q003": {
+     "complete": false,
+     "hit": true,
+     "rank": 2,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q004": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q005": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q006": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q007": {
+     "complete": false,
+     "hit": true,
+     "rank": 3,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q008": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q009": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q010": {
+     "complete": false,
+     "hit": true,
+     "rank": 3,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q011": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q012": {
+     "complete": true,
+     "hit": true,
+     "rank": 3,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q013": {
+     "complete": false,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q014": {
+     "complete": false,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "E001-602-Q001": {
+     "complete": true,
+     "hit": true,
+     "rank": 2,
+     "document": "E001-602.pdf"
+    },
+    "E001-602-Q002": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "E001-602.pdf"
+    },
+    "PO-24-12-Q001": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "ORDER PERU 24-12 ANDET.pdf"
+    },
+    "PO-24-12-Q002": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "ORDER PERU 24-12 ANDET.pdf"
+    },
+    "PO-24-12-Q003": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "ORDER PERU 24-12 ANDET.pdf"
+    },
+    "PO-24-12-Q004": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "ORDER PERU 24-12 ANDET.pdf"
+    },
+    "PO-24-12-Q005": {
+     "complete": true,
+     "hit": true,
+     "rank": 2,
+     "document": "ORDER PERU 24-12 ANDET.pdf"
+    },
+    "PO-24-12-Q006": {
+     "complete": true,
+     "hit": true,
+     "rank": 2,
+     "document": "ORDER PERU 24-12 ANDET.pdf"
+    },
+    "PO-25-15-Q001": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "ORDER PERU 25-15 ANDET VF.pdf"
+    },
+    "PO-25-15-Q002": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "ORDER PERU 25-15 ANDET VF.pdf"
+    },
+    "PO-25-19-Q001": {
+     "complete": false,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q002": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q003": {
+     "complete": false,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q004": {
+     "complete": true,
+     "hit": true,
+     "rank": 3,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q005": {
+     "complete": false,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q006": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q007": {
+     "complete": true,
+     "hit": true,
+     "rank": 2,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q009": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    }
+   }
+  },
+  "E3d": {
+   "run": "2026-11-11_v41_e3d_k3_filter-on_hybrid_table",
+   "metrics": {
+    "hit_rate": {
+     "value": 0.9375,
+     "numerator": 30,
+     "denominator": 32
+    },
+    "complete_coverage": {
+     "value": 0.6875,
+     "numerator": 22,
+     "denominator": 32
+    },
+    "group_recall": {
+     "value": 0.8058035714285715,
+     "numerator": 25.78571428571429,
+     "denominator": 32
+    },
+    "mrr": {
+     "value": 0.8593749999999999,
+     "numerator": 27.499999999999996,
+     "denominator": 32
+    },
+    "chunk_precision": {
+     "value": 0.5104166666666666,
+     "numerator": 16.333333333333332,
+     "denominator": 32
+    },
+    "cross_document": {
+     "value": 0.0,
+     "numerator": 0.0,
+     "denominator": 32
+    }
+   },
+   "returned_tokens": {
+    "total": 44969,
+    "denominator": 32,
+    "value": 1405.28125,
+    "max": 2665
+   },
+   "evidence_modes": {
+    "coordinate": 85,
+    "fallback": 0,
+    "unmapped": 0
+   },
+   "cases": {
+    "CONTRACT-105-Q001": {
+     "complete": true,
+     "hit": true,
+     "rank": 2,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q002": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q003": {
+     "complete": false,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q004": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q005": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q006": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q007": {
+     "complete": false,
+     "hit": true,
+     "rank": 3,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q008": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q009": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q010": {
+     "complete": false,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q011": {
+     "complete": false,
+     "hit": false,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q012": {
+     "complete": true,
+     "hit": true,
+     "rank": 3,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q013": {
+     "complete": false,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "CONTRACT-105-Q014": {
+     "complete": false,
+     "hit": true,
+     "rank": 1,
+     "document": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf"
+    },
+    "E001-602-Q001": {
+     "complete": true,
+     "hit": true,
+     "rank": 2,
+     "document": "E001-602.pdf"
+    },
+    "E001-602-Q002": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "E001-602.pdf"
+    },
+    "PO-24-12-Q001": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "ORDER PERU 24-12 ANDET.pdf"
+    },
+    "PO-24-12-Q002": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "ORDER PERU 24-12 ANDET.pdf"
+    },
+    "PO-24-12-Q003": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "ORDER PERU 24-12 ANDET.pdf"
+    },
+    "PO-24-12-Q004": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "ORDER PERU 24-12 ANDET.pdf"
+    },
+    "PO-24-12-Q005": {
+     "complete": true,
+     "hit": true,
+     "rank": 2,
+     "document": "ORDER PERU 24-12 ANDET.pdf"
+    },
+    "PO-24-12-Q006": {
+     "complete": true,
+     "hit": true,
+     "rank": 2,
+     "document": "ORDER PERU 24-12 ANDET.pdf"
+    },
+    "PO-25-15-Q001": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "ORDER PERU 25-15 ANDET VF.pdf"
+    },
+    "PO-25-15-Q002": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "ORDER PERU 25-15 ANDET VF.pdf"
+    },
+    "PO-25-19-Q001": {
+     "complete": false,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q002": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q003": {
+     "complete": false,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q004": {
+     "complete": true,
+     "hit": true,
+     "rank": 3,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q005": {
+     "complete": false,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q006": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q007": {
+     "complete": false,
+     "hit": false,
+     "rank": 2,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    },
+    "PO-25-19-Q009": {
+     "complete": true,
+     "hit": true,
+     "rank": 1,
+     "document": "签字-ORDER PERU 25-19 FONAFE.pdf"
+    }
+   }
+  }
+ }
+}
