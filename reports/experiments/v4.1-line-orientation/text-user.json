@@ -1,0 +1,788 @@
+{
+ "rows": [
+  {
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 1,
+   "on": {
+    "lines": 55,
+    "valid_chars": 2989,
+    "low_lines": 1
+   },
+   "off": {
+    "lines": 55,
+    "valid_chars": 3036,
+    "low_lines": 2
+   },
+   "pick": {
+    "lines": 55,
+    "valid_chars": 3052,
+    "low_lines": 0
+   }
+  },
+  {
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 2,
+   "on": {
+    "lines": 55,
+    "valid_chars": 2543,
+    "low_lines": 5
+   },
+   "off": {
+    "lines": 55,
+    "valid_chars": 2710,
+    "low_lines": 5
+   },
+   "pick": {
+    "lines": 55,
+    "valid_chars": 2736,
+    "low_lines": 2
+   }
+  },
+  {
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "on": {
+    "lines": 125,
+    "valid_chars": 1940,
+    "low_lines": 3
+   },
+   "off": {
+    "lines": 125,
+    "valid_chars": 1942,
+    "low_lines": 29
+   },
+   "pick": {
+    "lines": 125,
+    "valid_chars": 2014,
+    "low_lines": 1
+   }
+  },
+  {
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 4,
+   "on": {
+    "lines": 53,
+    "valid_chars": 2522,
+    "low_lines": 5
+   },
+   "off": {
+    "lines": 53,
+    "valid_chars": 2675,
+    "low_lines": 5
+   },
+   "pick": {
+    "lines": 53,
+    "valid_chars": 2709,
+    "low_lines": 2
+   }
+  },
+  {
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 5,
+   "on": {
+    "lines": 51,
+    "valid_chars": 2267,
+    "low_lines": 5
+   },
+   "off": {
+    "lines": 51,
+    "valid_chars": 2452,
+    "low_lines": 6
+   },
+   "pick": {
+    "lines": 51,
+    "valid_chars": 2475,
+    "low_lines": 2
+   }
+  },
+  {
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 6,
+   "on": {
+    "lines": 51,
+    "valid_chars": 2048,
+    "low_lines": 5
+   },
+   "off": {
+    "lines": 51,
+    "valid_chars": 2162,
+    "low_lines": 4
+   },
+   "pick": {
+    "lines": 51,
+    "valid_chars": 2180,
+    "low_lines": 3
+   }
+  },
+  {
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 7,
+   "on": {
+    "lines": 51,
+    "valid_chars": 2573,
+    "low_lines": 5
+   },
+   "off": {
+    "lines": 51,
+    "valid_chars": 2680,
+    "low_lines": 5
+   },
+   "pick": {
+    "lines": 51,
+    "valid_chars": 2709,
+    "low_lines": 3
+   }
+  },
+  {
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 8,
+   "on": {
+    "lines": 57,
+    "valid_chars": 2974,
+    "low_lines": 5
+   },
+   "off": {
+    "lines": 57,
+    "valid_chars": 3162,
+    "low_lines": 4
+   },
+   "pick": {
+    "lines": 57,
+    "valid_chars": 3178,
+    "low_lines": 2
+   }
+  },
+  {
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 9,
+   "on": {
+    "lines": 53,
+    "valid_chars": 2382,
+    "low_lines": 3
+   },
+   "off": {
+    "lines": 53,
+    "valid_chars": 2492,
+    "low_lines": 5
+   },
+   "pick": {
+    "lines": 53,
+    "valid_chars": 2515,
+    "low_lines": 1
+   }
+  },
+  {
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 10,
+   "on": {
+    "lines": 53,
+    "valid_chars": 2675,
+    "low_lines": 2
+   },
+   "off": {
+    "lines": 53,
+    "valid_chars": 2720,
+    "low_lines": 3
+   },
+   "pick": {
+    "lines": 53,
+    "valid_chars": 2740,
+    "low_lines": 0
+   }
+  },
+  {
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 11,
+   "on": {
+    "lines": 48,
+    "valid_chars": 2618,
+    "low_lines": 2
+   },
+   "off": {
+    "lines": 48,
+    "valid_chars": 2740,
+    "low_lines": 2
+   },
+   "pick": {
+    "lines": 48,
+    "valid_chars": 2763,
+    "low_lines": 0
+   }
+  },
+  {
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 12,
+   "on": {
+    "lines": 53,
+    "valid_chars": 1280,
+    "low_lines": 4
+   },
+   "off": {
+    "lines": 52,
+    "valid_chars": 1344,
+    "low_lines": 1
+   },
+   "pick": {
+    "lines": 53,
+    "valid_chars": 1345,
+    "low_lines": 2
+   }
+  },
+  {
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 1,
+   "on": {
+    "lines": 78,
+    "valid_chars": 2421,
+    "low_lines": 4
+   },
+   "off": {
+    "lines": 78,
+    "valid_chars": 2548,
+    "low_lines": 2
+   },
+   "pick": {
+    "lines": 78,
+    "valid_chars": 2548,
+    "low_lines": 2
+   }
+  },
+  {
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 2,
+   "on": {
+    "lines": 95,
+    "valid_chars": 2390,
+    "low_lines": 10
+   },
+   "off": {
+    "lines": 95,
+    "valid_chars": 2654,
+    "low_lines": 5
+   },
+   "pick": {
+    "lines": 95,
+    "valid_chars": 2654,
+    "low_lines": 5
+   }
+  },
+  {
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 3,
+   "on": {
+    "lines": 120,
+    "valid_chars": 2652,
+    "low_lines": 7
+   },
+   "off": {
+    "lines": 120,
+    "valid_chars": 2758,
+    "low_lines": 5
+   },
+   "pick": {
+    "lines": 120,
+    "valid_chars": 2758,
+    "low_lines": 5
+   }
+  },
+  {
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 4,
+   "on": {
+    "lines": 71,
+    "valid_chars": 2339,
+    "low_lines": 10
+   },
+   "off": {
+    "lines": 71,
+    "valid_chars": 2671,
+    "low_lines": 4
+   },
+   "pick": {
+    "lines": 71,
+    "valid_chars": 2671,
+    "low_lines": 4
+   }
+  },
+  {
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 5,
+   "on": {
+    "lines": 70,
+    "valid_chars": 2639,
+    "low_lines": 9
+   },
+   "off": {
+    "lines": 70,
+    "valid_chars": 2832,
+    "low_lines": 5
+   },
+   "pick": {
+    "lines": 71,
+    "valid_chars": 2837,
+    "low_lines": 6
+   }
+  },
+  {
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 6,
+   "on": {
+    "lines": 64,
+    "valid_chars": 2253,
+    "low_lines": 5
+   },
+   "off": {
+    "lines": 64,
+    "valid_chars": 2253,
+    "low_lines": 5
+   },
+   "pick": {
+    "lines": 64,
+    "valid_chars": 2253,
+    "low_lines": 5
+   }
+  },
+  {
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 7,
+   "on": {
+    "lines": 39,
+    "valid_chars": 664,
+    "low_lines": 8
+   },
+   "off": {
+    "lines": 38,
+    "valid_chars": 662,
+    "low_lines": 6
+   },
+   "pick": {
+    "lines": 39,
+    "valid_chars": 670,
+    "low_lines": 7
+   }
+  },
+  {
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 2,
+   "on": {
+    "lines": 85,
+    "valid_chars": 3467,
+    "low_lines": 2
+   },
+   "off": {
+    "lines": 85,
+    "valid_chars": 3513,
+    "low_lines": 2
+   },
+   "pick": {
+    "lines": 85,
+    "valid_chars": 3531,
+    "low_lines": 1
+   }
+  },
+  {
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 3,
+   "on": {
+    "lines": 74,
+    "valid_chars": 2292,
+    "low_lines": 4
+   },
+   "off": {
+    "lines": 74,
+    "valid_chars": 2438,
+    "low_lines": 3
+   },
+   "pick": {
+    "lines": 74,
+    "valid_chars": 2470,
+    "low_lines": 1
+   }
+  },
+  {
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 4,
+   "on": {
+    "lines": 53,
+    "valid_chars": 2951,
+    "low_lines": 4
+   },
+   "off": {
+    "lines": 52,
+    "valid_chars": 3113,
+    "low_lines": 2
+   },
+   "pick": {
+    "lines": 53,
+    "valid_chars": 3152,
+    "low_lines": 1
+   }
+  },
+  {
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 5,
+   "on": {
+    "lines": 54,
+    "valid_chars": 2768,
+    "low_lines": 3
+   },
+   "off": {
+    "lines": 54,
+    "valid_chars": 2902,
+    "low_lines": 1
+   },
+   "pick": {
+    "lines": 54,
+    "valid_chars": 2902,
+    "low_lines": 1
+   }
+  },
+  {
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 6,
+   "on": {
+    "lines": 50,
+    "valid_chars": 2694,
+    "low_lines": 2
+   },
+   "off": {
+    "lines": 50,
+    "valid_chars": 2795,
+    "low_lines": 2
+   },
+   "pick": {
+    "lines": 50,
+    "valid_chars": 2831,
+    "low_lines": 0
+   }
+  },
+  {
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 7,
+   "on": {
+    "lines": 66,
+    "valid_chars": 2313,
+    "low_lines": 3
+   },
+   "off": {
+    "lines": 66,
+    "valid_chars": 2440,
+    "low_lines": 1
+   },
+   "pick": {
+    "lines": 66,
+    "valid_chars": 2455,
+    "low_lines": 0
+   }
+  },
+  {
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 8,
+   "on": {
+    "lines": 54,
+    "valid_chars": 2947,
+    "low_lines": 3
+   },
+   "off": {
+    "lines": 54,
+    "valid_chars": 3137,
+    "low_lines": 2
+   },
+   "pick": {
+    "lines": 54,
+    "valid_chars": 3170,
+    "low_lines": 0
+   }
+  },
+  {
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 9,
+   "on": {
+    "lines": 49,
+    "valid_chars": 2345,
+    "low_lines": 2
+   },
+   "off": {
+    "lines": 48,
+    "valid_chars": 2374,
+    "low_lines": 2
+   },
+   "pick": {
+    "lines": 49,
+    "valid_chars": 2420,
+    "low_lines": 1
+   }
+  },
+  {
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 10,
+   "on": {
+    "lines": 50,
+    "valid_chars": 2631,
+    "low_lines": 7
+   },
+   "off": {
+    "lines": 50,
+    "valid_chars": 2963,
+    "low_lines": 3
+   },
+   "pick": {
+    "lines": 50,
+    "valid_chars": 2979,
+    "low_lines": 2
+   }
+  },
+  {
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 11,
+   "on": {
+    "lines": 53,
+    "valid_chars": 2919,
+    "low_lines": 2
+   },
+   "off": {
+    "lines": 53,
+    "valid_chars": 2956,
+    "low_lines": 3
+   },
+   "pick": {
+    "lines": 53,
+    "valid_chars": 2991,
+    "low_lines": 1
+   }
+  },
+  {
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 12,
+   "on": {
+    "lines": 51,
+    "valid_chars": 2391,
+    "low_lines": 5
+   },
+   "off": {
+    "lines": 50,
+    "valid_chars": 2674,
+    "low_lines": 1
+   },
+   "pick": {
+    "lines": 51,
+    "valid_chars": 2715,
+    "low_lines": 0
+   }
+  },
+  {
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 13,
+   "on": {
+    "lines": 54,
+    "valid_chars": 2140,
+    "low_lines": 1
+   },
+   "off": {
+    "lines": 54,
+    "valid_chars": 2172,
+    "low_lines": 2
+   },
+   "pick": {
+    "lines": 54,
+    "valid_chars": 2204,
+    "low_lines": 0
+   }
+  },
+  {
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 14,
+   "on": {
+    "lines": 37,
+    "valid_chars": 866,
+    "low_lines": 3
+   },
+   "off": {
+    "lines": 37,
+    "valid_chars": 946,
+    "low_lines": 1
+   },
+   "pick": {
+    "lines": 37,
+    "valid_chars": 946,
+    "low_lines": 1
+   }
+  },
+  {
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 15,
+   "on": {
+    "lines": 52,
+    "valid_chars": 2834,
+    "low_lines": 6
+   },
+   "off": {
+    "lines": 51,
+    "valid_chars": 3073,
+    "low_lines": 3
+   },
+   "pick": {
+    "lines": 52,
+    "valid_chars": 3118,
+    "low_lines": 2
+   }
+  },
+  {
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 16,
+   "on": {
+    "lines": 30,
+    "valid_chars": 1349,
+    "low_lines": 3
+   },
+   "off": {
+    "lines": 30,
+    "valid_chars": 1544,
+    "low_lines": 3
+   },
+   "pick": {
+    "lines": 30,
+    "valid_chars": 1571,
+    "low_lines": 1
+   }
+  },
+  {
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 1,
+   "on": {
+    "lines": 62,
+    "valid_chars": 2364,
+    "low_lines": 9
+   },
+   "off": {
+    "lines": 63,
+    "valid_chars": 2811,
+    "low_lines": 1
+   },
+   "pick": {
+    "lines": 63,
+    "valid_chars": 2811,
+    "low_lines": 1
+   }
+  },
+  {
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 2,
+   "on": {
+    "lines": 100,
+    "valid_chars": 2301,
+    "low_lines": 5
+   },
+   "off": {
+    "lines": 100,
+    "valid_chars": 2416,
+    "low_lines": 2
+   },
+   "pick": {
+    "lines": 100,
+    "valid_chars": 2416,
+    "low_lines": 2
+   }
+  },
+  {
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 3,
+   "on": {
+    "lines": 110,
+    "valid_chars": 2008,
+    "low_lines": 13
+   },
+   "off": {
+    "lines": 112,
+    "valid_chars": 2450,
+    "low_lines": 5
+   },
+   "pick": {
+    "lines": 112,
+    "valid_chars": 2450,
+    "low_lines": 5
+   }
+  },
+  {
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 4,
+   "on": {
+    "lines": 73,
+    "valid_chars": 2864,
+    "low_lines": 7
+   },
+   "off": {
+    "lines": 73,
+    "valid_chars": 3176,
+    "low_lines": 1
+   },
+   "pick": {
+    "lines": 73,
+    "valid_chars": 3176,
+    "low_lines": 1
+   }
+  },
+  {
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 5,
+   "on": {
+    "lines": 72,
+    "valid_chars": 2665,
+    "low_lines": 6
+   },
+   "off": {
+    "lines": 72,
+    "valid_chars": 2828,
+    "low_lines": 3
+   },
+   "pick": {
+    "lines": 72,
+    "valid_chars": 2828,
+    "low_lines": 3
+   }
+  },
+  {
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 6,
+   "on": {
+    "lines": 64,
+    "valid_chars": 2778,
+    "low_lines": 5
+   },
+   "off": {
+    "lines": 65,
+    "valid_chars": 2957,
+    "low_lines": 2
+   },
+   "pick": {
+    "lines": 65,
+    "valid_chars": 2957,
+    "low_lines": 2
+   }
+  },
+  {
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 7,
+   "on": {
+    "lines": 72,
+    "valid_chars": 1642,
+    "low_lines": 6
+   },
+   "off": {
+    "lines": 72,
+    "valid_chars": 1654,
+    "low_lines": 4
+   },
+   "pick": {
+    "lines": 72,
+    "valid_chars": 1654,
+    "low_lines": 3
+   }
+  }
+ ],
+ "squeeze": {
+  "turned_horizontal": 221,
+  "segments": 1074,
+  "segments_turned": 150
+ }
+}

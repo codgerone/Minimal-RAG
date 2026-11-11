@@ -1,0 +1,569 @@
+{
+ "rows": [
+  {
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 1,
+   "on": {
+    "lines": 81,
+    "valid_chars": 2750,
+    "low_lines": 7,
+    "hit": 499,
+    "ref": 597,
+    "ocr": 548
+   },
+   "off": {
+    "lines": 81,
+    "valid_chars": 3027,
+    "low_lines": 0,
+    "hit": 557,
+    "ref": 597,
+    "ocr": 582
+   },
+   "pick": {
+    "lines": 81,
+    "valid_chars": 3027,
+    "low_lines": 0,
+    "hit": 557,
+    "ref": 597,
+    "ocr": 582
+   }
+  },
+  {
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 2,
+   "on": {
+    "lines": 52,
+    "valid_chars": 2157,
+    "low_lines": 4,
+    "hit": 372,
+    "ref": 443,
+    "ocr": 405
+   },
+   "off": {
+    "lines": 52,
+    "valid_chars": 2423,
+    "low_lines": 0,
+    "hit": 429,
+    "ref": 443,
+    "ocr": 445
+   },
+   "pick": {
+    "lines": 52,
+    "valid_chars": 2423,
+    "low_lines": 0,
+    "hit": 429,
+    "ref": 443,
+    "ocr": 445
+   }
+  },
+  {
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 3,
+   "on": {
+    "lines": 62,
+    "valid_chars": 2930,
+    "low_lines": 3,
+    "hit": 566,
+    "ref": 621,
+    "ocr": 601
+   },
+   "off": {
+    "lines": 62,
+    "valid_chars": 3146,
+    "low_lines": 0,
+    "hit": 619,
+    "ref": 621,
+    "ocr": 636
+   },
+   "pick": {
+    "lines": 62,
+    "valid_chars": 3146,
+    "low_lines": 0,
+    "hit": 619,
+    "ref": 621,
+    "ocr": 636
+   }
+  },
+  {
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 4,
+   "on": {
+    "lines": 65,
+    "valid_chars": 2038,
+    "low_lines": 4,
+    "hit": 378,
+    "ref": 447,
+    "ocr": 434
+   },
+   "off": {
+    "lines": 65,
+    "valid_chars": 2304,
+    "low_lines": 0,
+    "hit": 443,
+    "ref": 447,
+    "ocr": 458
+   },
+   "pick": {
+    "lines": 65,
+    "valid_chars": 2304,
+    "low_lines": 0,
+    "hit": 443,
+    "ref": 447,
+    "ocr": 458
+   }
+  },
+  {
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 5,
+   "on": {
+    "lines": 117,
+    "valid_chars": 2379,
+    "low_lines": 0,
+    "hit": 478,
+    "ref": 481,
+    "ocr": 495
+   },
+   "off": {
+    "lines": 117,
+    "valid_chars": 2379,
+    "low_lines": 0,
+    "hit": 478,
+    "ref": 481,
+    "ocr": 495
+   },
+   "pick": {
+    "lines": 117,
+    "valid_chars": 2379,
+    "low_lines": 0,
+    "hit": 478,
+    "ref": 481,
+    "ocr": 495
+   }
+  },
+  {
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 6,
+   "on": {
+    "lines": 52,
+    "valid_chars": 2873,
+    "low_lines": 5,
+    "hit": 530,
+    "ref": 617,
+    "ocr": 589
+   },
+   "off": {
+    "lines": 52,
+    "valid_chars": 3225,
+    "low_lines": 0,
+    "hit": 613,
+    "ref": 617,
+    "ocr": 629
+   },
+   "pick": {
+    "lines": 52,
+    "valid_chars": 3225,
+    "low_lines": 0,
+    "hit": 613,
+    "ref": 617,
+    "ocr": 629
+   }
+  },
+  {
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 7,
+   "on": {
+    "lines": 50,
+    "valid_chars": 2334,
+    "low_lines": 4,
+    "hit": 441,
+    "ref": 513,
+    "ocr": 501
+   },
+   "off": {
+    "lines": 50,
+    "valid_chars": 2598,
+    "low_lines": 0,
+    "hit": 509,
+    "ref": 513,
+    "ocr": 528
+   },
+   "pick": {
+    "lines": 50,
+    "valid_chars": 2598,
+    "low_lines": 0,
+    "hit": 509,
+    "ref": 513,
+    "ocr": 528
+   }
+  },
+  {
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 8,
+   "on": {
+    "lines": 52,
+    "valid_chars": 2631,
+    "low_lines": 7,
+    "hit": 455,
+    "ref": 567,
+    "ocr": 520
+   },
+   "off": {
+    "lines": 52,
+    "valid_chars": 3151,
+    "low_lines": 0,
+    "hit": 564,
+    "ref": 567,
+    "ocr": 582
+   },
+   "pick": {
+    "lines": 52,
+    "valid_chars": 3151,
+    "low_lines": 0,
+    "hit": 564,
+    "ref": 567,
+    "ocr": 582
+   }
+  },
+  {
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 9,
+   "on": {
+    "lines": 60,
+    "valid_chars": 2477,
+    "low_lines": 0,
+    "hit": 408,
+    "ref": 408,
+    "ocr": 458
+   },
+   "off": {
+    "lines": 60,
+    "valid_chars": 2477,
+    "low_lines": 0,
+    "hit": 408,
+    "ref": 408,
+    "ocr": 458
+   },
+   "pick": {
+    "lines": 60,
+    "valid_chars": 2477,
+    "low_lines": 0,
+    "hit": 408,
+    "ref": 408,
+    "ocr": 458
+   }
+  },
+  {
+   "doc": "E001-602.pdf",
+   "page": 1,
+   "on": {
+    "lines": 112,
+    "valid_chars": 1569,
+    "low_lines": 2,
+    "hit": 297,
+    "ref": 336,
+    "ocr": 316
+   },
+   "off": {
+    "lines": 112,
+    "valid_chars": 1640,
+    "low_lines": 0,
+    "hit": 314,
+    "ref": 336,
+    "ocr": 323
+   },
+   "pick": {
+    "lines": 112,
+    "valid_chars": 1640,
+    "low_lines": 0,
+    "hit": 314,
+    "ref": 336,
+    "ocr": 323
+   }
+  },
+  {
+   "doc": "ORDER PERU 24-12 ANDET.pdf",
+   "page": 1,
+   "on": {
+    "lines": 73,
+    "valid_chars": 1875,
+    "low_lines": 2,
+    "hit": 367,
+    "ref": 381,
+    "ocr": 369
+   },
+   "off": {
+    "lines": 74,
+    "valid_chars": 1877,
+    "low_lines": 3,
+    "hit": 367,
+    "ref": 381,
+    "ocr": 370
+   },
+   "pick": {
+    "lines": 74,
+    "valid_chars": 1877,
+    "low_lines": 3,
+    "hit": 367,
+    "ref": 381,
+    "ocr": 370
+   }
+  },
+  {
+   "doc": "ORDER PERU 24-12 ANDET.pdf",
+   "page": 2,
+   "on": {
+    "lines": 21,
+    "valid_chars": 808,
+    "low_lines": 0,
+    "hit": 155,
+    "ref": 162,
+    "ocr": 157
+   },
+   "off": {
+    "lines": 21,
+    "valid_chars": 808,
+    "low_lines": 0,
+    "hit": 155,
+    "ref": 162,
+    "ocr": 157
+   },
+   "pick": {
+    "lines": 21,
+    "valid_chars": 808,
+    "low_lines": 0,
+    "hit": 155,
+    "ref": 162,
+    "ocr": 157
+   }
+  },
+  {
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 1,
+   "on": {
+    "lines": 73,
+    "valid_chars": 1458,
+    "low_lines": 0,
+    "hit": 268,
+    "ref": 293,
+    "ocr": 278
+   },
+   "off": {
+    "lines": 73,
+    "valid_chars": 1543,
+    "low_lines": 0,
+    "hit": 287,
+    "ref": 293,
+    "ocr": 293
+   },
+   "pick": {
+    "lines": 73,
+    "valid_chars": 1543,
+    "low_lines": 0,
+    "hit": 287,
+    "ref": 293,
+    "ocr": 293
+   }
+  },
+  {
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 2,
+   "on": {
+    "lines": 301,
+    "valid_chars": 1826,
+    "low_lines": 6,
+    "hit": 415,
+    "ref": 416,
+    "ocr": 417
+   },
+   "off": {
+    "lines": 301,
+    "valid_chars": 1826,
+    "low_lines": 0,
+    "hit": 416,
+    "ref": 416,
+    "ocr": 417
+   },
+   "pick": {
+    "lines": 301,
+    "valid_chars": 1826,
+    "low_lines": 0,
+    "hit": 416,
+    "ref": 416,
+    "ocr": 417
+   }
+  },
+  {
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 3,
+   "on": {
+    "lines": 131,
+    "valid_chars": 2131,
+    "low_lines": 2,
+    "hit": 431,
+    "ref": 443,
+    "ocr": 438
+   },
+   "off": {
+    "lines": 131,
+    "valid_chars": 2131,
+    "low_lines": 0,
+    "hit": 431,
+    "ref": 443,
+    "ocr": 438
+   },
+   "pick": {
+    "lines": 131,
+    "valid_chars": 2131,
+    "low_lines": 0,
+    "hit": 431,
+    "ref": 443,
+    "ocr": 438
+   }
+  },
+  {
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 4,
+   "on": {
+    "lines": 12,
+    "valid_chars": 268,
+    "low_lines": 0,
+    "hit": 49,
+    "ref": 49,
+    "ocr": 50
+   },
+   "off": {
+    "lines": 12,
+    "valid_chars": 268,
+    "low_lines": 0,
+    "hit": 49,
+    "ref": 49,
+    "ocr": 50
+   },
+   "pick": {
+    "lines": 12,
+    "valid_chars": 268,
+    "low_lines": 0,
+    "hit": 49,
+    "ref": 49,
+    "ocr": 50
+   }
+  },
+  {
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 5,
+   "on": {
+    "lines": 48,
+    "valid_chars": 1729,
+    "low_lines": 3,
+    "hit": 334,
+    "ref": 397,
+    "ocr": 368
+   },
+   "off": {
+    "lines": 48,
+    "valid_chars": 1987,
+    "low_lines": 0,
+    "hit": 389,
+    "ref": 397,
+    "ocr": 396
+   },
+   "pick": {
+    "lines": 48,
+    "valid_chars": 1987,
+    "low_lines": 0,
+    "hit": 389,
+    "ref": 397,
+    "ocr": 396
+   }
+  },
+  {
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 6,
+   "on": {
+    "lines": 66,
+    "valid_chars": 3920,
+    "low_lines": 4,
+    "hit": 793,
+    "ref": 852,
+    "ocr": 841
+   },
+   "off": {
+    "lines": 66,
+    "valid_chars": 4111,
+    "low_lines": 0,
+    "hit": 834,
+    "ref": 852,
+    "ocr": 863
+   },
+   "pick": {
+    "lines": 66,
+    "valid_chars": 4111,
+    "low_lines": 0,
+    "hit": 834,
+    "ref": 852,
+    "ocr": 863
+   }
+  },
+  {
+   "doc": "ORDER PERU 25-15 ANDET VF.pdf",
+   "page": 1,
+   "on": {
+    "lines": 76,
+    "valid_chars": 1119,
+    "low_lines": 0,
+    "hit": 218,
+    "ref": 220,
+    "ocr": 221
+   },
+   "off": {
+    "lines": 76,
+    "valid_chars": 1119,
+    "low_lines": 0,
+    "hit": 218,
+    "ref": 220,
+    "ocr": 221
+   },
+   "pick": {
+    "lines": 76,
+    "valid_chars": 1119,
+    "low_lines": 0,
+    "hit": 218,
+    "ref": 220,
+    "ocr": 221
+   }
+  },
+  {
+   "doc": "ORDER PERU 25-15 ANDET VF.pdf",
+   "page": 2,
+   "on": {
+    "lines": 77,
+    "valid_chars": 1540,
+    "low_lines": 0,
+    "hit": 293,
+    "ref": 332,
+    "ocr": 294
+   },
+   "off": {
+    "lines": 77,
+    "valid_chars": 1540,
+    "low_lines": 0,
+    "hit": 293,
+    "ref": 332,
+    "ocr": 294
+   },
+   "pick": {
+    "lines": 77,
+    "valid_chars": 1540,
+    "low_lines": 0,
+    "hit": 293,
+    "ref": 332,
+    "ocr": 294
+   }
+  }
+ ],
+ "squeeze": {
+  "turned_horizontal": 74,
+  "segments": 408,
+  "segments_turned": 33
+ }
+}
