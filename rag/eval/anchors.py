@@ -17,6 +17,11 @@ an excerpt is split into pieces at " | " and line breaks and each piece is match
 4. When the same value repeats across columns of one row, only the column tells them apart: the
    excerpt's `locate_hint` (its column's header text, found once on the page) keeps only the
    occurrences that overlap that column horizontally. The hint is not part of the evidence.
+5. On scanned pages (OCR text layer) excerpts are copied from the paper, so a piece may differ from
+   what OCR read. When exact matching leaves words of a piece unfound, the run of touching words on
+   scanned pages with the smallest edit distance to the whole piece is taken instead, if that distance
+   is at most max(1, 20% of the piece's normalized length). The piece records the distance and the
+   text OCR read.
 
 The result is for human review; once confirmed it is written into the ground truth.
 """
@@ -32,6 +37,7 @@ from pathlib import Path
 from typing import Literal
 
 import pymupdf
+from rapidfuzz.distance import Levenshtein
 
 from rag.eval.dataset import Excerpt, text_sha256
 from rag.jsonio import read_json, write_json
@@ -41,6 +47,7 @@ ROW_WEIGHT = 4.0           # vertical distance counts more between lines
 SAME_LINE_WEIGHT = 0.25    # pieces sharing a line (a table row) count as close
 MAX_CANDIDATES = 40        # occurrences kept per piece
 MAX_COMBINATIONS = 200_000
+APPROXIMATE_RATIO = 0.2    # accepted edit distance on scanned pages, relative to the piece's length
 
 Status = Literal["located", "ambiguous", "missing"]
 
@@ -84,6 +91,7 @@ class PieceResult:
     candidates: int                 # occurrences found (0 when nothing of it was found)
     words: tuple[PdfWord, ...]      # the chosen occurrence
     missing: tuple[str, ...]        # excerpt tokens that could not be found
+    distance: int | None = None     # edit distance of an approximate match on a scanned page; None = exact
 
 
 @dataclass(frozen=True)
@@ -93,6 +101,11 @@ class ExcerptAnchor:
     pieces: tuple[PieceResult, ...]
     words: tuple[PdfWord, ...]
     groups: tuple[tuple[str, tuple[PdfWord, ...]], ...] = ()   # excerpt piece (split at " | " / line) → its words
+    distances: tuple[int | None, ...] = ()   # per group: edit distance when matched approximately, else None
+
+    @property
+    def approximate(self) -> bool:
+        return any(d is not None for d in self.distances)
 
 
 class _Stream:
@@ -141,21 +154,66 @@ class _Stream:
     def span(self, position: int, length: int) -> tuple[int, ...]:
         return tuple(range(self.owner[position], self.owner[position + length - 1] + 1))
 
+    def approximate(self, target: str, scanned: frozenset[int]) -> tuple[int, list[tuple[int, ...]]]:
+        """Runs of touching words on scanned pages closest to target by edit distance, if within the
+        accepted distance: (distance, occurrences). Of overlapping runs at that distance, the one
+        closest to the target's length is kept."""
+        limit = max(1, int(APPROXIMATE_RATIO * len(target)))
+        found: list[tuple[int, int, int, int]] = []   # distance, length gap, first word, last word
+        for start, word in enumerate(self.words):
+            if word.page not in scanned:
+                continue
+            length = 0
+            for end in range(start, len(self.words)):
+                length += len(self.words[end].norm)
+                if length > len(target) + limit or not self.adjacent(self.starts[start], length):
+                    break   # a run that does not read as one text never does once extended
+                if length < len(target) - limit:
+                    continue
+                text = self.text[self.starts[start]:self.starts[start] + length]
+                distance = Levenshtein.distance(target, text, score_cutoff=limit)
+                if distance <= limit:
+                    found.append((distance, abs(length - len(target)), start, end))
+        if not found:
+            return 0, []
+        best = min(f[0] for f in found)
+        chosen: list[tuple[int, ...]] = []
+        taken: set[int] = set()
+        for _, _, start, end in sorted(f for f in found if f[0] == best):
+            run = tuple(range(start, end + 1))
+            if not taken.intersection(run):
+                chosen.append(run)
+                taken.update(run)
+        return best, chosen[:MAX_CANDIDATES]
 
-def _match_piece(stream: _Stream, text: str) -> list[tuple[str, list[tuple[int, ...]], tuple[str, ...]]]:
-    """Sub-pieces of one piece as (text, occurrences, missing tokens).
+
+Sub = tuple[str, list[tuple[int, ...]], tuple[str, ...], int | None]   # text, occurrences, missing, distance
+
+
+def _match_piece(stream: _Stream, text: str, scanned: frozenset[int] = frozenset()) -> list[Sub]:
+    """Sub-pieces of one piece as (text, occurrences, missing tokens, edit distance).
 
     A piece found contiguously is one sub-piece. Otherwise its tokens are grouped greedily into the
     longest runs that occur as touching whole words; each run keeps all its occurrences so that the
-    choice between them is made together with the other pieces. A token found nowhere is missing.
+    choice between them is made together with the other pieces. A token found nowhere is missing;
+    then, if the excerpt has scanned pages, the whole piece is matched approximately there instead.
     """
     target = normalize(text)
     whole = [p for p in stream.find(target) if stream.adjacent(p, len(target))]
     if whole:
-        return [(text, [stream.span(p, len(target)) for p in whole[:MAX_CANDIDATES]], ())]
+        return [(text, [stream.span(p, len(target)) for p in whole[:MAX_CANDIDATES]], (), None)]
+    runs = _runs(stream, text)
+    if scanned and any(missing for _, _, missing, _ in runs):
+        distance, occurrences = stream.approximate(target, scanned)
+        if occurrences:
+            return [(text, occurrences, (), distance)]
+    return runs
+
+
+def _runs(stream: _Stream, text: str) -> list[Sub]:
     tokens = [t for t in text.split() if normalize(t)]
     norms = [normalize(t) for t in tokens]
-    result: list[tuple[str, list[tuple[int, ...]], tuple[str, ...]]] = []
+    result: list[Sub] = []
     index = 0
     while index < len(norms):
         for end in range(len(norms), index, -1):
@@ -163,11 +221,11 @@ def _match_piece(stream: _Stream, text: str) -> list[tuple[str, list[tuple[int, 
             hits = [h for h in stream.find(run, whole_words=True) if stream.adjacent(h, len(run))]
             if hits:
                 result.append((" ".join(tokens[index:end]),
-                               [stream.span(h, len(run)) for h in hits[:MAX_CANDIDATES]], ()))
+                               [stream.span(h, len(run)) for h in hits[:MAX_CANDIDATES]], (), None))
                 index = end
                 break
         else:
-            result.append((tokens[index], [], (tokens[index],)))
+            result.append((tokens[index], [], (tokens[index],), None))
             index += 1
     return result
 
@@ -249,31 +307,37 @@ def split_pieces(text: str) -> list[str]:
     return [p for p in re.split(r"\s*\|\s*|\n", text) if normalize(p)]
 
 
-def locate_excerpt(excerpt: Excerpt, words: list[PdfWord]) -> ExcerptAnchor:
+def locate_excerpt(excerpt: Excerpt, words: list[PdfWord],
+                   scanned: frozenset[int] = frozenset()) -> ExcerptAnchor:
+    """`scanned`: page numbers whose text layer comes from OCR; only there may a piece match approximately."""
     stream = _Stream(words)
-    owners = [(text, sub) for text in split_pieces(excerpt.text) for sub in _match_piece(stream, text)]
+    owners = [(text, sub) for text in split_pieces(excerpt.text)
+              for sub in _match_piece(stream, text, scanned)]
     pieces = [sub for _, sub in owners]
     if excerpt.locate_hint:
-        hint = _match_piece(stream, excerpt.locate_hint)
+        hint = _match_piece(stream, excerpt.locate_hint, scanned)
         if len(hint) != 1 or len(hint[0][1]) != 1:
-            pieces.append((f"定位提示：{excerpt.locate_hint}", [], ("定位提示须在页面上恰好出现一次",)))
+            pieces.append((f"定位提示：{excerpt.locate_hint}", [], ("定位提示须在页面上恰好出现一次",), None))
         else:
             column = (min(stream.words[i].bbox[0] for i in hint[0][1][0]),
                       max(stream.words[i].bbox[2] for i in hint[0][1][0]))
-            pieces = [(text, [o for o in occ if _in_column(stream, o, column)] or occ if len(occ) > 1 else occ, miss)
-                      for text, occ, miss in pieces]
-    found = [n for n, (_, occ, _) in enumerate(pieces) if occ]
+            pieces = [(text, [o for o in occ if _in_column(stream, o, column)] or occ if len(occ) > 1 else occ,
+                       miss, distance) for text, occ, miss, distance in pieces]
+    found = [n for n, (_, occ, _, _) in enumerate(pieces) if occ]
     chosen = dict(zip(found, _choose(stream, [pieces[n][1] for n in found]))) if found else {}
-    results = tuple(PieceResult(text, len(occ), tuple(words[i] for i in chosen.get(n, ())), tuple(miss))
-                    for n, (text, occ, miss) in enumerate(pieces))
+    results = tuple(PieceResult(text, len(occ), tuple(words[i] for i in chosen.get(n, ())), tuple(miss), distance)
+                    for n, (text, occ, miss, distance) in enumerate(pieces))
     indices = sorted({i for words_ in chosen.values() for i in words_})
     status: Status = ("missing" if any(r.missing or not r.candidates for r in results)
                       else "ambiguous" if any(r.candidates > 1 for r in results) else "located")
     groups: dict[str, list[int]] = {}
-    for n, (text, _) in enumerate(owners):
+    distances: dict[str, int | None] = {}
+    for n, (text, sub) in enumerate(owners):
         groups.setdefault(text, []).extend(chosen.get(n, ()))
+        distances[text] = sub[3] if sub[3] is not None else distances.get(text)
     return ExcerptAnchor(excerpt, status, results, tuple(words[i] for i in indices),
-                         tuple((text, tuple(words[i] for i in sorted(set(ids)))) for text, ids in groups.items()))
+                         tuple((text, tuple(words[i] for i in sorted(set(ids)))) for text, ids in groups.items()),
+                         tuple(distances[text] for text in groups))
 
 
 def document_words(pdf_path: Path, pages: set[int]) -> dict[int, list[PdfWord]]:
@@ -281,14 +345,23 @@ def document_words(pdf_path: Path, pages: set[int]) -> dict[int, list[PdfWord]]:
         return {p: page_words(pdf[p - 1], p) for p in sorted(pages) if 0 < p <= len(pdf)}
 
 
-def locate_all(excerpts: list[Excerpt], pdf_paths: dict[str, Path]) -> list[ExcerptAnchor]:
-    """`pdf_paths` maps document_id → PDF file."""
+def locate_all(excerpts: list[Excerpt], pdf_paths: dict[str, Path],
+               scanned: dict[str, frozenset[int]] | None = None) -> list[ExcerptAnchor]:
+    """`pdf_paths` maps document_id → the PDF tools read (ocr.pdf for a document with scanned pages);
+    `scanned` maps document_id → its scanned page numbers."""
+    scanned = scanned or {}
     needed: dict[str, set[int]] = {}
     for x in excerpts:
         needed.setdefault(x.document_id, set()).update(x.pages)
     words = {doc: document_words(pdf_paths[doc], pages) for doc, pages in needed.items()}
-    return [locate_excerpt(x, [w for p in x.pages for w in words[x.document_id].get(p, [])])
+    return [locate_excerpt(x, [w for p in x.pages for w in words[x.document_id].get(p, [])],
+                           scanned.get(x.document_id, frozenset()))
             for x in excerpts]
+
+
+def read_text(words: tuple[PdfWord, ...]) -> str:
+    """The located words as the PDF reads them."""
+    return " ".join(w.text for w in words)
 
 
 def format_word(word: PdfWord) -> str:
@@ -308,8 +381,12 @@ def write_anchors(folder: Path, anchors: dict[tuple[str, str], ExcerptAnchor]) -
                 item = anchors.get((case["case_id"], x["excerpt_id"]))
                 if item is None:
                     continue
+                distances = item.distances or (None,) * len(item.groups)
                 x["anchor"] = {"text_sha256": text_sha256(x["text"]), "pieces": [
-                    {"text": text, "words": [format_word(w) for w in words]} for text, words in item.groups]}
+                    {"text": text, "words": [format_word(w) for w in words]}
+                    | ({"approximate": True, "distance": distance, "ocr_text": read_text(words)}
+                       if distance is not None else {})
+                    for (text, words), distance in zip(item.groups, distances)]}
                 written += 1
         write_json(path, data)
     return written

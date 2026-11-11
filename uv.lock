@@ -1493,7 +1493,7 @@ wheels = [
 
 [[package]]
 name = "minimal-rag"
-version = "3.11.0"
+version = "3.15.0"
 source = { editable = "." }
 dependencies = [
     { name = "camelot-py" },
@@ -1503,6 +1503,7 @@ dependencies = [
     { name = "openai" },
     { name = "pymupdf" },
     { name = "python-dotenv" },
+    { name = "rapidfuzz" },
     { name = "sentence-transformers" },
     { name = "snowballstemmer" },
     { name = "unstructured", extra = ["local-inference"] },
@@ -1523,6 +1524,7 @@ requires-dist = [
     { name = "openai", specifier = ">=1.0,<3" },
     { name = "pymupdf", specifier = ">=1.24,<2" },
     { name = "python-dotenv", specifier = ">=1.0,<2" },
+    { name = "rapidfuzz", specifier = ">=3.0,<4" },
     { name = "sentence-transformers", specifier = ">=3.0,<6" },
     { name = "snowballstemmer", specifier = ">=2.2,<4" },
     { name = "unstructured", extras = ["local-inference"], specifier = ">=0.18,<1" },

@@ -171,14 +171,18 @@ def assemble(config: AssemblyConfig) -> Assembly:
     chunker = _make(CHUNKERS, "chunker", config.chunker, embedder)
     lexical = Analyzer(**config.lexical) if config.lexical is not None else None
     table_steps = _table_steps(config, parser, chunker)
-    ocr = None
-    if config.ocr is not None:
-        from rag.ingest.ocr.step import OcrStep
-        if config.ocr.use not in OCR_ENGINES:
-            raise ConfigError(f"[ocr] 没有名为 {config.ocr.use!r} 的实现，可选：{', '.join(OCR_ENGINES)}")
-        ocr = OcrStep(config.ocr.use, OCR_ENGINES[config.ocr.use](), config.ocr.params["dpi"],
-                      _workspace_root(config) / ".rag" / "ocr")
-    return Assembly(config, parser, extractors, table_steps, embedder, chunker, lexical, ocr)
+    return Assembly(config, parser, extractors, table_steps, embedder, chunker, lexical, ocr_step(config))
+
+
+def ocr_step(config: AssemblyConfig) -> Any:
+    """The OcrStep of a config with [ocr], else None (scanned pages stay unread)."""
+    if config.ocr is None:
+        return None
+    from rag.ingest.ocr.step import OcrStep
+    if config.ocr.use not in OCR_ENGINES:
+        raise ConfigError(f"[ocr] 没有名为 {config.ocr.use!r} 的实现，可选：{', '.join(OCR_ENGINES)}")
+    return OcrStep(config.ocr.use, OCR_ENGINES[config.ocr.use](), config.ocr.params["dpi"],
+                   _workspace_root(config) / ".rag" / "ocr")
 
 
 def _workspace_root(config: AssemblyConfig):
