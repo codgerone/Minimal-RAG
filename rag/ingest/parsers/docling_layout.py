@@ -66,10 +66,8 @@ def _convert(pdf_bytes: bytes) -> Any:
 class DoclingLayoutParser:
     provides_table_slots = True
 
-    def __init__(self, converter: Callable[[bytes], Any] = _convert, ocr: str | None = None):
+    def __init__(self, converter: Callable[[bytes], Any] = _convert):
         self.converter = converter
-        self.ocr = ocr          # V4.1 experiment only (docling_ocr_experiment.py)
-        self.does_ocr = ocr is not None
 
     def parse(self, source: SourceDocument) -> ParseResult:
         pdf_bytes = source.pdf_path.read_bytes()
@@ -78,12 +76,7 @@ class DoclingLayoutParser:
                           for index, page in enumerate(pdf)}
         if not page_sizes:
             raise DoclingParseError(f"PDF 没有页面：{source.relative_path}")
-        if self.ocr is not None:
-            from rag.ingest.parsers import docling_ocr_experiment
-            document = docling_ocr_experiment.convert(pdf_bytes, self.ocr)
-            docling_ocr_experiment.save_records(self.ocr, source.file_hash)
-        else:
-            document = self.converter(pdf_bytes)
+        document = self.converter(pdf_bytes)
         native = json.loads(json.dumps(document.export_to_dict(), ensure_ascii=False))
         primary = map_docling_document(document, source, page_sizes)
         return ParseResult(primary, native, DoclingConversion(source, page_sizes, document))
