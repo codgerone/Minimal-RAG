@@ -59,8 +59,17 @@ def page_word_boxes(page: pymupdf.Page, blocks: list, text: str, page_number: in
     return tuple(words)
 
 
+# Rules version of the PyMuPDF page parser. Bump it, to the release that ships the change, whenever this
+# code changes its output: the documents passing through the step are then rebuilt.
+RULES_VERSION = "v4.1.1"
+
+
 class PyMuPDFPagesParser:
     provides_table_slots = False
+
+    def identity(self) -> dict:
+        from rag.ingest.libraries import versions
+        return {"rules": RULES_VERSION, "libraries": versions("pymupdf")}
 
     def parse(self, source: SourceDocument) -> ParseResult:
         elements: list[PrimaryText] = []

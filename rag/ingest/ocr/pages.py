@@ -8,6 +8,10 @@ import fitz
 
 from rag.ingest.ocr.models import PageClass, PageKind
 
+# Rules version of page classification. Bump it, to the release that ships the change, whenever this
+# code changes its output: the documents passing through the step are then rebuilt.
+RULES_VERSION = "v4.1.1"
+
 
 def page_kind(page: fitz.Page) -> PageKind:
     if page.get_text("text").strip():

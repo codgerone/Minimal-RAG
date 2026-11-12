@@ -64,6 +64,11 @@ def detect_language(texts: Iterable[str]) -> Literal["spanish", "english"]:
     return "spanish" if counts["spanish"] > counts["english"] else "english"
 
 
+# Rules version of BM25 analysis (tokenization, stopwords, stemming, language detection). Bump it, to the release that ships the change, whenever this
+# code changes its output: the documents passing through the step are then rebuilt.
+RULES_VERSION = "v4.1.1"
+
+
 class Analyzer:
     def __init__(self, stopwords: bool = True, stemming: bool = True):
         if type(stopwords) is not bool or type(stemming) is not bool:
@@ -73,6 +78,10 @@ class Analyzer:
 
     def settings(self) -> dict[str, bool]:
         return {"stopwords": self.remove_stopwords, "stemming": self.stemming}
+
+    def identity(self) -> dict[str, object]:
+        from rag.ingest.libraries import versions
+        return {"rules": RULES_VERSION, "libraries": versions("snowballstemmer")}
 
     def terms(self, text: str, language: Language) -> Counter[str]:
         """Term frequencies; `language` only selects the stemmer."""

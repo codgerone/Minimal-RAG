@@ -19,3 +19,7 @@ class Parser(Protocol):
     provides_table_slots: bool    # whether primary.table_slots can anchor table extraction
 
     def parse(self, source: SourceDocument) -> ParseResult: ...
+
+    def identity(self) -> dict[str, Any]:
+        """Rules version and library versions: what besides the config decides the output."""
+        ...

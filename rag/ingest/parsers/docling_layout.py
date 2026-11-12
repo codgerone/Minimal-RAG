@@ -63,11 +63,21 @@ def _convert(pdf_bytes: bytes) -> Any:
         return converter.convert(DocumentStream(name="source.pdf", stream=stream)).document
 
 
+# Rules version of the Docling parser adapter (docling_layout.py, docling_mapper.py). Bump it, to the release that ships the change, whenever this
+# code changes its output: the documents passing through the step are then rebuilt.
+RULES_VERSION = "v4.1.1"
+
+
 class DoclingLayoutParser:
     provides_table_slots = True
 
     def __init__(self, converter: Callable[[bytes], Any] = _convert):
         self.converter = converter
+
+    def identity(self) -> dict[str, Any]:
+        from rag.ingest.libraries import versions
+        return {"rules": RULES_VERSION,
+                "libraries": versions("docling", "docling-core", "docling-ibm-models", "docling-parse", "pymupdf")}
 
     def parse(self, source: SourceDocument) -> ParseResult:
         pdf_bytes = source.pdf_path.read_bytes()

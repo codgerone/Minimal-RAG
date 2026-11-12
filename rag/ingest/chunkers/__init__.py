@@ -8,8 +8,15 @@ from typing import Protocol
 from rag.models import ChunkBatch, ParsedDocument
 
 
+# Rules version of chunking and chunk source regions (chunkers/, regions.py). Bump it, to the release that ships the change, whenever this
+# code changes its output: the documents passing through the step are then rebuilt.
+RULES_VERSION = "v4.1.1"
+
+
 class Chunker(Protocol):
     def chunk(self, document: ParsedDocument) -> ChunkBatch: ...
+
+    def identity(self) -> dict[str, object]: ...
 
 
 def chunk_id(document_id: str, index: int) -> str:

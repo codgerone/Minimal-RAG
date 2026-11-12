@@ -8,6 +8,12 @@ from rag.ingest.tables.markdown_rows import serialize_markdown_rows
 from rag.ingest.tables.models import SerializedTable, StructuredTable, TableStructure
 
 
+# Rules version of table structure, formatters, grid rows and index text (structure, formatters,
+# markdown_rows, the code side of llm_tables; prompts have their own PROMPT_VERSION). Bump it, to the release that ships the change, whenever this
+# code changes its output: the documents passing through the step are then rebuilt.
+RULES_VERSION = "v4.1.1"
+
+
 class TableFormatter(Protocol):
     labeled: bool          # LLM annotations are validated against the form the formatter writes
     def format(self, table: StructuredTable, structure: TableStructure, *,

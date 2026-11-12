@@ -20,8 +20,29 @@ from rag.ingest.tables.models import TableExtractionReport, TableStrategy, ToolN
 from rag.models import SourceDocument
 
 
+# Libraries each tool calls; part of the extractor identity.
+LIBRARIES: dict[str, tuple[str, ...]] = {
+    "pymupdf": ("pymupdf",),
+    "camelot": ("camelot-py", "pypdfium2", "pdfminer.six", "opencv-python"),
+    "unstructured": ("unstructured", "unstructured-inference", "pdfminer.six"),
+    "docling": ("docling", "docling-core", "docling-ibm-models", "docling-parse"),
+}
+
+
+def _identity(tool: str, strategies: tuple[str, ...]) -> dict[str, object]:
+    from rag.ingest.libraries import versions
+    from rag.ingest.tables import extract, camelot_tables, docling_tables, pymupdf_tables, unstructured_tables
+    module = {"pymupdf": pymupdf_tables, "camelot": camelot_tables, "unstructured": unstructured_tables,
+              "docling": docling_tables}[tool]
+    return {"tool": tool, "strategies": list(strategies),
+            "rules": {"extract": extract.RULES_VERSION, tool: module.RULES_VERSION},
+            "libraries": versions(*LIBRARIES[tool])}
+
+
 class TableExtractor(Protocol):
     tool: ToolName
+
+    def identity(self) -> dict[str, object]: ...
 
     def extract(self, source: SourceDocument, shared: object | None) -> TableExtractionReport: ...
 
@@ -32,6 +53,9 @@ class PageStrategyExtractor:
     tool: ToolName
     strategies: tuple[TableStrategy, ...]
     adapters: dict[tuple[str, str], StrategyAdapter]
+
+    def identity(self) -> dict[str, object]:
+        return _identity(self.tool, self.strategies)
 
     def extract(self, source: SourceDocument, shared: object | None) -> TableExtractionReport:
         with fitz.open(source.pdf_path) as pdf:
@@ -44,6 +68,9 @@ class PageStrategyExtractor:
 class DoclingTableExtractor:
     """Reuses the parser's Docling conversion instead of converting the PDF twice."""
     tool: ToolName = "docling"
+
+    def identity(self) -> dict[str, object]:
+        return _identity(self.tool, ("accurate",))
 
     def extract(self, source: SourceDocument, shared: object | None) -> TableExtractionReport:
         if not isinstance(shared, DoclingConversion) or shared.source != source:

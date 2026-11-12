@@ -21,7 +21,12 @@ from rag.ingest.ocr.pages import classify_pages
 from rag.ingest.ocr.recognize import recognize_page
 from rag.ingest.ocr.text_layer import OcrSelfCheckError, build_text_layer_pdf, self_check
 from rag.jsonio import from_jsonable, read_json, write_json
+from rag.ingest.libraries import versions
 from rag.models import ParseFile, SourceDocument
+
+# Rules version of the OCR step (orientation search, deskew, text-layer PDF, self-check). Bump it, to the release that ships the change, whenever this
+# code changes its output: the documents passing through the step are then rebuilt.
+RULES_VERSION = "v4.1.1"
 
 
 def _sha256(path: Path) -> str:
@@ -36,7 +41,8 @@ class OcrStep:
         self.root = root        # .rag/ocr
 
     def settings(self) -> dict[str, Any]:
-        return {"use": self.use, "dpi": self.dpi, "identity": self.engine.identity()}
+        return {"use": self.use, "dpi": self.dpi, "identity": self.engine.identity(),
+                "rules": RULES_VERSION, "libraries": versions("pymupdf", "opencv-python", "onnxruntime")}
 
     def key(self, source: SourceDocument) -> str:
         raw = json.dumps(self.settings(), ensure_ascii=False, sort_keys=True, separators=(",", ":"))

@@ -10,6 +10,11 @@ from rag.models import (
 from rag.ingest.tables.models import ContentResolution, PreparedTableContent
 
 
+# Rules version of document composition and document language (assemble.py, language.py). Bump it, to the release that ships the change, whenever this
+# code changes its output: the documents passing through the step are then rebuilt.
+RULES_VERSION = "v4.1.1"
+
+
 class DocumentCompositionError(ValueError):
     """The resolved document cannot be assembled without losing source facts."""
 

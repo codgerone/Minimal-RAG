@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 
+# Rules version of the Docling table normalization. Bump it, to the release that ships the change, whenever this
+# code changes its output: the documents passing through the step are then rebuilt.
+RULES_VERSION = "v4.1.1"
+
 from statistics import median
 from typing import Any
 

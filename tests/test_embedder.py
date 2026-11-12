@@ -26,12 +26,14 @@ def with_fake(item):
     return item
 
 
-def test_e5_small_identity_is_unchanged():
-    # The built-in indexes' fingerprints depend on this exact identity.
-    assert embedders.e5_small().identity() == {
+def test_e5_small_identity_names_model_prefixes_and_libraries():
+    identity = embedders.e5_small().identity()
+    libraries = identity.pop("libraries")
+    assert identity == {
         "model": "intfloat/multilingual-e5-small",
         "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
         "passage_prefix": "passage: ", "query_prefix": "query: ", "normalized": True}
+    assert set(libraries) == {"sentence-transformers", "transformers", "tokenizers", "torch"}
 
 
 @pytest.mark.parametrize("factory, query, passage", [
