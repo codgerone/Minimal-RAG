@@ -139,3 +139,19 @@ def test_routed_completion_takes_each_excerpt_from_its_best_route_and_the_worst_
     assert routed_completion_rank([[("x",)]], [[x1]]) is None
     group = GroupEvidence("e1", "coordinate", (frozenset({"a", "b"}), frozenset({"a", "c", "d"})))
     assert routed_completion_rank([route1], [[x1, x2]]) == completion_ranks(route1, [group])["e1"]
+
+
+def test_document_types_come_from_the_page_classification(tmp_path):
+    from rag.jsonio import write_json
+    from rag.eval.runner import _document_types
+    from rag.paths import Workspace
+    workspace = Workspace(tmp_path)
+    for name, doc_id, kinds in (("a", "d1", ["text_layer"]), ("b", "d2", ["scanned", "blank"]),
+                                ("c", "d3", ["text_layer", "scanned"]), ("old", "d4", None)):
+        folder = workspace.index_dir("cfg") / "documents" / name
+        folder.mkdir(parents=True)
+        write_json(folder / "parsed.json", {"document_id": doc_id})
+        if kinds:
+            write_json(folder / "pages.json", {"pages": [{"page_number": i + 1, "kind": k, "rotation": 0}
+                                                         for i, k in enumerate(kinds)], "ocr_key": None})
+    assert _document_types(workspace, "cfg") == {"d1": "digital", "d2": "scanned", "d3": "partly_scanned"}

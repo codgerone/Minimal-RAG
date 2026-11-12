@@ -1,7 +1,7 @@
 {
   "schema_version": "ground_truth_manifest_v1",
-  "dataset_version": "3.4.1",
-  "ground_truth_fingerprint": "47cb1018812a0adb09c2b190750497f48f4aa5e73357b0fe7043753ca4e12fa3",
+  "dataset_version": "4.1.0",
+  "ground_truth_fingerprint": "4135eeef8c8104816fa34276bc7fb7cb1777262e6a53c1b0a21b5460f15d18fe",
   "review_status": "approved",
   "files": [
     {
@@ -29,6 +29,30 @@
       "case_count": 2
     },
     {
+      "document_key": "scanned-CONTRATO-HDNA--cd1050eecb2b23c0",
+      "json_path": "eval/ground-truth/scanned-CONTRATO-HDNA--cd1050eecb2b23c0.json",
+      "content_sha256": "c71d8a300fa901a89dbe27e071c5022d2c297455a80ff65af3efebdbfc16d8cc",
+      "case_count": 6
+    },
+    {
+      "document_key": "scanned-CONTRATO-N-102-2025-HEXING-ELECTRICAL-COMPANY-SAC--984b27ffba91dd05",
+      "json_path": "eval/ground-truth/scanned-CONTRATO-N-102-2025-HEXING-ELECTRICAL-COMPANY-SAC--984b27ffba91dd05.json",
+      "content_sha256": "599be29fae321d3e8087864b27a9c3671e6d62343475889398f4669995487031",
+      "case_count": 6
+    },
+    {
+      "document_key": "scanned-CONTRATO-SEAL--5d939f66e638c8fe",
+      "json_path": "eval/ground-truth/scanned-CONTRATO-SEAL--5d939f66e638c8fe.json",
+      "content_sha256": "0c25be7207a78038fb4bbbd1a499e8a123545b984cc4af34d056af7db416d33b",
+      "case_count": 5
+    },
+    {
+      "document_key": "scanned-Electrosur-Contrato-Complementario--51acbf9e2a5acbe8",
+      "json_path": "eval/ground-truth/scanned-Electrosur-Contrato-Complementario--51acbf9e2a5acbe8.json",
+      "content_sha256": "f5e24afc7f449d7e7c429cd13f605c95b306fd3957e496426bea9429bc7da650",
+      "case_count": 7
+    },
+    {
       "document_key": "签字-ORDER-PERU-25-19-FONAFE--5a4c36e0022f4917",
       "json_path": "eval/ground-truth/签字-ORDER-PERU-25-19-FONAFE--5a4c36e0022f4917.json",
       "content_sha256": "36898faa75d0342abbd5d0482319626de5f9319099f787f18b54721920093eff",
@@ -36,6 +60,6 @@
     }
   ],
   "created_at": "2026-09-20T02:55:05Z",
-  "reviewed_at": "2026-10-24T00:00:00Z",
+  "reviewed_at": "2026-11-12T00:00:00Z",
   "superseded_by": null
 }

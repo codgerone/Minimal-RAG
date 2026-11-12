@@ -499,6 +499,7 @@ def _anchors(workspace: Workspace, args: argparse.Namespace) -> int:
     from rag.eval.dataset import load_dataset
     from rag.eval.runner import EvalError
     from rag.ingest.sources import discover
+    from rag.registry import ocr_step
     from rag.reports.anchor_review import write_anchor_review
     dataset = load_dataset(workspace.ground_truth)
     sources = {s.document_id: s for s in discover(workspace.documents)}
@@ -507,8 +508,16 @@ def _anchors(workspace: Workspace, args: argparse.Namespace) -> int:
             raise EvalError(f"标注涉及的 PDF 不在 documents/ 中：{doc}")
         if sources[doc].file_hash != labelled:
             raise EvalError(f"PDF 在标注之后被修改过，需重新标注：{sources[doc].relative_path}")
+    # Documents with scanned pages are read from their OCR text-layer PDF, as every other tool does.
+    step = ocr_step(resolve_config(workspace.root, args.config))
+    scanned: dict[str, frozenset[int]] = {}
+    for doc in dataset.document_hashes:
+        if step is not None:
+            sources[doc], pages = step.prepare(sources[doc], _out)
+            scanned[doc] = frozenset(p.page_number for p in pages.pages if p.kind == "scanned")
+    pdf_paths = {d: s.pdf_path for d, s in sources.items()}
     pairs = [(c.case_id, x) for c in dataset.cases for x in c.excerpts]
-    located = locate_all([x for _, x in pairs], {d: s.absolute_path for d, s in sources.items()})
+    located = locate_all([x for _, x in pairs], pdf_paths, scanned)
     items = [(case_id, item) for (case_id, _), item in zip(pairs, located)]
     previous: dict[tuple[str, str], str | None] = {}
     if args.since:
@@ -523,11 +532,12 @@ def _anchors(workspace: Workspace, args: argparse.Namespace) -> int:
                 if item.excerpt.document_id in path.stem and texts.get(key) != item.excerpt.text:
                     previous[key] = texts.get(key)
     folder = workspace.root / "tmp" / "anchor-review"
-    page_path = write_anchor_review(folder, items, {d: s.absolute_path for d, s in sources.items()},
+    page_path = write_anchor_review(folder, items, pdf_paths,
                                     {c.case_id: c.question for c in dataset.cases}, previous)
     counts = {s: sum(1 for _, i in items if i.status == s) for s in ("located", "ambiguous", "missing")}
+    approximate = sum(1 for _, i in items if i.approximate)
     _out(f"{len(items)} 段 excerpt：唯一定位 {counts['located']}，多处出现按位置选定 {counts['ambiguous']}，"
-         f"有片段找不到 {counts['missing']}")
+         f"有片段找不到 {counts['missing']}；其中 {approximate} 段含扫描页上的近似匹配")
     _out(f"审核页：{page_path.relative_to(workspace.root).as_posix()}")
     if args.write:
         if counts["missing"]:

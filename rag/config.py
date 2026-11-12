@@ -59,6 +59,7 @@ class AssemblyConfig:
     bm25_weight: float = 1.0   # hybrid: weight α of the BM25 ranking in the fusion (docs/rules/lexical.md)
     multi_round: MultiRoundConfig = MultiRoundConfig()
     query_mode: str = "retrieval"   # [query] mode: retrieval (the question retrieved once) | multi_round
+    ocr: Component | None = None    # [ocr]: OCR of scanned pages (docs/rules/ocr.md); None = scanned pages are not read
 
     def build_settings(self) -> dict[str, Any]:
         """Everything that changes index content. Retrieval, LLM and display settings are excluded."""
@@ -71,6 +72,7 @@ class AssemblyConfig:
             "table_index_text": _with_rules(self.table_index_text, "summary", _summary_rules),
             "chunker": self.chunker.as_dict(),
             "embedder": self.embedder.as_dict(),
+            **({"ocr": self.ocr.as_dict()} if self.ocr is not None else {}),
             # Only present when configured, so configs without a BM25 index keep their fingerprint.
             **({"lexical": self.lexical} if self.lexical is not None else {}),
         }
@@ -115,7 +117,8 @@ def load_config(path: Path) -> AssemblyConfig:
     except (OSError, tomllib.TOMLDecodeError) as exc:
         raise ConfigError(f"无法读取配置 {path.name}：{exc}") from exc
     known = {"name", "description", "parser", "table_extractors", "table_structure", "table_formatter",
-             "table_index_text", "chunker", "embedder", "lexical", "retriever", "llm", "eval", "multi_round", "query"}
+             "table_index_text", "chunker", "embedder", "lexical", "retriever", "llm", "eval", "multi_round", "query",
+             "ocr"}
     unknown = set(data) - known
     if unknown:
         raise ConfigError(f"{path.name}：未知配置项 {sorted(unknown)}")
@@ -160,6 +163,7 @@ def load_config(path: Path) -> AssemblyConfig:
     query_mode = query.get("mode", "retrieval")
     if query_mode not in QUERY_MODES:
         raise ConfigError(f'{path.name}：query.mode 只能是 "retrieval" 或 "multi_round"')
+    ocr = _ocr(data["ocr"], path) if "ocr" in data else None
     table_sections = {name: _component(data[name], name, path) if name in data else None
                       for name in ("table_structure", "table_formatter", "table_index_text")}
     return AssemblyConfig(
@@ -173,8 +177,18 @@ def load_config(path: Path) -> AssemblyConfig:
         _component(data["llm"], "llm", path),
         eval_top_k, document_filter, lexical, table_return_unit,
         table_sections["table_structure"], table_sections["table_index_text"], float(bm25_weight),
-        _multi_round(data.get("multi_round", {}), path), query_mode,
+        _multi_round(data.get("multi_round", {}), path), query_mode, ocr,
     )
+
+
+def _ocr(data: Any, path: Path) -> Component:
+    component = _component(data, "ocr", path)
+    if set(component.params) - {"dpi"}:
+        raise ConfigError(f"{path.name}：[ocr] 只接受 use 和 dpi")
+    dpi = component.params.get("dpi", 300)
+    if type(dpi) is not int or not 72 <= dpi <= 600:
+        raise ConfigError(f"{path.name}：ocr.dpi 必须为 72–600 的整数")
+    return Component(component.use, {"dpi": dpi})
 
 
 def _multi_round(data: Any, path: Path) -> MultiRoundConfig:

@@ -10,6 +10,7 @@ import shutil
 from dataclasses import dataclass
 from pathlib import Path
 
+from rag.ingest.ocr.models import DocumentPages
 from rag.ingest.pipeline import ProcessedDocument
 from rag.ingest.tables.models import (
     ContentResolution, ContinuationReport, GroupingReport, PreparedTableContent, ScoringReport,
@@ -30,6 +31,7 @@ class DocumentAudit:
     continuations: ContinuationReport | None
     prepared_tables: tuple[PreparedTableContent, ...]
     batch: ChunkBatch
+    pages: DocumentPages | None = None   # None for indexes built before V4.1
 
 
 def write_audit(folder: Path, processed: ProcessedDocument, batch: ChunkBatch) -> None:
@@ -48,6 +50,7 @@ def write_audit(folder: Path, processed: ProcessedDocument, batch: ChunkBatch) -
             "prepared_tables": processed.prepared_tables,
         })
     write_json(folder / "chunks.json", batch)
+    write_json(folder / "pages.json", processed.pages)
 
 
 def load_audit(folder: Path) -> DocumentAudit:
@@ -65,4 +68,6 @@ def load_audit(folder: Path) -> DocumentAudit:
         part("continuations", ContinuationReport | None, None),
         part("prepared_tables", tuple[PreparedTableContent, ...], ()),
         from_jsonable(ChunkBatch, read_json(folder / "chunks.json")),
+        from_jsonable(DocumentPages, read_json(folder / "pages.json"))
+        if (folder / "pages.json").is_file() else None,
     )

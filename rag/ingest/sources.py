@@ -74,10 +74,13 @@ def select(selector: str, sources: tuple[SourceDocument, ...]) -> SourceDocument
     raise SourceError(f"找不到文档：{selector}")
 
 
-def has_text(source: SourceDocument) -> bool:
-    """False for unreadable PDFs or scans without a text layer."""
+def has_text(source: SourceDocument, *, ocr: bool = False) -> bool:
+    """False for unreadable PDFs, and for PDFs without any text-layer page unless OCR is configured
+    and some page is scanned."""
+    from rag.ingest.ocr.pages import page_kind
     try:
         with fitz.open(source.absolute_path) as pdf:
-            return any(page.get_text("text").strip() for page in pdf)
+            kinds = {page_kind(page) for page in pdf}
     except Exception:
         return False
+    return "text_layer" in kinds or (ocr and "scanned" in kinds)

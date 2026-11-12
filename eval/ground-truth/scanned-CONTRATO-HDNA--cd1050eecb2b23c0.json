@@ -1,0 +1,1135 @@
+{
+  "schema_version": "ground_truth_document_v2",
+  "document_key": "scanned-CONTRATO-HDNA--cd1050eecb2b23c0",
+  "document_id": "cd1050eecb2b23c0",
+  "document_name": "scanned-CONTRATO HDNA.pdf",
+  "relative_path": "scanned-CONTRATO HDNA.pdf",
+  "file_hash": "cec6f68dfbd39dc81c81dccd5c7a5be7986cc1e7505bfc7e02bddc4b828d5a5d",
+  "cases": [
+    {
+      "case_id": "CONTRACT-HDNA-Q001",
+      "question": "采购合同 CONT2025002 包含哪些 Ítem 的产品？各自的数量、单价和总价是多少？合同总金额是多少？",
+      "answerable": true,
+      "reference_answer": "合同包含 3 个 Ítem，合同总金额为 US$ 1,617,269.96（含全部税费）：\n1. Ítem 1（单相 2 线电子电表）：190,941 台，单价 US$ 6.1124，总价 US$ 1,167,107.77；\n2. Ítem 3（三相 3 线电子电表）：400 台，单价 US$ 18.0894，总价 US$ 7,235.76；\n3. Ítem 4（三相 4 线电子电表）：22,986 台，单价 US$ 19.2694，总价 US$ 442,926.43。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "cd1050eecb2b23c0",
+          "document_name": "scanned-CONTRATO HDNA.pdf",
+          "relative_path": "scanned-CONTRATO HDNA.pdf",
+          "page_numbers": [
+            2
+          ],
+          "text": "1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | UNIDAD | 190,941\n3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS | UNIDAD | 400\n4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | UNIDAD | 22,986",
+          "anchor": {
+            "text_sha256": "e859ac7dd657ffce",
+            "pieces": [
+              {
+                "text": "1",
+                "words": [
+                  "2 112.80 330.49 121.67 341.03"
+                ]
+              },
+              {
+                "text": "MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS",
+                "words": [
+                  "2 138.48 330.01 174.45 341.27",
+                  "2 177.12 330.01 227.48 341.27",
+                  "2 232.08 330.01 280.53 341.27",
+                  "2 285.12 330.01 293.51 341.27",
+                  "2 296.16 330.01 300.71 341.27",
+                  "2 301.68 330.01 324.46 341.27"
+                ]
+              },
+              {
+                "text": "UNIDAD",
+                "words": [
+                  "2 360.24 330.49 389.97 341.03",
+                  "2 360.24 344.41 389.97 354.95",
+                  "2 360.24 358.57 389.97 369.11"
+                ]
+              },
+              {
+                "text": "190,941",
+                "words": [
+                  "2 446.40 330.97 475.40 341.51"
+                ]
+              },
+              {
+                "text": "3",
+                "words": [
+                  "2 112.80 343.93 121.67 354.71"
+                ]
+              },
+              {
+                "text": "MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS",
+                "words": [
+                  "2 146.88 343.93 180.69 355.19",
+                  "2 183.60 343.93 233.96 355.19",
+                  "2 236.64 343.93 274.52 355.19",
+                  "2 277.44 343.93 287.51 355.19",
+                  "2 288.24 343.93 293.03 355.19",
+                  "2 295.68 343.93 316.79 355.19"
+                ]
+              },
+              {
+                "text": "400",
+                "words": [
+                  "2 454.56 343.93 469.18 355.91"
+                ]
+              },
+              {
+                "text": "4",
+                "words": [
+                  "2 112.80 358.09 121.91 368.63"
+                ]
+              },
+              {
+                "text": "MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS",
+                "words": [
+                  "2 147.12 357.13 179.97 368.87",
+                  "2 183.36 357.37 233.48 369.11",
+                  "2 236.64 357.37 273.32 369.11",
+                  "2 278.64 357.61 286.79 369.11",
+                  "2 290.16 357.61 294.47 369.35",
+                  "2 295.92 357.61 317.27 369.35"
+                ]
+              },
+              {
+                "text": "22,986",
+                "words": [
+                  "2 449.52 358.09 473.49 370.07"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "cd1050eecb2b23c0",
+          "document_name": "scanned-CONTRATO HDNA.pdf",
+          "relative_path": "scanned-CONTRATO HDNA.pdf",
+          "page_numbers": [
+            2
+          ],
+          "text": "1 | MEDIDOR ELECTRÓNICO\nMONOFASICO DE 2 HILOS | UNIDAD | 190,941 | 6.1124 | 1,167,107.77\n3 | MEDIDOR ELECTRÓNICO\nTRIFÁSICO DE 3 HILOS | UNIDAD | 400 | 18.0894 | 7,235.76\n4 | MEDIDOR ELECTRÓNICO\nTRIFÁSICO DE 4 HILOS | UNIDAD | 22,986 | 19.2694 | 442,926.43",
+          "anchor": {
+            "text_sha256": "5d54d6b45b061c48",
+            "pieces": [
+              {
+                "text": "1",
+                "words": [
+                  "2 106.08 484.09 114.95 494.63"
+                ]
+              },
+              {
+                "text": "MEDIDOR ELECTRÓNICO",
+                "words": [
+                  "2 136.56 478.09 170.61 489.35",
+                  "2 173.28 478.09 223.64 489.35",
+                  "2 136.56 507.85 170.61 519.11",
+                  "2 173.28 507.85 223.64 519.11",
+                  "2 136.56 535.93 170.61 547.19",
+                  "2 173.28 535.93 223.64 547.19"
+                ]
+              },
+              {
+                "text": "MONOFASICO DE 2 HILOS",
+                "words": [
+                  "2 134.16 490.09 184.05 499.92",
+                  "2 186.00 490.09 195.59 499.92",
+                  "2 197.28 490.09 202.07 499.92",
+                  "2 205.44 490.09 226.31 499.92"
+                ]
+              },
+              {
+                "text": "UNIDAD",
+                "words": [
+                  "2 247.20 483.13 274.78 494.87",
+                  "2 245.04 512.65 276.69 525.35",
+                  "2 245.76 540.97 274.54 553.91"
+                ]
+              },
+              {
+                "text": "190,941",
+                "words": [
+                  "2 311.52 484.09 341.48 496.07"
+                ]
+              },
+              {
+                "text": "6.1124",
+                "words": [
+                  "2 383.76 484.81 410.12 497.03"
+                ]
+              },
+              {
+                "text": "1,167,107.77",
+                "words": [
+                  "2 443.52 485.77 491.22 497.51"
+                ]
+              },
+              {
+                "text": "3",
+                "words": [
+                  "2 106.08 513.85 114.95 524.39"
+                ]
+              },
+              {
+                "text": "TRIFÁSICO DE 3 HILOS",
+                "words": [
+                  "2 138.96 518.89 176.60 530.15",
+                  "2 179.28 518.89 189.59 530.15",
+                  "2 190.32 518.89 195.11 530.15",
+                  "2 197.76 518.89 220.78 530.15"
+                ]
+              },
+              {
+                "text": "400",
+                "words": [
+                  "2 318.72 513.85 333.10 525.35"
+                ]
+              },
+              {
+                "text": "18.0894",
+                "words": [
+                  "2 381.60 517.21 410.84 527.75"
+                ]
+              },
+              {
+                "text": "7,235.76",
+                "words": [
+                  "2 450.96 517.21 483.79 528.95"
+                ]
+              },
+              {
+                "text": "4",
+                "words": [
+                  "2 106.32 541.69 115.19 552.47"
+                ]
+              },
+              {
+                "text": "TRIFÁSICO DE 4 HILOS",
+                "words": [
+                  "2 139.44 546.01 175.88 557.99",
+                  "2 181.44 546.49 189.35 558.23",
+                  "2 192.72 546.49 196.79 558.23",
+                  "2 198.48 546.73 219.83 558.47"
+                ]
+              },
+              {
+                "text": "22,986",
+                "words": [
+                  "2 313.68 541.69 339.80 553.91"
+                ]
+              },
+              {
+                "text": "19.2694",
+                "words": [
+                  "2 381.84 544.81 410.60 556.55"
+                ]
+              },
+              {
+                "text": "442,926.43",
+                "words": [
+                  "2 446.40 544.81 486.66 556.55"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x3",
+          "document_id": "cd1050eecb2b23c0",
+          "document_name": "scanned-CONTRATO HDNA.pdf",
+          "relative_path": "scanned-CONTRATO HDNA.pdf",
+          "page_numbers": [
+            2
+          ],
+          "text": "El monto total del presente contrato asciende a $ 1,617,269.96 (Un Millón Seiscientos Diecisiete Mil Doscientos Sesenta y Nueve con 96/100 Dólares Americanos), que incluye todos los impuestos de Ley",
+          "anchor": {
+            "text_sha256": "68980769afde40d7",
+            "pieces": [
+              {
+                "text": "El monto total del presente contrato asciende a $ 1,617,269.96 (Un Millón Seiscientos Diecisiete Mil Doscientos Sesenta y Nueve con 96/100 Dólares Americanos), que incluye todos los impuestos de Ley",
+                "words": [
+                  "2 96.72 393.37 105.59 406.07",
+                  "2 111.36 393.37 137.26 406.07",
+                  "2 141.12 393.37 162.69 406.07",
+                  "2 166.32 393.37 179.74 406.07",
+                  "2 183.36 393.37 221.96 406.07",
+                  "2 227.76 393.37 262.04 406.07",
+                  "2 268.08 393.37 306.44 406.31",
+                  "2 312.48 393.61 317.28 406.31",
+                  "2 333.60 393.61 391.13 406.31",
+                  "2 394.80 393.61 412.30 406.31",
+                  "2 418.08 393.61 446.12 406.31",
+                  "2 451.92 393.61 505.38 406.31",
+                  "2 96.24 404.65 142.02 417.59",
+                  "2 149.28 404.89 165.34 417.59",
+                  "2 168.48 404.89 222.43 417.59",
+                  "2 227.76 404.89 267.09 417.83",
+                  "2 272.40 405.13 277.68 417.83",
+                  "2 285.12 405.13 313.66 417.83",
+                  "2 318.96 405.13 337.18 417.83",
+                  "2 342.24 405.13 373.16 418.07",
+                  "2 380.40 405.37 415.65 418.07",
+                  "2 422.88 405.37 487.62 418.31",
+                  "2 490.80 405.61 506.62 418.31",
+                  "2 94.32 417.13 125.72 429.35",
+                  "2 129.12 417.13 154.30 429.35",
+                  "2 155.52 417.13 168.47 429.35",
+                  "2 171.84 417.13 217.40 429.35",
+                  "2 220.80 417.13 231.83 429.35",
+                  "2 235.20 417.13 254.15 429.35"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x4",
+          "document_id": "cd1050eecb2b23c0",
+          "document_name": "scanned-CONTRATO HDNA.pdf",
+          "relative_path": "scanned-CONTRATO HDNA.pdf",
+          "page_numbers": [
+            2
+          ],
+          "text": "TOTAL $ | 1,617,269.96",
+          "anchor": {
+            "text_sha256": "714beb9423a19c74",
+            "pieces": [
+              {
+                "text": "TOTAL $",
+                "words": [
+                  "2 247.20 562.09 271.91 575.51"
+                ]
+              },
+              {
+                "text": "1,617,269.96",
+                "words": [
+                  "2 443.52 562.57 491.22 574.31"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x5",
+          "document_id": "cd1050eecb2b23c0",
+          "document_name": "scanned-CONTRATO HDNA.pdf",
+          "relative_path": "scanned-CONTRATO HDNA.pdf",
+          "page_numbers": [
+            3
+          ],
+          "text": "1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | UNIDAD | 190,941\n3 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS | UNIDAD | 400\n4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | UNIDAD | 22,986",
+          "anchor": {
+            "text_sha256": "e859ac7dd657ffce",
+            "pieces": [
+              {
+                "text": "1",
+                "words": [
+                  "3 114.00 550.81 123.11 562.07"
+                ]
+              },
+              {
+                "text": "MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS",
+                "words": [
+                  "3 143.76 546.97 174.94 555.36",
+                  "3 177.60 546.97 222.93 555.36",
+                  "3 142.32 556.33 187.41 566.16",
+                  "3 189.36 556.33 198.95 566.16",
+                  "3 199.44 556.33 203.99 566.16",
+                  "3 205.92 556.33 226.31 566.16"
+                ]
+              },
+              {
+                "text": "UNIDAD",
+                "words": [
+                  "3 241.92 550.81 268.54 560.88",
+                  "3 240.72 579.13 268.30 589.67",
+                  "3 240.96 608.41 268.78 618.95"
+                ]
+              },
+              {
+                "text": "190,941",
+                "words": [
+                  "3 298.56 551.05 325.40 561.83"
+                ]
+              },
+              {
+                "text": "3",
+                "words": [
+                  "3 114.00 579.13 122.39 589.20"
+                ]
+              },
+              {
+                "text": "MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS",
+                "words": [
+                  "3 144.00 574.09 174.22 583.92",
+                  "3 176.64 574.09 222.92 583.92",
+                  "3 146.40 584.17 179.49 594.24",
+                  "3 183.60 584.17 192.47 594.24",
+                  "3 193.44 584.17 197.27 594.24",
+                  "3 199.92 584.17 218.39 594.24"
+                ]
+              },
+              {
+                "text": "400",
+                "words": [
+                  "3 304.80 578.65 318.94 590.39"
+                ]
+              },
+              {
+                "text": "4",
+                "words": [
+                  "3 114.48 608.41 122.87 618.48"
+                ]
+              },
+              {
+                "text": "MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS",
+                "words": [
+                  "3 144.96 602.89 174.70 614.15",
+                  "3 177.84 602.89 222.45 614.15",
+                  "3 147.12 613.45 179.73 623.52",
+                  "3 184.32 613.45 191.03 623.52",
+                  "3 193.92 613.45 197.51 623.52",
+                  "3 200.40 613.45 218.63 623.52"
+                ]
+              },
+              {
+                "text": "22,986",
+                "words": [
+                  "3 300.48 607.93 324.21 620.15"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "各 Ítem 的品名",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            },
+            {
+              "scheme_id": "s2",
+              "excerpt_ids": [
+                "x2"
+              ]
+            },
+            {
+              "scheme_id": "s3",
+              "excerpt_ids": [
+                "x5"
+              ]
+            }
+          ],
+          "note": ""
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "各 Ítem 的数量",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            },
+            {
+              "scheme_id": "s2",
+              "excerpt_ids": [
+                "x2"
+              ]
+            },
+            {
+              "scheme_id": "s3",
+              "excerpt_ids": [
+                "x5"
+              ]
+            }
+          ],
+          "note": "x1 为第二条标的表，x5 为第五条交货计划表的需求总量列"
+        },
+        {
+          "evidence_group_id": "e3",
+          "information_item": "各 Ítem 的单价",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ]
+            }
+          ],
+          "note": ""
+        },
+        {
+          "evidence_group_id": "e4",
+          "information_item": "各 Ítem 的总价",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ]
+            }
+          ],
+          "note": ""
+        },
+        {
+          "evidence_group_id": "e5",
+          "information_item": "合同总金额",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x3"
+              ]
+            },
+            {
+              "scheme_id": "s2",
+              "excerpt_ids": [
+                "x4"
+              ]
+            }
+          ],
+          "note": "x3 为第三条正文，x4 为价格表合计行"
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-HDNA-Q002",
+      "question": "采购合同 CONT2025002 的第 1 次交付（1era ENTREGA，签约后 170 天），各 Ítem 分别要交多少台？",
+      "answerable": true,
+      "reference_answer": "第 1 次交付（签约后 170 天内）：Ítem 1（单相 2 线）70,000 台，Ítem 3（三相 3 线）400 台，Ítem 4（三相 4 线）12,000 台。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "cd1050eecb2b23c0",
+          "document_name": "scanned-CONTRATO HDNA.pdf",
+          "relative_path": "scanned-CONTRATO HDNA.pdf",
+          "page_numbers": [
+            3
+          ],
+          "text": "MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | 70,000\nMEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS | 400\nMEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | 12,000",
+          "locate_hint": "1era ENTREGA",
+          "anchor": {
+            "text_sha256": "abaa30e41c8fa1f0",
+            "pieces": [
+              {
+                "text": "MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS",
+                "words": [
+                  "3 143.76 546.97 174.94 555.36",
+                  "3 177.60 546.97 222.93 555.36",
+                  "3 142.32 556.33 187.41 566.16",
+                  "3 189.36 556.33 198.95 566.16",
+                  "3 199.44 556.33 203.99 566.16",
+                  "3 205.92 556.33 226.31 566.16"
+                ]
+              },
+              {
+                "text": "70,000",
+                "words": [
+                  "3 364.08 550.81 387.57 561.35"
+                ]
+              },
+              {
+                "text": "MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS",
+                "words": [
+                  "3 144.00 574.09 174.22 583.92",
+                  "3 176.64 574.09 222.92 583.92",
+                  "3 146.40 584.17 179.49 594.24",
+                  "3 183.60 584.17 192.47 594.24",
+                  "3 193.44 584.17 197.27 594.24",
+                  "3 199.92 584.17 218.39 594.24"
+                ]
+              },
+              {
+                "text": "400",
+                "words": [
+                  "3 368.88 578.65 383.26 590.39"
+                ]
+              },
+              {
+                "text": "MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS",
+                "words": [
+                  "3 144.96 602.89 174.70 614.15",
+                  "3 177.84 602.89 222.45 614.15",
+                  "3 147.12 613.45 179.73 623.52",
+                  "3 184.32 613.45 191.03 623.52",
+                  "3 193.92 613.45 197.51 623.52",
+                  "3 200.40 613.45 218.63 623.52"
+                ]
+              },
+              {
+                "text": "12,000",
+                "words": [
+                  "3 364.32 607.93 387.81 620.15"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "第 1 次交付各 Ítem 的数量",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ],
+          "note": "Ítem 3 的需求总量与第 1 次交付同为 400，靠定位提示选列"
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-HDNA-Q003",
+      "question": "采购合同 CONT2025002 中，各 Ítem 的履约保证金（garantía de fiel cumplimiento）金额是多少？保函编号分别是什么？由哪家机构出具？",
+      "answerable": true,
+      "reference_answer": "履约保证金为各 Ítem 原合同金额的 10%，均由 AVLA PERÚ COMPAÑÍA DE SEGUROS S.A. 出具：\n- Ítem 1：US$ 116,710.78，保函 N° 3012025041869；\n- Ítem 3：US$ 723.58，保函 N° 3012025041883；\n- Ítem 4：US$ 44,292.65，保函 N° 3012025041891。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "cd1050eecb2b23c0",
+          "document_name": "scanned-CONTRATO HDNA.pdf",
+          "relative_path": "scanned-CONTRATO HDNA.pdf",
+          "page_numbers": [
+            4
+          ],
+          "text": "Ítem N° 1: De fiel cumplimiento del contrato: $ 116,710.78 (CIENTO DIECISEIS MIL SETECIENTOS DIEZ CON 78/100 DÓLARES AMERICANOS) a través de la CARTA FIANZA N° 3012025041869 emitida por AVLA PERÚ COMPAÑÍA DE SEGUROS S.A.",
+          "anchor": {
+            "text_sha256": "623e07c81d8959ba",
+            "pieces": [
+              {
+                "text": "Ítem N° 1: De fiel cumplimiento del contrato: $ 116,710.78 (CIENTO DIECISEIS MIL SETECIENTOS DIEZ CON 78/100 DÓLARES AMERICANOS) a través de la CARTA FIANZA N° 3012025041869 emitida por AVLA PERÚ COMPAÑÍA DE SEGUROS S.A.",
+                "words": [
+                  "4 113.04 225.61 131.74 239.51",
+                  "4 140.16 225.85 163.41 239.51",
+                  "4 167.28 225.85 260.76 239.99",
+                  "4 264.72 226.09 281.26 239.99",
+                  "4 282.72 226.09 430.14 240.47",
+                  "4 438.72 226.81 484.50 240.71",
+                  "4 492.96 226.81 507.11 240.71",
+                  "4 112.80 237.85 184.02 250.55",
+                  "4 188.64 238.09 210.70 250.55",
+                  "4 215.28 238.33 237.35 250.55",
+                  "4 241.92 238.33 272.12 250.79",
+                  "4 276.72 238.57 323.49 251.03",
+                  "4 330.00 238.57 401.22 251.27",
+                  "4 403.68 238.81 409.44 251.27",
+                  "4 411.84 238.81 442.29 251.27",
+                  "4 446.64 239.05 456.71 251.27",
+                  "4 459.12 239.05 468.95 251.27",
+                  "4 473.28 239.05 505.89 251.51",
+                  "4 112.80 249.37 148.53 262.07",
+                  "4 153.12 249.37 165.35 262.07",
+                  "4 168.00 249.37 239.42 262.31",
+                  "4 244.32 249.61 275.72 262.31",
+                  "4 280.32 249.61 296.86 262.31",
+                  "4 299.52 249.61 322.31 262.31",
+                  "4 327.12 249.61 353.98 262.31",
+                  "4 360.96 249.61 411.33 262.55",
+                  "4 418.08 249.85 430.31 262.55",
+                  "4 435.12 249.85 483.33 262.55",
+                  "4 488.16 249.85 507.10 262.55"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "cd1050eecb2b23c0",
+          "document_name": "scanned-CONTRATO HDNA.pdf",
+          "relative_path": "scanned-CONTRATO HDNA.pdf",
+          "page_numbers": [
+            4
+          ],
+          "text": "Ítem N° 3: De fiel cumplimiento del contrato: $ 723.58 (SETECIENTOS VEINTITRES CON 58/100 DÓLARES AMERICANOS) a través de la CARTA FIANZA N° 3012025041883 emitida por AVLA PERÚ COMPAÑÍA DE SEGUROS S.A.",
+          "anchor": {
+            "text_sha256": "cc8807b0d9423fce",
+            "pieces": [
+              {
+                "text": "Ítem N° 3: De fiel cumplimiento del contrato: $ 723.58 (SETECIENTOS VEINTITRES CON 58/100 DÓLARES AMERICANOS) a través de la CARTA FIANZA N° 3012025041883 emitida por AVLA PERÚ COMPAÑÍA DE SEGUROS S.A.",
+                "words": [
+                  "4 113.04 296.41 131.26 309.35",
+                  "4 138.48 296.65 162.93 309.35",
+                  "4 168.24 296.65 179.99 309.35",
+                  "4 183.12 296.65 260.54 309.35",
+                  "4 263.52 296.65 279.58 309.35",
+                  "4 282.72 296.65 322.03 309.35",
+                  "4 325.20 296.65 442.67 309.59",
+                  "4 450.24 296.89 506.34 309.59",
+                  "4 115.20 307.45 133.43 320.39",
+                  "4 144.72 307.69 175.88 320.39",
+                  "4 185.04 307.69 230.85 320.63",
+                  "4 242.40 307.93 313.62 320.87",
+                  "4 320.88 308.17 326.40 320.87",
+                  "4 333.60 308.17 362.38 321.11",
+                  "4 371.76 308.41 381.59 321.11",
+                  "4 390.72 308.41 400.55 321.11",
+                  "4 409.92 308.41 440.85 321.35",
+                  "4 452.16 308.65 485.26 321.35",
+                  "4 496.80 308.89 507.11 321.59",
+                  "4 113.04 318.49 185.90 332.87",
+                  "4 189.60 318.73 220.76 332.87",
+                  "4 226.80 318.97 241.91 332.87",
+                  "4 245.52 318.97 269.75 333.11",
+                  "4 273.36 319.21 299.98 333.11",
+                  "4 305.76 319.21 358.05 333.35",
+                  "4 363.84 319.45 376.55 333.35",
+                  "4 380.16 319.45 430.05 333.59",
+                  "4 433.44 319.69 455.49 333.59"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x3",
+          "document_id": "cd1050eecb2b23c0",
+          "document_name": "scanned-CONTRATO HDNA.pdf",
+          "relative_path": "scanned-CONTRATO HDNA.pdf",
+          "page_numbers": [
+            4
+          ],
+          "text": "Ítem N° 4: De fiel cumplimiento del contrato: $ 44,292.65 (CUARENTA Y CUATRO MIL DOSCIENTOS NOVENTA Y DOS CON 65/100 DÓLARES AMERICANOS) a través de la CARTA FIANZA N° 3012025041891 emitida por AVLA PERÚ COMPAÑÍA DE SEGUROS S.A.",
+          "anchor": {
+            "text_sha256": "9a14f366d6296101",
+            "pieces": [
+              {
+                "text": "Ítem N° 4: De fiel cumplimiento del contrato: $ 44,292.65 (CUARENTA Y CUATRO MIL DOSCIENTOS NOVENTA Y DOS CON 65/100 DÓLARES AMERICANOS) a través de la CARTA FIANZA N° 3012025041891 emitida por AVLA PERÚ COMPAÑÍA DE SEGUROS S.A.",
+                "words": [
+                  "4 111.60 366.01 131.50 378.95",
+                  "4 139.20 366.25 161.25 378.95",
+                  "4 164.64 366.25 176.15 378.95",
+                  "4 179.28 366.25 195.10 378.95",
+                  "4 196.32 366.25 254.33 379.19",
+                  "4 257.76 366.49 273.58 379.19",
+                  "4 274.80 366.49 313.87 379.19",
+                  "4 325.44 366.49 368.82 379.43",
+                  "4 372.24 366.73 432.43 379.43",
+                  "4 435.60 366.73 440.88 379.43",
+                  "4 446.40 366.73 485.49 379.67",
+                  "4 492.96 366.97 506.63 379.67",
+                  "4 114.96 377.05 178.03 389.99",
+                  "4 182.88 377.29 231.09 390.23",
+                  "4 235.68 377.53 241.68 390.23",
+                  "4 246.48 377.53 265.19 390.23",
+                  "4 271.92 377.77 292.55 390.47",
+                  "4 297.36 377.77 326.60 390.47",
+                  "4 331.20 377.77 377.48 390.71",
+                  "4 382.08 378.01 453.78 390.95",
+                  "4 456.24 378.25 462.24 390.95",
+                  "4 464.64 378.25 494.13 391.19",
+                  "4 496.56 378.49 506.63 391.19",
+                  "4 112.80 388.57 120.71 402.47",
+                  "4 128.64 388.57 161.49 402.47",
+                  "4 169.44 388.81 202.06 402.71",
+                  "4 210.00 388.81 222.47 402.71",
+                  "4 228.00 388.81 301.81 402.71",
+                  "4 307.44 389.05 340.28 402.95",
+                  "4 345.84 389.05 360.47 402.95",
+                  "4 368.40 389.05 392.15 402.95",
+                  "4 400.08 389.29 425.98 403.19",
+                  "4 433.92 389.29 487.17 403.19",
+                  "4 495.12 389.53 507.35 403.19",
+                  "4 113.28 400.57 162.68 413.27",
+                  "4 166.32 400.57 185.98 413.51"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "各 Ítem 履约保证金金额",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2",
+                "x3"
+              ]
+            }
+          ],
+          "note": ""
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "各 Ítem 保函编号",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2",
+                "x3"
+              ]
+            }
+          ],
+          "note": ""
+        },
+        {
+          "evidence_group_id": "e3",
+          "information_item": "出具机构",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2",
+                "x3"
+              ]
+            }
+          ],
+          "note": "三张保函各自写明出具机构"
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-HDNA-Q004",
+      "question": "采购合同 CONT2025002 中，货物的收货（recepción）和验收合格（conformidad）分别由哪个部门负责？验收合格的出具时限是多少？",
+      "answerable": true,
+      "reference_answer": "收货由仓库部门（Área de almacén）负责，验收合格由销售与小客户部门（Área de Ventas y Clientes Menores）出具；时限为收货后最长 7 天，需要测试时最长 15 天。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "cd1050eecb2b23c0",
+          "document_name": "scanned-CONTRATO HDNA.pdf",
+          "relative_path": "scanned-CONTRATO HDNA.pdf",
+          "page_numbers": [
+            4
+          ],
+          "text": "La recepción será otorgada por el Área de almacén y la conformidad será otorgada por la el Área de Ventas y Clientes Menores en el plazo máximo de siete (7) días de producida la recepción o máximo de quince (15) días de producida la recepción en caso se requiera efectuar pruebas que permitan verificar el cumplimiento de la obligación.",
+          "anchor": {
+            "text_sha256": "6c276137efc52048",
+            "pieces": [
+              {
+                "text": "La recepción será otorgada por el Área de almacén y la conformidad será otorgada por la el Área de Ventas y Clientes Menores en el plazo máximo de siete (7) días de producida la recepción o máximo de quince (15) días de producida la recepción en caso se requiera efectuar pruebas que permitan verificar el cumplimiento de la obligación.",
+                "words": [
+                  "4 332.16 542.89 343.20 555.59",
+                  "4 344.64 542.89 387.55 555.83",
+                  "4 393.36 543.13 410.63 555.83",
+                  "4 414.48 543.13 452.85 556.07",
+                  "4 456.72 543.37 472.06 556.07",
+                  "4 473.52 543.37 482.63 556.07",
+                  "4 486.24 543.37 505.67 556.31",
+                  "4 95.52 553.69 106.79 566.39",
+                  "4 110.40 553.69 146.84 566.63",
+                  "4 150.48 553.93 155.28 566.63",
+                  "4 156.96 553.93 165.83 566.63",
+                  "4 169.44 553.93 222.91 566.87",
+                  "4 228.72 554.17 246.23 566.87",
+                  "4 249.84 554.17 288.21 566.87",
+                  "4 294.00 554.41 307.43 567.11",
+                  "4 308.88 554.41 317.99 567.11",
+                  "4 321.60 554.41 330.47 567.11",
+                  "4 334.08 554.41 353.75 567.11",
+                  "4 357.36 554.41 366.47 567.11",
+                  "4 372.24 554.65 402.46 567.35",
+                  "4 406.08 554.65 410.88 567.35",
+                  "4 414.48 554.65 448.76 567.59",
+                  "4 454.56 554.89 491.02 567.59",
+                  "4 494.64 554.89 505.91 567.59",
+                  "4 95.76 565.21 104.63 577.91",
+                  "4 106.32 565.21 129.82 577.91",
+                  "4 135.84 565.21 167.98 578.15",
+                  "4 173.76 565.45 182.63 578.15",
+                  "4 186.48 565.45 208.06 578.39",
+                  "4 211.68 565.69 224.85 578.39",
+                  "4 228.72 565.69 245.98 578.39",
+                  "4 249.84 565.69 260.87 578.63",
+                  "4 264.48 565.93 307.14 578.63",
+                  "4 311.04 565.93 319.91 578.87",
+                  "4 323.76 566.17 366.43 578.87",
+                  "4 370.08 566.17 374.88 579.11",
+                  "4 380.64 566.41 412.78 579.11",
+                  "4 418.56 566.41 427.67 579.11",
+                  "4 433.44 566.41 461.24 579.35",
+                  "4 465.12 566.65 484.52 579.35",
+                  "4 486.24 566.65 505.66 579.59",
+                  "4 95.52 576.49 106.79 589.43",
+                  "4 110.40 576.73 153.30 589.43",
+                  "4 156.72 576.73 166.07 589.67",
+                  "4 169.44 576.97 212.59 589.67",
+                  "4 218.16 577.21 229.43 589.91",
+                  "4 232.80 577.21 254.86 589.91",
+                  "4 258.24 577.21 269.52 589.91",
+                  "4 273.12 577.21 309.80 590.15",
+                  "4 315.36 577.45 352.04 590.39",
+                  "4 355.44 577.69 389.97 590.63",
+                  "4 395.76 577.93 411.10 590.63",
+                  "4 416.88 577.93 453.56 590.87",
+                  "4 459.12 578.17 493.64 590.87",
+                  "4 497.04 578.17 506.39 591.11",
+                  "4 96.24 589.21 154.24 600.95",
+                  "4 157.20 589.21 167.75 600.95",
+                  "4 170.64 589.21 179.27 600.95",
+                  "4 182.16 589.21 229.38 600.95"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "cd1050eecb2b23c0",
+          "document_name": "scanned-CONTRATO HDNA.pdf",
+          "relative_path": "scanned-CONTRATO HDNA.pdf",
+          "page_numbers": [
+            3
+          ],
+          "text": "el responsable de otorgar la conformidad de la prestación deberá hacerlo en un plazo que no excederá de los siete (7) días de producida la recepción, salvo que se requiera efectuar pruebas que permitan verificar el cumplimiento de la obligación, en cuyo caso la conformidad se emite en un plazo máximo de quince (15) días",
+          "anchor": {
+            "text_sha256": "0aa37d62e31364ef",
+            "pieces": [
+              {
+                "text": "el responsable de otorgar la conformidad de la prestación deberá hacerlo en un plazo que no excederá de los siete (7) días de producida la recepción, salvo que se requiera efectuar pruebas que permitan verificar el cumplimiento de la obligación, en cuyo caso la conformidad se emite en un plazo máximo de quince (15) días",
+                "words": [
+                  "3 177.12 243.85 183.83 256.55",
+                  "3 185.52 243.85 240.91 256.79",
+                  "3 244.80 244.09 255.59 256.79",
+                  "3 259.68 244.09 291.57 257.03",
+                  "3 293.52 244.33 299.99 257.03",
+                  "3 304.08 244.33 359.22 257.27",
+                  "3 363.36 244.57 371.99 257.27",
+                  "3 376.08 244.57 384.71 257.27",
+                  "3 388.80 244.57 433.39 257.51",
+                  "3 437.28 244.81 467.25 257.75",
+                  "3 471.36 245.05 503.25 257.75",
+                  "3 507.12 245.05 518.15 257.99",
+                  "3 104.88 255.37 115.90 267.59",
+                  "3 121.20 255.37 144.46 267.83",
+                  "3 149.76 255.61 165.10 267.83",
+                  "3 170.40 255.61 181.43 268.07",
+                  "3 186.72 255.61 226.53 268.07",
+                  "3 231.84 255.85 242.87 268.31",
+                  "3 246.24 255.85 261.35 268.31",
+                  "3 264.48 256.09 285.82 268.31",
+                  "3 289.20 256.09 304.29 268.55",
+                  "3 307.68 256.09 326.86 268.55",
+                  "3 332.16 256.33 341.27 268.55",
+                  "3 346.56 256.33 390.42 268.79",
+                  "3 395.76 256.57 402.71 268.79",
+                  "3 408.00 256.57 455.95 269.03",
+                  "3 459.12 256.81 482.62 269.27",
+                  "3 487.92 256.81 503.02 269.27",
+                  "3 508.32 257.05 519.36 269.27",
+                  "3 104.64 266.89 141.08 279.59",
+                  "3 146.88 266.89 183.32 279.83",
+                  "3 187.20 267.13 221.49 280.07",
+                  "3 227.28 267.37 242.62 280.07",
+                  "3 246.48 267.37 285.07 280.31",
+                  "3 290.88 267.61 325.16 280.31",
+                  "3 329.04 267.85 337.91 280.55",
+                  "3 339.60 267.85 399.28 280.79",
+                  "3 403.20 268.09 414.23 280.79",
+                  "3 417.84 268.09 426.95 280.79",
+                  "3 430.56 268.09 479.70 281.03",
+                  "3 483.60 268.33 492.47 281.03",
+                  "3 498.48 268.33 517.90 281.27",
+                  "3 104.16 278.65 125.51 291.11",
+                  "3 128.88 278.89 135.83 291.11",
+                  "3 139.20 278.89 195.30 291.35",
+                  "3 198.48 279.13 207.60 291.35",
+                  "3 212.88 279.13 236.14 291.59",
+                  "3 239.52 279.37 250.55 291.59",
+                  "3 253.92 279.37 264.94 291.59",
+                  "3 268.08 279.37 291.58 291.83",
+                  "3 296.88 279.37 330.46 291.83",
+                  "3 333.84 279.61 344.87 292.07",
+                  "3 348.00 279.61 377.72 292.07",
+                  "3 378.72 279.85 400.04 292.31",
+                  "3 401.28 279.85 424.78 292.31"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "收货负责部门",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ],
+          "note": ""
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "验收合格负责部门",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ],
+          "note": ""
+        },
+        {
+          "evidence_group_id": "e3",
+          "information_item": "验收合格的出具时限",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            },
+            {
+              "scheme_id": "s2",
+              "excerpt_ids": [
+                "x2"
+              ]
+            }
+          ],
+          "note": "x2 为第四条付款条款中的同一时限"
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-HDNA-Q005",
+      "question": "采购合同 CONT2025002 的交货地点在哪里？是否接受提前交货？",
+      "answerable": true,
+      "reference_answer": "交货地点为 HDNA 仓库，地址 Carretera Panamericana Norte Km 568 - La Esperanza, Trujillo, La Libertad。不接受提前交货，除非买方提出要求、且承包商有货并同意。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "cd1050eecb2b23c0",
+          "document_name": "scanned-CONTRATO HDNA.pdf",
+          "relative_path": "scanned-CONTRATO HDNA.pdf",
+          "page_numbers": [
+            3
+          ],
+          "text": "HDNA | Carretera Panamericana Norte Km 568 - La Esperanza, Trujillo, La Libertad",
+          "anchor": {
+            "text_sha256": "fe3e5052889d17de",
+            "pieces": [
+              {
+                "text": "HDNA",
+                "words": [
+                  "3 122.64 748.57 148.79 761.75"
+                ]
+              },
+              {
+                "text": "Carretera Panamericana Norte Km 568 - La Esperanza, Trujillo, La Libertad",
+                "words": [
+                  "3 172.08 748.57 213.09 761.27",
+                  "3 218.64 748.57 280.74 761.27",
+                  "3 286.32 748.57 308.38 761.27",
+                  "3 311.52 748.57 325.19 761.27",
+                  "3 330.72 748.57 346.30 761.27",
+                  "3 356.16 748.57 367.44 761.51",
+                  "3 370.80 748.81 422.60 761.51",
+                  "3 423.84 748.81 458.35 761.51",
+                  "3 459.60 748.81 469.20 761.51",
+                  "3 472.32 748.81 509.23 761.51"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "cd1050eecb2b23c0",
+          "document_name": "scanned-CONTRATO HDNA.pdf",
+          "relative_path": "scanned-CONTRATO HDNA.pdf",
+          "page_numbers": [
+            3
+          ],
+          "text": "No se aceptarán entregas anticipadas, salvo que sea requerido por la Entidad, previa disponibilidad y aceptación por parte del Contratista.",
+          "anchor": {
+            "text_sha256": "d9bce497c943f953",
+            "pieces": [
+              {
+                "text": "No se aceptarán entregas anticipadas, salvo que sea requerido por la Entidad, previa disponibilidad y aceptación por parte del Contratista.",
+                "words": [
+                  "3 107.28 651.37 118.08 664.07",
+                  "3 124.08 651.37 132.96 664.07",
+                  "3 141.12 651.37 183.79 664.07",
+                  "3 189.84 651.37 228.21 664.07",
+                  "3 236.40 651.37 289.61 664.07",
+                  "3 293.76 651.37 317.26 664.31",
+                  "3 323.28 651.61 338.38 664.31",
+                  "3 346.56 651.61 361.67 664.31",
+                  "3 367.68 651.61 408.43 664.31",
+                  "3 416.40 651.61 429.59 664.31",
+                  "3 435.60 651.61 442.31 664.31",
+                  "3 450.48 651.61 486.67 664.31",
+                  "3 492.72 651.61 518.61 664.31",
+                  "3 105.60 663.61 165.26 675.83",
+                  "3 169.20 663.61 173.76 675.83",
+                  "3 177.36 663.61 224.82 675.83",
+                  "3 228.48 663.61 243.35 675.83",
+                  "3 246.72 663.61 267.82 675.83",
+                  "3 271.44 663.61 286.06 675.83",
+                  "3 287.76 663.61 339.06 675.83"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "交货地点",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ],
+          "note": ""
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "是否接受提前交货",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ]
+            }
+          ],
+          "note": ""
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-HDNA-Q006",
+      "question": "采购合同 CONT2025002 规定的预付款（adelanto）比例是多少？",
+      "answerable": false,
+      "reference_answer": "合同中没有预付款的约定，货款按交付批次分期支付。",
+      "excerpts": [],
+      "evidence_groups": []
+    }
+  ]
+}

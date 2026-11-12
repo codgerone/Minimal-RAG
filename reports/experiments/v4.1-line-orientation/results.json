@@ -1,0 +1,9640 @@
+{
+ "timings": [
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "pages": 9,
+   "scanned_pages": 9,
+   "current_s": 29.962166600394994,
+   "pick_s": 48.9928706001956,
+   "same_as_stored": 9
+  },
+  {
+   "set": "sim",
+   "doc": "E001-602.pdf",
+   "pages": 1,
+   "scanned_pages": 1,
+   "current_s": 3.19418069999665,
+   "pick_s": 4.886419099988416,
+   "same_as_stored": 1
+  },
+  {
+   "set": "sim",
+   "doc": "ORDER PERU 24-12 ANDET.pdf",
+   "pages": 2,
+   "scanned_pages": 2,
+   "current_s": 5.021517999703065,
+   "pick_s": 8.54358660010621,
+   "same_as_stored": 2
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "pages": 6,
+   "scanned_pages": 6,
+   "current_s": 19.86523380014114,
+   "pick_s": 33.36808249983005,
+   "same_as_stored": 6
+  },
+  {
+   "set": "sim",
+   "doc": "ORDER PERU 25-15 ANDET VF.pdf",
+   "pages": 2,
+   "scanned_pages": 2,
+   "current_s": 6.759234300116077,
+   "pick_s": 13.316232700133696,
+   "same_as_stored": 2
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "pages": 12,
+   "scanned_pages": 12,
+   "current_s": 49.45752300065942,
+   "pick_s": 83.99569270038046,
+   "same_as_stored": 12
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "pages": 7,
+   "scanned_pages": 7,
+   "current_s": 31.270620299736038,
+   "pick_s": 52.84615320013836,
+   "same_as_stored": 7
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "pages": 16,
+   "scanned_pages": 15,
+   "current_s": 68.93005610024557,
+   "pick_s": 117.77916339947842,
+   "same_as_stored": 15
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "pages": 7,
+   "scanned_pages": 7,
+   "current_s": 25.886110299965367,
+   "pick_s": 44.11419719993137,
+   "same_as_stored": 7
+  }
+ ],
+ "boxes": [
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 1,
+   "box_px": [
+    405.2769775390625,
+    1329.6451416015625,
+    2132.109375,
+    1382.6895751953125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.983468770980835
+   ],
+   "turned": true,
+   "on": {
+    "text": "ELE         ,     tra",
+    "conf": 0.70865,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "ELECTRO SUR ESTE S.A.A., identificada con RUC. Nº20116544289, cuya personería jurídica se encuentra",
+    "conf": 0.97806,
+    "f1": 0.8888888888888888
+   },
+   "crop": "sim-ab5801-p001-0000.png",
+   "reference": "electro sur este s.a.a., identificada con ruc. nº 20116544289, cuya personería jurídica se encuentra",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 1,
+   "box_px": [
+    407.0390625,
+    1522.373046875,
+    2130.347412109375,
+    1573.6492919921875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9633979797363281
+   ],
+   "turned": true,
+   "on": {
+    "text": "Frer  o  ecn   n         ion",
+    "conf": 0.60775,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "Fredy Hernán Gonzáles De La Vega, peruano, identificado con DNI. Nº 23839976, con poder de representación",
+    "conf": 0.99413,
+    "f1": 1.0
+   },
+   "crop": "sim-ab5801-p001-0001.png",
+   "reference": "fredy hernán gonzáles de la vega, peruano, identificado con dni. nº 23839976, con poder de representación",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 1,
+   "box_px": [
+    407.0390625,
+    2250.848876953125,
+    2133.87158203125,
+    2302.125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9654953479766846
+   ],
+   "turned": true,
+   "on": {
+    "text": "LO L MI L  I L I A     OILA",
+    "conf": 0.6997,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "FONAFE para la: “COMPRA CORPORATIVA DE MEDIDORES PARA LAS EMPRESAS DE LA",
+    "conf": 0.9858,
+    "f1": 1.0
+   },
+   "crop": "sim-ab5801-p001-0002.png",
+   "reference": "fonafe para la: “compra corporativa de medidores para las empresas de la",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 1,
+   "box_px": [
+    79.29332733154297,
+    2588.564697265625,
+    172.68324279785156,
+    2613.318603515625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9163733124732971
+   ],
+   "turned": true,
+   "on": {
+    "text": "2015428",
+    "conf": 0.65638,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "2011654428",
+    "conf": 0.9999,
+    "f1": 0.2222222222222222
+   },
+   "crop": "sim-ab5801-p001-0003.png",
+   "reference": "r ruth fau 2011654428 9 hard fau hard",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 1,
+   "box_px": [
+    81.0553970336914,
+    2608.01416015625,
+    133.91761779785156,
+    2632.768310546875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9081895351409912
+   ],
+   "turned": true,
+   "on": {
+    "text": "hard",
+    "conf": 0.7186,
+    "f1": 0.5
+   },
+   "off": {
+    "text": "9 hard",
+    "conf": 0.97908,
+    "f1": 0.8
+   },
+   "crop": "sim-ab5801-p001-0004.png",
+   "reference": "2011654428 9 hard",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 1,
+   "box_px": [
+    192.06605529785156,
+    2722.943603515625,
+    320.69744873046875,
+    2756.538330078125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9289777874946594
+   ],
+   "turned": true,
+   "on": {
+    "text": "FELORS  SOCcar",
+    "conf": 0.53773,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "FLORES BOZA Oscar",
+    "conf": 0.94714,
+    "f1": 0.6
+   },
+   "crop": "sim-ab5801-p001-0005.png",
+   "reference": "digitalmente por flores boza oscar antonio fau",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 1,
+   "box_px": [
+    407.0390625,
+    3161.443603515625,
+    2133.87158203125,
+    3212.7197265625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9719321131706238
+   ],
+   "turned": true,
+   "on": {
+    "text": "san  o  l  es o s      o soctra",
+    "conf": 0.61084,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "sancionados por el Tribunal de Contrataciones del Estado con sanción vigente” EL CONTRATISTA no se encuentra",
+    "conf": 0.9876,
+    "f1": 1.0
+   },
+   "crop": "sim-ab5801-p001-0006.png",
+   "reference": "sancionados por el tribunal de contrataciones del estado con sanción vigente” el contratista no se encuentra",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 2,
+   "box_px": [
+    408.8011474609375,
+    905.2903442382812,
+    2132.109375,
+    956.5665283203125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9867132902145386
+   ],
+   "turned": true,
+   "on": {
+    "text": "Ca       s)  $        cho",
+    "conf": 0.68485,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "Carta fianza N° 3012025041864 por el monto de US$ 73,348.80 (Setenta y tres mil trescientos cuarenta y ocho",
+    "conf": 0.98498,
+    "f1": 1.0
+   },
+   "crop": "sim-ab5801-p002-0007.png",
+   "reference": "carta fianza n° 3012025041864 por el monto de us$ 73,348.80 (setenta y tres mil trescientos cuarenta y ocho",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 2,
+   "box_px": [
+    410.5632019042969,
+    1195.26611328125,
+    2132.109375,
+    1241.2379150390625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9477066993713379
+   ],
+   "turned": true,
+   "on": {
+    "text": "Car        $     D   res",
+    "conf": 0.7597,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "Carta fianza N° 3012025041881 por el monto de US$ 2,713.41 (Dos mil setecientos trece con 41/100 Dólares",
+    "conf": 0.98117,
+    "f1": 1.0
+   },
+   "crop": "sim-ab5801-p002-0008.png",
+   "reference": "carta fianza n° 3012025041881 por el monto de us$ 2,713.41 (dos mil setecientos trece con 41/100 dólares",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 2,
+   "box_px": [
+    407.0390625,
+    1288.9779052734375,
+    1982.3331298828125,
+    1340.2540283203125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9290007948875427
+   ],
+   "turned": true,
+   "on": {
+    "text": "din       a iin na     s",
+    "conf": 0.65534,
+    "f1": 0.09523809523809523
+   },
+   "off": {
+    "text": "de excusión y de realización automática, como garantía de fiel cumplimiento a favor de LA EMPRESA.",
+    "conf": 0.99399,
+    "f1": 1.0
+   },
+   "crop": "sim-ab5801-p002-0009.png",
+   "reference": "de excusión y de realización automática, como garantía de fiel cumplimiento a favor de la empresa.",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 2,
+   "box_px": [
+    375.3217468261719,
+    2661.05859375,
+    1483.666259765625,
+    2712.334716796875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9090228080749512
+   ],
+   "turned": true,
+   "on": {
+    "text": "LAo s   s s rs  r ro:",
+    "conf": 0.64609,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "LA CORPORACION FONAFE\"según se detalla en el siguiente cuadro:",
+    "conf": 0.99135,
+    "f1": 0.8421052631578947
+   },
+   "crop": "sim-ab5801-p002-0010.png",
+   "reference": "la corporacion fonafe” según se detalla en el siguiente cuadro:",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 3,
+   "box_px": [
+    408.8011474609375,
+    1465.7923583984375,
+    2130.347412109375,
+    1511.76416015625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9170087575912476
+   ],
+   "turned": true,
+   "on": {
+    "text": "cone     m i    e e        las",
+    "conf": 0.67523,
+    "f1": 0.07407407407407407
+   },
+   "off": {
+    "text": "contados a partir de la fecha de recepción en el almacén de LA EMPRESA, la misma que está suscrita por las",
+    "conf": 0.99449,
+    "f1": 1.0
+   },
+   "crop": "sim-ab5801-p003-0011.png",
+   "reference": "contados a partir de la fecha de recepción en el almacén de la empresa, la misma que está suscrita por las",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 3,
+   "box_px": [
+    405.2769775390625,
+    1794.6673583984375,
+    2135.633544921875,
+    1847.7117919921875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9969413876533508
+   ],
+   "turned": true,
+   "on": {
+    "text": "Dae re      m     e  med e nal",
+    "conf": 0.59908,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "Durante el período de garantía, ante la falla de alguno de los medidores, LA EMPRESA informará al",
+    "conf": 0.98706,
+    "f1": 1.0
+   },
+   "crop": "sim-ab5801-p003-0012.png",
+   "reference": "durante el período de garantía, ante la falla de alguno de los medidores, la empresa informará al",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 3,
+   "box_px": [
+    408.8011474609375,
+    2565.57861328125,
+    2130.347412109375,
+    2611.550537109375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9825464487075806
+   ],
+   "turned": true,
+   "on": {
+    "text": "an  s     mn   a  a   s maal",
+    "conf": 0.72139,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "Cuando se produzcan fallas repetitivas en medidores de un mismo lote de producción, que sean imputables al",
+    "conf": 0.99144,
+    "f1": 1.0
+   },
+   "crop": "sim-ab5801-p003-0013.png",
+   "reference": "cuando se produzcan fallas repetitivas en medidores de un mismo lote de producción, que sean imputables al",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 4,
+   "box_px": [
+    405.2769775390625,
+    516.2984008789062,
+    2128.585205078125,
+    569.3427734375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.98199063539505
+   ],
+   "turned": true,
+   "on": {
+    "text": "ser  l  a     s oci  o  e o cisn",
+    "conf": 0.64064,
+    "f1": 0.07692307692307693
+   },
+   "off": {
+    "text": "servicio eléctrico, en este caso, EL coNTRATISTA se compromete a la reposición total del lote de producción",
+    "conf": 0.98421,
+    "f1": 1.0
+   },
+   "crop": "sim-ab5801-p004-0014.png",
+   "reference": "servicio eléctrico, en este caso, el contratista se compromete a la reposición total del lote de producción",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 4,
+   "box_px": [
+    403.5149230957031,
+    657.75,
+    2130.347412109375,
+    712.5625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9967302083969116
+   ],
+   "turned": true,
+   "on": {
+    "text": "Sl sa  oae c re s aet e     ap co dis",
+    "conf": 0.54869,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "Si como consecuencia de la aplicación de la garantía se requiere del ingreso de representantes del",
+    "conf": 0.99318,
+    "f1": 1.0
+   },
+   "crop": "sim-ab5801-p004-0015.png",
+   "reference": "si como consecuencia de la aplicación de la garantía se requiere del ingreso de representantes del",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 4,
+   "box_px": [
+    1629.9183349609375,
+    1568.3448486328125,
+    1735.642822265625,
+    1628.4617919921875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9934865236282349
+   ],
+   "turned": true,
+   "on": {
+    "text": "($sn)",
+    "conf": 0.98679,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "(US$)",
+    "conf": 0.99789,
+    "f1": 1.0
+   },
+   "crop": "sim-ab5801-p004-0016.png",
+   "reference": "(us$)",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 4,
+   "box_px": [
+    407.0390625,
+    1982.0908203125,
+    2132.109375,
+    2033.366943359375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9514733552932739
+   ],
+   "turned": true,
+   "on": {
+    "text": "Ete  eo s s os os o o    o le  s lde",
+    "conf": 0.58246,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "Este monto comprende el costo de los bienes, todos los tributos, seguros, transporte, inspecciones, pruebas y, de",
+    "conf": 0.99867,
+    "f1": 1.0
+   },
+   "crop": "sim-ab5801-p004-0017.png",
+   "reference": "este monto comprende el costo de los bienes, todos los tributos, seguros, transporte, inspecciones, pruebas y, de",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 4,
+   "box_px": [
+    407.0390625,
+    2514.302490234375,
+    2128.585205078125,
+    2567.346923828125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9999589920043945
+   ],
+   "turned": true,
+   "on": {
+    "text": "Pao  co c  s  co a  on  co  a cnta",
+    "conf": 0.64464,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "Para realizar el pago EL CONTRATISTA debe indicar número de su cuenta bancaria, código de cuenta",
+    "conf": 0.9888,
+    "f1": 1.0
+   },
+   "crop": "sim-ab5801-p004-0018.png",
+   "reference": "para realizar el pago el contratista debe indicar número de su cuenta bancaria, código de cuenta",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 6,
+   "box_px": [
+    468.7116394042969,
+    1296.0504150390625,
+    2128.585205078125,
+    1342.022216796875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9588072896003723
+   ],
+   "turned": true,
+   "on": {
+    "text": "eu s  n  d o n    (mn m n  e nnte",
+    "conf": 0.64818,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "equivalente al diez por ciento (10%) del monto del contrato original, la misma que debe mantenerse vigente",
+    "conf": 0.9891,
+    "f1": 1.0
+   },
+   "crop": "sim-ab5801-p006-0019.png",
+   "reference": "equivalente al diez por ciento (10%) del monto del contrato original, la misma que debe mantenerse vigente",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 6,
+   "box_px": [
+    407.0390625,
+    2259.689453125,
+    2132.109375,
+    2310.9658203125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9080649018287659
+   ],
+   "turned": true,
+   "on": {
+    "text": "de n d  s e     b     sa    dan",
+    "conf": 0.71582,
+    "f1": 0.06896551724137931
+   },
+   "off": {
+    "text": "de jefe de la División de Ventas de la Gerencia Comercial de LA EMPRESA; o en su ausencia por quienes hagan",
+    "conf": 0.99382,
+    "f1": 1.0
+   },
+   "crop": "sim-ab5801-p006-0020.png",
+   "reference": "de jefe de la división de ventas de la gerencia comercial de la empresa; o en su ausencia por quienes hagan",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 6,
+   "box_px": [
+    407.0390625,
+    2549.665283203125,
+    2128.585205078125,
+    2595.63720703125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9994914531707764
+   ],
+   "turned": true,
+   "on": {
+    "text": "mn ( oo    () o  o o s d o  o s  omas",
+    "conf": 0.69542,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "sentido de estas, otorgándole un plazo para subsanar no menor de dos (2) ni mayor de ocho (08) días.",
+    "conf": 0.99088,
+    "f1": 1.0
+   },
+   "crop": "sim-ab5801-p006-0021.png",
+   "reference": "sentido de estas, otorgándole un plazo para subsanar no menor de dos (2) ni mayor de ocho (08) días.",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 6,
+   "box_px": [
+    408.8011474609375,
+    2597.4052734375,
+    2130.347412109375,
+    2643.377197265625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9094366431236267
+   ],
+   "turned": true,
+   "on": {
+    "text": "Dep   add dd    s s  ds o ao   opdde",
+    "conf": 0.62494,
+    "f1": 0.07692307692307693
+   },
+   "off": {
+    "text": "Dependiendo de la complejidad o sofisticación de las subsanaciones a realizar el plazo para subsanar no puede",
+    "conf": 0.99582,
+    "f1": 1.0
+   },
+   "crop": "sim-ab5801-p006-0022.png",
+   "reference": "dependiendo de la complejidad o sofisticación de las subsanaciones a realizar el plazo para subsanar no puede",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 6,
+   "box_px": [
+    405.2769775390625,
+    2689.348876953125,
+    2133.87158203125,
+    2740.625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9625471234321594
+   ],
+   "turned": true,
+   "on": {
+    "text": "aa d  od  a  d     s la a",
+    "conf": 0.66592,
+    "f1": 0.17391304347826086
+   },
+   "off": {
+    "text": "a cabalidad con la subsanación, LA EMPRESA puede otorgar al CONTRATISTA periodos adicionales para las",
+    "conf": 0.99702,
+    "f1": 1.0
+   },
+   "crop": "sim-ab5801-p006-0023.png",
+   "reference": "a cabalidad con la subsanación, la empresa puede otorgar al contratista periodos adicionales para las",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 7,
+   "box_px": [
+    408.8011474609375,
+    668.35888671875,
+    1957.6640625,
+    714.3306884765625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9896221160888672
+   ],
+   "turned": true,
+   "on": {
+    "text": "conn  o o ns o o ao a ni an  ds  nto",
+    "conf": 0.65765,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "contrato, bajo sanción de quedar inhabilitado para contratar con el Estado en caso de incumplimiento.",
+    "conf": 0.99458,
+    "f1": 1.0
+   },
+   "crop": "sim-ab5801-p007-0024.png",
+   "reference": "contrato, bajo sanción de quedar inhabilitado para contratar con el estado en caso de incumplimiento.",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 7,
+   "box_px": [
+    407.0390625,
+    862.8548583984375,
+    2132.109375,
+    908.82666015625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.987671971321106
+   ],
+   "turned": true,
+   "on": {
+    "text": "Lra   r   c rc    o r   cn r dar",
+    "conf": 0.64486,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "La recepción conforme de la prestación por parte de LA EMPRESA no enerva su derecho a reclamar",
+    "conf": 0.9947,
+    "f1": 1.0
+   },
+   "crop": "sim-ab5801-p007-0025.png",
+   "reference": "la recepción conforme de la prestación por parte de la empresa no enerva su derecho a reclamar",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 7,
+   "box_px": [
+    407.0390625,
+    2687.580810546875,
+    2130.347412109375,
+    2738.85693359375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9199939370155334
+   ],
+   "turned": true,
+   "on": {
+    "text": "cualie      a e r ao  ol    sd s  oeulo",
+    "conf": 0.61081,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "Cualquiera de las partes puede resolver el contrato, de conformidad con el numeral 32.3 del artículo 32 y artículo",
+    "conf": 0.98584,
+    "f1": 1.0
+   },
+   "crop": "sim-ab5801-p007-0026.png",
+   "reference": "cualquiera de las partes puede resolver el contrato, de conformidad con el numeral 32.3 del artículo 32 y artículo",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 7,
+   "box_px": [
+    405.2769775390625,
+    2975.788330078125,
+    2133.87158203125,
+    3028.832763671875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9448310732841492
+   ],
+   "turned": true,
+   "on": {
+    "text": "Ca    e s ted   ae  es a od a e a s oaos",
+    "conf": 0.64942,
+    "f1": 0.0625
+   },
+   "off": {
+    "text": "Cuando se resuelva el contrato por causas imputables a algunas de las partes, se debe resarcir los daños y",
+    "conf": 0.98587,
+    "f1": 1.0
+   },
+   "crop": "sim-ab5801-p007-0027.png",
+   "reference": "cuando se resuelva el contrato por causas imputables a algunas de las partes, se debe resarcir los daños y",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 8,
+   "box_px": [
+    407.0390625,
+    811.5786743164062,
+    2130.347412109375,
+    857.5504150390625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9184637665748596
+   ],
+   "turned": true,
+   "on": {
+    "text": "sn    a ose    ( a d  e   on",
+    "conf": 0.6732,
+    "f1": 0.08
+   },
+   "off": {
+    "text": "se encuentra disponible en la página web (www.else.com.pe) y por este instrumento se compromete a cumplir con",
+    "conf": 0.98961,
+    "f1": 1.0
+   },
+   "crop": "sim-ab5801-p008-0028.png",
+   "reference": "se encuentra disponible en la página web (www.else.com.pe) y por este instrumento se compromete a cumplir con",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 8,
+   "box_px": [
+    408.8011474609375,
+    1198.802490234375,
+    2128.585205078125,
+    1244.774169921875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9445380568504333
+   ],
+   "turned": true,
+   "on": {
+    "text": "cup ods s    u         oe",
+    "conf": 0.67538,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "cumplimiento del contrato, referido al rendimiento y nivel de avance de las actividades contratadas, aspectos de",
+    "conf": 0.99017,
+    "f1": 1.0
+   },
+   "crop": "sim-ab5801-p008-0029.png",
+   "reference": "cumplimiento del contrato, referido al rendimiento y nivel de avance de las actividades contratadas, aspectos de",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 8,
+   "box_px": [
+    405.2769775390625,
+    1243.006103515625,
+    2132.109375,
+    1296.0504150390625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.999220609664917
+   ],
+   "turned": true,
+   "on": {
+    "text": "s i e   on sons esnd o eur  on ennts",
+    "conf": 0.59322,
+    "f1": 0.08695652173913043
+   },
+   "off": {
+    "text": "seguridad, equipamiento e infraestructura ofertada, personal, seguros, cumplimiento de la normatividad vigente y",
+    "conf": 0.9912,
+    "f1": 1.0
+   },
+   "crop": "sim-ab5801-p008-0030.png",
+   "reference": "seguridad, equipamiento e infraestructura ofertada, personal, seguros, cumplimiento de la normatividad vigente y",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 8,
+   "box_px": [
+    407.0390625,
+    1290.7459716796875,
+    2132.109375,
+    1342.022216796875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9711993336677551
+   ],
+   "turned": true,
+   "on": {
+    "text": "al      s   i  oo    o  ln",
+    "conf": 0.60173,
+    "f1": 0.08333333333333333
+   },
+   "off": {
+    "text": "aplicable al objeto del contrato y otros que requiera LA EMPRESA. Estas auditorías estarán a cargo de los",
+    "conf": 0.98688,
+    "f1": 1.0
+   },
+   "crop": "sim-ab5801-p008-0031.png",
+   "reference": "aplicable al objeto del contrato y otros que requiera la empresa. estas auditorías estarán a cargo de los",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 8,
+   "box_px": [
+    403.5149230957031,
+    1817.6533203125,
+    2132.109375,
+    1870.6976318359375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9525449275970459
+   ],
+   "turned": true,
+   "on": {
+    "text": "Ain    e     o oo s oc  oscso",
+    "conf": 0.61731,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "Asimismo, EL cONTRATISTA se obliga a conducirse en todo momento, durante la ejecución del contrato, con",
+    "conf": 0.97668,
+    "f1": 1.0
+   },
+   "crop": "sim-ab5801-p008-0032.png",
+   "reference": "asimismo, el contratista se obliga a conducirse en todo momento, durante la ejecución del contrato, con",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 8,
+   "box_px": [
+    405.2769775390625,
+    1914.9012451171875,
+    2130.347412109375,
+    1967.945556640625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9850749969482422
+   ],
+   "turned": true,
+   "on": {
+    "text": "ni o so  ets ciscct cscts ocs s  cs   tds",
+    "conf": 0.5593,
+    "f1": 0.08333333333333333
+   },
+   "off": {
+    "text": "indirectamente o a través de sus socios, accionistas, participacionistas, integrantes de los órganos de",
+    "conf": 0.99254,
+    "f1": 1.0
+   },
+   "crop": "sim-ab5801-p008-0033.png",
+   "reference": "indirectamente o a través de sus socios, accionistas, participacionistas, integrantes de los órganos de",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "Contrato N 105-2025 LP-002-2024-FONAFE Adquisición de medidores ítem 1 3 y 4 - HEXING ELECTRICAL (1)[R][R].pdf",
+   "page": 8,
+   "box_px": [
+    408.8011474609375,
+    2639.8408203125,
+    2130.347412109375,
+    2685.8125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9879136681556702
+   ],
+   "turned": true,
+   "on": {
+    "text": "Ssol     s  t  t     o s      cvas",
+    "conf": 0.65186,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "Sólo en lo no previsto en este contrato, en la Ley de Contrataciones del Estado y su Reglamento, en las directivas",
+    "conf": 0.99028,
+    "f1": 1.0
+   },
+   "crop": "sim-ab5801-p008-0034.png",
+   "reference": "sólo en lo no previsto en este contrato, en la ley de contrataciones del estado y su reglamento, en las directivas",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "E001-602.pdf",
+   "page": 1,
+   "box_px": [
+    1680.078125,
+    1892.8427734375,
+    1912.5,
+    1932.7620849609375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9818987846374512
+   ],
+   "turned": true,
+   "on": {
+    "text": " trbbius Truos:",
+    "conf": 0.6563,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "Otros Tributos :",
+    "conf": 0.98744,
+    "f1": 1.0
+   },
+   "crop": "sim-ce5d7b-p001-0035.png",
+   "reference": "otros tributos :",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "E001-602.pdf",
+   "page": 1,
+   "box_px": [
+    107.91015625,
+    2375.20166015625,
+    2447.0703125,
+    2435.08056640625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9991557598114014
+   ],
+   "turned": true,
+   "on": {
+    "text": "Es   sa  a a  u   s a n a de",
+    "conf": 0.70607,
+    "f1": 0.15384615384615385
+   },
+   "off": {
+    "text": "Esta es una representación impresa de la factura electrónica, generada en el Sistema de SUNAT. Puede",
+    "conf": 0.99329,
+    "f1": 1.0
+   },
+   "crop": "sim-ce5d7b-p001-0036.png",
+   "reference": "esta es una representación impresa de la factura electrónica, generada en el sistema de sunat. puede",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "ORDER PERU 24-12 ANDET.pdf",
+   "page": 1,
+   "box_px": [
+    516.2876586914062,
+    2816.6552734375,
+    548.0050048828125,
+    2850.25
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9526975750923157
+   ],
+   "turned": true,
+   "on": {
+    "text": "0",
+    "conf": 0.37569,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "O",
+    "conf": 0.35705,
+    "f1": 1.0
+   },
+   "crop": "sim-1c46d5-p001-0037.png",
+   "reference": "o",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "ORDER PERU 24-12 ANDET.pdf",
+   "page": 1,
+   "box_px": [
+    1624.632080078125,
+    1555.9677734375,
+    1922.422607421875,
+    1734.5504150390625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9789606332778931
+   ],
+   "turned": true,
+   "on": null,
+   "off": {
+    "text": "网能",
+    "conf": 0.67824,
+    "f1": 0.0
+   },
+   "crop": "sim-1c46d5-p001-0038.png",
+   "reference": "",
+   "right": "off",
+   "method": "only_one_reading"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 1,
+   "box_px": [
+    366.5113525390625,
+    2339.256103515625,
+    2218.450927734375,
+    2379.92333984375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9286832213401794
+   ],
+   "turned": true,
+   "on": {
+    "text": "ver    t           r   te",
+    "conf": 0.84369,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "verifying the display reading after 24 hours, a current equivalent to 5% of the nominal current must be injected",
+    "conf": 0.98755,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p001-0039.png",
+   "reference": "verifying the display reading after 24 hours, a current equivalent to 5% of the nominal current must be injected",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 2,
+   "box_px": [
+    896.8956298828125,
+    873.4637451171875,
+    969.140625,
+    912.3629150390625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9653823375701904
+   ],
+   "turned": true,
+   "on": {
+    "text": "UNIT",
+    "conf": 0.77761,
+    "f1": 1.0
+   },
+   "off": {
+    "text": "UNIT",
+    "conf": 0.99992,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p002-0040.png",
+   "reference": "unit",
+   "right": null,
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 2,
+   "box_px": [
+    896.8956298828125,
+    983.0887451171875,
+    969.140625,
+    1021.9879150390625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9586925506591797
+   ],
+   "turned": true,
+   "on": {
+    "text": "UNIT",
+    "conf": 0.78619,
+    "f1": 1.0
+   },
+   "off": {
+    "text": "UNIT",
+    "conf": 0.99992,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p002-0041.png",
+   "reference": "unit",
+   "right": null,
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 2,
+   "box_px": [
+    895.133544921875,
+    1094.48193359375,
+    970.9027099609375,
+    1133.381103515625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9259058833122253
+   ],
+   "turned": true,
+   "on": {
+    "text": "UNIT",
+    "conf": 0.90432,
+    "f1": 1.0
+   },
+   "off": {
+    "text": "UNIT",
+    "conf": 0.95877,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p002-0042.png",
+   "reference": "unit",
+   "right": null,
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 2,
+   "box_px": [
+    896.8956298828125,
+    1205.875,
+    970.9027099609375,
+    1244.774169921875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9022519588470459
+   ],
+   "turned": true,
+   "on": {
+    "text": "UNIT",
+    "conf": 0.75381,
+    "f1": 1.0
+   },
+   "off": {
+    "text": "UNIT",
+    "conf": 0.99996,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p002-0043.png",
+   "reference": "unit",
+   "right": null,
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 2,
+   "box_px": [
+    896.8956298828125,
+    1538.286376953125,
+    970.9027099609375,
+    1577.185546875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9645654559135437
+   ],
+   "turned": true,
+   "on": {
+    "text": "UNIT",
+    "conf": 0.84942,
+    "f1": 1.0
+   },
+   "off": {
+    "text": "UNIT",
+    "conf": 0.99994,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p002-0044.png",
+   "reference": "unit",
+   "right": null,
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 2,
+   "box_px": [
+    896.8956298828125,
+    1649.679443359375,
+    970.9027099609375,
+    1688.57861328125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9324035048484802
+   ],
+   "turned": true,
+   "on": {
+    "text": "UNIT",
+    "conf": 0.83182,
+    "f1": 1.0
+   },
+   "off": {
+    "text": "UNIT",
+    "conf": 0.99994,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p002-0045.png",
+   "reference": "unit",
+   "right": null,
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 2,
+   "box_px": [
+    896.8956298828125,
+    1759.304443359375,
+    970.9027099609375,
+    1799.9718017578125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.937865138053894
+   ],
+   "turned": true,
+   "on": {
+    "text": "UNIT",
+    "conf": 0.82,
+    "f1": 1.0
+   },
+   "off": {
+    "text": "UNIT",
+    "conf": 0.99994,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p002-0046.png",
+   "reference": "unit",
+   "right": null,
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 2,
+   "box_px": [
+    896.8956298828125,
+    1870.6976318359375,
+    970.9027099609375,
+    1911.364990234375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9550588726997375
+   ],
+   "turned": true,
+   "on": {
+    "text": "UNIT",
+    "conf": 0.81455,
+    "f1": 1.0
+   },
+   "off": {
+    "text": "UNIT",
+    "conf": 0.99993,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p002-0047.png",
+   "reference": "unit",
+   "right": null,
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 2,
+   "box_px": [
+    896.8956298828125,
+    1982.0908203125,
+    970.9027099609375,
+    2020.989990234375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9527363181114197
+   ],
+   "turned": true,
+   "on": {
+    "text": "UNIT",
+    "conf": 0.82596,
+    "f1": 1.0
+   },
+   "off": {
+    "text": "UNIT",
+    "conf": 0.99992,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p002-0048.png",
+   "reference": "unit",
+   "right": null,
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 2,
+   "box_px": [
+    896.8956298828125,
+    2093.48388671875,
+    969.140625,
+    2132.383056640625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9709874391555786
+   ],
+   "turned": true,
+   "on": {
+    "text": "UNIT",
+    "conf": 0.80676,
+    "f1": 1.0
+   },
+   "off": {
+    "text": "UNIT",
+    "conf": 0.99995,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p002-0049.png",
+   "reference": "unit",
+   "right": null,
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 2,
+   "box_px": [
+    896.8956298828125,
+    2386.99609375,
+    970.9027099609375,
+    2425.895263671875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9155877828598022
+   ],
+   "turned": true,
+   "on": {
+    "text": "UNIT",
+    "conf": 0.75346,
+    "f1": 1.0
+   },
+   "off": {
+    "text": "UNIT",
+    "conf": 0.99995,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p002-0050.png",
+   "reference": "unit",
+   "right": null,
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 2,
+   "box_px": [
+    896.8956298828125,
+    2498.38916015625,
+    970.9027099609375,
+    2537.288330078125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9642234444618225
+   ],
+   "turned": true,
+   "on": {
+    "text": "UNIT",
+    "conf": 0.82702,
+    "f1": 1.0
+   },
+   "off": {
+    "text": "UNIT",
+    "conf": 0.99993,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p002-0051.png",
+   "reference": "unit",
+   "right": null,
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 2,
+   "box_px": [
+    896.8956298828125,
+    2668.131103515625,
+    970.9027099609375,
+    2707.0302734375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9520624279975891
+   ],
+   "turned": true,
+   "on": {
+    "text": "UNIT",
+    "conf": 0.79624,
+    "f1": 1.0
+   },
+   "off": {
+    "text": "UNIT",
+    "conf": 0.99996,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p002-0052.png",
+   "reference": "unit",
+   "right": null,
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 2,
+   "box_px": [
+    1101.296142578125,
+    2754.770263671875,
+    1162.96875,
+    2795.4375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.949769139289856
+   ],
+   "turned": true,
+   "on": {
+    "text": "300",
+    "conf": 0.99109,
+    "f1": 1.0
+   },
+   "off": {
+    "text": "300",
+    "conf": 0.99999,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p002-0053.png",
+   "reference": "300",
+   "right": null,
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 2,
+   "box_px": [
+    1099.5340576171875,
+    2841.409423828125,
+    1162.96875,
+    2882.07666015625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9014789462089539
+   ],
+   "turned": true,
+   "on": {
+    "text": "006",
+    "conf": 0.99995,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "900",
+    "conf": 0.99998,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p002-0054.png",
+   "reference": "900",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 2,
+   "box_px": [
+    896.8956298828125,
+    2928.04833984375,
+    969.140625,
+    2966.94775390625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9482043981552124
+   ],
+   "turned": true,
+   "on": {
+    "text": "UNIT",
+    "conf": 0.77334,
+    "f1": 1.0
+   },
+   "off": {
+    "text": "UNIT",
+    "conf": 0.99993,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p002-0055.png",
+   "reference": "unit",
+   "right": null,
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 2,
+   "box_px": [
+    896.8956298828125,
+    3014.6875,
+    970.9027099609375,
+    3055.35498046875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9549041986465454
+   ],
+   "turned": true,
+   "on": {
+    "text": "UNIT",
+    "conf": 0.81352,
+    "f1": 1.0
+   },
+   "off": {
+    "text": "UNIT",
+    "conf": 0.99993,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p002-0056.png",
+   "reference": "unit",
+   "right": null,
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 2,
+   "box_px": [
+    896.8956298828125,
+    3101.32666015625,
+    970.9027099609375,
+    3141.994140625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9169203639030457
+   ],
+   "turned": true,
+   "on": {
+    "text": "UNIT",
+    "conf": 0.82332,
+    "f1": 1.0
+   },
+   "off": {
+    "text": "UNIT",
+    "conf": 0.99993,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p002-0057.png",
+   "reference": "unit",
+   "right": null,
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 3,
+   "box_px": [
+    896.8956298828125,
+    392.5282287597656,
+    970.9027099609375,
+    431.42742919921875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9599253535270691
+   ],
+   "turned": true,
+   "on": {
+    "text": "UNIT",
+    "conf": 0.8267,
+    "f1": 1.0
+   },
+   "off": {
+    "text": "UNIT",
+    "conf": 0.99994,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p003-0058.png",
+   "reference": "unit",
+   "right": null,
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 3,
+   "box_px": [
+    895.133544921875,
+    551.6613159179688,
+    970.9027099609375,
+    592.32861328125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9539503455162048
+   ],
+   "turned": true,
+   "on": {
+    "text": "UNIT",
+    "conf": 0.81048,
+    "f1": 1.0
+   },
+   "off": {
+    "text": "UNIT",
+    "conf": 0.99992,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p003-0059.png",
+   "reference": "unit",
+   "right": null,
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 3,
+   "box_px": [
+    895.133544921875,
+    638.3004150390625,
+    970.9027099609375,
+    678.9677734375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9246910810470581
+   ],
+   "turned": true,
+   "on": {
+    "text": "UNIT",
+    "conf": 0.81305,
+    "f1": 1.0
+   },
+   "off": {
+    "text": "UNIT",
+    "conf": 0.99992,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p003-0060.png",
+   "reference": "unit",
+   "right": null,
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 3,
+   "box_px": [
+    895.133544921875,
+    724.9395141601562,
+    970.9027099609375,
+    765.6068725585938
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9385830163955688
+   ],
+   "turned": true,
+   "on": {
+    "text": "UNIT",
+    "conf": 0.80688,
+    "f1": 1.0
+   },
+   "off": {
+    "text": "UNIT",
+    "conf": 0.99992,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p003-0061.png",
+   "reference": "unit",
+   "right": null,
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 3,
+   "box_px": [
+    895.133544921875,
+    811.5786743164062,
+    970.9027099609375,
+    852.2459716796875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9602302312850952
+   ],
+   "turned": true,
+   "on": {
+    "text": "UNIT",
+    "conf": 0.77122,
+    "f1": 1.0
+   },
+   "off": {
+    "text": "UNIT",
+    "conf": 0.99994,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p003-0062.png",
+   "reference": "unit",
+   "right": null,
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 3,
+   "box_px": [
+    893.3714599609375,
+    894.6814575195312,
+    972.664794921875,
+    940.6532592773438
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9863735437393188
+   ],
+   "turned": true,
+   "on": {
+    "text": "UNIT",
+    "conf": 0.74056,
+    "f1": 1.0
+   },
+   "off": {
+    "text": "UNIT",
+    "conf": 0.99993,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p003-0063.png",
+   "reference": "unit",
+   "right": null,
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 3,
+   "box_px": [
+    896.8956298828125,
+    984.8568725585938,
+    970.9027099609375,
+    1025.524169921875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.957414448261261
+   ],
+   "turned": true,
+   "on": {
+    "text": "UNIT",
+    "conf": 0.82426,
+    "f1": 1.0
+   },
+   "off": {
+    "text": "UNIT",
+    "conf": 0.99994,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p003-0064.png",
+   "reference": "unit",
+   "right": null,
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 3,
+   "box_px": [
+    896.8956298828125,
+    1071.4959716796875,
+    970.9027099609375,
+    1112.163330078125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9503167271614075
+   ],
+   "turned": true,
+   "on": {
+    "text": "UNIT",
+    "conf": 0.83105,
+    "f1": 1.0
+   },
+   "off": {
+    "text": "UNIT",
+    "conf": 0.99995,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p003-0065.png",
+   "reference": "unit",
+   "right": null,
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 4,
+   "box_px": [
+    283.69390869140625,
+    178.58267211914062,
+    701.305419921875,
+    284.67138671875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9923402070999146
+   ],
+   "turned": true,
+   "on": {
+    "text": "DNIX3H",
+    "conf": 0.9569,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "HEXING",
+    "conf": 0.99995,
+    "f1": 0.0
+   },
+   "crop": "sim-d7124c-p004-0066.png",
+   "reference": "",
+   "right": null,
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 5,
+   "box_px": [
+    290.7421875,
+    190.95968627929688,
+    694.257080078125,
+    281.1351013183594
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9007821679115295
+   ],
+   "turned": true,
+   "on": {
+    "text": "DNIX3H",
+    "conf": 0.94958,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "HEXING",
+    "conf": 0.99982,
+    "f1": 0.0
+   },
+   "crop": "sim-d7124c-p005-0067.png",
+   "reference": "",
+   "right": null,
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 5,
+   "box_px": [
+    288.9801025390625,
+    1149.29443359375,
+    2218.450927734375,
+    1195.26611328125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9682735800743103
+   ],
+   "turned": true,
+   "on": {
+    "text": "Vei t    t    t      iil il",
+    "conf": 0.63674,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "10. Verification that the sealing complies with the specifications in the technical datasheets, for which attempts will",
+    "conf": 0.99196,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p005-0068.png",
+   "reference": "10. verification that the sealing complies with the specifications in the technical datasheets, for which attempts will",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 5,
+   "box_px": [
+    288.9801025390625,
+    1711.5645751953125,
+    2218.450927734375,
+    1757.536376953125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9974868297576904
+   ],
+   "turned": true,
+   "on": {
+    "text": "te s ss s  s    t s s    t s  s s be",
+    "conf": 0.64946,
+    "f1": 0.058823529411764705
+   },
+   "off": {
+    "text": "to witness the acceptance tests of the batch corresponding to the first delivery. It is specified that these tests may be",
+    "conf": 0.99476,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p005-0069.png",
+   "reference": "to witness the acceptance tests of the batch corresponding to the first delivery. it is specified that these tests may be",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 5,
+   "box_px": [
+    290.7421875,
+    1754.0,
+    2216.68896484375,
+    1799.9718017578125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9824668169021606
+   ],
+   "turned": true,
+   "on": {
+    "text": "car r r  s s r or-t  t o       bery",
+    "conf": 0.61234,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "carried out either at the manufacturer's laboratory or at a third-party laboratory accredited in its country of origin by",
+    "conf": 0.99258,
+    "f1": 0.9473684210526315
+   },
+   "crop": "sim-d7124c-p005-0070.png",
+   "reference": "carried out either at the manufacturer’s laboratory or at a third-party laboratory accredited in its country of origin by",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 6,
+   "box_px": [
+    281.93182373046875,
+    187.4233856201172,
+    694.257080078125,
+    282.9032287597656
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9871399998664856
+   ],
+   "turned": true,
+   "on": {
+    "text": "DNIX3H",
+    "conf": 0.75447,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "HEXING",
+    "conf": 0.99995,
+    "f1": 0.0
+   },
+   "crop": "sim-d7124c-p006-0071.png",
+   "reference": "",
+   "right": null,
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 6,
+   "box_px": [
+    290.7421875,
+    461.48590087890625,
+    1954.139892578125,
+    502.1532287597656
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9993488192558289
+   ],
+   "turned": true,
+   "on": {
+    "text": "ACO   SE   TI  R  T OIES",
+    "conf": 0.70392,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "ACCEPTANCE TEST PROCESS FOR THE EQUIPMENT TO BE SUPPLIED TO THE COMPANIES",
+    "conf": 0.99301,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p006-0072.png",
+   "reference": "acceptance test process for the equipment to be supplied to the companies",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 6,
+   "box_px": [
+    290.7421875,
+    590.5604858398438,
+    1992.905517578125,
+    631.2278442382812
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9926970601081848
+   ],
+   "turned": true,
+   "on": {
+    "text": "T   SE  TI  R S T ES",
+    "conf": 0.63039,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "7. ACCEPTANCE TEST PROCESS FOR THE EQUIPMENT TO BE SUPPLIED TO THE COMPANIES",
+    "conf": 0.99663,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p006-0073.png",
+   "reference": "7. acceptance test process for the equipment to be supplied to the companies",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "sim",
+   "doc": "签字-ORDER PERU 25-19 FONAFE.pdf",
+   "page": 6,
+   "box_px": [
+    290.7421875,
+    1080.336669921875,
+    2139.15771484375,
+    1121.0040283203125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9823196530342102
+   ],
+   "turned": true,
+   "on": {
+    "text": "ei  e oed o e    e   a e   s   e a",
+    "conf": 0.60839,
+    "f1": 0.0
+   },
+   "off": {
+    "text": "a) In the bases it has been established that deliveries will be made in batches, each inspection period (acceptance tests), will",
+    "conf": 0.99716,
+    "f1": 1.0
+   },
+   "crop": "sim-d7124c-p006-0074.png",
+   "reference": "a) in the bases it has been established that deliveries will be made in batches, each inspection period (acceptance tests), will",
+   "right": "off",
+   "method": "reference_f1"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 1,
+   "box_px": [
+    98.67613983154297,
+    2032.177978515625,
+    169.15908813476562,
+    2493.79541015625
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9999171495437622
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRICAL COMPANY S.A.C.",
+    "conf": 0.9779
+   },
+   "off": {
+    "text": "HEXINS EA.C",
+    "conf": 0.58666
+   },
+   "crop": "user-329b53-p001-0000.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 1,
+   "box_px": [
+    380.60797119140625,
+    2253.259033203125,
+    2155.016357421875,
+    2306.318603515625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9996659755706787
+   ],
+   "turned": true,
+   "on": {
+    "text": "ME C,   OS     IV",
+    "conf": 0.58065
+   },
+   "off": {
+    "text": "\"MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS\", CORRESPONDIENTE A LA “COMPRA CORPORATIVA",
+    "conf": 0.98066
+   },
+   "crop": "user-329b53-p001-0001.png",
+   "vocab": [
+    null,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 1,
+   "box_px": [
+    142.7279815673828,
+    3033.2333984375,
+    185.01776123046875,
+    3141.12109375
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9998655319213867
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING",
+    "conf": 0.99993
+   },
+   "off": {
+    "text": "HEXIING",
+    "conf": 0.68307
+   },
+   "crop": "user-329b53-p001-0002.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 2,
+   "box_px": [
+    514.5255737304688,
+    744.601318359375,
+    2151.4921875,
+    811.8099975585938
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9734188318252563
+   ],
+   "turned": true,
+   "on": {
+    "text": "E    ,         D",
+    "conf": 0.64533
+   },
+   "off": {
+    "text": "En relación a la adquisición del ÍTEM 01: “MEDIDOR ELECTRÓNICO MONOFÁSICO DE 2",
+    "conf": 0.95532
+   },
+   "crop": "user-329b53-p002-0003.png",
+   "vocab": [
+    null,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 2,
+   "box_px": [
+    518.0497436523438,
+    1496.2772216796875,
+    2151.4921875,
+    1561.71728515625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9886530041694641
+   ],
+   "turned": true,
+   "on": {
+    "text": "nr              S",
+    "conf": 0.63695
+   },
+   "off": {
+    "text": "En relación a la adquisición del ÍTEM 03: \"MEDIDOR ELECTRÓNICO TRIFÁSICO DE 3 HILOS”,",
+    "conf": 0.97035
+   },
+   "crop": "user-329b53-p002-0004.png",
+   "vocab": [
+    null,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 2,
+   "box_px": [
+    125.10724639892578,
+    2009.185546875,
+    179.73153686523438,
+    2467.265625
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9999998807907104
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRICAL COMPANY S.A.C.",
+    "conf": 0.97679
+   },
+   "off": {
+    "text": "HEXIS  E AC.",
+    "conf": 0.58859
+   },
+   "crop": "user-329b53-p002-0005.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 2,
+   "box_px": [
+    523.3359375,
+    2037.48388671875,
+    2155.016357421875,
+    2095.849365234375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9904882907867432
+   ],
+   "turned": true,
+   "on": {
+    "text": "0         --5S..",
+    "conf": 0.64765
+   },
+   "off": {
+    "text": "002-2024-FONAFE-1; el monto total que le corresponde contratar a ELECTRONOROESTE S.A.",
+    "conf": 0.99797
+   },
+   "crop": "user-329b53-p002-0006.png",
+   "vocab": [
+    null,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 2,
+   "box_px": [
+    125.10724639892578,
+    2794.4658203125,
+    174.4453125,
+    2900.584716796875
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9523209929466248
+   ],
+   "turned": true,
+   "on": {
+    "text": "ALCOM",
+    "conf": 0.98879
+   },
+   "off": {
+    "text": "OM",
+    "conf": 0.64013
+   },
+   "crop": "user-329b53-p002-0007.png",
+   "vocab": [
+    0.0,
+    null
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 2,
+   "box_px": [
+    125.10724639892578,
+    2902.353271484375,
+    167.3970184326172,
+    3118.128662109375
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    1.0
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRIO",
+    "conf": 0.95445
+   },
+   "off": {
+    "text": "HEXIG ETIO",
+    "conf": 0.6396
+   },
+   "crop": "user-329b53-p002-0008.png",
+   "vocab": [
+    0.5,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    373.5596618652344,
+    1078.8759765625,
+    2156.7783203125,
+    1133.7041015625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9567750096321106
+   ],
+   "turned": true,
+   "on": {
+    "text": "ars  s                 se",
+    "conf": 0.76652
+   },
+   "off": {
+    "text": "artículo 39 de la Ley de Contrataciones del Estado y en el artículo 171 de su Reglamento, los que se",
+    "conf": 0.99402
+   },
+   "crop": "user-329b53-p003-0009.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    940.9474487304688,
+    1804.022216796875,
+    976.1889038085938,
+    2081.7001953125
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    1.0
+   ],
+   "turned": true,
+   "on": {
+    "text": "UNIDAD DE MEDIDA",
+    "conf": 0.99138
+   },
+   "off": {
+    "text": "UNDDDD D DDDIDA",
+    "conf": 0.6744
+   },
+   "crop": "user-329b53-p003-0010.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    1066.0546875,
+    1827.0146484375,
+    1106.5823974609375,
+    2064.013671875
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    1.0
+   ],
+   "turned": true,
+   "on": {
+    "text": "REQUERIMIENTO",
+    "conf": 0.99986
+   },
+   "off": {
+    "text": "REOIIIIINTO",
+    "conf": 0.70564
+   },
+   "crop": "user-329b53-p003-0011.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    556.8153686523438,
+    1872.99951171875,
+    593.8189086914062,
+    2010.9542236328125
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    1.0
+   ],
+   "turned": true,
+   "on": {
+    "text": "EMPRESA",
+    "conf": 0.9999
+   },
+   "off": {
+    "text": "EMPRESA",
+    "conf": 0.8405
+   },
+   "crop": "user-329b53-p003-0012.png",
+   "vocab": [
+    1.0,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    662.539794921875,
+    1903.0665283203125,
+    706.5916137695312,
+    1987.961669921875
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9273324012756348
+   ],
+   "turned": true,
+   "on": {
+    "text": "ITEM",
+    "conf": 0.99963
+   },
+   "off": {
+    "text": "ITEM",
+    "conf": 0.82385
+   },
+   "crop": "user-329b53-p003-0013.png",
+   "vocab": [
+    1.0,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    1103.0582275390625,
+    1892.4547119140625,
+    1147.110107421875,
+    1993.2677001953125
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9970865845680237
+   ],
+   "turned": true,
+   "on": {
+    "text": "TOTAL",
+    "conf": 0.99998
+   },
+   "off": {
+    "text": "TOTAL",
+    "conf": 0.84642
+   },
+   "crop": "user-329b53-p003-0014.png",
+   "vocab": [
+    1.0,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    1229.9276123046875,
+    1903.0665283203125,
+    1270.455322265625,
+    2087.006103515625
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.999998927116394
+   ],
+   "turned": true,
+   "on": {
+    "text": "(A 170 días de la",
+    "conf": 0.99741
+   },
+   "off": {
+    "text": "( d de tla",
+    "conf": 0.56787
+   },
+   "crop": "user-329b53-p003-0015.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    1370.8934326171875,
+    1903.0665283203125,
+    1411.421142578125,
+    2087.006103515625
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.999998927116394
+   ],
+   "turned": true,
+   "on": {
+    "text": "(A 210 días de la",
+    "conf": 0.99686
+   },
+   "off": {
+    "text": "(2  detla",
+    "conf": 0.65692
+   },
+   "crop": "user-329b53-p003-0016.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    1513.6214599609375,
+    1901.2978515625,
+    1559.4354248046875,
+    2087.006103515625
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.999760091304779
+   ],
+   "turned": true,
+   "on": {
+    "text": "(A 330 días de la",
+    "conf": 0.99823
+   },
+   "off": {
+    "text": "( d d tta",
+    "conf": 0.52243
+   },
+   "crop": "user-329b53-p003-0017.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    1668.6839599609375,
+    1899.529296875,
+    1714.4979248046875,
+    2087.006103515625
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9999966621398926
+   ],
+   "turned": true,
+   "on": {
+    "text": "(A 450 días de la",
+    "conf": 0.99782
+   },
+   "off": {
+    "text": "(4  d la",
+    "conf": 0.6801
+   },
+   "crop": "user-329b53-p003-0018.png",
+   "vocab": [
+    1.0,
+    null
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    1825.508544921875,
+    1901.2978515625,
+    1878.3707275390625,
+    2087.006103515625
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9626664519309998
+   ],
+   "turned": true,
+   "on": {
+    "text": "(A 570 días de la",
+    "conf": 0.9734
+   },
+   "off": {
+    "text": "(AS  el la",
+    "conf": 0.56768
+   },
+   "crop": "user-329b53-p003-0019.png",
+   "vocab": [
+    1.0,
+    null
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    1996.4296875,
+    1903.0665283203125,
+    2036.9573974609375,
+    2088.774658203125
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9999839067459106
+   ],
+   "turned": true,
+   "on": {
+    "text": "(A 690 días de la",
+    "conf": 0.98268
+   },
+   "off": {
+    "text": "(  d t",
+    "conf": 0.66906
+   },
+   "crop": "user-329b53-p003-0020.png",
+   "vocab": [
+    1.0,
+    null
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    1265.1690673828125,
+    1940.208251953125,
+    1300.4105224609375,
+    2051.633056640625
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9976879358291626
+   ],
+   "turned": true,
+   "on": {
+    "text": "firma del",
+    "conf": 0.94848
+   },
+   "off": {
+    "text": "Fira fddel",
+    "conf": 0.60765
+   },
+   "crop": "user-329b53-p003-0021.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    1296.8863525390625,
+    1941.976806640625,
+    1332.1278076171875,
+    2051.633056640625
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9988986253738403
+   ],
+   "turned": true,
+   "on": {
+    "text": "contrato)",
+    "conf": 0.99984
+   },
+   "off": {
+    "text": "contrato)",
+    "conf": 0.71556
+   },
+   "crop": "user-329b53-p003-0022.png",
+   "vocab": [
+    1.0,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    1404.3729248046875,
+    1940.208251953125,
+    1441.37646484375,
+    2049.864501953125
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9993221759796143
+   ],
+   "turned": true,
+   "on": {
+    "text": "firma del",
+    "conf": 0.99824
+   },
+   "off": {
+    "text": "Fra ddel",
+    "conf": 0.59114
+   },
+   "crop": "user-329b53-p003-0023.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    1436.0902099609375,
+    1941.976806640625,
+    1473.09375,
+    2049.864501953125
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9993698000907898
+   ],
+   "turned": true,
+   "on": {
+    "text": "contrato)",
+    "conf": 0.99982
+   },
+   "off": {
+    "text": "Contato)",
+    "conf": 0.6911
+   },
+   "crop": "user-329b53-p003-0024.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    1548.8629150390625,
+    1940.208251953125,
+    1591.1527099609375,
+    2051.633056640625
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9991649389266968
+   ],
+   "turned": true,
+   "on": {
+    "text": "firma del",
+    "conf": 0.99735
+   },
+   "off": {
+    "text": "Fr  mdel",
+    "conf": 0.69402
+   },
+   "crop": "user-329b53-p003-0025.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    1584.1043701171875,
+    1940.208251953125,
+    1621.10791015625,
+    2048.095703125
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9999693632125854
+   ],
+   "turned": true,
+   "on": {
+    "text": "contrato)",
+    "conf": 0.99984
+   },
+   "off": {
+    "text": "contrato)",
+    "conf": 0.73417
+   },
+   "crop": "user-329b53-p003-0026.png",
+   "vocab": [
+    1.0,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    1705.6875,
+    1941.976806640625,
+    1742.6910400390625,
+    2049.864501953125
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.998832643032074
+   ],
+   "turned": true,
+   "on": {
+    "text": "firma del",
+    "conf": 0.99908
+   },
+   "off": {
+    "text": "fFir amdel",
+    "conf": 0.65271
+   },
+   "crop": "user-329b53-p003-0027.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    1737.40478515625,
+    1943.7454833984375,
+    1774.408447265625,
+    2049.864501953125
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9999396800994873
+   ],
+   "turned": true,
+   "on": {
+    "text": "contrato)",
+    "conf": 0.99988
+   },
+   "off": {
+    "text": "Contrato)",
+    "conf": 0.71639
+   },
+   "crop": "user-329b53-p003-0028.png",
+   "vocab": [
+    1.0,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    1867.79833984375,
+    1938.4395751953125,
+    1904.8018798828125,
+    2049.864501953125
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.99972003698349
+   ],
+   "turned": true,
+   "on": {
+    "text": "firma del",
+    "conf": 0.99907
+   },
+   "off": {
+    "text": "Fradel",
+    "conf": 0.7095
+   },
+   "crop": "user-329b53-p003-0029.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    1897.7535400390625,
+    1940.208251953125,
+    1934.757080078125,
+    2048.095703125
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9966688752174377
+   ],
+   "turned": true,
+   "on": {
+    "text": "contrato)",
+    "conf": 0.99984
+   },
+   "off": {
+    "text": "contratol)",
+    "conf": 0.68134
+   },
+   "crop": "user-329b53-p003-0030.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    2029.9090576171875,
+    1941.976806640625,
+    2066.91259765625,
+    2049.864501953125
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9998071789741516
+   ],
+   "turned": true,
+   "on": {
+    "text": "firma del",
+    "conf": 0.9992
+   },
+   "off": {
+    "text": "Fr adel",
+    "conf": 0.71265
+   },
+   "crop": "user-329b53-p003-0031.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    2059.8642578125,
+    1941.976806640625,
+    2096.867919921875,
+    2048.095703125
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.997377872467041
+   ],
+   "turned": true,
+   "on": {
+    "text": "contrato)",
+    "conf": 0.99991
+   },
+   "off": {
+    "text": "contato)",
+    "conf": 0.80764
+   },
+   "crop": "user-329b53-p003-0032.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    96.9140625,
+    2018.02880859375,
+    158.58665466308594,
+    2483.18359375
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9987713694572449
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRICAL COMPANY S.A.C.",
+    "conf": 0.98872
+   },
+   "off": {
+    "text": "HEXIS  AE AC.",
+    "conf": 0.54817
+   },
+   "crop": "user-329b53-p003-0033.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    555.0532836914062,
+    2221.42333984375,
+    599.1051025390625,
+    2327.54248046875
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9992823004722595
+   ],
+   "turned": true,
+   "on": {
+    "text": "ENOSA",
+    "conf": 0.99936
+   },
+   "off": {
+    "text": "ENOSA",
+    "conf": 0.76891
+   },
+   "crop": "user-329b53-p003-0034.png",
+   "vocab": [
+    1.0,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    937.4232788085938,
+    2214.348876953125,
+    979.7130737304688,
+    2334.616943359375
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9984682202339172
+   ],
+   "turned": true,
+   "on": {
+    "text": "UNIDAD",
+    "conf": 0.99977
+   },
+   "off": {
+    "text": "UNIDAD",
+    "conf": 0.78189
+   },
+   "crop": "user-329b53-p003-0035.png",
+   "vocab": [
+    1.0,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    555.0532836914062,
+    2460.191162109375,
+    599.1051025390625,
+    2566.31005859375
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9999799728393555
+   ],
+   "turned": true,
+   "on": {
+    "text": "ENOSA",
+    "conf": 0.99917
+   },
+   "off": {
+    "text": "ENOSA",
+    "conf": 0.7366
+   },
+   "crop": "user-329b53-p003-0036.png",
+   "vocab": [
+    1.0,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    937.4232788085938,
+    2453.116455078125,
+    979.7130737304688,
+    2575.1533203125
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9976221919059753
+   ],
+   "turned": true,
+   "on": {
+    "text": "UNIDAD",
+    "conf": 0.9998
+   },
+   "off": {
+    "text": "UNIDAD",
+    "conf": 0.75122
+   },
+   "crop": "user-329b53-p003-0037.png",
+   "vocab": [
+    1.0,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    794.6953125,
+    2497.332763671875,
+    826.4126586914062,
+    2529.16845703125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.922270655632019
+   ],
+   "turned": true,
+   "on": {
+    "text": "0",
+    "conf": 0.75187
+   },
+   "off": {
+    "text": "0",
+    "conf": 0.87422
+   },
+   "crop": "user-329b53-p003-0038.png",
+   "vocab": [
+    null,
+    null
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    555.0532836914062,
+    2698.958740234375,
+    599.1051025390625,
+    2805.07763671875
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9976303577423096
+   ],
+   "turned": true,
+   "on": {
+    "text": "ENOSA",
+    "conf": 0.99929
+   },
+   "off": {
+    "text": "ENOSA",
+    "conf": 0.79279
+   },
+   "crop": "user-329b53-p003-0039.png",
+   "vocab": [
+    1.0,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    933.899169921875,
+    2688.346923828125,
+    981.4751586914062,
+    2813.9208984375
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9952115416526794
+   ],
+   "turned": true,
+   "on": {
+    "text": "UNIDAD",
+    "conf": 0.99984
+   },
+   "off": {
+    "text": "UNIDAD",
+    "conf": 0.74714
+   },
+   "crop": "user-329b53-p003-0040.png",
+   "vocab": [
+    1.0,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    556.8153686523438,
+    2937.726318359375,
+    599.1051025390625,
+    3042.07666015625
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9991545677185059
+   ],
+   "turned": true,
+   "on": {
+    "text": "ENOSA",
+    "conf": 0.99911
+   },
+   "off": {
+    "text": "ENOSA",
+    "conf": 0.84531
+   },
+   "crop": "user-329b53-p003-0041.png",
+   "vocab": [
+    1.0,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    933.899169921875,
+    2927.114501953125,
+    981.4751586914062,
+    3049.1513671875
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9996316432952881
+   ],
+   "turned": true,
+   "on": {
+    "text": "UNIDAD",
+    "conf": 0.99984
+   },
+   "off": {
+    "text": "UNIDAD",
+    "conf": 0.6488
+   },
+   "crop": "user-329b53-p003-0042.png",
+   "vocab": [
+    1.0,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    1251.072509765625,
+    2967.79345703125,
+    1314.507080078125,
+    3010.240966796875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9802538752555847
+   ],
+   "turned": true,
+   "on": {
+    "text": "808",
+    "conf": 0.99999
+   },
+   "off": {
+    "text": "808",
+    "conf": 0.99999
+   },
+   "crop": "user-329b53-p003-0043.png",
+   "vocab": [
+    null,
+    null
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    1386.752197265625,
+    2966.024658203125,
+    1457.235107421875,
+    3012.009521484375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9229937195777893
+   ],
+   "turned": true,
+   "on": {
+    "text": "808",
+    "conf": 0.99999
+   },
+   "off": {
+    "text": "808",
+    "conf": 0.99999
+   },
+   "crop": "user-329b53-p003-0044.png",
+   "vocab": [
+    null,
+    null
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    1538.29052734375,
+    2967.79345703125,
+    1603.4871826171875,
+    3010.240966796875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9276944994926453
+   ],
+   "turned": true,
+   "on": {
+    "text": "808",
+    "conf": 0.99999
+   },
+   "off": {
+    "text": "808",
+    "conf": 0.99998
+   },
+   "crop": "user-329b53-p003-0045.png",
+   "vocab": [
+    null,
+    null
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    1689.828857421875,
+    2966.024658203125,
+    1760.311767578125,
+    3012.009521484375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9638556241989136
+   ],
+   "turned": true,
+   "on": {
+    "text": "808",
+    "conf": 0.99999
+   },
+   "off": {
+    "text": "808",
+    "conf": 0.99999
+   },
+   "crop": "user-329b53-p003-0046.png",
+   "vocab": [
+    null,
+    null
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 3,
+   "box_px": [
+    158.58665466308594,
+    3003.166259765625,
+    204.40057373046875,
+    3148.195556640625
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9934743046760559
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELE",
+    "conf": 0.98713
+   },
+   "off": {
+    "text": "HEHINE",
+    "conf": 0.75243
+   },
+   "crop": "user-329b53-p003-0047.png",
+   "vocab": [
+    0.5,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 4,
+   "box_px": [
+    370.0355224609375,
+    810.0413208007812,
+    2149.730224609375,
+    864.8694458007812
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9172788858413696
+   ],
+   "turned": true,
+   "on": {
+    "text": "ELlsa ao     d   o es",
+    "conf": 0.61525
+   },
+   "off": {
+    "text": "EL CONTRATISTA entregó al perfeccionamiento del contrato las respectivas garantías incondicionales,",
+    "conf": 0.99447
+   },
+   "crop": "user-329b53-p004-0048.png",
+   "vocab": [
+    0.0,
+    0.7777777777777778
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 4,
+   "box_px": [
+    525.0980224609375,
+    1941.976806640625,
+    2158.54052734375,
+    2002.1109619140625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9885922074317932
+   ],
+   "turned": true,
+   "on": {
+    "text": "tra      C      ",
+    "conf": 0.76481
+   },
+   "off": {
+    "text": "través de la CARTA FIANZA Nº3012025041872emitida por AVLA PERÚCOMPAÑÍA DE",
+    "conf": 0.98068
+   },
+   "crop": "user-329b53-p004-0049.png",
+   "vocab": [
+    0.0,
+    0.8571428571428571
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 4,
+   "box_px": [
+    100.4382095336914,
+    2101.1552734375,
+    165.63494873046875,
+    2561.004150390625
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9999606609344482
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRICACCOMPANY S.A.C.",
+    "conf": 0.97641
+   },
+   "off": {
+    "text": "HESAC.",
+    "conf": 0.67707
+   },
+   "crop": "user-329b53-p004-0050.png",
+   "vocab": [
+    0.5,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 4,
+   "box_px": [
+    526.860107421875,
+    2311.62451171875,
+    2160.302490234375,
+    2368.22119140625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9665707945823669
+   ],
+   "turned": true,
+   "on": {
+    "text": "ELE O A  OT I  O  CIVA",
+    "conf": 0.62046
+   },
+   "off": {
+    "text": "ELECTRÓNICO TRIFÁSICO DE 3 HILOS\", CORRESPONDIENTE A LA \"COMPRA CORPORATIVA",
+    "conf": 0.97839
+   },
+   "crop": "user-329b53-p004-0051.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 4,
+   "box_px": [
+    214.97300720214844,
+    2446.0419921875,
+    244.9282684326172,
+    2520.3251953125
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9965730905532837
+   ],
+   "turned": true,
+   "on": {
+    "text": "MARI",
+    "conf": 0.93392
+   },
+   "off": {
+    "text": "MAARI",
+    "conf": 0.76062
+   },
+   "crop": "user-329b53-p004-0052.png",
+   "vocab": [
+    0.0,
+    0.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 4,
+   "box_px": [
+    132.15554809570312,
+    2672.428955078125,
+    193.828125,
+    3017.315673828125
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9906142950057983
+   ],
+   "turned": true,
+   "on": {
+    "text": "LEGTEICAL COMPANY S.A.C.",
+    "conf": 0.88996
+   },
+   "off": {
+    "text": "LEO SAC",
+    "conf": 0.59228
+   },
+   "crop": "user-329b53-p004-0053.png",
+   "vocab": [
+    0.5,
+    0.5
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 4,
+   "box_px": [
+    140.96591186523438,
+    3020.852783203125,
+    183.25567626953125,
+    3132.27783203125
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.99977046251297
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING",
+    "conf": 0.9999
+   },
+   "off": {
+    "text": "HEING",
+    "conf": 0.80468
+   },
+   "crop": "user-329b53-p004-0054.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 5,
+   "box_px": [
+    368.2734375,
+    1186.763671875,
+    2149.730224609375,
+    1241.591796875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9253745079040527
+   ],
+   "turned": true,
+   "on": {
+    "text": "La  i   s   o s s  d    de",
+    "conf": 0.64123
+   },
+   "off": {
+    "text": "La conformidad de la prestación del servicio se regula por lo dispuesto en el artículo 168 del",
+    "conf": 0.9962
+   },
+   "crop": "user-329b53-p005-0055.png",
+   "vocab": [
+    null,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 5,
+   "box_px": [
+    368.2734375,
+    1248.6663818359375,
+    2147.968017578125,
+    1303.4945068359375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.949251115322113
+   ],
+   "turned": true,
+   "on": {
+    "text": "Re     os  d o  d     daa",
+    "conf": 0.73044
+   },
+   "off": {
+    "text": "Reglamento de la Ley de Contrataciones del Estado. La conformidad será otorgada por el Área De",
+    "conf": 0.989
+   },
+   "crop": "user-329b53-p005-0056.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 5,
+   "box_px": [
+    371.7975769042969,
+    1858.850341796875,
+    2151.4921875,
+    1910.14111328125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9417223930358887
+   ],
+   "turned": true,
+   "on": {
+    "text": "Cco s   d c  d c od nde",
+    "conf": 0.65455
+   },
+   "off": {
+    "text": "CONTRATISTA periodos adicionales para las correcciones pertinentes. En este supuesto corresponde",
+    "conf": 0.99882
+   },
+   "crop": "user-329b53-p005-0057.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 5,
+   "box_px": [
+    123.34516906738281,
+    2113.535888671875,
+    179.73153686523438,
+    2573.384521484375
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9999939203262329
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRICAL OMPANY S.A.C.",
+    "conf": 0.98775
+   },
+   "off": {
+    "text": "HEXIS E AC.",
+    "conf": 0.58675
+   },
+   "crop": "user-329b53-p005-0058.png",
+   "vocab": [
+    0.6666666666666666,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 5,
+   "box_px": [
+    102.20028686523438,
+    2828.070068359375,
+    153.30043029785156,
+    2999.629150390625
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    1.0
+   ],
+   "turned": true,
+   "on": {
+    "text": "CALCOMPANY",
+    "conf": 0.97893
+   },
+   "off": {
+    "text": "CALPAN",
+    "conf": 0.79945
+   },
+   "crop": "user-329b53-p005-0059.png",
+   "vocab": [
+    0.0,
+    0.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 5,
+   "box_px": [
+    223.78338623046875,
+    2806.84619140625,
+    257.2627868652344,
+    2866.98046875
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9999980926513672
+   ],
+   "turned": true,
+   "on": {
+    "text": "GAL",
+    "conf": 0.99995
+   },
+   "off": {
+    "text": "GAL",
+    "conf": 0.75143
+   },
+   "crop": "user-329b53-p005-0060.png",
+   "vocab": [
+    0.0,
+    0.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 5,
+   "box_px": [
+    119.8210220336914,
+    3061.53173828125,
+    172.68324279785156,
+    3201.255126953125
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9998385906219482
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING EU",
+    "conf": 0.92035
+   },
+   "off": {
+    "text": "HEXNEW",
+    "conf": 0.7833
+   },
+   "crop": "user-329b53-p005-0061.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 6,
+   "box_px": [
+    366.5113525390625,
+    1453.8297119140625,
+    2151.4921875,
+    1512.195068359375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9090610146522522
+   ],
+   "turned": true,
+   "on": {
+    "text": "Ean  s   o oo     d     el",
+    "conf": 0.63296
+   },
+   "off": {
+    "text": "ENTiDAD no da lugar al pago de gastos generales ni costos directos de ningún tipo, conforme el",
+    "conf": 0.9799
+   },
+   "crop": "user-329b53-p006-0062.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 6,
+   "box_px": [
+    368.2734375,
+    1630.694580078125,
+    2149.730224609375,
+    1687.2913818359375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9515432119369507
+   ],
+   "turned": true,
+   "on": {
+    "text": "Est s   s  d    d so    s sd ra",
+    "conf": 0.67258
+   },
+   "off": {
+    "text": "Estas penalidades se deducen de los pagos a cuenta o del pago final, según corresponda; o si fuera",
+    "conf": 0.99775
+   },
+   "crop": "user-329b53-p006-0063.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 6,
+   "box_px": [
+    111.01065063476562,
+    1970.2752685546875,
+    176.20738220214844,
+    2431.892578125
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9999995231628418
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRICAL COMPANY S.A.C.",
+    "conf": 0.98015
+   },
+   "off": {
+    "text": "HEXIS CA.C.",
+    "conf": 0.62069
+   },
+   "crop": "user-329b53-p006-0064.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 6,
+   "box_px": [
+    107.48650360107422,
+    2923.5771484375,
+    144.49005126953125,
+    3031.46484375
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.999667763710022
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING",
+    "conf": 0.99989
+   },
+   "off": {
+    "text": "HEXING",
+    "conf": 0.80495
+   },
+   "crop": "user-329b53-p006-0065.png",
+   "vocab": [
+    1.0,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 7,
+   "box_px": [
+    368.2734375,
+    647.3256225585938,
+    2149.730224609375,
+    705.6910400390625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9787920713424683
+   ],
+   "turned": true,
+   "on": {
+    "text": "avudi  onn  un  u u unns  unes",
+    "conf": 0.62983
+   },
+   "off": {
+    "text": "auditorías y/o supervisiones específicas para la verificación del cumplimiento de obligaciones",
+    "conf": 0.99594
+   },
+   "crop": "user-329b53-p007-0066.png",
+   "vocab": [
+    0.0,
+    0.75
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 7,
+   "box_px": [
+    366.5113525390625,
+    916.1602783203125,
+    2149.730224609375,
+    974.5256958007812
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9832342863082886
+   ],
+   "turned": true,
+   "on": {
+    "text": "Si  s s     s   d    dn",
+    "conf": 0.72387
+   },
+   "off": {
+    "text": "Si como resultado de la auditoría y/o supervisión de la prestación de servicio, se detectase algún",
+    "conf": 0.99881
+   },
+   "crop": "user-329b53-p007-0067.png",
+   "vocab": [
+    null,
+    0.625
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 7,
+   "box_px": [
+    130.39346313476562,
+    2035.7152099609375,
+    200.8764190673828,
+    2499.101318359375
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9963734745979309
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRICAL COMPANY S.A.C.",
+    "conf": 0.97633
+   },
+   "off": {
+    "text": "HEXINS GEEA.C.",
+    "conf": 0.57186
+   },
+   "crop": "user-329b53-p007-0068.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 7,
+   "box_px": [
+    111.01065063476562,
+    2629.9814453125,
+    177.96946716308594,
+    2992.554443359375
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9989385008811951
+   ],
+   "turned": true,
+   "on": {
+    "text": "ELECTRICALCOMPANYS.AC.",
+    "conf": 0.96814
+   },
+   "off": {
+    "text": "ELESAC",
+    "conf": 0.72328
+   },
+   "crop": "user-329b53-p007-0069.png",
+   "vocab": [
+    0.0,
+    0.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 8,
+   "box_px": [
+    93.3899154663086,
+    1837.6265869140625,
+    179.73153686523438,
+    2302.78125
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9999186992645264
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRICACOMPANY S.A.C.",
+    "conf": 0.96336
+   },
+   "off": {
+    "text": "HEXINS ACESAC.",
+    "conf": 0.54882
+   },
+   "crop": "user-329b53-p008-0070.png",
+   "vocab": [
+    0.5,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 8,
+   "box_px": [
+    375.3217468261719,
+    1878.305419921875,
+    2156.7783203125,
+    1938.4395751953125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9724250435829163
+   ],
+   "turned": true,
+   "on": {
+    "text": "salisd ei    s   a  ns  nto",
+    "conf": 0.65313
+   },
+   "off": {
+    "text": "salidas; v) gestión de programas corporativos, vi) manejo de acciones correctivas; vii) procesamiento",
+    "conf": 0.99857
+   },
+   "crop": "user-329b53-p008-0071.png",
+   "vocab": [
+    0.0,
+    0.5555555555555556
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 8,
+   "box_px": [
+    377.08380126953125,
+    2253.259033203125,
+    2160.302490234375,
+    2313.39306640625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9943583607673645
+   ],
+   "turned": true,
+   "on": {
+    "text": "por r  td o  ritt (i   s   ut  ii",
+    "conf": 0.63327
+   },
+   "off": {
+    "text": "Por su parte, EL CONTRATISTA se compromete a: (i) utilizar los datos personales que pudiera recibir",
+    "conf": 0.98921
+   },
+   "crop": "user-329b53-p008-0072.png",
+   "vocab": [
+    0.5,
+    0.8181818181818182
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 8,
+   "box_px": [
+    380.60797119140625,
+    2679.503662109375,
+    2162.064697265625,
+    2739.6376953125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9223049283027649
+   ],
+   "turned": true,
+   "on": {
+    "text": "El     u   o o     s  la",
+    "conf": 0.63086
+   },
+   "off": {
+    "text": "El CONTRATISTA se obliga a cumplir con estos compromisos y, en general, con las disposiciones de la",
+    "conf": 0.9976
+   },
+   "crop": "user-329b53-p008-0073.png",
+   "vocab": [
+    null,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 8,
+   "box_px": [
+    118.05895233154297,
+    2730.79443359375,
+    156.82456970214844,
+    2808.614990234375
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9989445805549622
+   ],
+   "turned": true,
+   "on": {
+    "text": "ECTRI",
+    "conf": 0.88367
+   },
+   "off": {
+    "text": "ECTR",
+    "conf": 0.87346
+   },
+   "crop": "user-329b53-p008-0074.png",
+   "vocab": [
+    0.0,
+    0.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 8,
+   "box_px": [
+    112.7727279663086,
+    2824.53271484375,
+    156.82456970214844,
+    2934.18896484375
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9999747276306152
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING",
+    "conf": 0.99988
+   },
+   "off": {
+    "text": "HENG",
+    "conf": 0.79533
+   },
+   "crop": "user-329b53-p008-0075.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 9,
+   "box_px": [
+    366.5113525390625,
+    1002.8240966796875,
+    2149.730224609375,
+    1059.4208984375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9742287993431091
+   ],
+   "turned": true,
+   "on": {
+    "text": "Llasun   t   e  s s u as  s snte",
+    "conf": 0.69352
+   },
+   "off": {
+    "text": "Las controversias que surjan entre las partes durante la ejecución del contrato se resuelven mediante",
+    "conf": 0.99449
+   },
+   "crop": "user-329b53-p009-0076.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 9,
+   "box_px": [
+    133.91761779785156,
+    1908.37255859375,
+    188.54190063476562,
+    2366.45263671875
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9999996423721313
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRICALCOMPANY S.A.C.",
+    "conf": 0.98842
+   },
+   "off": {
+    "text": "HEX AC.",
+    "conf": 0.64947
+   },
+   "crop": "user-329b53-p009-0077.png",
+   "vocab": [
+    0.5,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 9,
+   "box_px": [
+    373.5596618652344,
+    2230.2666015625,
+    2153.25439453125,
+    2288.632080078125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9920634627342224
+   ],
+   "turned": true,
+   "on": {
+    "text": "ents   a s s  arad a  a  s o d se olo",
+    "conf": 0.64305
+   },
+   "off": {
+    "text": "entre ambas partes o se llegue a un acuerdo parcial. Las controversias sobre nulidad del contrato solo",
+    "conf": 0.99316
+   },
+   "crop": "user-329b53-p009-0078.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 9,
+   "box_px": [
+    190.30398559570312,
+    2515.019287109375,
+    227.30752563476562,
+    2621.13818359375
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9972870349884033
+   ],
+   "turned": true,
+   "on": {
+    "text": "TAIPE",
+    "conf": 0.99561
+   },
+   "off": {
+    "text": "TAIPE",
+    "conf": 0.79435
+   },
+   "crop": "user-329b53-p009-0079.png",
+   "vocab": [
+    1.0,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 9,
+   "box_px": [
+    227.30752563476562,
+    2548.62353515625,
+    255.50071716308594,
+    2606.989013671875
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9999829530715942
+   ],
+   "turned": true,
+   "on": {
+    "text": "GAL",
+    "conf": 0.99996
+   },
+   "off": {
+    "text": "GAL",
+    "conf": 0.83006
+   },
+   "crop": "user-329b53-p009-0080.png",
+   "vocab": [
+    0.0,
+    0.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 9,
+   "box_px": [
+    103.96235656738281,
+    2688.346923828125,
+    151.53836059570312,
+    2808.614990234375
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9999983310699463
+   ],
+   "turned": true,
+   "on": {
+    "text": "ECTRICAL",
+    "conf": 0.99379
+   },
+   "off": {
+    "text": "ECTRICAL",
+    "conf": 0.78305
+   },
+   "crop": "user-329b53-p009-0081.png",
+   "vocab": [
+    0.0,
+    0.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 9,
+   "box_px": [
+    112.7727279663086,
+    2820.99560546875,
+    158.58665466308594,
+    2934.18896484375
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9999785423278809
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXINGE",
+    "conf": 0.97612
+   },
+   "off": {
+    "text": "HINGE",
+    "conf": 0.75519
+   },
+   "crop": "user-329b53-p009-0082.png",
+   "vocab": [
+    0.0,
+    0.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 10,
+   "box_px": [
+    366.5113525390625,
+    866.6381225585938,
+    2149.730224609375,
+    923.23486328125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9784921407699585
+   ],
+   "turned": true,
+   "on": {
+    "text": "los s se s s   s   dt s     s sde",
+    "conf": 0.71254
+   },
+   "off": {
+    "text": "los demás que formen parte de su Oferta y que se deriven de las prestaciones contratadas serán de",
+    "conf": 0.98732
+   },
+   "crop": "user-329b53-p010-0083.png",
+   "vocab": [
+    0.5,
+    0.9166666666666666
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 10,
+   "box_px": [
+    72.24502563476562,
+    1605.9334716796875,
+    172.68324279785156,
+    1715.5897216796875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9137039184570312
+   ],
+   "turned": true,
+   "on": {
+    "text": "ELECT",
+    "conf": 0.7298
+   },
+   "off": {
+    "text": "ELECTH",
+    "conf": 0.98157
+   },
+   "crop": "user-329b53-p010-0084.png",
+   "vocab": [
+    0.0,
+    0.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 10,
+   "box_px": [
+    151.53836059570312,
+    1910.14111328125,
+    197.35227966308594,
+    2366.45263671875
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    1.0
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRICAL ÇOMPANY S.A.C.",
+    "conf": 0.97186
+   },
+   "off": {
+    "text": "HEXIS   A.C.",
+    "conf": 0.63041
+   },
+   "crop": "user-329b53-p010-0085.png",
+   "vocab": [
+    0.6666666666666666,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 10,
+   "box_px": [
+    123.34516906738281,
+    2725.488525390625,
+    165.63494873046875,
+    2858.13720703125
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9998563528060913
+   ],
+   "turned": true,
+   "on": {
+    "text": "LACTRICAL",
+    "conf": 0.93365
+   },
+   "off": {
+    "text": "ECTRICRL",
+    "conf": 0.5611
+   },
+   "crop": "user-329b53-p010-0086.png",
+   "vocab": [
+    0.0,
+    0.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 10,
+   "box_px": [
+    123.34516906738281,
+    2866.98046875,
+    160.34872436523438,
+    2973.099365234375
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9999902248382568
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING",
+    "conf": 0.99988
+   },
+   "off": {
+    "text": "HEXING",
+    "conf": 0.7923
+   },
+   "crop": "user-329b53-p010-0087.png",
+   "vocab": [
+    1.0,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 11,
+   "box_px": [
+    123.34516906738281,
+    1867.693603515625,
+    179.73153686523438,
+    2322.236328125
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9999997615814209
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRICALCOMPANY S.A.C.",
+    "conf": 0.96047
+   },
+   "off": {
+    "text": "HEAC.",
+    "conf": 0.70634
+   },
+   "crop": "user-329b53-p011-0088.png",
+   "vocab": [
+    0.5,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 11,
+   "box_px": [
+    371.7975769042969,
+    1855.31298828125,
+    2149.730224609375,
+    1906.6038818359375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9909453392028809
+   ],
+   "turned": true,
+   "on": {
+    "text": "Tit  -      d   (       ue",
+    "conf": 0.70424
+   },
+   "off": {
+    "text": "Título XVIII del Código Penal (corrupción de funcionarios) o los previstos en la Ley N° 30424 - Ley que",
+    "conf": 0.98622
+   },
+   "crop": "user-329b53-p011-0089.png",
+   "vocab": [
+    0.0,
+    0.9166666666666666
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 11,
+   "box_px": [
+    151.53836059570312,
+    2870.517578125,
+    193.828125,
+    2974.867919921875
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9993429780006409
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING",
+    "conf": 0.99973
+   },
+   "off": {
+    "text": "HEING",
+    "conf": 0.78776
+   },
+   "crop": "user-329b53-p011-0090.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 11,
+   "box_px": [
+    375.3217468261719,
+    2994.3232421875,
+    2153.25439453125,
+    3050.919921875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9945613741874695
+   ],
+   "turned": true,
+   "on": {
+    "text": "cuaa   u ud   d   d d   udos",
+    "conf": 0.68258
+   },
+   "off": {
+    "text": "Cualquiera de las partes puede elevar el presente contrato a Escritura Pública corriendo con todos",
+    "conf": 0.99047
+   },
+   "crop": "user-329b53-p011-0091.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 12,
+   "box_px": [
+    361.22515869140625,
+    534.132080078125,
+    1991.1434326171875,
+    594.26611328125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9879313111305237
+   ],
+   "turned": true,
+   "on": {
+    "text": "CLA   G GO  S AUAL",
+    "conf": 0.62611
+   },
+   "off": {
+    "text": "CLÁUSULA VIGÉSIMA CUARTA: NOTIFICACIONES DURANTE LA EJECUCIÓN CONTRACTUAL.",
+    "conf": 0.99614
+   },
+   "crop": "user-329b53-p012-0092.png",
+   "vocab": [
+    0.5,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 12,
+   "box_px": [
+    1499.52490234375,
+    2414.206298828125,
+    1918.8984375,
+    2476.10888671875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9948163628578186
+   ],
+   "turned": true,
+   "on": {
+    "text": "MEA TIPE",
+    "conf": 0.52566
+   },
+   "off": {
+    "text": "MEDALY AROTOMA TAIPE",
+    "conf": 0.96849
+   },
+   "crop": "user-329b53-p012-0093.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+   "page": 12,
+   "box_px": [
+    311.8870849609375,
+    2739.6376953125,
+    336.5561218261719,
+    2766.16748046875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9431009888648987
+   ],
+   "turned": true,
+   "on": {
+    "text": "A",
+    "conf": 0.706
+   },
+   "off": {
+    "text": "y",
+    "conf": 0.42931
+   },
+   "crop": "user-329b53-p012-0094.png",
+   "vocab": [
+    null,
+    null
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 1,
+   "box_px": [
+    188.46591186523438,
+    185.5493927001953,
+    944.0908813476562,
+    383.46875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9646170735359192
+   ],
+   "turned": true,
+   "on": {
+    "text": "eas",
+    "conf": 0.94938
+   },
+   "off": {
+    "text": "seal",
+    "conf": 0.9602
+   },
+   "crop": "user-b99e36-p001-0095.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 1,
+   "box_px": [
+    378.69317626953125,
+    802.2802124023438,
+    2104.82958984375,
+    853.5272216796875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.915349006652832
+   ],
+   "turned": true,
+   "on": {
+    "text": "asme           in e dsan:",
+    "conf": 0.59028
+   },
+   "off": {
+    "text": "las empresas dedistribución eléctrica bajo el ámbito de FONAFE, Ítems 1 y 4”, que celebran:",
+    "conf": 0.98647
+   },
+   "crop": "user-b99e36-p001-0096.png",
+   "vocab": [
+    0.0,
+    0.9
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 1,
+   "box_px": [
+    435.05682373046875,
+    1141.570556640625,
+    2101.306884765625,
+    1192.8175048828125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9332723021507263
+   ],
+   "turned": true,
+   "on": {
+    "text": "Gerr   d     s   l)",
+    "conf": 0.63064
+   },
+   "off": {
+    "text": "Gerente General, el señor Markpool Francois De Taboada Quenaya, identificado con D.N.I.",
+    "conf": 0.99888
+   },
+   "crop": "user-b99e36-p001-0097.png",
+   "vocab": [
+    0.0,
+    0.6666666666666666
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 2,
+   "box_px": [
+    383.9772644042969,
+    508.93548583984375,
+    2113.63623046875,
+    567.2509765625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9786425828933716
+   ],
+   "turned": true,
+   "on": {
+    "text": "Cosso o c coso css coto coo co s costo c osto",
+    "conf": 0.62504
+   },
+   "off": {
+    "text": "administrador de contrato, en cuyo caso será suficiente comunicarlo a EL CONTRATISTA",
+    "conf": 0.99157
+   },
+   "crop": "user-b99e36-p002-0098.png",
+   "vocab": [
+    0.14285714285714285,
+    0.75
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 2,
+   "box_px": [
+    382.2159118652344,
+    1839.5897216796875,
+    2110.113525390625,
+    1899.67236328125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9124900102615356
+   ],
+   "turned": true,
+   "on": {
+    "text": "dlacc e  in  a c   o   ocio",
+    "conf": 0.59445
+   },
+   "off": {
+    "text": "plazos de entrega. luego de la recepción formal y completa de la documentación",
+    "conf": 0.99697
+   },
+   "crop": "user-b99e36-p002-0099.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 2,
+   "box_px": [
+    380.45452880859375,
+    1887.3023681640625,
+    2108.352294921875,
+    1947.385009765625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9770261645317078
+   ],
+   "turned": true,
+   "on": {
+    "text": "cor       t   s  s ido",
+    "conf": 0.71077
+   },
+   "off": {
+    "text": "correspondiente, según lo establecido en el artículo 171 del Reglamento de la Ley de",
+    "conf": 0.99312
+   },
+   "crop": "user-b99e36-p002-0100.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 2,
+   "box_px": [
+    382.2159118652344,
+    2032.2076416015625,
+    2110.113525390625,
+    2090.523193359375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9209558963775635
+   ],
+   "turned": true,
+   "on": {
+    "text": "Pdae a e d   ae e re  e e o  oton",
+    "conf": 0.60749
+   },
+   "off": {
+    "text": "Para tal efecto, el responsable de otorgar la conformidad de la prestación deberá hacerlo en",
+    "conf": 0.9989
+   },
+   "crop": "user-b99e36-p002-0101.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 2,
+   "box_px": [
+    380.45452880859375,
+    2129.400146484375,
+    2110.113525390625,
+    2187.715576171875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9588543176651001
+   ],
+   "turned": true,
+   "on": {
+    "text": "rebnn n i  n u e ean e n e e eao",
+    "conf": 0.60783
+   },
+   "off": {
+    "text": "requiera efectuar pruebas que permitan verificar el cumplimiento de la obligación, en cuyo",
+    "conf": 0.99171
+   },
+   "crop": "user-b99e36-p002-0102.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 3,
+   "box_px": [
+    517.8408813476562,
+    1866.0966796875,
+    2101.306884765625,
+    1922.6451416015625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9375988841056824
+   ],
+   "turned": true,
+   "on": {
+    "text": "vg d z a  e n n     d e  nnito",
+    "conf": 0.75273
+   },
+   "off": {
+    "text": "vigencia hasta el 20 de setiembre de 2027. Monto que es equivalente al diez por ciento",
+    "conf": 0.99257
+   },
+   "crop": "user-b99e36-p003-0103.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 3,
+   "box_px": [
+    517.8408813476562,
+    2205.386962890625,
+    2103.068115234375,
+    2258.401123046875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.943439245223999
+   ],
+   "turned": true,
+   "on": {
+    "text": "or   i      oi  i   do",
+    "conf": 0.73595
+   },
+   "off": {
+    "text": "por AVLA Perú Compañía de Seguros S.A., con plazo de vigencia hasta el 20 de",
+    "conf": 0.9957
+   },
+   "crop": "user-b99e36-p003-0104.png",
+   "vocab": [
+    null,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 4,
+   "box_px": [
+    387.5,
+    459.45562744140625,
+    2115.397705078125,
+    523.0725708007812
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9596208333969116
+   ],
+   "turned": true,
+   "on": {
+    "text": "e eea eea  ead e ea s a  e (ia i o",
+    "conf": 0.64754
+   },
+   "off": {
+    "text": "máximo quince (15) días (en caso se requiera efectuar pruebas que permitan verificar el",
+    "conf": 0.99792
+   },
+   "crop": "user-b99e36-p004-0105.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 4,
+   "box_px": [
+    385.7386474609375,
+    796.9788208007812,
+    2115.397705078125,
+    858.82861328125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9567181468009949
+   ],
+   "turned": true,
+   "on": {
+    "text": "da      o  coo od  d  a",
+    "conf": 0.59726
+   },
+   "off": {
+    "text": "días. Si pese al plazo otorgado, EL CONTRATISTA no cumpliese a cabalidad con la",
+    "conf": 0.98419
+   },
+   "crop": "user-b99e36-p004-0106.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 4,
+   "box_px": [
+    262.44317626953125,
+    1183.9818115234375,
+    1835.3409423828125,
+    1240.5301513671875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9520649313926697
+   ],
+   "turned": true,
+   "on": {
+    "text": "era   d   a ped d dsds",
+    "conf": 0.68014
+   },
+   "off": {
+    "text": "seauprèstación, aplicándose la penalidad que corresponda por cada día de atraso.",
+    "conf": 0.97758
+   },
+   "crop": "user-b99e36-p004-0107.png",
+   "vocab": [
+    0.3333333333333333,
+    0.8888888888888888
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 4,
+   "box_px": [
+    383.9772644042969,
+    1376.5997314453125,
+    2113.63623046875,
+    1434.915283203125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9295294284820557
+   ],
+   "turned": true,
+   "on": {
+    "text": "der o ao ced coi   cs c co  c cste",
+    "conf": 0.64955
+   },
+   "off": {
+    "text": "derivadas del presente contrato, bajo sanción de quedar inhabilitado para contratar con el",
+    "conf": 0.98859
+   },
+   "crop": "user-b99e36-p004-0108.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 4,
+   "box_px": [
+    385.7386474609375,
+    2002.166259765625,
+    2111.875,
+    2058.714599609375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9545753598213196
+   ],
+   "turned": true,
+   "on": {
+    "text": "ob d c d d c  od l     da",
+    "conf": 0.68366
+   },
+   "off": {
+    "text": "objeto del contrato, LA ENTIDAD le aplica automáticamente una penalidad por mora por cada",
+    "conf": 0.98536
+   },
+   "crop": "user-b99e36-p004-0109.png",
+   "vocab": [
+    null,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 4,
+   "box_px": [
+    385.7386474609375,
+    2779.70654296875,
+    2110.113525390625,
+    2830.95361328125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9994258880615234
+   ],
+   "turned": true,
+   "on": {
+    "text": "suso o  eoo  d        ed od soo",
+    "conf": 0.62664
+   },
+   "off": {
+    "text": "justificado por parte de LA ENTIDAD no da lugar al pago de gastos generales ni costos",
+    "conf": 0.98465
+   },
+   "crop": "user-b99e36-p004-0110.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 5,
+   "box_px": [
+    193.75,
+    178.4808349609375,
+    956.4204711914062,
+    381.70159912109375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9652153253555298
+   ],
+   "turned": true,
+   "on": {
+    "text": "eas",
+    "conf": 0.90861
+   },
+   "off": {
+    "text": "seal",
+    "conf": 0.94409
+   },
+   "crop": "user-b99e36-p005-0111.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 5,
+   "box_px": [
+    383.9772644042969,
+    991.3638916015625,
+    2110.113525390625,
+    1053.213623046875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9976027607917786
+   ],
+   "turned": true,
+   "on": {
+    "text": "Cun  d e  a      sadd   eddel",
+    "conf": 0.66658
+   },
+   "off": {
+    "text": "Cualquiera de las partes puede resolver el contrato, de conformidad con el numeral 32.3 del",
+    "conf": 0.99868
+   },
+   "crop": "user-b99e36-p005-0112.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 5,
+   "box_px": [
+    366.3636474609375,
+    1275.8729248046875,
+    2111.875,
+    1346.5584716796875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9550447463989258
+   ],
+   "turned": true,
+   "on": {
+    "text": "c s ce s  e e s s d c e c s e",
+    "conf": 0.65268
+   },
+   "off": {
+    "text": "Cuando se resuelva el contrato por causas imputables a algunas de las partes, se debe",
+    "conf": 0.99129
+   },
+   "crop": "user-b99e36-p005-0113.png",
+   "vocab": [
+    null,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 5,
+   "box_px": [
+    376.93182373046875,
+    1908.508056640625,
+    2106.5908203125,
+    1966.823486328125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.924953043460846
+   ],
+   "turned": true,
+   "on": {
+    "text": "nuen el  o ced ebeo eao  o edd eo co o cio",
+    "conf": 0.61257
+   },
+   "off": {
+    "text": "negociado o efectuado, cualquier pago o, en general, cualquier beneficio o incentivo ilegal en",
+    "conf": 0.99806
+   },
+   "crop": "user-b99e36-p005-0114.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 5,
+   "box_px": [
+    376.93182373046875,
+    2148.838623046875,
+    2103.068115234375,
+    2207.154296875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.981891930103302
+   ],
+   "turned": true,
+   "on": {
+    "text": "oaoccices cocictss ss  soc   cces  aci ccit  s",
+    "conf": 0.54599
+   },
+   "off": {
+    "text": "o de corrupción, directa o indirectamente o a través de sus socios, accionistas,",
+    "conf": 0.99583
+   },
+   "crop": "user-b99e36-p005-0115.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 5,
+   "box_px": [
+    2296.818115234375,
+    2214.22265625,
+    2346.13623046875,
+    2240.729736328125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9491398334503174
+   ],
+   "turned": true,
+   "on": {
+    "text": "rn",
+    "conf": 0.21566
+   },
+   "off": {
+    "text": "re!",
+    "conf": 0.77203
+   },
+   "crop": "user-b99e36-p005-0116.png",
+   "vocab": [
+    null,
+    null
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 5,
+   "box_px": [
+    204.31817626953125,
+    3242.696533203125,
+    290.625,
+    3267.4365234375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9112046957015991
+   ],
+   "turned": true,
+   "on": {
+    "text": "(0003) 5",
+    "conf": 0.55719
+   },
+   "off": {
+    "text": "NE (E0tmn)",
+    "conf": 0.46796
+   },
+   "crop": "user-b99e36-p005-0117.png",
+   "vocab": [
+    null,
+    0.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 6,
+   "box_px": [
+    741.5340576171875,
+    3050.07861328125,
+    801.4204711914062,
+    3074.818359375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9587386250495911
+   ],
+   "turned": true,
+   "on": {
+    "text": "G10D",
+    "conf": 0.88914
+   },
+   "off": {
+    "text": "GOLD",
+    "conf": 0.9997
+   },
+   "crop": "user-b99e36-p006-0118.png",
+   "vocab": [
+    null,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 7,
+   "box_px": [
+    2020.2840576171875,
+    786.3759765625,
+    2342.613525390625,
+    865.8971557617188
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9751656651496887
+   ],
+   "turned": true,
+   "on": {
+    "text": "REPRE ESEEGAL",
+    "conf": 0.61855
+   },
+   "off": {
+    "text": "REPRESENTANTE LEGAL",
+    "conf": 0.98693
+   },
+   "crop": "user-b99e36-p007-0119.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 7,
+   "box_px": [
+    1643.352294921875,
+    3202.05224609375,
+    1750.79541015625,
+    3225.025146484375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9454349279403687
+   ],
+   "turned": true,
+   "on": {
+    "text": "wg wNs",
+    "conf": 0.38496
+   },
+   "off": {
+    "text": "Sa Ne Ges",
+    "conf": 0.46922
+   },
+   "crop": "user-b99e36-p007-0120.png",
+   "vocab": [
+    0.0,
+    0.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO SEAL.pdf",
+   "page": 7,
+   "box_px": [
+    1660.9659423828125,
+    3212.6552734375,
+    1729.6590576171875,
+    3237.39501953125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9305132031440735
+   ],
+   "turned": true,
+   "on": {
+    "text": "acqisaug",
+    "conf": 0.54389
+   },
+   "off": {
+    "text": "aetsctoe",
+    "conf": 0.3247
+   },
+   "crop": "user-b99e36-p007-0121.png",
+   "vocab": [
+    0.0,
+    0.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 2,
+   "box_px": [
+    428.1839599609375,
+    1174.383056640625,
+    2147.968017578125,
+    1225.6739501953125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9789591431617737
+   ],
+   "turned": true,
+   "on": {
+    "text": "ELE         A  iO",
+    "conf": 0.64427
+   },
+   "off": {
+    "text": "ELECTRICIDAD SOCIEDAD ANÓNIMA - ELECTROSUR S.A., Con RUC Nº 20119205949, con domicilio",
+    "conf": 0.98317
+   },
+   "crop": "user-3b797d-p002-0122.png",
+   "vocab": [
+    0.0,
+    0.875
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 2,
+   "box_px": [
+    118.05895233154297,
+    1966.7379150390625,
+    185.01776123046875,
+    2423.04931640625
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9999995231628418
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRICAL COMPANY S.A.C.",
+    "conf": 0.98163
+   },
+   "off": {
+    "text": "HEXIN  C AC.",
+    "conf": 0.68485
+   },
+   "crop": "user-3b797d-p002-0123.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 3,
+   "box_px": [
+    484.5703125,
+    659.7061767578125,
+    2133.87158203125,
+    723.3775024414062
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9859436750411987
+   ],
+   "turned": true,
+   "on": {
+    "text": "15.       )     s  d (10",
+    "conf": 0.61989
+   },
+   "off": {
+    "text": "(15.04.2025), por un monto total de 83,240.74 (Ochenta y tres mil doscientos cuarenta con 74/100",
+    "conf": 0.98999
+   },
+   "crop": "user-3b797d-p003-0124.png",
+   "vocab": [
+    null,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 3,
+   "box_px": [
+    481.0461730957031,
+    1391.9268798828125,
+    2130.347412109375,
+    1453.8297119140625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.998406708240509
+   ],
+   "turned": true,
+   "on": {
+    "text": "DIS I M   M  M  ICO",
+    "conf": 0.71501
+   },
+   "off": {
+    "text": "DISTRIBUCION ELECTRICA BAJO EL AMBITO DE FONAFE\" ÍTEM 1: MEDIDOR ELECTRONICO",
+    "conf": 0.98896
+   },
+   "crop": "user-3b797d-p003-0125.png",
+   "vocab": [
+    0.0,
+    0.625
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 3,
+   "box_px": [
+    111.01065063476562,
+    1611.2393798828125,
+    204.40057373046875,
+    2071.088134765625
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    1.0
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRICAL COMPANY S.A.C.",
+    "conf": 0.99289
+   },
+   "off": {
+    "text": "HEXIS  C AC.",
+    "conf": 0.66715
+   },
+   "crop": "user-3b797d-p003-0126.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 3,
+   "box_px": [
+    482.8082275390625,
+    1658.992919921875,
+    2130.347412109375,
+    1715.5897216796875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9783914685249329
+   ],
+   "turned": true,
+   "on": {
+    "text": "O      C i orE POr",
+    "conf": 0.55664
+   },
+   "off": {
+    "text": "- FONAFE - Primera Convocatoria para la contratación de la “COMPRA CORPORATIVA DE",
+    "conf": 0.98232
+   },
+   "crop": "user-3b797d-p003-0127.png",
+   "vocab": [
+    0.5,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 3,
+   "box_px": [
+    75.76918029785156,
+    2316.930419921875,
+    172.68324279785156,
+    2753.786865234375
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9992408752441406
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRICALCOMPANYSA",
+    "conf": 0.9678
+   },
+   "off": {
+    "text": "HEXSNACEGSA",
+    "conf": 0.55683
+   },
+   "crop": "user-3b797d-p003-0128.png",
+   "vocab": [
+    0.5,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 4,
+   "box_px": [
+    403.5149230957031,
+    1022.2792358398438,
+    2123.299072265625,
+    1077.107421875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9085714221000671
+   ],
+   "turned": true,
+   "on": {
+    "text": "ELns os   s e i    o mos",
+    "conf": 0.61655
+   },
+   "off": {
+    "text": "EL CONTRATISTA debe cumplir con i) las Especificaciones Técnicas, requerimientos técnicos mínimos",
+    "conf": 0.98215
+   },
+   "crop": "user-3b797d-p004-0129.png",
+   "vocab": [
+    0.0,
+    0.9
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 4,
+   "box_px": [
+    405.2769775390625,
+    1124.8609619140625,
+    2123.299072265625,
+    1177.92041015625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9773539900779724
+   ],
+   "turned": true,
+   "on": {
+    "text": "COR S D  A  D    DEL",
+    "conf": 0.7571
+   },
+   "off": {
+    "text": "CORPORATIVA DE MEDIDORES PARA LAS EMPRESAS DE DISTRIBUCIÓN ELÉCTRICA BAJO EL",
+    "conf": 0.99465
+   },
+   "crop": "user-3b797d-p004-0130.png",
+   "vocab": [
+    0.5,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 4,
+   "box_px": [
+    151.53836059570312,
+    1628.9259033203125,
+    239.6420440673828,
+    2101.1552734375
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9999926090240479
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRICAL COMPANY S.A.C.",
+    "conf": 0.94899
+   },
+   "off": {
+    "text": "HEXN  .C",
+    "conf": 0.4296
+   },
+   "crop": "user-3b797d-p004-0131.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 4,
+   "box_px": [
+    403.5149230957031,
+    1690.82861328125,
+    2125.06103515625,
+    1745.65673828125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9399962425231934
+   ],
+   "turned": true,
+   "on": {
+    "text": "e  ea     a  ai e a a  o dad",
+    "conf": 0.70346
+   },
+   "off": {
+    "text": "efecto, ofrece una garantía técnico-comercial, en idioma español a través de la cual garantiza la calidad",
+    "conf": 0.99423
+   },
+   "crop": "user-3b797d-p004-0132.png",
+   "vocab": [
+    0.0,
+    0.9166666666666666
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 4,
+   "box_px": [
+    132.15554809570312,
+    2435.429931640625,
+    197.35227966308594,
+    2817.458251953125
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9999736547470093
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRICALCOMPANY",
+    "conf": 0.9776
+   },
+   "off": {
+    "text": "HXINRE RANY",
+    "conf": 0.59064
+   },
+   "crop": "user-3b797d-p004-0133.png",
+   "vocab": [
+    0.5,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 5,
+   "box_px": [
+    419.37359619140625,
+    571.273681640625,
+    2135.633544921875,
+    622.5645141601562
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9231576323509216
+   ],
+   "turned": true,
+   "on": {
+    "text": "Cuaes  m   mian n    t  me e an",
+    "conf": 0.63065
+   },
+   "off": {
+    "text": "Cuando se produzcan fallas repetitivas en medidores de un mismo lote de producción, que sean",
+    "conf": 0.98214
+   },
+   "crop": "user-3b797d-p005-0134.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 5,
+   "box_px": [
+    417.61151123046875,
+    1547.568115234375,
+    2139.15771484375,
+    1598.85888671875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9962419271469116
+   ],
+   "turned": true,
+   "on": {
+    "text": "san as    o    a     s odtel",
+    "conf": 0.64493
+   },
+   "off": {
+    "text": "sanitarios, según lo dispuesto en el numeral 7.3 del requerimiento contenido en las bases integradas del",
+    "conf": 0.99528
+   },
+   "crop": "user-3b797d-p005-0135.png",
+   "vocab": [
+    0.5,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 6,
+   "box_px": [
+    119.8210220336914,
+    1577.6351318359375,
+    209.68679809570312,
+    2037.48388671875
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    1.0
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRICAL COMPANY S.A.C.",
+    "conf": 0.96595
+   },
+   "off": {
+    "text": "HEXINS   AC..",
+    "conf": 0.59929
+   },
+   "crop": "user-3b797d-p006-0136.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 6,
+   "box_px": [
+    93.3899154663086,
+    2251.490478515625,
+    185.01776123046875,
+    2720.1826171875
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.999519944190979
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRICALCOMPANY S.A.C.",
+    "conf": 0.97444
+   },
+   "off": {
+    "text": "HXIN  ESAC.",
+    "conf": 0.53913
+   },
+   "crop": "user-3b797d-p006-0137.png",
+   "vocab": [
+    0.5,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 6,
+   "box_px": [
+    401.7528381347656,
+    2523.862548828125,
+    2126.8232421875,
+    2583.99658203125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.96888667345047
+   ],
+   "turned": true,
+   "on": {
+    "text": "a ooed   e  a  e     s e(",
+    "conf": 0.63028
+   },
+   "off": {
+    "text": "(*) El contratista es responsable de presentar la documentación solicitada para el trámite de pago en:",
+    "conf": 0.99183
+   },
+   "crop": "user-3b797d-p006-0138.png",
+   "vocab": [
+    0.0,
+    0.875
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 6,
+   "box_px": [
+    403.5149230957031,
+    2888.2041015625,
+    2123.299072265625,
+    2939.4951171875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.928906261920929
+   ],
+   "turned": true,
+   "on": {
+    "text": "prun  os uao  oso o  cuo   oi e  c  saa",
+    "conf": 0.59474
+   },
+   "off": {
+    "text": "pruebas que permitan verificar el cumplimiento de la obligación, en cuyo caso la conformidad se emite en",
+    "conf": 0.99055
+   },
+   "crop": "user-3b797d-p006-0139.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 7,
+   "box_px": [
+    414.0873718261719,
+    525.288818359375,
+    1677.494384765625,
+    578.3482666015625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9027596712112427
+   ],
+   "turned": true,
+   "on": {
+    "text": "uno   o  s (do)   o d do",
+    "conf": 0.66183
+   },
+   "off": {
+    "text": "un plazo máximo de veinte (20) días, bajo responsabilidad de dicho servidor.",
+    "conf": 0.99275
+   },
+   "crop": "user-3b797d-p007-0140.png",
+   "vocab": [
+    1.0,
+    0.875
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 7,
+   "box_px": [
+    412.3252868652344,
+    884.3245849609375,
+    2132.109375,
+    935.6154174804688
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9987032413482666
+   ],
+   "turned": true,
+   "on": {
+    "text": "fuer       ad a  s c  os ido",
+    "conf": 0.65081
+   },
+   "off": {
+    "text": "fuerza mayor, EL CONTRATISTA tendrá derecho al pago de intereses legales conforme a lo establecido",
+    "conf": 0.99581
+   },
+   "crop": "user-3b797d-p007-0141.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 7,
+   "box_px": [
+    130.39346313476562,
+    2285.0947265625,
+    183.25567626953125,
+    2661.817138671875
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    1.0
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELEOTRICAL COMBANY",
+    "conf": 0.96461
+   },
+   "off": {
+    "text": "HEXI E ANY",
+    "conf": 0.7395
+   },
+   "crop": "user-3b797d-p007-0142.png",
+   "vocab": [
+    0.3333333333333333,
+    0.5
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 7,
+   "box_px": [
+    502.1910400390625,
+    2476.10888671875,
+    1256.358642578125,
+    2529.16845703125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9344865083694458
+   ],
+   "turned": true,
+   "on": {
+    "text": "Vvri d siii d dr  dplay",
+    "conf": 0.60393
+   },
+   "off": {
+    "text": "Verificación del número de dígitos del display",
+    "conf": 0.9999
+   },
+   "crop": "user-3b797d-p007-0143.png",
+   "vocab": [
+    0.0,
+    0.8333333333333334
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 8,
+   "box_px": [
+    137.44175720214844,
+    1471.51611328125,
+    213.2109375,
+    1926.0589599609375
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    1.0
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRIÇAL COMPANY S.A.C.",
+    "conf": 0.96455
+   },
+   "off": {
+    "text": "HEXIMS   AC.",
+    "conf": 0.64711
+   },
+   "crop": "user-3b797d-p008-0144.png",
+   "vocab": [
+    0.6666666666666666,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 8,
+   "box_px": [
+    405.2769775390625,
+    1749.194091796875,
+    2123.299072265625,
+    1800.48486328125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9644602537155151
+   ],
+   "turned": true,
+   "on": {
+    "text": "Lar      r  d  o    r   nto",
+    "conf": 0.72517
+   },
+   "off": {
+    "text": "La recepción y conformidad de la prestación se regula por lo dispuesto en el artículo 144 del Reglamento",
+    "conf": 0.99044
+   },
+   "crop": "user-3b797d-p008-0145.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 8,
+   "box_px": [
+    405.2769775390625,
+    1800.48486328125,
+    2123.299072265625,
+    1853.54443359375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9023556709289551
+   ],
+   "turned": true,
+   "on": {
+    "text": "dl          o       d dt",
+    "conf": 0.75272
+   },
+   "off": {
+    "text": "de la Ley N° 32069. La recepción será otorgada por el Jefe del Servicio de Almacén del Departamento",
+    "conf": 0.99345
+   },
+   "crop": "user-3b797d-p008-0146.png",
+   "vocab": [
+    null,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 8,
+   "box_px": [
+    403.5149230957031,
+    2157.751953125,
+    2123.299072265625,
+    2212.580078125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9572124481201172
+   ],
+   "turned": true,
+   "on": {
+    "text": "pr i      d  t  n   idde",
+    "conf": 0.69477
+   },
+   "off": {
+    "text": "permitan verificar el cumplimiento de la obligación, el plazo se computa desde el día siguiente de",
+    "conf": 0.99555
+   },
+   "crop": "user-3b797d-p008-0147.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 8,
+   "box_px": [
+    125.10724639892578,
+    2325.773681640625,
+    192.06605529785156,
+    2760.861328125
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9999881982803345
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRICAL COMPANY S.A",
+    "conf": 0.96911
+   },
+   "off": {
+    "text": "HEXI E CAE SA",
+    "conf": 0.51005
+   },
+   "crop": "user-3b797d-p008-0148.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 9,
+   "box_px": [
+    401.7528381347656,
+    716.3029174804688,
+    2121.536865234375,
+    771.1310424804688
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9729548096656799
+   ],
+   "turned": true,
+   "on": {
+    "text": "pos   s    o   d s  oco",
+    "conf": 0.64514
+   },
+   "off": {
+    "text": "positivos y disminuyendo la probabilidad de los riesgos negativos y su impacto durante la ejecución",
+    "conf": 0.99124
+   },
+   "crop": "user-3b797d-p009-0149.png",
+   "vocab": [
+    0.0,
+    0.6666666666666666
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 9,
+   "box_px": [
+    77.53125,
+    1522.8070068359375,
+    139.20384216308594,
+    1977.349853515625
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9999991655349731
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRICAL COMPANY S.A.C.",
+    "conf": 0.99629
+   },
+   "off": {
+    "text": "HEXI   AC.",
+    "conf": 0.62724
+   },
+   "crop": "user-3b797d-p009-0150.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 9,
+   "box_px": [
+    112.7727279663086,
+    2267.408203125,
+    172.68324279785156,
+    2725.488525390625
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9999749660491943
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRICAL COMPANY S,A.C.",
+    "conf": 0.97712
+   },
+   "off": {
+    "text": "HXIS  CSAG.",
+    "conf": 0.45667
+   },
+   "crop": "user-3b797d-p009-0151.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 10,
+   "box_px": [
+    403.5149230957031,
+    1230.9798583984375,
+    2126.8232421875,
+    1292.882568359375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9578410387039185
+   ],
+   "turned": true,
+   "on": {
+    "text": "Yye  d  o         o od ",
+    "conf": 0.64589
+   },
+   "off": {
+    "text": "y perjuicios ocasionados, a través de la indemnización correspondiente. Ello no obsta la aplicación de las",
+    "conf": 0.99458
+   },
+   "crop": "user-3b797d-p010-0152.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 10,
+   "box_px": [
+    405.2769775390625,
+    1285.8079833984375,
+    2126.8232421875,
+    1344.1734619140625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9326379299163818
+   ],
+   "turned": true,
+   "on": {
+    "text": "san ds le e da d ds d   sa  se s nno",
+    "conf": 0.59579
+   },
+   "off": {
+    "text": "sanciones administrativas, penales y pecuniarias a que dicho incumplimiento diere lugar, en el caso que",
+    "conf": 0.99419
+   },
+   "crop": "user-3b797d-p010-0153.png",
+   "vocab": [
+    0.5,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 10,
+   "box_px": [
+    96.9140625,
+    1570.560546875,
+    192.06605529785156,
+    2037.48388671875
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9999349117279053
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRIÇAL COMPANY S.A.C.",
+    "conf": 0.95781
+   },
+   "off": {
+    "text": "HEXINSG A A.C.",
+    "conf": 0.59394
+   },
+   "crop": "user-3b797d-p010-0154.png",
+   "vocab": [
+    0.6666666666666666,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 10,
+   "box_px": [
+    408.8011474609375,
+    1917.2156982421875,
+    2128.585205078125,
+    1975.5811767578125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9863449335098267
+   ],
+   "turned": true,
+   "on": {
+    "text": "con  o  d cso  cso  cm e mo    no",
+    "conf": 0.59072
+   },
+   "off": {
+    "text": "contrato, y después de culminado el mismo en caso existan controversias pendientes de resolver, lo que",
+    "conf": 0.98818
+   },
+   "crop": "user-3b797d-p010-0155.png",
+   "vocab": [
+    0.3333333333333333,
+    0.7
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 10,
+   "box_px": [
+    410.5632019042969,
+    2072.85693359375,
+    2126.8232421875,
+    2129.45361328125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9586663842201233
+   ],
+   "turned": true,
+   "on": {
+    "text": "Aun        a       los",
+    "conf": 0.66745
+   },
+   "off": {
+    "text": "Aunado a ello, EL CONTRATISTA se obliga a abstenerse de ofrecer, negociar, prometer o dar regalos,",
+    "conf": 0.99023
+   },
+   "crop": "user-3b797d-p010-0156.png",
+   "vocab": [
+    1.0,
+    0.5
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 10,
+   "box_px": [
+    410.5632019042969,
+    2237.34130859375,
+    2128.585205078125,
+    2297.475341796875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9434624910354614
+   ],
+   "turned": true,
+   "on": {
+    "text": "us c  osc  ec  d  ac ac d  csn",
+    "conf": 0.53582
+   },
+   "off": {
+    "text": "usuaria, de la dependencia encargada de la contratación, actores del proceso de contratación y/o",
+    "conf": 0.99116
+   },
+   "crop": "user-3b797d-p010-0157.png",
+   "vocab": [
+    0.0,
+    0.75
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 11,
+   "box_px": [
+    405.2769775390625,
+    1291.1138916015625,
+    2123.299072265625,
+    1342.40478515625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9717673659324646
+   ],
+   "turned": true,
+   "on": {
+    "text": "Llas   s e   e  t     sas snte",
+    "conf": 0.59815
+   },
+   "off": {
+    "text": "Las controversias que surjan entre las partes durante la ejecución del contrato se resuelven mediante",
+    "conf": 0.98845
+   },
+   "crop": "user-3b797d-p011-0158.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 11,
+   "box_px": [
+    123.34516906738281,
+    1427.2999267578125,
+    195.59019470214844,
+    1881.8427734375
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9999998807907104
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRICAL COMPANY S.A.C.",
+    "conf": 0.99019
+   },
+   "off": {
+    "text": "HEIS AC.",
+    "conf": 0.64241
+   },
+   "crop": "user-3b797d-p011-0159.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 11,
+   "box_px": [
+    86.34162139892578,
+    2168.364013671875,
+    170.92117309570312,
+    2603.45166015625
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9997434020042419
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRICAL COMPANY S.A.",
+    "conf": 0.96343
+   },
+   "off": {
+    "text": "HEXI XN RESA",
+    "conf": 0.5023
+   },
+   "crop": "user-3b797d-p011-0160.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 12,
+   "box_px": [
+    396.46661376953125,
+    877.25,
+    2116.250732421875,
+    930.3095092773438
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9206917881965637
+   ],
+   "turned": true,
+   "on": {
+    "text": "y es  e e ed s a  ea d aa a",
+    "conf": 0.65124
+   },
+   "off": {
+    "text": "y deberá implementar medidas de seguridad necesarias para asegurar la confidencialidad, integridad y",
+    "conf": 0.98555
+   },
+   "crop": "user-3b797d-p012-0161.png",
+   "vocab": [
+    null,
+    0.8888888888888888
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 12,
+   "box_px": [
+    111.01065063476562,
+    1367.1658935546875,
+    181.4936065673828,
+    1827.0146484375
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    1.0
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRICAL COMPANY S.A.C.",
+    "conf": 0.98887
+   },
+   "off": {
+    "text": "HEXINS L CAREAC.",
+    "conf": 0.49069
+   },
+   "crop": "user-3b797d-p012-0162.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 12,
+   "box_px": [
+    399.99078369140625,
+    1643.0750732421875,
+    2118.0126953125,
+    1699.671875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9578566551208496
+   ],
+   "turned": true,
+   "on": {
+    "text": "eu o   e o o e o  e  o nn to",
+    "conf": 0.63655
+   },
+   "off": {
+    "text": "el único responsable de ello ante cualquier efecto o consecuencia legal derivado de este incumplimiento.",
+    "conf": 0.98661
+   },
+   "crop": "user-3b797d-p012-0163.png",
+   "vocab": [
+    null,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 12,
+   "box_px": [
+    125.10724639892578,
+    2164.82666015625,
+    186.7798309326172,
+    2580.459228515625
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9999555349349976
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRICAL COMPANY SA",
+    "conf": 0.97722
+   },
+   "off": {
+    "text": "HEXIA CANYS",
+    "conf": 0.54246
+   },
+   "crop": "user-3b797d-p012-0164.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 12,
+   "box_px": [
+    403.5149230957031,
+    2260.333740234375,
+    1723.3082275390625,
+    2315.161865234375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9762672781944275
+   ],
+   "turned": true,
+   "on": {
+    "text": "Ads ss so  s o t  t  tos",
+    "conf": 0.62402
+   },
+   "off": {
+    "text": "Adjunto al texto del presente contrato se encuentran los siguientes documentos:",
+    "conf": 0.98986
+   },
+   "crop": "user-3b797d-p012-0165.png",
+   "vocab": [
+    0.0,
+    0.7777777777777778
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 12,
+   "box_px": [
+    431.7080993652344,
+    2716.645263671875,
+    2125.06103515625,
+    2773.241943359375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9884805679321289
+   ],
+   "turned": true,
+   "on": {
+    "text": "Te     l   ct ca l o   ocdeo",
+    "conf": 0.65698
+   },
+   "off": {
+    "text": "Técnico es la Jefatura del Departamento Comercial Zonal Tacna de la Gerencia Zonal Tacna de",
+    "conf": 0.99699
+   },
+   "crop": "user-3b797d-p012-0166.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 12,
+   "box_px": [
+    431.7080993652344,
+    2920.039794921875,
+    2126.8232421875,
+    2980.173828125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9575557708740234
+   ],
+   "turned": true,
+   "on": {
+    "text": "Ec     aa t  d   om mo",
+    "conf": 0.56589
+   },
+   "off": {
+    "text": "El contrato será administrado por el Gerente Zonal Moquegua de ELECTROSUR S.A. y como",
+    "conf": 0.98163
+   },
+   "crop": "user-3b797d-p012-0167.png",
+   "vocab": [
+    null,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 13,
+   "box_px": [
+    403.5149230957031,
+    1202.6815185546875,
+    2095.10595703125,
+    1248.6663818359375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9831864833831787
+   ],
+   "turned": true,
+   "on": {
+    "text": "ota  D Di ia Di ia   anto",
+    "conf": 0.61603
+   },
+   "off": {
+    "text": "notarial conforme la Décimo Tercera Disposición Complementaria Transitoria del Reglamento.",
+    "conf": 0.99915
+   },
+   "crop": "user-3b797d-p013-0168.png",
+   "vocab": [
+    0.0,
+    0.6666666666666666
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 13,
+   "box_px": [
+    137.44175720214844,
+    1432.6058349609375,
+    199.11434936523438,
+    1890.68603515625
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9999998807907104
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRICAL COMPANY S.A.C.",
+    "conf": 0.99042
+   },
+   "off": {
+    "text": "HEXIMS E CE EA.C.",
+    "conf": 0.56636
+   },
+   "crop": "user-3b797d-p013-0169.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 13,
+   "box_px": [
+    24.669034957885742,
+    2230.2666015625,
+    126.86931610107422,
+    2698.958740234375
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9999470710754395
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRICAL COMPANY S.A.C.",
+    "conf": 0.97608
+   },
+   "off": {
+    "text": "HXIS AESG",
+    "conf": 0.57726
+   },
+   "crop": "user-3b797d-p013-0170.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 14,
+   "box_px": [
+    399.99078369140625,
+    620.7958984375,
+    2123.299072265625,
+    682.6986083984375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9568771719932556
+   ],
+   "turned": true,
+   "on": {
+    "text": "r   a  s d   a     l  s   d d",
+    "conf": 0.69501
+   },
+   "off": {
+    "text": "firman por duplicado en señal de conformidad en la ciudad de Tacna, a los 02 días del mes de junio del",
+    "conf": 0.99665
+   },
+   "crop": "user-3b797d-p014-0171.png",
+   "vocab": [
+    null,
+    0.9230769230769231
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 14,
+   "box_px": [
+    1589.390625,
+    1262.8155517578125,
+    1911.85009765625,
+    1324.71826171875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9400047659873962
+   ],
+   "turned": true,
+   "on": {
+    "text": "BEPEESEGAL",
+    "conf": 0.59134
+   },
+   "off": {
+    "text": "REPRESENTANTE LEGAL",
+    "conf": 0.98056
+   },
+   "crop": "user-3b797d-p014-0172.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 15,
+   "box_px": [
+    306.6008605957031,
+    698.616455078125,
+    2112.7265625,
+    758.75048828125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9953397512435913
+   ],
+   "turned": true,
+   "on": {
+    "text": "p o   no  s     o    r   s oo de",
+    "conf": 0.58697
+   },
+   "off": {
+    "text": "EL CONTRATISTA se compromete a no revelar a terceros y a no usar en su provecho, ningún tipo de",
+    "conf": 0.97669
+   },
+   "crop": "user-3b797d-p015-0173.png",
+   "vocab": [
+    null,
+    0.625
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 15,
+   "box_px": [
+    40.5276985168457,
+    1367.1658935546875,
+    98.67613983154297,
+    1821.708740234375
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    1.0
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRICAL COMPANY S.A.C.",
+    "conf": 0.97772
+   },
+   "off": {
+    "text": "HEXIS   AC.",
+    "conf": 0.65894
+   },
+   "crop": "user-3b797d-p015-0174.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 15,
+   "box_px": [
+    308.3629150390625,
+    1524.57568359375,
+    2112.7265625,
+    1577.6351318359375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9890823364257812
+   ],
+   "turned": true,
+   "on": {
+    "text": "de  a  o  e  a s n   edd  es   a lo",
+    "conf": 0.62428
+   },
+   "off": {
+    "text": "del banco de datos personales y para los fines que se hayan detallado en el contrato que hayan acordado",
+    "conf": 0.99238
+   },
+   "crop": "user-3b797d-p015-0175.png",
+   "vocab": [
+    0.0,
+    0.8571428571428571
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 15,
+   "box_px": [
+    63.43465805053711,
+    2147.14013671875,
+    130.39346313476562,
+    2596.376953125
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    0.9746308922767639
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRICAL COMPANY SA.C",
+    "conf": 0.98477
+   },
+   "off": {
+    "text": "HXINI G CAESAC",
+    "conf": 0.44989
+   },
+   "crop": "user-3b797d-p015-0176.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 15,
+   "box_px": [
+    308.3629150390625,
+    2292.16943359375,
+    2116.250732421875,
+    2346.99755859375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9534632563591003
+   ],
+   "turned": true,
+   "on": {
+    "text": "EL    s         t l   to",
+    "conf": 0.63753
+   },
+   "off": {
+    "text": "ELECTROSUR S.A. es el titular del banco de datos personales en el cual se recopilará todos los datos",
+    "conf": 0.98711
+   },
+   "crop": "user-3b797d-p015-0177.png",
+   "vocab": [
+    null,
+    0.9090909090909091
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 15,
+   "box_px": [
+    306.6008605957031,
+    2704.2646484375,
+    2116.250732421875,
+    2760.861328125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9958821535110474
+   ],
+   "turned": true,
+   "on": {
+    "text": "and            de",
+    "conf": 0.72953
+   },
+   "off": {
+    "text": "ante cualquier efecto o consecuencia legal derivado de este incumplimiento. ELECTROSUR S.A. puede",
+    "conf": 0.98882
+   },
+   "crop": "user-3b797d-p015-0178.png",
+   "vocab": [
+    1.0,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 16,
+   "box_px": [
+    292.5042724609375,
+    850.7202758789062,
+    2102.154052734375,
+    907.3170776367188
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9251159429550171
+   ],
+   "turned": true,
+   "on": {
+    "text": "co   o    s       stos",
+    "conf": 0.80384
+   },
+   "off": {
+    "text": "complementarias, entre los fines de tratamiento que se debe contemplar EL CONTRATISTA están los datos",
+    "conf": 0.99491
+   },
+   "crop": "user-3b797d-p016-0179.png",
+   "vocab": [
+    0.0,
+    0.8333333333333334
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 16,
+   "box_px": [
+    294.2663269042969,
+    1262.8155517578125,
+    2107.4404296875,
+    1322.9495849609375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9299052357673645
+   ],
+   "turned": true,
+   "on": {
+    "text": "epe       d  p  od  d  s dira",
+    "conf": 0.68546
+   },
+   "off": {
+    "text": "especial las que pongan en peligro la seguridad y prevención de incidencias de ELECTROSUR SA, se impedirá",
+    "conf": 0.99628
+   },
+   "crop": "user-3b797d-p016-0180.png",
+   "vocab": [
+    0.0,
+    0.7
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 16,
+   "box_px": [
+    75.76918029785156,
+    1312.3377685546875,
+    156.82456970214844,
+    1773.9552001953125
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    1.0
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTRICAL COMPANY S.A.C.",
+    "conf": 0.99062
+   },
+   "off": {
+    "text": "HEXIS   AC..",
+    "conf": 0.72811
+   },
+   "crop": "user-3b797d-p016-0181.png",
+   "vocab": [
+    1.0,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 16,
+   "box_px": [
+    269.5972900390625,
+    1918.984375,
+    294.2663269042969,
+    1941.976806640625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9497227072715759
+   ],
+   "turned": true,
+   "on": {
+    "text": "2",
+    "conf": 0.74538
+   },
+   "off": {
+    "text": "2",
+    "conf": 0.52011
+   },
+   "crop": "user-3b797d-p016-0182.png",
+   "vocab": [
+    null,
+    null
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 16,
+   "box_px": [
+    61.672584533691406,
+    2311.62451171875,
+    121.58309936523438,
+    2578.690673828125
+   ],
+   "vertical": true,
+   "cls": [
+    "180",
+    1.0
+   ],
+   "turned": true,
+   "on": {
+    "text": "HEXING ELECTHICAL",
+    "conf": 0.94069
+   },
+   "off": {
+    "text": "HEXIE ECL",
+    "conf": 0.51315
+   },
+   "crop": "user-3b797d-p016-0183.png",
+   "vocab": [
+    0.5,
+    0.0
+   ],
+   "right": "on",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-Electrosur - Contrato Complementario.pdf",
+   "page": 16,
+   "box_px": [
+    592.0568237304688,
+    3188.87451171875,
+    1853.70166015625,
+    3243.70263671875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9980429410934448
+   ],
+   "turned": true,
+   "on": {
+    "text": "ww#...oehw..home",
+    "conf": 0.53557
+   },
+   "off": {
+    "text": "www.electrosur.com.pehttp//mesadepartesvirtual.electrosur.com.pe:82/mesapartesvirtual/#/home",
+    "conf": 0.99986
+   },
+   "crop": "user-3b797d-p016-0184.png",
+   "vocab": [
+    0.5,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 1,
+   "box_px": [
+    424.4886474609375,
+    1248.310546875,
+    2162.95458984375,
+    1310.195556640625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.997700035572052
+   ],
+   "turned": true,
+   "on": {
+    "text": "SEUO UO OO  O O UO ELIAD",
+    "conf": 0.5978
+   },
+   "off": {
+    "text": "SERVICIO PÚBLICO DE ELECTRICIDAD ELECTRO NORTE MEDIO SOCIEDAD",
+    "conf": 0.98925
+   },
+   "crop": "user-930e84-p001-0185.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 1,
+   "box_px": [
+    426.25,
+    1297.818603515625,
+    2161.193115234375,
+    1357.935546875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9970429539680481
+   ],
+   "turned": true,
+   "on": {
+    "text": "HN        4  H54",
+    "conf": 0.69962
+   },
+   "off": {
+    "text": "ANONIMA - HIDRANDINA S.A., en adelante LA ENTIDAD, con RUC N° 20132023540,",
+    "conf": 0.97435
+   },
+   "crop": "user-930e84-p001-0186.png",
+   "vocab": [
+    null,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 1,
+   "box_px": [
+    424.4886474609375,
+    1343.7904052734375,
+    2161.193115234375,
+    1410.9798583984375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9856855869293213
+   ],
+   "turned": true,
+   "on": {
+    "text": "coi  i  i  i n in i i  i ai dilo,",
+    "conf": 0.62806
+   },
+   "off": {
+    "text": "con domicilio legal en Jirón San Martin N° 831, del distrito y provincia de Trujillo,",
+    "conf": 0.98837
+   },
+   "crop": "user-930e84-p001-0187.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 1,
+   "box_px": [
+    426.25,
+    1490.54638671875,
+    2164.7158203125,
+    1550.663330078125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9985048770904541
+   ],
+   "turned": true,
+   "on": {
+    "text": "Ram      o    der",
+    "conf": 0.7695
+   },
+   "off": {
+    "text": "Ramos Verastegui, identificado con DNI N°18215719; ambos con facultades de poder",
+    "conf": 0.99069
+   },
+   "crop": "user-930e84-p001-0188.png",
+   "vocab": [
+    0.0,
+    0.8888888888888888
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 1,
+   "box_px": [
+    424.4886474609375,
+    1877.770263671875,
+    2161.193115234375,
+    1936.1190185546875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9987969398498535
+   ],
+   "turned": true,
+   "on": {
+    "text": "Para  e       a   lin",
+    "conf": 0.63264
+   },
+   "off": {
+    "text": "Partida Electrónica Nº 12601784 del Registro de Personas Jurídicas de la Zona Registral Nº",
+    "conf": 0.99484
+   },
+   "crop": "user-930e84-p001-0189.png",
+   "vocab": [
+    0.5,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 1,
+   "box_px": [
+    426.25,
+    1973.25,
+    2161.193115234375,
+    2031.598876953125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9433299899101257
+   ],
+   "turned": true,
+   "on": {
+    "text": "co       s    s    o",
+    "conf": 0.62712
+   },
+   "off": {
+    "text": "con DNI N° 70034859 según consta en el asiento N° C00010 de la Partida Electrónica N°",
+    "conf": 0.97218
+   },
+   "crop": "user-930e84-p001-0190.png",
+   "vocab": [
+    null,
+    0.8571428571428571
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 1,
+   "box_px": [
+    426.25,
+    2020.989990234375,
+    2159.431884765625,
+    2079.3388671875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9834946990013123
+   ],
+   "turned": true,
+   "on": {
+    "text": "12e   l  l     e    a,",
+    "conf": 0.63926
+   },
+   "off": {
+    "text": "12601784 del Registro de Personas Jurídicas de la Zona Registral N° IX - Sede Lima,",
+    "conf": 0.96962
+   },
+   "crop": "user-930e84-p001-0191.png",
+   "vocab": [
+    null,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 1,
+   "box_px": [
+    426.25,
+    2167.74609375,
+    2162.95458984375,
+    2224.32666015625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9384368062019348
+   ],
+   "turned": true,
+   "on": {
+    "text": "do l       s     t  r lo",
+    "conf": 0.65154
+   },
+   "off": {
+    "text": "de Crédito del Perú, a quien en adelante se le denominará EL CONTRATISTA en los",
+    "conf": 0.99374
+   },
+   "crop": "user-930e84-p001-0192.png",
+   "vocab": [
+    null,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 1,
+   "box_px": [
+    329.375,
+    3191.502197265625,
+    417.44317626953125,
+    3233.9375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9002766609191895
+   ],
+   "turned": true,
+   "on": {
+    "text": "8aal",
+    "conf": 0.3791
+   },
+   "off": {
+    "text": "Logal",
+    "conf": 0.84559
+   },
+   "crop": "user-930e84-p001-0193.png",
+   "vocab": [
+    0.0,
+    0.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 2,
+   "box_px": [
+    109.20454406738281,
+    518.0665283203125,
+    162.0454559326172,
+    560.5020141601562
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9147531986236572
+   ],
+   "turned": true,
+   "on": {
+    "text": "。8。",
+    "conf": 0.57931
+   },
+   "off": {
+    "text": "B°",
+    "conf": 0.95852
+   },
+   "crop": "user-930e84-p002-0194.png",
+   "vocab": [
+    null,
+    null
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 2,
+   "box_px": [
+    391.0227355957031,
+    2827.26416015625,
+    2117.1591796875,
+    2885.613037109375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9920388460159302
+   ],
+   "turned": true,
+   "on": {
+    "text": "co  o   o   o   ro  oo",
+    "conf": 0.64805
+   },
+   "off": {
+    "text": "cronograma de plazos de entregas, luego de la recepción formal y completa de la",
+    "conf": 0.99692
+   },
+   "crop": "user-930e84-p002-0195.png",
+   "vocab": [
+    null,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 2,
+   "box_px": [
+    396.30682373046875,
+    3016.455810546875,
+    2113.63623046875,
+    3076.57275390625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9649221897125244
+   ],
+   "turned": true,
+   "on": {
+    "text": "Da        a  o  ar rta",
+    "conf": 0.72079
+   },
+   "off": {
+    "text": "Para realizar el pago cabe indicar número de cuenta bancaria, CCl Código de (Cuenta",
+    "conf": 0.97817
+   },
+   "crop": "user-930e84-p002-0196.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 3,
+   "box_px": [
+    426.25,
+    1014.9153442382812,
+    2162.95458984375,
+    1075.0322265625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9576654434204102
+   ],
+   "turned": true,
+   "on": {
+    "text": "Pdae  e d t  a te a      ten",
+    "conf": 0.67073
+   },
+   "off": {
+    "text": "Para tal efecto, el responsable de otorgar la conformidad de la prestación deberá hacerlo en",
+    "conf": 0.99554
+   },
+   "crop": "user-930e84-p003-0197.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 3,
+   "box_px": [
+    426.25,
+    1064.4234619140625,
+    2164.7158203125,
+    1122.772216796875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9921161532402039
+   ],
+   "turned": true,
+   "on": {
+    "text": "n   c     ( s       sn",
+    "conf": 0.76181
+   },
+   "off": {
+    "text": "un plazo que no excederá de los siete (7) días de producida la recepción, salvo que se",
+    "conf": 0.97228
+   },
+   "crop": "user-930e84-p003-0198.png",
+   "vocab": [
+    null,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 3,
+   "box_px": [
+    424.4886474609375,
+    1112.163330078125,
+    2162.95458984375,
+    1172.2802734375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.986965537071228
+   ],
+   "turned": true,
+   "on": {
+    "text": "reb n  e  vun  e ue  ve e veuo",
+    "conf": 0.62427
+   },
+   "off": {
+    "text": "requiera efectuar pruebas que permitan verificar el cumplimiento de la obligación, en cuyo",
+    "conf": 0.99587
+   },
+   "crop": "user-930e84-p003-0199.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 3,
+   "box_px": [
+    426.25,
+    1352.631103515625,
+    2164.7158203125,
+    1410.9798583984375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9449781775474548
+   ],
+   "turned": true,
+   "on": {
+    "text": "otor   ls  or   l o  ones",
+    "conf": 0.71205
+   },
+   "off": {
+    "text": "otorgada la conformidad de los bienes, siempre que se verifiquen las condiciones",
+    "conf": 0.99806
+   },
+   "crop": "user-930e84-p003-0200.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 3,
+   "box_px": [
+    424.4886474609375,
+    1640.8387451171875,
+    2161.193115234375,
+    1699.1875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9888021945953369
+   ],
+   "turned": true,
+   "on": {
+    "text": "doeg d    do    l     li",
+    "conf": 0.75609
+   },
+   "off": {
+    "text": "de su Reglamento, los que se computan desde la oportunidad en que el pago debió",
+    "conf": 0.98755
+   },
+   "crop": "user-930e84-p003-0201.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 3,
+   "box_px": [
+    128.5795440673828,
+    1702.723876953125,
+    352.2727355957031,
+    1752.23193359375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9532434344291687
+   ],
+   "turned": true,
+   "on": {
+    "text": "hos e",
+    "conf": 0.44651
+   },
+   "off": {
+    "text": "Jhosely Gutierrez E.",
+    "conf": 0.91005
+   },
+   "crop": "user-930e84-p003-0202.png",
+   "vocab": [
+    0.0,
+    0.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 3,
+   "box_px": [
+    1784.2613525390625,
+    2415.286376953125,
+    1819.4886474609375,
+    2457.721923828125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9096944332122803
+   ],
+   "turned": true,
+   "on": {
+    "text": "0",
+    "conf": 0.99793
+   },
+   "off": {
+    "text": "0",
+    "conf": 0.99905
+   },
+   "crop": "user-930e84-p003-0203.png",
+   "vocab": [
+    null,
+    null
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 3,
+   "box_px": [
+    426.25,
+    2714.102783203125,
+    2162.95458984375,
+    2768.915283203125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9930484294891357
+   ],
+   "turned": true,
+   "on": {
+    "text": "Nnt i   n   s s s n  lia",
+    "conf": 0.62303
+   },
+   "off": {
+    "text": "No se aceptarán entregas anticipadas, salvo que sea requerido por la Entidad, previa",
+    "conf": 0.98865
+   },
+   "crop": "user-930e84-p003-0204.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 3,
+   "box_px": [
+    426.25,
+    2906.830810546875,
+    2162.95458984375,
+    2961.643310546875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9950276017189026
+   ],
+   "turned": true,
+   "on": {
+    "text": "Lo s  s s s   o s  lnte",
+    "conf": 0.70305
+   },
+   "off": {
+    "text": "Los bienes serán entregados en las siguientes direcciones, según la empresa participante",
+    "conf": 0.99534
+   },
+   "crop": "user-930e84-p003-0205.png",
+   "vocab": [
+    0.0,
+    0.7
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 3,
+   "box_px": [
+    1261.1363525390625,
+    3248.082763671875,
+    1366.818115234375,
+    3324.113037109375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9549111723899841
+   ],
+   "turned": true,
+   "on": {
+    "text": "080",
+    "conf": 0.52238
+   },
+   "off": {
+    "text": "VoBo",
+    "conf": 0.63124
+   },
+   "crop": "user-930e84-p003-0206.png",
+   "vocab": [
+    null,
+    0.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 3,
+   "box_px": [
+    1255.852294921875,
+    3385.998046875,
+    1380.9090576171875,
+    3444.346923828125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9381086826324463
+   ],
+   "turned": true,
+   "on": {
+    "text": "Vz s",
+    "conf": 0.4707
+   },
+   "off": {
+    "text": "y Finanzas",
+    "conf": 0.97626
+   },
+   "crop": "user-930e84-p003-0207.png",
+   "vocab": [
+    null,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 3,
+   "box_px": [
+    1697.95458984375,
+    3398.375,
+    1845.9090576171875,
+    3447.883056640625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9966431856155396
+   ],
+   "turned": true,
+   "on": {
+    "text": "eaomcial",
+    "conf": 0.60688
+   },
+   "off": {
+    "text": "Comercial",
+    "conf": 0.95942
+   },
+   "crop": "user-930e84-p003-0208.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 4,
+   "box_px": [
+    383.9772644042969,
+    799.20166015625,
+    2110.113525390625,
+    855.7822875976562
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.971646249294281
+   ],
+   "turned": true,
+   "on": {
+    "text": "inoos  std  s anc n    io acolo",
+    "conf": 0.60702
+   },
+   "off": {
+    "text": "incondicional, solidaria, irrevocable, y de realización automática en el país al solo",
+    "conf": 0.999
+   },
+   "crop": "user-930e84-p004-0209.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 4,
+   "box_px": [
+    461.4772644042969,
+    1281.9052734375,
+    2113.63623046875,
+    1340.2540283203125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9951926469802856
+   ],
+   "turned": true,
+   "on": {
+    "text": "CO       O   N",
+    "conf": 0.73618
+   },
+   "off": {
+    "text": "CON 58/100 DÓLARES AMERICANOS) a través de la CARTA FIANZA N°",
+    "conf": 0.99211
+   },
+   "crop": "user-930e84-p004-0210.png",
+   "vocab": [
+    null,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 4,
+   "box_px": [
+    459.7159118652344,
+    1619.6209716796875,
+    2115.397705078125,
+    1679.7379150390625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9842066764831543
+   ],
+   "turned": true,
+   "on": {
+    "text": "IL   A       DE",
+    "conf": 0.65305
+   },
+   "off": {
+    "text": "la CARTA FIANZA N° 3012025041891 emitida por AVLA PERÚ COMPAÑÍA DE",
+    "conf": 0.98365
+   },
+   "crop": "user-930e84-p004-0211.png",
+   "vocab": [
+    null,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 4,
+   "box_px": [
+    387.5,
+    2641.60888671875,
+    2111.875,
+    2699.957763671875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9686248302459717
+   ],
+   "turned": true,
+   "on": {
+    "text": "oa  osds o oao   oa  ( oo  oao",
+    "conf": 0.65537
+   },
+   "off": {
+    "text": "mayor de ocho (8) días. Dependiendo de la complejidad o sofisticación de las",
+    "conf": 0.99535
+   },
+   "crop": "user-930e84-p004-0212.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 4,
+   "box_px": [
+    387.5,
+    2832.568603515625,
+    2110.113525390625,
+    2894.45361328125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9702181220054626
+   ],
+   "turned": true,
+   "on": {
+    "text": "aio  os   ce   cot te",
+    "conf": 0.59122
+   },
+   "off": {
+    "text": "adicionales para las correcciones pertinentes. En este supuesto corresponde aplicar la",
+    "conf": 0.99337
+   },
+   "crop": "user-930e84-p004-0213.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 4,
+   "box_px": [
+    383.9772644042969,
+    3119.008056640625,
+    2074.88623046875,
+    3179.125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.955792248249054
+   ],
+   "turned": true,
+   "on": {
+    "text": "ea  da a od a  d e dda  d s",
+    "conf": 0.63961
+   },
+   "off": {
+    "text": "ejecutada la prestación, aplicándose la penalidad que corresponda por cada día de atraso.",
+    "conf": 0.9927
+   },
+   "crop": "user-930e84-p004-0214.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 5,
+   "box_px": [
+    422.7272644042969,
+    429.6592712402344,
+    1979.772705078125,
+    493.3125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9503215551376343
+   ],
+   "turned": true,
+   "on": {
+    "text": "CLA D D DA  DD DSTA",
+    "conf": 0.69899
+   },
+   "off": {
+    "text": "CLÁUSULA DÉCIMO PRIMERA: DECLARACIÓN JURADA DEL CONTRATISTA",
+    "conf": 0.99904
+   },
+   "crop": "user-930e84-p005-0215.png",
+   "vocab": [
+    0.5,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 5,
+   "box_px": [
+    420.9659118652344,
+    532.2117309570312,
+    2159.431884765625,
+    594.0968017578125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9877457022666931
+   ],
+   "turned": true,
+   "on": {
+    "text": "de do a cd c a  cd c o d c csa",
+    "conf": 0.5944
+   },
+   "off": {
+    "text": "derivadas del presente contrato, bajo sanción de quedar inhabilitado para contratar con el",
+    "conf": 0.99455
+   },
+   "crop": "user-930e84-p005-0216.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 5,
+   "box_px": [
+    420.9659118652344,
+    2125.310546875,
+    2159.431884765625,
+    2178.35498046875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9456743597984314
+   ],
+   "turned": true,
+   "on": {
+    "text": "s  t          a  t iel",
+    "conf": 0.72935
+   },
+   "off": {
+    "text": "si fuera necesario, se cobra del monto resultante de la ejecución de la garantía de fiel",
+    "conf": 0.9856
+   },
+   "crop": "user-930e84-p005-0217.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 6,
+   "box_px": [
+    89.82954406738281,
+    367.7742004394531,
+    243.06817626953125,
+    406.67340087890625
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9948404431343079
+   ],
+   "turned": true,
+   "on": {
+    "text": "rleede  ae",
+    "conf": 0.47032
+   },
+   "off": {
+    "text": "Jete de Departamento",
+    "conf": 0.9402
+   },
+   "crop": "user-930e84-p006-0218.png",
+   "vocab": [
+    0.0,
+    0.5
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 6,
+   "box_px": [
+    391.0227355957031,
+    838.100830078125,
+    2117.1591796875,
+    892.913330078125
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9950209856033325
+   ],
+   "turned": true,
+   "on": {
+    "text": "neg n o  uo ao o o udd uo o o ugao",
+    "conf": 0.56296
+   },
+   "off": {
+    "text": "negociado o efectuado, cualquier pago o, en general, cualquier beneficio o incentivo ilegal",
+    "conf": 0.98886
+   },
+   "crop": "user-930e84-p006-0219.png",
+   "vocab": [
+    0.0,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 6,
+   "box_px": [
+    392.7840881347656,
+    1603.7076416015625,
+    2115.397705078125,
+    1662.0565185546875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9546396732330322
+   ],
+   "turned": true,
+   "on": {
+    "text": "        e   r   c",
+    "conf": 0.68647
+   },
+   "off": {
+    "text": "los que deba interactuar, en situaciones reñidas con la ética. En tal sentido, reconoce y",
+    "conf": 0.98331
+   },
+   "crop": "user-930e84-p006-0220.png",
+   "vocab": [
+    null,
+    1.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 6,
+   "box_px": [
+    391.0227355957031,
+    2763.61083984375,
+    2115.397705078125,
+    2825.49609375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.971589982509613
+   ],
+   "turned": true,
+   "on": {
+    "text": "caso add aa u a anel s o a aa ao a   ael o o sas",
+    "conf": 0.65629
+   },
+   "off": {
+    "text": "caso no se llegue a un acuerdo entre ambas partes o se llegue a un acuerdo parcial. Las",
+    "conf": 0.99124
+   },
+   "crop": "user-930e84-p006-0221.png",
+   "vocab": [
+    0.2,
+    1.0
+   ],
+   "right": "off",
+   "method": "vocabulary"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 7,
+   "box_px": [
+    170.85226440429688,
+    1715.100830078125,
+    285.3409118652344,
+    1759.304443359375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9428519010543823
+   ],
+   "turned": true,
+   "on": {
+    "text": "Coi",
+    "conf": 0.64224
+   },
+   "off": {
+    "text": "Contratacio",
+    "conf": 0.92874
+   },
+   "crop": "user-930e84-p007-0222.png",
+   "vocab": [
+    0.0,
+    0.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 7,
+   "box_px": [
+    546.022705078125,
+    2726.47998046875,
+    715.1136474609375,
+    2788.364990234375
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9135829210281372
+   ],
+   "turned": true,
+   "on": {
+    "text": "-13.",
+    "conf": 0.62717
+   },
+   "off": {
+    "text": "ickt",
+    "conf": 0.85578
+   },
+   "crop": "user-930e84-p007-0223.png",
+   "vocab": [
+    null,
+    0.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 7,
+   "box_px": [
+    708.0681762695312,
+    2730.01611328125,
+    864.8295288085938,
+    2791.9013671875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.9887843132019043
+   ],
+   "turned": true,
+   "on": {
+    "text": "cusy",
+    "conf": 0.81826
+   },
+   "off": {
+    "text": "tamo",
+    "conf": 0.67632
+   },
+   "crop": "user-930e84-p007-0224.png",
+   "vocab": [
+    0.0,
+    0.0
+   ],
+   "right": null,
+   "method": "manual"
+  },
+  {
+   "set": "user",
+   "doc": "scanned-CONTRATO HDNA.pdf",
+   "page": 7,
+   "box_px": [
+    1636.3067626953125,
+    3338.258056640625,
+    1773.693115234375,
+    3394.8388671875
+   ],
+   "vertical": false,
+   "cls": [
+    "180",
+    0.994657576084137
+   ],
+   "turned": true,
+   "on": {
+    "text": "Comelal",
+    "conf": 0.71754
+   },
+   "off": {
+    "text": "Comeretal",
+    "conf": 0.98873
+   },
+   "crop": "user-930e84-p007-0225.png",
+   "vocab": [
+    0.0,
+    0.0
+   ],
+   "right": null,
+   "method": "manual"
+  }
+ ]
+}

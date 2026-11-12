@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Literal
 
 Box = tuple[float, float, float, float]
-AnchorPiece = tuple[str, tuple[tuple[int, Box], ...]]    # piece text, its words (page, box)
+AnchorPiece = tuple[str, tuple[tuple[int, Box], ...]]    # piece text as the PDF reads it, its words (page, box)
 
 
 @dataclass(frozen=True)
@@ -77,7 +77,8 @@ def _anchor(raw: dict) -> tuple[tuple[AnchorPiece, ...] | None, str]:
         for value in piece["words"]:
             page, *box = value.split()
             words.append((int(page), tuple(float(v) for v in box)))
-        pieces.append((piece["text"], tuple(words)))
+        # An approximate match on a scanned page also records what OCR read; chunk text holds that.
+        pieces.append((piece.get("ocr_text", piece["text"]), tuple(words)))
     return tuple(pieces), "ok"
 
 

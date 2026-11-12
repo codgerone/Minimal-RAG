@@ -1,11 +1,12 @@
-# 系统设计（V3.15）
+# 系统设计（V4.1）
 
 ## 1. 数据主链
 
 ```
-入库   PDF ─→ Parser ─→ 主文档（文本 / 列表 / 表格位置，按阅读顺序）─→ 文档语言
-              │
-              └─→ TableExtractor × N ─→ 准入·分组·评分选优 ─→ 续表合并 ─→ 规则表头判定
+入库   PDF ─→ 页面判定 ─→ 有扫描页时：OcrEngine ─→ OCR 事实（ocr.json）─→ 文字层 PDF（自检）
+       解析用 PDF（原 PDF 或文字层 PDF）─→ Parser ─→ 主文档（文本 / 列表 / 表格位置，按阅读顺序）─→ 文档语言
+                                          │
+                                          └─→ TableExtractor × N ─→ 准入·分组·评分选优 ─→ 续表合并 ─→ 规则表头判定
                     ─→ TableStructurer（表格结构）─→ TableFormatter（入库文本）+ 整表文本 ─→ 表格检索文本（行 / 行 + 引导句 / 摘要）─┐
                                                                                                                          ↓
                        组装后的文档（ParsedDocument）─→ Chunker ─→ chunks ─→ 来源区域 ─┬─→ Embedder ─→ Chroma（向量索引）
@@ -33,6 +34,8 @@
 
 **查询侧模块**（分解、去编码、写法、融合、合并，[rules/query-planning.md](rules/query-planning.md)）的预先规划只在查询侧对比中使用；多轮检索复用其中的去编码与 RRF 融合（`rag/query/execution.py`）。规划与检索执行分开：规划输出问题列表与每个问题的各写法（`rag/query/planning.py`），检索执行按配置取用其中一部分。各模块的评估结论见 [decisions/015-query-modules.md](decisions/015-query-modules.md)。
 
+**扫描页**（[rules/ocr.md](rules/ocr.md)，`rag/ingest/ocr/`）：OCR 在解析之前独立完成，只认字（文字、框、置信度），结果作为事实存为 `ocr.json`；再由原 PDF 与事实派生带隐形文字层的 `ocr.pdf`，通过自检后作为"解析用 PDF"（`SourceDocument.parse_file`）。下游所有读 PDF 的环节都读解析用 PDF，结构仍由 Docling 版面解析与表格工具恢复，与数字 PDF 相同；`file_hash` 仍是原文件的哈希。选这条路线而不是由解析器自己 OCR，原因见 [decisions/020-ocr-route.md](decisions/020-ocr-route.md)。
+
 各阶段的数据模型定义在 `rag/models.py`（文档与 chunk）和 `rag/ingest/tables/models.py`（表格证据）。设计原则：解析器、工具和 LLM 的原始结果是"事实"，不会被后续阶段原地修改；选优、表头、结构标注是否采用这类判断单独记录，审核页可以逐层追溯。
 
 **表格的三个环节**：一张表经过选优与续表合并后，先由规则判定表头（这是事实，续表判定也要用到）；然后：
@@ -49,6 +52,7 @@
 
 | 接口 | 定义位置 | 内置实现 |
 |---|---|---|
+| OcrEngine | `rag/ingest/ocr/__init__.py` | `rapidocr` |
 | Parser | `rag/ingest/parsers/__init__.py` | `pymupdf_pages`、`docling_layout` |
 | TableExtractor（可配多个） | `rag/ingest/tables/extractors.py` | `pymupdf`、`camelot`、`docling`、`unstructured` |
 | TableStructurer | `rag/ingest/tables/structure.py` | `header_rules`、`llm_annotation` |
@@ -81,7 +85,7 @@
 
 `configs/*.toml` 是内置装配：七种表格处理组合各一份，`ingest --all-configs` 重建它们，13 种查询组合（加上返回单元）都从这些索引评估（`scripts/eval_tables.sh`）。`configs/extra/*.toml` 是不参与 `--all-configs` 的配置，同样按名称用 `--config` 选择；名称在两处之间不能重复。
 
-配置中解析、表格（提取器与三个表格环节）、分块、编码相关的设置，加上编码器身份（模型名与版本）和 `RULES_VERSION`，一起计算出**构建指纹**，记录在索引的 `manifest.json` 中。用 LLM 的表格环节，其模型、提示词版本、推理强度、长度与上下文规则也进入指纹。配置了 `[lexical]` 时，其分析器设置（去停用词、词干化）也进入指纹；没有这一节的配置不建 BM25 索引，指纹也不含它。检索器 `[retriever] use`、命中表格时的返回单元 `table_return_unit`、混合检索中 BM25 排名的权重 `bm25_weight`（默认 1，[decisions/017-bm25-weight.md](decisions/017-bm25-weight.md)）、检索的 `top_k`（问答用，默认 4）、文档过滤开关 `document_filter`、评估的 `[eval] top_k`（默认 3，与历史基线一致）、问答 LLM 设置、查询的一路 `[query] mode` 与多轮检索设置 `[multi_round]` 不参与计算，修改它们不需要重建索引。
+配置中 OCR（`[ocr]` 的设置与引擎身份：版本、模型文件名、行方向规则）、解析、表格（提取器与三个表格环节）、分块、编码相关的设置，加上编码器身份（模型名与版本）和 `RULES_VERSION`，一起计算出**构建指纹**，记录在索引的 `manifest.json` 中。用 LLM 的表格环节，其模型、提示词版本、推理强度、长度与上下文规则也进入指纹。配置了 `[lexical]` 时，其分析器设置（去停用词、词干化）也进入指纹；没有这一节的配置不建 BM25 索引，指纹也不含它。检索器 `[retriever] use`、命中表格时的返回单元 `table_return_unit`、混合检索中 BM25 排名的权重 `bm25_weight`（默认 1，[decisions/017-bm25-weight.md](decisions/017-bm25-weight.md)）、检索的 `top_k`（问答用，默认 4）、文档过滤开关 `document_filter`、评估的 `[eval] top_k`（默认 3，与历史基线一致）、问答 LLM 设置、查询的一路 `[query] mode` 与多轮检索设置 `[multi_round]` 不参与计算，修改它们不需要重建索引。
 
 配置改动导致指纹变化后，`status` 会显示"配置已改变"，这时需要用 `ingest --force` 全量重建。内置算法的输出发生变化时，要同步提升 `rag/config.py` 中的 `RULES_VERSION`；LLM 提示词改动时提升 `rag/ingest/tables/llm_tables.py` 中的 `PROMPT_VERSION`。
 
@@ -92,6 +96,8 @@
 **整表库**记录每张表格的整表文本（`grid_rows_v1`，续表已合并）和它被切成的 chunk（摘要 chunk 也算该表的成员），不做向量化，只按 chunk 查表。查询时检索器先给 chunk 排序，再由返回单元一步（`rag/query/units.py`）映射：`table_return_unit = "table"` 时表格 chunk 换成整表，占据它排名最靠前的 chunk 的位置，同表的其他 chunk 跳过，后面的结果依次补上；`"chunk"` 时原样返回。原因见 [decisions/012-whole-table-return.md](decisions/012-whole-table-return.md)。
 
 **中间结果**（`documents/<文档名>/`）：解析器原始输出、组装后的文档（含表格结构与 LLM 调用记录）、表格选优与续表的全部证据、chunk 及其来源区域。它们按类型存成 JSON，可以原样读回（`rag/index/audit.py`）；入库审核页和评估都从这里读取，不重新处理 PDF。
+
+**OCR 事实**：`.rag/ocr/<原文件哈希>-<OCR 设置哈希>/` 存 `ocr.json` 与 `ocr.pdf`，不属于任何索引，各配置共用；OCR 设置不变时重建索引不重做 OCR。每份索引的中间结果另有 `pages.json`（页面判定与 OCR 目录），评估按它判定文档类型。
 
 **LLM 缓存**：`.rag/llm-cache/` 按请求内容缓存表格处理、查询规划与多轮检索的 LLM 调用结果，不属于任何索引，全量重建时保留并复用（[rules/table-llm.md](rules/table-llm.md)）。
 
@@ -108,7 +114,7 @@
 
 ## 6. 评估与报告
 
-评估流程和指标定义见 [rules/evaluation.md](rules/evaluation.md)。关键设计是：证据按"信息项 → 方案 → excerpt"组织，原因见 [decisions/003-evidence-schemes.md](decisions/003-evidence-schemes.md)；excerpt 与 chunk 的对应按 PDF 坐标判定，原因见 [decisions/004-coordinate-mapping.md](decisions/004-coordinate-mapping.md)。excerpt 的位置只依赖 PDF，人工确认一次后写入 ground-truth；chunk 的来源区域在入库时由 chunk 来源记录和解析器坐标统一推出（`rag/ingest/regions.py`），所以任何装配都不需要为评估另做确认。对插件的要求：解析器提供元素坐标，分块器记录 chunk 内容来自哪个元素的哪段文字；缺细坐标时记粗略区域，评估在其中按片段文字兜底。
+评估流程和指标定义见 [rules/evaluation.md](rules/evaluation.md)。关键设计是：证据按"信息项 → 方案 → excerpt"组织，原因见 [decisions/003-evidence-schemes.md](decisions/003-evidence-schemes.md)；excerpt 与 chunk 的对应按 PDF 坐标判定，原因见 [decisions/004-coordinate-mapping.md](decisions/004-coordinate-mapping.md)。excerpt 的位置只依赖 PDF，人工确认一次后写入 ground-truth；chunk 的来源区域在入库时由 chunk 来源记录和解析器坐标统一推出（`rag/ingest/regions.py`），所以任何装配都不需要为评估另做确认。对插件的要求：解析器提供元素坐标，分块器记录 chunk 内容来自哪个元素的哪段文字；缺细坐标时记粗略区域，评估在其中按片段文字兜底。扫描件的 excerpt 照抄纸面，在 `ocr.pdf` 上定位；纸面与 OCR 文字不同时近似匹配，记下 OCR 读出的文字供文字兜底比较。评估报告与对比页在全部题目之外按文档类型（数字 PDF、扫描 PDF、部分扫描）分列指标。
 
 每次评估在 `reports/eval/<日期>_<配置>_k<K>_filter-on|filter-off[_<检索器>][_table]/` 下生成 `index.html` 和 `result.json`（检索器不是 `semantic` 时目录名带上检索器名，返回整表时加 `_table`），同名时在目录名后加 `_2`、`_3`。评估另报表格证据指标（表格 chunk 名次、所需返回单元数与 token、K 曲线）和入库的 LLM 成本。评估页的"较上次"对比同一配置、同一检索器、同一返回单元、同一 K、同一数据集版本的上一次运行（不论过滤状态）。
 
@@ -130,10 +136,10 @@ rag/
   models.py        文档、chunk 等公共模型
   jsonio.py        JSON 写出与按类型读回
   paths.py         目录约定（.rag/ 与 reports/）
-  ingest/          sources（发现 PDF）、parsers/、language（文档语言）、tables/（提取、选优、续表、表头、结构、写法、LLM）、chunkers/、assemble、pipeline
+  ingest/          sources（发现 PDF）、ocr/（页面判定、OCR、文字层 PDF）、parsers/、language（文档语言）、tables/（提取、选优、续表、表头、结构、写法、LLM）、chunkers/、assemble、pipeline
   index/           embedder、store（Chroma）、analyzer 与 lexical（BM25）、tables（整表库）、audit（中间结果）、manifest、status、builder
   query/           scope（检索范围、去编码）、retriever、units（返回单元与检索缓存）、planning（规划）、execution（检索执行、融合与合并）、prompt、llm、multi_round/（state、retrieval、planner、runner）
   eval/            dataset、judge、metrics、table_metrics、table_structure（结构标注答案）、runner、query_compare（查询侧对比数据）、multi_round（多轮检索评估的运行事实）
-  reports/         html（页面外壳；样式与脚本写入 reports/assets/）、ingest（入库审核页）、evaluation、compare 与 table_compare（对比页）、query_compare（查询侧对比页）、multi_round（多轮检索评估页与逐题页）、index_page
+  reports/         html（页面外壳；样式与脚本写入 reports/assets/）、ingest 与 ocr（入库审核页及其 OCR 标签页）、anchor_review（excerpt 定位审核）、evaluation、compare 与 table_compare（对比页）、query_compare（查询侧对比页）、multi_round（多轮检索评估页与逐题页）、index_page
 tests/             算法、装配校验、索引一致性、检索范围、检索、评估、报告
 ```

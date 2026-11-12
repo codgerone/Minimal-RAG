@@ -94,7 +94,7 @@ def run_extractor(
     for strategy in strategies:
         configured = adapters.get(strategy)
         execution, produced, diagnostics = run_strategy(
-            source.absolute_path, page_count,
+            source.pdf_path, page_count,
             configured if isinstance(configured, StrategyAdapter) else None,
             tool=tool, strategy=strategy,
             initialization_error=configured if isinstance(configured, Exception) else None,

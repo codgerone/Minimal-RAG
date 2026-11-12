@@ -70,11 +70,13 @@ def current_status(workspace: Workspace, assembly: Assembly,
     sources = discover(workspace.documents) if sources is None else sources
     return check_status(workspace, assembly.name, assembly.fingerprint(), sources,
                         open_store(workspace, assembly.name), open_lexical(workspace, assembly),
-                        open_tables(workspace, assembly.name))
+                        open_tables(workspace, assembly.name), ocr=assembly.ocr is not None)
 
 
-def prepare(source: SourceDocument, assembly: Assembly) -> Prepared:
-    processed = process_document(source, assembly.parser, assembly.extractors, assembly.table_steps)
+def prepare(source: SourceDocument, assembly: Assembly,
+            progress: Callable[[str], None] = lambda message: None) -> Prepared:
+    processed = process_document(source, assembly.parser, assembly.extractors, assembly.table_steps,
+                                 assembly.ocr, progress)
     batch = attach_regions(assembly.chunker.chunk(processed.document), processed.document)
     vectors = assembly.embedder.encode_passages([chunk.text for chunk in batch.chunks])
     lexical = None
@@ -157,7 +159,7 @@ def ingest(workspace: Workspace, assembly: Assembly, *, file: str | None = None,
         assert item.source is not None
         progress(f"处理 {item.relative_path} …")
         try:
-            prepared = prepare(item.source, assembly)
+            prepared = prepare(item.source, assembly, progress)
             if item.entry is not None and item.entry.folder != prepared.entry.folder:
                 shutil.rmtree(index_dir / "documents" / item.entry.folder, ignore_errors=True)
             write_audit(index_dir / "documents" / prepared.entry.folder, prepared.processed, prepared.batch)
@@ -187,12 +189,12 @@ def _rebuild_all(workspace: Workspace, assembly: Assembly,
     outcomes: list[DocumentOutcome] = []
     from rag.ingest.sources import has_text
     for source in sources:
-        if not has_text(source):
+        if not has_text(source, ocr=assembly.ocr is not None):
             outcomes.append(DocumentOutcome(source.relative_path, "unreadable"))
             continue
         progress(f"处理 {source.relative_path} …")
         try:
-            prepared = prepare(source, assembly)
+            prepared = prepare(source, assembly, progress)
             write_audit(staging / prepared.entry.folder, prepared.processed, prepared.batch)
         except Exception as exc:
             shutil.rmtree(staging, ignore_errors=True)

@@ -1,4 +1,5 @@
-"""Per-document audit pages: 1-解析.html, 2-表格.html (if any tables), 3-分块.html."""
+"""Per-document audit pages: 0-OCR.html (if any page was OCR'd), 1-解析.html, 2-表格.html (if any tables),
+3-分块.html."""
 
 from __future__ import annotations
 
@@ -18,6 +19,7 @@ from rag.jsonio import write_atomic
 from rag.models import ChunkBatch, ListNode, TableNode, TextNode
 from rag.paths import Workspace
 from rag.reports.html import badge, esc, filters, page, pct, text_block, write_assets
+from rag.reports.ocr import TYPE_LABELS
 
 TEXT_KINDS = {"title": "标题", "paragraph": "段落", "header": "页眉", "footer": "页脚",
               "footnote": "脚注", "caption": "图表标题", "table_note": "表注",
@@ -33,7 +35,8 @@ SELECTION = {"highest_total_score": "总分最高", "tool_priority_tiebreak": "�
              "candidate_id_tiebreak": "总分并列，按候选编号"}
 METRIC_LABELS = (("text_f1", "文本覆盖"), ("critical_token_integrity", "关键数字完整"),
                  ("shape_support", "行列形状共识"), ("blank_anomaly", "空白异常"))
-PAGE_NAMES = ("1-解析.html", "2-表格.html", "3-分块.html")
+PAGE_NAMES = ("1-解析.html", "2-表格.html", "3-分块.html", "0-OCR.html")
+NAV_ORDER = (3, 0, 1, 2)    # OCR comes first: it runs before parsing
 LANGUAGE_NAMES = {"chinese": "中文", "spanish": "西班牙文", "english": "英文"}
 
 
@@ -103,16 +106,37 @@ def render_grid(table: StructuredTable | TableCandidate, max_rows: int | None = 
 def _header(processed: DocumentAudit, entry: DocumentEntry, config_name: str,
             current: int) -> str:
     links = []
-    for index, name in enumerate(PAGE_NAMES):
-        if index == 1 and not processed.table_slots:
+    for index in NAV_ORDER:
+        name = PAGE_NAMES[index]
+        if (index == 1 and not processed.table_slots) or (index == 3 and not _has_ocr(processed)):
             continue
         label = name.removesuffix(".html")
         links.append(f"<b>{esc(label)}</b>" if index == current else f'<a href="{esc(name)}">{esc(label)}</a>')
     return (f"<h1>{esc(entry.document_name)}</h1>"
             f'<div class="sub">配置 {esc(config_name)} · {entry.page_count} 页 · '
+            + (f'{TYPE_LABELS[processed.pages.document_type]} · ' if processed.pages else '') +
             f'{entry.chunk_count} 个 chunk · {entry.table_count} 张表 · '
             f'文档语言 {LANGUAGE_NAMES[processed.document.language]} · 入库于 {esc(entry.built_at)}'
             f'　|　{"　".join(links)}</div>')
+
+
+def _has_ocr(processed: DocumentAudit) -> bool:
+    return processed.pages is not None and processed.pages.ocr_key is not None
+
+
+def ocr_page(workspace: Workspace, processed: DocumentAudit, entry: DocumentEntry, config_name: str) -> str:
+    from rag.ingest.ocr.models import OcrFacts
+    from rag.jsonio import from_jsonable, read_json
+    from rag.reports.ocr import ocr_body, page_images, readback_deviation
+    assert processed.pages is not None and processed.pages.ocr_key is not None
+    key = processed.pages.ocr_key
+    folder = workspace.root / ".rag" / "ocr" / key
+    facts = from_jsonable(OcrFacts, read_json(folder / "ocr.json"))
+    images = page_images(folder / "ocr.pdf", facts, workspace.reports / "ocr" / key)
+    body = (_header(processed, entry, config_name, 3) +
+            ocr_body(processed.pages, facts, images, f"../../../ocr/{key}/",
+                     readback_deviation(folder / "ocr.pdf", facts)))
+    return page(f"OCR · {entry.document_name}", body, root="../../../", crumbs=_crumbs(config_name))
 
 
 def _crumbs(config_name: str) -> list[tuple[str, str]]:
@@ -479,6 +503,8 @@ def write_document_reports(workspace: Workspace, config_name: str, processed: Do
     folder = workspace.ingest_reports(config_name) / entry.folder
     if folder.exists():
         shutil.rmtree(folder)
+    if _has_ocr(processed):
+        write_atomic(folder / PAGE_NAMES[3], ocr_page(workspace, processed, entry, config_name))
     write_atomic(folder / PAGE_NAMES[0], parse_page(processed, entry, config_name))
     if processed.table_slots:
         answers = load_answers(workspace.root / "eval" / "table-structure", processed.document.document_id)

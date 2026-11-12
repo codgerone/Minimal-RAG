@@ -70,7 +70,7 @@ class DoclingLayoutParser:
         self.converter = converter
 
     def parse(self, source: SourceDocument) -> ParseResult:
-        pdf_bytes = source.absolute_path.read_bytes()
+        pdf_bytes = source.pdf_path.read_bytes()
         with fitz.open(stream=pdf_bytes, filetype="pdf") as pdf:
             page_sizes = {index + 1: (float(page.rect.width), float(page.rect.height))
                           for index, page in enumerate(pdf)}

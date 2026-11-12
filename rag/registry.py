@@ -77,6 +77,14 @@ RETRIEVERS = ("semantic", "bm25", "hybrid")
 NEEDS_LEXICAL = ("bm25", "hybrid")
 LLMS: dict[str, Callable[..., LLM]] = {"openrouter": OpenRouterLLM}
 
+
+def _rapidocr() -> Any:
+    from rag.ingest.ocr.rapidocr_engine import RapidOcrEngine
+    return RapidOcrEngine()
+
+
+OCR_ENGINES: dict[str, Callable[..., Any]] = {"rapidocr": _rapidocr}
+
 # Steps whose implementation only makes sense with a specific parser.
 REQUIRES_PARSER = {
     ("table_extractors", "docling"): "docling_layout",
@@ -107,6 +115,7 @@ class Assembly:
     embedder: Embedder
     chunker: Chunker
     lexical: Analyzer | None = None     # set when the config has [lexical]: ingest builds a BM25 index
+    ocr: Any = None                     # OcrStep, set when the config has [ocr]
     _llm: LLM | None = field(default=None, repr=False)
 
     @property
@@ -114,7 +123,10 @@ class Assembly:
         return self.config.name
 
     def build_settings(self) -> dict[str, Any]:
-        return {**self.config.build_settings(), "embedder_identity": self.embedder.identity()}
+        settings = {**self.config.build_settings(), "embedder_identity": self.embedder.identity()}
+        if self.ocr is not None:
+            settings["ocr_identity"] = self.ocr.engine.identity()
+        return settings
 
     def fingerprint(self) -> str:
         raw = json.dumps(self.build_settings(), ensure_ascii=False, sort_keys=True,
@@ -159,7 +171,22 @@ def assemble(config: AssemblyConfig) -> Assembly:
     chunker = _make(CHUNKERS, "chunker", config.chunker, embedder)
     lexical = Analyzer(**config.lexical) if config.lexical is not None else None
     table_steps = _table_steps(config, parser, chunker)
-    return Assembly(config, parser, extractors, table_steps, embedder, chunker, lexical)
+    return Assembly(config, parser, extractors, table_steps, embedder, chunker, lexical, ocr_step(config))
+
+
+def ocr_step(config: AssemblyConfig) -> Any:
+    """The OcrStep of a config with [ocr], else None (scanned pages stay unread)."""
+    if config.ocr is None:
+        return None
+    from rag.ingest.ocr.step import OcrStep
+    if config.ocr.use not in OCR_ENGINES:
+        raise ConfigError(f"[ocr] 没有名为 {config.ocr.use!r} 的实现，可选：{', '.join(OCR_ENGINES)}")
+    return OcrStep(config.ocr.use, OCR_ENGINES[config.ocr.use](), config.ocr.params["dpi"],
+                   _workspace_root(config) / ".rag" / "ocr")
+
+
+def _workspace_root(config: AssemblyConfig):
+    return next(p for p in config.path.parents if p.name == "configs").parent
 
 
 def _table_steps(config: AssemblyConfig, parser: Parser, chunker: Chunker) -> TableSteps | None:
@@ -202,8 +229,7 @@ def _table_steps(config: AssemblyConfig, parser: Parser, chunker: Chunker) -> Ta
     if uses_llm:
         from rag.ingest.chunkers.tokens import E5TokenCounter
         from rag.ingest.tables.llm_tables import LLMAnnotationStructure, LLMCache, LLMSummary
-        root = next(p for p in config.path.parents if p.name == "configs").parent
-        cache = LLMCache(root / ".rag" / "llm-cache")
+        cache = LLMCache(_workspace_root(config) / ".rag" / "llm-cache")
         llm_config = structure if structure.use == "llm_annotation" else index_text
         llm = OpenRouterLLM(model=llm_config.params["model"], temperature=llm_config.params.get("temperature", 0),
                             env_override=False)

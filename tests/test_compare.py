@@ -98,3 +98,31 @@ def test_table_evidence_tab_can_be_left_out_and_is_saved(workspace):
     write_json(workspace.eval_reports() / "a" / "result.json", run("structured", "small", {"q1": "miss"}))
     folder = write_comparison(workspace, "v", ["a"], table_evidence=False)
     assert read_json(folder / "runs.json")["table_evidence"] is False
+
+
+def with_types(result, types):
+    """types: document_id → (type, label); each case's document is taken from its case_id prefix."""
+    for case in result["cases"]:
+        case["document_id"] = case["case_id"].split("-")[0]
+    result["documents"] = {doc: {"document_name": doc, "document_type": kind, "questions": 1,
+                                 "metrics": result["metrics"]} for doc, (kind, _) in types.items()}
+    result["document_types"] = {kind: {"label": label, "documents": 1, "answerable": 1,
+                                       "metrics": result["metrics"], "returned_tokens": {"value": 100}}
+                                for kind, label in dict(types.values()).items()}
+    return result
+
+
+def test_changes_by_document_type_count_only_that_types_questions():
+    from rag.reports.compare import _by_type
+    types = {"dig": ("digital", "数字 PDF"), "scan": ("scanned", "扫描 PDF")}
+    base = with_types(run("structured", "small", {"dig-q1": "miss", "scan-q1": "complete"}), types)
+    other = with_types(run("structured", "small", {"dig-q1": "complete", "scan-q1": "complete"}), types)
+    html = _by_type([("a", base), ("b", other)])
+    digital, scanned = html.split("<h3>")[1:3]
+    assert "数字 PDF" in digital and "↑1</span>" in digital
+    assert "扫描 PDF" in scanned and "↑0</span>" in scanned
+
+
+def test_runs_without_document_types_are_noted():
+    from rag.reports.compare import _by_type
+    assert "V4.1 之前" in _by_type([("a", run("structured", "small", {"q1": "miss"}))])

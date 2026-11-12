@@ -1,0 +1,803 @@
+{
+  "schema_version": "ground_truth_document_v2",
+  "document_key": "scanned-CONTRATO-N-102-2025-HEXING-ELECTRICAL-COMPANY-SAC--984b27ffba91dd05",
+  "document_id": "984b27ffba91dd05",
+  "document_name": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+  "relative_path": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+  "file_hash": "7aeabc75314a3330cfeac836da6e284003e4ee462e1727aa9fabbb80724b653a",
+  "cases": [
+    {
+      "case_id": "CONTRACT-102-Q001",
+      "question": "采购合同 CONT2025003 中，ENOSA 就各 Ítem 应付的合同金额分别是多少？",
+      "answerable": true,
+      "reference_answer": "- Ítem 01（单相 2 线电子电表）：US$ 663,990.01；\n- Ítem 02（单相 3 线电子电表）：US$ 35,540.89；\n- Ítem 03（三相 3 线电子电表）：US$ 16,280.46；\n- Ítem 04（三相 4 线电子电表）：US$ 93,418.05。\n合同未写合计数。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "984b27ffba91dd05",
+          "document_name": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+          "relative_path": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+          "page_numbers": [
+            2
+          ],
+          "text": "derivado de la adjudicación del ÍTEM 01 de la Licitación Pública Nº 002-2024-FONAFE-1; el monto total que le corresponde contratar a ELECTRONOROESTE S.A. -ENOSA-, asciende a la suma de US$ 663,990.01 (seiscientos sesenta y tres mil novecientos noventa con 01/100 dólares americanos)",
+          "anchor": {
+            "text_sha256": "4a2d54b678354d40",
+            "pieces": [
+              {
+                "text": "derivado de la adjudicación del ÍTEM 01 de la Licitación Pública Nº 002-2024-FONAFE-1; el monto total que le corresponde contratar a ELECTRONOROESTE S.A. -ENOSA-, asciende a la suma de US$ 663,990.01 (seiscientos sesenta y tres mil novecientos noventa con 01/100 dólares americanos)",
+                "words": [
+                  "2 270.00 206.89 305.48 219.35",
+                  "2 311.04 206.89 319.91 219.11",
+                  "2 323.28 206.89 332.15 219.11",
+                  "2 335.76 206.65 389.44 219.11",
+                  "2 395.04 206.65 407.98 218.87",
+                  "2 409.44 206.41 430.54 218.87",
+                  "2 436.08 206.41 447.11 218.63",
+                  "2 450.48 206.41 461.27 218.63",
+                  "2 464.88 206.41 471.59 218.63",
+                  "2 475.20 206.17 514.74 218.63",
+                  "2 126.72 220.09 156.68 232.79",
+                  "2 167.04 220.09 175.91 232.79",
+                  "2 183.84 219.85 275.42 232.79",
+                  "2 281.28 219.85 290.15 232.55",
+                  "2 298.32 219.85 326.14 232.55",
+                  "2 332.16 219.61 353.73 232.55",
+                  "2 361.92 219.61 377.02 232.31",
+                  "2 385.20 219.61 394.07 232.31",
+                  "2 402.00 219.37 455.47 232.31",
+                  "2 463.44 219.37 504.19 232.07",
+                  "2 510.24 219.37 514.80 232.07",
+                  "2 126.96 233.05 211.62 245.75",
+                  "2 215.04 233.05 234.22 245.27",
+                  "2 237.60 232.81 277.41 245.27",
+                  "2 282.72 232.81 318.44 245.03",
+                  "2 323.76 232.57 328.56 245.03",
+                  "2 334.08 232.57 341.03 245.03",
+                  "2 346.32 232.57 369.58 245.03",
+                  "2 375.12 232.57 386.15 244.79",
+                  "2 391.44 232.33 408.70 244.79",
+                  "2 414.00 232.33 459.78 244.79",
+                  "2 465.12 232.09 515.23 244.55",
+                  "2 126.72 246.25 158.86 259.19",
+                  "2 162.72 246.25 167.28 258.95",
+                  "2 168.96 246.25 184.07 258.95",
+                  "2 187.92 246.25 203.02 258.95",
+                  "2 203.04 246.01 253.87 258.95",
+                  "2 257.76 245.77 291.81 258.71",
+                  "2 295.92 245.77 308.87 258.47",
+                  "2 312.72 245.53 342.68 258.47",
+                  "2 346.56 245.53 376.77 258.23",
+                  "2 380.64 245.29 435.31 258.23"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "984b27ffba91dd05",
+          "document_name": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+          "relative_path": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+          "page_numbers": [
+            2
+          ],
+          "text": "derivado de la adjudicación del ÍTEM 02 de la Licitación Pública Nº 002-2024-FONAFE-1; el monto total que le corresponde contratar a ELECTRONOROESTE S.A. -ENOSA-, asciende a la suma de US$ 35,540.89 (treinta y cinco mil quinientos cuarenta con 89/100 dólares americanos)",
+          "anchor": {
+            "text_sha256": "4cc1581a7f6f2a27",
+            "pieces": [
+              {
+                "text": "derivado de la adjudicación del ÍTEM 02 de la Licitación Pública Nº 002-2024-FONAFE-1; el monto total que le corresponde contratar a ELECTRONOROESTE S.A. -ENOSA-, asciende a la suma de US$ 35,540.89 (treinta y cinco mil quinientos cuarenta con 89/100 dólares americanos)",
+                "words": [
+                  "2 271.20 296.41 307.64 309.35",
+                  "2 311.52 296.41 320.39 309.11",
+                  "2 324.24 296.41 333.11 309.11",
+                  "2 336.96 296.17 390.16 309.11",
+                  "2 394.08 296.17 409.42 308.87",
+                  "2 411.12 295.93 430.55 308.87",
+                  "2 436.32 295.93 445.43 308.63",
+                  "2 451.20 295.93 460.31 308.63",
+                  "2 463.92 295.93 473.03 308.63",
+                  "2 474.48 295.69 515.22 308.63",
+                  "2 127.20 310.09 157.16 322.79",
+                  "2 167.52 310.09 176.39 322.79",
+                  "2 184.32 309.85 275.90 322.79",
+                  "2 282.00 309.85 290.87 322.55",
+                  "2 298.80 309.85 326.86 322.55",
+                  "2 332.88 309.61 356.61 322.55",
+                  "2 362.64 309.61 377.74 322.31",
+                  "2 385.92 309.61 394.79 322.31",
+                  "2 402.72 309.37 456.19 322.31",
+                  "2 464.40 309.37 505.15 322.07",
+                  "2 510.96 309.37 515.76 322.07",
+                  "2 127.44 322.81 210.42 335.51",
+                  "2 214.32 322.57 231.58 335.51",
+                  "2 233.52 322.57 274.05 335.51",
+                  "2 275.76 322.57 312.20 335.27",
+                  "2 313.92 322.57 318.48 335.27",
+                  "2 322.56 322.57 329.27 335.27",
+                  "2 330.96 322.33 354.46 335.27",
+                  "2 358.32 322.33 367.19 335.03",
+                  "2 371.04 322.33 388.55 335.03",
+                  "2 392.40 322.33 432.91 335.03",
+                  "2 434.64 322.09 466.75 335.03",
+                  "2 470.64 322.09 475.20 334.79",
+                  "2 476.88 322.09 498.45 334.79",
+                  "2 504.48 322.09 516.46 334.79",
+                  "2 127.92 336.25 172.74 349.19",
+                  "2 174.24 336.25 212.84 348.95",
+                  "2 214.56 336.01 229.90 348.95",
+                  "2 233.52 336.01 263.96 348.71",
+                  "2 267.60 335.77 297.57 348.71",
+                  "2 299.28 335.53 354.91 348.47"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x3",
+          "document_id": "984b27ffba91dd05",
+          "document_name": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+          "relative_path": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+          "page_numbers": [
+            2
+          ],
+          "text": "derivado de la adjudicación del ÍTEM 03 de la Licitación Pública Nº 002-2024-FONAFE-1; el monto total que le corresponde contratar a ELECTRONOROESTE S.A. -ENOSA-, asciende a la suma de US$ 16,280.46 (dieciséis doscientos ochenta con 46/100 dólares americanos)",
+          "anchor": {
+            "text_sha256": "893c4ed1d2ca25b3",
+            "pieces": [
+              {
+                "text": "derivado de la adjudicación del ÍTEM 03 de la Licitación Pública Nº 002-2024-FONAFE-1; el monto total que le corresponde contratar a ELECTRONOROESTE S.A. -ENOSA-, asciende a la suma de US$ 16,280.46 (dieciséis doscientos ochenta con 46/100 dólares americanos)",
+                "words": [
+                  "2 238.08 386.41 274.28 399.35",
+                  "2 278.16 386.41 287.03 399.11",
+                  "2 288.96 386.41 297.59 399.11",
+                  "2 299.52 386.17 352.48 399.11",
+                  "2 356.64 386.17 369.58 398.87",
+                  "2 369.60 386.17 390.94 398.87",
+                  "2 395.04 386.17 405.82 398.87",
+                  "2 409.68 386.17 418.55 398.87",
+                  "2 420.48 385.93 426.95 398.87",
+                  "2 431.04 385.93 469.38 398.63",
+                  "2 473.28 385.69 503.24 398.63",
+                  "2 507.12 385.69 515.99 398.39",
+                  "2 127.92 399.85 217.35 412.79",
+                  "2 219.12 399.85 227.99 412.55",
+                  "2 229.68 399.85 257.50 412.55",
+                  "2 259.44 399.61 281.01 412.55",
+                  "2 282.72 399.61 297.82 412.31",
+                  "2 299.76 399.61 306.47 412.31",
+                  "2 310.32 399.37 361.39 412.31",
+                  "2 365.52 399.37 406.03 412.07",
+                  "2 407.76 399.13 412.32 412.07",
+                  "2 414.24 398.89 499.38 411.83",
+                  "2 501.12 398.89 517.18 411.59",
+                  "2 127.44 413.05 167.49 425.51",
+                  "2 170.64 413.05 206.36 425.51",
+                  "2 211.68 413.05 216.72 425.27",
+                  "2 217.68 412.81 226.79 425.27",
+                  "2 230.16 412.81 253.42 425.27",
+                  "2 256.80 412.81 267.83 425.03",
+                  "2 271.20 412.57 288.46 425.03",
+                  "2 291.60 412.33 333.54 424.79",
+                  "2 336.72 412.33 376.74 424.79",
+                  "2 379.92 412.09 425.95 424.55",
+                  "2 429.12 411.85 465.08 424.31",
+                  "2 468.24 411.85 483.34 424.07",
+                  "2 486.72 411.61 516.20 424.07",
+                  "2 128.40 426.97 159.81 438.71",
+                  "2 162.96 426.97 216.91 438.71"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x4",
+          "document_id": "984b27ffba91dd05",
+          "document_name": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+          "relative_path": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+          "page_numbers": [
+            2
+          ],
+          "text": "derivado de la adjudicación del ÍTEM 04 de la Licitación Pública Nº 002-2024-FONAFE-1; el monto total que le corresponde contratar a ELECTRONOROESTE S.A. -ENOSA-, asciende a la suma de US$ 93,418.05 (noventa y tres mil cuatrocientos dieciocho con 05/100 dólares americanos)",
+          "anchor": {
+            "text_sha256": "f0085d2ba15e8154",
+            "pieces": [
+              {
+                "text": "derivado de la adjudicación del ÍTEM 04 de la Licitación Pública Nº 002-2024-FONAFE-1; el monto total que le corresponde contratar a ELECTRONOROESTE S.A. -ENOSA-, asciende a la suma de US$ 93,418.05 (noventa y tres mil cuatrocientos dieciocho con 05/100 dólares americanos)",
+                "words": [
+                  "2 238.56 476.41 275.00 489.35",
+                  "2 278.88 476.41 287.75 489.11",
+                  "2 289.44 476.41 298.31 489.11",
+                  "2 300.00 476.17 353.20 489.11",
+                  "2 357.12 476.17 370.30 488.87",
+                  "2 372.00 476.17 391.42 488.87",
+                  "2 395.28 476.17 406.31 488.87",
+                  "2 410.16 475.93 419.03 488.87",
+                  "2 420.72 475.93 429.59 488.87",
+                  "2 431.28 475.93 469.86 488.63",
+                  "2 473.76 475.69 503.72 488.63",
+                  "2 507.60 475.69 516.47 488.39",
+                  "2 128.16 490.09 218.79 502.79",
+                  "2 220.56 490.09 229.19 502.55",
+                  "2 230.88 490.09 257.74 502.31",
+                  "2 259.44 489.85 280.29 502.31",
+                  "2 282.00 489.85 296.86 502.31",
+                  "2 300.48 489.85 307.19 502.07",
+                  "2 310.80 489.61 362.36 502.07",
+                  "2 366.24 489.37 405.55 501.83",
+                  "2 409.20 489.37 413.76 501.59",
+                  "2 415.44 488.89 499.86 501.59",
+                  "2 501.60 488.89 517.42 501.35",
+                  "2 126.24 502.33 168.93 515.27",
+                  "2 170.64 502.09 207.08 515.03",
+                  "2 210.96 502.09 215.52 514.79",
+                  "2 217.20 502.09 224.15 514.79",
+                  "2 228.00 502.09 249.35 514.79",
+                  "2 253.20 502.09 264.23 514.79",
+                  "2 268.08 501.85 283.43 514.79",
+                  "2 287.28 501.85 327.79 514.55",
+                  "2 329.52 501.61 367.88 514.55",
+                  "2 371.76 501.61 376.56 514.31",
+                  "2 380.40 501.61 395.51 514.31",
+                  "2 401.52 501.61 414.46 514.31",
+                  "2 416.40 501.37 473.69 514.31",
+                  "2 475.68 501.13 516.43 514.07",
+                  "2 128.88 515.53 141.83 528.23",
+                  "2 148.08 515.53 175.89 528.23",
+                  "2 180.00 515.29 209.97 528.23",
+                  "2 214.08 515.29 268.51 527.99"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "各 Ítem 的合同金额",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2",
+                "x3",
+                "x4"
+              ]
+            }
+          ],
+          "note": ""
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-102-Q002",
+      "question": "采购合同 CONT2025003 中，Ítem 4（三相 4 线电子电表）的总需求量是多少？分几次交付？每次交多少台？",
+      "answerable": true,
+      "reference_answer": "Ítem 4 总需求量 4,848 台，分 6 次交付（签约后 170、210、330、450、570、690 天），每次 808 台。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "984b27ffba91dd05",
+          "document_name": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+          "relative_path": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+          "page_numbers": [
+            3
+          ],
+          "text": "4 | 4,848 | 808 | 808 | 808 | 808 | 808 | 808",
+          "anchor": {
+            "text_sha256": "bde7035be9d0bf32",
+            "pieces": [
+              {
+                "text": "4",
+                "words": [
+                  "3 158.88 712.09 167.27 722.40"
+                ]
+              },
+              {
+                "text": "4,848",
+                "words": [
+                  "3 257.04 711.85 275.74 723.11"
+                ]
+              },
+              {
+                "text": "808",
+                "words": [
+                  "3 302.16 712.09 314.86 722.40",
+                  "3 334.80 711.85 348.70 723.11",
+                  "3 371.04 712.09 383.74 722.40",
+                  "3 407.52 711.85 421.42 723.11",
+                  "3 446.64 712.09 459.58 722.40",
+                  "3 485.52 712.09 498.22 722.40"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "984b27ffba91dd05",
+          "document_name": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+          "relative_path": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+          "page_numbers": [
+            3
+          ],
+          "text": "1era ENTREGA | 2da ENTREGA | 3era ENTREGA | 4ta ENTREGA | 5ta ENTREGA | 6ta ENTREGA",
+          "table_header": true,
+          "anchor": {
+            "text_sha256": "8bbe13c81c75ee9f",
+            "pieces": [
+              {
+                "text": "1era ENTREGA",
+                "words": [
+                  "3 302.16 435.37 312.95 443.76",
+                  "3 328.80 442.09 353.74 450.72"
+                ]
+              },
+              {
+                "text": "2da ENTREGA",
+                "words": [
+                  "3 336.00 434.65 346.79 443.04",
+                  "3 364.80 442.09 387.82 450.72"
+                ]
+              },
+              {
+                "text": "3era ENTREGA",
+                "words": [
+                  "3 370.80 434.89 383.27 443.28",
+                  "3 401.52 442.09 424.54 450.72"
+                ]
+              },
+              {
+                "text": "4ta ENTREGA",
+                "words": [
+                  "3 295.44 442.09 318.46 450.72",
+                  "3 408.96 434.89 417.59 443.52"
+                ]
+              },
+              {
+                "text": "5ta ENTREGA",
+                "words": [
+                  "3 436.32 438.49 443.51 447.36",
+                  "3 446.88 438.49 468.94 447.36"
+                ]
+              },
+              {
+                "text": "6ta ENTREGA",
+                "words": [
+                  "3 480.48 442.09 503.74 450.72",
+                  "3 487.20 434.89 496.07 443.52"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "Ítem 4 的总需求量",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ],
+          "note": ""
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "交付次数",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2"
+              ]
+            }
+          ],
+          "note": "x2 为交货计划表的批次表头，x1 说明 Ítem 4 每批都有交货"
+        },
+        {
+          "evidence_group_id": "e3",
+          "information_item": "每次交付数量",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ],
+          "note": ""
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-102-Q003",
+      "question": "采购合同 CONT2025003 中，Ítem 04 的履约保证金金额是多少？保函编号是什么？",
+      "answerable": true,
+      "reference_answer": "Ítem 04（三相 4 线电子电表）的履约保证金为 US$ 9,341.81，保函 CARTA FIANZA Nº 3012025041888，由 AVLA PERÚ COMPAÑÍA DE SEGUROS S.A. 出具。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "984b27ffba91dd05",
+          "document_name": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+          "relative_path": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+          "page_numbers": [
+            4,
+            5
+          ],
+          "text": "Garantía de fiel cumplimiento de contrato, para la adquisición del ÍTEM 04: “MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS”\nla suma de US$ 9,341.81 (nueve mil trescientos cuarenta y uno con 81/100 dólares americanos), a través de la CARTA FIANZA Nº 3012025041888 emitida por AVLA PERÚ COMPAÑÍA DE SEGUROS S.A.",
+          "anchor": {
+            "text_sha256": "02ec24ecdad71e3b",
+            "pieces": [
+              {
+                "text": "Garantía de fiel cumplimiento de contrato, para la adquisición del ÍTEM 04: “MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS”",
+                "words": [
+                  "4 129.84 688.57 166.52 701.51",
+                  "4 170.16 688.57 181.43 701.27",
+                  "4 185.04 688.57 200.62 701.27",
+                  "4 202.08 688.33 262.00 701.27",
+                  "4 265.68 688.09 276.71 701.03",
+                  "4 280.32 688.09 321.32 700.79",
+                  "4 324.96 687.85 342.47 700.79",
+                  "4 346.08 687.85 355.19 700.55",
+                  "4 358.80 687.61 406.01 700.55",
+                  "4 411.84 687.61 425.26 700.31",
+                  "4 428.88 687.37 448.54 700.31",
+                  "4 454.32 687.37 469.66 700.07",
+                  "4 471.12 687.13 518.60 700.07",
+                  "4 129.60 702.73 188.11 715.43",
+                  "4 191.04 702.49 234.67 715.43",
+                  "4 239.76 702.49 249.59 715.19",
+                  "4 252.48 702.49 257.99 715.19",
+                  "4 258.96 702.49 289.66 715.19"
+                ]
+              },
+              {
+                "text": "la suma de US$ 9,341.81 (nueve mil trescientos cuarenta y uno con 81/100 dólares americanos), a través de la CARTA FIANZA Nº 3012025041888 emitida por AVLA PERÚ COMPAÑÍA DE SEGUROS S.A.",
+                "words": [
+                  "4 127.92 747.85 136.79 760.55",
+                  "4 142.80 747.61 164.38 760.55",
+                  "4 172.32 747.61 181.43 760.31",
+                  "4 187.20 747.61 202.55 760.31",
+                  "4 210.48 747.37 244.99 760.31",
+                  "4 250.80 747.37 281.01 760.07",
+                  "4 286.80 747.37 299.98 760.07",
+                  "4 303.84 747.13 350.83 760.07",
+                  "4 356.88 746.89 393.32 759.83",
+                  "4 399.12 746.89 403.92 759.59",
+                  "4 409.68 746.89 425.02 759.59",
+                  "4 431.04 746.89 446.38 759.59",
+                  "4 452.16 746.65 482.60 759.59",
+                  "4 488.40 746.65 518.61 759.35",
+                  "5 126.24 104.65 181.63 117.35",
+                  "5 185.52 104.41 190.08 117.35",
+                  "5 193.92 104.41 221.74 117.11",
+                  "5 225.60 104.41 234.47 117.11",
+                  "5 240.48 104.41 247.19 117.11",
+                  "5 252.96 104.17 278.86 117.11",
+                  "5 284.88 104.17 314.86 116.87",
+                  "5 320.64 103.93 403.81 116.87",
+                  "5 409.68 103.69 441.80 116.63",
+                  "5 445.68 103.69 461.02 116.39",
+                  "5 466.80 103.45 486.23 116.39",
+                  "5 492.24 103.45 511.67 116.15",
+                  "5 126.72 118.81 173.49 131.51",
+                  "5 177.36 118.81 186.23 131.51",
+                  "5 190.08 118.81 230.61 131.51",
+                  "5 232.32 118.81 253.66 131.51"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "Ítem 04 履约保证金金额",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ],
+          "note": "跨第 4、5 页"
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "Ítem 04 保函编号",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ],
+          "note": ""
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-102-Q004",
+      "question": "采购合同 CONT2025003 约定的仲裁由哪些机构管理？仲裁庭由几名仲裁员组成？",
+      "answerable": true,
+      "reference_answer": "机构仲裁，由发起争议的一方在两家机构中选择：利马商会仲裁中心（Centro de Arbitraje de la Cámara de Comercio de Lima），或拉丁美洲仲裁与法律研究中心（CEAR Latinoamericano）。仲裁庭由 3 名仲裁员组成，双方各指定 1 名，再由这两名共同指定第三名担任首席。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "984b27ffba91dd05",
+          "document_name": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+          "relative_path": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+          "page_numbers": [
+            9
+          ],
+          "text": "ambas partes acuerdan que se someterán a un arbitraje institucional de derecho a cargo de un tribunal arbitral, en idioma castellano y de acuerdo con las normas contenidas en el Reglamento de Arbitraje del Centro de Arbitraje de la Cámara de Comercio de Lima bajo su administración o del Reglamento de Arbitraje del Centro de Arbitraje Latinoamericano e Investigación Jurídica - CEAR Latinoamericano, bajo su administración, a elección de quien inicie la controversia.",
+          "anchor": {
+            "text_sha256": "a511a353ae8ecd35",
+            "pieces": [
+              {
+                "text": "ambas partes acuerdan que se someterán a un arbitraje institucional de derecho a cargo de un tribunal arbitral, en idioma castellano y de acuerdo con las normas contenidas en el Reglamento de Arbitraje del Centro de Arbitraje de la Cámara de Comercio de Lima bajo su administración o del Reglamento de Arbitraje del Centro de Arbitraje Latinoamericano e Investigación Jurídica - CEAR Latinoamericano, bajo su administración, a elección de quien inicie la controversia.",
+                "words": [
+                  "9 158.88 330.01 185.98 342.23",
+                  "9 189.60 329.77 214.78 342.23",
+                  "9 218.16 329.77 257.72 342.23",
+                  "9 261.12 329.77 278.14 341.99",
+                  "9 281.76 329.77 290.40 341.99",
+                  "9 294.00 329.53 337.41 341.99",
+                  "9 342.96 329.53 347.76 341.99",
+                  "9 351.12 329.53 359.99 341.99",
+                  "9 365.52 329.53 400.76 341.99",
+                  "9 402.24 329.29 455.91 341.75",
+                  "9 459.60 329.29 468.23 341.75",
+                  "9 474.00 329.29 507.09 341.75",
+                  "9 510.72 329.29 515.28 341.51",
+                  "9 90.96 344.89 113.98 357.35",
+                  "9 119.52 344.89 128.15 357.11",
+                  "9 133.92 344.89 142.55 357.11",
+                  "9 146.16 344.65 181.14 357.11",
+                  "9 184.80 344.65 218.12 357.11",
+                  "9 221.52 344.65 230.39 356.87",
+                  "9 233.76 344.41 263.01 356.87",
+                  "9 268.56 344.41 309.79 356.63",
+                  "9 313.44 344.41 318.00 356.63",
+                  "9 321.60 344.17 332.39 356.63",
+                  "9 336.00 344.17 371.01 356.63",
+                  "9 374.64 344.17 389.50 356.39",
+                  "9 393.12 344.17 403.67 356.39",
+                  "9 407.52 343.93 440.62 356.39",
+                  "9 444.24 343.69 489.55 356.15",
+                  "9 493.20 343.69 503.99 356.15",
+                  "9 507.60 343.69 516.23 356.15",
+                  "9 91.92 359.29 142.75 372.23",
+                  "9 149.04 359.29 157.67 371.99",
+                  "9 163.92 359.29 199.87 371.99",
+                  "9 206.16 359.05 219.10 371.99",
+                  "9 225.36 359.05 252.93 371.75",
+                  "9 259.20 359.05 267.83 371.75",
+                  "9 274.08 359.05 310.03 371.75",
+                  "9 316.32 359.05 324.95 371.75",
+                  "9 331.20 358.81 337.67 371.75",
+                  "9 343.92 358.81 375.82 371.51",
+                  "9 382.08 358.81 390.71 371.51",
+                  "9 396.96 358.81 437.25 371.51",
+                  "9 443.52 358.81 452.15 371.51",
+                  "9 458.40 358.57 477.59 371.51",
+                  "9 483.84 358.57 500.86 371.27",
+                  "9 507.12 358.57 515.51 371.27",
+                  "9 91.44 374.17 153.28 386.63",
+                  "9 156.96 374.17 161.52 386.39",
+                  "9 165.12 374.17 177.82 386.39",
+                  "9 179.28 373.93 228.91 386.39",
+                  "9 232.56 373.93 241.19 386.39",
+                  "9 244.80 373.93 281.95 386.15",
+                  "9 283.68 373.93 298.30 386.15",
+                  "9 300.00 373.69 327.09 386.15",
+                  "9 328.56 373.69 339.35 386.15",
+                  "9 342.96 373.69 378.19 386.15",
+                  "9 379.68 373.45 451.61 385.91",
+                  "9 453.36 373.45 457.92 385.91",
+                  "9 459.36 373.45 514.97 385.91",
+                  "9 90.72 389.05 123.55 401.51",
+                  "9 133.92 389.05 154.30 401.27",
+                  "9 156.24 388.81 230.09 401.27",
+                  "9 234.24 388.81 250.54 401.03",
+                  "9 254.64 388.81 262.79 401.03",
+                  "9 266.88 388.57 332.56 401.03",
+                  "9 334.56 388.57 338.64 401.03",
+                  "9 340.80 388.57 375.80 401.03",
+                  "9 379.92 388.57 388.07 400.79",
+                  "9 392.16 388.57 414.69 400.79",
+                  "9 418.80 388.33 439.40 400.79",
+                  "9 443.52 388.33 449.51 400.79",
+                  "9 453.60 388.33 508.02 400.79"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "984b27ffba91dd05",
+          "document_name": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+          "relative_path": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+          "page_numbers": [
+            9
+          ],
+          "text": "El tribunal estará compuesto por tres (03) miembros, uno designado por cada una de las partes, los que a su vez designarán al tercero, quien presidirá el tribunal arbitral.",
+          "anchor": {
+            "text_sha256": "94f85784cf4c1d2d",
+            "pieces": [
+              {
+                "text": "El tribunal estará compuesto por tres (03) miembros, uno designado por cada una de las partes, los que a su vez designarán al tercero, quien presidirá el tribunal arbitral.",
+                "words": [
+                  "9 92.16 418.33 100.79 430.79",
+                  "9 102.48 418.33 137.70 430.79",
+                  "9 139.20 418.33 164.14 430.79",
+                  "9 167.76 418.33 213.32 430.79",
+                  "9 216.96 418.33 231.59 430.79",
+                  "9 233.28 418.33 250.06 430.79",
+                  "9 251.52 418.33 270.45 430.79",
+                  "9 274.08 418.33 319.88 430.79",
+                  "9 321.36 418.33 336.23 430.79",
+                  "9 339.84 418.33 383.24 430.79",
+                  "9 386.64 418.33 401.51 430.79",
+                  "9 403.20 418.33 421.90 430.79",
+                  "9 425.52 418.33 442.30 430.79",
+                  "9 445.92 418.33 454.79 430.79",
+                  "9 458.40 418.33 468.95 430.79",
+                  "9 472.56 418.33 501.57 430.79",
+                  "9 503.28 418.33 515.99 430.79",
+                  "9 91.92 433.21 107.02 445.91",
+                  "9 113.28 433.21 117.60 445.91",
+                  "9 121.68 433.21 130.31 445.91",
+                  "9 136.56 433.21 149.27 445.91",
+                  "9 153.36 432.97 197.95 445.91",
+                  "9 204.24 432.97 212.87 445.67",
+                  "9 214.80 432.97 248.85 445.67",
+                  "9 252.96 432.97 276.45 445.67",
+                  "9 280.80 432.73 317.00 445.67",
+                  "9 321.12 432.73 329.75 445.43",
+                  "9 333.84 432.73 367.86 445.43",
+                  "9 372.00 432.73 406.03 445.43"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "仲裁管理机构",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ],
+          "note": ""
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "仲裁庭人数",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ]
+            }
+          ],
+          "note": ""
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-102-Q005",
+      "question": "采购合同 CONT2025003 中，承包商的保密义务期限是多久？",
+      "answerable": true,
+      "reference_answer": "永久（a perpetuidad）：承包商须永久对因本合同及其履行而接触到的任何信息和文件保密，不得向第三方泄露。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "984b27ffba91dd05",
+          "document_name": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+          "relative_path": "scanned-CONTRATO N°102-2025 - HEXING ELECTRICAL COMPANY SAC.pdf",
+          "page_numbers": [
+            9
+          ],
+          "text": "El contratista deberá mantener a perpetuidad la confidencialidad y reserva absoluta en el manejo de cualquier información y documentación a la que se tenga acceso a consecuencia de la contratación y la ejecución de la prestación, quedando prohibida revelarla a terceros.",
+          "anchor": {
+            "text_sha256": "d936a6c40871f698",
+            "pieces": [
+              {
+                "text": "El contratista deberá mantener a perpetuidad la confidencialidad y reserva absoluta en el manejo de cualquier información y documentación a la que se tenga acceso a consecuencia de la contratación y la ejecución de la prestación, quedando prohibida revelarla a terceros.",
+                "words": [
+                  "9 92.64 663.37 101.27 675.59",
+                  "9 102.96 663.13 148.26 675.59",
+                  "9 150.00 663.13 179.01 675.35",
+                  "9 182.64 662.89 223.88 675.35",
+                  "9 225.60 662.89 230.16 675.35",
+                  "9 233.76 662.65 285.29 675.11",
+                  "9 286.80 662.65 295.43 675.11",
+                  "9 297.12 662.41 367.10 675.11",
+                  "9 370.56 662.41 375.36 674.87",
+                  "9 376.80 662.41 407.98 674.87",
+                  "9 409.44 662.17 446.84 674.63",
+                  "9 448.32 662.17 459.11 674.63",
+                  "9 462.72 662.17 469.19 674.63",
+                  "9 472.80 662.17 502.06 674.39",
+                  "9 505.68 662.17 516.47 674.39",
+                  "9 91.44 676.33 132.66 688.79",
+                  "9 134.40 676.33 185.71 688.55",
+                  "9 187.44 676.09 191.76 688.55",
+                  "9 195.84 676.09 259.13 688.55",
+                  "9 263.28 676.09 267.36 688.31",
+                  "9 269.28 675.85 277.67 688.31",
+                  "9 281.52 675.85 296.14 688.31",
+                  "9 297.84 675.85 306.24 688.07",
+                  "9 310.08 675.85 332.85 688.07",
+                  "9 336.72 675.61 363.58 688.07",
+                  "9 367.44 675.61 371.76 688.07",
+                  "9 375.60 675.37 430.98 687.83",
+                  "9 434.88 675.37 443.27 687.83",
+                  "9 447.12 675.37 453.35 687.83",
+                  "9 457.20 675.37 508.74 687.59",
+                  "9 512.64 675.13 516.96 687.59",
+                  "9 90.72 689.29 99.11 701.51",
+                  "9 103.20 689.05 142.03 701.51",
+                  "9 148.08 689.05 156.47 701.27",
+                  "9 158.40 689.05 166.79 701.27",
+                  "9 170.64 688.81 215.71 701.27",
+                  "9 219.60 688.81 260.83 701.27",
+                  "9 264.72 688.57 303.78 701.03",
+                  "9 307.68 688.57 344.60 701.03",
+                  "9 346.56 688.57 350.88 700.79",
+                  "9 354.72 688.33 391.41 700.79"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "保密义务期限",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ],
+          "note": ""
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-102-Q006",
+      "question": "采购合同 CONT2025003 规定的交货地点（仓库地址）在哪里？",
+      "answerable": false,
+      "reference_answer": "合同中没有写明交货地点。",
+      "excerpts": [],
+      "evidence_groups": []
+    }
+  ]
+}

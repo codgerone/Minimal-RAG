@@ -66,7 +66,7 @@ class PyMuPDFPagesParser:
         elements: list[PrimaryText] = []
         native_pages = []
         try:
-            with pymupdf.open(source.absolute_path) as pdf:
+            with pymupdf.open(source.pdf_path) as pdf:
                 page_count = len(pdf)
                 for page_number, page in enumerate(pdf, start=1):
                     blocks = page.get_text("blocks", sort=True)

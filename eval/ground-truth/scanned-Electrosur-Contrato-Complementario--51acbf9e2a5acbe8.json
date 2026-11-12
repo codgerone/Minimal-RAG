@@ -1,0 +1,1085 @@
+{
+  "schema_version": "ground_truth_document_v2",
+  "document_key": "scanned-Electrosur-Contrato-Complementario--51acbf9e2a5acbe8",
+  "document_id": "51acbf9e2a5acbe8",
+  "document_name": "scanned-Electrosur - Contrato Complementario.pdf",
+  "relative_path": "scanned-Electrosur - Contrato Complementario.pdf",
+  "file_hash": "c649d91165c2d72f113598ecea363add497bee31643acaf8f8aba40361a6c833",
+  "cases": [
+    {
+      "case_id": "CONTRACT-ESUR-Q001",
+      "question": "文件 CONT2025005 首页的附函是哪天发出的？以哪家公司的名义发出？随函附上了哪份合同？",
+      "answerable": true,
+      "reference_answer": "附函日期为 2025 年 6 月 9 日（Lima），以 HEXING ELECTRICAL COMPANY SAC 的名义发给 ELECTROSUR，随函附上补充合同 ES-C-004-2025 及其附件。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "51acbf9e2a5acbe8",
+          "document_name": "scanned-Electrosur - Contrato Complementario.pdf",
+          "relative_path": "scanned-Electrosur - Contrato Complementario.pdf",
+          "page_numbers": [
+            1
+          ],
+          "text": "Lima, 09 de junio del 2025",
+          "anchor": {
+            "text_sha256": "1b6f0ea26f3ae949",
+            "pieces": [
+              {
+                "text": "Lima, 09 de junio del 2025",
+                "words": [
+                  "1 381.64 179.53 411.98 192.81",
+                  "1 414.66 179.53 426.30 192.81",
+                  "1 428.58 179.53 440.57 192.81",
+                  "1 443.28 179.53 468.78 192.81",
+                  "1 471.18 179.53 486.52 192.81",
+                  "1 489.12 179.53 513.06 192.81"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "51acbf9e2a5acbe8",
+          "document_name": "scanned-Electrosur - Contrato Complementario.pdf",
+          "relative_path": "scanned-Electrosur - Contrato Complementario.pdf",
+          "page_numbers": [
+            1
+          ],
+          "text": "HEXING ELECTRICAL COMPANY SAC, identificado con RUC 20546102115",
+          "anchor": {
+            "text_sha256": "aa17affb8ade8622",
+            "pieces": [
+              {
+                "text": "HEXING ELECTRICAL COMPANY SAC, identificado con RUC 20546102115",
+                "words": [
+                  "1 85.10 333.69 131.05 346.97",
+                  "1 136.03 333.69 209.40 346.97",
+                  "1 214.35 333.69 274.33 346.97",
+                  "1 279.25 333.69 305.59 346.97",
+                  "1 310.56 333.69 367.93 346.97",
+                  "1 372.81 333.69 390.14 346.97",
+                  "1 395.12 333.69 419.74 346.97",
+                  "1 424.86 333.69 493.91 346.97"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x3",
+          "document_id": "51acbf9e2a5acbe8",
+          "document_name": "scanned-Electrosur - Contrato Complementario.pdf",
+          "relative_path": "scanned-Electrosur - Contrato Complementario.pdf",
+          "page_numbers": [
+            1
+          ],
+          "text": "adjuntamos el contrato Complementario ES-C-004-\n2025 y anexos.",
+          "anchor": {
+            "text_sha256": "90d476c6eaadeeaf",
+            "pieces": [
+              {
+                "text": "adjuntamos el contrato Complementario ES-C-004-",
+                "words": [
+                  "1 265.96 395.79 321.29 409.07",
+                  "1 324.87 395.79 333.53 409.07",
+                  "1 337.10 395.79 376.42 409.07",
+                  "1 379.96 395.79 460.62 409.07",
+                  "1 464.28 395.79 516.22 409.07"
+                ]
+              },
+              {
+                "text": "2025 y anexos.",
+                "words": [
+                  "1 85.10 416.49 109.10 429.77",
+                  "1 112.10 416.49 118.10 429.77",
+                  "1 121.10 416.49 157.42 429.77"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "附函日期",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ],
+          "note": ""
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "发函公司",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ]
+            }
+          ],
+          "note": ""
+        },
+        {
+          "evidence_group_id": "e3",
+          "information_item": "附上的合同",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x3"
+              ]
+            }
+          ],
+          "note": ""
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-ESUR-Q002",
+      "question": "补充合同 CONT2025005 的金额是多少？相当于原合同金额的多少比例？履约期限多长？",
+      "answerable": true,
+      "reference_answer": "补充合同金额为 US$ 83,240.74（含全部税费），相当于原合同金额的 29.87%；履约期限为 120 个日历日，自合同签署次日起算。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "51acbf9e2a5acbe8",
+          "document_name": "scanned-Electrosur - Contrato Complementario.pdf",
+          "relative_path": "scanned-Electrosur - Contrato Complementario.pdf",
+          "page_numbers": [
+            2
+          ],
+          "text": "para contratar complementariamente por el monto de US$ 83,240.74 (Ochenta y tres mil doscientos cuarenta con 74/100 dólares americanos), equivalente al 29.87% del monto del contrato original, y por un plazo de 120 días calendario, el cual se contabilizará al día siguiente de la firma del contrato.",
+          "anchor": {
+            "text_sha256": "faaf0ca6548e0be5",
+            "pieces": [
+              {
+                "text": "para contratar complementariamente por el monto de US$ 83,240.74 (Ochenta y tres mil doscientos cuarenta con 74/100 dólares americanos), equivalente al 29.87% del monto del contrato original, y por un plazo de 120 días calendario, el cual se contabilizará al día siguiente de la firma del contrato.",
+                "words": [
+                  "2 498.24 638.41 513.82 652.31",
+                  "2 124.08 651.37 158.12 664.07",
+                  "2 162.48 651.37 249.51 664.07",
+                  "2 253.68 651.37 268.55 664.07",
+                  "2 270.48 651.37 279.11 664.07",
+                  "2 283.20 651.37 306.70 664.07",
+                  "2 310.80 651.37 319.43 664.07",
+                  "2 325.68 651.37 385.13 664.07",
+                  "2 389.28 651.37 425.48 664.07",
+                  "2 429.60 651.37 434.16 664.07",
+                  "2 438.24 651.37 453.11 664.07",
+                  "2 459.36 651.37 472.30 664.07",
+                  "2 474.24 651.37 514.52 664.07",
+                  "2 122.16 663.85 158.12 676.55",
+                  "2 160.32 663.85 175.18 676.55",
+                  "2 179.52 663.85 204.93 676.55",
+                  "2 209.04 663.85 236.62 676.55",
+                  "2 240.96 663.85 291.79 676.55",
+                  "2 294.00 663.85 338.58 676.55",
+                  "2 342.72 663.85 351.35 676.55",
+                  "2 353.28 663.85 378.69 676.55",
+                  "2 385.20 663.85 397.90 676.55",
+                  "2 400.08 663.85 423.34 676.55",
+                  "2 427.68 663.85 440.38 676.55",
+                  "2 442.56 663.85 474.21 676.55",
+                  "2 478.56 663.85 510.20 676.55",
+                  "2 510.24 663.85 514.56 676.55",
+                  "2 124.08 676.57 136.31 689.27",
+                  "2 138.72 676.33 146.87 689.27",
+                  "2 151.44 676.33 170.14 689.27",
+                  "2 174.96 676.33 182.87 689.03",
+                  "2 187.68 676.33 199.90 689.03",
+                  "2 204.48 676.33 221.26 689.03",
+                  "2 223.68 676.09 267.79 689.03",
+                  "2 270.24 676.09 276.23 688.79",
+                  "2 278.88 676.09 295.42 688.79",
+                  "2 297.84 676.09 306.00 688.79",
+                  "2 308.40 676.09 356.82 688.79",
+                  "2 361.44 676.09 367.43 688.79",
+                  "2 370.08 675.85 382.30 688.79",
+                  "2 384.96 675.85 420.44 688.55",
+                  "2 423.12 675.85 431.27 688.55",
+                  "2 433.68 675.85 441.83 688.55",
+                  "2 444.24 675.85 462.94 688.55",
+                  "2 467.52 675.85 479.98 688.55",
+                  "2 482.40 675.61 515.24 688.55"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "51acbf9e2a5acbe8",
+          "document_name": "scanned-Electrosur - Contrato Complementario.pdf",
+          "relative_path": "scanned-Electrosur - Contrato Complementario.pdf",
+          "page_numbers": [
+            3
+          ],
+          "text": "El monto total del presente contrato complementario asciende a US$ 83 240.74 (Ochenta y tres mil doscientos cuarenta con 74/100 dólares americanos), que incluye todos los impuestos de Ley.",
+          "anchor": {
+            "text_sha256": "8ca644f2dbc97b56",
+            "pieces": [
+              {
+                "text": "El monto total del presente contrato complementario asciende a US$ 83 240.74 (Ochenta y tres mil doscientos cuarenta con 74/100 dólares americanos), que incluye todos los impuestos de Ley.",
+                "words": [
+                  "3 100.56 560.17 109.19 572.87",
+                  "3 111.36 560.17 134.62 573.11",
+                  "3 138.72 560.41 158.13 573.11",
+                  "3 160.08 560.41 172.78 573.11",
+                  "3 174.72 560.41 209.01 573.35",
+                  "3 212.88 560.65 245.00 573.35",
+                  "3 249.12 560.65 310.50 573.59",
+                  "3 314.64 560.89 348.68 573.59",
+                  "3 352.80 560.89 357.36 573.83",
+                  "3 361.44 561.13 378.47 573.83",
+                  "3 384.72 561.13 393.35 573.83",
+                  "3 397.44 561.13 425.00 573.83",
+                  "3 426.96 561.13 467.47 574.07",
+                  "3 469.44 561.37 473.76 574.07",
+                  "3 477.84 561.37 492.95 574.07",
+                  "3 499.20 561.37 510.94 574.07",
+                  "3 100.08 572.41 147.07 585.35",
+                  "3 148.80 572.65 185.24 585.59",
+                  "3 189.12 572.89 204.22 585.59",
+                  "3 208.32 572.89 233.97 585.83",
+                  "3 237.84 573.13 267.81 586.07",
+                  "3 271.68 573.37 326.83 586.31",
+                  "3 326.88 573.61 341.98 586.31",
+                  "3 343.92 573.61 371.72 586.31",
+                  "3 373.44 573.61 395.02 586.55",
+                  "3 396.96 573.85 409.91 586.55",
+                  "3 411.60 573.85 452.12 586.79",
+                  "3 456.24 574.09 464.87 586.79",
+                  "3 466.80 574.09 484.07 587.03"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x3",
+          "document_id": "51acbf9e2a5acbe8",
+          "document_name": "scanned-Electrosur - Contrato Complementario.pdf",
+          "relative_path": "scanned-Electrosur - Contrato Complementario.pdf",
+          "page_numbers": [
+            7
+          ],
+          "text": "El plazo contractual total es de 120 días calendario",
+          "anchor": {
+            "text_sha256": "44a483d73dbf15a8",
+            "pieces": [
+              {
+                "text": "El plazo contractual total es de 120 días calendario",
+                "words": [
+                  "7 251.28 260.89 259.91 273.35",
+                  "7 261.36 260.89 282.46 273.35",
+                  "7 285.84 260.89 331.38 273.35",
+                  "7 332.88 260.89 351.81 273.35",
+                  "7 353.28 260.89 362.16 273.35",
+                  "7 365.76 260.89 374.39 273.35",
+                  "7 379.92 260.89 392.62 273.35",
+                  "7 396.24 260.89 413.26 273.35",
+                  "7 416.64 260.89 462.19 273.35"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "补充合同金额",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            },
+            {
+              "scheme_id": "s2",
+              "excerpt_ids": [
+                "x2"
+              ]
+            }
+          ],
+          "note": "x2 为第三条合同金额条款"
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "占原合同金额的比例",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ],
+          "note": ""
+        },
+        {
+          "evidence_group_id": "e3",
+          "information_item": "履约期限",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            },
+            {
+              "scheme_id": "s2",
+              "excerpt_ids": [
+                "x3"
+              ]
+            }
+          ],
+          "note": "x3 为第八条履约期限条款"
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-ESUR-Q003",
+      "question": "补充合同 CONT2025005 的采购数量、单价、不含税小计和 IGV 税额分别是多少？",
+      "answerable": true,
+      "reference_answer": "Ítem 1（单相 2 线电子电表，SAP 编码 309896）12,100 台，单价 US$ 5.83；不含税小计 70,543.00，IGV 12,697.74，合计 US$ 83,240.74。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "51acbf9e2a5acbe8",
+          "document_name": "scanned-Electrosur - Contrato Complementario.pdf",
+          "relative_path": "scanned-Electrosur - Contrato Complementario.pdf",
+          "page_numbers": [
+            3
+          ],
+          "text": "1 | Medidor Electrónico Monofásico de 2 Hilos | 309896 | Unidad | 12,100 | 5.83 | 70,543.00",
+          "anchor": {
+            "text_sha256": "d2ff69b53985f76e",
+            "pieces": [
+              {
+                "text": "1",
+                "words": [
+                  "3 108.48 640.09 117.11 650.63"
+                ]
+              },
+              {
+                "text": "Medidor Electrónico Monofásico de 2 Hilos",
+                "words": [
+                  "3 134.16 635.29 160.78 645.83",
+                  "3 175.20 634.81 210.67 646.55",
+                  "3 135.60 644.65 170.62 655.91",
+                  "3 174.48 644.65 181.67 655.91",
+                  "3 183.84 644.65 187.20 655.91",
+                  "3 189.36 644.65 205.67 655.91"
+                ]
+              },
+              {
+                "text": "309896",
+                "words": [
+                  "3 223.20 639.61 246.69 651.59"
+                ]
+              },
+              {
+                "text": "Unidad",
+                "words": [
+                  "3 265.44 640.09 289.41 652.07"
+                ]
+              },
+              {
+                "text": "12,100",
+                "words": [
+                  "3 307.44 640.09 328.77 652.07"
+                ]
+              },
+              {
+                "text": "5.83",
+                "words": [
+                  "3 404.40 640.33 419.74 652.07"
+                ]
+              },
+              {
+                "text": "70,543.00",
+                "words": [
+                  "3 470.16 639.61 503.71 652.55"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "51acbf9e2a5acbe8",
+          "document_name": "scanned-Electrosur - Contrato Complementario.pdf",
+          "relative_path": "scanned-Electrosur - Contrato Complementario.pdf",
+          "page_numbers": [
+            3
+          ],
+          "text": "Sub Total (S/) | 70,543.00\nI.G.V. | 12,697.74",
+          "anchor": {
+            "text_sha256": "68744ab77310c22d",
+            "pieces": [
+              {
+                "text": "Sub Total (S/)",
+                "words": [
+                  "3 342.24 657.37 354.46 671.03",
+                  "3 359.76 657.85 376.30 671.51",
+                  "3 377.04 658.09 389.26 671.51"
+                ]
+              },
+              {
+                "text": "70,543.00",
+                "words": [
+                  "3 470.40 657.37 503.24 670.55"
+                ]
+              },
+              {
+                "text": "I.G.V.",
+                "words": [
+                  "3 342.00 671.77 361.65 683.03"
+                ]
+              },
+              {
+                "text": "12,697.74",
+                "words": [
+                  "3 470.40 671.77 502.76 683.51"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x3",
+          "document_id": "51acbf9e2a5acbe8",
+          "document_name": "scanned-Electrosur - Contrato Complementario.pdf",
+          "relative_path": "scanned-Electrosur - Contrato Complementario.pdf",
+          "page_numbers": [
+            7
+          ],
+          "text": "1 | MEDIDOR ELECTRONICO MONOFASICO DE 2 HILOS | 309896 | Unidad | 12,100",
+          "anchor": {
+            "text_sha256": "dfe4af3c0af47afa",
+            "pieces": [
+              {
+                "text": "1",
+                "words": [
+                  "7 115.68 391.21 124.31 401.75"
+                ]
+              },
+              {
+                "text": "MEDIDOR ELECTRONICO MONOFASICO DE 2 HILOS",
+                "words": [
+                  "7 135.60 387.13 166.30 396.96",
+                  "7 168.24 387.13 215.24 396.96",
+                  "7 217.20 387.13 260.86 396.96",
+                  "7 263.04 387.13 272.15 396.96",
+                  "7 191.28 395.53 195.11 406.07",
+                  "7 196.56 395.53 216.23 406.07"
+                ]
+              },
+              {
+                "text": "309896",
+                "words": [
+                  "7 280.32 390.49 304.05 402.47"
+                ]
+              },
+              {
+                "text": "Unidad",
+                "words": [
+                  "7 314.40 390.01 339.33 402.23"
+                ]
+              },
+              {
+                "text": "12,100",
+                "words": [
+                  "7 352.08 389.53 376.53 403.43"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "采购数量",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            },
+            {
+              "scheme_id": "s2",
+              "excerpt_ids": [
+                "x3"
+              ]
+            }
+          ],
+          "note": "x3 为第八条交货计划表"
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "单价",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ],
+          "note": ""
+        },
+        {
+          "evidence_group_id": "e3",
+          "information_item": "不含税小计",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ]
+            }
+          ],
+          "note": "x1 的总价与小计相同，但只有 x2 表明它不含税"
+        },
+        {
+          "evidence_group_id": "e4",
+          "information_item": "IGV 税额",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ]
+            }
+          ],
+          "note": ""
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-ESUR-Q004",
+      "question": "补充合同 CONT2025005 的技术商业质保期是多久？质保期内电表出现故障时，承包商应在多少天内派技术代表到场？故障归承包商时，修复的期限是多少？",
+      "answerable": true,
+      "reference_answer": "质保期为 5 年零 1 个月，自货物在 ELECTROSUR 仓库收货之日起算。接到故障通知后，承包商须在 30 个日历日内派技术代表到场；故障归承包商时，自外部鉴定结果出具次日起开始修复，须在 45 个日历日内返还修好的电表（无法修复则返还新表）。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "51acbf9e2a5acbe8",
+          "document_name": "scanned-Electrosur - Contrato Complementario.pdf",
+          "relative_path": "scanned-Electrosur - Contrato Complementario.pdf",
+          "page_numbers": [
+            4
+          ],
+          "text": "ofrece una garantía técnico-comercial, en idioma español a través de la cual garantiza la calidad técnica de los medidores de energía, por un periodo de 5 años y 01 mes, contados a partir de la fecha de recepción en el almacén de ELECTROSUR S.A.",
+          "anchor": {
+            "text_sha256": "5fa031d41362df92",
+            "pieces": [
+              {
+                "text": "ofrece una garantía técnico-comercial, en idioma español a través de la cual garantiza la calidad técnica de los medidores de energía, por un periodo de 5 años y 01 mes, contados a partir de la fecha de recepción en el almacén de ELECTROSUR S.A.",
+                "words": [
+                  "4 129.60 405.61 152.63 418.55",
+                  "4 157.20 405.85 169.67 418.55",
+                  "4 174.24 405.85 205.64 418.55",
+                  "4 208.08 405.85 281.91 418.55",
+                  "4 284.40 405.85 290.63 418.55",
+                  "4 295.20 405.85 320.37 418.55",
+                  "4 324.72 405.85 356.37 418.79",
+                  "4 358.80 405.85 362.64 418.79",
+                  "4 365.04 405.85 388.06 418.79",
+                  "4 392.64 406.09 401.03 418.79",
+                  "4 403.20 406.09 411.59 418.79",
+                  "4 414.00 406.09 432.69 418.79",
+                  "4 435.12 406.09 468.92 418.79",
+                  "4 471.36 406.09 479.75 418.79",
+                  "4 481.92 406.09 509.24 418.79",
+                  "4 97.68 418.81 126.20 431.03",
+                  "4 130.32 418.81 138.47 431.03",
+                  "4 140.40 418.81 152.87 431.03",
+                  "4 156.72 418.81 195.81 431.03",
+                  "4 199.68 418.81 208.07 431.03",
+                  "4 211.92 418.81 244.77 431.03",
+                  "4 246.72 418.81 259.19 431.03",
+                  "4 261.12 418.81 269.27 431.03",
+                  "4 273.36 418.81 301.89 431.03",
+                  "4 306.00 418.81 314.39 431.03",
+                  "4 316.32 418.81 320.39 431.03",
+                  "4 324.48 418.81 342.95 431.03",
+                  "4 344.88 418.81 348.96 431.03",
+                  "4 353.28 418.81 361.43 431.03",
+                  "4 365.52 418.81 383.99 431.03",
+                  "4 385.92 418.81 420.69 431.03",
+                  "4 424.80 418.81 428.88 431.03",
+                  "4 430.80 418.81 453.33 431.03",
+                  "4 453.36 418.81 463.67 431.03",
+                  "4 465.60 418.81 471.83 431.03",
+                  "4 473.76 418.81 496.30 431.03",
+                  "4 500.40 418.81 508.55 431.03",
+                  "4 97.44 430.81 136.75 443.03",
+                  "4 140.64 430.81 149.03 443.03",
+                  "4 152.88 430.81 161.27 443.03",
+                  "4 161.28 430.81 194.37 443.03",
+                  "4 198.00 430.81 206.63 443.03",
+                  "4 212.40 430.81 270.43 443.03",
+                  "4 274.32 430.81 293.25 443.03"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "51acbf9e2a5acbe8",
+          "document_name": "scanned-Electrosur - Contrato Complementario.pdf",
+          "relative_path": "scanned-Electrosur - Contrato Complementario.pdf",
+          "page_numbers": [
+            4
+          ],
+          "text": "EL CONTRATISTA tendrá un plazo máximo de 30 días calendario contados a partir de la fecha de realizada la notificación, para que se apersone un representante técnico",
+          "anchor": {
+            "text_sha256": "ad2ca40fb5ffb054",
+            "pieces": [
+              {
+                "text": "EL CONTRATISTA tendrá un plazo máximo de 30 días calendario contados a partir de la fecha de realizada la notificación, para que se apersone un representante técnico",
+                "words": [
+                  "4 336.72 516.73 345.36 529.43",
+                  "4 349.44 516.73 411.06 529.43",
+                  "4 415.20 516.73 441.09 529.43",
+                  "4 443.04 516.73 451.67 529.67",
+                  "4 455.76 516.73 477.10 529.67",
+                  "4 479.04 516.97 508.78 529.67",
+                  "4 100.08 528.73 107.99 541.43",
+                  "4 112.80 528.73 120.71 541.67",
+                  "4 125.52 528.73 139.90 541.67",
+                  "4 144.48 528.97 184.51 541.67",
+                  "4 186.96 528.97 222.68 541.67",
+                  "4 225.12 528.97 228.96 541.67",
+                  "4 233.52 528.97 254.37 541.91",
+                  "4 257.04 529.21 265.19 541.91",
+                  "4 267.60 529.21 273.59 541.91",
+                  "4 278.16 529.21 299.02 541.91",
+                  "4 301.44 529.21 309.59 541.91",
+                  "4 314.16 529.21 349.88 541.91",
+                  "4 352.32 529.21 358.31 542.15",
+                  "4 363.12 529.45 409.38 542.15",
+                  "4 411.84 529.45 428.38 542.15",
+                  "4 432.96 529.45 445.43 542.15",
+                  "4 450.00 529.45 458.16 542.15",
+                  "4 460.56 529.45 496.54 542.39",
+                  "4 501.12 529.69 509.27 542.39",
+                  "4 98.16 541.93 153.07 554.15",
+                  "4 155.28 541.93 187.88 554.15"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x3",
+          "document_id": "51acbf9e2a5acbe8",
+          "document_name": "scanned-Electrosur - Contrato Complementario.pdf",
+          "relative_path": "scanned-Electrosur - Contrato Complementario.pdf",
+          "page_numbers": [
+            4
+          ],
+          "text": "la reparación debe iniciarse a partir del día siguiente de emitido el resultado del peritaje por el organismo externo, debiendo devolverse el medidor debidamente reparado dentro de los 45 días calendario a partir de esa fecha",
+          "anchor": {
+            "text_sha256": "9694dba929303f8f",
+            "pieces": [
+              {
+                "text": "la reparación debe iniciarse a partir del día siguiente de emitido el resultado del peritaje por el organismo externo, debiendo devolverse el medidor debidamente reparado dentro de los 45 días calendario a partir de esa fecha",
+                "words": [
+                  "4 337.68 640.81 345.83 653.03",
+                  "4 347.76 640.81 388.76 653.03",
+                  "4 392.88 640.81 411.34 653.03",
+                  "4 415.44 640.81 448.04 653.03",
+                  "4 452.16 640.81 456.48 653.03",
+                  "4 460.32 640.81 481.17 653.03",
+                  "4 483.12 640.81 495.58 653.03",
+                  "4 497.52 640.81 509.74 653.03",
+                  "4 100.32 653.05 134.84 665.51",
+                  "4 138.96 653.05 147.11 665.51",
+                  "4 151.20 653.05 177.81 665.51",
+                  "4 181.92 653.05 190.07 665.51",
+                  "4 192.24 653.05 226.76 665.51",
+                  "4 231.12 653.05 243.10 665.51",
+                  "4 247.44 653.05 273.80 665.51",
+                  "4 277.92 653.05 290.15 665.51",
+                  "4 294.48 653.05 300.23 665.51",
+                  "4 302.64 653.05 343.17 665.51",
+                  "4 347.52 653.05 379.90 665.51",
+                  "4 382.32 653.05 416.84 665.51",
+                  "4 420.96 653.05 463.89 665.51",
+                  "4 466.08 653.05 473.99 665.51",
+                  "4 478.56 653.05 509.01 665.51",
+                  "4 100.08 665.53 149.23 677.75",
+                  "4 153.12 665.53 188.13 677.75",
+                  "4 192.00 665.53 216.69 677.75",
+                  "4 218.64 665.53 228.95 677.75",
+                  "4 230.88 665.53 243.35 677.75",
+                  "4 245.04 665.53 255.58 677.75",
+                  "4 257.28 665.53 274.06 677.75",
+                  "4 277.92 665.53 316.76 677.75",
+                  "4 320.64 665.53 324.96 677.75",
+                  "4 328.80 665.53 349.65 677.75",
+                  "4 351.36 665.53 359.75 677.75",
+                  "4 363.60 665.53 378.23 677.75",
+                  "4 379.92 665.53 400.54 677.75"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "技术商业质保期",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ],
+          "note": ""
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "派技术代表到场的时限",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ]
+            }
+          ],
+          "note": ""
+        },
+        {
+          "evidence_group_id": "e3",
+          "information_item": "修复期限",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x3"
+              ]
+            }
+          ],
+          "note": ""
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-ESUR-Q005",
+      "question": "补充合同 CONT2025005 中，需要做测试时，验收合格（conformidad）最长多少天内出具？出具后买方应在多长时间内付款？",
+      "answerable": true,
+      "reference_answer": "需要测试时，验收合格最长在 20 天内出具（不需测试时 7 天）；出具后 ELECTROSUR 须在 10 个工作日（días hábiles）内付款。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "51acbf9e2a5acbe8",
+          "document_name": "scanned-Electrosur - Contrato Complementario.pdf",
+          "relative_path": "scanned-Electrosur - Contrato Complementario.pdf",
+          "page_numbers": [
+            6,
+            7
+          ],
+          "text": "salvo que se requiera efectuar pruebas que permitan verificar el cumplimiento de la obligación, en cuyo caso la conformidad se emite en un plazo máximo de veinte (20) días",
+          "anchor": {
+            "text_sha256": "ef51002fffe89e65",
+            "pieces": [
+              {
+                "text": "salvo que se requiera efectuar pruebas que permitan verificar el cumplimiento de la obligación, en cuyo caso la conformidad se emite en un plazo máximo de veinte (20) días",
+                "words": [
+                  "6 386.64 680.17 405.34 692.87",
+                  "6 409.68 680.17 424.54 692.87",
+                  "6 428.88 680.17 437.04 692.87",
+                  "6 439.44 680.17 473.00 693.11",
+                  "6 477.36 680.41 509.01 693.11",
+                  "6 99.60 693.13 130.29 705.35",
+                  "6 134.40 693.13 146.63 705.35",
+                  "6 150.72 693.13 183.32 705.35",
+                  "6 187.68 693.13 218.12 705.35",
+                  "6 220.32 693.13 228.47 705.35",
+                  "6 230.40 693.13 281.46 705.35",
+                  "6 283.68 693.13 291.83 705.35",
+                  "6 295.92 693.13 301.91 705.35",
+                  "6 304.08 693.13 346.75 705.35",
+                  "6 348.96 693.13 357.35 705.35",
+                  "6 361.44 693.13 379.90 705.35",
+                  "6 381.84 693.13 400.31 705.35",
+                  "6 402.48 693.13 410.39 705.35",
+                  "6 412.56 693.13 459.55 705.35",
+                  "6 463.68 693.13 471.84 705.35",
+                  "6 475.92 693.13 496.30 705.35",
+                  "6 498.48 693.13 506.63 705.35",
+                  "7 100.32 126.01 110.86 138.71",
+                  "7 113.04 126.01 134.38 138.71",
+                  "7 138.48 126.01 168.22 138.71",
+                  "7 172.32 126.01 180.95 138.71",
+                  "7 182.88 126.01 206.37 138.71",
+                  "7 208.32 126.01 225.33 138.71",
+                  "7 227.52 126.01 248.62 138.71"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "51acbf9e2a5acbe8",
+          "document_name": "scanned-Electrosur - Contrato Complementario.pdf",
+          "relative_path": "scanned-Electrosur - Contrato Complementario.pdf",
+          "page_numbers": [
+            8
+          ],
+          "text": "máximo de siete (07) días o de veinte (20) días, esto último en caso se requiera efectuar pruebas que permitan verificar el cumplimiento de la obligación",
+          "anchor": {
+            "text_sha256": "370ce34bf246feb2",
+            "pieces": [
+              {
+                "text": "máximo de siete (07) días o de veinte (20) días, esto último en caso se requiera efectuar pruebas que permitan verificar el cumplimiento de la obligación",
+                "words": [
+                  "8 99.84 505.45 129.34 518.15",
+                  "8 133.68 505.45 142.07 518.15",
+                  "8 146.40 505.45 165.34 518.15",
+                  "8 167.52 505.45 184.53 518.15",
+                  "8 186.48 505.45 203.50 518.15",
+                  "8 207.84 505.45 211.92 518.39",
+                  "8 216.24 505.45 224.63 518.39",
+                  "8 228.96 505.69 250.06 518.39",
+                  "8 254.40 505.69 271.17 518.39",
+                  "8 273.36 505.69 294.70 518.39",
+                  "8 296.64 505.69 311.51 518.39",
+                  "8 315.84 505.69 339.09 518.39",
+                  "8 341.04 505.69 351.83 518.39",
+                  "8 355.92 505.69 372.95 518.39",
+                  "8 377.04 505.69 385.68 518.39",
+                  "8 387.84 505.69 421.65 518.39",
+                  "8 423.84 505.69 457.65 518.63",
+                  "8 459.84 505.93 491.73 518.63",
+                  "8 496.08 505.93 508.79 518.63",
+                  "8 99.84 517.69 133.64 530.39",
+                  "8 138.00 517.69 169.40 530.63",
+                  "8 174.00 517.93 182.15 530.63",
+                  "8 184.56 517.93 237.29 530.63",
+                  "8 241.68 517.93 250.07 530.63",
+                  "8 254.40 517.93 262.79 530.63",
+                  "8 267.12 517.93 311.46 530.63"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x3",
+          "document_id": "51acbf9e2a5acbe8",
+          "document_name": "scanned-Electrosur - Contrato Complementario.pdf",
+          "relative_path": "scanned-Electrosur - Contrato Complementario.pdf",
+          "page_numbers": [
+            7
+          ],
+          "text": "ELECTROSUR S.A. debe efectuar el pago dentro de los diez (10) días hábiles siguientes de otorgada la conformidad de los bienes",
+          "anchor": {
+            "text_sha256": "685683df4388af70",
+            "pieces": [
+              {
+                "text": "ELECTROSUR S.A. debe efectuar el pago dentro de los diez (10) días hábiles siguientes de otorgada la conformidad de los bienes",
+                "words": [
+                  "7 101.52 149.77 160.76 162.47",
+                  "7 164.88 149.77 181.90 162.47",
+                  "7 183.84 149.77 203.02 162.47",
+                  "7 207.12 149.77 238.77 162.47",
+                  "7 240.96 149.77 249.59 162.71",
+                  "7 251.52 149.77 268.55 162.71",
+                  "7 272.64 150.01 298.05 162.71",
+                  "7 300.24 150.01 308.63 162.71",
+                  "7 310.80 150.01 323.51 162.71",
+                  "7 325.44 150.01 342.46 162.71",
+                  "7 344.64 150.01 361.41 162.71",
+                  "7 363.60 150.01 378.46 162.71",
+                  "7 382.56 150.01 410.13 162.71",
+                  "7 412.32 150.01 452.59 162.71",
+                  "7 454.80 150.01 463.19 162.71",
+                  "7 467.52 150.01 501.33 162.95",
+                  "7 503.28 150.25 511.91 162.95",
+                  "7 102.24 162.97 149.23 175.19",
+                  "7 153.36 162.97 161.51 175.19",
+                  "7 165.60 162.97 177.83 175.19",
+                  "7 180.00 162.97 210.69 175.19"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "需测试时验收合格的出具时限",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            },
+            {
+              "scheme_id": "s2",
+              "excerpt_ids": [
+                "x2"
+              ]
+            }
+          ],
+          "note": "x1 跨第 6、7 页，为第七条付款条款；x2 为第十二条"
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "付款期限",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x3"
+              ]
+            }
+          ],
+          "note": ""
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-ESUR-Q006",
+      "question": "补充合同 CONT2025005 的履约保证金金额、保函编号和有效期分别是什么？",
+      "answerable": true,
+      "reference_answer": "履约保证金 US$ 27,861.57，保函 Carta Fianza N° 3012025039661，由 AVLA PERU COMPAÑIA DE SEGUROS S.A. 出具，有效期 2025 年 5 月 21 日至 2025 年 10 月 21 日；金额为原合同金额的 10%。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "51acbf9e2a5acbe8",
+          "document_name": "scanned-Electrosur - Contrato Complementario.pdf",
+          "relative_path": "scanned-Electrosur - Contrato Complementario.pdf",
+          "page_numbers": [
+            8
+          ],
+          "text": "De fiel cumplimiento del contrato: US$ 27,861.57 (Veintisiete mil ochocientos sesenta y uno con 57/100 Dólares Americanos), a través de la Carta Fianza N° 3012025039661 emitida por AVLA PERU COMPAÑIA DE SEGUROS S.A., con vigencia desde el 21.05.2025 hasta el 21.10.2025.",
+          "anchor": {
+            "text_sha256": "07dc41f535ba0e90",
+            "pieces": [
+              {
+                "text": "De fiel cumplimiento del contrato: US$ 27,861.57 (Veintisiete mil ochocientos sesenta y uno con 57/100 Dólares Americanos), a través de la Carta Fianza N° 3012025039661 emitida por AVLA PERU COMPAÑIA DE SEGUROS S.A., con vigencia desde el 21.05.2025 hasta el 21.10.2025.",
+                "words": [
+                  "8 114.48 255.37 123.11 268.07",
+                  "8 127.20 255.37 140.14 268.07",
+                  "8 142.08 255.37 192.89 268.31",
+                  "8 197.04 255.61 209.98 268.31",
+                  "8 210.00 255.61 245.96 268.31",
+                  "8 247.92 255.61 264.95 268.31",
+                  "8 266.88 255.61 305.23 268.31",
+                  "8 309.36 255.61 356.10 268.31",
+                  "8 360.00 255.61 372.94 268.31",
+                  "8 374.88 255.61 426.19 268.55",
+                  "8 430.08 255.85 462.22 268.55",
+                  "8 466.08 255.85 470.64 268.55",
+                  "8 472.56 255.85 487.42 268.55",
+                  "8 491.52 255.85 506.62 268.55",
+                  "8 113.52 267.85 139.17 280.55",
+                  "8 145.20 267.85 175.18 280.55",
+                  "8 180.96 267.85 236.35 280.55",
+                  "8 238.08 267.85 242.88 280.55",
+                  "8 246.48 267.85 272.38 280.55",
+                  "8 276.24 267.85 285.11 280.55",
+                  "8 286.80 267.85 295.67 280.55",
+                  "8 299.28 267.85 320.86 280.79",
+                  "8 324.72 267.85 350.85 280.79",
+                  "8 354.48 268.09 365.51 280.79",
+                  "8 367.20 268.09 430.95 280.79",
+                  "8 434.88 268.09 464.84 280.79",
+                  "8 466.56 268.09 481.67 280.79",
+                  "8 483.36 268.09 504.95 280.79",
+                  "8 113.28 279.13 136.54 293.27",
+                  "8 141.12 279.37 185.25 293.27",
+                  "8 190.08 279.37 199.19 293.27",
+                  "8 204.00 279.37 245.73 293.51",
+                  "8 248.16 279.61 268.78 293.51",
+                  "8 271.44 279.61 282.71 293.51",
+                  "8 285.36 279.61 317.72 293.51",
+                  "8 320.16 279.61 343.18 293.75",
+                  "8 345.60 279.61 354.71 293.75",
+                  "8 354.96 279.61 398.82 293.75",
+                  "8 401.52 279.85 422.14 293.75",
+                  "8 424.56 279.85 431.51 293.75",
+                  "8 433.92 279.85 480.17 293.99"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "履约保证金金额",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ],
+          "note": ""
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "保函编号",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ],
+          "note": ""
+        },
+        {
+          "evidence_group_id": "e3",
+          "information_item": "保函有效期",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ],
+          "note": ""
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-ESUR-Q007",
+      "question": "补充合同 CONT2025005 中 Ítem 4（三相 4 线电子电表）的采购数量是多少？",
+      "answerable": false,
+      "reference_answer": "补充合同只涉及 Ítem 1（单相 2 线电子电表），没有 Ítem 4。",
+      "excerpts": [],
+      "evidence_groups": []
+    }
+  ]
+}

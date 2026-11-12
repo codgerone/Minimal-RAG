@@ -229,12 +229,15 @@ def render(result: dict[str, Any], previous: dict[str, Any] | None) -> str:
     if result["dataset"]["pdf_changed_since_labelling"]:
         notices.append("部分 PDF 在标注之后被修改过，标注证据可能已过时。")
     notice_html = "".join(f'<div class="card">⚠ {n}</div>' for n in notices)
+    types = result.get("document_types") or {}
+    type_label = {kind: info["label"] for kind, info in types.items()}
     doc_rows = "".join(
         f'<tr><td><a href="#doc-{esc(doc_id)}">{esc(info["document_name"])}</a></td>'
-        f'<td class="num">{info["questions"]}</td>'
+        + (f'<td style="white-space:nowrap">{esc(type_label.get(info.get("document_type"), "—"))}</td>' if types else "")
+        + f'<td class="num">{info["questions"]}</td>'
         + "".join(f'<td class="num">{pct(info["metrics"][key]["value"])}</td>' for key, _, _ in METRICS)
         + "</tr>" for doc_id, info in result["documents"].items())
-    doc_table = (f'<div class="scroll"><table><tr><th>文档</th><th class="num">题数</th>'
+    doc_table = (f'<div class="scroll"><table><tr><th>文档</th>{"<th>类型</th>" if types else ""}<th class="num">题数</th>'
                  + "".join(f'<th class="num">{esc(label)}</th>' for _, label, _ in METRICS)
                  + f"</tr>{doc_rows}</table></div>")
     has_cross = [any(h["cross_document"] for h in c["hits"]) for c in cases]
@@ -275,12 +278,36 @@ def render(result: dict[str, Any], previous: dict[str, Any] | None) -> str:
             f' · 文档过滤{filter_state(result)}{_cost_text(result)}'
             f' · 构建指纹 {esc(result["fingerprint"][:12])}</div>{_budget_links(result)}'
             f'<div class="tiles">{tiles}</div>{notice_html}'
-            f'<h2>按文档</h2>{doc_table}'
+            f'{_type_table(types)}<h2>按文档</h2>{doc_table}'
             f'<details><summary>本次使用的构建配置</summary><pre>{esc(_pretty(settings))}</pre></details>'
             f'<h2>逐题明细</h2>{bar}{"".join(blocks)}'
             f'<div class="meta">指标定义见 docs/rules/evaluation.md；原始数据见同目录 result.json。</div>')
     return page(f"检索评估 · {result['config']} · K={result['top_k']}", body,
                 root="../../", crumbs=[("报告首页", "../../index.html")])
+
+
+def _type_table(types: dict[str, Any]) -> str:
+    """Metrics per document type (each question counted under its document's type)."""
+    if not types:
+        return ""
+    rows = "".join(
+        f'<tr><td>{esc(info["label"])}</td><td class="num">{info["documents"]}</td>'
+        f'<td class="num">{info["answerable"]}</td>'
+        f'<td class="num">{info["metrics"]["hit_rate"]["numerator"]:.0f} / '
+        f'{info["metrics"]["complete_coverage"]["numerator"]:.0f}</td>'
+        + "".join(f'<td class="num">{pct(info["metrics"][key]["value"])}</td>' for key, _, _ in METRICS)
+        + f'<td class="num">{_type_tokens(info)}</td></tr>' for info in types.values())
+    return ('<h2>按文档类型</h2><div class="scroll"><table><tr><th>类型</th><th class="num">文档</th>'
+            '<th class="num">可回答题</th><th class="num">命中 / 完整覆盖（题）</th>'
+            + "".join(f'<th class="num">{esc(label)}</th>' for _, label, _ in METRICS)
+            + f'<th class="num">每题返回 token</th></tr>{rows}</table></div>'
+            '<div class="meta">每题按它所属文档的类型归类；类型由入库时的页面判定得出：没有扫描页为数字 PDF，'
+            '非空白页全部是扫描页为扫描 PDF，两者都有为部分扫描。</div>')
+
+
+def _type_tokens(info: dict[str, Any]) -> str:
+    tokens = info.get("returned_tokens") or {}
+    return "—" if tokens.get("value") is None else f'{tokens["value"]:.0f}'
 
 
 def _pretty(value: Any) -> str:

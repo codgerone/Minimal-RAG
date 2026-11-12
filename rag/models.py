@@ -38,12 +38,29 @@ ChunkKind: TypeAlias = Literal["text", "list", "table", "table_summary"]
 
 
 @dataclass(frozen=True)
+class ParseFile:
+    """A PDF derived from the source that downstream tools read instead of it (OCR text layer)."""
+    path: Path
+    sha256: str
+
+
+@dataclass(frozen=True)
 class SourceDocument:
     document_id: str
     document_name: str
     relative_path: str
     absolute_path: Path
-    file_hash: str
+    file_hash: str                       # of the source file: incremental ingest and ground truth bind to it
+    parse_file: ParseFile | None = None  # set when the source has scanned pages and OCR produced ocr.pdf
+
+    @property
+    def pdf_path(self) -> Path:
+        """The PDF every tool reads: the OCR text-layer PDF when there is one, else the source."""
+        return self.parse_file.path if self.parse_file else self.absolute_path
+
+    @property
+    def pdf_hash(self) -> str:
+        return self.parse_file.sha256 if self.parse_file else self.file_hash
 
 
 @dataclass(frozen=True)
