@@ -1493,7 +1493,7 @@ wheels = [
 
 [[package]]
 name = "minimal-rag"
-version = "3.15.0"
+version = "4.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "camelot-py" },
