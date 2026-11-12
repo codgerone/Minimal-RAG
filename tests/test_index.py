@@ -72,10 +72,10 @@ def test_full_rebuild_failure_leaves_index_untouched(workspace, fake_assembly, m
     count_before = open_store(workspace, "fake").count()
     real_prepare = builder.prepare
 
-    def fail_on_b(source, assembly):
+    def fail_on_b(source, assembly, *args, **kwargs):
         if source.relative_path == "b.pdf":
             raise RuntimeError("parser crashed")
-        return real_prepare(source, assembly)
+        return real_prepare(source, assembly, *args, **kwargs)
 
     monkeypatch.setattr(builder, "prepare", fail_on_b)
     with pytest.raises(IngestError, match="现有索引未改动"):

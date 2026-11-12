@@ -79,14 +79,26 @@ class DoclingLayoutParser:
         return {"rules": RULES_VERSION,
                 "libraries": versions("docling", "docling-core", "docling-ibm-models", "docling-parse", "pymupdf")}
 
-    def parse(self, source: SourceDocument) -> ParseResult:
+    def parse(self, source: SourceDocument, cache: Any = None) -> ParseResult:
+        """With a cache, Docling's exported document is kept under the parsed file's hash, the
+        parser settings and identity; on a hit the document is rebuilt from it (export → rebuild
+        is exact) and mapped as usual."""
         pdf_bytes = source.pdf_path.read_bytes()
         with fitz.open(stream=pdf_bytes, filetype="pdf") as pdf:
             page_sizes = {index + 1: (float(page.rect.width), float(page.rect.height))
                           for index, page in enumerate(pdf)}
         if not page_sizes:
             raise DoclingParseError(f"PDF 没有页面：{source.relative_path}")
-        document = self.converter(pdf_bytes)
-        native = json.loads(json.dumps(document.export_to_dict(), ensure_ascii=False))
+
+        def convert() -> dict[str, Any]:
+            return json.loads(json.dumps(self.converter(pdf_bytes).export_to_dict(), ensure_ascii=False))
+
+        if cache is None:
+            native = convert()
+        else:
+            key = {"parser": "docling_layout", "pdf_sha256": source.pdf_hash, "identity": self.identity()}
+            native, _ = cache.get_or_compute("parse", key, convert, lambda value: value, lambda value: value)
+        from docling_core.types.doc import DoclingDocument
+        document = DoclingDocument.model_validate(native)
         primary = map_docling_document(document, source, page_sizes)
         return ParseResult(primary, native, DoclingConversion(source, page_sizes, document))

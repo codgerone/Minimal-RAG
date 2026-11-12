@@ -60,9 +60,11 @@ def process_document(source: SourceDocument, parser: Parser,
                      extractors: tuple[TableExtractor, ...],
                      table_steps: TableSteps | None, ocr: object | None = None,
                      progress: Callable[[str], None] = lambda message: None,
-                     times: StepTimes | None = None) -> ProcessedDocument:
+                     times: StepTimes | None = None, cache: object | None = None) -> ProcessedDocument:
     """`ocr` is an OcrStep (rag/ingest/ocr/step.py); without it scanned pages stay unread.
-    `times` collects the wall-clock time of each step."""
+    `times` collects the wall-clock time of each step and whether it was read from `cache`
+    (rag/index/step_cache.py StepCache), which keeps the parser's raw output and each table
+    extractor's report."""
     times = times if times is not None else StepTimes()
     with times.step("pages_ocr"):
         if ocr is not None:
@@ -70,13 +72,13 @@ def process_document(source: SourceDocument, parser: Parser,
         else:
             pages = DocumentPages(classify_pages(source.absolute_path), None)
     with times.step("parse"):
-        parsed = parser.parse(source)
+        parsed = parser.parse(source, cache)
     primary = parsed.primary
     language = primary_language(primary)
     reports_list = []
     for extractor in extractors:
         with times.step(f"extract_{extractor.tool}"):
-            reports_list.append(extractor.extract(source, parsed.shared))
+            reports_list.append(_extract(extractor, source, parsed, cache))
     reports = tuple(reports_list)
     with times.step("select_tables"):
         selected = _select(source, primary, reports)
@@ -90,6 +92,21 @@ def process_document(source: SourceDocument, parser: Parser,
                                 bool(primary.table_slots), language, warnings)
     return ProcessedDocument(source, parsed, reports, resolutions, grouping, scoring,
                              prepared, continuations, document, pages)
+
+
+def _extract(extractor: TableExtractor, source: SourceDocument, parsed: ParseResult,
+             cache: object | None) -> TableExtractionReport:
+    """The Docling extractor reads the parser's conversion (cached with the parse); every other
+    extractor reads the PDF, so its report is cached under the PDF, the source and its identity."""
+    if cache is None or extractor.tool == "docling":
+        return extractor.extract(source, parsed.shared)
+    from rag.jsonio import from_jsonable, to_jsonable
+    key = {"tool": extractor.tool, "pdf_sha256": source.pdf_hash, "file_hash": source.file_hash,
+           "relative_path": source.relative_path, "identity": extractor.identity()}
+    report, _ = cache.get_or_compute(  # type: ignore[attr-defined]
+        f"extract_{extractor.tool}", key, lambda: extractor.extract(source, parsed.shared),
+        to_jsonable, lambda value: from_jsonable(TableExtractionReport, value))
+    return report
 
 
 def _select(source: SourceDocument, primary, reports: tuple[TableExtractionReport, ...]):

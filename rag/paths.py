@@ -34,6 +34,11 @@ class Workspace:
     def reports(self) -> Path:
         return self.root / "reports"
 
+    @property
+    def cache_dir(self) -> Path:
+        """Step result caches shared by every index (rag/index/step_cache.py)."""
+        return self.root / ".rag" / "cache"
+
     def index_dir(self, config_name: str) -> Path:
         return self.root / ".rag" / "indexes" / config_name
 

@@ -18,6 +18,7 @@ from rag.index.build_steps import DocumentFacts, fingerprint, step_settings
 from rag.index.lexical import LexicalChunk, LexicalStore
 from rag.index.manifest import DocumentEntry, Manifest, now
 from rag.index.status import IndexStatus, check_status
+from rag.index.step_cache import StepCache
 from rag.index.store import ChromaStore, StoredChunk
 from rag.index.tables import StoredTable, TableStore, collect_tables
 from rag.ingest.regions import attach_regions
@@ -77,14 +78,25 @@ def current_status(workspace: Workspace, assembly: Assembly,
 
 
 def prepare(source: SourceDocument, assembly: Assembly,
-            progress: Callable[[str], None] = lambda message: None) -> Prepared:
+            progress: Callable[[str], None] = lambda message: None,
+            cache: StepCache | None = None) -> Prepared:
+    """`cache` keeps the parser's raw output, each table extractor's report and the passage vectors."""
     times = StepTimes()
+    first_lookup = len(cache.log) if cache is not None else 0
     processed = process_document(source, assembly.parser, assembly.extractors, assembly.table_steps,
-                                 assembly.ocr, progress, times)
+                                 assembly.ocr, progress, times, cache)
     with times.step("chunk"):
         batch = attach_regions(assembly.chunker.chunk(processed.document), processed.document)
+    texts = [chunk.text for chunk in batch.chunks]
     with times.step("embed"):
-        vectors = assembly.embedder.encode_passages([chunk.text for chunk in batch.chunks])
+        if cache is None:
+            vectors = assembly.embedder.encode_passages(texts)
+        else:
+            vectors, hits = cache.embeddings().encode_passages(assembly.embedder, texts)
+            times.cache["embed"] = f"{hits}/{len(texts)}"
+    if cache is not None:
+        for step, hit in cache.log[first_lookup:]:
+            times.cache[step] = "hit" if hit else "miss"
     lexical = None
     if assembly.lexical is not None:
         language = processed.document.language
@@ -98,7 +110,7 @@ def prepare(source: SourceDocument, assembly: Assembly,
                           source.file_hash, readable_name(source.relative_path),
                           processed.parse.primary.page_count, len(batch.chunks),
                           len(processed.prepared_tables), now(), times.rounded(),
-                          facts.scanned_pages, record, fingerprint(record))
+                          times.cache, facts.scanned_pages, record, fingerprint(record))
     tables = collect_tables(processed.document, batch)
     if len(tables) != entry.table_count:
         raise IngestError(f"整表数 {len(tables)} 与表格数 {entry.table_count} 不一致")
@@ -133,17 +145,20 @@ def _encoder_changed(status: IndexStatus) -> bool:
 
 
 def ingest(workspace: Workspace, assembly: Assembly, *, file: str | None = None,
-           force: bool = False, prune: bool = False,
+           force: bool = False, prune: bool = False, refresh_cache: bool = False,
            progress: Callable[[str], None] = lambda message: None) -> list[DocumentOutcome]:
+    """`refresh_cache` recomputes the parse, table extraction and passage vectors of every document
+    processed, overwriting their cache entries (OCR facts and LLM results are kept)."""
+    cache = StepCache(workspace.cache_dir, refresh_cache)
     sources = discover(workspace.documents)
     status = current_status(workspace, assembly, sources)
     if _encoder_changed(status):
         if file is not None:
             raise IngestError(f"配置 {assembly.name} 的编码设置已改变（或索引是 V4.1.1 之前建的），"
                               f"向量库要整体重建；请不加 --file 运行 ingest --config {assembly.name}")
-        return _rebuild_all(workspace, assembly, sources, progress)
+        return _rebuild_all(workspace, assembly, sources, progress, cache)
     if force and file is None:
-        return _rebuild_all(workspace, assembly, sources, progress)
+        return _rebuild_all(workspace, assembly, sources, progress, cache)
 
     index_dir = workspace.index_dir(assembly.name)
     manifest = status.manifest or _new_manifest(assembly)
@@ -177,9 +192,10 @@ def ingest(workspace: Workspace, assembly: Assembly, *, file: str | None = None,
             outcomes.append(DocumentOutcome(item.relative_path, "skipped"))
             continue
         assert item.source is not None
-        progress(f"处理 {item.relative_path} …")
+        reason = f"（{item.stale_reason}）" if item.state == "stale" else ""
+        progress(f"处理 {item.relative_path}{reason} …")
         try:
-            prepared = prepare(item.source, assembly, progress)
+            prepared = prepare(item.source, assembly, progress, cache=cache)
             if item.entry is not None and item.entry.folder != prepared.entry.folder:
                 shutil.rmtree(index_dir / "documents" / item.entry.folder, ignore_errors=True)
             write_audit(index_dir / "documents" / prepared.entry.folder, prepared.processed, prepared.batch)
@@ -201,7 +217,7 @@ def ingest(workspace: Workspace, assembly: Assembly, *, file: str | None = None,
 
 def _rebuild_all(workspace: Workspace, assembly: Assembly,
                  sources: tuple[SourceDocument, ...],
-                 progress: Callable[[str], None]) -> list[DocumentOutcome]:
+                 progress: Callable[[str], None], cache: StepCache) -> list[DocumentOutcome]:
     index_dir = workspace.index_dir(assembly.name)
     staging = index_dir / "documents.staging"
     shutil.rmtree(staging, ignore_errors=True)
@@ -214,7 +230,7 @@ def _rebuild_all(workspace: Workspace, assembly: Assembly,
             continue
         progress(f"处理 {source.relative_path} …")
         try:
-            prepared = prepare(source, assembly, progress)
+            prepared = prepare(source, assembly, progress, cache=cache)
             write_audit(staging / prepared.entry.folder, prepared.processed, prepared.batch)
         except Exception as exc:
             shutil.rmtree(staging, ignore_errors=True)

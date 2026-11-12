@@ -26,6 +26,7 @@ class DocumentEntry:
     table_count: int
     built_at: str
     timings: dict[str, float] = field(default_factory=dict)   # seconds per ingest step
+    cache: dict[str, str] = field(default_factory=dict)        # step → hit / miss; embed: "<hits>/<passages>"
     # Facts deciding which steps the document passes through, and those steps' build record
     # (rag/index/build_steps.py). None in a manifest written before V4.1.1: the document is out of date.
     scanned_pages: bool | None = None

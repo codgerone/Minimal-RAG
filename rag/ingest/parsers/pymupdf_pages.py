@@ -71,7 +71,8 @@ class PyMuPDFPagesParser:
         from rag.ingest.libraries import versions
         return {"rules": RULES_VERSION, "libraries": versions("pymupdf")}
 
-    def parse(self, source: SourceDocument) -> ParseResult:
+    def parse(self, source: SourceDocument, cache: object = None) -> ParseResult:
+        # PyMuPDF reads a document in about a second: nothing to cache.
         elements: list[PrimaryText] = []
         native_pages = []
         try:

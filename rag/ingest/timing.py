@@ -10,6 +10,7 @@ from typing import Iterator
 class StepTimes:
     def __init__(self) -> None:
         self.seconds: dict[str, float] = {}
+        self.cache: dict[str, str] = {}     # step → hit / miss, or "<hits>/<total>" for passages
 
     @contextmanager
     def step(self, name: str) -> Iterator[None]:

@@ -1,5 +1,6 @@
 """Contract-level examples for V3 table content preparation."""
 
+import json
 from dataclasses import replace
 from pathlib import Path
 import hashlib
@@ -201,6 +202,8 @@ def test_real_pdf_words_drive_group_scoring_and_explicit_fallback(tmp_path: Path
                                   (PageExecution(1, "completed", ("winner",), None, None),),
                                   ("winner",), None, None)
     report = TableExtractionReport(source.relative_path, source.file_hash, (execution,), (candidate,), ())
+    from rag.jsonio import from_jsonable, to_jsonable    # how the extraction cache stores a report
+    assert from_jsonable(TableExtractionReport, json.loads(json.dumps(to_jsonable(report)))) == report
     decisions, grouping, scoring = select_tables(source, primary, (report,),
                                                   PyMuPdfEvidenceReader())
     assert decisions[0].origin == "selected_winner"
