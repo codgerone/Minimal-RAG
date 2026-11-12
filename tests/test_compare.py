@@ -126,3 +126,25 @@ def test_changes_by_document_type_count_only_that_types_questions():
 def test_runs_without_document_types_are_noted():
     from rag.reports.compare import _by_type
     assert "V4.1 之前" in _by_type([("a", run("structured", "small", {"q1": "miss"}))])
+
+
+def test_results_recorded_per_build_step_group_with_earlier_flat_results():
+    from rag.reports.compare import _group_key, _model
+    parser, chunker = {"use": "docling_layout"}, {"use": "structured_tokens", "max_tokens": 512}
+    extractor, ocr = {"use": "camelot"}, {"use": "rapidocr", "dpi": 300}
+    flat = run("structured", "small", {"q1": "partial"})
+    flat["build_settings"] = {
+        "rules_version": "v3.13", "parser": parser, "table_extractors": [extractor], "chunker": chunker,
+        "ocr": ocr, "ocr_identity": {"version": "3.9.2"}, "embedder": {"use": "small"},
+        "embedder_identity": {"model": "org/small"}, "table_formatter": {"use": "markdown_rows"}}
+    stepped = run("structured", "small", {"q1": "complete"})
+    stepped["build_settings"] = {
+        "pages": {"rules": "v4.1.1"},
+        "ocr": {**ocr, "identity": {"version": "3.9.2"}, "rules": "v4.1.1", "libraries": {}},
+        "parse": {**parser, "identity": {"rules": "v4.1.1"}},
+        "table_extraction": {"extractors": [{**extractor, "identity": {}}], "rules": "v4.1.1"},
+        "table_text": {"table_formatter": {"use": "labeled_rows"}, "rules": "v4.1.1"},
+        "chunk": {**chunker, "identity": {"rules": "v4.1.1"}},
+        "embed": {"use": "small", "identity": {"model": "org/small"}}}
+    assert _group_key(flat) == _group_key(stepped)
+    assert _model(stepped) == _model(flat).removeprefix("规则 v3.13 · ")

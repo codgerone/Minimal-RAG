@@ -2,8 +2,9 @@
 
 Consistency rule: manifest.json is written last. If anything fails before that, the
 manifest still describes the old state and `status` reports the document as needing
-work; re-running ingest repairs it. A full `--force` rebuild processes every PDF
-first and only touches the index once all of them succeeded.
+work; re-running ingest repairs it. A full rebuild (`--force`, or a change of the encoder,
+whose vectors cannot share a store with the old ones) processes every PDF first and only
+touches the index once all of them succeeded.
 """
 
 from __future__ import annotations
@@ -13,6 +14,7 @@ from dataclasses import dataclass
 from typing import Callable, Literal
 
 from rag.index.audit import load_audit, write_audit
+from rag.index.build_steps import DocumentFacts, fingerprint, step_settings
 from rag.index.lexical import LexicalChunk, LexicalStore
 from rag.index.manifest import DocumentEntry, Manifest, now
 from rag.index.status import IndexStatus, check_status
@@ -69,7 +71,7 @@ def open_tables(workspace: Workspace, config_name: str) -> TableStore:
 def current_status(workspace: Workspace, assembly: Assembly,
                    sources: tuple[SourceDocument, ...] | None = None) -> IndexStatus:
     sources = discover(workspace.documents) if sources is None else sources
-    return check_status(workspace, assembly.name, assembly.fingerprint(), sources,
+    return check_status(workspace, assembly.name, lambda facts: step_settings(assembly, facts), sources,
                         open_store(workspace, assembly.name), open_lexical(workspace, assembly),
                         open_tables(workspace, assembly.name), ocr=assembly.ocr is not None)
 
@@ -89,10 +91,14 @@ def prepare(source: SourceDocument, assembly: Assembly,
         with times.step("lexical"):
             lexical = [LexicalChunk(chunk.chunk_id, language, assembly.lexical.terms(chunk.text, language))
                        for chunk in batch.chunks]
+    facts = DocumentFacts(any(page.kind == "scanned" for page in processed.pages.pages),
+                          len(processed.prepared_tables) > 0)
+    record = step_settings(assembly, facts)
     entry = DocumentEntry(source.document_id, source.document_name, source.relative_path,
                           source.file_hash, readable_name(source.relative_path),
                           processed.parse.primary.page_count, len(batch.chunks),
-                          len(processed.prepared_tables), now(), times.rounded())
+                          len(processed.prepared_tables), now(), times.rounded(),
+                          facts.scanned_pages, record, fingerprint(record))
     tables = collect_tables(processed.document, batch)
     if len(tables) != entry.table_count:
         raise IngestError(f"整表数 {len(tables)} 与表格数 {entry.table_count} 不一致")
@@ -116,7 +122,14 @@ def _write_reports(workspace: Workspace, config_name: str, entry: DocumentEntry)
 
 
 def _new_manifest(assembly: Assembly) -> Manifest:
-    return Manifest(assembly.name, assembly.fingerprint(), assembly.build_settings(), now())
+    return Manifest(assembly.name, now())
+
+
+def _encoder_changed(status: IndexStatus) -> bool:
+    """A document built with another encoder (or before records were kept per document): its vectors
+    may have another dimension, so the store is rebuilt as a whole."""
+    return any(item.state == "stale" and (not item.changed_steps or "embed" in item.changed_steps)
+               for item in status.documents)
 
 
 def ingest(workspace: Workspace, assembly: Assembly, *, file: str | None = None,
@@ -124,9 +137,11 @@ def ingest(workspace: Workspace, assembly: Assembly, *, file: str | None = None,
            progress: Callable[[str], None] = lambda message: None) -> list[DocumentOutcome]:
     sources = discover(workspace.documents)
     status = current_status(workspace, assembly, sources)
-    if status.state == "config_changed" and not (force and file is None):
-        raise IngestError(f"配置 {assembly.name} 的构建设置已改变，现有索引已过期；"
-                          f"请运行 ingest --config {assembly.name} --force 全量重建")
+    if _encoder_changed(status):
+        if file is not None:
+            raise IngestError(f"配置 {assembly.name} 的编码设置已改变（或索引是 V4.1.1 之前建的），"
+                              f"向量库要整体重建；请不加 --file 运行 ingest --config {assembly.name}")
+        return _rebuild_all(workspace, assembly, sources, progress)
     if force and file is None:
         return _rebuild_all(workspace, assembly, sources, progress)
 

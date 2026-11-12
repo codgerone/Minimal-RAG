@@ -26,15 +26,21 @@ class DocumentEntry:
     table_count: int
     built_at: str
     timings: dict[str, float] = field(default_factory=dict)   # seconds per ingest step
+    # Facts deciding which steps the document passes through, and those steps' build record
+    # (rag/index/build_steps.py). None in a manifest written before V4.1.1: the document is out of date.
+    scanned_pages: bool | None = None
+    build_settings: dict[str, Any] | None = None
+    fingerprint: str | None = None
 
 
 @dataclass
 class Manifest:
+    """Build settings are recorded per document; a manifest written before V4.1.1 also carried one
+    index-wide fingerprint, which is ignored when read."""
     config_name: str
-    fingerprint: str
-    build_settings: dict[str, Any]
     updated_at: str
     documents: dict[str, DocumentEntry] = field(default_factory=dict)
+    schema_version: str = "manifest_v2"
 
     @classmethod
     def load(cls, path: Path) -> "Manifest | None":
@@ -42,8 +48,7 @@ class Manifest:
             return None
         data = read_json(path)
         documents = {key: DocumentEntry(**value) for key, value in data["documents"].items()}
-        return cls(data["config_name"], data["fingerprint"], data["build_settings"],
-                   data["updated_at"], documents)
+        return cls(data["config_name"], data["updated_at"], documents)
 
     def save(self, path: Path) -> None:
         self.updated_at = now()

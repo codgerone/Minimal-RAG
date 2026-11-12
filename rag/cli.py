@@ -166,7 +166,7 @@ def _status(workspace: Workspace, args: argparse.Namespace) -> int:
     assembly = _assembly(workspace, args.config)
     sources = discover(workspace.documents)
     status = current_status(workspace, assembly, sources)
-    headline = {"not_built": "尚未建立索引", "config_changed": "配置已改变，索引过期（需 ingest --force）",
+    headline = {"not_built": "尚未建立索引", "stale": "部分文档的构建设置已改变，需 ingest",
                 "ready": "可用"}[status.state]
     from rag.reports.index_page import index_summary
     _out(f"配置 {assembly.name}：{headline}")
@@ -178,6 +178,8 @@ def _status(workspace: Workspace, args: argparse.Namespace) -> int:
             missing = [name for name, ok in (("向量", item.vectors_complete), ("倒排", item.lexical_complete),
                                              ("整表", item.tables_complete)) if ok is False]
             indexes = f"  （{'、'.join(missing)}索引不完整）"
+        if item.state == "stale":
+            indexes = f"  （{item.stale_reason}）"
         _out(f"  [{STATE_LABELS[item.state]}] {item.relative_path}  {chunks}{indexes}")
     todo = [d for d in status.documents if d.needs_ingest]
     if todo:
@@ -239,8 +241,7 @@ def _require_queryable(workspace: Workspace, assembly) -> None:
     from rag.index.builder import current_status
     status = current_status(workspace, assembly)
     if not status.queryable:
-        hint = ("ingest --force" if status.state == "config_changed" else "ingest")
-        raise ConfigError(f"配置 {assembly.name} 的索引不可用，请先运行：python -m rag {hint} --config {assembly.name}")
+        raise ConfigError(f"配置 {assembly.name} 的索引不可用，请先运行：python -m rag ingest --config {assembly.name}")
     stale = [d.relative_path for d in status.documents if d.state != "current"]
     if stale:
         _out(f"提示：{len(stale)} 个文档的索引不是最新的（运行 status 查看），结果可能不完整。")

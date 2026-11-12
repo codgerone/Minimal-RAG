@@ -143,7 +143,7 @@ def test_the_bm25_weight_scales_the_lexical_term_and_zero_leaves_the_semantic_or
 
 def test_lexical_section_enters_the_fingerprint_only_when_present(tmp_path):
     plain = assemble(load_config(write(tmp_path)))
-    assert plain.lexical is None and "lexical" not in plain.config.build_settings()
+    assert plain.lexical is None and "lexical" not in plain.build_settings()
     with_bm25 = assemble(load_config(write(tmp_path, extra="[lexical]\n")))
     assert with_bm25.config.lexical == {"stopwords": True, "stemming": True}
     unstemmed = assemble(load_config(write(tmp_path, extra="[lexical]\nstemming = false\n")))

@@ -8,8 +8,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-# Bump when a built-in algorithm changes its output, so existing indexes are flagged stale.
-RULES_VERSION = "v3.13"
+# Rules versions live in the module of each ingest step (rag/index/build_steps.py lists the steps).
 DEFAULT_CONFIG = "structured"
 TABLE_RETURN_UNITS = ("chunk", "table")
 QUERY_MODES = ("retrieval", "multi_round")   # [query] mode: the question retrieved once, or multi-round retrieval
@@ -61,20 +60,12 @@ class AssemblyConfig:
     query_mode: str = "retrieval"   # [query] mode: retrieval (the question retrieved once) | multi_round
     ocr: Component | None = None    # [ocr]: OCR of scanned pages (docs/rules/ocr.md); None = scanned pages are not read
 
-    def build_settings(self) -> dict[str, Any]:
-        """Everything that changes index content. Retrieval, LLM and display settings are excluded."""
+    def table_settings(self) -> dict[str, Any]:
+        """The three table steps; LLM steps add their model, prompt and context rules."""
         return {
-            "rules_version": RULES_VERSION,
-            "parser": self.parser.as_dict(),
-            "table_extractors": [item.as_dict() for item in self.table_extractors],
             "table_structure": _with_rules(self.table_structure, "llm_annotation", _annotation_rules),
             "table_formatter": self.table_formatter.as_dict() if self.table_formatter else None,
             "table_index_text": _with_rules(self.table_index_text, "summary", _summary_rules),
-            "chunker": self.chunker.as_dict(),
-            "embedder": self.embedder.as_dict(),
-            **({"ocr": self.ocr.as_dict()} if self.ocr is not None else {}),
-            # Only present when configured, so configs without a BM25 index keep their fingerprint.
-            **({"lexical": self.lexical} if self.lexical is not None else {}),
         }
 
 

@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import hashlib
-import json
 from dataclasses import dataclass, field
 from typing import Any, Callable
 
@@ -123,15 +121,15 @@ class Assembly:
         return self.config.name
 
     def build_settings(self) -> dict[str, Any]:
-        settings = {**self.config.build_settings(), "embedder_identity": self.embedder.identity()}
-        if self.ocr is not None:
-            settings["ocr_identity"] = self.ocr.engine.identity()
-        return settings
+        """Every build step of the config (rag/index/build_steps.py); each document's own record
+        holds only the steps it passes through."""
+        from rag.index.build_steps import step_settings
+        return step_settings(self)
 
     def fingerprint(self) -> str:
-        raw = json.dumps(self.build_settings(), ensure_ascii=False, sort_keys=True,
-                         separators=(",", ":"))
-        return hashlib.sha256(raw.encode("utf-8")).hexdigest()
+        """Identifies the config's build settings for display; staleness is judged per document."""
+        from rag.index.build_steps import fingerprint
+        return fingerprint(self.build_settings())
 
     def llm(self) -> LLM:
         if self._llm is None:
