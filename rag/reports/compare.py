@@ -151,6 +151,45 @@ def _summary(runs: list[tuple[str, dict[str, Any]]]) -> str:
             f'变好 / 变差按 未命中 &lt; 部分覆盖 &lt; 完整覆盖 的状态比较。</div>')
 
 
+def _by_type(runs: list[tuple[str, dict[str, Any]]]) -> str:
+    """Per document type, the summary metrics of every run and its changes against the baseline,
+    counted over that type's answerable questions; runs before V4.1 do not record document types."""
+    if not all(r.get("document_types") for _, r in runs):
+        return '<div class="meta">有运行未记录文档类型（V4.1 之前的评估）。</div>'
+    base = runs[0][1]
+    type_of = {doc: info.get("document_type") for doc, info in base["documents"].items()}
+    sections = []
+    for kind, base_info in base["document_types"].items():
+        cases = {c["case_id"] for c in base["cases"] if c["answerable"] and type_of.get(c["document_id"]) == kind}
+        rows = []
+        for index, (name, result) in enumerate(runs):
+            info = result["document_types"].get(kind)
+            if info is None:
+                continue
+            changes = {cid: v for cid, v in _changes(base, result).items() if cid in cases}
+            cells = "".join(
+                f'<td class="num">{pct(info["metrics"][key]["value"])}'
+                f'{"" if index == 0 else _delta(info["metrics"][key]["value"], base_info["metrics"][key]["value"], up)}</td>'
+                for key, _, up in METRICS)
+            moved = ("基线" if index == 0 else
+                     f'<span class="up">↑{sum(v > 0 for v in changes.values())}</span> / '
+                     f'<span class="down">↓{sum(v < 0 for v in changes.values())}</span>')
+            counts = (f'{info["metrics"]["hit_rate"]["numerator"]:.0f} / '
+                      f'{info["metrics"]["complete_coverage"]["numerator"]:.0f}')
+            tokens = (info.get("returned_tokens") or {}).get("value")
+            rows.append(f'<tr><td><b>{esc(_model(result))}</b></td><td class="num">{counts}</td>{cells}'
+                        f'<td class="num">{"—" if tokens is None else f"{tokens:.0f}"}</td>'
+                        f'<td class="num">{moved}</td></tr>')
+        head = "".join(f'<th class="num">{esc(label)}</th>' for _, label, _ in METRICS)
+        sections.append(
+            f'<h3>{esc(base_info["label"])}<span class="meta"> · {base_info["documents"]} 份文档 · '
+            f'{base_info["answerable"]} 道可回答题</span></h3>'
+            f'<div class="scroll"><table><tr><th>设置 / 运行</th><th class="num">命中 / 完整覆盖（题）</th>{head}'
+            f'<th class="num">每题返回 token</th><th class="num">较基线 变好 / 变差</th></tr>{"".join(rows)}</table></div>')
+    return ("".join(sections) + '<div class="meta">每题按它所属文档的类型归类；类型由入库时的页面判定得出。'
+            '变好 / 变差只计该类型的题。</div>')
+
+
 def _required_k(runs: list[tuple[str, dict[str, Any]]], tab: str) -> str:
     """Evidence groups whose required K (leading results the full ranking needs to cover them)
     differs between runs; runs before V3.12 do not record it."""
@@ -291,7 +330,7 @@ def render(name: str, runs: list[tuple[str, dict[str, Any]]], spec: TableSpec | 
                        (f"{tab}-worse", "有运行变差", sum(f"{tab}-worse" in t.split() for t in tags_of.values()))])
         panels.append(
             f'<div data-panel="{esc(tab)}"><h2>指标（K={top_k}，基线 {esc(_model(members[0][1]))}）</h2>'
-            f'{_summary(members)}<h2>逐证据组所需 K 的变化</h2>'
+            f'{_summary(members)}<h2>按文档类型</h2>{_by_type(members)}<h2>逐证据组所需 K 的变化</h2>'
             f'<div class="meta">所需 K：按全量排名，该证据组全部进入前几个结果；整表算一个结果。</div>'
             f'{_required_k(members, tab)}'
             f'<h2>逐题状态</h2>{bar}{matrix}'

@@ -26,6 +26,23 @@ class EvalError(RuntimeError):
     pass
 
 
+# Document types reported separately (docs/rules/evaluation.md); the order is the report's.
+DOCUMENT_TYPES = {"digital": "数字 PDF", "scanned": "扫描 PDF", "partly_scanned": "部分扫描"}
+
+
+def _document_types(workspace: Workspace, config_name: str) -> dict[str, str]:
+    """document_id → type, from the page classification in the index's intermediate results;
+    documents of indexes built before V4.1 (no pages.json) are left out."""
+    from rag.ingest.ocr.models import DocumentPages
+    from rag.jsonio import from_jsonable
+    types = {}
+    for folder in sorted((workspace.index_dir(config_name) / "documents").iterdir()):
+        if (folder / "pages.json").is_file() and (folder / "parsed.json").is_file():
+            pages = from_jsonable(DocumentPages, read_json(folder / "pages.json"))
+            types[read_json(folder / "parsed.json")["document_id"]] = pages.document_type
+    return types
+
+
 @dataclass(frozen=True)
 class CaseResult:
     case: Case
@@ -255,12 +272,23 @@ def _write_run(workspace: Workspace, assembly: Assembly, folder: Path, top_k: in
     table_return_unit = assembly.config.table_return_unit
     names = {doc_id: source.document_name for doc_id, source in sources.items()}
     scored = [r.score for r in results if r.score is not None]
+    types = _document_types(workspace, assembly.name)
     per_document: dict[str, Any] = {}
     for doc_id in dict.fromkeys(r.case.document_id for r in results):
         doc_scores = [r.score for r in results if r.case.document_id == doc_id and r.score]
         name = next(r.case.document_name for r in results if r.case.document_id == doc_id)
-        per_document[doc_id] = {"document_name": name, "questions": len(doc_scores),
-                                "metrics": _metrics_dict(doc_scores)}
+        per_document[doc_id] = {"document_name": name, "document_type": types.get(doc_id),
+                                "questions": len(doc_scores), "metrics": _metrics_dict(doc_scores)}
+    # Each question belongs to one document and is counted under that document's type.
+    per_type: dict[str, Any] = {}
+    for kind, label in DOCUMENT_TYPES.items():
+        members = [r for r in results if types.get(r.case.document_id) == kind]
+        if members:
+            type_scores = [r.score for r in members if r.score]
+            per_type[kind] = {"label": label, "documents": len({r.case.document_id for r in members}),
+                              "questions": len(members), "answerable": len(type_scores),
+                              "metrics": _metrics_dict(type_scores),
+                              "returned_tokens": _tokens_summary([r for r in members if r.score is not None])}
     result = {
         "config": assembly.name,
         "fingerprint": assembly.fingerprint(),
@@ -283,6 +311,7 @@ def _write_run(workspace: Workspace, assembly: Assembly, folder: Path, top_k: in
         "query_cost": _cost_summary([r for r in results if r.score is not None]),
         "document_scope": _scope_summary(results, enabled, has_catalog),
         "documents": per_document,
+        "document_types": per_type,
         "table_evidence": _table_summary(results, table_excerpts),
         "ingest_cost": _ingest_cost(workspace, assembly.name),
         "cases": [_case_json(r, names) for r in results],
