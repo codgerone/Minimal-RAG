@@ -73,3 +73,12 @@ def test_rebuild_reads_vectors_from_the_cache_and_stores_the_same_ones(workspace
     after = open_store(workspace, "fake")._open(create=False).get(include=["embeddings"])
     assert before["ids"] == after["ids"]
     assert all((a == b).all() for a, b in zip(before["embeddings"], after["embeddings"]))
+
+
+def test_integer_geometry_is_stored_as_float_so_reports_survive_json():
+    from rag.ingest.tables.models import CoordinateTransform
+    from rag.jsonio import from_jsonable, to_jsonable
+    transform = CoordinateTransform("top_left", "px", 1, 1, 3850)
+    assert type(transform.page_height_before_scale) is float
+    assert from_jsonable(CoordinateTransform, json.loads(json.dumps(to_jsonable(transform)))) == transform
+    assert type(from_jsonable(CoordinateTransform, to_jsonable(transform)).scale_x) is float
