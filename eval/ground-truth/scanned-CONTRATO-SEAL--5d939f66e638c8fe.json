@@ -1,0 +1,901 @@
+{
+  "schema_version": "ground_truth_document_v2",
+  "document_key": "scanned-CONTRATO-SEAL--5d939f66e638c8fe",
+  "document_id": "5d939f66e638c8fe",
+  "document_name": "scanned-CONTRATO SEAL.pdf",
+  "relative_path": "scanned-CONTRATO SEAL.pdf",
+  "file_hash": "a4fddd05c257f84bef8334bd7cac1de797bb7a2bfc5cd6895dd6f4c21427233d",
+  "cases": [
+    {
+      "case_id": "CONTRACT-SEAL-Q001",
+      "question": "采购合同 CONT2025004 包含哪些 Ítem 的产品？各自的数量、单价和总价是多少？合同总金额是多少？",
+      "answerable": true,
+      "reference_answer": "合同包含 2 个 Ítem，合同总金额为 US$ 701,268.10（含 IGV）：\n1. Ítem 1（单相 2 线电子电表）：110,000 台，单价 US$ 6.1124，总价 US$ 672,364.00；\n2. Ítem 4（三相 4 线电子电表）：1,500 台，单价 US$ 19.2694，总价 US$ 28,904.10。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "5d939f66e638c8fe",
+          "document_name": "scanned-CONTRATO SEAL.pdf",
+          "relative_path": "scanned-CONTRATO SEAL.pdf",
+          "page_numbers": [
+            2
+          ],
+          "text": "1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | UNIDAD | 110,000 | 6.1124 | 672,364.00\n4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | UNIDAD | 1,500 | 19.2694 | 28,904.10",
+          "anchor": {
+            "text_sha256": "a8d280bd71a80765",
+            "pieces": [
+              {
+                "text": "1",
+                "words": [
+                  "2 107.52 293.77 115.19 304.08"
+                ]
+              },
+              {
+                "text": "MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS",
+                "words": [
+                  "2 134.16 288.73 171.81 299.04",
+                  "2 175.20 288.97 231.56 299.28",
+                  "2 133.92 298.09 187.89 308.40",
+                  "2 191.52 298.33 201.59 308.40",
+                  "2 204.96 298.33 209.99 308.64",
+                  "2 211.68 298.33 235.43 308.64"
+                ]
+              },
+              {
+                "text": "UNIDAD",
+                "words": [
+                  "2 285.60 294.25 314.38 304.32",
+                  "2 285.60 313.69 314.38 324.00"
+                ]
+              },
+              {
+                "text": "110,000",
+                "words": [
+                  "2 356.40 294.25 385.16 304.79"
+                ]
+              },
+              {
+                "text": "6.1124",
+                "words": [
+                  "2 412.32 294.25 436.29 305.99"
+                ]
+              },
+              {
+                "text": "672,364.00",
+                "words": [
+                  "2 457.44 294.97 498.90 305.28"
+                ]
+              },
+              {
+                "text": "4",
+                "words": [
+                  "2 107.52 313.21 114.95 323.28"
+                ]
+              },
+              {
+                "text": "MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS",
+                "words": [
+                  "2 134.40 308.65 169.65 318.72",
+                  "2 193.92 308.65 249.55 318.72",
+                  "2 134.40 316.81 176.36 328.31",
+                  "2 178.80 317.05 189.35 328.55",
+                  "2 191.76 317.29 196.79 328.55",
+                  "2 199.20 317.29 222.94 328.79"
+                ]
+              },
+              {
+                "text": "1,500",
+                "words": [
+                  "2 360.72 313.69 381.57 324.95"
+                ]
+              },
+              {
+                "text": "19.2694",
+                "words": [
+                  "2 410.40 314.17 439.40 324.71"
+                ]
+              },
+              {
+                "text": "28,904.10",
+                "words": [
+                  "2 460.32 314.17 496.51 325.91"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "5d939f66e638c8fe",
+          "document_name": "scanned-CONTRATO SEAL.pdf",
+          "relative_path": "scanned-CONTRATO SEAL.pdf",
+          "page_numbers": [
+            2
+          ],
+          "text": "El monto total del presente contrato asciende a US$ 701,268.10 (setecientos un mil doscientos sesenta y ocho con 10/100 Dólares Americanos), que incluye todos los impuestos de Ley",
+          "anchor": {
+            "text_sha256": "beb4e7ee17f9424e",
+            "pieces": [
+              {
+                "text": "El monto total del presente contrato asciende a US$ 701,268.10 (setecientos un mil doscientos sesenta y ocho con 10/100 Dólares Americanos), que incluye todos los impuestos de Ley",
+                "words": [
+                  "2 94.56 213.61 106.06 226.31",
+                  "2 111.84 213.85 137.98 226.55",
+                  "2 143.52 213.85 165.57 226.79",
+                  "2 168.96 214.09 184.54 226.79",
+                  "2 190.08 214.09 227.01 227.03",
+                  "2 234.48 214.33 271.40 227.27",
+                  "2 276.96 214.57 316.04 227.51",
+                  "2 323.52 214.81 328.56 227.51",
+                  "2 336.24 214.81 353.99 227.75",
+                  "2 361.68 215.05 411.29 227.99",
+                  "2 416.88 215.29 470.58 228.23",
+                  "2 476.16 215.53 487.43 228.47",
+                  "2 495.12 215.77 507.34 228.47",
+                  "2 94.56 225.13 142.03 238.07",
+                  "2 145.68 225.37 180.21 238.31",
+                  "2 183.84 225.61 188.64 238.31",
+                  "2 192.24 225.61 211.90 238.55",
+                  "2 215.76 225.85 231.10 238.55",
+                  "2 234.72 225.85 264.92 238.79",
+                  "2 268.56 226.09 300.94 239.03",
+                  "2 304.56 226.33 364.51 239.51",
+                  "2 366.00 226.81 381.58 239.51",
+                  "2 385.20 226.81 415.40 239.75",
+                  "2 419.04 227.05 443.02 239.99",
+                  "2 444.48 227.29 457.67 239.99",
+                  "2 461.28 227.29 506.35 240.23",
+                  "2 94.56 236.89 106.07 249.83",
+                  "2 109.68 237.13 129.35 249.83"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x3",
+          "document_id": "5d939f66e638c8fe",
+          "document_name": "scanned-CONTRATO SEAL.pdf",
+          "relative_path": "scanned-CONTRATO SEAL.pdf",
+          "page_numbers": [
+            2
+          ],
+          "text": "TOTAL USD (INC IGV) | 701,268.10",
+          "anchor": {
+            "text_sha256": "452ad25bc235c6ff",
+            "pieces": [
+              {
+                "text": "TOTAL USD (INC IGV)",
+                "words": [
+                  "2 233.04 327.85 257.99 338.16",
+                  "2 261.84 328.09 276.95 338.40",
+                  "2 279.12 328.33 295.66 338.64",
+                  "2 297.84 328.33 316.06 338.64"
+                ]
+              },
+              {
+                "text": "701,268.10",
+                "words": [
+                  "2 458.16 329.05 497.47 339.12"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x4",
+          "document_id": "5d939f66e638c8fe",
+          "document_name": "scanned-CONTRATO SEAL.pdf",
+          "relative_path": "scanned-CONTRATO SEAL.pdf",
+          "page_numbers": [
+            1
+          ],
+          "text": "1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | UNIDAD | 110,000\n4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | UNIDAD | 1,500",
+          "anchor": {
+            "text_sha256": "bdb6e70acba8c72e",
+            "pieces": [
+              {
+                "text": "1",
+                "words": [
+                  "1 105.84 642.01 113.27 652.08"
+                ]
+              },
+              {
+                "text": "MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS",
+                "words": [
+                  "1 131.28 642.01 168.93 652.08",
+                  "1 173.52 642.01 233.95 652.08",
+                  "1 238.56 642.01 293.97 652.08",
+                  "1 298.56 642.01 308.63 652.08",
+                  "1 311.52 642.01 316.79 652.08",
+                  "1 319.68 642.01 344.62 652.08"
+                ]
+              },
+              {
+                "text": "UNIDAD",
+                "words": [
+                  "1 372.96 640.81 402.46 652.31",
+                  "1 372.96 651.37 402.46 663.11"
+                ]
+              },
+              {
+                "text": "110,000",
+                "words": [
+                  "1 444.48 641.05 475.88 651.36"
+                ]
+              },
+              {
+                "text": "4",
+                "words": [
+                  "1 105.60 652.57 113.51 662.64"
+                ]
+              },
+              {
+                "text": "MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS",
+                "words": [
+                  "1 131.04 652.09 170.13 662.40",
+                  "1 173.52 651.85 234.43 662.16",
+                  "1 237.84 651.85 282.19 662.16",
+                  "1 285.60 651.85 295.67 661.92",
+                  "1 299.04 651.85 304.31 661.92",
+                  "1 307.68 651.85 331.42 661.92"
+                ]
+              },
+              {
+                "text": "1,500",
+                "words": [
+                  "1 449.28 651.37 471.57 663.11"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x5",
+          "document_id": "5d939f66e638c8fe",
+          "document_name": "scanned-CONTRATO SEAL.pdf",
+          "relative_path": "scanned-CONTRATO SEAL.pdf",
+          "page_numbers": [
+            3
+          ],
+          "text": "1 | MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS | UNIDAD | 110,000\n4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | UNIDAD | 1,500",
+          "anchor": {
+            "text_sha256": "bdb6e70acba8c72e",
+            "pieces": [
+              {
+                "text": "1",
+                "words": [
+                  "3 74.40 185.77 81.11 194.16"
+                ]
+              },
+              {
+                "text": "MEDIDOR ELECTRÓNICO MONOFASICO DE 2 HILOS",
+                "words": [
+                  "3 95.52 172.09 121.90 181.68",
+                  "3 96.00 189.13 133.90 198.96",
+                  "3 94.56 181.45 131.73 189.84",
+                  "3 94.56 197.53 102.71 206.40",
+                  "3 103.44 197.53 107.04 206.40",
+                  "3 109.44 197.53 124.79 206.40"
+                ]
+              },
+              {
+                "text": "UNIDAD",
+                "words": [
+                  "3 151.20 184.81 173.50 194.88",
+                  "3 150.96 217.93 173.26 228.00"
+                ]
+              },
+              {
+                "text": "110,000",
+                "words": [
+                  "3 198.72 185.29 220.29 195.36"
+                ]
+              },
+              {
+                "text": "4",
+                "words": [
+                  "3 74.40 218.65 80.87 227.04"
+                ]
+              },
+              {
+                "text": "MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS",
+                "words": [
+                  "3 95.28 206.41 121.90 214.80",
+                  "3 94.80 222.01 122.13 232.08",
+                  "3 125.52 222.01 131.99 232.08",
+                  "3 133.68 222.01 136.80 232.08",
+                  "3 94.56 214.57 131.97 222.96",
+                  "3 94.32 230.17 112.07 239.76"
+                ]
+              },
+              {
+                "text": "1,500",
+                "words": [
+                  "3 202.08 218.41 217.90 228.95"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "各 Ítem 的品名",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            },
+            {
+              "scheme_id": "s2",
+              "excerpt_ids": [
+                "x4"
+              ]
+            },
+            {
+              "scheme_id": "s3",
+              "excerpt_ids": [
+                "x5"
+              ]
+            }
+          ],
+          "note": ""
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "各 Ítem 的数量",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            },
+            {
+              "scheme_id": "s2",
+              "excerpt_ids": [
+                "x4"
+              ]
+            },
+            {
+              "scheme_id": "s3",
+              "excerpt_ids": [
+                "x5"
+              ]
+            }
+          ],
+          "note": "x4 为第二条数量表，x5 为第五条交货计划表的需求总量列"
+        },
+        {
+          "evidence_group_id": "e3",
+          "information_item": "各 Ítem 的单价",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ],
+          "note": ""
+        },
+        {
+          "evidence_group_id": "e4",
+          "information_item": "各 Ítem 的总价",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ],
+          "note": ""
+        },
+        {
+          "evidence_group_id": "e5",
+          "information_item": "合同总金额",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ]
+            },
+            {
+              "scheme_id": "s2",
+              "excerpt_ids": [
+                "x3"
+              ]
+            }
+          ],
+          "note": "x2 为第三条正文，x3 为价格表合计行"
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-SEAL-Q002",
+      "question": "采购合同 CONT2025004 中，Ítem 4（三相 4 线电子电表）在哪几次交付中交货？各交多少台？",
+      "answerable": true,
+      "reference_answer": "Ítem 4 只在后两次交付中交货：第 5 次（签约后 570 天）500 台，第 6 次（签约后 690 天）1,000 台；前 4 次不交。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "5d939f66e638c8fe",
+          "document_name": "scanned-CONTRATO SEAL.pdf",
+          "relative_path": "scanned-CONTRATO SEAL.pdf",
+          "page_numbers": [
+            3
+          ],
+          "text": "4 | MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS | UNIDAD | 1,500 | 500 | 1,000",
+          "anchor": {
+            "text_sha256": "e7c472707e6f6197",
+            "pieces": [
+              {
+                "text": "4",
+                "words": [
+                  "3 74.40 218.65 80.87 227.04"
+                ]
+              },
+              {
+                "text": "MEDIDOR ELECTRÓNICO TRIFÁSICO DE 4 HILOS",
+                "words": [
+                  "3 95.28 206.41 121.90 214.80",
+                  "3 94.80 222.01 122.13 232.08",
+                  "3 125.52 222.01 131.99 232.08",
+                  "3 133.68 222.01 136.80 232.08",
+                  "3 94.56 214.57 131.97 222.96",
+                  "3 94.32 230.17 112.07 239.76"
+                ]
+              },
+              {
+                "text": "UNIDAD",
+                "words": [
+                  "3 150.96 217.93 173.26 228.00"
+                ]
+              },
+              {
+                "text": "1,500",
+                "words": [
+                  "3 202.08 218.41 217.90 228.95"
+                ]
+              },
+              {
+                "text": "500",
+                "words": [
+                  "3 455.04 219.13 467.98 229.44"
+                ]
+              },
+              {
+                "text": "1,000",
+                "words": [
+                  "3 500.40 219.13 515.98 229.67"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "5d939f66e638c8fe",
+          "document_name": "scanned-CONTRATO SEAL.pdf",
+          "relative_path": "scanned-CONTRATO SEAL.pdf",
+          "page_numbers": [
+            3
+          ],
+          "text": "5ta ENTREGA | (A 570 días de la firma del contrato) | 6ta ENTREGA | (A 690 días de la firma del contrato)",
+          "table_header": true,
+          "anchor": {
+            "text_sha256": "5f7ac5b255a4dc13",
+            "pieces": [
+              {
+                "text": "5ta ENTREGA",
+                "words": [
+                  "3 442.80 135.61 451.43 144.00",
+                  "3 454.08 135.61 478.30 144.00"
+                ]
+              },
+              {
+                "text": "(A 570 días de la firma del contrato)",
+                "words": [
+                  "3 442.32 148.81 446.63 157.20",
+                  "3 449.28 148.81 459.34 157.20",
+                  "3 460.56 148.81 472.06 157.20",
+                  "3 473.28 148.81 480.47 157.20",
+                  "3 444.48 156.73 450.23 165.60",
+                  "3 451.68 156.73 466.55 165.60",
+                  "3 468.00 156.73 476.87 165.60",
+                  "3 448.08 163.69 475.16 174.71"
+                ]
+              },
+              {
+                "text": "6ta ENTREGA",
+                "words": [
+                  "3 490.08 135.61 498.71 144.00",
+                  "3 501.36 135.61 525.82 144.00"
+                ]
+              },
+              {
+                "text": "(A 690 días de la firma del contrato)",
+                "words": [
+                  "3 489.12 148.33 495.59 157.44",
+                  "3 496.80 148.57 505.91 157.68",
+                  "3 508.56 148.81 519.35 157.92",
+                  "3 520.56 149.05 528.24 158.16",
+                  "3 492.96 157.21 496.79 165.60",
+                  "3 498.72 157.21 513.83 165.60",
+                  "3 515.52 157.21 523.67 165.60",
+                  "3 495.36 164.89 522.21 174.96"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "Ítem 4 交货的批次",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2"
+              ]
+            }
+          ],
+          "note": "x2 为第 5、6 次交付的表头，x1 为 Ítem 4 的数据行"
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "各批次交货数量",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2"
+              ]
+            }
+          ],
+          "note": ""
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-SEAL-Q003",
+      "question": "采购合同 CONT2025004 中，各 Ítem 的履约保证金金额是多少？保函有效期到什么时候？",
+      "answerable": true,
+      "reference_answer": "- Ítem 1：US$ 67,236.40，保函 N° 3012025041867；\n- Ítem 4：US$ 2,890.41，保函 N° 3012025041892。\n两张保函均由 AVLA Perú Compañía de Seguros S.A. 出具，有效期至 2027 年 9 月 20 日。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "5d939f66e638c8fe",
+          "document_name": "scanned-CONTRATO SEAL.pdf",
+          "relative_path": "scanned-CONTRATO SEAL.pdf",
+          "page_numbers": [
+            3
+          ],
+          "text": "Para el Ítem 1\nDe fiel cumplimiento del contrato: US$ 67,236.40 (sesenta y siete mil doscientos treinta y seis con 40/100 Dólares Americanos), a través de la Carta Fianza N° 3012025041867 emitida por AVLA Perú Compañía de Seguros S.A., con plazo de vigencia hasta el 20 de setiembre de 2027.",
+          "anchor": {
+            "text_sha256": "bded757be040dcf6",
+            "pieces": [
+              {
+                "text": "Para el Ítem 1",
+                "words": [
+                  "3 128.88 401.53 147.35 414.23",
+                  "3 151.92 401.53 157.91 414.23",
+                  "3 160.56 401.53 176.86 414.23",
+                  "3 184.08 401.53 187.67 414.23"
+                ]
+              },
+              {
+                "text": "De fiel cumplimiento del contrato: US$ 67,236.40 (sesenta y siete mil doscientos treinta y seis con 40/100 Dólares Americanos), a través de la Carta Fianza N° 3012025041867 emitida por AVLA Perú Compañía de Seguros S.A., con plazo de vigencia hasta el 20 de setiembre de 2027.",
+                "words": [
+                  "3 126.96 413.05 137.99 425.75",
+                  "3 143.76 413.05 156.94 425.75",
+                  "3 160.80 413.05 220.24 425.99",
+                  "3 226.32 413.29 239.26 425.99",
+                  "3 243.12 413.29 281.47 426.23",
+                  "3 287.52 413.53 304.78 426.23",
+                  "3 310.80 413.53 353.46 426.47",
+                  "3 359.28 413.77 398.13 426.71",
+                  "3 401.76 414.01 406.56 426.71",
+                  "3 412.32 414.01 433.90 426.71",
+                  "3 439.92 414.01 453.10 426.71",
+                  "3 456.72 414.01 503.71 426.95",
+                  "3 126.72 424.81 154.52 437.51",
+                  "3 160.56 424.81 165.12 437.51",
+                  "3 171.12 424.81 188.15 437.51",
+                  "3 194.40 424.81 207.35 437.75",
+                  "3 215.52 425.05 245.24 437.75",
+                  "3 251.52 425.05 283.42 437.75",
+                  "3 291.60 425.05 350.83 437.75",
+                  "3 354.96 425.05 359.52 437.75",
+                  "3 365.52 425.05 391.18 437.75",
+                  "3 399.36 425.05 407.99 437.99",
+                  "3 412.08 425.29 420.71 437.99",
+                  "3 429.12 425.29 450.22 437.99",
+                  "3 458.64 425.29 486.21 437.99",
+                  "3 494.64 425.29 503.03 437.99",
+                  "3 125.76 436.33 198.62 448.79",
+                  "3 203.76 436.57 235.40 449.03",
+                  "3 238.56 436.57 253.91 449.03",
+                  "3 258.96 436.81 282.71 449.03",
+                  "3 287.76 436.81 307.19 449.27",
+                  "3 314.40 437.05 358.52 449.27",
+                  "3 363.60 437.05 372.95 449.51",
+                  "3 378.00 437.05 415.89 449.51",
+                  "3 419.04 437.29 442.54 449.75",
+                  "3 445.68 437.29 461.02 449.75",
+                  "3 466.08 437.53 490.05 449.75",
+                  "3 492.96 437.53 504.23 449.75",
+                  "3 126.72 447.85 162.19 460.07",
+                  "3 165.60 447.85 188.86 460.31",
+                  "3 192.24 448.09 201.11 460.31",
+                  "3 202.56 448.09 213.35 460.31",
+                  "3 216.96 448.09 225.83 460.31",
+                  "3 229.20 448.09 273.08 460.55",
+                  "3 276.48 448.33 285.35 460.55",
+                  "3 288.72 448.33 314.12 460.55"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "5d939f66e638c8fe",
+          "document_name": "scanned-CONTRATO SEAL.pdf",
+          "relative_path": "scanned-CONTRATO SEAL.pdf",
+          "page_numbers": [
+            3
+          ],
+          "text": "Para el Ítem 4\nDe fiel cumplimiento del contrato: US$ 2,890.41 (dos mil ochocientos noventa con 41/100 Dólares Americanos), a través de la Carta Fianza N° 3012025041892 emitida por AVLA Perú Compañía de Seguros S.A., con plazo de vigencia hasta el 20 de setiembre de 2027.",
+          "anchor": {
+            "text_sha256": "04d565babd37c31d",
+            "pieces": [
+              {
+                "text": "Para el Ítem 4",
+                "words": [
+                  "3 126.72 493.45 146.15 506.15",
+                  "3 150.00 493.45 158.87 506.15",
+                  "3 160.56 493.45 177.82 506.15",
+                  "3 183.84 493.45 188.39 506.15"
+                ]
+              },
+              {
+                "text": "De fiel cumplimiento del contrato: US$ 2,890.41 (dos mil ochocientos noventa con 41/100 Dólares Americanos), a través de la Carta Fianza N° 3012025041892 emitida por AVLA Perú Compañía de Seguros S.A., con plazo de vigencia hasta el 20 de setiembre de 2027.",
+                "words": [
+                  "3 128.40 505.45 139.43 517.67",
+                  "3 142.80 505.45 157.90 517.67",
+                  "3 161.28 505.45 219.29 517.91",
+                  "3 224.88 505.69 237.82 517.91",
+                  "3 241.20 505.69 280.99 518.15",
+                  "3 284.16 505.69 303.58 518.15",
+                  "3 308.88 505.93 346.51 518.15",
+                  "3 349.92 505.93 369.10 518.15",
+                  "3 374.40 505.93 389.50 518.39",
+                  "3 392.88 505.93 444.90 518.39",
+                  "3 448.32 506.17 484.05 518.63",
+                  "3 489.36 506.17 504.70 518.63",
+                  "3 126.48 516.97 156.92 529.67",
+                  "3 160.56 516.97 195.10 529.67",
+                  "3 198.72 516.97 258.67 529.67",
+                  "3 260.16 516.97 265.20 529.67",
+                  "3 266.64 516.97 294.70 529.67",
+                  "3 298.32 516.97 307.43 529.91",
+                  "3 311.04 517.21 320.15 529.91",
+                  "3 323.76 517.21 347.74 529.91",
+                  "3 351.36 517.21 379.65 529.91",
+                  "3 383.28 517.21 394.55 529.91",
+                  "3 397.92 517.21 468.62 529.91",
+                  "3 472.32 517.21 504.92 529.91",
+                  "3 126.72 529.21 142.54 541.91",
+                  "3 145.68 529.21 169.91 541.91",
+                  "3 175.20 529.21 195.34 541.91",
+                  "3 200.64 529.21 245.96 541.91",
+                  "3 251.28 529.21 260.87 541.91",
+                  "3 266.16 529.21 303.09 541.91",
+                  "3 306.24 529.21 330.46 541.91",
+                  "3 331.68 529.21 347.50 541.91",
+                  "3 352.80 529.21 377.01 541.91",
+                  "3 380.16 529.21 392.15 541.91",
+                  "3 395.28 529.21 432.19 541.91",
+                  "3 437.52 529.21 461.74 541.91",
+                  "3 464.88 529.21 474.47 541.91",
+                  "3 477.60 529.21 489.34 541.91",
+                  "3 492.48 529.21 503.99 541.91",
+                  "3 126.48 540.25 169.40 552.95",
+                  "3 173.04 540.25 184.31 552.95",
+                  "3 187.68 540.25 213.80 552.95"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "各 Ítem 履约保证金金额",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2"
+              ]
+            }
+          ],
+          "note": ""
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "保函有效期",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2"
+              ]
+            }
+          ],
+          "note": "两张保函各自写明有效期"
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-SEAL-Q004",
+      "question": "采购合同 CONT2025004 由哪个部门担任合同管理人？交货地点在哪里？",
+      "answerable": true,
+      "reference_answer": "合同由 SEAL 商务管理部（Gerencia de Comercialización）商业运营处（Unidad de Operaciones Comerciales）的接线维护与计量控制组（Equipo de Mantenimiento de Conexiones y Control de la Medición）管理。交货地点为 SEAL 仓库，地址 Ciudad Blanca, Mz. X, Lt. 1, Comité 24, distrito de Paucarpata, Arequipa。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "5d939f66e638c8fe",
+          "document_name": "scanned-CONTRATO SEAL.pdf",
+          "relative_path": "scanned-CONTRATO SEAL.pdf",
+          "page_numbers": [
+            1
+          ],
+          "text": "El presente contrato será administrado por el Equipo de Mantenimiento de Conexiones y Control de la Medición de la Unidad de Operaciones Comerciales de la Gerencia de Comercialización de LA ENTIDAD",
+          "anchor": {
+            "text_sha256": "1a1ee46b0f61b5f8",
+            "pieces": [
+              {
+                "text": "El presente contrato será administrado por el Equipo de Mantenimiento de Conexiones y Control de la Medición de la Unidad de Operaciones Comerciales de la Gerencia de Comercialización de LA ENTIDAD",
+                "words": [
+                  "1 94.56 684.49 103.43 696.71",
+                  "1 106.80 684.49 144.68 696.71",
+                  "1 148.08 684.49 185.48 696.71",
+                  "1 188.88 684.49 208.07 696.71",
+                  "1 211.44 684.49 267.54 696.71",
+                  "1 270.96 684.49 286.07 696.71",
+                  "1 289.20 684.49 298.31 696.71",
+                  "1 301.68 684.49 333.08 696.71",
+                  "1 338.40 684.49 347.51 696.71",
+                  "1 352.80 684.49 421.13 696.71",
+                  "1 426.48 684.49 437.51 696.71",
+                  "1 440.88 684.49 497.00 696.71",
+                  "1 500.40 684.49 505.20 696.71",
+                  "1 95.28 695.77 130.28 708.23",
+                  "1 136.08 695.77 144.71 708.23",
+                  "1 150.48 695.77 156.95 708.23",
+                  "1 164.88 695.77 203.96 708.23",
+                  "1 211.92 695.77 220.55 708.23",
+                  "1 224.16 695.77 232.79 708.23",
+                  "1 238.56 695.77 269.48 708.23",
+                  "1 277.44 695.77 286.07 708.23",
+                  "1 294.00 695.77 351.55 708.23",
+                  "1 357.36 695.77 415.15 708.23",
+                  "1 421.20 695.77 429.59 708.23",
+                  "1 435.36 695.77 441.83 708.23",
+                  "1 449.76 695.77 489.08 708.23",
+                  "1 494.88 695.77 505.43 708.23",
+                  "1 94.56 707.29 175.11 719.51",
+                  "1 182.64 707.29 193.43 719.51",
+                  "1 200.88 707.29 211.91 719.51",
+                  "1 221.52 707.29 267.08 719.51"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "5d939f66e638c8fe",
+          "document_name": "scanned-CONTRATO SEAL.pdf",
+          "relative_path": "scanned-CONTRATO SEAL.pdf",
+          "page_numbers": [
+            2
+          ],
+          "text": "La entrega de los bienes se realizará en el almacén de LA ENTIDAD, ubicado en Ciudad Blanca, Mz. X, Lt. 1, Comité 24, distrito de Paucarpata, provincia y departamento de Arequipa.",
+          "anchor": {
+            "text_sha256": "6aab96d611961b8f",
+            "pieces": [
+              {
+                "text": "La entrega de los bienes se realizará en el almacén de LA ENTIDAD, ubicado en Ciudad Blanca, Mz. X, Lt. 1, Comité 24, distrito de Paucarpata, provincia y departamento de Arequipa.",
+                "words": [
+                  "2 94.56 167.53 106.07 180.23",
+                  "2 109.68 167.53 144.45 180.23",
+                  "2 147.84 167.53 159.11 180.47",
+                  "2 162.48 167.77 176.15 180.47",
+                  "2 179.52 167.77 209.97 180.71",
+                  "2 213.36 168.01 222.72 180.71",
+                  "2 228.24 168.01 265.16 180.71",
+                  "2 270.48 168.25 279.83 180.95",
+                  "2 285.36 168.25 294.71 180.95",
+                  "2 295.92 168.25 332.84 181.19",
+                  "2 338.40 168.49 349.91 181.19",
+                  "2 353.28 168.49 364.79 181.19",
+                  "2 372.24 168.49 419.72 181.43",
+                  "2 420.96 168.73 455.72 181.67",
+                  "2 461.28 168.97 470.63 181.67",
+                  "2 476.16 168.97 506.60 181.91",
+                  "2 95.28 179.29 129.33 192.23",
+                  "2 133.20 179.53 148.55 192.23",
+                  "2 150.24 179.53 159.11 192.23",
+                  "2 160.80 179.53 173.74 192.47",
+                  "2 175.44 179.77 184.31 192.47",
+                  "2 186.00 179.77 215.97 192.71",
+                  "2 219.84 180.01 233.02 192.71",
+                  "2 234.72 180.01 264.68 192.95",
+                  "2 268.56 180.25 277.43 192.95",
+                  "2 281.28 180.25 334.51 193.19",
+                  "2 336.24 180.49 376.75 193.43",
+                  "2 378.48 180.73 383.28 193.43",
+                  "2 387.12 180.73 446.58 193.91",
+                  "2 450.48 181.21 461.51 193.91",
+                  "2 465.36 181.21 505.87 194.15"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "合同管理部门",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ],
+          "note": ""
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "交货地点",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ]
+            }
+          ],
+          "note": ""
+        }
+      ]
+    },
+    {
+      "case_id": "CONTRACT-SEAL-Q005",
+      "question": "采购合同 CONT2025004 规定的技术商业质保期（Garantía Técnico-Comercial）是多久？",
+      "answerable": false,
+      "reference_answer": "合同中没有技术商业质保期的约定（第十一条只规定承包商对隐蔽缺陷的责任期为验收合格后 1 年）。",
+      "excerpts": [],
+      "evidence_groups": []
+    }
+  ]
+}
