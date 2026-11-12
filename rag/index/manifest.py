@@ -25,6 +25,7 @@ class DocumentEntry:
     chunk_count: int
     table_count: int
     built_at: str
+    timings: dict[str, float] = field(default_factory=dict)   # seconds per ingest step
 
 
 @dataclass

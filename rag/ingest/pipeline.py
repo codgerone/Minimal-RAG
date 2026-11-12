@@ -14,6 +14,7 @@ from rag.ingest.parsers import ParseResult, Parser
 from rag.ingest.tables.extractors import TableExtractor
 from rag.ingest.tables.formatters import TableFormatter
 from rag.ingest.tables.markdown_rows import serialize_grid_rows
+from rag.ingest.timing import StepTimes
 from rag.ingest.tables.models import (
     AdoptedTable, ContentResolution, ContinuationReport, GroupingReport, PreparedTableContent,
     ScoringReport, TableExtractionReport, TableIndexText,
@@ -58,16 +59,41 @@ class ProcessedDocument:
 def process_document(source: SourceDocument, parser: Parser,
                      extractors: tuple[TableExtractor, ...],
                      table_steps: TableSteps | None, ocr: object | None = None,
-                     progress: Callable[[str], None] = lambda message: None) -> ProcessedDocument:
-    """`ocr` is an OcrStep (rag/ingest/ocr/step.py); without it scanned pages stay unread."""
-    if ocr is not None:
-        source, pages = ocr.prepare(source, progress)  # type: ignore[attr-defined]
-    else:
-        pages = DocumentPages(classify_pages(source.absolute_path), None)
-    parsed = parser.parse(source)
+                     progress: Callable[[str], None] = lambda message: None,
+                     times: StepTimes | None = None) -> ProcessedDocument:
+    """`ocr` is an OcrStep (rag/ingest/ocr/step.py); without it scanned pages stay unread.
+    `times` collects the wall-clock time of each step."""
+    times = times if times is not None else StepTimes()
+    with times.step("pages_ocr"):
+        if ocr is not None:
+            source, pages = ocr.prepare(source, progress)  # type: ignore[attr-defined]
+        else:
+            pages = DocumentPages(classify_pages(source.absolute_path), None)
+    with times.step("parse"):
+        parsed = parser.parse(source)
     primary = parsed.primary
     language = primary_language(primary)
-    reports = tuple(extractor.extract(source, parsed.shared) for extractor in extractors)
+    reports_list = []
+    for extractor in extractors:
+        with times.step(f"extract_{extractor.tool}"):
+            reports_list.append(extractor.extract(source, parsed.shared))
+    reports = tuple(reports_list)
+    with times.step("select_tables"):
+        selected = _select(source, primary, reports)
+    resolutions, grouping, scoring, adopted, warnings, continuations = selected
+    prepared: tuple[PreparedTableContent, ...] = ()
+    if adopted:
+        assert table_steps is not None
+        with times.step("table_text"):
+            prepared = table_texts(primary, adopted, language, table_steps)
+    document = compose_document(source, primary, resolutions, prepared,
+                                bool(primary.table_slots), language, warnings)
+    return ProcessedDocument(source, parsed, reports, resolutions, grouping, scoring,
+                             prepared, continuations, document, pages)
+
+
+def _select(source: SourceDocument, primary, reports: tuple[TableExtractionReport, ...]):
+    """Choose each table's content: select among extractor candidates, or keep the parser's own."""
     if reports:
         resolutions, grouping, scoring = select_tables(source, primary, reports,
                                                        PyMuPdfEvidenceReader())
@@ -84,14 +110,7 @@ def process_document(source: SourceDocument, parser: Parser,
     else:
         resolutions, grouping, scoring, adopted, warnings = (), None, None, (), ()
         continuations = None
-    prepared: tuple[PreparedTableContent, ...] = ()
-    if adopted:
-        assert table_steps is not None
-        prepared = table_texts(primary, adopted, language, table_steps)
-    document = compose_document(source, primary, resolutions, prepared,
-                                bool(primary.table_slots), language, warnings)
-    return ProcessedDocument(source, parsed, reports, resolutions, grouping, scoring,
-                             prepared, continuations, document, pages)
+    return resolutions, grouping, scoring, adopted, warnings, continuations
 
 
 def table_texts(primary, adopted: tuple[AdoptedTable, ...], language: str,

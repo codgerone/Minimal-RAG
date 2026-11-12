@@ -216,9 +216,23 @@ def _ingest(workspace: Workspace, args: argparse.Namespace) -> int:
             error = f"：{item.error}" if item.error else ""
             _out(f"  [{labels[item.action]}] {item.relative_path}{extra}{error}")
             failed |= item.action == "failed"
+        built = {item.relative_path for item in outcomes if item.action in ("added", "updated", "rebuilt")}
+        if built:
+            _out(f"  各步骤耗时（{len(built)} 份文档合计）：{_step_times(workspace, assembly.name, built)}")
     write_index_page(workspace)
     _out("审核报告：reports/index.html")
     return 1 if failed else 0
+
+
+def _step_times(workspace: Workspace, config_name: str, built: set[str]) -> str:
+    from rag.index.manifest import Manifest
+    manifest = Manifest.load(workspace.index_dir(config_name) / "manifest.json")
+    totals: dict[str, float] = {}
+    for entry in (manifest.documents.values() if manifest else ()):
+        if entry.relative_path in built:
+            for name, seconds in entry.timings.items():
+                totals[name] = totals.get(name, 0.0) + seconds
+    return "，".join(f"{name} {seconds:.1f}s" for name, seconds in totals.items())
 
 
 def _require_queryable(workspace: Workspace, assembly) -> None:
