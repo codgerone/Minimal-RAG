@@ -1,7 +1,7 @@
 # 关键词检索（BM25）与混合检索
 
 > **规则摘要**
-> - 配置含 `[lexical]` 一节时，入库为每个 chunk 建 BM25 倒排索引（`.rag/indexes/<配置名>/bm25.sqlite`）；`[lexical]` 的设置进入构建指纹。
+> - 配置含 `[lexical]` 一节时，入库为每个 chunk 建 BM25 倒排索引（`.rag/indexes/<配置名>/bm25.sqlite`）；`[lexical]` 的设置进入 BM25 一步的构建记录。
 > - 问题与 chunk 经同一分析器变为词：规范化 → 切词 → 去停用词（可关）→ 词干化（可开）。
 > - BM25 的 IDF 与平均 chunk 长度按全库统计，检索范围只决定哪些 chunk 参与排序。
 > - `hybrid` 用倒数排名融合（RRF）合并向量排名与 BM25 排名，BM25 一项乘以权重 α（`[retriever] bm25_weight`，默认 1，查询设置）。

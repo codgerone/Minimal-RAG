@@ -1,4 +1,4 @@
-# 系统设计（V4.1）
+# 系统设计（V4.1.1）
 
 ## 1. 数据主链
 
@@ -81,13 +81,31 @@
 
 `docling_layout` 解析器不配任何表格提取器也是合法组合：这时所有表格都采用 Docling 原生结构。
 
-## 3. 配置与构建指纹
+## 3. 配置与构建记录
 
 `configs/*.toml` 是内置装配：七种表格处理组合各一份，`ingest --all-configs` 重建它们，13 种查询组合（加上返回单元）都从这些索引评估（`scripts/eval_tables.sh`）。`configs/extra/*.toml` 是不参与 `--all-configs` 的配置，同样按名称用 `--config` 选择；名称在两处之间不能重复。
 
-配置中 OCR（`[ocr]` 的设置与引擎身份：版本、模型文件名、行方向规则）、解析、表格（提取器与三个表格环节）、分块、编码相关的设置，加上编码器身份（模型名与版本）和 `RULES_VERSION`，一起计算出**构建指纹**，记录在索引的 `manifest.json` 中。用 LLM 的表格环节，其模型、提示词版本、推理强度、长度与上下文规则也进入指纹。配置了 `[lexical]` 时，其分析器设置（去停用词、词干化）也进入指纹；没有这一节的配置不建 BM25 索引，指纹也不含它。检索器 `[retriever] use`、命中表格时的返回单元 `table_return_unit`、混合检索中 BM25 排名的权重 `bm25_weight`（默认 1，[decisions/017-bm25-weight.md](decisions/017-bm25-weight.md)）、检索的 `top_k`（问答用，默认 4）、文档过滤开关 `document_filter`、评估的 `[eval] top_k`（默认 3，与历史基线一致）、问答 LLM 设置、查询的一路 `[query] mode` 与多轮检索设置 `[multi_round]` 不参与计算，修改它们不需要重建索引。
+**构建记录**：每个文档入库时记下它实际经过的步骤各自的设置，存在 manifest 的文档条目中（`rag/index/build_steps.py`）。步骤依次是页面判定、OCR、解析、表格提取与选优、表格处理、组装、分块、编码、BM25；每一步记录三类内容：
 
-配置改动导致指纹变化后，`status` 会显示"配置已改变"，这时需要用 `ingest --force` 全量重建。内置算法的输出发生变化时，要同步提升 `rag/config.py` 中的 `RULES_VERSION`；LLM 提示词改动时提升 `rag/ingest/tables/llm_tables.py` 中的 `PROMPT_VERSION`。
+- 配置中该步骤的设置：OCR 为 `[ocr]` 与引擎身份（版本、模型文件名、行方向规则）；表格处理为 `[table_structure]`、`[table_formatter]`、`[table_index_text]`，用 LLM 的环节加上模型、提示词版本、推理强度、长度与上下文规则；BM25 为 `[lexical]` 的分析器设置；编码为编码器身份（模型名、版本、前缀、归一化）。
+- 该步骤的**规则版本**：定义在实现该步骤的模块中（`RULES_VERSION`，值为发布它的版本号），解析器、各表格提取器、分块器、BM25 分析器各有自己的版本。
+- 该步骤用到的**第三方库版本**（从已安装的包读出）。
+
+文档经过哪些步骤由两个入库时记下的事实决定：有没有扫描页（OCR，且配置了 `[ocr]`），解析器找到没有表格（表格提取与表格处理两步）。这两个事实由每个 PDF 都经过的页面判定与解析得出，所以它们可能改变时，文档已因这两步而过期。没有 `[lexical]` 的配置不建 BM25 索引，记录也不含这一步。
+
+检索器 `[retriever] use`、命中表格时的返回单元 `table_return_unit`、混合检索中 BM25 排名的权重 `bm25_weight`（默认 1，[decisions/017-bm25-weight.md](decisions/017-bm25-weight.md)）、检索的 `top_k`（问答用，默认 4）、文档过滤开关 `document_filter`、评估的 `[eval] top_k`（默认 3，与历史基线一致）、问答 LLM 设置、查询的一路 `[query] mode` 与多轮检索设置 `[multi_round]` 不进入构建记录，修改它们不需要重建索引。
+
+**过期与重建**：文档的构建记录与按当前配置、代码、库版本算出的记录不同时，`status` 记为"构建设置已改变"，并写明是哪几步；只影响经过这些步骤的文档。不加 `--force` 的 `ingest` 重建过期文档；编码一步改变（或索引是 V4.1.1 之前建的，没有逐文档记录）时，向量可能换了维度，整份索引重建。入库侧代码改变某一步的输出时，提升该步骤模块中的 `RULES_VERSION`；LLM 提示词改动时提升 `rag/ingest/tables/llm_tables.py` 中的 `PROMPT_VERSION`。检查时点与原因见 [decisions/021-per-document-rebuild.md](decisions/021-per-document-rebuild.md)。
+
+**步骤结果缓存**（`.rag/cache/`，`rag/index/step_cache.py`）：不属于任何索引，各配置共用，只让入库更快，不参与过期判定。
+
+| 缓存 | 内容 | 键 |
+|---|---|---|
+| `parse/` | Docling 解析的原生输出 | PDF 内容哈希 + 解析器身份 |
+| `extract_<工具>/` | PyMuPDF、Camelot、Unstructured 表格提取器的报告（Docling 的表格取自解析结果，不另缓存） | 工具、PDF 内容哈希、文件哈希、相对路径 + 提取器身份 |
+| `embeddings.sqlite` | 每段 chunk 文字的向量（float64 原值） | 编码器身份 + 文字 |
+
+每个条目存完整的键，读出时与要查的键逐字比较，不同即视为未命中。编码未命中的文字逐条单独编码，所以一段文字的向量与它和哪些 chunk 同批无关。`ingest --refresh-cache` 让处理到的文档重算这三类结果并覆盖缓存（OCR 结果与 LLM 结果不重算）。入库记录与输出写明每个文档各步骤是否命中缓存与各步骤耗时；`status` 显示缓存占用。
 
 ## 4. 索引一致性
 
@@ -97,14 +115,14 @@
 
 **中间结果**（`documents/<文档名>/`）：解析器原始输出、组装后的文档（含表格结构与 LLM 调用记录）、表格选优与续表的全部证据、chunk 及其来源区域。它们按类型存成 JSON，可以原样读回（`rag/index/audit.py`）；入库审核页和评估都从这里读取，不重新处理 PDF。
 
-**OCR 事实**：`.rag/ocr/<原文件哈希>-<OCR 设置哈希>/` 存 `ocr.json` 与 `ocr.pdf`，不属于任何索引，各配置共用；OCR 设置不变时重建索引不重做 OCR。每份索引的中间结果另有 `pages.json`（页面判定与 OCR 目录），评估按它判定文档类型。
+**OCR 事实**：`.rag/ocr/<原文件哈希>-<OCR 设置哈希>/` 存 `ocr.json` 与 `ocr.pdf`，不属于任何索引，各配置共用；OCR 设置（含 OCR 的规则版本与库版本）不变时重建索引不重做 OCR。每份索引的中间结果另有 `pages.json`（页面判定与 OCR 目录），评估按它判定文档类型。
 
 **LLM 缓存**：`.rag/llm-cache/` 按请求内容缓存表格处理、查询规划与多轮检索的 LLM 调用结果，不属于任何索引，全量重建时保留并复用（[rules/table-llm.md](rules/table-llm.md)）。
 
 - **manifest 是唯一的入库记录，并且最后写入**（先写临时文件再原子替换）。单个文档的入库顺序是：处理 → 写中间结果 → 替换该文档的向量 → 替换该文档的 BM25 记录 → 替换该文档的整表 → 更新 manifest → 由中间结果生成审核页。
-- **状态由事实比对得出**（`rag/index/status.py`）：PDF 哈希与 manifest 不同，记为"已修改"；manifest 中的 chunk ID 集合与向量库、BM25 索引或中间结果对不上，记为"不完整"，并分别记录两份索引是否完整。中途崩溃最多只会留下"需要重做"的文档，再运行一次 `ingest` 即可修复。所有数据都由 PDF 派生，所以不需要事务日志或回滚。
+- **状态由事实比对得出**（`rag/index/status.py`）：PDF 哈希与 manifest 不同，记为"已修改"；构建记录与当前的不同，记为"构建设置已改变"（第 3 节）；manifest 中的 chunk ID 集合与向量库、BM25 索引或中间结果对不上，记为"不完整"，并分别记录两份索引是否完整。中途崩溃最多只会留下"需要重做"的文档，再运行一次 `ingest` 即可修复。所有数据都由 PDF 派生，所以不需要事务日志或回滚。
 - **全量重建**：先把所有 PDF 处理、编码完，中间结果写到 `documents.staging/`；全部成功后才清空并重写向量库、BM25 索引与整表库、切换目录、写 manifest。任何一份失败，现有索引都不受影响。全量重建后，索引内容与 `documents/` 完全一致。
-- **查询**只检查索引存在且与配置一致；有文档不是最新时给出提示，但不阻止查询。
+- **查询**要求索引存在且没有"构建设置已改变"的文档；有新增、已修改的文档时给出提示，但不阻止查询。
 
 旧版用 journal、跨进程锁和快照回滚来保证事务性；对单用户的本地派生数据来说成本过高，V3.1 改为"可检测、可重做"。
 
@@ -132,12 +150,12 @@
 rag/
   cli.py           命令入口
   config.py        读取 configs/*.toml 与 configs/extra/*.toml
-  registry.py      实现登记、装配校验、构建指纹
+  registry.py      实现登记、装配校验、装配的构建记录
   models.py        文档、chunk 等公共模型
   jsonio.py        JSON 写出与按类型读回
   paths.py         目录约定（.rag/ 与 reports/）
-  ingest/          sources（发现 PDF）、ocr/（页面判定、OCR、文字层 PDF）、parsers/、language（文档语言）、tables/（提取、选优、续表、表头、结构、写法、LLM）、chunkers/、assemble、pipeline
-  index/           embedder、store（Chroma）、analyzer 与 lexical（BM25）、tables（整表库）、audit（中间结果）、manifest、status、builder
+  ingest/          sources（发现 PDF）、ocr/（页面判定、OCR、文字层 PDF）、parsers/、language（文档语言）、tables/（提取、选优、续表、表头、结构、写法、LLM）、chunkers/、assemble、pipeline、libraries（库版本）、timing（步骤计时）
+  index/           embedder、store（Chroma）、analyzer 与 lexical（BM25）、tables（整表库）、audit（中间结果）、build_steps（逐文档构建记录）、step_cache（步骤结果缓存）、manifest、status、builder
   query/           scope（检索范围、去编码）、retriever、units（返回单元与检索缓存）、planning（规划）、execution（检索执行、融合与合并）、prompt、llm、multi_round/（state、retrieval、planner、runner）
   eval/            dataset、judge、metrics、table_metrics、table_structure（结构标注答案）、runner、query_compare（查询侧对比数据）、multi_round（多轮检索评估的运行事实）
   reports/         html（页面外壳；样式与脚本写入 reports/assets/）、ingest 与 ocr（入库审核页及其 OCR 标签页）、anchor_review（excerpt 定位审核）、evaluation、compare 与 table_compare（对比页）、query_compare（查询侧对比页）、multi_round（多轮检索评估页与逐题页）、index_page

@@ -93,7 +93,7 @@ def main() -> None:
                        '<tr><th>题</th><th>chunk</th><th class="num">旧分数差（或 ‖Δv‖）</th><th class="num">上界</th>'
                        f'<th class="num">V4.1 名次</th></tr>{lines}</table></div></details>')
     details_html = "<h2>名次互换与超界明细</h2>" + ("".join(details) or '<div class="meta">没有任何名次互换，也没有超过上界的 chunk。</div>')
-    method = ('<h2>判定标准</h2><div class="meta">见 docs/changes/v4.1.1.md 拍板问题 3。查询向量与 chunk 向量都已归一化，'
+    method = ('<h2>判定标准</h2><div class="meta">见 docs/archive/changes/v4.1.1.md 拍板问题 3 与 docs/decisions/021-per-document-rebuild.md（以后的门槛取批次噪声上界的 10 倍）。查询向量与 chunk 向量都已归一化，'
               '一个 chunk 的分数变化不超过它的 ‖Δv‖，所以两个 chunk 只有在旧分数差 ≤ 两者 ‖Δv‖ 之和时才可能互换名次；'
               '排名用全部 chunk（不按文档过滤），过滤后的排名是它的子序列。原始数据见同目录 summary.json、noise.json，'
               '计算脚本 run.py。</div>')

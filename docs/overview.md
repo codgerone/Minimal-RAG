@@ -1,4 +1,4 @@
-# 系统概览（V4.1）
+# 系统概览（V4.1.1）
 
 ## 这是什么
 
@@ -10,8 +10,8 @@
 
 | 命令 | 作用 |
 |---|---|
-| `python -m rag status` | 查看哪些文档已入库、需要更新或可以清理 |
-| `python -m rag ingest` | 入库新增或修改过的 PDF；`--force` 全量重建，`--prune` 清理已删除的文档，`--all-configs` 对所有配置执行 |
+| `python -m rag status` | 查看哪些文档已入库、需要更新（新增、已修改，或构建设置已改变并写明是哪一步）或可以清理，以及步骤缓存的占用 |
+| `python -m rag ingest` | 入库新增、修改过和构建设置已改变的 PDF，只重建这些文档（改了某一步的设置、规则或库版本，只有经过这一步的文档要重建；编码设置改变时整份重建）；`--force` 全量重建，`--refresh-cache` 重算解析、表格提取与编码并覆盖步骤缓存，`--prune` 清理已删除的文档，`--all-configs` 对所有配置执行 |
 | `python -m rag chunks` | 浏览已入库的 chunk（可按 `--document`、`--page` 筛选） |
 | `python -m rag search "问题"` | 检索，显示检索范围、命中的 chunk 及其在向量与 BM25 两路的名次 |
 | `python -m rag ask "问题"` | 检索后让 LLM 依据证据回答；`--debug` 显示命中内容和完整 Prompt（多轮检索时显示问题列表） |
@@ -209,5 +209,6 @@ V4.1 支持扫描 PDF（[决策 019](decisions/019-line-orientation.md)、[020](
 | `.rag/indexes/<配置名>/` | 机器数据：`manifest.json`、向量库 `chroma/`、BM25 倒排索引 `bm25.sqlite`、整表库 `tables.sqlite`、各文档中间结果 JSON（含 chunk 来源区域、表格结构与 LLM 调用记录；审核页由它生成） | 否 |
 | `.rag/ocr/` | 扫描件的 OCR 事实 `ocr.json` 与派生的文字层 PDF `ocr.pdf`，各配置共用 | 否 |
 | `.rag/llm-cache/` | LLM 调用的缓存：入库时的表格处理、查询规划、多轮检索 | 否 |
+| `.rag/cache/` | 步骤结果缓存，各配置共用：解析的原生输出、各表格提取器的报告、每段 chunk 文字的向量；设置、规则与库版本不变时直接读出，不重算 | 否 |
 | `eval/table-structure/` | 测试集表格的结构标注正确答案（审核页据此判定 LLM 标注是否正确） | 是 |
 | `tmp/anchor-review/` | excerpt 定位审核文件（临时） | 否 |
