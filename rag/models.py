@@ -24,10 +24,10 @@ WarningCode: TypeAlias = Literal[
     "source_location_unavailable", "detached_text_recovered", "detached_list_item",
     "unknown_docling_text_label", "unsupported_nontext_item", "orphan_nested_list_group",
     "formula_orig_fallback", "empty_text_node", "optional_tool_page_failed", "optional_tool_unavailable",
-    "artifact_cleanup_failed",
+    "artifact_cleanup_failed", "unknown_numbering_format",
 ]
 ProcessingStage: TypeAlias = Literal[
-    "configuration", "docling_layout_parsing", "layout_mapping", "table_extraction",
+    "configuration", "docling_layout_parsing", "docx_parsing", "layout_mapping", "table_extraction",
     "table_admission", "table_grouping", "table_scoring", "parsed_document_fusion",
     "table_header_detection", "table_serialization", "document_text_serialization",
     "structured_chunking", "artifact_staging", "artifact_cleanup", "index_publication",

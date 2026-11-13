@@ -44,6 +44,7 @@ td.dup,.legend .dup{background:#eef8f1;color:var(--ok)}.legend .hdr{background:#
 details{margin:6px 0}summary{cursor:pointer;color:var(--muted);font-size:13px}
 .item{border-top:1px solid var(--line);padding:8px 0}.item:first-child{border-top:0}
 .meta{font-size:13px;color:var(--muted)}
+.lbl{color:#8a3b00;background:#ffe6cc;border-radius:3px;padding:0 2px}
 .winner{outline:2px solid var(--ok);outline-offset:-1px}
 .filters{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
 .filters button{font:inherit;font-size:13px;padding:3px 10px;border-radius:14px;cursor:pointer;

@@ -32,6 +32,7 @@ class DocumentAudit:
     prepared_tables: tuple[PreparedTableContent, ...]
     batch: ChunkBatch
     pages: DocumentPages | None = None   # None for Word, and for indexes built before V4.1
+    folder: Path | None = None           # where the results are, for pages that read parse-native.json
 
 
 def write_audit(folder: Path, processed: ProcessedDocument, batch: ChunkBatch) -> None:
@@ -71,4 +72,5 @@ def load_audit(folder: Path) -> DocumentAudit:
         from_jsonable(ChunkBatch, read_json(folder / "chunks.json")),
         from_jsonable(DocumentPages, read_json(folder / "pages.json"))
         if (folder / "pages.json").is_file() else None,
+        folder,
     )

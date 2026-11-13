@@ -16,7 +16,8 @@ from rag.ingest.tables.models import (
     TableCandidate, TableLLMResult,
 )
 from rag.jsonio import write_atomic
-from rag.models import ChunkBatch, ListNode, TableNode, TextNode
+from rag.locations import describe, merge, span_location
+from rag.models import ChunkBatch, DocxSpan, ListNode, TableNode, TextNode
 from rag.paths import Workspace
 from rag.reports.html import badge, esc, filters, page, pct, text_block, write_assets
 from rag.reports.ocr import TYPE_LABELS
@@ -113,7 +114,8 @@ def _header(processed: DocumentAudit, entry: DocumentEntry, config_name: str,
         label = name.removesuffix(".html")
         links.append(f"<b>{esc(label)}</b>" if index == current else f'<a href="{esc(name)}">{esc(label)}</a>')
     return (f"<h1>{esc(entry.document_name)}</h1>"
-            f'<div class="sub">配置 {esc(config_name)} · {entry.page_count} 页 · '
+            f'<div class="sub">配置 {esc(config_name)} · '
+            + (f'{entry.page_count} 页 · ' if entry.page_count is not None else 'Word 文档 · ')
             + (f'{TYPE_LABELS[processed.pages.document_type]} · ' if processed.pages else '') +
             f'{entry.chunk_count} 个 chunk · {entry.table_count} 张表 · '
             f'文档语言 {LANGUAGE_NAMES[processed.document.language]} · 入库于 {esc(entry.built_at)}'
@@ -147,6 +149,75 @@ def _node_page(node) -> int:
     return node.sources[0].page_number if node.sources else 0
 
 
+def _is_word(processed: DocumentAudit) -> bool:
+    return any(isinstance(span, DocxSpan) for node in processed.document.nodes for span in node.sources)
+
+
+PART_NAMES = {"body": "正文", "header": "页眉", "footer": "页脚", "footnotes": "脚注", "endnotes": "尾注"}
+OBJECT_NAMES = {"picture": "图片", "chart": "图表", "ole": "嵌入对象"}
+
+
+def _part_title(part: str) -> str:
+    kind = next((k for k in PART_NAMES if part.startswith(k)), part)
+    return PART_NAMES.get(kind, part) + (f"（{part}）" if part not in PART_NAMES else "")
+
+
+def _labelled(text: str, label_end: int) -> str:
+    """Text whose first `label_end` characters are numbering text, marked."""
+    if label_end <= 0:
+        return f'<div class="text">{esc(text)}</div>'
+    return f'<div class="text"><span class="lbl">{esc(text[:label_end])}</span>{esc(text[label_end:])}</div>'
+
+
+def _word_parse_sections(processed: DocumentAudit) -> tuple[str, str]:
+    """Elements in reading order grouped by part, and a note on what the parser skipped."""
+    from rag.jsonio import read_json
+    native: dict = {}
+    if processed.folder is not None and (processed.folder / "parse-native.json").is_file():
+        native = read_json(processed.folder / "parse-native.json")
+    slot_number = {slot.slot_id: n for n, slot in enumerate(processed.table_slots, start=1)}
+    by_part: dict[str, list[str]] = {}
+    for node in processed.document.nodes:
+        span = node.sources[0] if node.sources else None
+        where = esc(span.label) if isinstance(span, DocxSpan) else ""
+        if isinstance(node, TextNode):
+            label_end = next((p.end for p in node.pieces if p.address.endswith("#label")), 0)
+            html = (f'{badge(TEXT_KINDS.get(node.kind, node.kind))} <span class="meta">{where}</span>'
+                    f'{_labelled(node.text, label_end)}')
+        elif isinstance(node, ListNode):
+            lines = "\n".join(("  " * item.level)
+                               + (f'<span class="lbl">{esc(item.ordinal)}</span>' if item.ordinal else "•")
+                               + " " + esc(item.text) for item in node.items)
+            html = f'{badge("列表")} <span class="meta">{where}</span><div class="text">{lines}</div>'
+        else:
+            assert isinstance(node, TableNode)
+            number = slot_number.get(node.slot_id, 1)
+            html = (f'{badge("表格", "warn")} <span class="meta">{where} · 从文件直接读出，'
+                    f'详见 <a href="2-表格.html#t{number}">表格页·表 {number}</a></span>{render_grid(node.table, 12)}')
+        part = span.address.split("/", 1)[0] if isinstance(span, DocxSpan) else "?"
+        by_part.setdefault(part, []).append(f'<div class="item">{html}</div>')
+    sections = "".join(f'<div class="card"><h3>{esc(_part_title(part))}</h3>{"".join(items)}</div>'
+                       for part, items in by_part.items())
+    skipped = []
+    toc = native.get("skipped_toc", [])
+    if toc:
+        skipped.append(f"目录段落 {len(toc)} 段")
+    objects = native.get("objects", [])
+    if objects:
+        counts = Counter(OBJECT_NAMES.get(o["kind"], o["kind"]) for o in objects)
+        skipped.append("、".join(f"{k} {v} 个" for k, v in counts.items()))
+    note = "".join(f'<div class="meta">未入库：{esc(s)}</div>' for s in skipped)
+    frames = native.get("layout_frames", [])
+    if frames:
+        note += (f'<div class="meta">单列表格 {len(frames)} 个按排版框处理，格内内容按正文读出'
+                 f'（{esc("、".join(frames))}）</div>')
+    if objects:
+        note += ('<details><summary>未入库的对象位置</summary><ul class="meta">'
+                 + "".join(f'<li>{esc(o["address"])} · {esc(OBJECT_NAMES.get(o["kind"], o["kind"]))}</li>'
+                           for o in objects) + "</ul></details>")
+    return sections, note
+
+
 def parse_page(processed: DocumentAudit, entry: DocumentEntry, config_name: str) -> str:
     document = processed.document
     kinds = Counter(TEXT_KINDS.get(n.kind, n.kind) if isinstance(n, TextNode)
@@ -155,6 +226,14 @@ def parse_page(processed: DocumentAudit, entry: DocumentEntry, config_name: str)
     warnings = Counter(w.code for w in document.warnings)
     warn_html = ("" if not warnings else "<div class='meta'>处理提示：" +
                  "；".join(f"{esc(code)} ×{n}" for code, n in warnings.items()) + "</div>")
+    if _is_word(processed):
+        sections, note = _word_parse_sections(processed)
+        body = (_header(processed, entry, config_name, 0) +
+                f'<div class="card"><b>解析结果</b>：{esc(summary)}{warn_html}{note}'
+                f'<div class="meta">按阅读顺序（页眉 → 正文 → 脚注 → 尾注 → 页脚）列出解析器从 Word 文件读出的元素；'
+                f'<span class="lbl">着色</span>的是 Word 自动编号生成的文字。规则见 docs/rules/docx.md</div></div>'
+                + sections)
+        return page(f"解析 · {entry.document_name}", body, root="../../../", crumbs=_crumbs(config_name))
     by_page: dict[int, list[str]] = {}
     slot_number = {slot.slot_id: n for n, slot in enumerate(processed.table_slots, start=1)}
     for node in document.nodes:
@@ -363,14 +442,18 @@ def tables_page(processed: DocumentAudit, entry: DocumentEntry, config_name: str
     merged_line = "；".join("表 " + "、".join(str(numbers[seg.slot_id]) for seg in p.segments) + " 合并为一张表"
                            for p in merged) or "没有判为续表的"
     winners = sum(r.origin == "selected_winner" for r in processed.resolutions)
+    exact = sum(r.origin == "parser_exact" for r in processed.resolutions)
     executions = [e for r in processed.extraction_reports for e in r.executions]
     failed = [e for e in executions if e.status in {"failed", "not_started", "completed_with_page_failures"}]
     tool_line = "　".join(f"{e.tool}/{e.strategy} {sum(len(p.candidate_ids) for p in e.pages)} 张"
                           + (" ⚠" if e in failed else "") for e in executions)
-    summary = (f'<div class="card"><b>{len(slots)} 张表</b>：{winners} 张采用候选胜出者，'
-               f'{len(slots) - winners} 张采用解析器原生表格'
+    summary = (f'<div class="card"><b>{len(slots)} 张表</b>：' + (
+               '全部由解析器直接从 Word 文件读出（合并单元格按 gridSpan、vMerge），不经过表格提取、选优与续表判定'
+               if exact == len(slots) else
+               f'{winners} 张采用候选胜出者，{len(slots) - winners} 张采用解析器原生表格')
                + (f'；跨页合并后共 {len(processed.prepared_tables)} 张' if merged else '') + '。'
-               f'<div class="meta">各工具找到的候选：{esc(tool_line) or "（未配置表格提取器）"}</div>'
+               + ("" if exact == len(slots) else
+                  f'<div class="meta">各工具找到的候选：{esc(tool_line) or "（未配置表格提取器）"}</div>')
                + ("".join(f'<div class="meta">⚠ {esc(e.tool)}/{esc(e.strategy)}：{esc(e.status)} '
                           f'{esc(e.error_message or "")}</div>' for e in failed))
                + (f'<div>跨页续表：{len(evaluations)} 对相邻页表格参与判定，{esc(merged_line)}（见“续表判定”）</div>'
@@ -386,6 +469,8 @@ def tables_page(processed: DocumentAudit, entry: DocumentEntry, config_name: str
             decision = (f'{badge("采用候选", "ok")} {esc(prep.adopted_table.tool)}/'
                         f'{esc(prep.adopted_table.strategy)} · {SELECTION.get(scored.selection_reason, "")}'
                         f'（总分 {scored.highest_total_score:.2f}，{len(scored.candidates)} 个候选参与评分）')
+        elif resolution.origin == "parser_exact":
+            decision = f'{badge("文件原表", "ok")} 从 Word 文件直接读出'
         else:
             decision = f'{badge("原生表格", "warn")} 没有可评分的候选，保留解析器识别的表格结构'
         header_status, header_rows = _header_status(prep.header_decision)
@@ -425,11 +510,12 @@ def tables_page(processed: DocumentAudit, entry: DocumentEntry, config_name: str
             f"<tr><td>{esc(c.tool)}/{esc(c.strategy)}</td><td>"
             f"{esc(ADMISSION.get(admissions[c.candidate_id].reason_codes[0], admissions[c.candidate_id].reason_codes[0]) if admissions.get(c.candidate_id) and admissions[c.candidate_id].reason_codes else (admissions[c.candidate_id].deferred_reason if admissions.get(c.candidate_id) else ''))}"
             f"</td></tr>" for c in page_candidates)
-        tab_mark = (("" if resolution.origin == "selected_winner" else "（原生）")
+        tab_mark = (("" if resolution.origin in ("selected_winner", "parser_exact") else "（原生）")
                     + (f"（续表 {head}）" if continued else ""))
-        tabs.append(f'<a href="#t{number}" data-tab="t{number}">表 {number} · 第 {slot.page_number or "?"} 页{tab_mark}</a>')
+        where = "" if resolution.origin == "parser_exact" else f' · 第 {slot.page_number or "?"} 页'
+        tabs.append(f'<a href="#t{number}" data-tab="t{number}">表 {number}{where}{tab_mark}</a>')
         sections.append(
-            f'<div data-panel="t{number}"><h2>表 {number} · 第 {slot.page_number or "?"} 页</h2>'
+            f'<div data-panel="t{number}"><h2>表 {number}{where}</h2>'
             f'<div class="card">{decision}' + (_score_table(scored) if scored else "") + "</div>"
             + (f'<div class="grid">{"".join(cards[:3])}</div>' if cards else "")
             + (f'<details><summary>其余 {len(cards) - 3} 个候选表</summary>'
@@ -463,7 +549,7 @@ def chunks_page(processed: DocumentAudit, batch: ChunkBatch, entry: DocumentEntr
     kinds = Counter(CHUNK_KINDS.get(c.kind, c.kind) for c in chunks)
     cards = []
     for chunk in chunks:
-        pages = sorted({s.page_number for src in chunk.sources for s in src.page_spans})
+        pages = merge(span_location(s) for src in chunk.sources for s in src.page_spans)
         tags = ["all", chunk.kind] + (["tiny"] if chunk in tiny else []) + (["split"] if chunk.fragment_count > 1 else [])
         size_text = f"{chunk.token_count} tokens" if chunk.token_count else f"{len(chunk.text)} 字符"
         split = f" · 拆分 {chunk.fragment_index + 1}/{chunk.fragment_count}" if chunk.fragment_count > 1 else ""
@@ -473,7 +559,7 @@ def chunks_page(processed: DocumentAudit, batch: ChunkBatch, entry: DocumentEntr
                           for s in chunk.sources)
         cards.append(
             f'<div class="card" data-tags="{" ".join(tags)}"><h3>#{chunk.chunk_index} · '
-            f'{esc(CHUNK_KINDS.get(chunk.kind, chunk.kind))} · 第 {",".join(map(str, pages))} 页 · '
+            f'{esc(CHUNK_KINDS.get(chunk.kind, chunk.kind))} · {esc(describe(pages))} · '
             f'{size_text}{split}</h3>'
             + (f'<div class="meta">含 {len(repeated)} 段为保持可读而重复的上下文（表头/上级列表项/重叠）</div>' if repeated else "")
             + f'{text_block(chunk.text)}<details><summary>{esc(chunk.chunk_id)} · 来源</summary>'
