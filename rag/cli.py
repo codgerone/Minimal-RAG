@@ -12,6 +12,7 @@ from typing import Sequence
 
 from rag.config import ConfigError, list_configs, resolve_config
 from rag.paths import Workspace
+from rag.locations import describe as describe_locations
 
 
 def _positive(value: str) -> int:
@@ -279,7 +280,7 @@ def _chunks(workspace: Workspace, args: argparse.Namespace) -> int:
         chunks = [c for c in chunks if args.page in c.pages]
     shown = chunks[args.offset:args.offset + args.limit]
     for chunk in shown:
-        _out(f"── {chunk.chunk_id} · {chunk.document_name} · 第 {','.join(map(str, chunk.pages))} 页 · {chunk.kind}")
+        _out(f"── {chunk.chunk_id} · {chunk.document_name} · {describe_locations(chunk.pages)} · {chunk.kind}")
         _out(chunk.text)
     _out(f"（显示 {len(shown)} / 共 {len(chunks)} 个）")
     return 0
@@ -337,7 +338,7 @@ def _show_units(units, retriever: str) -> None:
         source = (f"整表 {unit.table.table_id}（命中 {chunk.chunk_id}，共 {len(unit.chunk_ids)} 块）"
                   if unit.table else chunk.chunk_id)
         _out(f"#{rank} {_hit_scores(unit.hit, retriever)} · {chunk.document_name} · "
-             f"第 {','.join(map(str, unit.pages))} 页 · {source}")
+             f"{describe_locations(unit.pages)} · {source}")
         _out(unit.text)
         _out()
 

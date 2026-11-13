@@ -22,6 +22,7 @@ from rag.index.step_cache import StepCache
 from rag.index.store import ChromaStore, StoredChunk
 from rag.index.tables import StoredTable, TableStore, collect_tables
 from rag.ingest.regions import attach_regions
+from rag.locations import span_location
 from rag.ingest.pipeline import ProcessedDocument, process_document
 from rag.ingest.sources import discover, select
 from rag.ingest.timing import StepTimes
@@ -121,7 +122,7 @@ def _stored(prepared: Prepared) -> list[StoredChunk]:
     source = prepared.source
     return [StoredChunk(chunk.chunk_id, source.document_id, source.document_name,
                         source.relative_path, chunk.chunk_index, chunk.kind,
-                        tuple(dict.fromkeys(span.page_number for item in chunk.sources
+                        tuple(dict.fromkeys(span_location(span) for item in chunk.sources
                                             for span in item.page_spans)),
                         chunk.token_count, chunk.text)
             for chunk in prepared.batch.chunks]

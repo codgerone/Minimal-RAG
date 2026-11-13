@@ -12,6 +12,10 @@ docs/rules/evaluation.md:
 4. A table-header excerpt is also covered by each other chunk of the same split table whose text
    contains all its header pieces.
 5. A group is covered by any of its schemes; a scheme needs every one of its excerpts.
+
+In a Word file a word is its address and character range; a chunk covers it when one of the
+chunk's regions has the same address and holds the word's middle character, or is a whole
+address (a table cell) the word lies at or under. Word regions are exact, so rule 2 never applies.
 """
 
 from __future__ import annotations
@@ -28,6 +32,7 @@ EDGE = 0.5          # points of tolerance when testing whether a word centre lie
 
 Mode = Literal["coordinate", "fallback", "unmapped"]
 Box = tuple[float, float, float, float]
+DocxSpot = tuple[str, int | None, int | None]     # address, character range (None: whole address)
 
 
 @dataclass(frozen=True)
@@ -39,6 +44,7 @@ class JudgeChunk:
     parent_unit_id: str | None
     fine: tuple[tuple[int, Box], ...]
     coarse: tuple[tuple[int, Box | None], ...]     # None: anywhere on the page
+    docx: tuple[DocxSpot, ...] = ()                 # Word regions
 
 
 @dataclass(frozen=True)
@@ -73,6 +79,13 @@ def _inside(point: tuple[int, float, float], page: int, box: Box | None) -> bool
     p, x, y = point
     return p == page and (box is None or (box[0] - EDGE <= x <= box[2] + EDGE
                                           and box[1] - EDGE <= y <= box[3] + EDGE))
+
+
+def _covers(region: DocxSpot, address: str, middle: int) -> bool:
+    place, start, end = region
+    if start is None or end is None:
+        return address == place or address.startswith(place + "/") or address.startswith(place + "#")
+    return address == place and start <= middle < end
 
 
 def _minimal(sets: list[frozenset[str]]) -> tuple[frozenset[str], ...]:
@@ -120,7 +133,17 @@ def judge_excerpt(excerpt: Excerpt, chunks: list[JudgeChunk]) -> ExcerptEvidence
     problems: list[str] = []
     used_text = False
     for piece, words in excerpt.anchor or ():
-        for page, box in words:
+        for word in words:
+            if isinstance(word[0], str):
+                address, start, end = word
+                middle = (start + end) // 2 if end > start else start
+                held = frozenset(c.chunk_id for c in own if any(_covers(r, address, middle) for r in c.docx))
+                if held:
+                    requirements.append(held)
+                else:
+                    problems.append(f"片段“{piece}”的词不在任何 chunk 的区域内")
+                continue
+            page, box = word
             centre = (page, (box[0] + box[2]) / 2, (box[1] + box[3]) / 2)
             fine = frozenset(c.chunk_id for c in own if any(_inside(centre, p, b) for p, b in c.fine))
             if fine:

@@ -72,6 +72,11 @@ def prepare_tables(
             if candidate is None:
                 raise TablePreparationError("selected candidate absent from this execution")
             adopted = _candidate_table(candidate)
+        elif resolution.origin == "parser_exact":
+            native = by_native.get(placeholder.slot_id)
+            if native is None or native.source_ref != placeholder.source_ref or resolution.selection_ref is not None:
+                raise TablePreparationError("exact parser table missing or from another slot")
+            adopted = native.table
         elif resolution.origin == "docling_native_fallback":
             if resolution.selection_ref is not None:
                 raise TablePreparationError("native fallback must not claim winner evidence")
@@ -89,8 +94,12 @@ def prepare_tables(
         adopted_by_slot[placeholder.slot_id] = adopted
 
     # Each table is judged on its own first; continuation detection needs the later table's verdict.
+    # Tables a parser read exactly from the file (Word) are whole: there are no page continuations.
     headers = {slot_id: header_detector(table) for slot_id, table in adopted_by_slot.items()}
-    report = detect_continuations(primary, adopted_by_slot, headers)
+    exact = bool(placeholders) and all(by_resolution[item.slot_id].origin == "parser_exact"
+                                       for item in placeholders)
+    report = (ContinuationReport(RULE_VERSION, (), ()) if exact
+              else detect_continuations(primary, adopted_by_slot, headers))
     chained = {slot_id: chain for chain in report.chains for slot_id in chain}
     slots = {slot.slot_id: slot for slot in primary.table_slots}
 

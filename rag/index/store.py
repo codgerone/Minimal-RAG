@@ -19,7 +19,7 @@ class StoredChunk:
     relative_path: str
     chunk_index: int
     kind: str
-    pages: tuple[int, ...]
+    pages: tuple[int | str, ...]     # page numbers (PDF) or location labels (Word), rag/locations.py
     token_count: int | None
     text: str
 

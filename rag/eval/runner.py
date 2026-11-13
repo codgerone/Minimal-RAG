@@ -99,12 +99,14 @@ def _judge_chunks(workspace: Workspace, config_name: str, chunk_ids: set[str]) -
     for path in sorted((workspace.index_dir(config_name) / "documents").glob("*/chunks.json")):
         for c in read_json(path)["chunks"]:
             regions = c.get("regions") or []
+            pdf = [r for r in regions if "page_number" in r]
             chunks.append(JudgeChunk(
                 c["chunk_id"], c["document_id"], c["text"], c["parent_unit_id"],
-                tuple((r["page_number"], box(r["bbox"])) for r in regions if r["precision"] == "fine"),
-                tuple((r["page_number"], box(r["bbox"])) for r in regions if r["precision"] == "coarse")))
+                tuple((r["page_number"], box(r["bbox"])) for r in pdf if r["precision"] == "fine"),
+                tuple((r["page_number"], box(r["bbox"])) for r in pdf if r["precision"] == "coarse"),
+                tuple((r["address"], r["start"], r["end"]) for r in regions if "address" in r)))
     found = {c.chunk_id for c in chunks}
-    without = [c.chunk_id for c in chunks if not c.fine and not c.coarse]
+    without = [c.chunk_id for c in chunks if not c.fine and not c.coarse and not c.docx]
     if found != chunk_ids or without:
         raise EvalError(f"配置 {config_name} 的中间结果缺少 chunk 来源区域（索引建于 V3.4 之前），"
                         f"请运行 ingest --force 重建")

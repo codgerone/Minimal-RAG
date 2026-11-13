@@ -1,4 +1,4 @@
-"""Shared data models: source PDFs, parsed documents and chunks.
+"""Shared data models: source documents, parsed documents and chunks.
 
 Facts produced by parsers (Primary*) are kept separate from the assembled
 document (ParsedDocument) that downstream chunking consumes.
@@ -35,6 +35,7 @@ ProcessingStage: TypeAlias = Literal[
 ContextKind: TypeAlias = Literal["none", "overlap", "table_header", "section_title", "merged_cell",
                                  "list_ancestor", "fallback_locator"]
 ChunkKind: TypeAlias = Literal["text", "list", "table", "table_summary"]
+FileType: TypeAlias = Literal["pdf", "docx"]
 
 
 @dataclass(frozen=True)
@@ -52,6 +53,7 @@ class SourceDocument:
     absolute_path: Path
     file_hash: str                       # of the source file: incremental ingest and ground truth bind to it
     parse_file: ParseFile | None = None  # set when the source has scanned pages and OCR produced ocr.pdf
+    file_type: FileType = "pdf"
 
     @property
     def pdf_path(self) -> Path:
@@ -93,6 +95,27 @@ class PageSpan:
 
 
 @dataclass(frozen=True)
+class DocxSpan:
+    """Where an element sits in a Word file: a file address (docs/rules/docx.md), e.g. `body/12`,
+    `body/7/r2c1/0`; the numbering text of a paragraph has the address with `#label` appended."""
+    address: str
+    label: str            # what reports show instead of a page: "第 N 块", "表 N", "页眉", "脚注"…
+    source_ref: str
+
+
+Span: TypeAlias = PageSpan | DocxSpan
+
+
+@dataclass(frozen=True)
+class TextPiece:
+    """text[start:end] of an element is the text of `address` from `offset` on (Word)."""
+    start: int
+    end: int
+    address: str
+    offset: int
+
+
+@dataclass(frozen=True)
 class WordBox:
     """Where one word of an element's text sits: text[start:end] is drawn inside bbox on that page."""
     start: int
@@ -115,6 +138,19 @@ class ChunkRegion:
 
 
 @dataclass(frozen=True)
+class DocxRegion:
+    """A place in a Word file the chunk's content comes from: characters [start, end) of the text
+    at `address`, or everything at and under the address (a table cell) when both are None.
+    Word positions are exact, so there is no coarse kind."""
+    address: str
+    start: int | None
+    end: int | None
+
+
+Region: TypeAlias = ChunkRegion | DocxRegion
+
+
+@dataclass(frozen=True)
 class ProcessingWarning:
     code: WarningCode
     stage: ProcessingStage
@@ -127,9 +163,10 @@ class PrimaryText:
     element_id: str
     kind: TextKind
     text: str
-    sources: tuple[PageSpan, ...]
+    sources: tuple[Span, ...]
     source_ref: str | None
     word_boxes: tuple[WordBox, ...] = ()     # per-word positions, when the parser knows them
+    pieces: tuple[TextPiece, ...] = ()       # Word: where each part of the text is in the file
 
 
 @dataclass(frozen=True)
@@ -139,8 +176,9 @@ class ListItem:
     level: int
     ordinal: str | None
     parent_item_id: str | None
-    sources: tuple[PageSpan, ...]
+    sources: tuple[Span, ...]
     source_ref: str | None
+    pieces: tuple[TextPiece, ...] = ()       # Word: where the item text is in the file (ordinal not included)
 
 
 @dataclass(frozen=True)
@@ -148,7 +186,7 @@ class PrimaryList:
     element_id: str
     items: tuple[ListItem, ...]
     source_refs: tuple[str, ...]
-    sources: tuple[PageSpan, ...]
+    sources: tuple[Span, ...]
 
 
 @dataclass(frozen=True)
@@ -156,7 +194,7 @@ class PrimaryTablePlaceholder:
     element_id: str
     slot_id: str
     source_ref: str
-    sources: tuple[PageSpan, ...]
+    sources: tuple[Span, ...]
 
 
 @dataclass(frozen=True)
@@ -173,7 +211,7 @@ PrimaryElement: TypeAlias = PrimaryText | PrimaryList | PrimaryTablePlaceholder
 class PrimaryDocument:
     document_id: str
     file_hash: str
-    page_count: int
+    page_count: int | None                   # None for Word, which has no pages
     elements: tuple[PrimaryElement, ...]
     table_slots: tuple[TableSlot, ...]
     native_tables: tuple[NativeTableFact, ...]
@@ -181,7 +219,7 @@ class PrimaryDocument:
     schema_version: str = "primary_document_v3"
 
     def __post_init__(self) -> None:
-        if type(self.page_count) is not int or self.page_count <= 0:
+        if self.page_count is not None and (type(self.page_count) is not int or self.page_count <= 0):
             raise ValueError("primary document must record physical pages")
         if self.schema_version != "primary_document_v3":
             raise ValueError("unsupported primary document schema")
@@ -199,9 +237,10 @@ class TextNode:
     node_id: str
     kind: TextKind
     text: str
-    sources: tuple[PageSpan, ...]
+    sources: tuple[Span, ...]
     source_ref: str | None
     word_boxes: tuple[WordBox, ...] = ()
+    pieces: tuple[TextPiece, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -209,7 +248,7 @@ class ListNode:
     node_id: str
     items: tuple[ListItem, ...]
     source_refs: tuple[str, ...]
-    sources: tuple[PageSpan, ...]
+    sources: tuple[Span, ...]
 
 
 @dataclass(frozen=True)
@@ -217,7 +256,7 @@ class TableNode:
     node_id: str
     slot_id: str
     source_ref: str
-    origin: Literal["selected_winner", "docling_native_fallback"]
+    origin: Literal["selected_winner", "docling_native_fallback", "parser_exact"]
     table: StructuredTable
     selection_ref: str | None
     header: HeaderDecision             # the rule header, a fact even when the structure is the LLM's
@@ -225,18 +264,19 @@ class TableNode:
     serialized: SerializedTable
     whole_text: str                    # grid_rows_v1 text, returned when the whole table is
     index_text: TableIndexText         # table rows, rows with a lead, or a summary in the index
-    sources: tuple[PageSpan, ...]
+    sources: tuple[Span, ...]
     # Pages of a table merged across pages, one per part in row order; empty for a single part.
     segments: tuple[TableSegment, ...] = ()
     llm: TableLLMResult | None = None
 
-    def spans_for_rows(self, rows: tuple[int, ...]) -> tuple[PageSpan, ...]:
+    def spans_for_rows(self, rows: tuple[int, ...]) -> tuple[Span, ...]:
         """The page spans holding these table rows; all of them when unknown."""
         if not self.segments or not rows:
             return self.sources
         pages = {segment.page_number for segment in self.segments
                  if any(segment.start_row <= row < segment.end_row for row in rows)}
-        return tuple(span for span in self.sources if span.page_number in pages) or self.sources
+        return tuple(span for span in self.sources
+                     if isinstance(span, PageSpan) and span.page_number in pages) or self.sources
 
 
 ParsedNode: TypeAlias = TextNode | ListNode | TableNode
@@ -266,7 +306,7 @@ class ParsedDocument:
 @dataclass(frozen=True)
 class ChunkSource:
     node_id: str
-    page_spans: tuple[PageSpan, ...]
+    page_spans: tuple[Span, ...]
     source_text_start: int | None
     source_text_end: int | None
     repeated_context: bool
@@ -293,7 +333,7 @@ class DocumentChunk:
     parent_unit_id: str | None
     fragment_index: int
     fragment_count: int
-    regions: tuple[ChunkRegion, ...] = ()    # filled after chunking, see rag/ingest/regions.py
+    regions: tuple[Region, ...] = ()         # filled after chunking, see rag/ingest/regions.py
 
     def __post_init__(self) -> None:
         if not self.text.strip() or type(self.chunk_index) is not int or self.chunk_index < 0:

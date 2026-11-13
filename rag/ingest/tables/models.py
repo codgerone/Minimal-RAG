@@ -10,10 +10,10 @@ import math
 from dataclasses import dataclass
 from typing import Literal, TypeAlias, get_args
 
-from rag.models import BoundingBox, PageSpan, ProcessingWarning
+from rag.models import BoundingBox, PageSpan, ProcessingWarning, Span
 
-ToolName: TypeAlias = Literal["pymupdf", "camelot", "docling", "unstructured"]
-TableStrategy: TypeAlias = Literal["lines", "lines_strict", "text", "lattice", "stream", "network", "hybrid", "accurate", "hi_res"]
+ToolName: TypeAlias = Literal["pymupdf", "camelot", "docling", "unstructured", "docx_native"]
+TableStrategy: TypeAlias = Literal["lines", "lines_strict", "text", "lattice", "stream", "network", "hybrid", "accurate", "hi_res", "file"]
 StrategyStatus: TypeAlias = Literal["not_started", "completed_no_tables", "completed_with_tables", "completed_with_page_failures", "failed"]
 CellRole: TypeAlias = Literal["column_header", "row_header", "row_section", "body", "unknown"]
 SpanSource: TypeAlias = Literal["native", "geometry_inferred", "edge_inferred", "unavailable"]
@@ -270,6 +270,7 @@ class TableCell:
     roles: tuple[CellRole, ...]
     span_source: SpanSource
     source_refs: tuple[str, ...]
+    address: str | None = None      # Word: the cell's file address (docs/rules/docx.md)
 
 @dataclass(frozen=True)
 class GridPosition:
@@ -292,7 +293,7 @@ class TableSlot:
 @dataclass(frozen=True)
 class ContentResolution:
     slot_id: str
-    origin: Literal["selected_winner", "docling_native_fallback"]
+    origin: Literal["selected_winner", "docling_native_fallback", "parser_exact"]
     selected_candidate_id: str | None
     selection_ref: str | None
     decision_ref: str
@@ -719,5 +720,5 @@ class StructuredTable:
     cells: tuple[TableCell, ...]
     uncovered_grid_positions: tuple[GridPosition, ...]
     unplaced_text: str | None
-    sources: tuple[PageSpan, ...]
+    sources: tuple[Span, ...]
     warnings: tuple[ProcessingWarning, ...]

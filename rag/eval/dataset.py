@@ -9,7 +9,9 @@ from pathlib import Path
 from typing import Literal
 
 Box = tuple[float, float, float, float]
-AnchorPiece = tuple[str, tuple[tuple[int, Box], ...]]    # piece text as the PDF reads it, its words (page, box)
+# A word of a piece: (page, box) on a PDF, or (address, start, end) in a Word file.
+AnchorWord = tuple[int, Box] | tuple[str, int, int]
+AnchorPiece = tuple[str, tuple[AnchorWord, ...]]    # piece text as the file reads it, its words
 
 
 @dataclass(frozen=True)
@@ -17,7 +19,7 @@ class Excerpt:
     excerpt_id: str
     document_id: str
     document_name: str
-    pages: tuple[int, ...]
+    pages: tuple[int, ...]       # PDF pages the excerpt is on; empty for Word
     text: str
     table_header: bool = False   # the excerpt is table header text that itself answers the question
     locate_hint: str | None = None   # header text of the excerpt's column; only for locating it in the PDF
@@ -75,8 +77,11 @@ def _anchor(raw: dict) -> tuple[tuple[AnchorPiece, ...] | None, str]:
     for piece in stored["pieces"]:
         words = []
         for value in piece["words"]:
-            page, *box = value.split()
-            words.append((int(page), tuple(float(v) for v in box)))
+            first, *rest = value.split()
+            if "/" in first:             # Word: "<address> <start> <end>"
+                words.append((first, int(rest[0]), int(rest[1])))
+            else:
+                words.append((int(first), tuple(float(v) for v in rest)))
         # An approximate match on a scanned page also records what OCR read; chunk text holds that.
         pieces.append((piece.get("ocr_text", piece["text"]), tuple(words)))
     return tuple(pieces), "ok"
@@ -84,7 +89,7 @@ def _anchor(raw: dict) -> tuple[tuple[AnchorPiece, ...] | None, str]:
 
 def _excerpt(x: dict) -> Excerpt:
     anchor, state = _anchor(x)
-    return Excerpt(x["excerpt_id"], x["document_id"], x["document_name"], tuple(x["page_numbers"]),
+    return Excerpt(x["excerpt_id"], x["document_id"], x["document_name"], tuple(x.get("page_numbers", ())),
                    x["text"], bool(x.get("table_header", False)), x.get("locate_hint"), anchor, state)
 
 

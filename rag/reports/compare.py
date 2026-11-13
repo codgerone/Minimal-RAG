@@ -19,6 +19,7 @@ from rag.paths import Workspace
 from rag.reports.evaluation import unit_chunks
 from rag.reports.table_compare import TableSpec, table_tabs
 from rag.reports.html import badge, esc, filters, hit_scores, page, pct, text_block, write_assets
+from rag.locations import describe
 
 LEVELS = {"miss": (0, "✗ 未命中", "bad"), "partial": (1, "◐ 部分", "warn"), "complete": (2, "✓ 完整", "ok")}
 RECURRING_MIN = 3   # an irrelevant chunk listed when it is in the Top-K of at least this many questions
@@ -284,7 +285,7 @@ def _hit(hit: dict[str, Any], retriever: str) -> str:
     table = badge(f"整表 · {len(unit_chunks(hit))} 块") if hit.get("table_id") else ""
     ids = f'整表 {hit["table_id"]}，排名来自 {hit["chunk_id"]}' if hit.get("table_id") else hit["chunk_id"]
     return (f'<div class="item"><b>#{hit["rank"]}</b> {state} {table} <span class="meta">{esc(hit_scores(hit, retriever))}'
-            f' · 第 {",".join(map(str, hit["pages"]))} 页</span>{text_block(hit["text"], 160)}'
+            f' · {esc(describe(hit["pages"]))}</span>{text_block(hit["text"], 160)}'
             f'<details><summary>ID</summary><div class="meta">{esc(ids)}</div></details></div>')
 
 
@@ -315,7 +316,7 @@ def _recurring(runs: list[tuple[str, dict[str, Any]]]) -> str:
                     texts[key] = hit
         items = [(cid, n) for cid, n in counts.most_common() if n >= RECURRING_MIN]
         body = "".join(f'<div class="item"><b>{n} 题</b> <span class="meta">{esc(texts[cid]["document_name"])} · '
-                       f'第 {",".join(map(str, texts[cid]["pages"]))} 页</span>'
+                       f'{esc(describe(texts[cid]["pages"]))}</span>'
                        f'{text_block(texts[cid]["text"], 160)}'
                        f'<details><summary>chunk ID</summary><div class="meta">{esc(cid)}</div></details></div>'
                        for cid, n in items)
