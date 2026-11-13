@@ -1,0 +1,26 @@
+{
+ "texts": 1170,
+ "pairs": {
+  "alone~batch8": {
+   "max": 6.620580682790735e-06,
+   "median": 7.798094824411635e-07,
+   "bit_identical": 209
+  },
+  "alone~batch32": {
+   "max": 6.620580682790735e-06,
+   "median": 8.042190707471683e-07,
+   "bit_identical": 133
+  },
+  "batch8~batch32": {
+   "max": 3.602821554654732e-06,
+   "median": 0.0,
+   "bit_identical": 1053
+  }
+ },
+ "bound": 6.620580682790735e-06,
+ "reproducibility": {
+  "texts": 1170,
+  "bit_identical": 884,
+  "max": 7.004292420085616e-08
+ }
+}

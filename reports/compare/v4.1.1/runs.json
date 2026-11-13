@@ -1,0 +1,18 @@
+{
+  "name": "v4.1.1",
+  "runs": [
+    "2026-11-13_structured_k3_filter-on_hybrid_2=RM-C",
+    "2026-11-13_structured_k3_filter-on_hybrid_table_2=RM-T",
+    "2026-11-13_structured_labeled_k3_filter-on_hybrid_2=RL-C",
+    "2026-11-13_structured_labeled_k3_filter-on_hybrid_table_2=RL-T",
+    "2026-11-13_structured_llm_k3_filter-on_hybrid_2=LM-C",
+    "2026-11-13_structured_llm_k3_filter-on_hybrid_table_2=LM-T",
+    "2026-11-13_structured_llm_labeled_k3_filter-on_hybrid_2=LL-C",
+    "2026-11-13_structured_llm_labeled_k3_filter-on_hybrid_table_2=LL-T",
+    "2026-11-13_structured_llm_lead_k3_filter-on_hybrid_2=LM+-C",
+    "2026-11-13_structured_llm_lead_k3_filter-on_hybrid_table_2=LM+-T",
+    "2026-11-13_structured_llm_labeled_lead_k3_filter-on_hybrid_2=LL+-C",
+    "2026-11-13_structured_llm_labeled_lead_k3_filter-on_hybrid_table_2=LL+-T",
+    "2026-11-13_structured_summary_k3_filter-on_hybrid_table_2=S-T"
+  ]
+}
