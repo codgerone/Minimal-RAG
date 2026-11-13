@@ -21,6 +21,11 @@ class E5TokenCounter:
     def __init__(self) -> None:
         self._tokenizer: Any = None
 
+    def identity(self) -> dict[str, object]:
+        from rag.ingest.libraries import versions
+        return {"tokenizer": E5_TOKENIZER, "revision": E5_TOKENIZER_REVISION,
+                "libraries": versions("transformers", "tokenizers")}
+
     def _load(self) -> Any:
         if self._tokenizer is None:
             from transformers import AutoTokenizer

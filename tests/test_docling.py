@@ -78,3 +78,29 @@ def test_docling_converts_once_and_table_extractor_reuses_it(tmp_path: Path) -> 
     assert parsed.native == doc.export_to_dict()
     assert parsed.primary.elements[0].text == "Body"
     assert report.executions[0].status == "completed_no_tables"
+
+
+def test_cached_conversion_is_rebuilt_without_calling_docling_again(tmp_path):
+    from rag.index.step_cache import StepCache
+    pdf_path = tmp_path / "source.pdf"
+    with fitz.open() as pdf:
+        pdf.new_page(width=100, height=100)
+        pdf.save(pdf_path)
+    doc = DoclingDocument(name="fixture")
+    doc.add_page(1, Size(width=100, height=100))
+    doc.add_text(DocItemLabel.TEXT, "Body", prov=provenance(10))
+    source = SourceDocument("doc", "source.pdf", "source.pdf", pdf_path,
+                            hashlib.sha256(pdf_path.read_bytes()).hexdigest())
+    calls: list[bytes] = []
+
+    def convert(data: bytes) -> DoclingDocument:
+        calls.append(data)
+        return doc
+
+    cache = StepCache(tmp_path / "cache")
+    first = DoclingLayoutParser(converter=convert).parse(source, cache)
+    second = DoclingLayoutParser(converter=convert).parse(source, cache)
+    assert len(calls) == 1 and cache.log == [("parse", False), ("parse", True)]
+    assert second.primary == first.primary and second.native == first.native
+    assert (DoclingTableExtractor().extract(source, second.shared)
+            == DoclingTableExtractor().extract(source, first.shared))

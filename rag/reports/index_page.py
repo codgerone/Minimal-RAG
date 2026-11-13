@@ -13,6 +13,7 @@ from rag.paths import Workspace
 from rag.reports.html import badge, esc, page, pct, write_assets
 
 STATE_BADGES = {"current": ("已入库", "ok"), "new": ("未入库", "warn"), "changed": ("PDF 已修改", "warn"),
+                "stale": ("构建设置已改变", "bad"),
                 "incomplete": ("索引不完整", "bad"), "missing": ("PDF 已删除", ""),
                 "unreadable": ("无可用文本", "bad")}
 
@@ -47,11 +48,13 @@ def _config_section(workspace: Workspace, config) -> str:
         return f'<div class="card">{badge("配置无效", "bad")} {esc(exc)}</div>'
     status = current_status(workspace, assembly)
     state = {"not_built": badge("尚未建立索引", "warn"),
-             "config_changed": badge("配置已改变，需 ingest --force", "bad"),
+             "stale": badge("部分文档的构建设置已改变，需 ingest", "bad"),
              "ready": badge("可用", "ok")}[status.state]
     rows = []
     for item in status.documents:
         label, kind = STATE_BADGES[item.state]
+        if item.state == "stale":
+            label = f"{label}（{item.stale_reason}）"
         entry = item.entry
         links = ""
         if entry and item.state != "new":

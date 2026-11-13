@@ -16,6 +16,12 @@ from rag.ingest.tables.models import (
 )
 
 
+# Rules version of table selection, continuation merge and rule header decision (select, grouping, scoring,
+# prepare, continuation, header, pdf_words). Bump it, to the release that ships the change, whenever this
+# code changes its output: the documents passing through the step are then rebuilt.
+RULES_VERSION = "v4.1.1"
+
+
 class TableSelectionError(ValueError):
     """Table evidence does not belong to this source or cannot form unique decisions."""
 

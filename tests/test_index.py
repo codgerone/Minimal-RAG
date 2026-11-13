@@ -72,10 +72,10 @@ def test_full_rebuild_failure_leaves_index_untouched(workspace, fake_assembly, m
     count_before = open_store(workspace, "fake").count()
     real_prepare = builder.prepare
 
-    def fail_on_b(source, assembly):
+    def fail_on_b(source, assembly, *args, **kwargs):
         if source.relative_path == "b.pdf":
             raise RuntimeError("parser crashed")
-        return real_prepare(source, assembly)
+        return real_prepare(source, assembly, *args, **kwargs)
 
     monkeypatch.setattr(builder, "prepare", fail_on_b)
     with pytest.raises(IngestError, match="现有索引未改动"):
@@ -85,17 +85,39 @@ def test_full_rebuild_failure_leaves_index_untouched(workspace, fake_assembly, m
     assert not (workspace.index_dir("fake") / "documents.staging").exists()
 
 
-def test_config_change_requires_full_rebuild(workspace, fake_assembly):
+def test_changed_step_marks_its_documents_stale_and_plain_ingest_rebuilds_them(workspace, fake_assembly):
+    from dataclasses import replace
+    from rag.ingest.chunkers.characters import CharacterChunker
+    make_pdf(workspace.documents / "a.pdf", PAGES)
+    make_pdf(workspace.documents / "b.pdf", ["Second document."])
+    ingest(workspace, fake_assembly)
+    config = replace(fake_assembly.config,
+                     chunker=replace(fake_assembly.config.chunker, params={"chunk_size": 60, "chunk_overlap": 10}))
+    rechunked = replace(fake_assembly, config=config, chunker=CharacterChunker(60, 10))
+    status = current_status(workspace, rechunked)
+    assert status.state == "stale" and not status.queryable
+    assert {d.state for d in status.documents} == {"stale"}
+    assert {d.changed_steps for d in status.documents} == {("chunk",)}
+    assert [o.action for o in ingest(workspace, rechunked)] == ["updated", "updated"]   # no --force needed
+    assert current_status(workspace, rechunked).state == "ready"
+    assert [o.action for o in ingest(workspace, rechunked)] == ["skipped", "skipped"]
+
+
+def test_manifest_from_before_per_document_records_triggers_a_full_rebuild(workspace, fake_assembly):
     make_pdf(workspace.documents / "a.pdf", PAGES)
     ingest(workspace, fake_assembly)
     path = workspace.index_dir("fake") / "manifest.json"
     data = json.loads(path.read_text(encoding="utf-8"))
-    data["fingerprint"] = "old"
+    data["fingerprint"], data["build_settings"] = "old", {}
+    for entry in data["documents"].values():
+        for key in ("scanned_pages", "build_settings", "fingerprint", "timings"):
+            entry.pop(key)
     path.write_text(json.dumps(data), encoding="utf-8")
-    assert current_status(workspace, fake_assembly).state == "config_changed"
-    with pytest.raises(IngestError, match="--force"):
-        ingest(workspace, fake_assembly)
-    assert [o.action for o in ingest(workspace, fake_assembly, force=True)] == ["rebuilt"]
+    item = current_status(workspace, fake_assembly).documents[0]
+    assert item.state == "stale" and item.stale_reason == "入库记录为 V4.1.1 之前的格式"
+    with pytest.raises(IngestError, match="不加 --file"):
+        ingest(workspace, fake_assembly, file="a.pdf")
+    assert [o.action for o in ingest(workspace, fake_assembly)] == ["rebuilt"]
     assert current_status(workspace, fake_assembly).state == "ready"
 
 
@@ -133,6 +155,9 @@ def test_missing_whole_tables_are_detected_as_incomplete(workspace, fake_assembl
     manifest = Manifest.load(path)
     entry = next(iter(manifest.documents.values()))
     entry.table_count = 1           # the store holds no table for this document
+    from rag.index.build_steps import DocumentFacts, fingerprint, step_settings
+    entry.build_settings = step_settings(fake_assembly, DocumentFacts(False, True))
+    entry.fingerprint = fingerprint(entry.build_settings)
     manifest.save(path)
     status = current_status(workspace, fake_assembly).documents[0]
     assert status.state == "incomplete" and status.tables_complete is False

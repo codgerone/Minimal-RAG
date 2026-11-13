@@ -18,6 +18,11 @@ class CharacterChunker:
             chunk_size=chunk_size, chunk_overlap=chunk_overlap,
             length_function=len, keep_separator="end", separators=list(SEPARATORS))
 
+    def identity(self) -> dict[str, object]:
+        from rag.ingest.chunkers import RULES_VERSION
+        from rag.ingest.libraries import versions
+        return {"rules": RULES_VERSION, "libraries": versions("langchain-text-splitters")}
+
     def chunk(self, document: ParsedDocument) -> ChunkBatch:
         chunks: list[DocumentChunk] = []
         character_count = 0

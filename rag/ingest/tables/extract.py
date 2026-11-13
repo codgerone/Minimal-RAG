@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 
+# Rules version of the per-page strategy runner shared by the extractors. Bump it, to the release that ships the change, whenever this
+# code changes its output: the documents passing through the step are then rebuilt.
+RULES_VERSION = "v4.1.1"
+
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable

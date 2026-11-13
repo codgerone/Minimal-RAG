@@ -206,9 +206,11 @@ def test_ocr_config_validation_and_fingerprint(tmp_path: Path) -> None:
     (tmp_path / "configs").mkdir()
     path = write(tmp_path / "configs", name="scan", extra='[ocr]\nuse = "rapidocr"\n')
     with_ocr = assemble(load_config(path))
-    assert with_ocr.build_settings()["ocr"] == {"use": "rapidocr", "dpi": 300}
-    assert with_ocr.build_settings()["ocr_identity"]["models"]["rec"] == "PP-OCRv6_rec_small.onnx"
-    assert with_ocr.build_settings()["ocr_identity"]["line_orientation"] == "cls_on_off_higher_confidence"
+    ocr = with_ocr.build_settings()["ocr"]
+    assert (ocr["use"], ocr["dpi"], ocr["rules"]) == ("rapidocr", 300, "v4.1.1")
+    assert ocr["identity"]["models"]["rec"] == "PP-OCRv6_rec_small.onnx"
+    assert ocr["identity"]["line_orientation"] == "cls_on_off_higher_confidence"
+    assert set(ocr["libraries"]) == {"pymupdf", "opencv-python", "onnxruntime"}
     assert with_ocr.ocr.root == tmp_path / ".rag" / "ocr"
     for bad in ('[ocr]\nuse = "rapidocr"\ndpi = 20\n', '[ocr]\nuse = "rapidocr"\nlang = "es"\n'):
         with pytest.raises(ConfigError):

@@ -75,10 +75,12 @@ def build_parser() -> argparse.ArgumentParser:
         return sub
 
     command("status", "查看索引状态：哪些文档已入库、需要更新或清理")
-    ingest = command("ingest", "把 documents/ 中的 PDF 入库（默认只处理新增和修改的）")
+    ingest = command("ingest", "把 documents/ 中的 PDF 入库（默认只处理新增、修改过和构建设置已改变的）")
     ingest.add_argument("--file", help="只处理这个文档（相对路径或唯一文件名）")
     ingest.add_argument("--force", action="store_true", help="强制重建；不带 --file 时全量重建")
     ingest.add_argument("--prune", action="store_true", help="同时清理已从 documents/ 删除的文档")
+    ingest.add_argument("--refresh-cache", action="store_true",
+                        help="处理到的文档重算解析、表格提取与编码，覆盖 .rag/cache/ 中的结果（OCR 与 LLM 结果不重算）")
     ingest.add_argument("--all-configs", action="store_true", help="对 configs/ 下所有配置依次入库")
     chunks = command("chunks", "浏览已入库的 chunk")
     chunks.add_argument("--document", help="只看这个文档")
@@ -166,7 +168,7 @@ def _status(workspace: Workspace, args: argparse.Namespace) -> int:
     assembly = _assembly(workspace, args.config)
     sources = discover(workspace.documents)
     status = current_status(workspace, assembly, sources)
-    headline = {"not_built": "尚未建立索引", "config_changed": "配置已改变，索引过期（需 ingest --force）",
+    headline = {"not_built": "尚未建立索引", "stale": "部分文档的构建设置已改变，需 ingest",
                 "ready": "可用"}[status.state]
     from rag.reports.index_page import index_summary
     _out(f"配置 {assembly.name}：{headline}")
@@ -178,7 +180,11 @@ def _status(workspace: Workspace, args: argparse.Namespace) -> int:
             missing = [name for name, ok in (("向量", item.vectors_complete), ("倒排", item.lexical_complete),
                                              ("整表", item.tables_complete)) if ok is False]
             indexes = f"  （{'、'.join(missing)}索引不完整）"
+        if item.state == "stale":
+            indexes = f"  （{item.stale_reason}）"
         _out(f"  [{STATE_LABELS[item.state]}] {item.relative_path}  {chunks}{indexes}")
+    from rag.index.step_cache import StepCache
+    _out(f"  步骤缓存 .rag/cache/：{StepCache(workspace.cache_dir).size_bytes() / 2**20:.1f} MB（各配置共用）")
     todo = [d for d in status.documents if d.needs_ingest]
     if todo:
         _out(f"→ {len(todo)} 个文档需要处理：python -m rag ingest --config {assembly.name}")
@@ -210,23 +216,48 @@ def _ingest(workspace: Workspace, args: argparse.Namespace) -> int:
         assembly = _assembly(workspace, name)
         _out(f"== 配置 {assembly.name} ==")
         outcomes = ingest(workspace, assembly, file=args.file, force=args.force, prune=args.prune,
-                          progress=lambda message: _out(f"  {message}"))
+                          refresh_cache=args.refresh_cache, progress=lambda message: _out(f"  {message}"))
         for item in outcomes:
             extra = f"（{item.chunk_count} chunks）" if item.chunk_count else ""
             error = f"：{item.error}" if item.error else ""
             _out(f"  [{labels[item.action]}] {item.relative_path}{extra}{error}")
             failed |= item.action == "failed"
+        built = {item.relative_path for item in outcomes if item.action in ("added", "updated", "rebuilt")}
+        if built:
+            times, cache = _step_times(workspace, assembly.name, built)
+            _out(f"  各步骤耗时（{len(built)} 份文档合计）：{times}")
+            _out(f"  步骤缓存：{cache}")
     write_index_page(workspace)
     _out("审核报告：reports/index.html")
     return 1 if failed else 0
+
+
+def _step_times(workspace: Workspace, config_name: str, built: set[str]) -> tuple[str, str]:
+    """Seconds per step, and cache hits per step, summed over the documents just built."""
+    from rag.index.manifest import Manifest
+    manifest = Manifest.load(workspace.index_dir(config_name) / "manifest.json")
+    totals: dict[str, float] = {}
+    hits: dict[str, list[int]] = {}
+    for entry in (manifest.documents.values() if manifest else ()):
+        if entry.relative_path in built:
+            for name, seconds in entry.timings.items():
+                totals[name] = totals.get(name, 0.0) + seconds
+            for name, outcome in entry.cache.items():
+                found, total = ((int(n) for n in outcome.split("/")) if "/" in outcome
+                                else ((outcome == "hit") * 1, 1))
+                counts = hits.setdefault(name, [0, 0])
+                counts[0] += found
+                counts[1] += total
+    times = "，".join(f"{name} {seconds:.1f}s" for name, seconds in totals.items())
+    cache = "，".join(f"{name} 命中 {found}/{total}" for name, (found, total) in hits.items()) or "未使用"
+    return times, cache
 
 
 def _require_queryable(workspace: Workspace, assembly) -> None:
     from rag.index.builder import current_status
     status = current_status(workspace, assembly)
     if not status.queryable:
-        hint = ("ingest --force" if status.state == "config_changed" else "ingest")
-        raise ConfigError(f"配置 {assembly.name} 的索引不可用，请先运行：python -m rag {hint} --config {assembly.name}")
+        raise ConfigError(f"配置 {assembly.name} 的索引不可用，请先运行：python -m rag ingest --config {assembly.name}")
     stale = [d.relative_path for d in status.documents if d.state != "current"]
     if stale:
         _out(f"提示：{len(stale)} 个文档的索引不是最新的（运行 status 查看），结果可能不完整。")

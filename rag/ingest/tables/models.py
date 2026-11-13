@@ -222,6 +222,10 @@ class CoordinateTransform:
     page_height_before_scale: float
 
     def __post_init__(self) -> None:
+        # Adapters may hand in integer pixel sizes; stored as the declared float, so a report read
+        # back from JSON (the extraction cache, audit files) equals the one computed.
+        for name in ("scale_x", "scale_y", "page_height_before_scale"):
+            object.__setattr__(self, name, float(getattr(self, name)))
         if not all(math.isfinite(value) and value > 0 for value in
                    (self.scale_x, self.scale_y, self.page_height_before_scale)):
             raise ValueError("coordinate transform requires finite positive geometry")

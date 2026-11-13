@@ -125,3 +125,15 @@ def test_an_approximate_piece_is_written_with_what_ocr_read(tmp_path):
     assert piece["approximate"] is True and piece["distance"] == 1 and piece["ocr_text"] == "Meter Cl"
     loaded = load_dataset(tmp_path).cases[0].excerpts[0]
     assert loaded.anchor[0][0] == "Meter Cl"   # chunk text is compared with what OCR read
+
+
+def test_dataset_fingerprint_ignores_crlf_line_endings(tmp_path):
+    from rag.eval.dataset import load_dataset
+    data = '{"document_id": "d1", "document_name": "doc.pdf", "file_hash": "h",\n "cases": []}\n'
+    (tmp_path / "manifest.json").write_text('{"dataset_version": "t"}', encoding="utf-8")
+    (tmp_path / "doc.json").write_bytes(data.encode("utf-8"))
+    lf = load_dataset(tmp_path).fingerprint
+    (tmp_path / "doc.json").write_bytes(data.replace("\n", "\r\n").encode("utf-8"))
+    assert load_dataset(tmp_path).fingerprint == lf
+    (tmp_path / "doc.json").write_bytes(data.replace('"h"', '"h2"').encode("utf-8"))
+    assert load_dataset(tmp_path).fingerprint != lf

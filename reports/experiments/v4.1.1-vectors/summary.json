@@ -1,0 +1,260 @@
+{
+ "noise": {
+  "texts": 1170,
+  "pairs": {
+   "alone~batch8": {
+    "max": 6.620580682790735e-06,
+    "median": 7.798094824411635e-07,
+    "bit_identical": 209
+   },
+   "alone~batch32": {
+    "max": 6.620580682790735e-06,
+    "median": 8.042190707471683e-07,
+    "bit_identical": 133
+   },
+   "batch8~batch32": {
+    "max": 3.602821554654732e-06,
+    "median": 0.0,
+    "bit_identical": 1053
+   }
+  },
+  "bound": 6.620580682790735e-06,
+  "reproducibility": {
+   "texts": 1170,
+   "bit_identical": 884,
+   "max": 7.004292420085616e-08
+  }
+ },
+ "configs": {
+  "structured": {
+   "layer1": {
+    "ids_same": true,
+    "chunks": 143,
+    "dims": [
+     1024
+    ],
+    "text_mismatches": []
+   },
+   "layer2": {
+    "max": 3.737687639090437e-06,
+    "median": 9.339101094140313e-07,
+    "bit_identical": 38,
+    "over_bound": []
+   },
+   "layer3": {
+    "questions": 58,
+    "swaps_within_bound": [],
+    "violations": []
+   },
+   "passed": true
+  },
+  "structured_labeled": {
+   "layer1": {
+    "ids_same": true,
+    "chunks": 153,
+    "dims": [
+     1024
+    ],
+    "text_mismatches": []
+   },
+   "layer2": {
+    "max": 3.737687639090437e-06,
+    "median": 9.403206404918341e-07,
+    "bit_identical": 37,
+    "over_bound": []
+   },
+   "layer3": {
+    "questions": 58,
+    "swaps_within_bound": [],
+    "violations": []
+   },
+   "passed": true
+  },
+  "structured_llm": {
+   "layer1": {
+    "ids_same": true,
+    "chunks": 145,
+    "dims": [
+     1024
+    ],
+    "text_mismatches": []
+   },
+   "layer2": {
+    "max": 3.737687639090437e-06,
+    "median": 9.403206404918341e-07,
+    "bit_identical": 38,
+    "over_bound": []
+   },
+   "layer3": {
+    "questions": 58,
+    "swaps_within_bound": [],
+    "violations": []
+   },
+   "passed": true
+  },
+  "structured_llm_labeled": {
+   "layer1": {
+    "ids_same": true,
+    "chunks": 155,
+    "dims": [
+     1024
+    ],
+    "text_mismatches": []
+   },
+   "layer2": {
+    "max": 3.737687639090437e-06,
+    "median": 1.0087763937900444e-06,
+    "bit_identical": 38,
+    "over_bound": []
+   },
+   "layer3": {
+    "questions": 58,
+    "swaps_within_bound": [],
+    "violations": []
+   },
+   "passed": true
+  },
+  "structured_llm_labeled_lead": {
+   "layer1": {
+    "ids_same": true,
+    "chunks": 157,
+    "dims": [
+     1024
+    ],
+    "text_mismatches": []
+   },
+   "layer2": {
+    "max": 3.737687639090437e-06,
+    "median": 9.495377143915811e-07,
+    "bit_identical": 39,
+    "over_bound": []
+   },
+   "layer3": {
+    "questions": 58,
+    "swaps_within_bound": [],
+    "violations": []
+   },
+   "passed": true
+  },
+  "structured_llm_lead": {
+   "layer1": {
+    "ids_same": true,
+    "chunks": 146,
+    "dims": [
+     1024
+    ],
+    "text_mismatches": []
+   },
+   "layer2": {
+    "max": 3.737687639090437e-06,
+    "median": 9.37144718735751e-07,
+    "bit_identical": 39,
+    "over_bound": []
+   },
+   "layer3": {
+    "questions": 58,
+    "swaps_within_bound": [],
+    "violations": []
+   },
+   "passed": true
+  },
+  "structured_summary": {
+   "layer1": {
+    "ids_same": true,
+    "chunks": 139,
+    "dims": [
+     1024
+    ],
+    "text_mismatches": []
+   },
+   "layer2": {
+    "max": 3.737687639090437e-06,
+    "median": 9.403206404918341e-07,
+    "bit_identical": 38,
+    "over_bound": []
+   },
+   "layer3": {
+    "questions": 58,
+    "swaps_within_bound": [],
+    "violations": []
+   },
+   "passed": true
+  },
+  "plain_text": {
+   "layer1": {
+    "ids_same": true,
+    "chunks": 888,
+    "dims": [
+     1024
+    ],
+    "text_mismatches": []
+   },
+   "layer2": {
+    "max": 6.620580682790735e-06,
+    "median": 7.802764026646962e-07,
+    "bit_identical": 162,
+    "over_bound": []
+   },
+   "layer3": {
+    "questions": 58,
+    "swaps_within_bound": [
+     {
+      "case": "CONTRACT-105-Q001",
+      "chunks": [
+       "51acbf9e2a5acbe8-c0135",
+       "cd1050eecb2b23c0-c0022"
+      ],
+      "old_gap": 1.807929922437168e-08,
+      "bound": 7.861228252137311e-07,
+      "old_ranks": [
+       248,
+       249
+      ]
+     },
+     {
+      "case": "CONTRACT-105-Q003",
+      "chunks": [
+       "984b27ffba91dd05-c0128",
+       "984b27ffba91dd05-c0134"
+      ],
+      "old_gap": 9.615644380733812e-08,
+      "bound": 5.828776148582036e-06,
+      "old_ranks": [
+       641,
+       640
+      ]
+     },
+     {
+      "case": "CONTRACT-HDNA-Q003",
+      "chunks": [
+       "51acbf9e2a5acbe8-c0046",
+       "d359c37e0bc3c87a-c0032"
+      ],
+      "old_gap": 6.222459592031271e-08,
+      "bound": 2.6423483488634007e-06,
+      "old_ranks": [
+       268,
+       269
+      ]
+     },
+     {
+      "case": "CONTRACT-SEAL-Q004",
+      "chunks": [
+       "984b27ffba91dd05-c0073",
+       "984b27ffba91dd05-c0113"
+      ],
+      "old_gap": 2.8492672943247754e-08,
+      "bound": 1.5350204056265385e-06,
+      "old_ranks": [
+       596,
+       595
+      ]
+     }
+    ],
+    "violations": []
+   },
+   "passed": true
+  }
+ },
+ "passed": true
+}

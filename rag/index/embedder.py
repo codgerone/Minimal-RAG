@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from rag.ingest.libraries import versions
+
 from typing import Any, Protocol
 
 
@@ -34,7 +36,8 @@ class SentenceTransformerEmbedder:
     def identity(self) -> dict[str, object]:
         return {"model": self.model_name, "revision": self.revision,
                 "passage_prefix": self.passage_prefix, "query_prefix": self.query_prefix,
-                "normalized": True}
+                "normalized": True,
+                "libraries": versions("sentence-transformers", "transformers", "tokenizers", "torch")}
 
     def _load_model(self) -> Any:
         if self._model is None:

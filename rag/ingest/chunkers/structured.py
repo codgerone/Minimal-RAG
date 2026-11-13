@@ -327,6 +327,10 @@ class StructuredTokenChunker:
         self.max_tokens = max_tokens
         self.overlap_tokens = overlap_tokens
 
+    def identity(self) -> dict[str, object]:
+        from rag.ingest.chunkers import RULES_VERSION
+        return {"rules": RULES_VERSION, "token_counter": self.counter.identity()}
+
     def chunk(self, document: ParsedDocument) -> ChunkBatch:
         from rag.ingest.chunkers import renumber
         return renumber(chunk_parsed_document(document, self.counter,

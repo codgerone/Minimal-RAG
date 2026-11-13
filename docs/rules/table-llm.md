@@ -54,8 +54,8 @@
 
 装配约束：`rows_with_lead` 需要 `llm_annotation`（引导句与标注同一次调用）；`summary` 只能搭配 `header_rules`（结构标注的结果在摘要配置中只会用于退回，不值得多一次调用）；两种 LLM 调用都需要 `structured_tokens` 分块器。
 
-## 缓存与指纹
+## 缓存与构建记录
 
 - 缓存键包含模型、提示词版本、推理强度与完整请求（含网格、上下文、长度表述）；`ingest --force` 复用缓存，不重复计费。
-- 模型、提示词版本、推理强度、长度设置与上下文规则进入构建指纹。入库用的 LLM 在配置节中设置，与问答的 `[llm]` 分开，不受 `OPENROUTER_MODEL` 影响。temperature 默认为 0，可在配置节中用 `temperature` 设置。
+- 模型、提示词版本、推理强度、长度设置与上下文规则进入表格处理一步的构建记录。入库用的 LLM 在配置节中设置，与问答的 `[llm]` 分开，不受 `OPENROUTER_MODEL` 影响。temperature 默认为 0，可在配置节中用 `temperature` 设置。
 - 请求只发往支持 structured output 的服务方。

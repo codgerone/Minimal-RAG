@@ -18,4 +18,11 @@ class ParseResult:
 class Parser(Protocol):
     provides_table_slots: bool    # whether primary.table_slots can anchor table extraction
 
-    def parse(self, source: SourceDocument) -> ParseResult: ...
+    def parse(self, source: SourceDocument, cache: Any = None) -> ParseResult:
+        """`cache` (rag/index/step_cache.py StepCache) keeps the tool's raw output when the tool is
+        expensive; parsers whose tool is cheap ignore it."""
+        ...
+
+    def identity(self) -> dict[str, Any]:
+        """Rules version and library versions: what besides the config decides the output."""
+        ...

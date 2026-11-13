@@ -34,18 +34,42 @@ def _status(case: dict[str, Any]) -> str:
     return "complete" if case["complete"] else "partial" if case["hit"] else "miss"
 
 
+def _without_identity(component: dict[str, Any] | None) -> dict[str, Any] | None:
+    if component is None:
+        return None
+    return {k: v for k, v in component.items() if k not in ("identity", "rules", "libraries")}
+
+
+def _group_settings(settings: dict[str, Any]) -> dict[str, Any]:
+    """Parser, table extractors, chunker and OCR settings without rules or library versions, in one
+    form for results recorded per build step (V4.1.1 on) and for the earlier flat records."""
+    if "parse" in settings:
+        extraction = settings.get("table_extraction") or {}
+        return {"parser": _without_identity(settings["parse"]),
+                "table_extractors": [_without_identity(e) for e in extraction.get("extractors", [])],
+                "chunker": _without_identity(settings["chunk"]),
+                **({"ocr": _without_identity(settings["ocr"])} if "ocr" in settings else {})}
+    return {k: v for k, v in settings.items()
+            if k not in ("rules_version", "embedder", "embedder_identity", "lexical", "ocr_identity",
+                         *TABLE_SETTINGS)}
+
+
+def _embedder_model(settings: dict[str, Any]) -> str:
+    identity = settings["embed"]["identity"] if "embed" in settings else settings.get("embedder_identity", {})
+    return str(identity.get("model", "?")).split("/")[-1]
+
+
 def _group_key(result: dict[str, Any]) -> str:
-    settings = {k: v for k, v in result["build_settings"].items()
-                if k not in ("rules_version", "embedder", "embedder_identity", "lexical", *TABLE_SETTINGS)}
     import json
-    return json.dumps([settings, result["top_k"]], sort_keys=True, ensure_ascii=False)
+    return json.dumps([_group_settings(result["build_settings"]), result["top_k"]],
+                      sort_keys=True, ensure_ascii=False)
 
 
 def _model(result: dict[str, Any]) -> str:
     """Display name when given; rules version and embedder model name; the retriever and BM25
     analyzer settings when not plain semantic; 整表 when whole tables are returned; the dataset
     variant (e.g. `+translated`) when there is one."""
-    parts = [str(result["build_settings"].get("embedder_identity", {}).get("model", "?")).split("/")[-1]]
+    parts = [_embedder_model(result["build_settings"])]
     if "rules_version" in result["build_settings"]:
         parts.insert(0, "规则 " + str(result["build_settings"]["rules_version"]))
     if result.get("display_name"):
