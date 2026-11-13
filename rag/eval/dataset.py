@@ -97,7 +97,8 @@ def load_dataset(folder: Path) -> Dataset:
         if path.name == "manifest.json":
             continue
         raw = path.read_bytes()
-        digest.update(path.name.encode("utf-8") + b"\0" + raw)
+        # LF bytes, so a checkout that rewrites line endings (core.autocrlf) keeps the fingerprint.
+        digest.update(path.name.encode("utf-8") + b"\0" + raw.replace(b"\r\n", b"\n"))
         data = json.loads(raw)
         hashes[data["document_id"]] = data["file_hash"]
         for case in data["cases"]:
