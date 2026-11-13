@@ -1,0 +1,61 @@
+{
+ "sample": 120,
+ "longest_included": 20,
+ "bound": 6.620580682790735e-06,
+ "kinds": {
+  "delete_char": {
+   "n": 120,
+   "min": 0.0028440170127188523,
+   "p05": 0.009196922131346763,
+   "median": 0.062072648706442,
+   "zero": 0,
+   "within_bound": 0,
+   "within_10x_bound": 0
+  },
+  "replace_letter": {
+   "n": 120,
+   "min": 0.013362899817915212,
+   "p05": 0.028736140959354912,
+   "median": 0.09903798221633081,
+   "zero": 0,
+   "within_bound": 0,
+   "within_10x_bound": 0
+  },
+  "replace_digit": {
+   "n": 92,
+   "min": 0.001294409374427713,
+   "p05": 0.005667184567812093,
+   "median": 0.043908372944268845,
+   "zero": 0,
+   "within_bound": 0,
+   "within_10x_bound": 0
+  },
+  "replace_word": {
+   "n": 120,
+   "min": 0.011352419974505779,
+   "p05": 0.027781131535022163,
+   "median": 0.15777342547530754,
+   "zero": 0,
+   "within_bound": 0,
+   "within_10x_bound": 0
+  },
+  "space_trailing": {
+   "n": 120,
+   "min": 0.0,
+   "p05": 0.0,
+   "median": 0.0,
+   "zero": 120,
+   "within_bound": 120,
+   "within_10x_bound": 120
+  },
+  "space_double": {
+   "n": 120,
+   "min": 0.0,
+   "p05": 0.0,
+   "median": 0.0,
+   "zero": 120,
+   "within_bound": 120,
+   "within_10x_bound": 120
+  }
+ }
+}

@@ -60,6 +60,26 @@ def main() -> None:
                   f'步骤缓存使这种差不进入索引：缓存命中时直接读出重建时存下的向量。</div>'
                   '<div class="scroll"><table><tr><th>两种编法</th><th class="num">最大 ‖Δ‖</th><th class="num">中位 ‖Δ‖</th>'
                   f'<th class="num">逐位相同</th></tr>{noise_rows}</table></div>')
+    perturb_html = ""
+    if (HERE / "perturb.json").is_file():
+        pt = json.loads((HERE / "perturb.json").read_text(encoding="utf-8"))
+        names = {"delete_char": "删一个字符", "replace_letter": "换一个字母", "replace_digit": "换一个数字",
+                 "replace_word": "换一个词", "space_trailing": "末尾加一个空格", "space_double": "一个空格改两个"}
+        real = [v for k, v in pt["kinds"].items() if not k.startswith("space")]
+        smallest = min(v["min"] for v in real)
+        prow = "".join(f'<tr><td>{names[k]}</td><td class="num">{v["n"]}</td><td class="num">{sci(v["min"])}</td>'
+                       f'<td class="num">{sci(v["p05"])}</td><td class="num">{sci(v["median"])}</td>'
+                       f'<td class="num">{v["zero"]}</td><td class="num">{v["within_10x_bound"]}</td></tr>'
+                       for k, v in pt["kinds"].items())
+        perturb_html = (
+            f'<h2>最小的真实改变</h2><div class="sub">抽 {pt["sample"]} 段 chunk 文字（含最长的 {pt["longest_included"]} 段），'
+            f'每段各做一处最小改动，与原文都单独编码后比较。改字符、数字、词的 ‖Δv‖ 最小 {sci(smallest)}，'
+            f'是批次噪声上界的 {smallest / bound:.0f} 倍；以后的判定上界取噪声上界的 10 倍（{sci(10 * bound)}），'
+            f'与最小的真实改变仍差 {smallest / (10 * bound):.0f} 倍。只改空白时向量逐位不变（分词器忽略多余空格），'
+            f'这类改动只能由第 1 层（送入编码器的文字相同）查出。</div>'
+            '<div class="scroll"><table><tr><th>改动</th><th class="num">段数</th><th class="num">最小 ‖Δv‖</th>'
+            '<th class="num">5% 分位</th><th class="num">中位</th><th class="num">向量不变</th>'
+            f'<th class="num">≤ 10 倍噪声上界</th></tr>{prow}</table></div>')
     details = []
     for name, r in configs.items():
         items = r["layer3"]["violations"] + r["layer3"]["swaps_within_bound"] + r["layer2"]["over_bound"]
@@ -78,7 +98,7 @@ def main() -> None:
               '排名用全部 chunk（不按文档过滤），过滤后的排名是它的子序列。原始数据见同目录 summary.json、noise.json，'
               '计算脚本 run.py。</div>')
     body = (f'<h1>向量比较 · V4.1.1 重建与 V4.1</h1><div class="sub">编码改为逐条单独编码后，判定新旧向量是否相同</div>'
-            f'{conclusion}<div class="tiles">{tiles}</div>{table}{noise_html}{details_html}{method}')
+            f'{conclusion}<div class="tiles">{tiles}</div>{table}{noise_html}{perturb_html}{details_html}{method}')
     write_assets(ROOT / "reports")
     (HERE / "index.html").write_text(page("向量比较 · V4.1.1", body, root="../../",
                                           crumbs=[("报告首页", "../../index.html")]), encoding="utf-8")
