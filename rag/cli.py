@@ -184,6 +184,9 @@ def _status(workspace: Workspace, args: argparse.Namespace) -> int:
         if item.state == "stale":
             indexes = f"  （{item.stale_reason}）"
         _out(f"  [{STATE_LABELS[item.state]}] {item.relative_path}  {chunks}{indexes}")
+    from rag.ingest.sources import unsupported
+    for path in unsupported(workspace.documents):
+        _out(f"  [不支持的类型] {path}")
     from rag.index.step_cache import StepCache
     _out(f"  步骤缓存 .rag/cache/：{StepCache(workspace.cache_dir).size_bytes() / 2**20:.1f} MB（各配置共用）")
     todo = [d for d in status.documents if d.needs_ingest]
@@ -196,7 +199,7 @@ def _status(workspace: Workspace, args: argparse.Namespace) -> int:
         _out(f"文档标识表：未配置（documents/{CATALOG_FILE}），检索不会按标识编码限定范围")
         return 0
     switch = "" if assembly.config.document_filter else "（本配置已关闭文档过滤）"
-    _out(f"文档标识表：已登记 {len(catalog.entries)} / {len(sources)} 份 PDF{switch}")
+    _out(f"文档标识表：已登记 {len(catalog.entries)} / {len(sources)} 份文档{switch}")
     for path in catalog.unregistered:
         _out(f"  [未登记标识编码] {path}")
     for path in catalog.missing_files:
@@ -211,7 +214,8 @@ def _ingest(workspace: Workspace, args: argparse.Namespace) -> int:
     if args.all_configs and args.config:
         raise ConfigError("--all-configs 与 --config 不能同时使用")
     labels = {"added": "新增", "updated": "更新", "rebuilt": "重建", "skipped": "无变化",
-              "failed": "失败", "pruned": "已清理", "unreadable": "无可用文本，跳过"}
+              "failed": "失败", "pruned": "已清理", "unreadable": "无可用文本，跳过",
+              "unsupported": "此配置不支持，跳过"}
     failed = False
     for name in names:
         assembly = _assembly(workspace, name)

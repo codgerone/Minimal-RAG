@@ -8,8 +8,16 @@ from pathlib import Path
 
 
 def readable_name(relative_path: str) -> str:
-    """Folder name for a document: its path without `.pdf`, sub-folders joined by `__`."""
-    stem = relative_path[:-4] if relative_path.casefold().endswith(".pdf") else relative_path
+    """Folder name for a document: its path without `.pdf`, sub-folders joined by `__`; other
+    types drop the extension and end in `-<type>` (`-docx`), so a PDF and a Word file of the same
+    name do not collide."""
+    folded = relative_path.casefold()
+    if folded.endswith(".pdf"):
+        stem = relative_path[:-4]
+    elif folded.endswith(".docx"):
+        stem = relative_path[:-5].rstrip(" .") + "-docx"
+    else:
+        stem = relative_path
     name = stem.replace("/", "__")
     return re.sub(r'[<>:"\|?*\x00-\x1f]', "_", name).strip(" .") or "document"
 

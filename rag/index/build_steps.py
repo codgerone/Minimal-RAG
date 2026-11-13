@@ -2,10 +2,14 @@
 version and library versions. A document is out of date exactly when this record differs from
 the one it was built with; steps it does not pass through never make it out of date.
 
-Which steps a document passes through follows from two facts recorded when it was built:
-whether it has scanned pages (OCR) and whether the parser found tables (table steps). Both are
-decided by steps that every PDF passes through (page classification, parsing), so whenever
-either fact could change, the document is already out of date for that step.
+Which steps a document passes through follows from facts recorded when it was built: its file
+type, whether it has scanned pages (OCR) and whether the parser found tables (table steps). The last
+two are decided by steps that every document of the type passes through (page classification,
+parsing), so whenever either fact could change, the document is already out of date for that step.
+
+A Word file passes through Word parsing, the table steps (with tables), composition, chunking,
+encoding and BM25: not page classification, OCR, or table extraction and selection. Its parse
+record holds [docx_parser]; a PDF's records never hold it.
 """
 
 from __future__ import annotations
@@ -28,18 +32,25 @@ STEP_LABELS = {"pages": "页面判定", "ocr": "OCR", "parse": "解析", "table_
 class DocumentFacts:
     scanned_pages: bool     # page classification found scanned pages
     tables: bool            # the parser found tables
+    file_type: str = "pdf"
 
 
 def step_settings(assembly: "Assembly", facts: DocumentFacts | None = None) -> dict[str, Any]:
     """The steps a document with these facts passes through; facts None: every step of the config."""
-    from rag.ingest import assemble
     from rag.ingest.libraries import versions
     from rag.ingest.ocr import pages
     from rag.ingest.tables import formatters, select
     config = assembly.config
     if facts is None:
         facts = DocumentFacts(True, assembly.parser.provides_table_slots)
-    steps: dict[str, Any] = {"pages": {"rules": pages.RULES_VERSION, "libraries": versions("pymupdf")}}
+    steps: dict[str, Any] = {}
+    if facts.file_type == "docx":
+        assert config.docx_parser is not None and assembly.docx_parser is not None
+        steps["parse"] = {**config.docx_parser.as_dict(), "identity": assembly.docx_parser.identity()}
+        if facts.tables:
+            steps["table_text"] = {**config.table_settings(), "rules": formatters.RULES_VERSION}
+        return {**steps, **_shared_steps(assembly)}
+    steps["pages"] = {"rules": pages.RULES_VERSION, "libraries": versions("pymupdf")}
     if assembly.ocr is not None and facts.scanned_pages:
         steps["ocr"] = assembly.ocr.settings()
     steps["parse"] = {**config.parser.as_dict(), "identity": assembly.parser.identity()}
@@ -49,7 +60,14 @@ def step_settings(assembly: "Assembly", facts: DocumentFacts | None = None) -> d
                            for component, extractor in zip(config.table_extractors, assembly.extractors)],
             "rules": select.RULES_VERSION, "libraries": versions("pymupdf")}
         steps["table_text"] = {**config.table_settings(), "rules": formatters.RULES_VERSION}
-    steps["compose"] = {"rules": assemble.RULES_VERSION}
+    return {**steps, **_shared_steps(assembly)}
+
+
+def _shared_steps(assembly: "Assembly") -> dict[str, Any]:
+    """Composition, chunking, encoding and BM25: every document passes through them."""
+    from rag.ingest import assemble
+    config = assembly.config
+    steps: dict[str, Any] = {"compose": {"rules": assemble.RULES_VERSION}}
     steps["chunk"] = {**config.chunker.as_dict(), "identity": assembly.chunker.identity()}
     steps["embed"] = {**config.embedder.as_dict(), "identity": assembly.embedder.identity()}
     if assembly.lexical is not None:
