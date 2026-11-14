@@ -1,0 +1,1709 @@
+{
+  "schema_version": "ground_truth_document_v2",
+  "document_key": "ORDER-PERU-25-19-FONAFE--924389c795a1fa37",
+  "document_id": "924389c795a1fa37",
+  "document_name": "ORDER PERU 25-19 FONAFE.docx",
+  "relative_path": "ORDER PERU 25-19 FONAFE.docx",
+  "file_hash": "5703d0bcdcb0de0e3994e228618c7393ad0384a7f5edb4afca8651183fd6e2f2",
+  "cases": [
+    {
+      "case_id": "PO-25-19-DOCX-Q001",
+      "question": "订单 ORDER2025004 中，ELCTO公司订购了哪些产品？每款产品的单价和数量是多少？订购的总金额是多少？交货的计划是怎么样的？请详细说明每批次交付的具体日期，及每批次交付的产品和数量明细。",
+      "answerable": true,
+      "reference_answer": "ELCTO总共订购了两款产品：HXE12ES和HXE13ES。HXE12ES的单价为USD 4.56，数量总共116000件；HXE13ES的单价为USD 5.08，数量总共94000件。订购的总金额为USD 1006480.00。交货计划分为六批次：第一批次交付日期为2026年2月28日，交付HXE12ES 19330件和HXE13ES 16000件；第二批次交付日期为2026年4月9日，交付HXE12ES 19330件和HXE13ES 16000件；第三批次交付日期为2026年8月7日，交付HXE12ES 19330件和HXE13ES 15500件；第四批次交付日期为2026年12月5日，交付HXE12ES 19330件和HXE13ES 15500件；第五批次交付日期为2027年4月4日，交付HXE12ES 19330件和HXE13ES 15500件；第六批次交付日期为2027年8月2日，交付HXE12ES 19350件和HXE13ES 15500件。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "924389c795a1fa37",
+          "document_name": "ORDER PERU 25-19 FONAFE.docx",
+          "relative_path": "ORDER PERU 25-19 FONAFE.docx",
+          "text": "HXE12ES | 1´131,056.00 | USD 4.56\nHXE13ES | 109,130.00 | USD 5.08",
+          "anchor": {
+            "text_sha256": "bb30e224eb07e840",
+            "pieces": [
+              {
+                "text": "HXE12ES",
+                "words": [
+                  "body/12/r2c1/0 35 42"
+                ]
+              },
+              {
+                "text": "1´131,056.00",
+                "words": [
+                  "body/12/r2c2/0 0 12"
+                ]
+              },
+              {
+                "text": "USD 4.56",
+                "words": [
+                  "body/12/r2c3/0 0 3",
+                  "body/12/r2c3/0 4 8"
+                ]
+              },
+              {
+                "text": "HXE13ES",
+                "words": [
+                  "body/12/r3c1/0 35 42"
+                ]
+              },
+              {
+                "text": "109,130.00",
+                "words": [
+                  "body/12/r3c2/0 0 10"
+                ]
+              },
+              {
+                "text": "USD 5.08",
+                "words": [
+                  "body/12/r3c3/0 0 3",
+                  "body/12/r3c3/0 4 8"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "表 1"
+          ]
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "924389c795a1fa37",
+          "document_name": "ORDER PERU 25-19 FONAFE.docx",
+          "relative_path": "ORDER PERU 25-19 FONAFE.docx",
+          "text": "ELCTO | HXE12ES | 116,000 | 19,330 | 19,330 | 19,330 | 19,330 | 19,330 | 19,350",
+          "anchor": {
+            "text_sha256": "388ce3c8fc6e6ff5",
+            "pieces": [
+              {
+                "text": "ELCTO",
+                "words": [
+                  "body/35/r7c0/0 0 5"
+                ]
+              },
+              {
+                "text": "HXE12ES",
+                "words": [
+                  "body/35/r3c0/0 43 50"
+                ]
+              },
+              {
+                "text": "116,000",
+                "words": [
+                  "body/35/r7c4/0 0 7"
+                ]
+              },
+              {
+                "text": "19,330",
+                "words": [
+                  "body/35/r7c5/0 0 6",
+                  "body/35/r7c6/0 0 6",
+                  "body/35/r7c7/0 0 6",
+                  "body/35/r7c8/0 0 6",
+                  "body/35/r7c9/0 0 6"
+                ]
+              },
+              {
+                "text": "19,350",
+                "words": [
+                  "body/35/r7c10/0 0 6"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "表 2"
+          ]
+        },
+        {
+          "excerpt_id": "x3",
+          "document_id": "924389c795a1fa37",
+          "document_name": "ORDER PERU 25-19 FONAFE.docx",
+          "relative_path": "ORDER PERU 25-19 FONAFE.docx",
+          "text": "ELCTO | HXE13ES | 94,000 | 16,000 | 16,000 | 15,500 | 15,500 | 15,500 | 15,500",
+          "anchor": {
+            "text_sha256": "44900a08e59ca8d9",
+            "pieces": [
+              {
+                "text": "ELCTO",
+                "words": [
+                  "body/35/r17c0/0 0 5"
+                ]
+              },
+              {
+                "text": "HXE13ES",
+                "words": [
+                  "body/35/r16c0/0 43 50"
+                ]
+              },
+              {
+                "text": "94,000",
+                "words": [
+                  "body/35/r17c4/0 0 6"
+                ]
+              },
+              {
+                "text": "16,000",
+                "words": [
+                  "body/35/r17c5/0 0 6",
+                  "body/35/r17c6/0 0 6"
+                ]
+              },
+              {
+                "text": "15,500",
+                "words": [
+                  "body/35/r17c7/0 0 6",
+                  "body/35/r17c8/0 0 6",
+                  "body/35/r17c9/0 0 6",
+                  "body/35/r17c10/0 0 6"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "表 2"
+          ]
+        },
+        {
+          "excerpt_id": "x4",
+          "document_id": "924389c795a1fa37",
+          "document_name": "ORDER PERU 25-19 FONAFE.docx",
+          "relative_path": "ORDER PERU 25-19 FONAFE.docx",
+          "text": "1ST DELIVERY 28/02/2026\n2ND DELIVERY 09/04/2026\n3RD DELIVERY 07/08/2026\n4TH DELIVERY 05/12/2026\n5TH DELIVERY 04/04/2027\n6TH DELIVERY 02/08/2027",
+          "anchor": {
+            "text_sha256": "7776733680478c23",
+            "pieces": [
+              {
+                "text": "1ST DELIVERY 28/02/2026",
+                "words": [
+                  "body/43/r1c1/0 0 3",
+                  "body/43/r1c1/0 4 12",
+                  "body/43/r1c2/0 0 10"
+                ]
+              },
+              {
+                "text": "2ND DELIVERY 09/04/2026",
+                "words": [
+                  "body/43/r2c1/0 0 3",
+                  "body/43/r2c1/0 4 12",
+                  "body/43/r2c2/0 0 10"
+                ]
+              },
+              {
+                "text": "3RD DELIVERY 07/08/2026",
+                "words": [
+                  "body/43/r3c1/0 0 3",
+                  "body/43/r3c1/0 4 12",
+                  "body/43/r3c2/0 0 10"
+                ]
+              },
+              {
+                "text": "4TH DELIVERY 05/12/2026",
+                "words": [
+                  "body/43/r4c1/0 0 3",
+                  "body/43/r4c1/0 4 12",
+                  "body/43/r4c2/0 0 10"
+                ]
+              },
+              {
+                "text": "5TH DELIVERY 04/04/2027",
+                "words": [
+                  "body/43/r5c1/0 0 3",
+                  "body/43/r5c1/0 4 12",
+                  "body/43/r5c2/0 0 10"
+                ]
+              },
+              {
+                "text": "6TH DELIVERY 02/08/2027",
+                "words": [
+                  "body/43/r6c1/0 0 3",
+                  "body/43/r6c1/0 4 12",
+                  "body/43/r6c2/0 0 10"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "表 3"
+          ]
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "订购了哪些产品",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2",
+                "x3"
+              ]
+            }
+          ],
+          "note": "两款产品分列在分配表的不同 ITEM 段落"
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "每款产品的单价",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ],
+          "note": "x1 只含 ELCTO 订购的两款产品"
+        },
+        {
+          "evidence_group_id": "e3",
+          "information_item": "每款产品的数量",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2",
+                "x3"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e4",
+          "information_item": "订购总金额",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2",
+                "x3"
+              ]
+            }
+          ],
+          "note": "原文无此数，由数量 × 单价求和得出"
+        },
+        {
+          "evidence_group_id": "e5",
+          "information_item": "各批次交付日期",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x4"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e6",
+          "information_item": "各批次交付的产品",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2",
+                "x3"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e7",
+          "information_item": "各批次交付的数量",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2",
+                "x3"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-19-DOCX-Q002",
+      "question": "订单 ORDER2025004 中，ELUC公司订购了多少件HXE34K-S1？总金额是多少？",
+      "answerable": true,
+      "reference_answer": "ELUC订购了2000件HXE34K-S1，总金额为USD 28740.00。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "924389c795a1fa37",
+          "document_name": "ORDER PERU 25-19 FONAFE.docx",
+          "relative_path": "ORDER PERU 25-19 FONAFE.docx",
+          "text": "Three Phase 04 Wires meter Model: HXE34K-S1 | USD 14.37",
+          "anchor": {
+            "text_sha256": "41a23664e5abddaf",
+            "pieces": [
+              {
+                "text": "Three Phase 04 Wires meter Model: HXE34K-S1",
+                "words": [
+                  "body/12/r5c1/0 0 5",
+                  "body/12/r5c1/0 6 11",
+                  "body/12/r5c1/0 12 14",
+                  "body/12/r5c1/0 15 20",
+                  "body/12/r5c1/0 21 26",
+                  "body/12/r5c1/0 27 33",
+                  "body/12/r5c1/0 34 43"
+                ]
+              },
+              {
+                "text": "USD 14.37",
+                "words": [
+                  "body/12/r5c3/0 0 3",
+                  "body/12/r5c3/0 4 9"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "表 1"
+          ]
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "924389c795a1fa37",
+          "document_name": "ORDER PERU 25-19 FONAFE.docx",
+          "relative_path": "ORDER PERU 25-19 FONAFE.docx",
+          "text": "ELUC | HXE34K-S1 | 2,000 | 1,000 | 1,000",
+          "anchor": {
+            "text_sha256": "0228fef54fc72295",
+            "pieces": [
+              {
+                "text": "ELUC",
+                "words": [
+                  "body/35/r29c0/0 0 4"
+                ]
+              },
+              {
+                "text": "HXE34K-S1",
+                "words": [
+                  "body/35/r28c0/0 42 51"
+                ]
+              },
+              {
+                "text": "2,000",
+                "words": [
+                  "body/35/r29c4/0 0 5"
+                ]
+              },
+              {
+                "text": "1,000",
+                "words": [
+                  "body/35/r29c5/0 0 5",
+                  "body/35/r29c8/0 0 5"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "表 2"
+          ]
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "订购数量",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "总金额",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2"
+              ]
+            }
+          ],
+          "note": "原文无此数，由数量 × 单价得出"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-19-DOCX-Q003",
+      "question": "订单 ORDER2025004 中，ENSA公司订购了哪些产品？每款产品的单价和数量是多少？订购的总金额是多少？交货的计划是怎么样的？请详细说明每批次交付的具体日期，及每批次交付的产品和数量明细。",
+      "answerable": true,
+      "reference_answer": "ENSA总共订购了四款产品：HXE12ES、HXE13ES、HXE33K-S1和HXE34K-S1。HXE12ES的单价为USD 4.56，数量总共132180件；HXE13ES的单价为USD 5.08，数量总共9910件；HXE33K-S1的单价为USD 13.49，数量总共5018件；HXE34K-S1的单价为USD 14.37，数量总共10804件。订购的总金额为USD 876029.90。交货计划分为六批次：第一批次交付日期为2026年2月28日，交付HXE12ES 24330件、HXE13ES 1810件、HXE33K-S1 1153件和HXE34K-S1 2234件；第二批次交付日期为2026年4月9日，交付HXE12ES 23630件、HXE13ES 1710件、HXE33K-S1 853件和HXE34K-S1 1734件；第三批次交付日期为2026年8月7日，交付HXE12ES 21880件、HXE13ES 1710件、HXE33K-S1 753件和HXE34K-S1 1734件；第四批次交付日期为2026年12月5日，交付HXE12ES 21680件、HXE13ES 1610件、HXE33K-S1 753件和HXE34K-S1 1734件；第五批次交付日期为2027年4月4日，交付HXE12ES 20480件、HXE13ES 1560件、HXE33K-S1 753件和HXE34K-S1 1734件；第六批次交付日期为2027年8月2日，交付HXE12ES 20180件、HXE13ES 1510件、HXE33K-S1 753件和HXE34K-S1 1634件。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "924389c795a1fa37",
+          "document_name": "ORDER PERU 25-19 FONAFE.docx",
+          "relative_path": "ORDER PERU 25-19 FONAFE.docx",
+          "text": "HXE12ES | USD 4.56\nHXE13ES | USD 5.08\nHXE33K-S1 | USD 13.49\nHXE34K-S1 | USD 14.37",
+          "anchor": {
+            "text_sha256": "a852f22f9531fb36",
+            "pieces": [
+              {
+                "text": "HXE12ES",
+                "words": [
+                  "body/12/r2c1/0 35 42"
+                ]
+              },
+              {
+                "text": "USD 4.56",
+                "words": [
+                  "body/12/r2c3/0 0 3",
+                  "body/12/r2c3/0 4 8"
+                ]
+              },
+              {
+                "text": "HXE13ES",
+                "words": [
+                  "body/12/r3c1/0 35 42"
+                ]
+              },
+              {
+                "text": "USD 5.08",
+                "words": [
+                  "body/12/r3c3/0 0 3",
+                  "body/12/r3c3/0 4 8"
+                ]
+              },
+              {
+                "text": "HXE33K-S1",
+                "words": [
+                  "body/12/r4c1/0 34 43"
+                ]
+              },
+              {
+                "text": "USD 13.49",
+                "words": [
+                  "body/12/r4c3/0 0 3",
+                  "body/12/r4c3/0 4 9"
+                ]
+              },
+              {
+                "text": "HXE34K-S1",
+                "words": [
+                  "body/12/r5c1/0 34 43"
+                ]
+              },
+              {
+                "text": "USD 14.37",
+                "words": [
+                  "body/12/r5c3/0 0 3",
+                  "body/12/r5c3/0 4 9"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "表 1"
+          ]
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "924389c795a1fa37",
+          "document_name": "ORDER PERU 25-19 FONAFE.docx",
+          "relative_path": "ORDER PERU 25-19 FONAFE.docx",
+          "text": "ENSA | HXE12ES | 132,180 | 24,330 | 23,630 | 21,880 | 21,680 | 20,480 | 20,180",
+          "anchor": {
+            "text_sha256": "42279f4297faa90e",
+            "pieces": [
+              {
+                "text": "ENSA",
+                "words": [
+                  "body/35/r10c0/0 0 4"
+                ]
+              },
+              {
+                "text": "HXE12ES",
+                "words": [
+                  "body/35/r3c0/0 43 50"
+                ]
+              },
+              {
+                "text": "132,180",
+                "words": [
+                  "body/35/r10c4/0 0 7"
+                ]
+              },
+              {
+                "text": "24,330",
+                "words": [
+                  "body/35/r10c5/0 0 6"
+                ]
+              },
+              {
+                "text": "23,630",
+                "words": [
+                  "body/35/r10c6/0 0 6"
+                ]
+              },
+              {
+                "text": "21,880",
+                "words": [
+                  "body/35/r10c7/0 0 6"
+                ]
+              },
+              {
+                "text": "21,680",
+                "words": [
+                  "body/35/r10c8/0 0 6"
+                ]
+              },
+              {
+                "text": "20,480",
+                "words": [
+                  "body/35/r10c9/0 0 6"
+                ]
+              },
+              {
+                "text": "20,180",
+                "words": [
+                  "body/35/r10c10/0 0 6"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "表 2"
+          ]
+        },
+        {
+          "excerpt_id": "x3",
+          "document_id": "924389c795a1fa37",
+          "document_name": "ORDER PERU 25-19 FONAFE.docx",
+          "relative_path": "ORDER PERU 25-19 FONAFE.docx",
+          "text": "ENSA | HXE13ES | 9,910 | 1,810 | 1,710 | 1,710 | 1,610 | 1,560 | 1,510",
+          "anchor": {
+            "text_sha256": "d4049a63b43344bc",
+            "pieces": [
+              {
+                "text": "ENSA",
+                "words": [
+                  "body/35/r19c0/0 0 4"
+                ]
+              },
+              {
+                "text": "HXE13ES",
+                "words": [
+                  "body/35/r16c0/0 43 50"
+                ]
+              },
+              {
+                "text": "9,910",
+                "words": [
+                  "body/35/r19c4/0 0 5"
+                ]
+              },
+              {
+                "text": "1,810",
+                "words": [
+                  "body/35/r19c5/0 0 5"
+                ]
+              },
+              {
+                "text": "1,710",
+                "words": [
+                  "body/35/r19c6/0 0 5",
+                  "body/35/r19c7/0 0 5"
+                ]
+              },
+              {
+                "text": "1,610",
+                "words": [
+                  "body/35/r19c8/0 0 5"
+                ]
+              },
+              {
+                "text": "1,560",
+                "words": [
+                  "body/35/r19c9/0 0 5"
+                ]
+              },
+              {
+                "text": "1,510",
+                "words": [
+                  "body/35/r19c10/0 0 5"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "表 2"
+          ]
+        },
+        {
+          "excerpt_id": "x4",
+          "document_id": "924389c795a1fa37",
+          "document_name": "ORDER PERU 25-19 FONAFE.docx",
+          "relative_path": "ORDER PERU 25-19 FONAFE.docx",
+          "text": "ENSA | HXE33K-S1 | 5,018 | 1,153 | 853 | 753 | 753 | 753 | 753",
+          "anchor": {
+            "text_sha256": "c5b4b1720a3196c1",
+            "pieces": [
+              {
+                "text": "ENSA",
+                "words": [
+                  "body/35/r25c0/0 0 4"
+                ]
+              },
+              {
+                "text": "HXE33K-S1",
+                "words": [
+                  "body/35/r20c0/0 42 51"
+                ]
+              },
+              {
+                "text": "5,018",
+                "words": [
+                  "body/35/r25c4/0 0 5"
+                ]
+              },
+              {
+                "text": "1,153",
+                "words": [
+                  "body/35/r25c5/0 0 5"
+                ]
+              },
+              {
+                "text": "853",
+                "words": [
+                  "body/35/r25c6/0 0 3"
+                ]
+              },
+              {
+                "text": "753",
+                "words": [
+                  "body/35/r25c7/0 0 3",
+                  "body/35/r25c8/0 0 3",
+                  "body/35/r25c9/0 0 3",
+                  "body/35/r25c10/0 0 3"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "表 2"
+          ]
+        },
+        {
+          "excerpt_id": "x5",
+          "document_id": "924389c795a1fa37",
+          "document_name": "ORDER PERU 25-19 FONAFE.docx",
+          "relative_path": "ORDER PERU 25-19 FONAFE.docx",
+          "text": "ENSA | HXE34K-S1 | 10,804 | 2,234 | 1,734 | 1,734 | 1,734 | 1,734 | 1,634",
+          "anchor": {
+            "text_sha256": "9e1ebc4afbd6f6fc",
+            "pieces": [
+              {
+                "text": "ENSA",
+                "words": [
+                  "body/35/r32c0/0 0 4"
+                ]
+              },
+              {
+                "text": "HXE34K-S1",
+                "words": [
+                  "body/35/r28c0/0 42 51"
+                ]
+              },
+              {
+                "text": "10,804",
+                "words": [
+                  "body/35/r32c4/0 0 6"
+                ]
+              },
+              {
+                "text": "2,234",
+                "words": [
+                  "body/35/r32c5/0 0 5"
+                ]
+              },
+              {
+                "text": "1,734",
+                "words": [
+                  "body/35/r32c6/0 0 5",
+                  "body/35/r32c7/0 0 5",
+                  "body/35/r32c8/0 0 5",
+                  "body/35/r32c9/0 0 5"
+                ]
+              },
+              {
+                "text": "1,634",
+                "words": [
+                  "body/35/r32c10/0 0 5"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "表 2"
+          ]
+        },
+        {
+          "excerpt_id": "x6",
+          "document_id": "924389c795a1fa37",
+          "document_name": "ORDER PERU 25-19 FONAFE.docx",
+          "relative_path": "ORDER PERU 25-19 FONAFE.docx",
+          "text": "1ST DELIVERY 28/02/2026\n2ND DELIVERY 09/04/2026\n3RD DELIVERY 07/08/2026\n4TH DELIVERY 05/12/2026\n5TH DELIVERY 04/04/2027\n6TH DELIVERY 02/08/2027",
+          "anchor": {
+            "text_sha256": "7776733680478c23",
+            "pieces": [
+              {
+                "text": "1ST DELIVERY 28/02/2026",
+                "words": [
+                  "body/43/r1c1/0 0 3",
+                  "body/43/r1c1/0 4 12",
+                  "body/43/r1c2/0 0 10"
+                ]
+              },
+              {
+                "text": "2ND DELIVERY 09/04/2026",
+                "words": [
+                  "body/43/r2c1/0 0 3",
+                  "body/43/r2c1/0 4 12",
+                  "body/43/r2c2/0 0 10"
+                ]
+              },
+              {
+                "text": "3RD DELIVERY 07/08/2026",
+                "words": [
+                  "body/43/r3c1/0 0 3",
+                  "body/43/r3c1/0 4 12",
+                  "body/43/r3c2/0 0 10"
+                ]
+              },
+              {
+                "text": "4TH DELIVERY 05/12/2026",
+                "words": [
+                  "body/43/r4c1/0 0 3",
+                  "body/43/r4c1/0 4 12",
+                  "body/43/r4c2/0 0 10"
+                ]
+              },
+              {
+                "text": "5TH DELIVERY 04/04/2027",
+                "words": [
+                  "body/43/r5c1/0 0 3",
+                  "body/43/r5c1/0 4 12",
+                  "body/43/r5c2/0 0 10"
+                ]
+              },
+              {
+                "text": "6TH DELIVERY 02/08/2027",
+                "words": [
+                  "body/43/r6c1/0 0 3",
+                  "body/43/r6c1/0 4 12",
+                  "body/43/r6c2/0 0 10"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "表 3"
+          ]
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "订购了哪些产品",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2",
+                "x3",
+                "x4",
+                "x5"
+              ]
+            }
+          ],
+          "note": "四款产品分列在分配表的四个 ITEM 段落"
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "每款产品的单价",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e3",
+          "information_item": "每款产品的数量",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2",
+                "x3",
+                "x4",
+                "x5"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e4",
+          "information_item": "订购总金额",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2",
+                "x3",
+                "x4",
+                "x5"
+              ]
+            }
+          ],
+          "note": "原文无此数，由数量 × 单价求和得出"
+        },
+        {
+          "evidence_group_id": "e5",
+          "information_item": "各批次交付日期",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x6"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e6",
+          "information_item": "各批次交付的产品",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2",
+                "x3",
+                "x4",
+                "x5"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e7",
+          "information_item": "各批次交付的数量",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2",
+                "x3",
+                "x4",
+                "x5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-19-DOCX-Q004",
+      "question": "订单 ORDER2025004，客户的付款条件是什么？",
+      "answerable": true,
+      "reference_answer": "货款将在货物在客户仓库被验收后30天内被支付。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "924389c795a1fa37",
+          "document_name": "ORDER PERU 25-19 FONAFE.docx",
+          "relative_path": "ORDER PERU 25-19 FONAFE.docx",
+          "text": "Customer´s Payment Terms: Payment will be done 30 days after the acceptance of the goods in customer´s warehouse.",
+          "anchor": {
+            "text_sha256": "3406553f28743bb4",
+            "pieces": [
+              {
+                "text": "Customer´s Payment Terms: Payment will be done 30 days after the acceptance of the goods in customer´s warehouse.",
+                "words": [
+                  "body/49 0 10",
+                  "body/49 11 18",
+                  "body/49 19 25",
+                  "body/49 26 33",
+                  "body/49 34 38",
+                  "body/49 39 41",
+                  "body/49 42 46",
+                  "body/49 47 49",
+                  "body/49 50 54",
+                  "body/49 55 60",
+                  "body/49 61 64",
+                  "body/49 65 75",
+                  "body/49 76 78",
+                  "body/49 79 82",
+                  "body/49 83 88",
+                  "body/49 89 91",
+                  "body/49 92 102",
+                  "body/49 103 113"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "第 50 块"
+          ]
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "客户的付款条件",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-19-DOCX-Q005",
+      "question": "订单 ORDER2025004 中，HDNA 公司订购数量最多的是哪一款产品？这款产品的订单单价是多少？",
+      "answerable": true,
+      "reference_answer": "HDNA 订购了三款产品：Item 1 单相两线表 190,941 台、Item 3 三相三线表 400 台、Item 4 三相四线表 22,986 台，数量最多的是 Item 1 单相两线表（型号 HXE12ES）。该型号的订单单价为 USD 4.56（CIF Callao）。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "924389c795a1fa37",
+          "document_name": "ORDER PERU 25-19 FONAFE.docx",
+          "relative_path": "ORDER PERU 25-19 FONAFE.docx",
+          "text": "HDNA | 1 | Single Phase Meter 2 wires | UNIT | 190,941",
+          "anchor": {
+            "text_sha256": "b4b0d67aecda3053",
+            "pieces": [
+              {
+                "text": "HDNA",
+                "words": [
+                  "body/35/r9c0/0 0 4"
+                ]
+              },
+              {
+                "text": "1",
+                "words": [
+                  "body/35/r9c1/0 0 1"
+                ]
+              },
+              {
+                "text": "Single Phase Meter 2 wires",
+                "words": [
+                  "body/35/r9c2/0 0 6",
+                  "body/35/r9c2/0 7 12",
+                  "body/35/r9c2/0 13 18",
+                  "body/35/r9c2/0 19 20",
+                  "body/35/r9c2/0 21 26"
+                ]
+              },
+              {
+                "text": "UNIT",
+                "words": [
+                  "body/35/r9c3/0 0 4"
+                ]
+              },
+              {
+                "text": "190,941",
+                "words": [
+                  "body/35/r9c4/0 0 7"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "表 2"
+          ]
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "924389c795a1fa37",
+          "document_name": "ORDER PERU 25-19 FONAFE.docx",
+          "relative_path": "ORDER PERU 25-19 FONAFE.docx",
+          "text": "HDNA | 3 | Three Phase 3 wires | UNIT | 400",
+          "anchor": {
+            "text_sha256": "0215b3e3ec1f337e",
+            "pieces": [
+              {
+                "text": "HDNA",
+                "words": [
+                  "body/35/r24c0/0 0 4"
+                ]
+              },
+              {
+                "text": "3",
+                "words": [
+                  "body/35/r24c1/0 0 1"
+                ]
+              },
+              {
+                "text": "Three Phase 3 wires",
+                "words": [
+                  "body/35/r24c2/0 0 5",
+                  "body/35/r24c2/0 6 11",
+                  "body/35/r24c2/0 12 13",
+                  "body/35/r24c2/0 14 19"
+                ]
+              },
+              {
+                "text": "UNIT",
+                "words": [
+                  "body/35/r24c3/0 0 4"
+                ]
+              },
+              {
+                "text": "400",
+                "words": [
+                  "body/35/r24c4/0 0 3"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "表 2"
+          ]
+        },
+        {
+          "excerpt_id": "x3",
+          "document_id": "924389c795a1fa37",
+          "document_name": "ORDER PERU 25-19 FONAFE.docx",
+          "relative_path": "ORDER PERU 25-19 FONAFE.docx",
+          "text": "HDNA | 4 | Three Phase 4 wires | UNIT | 22,986",
+          "anchor": {
+            "text_sha256": "3be67c206071a309",
+            "pieces": [
+              {
+                "text": "HDNA",
+                "words": [
+                  "body/35/r31c0/0 0 4"
+                ]
+              },
+              {
+                "text": "4",
+                "words": [
+                  "body/35/r31c1/0 0 1"
+                ]
+              },
+              {
+                "text": "Three Phase 4 wires",
+                "words": [
+                  "body/35/r31c2/0 0 5",
+                  "body/35/r31c2/0 6 11",
+                  "body/35/r31c2/0 12 13",
+                  "body/35/r31c2/0 14 19"
+                ]
+              },
+              {
+                "text": "UNIT",
+                "words": [
+                  "body/35/r31c3/0 0 4"
+                ]
+              },
+              {
+                "text": "22,986",
+                "words": [
+                  "body/35/r31c4/0 0 6"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "表 2"
+          ]
+        },
+        {
+          "excerpt_id": "x4",
+          "document_id": "924389c795a1fa37",
+          "document_name": "ORDER PERU 25-19 FONAFE.docx",
+          "relative_path": "ORDER PERU 25-19 FONAFE.docx",
+          "text": "1 | Single Phase 02 Wires meter Model: HXE12ES | 1´131,056.00 | USD 4.56",
+          "anchor": {
+            "text_sha256": "0af7a7c2cb8476cc",
+            "pieces": [
+              {
+                "text": "1",
+                "words": [
+                  "body/12/r2c0/0 0 1"
+                ]
+              },
+              {
+                "text": "Single Phase 02 Wires meter Model: HXE12ES",
+                "words": [
+                  "body/12/r2c1/0 0 6",
+                  "body/12/r2c1/0 7 12",
+                  "body/12/r2c1/0 13 15",
+                  "body/12/r2c1/0 16 21",
+                  "body/12/r2c1/0 22 27",
+                  "body/12/r2c1/0 28 34",
+                  "body/12/r2c1/0 35 42"
+                ]
+              },
+              {
+                "text": "1´131,056.00",
+                "words": [
+                  "body/12/r2c2/0 0 12"
+                ]
+              },
+              {
+                "text": "USD 4.56",
+                "words": [
+                  "body/12/r2c3/0 0 3",
+                  "body/12/r2c3/0 4 8"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "表 1"
+          ]
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "订购数量最多的产品",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2",
+                "x3"
+              ]
+            }
+          ],
+          "note": "需比较 HDNA 在三个 ITEM 段落中的三行"
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "该产品的订单单价",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2",
+                "x3",
+                "x4"
+              ]
+            }
+          ],
+          "note": "先由 x1–x3 得出 Item 1，再在单价表按 Item 1 / HXE12ES 查单价"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-19-DOCX-Q006",
+      "question": "订单 ORDER2025004 中，ELPU 公司的货物安排在第几批次交付？该批次的 DDP 日期是哪天？",
+      "answerable": true,
+      "reference_answer": "ELPU 订购 Item 3 三相三线表 100 台和 Item 4 三相四线表 1,200 台，都安排在第 4 批次（签约后 450 天）交付；第 4 批次的 DDP 日期为 2026 年 12 月 5 日。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "924389c795a1fa37",
+          "document_name": "ORDER PERU 25-19 FONAFE.docx",
+          "relative_path": "ORDER PERU 25-19 FONAFE.docx",
+          "text": "ELPU | 3 | Three Phase 3 wires | UNIT | 100 | 100",
+          "locate_hint": "4th Delivery",
+          "anchor": {
+            "text_sha256": "f527eafeaeeaa9f2",
+            "pieces": [
+              {
+                "text": "ELPU",
+                "words": [
+                  "body/35/r27c0/0 0 4"
+                ]
+              },
+              {
+                "text": "3",
+                "words": [
+                  "body/35/r27c1/0 0 1"
+                ]
+              },
+              {
+                "text": "Three Phase 3 wires",
+                "words": [
+                  "body/35/r27c2/0 0 5",
+                  "body/35/r27c2/0 6 11",
+                  "body/35/r27c2/0 12 13",
+                  "body/35/r27c2/0 14 19"
+                ]
+              },
+              {
+                "text": "UNIT",
+                "words": [
+                  "body/35/r27c3/0 0 4"
+                ]
+              },
+              {
+                "text": "100",
+                "words": [
+                  "body/35/r27c8/0 0 3"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "表 2"
+          ]
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "924389c795a1fa37",
+          "document_name": "ORDER PERU 25-19 FONAFE.docx",
+          "relative_path": "ORDER PERU 25-19 FONAFE.docx",
+          "text": "ELPU | 4 | Three Phase 4 wires | UNIT | 1,200 | 1,200",
+          "locate_hint": "4th Delivery",
+          "anchor": {
+            "text_sha256": "f17a6ca242702bc0",
+            "pieces": [
+              {
+                "text": "ELPU",
+                "words": [
+                  "body/35/r34c0/0 0 4"
+                ]
+              },
+              {
+                "text": "4",
+                "words": [
+                  "body/35/r34c1/0 0 1"
+                ]
+              },
+              {
+                "text": "Three Phase 4 wires",
+                "words": [
+                  "body/35/r34c2/0 0 5",
+                  "body/35/r34c2/0 6 11",
+                  "body/35/r34c2/0 12 13",
+                  "body/35/r34c2/0 14 19"
+                ]
+              },
+              {
+                "text": "UNIT",
+                "words": [
+                  "body/35/r34c3/0 0 4"
+                ]
+              },
+              {
+                "text": "1,200",
+                "words": [
+                  "body/35/r34c8/0 0 5"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "表 2"
+          ]
+        },
+        {
+          "excerpt_id": "x3",
+          "document_id": "924389c795a1fa37",
+          "document_name": "ORDER PERU 25-19 FONAFE.docx",
+          "relative_path": "ORDER PERU 25-19 FONAFE.docx",
+          "text": "4th Delivery",
+          "table_header": true,
+          "anchor": {
+            "text_sha256": "1fa142c602a9a8d1",
+            "pieces": [
+              {
+                "text": "4th Delivery",
+                "words": [
+                  "body/35/r1c8/0 0 3",
+                  "body/35/r1c8/0 4 12"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "表 2"
+          ]
+        },
+        {
+          "excerpt_id": "x4",
+          "document_id": "924389c795a1fa37",
+          "document_name": "ORDER PERU 25-19 FONAFE.docx",
+          "relative_path": "ORDER PERU 25-19 FONAFE.docx",
+          "text": "4 | 4TH DELIVERY | 05/12/2026",
+          "anchor": {
+            "text_sha256": "dea86d79d5bae9c1",
+            "pieces": [
+              {
+                "text": "4",
+                "words": [
+                  "body/43/r4c0/0 0 1"
+                ]
+              },
+              {
+                "text": "4TH DELIVERY",
+                "words": [
+                  "body/43/r4c1/0 0 3",
+                  "body/43/r4c1/0 4 12"
+                ]
+              },
+              {
+                "text": "05/12/2026",
+                "words": [
+                  "body/43/r4c2/0 0 10"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "表 3"
+          ]
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "ELPU 的交付批次",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2",
+                "x3"
+              ]
+            }
+          ],
+          "note": "两行的数量都落在 4th Delivery 列，批次由表头（x3）得出"
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "该批次的 DDP 日期",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2",
+                "x3",
+                "x4"
+              ]
+            }
+          ],
+          "note": "先由 x1–x3 得出第 4 批次，再在交货日期表查第 4 批次"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-19-DOCX-Q007",
+      "question": "订单 ORDER2025004 中，第 1 批次的货物最晚需要在什么时候运抵秘鲁？",
+      "answerable": true,
+      "reference_answer": "第 1 批次的 DDP 日期为 2026 年 2 月 28 日，这是客户要求货物到达其仓库的最晚日期；Hexing Peru 在货物运抵秘鲁后约需 10 天办理清关和境内配送，因此第 1 批次的货物最晚约需在 2026 年 2 月 18 日前运抵秘鲁。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "924389c795a1fa37",
+          "document_name": "ORDER PERU 25-19 FONAFE.docx",
+          "relative_path": "ORDER PERU 25-19 FONAFE.docx",
+          "text": "1 | 1ST DELIVERY | 28/02/2026",
+          "anchor": {
+            "text_sha256": "fa5ff61c05a0f769",
+            "pieces": [
+              {
+                "text": "1",
+                "words": [
+                  "body/43/r1c0/0 0 1"
+                ]
+              },
+              {
+                "text": "1ST DELIVERY",
+                "words": [
+                  "body/43/r1c1/0 0 3",
+                  "body/43/r1c1/0 4 12"
+                ]
+              },
+              {
+                "text": "28/02/2026",
+                "words": [
+                  "body/43/r1c2/0 0 10"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "表 3"
+          ]
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "924389c795a1fa37",
+          "document_name": "ORDER PERU 25-19 FONAFE.docx",
+          "relative_path": "ORDER PERU 25-19 FONAFE.docx",
+          "text": "The delivery date is the maximum date required by customer in warehouse, Hexing Peru needs around 10 days after the goods arrive to Peru for customs and internal deliveries.",
+          "anchor": {
+            "text_sha256": "a510f2c5a6dc930d",
+            "pieces": [
+              {
+                "text": "The delivery date is the maximum date required by customer in warehouse, Hexing Peru needs around 10 days after the goods arrive to Peru for customs and internal deliveries.",
+                "words": [
+                  "body/46 0 3",
+                  "body/46 4 12",
+                  "body/46 13 17",
+                  "body/46 18 20",
+                  "body/46 21 24",
+                  "body/46 25 32",
+                  "body/46 33 37",
+                  "body/46 38 46",
+                  "body/46 47 49",
+                  "body/46 50 58",
+                  "body/46 59 61",
+                  "body/46 62 72",
+                  "body/46 73 79",
+                  "body/46 80 84",
+                  "body/46 85 90",
+                  "body/46 91 97",
+                  "body/46 98 100",
+                  "body/46 101 105",
+                  "body/46 106 111",
+                  "body/46 112 115",
+                  "body/46 116 121",
+                  "body/46 122 128",
+                  "body/46 129 131",
+                  "body/46 132 136",
+                  "body/46 137 140",
+                  "body/46 141 148",
+                  "body/46 149 152",
+                  "body/46 153 161",
+                  "body/46 162 173"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "第 47 块"
+          ]
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "第 1 批次最晚运抵秘鲁的日期",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2"
+              ]
+            }
+          ],
+          "note": "日期 = DDP 日期（x1）− 清关与境内配送约 10 天（x2）；问题未提到清关时间"
+        }
+      ]
+    },
+    {
+      "case_id": "PO-25-19-DOCX-Q008",
+      "question": "订单 ORDER2025004 中，HXE33K-S1 电表的质保期是多久？",
+      "answerable": false,
+      "reference_answer": "订单中没有关于质保期的约定。",
+      "excerpts": [],
+      "evidence_groups": []
+    },
+    {
+      "case_id": "PO-25-19-DOCX-Q009",
+      "question": "订单 ORDER2025004 中，唯一对序列号有额外要求的电力公司订购了哪些产品？各订购多少台？",
+      "answerable": true,
+      "reference_answer": "唯一对序列号有额外要求的是 SEAL（需另加 NIM 编码，待确认）。SEAL 订购了 Item 1 单相两线表（HXE12ES）110,000 台和 Item 4 三相四线表（HXE34K-S1）1,500 台，未订购 Item 2、Item 3。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "924389c795a1fa37",
+          "document_name": "ORDER PERU 25-19 FONAFE.docx",
+          "relative_path": "ORDER PERU 25-19 FONAFE.docx",
+          "text": "All utilities have no special requirements regarding serial numbers; the factory serial number is applied. The only exception is SEAL, which requires an additional NIM code (to be confirmed).",
+          "anchor": {
+            "text_sha256": "8c7408e621a55497",
+            "pieces": [
+              {
+                "text": "All utilities have no special requirements regarding serial numbers; the factory serial number is applied. The only exception is SEAL, which requires an additional NIM code (to be confirmed).",
+                "words": [
+                  "body/26 15 18",
+                  "body/26 19 28",
+                  "body/26 29 33",
+                  "body/26 34 36",
+                  "body/26 37 44",
+                  "body/26 45 57",
+                  "body/26 58 67",
+                  "body/26 68 74",
+                  "body/26 75 83",
+                  "body/26 84 87",
+                  "body/26 88 95",
+                  "body/26 96 102",
+                  "body/26 103 109",
+                  "body/26 110 112",
+                  "body/26 113 121",
+                  "body/26 122 125",
+                  "body/26 126 130",
+                  "body/26 131 140",
+                  "body/26 141 143",
+                  "body/26 144 149",
+                  "body/26 150 155",
+                  "body/26 156 164",
+                  "body/26 165 167",
+                  "body/26 168 178",
+                  "body/26 179 182",
+                  "body/26 183 187",
+                  "body/26 188 191",
+                  "body/26 192 194",
+                  "body/26 195 206"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "第 27 块"
+          ]
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "924389c795a1fa37",
+          "document_name": "ORDER PERU 25-19 FONAFE.docx",
+          "relative_path": "ORDER PERU 25-19 FONAFE.docx",
+          "text": "SEAL | 1 | Single Phase Meter 2 wires | UNIT | 110,000",
+          "anchor": {
+            "text_sha256": "8d56f027162deec2",
+            "pieces": [
+              {
+                "text": "SEAL",
+                "words": [
+                  "body/35/r13c0/0 0 4"
+                ]
+              },
+              {
+                "text": "1",
+                "words": [
+                  "body/35/r13c1/0 0 1"
+                ]
+              },
+              {
+                "text": "Single Phase Meter 2 wires",
+                "words": [
+                  "body/35/r13c2/0 0 6",
+                  "body/35/r13c2/0 7 12",
+                  "body/35/r13c2/0 13 18",
+                  "body/35/r13c2/0 19 20",
+                  "body/35/r13c2/0 21 26"
+                ]
+              },
+              {
+                "text": "UNIT",
+                "words": [
+                  "body/35/r13c3/0 0 4"
+                ]
+              },
+              {
+                "text": "110,000",
+                "words": [
+                  "body/35/r13c4/0 0 7"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "表 2"
+          ]
+        },
+        {
+          "excerpt_id": "x3",
+          "document_id": "924389c795a1fa37",
+          "document_name": "ORDER PERU 25-19 FONAFE.docx",
+          "relative_path": "ORDER PERU 25-19 FONAFE.docx",
+          "text": "SEAL | 4 | Three Phase 4 wires | UNIT | 1,500",
+          "anchor": {
+            "text_sha256": "44604624359943d0",
+            "pieces": [
+              {
+                "text": "SEAL",
+                "words": [
+                  "body/35/r35c0/0 0 4"
+                ]
+              },
+              {
+                "text": "4",
+                "words": [
+                  "body/35/r35c1/0 0 1"
+                ]
+              },
+              {
+                "text": "Three Phase 4 wires",
+                "words": [
+                  "body/35/r35c2/0 0 5",
+                  "body/35/r35c2/0 6 11",
+                  "body/35/r35c2/0 12 13",
+                  "body/35/r35c2/0 14 19"
+                ]
+              },
+              {
+                "text": "UNIT",
+                "words": [
+                  "body/35/r35c3/0 0 4"
+                ]
+              },
+              {
+                "text": "1,500",
+                "words": [
+                  "body/35/r35c4/0 0 5"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "表 2"
+          ]
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "该公司订购的产品",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2",
+                "x3"
+              ]
+            }
+          ],
+          "note": "先由 x1 得出是 SEAL，再在各 ITEM 段落中查 SEAL 的行"
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "该公司订购的数量",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2",
+                "x3"
+              ]
+            }
+          ],
+          "note": "先由 x1 得出是 SEAL，再在各 ITEM 段落中查 SEAL 的行"
+        }
+      ]
+    }
+  ]
+}

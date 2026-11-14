@@ -1,0 +1,929 @@
+{
+  "schema_version": "ground_truth_document_v2",
+  "document_key": "S0153662-en--481548282b82d3b9",
+  "document_id": "481548282b82d3b9",
+  "document_name": "S0153662 en.docx",
+  "relative_path": "S0153662 en.docx",
+  "file_hash": "3d8ae9a036030fc8b836fc7a593037e254568e2faa1ac78b2533a3b17347a7ce",
+  "cases": [
+    {
+      "case_id": "RFQ-0153662-Q001",
+      "question": "询价单 RFQ2025001 询价了哪些物料？各自的物料编码和询价数量是多少？",
+      "answerable": true,
+      "reference_answer": "共两项：第 1 项物料编码 5611532，单相电子式有功电能表（5A 额定电流、60A 允许过载、220V、3 线、1 级），数量 48,850；第 2 项物料编码 5637972，三相有功电子式电能表（15A 额定电流、90A 允许过载、220V、3 线 2 元件、1 级），数量 16,440。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "询价的物料及编码",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "各物料的询价数量",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2"
+              ]
+            }
+          ]
+        }
+      ],
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "481548282b82d3b9",
+          "document_name": "S0153662 en.docx",
+          "relative_path": "S0153662 en.docx",
+          "text": "1 | 5611532 | SINGLE-PHASE ELECTRONIC ACTIVE ENERGY METER WITH 5A NOMINAL CURRENT, 60A ALLOWABLE OVERLOAD | 48850,00",
+          "anchor": {
+            "text_sha256": "fb4c4ee429ec3863",
+            "pieces": [
+              {
+                "text": "1",
+                "words": [
+                  "body/13/r1c2/0 139 141"
+                ]
+              },
+              {
+                "text": "5611532",
+                "words": [
+                  "body/13/r1c1/0 0 7"
+                ]
+              },
+              {
+                "text": "SINGLE-PHASE ELECTRONIC ACTIVE ENERGY METER WITH 5A NOMINAL CURRENT, 60A ALLOWABLE OVERLOAD",
+                "words": [
+                  "body/13/r1c2/0 0 12",
+                  "body/13/r1c2/0 13 23",
+                  "body/13/r1c2/0 24 30",
+                  "body/13/r1c2/0 31 37",
+                  "body/13/r1c2/0 38 43",
+                  "body/13/r1c2/0 44 48",
+                  "body/13/r1c2/0 49 51",
+                  "body/13/r1c2/0 52 59",
+                  "body/13/r1c2/0 60 68",
+                  "body/13/r1c2/0 69 72",
+                  "body/13/r1c2/0 73 82",
+                  "body/13/r1c2/0 83 92"
+                ]
+              },
+              {
+                "text": "48850,00",
+                "words": [
+                  "body/13/r1c4/0 0 8"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "表 1"
+          ]
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "481548282b82d3b9",
+          "document_name": "S0153662 en.docx",
+          "relative_path": "S0153662 en.docx",
+          "text": "2 | 5637972 | THREE-PHASE ACTIVE ENERGY ELECTRONIC METER WITH 15A NOMINAL CURRENT, 90A ALLOWABLE OVERLOAD | 16440,00",
+          "anchor": {
+            "text_sha256": "7583c3654dba7091",
+            "pieces": [
+              {
+                "text": "2",
+                "words": [
+                  "body/13/r2c2/0 124 125"
+                ]
+              },
+              {
+                "text": "5637972",
+                "words": [
+                  "body/13/r2c1/0 0 7"
+                ]
+              },
+              {
+                "text": "THREE-PHASE ACTIVE ENERGY ELECTRONIC METER WITH 15A NOMINAL CURRENT, 90A ALLOWABLE OVERLOAD",
+                "words": [
+                  "body/13/r2c2/0 0 11",
+                  "body/13/r2c2/0 12 18",
+                  "body/13/r2c2/0 19 25",
+                  "body/13/r2c2/0 26 36",
+                  "body/13/r2c2/0 37 42",
+                  "body/13/r2c2/0 43 47",
+                  "body/13/r2c2/0 48 51",
+                  "body/13/r2c2/0 52 59",
+                  "body/13/r2c2/0 60 68",
+                  "body/13/r2c2/0 69 72",
+                  "body/13/r2c2/0 73 82",
+                  "body/13/r2c2/0 83 92"
+                ]
+              },
+              {
+                "text": "16440,00",
+                "words": [
+                  "body/13/r2c4/0 0 8"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "表 1"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "RFQ-0153662-Q002",
+      "question": "询价单 RFQ2025001 的报价提交截止时间是什么时候？技术或商务咨询应在哪天之前提出，向谁提出？",
+      "answerable": true,
+      "reference_answer": "报价须在 2025 年 3 月 11 日 17:30 前提交；技术和/或商务咨询截止日期为 2025 年 3 月 4 日，向 QUISPE HUARCAYA, VICTOR 工程师提出（邮箱 vquispe@tecsur.com.pe）。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "报价提交截止时间",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "咨询截止日期与联系人",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ]
+            }
+          ]
+        }
+      ],
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "481548282b82d3b9",
+          "document_name": "S0153662 en.docx",
+          "relative_path": "S0153662 en.docx",
+          "text": "Submission of offers: 11/03/2025 17:30 (hours)",
+          "anchor": {
+            "text_sha256": "48ba8775271d8e94",
+            "pieces": [
+              {
+                "text": "Submission of offers: 11/03/2025 17:30 (hours)",
+                "words": [
+                  "body/23 0 10",
+                  "body/23 11 13",
+                  "body/23 14 21",
+                  "body/23 22 32",
+                  "body/23 33 38",
+                  "body/23 39 46"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "第 24 块"
+          ]
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "481548282b82d3b9",
+          "document_name": "S0153662 en.docx",
+          "relative_path": "S0153662 en.docx",
+          "text": "Technical and/or commercial queries: 04/03/2025\nAddressed to Eng.: QUISPE HUARCAYA, VICTOR",
+          "anchor": {
+            "text_sha256": "a9aa0d6e4268d5f2",
+            "pieces": [
+              {
+                "text": "Technical and/or commercial queries: 04/03/2025",
+                "words": [
+                  "body/18 0 9",
+                  "body/18 10 16",
+                  "body/18 17 27",
+                  "body/18 28 36",
+                  "body/18 37 47"
+                ]
+              },
+              {
+                "text": "Addressed to Eng.: QUISPE HUARCAYA, VICTOR",
+                "words": [
+                  "body/19 0 9",
+                  "body/19 10 12",
+                  "body/19 13 18",
+                  "body/19 19 25",
+                  "body/19 26 35",
+                  "body/19 36 42"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "第 19 块",
+            "第 20 块"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "RFQ-0153662-Q003",
+      "question": "询价单 RFQ2025001 中，物料编码 5637972 分几批交付？各批的交付日期和数量是多少？",
+      "answerable": true,
+      "reference_answer": "物料 5637972 分 8 批交付：2025-04-07 1,000 台；2025-08-11 2,500 台；2025-09-11 2,200 台；2025-10-10 2,200 台；2025-11-10 2,200 台；2025-12-10 2,140 台；2026-01-09 2,100 台；2026-02-09 2,100 台，合计 16,440 台（日期按日/月/年书写）。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "交付批次数",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "各批交付日期与数量",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ],
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "481548282b82d3b9",
+          "document_name": "S0153662 en.docx",
+          "relative_path": "S0153662 en.docx",
+          "text": "5637972 | 11/08/2025 | 102 | 2500.00\n5637972 | 11/09/2025 | 125 | 2200.00\n5637972 | 10/10/2025 | 145 | 2200.00\n5637972 | 10/11/2025 | 166 | 2200.00\n5637972 | 10/12/2025 | 186 | 2140.00\n5637972 | 07/04/2025 | 19 | 1000.00\n5637972 | 09/01/2026 | 206 | 2100.00\n5637972 | 09/02/2026 | 227 | 2100.00",
+          "anchor": {
+            "text_sha256": "2b1ec7118f7d8bd3",
+            "pieces": [
+              {
+                "text": "5637972",
+                "words": [
+                  "body/51/r12c1/0 0 7",
+                  "body/51/r13c1/0 0 7",
+                  "body/51/r14c1/0 0 7",
+                  "body/51/r15c1/0 0 7",
+                  "body/51/r16c1/0 0 7",
+                  "body/51/r17c1/0 0 7",
+                  "body/51/r18c1/0 0 7",
+                  "body/51/r19c1/0 0 7"
+                ]
+              },
+              {
+                "text": "11/08/2025",
+                "words": [
+                  "body/51/r12c2/0 0 10"
+                ]
+              },
+              {
+                "text": "102",
+                "words": [
+                  "body/51/r12c3/0 0 3"
+                ]
+              },
+              {
+                "text": "2500.00",
+                "words": [
+                  "body/51/r12c4/0 0 7"
+                ]
+              },
+              {
+                "text": "11/09/2025",
+                "words": [
+                  "body/51/r13c2/0 0 10"
+                ]
+              },
+              {
+                "text": "125",
+                "words": [
+                  "body/51/r13c3/0 0 3"
+                ]
+              },
+              {
+                "text": "2200.00",
+                "words": [
+                  "body/51/r13c4/0 0 7",
+                  "body/51/r14c4/0 0 7",
+                  "body/51/r15c4/0 0 7"
+                ]
+              },
+              {
+                "text": "10/10/2025",
+                "words": [
+                  "body/51/r14c2/0 0 10"
+                ]
+              },
+              {
+                "text": "145",
+                "words": [
+                  "body/51/r14c3/0 0 3"
+                ]
+              },
+              {
+                "text": "10/11/2025",
+                "words": [
+                  "body/51/r15c2/0 0 10"
+                ]
+              },
+              {
+                "text": "166",
+                "words": [
+                  "body/51/r15c3/0 0 3"
+                ]
+              },
+              {
+                "text": "10/12/2025",
+                "words": [
+                  "body/51/r16c2/0 0 10"
+                ]
+              },
+              {
+                "text": "186",
+                "words": [
+                  "body/51/r16c3/0 0 3"
+                ]
+              },
+              {
+                "text": "2140.00",
+                "words": [
+                  "body/51/r16c4/0 0 7"
+                ]
+              },
+              {
+                "text": "07/04/2025",
+                "words": [
+                  "body/51/r17c2/0 0 10"
+                ]
+              },
+              {
+                "text": "19",
+                "words": [
+                  "body/51/r17c3/0 0 2"
+                ]
+              },
+              {
+                "text": "1000.00",
+                "words": [
+                  "body/51/r17c4/0 0 7"
+                ]
+              },
+              {
+                "text": "09/01/2026",
+                "words": [
+                  "body/51/r18c2/0 0 10"
+                ]
+              },
+              {
+                "text": "206",
+                "words": [
+                  "body/51/r18c3/0 0 3"
+                ]
+              },
+              {
+                "text": "2100.00",
+                "words": [
+                  "body/51/r18c4/0 0 7",
+                  "body/51/r19c4/0 0 7"
+                ]
+              },
+              {
+                "text": "09/02/2026",
+                "words": [
+                  "body/51/r19c2/0 0 10"
+                ]
+              },
+              {
+                "text": "227",
+                "words": [
+                  "body/51/r19c3/0 0 3"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "表 2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "RFQ-0153662-Q004",
+      "question": "询价单 RFQ2025001 给出的参考商务条件中，报价有效期、付款条件和报价币种分别是什么？",
+      "answerable": true,
+      "reference_answer": "报价有效期 60 天；付款条件为 90 天内现金支付；以美元报价。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "报价有效期",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "付款条件",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e3",
+          "information_item": "报价币种",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ],
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "481548282b82d3b9",
+          "document_name": "S0153662 en.docx",
+          "relative_path": "S0153662 en.docx",
+          "text": "- Offer Validity: 60(in days.)\n- Payment Terms: Cash in 90 Days\n- Monetary Unit: US Dollar",
+          "anchor": {
+            "text_sha256": "32f08e9144697938",
+            "pieces": [
+              {
+                "text": "- Offer Validity: 60(in days.)",
+                "words": [
+                  "body/34 2 7",
+                  "body/34 8 17",
+                  "body/34 18 23",
+                  "body/34 24 30"
+                ]
+              },
+              {
+                "text": "- Payment Terms: Cash in 90 Days",
+                "words": [
+                  "body/35 2 9",
+                  "body/35 10 16",
+                  "body/35 17 21",
+                  "body/35 22 24",
+                  "body/35 25 27",
+                  "body/35 28 32"
+                ]
+              },
+              {
+                "text": "- Monetary Unit: US Dollar",
+                "words": [
+                  "body/36 2 10",
+                  "body/36 11 16",
+                  "body/36 17 19",
+                  "body/36 20 26"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "第 35 块",
+            "第 36 块",
+            "第 37 块"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "RFQ-0153662-Q005",
+      "question": "询价单 RFQ2025001 对中标后的履约保函金额有什么要求？",
+      "answerable": true,
+      "reference_answer": "询价单的说明（OBSERVATIONS）要求按中标金额的 10% 考虑履约保函；所附采购政策第 14 条则要求收到授标函后开具金额为授标金额 20%（另加增值税）的银行履约保函，第 15 条同样写明为授标总额的 20%。两处比例不一致。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "说明中的保函比例",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "采购政策中的保函比例",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ]
+            },
+            {
+              "scheme_id": "s2",
+              "excerpt_ids": [
+                "x3"
+              ]
+            }
+          ],
+          "note": "第 14、15 条都写明 20%，任一条即可"
+        }
+      ],
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "481548282b82d3b9",
+          "document_name": "S0153662 en.docx",
+          "relative_path": "S0153662 en.docx",
+          "text": "Consider a letter of guarantee of faithful performance for 10% of the amount awarded in case you are the winner.",
+          "anchor": {
+            "text_sha256": "a7ff0e6af617eb04",
+            "pieces": [
+              {
+                "text": "Consider a letter of guarantee of faithful performance for 10% of the amount awarded in case you are the winner.",
+                "words": [
+                  "body/41 109 117",
+                  "body/41 118 119",
+                  "body/41 120 126",
+                  "body/41 127 129",
+                  "body/41 130 139",
+                  "body/41 140 142",
+                  "body/41 143 151",
+                  "body/41 152 163",
+                  "body/41 164 167",
+                  "body/41 168 171",
+                  "body/41 172 174",
+                  "body/41 175 178",
+                  "body/41 179 185",
+                  "body/41 186 193",
+                  "body/41 194 196",
+                  "body/41 197 201",
+                  "body/41 202 205",
+                  "body/41 206 209",
+                  "body/41 210 213",
+                  "body/41 214 221"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "第 42 块"
+          ]
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "481548282b82d3b9",
+          "document_name": "S0153662 en.docx",
+          "relative_path": "S0153662 en.docx",
+          "text": "THE SELLER will constitute a Bank Guarantee Letter of Faithful Compliance, in favor of TECSUR SA, for the amount of 20% of the amount awarded through the Award Letter plus VAT",
+          "anchor": {
+            "text_sha256": "324ac6a34740d68a",
+            "pieces": [
+              {
+                "text": "THE SELLER will constitute a Bank Guarantee Letter of Faithful Compliance, in favor of TECSUR SA, for the amount of 20% of the amount awarded through the Award Letter plus VAT",
+                "words": [
+                  "body/71 184 187",
+                  "body/71 188 194",
+                  "body/71 195 199",
+                  "body/71 200 210",
+                  "body/71 211 212",
+                  "body/71 213 217",
+                  "body/71 218 227",
+                  "body/71 228 234",
+                  "body/71 235 237",
+                  "body/71 238 246",
+                  "body/71 247 258",
+                  "body/71 259 261",
+                  "body/71 262 267",
+                  "body/71 268 270",
+                  "body/71 271 277",
+                  "body/71 278 281",
+                  "body/71 282 285",
+                  "body/71 286 289",
+                  "body/71 290 296",
+                  "body/71 297 299",
+                  "body/71 300 303",
+                  "body/71 304 306",
+                  "body/71 307 310",
+                  "body/71 311 317",
+                  "body/71 318 325",
+                  "body/71 326 333",
+                  "body/71 334 337",
+                  "body/71 338 343",
+                  "body/71 344 350",
+                  "body/71 351 355",
+                  "body/71 356 359"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "第 72 块"
+          ]
+        },
+        {
+          "excerpt_id": "x3",
+          "document_id": "481548282b82d3b9",
+          "document_name": "S0153662 en.docx",
+          "relative_path": "S0153662 en.docx",
+          "text": "the supplier who has received an Award Letter must issue a PERFORMANCE BOND LETTER for a value of 20% of the total amount awarded",
+          "anchor": {
+            "text_sha256": "f311b91a1b91eea0",
+            "pieces": [
+              {
+                "text": "the supplier who has received an Award Letter must issue a PERFORMANCE BOND LETTER for a value of 20% of the total amount awarded",
+                "words": [
+                  "body/82 71 74",
+                  "body/82 75 83",
+                  "body/82 84 87",
+                  "body/82 88 91",
+                  "body/82 92 100",
+                  "body/82 101 103",
+                  "body/82 104 109",
+                  "body/82 110 116",
+                  "body/82 117 121",
+                  "body/82 122 127",
+                  "body/82 128 129",
+                  "body/82 130 141",
+                  "body/82 142 146",
+                  "body/82 147 153",
+                  "body/82 154 157",
+                  "body/82 158 159",
+                  "body/82 160 165",
+                  "body/82 166 168",
+                  "body/82 169 172",
+                  "body/82 173 175",
+                  "body/82 176 179",
+                  "body/82 180 185",
+                  "body/82 186 192",
+                  "body/82 193 201"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "第 83 块"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "RFQ-0153662-Q006",
+      "question": "按询价单 RFQ2025001 所附采购订单（PO）通用条件，交货每延迟一天罚多少？罚款上限是多少？",
+      "answerable": true,
+      "reference_answer": "每延迟一天，按该次交货总额的 0.5% 罚款，最高不超过采购订单总额的 20%。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "每日罚款比例",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "罚款上限",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ],
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "481548282b82d3b9",
+          "document_name": "S0153662 en.docx",
+          "relative_path": "S0153662 en.docx",
+          "text": "For each day of delay in the delivery of the goods described in this PO, Tecsur will apply to the supplier a penalty equivalent to 0.5% of the total amount of the delivery, with a maximum of 20% of the total PO.",
+          "anchor": {
+            "text_sha256": "1fedbf1079f4a188",
+            "pieces": [
+              {
+                "text": "For each day of delay in the delivery of the goods described in this PO, Tecsur will apply to the supplier a penalty equivalent to 0.5% of the total amount of the delivery, with a maximum of 20% of the total PO.",
+                "words": [
+                  "body/152 0 3",
+                  "body/152 4 8",
+                  "body/152 9 12",
+                  "body/152 13 15",
+                  "body/152 16 21",
+                  "body/152 22 24",
+                  "body/152 25 28",
+                  "body/152 29 37",
+                  "body/152 38 40",
+                  "body/152 41 44",
+                  "body/152 45 50",
+                  "body/152 51 60",
+                  "body/152 61 63",
+                  "body/152 64 68",
+                  "body/152 69 72",
+                  "body/152 73 79",
+                  "body/152 80 84",
+                  "body/152 85 90",
+                  "body/152 91 93",
+                  "body/152 94 97",
+                  "body/152 98 106",
+                  "body/152 107 108",
+                  "body/152 109 116",
+                  "body/152 117 127",
+                  "body/152 128 130",
+                  "body/152 131 135",
+                  "body/152 136 138",
+                  "body/152 139 142",
+                  "body/152 143 148",
+                  "body/152 149 155",
+                  "body/152 156 158",
+                  "body/152 159 162",
+                  "body/152 163 172",
+                  "body/152 173 177",
+                  "body/152 178 179",
+                  "body/152 180 187",
+                  "body/152 188 190",
+                  "body/152 191 194",
+                  "body/152 195 197",
+                  "body/152 198 201",
+                  "body/152 202 207",
+                  "body/152 208 211"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "第 153 块"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "RFQ-0153662-Q007",
+      "question": "按询价单 RFQ2025001 所附采购订单（PO）通用条件，电表这类货物的质保期是多久？从何时起算？",
+      "answerable": true,
+      "reference_answer": "钢筋混凝土杆以外的货物质保期为 2 年（招标另有约定的除外），自货物合格确认文件（Goods Conformity）签发日的次日起算。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "质保期",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "质保起算时间",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ],
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "481548282b82d3b9",
+          "document_name": "S0153662 en.docx",
+          "relative_path": "S0153662 en.docx",
+          "text": "The supplier grants a guarantee for the quality and proper functioning of the goods, for 5 years for reinforced concrete posts and 2 years for other goods. The above except in the case of purchases in which a different guarantee period has been established in the tender or auction process. The guarantee period will begin to apply from the day following the date of issue of the Goods Conformity.",
+          "anchor": {
+            "text_sha256": "170ec8fcf86bdda8",
+            "pieces": [
+              {
+                "text": "The supplier grants a guarantee for the quality and proper functioning of the goods, for 5 years for reinforced concrete posts and 2 years for other goods. The above except in the case of purchases in which a different guarantee period has been established in the tender or auction process. The guarantee period will begin to apply from the day following the date of issue of the Goods Conformity.",
+                "words": [
+                  "body/135 0 3",
+                  "body/135 4 12",
+                  "body/135 13 19",
+                  "body/135 20 21",
+                  "body/135 22 31",
+                  "body/135 32 35",
+                  "body/135 36 39",
+                  "body/135 40 47",
+                  "body/135 48 51",
+                  "body/135 52 58",
+                  "body/135 59 70",
+                  "body/135 71 73",
+                  "body/135 74 77",
+                  "body/135 78 84",
+                  "body/135 85 88",
+                  "body/135 89 90",
+                  "body/135 91 96",
+                  "body/135 97 100",
+                  "body/135 101 111",
+                  "body/135 112 120",
+                  "body/135 121 126",
+                  "body/135 127 130",
+                  "body/135 131 132",
+                  "body/135 133 138",
+                  "body/135 139 142",
+                  "body/135 143 148",
+                  "body/135 149 155",
+                  "body/135 156 159",
+                  "body/135 160 165",
+                  "body/135 166 172",
+                  "body/135 173 175",
+                  "body/135 176 179",
+                  "body/135 180 184",
+                  "body/135 185 187",
+                  "body/135 188 197",
+                  "body/135 198 200",
+                  "body/135 201 206",
+                  "body/135 207 208",
+                  "body/135 209 218",
+                  "body/135 219 228",
+                  "body/135 229 235",
+                  "body/135 236 239",
+                  "body/135 240 244",
+                  "body/135 245 256",
+                  "body/135 257 259",
+                  "body/135 260 263",
+                  "body/135 264 270",
+                  "body/135 271 273",
+                  "body/135 274 281",
+                  "body/135 282 290",
+                  "body/135 291 294",
+                  "body/135 295 304",
+                  "body/135 305 311",
+                  "body/135 312 316",
+                  "body/135 317 322",
+                  "body/135 323 325",
+                  "body/135 326 331",
+                  "body/135 332 336",
+                  "body/135 337 340",
+                  "body/135 341 344",
+                  "body/135 345 354",
+                  "body/135 355 358",
+                  "body/135 359 363",
+                  "body/135 364 366",
+                  "body/135 367 372",
+                  "body/135 373 375",
+                  "body/135 376 379",
+                  "body/135 380 385",
+                  "body/135 386 397"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "第 136 块"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "RFQ-0153662-Q008",
+      "question": "询价单 RFQ2025001 中，单相电表的目标单价是多少？",
+      "answerable": false,
+      "reference_answer": "询价单没有给出目标单价，单价栏为空，由供应商报价。",
+      "evidence_groups": [],
+      "excerpts": []
+    }
+  ]
+}

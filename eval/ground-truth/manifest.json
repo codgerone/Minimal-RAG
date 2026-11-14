@@ -1,7 +1,7 @@
 {
   "schema_version": "ground_truth_manifest_v1",
-  "dataset_version": "4.1.0",
-  "ground_truth_fingerprint": "4135eeef8c8104816fa34276bc7fb7cb1777262e6a53c1b0a21b5460f15d18fe",
+  "dataset_version": "4.2.0",
+  "ground_truth_fingerprint": "34a3f81a6aae60bb06bdee3acbc0da6cefef3771563efc1841db58fba3ac2473",
   "review_status": "approved",
   "files": [
     {
@@ -11,10 +11,28 @@
       "case_count": 14
     },
     {
+      "document_key": "Documento-A-Bases-Administrativas--c941ca1b437f0488",
+      "json_path": "eval/ground-truth/Documento-A-Bases-Administrativas--c941ca1b437f0488.json",
+      "content_sha256": "82fadea9356cf67a32a198b65f56eda21bad6e0bb3619ea57c389d2c7f322002",
+      "case_count": 8
+    },
+    {
+      "document_key": "Documento-A-Bases-Administrativas-Sistema-AMI-Chos--4f7783612fa26b38",
+      "json_path": "eval/ground-truth/Documento-A-Bases-Administrativas-Sistema-AMI-Chos--4f7783612fa26b38.json",
+      "content_sha256": "2ddb6306c98fdbcf3c0d81fcdbcacc54833b5726a78890ae894421c54a33f687",
+      "case_count": 8
+    },
+    {
       "document_key": "E001-602--817cfff2927c6c65",
       "json_path": "eval/ground-truth/E001-602--817cfff2927c6c65.json",
       "content_sha256": "e7ba68fd290e9ab2274957c08140bd633c2c9fa00344c265bca57b68b3582366",
       "case_count": 3
+    },
+    {
+      "document_key": "Nuevas-Especificaciones-Tecnicas-PROYECTO-CHOSICA--21125ec3b4d95316",
+      "json_path": "eval/ground-truth/Nuevas-Especificaciones-Tecnicas-PROYECTO-CHOSICA--21125ec3b4d95316.json",
+      "content_sha256": "c08f006c151498a99607e1906f200ad8afb31aa341d09253a94f777fdad1185d",
+      "case_count": 8
     },
     {
       "document_key": "ORDER-PERU-24-12-ANDET--169a1f2133fe5643",
@@ -27,6 +45,18 @@
       "json_path": "eval/ground-truth/ORDER-PERU-25-15-ANDET-VF--5883b02cd922a64f.json",
       "content_sha256": "07df3739682966c62a604029bce1d1b11e62e6d9919097591cdeb5c15d1b15ef",
       "case_count": 2
+    },
+    {
+      "document_key": "ORDER-PERU-25-19-FONAFE--924389c795a1fa37",
+      "json_path": "eval/ground-truth/ORDER-PERU-25-19-FONAFE--924389c795a1fa37.json",
+      "content_sha256": "676ba79ae6766a7f97346f5c41e904165c804713277d9cdcfc15b9acf3201109",
+      "case_count": 9
+    },
+    {
+      "document_key": "S0153662-en--481548282b82d3b9",
+      "json_path": "eval/ground-truth/S0153662-en--481548282b82d3b9.json",
+      "content_sha256": "4d76a6960fa3a7ef0ca8627f6e607217e1f3f82086e752523012d7a3bec2c236",
+      "case_count": 8
     },
     {
       "document_key": "scanned-CONTRATO-HDNA--cd1050eecb2b23c0",
@@ -60,6 +90,6 @@
     }
   ],
   "created_at": "2026-09-20T02:55:05Z",
-  "reviewed_at": "2026-11-12T00:00:00Z",
+  "reviewed_at": "2026-11-14T00:00:00Z",
   "superseded_by": null
 }
