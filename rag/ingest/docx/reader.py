@@ -5,7 +5,11 @@ Addresses: `<part>/<block>` for a paragraph or table of a part; inside a table
 `<table>/r<row>c<col>/<block>` (the cell's start row and grid column, then the block in the cell);
 a text-box paragraph adds `/t<n>` to its anchoring paragraph. The numbering text of a paragraph has
 its address with `#label` appended. Blocks are numbered from 0 in document order, paragraphs and
-tables alike; content controls are transparent; empty paragraphs are numbered too.
+tables alike; content controls are transparent; empty paragraphs are numbered too. Footnote and
+endnote blocks are numbered across all notes of their part (`footnotes/<n>`, `endnotes/<n>`).
+
+The result (`DocxFile`) holds facts only: what the file says, by the text rules. Where headers,
+footers and notes go in the reading order, and what becomes a heading, list or table, is the parser's.
 """
 
 from __future__ import annotations
@@ -23,11 +27,12 @@ from rag.ingest.docx.numbering import W, Numbering
 MC = "{http://schemas.openxmlformats.org/markup-compatibility/2006}"
 R = "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}"
 PartKind = Literal["body", "header", "footer", "footnotes", "endnotes"]
-HEADER_TYPES = ("default", "first", "even")
+NoteKind = Literal["footnotes", "endnotes"]
+NOTE_REFERENCES = {f"{W}footnoteReference": "footnotes", f"{W}endnoteReference": "endnotes"}
+HEADER_TYPES = ("first", "default", "even")
 TRANSPARENT = {f"{W}sdt", f"{W}customXml", f"{W}smartTag"}       # their content is read in place
 SKIPPED = {f"{W}pPr", f"{W}rPr", f"{W}del", f"{W}moveFrom", f"{W}instrText", f"{W}delInstrText",
-           f"{W}delText", f"{W}sdtPr", f"{W}sdtEndPr", f"{W}footnoteReference", f"{W}endnoteReference",
-           f"{W}footnoteRef", f"{W}endnoteRef", f"{W}commentReference", f"{W}annotationRef"}
+           f"{W}delText", f"{W}sdtPr", f"{W}sdtEndPr", f"{W}footnoteRef", f"{W}endnoteRef", f"{W}commentReference", f"{W}annotationRef"}
 OBJECTS = {f"{W}drawing", f"{W}pict", f"{W}object"}
 LEAVES = {f"{W}{name}" for name in ("t", "tab", "ptab", "br", "cr", "sym", "noBreakHyphen", "softHyphen")}
 
@@ -36,12 +41,15 @@ LEAVES = {f"{W}{name}" for name in ("t", "tab", "ptab", "br", "cr", "sym", "noBr
 class Paragraph:
     address: str
     text: str                         # by the text rules, not stripped
+    style: str                        # paragraph style name (w:name, lower case); "" when none
+    numbering: tuple[str, int] | None # (w:numId, w:ilvl) in effect, from the paragraph or its style
     label: str | None                 # numbering text; None for bullets and unnumbered paragraphs
     bullet: str | None                # the bullet text of a bulleted paragraph
     level: int                        # numbering level (w:ilvl); 0 when not numbered
     heading: int | None               # outline level 0–8 when the paragraph is a heading
     toc: bool                         # a table-of-contents paragraph
-    objects: tuple[str, ...]          # pictures, charts, OLE objects skipped: their kinds
+    objects: tuple[str, ...]          # pictures, charts, OLE objects (not text): their kinds
+    notes: tuple[tuple[str, str], ...] = ()  # footnote and endnote references in order: (part, w:id)
     textbox: tuple["Block", ...] = () # text-box content anchored in the paragraph
 
     @property
@@ -80,9 +88,34 @@ class Part:
 
 
 @dataclass(frozen=True)
+class Note:
+    kind: NoteKind
+    id: str                           # w:id, what references name
+    blocks: tuple[Block, ...]
+
+
+@dataclass(frozen=True)
+class Section:
+    start: int                        # body blocks [start, end) belong to the section
+    end: int
+    headers: tuple[tuple[str, str], ...]   # (type, part name) referenced, in the order first, default, even
+    footers: tuple[tuple[str, str], ...]
+
+
+@dataclass(frozen=True)
 class DocxFile:
-    parts: tuple[Part, ...]           # reading order: headers, body, footnotes, endnotes, footers
+    body: Part
+    sections: tuple[Section, ...]     # in document order; together they cover the body
+    furniture: tuple[Part, ...]       # header and footer parts the sections reference, once each
+    notes: tuple[Note, ...]           # footnotes then endnotes, separators left out
     unknown_formats: tuple[str, ...]  # numbering formats written as decimal
+
+    @property
+    def parts(self) -> tuple[Part, ...]:
+        """Every part with addressed blocks; the footnotes and the endnotes each as one part."""
+        notes = tuple(Part(kind, kind, tuple(b for n in self.notes if n.kind == kind for b in n.blocks))
+                      for kind in ("footnotes", "endnotes") if any(n.kind == kind for n in self.notes))
+        return (self.body,) + self.furniture + notes   # type: ignore[arg-type]
 
 
 @dataclass(frozen=True)
@@ -180,6 +213,9 @@ class _Reader:
     def _runs(self, element, out: list[str], objects: list[str], boxes: list, state: dict) -> None:
         for child in element:
             tag = child.tag
+            if tag in NOTE_REFERENCES:
+                state["notes"].append((NOTE_REFERENCES[tag], child.get(f"{W}id") or ""))
+                continue
             if not isinstance(tag, str) or tag in SKIPPED:
                 if tag == f"{W}instrText" and self.fields and not self.fields[-1]["result"]:
                     self.fields[-1]["instr"] += child.text or ""
@@ -234,7 +270,7 @@ class _Reader:
         ppr = element.find(f"{W}pPr")
         style_id = _val(ppr.find(f"{W}pStyle")) if ppr is not None else None
         style_id = style_id or self.default_style
-        state = {"toc": self._in_toc()}
+        state: dict = {"toc": self._in_toc(), "notes": []}
         out: list[str] = []
         objects: list[str] = []
         boxes: list = []
@@ -255,8 +291,8 @@ class _Reader:
         textbox: list[Block] = []
         for content in boxes:
             textbox += self.blocks(content, f"{address}/t", start=len(textbox), joiner="")
-        return Paragraph(address, "".join(out), label, bullet, level, self._heading(ppr, style_id), toc,
-                         tuple(objects), tuple(textbox))
+        return Paragraph(address, "".join(out), style_name, numbering, label, bullet, level,
+                         self._heading(ppr, style_id), toc, tuple(objects), tuple(state["notes"]), tuple(textbox))
 
     # --- blocks -----------------------------------------------------------------------------
     def blocks(self, container, prefix: str, start: int = 0, joiner: str = "/") -> list[Block]:
@@ -371,48 +407,58 @@ def read_docx(path: Path) -> DocxFile:
     reader = _Reader(styles, default_style, numbering)
     body = Part("body", "body", tuple(reader.blocks(body_root, "body")))
 
-    def header_parts(kind: str) -> list[Part]:
-        found: list[Part] = []
-        names: set[str] = set()
-        texts: set[tuple[str, ...]] = set()
-        for sect in body_root.iter(f"{W}sectPr"):
-            for kind_name in HEADER_TYPES:
-                for ref in sect.findall(f"{W}{kind}Reference"):
-                    if ref.get(f"{W}type", "default") != kind_name:
-                        continue
-                    rel = main.rels.get(ref.get(f"{R}id"))
-                    if rel is None or rel.is_external:
-                        continue
-                    target = rel.target_part
-                    name = _part_name(str(target.partname))
-                    if name in names:
-                        continue
-                    names.add(name)
-                    own = _Reader(styles, default_style, numbering.fresh())
-                    part = Part(name, kind, tuple(own.blocks(etree.fromstring(target.blob), name)))
-                    content = tuple(unit.text for unit in units(part))
-                    if content in texts:
-                        continue
-                    texts.add(content)
-                    found.append(part)
-        return found
+    furniture: dict[str, Part] = {}
 
-    def notes(kind: str) -> list[Part]:
+    def references(sect, kind: str) -> tuple[tuple[str, str], ...]:
+        if sect is None:
+            return ()
+        found = []
+        for type_name in HEADER_TYPES:
+            for ref in sect.findall(f"{W}{kind}Reference"):
+                if ref.get(f"{W}type", "default") != type_name:
+                    continue
+                rel = main.rels.get(ref.get(f"{R}id"))
+                if rel is None or rel.is_external:
+                    continue
+                target = rel.target_part
+                name = _part_name(str(target.partname))
+                if name not in furniture:
+                    own = _Reader(styles, default_style, numbering.fresh())
+                    furniture[name] = Part(name, kind, tuple(own.blocks(etree.fromstring(target.blob), name)))
+                found.append((type_name, name))
+        return tuple(found)
+
+    # A section ends with the paragraph that holds its w:sectPr; the last one is the body's own.
+    sections: list[Section] = []
+    start = 0
+    for index, element in enumerate(_block_elements(body_root)):
+        sect = element.find(f"{W}pPr/{W}sectPr") if element.tag == f"{W}p" else None
+        if sect is not None:
+            sections.append(Section(start, index + 1, references(sect, "header"), references(sect, "footer")))
+            start = index + 1
+    final = body_root.find(f"{W}sectPr")
+    if final is not None or start < len(body.blocks) or not sections:
+        sections.append(Section(start, len(body.blocks), references(final, "header"),
+                                references(final, "footer")))
+    ordered = sorted(furniture.values(), key=lambda part: part.kind != "header")
+
+    def notes(kind: NoteKind) -> list[Note]:
         xml = blob(f"/word/{kind}.xml")
         if xml is None:
             return []
         own = _Reader(styles, default_style, numbering.fresh())
-        blocks: list[Block] = []
+        found: list[Note] = []
+        count = 0
         for note in etree.fromstring(xml).findall(f"{W}{kind[:-1]}"):
             if note.get(f"{W}type") in ("separator", "continuationSeparator", "continuationNotice"):
                 continue
-            blocks += own.blocks(note, kind, start=len(blocks))
-        return [Part(kind, kind, tuple(blocks))] if blocks else []   # type: ignore[arg-type]
+            blocks = own.blocks(note, kind, start=count)
+            count += len(blocks)
+            found.append(Note(kind, note.get(f"{W}id") or "", tuple(blocks)))
+        return found
 
-    parts = (header_parts("header") + [body] + notes("footnotes") + notes("endnotes")
-             + header_parts("footer"))
-    unknown = numbering.unknown_formats
-    return DocxFile(tuple(parts), tuple(sorted(unknown)))
+    return DocxFile(body, tuple(sections), tuple(ordered), tuple(notes("footnotes") + notes("endnotes")),
+                    tuple(sorted(numbering.unknown_formats)))
 
 
 # --- units -----------------------------------------------------------------------------------

@@ -1,12 +1,17 @@
 """Word parser: reads a .docx file directly (rag/ingest/docx/reader.py) into the primary document.
 Rules: docs/rules/docx.md.
 
-Reading order: headers, body, footnotes, endnotes, footers. Body paragraphs become headings (by
-style or outline level only), list items (automatic numbering or bullets) or paragraphs; table-of-
-contents paragraphs are skipped. Tables of two or more grid columns are tables, read exactly from
+Reading order, section by section: the section's headers, its body, its footers; a header or footer
+part already read, or with the same text as one read, is not read again. A footnote or endnote
+follows the paragraph, list or table that first references it; notes nobody references follow the
+last section's body. Body paragraphs become headings (by style or outline level only), list items
+(automatic numbering or bullets) or paragraphs; table-of-contents paragraphs are skipped. Tables of two or more grid columns are tables, read exactly from
 the file (`parser_exact`); a one-column table is a layout frame whose cells are read as body text.
 Header, footer and note paragraphs are header, footer and footnote text. Pictures, charts and OLE
 objects are skipped with a warning.
+
+The native result (parse-native.json) is the reader's facts, unjudged: every part, section and note,
+every block with its text, style, numbering, outline level and references, empty paragraphs included.
 """
 
 from __future__ import annotations
@@ -14,8 +19,9 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any
 
-from rag.ingest.docx.reader import Block, Paragraph, Part, Table, cell_text, read_docx
+from rag.ingest.docx.reader import Block, DocxFile, Note, Paragraph, Part, Table, cell_text, read_docx, units
 from rag.ingest.parsers import ParseResult
+from rag.jsonio import to_jsonable
 from rag.ingest.parsers.docling_mapper import node_id
 from rag.ingest.tables.models import GridPosition, StructuredTable, TableCell, TableSlot
 from rag.models import (
@@ -41,9 +47,8 @@ class _Builder:
     tables: list[NativeTableFact] = field(default_factory=list)
     warnings: list[ProcessingWarning] = field(default_factory=list)
     items: list[ListItem] = field(default_factory=list)      # the list being collected
-    skipped_toc: list[str] = field(default_factory=list)
-    objects: list[dict[str, str]] = field(default_factory=list)
-    frames: list[str] = field(default_factory=list)
+    notes: dict[tuple[str, str], Note] = field(default_factory=dict)   # not yet placed
+    pending: list[tuple[str, str]] = field(default_factory=list)       # referenced by the list being collected
 
     # --- lists ---------------------------------------------------------------------------
     def flush(self) -> None:
@@ -62,6 +67,21 @@ class _Builder:
         self.elements.append(PrimaryList(list_id, tuple(renamed), tuple(i.source_ref or "" for i in items),
                                          tuple(span for item in items for span in item.sources)))
         self.items = []
+        pending, self.pending = self.pending, []
+        self.place_notes(pending)
+
+    # --- notes ---------------------------------------------------------------------------
+    def place_notes(self, references) -> None:
+        for reference in references:
+            note = self.notes.pop(reference, None)
+            if note is not None:
+                self.place_note(note)
+
+    def place_note(self, note: Note) -> None:
+        part = Part(note.kind, note.kind, note.blocks)
+        for inner in note.blocks:
+            self.block(inner, part, PART_LABELS[note.kind])
+        self.flush()
 
     def add_item(self, paragraph: Paragraph, location: str, text: str, lead: int) -> None:
         parent = next((item.item_id for item in reversed(self.items) if item.level < paragraph.level), None)
@@ -93,13 +113,12 @@ class _Builder:
 
     def paragraph(self, paragraph: Paragraph, part: Part, location: str) -> None:
         for kind in paragraph.objects:
-            self.objects.append({"address": paragraph.address, "kind": kind})
             self.warnings.append(ProcessingWarning(
                 "unsupported_nontext_item", "docx_parsing",
                 f"{location}的{OBJECT_LABELS.get(kind, kind)}未入库", (paragraph.address,)))
+        listed = False
         if paragraph.toc:
-            if paragraph.text.strip():
-                self.skipped_toc.append(paragraph.address)
+            pass
         elif part.kind != "body":
             self.text(paragraph, PART_KINDS[part.kind], location)
         elif paragraph.heading is not None:
@@ -107,8 +126,13 @@ class _Builder:
         elif paragraph.numbered:
             raw = paragraph.text
             self.add_item(paragraph, location, raw.strip(), len(raw) - len(raw.lstrip()))
+            listed = True
         else:
             self.text(paragraph, "paragraph", location)
+        if listed:
+            self.pending += paragraph.notes
+        else:
+            self.place_notes(paragraph.notes)
         for inner in paragraph.textbox:
             self.block(inner, part, location)
 
@@ -132,13 +156,13 @@ class _Builder:
             table_id, "docx_native", "file", table.rows, table.columns, cells, uncovered, None, (span,), ())))
         self.elements.append(PrimaryTablePlaceholder(node_id(self.document_id, table.address), slot_id,
                                                      table.address, (span,)))
+        self.place_notes(_references(table))
 
     def block(self, block: Block, part: Part, location: str) -> None:
         if isinstance(block, Paragraph):
             self.paragraph(block, part, location)
         elif block.columns == 1:
             # A one-column table is a layout frame: its cells are read in order as body text.
-            self.frames.append(block.address)
             for cell in sorted(block.cells, key=lambda c: c.row):
                 for inner in cell.blocks:
                     self.block(inner, part, location)
@@ -146,8 +170,59 @@ class _Builder:
             self.table(block, location)
 
 
+def _references(table: Table) -> list[tuple[str, str]]:
+    """Note references anywhere in a table, in reading order."""
+    found: list[tuple[str, str]] = []
+
+    def walk(blocks) -> None:
+        for block in blocks:
+            if isinstance(block, Paragraph):
+                found.extend(block.notes)
+                walk(block.textbox)
+            else:
+                for cell in sorted(block.cells, key=lambda c: (c.row, c.column)):
+                    walk(cell.blocks)
+
+    walk((table,))
+    return found
+
+
 def _location(part: Part, index: int) -> str:
     return f"第 {index + 1} 块" if part.kind == "body" else PART_LABELS[part.kind]
+
+
+def _read(file: DocxFile, builder: _Builder) -> None:
+    """The reading order (module docstring)."""
+    furniture = {part.name: part for part in file.furniture}
+    read_names: set[str] = set()
+    read_texts: set[tuple[str, ...]] = set()
+
+    def read_part(name: str) -> None:
+        part = furniture.get(name)
+        if part is None or name in read_names:
+            return
+        read_names.add(name)
+        text = tuple(unit.text for unit in units(part))
+        if text in read_texts:
+            return
+        read_texts.add(text)
+        for block in part.blocks:
+            builder.block(block, part, _location(part, 0))
+        builder.flush()
+
+    builder.notes = {(note.kind, note.id): note for note in file.notes}
+    for number, section in enumerate(file.sections, start=1):
+        for _, name in section.headers:
+            read_part(name)
+        for index in range(section.start, section.end):
+            builder.block(file.body.blocks[index], file.body, _location(file.body, index))
+        builder.flush()
+        if number == len(file.sections):
+            for note in list(builder.notes.values()):     # notes nobody references
+                builder.notes.pop((note.kind, note.id), None)
+                builder.place_note(note)
+        for _, name in section.footers:
+            read_part(name)
 
 
 class DocxNativeParser:
@@ -161,18 +236,11 @@ class DocxNativeParser:
         """The parse takes well under a second per document, so it is not cached."""
         file = read_docx(source.absolute_path)
         builder = _Builder(source.document_id)
-        for part in file.parts:
-            for index, block in enumerate(part.blocks):
-                builder.block(block, part, _location(part, index))
-            builder.flush()
+        _read(file, builder)
         warnings = list(builder.warnings)
         for fmt in file.unknown_formats:
             warnings.append(ProcessingWarning("unknown_numbering_format", "docx_parsing",
                                               f"编号格式 {fmt} 不支持，按阿拉伯数字写出", ()))
         primary = PrimaryDocument(source.document_id, source.file_hash, None, tuple(builder.elements),
                                   tuple(builder.slots), tuple(builder.tables), tuple(warnings))
-        native = {"format": "docx_native_v1",
-                  "parts": [{"name": part.name, "kind": part.kind, "blocks": len(part.blocks)} for part in file.parts],
-                  "skipped_toc": builder.skipped_toc, "objects": builder.objects,
-                  "layout_frames": builder.frames}
-        return ParseResult(primary, native)
+        return ParseResult(primary, {"format": "docx_reader_v1", **to_jsonable(file)})

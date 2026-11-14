@@ -196,3 +196,72 @@ def test_parser_builds_headings_lists_tables_and_reads_one_column_tables_as_text
 ])
 def test_number_formats(value, fmt, written):
     assert format_value(value, fmt) == written
+
+
+FOOTNOTES = (f'<w:footnotes {NS}>'
+             '<w:footnote w:type="separator" w:id="-1"><w:p><w:r><w:separator/></w:r></w:p></w:footnote>'
+             + "".join(f'<w:footnote w:id="{i}">{p(r(text))}</w:footnote>'
+                       for i, text in ((1, "Note one"), (2, "Note two"), (3, "Orphan note")))
+             + '</w:footnotes>')
+
+
+def ref(i: int) -> str:
+    return f'<w:r><w:footnoteReference w:id="{i}"/></w:r>'
+
+
+@pytest.fixture(scope="module")
+def sectioned(tmp_path_factory) -> Path:
+    from docx.opc.constants import CONTENT_TYPE as CT, RELATIONSHIP_TYPE as RT
+    from docx.opc.packuri import PackURI
+    from docx.opc.part import Part as OpcPart
+    document = docx.Document()
+    body = document.element.body
+    for child in list(body):
+        if child.tag != f"{W}sectPr":
+            body.remove(child)
+    numbering = document.part.numbering_part.element
+    for child in list(numbering):
+        numbering.remove(child)
+    for child in etree.fromstring(NUMBERING):
+        numbering.append(child)
+    sect = body.find(f"{W}sectPr")
+    for xml in (p(r("One") + ref(1)), p(r("Item") + ref(2), num=(2, 0)), p(r("Item two"), num=(2, 0)),
+                p(r("After list"))):
+        sect.addprevious(etree.fromstring(f"<w:body {NS}>{xml}</w:body>")[0])
+    document.sections[0].header.paragraphs[0].text = "H1"
+    document.sections[0].footer.paragraphs[0].text = "F1"
+    second = document.add_section()
+    second.header.is_linked_to_previous = False
+    second.header.paragraphs[0].text = "H2"
+    document.add_paragraph("Two")
+    part = OpcPart(PackURI("/word/footnotes.xml"), CT.WML_FOOTNOTES, FOOTNOTES.encode(), document.part.package)
+    document.part.relate_to(part, RT.FOOTNOTES)
+    path = tmp_path_factory.mktemp("sections") / "sectioned.docx"
+    document.save(path)
+    return path
+
+
+def test_reader_keeps_sections_note_references_and_paragraph_facts(sectioned):
+    file = read_docx(sectioned)
+    assert len(file.sections) == 2
+    assert [name for s in file.sections for _, name in s.headers] == ["header1", "header2"]
+    assert file.sections[1].footers == ()                    # linked to the previous section
+    assert [(n.id, n.blocks[0].text) for n in file.notes] == [("1", "Note one"), ("2", "Note two"),
+                                                               ("3", "Orphan note")]
+    first = file.body.blocks[0]
+    assert first.notes == (("footnotes", "1"),) and first.text == "One"
+    assert file.body.blocks[1].numbering == ("2", 0)
+
+
+def test_headers_footers_go_by_section_and_notes_follow_their_reference(sectioned):
+    source = next(s for s in discover(sectioned.parent) if s.file_type == "docx")
+    result = DocxNativeParser().parse(source)
+    order = []
+    for element in result.primary.elements:
+        if isinstance(element, PrimaryList):
+            order.append("[" + ", ".join(i.text for i in element.items) + "]")
+        elif isinstance(element, PrimaryText):
+            order.append(element.text)
+    assert order == ["H1", "One", "Note one", "[Item, Item two]", "Note two", "After list", "F1",
+                     "H2", "Two", "Orphan note"]
+    assert result.native["format"] == "docx_reader_v1" and len(result.native["sections"]) == 2

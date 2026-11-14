@@ -153,13 +153,8 @@ def _is_word(processed: DocumentAudit) -> bool:
     return any(isinstance(span, DocxSpan) for node in processed.document.nodes for span in node.sources)
 
 
-PART_NAMES = {"body": "正文", "header": "页眉", "footer": "页脚", "footnotes": "脚注", "endnotes": "尾注"}
 OBJECT_NAMES = {"picture": "图片", "chart": "图表", "ole": "嵌入对象"}
-
-
-def _part_title(part: str) -> str:
-    kind = next((k for k in PART_NAMES if part.startswith(k)), part)
-    return PART_NAMES.get(kind, part) + (f"（{part}）" if part not in PART_NAMES else "")
+FURNITURE_NAMES = {"header": "页眉", "footer": "页脚", "footnotes": "脚注", "endnotes": "尾注"}
 
 
 def _labelled(text: str, label_end: int) -> str:
@@ -169,17 +164,72 @@ def _labelled(text: str, label_end: int) -> str:
     return f'<div class="text"><span class="lbl">{esc(text[:label_end])}</span>{esc(text[label_end:])}</div>'
 
 
+def _fact_blocks(facts: dict) -> list[dict]:
+    """Top-level blocks of every part and note in the reader's facts (parse-native.json)."""
+    blocks = list(facts.get("body", {}).get("blocks", []))
+    for part in facts.get("furniture", []):
+        blocks += part["blocks"]
+    for note in facts.get("notes", []):
+        blocks += note["blocks"]
+    return blocks
+
+
+def _not_read(facts: dict, slot_tables: set[str]) -> tuple[list[str], list[tuple[str, str]], list[str]]:
+    """What the facts hold that the parse result does not: table-of-contents paragraphs, objects,
+    and tables that are not table slots (read as text), found by comparing the two."""
+    toc: list[str] = []
+    objects: list[tuple[str, str]] = []
+    frames: list[str] = []
+
+    def walk(blocks: list[dict]) -> None:
+        for block in blocks:
+            if "cells" in block:
+                if block["address"] in slot_tables:
+                    continue
+                frames.append(block["address"])
+                for cell in block["cells"]:
+                    walk(cell["blocks"])
+            else:
+                if block["toc"] and block["text"].strip():
+                    toc.append(block["address"])
+                objects.extend((block["address"], kind) for kind in block["objects"])
+                walk(block.get("textbox", []))
+
+    walk(_fact_blocks(facts))
+    return toc, objects, frames
+
+
+def _section_of(facts: dict) -> dict[str, int]:
+    """Part name → number of the first section that references it (headers and footers)."""
+    found: dict[str, int] = {}
+    for number, section in enumerate(facts.get("sections", []), start=1):
+        for _, name in section["headers"] + section["footers"]:
+            found.setdefault(name, number)
+    return found
+
+
 def _word_parse_sections(processed: DocumentAudit) -> tuple[str, str]:
-    """Elements in reading order grouped by part, and a note on what the parser skipped."""
+    """Elements in reading order grouped by section, and a note on what the parse result left out."""
     from rag.jsonio import read_json
-    native: dict = {}
+    facts: dict = {}
     if processed.folder is not None and (processed.folder / "parse-native.json").is_file():
-        native = read_json(processed.folder / "parse-native.json")
+        facts = read_json(processed.folder / "parse-native.json")
+    sections_facts = facts.get("sections", [])
+    furniture_section = _section_of(facts)
     slot_number = {slot.slot_id: n for n, slot in enumerate(processed.table_slots, start=1)}
-    by_part: dict[str, list[str]] = {}
+    by_section: dict[int, list[str]] = {}
+    current = 1
     for node in processed.document.nodes:
         span = node.sources[0] if node.sources else None
         where = esc(span.label) if isinstance(span, DocxSpan) else ""
+        address = span.address if isinstance(span, DocxSpan) else ""
+        part, _, rest = address.partition("/")
+        if part == "body":
+            index = int(rest.split("/", 1)[0])
+            current = next((n for n, s in enumerate(sections_facts, start=1) if s["start"] <= index < s["end"]),
+                           current)
+        elif part in furniture_section and part.startswith("header"):
+            current = furniture_section[part]
         if isinstance(node, TextNode):
             label_end = next((p.end for p in node.pieces if p.address.endswith("#label")), 0)
             html = (f'{badge(TEXT_KINDS.get(node.kind, node.kind))} <span class="meta">{where}</span>'
@@ -192,29 +242,33 @@ def _word_parse_sections(processed: DocumentAudit) -> tuple[str, str]:
         else:
             assert isinstance(node, TableNode)
             number = slot_number.get(node.slot_id, 1)
+            kind = next((name for prefix, name in FURNITURE_NAMES.items() if part.startswith(prefix)), "")
+            where += f"（{kind}）" if kind else ""
             html = (f'{badge("表格", "warn")} <span class="meta">{where} · 从文件直接读出，'
                     f'详见 <a href="2-表格.html#t{number}">表格页·表 {number}</a></span>{render_grid(node.table, 12)}')
-        part = span.address.split("/", 1)[0] if isinstance(span, DocxSpan) else "?"
-        by_part.setdefault(part, []).append(f'<div class="item">{html}</div>')
-    sections = "".join(f'<div class="card"><h3>{esc(_part_title(part))}</h3>{"".join(items)}</div>'
-                       for part, items in by_part.items())
+        by_section.setdefault(current, []).append(f'<div class="item">{html}</div>')
+    many = len(sections_facts) > 1
+    sections = "".join(
+        f'<div class="card">' + (f'<h3>第 {number} 节</h3>' if many else "") + "".join(items) + "</div>"
+        for number, items in by_section.items())
+    slot_tables = {ref for slot in processed.table_slots for ref in slot.source_refs}
+    toc, objects, frames = _not_read(facts, slot_tables)
     skipped = []
-    toc = native.get("skipped_toc", [])
     if toc:
         skipped.append(f"目录段落 {len(toc)} 段")
-    objects = native.get("objects", [])
     if objects:
-        counts = Counter(OBJECT_NAMES.get(o["kind"], o["kind"]) for o in objects)
+        counts = Counter(OBJECT_NAMES.get(kind, kind) for _, kind in objects)
         skipped.append("、".join(f"{k} {v} 个" for k, v in counts.items()))
     note = "".join(f'<div class="meta">未入库：{esc(s)}</div>' for s in skipped)
-    frames = native.get("layout_frames", [])
     if frames:
         note += (f'<div class="meta">单列表格 {len(frames)} 个按排版框处理，格内内容按正文读出'
                  f'（{esc("、".join(frames))}）</div>')
     if objects:
         note += ('<details><summary>未入库的对象位置</summary><ul class="meta">'
-                 + "".join(f'<li>{esc(o["address"])} · {esc(OBJECT_NAMES.get(o["kind"], o["kind"]))}</li>'
-                           for o in objects) + "</ul></details>")
+                 + "".join(f'<li>{esc(address)} · {esc(OBJECT_NAMES.get(kind, kind))}</li>'
+                           for address, kind in objects) + "</ul></details>")
+    note += (f'<div class="meta">共 {len(sections_facts)} 节；解析器从文件读出的原始事实（每个块的文字、样式、编号、'
+             f'大纲级别、脚注引用，含空段落）保存在 parse-native.json</div>')
     return sections, note
 
 
@@ -230,7 +284,8 @@ def parse_page(processed: DocumentAudit, entry: DocumentEntry, config_name: str)
         sections, note = _word_parse_sections(processed)
         body = (_header(processed, entry, config_name, 0) +
                 f'<div class="card"><b>解析结果</b>：{esc(summary)}{warn_html}{note}'
-                f'<div class="meta">按阅读顺序（页眉 → 正文 → 脚注 → 尾注 → 页脚）列出解析器从 Word 文件读出的元素；'
+                f'<div class="meta">按阅读顺序逐节列出解析结果：每节先页眉、再正文、最后页脚，已读过或文字相同的页眉页脚不重复；'
+                f'脚注、尾注跟在第一次引用它的段落、列表或表格之后；'
                 f'<span class="lbl">着色</span>的是 Word 自动编号生成的文字。规则见 docs/rules/docx.md</div></div>'
                 + sections)
         return page(f"解析 · {entry.document_name}", body, root="../../../", crumbs=_crumbs(config_name))
