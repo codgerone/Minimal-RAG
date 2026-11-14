@@ -156,11 +156,33 @@ def _word_pages(items: list[tuple[str, ExcerptAnchor]], files: dict[str, DocxFil
     return pages
 
 
+def _cases_section(cases) -> str:
+    """Questions added or changed this round: what the excerpt cards do not show."""
+    if not cases:
+        return ""
+    rows = []
+    for case in cases:
+        groups = "".join(
+            f'<li>{esc(g.information_item)}：' + " 或 ".join("、".join(s.excerpt_ids) for s in g.schemes)
+            + (f'<span class="meta">（{esc(g.note)}）</span>' if g.note else "") + "</li>" for g in case.groups)
+        rows.append(f'<tr><td>{esc(case.case_id)}<div class="meta">{esc(case.document_name)}</div></td>'
+                    f'<td>{esc(case.question)}</td>'
+                    f'<td>{badge("可回答", "ok") if case.answerable else badge("不可回答", "warn")}</td>'
+                    f'<td>{esc(case.reference_answer)}</td><td><ul class="meta">{groups}</ul></td></tr>')
+    return (f'<div class="card"><details open><summary><b>本次新增或修改的题目（{len(cases)}）</b>'
+            '：题目、参考答案与证据组（每组列出可选方案，方案内的 excerpt 须全部检索到）</summary>'
+            '<table style="table-layout:fixed;width:100%"><tr><th style="width:15%">题号</th>'
+            '<th style="width:25%">问题</th><th style="width:8%"></th><th style="width:32%">参考答案</th>'
+            '<th style="width:20%">证据组</th></tr>'
+            + "".join(rows) + "</table></details></div>")
+
+
 def write_anchor_review(folder: Path, items: list[tuple[str, ExcerptAnchor]], pdf_paths: dict[str, Path],
                         questions: dict[str, str], previous: dict[tuple[str, str], str | None],
-                        word_files: dict[str, DocxFile] | None = None) -> Path:
+                        word_files: dict[str, DocxFile] | None = None, cases=()) -> Path:
     """`previous` maps (case_id, excerpt_id) → text before this round's edit (None = new excerpt).
-    `pdf_paths` holds the PDF documents; `word_files` the Word documents, read."""
+    `pdf_paths` holds the PDF documents; `word_files` the Word documents, read. `cases`: questions
+    added or changed this round, listed in full (question, answer, evidence groups)."""
     word_files = word_files or {}
     for name in ("img", "pdf", "word"):
         (folder / name).mkdir(parents=True, exist_ok=True)
@@ -233,6 +255,7 @@ def write_anchor_review(folder: Path, items: list[tuple[str, ExcerptAnchor]], pd
         f'<div class="tile"><div class="v">{counts["located"]}</div><div class="k">唯一定位</div></div>'
         f'<div class="tile"><div class="v">{approximate}</div><div class="k">含近似匹配</div></div>'
         f'<div class="tile"><div class="v">{edited}</div><div class="k">本次修改的 excerpt</div></div></div>'
+        + _cases_section(cases) +
         f'<div class="card"><b>整份文档高亮副本</b>（PDF 每个高亮的批注、Word 页面每个高亮的提示写明题号和'
         f' excerpt 号；Word 文档请打开原文件对照）：{links}</div>'
         + filters([("all", "全部", len(items)), ("missing", "有片段找不到", counts["missing"]),

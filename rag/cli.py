@@ -528,6 +528,12 @@ def _table_structure(workspace: Workspace, args: argparse.Namespace) -> int:
     return 0
 
 
+def _case_content(case: dict) -> dict:
+    """A case as labelled: what the anchors step does not write."""
+    return {k: v for k, v in case.items() if k != "excerpts"} | {
+        "excerpts": [{k: v for k, v in x.items() if k not in ("anchor", "locations")} for x in case["excerpts"]]}
+
+
 def _anchors(workspace: Workspace, args: argparse.Namespace) -> int:
     import json
     import subprocess
@@ -566,6 +572,7 @@ def _anchors(workspace: Workspace, args: argparse.Namespace) -> int:
         found[n] = dataclasses.replace(item, locations=location_labels(item.words, spans[item.excerpt.document_id]))
     items = [(case_id, found[n]) for n, (case_id, _) in enumerate(pairs)]
     previous: dict[tuple[str, str], str | None] = {}
+    changed_cases: set[str] = set()
     if args.since:
         for path in sorted(workspace.ground_truth.glob("*--*.json")):
             relative = path.relative_to(workspace.root).as_posix()
@@ -573,13 +580,18 @@ def _anchors(workspace: Workspace, args: argparse.Namespace) -> int:
                                    capture_output=True)
             old = json.loads(shown.stdout.decode("utf-8")) if shown.returncode == 0 else {"cases": []}
             texts = {(c["case_id"], x["excerpt_id"]): x["text"] for c in old["cases"] for x in c["excerpts"]}
+            before = {c["case_id"]: c for c in old["cases"]}
+            now = {c["case_id"]: c for c in json.loads(path.read_text(encoding="utf-8"))["cases"]}
+            changed_cases |= {cid for cid, c in now.items()
+                              if cid not in before or _case_content(before[cid]) != _case_content(c)}
             for case_id, item in items:
                 key = (case_id, item.excerpt.excerpt_id)
                 if item.excerpt.document_id in path.stem and texts.get(key) != item.excerpt.text:
                     previous[key] = texts.get(key)
     folder = workspace.root / "tmp" / "anchor-review"
     page_path = write_anchor_review(folder, items, pdf_paths,
-                                    {c.case_id: c.question for c in dataset.cases}, previous, word_files)
+                                    {c.case_id: c.question for c in dataset.cases}, previous, word_files,
+                                    [c for c in dataset.cases if c.case_id in changed_cases])
     counts = {s: sum(1 for _, i in items if i.status == s) for s in ("located", "ambiguous", "missing")}
     approximate = sum(1 for _, i in items if i.approximate)
     _out(f"{len(items)} 段 excerpt：唯一定位 {counts['located']}，多处出现按位置选定 {counts['ambiguous']}，"
