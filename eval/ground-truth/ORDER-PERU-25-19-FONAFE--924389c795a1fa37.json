@@ -10,6 +10,7 @@
       "case_id": "PO-25-19-DOCX-Q001",
       "question": "订单 ORDER2025004 中，ELCTO公司订购了哪些产品？每款产品的单价和数量是多少？订购的总金额是多少？交货的计划是怎么样的？请详细说明每批次交付的具体日期，及每批次交付的产品和数量明细。",
       "answerable": true,
+      "same_content_as": "PO-25-19-Q001",
       "reference_answer": "ELCTO总共订购了两款产品：HXE12ES和HXE13ES。HXE12ES的单价为USD 4.56，数量总共116000件；HXE13ES的单价为USD 5.08，数量总共94000件。订购的总金额为USD 1006480.00。交货计划分为六批次：第一批次交付日期为2026年2月28日，交付HXE12ES 19330件和HXE13ES 16000件；第二批次交付日期为2026年4月9日，交付HXE12ES 19330件和HXE13ES 16000件；第三批次交付日期为2026年8月7日，交付HXE12ES 19330件和HXE13ES 15500件；第四批次交付日期为2026年12月5日，交付HXE12ES 19330件和HXE13ES 15500件；第五批次交付日期为2027年4月4日，交付HXE12ES 19330件和HXE13ES 15500件；第六批次交付日期为2027年8月2日，交付HXE12ES 19350件和HXE13ES 15500件。",
       "excerpts": [
         {
@@ -327,6 +328,7 @@
       "case_id": "PO-25-19-DOCX-Q002",
       "question": "订单 ORDER2025004 中，ELUC公司订购了多少件HXE34K-S1？总金额是多少？",
       "answerable": true,
+      "same_content_as": "PO-25-19-Q002",
       "reference_answer": "ELUC订购了2000件HXE34K-S1，总金额为USD 28740.00。",
       "excerpts": [
         {
@@ -437,6 +439,7 @@
       "case_id": "PO-25-19-DOCX-Q003",
       "question": "订单 ORDER2025004 中，ENSA公司订购了哪些产品？每款产品的单价和数量是多少？订购的总金额是多少？交货的计划是怎么样的？请详细说明每批次交付的具体日期，及每批次交付的产品和数量明细。",
       "answerable": true,
+      "same_content_as": "PO-25-19-Q003",
       "reference_answer": "ENSA总共订购了四款产品：HXE12ES、HXE13ES、HXE33K-S1和HXE34K-S1。HXE12ES的单价为USD 4.56，数量总共132180件；HXE13ES的单价为USD 5.08，数量总共9910件；HXE33K-S1的单价为USD 13.49，数量总共5018件；HXE34K-S1的单价为USD 14.37，数量总共10804件。订购的总金额为USD 876029.90。交货计划分为六批次：第一批次交付日期为2026年2月28日，交付HXE12ES 24330件、HXE13ES 1810件、HXE33K-S1 1153件和HXE34K-S1 2234件；第二批次交付日期为2026年4月9日，交付HXE12ES 23630件、HXE13ES 1710件、HXE33K-S1 853件和HXE34K-S1 1734件；第三批次交付日期为2026年8月7日，交付HXE12ES 21880件、HXE13ES 1710件、HXE33K-S1 753件和HXE34K-S1 1734件；第四批次交付日期为2026年12月5日，交付HXE12ES 21680件、HXE13ES 1610件、HXE33K-S1 753件和HXE34K-S1 1734件；第五批次交付日期为2027年4月4日，交付HXE12ES 20480件、HXE13ES 1560件、HXE33K-S1 753件和HXE34K-S1 1734件；第六批次交付日期为2027年8月2日，交付HXE12ES 20180件、HXE13ES 1510件、HXE33K-S1 753件和HXE34K-S1 1634件。",
       "excerpts": [
         {
@@ -920,6 +923,7 @@
       "case_id": "PO-25-19-DOCX-Q004",
       "question": "订单 ORDER2025004，客户的付款条件是什么？",
       "answerable": true,
+      "same_content_as": "PO-25-19-Q004",
       "reference_answer": "货款将在货物在客户仓库被验收后30天内被支付。",
       "excerpts": [
         {
@@ -980,6 +984,7 @@
       "case_id": "PO-25-19-DOCX-Q005",
       "question": "订单 ORDER2025004 中，HDNA 公司订购数量最多的是哪一款产品？这款产品的订单单价是多少？",
       "answerable": true,
+      "same_content_as": "PO-25-19-Q005",
       "reference_answer": "HDNA 订购了三款产品：Item 1 单相两线表 190,941 台、Item 3 三相三线表 400 台、Item 4 三相四线表 22,986 台，数量最多的是 Item 1 单相两线表（型号 HXE12ES）。该型号的订单单价为 USD 4.56（CIF Callao）。",
       "excerpts": [
         {
@@ -1212,6 +1217,7 @@
       "case_id": "PO-25-19-DOCX-Q006",
       "question": "订单 ORDER2025004 中，ELPU 公司的货物安排在第几批次交付？该批次的 DDP 日期是哪天？",
       "answerable": true,
+      "same_content_as": "PO-25-19-Q006",
       "reference_answer": "ELPU 订购 Item 3 三相三线表 100 台和 Item 4 三相四线表 1,200 台，都安排在第 4 批次（签约后 450 天）交付；第 4 批次的 DDP 日期为 2026 年 12 月 5 日。",
       "excerpts": [
         {
@@ -1408,6 +1414,7 @@
       "case_id": "PO-25-19-DOCX-Q007",
       "question": "订单 ORDER2025004 中，第 1 批次的货物最晚需要在什么时候运抵秘鲁？",
       "answerable": true,
+      "same_content_as": "PO-25-19-Q007",
       "reference_answer": "第 1 批次的 DDP 日期为 2026 年 2 月 28 日，这是客户要求货物到达其仓库的最晚日期；Hexing Peru 在货物运抵秘鲁后约需 10 天办理清关和境内配送，因此第 1 批次的货物最晚约需在 2026 年 2 月 18 日前运抵秘鲁。",
       "excerpts": [
         {
@@ -1515,6 +1522,7 @@
       "case_id": "PO-25-19-DOCX-Q008",
       "question": "订单 ORDER2025004 中，HXE33K-S1 电表的质保期是多久？",
       "answerable": false,
+      "same_content_as": "PO-25-19-Q008",
       "reference_answer": "订单中没有关于质保期的约定。",
       "excerpts": [],
       "evidence_groups": []
@@ -1523,6 +1531,7 @@
       "case_id": "PO-25-19-DOCX-Q009",
       "question": "订单 ORDER2025004 中，唯一对序列号有额外要求的电力公司订购了哪些产品？各订购多少台？",
       "answerable": true,
+      "same_content_as": "PO-25-19-Q009",
       "reference_answer": "唯一对序列号有额外要求的是 SEAL（需另加 NIM 编码，待确认）。SEAL 订购了 Item 1 单相两线表（HXE12ES）110,000 台和 Item 4 三相四线表（HXE34K-S1）1,500 台，未订购 Item 2、Item 3。",
       "excerpts": [
         {

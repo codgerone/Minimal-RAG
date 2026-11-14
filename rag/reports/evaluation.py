@@ -279,7 +279,7 @@ def render(result: dict[str, Any], previous: dict[str, Any] | None) -> str:
             f' · 文档过滤{filter_state(result)}{_cost_text(result)}'
             f' · 构建指纹 {esc(result["fingerprint"][:12])}</div>{_budget_links(result)}'
             f'<div class="tiles">{tiles}</div>{notice_html}'
-            f'{_type_table(types)}<h2>按文档</h2>{doc_table}'
+            f'{_type_table(types)}{_pairs_table(cases)}<h2>按文档</h2>{doc_table}'
             f'<details><summary>本次使用的构建配置</summary><pre>{esc(_pretty(settings))}</pre></details>'
             f'<h2>逐题明细</h2>{bar}{"".join(blocks)}'
             f'<div class="meta">指标定义见 docs/rules/evaluation.md；原始数据见同目录 result.json。</div>')
@@ -303,7 +303,33 @@ def _type_table(types: dict[str, Any]) -> str:
             + "".join(f'<th class="num">{esc(label)}</th>' for _, label, _ in METRICS)
             + f'<th class="num">每题返回 token</th></tr>{rows}</table></div>'
             '<div class="meta">每题按它所属文档的类型归类；类型由入库时的页面判定得出：没有扫描页为数字 PDF，'
-            '非空白页全部是扫描页为扫描 PDF，两者都有为部分扫描。</div>')
+            '非空白页全部是扫描页为扫描 PDF，两者都有为部分扫描；Word 文档单列。</div>')
+
+
+def _pairs_table(cases: list[dict[str, Any]]) -> str:
+    """Questions labelled on two files of the same content (`same_content_as`), side by side."""
+    by_id = {c["case_id"]: c for c in cases}
+    pairs = [(c, by_id[c["same_content_as"]]) for c in cases if c.get("same_content_as") in by_id]
+    if not pairs:
+        return ""
+
+    def cells(case: dict[str, Any]) -> str:
+        if not case["answerable"]:
+            return '<td>不可回答</td><td class="num">—</td><td class="num">—</td>'
+        state = "完整覆盖" if case["complete"] else "命中" if case["hit"] else "未命中"
+        ks = [g["required_k"] for g in case["groups"]]
+        need = "—" if any(k is None for k in ks) or not ks else str(max(ks))
+        return (f'<td>{state}</td><td class="num">{case["first_relevant_rank"] or "—"}</td>'
+                f'<td class="num">{need}</td>')
+
+    rows = "".join(
+        f'<tr><td><a href="#{esc(a["case_id"])}">{esc(a["case_id"])}</a> / '
+        f'<a href="#{esc(b["case_id"])}">{esc(b["case_id"])}</a></td>{cells(a)}{cells(b)}</tr>' for a, b in pairs)
+    return ('<h2>同一内容的两种文件</h2><div class="meta">同一组题分别标注在内容相同的两份文件上（左为本题，右为'
+            '它所对应的题）；所需返回单元为各证据组在全量排名中被覆盖所需单元数的最大值。</div>'
+            '<div class="scroll"><table><tr><th>题号</th><th>本题</th><th class="num">首个相关名次</th>'
+            '<th class="num">所需返回单元</th><th>对应题</th><th class="num">首个相关名次</th>'
+            f'<th class="num">所需返回单元</th></tr>{rows}</table></div>')
 
 
 def _type_tokens(info: dict[str, Any]) -> str:

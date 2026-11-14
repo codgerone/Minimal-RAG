@@ -1,7 +1,7 @@
 {
   "schema_version": "ground_truth_manifest_v1",
   "dataset_version": "4.2.0",
-  "ground_truth_fingerprint": "34a3f81a6aae60bb06bdee3acbc0da6cefef3771563efc1841db58fba3ac2473",
+  "ground_truth_fingerprint": "0745c860b6c4fcb7033b8ec4dc178ed33a761db5b6e0c1c1c4d63dfa972746cb",
   "review_status": "approved",
   "files": [
     {
@@ -49,7 +49,7 @@
     {
       "document_key": "ORDER-PERU-25-19-FONAFE--924389c795a1fa37",
       "json_path": "eval/ground-truth/ORDER-PERU-25-19-FONAFE--924389c795a1fa37.json",
-      "content_sha256": "676ba79ae6766a7f97346f5c41e904165c804713277d9cdcfc15b9acf3201109",
+      "content_sha256": "55a4d3c55c85c0641c18ec92029d779ae67119ea9e8121eb4651aa09462d829b",
       "case_count": 9
     },
     {

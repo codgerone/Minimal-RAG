@@ -27,12 +27,13 @@ class EvalError(RuntimeError):
 
 
 # Document types reported separately (docs/rules/evaluation.md); the order is the report's.
-DOCUMENT_TYPES = {"digital": "数字 PDF", "scanned": "扫描 PDF", "partly_scanned": "部分扫描"}
+DOCUMENT_TYPES = {"digital": "数字 PDF", "scanned": "扫描 PDF", "partly_scanned": "部分扫描", "word": "Word"}
 
 
 def _document_types(workspace: Workspace, config_name: str) -> dict[str, str]:
-    """document_id → type, from the page classification in the index's intermediate results;
-    documents of indexes built before V4.1 (no pages.json) are left out."""
+    """document_id → type, from the page classification in the index's intermediate results; Word
+    documents (located by address, no pages) are "word"; PDFs of indexes built before V4.1 (no
+    pages.json) are left out."""
     from rag.ingest.ocr.models import DocumentPages
     from rag.jsonio import from_jsonable
     types = {}
@@ -40,6 +41,10 @@ def _document_types(workspace: Workspace, config_name: str) -> dict[str, str]:
         if (folder / "pages.json").is_file() and (folder / "parsed.json").is_file():
             pages = from_jsonable(DocumentPages, read_json(folder / "pages.json"))
             types[read_json(folder / "parsed.json")["document_id"]] = pages.document_type
+        elif (folder / "parsed.json").is_file():
+            parsed = read_json(folder / "parsed.json")
+            if any("address" in s for node in parsed.get("nodes", ()) for s in node.get("sources", ())):
+                types[parsed["document_id"]] = "word"
     return types
 
 
@@ -323,9 +328,10 @@ def _write_run(workspace: Workspace, assembly: Assembly, folder: Path, top_k: in
     write_eval_report(workspace, folder, result, latest_before(workspace, result))
 
 
-def _table_boxes(workspace: Workspace, config_name: str) -> dict[str, list[tuple[int, tuple[float, float, float, float]]]]:
-    """Per document, every table's box on each of its pages, as the parser gave it."""
-    boxes: dict[str, list[tuple[int, tuple[float, float, float, float]]]] = {}
+def _table_boxes(workspace: Workspace, config_name: str) -> dict[str, list[tuple[int | str, Any]]]:
+    """Per document, every table's box on each of its pages, as the parser gave it; for Word, every
+    table's address (with no box)."""
+    boxes: dict[str, list[tuple[int | str, Any]]] = {}
     for path in sorted((workspace.index_dir(config_name) / "documents").glob("*/parsed.json")):
         parsed = read_json(path)
         own = boxes.setdefault(parsed["document_id"], [])
@@ -333,6 +339,7 @@ def _table_boxes(workspace: Workspace, config_name: str) -> dict[str, list[tuple
             if "table" in node:
                 own += [(s["page_number"], (s["bbox"]["x0"], s["bbox"]["y0"], s["bbox"]["x1"], s["bbox"]["y1"]))
                         for s in node["sources"] if s.get("bbox")]
+                own += [(s["address"], None) for s in node["sources"] if "address" in s]
     return boxes
 
 
@@ -415,6 +422,7 @@ def _case_json(item: CaseResult, names: dict[str, str]) -> dict[str, Any]:
         "case_id": case.case_id, "document_id": case.document_id,
         "document_name": case.document_name, "question": case.question,
         "reference_answer": case.reference_answer, "answerable": case.answerable,
+        "same_content_as": case.same_content_as,
         "scope": {"kind": item.scope.kind, "codes": list(item.scope.codes),
                   "document_ids": list(item.scope.document_ids) if item.scope.document_ids else None,
                   "document_names": [names.get(d, d) for d in item.scope.document_ids or ()],

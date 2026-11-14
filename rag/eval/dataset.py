@@ -54,6 +54,7 @@ class Case:
     answerable: bool
     excerpts: tuple[Excerpt, ...]
     groups: tuple[EvidenceGroup, ...]
+    same_content_as: str | None = None   # the same question on another file of the same content
 
 
 @dataclass(frozen=True)
@@ -120,5 +121,5 @@ def load_dataset(folder: Path) -> Dataset:
                 raise ValueError(f"{path.name} {case['case_id']}: 方案引用了不存在的 excerpt {sorted(unknown)}")
             cases.append(Case(case["case_id"], data["document_id"], data["document_name"],
                               case["question"].strip(), case["reference_answer"],
-                              bool(case["answerable"]), excerpts, groups))
+                              bool(case["answerable"]), excerpts, groups, case.get("same_content_as")))
     return Dataset(manifest.get("dataset_version", "?"), digest.hexdigest(), tuple(cases), hashes)
