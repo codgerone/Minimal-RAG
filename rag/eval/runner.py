@@ -136,6 +136,7 @@ class EvalContext:
     searcher: UnitSearch
     owners: dict[str, str]        # chunk_id → table_id, when whole tables are returned
     tokens_of: Any                # text → token count
+    unsupported: frozenset[str] = frozenset()   # documents of a file type this assembly does not read
 
     def scope(self, question: str) -> SearchScope:
         return resolve_scope(question, self.catalog, self.enabled)
@@ -166,7 +167,11 @@ def prepare(workspace: Workspace, assembly: Assembly, cache_retrievals: bool = F
     status = current_status(workspace, assembly)
     if not status.queryable:
         raise EvalError(f"配置 {assembly.name} 的索引不可用（{status.state}），请先运行 ingest")
-    stale = [d.relative_path for d in status.documents if d.state != "current"]
+    # A file type the assembly has no parser for is not a stale index: its questions are scored
+    # like any other, and their evidence cannot be retrieved.
+    stale = [d.relative_path for d in status.documents if d.state not in ("current", "unsupported")]
+    unsupported = frozenset(d.source.document_id for d in status.documents
+                            if d.state == "unsupported" and d.source)
     if stale:
         raise EvalError("以下文档的索引不是最新的，评估结果会失真，请先运行 ingest："
                         + "；".join(stale))
@@ -198,7 +203,8 @@ def prepare(workspace: Workspace, assembly: Assembly, cache_retrievals: bool = F
                           tables, table_return_unit, cache)
     owners = ({cid: t.table_id for cid, t in tables.tables_for_chunks([c.chunk_id for c in chunks]).items()}
               if table_return_unit == "table" else {})
-    return EvalContext(dataset, sources, changed, chunks, enabled, catalog, searcher, owners, _TokenCounter())
+    return EvalContext(dataset, sources, changed, chunks, enabled, catalog, searcher, owners, _TokenCounter(),
+                       unsupported)
 
 
 def run_evaluation(workspace: Workspace, assembly: Assembly, budgets: Sequence[int]) -> list[Path]:
@@ -249,7 +255,8 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, budgets: Sequence[i
         prepared.append((item, run))
 
     unmapped = [f"{r.case.case_id}/{x}：{e.problem}" for r, _ in prepared
-                for x, e in r.evidence.excerpts.items() if e.mode == "unmapped"]
+                for x, e in r.evidence.excerpts.items()
+                if e.mode == "unmapped" and r.case.document_id not in ctx.unsupported]
     if unmapped:
         raise EvalError("以下 excerpt 找不到对应 chunk，评估结果会失真：" + "；".join(unmapped))
     folders = {}
@@ -268,14 +275,14 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, budgets: Sequence[i
                     item.evidence.groups, item.evidence_documents))
             results.append(item)
         _write_run(workspace, assembly, folders[budget], budget, folders, results, dataset, sources,
-                   changed, enabled, catalog is not None, len(table_excerpts))
+                   changed, enabled, catalog is not None, len(table_excerpts), ctx.unsupported)
     return [folders[b] for b in budgets]
 
 
 def _write_run(workspace: Workspace, assembly: Assembly, folder: Path, top_k: int,
                folders: dict[int, Path], results: list[CaseResult], dataset: Dataset,
                sources: dict[str, Any], changed: list[str], enabled: bool, has_catalog: bool,
-               table_excerpts: int) -> None:
+               table_excerpts: int, unsupported: frozenset[str] = frozenset()) -> None:
     table_return_unit = assembly.config.table_return_unit
     names = {doc_id: source.document_name for doc_id, source in sources.items()}
     scored = [r.score for r in results if r.score is not None]
@@ -310,7 +317,8 @@ def _write_run(workspace: Workspace, assembly: Assembly, folder: Path, top_k: in
         "created_at": datetime.now().astimezone().isoformat(timespec="seconds"),
         "dataset": {"version": dataset.version, "fingerprint": dataset.fingerprint,
                     "questions": len(dataset.cases), "answerable": len(scored),
-                    "pdf_changed_since_labelling": changed},
+                    "pdf_changed_since_labelling": changed,
+                    "unsupported_documents": sorted(names.get(d, d) for d in unsupported)},
         "evidence_modes": {mode: sum(x.mode == mode for r in results for x in r.evidence.excerpts.values())
                            for mode in ("coordinate", "fallback", "unmapped")},   # counted per excerpt
         "metrics": _metrics_dict(scored),

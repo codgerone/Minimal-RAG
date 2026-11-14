@@ -227,6 +227,10 @@ def render(result: dict[str, Any], previous: dict[str, Any] | None) -> str:
         unit = "段 excerpt" if result["cases"] and "excerpts" in result["cases"][0] else "个证据组"
         notices.append(f'{modes["auto"]} {unit}由自动判定、{modes["unmapped"]} {unit}找不到对应 chunk'
                        f'（V3.4 之前的旧判定方式）。')
+    if result["dataset"].get("unsupported_documents"):
+        notices.append(f'此配置不读取 {len(result["dataset"]["unsupported_documents"])} 份文档的文件类型'
+                       f'（{esc("、".join(result["dataset"]["unsupported_documents"]))}），'
+                       '它们的题照常计分，证据检索不到。')
     if result["dataset"]["pdf_changed_since_labelling"]:
         notices.append("部分 PDF 在标注之后被修改过，标注证据可能已过时。")
     notice_html = "".join(f'<div class="card">⚠ {n}</div>' for n in notices)
