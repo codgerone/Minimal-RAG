@@ -531,7 +531,10 @@ def _table_structure(workspace: Workspace, args: argparse.Namespace) -> int:
 def _anchors(workspace: Workspace, args: argparse.Namespace) -> int:
     import json
     import subprocess
+    import dataclasses
     from rag.eval.anchors import locate_all, write_anchors
+    from rag.eval.docx_anchors import locate_all as locate_word, location_labels, parser_spans
+    from rag.ingest.docx.reader import read_docx
     from rag.eval.dataset import load_dataset
     from rag.eval.runner import EvalError
     from rag.ingest.sources import discover
@@ -547,14 +550,21 @@ def _anchors(workspace: Workspace, args: argparse.Namespace) -> int:
     # Documents with scanned pages are read from their OCR text-layer PDF, as every other tool does.
     step = ocr_step(resolve_config(workspace.root, args.config))
     scanned: dict[str, frozenset[int]] = {}
+    word_docs = {doc for doc in dataset.document_hashes if sources[doc].file_type == "docx"}
     for doc in dataset.document_hashes:
-        if step is not None:
+        if step is not None and doc not in word_docs:
             sources[doc], pages = step.prepare(sources[doc], _out)
             scanned[doc] = frozenset(p.page_number for p in pages.pages if p.kind == "scanned")
-    pdf_paths = {d: s.pdf_path for d, s in sources.items()}
+    pdf_paths = {d: s.pdf_path for d, s in sources.items() if s.file_type == "pdf"}
+    word_files = {doc: read_docx(sources[doc].absolute_path) for doc in word_docs}
+    spans = {doc: parser_spans(sources[doc]) for doc in word_docs}
     pairs = [(c.case_id, x) for c in dataset.cases for x in c.excerpts]
-    located = locate_all([x for _, x in pairs], pdf_paths, scanned)
-    items = [(case_id, item) for (case_id, _), item in zip(pairs, located)]
+    on_pdf = [n for n, (_, x) in enumerate(pairs) if x.document_id not in word_docs]
+    on_word = [n for n, (_, x) in enumerate(pairs) if x.document_id in word_docs]
+    found = dict(zip(on_pdf, locate_all([pairs[n][1] for n in on_pdf], pdf_paths, scanned)))
+    for n, item in zip(on_word, locate_word([pairs[n][1] for n in on_word], word_files)):
+        found[n] = dataclasses.replace(item, locations=location_labels(item.words, spans[item.excerpt.document_id]))
+    items = [(case_id, found[n]) for n, (case_id, _) in enumerate(pairs)]
     previous: dict[tuple[str, str], str | None] = {}
     if args.since:
         for path in sorted(workspace.ground_truth.glob("*--*.json")):
@@ -569,7 +579,7 @@ def _anchors(workspace: Workspace, args: argparse.Namespace) -> int:
                     previous[key] = texts.get(key)
     folder = workspace.root / "tmp" / "anchor-review"
     page_path = write_anchor_review(folder, items, pdf_paths,
-                                    {c.case_id: c.question for c in dataset.cases}, previous)
+                                    {c.case_id: c.question for c in dataset.cases}, previous, word_files)
     counts = {s: sum(1 for _, i in items if i.status == s) for s in ("located", "ambiguous", "missing")}
     approximate = sum(1 for _, i in items if i.approximate)
     _out(f"{len(items)} 段 excerpt：唯一定位 {counts['located']}，多处出现按位置选定 {counts['ambiguous']}，"

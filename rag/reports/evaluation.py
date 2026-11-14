@@ -7,6 +7,7 @@ from typing import Any
 
 from rag.eval.metrics import METRICS
 from rag.jsonio import write_atomic
+from rag.locations import describe
 from rag.paths import Workspace
 from rag.reports.html import badge, esc, filters, hit_scores, page, pct, text_block, write_assets
 
@@ -60,7 +61,7 @@ def required_k_badge(group: dict[str, Any]) -> str:
 def _excerpt_html(x: dict[str, Any], case: dict[str, Any]) -> str:
     source = "" if x["document_name"] == case["document_name"] else f' · {esc(x["document_name"])}'
     header = " " + badge("表头") if x.get("table_header") else ""
-    return (f'<div class="meta">{esc(x["excerpt_id"])}{source} · 第 {",".join(map(str, x["pages"]))} 页{header}</div>'
+    return (f'<div class="meta">{esc(x["excerpt_id"])}{source} · {esc(describe(x["pages"]))}{header}</div>'
             f'{text_block(x["text"], 300)}')
 
 
@@ -70,7 +71,7 @@ def _legacy_group_html(group: dict[str, Any]) -> str:
     state = (badge(f"第 {group['covered_at_rank']} 位时已覆盖", "ok") if group["covered_at_rank"]
              else badge("未覆盖", "bad"))
     mode = badge(label, kind) if group["mode"] not in PLAIN_MODES else ""
-    excerpts = "".join(f'<div class="meta">{esc(x["document_name"])} · 第 {",".join(map(str, x["pages"]))} 页</div>'
+    excerpts = "".join(f'<div class="meta">{esc(x["document_name"])} · {esc(describe(x["pages"]))}</div>'
                        f'{text_block(x["text"], 400)}' for x in group["excerpts"])
     sets = "；".join(" + ".join(s) for s in group["acceptable_sets"]) or "无"
     return (f'<div class="item"><b>证据 {esc(group["group_id"])}</b> {state} {mode}{excerpts}'
@@ -200,7 +201,7 @@ def _hit_html(hit: dict[str, Any], groups: list[dict[str, Any]], retriever: str)
            + (f'；含证据的 {esc("、".join(hit["relevant_chunk_ids"]))}' if hit.get("relevant_chunk_ids") else "")
            if hit.get("table_id") else esc(hit["chunk_id"]))
     return (f'<div class="item"><b>#{hit["rank"]}</b> {mark} {table} '
-            f'<span class="meta">{esc(hit["document_name"])} · 第 {",".join(map(str, hit["pages"]))} 页'
+            f'<span class="meta">{esc(hit["document_name"])} · {esc(describe(hit["pages"]))}'
             f' · {esc(hit_scores(hit, retriever))}{tokens}</span>{text_block(hit["text"], 280)}'
             f'<details><summary>{esc(hit.get("table_id") or hit["chunk_id"])}</summary><div class="meta">{ids}；'
             + (f'得分 {hit["score"]:.6f}' if "score" in hit else f'距离 {hit["distance"]:.6f}')

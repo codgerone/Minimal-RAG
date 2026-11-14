@@ -265,3 +265,20 @@ def test_headers_footers_go_by_section_and_notes_follow_their_reference(sectione
     assert order == ["H1", "One", "Note one", "[Item, Item two]", "Note two", "After list", "F1",
                      "H2", "Two", "Orphan note"]
     assert result.native["format"] == "docx_reader_v1" and len(result.native["sections"]) == 2
+
+
+def test_excerpts_are_located_by_address_across_a_label_and_within_cells(sample):
+    from rag.eval.anchors import format_word
+    from rag.eval.dataset import Excerpt
+    from rag.eval.docx_anchors import file_words, locate_excerpt
+    words = file_words(read_docx(sample))
+    labelled = locate_excerpt(Excerpt("x1", "d", "n", (), "1. Clause one"), words)
+    assert labelled.status == "located"
+    assert [format_word(w) for w in labelled.words] == ["body/2#label 0 2", "body/2 0 6", "body/2 7 10"]
+    cells = locate_excerpt(Excerpt("x2", "d", "n", (), "x | y"), words)
+    assert [w.address for w in cells.words] == ["body/15/r1c1/0", "body/15/r1c2/0"]
+    across = locate_excerpt(Excerpt("x3", "d", "n", (), "x y"), words)   # two cells are not one text
+    assert across.status == "located" and len(across.groups[0][1]) == 2 and \
+        {w.address for w in across.words} == {"body/15/r1c1/0", "body/15/r1c2/0"}
+    toc = locate_excerpt(Excerpt("x4", "d", "n", (), "Contents 3"), words)
+    assert toc.status == "missing"                                       # table-of-contents text is not read

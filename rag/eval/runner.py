@@ -423,7 +423,7 @@ def _case_json(item: CaseResult, names: dict[str, str]) -> dict[str, Any]:
         "hit": score.hit if score else None, "complete": score.complete if score else None,
         "first_relevant_rank": score.first_relevant_rank if score else None,
         "excerpts": [{
-            "excerpt_id": x.excerpt_id, "document_name": x.document_name, "pages": list(x.pages),
+            "excerpt_id": x.excerpt_id, "document_name": x.document_name, "pages": list(x.pages) or list(x.locations),
             "text": x.text, "mode": item.evidence.excerpts[x.excerpt_id].mode,
             "acceptable_sets": [sorted(s) for s in item.evidence.excerpts[x.excerpt_id].acceptable_sets],
             "problem": item.evidence.excerpts[x.excerpt_id].problem, "table_header": x.table_header,

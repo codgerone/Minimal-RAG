@@ -25,6 +25,7 @@ class Excerpt:
     locate_hint: str | None = None   # header text of the excerpt's column; only for locating it in the PDF
     anchor: tuple[AnchorPiece, ...] | None = None   # confirmed PDF position; None unless anchor_state == "ok"
     anchor_state: Literal["ok", "missing", "stale"] = "missing"   # stale: text edited after locating
+    locations: tuple[str, ...] = ()   # Word: location labels ("第 N 块", "表 N" …), written with the anchor
 
 
 @dataclass(frozen=True)
@@ -90,7 +91,8 @@ def _anchor(raw: dict) -> tuple[tuple[AnchorPiece, ...] | None, str]:
 def _excerpt(x: dict) -> Excerpt:
     anchor, state = _anchor(x)
     return Excerpt(x["excerpt_id"], x["document_id"], x["document_name"], tuple(x.get("page_numbers", ())),
-                   x["text"], bool(x.get("table_header", False)), x.get("locate_hint"), anchor, state)
+                   x["text"], bool(x.get("table_header", False)), x.get("locate_hint"), anchor, state,
+                   tuple(x.get("locations", ())))
 
 
 def load_dataset(folder: Path) -> Dataset:

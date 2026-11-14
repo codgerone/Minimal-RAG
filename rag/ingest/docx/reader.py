@@ -493,6 +493,8 @@ def cell_text(cell: Cell) -> str:
 
 def _block_units(block: Block) -> Iterator[Unit]:
     if isinstance(block, Paragraph):
+        if block.toc:
+            return                            # table-of-contents text is not read
         if block.label is not None:
             yield Unit(block.address + "#label", block.label)
         yield Unit(block.address, block.text)
@@ -510,5 +512,6 @@ def units(part: Part) -> Iterator[Unit]:
 
 
 def all_units(file: DocxFile) -> list[Unit]:
-    """Every addressed text of the file in reading order (labels before their paragraph)."""
+    """Every addressed text of the file, part by part (labels before their paragraph), table-of-
+    contents paragraphs left out."""
     return [unit for part in file.parts for unit in units(part)]
