@@ -268,9 +268,9 @@
     },
     {
       "case_id": "BUDGET-FONAFE-Q007",
-      "question": "按概算 BUDGET2025001 的编制说明，报价有效期在 120 天以上时，风险准备金按多少比例计提？",
+      "question": "如果概算 BUDGET2025001 的报价有效期定为 150 天，风险准备金应按多少比例计提？",
       "answerable": true,
-      "reference_answer": "按 1% 计提。",
+      "reference_answer": "150 天属于 120 天以上，按 1% 计提。",
       "excerpts": [
         {
           "excerpt_id": "x1",
@@ -305,12 +305,60 @@
               ]
             }
           ],
-          "note": "数据假设表与填写说明第 3 节第 2）条都写明，任一处即可"
+          "note": "数据假设表与填写说明都写明 120 天以上按 1%，任一处即可"
         }
       ]
     },
     {
       "case_id": "BUDGET-FONAFE-Q008",
+      "question": "概算 BUDGET2025001 的成本核价表用多少的美元兑人民币汇率？与编制说明中数据假设的汇率一致吗？",
+      "answerable": true,
+      "reference_answer": "成本核价表的 USD:CNY 为 7.088；编制说明数据假设中的 USD:CNY 为 6.83，两者不一致。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "a7d55bc735854453",
+          "document_name": "FONAFE普表招标一般贸易概算-20251204.xlsx",
+          "relative_path": "FONAFE普表招标一般贸易概算-20251204.xlsx",
+          "text": "USD:CNY | 7.088"
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "a7d55bc735854453",
+          "document_name": "FONAFE普表招标一般贸易概算-20251204.xlsx",
+          "relative_path": "FONAFE普表招标一般贸易概算-20251204.xlsx",
+          "text": "USD:CNY | 6.83"
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "成本核价表的汇率",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "数据假设中的汇率",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "BUDGET-FONAFE-Q009",
       "question": "概算 BUDGET2025001 的海运费按哪个起运港到哪个目的港估算？",
       "answerable": false,
       "reference_answer": "文件没有写明起运港和目的港（关键假设清单中相应栏目为空）。",

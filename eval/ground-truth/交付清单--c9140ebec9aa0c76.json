@@ -8,22 +8,29 @@
   "cases": [
     {
       "case_id": "DELIV-FONAFE-Q001",
-      "question": "按交付清单 DELIV2025001，ITEM 1 中 HIDRANDINA 的采购数量、最长交付期限和保函有效期是多少？",
+      "question": "交付清单 DELIV2025001 中，中信保买方代码为 PER/591251 的是哪家公司？它在 ITEM 1 中的保函（FIANZA 10%）金额是多少？",
       "answerable": true,
-      "reference_answer": "数量 190,941 只，最长交付期限 330（天），保函有效期至 2026-09-20。",
+      "reference_answer": "买方代码 PER/591251 对应 HIDRANDINA（HDNA）；其 ITEM 1 的保函金额为 116,710.78。",
       "excerpts": [
         {
           "excerpt_id": "x1",
           "document_id": "c9140ebec9aa0c76",
           "document_name": "交付清单.xlsx",
           "relative_path": "交付清单.xlsx",
-          "text": "HIDRANDINA S.A. | 190,941.00 | 330 | 2026-09-20"
+          "text": "HIDRANDINA S.A. | HDNA | PER/591251"
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "c9140ebec9aa0c76",
+          "document_name": "交付清单.xlsx",
+          "relative_path": "交付清单.xlsx",
+          "text": "HIDRANDINA S.A. | 116,710.78"
         }
       ],
       "evidence_groups": [
         {
           "evidence_group_id": "e1",
-          "information_item": "采购数量",
+          "information_item": "对应的公司",
           "schemes": [
             {
               "scheme_id": "s1",
@@ -35,24 +42,13 @@
         },
         {
           "evidence_group_id": "e2",
-          "information_item": "最长交付期限",
+          "information_item": "ITEM 1 的保函金额",
           "schemes": [
             {
               "scheme_id": "s1",
               "excerpt_ids": [
-                "x1"
-              ]
-            }
-          ]
-        },
-        {
-          "evidence_group_id": "e3",
-          "information_item": "保函有效期",
-          "schemes": [
-            {
-              "scheme_id": "s1",
-              "excerpt_ids": [
-                "x1"
+                "x1",
+                "x2"
               ]
             }
           ]
@@ -61,47 +57,6 @@
     },
     {
       "case_id": "DELIV-FONAFE-Q002",
-      "question": "交付清单 DELIV2025001 中，ITEM 3 三相三线表的不含税单价和含税单价是多少？",
-      "answerable": true,
-      "reference_answer": "不含 IGV 单价 15.33，含 IGV 单价 18.0894。",
-      "excerpts": [
-        {
-          "excerpt_id": "x1",
-          "document_id": "c9140ebec9aa0c76",
-          "document_name": "交付清单.xlsx",
-          "relative_path": "交付清单.xlsx",
-          "text": "15.33000 | 18.0894"
-        }
-      ],
-      "evidence_groups": [
-        {
-          "evidence_group_id": "e1",
-          "information_item": "不含税单价",
-          "schemes": [
-            {
-              "scheme_id": "s1",
-              "excerpt_ids": [
-                "x1"
-              ]
-            }
-          ]
-        },
-        {
-          "evidence_group_id": "e2",
-          "information_item": "含税单价",
-          "schemes": [
-            {
-              "scheme_id": "s1",
-              "excerpt_ids": [
-                "x1"
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "case_id": "DELIV-FONAFE-Q003",
       "question": "交付清单 DELIV2025001 的中信保额度确认中，ENSA 的买方代码和已申请额度是多少？",
       "answerable": true,
       "reference_answer": "买方代码 PER/589545，已申请额度 500,000.00。",
@@ -131,6 +86,36 @@
         {
           "evidence_group_id": "e2",
           "information_item": "已申请额度",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "DELIV-FONAFE-Q003",
+      "question": "交付清单 DELIV2025001 中，第四批交货 ELSE 的 item1 数量是多少？",
+      "answerable": true,
+      "reference_answer": "第四批交货 ELSE 的 item1 数量为 25,000。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "c9140ebec9aa0c76",
+          "document_name": "交付清单.xlsx",
+          "relative_path": "交付清单.xlsx",
+          "text": "第四批交货 | ELSE | 25,000",
+          "locate_hint": "item1"
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "第四批 ELSE 的 item1 数量",
           "schemes": [
             {
               "scheme_id": "s1",

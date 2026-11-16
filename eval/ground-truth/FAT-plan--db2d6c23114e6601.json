@@ -165,6 +165,80 @@
     },
     {
       "case_id": "FAT-PLAN-Q005",
+      "question": "按 FAT 计划 FAT2025001，单相表的充电在哪一天全部完成？那天充电多少只？",
+      "answerable": true,
+      "reference_answer": "2025-12-17 是单相表充电的最后一天，当天充电 83 只（之后几天只做常规测试）。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "db2d6c23114e6601",
+          "document_name": "FAT plan.xlsx",
+          "relative_path": "FAT plan.xlsx",
+          "text": "2025-12-17",
+          "table_header": true
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "db2d6c23114e6601",
+          "document_name": "FAT plan.xlsx",
+          "relative_path": "FAT plan.xlsx",
+          "text": "83",
+          "locate_hint": "2025-12-17"
+        },
+        {
+          "excerpt_id": "x3",
+          "document_id": "db2d6c23114e6601",
+          "document_name": "FAT plan.xlsx",
+          "relative_path": "FAT plan.xlsx",
+          "text": "单相充电83只，常规测试96只 三相常规测试80只"
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "充电完成的日期",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2"
+              ]
+            },
+            {
+              "scheme_id": "s2",
+              "excerpt_ids": [
+                "x1",
+                "x3"
+              ]
+            }
+          ],
+          "note": "按充电数量行或按当天安排的说明行判断，任一即可"
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "当天充电数量",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2"
+              ]
+            },
+            {
+              "scheme_id": "s2",
+              "excerpt_ids": [
+                "x1",
+                "x3"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "FAT-PLAN-Q006",
       "question": "FAT 计划 FAT2025001 的验货由哪家第三方检验机构执行？",
       "answerable": false,
       "reference_answer": "文件没有写明执行验货的第三方检验机构。",

@@ -8,57 +8,9 @@
   "cases": [
     {
       "case_id": "ENEL-TENDER-Q001",
-      "question": "招标 TENDER2024001 的招标编号是什么？招标方（Utility）是哪家公司？",
+      "question": "招标 TENDER2024001 规定的提问截止日期是哪天？我方投标工作计划中把澄清问题发给招标方（Send consultations to utility）的日期能赶上这个截止日期吗？",
       "answerable": true,
-      "reference_answer": "招标编号 N° D-2-F-00003-24，招标方为 PLUZ ENERGIA SAA。",
-      "excerpts": [
-        {
-          "excerpt_id": "x1",
-          "document_id": "12fe2a52cc4f671b",
-          "document_name": "ENEL Tender information.xlsx",
-          "relative_path": "ENEL Tender information.xlsx",
-          "text": "N° D-2-F-00003-24"
-        },
-        {
-          "excerpt_id": "x2",
-          "document_id": "12fe2a52cc4f671b",
-          "document_name": "ENEL Tender information.xlsx",
-          "relative_path": "ENEL Tender information.xlsx",
-          "text": "PLUZ ENERGIA SAA"
-        }
-      ],
-      "evidence_groups": [
-        {
-          "evidence_group_id": "e1",
-          "information_item": "招标编号",
-          "schemes": [
-            {
-              "scheme_id": "s1",
-              "excerpt_ids": [
-                "x1"
-              ]
-            }
-          ]
-        },
-        {
-          "evidence_group_id": "e2",
-          "information_item": "招标方",
-          "schemes": [
-            {
-              "scheme_id": "s1",
-              "excerpt_ids": [
-                "x2"
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "case_id": "ENEL-TENDER-Q002",
-      "question": "招标 TENDER2024001 的提问截止日期和投标截止日期分别是哪天？",
-      "answerable": true,
-      "reference_answer": "提问截止日期 2024-09-16，投标截止日期 2024-10-03（发布日期 2024-09-06）。",
+      "reference_answer": "提问截止日期为 2024-09-16；工作计划中向招标方发送澄清问题的日期也是 2024-09-16，正好在截止当天，能赶上（没有余量）。",
       "excerpts": [
         {
           "excerpt_id": "x1",
@@ -72,7 +24,7 @@
           "document_id": "12fe2a52cc4f671b",
           "document_name": "ENEL Tender information.xlsx",
           "relative_path": "ENEL Tender information.xlsx",
-          "text": "Deadline for submission of tenders | 2024-10-03"
+          "text": "Send consultations to utility | 2024-09-16"
         }
       ],
       "evidence_groups": [
@@ -90,7 +42,7 @@
         },
         {
           "evidence_group_id": "e2",
-          "information_item": "投标截止日期",
+          "information_item": "计划发送澄清问题的日期",
           "schemes": [
             {
               "scheme_id": "s1",
@@ -103,7 +55,7 @@
       ]
     },
     {
-      "case_id": "ENEL-TENDER-Q003",
+      "case_id": "ENEL-TENDER-Q002",
       "question": "招标 TENDER2024001 采购哪些型号的电表？各自数量是多少？",
       "answerable": true,
       "reference_answer": "两种：HXE13ES 单相表 570,000 只；HXE33K-S1 三相表 150,000 只。",
@@ -153,7 +105,7 @@
       ]
     },
     {
-      "case_id": "ENEL-TENDER-Q004",
+      "case_id": "ENEL-TENDER-Q003",
       "question": "招标 TENDER2024001 对迟延交货的罚款是怎么规定的？",
       "answerable": true,
       "reference_answer": "每迟延一个日历日，罚合同总额的 0.5%。",
@@ -182,55 +134,7 @@
       ]
     },
     {
-      "case_id": "ENEL-TENDER-Q005",
-      "question": "招标 TENDER2024001 的付款条件和合同有效期是什么？",
-      "answerable": true,
-      "reference_answer": "付款条件为验收合格后 90 天付款；合同有效期 2 年，可延长 1 年。",
-      "excerpts": [
-        {
-          "excerpt_id": "x1",
-          "document_id": "12fe2a52cc4f671b",
-          "document_name": "ENEL Tender information.xlsx",
-          "relative_path": "ENEL Tender information.xlsx",
-          "text": "90 days after conformity"
-        },
-        {
-          "excerpt_id": "x2",
-          "document_id": "12fe2a52cc4f671b",
-          "document_name": "ENEL Tender information.xlsx",
-          "relative_path": "ENEL Tender information.xlsx",
-          "text": "2 years with the option of 1 year extension"
-        }
-      ],
-      "evidence_groups": [
-        {
-          "evidence_group_id": "e1",
-          "information_item": "付款条件",
-          "schemes": [
-            {
-              "scheme_id": "s1",
-              "excerpt_ids": [
-                "x1"
-              ]
-            }
-          ]
-        },
-        {
-          "evidence_group_id": "e2",
-          "information_item": "合同有效期",
-          "schemes": [
-            {
-              "scheme_id": "s1",
-              "excerpt_ids": [
-                "x2"
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "case_id": "ENEL-TENDER-Q006",
+      "case_id": "ENEL-TENDER-Q004",
       "question": "在招标 TENDER2024001 的投标工作计划中，价格评估（Evaluation of prices）安排在哪天，由谁负责？",
       "answerable": true,
       "reference_answer": "2024-10-01，由 Maria / Neng 负责。",
@@ -271,7 +175,7 @@
       ]
     },
     {
-      "case_id": "ENEL-TENDER-Q007",
+      "case_id": "ENEL-TENDER-Q005",
       "question": "招标 TENDER2024001 的预算金额（参考价）是多少？",
       "answerable": false,
       "reference_answer": "文件没有给出预算金额或参考价。",
