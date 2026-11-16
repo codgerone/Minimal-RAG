@@ -58,6 +58,7 @@ var S={L:blank(),R:blank(),km:3,doc:'all',all:false,focus:null,cell:null,flip:nu
   pq:D.cases[0].case_id,pc:D.combos[0].label};
 window.QC_FACTS=window.QC_FACTS||{};window.QC_PROCESS=window.QC_PROCESS||{};window.QC_PERTURB=window.QC_PERTURB||{};
 var PT=D.perturbation||null,PAV=new Set(PT?PT.available:[]),GENS=[0].concat(PT?PT.generations:[]);
+function loc(p){return p.length&&typeof p[0]==='string'?p.join('、'):'第 '+p.join(',')+' 页'}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 
 /* ---------- configurations (key grammar: rag/eval/query_compare.py QueryConfig.key) ---------- */
@@ -309,7 +310,7 @@ function cellDetail(id,combo,lk,rk_){
     var u=units[+i],a=lf.e[i],b=rf.e[i];
     var ex=(held[i]||[]).map(function(x){var e=xs[x];return '<span class="badge" title="'+esc(e?e.text:'')+'">'+esc(x)+(e&&e.groups.length?' · '+esc(e.groups.join('/')):'')+'</span>'}).join(' ');
     var src=b<=20?(proc?source(proc[combo][id][b-1],S.R):'加载中…'):'<span class="meta">第 20 名之后</span>';
-    return '<tr><td class="nw" title="'+esc(u.text)+'">'+(u.table?'整表 ':'')+esc(short(u.key))+'<div class="meta">第 '+u.pages.join(',')+' 页</div></td>'
+    return '<tr><td class="nw" title="'+esc(u.text)+'">'+(u.table?'整表 ':'')+esc(short(u.key))+'<div class="meta">'+esc(loc(u.pages))+'</div></td>'
       +'<td>'+ex+'</td><td class="num">'+arrow(a,b)+'</td><td>'+src+'</td></tr>';
   }).join('');
   var flips=ACC.map(function(k){
@@ -426,7 +427,7 @@ function mappingHtml(id){
 }
 function unitRow(n,i,units,held,src){
   var u=units[i],ev=held[i];
-  return '<tr><td class="num">'+n+'</td><td class="nw">'+(u.table?'整表 ':'')+esc(short(u.key))+'<div class="meta">第 '+u.pages.join(',')+' 页 · '+u.tokens+' token</div></td>'
+  return '<tr><td class="num">'+n+'</td><td class="nw">'+(u.table?'整表 ':'')+esc(short(u.key))+'<div class="meta">'+esc(loc(u.pages))+' · '+u.tokens+' token</div></td>'
     +'<td>'+(ev?'<span class="badge ok">'+esc(ev.join('、'))+'</span> ':'')+'<span class="meta">'+esc(u.text.slice(0,120))+'</span></td><td>'+src+'</td></tr>';
 }
 function renderProcess(){

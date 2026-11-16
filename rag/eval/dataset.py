@@ -9,7 +9,9 @@ from pathlib import Path
 from typing import Literal
 
 Box = tuple[float, float, float, float]
-AnchorPiece = tuple[str, tuple[tuple[int, Box], ...]]    # piece text as the PDF reads it, its words (page, box)
+# A word of a piece: (page, box) on a PDF, or (address, start, end) in a Word file.
+AnchorWord = tuple[int, Box] | tuple[str, int, int]
+AnchorPiece = tuple[str, tuple[AnchorWord, ...]]    # piece text as the file reads it, its words
 
 
 @dataclass(frozen=True)
@@ -17,12 +19,13 @@ class Excerpt:
     excerpt_id: str
     document_id: str
     document_name: str
-    pages: tuple[int, ...]
+    pages: tuple[int, ...]       # PDF pages the excerpt is on; empty for Word
     text: str
     table_header: bool = False   # the excerpt is table header text that itself answers the question
     locate_hint: str | None = None   # header text of the excerpt's column; only for locating it in the PDF
     anchor: tuple[AnchorPiece, ...] | None = None   # confirmed PDF position; None unless anchor_state == "ok"
     anchor_state: Literal["ok", "missing", "stale"] = "missing"   # stale: text edited after locating
+    locations: tuple[str, ...] = ()   # Word: location labels ("第 N 块", "表 N" …), written with the anchor
 
 
 @dataclass(frozen=True)
@@ -51,6 +54,7 @@ class Case:
     answerable: bool
     excerpts: tuple[Excerpt, ...]
     groups: tuple[EvidenceGroup, ...]
+    same_content_as: str | None = None   # the same question on another file of the same content
 
 
 @dataclass(frozen=True)
@@ -75,8 +79,11 @@ def _anchor(raw: dict) -> tuple[tuple[AnchorPiece, ...] | None, str]:
     for piece in stored["pieces"]:
         words = []
         for value in piece["words"]:
-            page, *box = value.split()
-            words.append((int(page), tuple(float(v) for v in box)))
+            first, *rest = value.split()
+            if "/" in first:             # Word: "<address> <start> <end>"
+                words.append((first, int(rest[0]), int(rest[1])))
+            else:
+                words.append((int(first), tuple(float(v) for v in rest)))
         # An approximate match on a scanned page also records what OCR read; chunk text holds that.
         pieces.append((piece.get("ocr_text", piece["text"]), tuple(words)))
     return tuple(pieces), "ok"
@@ -84,8 +91,9 @@ def _anchor(raw: dict) -> tuple[tuple[AnchorPiece, ...] | None, str]:
 
 def _excerpt(x: dict) -> Excerpt:
     anchor, state = _anchor(x)
-    return Excerpt(x["excerpt_id"], x["document_id"], x["document_name"], tuple(x["page_numbers"]),
-                   x["text"], bool(x.get("table_header", False)), x.get("locate_hint"), anchor, state)
+    return Excerpt(x["excerpt_id"], x["document_id"], x["document_name"], tuple(x.get("page_numbers", ())),
+                   x["text"], bool(x.get("table_header", False)), x.get("locate_hint"), anchor, state,
+                   tuple(x.get("locations", ())))
 
 
 def load_dataset(folder: Path) -> Dataset:
@@ -113,5 +121,5 @@ def load_dataset(folder: Path) -> Dataset:
                 raise ValueError(f"{path.name} {case['case_id']}: 方案引用了不存在的 excerpt {sorted(unknown)}")
             cases.append(Case(case["case_id"], data["document_id"], data["document_name"],
                               case["question"].strip(), case["reference_answer"],
-                              bool(case["answerable"]), excerpts, groups))
+                              bool(case["answerable"]), excerpts, groups, case.get("same_content_as")))
     return Dataset(manifest.get("dataset_version", "?"), digest.hexdigest(), tuple(cases), hashes)

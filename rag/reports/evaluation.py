@@ -7,6 +7,7 @@ from typing import Any
 
 from rag.eval.metrics import METRICS
 from rag.jsonio import write_atomic
+from rag.locations import describe
 from rag.paths import Workspace
 from rag.reports.html import badge, esc, filters, hit_scores, page, pct, text_block, write_assets
 
@@ -60,7 +61,7 @@ def required_k_badge(group: dict[str, Any]) -> str:
 def _excerpt_html(x: dict[str, Any], case: dict[str, Any]) -> str:
     source = "" if x["document_name"] == case["document_name"] else f' · {esc(x["document_name"])}'
     header = " " + badge("表头") if x.get("table_header") else ""
-    return (f'<div class="meta">{esc(x["excerpt_id"])}{source} · 第 {",".join(map(str, x["pages"]))} 页{header}</div>'
+    return (f'<div class="meta">{esc(x["excerpt_id"])}{source} · {esc(describe(x["pages"]))}{header}</div>'
             f'{text_block(x["text"], 300)}')
 
 
@@ -70,7 +71,7 @@ def _legacy_group_html(group: dict[str, Any]) -> str:
     state = (badge(f"第 {group['covered_at_rank']} 位时已覆盖", "ok") if group["covered_at_rank"]
              else badge("未覆盖", "bad"))
     mode = badge(label, kind) if group["mode"] not in PLAIN_MODES else ""
-    excerpts = "".join(f'<div class="meta">{esc(x["document_name"])} · 第 {",".join(map(str, x["pages"]))} 页</div>'
+    excerpts = "".join(f'<div class="meta">{esc(x["document_name"])} · {esc(describe(x["pages"]))}</div>'
                        f'{text_block(x["text"], 400)}' for x in group["excerpts"])
     sets = "；".join(" + ".join(s) for s in group["acceptable_sets"]) or "无"
     return (f'<div class="item"><b>证据 {esc(group["group_id"])}</b> {state} {mode}{excerpts}'
@@ -200,7 +201,7 @@ def _hit_html(hit: dict[str, Any], groups: list[dict[str, Any]], retriever: str)
            + (f'；含证据的 {esc("、".join(hit["relevant_chunk_ids"]))}' if hit.get("relevant_chunk_ids") else "")
            if hit.get("table_id") else esc(hit["chunk_id"]))
     return (f'<div class="item"><b>#{hit["rank"]}</b> {mark} {table} '
-            f'<span class="meta">{esc(hit["document_name"])} · 第 {",".join(map(str, hit["pages"]))} 页'
+            f'<span class="meta">{esc(hit["document_name"])} · {esc(describe(hit["pages"]))}'
             f' · {esc(hit_scores(hit, retriever))}{tokens}</span>{text_block(hit["text"], 280)}'
             f'<details><summary>{esc(hit.get("table_id") or hit["chunk_id"])}</summary><div class="meta">{ids}；'
             + (f'得分 {hit["score"]:.6f}' if "score" in hit else f'距离 {hit["distance"]:.6f}')
@@ -226,6 +227,10 @@ def render(result: dict[str, Any], previous: dict[str, Any] | None) -> str:
         unit = "段 excerpt" if result["cases"] and "excerpts" in result["cases"][0] else "个证据组"
         notices.append(f'{modes["auto"]} {unit}由自动判定、{modes["unmapped"]} {unit}找不到对应 chunk'
                        f'（V3.4 之前的旧判定方式）。')
+    if result["dataset"].get("unsupported_documents"):
+        notices.append(f'此配置不读取 {len(result["dataset"]["unsupported_documents"])} 份文档的文件类型'
+                       f'（{esc("、".join(result["dataset"]["unsupported_documents"]))}），'
+                       '它们的题照常计分，证据检索不到。')
     if result["dataset"]["pdf_changed_since_labelling"]:
         notices.append("部分 PDF 在标注之后被修改过，标注证据可能已过时。")
     notice_html = "".join(f'<div class="card">⚠ {n}</div>' for n in notices)
@@ -278,7 +283,7 @@ def render(result: dict[str, Any], previous: dict[str, Any] | None) -> str:
             f' · 文档过滤{filter_state(result)}{_cost_text(result)}'
             f' · 构建指纹 {esc(result["fingerprint"][:12])}</div>{_budget_links(result)}'
             f'<div class="tiles">{tiles}</div>{notice_html}'
-            f'{_type_table(types)}<h2>按文档</h2>{doc_table}'
+            f'{_type_table(types)}{_pairs_table(cases)}<h2>按文档</h2>{doc_table}'
             f'<details><summary>本次使用的构建配置</summary><pre>{esc(_pretty(settings))}</pre></details>'
             f'<h2>逐题明细</h2>{bar}{"".join(blocks)}'
             f'<div class="meta">指标定义见 docs/rules/evaluation.md；原始数据见同目录 result.json。</div>')
@@ -302,7 +307,33 @@ def _type_table(types: dict[str, Any]) -> str:
             + "".join(f'<th class="num">{esc(label)}</th>' for _, label, _ in METRICS)
             + f'<th class="num">每题返回 token</th></tr>{rows}</table></div>'
             '<div class="meta">每题按它所属文档的类型归类；类型由入库时的页面判定得出：没有扫描页为数字 PDF，'
-            '非空白页全部是扫描页为扫描 PDF，两者都有为部分扫描。</div>')
+            '非空白页全部是扫描页为扫描 PDF，两者都有为部分扫描；Word 文档单列。</div>')
+
+
+def _pairs_table(cases: list[dict[str, Any]]) -> str:
+    """Questions labelled on two files of the same content (`same_content_as`), side by side."""
+    by_id = {c["case_id"]: c for c in cases}
+    pairs = [(c, by_id[c["same_content_as"]]) for c in cases if c.get("same_content_as") in by_id]
+    if not pairs:
+        return ""
+
+    def cells(case: dict[str, Any]) -> str:
+        if not case["answerable"]:
+            return '<td>不可回答</td><td class="num">—</td><td class="num">—</td>'
+        state = "完整覆盖" if case["complete"] else "命中" if case["hit"] else "未命中"
+        ks = [g["required_k"] for g in case["groups"]]
+        need = "—" if any(k is None for k in ks) or not ks else str(max(ks))
+        return (f'<td>{state}</td><td class="num">{case["first_relevant_rank"] or "—"}</td>'
+                f'<td class="num">{need}</td>')
+
+    rows = "".join(
+        f'<tr><td><a href="#{esc(a["case_id"])}">{esc(a["case_id"])}</a> / '
+        f'<a href="#{esc(b["case_id"])}">{esc(b["case_id"])}</a></td>{cells(a)}{cells(b)}</tr>' for a, b in pairs)
+    return ('<h2>同一内容的两种文件</h2><div class="meta">同一组题分别标注在内容相同的两份文件上（左为本题，右为'
+            '它所对应的题）；所需返回单元为各证据组在全量排名中被覆盖所需单元数的最大值。</div>'
+            '<div class="scroll"><table><tr><th>题号</th><th>本题</th><th class="num">首个相关名次</th>'
+            '<th class="num">所需返回单元</th><th>对应题</th><th class="num">首个相关名次</th>'
+            f'<th class="num">所需返回单元</th></tr>{rows}</table></div>')
 
 
 def _type_tokens(info: dict[str, Any]) -> str:

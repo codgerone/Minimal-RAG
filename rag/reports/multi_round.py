@@ -14,6 +14,7 @@ from typing import Any
 
 from rag.eval.query_compare import completion_vector, verdict
 from rag.jsonio import read_json, write_atomic
+from rag.locations import describe
 from rag.paths import Workspace
 from rag.reports.html import esc, page, write_assets
 
@@ -465,7 +466,7 @@ def unit_line(u: str, info: dict[str, Any], groups: list[dict[str, Any]]) -> str
     held = [g["id"] for g in groups if holds(info["chunks"], g)]
     badge = f'<span class="badge ok">证据：{esc("、".join(held))}</span> ' if held else '<span class="badge">非证据</span> '
     src = "；".join(f'{s[0]} {s[2]}（第 {s[1]} 次检索，名次 {s[3]}）' for s in info["sources"])
-    return (f'<details><summary>{badge}<b>{esc(("整表 " if info["table"] else "") + u)}</b> <span class="meta">第 {",".join(map(str, info["pages"]))} 页 · '
+    return (f'<details><summary>{badge}<b>{esc(("整表 " if info["table"] else "") + u)}</b> <span class="meta">{esc(describe(info["pages"]))} · '
             f'{info["tokens"]} token · {esc(src)}</span></summary><pre style="white-space:pre-wrap">{esc(info["text"])}</pre></details>')
 
 

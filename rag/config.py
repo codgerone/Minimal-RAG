@@ -59,6 +59,7 @@ class AssemblyConfig:
     multi_round: MultiRoundConfig = MultiRoundConfig()
     query_mode: str = "retrieval"   # [query] mode: retrieval (the question retrieved once) | multi_round
     ocr: Component | None = None    # [ocr]: OCR of scanned pages (docs/rules/ocr.md); None = scanned pages are not read
+    docx_parser: Component | None = None   # [docx_parser]: Word parser; None = Word files are not ingested
 
     def table_settings(self) -> dict[str, Any]:
         """The three table steps; LLM steps add their model, prompt and context rules."""
@@ -109,7 +110,7 @@ def load_config(path: Path) -> AssemblyConfig:
         raise ConfigError(f"无法读取配置 {path.name}：{exc}") from exc
     known = {"name", "description", "parser", "table_extractors", "table_structure", "table_formatter",
              "table_index_text", "chunker", "embedder", "lexical", "retriever", "llm", "eval", "multi_round", "query",
-             "ocr"}
+             "ocr", "docx_parser"}
     unknown = set(data) - known
     if unknown:
         raise ConfigError(f"{path.name}：未知配置项 {sorted(unknown)}")
@@ -169,6 +170,7 @@ def load_config(path: Path) -> AssemblyConfig:
         eval_top_k, document_filter, lexical, table_return_unit,
         table_sections["table_structure"], table_sections["table_index_text"], float(bm25_weight),
         _multi_round(data.get("multi_round", {}), path), query_mode, ocr,
+        _component(data["docx_parser"], "docx_parser", path) if "docx_parser" in data else None,
     )
 
 

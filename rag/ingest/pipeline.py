@@ -1,5 +1,7 @@
-"""Process one PDF: classify pages → (OCR scanned pages → text-layer PDF) → parse → document language → (extract → select → merge continuations → rule
-header → table structure → table text → index text) → assemble."""
+"""Process one document. PDF: classify pages → (OCR scanned pages → text-layer PDF) → parse → document
+language → (extract → select → merge continuations → rule header → table structure → table text →
+index text) → assemble. Word: parse → document language → (rule header → table structure → table
+text → index text) → assemble; its tables come exactly from the file."""
 
 from __future__ import annotations
 
@@ -49,7 +51,7 @@ class ProcessedDocument:
     prepared_tables: tuple[PreparedTableContent, ...]
     continuations: ContinuationReport | None
     document: ParsedDocument
-    pages: DocumentPages
+    pages: DocumentPages | None      # None for Word, which has no pages
 
     @property
     def has_table_branch(self) -> bool:
@@ -66,11 +68,15 @@ def process_document(source: SourceDocument, parser: Parser,
     (rag/index/step_cache.py StepCache), which keeps the parser's raw output and each table
     extractor's report."""
     times = times if times is not None else StepTimes()
-    with times.step("pages_ocr"):
-        if ocr is not None:
-            source, pages = ocr.prepare(source, progress)  # type: ignore[attr-defined]
-        else:
-            pages = DocumentPages(classify_pages(source.absolute_path), None)
+    pages: DocumentPages | None = None
+    if source.file_type == "pdf":
+        with times.step("pages_ocr"):
+            if ocr is not None:
+                source, pages = ocr.prepare(source, progress)  # type: ignore[attr-defined]
+            else:
+                pages = DocumentPages(classify_pages(source.absolute_path), None)
+    else:
+        extractors = ()
     with times.step("parse"):
         parsed = parser.parse(source, cache)
     primary = parsed.primary
@@ -117,6 +123,12 @@ def _select(source: SourceDocument, primary, reports: tuple[TableExtractionRepor
         warnings = tuple(w for report in reports for w in report.warnings)
         warnings += grouping.warnings + scoring.warnings
         adopted, continuations = prepare_tables(primary, reports, resolutions, True)
+    elif primary.table_slots and all(table.table.tool == "docx_native" for table in primary.native_tables):
+        # Tables read exactly from the file (Word): adopted as they are.
+        resolutions = tuple(ContentResolution(slot.slot_id, "parser_exact", None, None, "read_from_file")
+                            for slot in primary.table_slots)
+        grouping, scoring, warnings = None, None, ()
+        adopted, continuations = prepare_tables(primary, (), resolutions, True)
     elif primary.table_slots:
         # No extractors configured: every table keeps the parser's own structure.
         resolutions = tuple(ContentResolution(slot.slot_id, "docling_native_fallback",

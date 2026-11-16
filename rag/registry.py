@@ -47,10 +47,16 @@ def _structured(embedder: Embedder, **params: Any) -> Chunker:
     return StructuredTokenChunker(E5TokenCounter(), **params)
 
 
+def _docx_native(**params: Any) -> Parser:
+    from rag.ingest.parsers.docx_native import DocxNativeParser
+    return DocxNativeParser(**params)
+
+
 PARSERS: dict[str, Callable[..., Parser]] = {
     "pymupdf_pages": _pymupdf_parser,
     "docling_layout": _docling_parser,
 }
+DOCX_PARSERS: dict[str, Callable[..., Parser]] = {"docx_native": _docx_native}
 TABLE_EXTRACTORS: dict[str, Callable[..., TableExtractor]] = {
     name: _extractor(name) for name in ("pymupdf", "camelot", "docling", "unstructured")
 }
@@ -114,7 +120,12 @@ class Assembly:
     chunker: Chunker
     lexical: Analyzer | None = None     # set when the config has [lexical]: ingest builds a BM25 index
     ocr: Any = None                     # OcrStep, set when the config has [ocr]
+    docx_parser: Parser | None = None   # set when the config has [docx_parser]
     _llm: LLM | None = field(default=None, repr=False)
+
+    def parser_for(self, file_type: str) -> Parser | None:
+        """The parser of this file type; None when the config does not read the type."""
+        return self.parser if file_type == "pdf" else self.docx_parser if file_type == "docx" else None
 
     @property
     def name(self) -> str:
@@ -169,7 +180,13 @@ def assemble(config: AssemblyConfig) -> Assembly:
     chunker = _make(CHUNKERS, "chunker", config.chunker, embedder)
     lexical = Analyzer(**config.lexical) if config.lexical is not None else None
     table_steps = _table_steps(config, parser, chunker)
-    return Assembly(config, parser, extractors, table_steps, embedder, chunker, lexical, ocr_step(config))
+    docx_parser = None
+    if config.docx_parser is not None:
+        docx_parser = _make(DOCX_PARSERS, "docx_parser", config.docx_parser)
+        if table_steps is None:
+            raise ConfigError(f"[docx_parser] 会产出表格，需要搭配产出表格的 PDF 解析器（docling_layout）与表格处理三个环节")
+    return Assembly(config, parser, extractors, table_steps, embedder, chunker, lexical, ocr_step(config),
+                    docx_parser)
 
 
 def ocr_step(config: AssemblyConfig) -> Any:

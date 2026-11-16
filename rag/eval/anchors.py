@@ -102,6 +102,7 @@ class ExcerptAnchor:
     words: tuple[PdfWord, ...]
     groups: tuple[tuple[str, tuple[PdfWord, ...]], ...] = ()   # excerpt piece (split at " | " / line) → its words
     distances: tuple[int | None, ...] = ()   # per group: edit distance when matched approximately, else None
+    locations: tuple[str, ...] = ()          # Word: the parser's location labels of the words
 
     @property
     def approximate(self) -> bool:
@@ -364,8 +365,11 @@ def read_text(words: tuple[PdfWord, ...]) -> str:
     return " ".join(w.text for w in words)
 
 
-def format_word(word: PdfWord) -> str:
-    """One located word as "page x0 y0 x1 y1" (PyMuPDF page coordinates, points, origin top left)."""
+def format_word(word) -> str:
+    """One located word as "page x0 y0 x1 y1" (PyMuPDF page coordinates, points, origin top left),
+    or in a Word file as "address start end" (character offsets in the addressed text)."""
+    if hasattr(word, "address"):
+        return f"{word.address} {word.start} {word.end}"
     return " ".join([str(word.page), *(f"{v:.2f}" for v in word.bbox)])
 
 
@@ -387,6 +391,8 @@ def write_anchors(folder: Path, anchors: dict[tuple[str, str], ExcerptAnchor]) -
                     | ({"approximate": True, "distance": distance, "ocr_text": read_text(words)}
                        if distance is not None else {})
                     for (text, words), distance in zip(item.groups, distances)]}
+                if item.locations:
+                    x["locations"] = list(item.locations)
                 written += 1
         write_json(path, data)
     return written

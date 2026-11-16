@@ -21,7 +21,7 @@ class DocumentEntry:
     relative_path: str
     file_hash: str
     folder: str           # readable folder name under documents/ and reports/
-    page_count: int
+    page_count: int | None   # None for Word
     chunk_count: int
     table_count: int
     built_at: str
@@ -32,6 +32,7 @@ class DocumentEntry:
     scanned_pages: bool | None = None
     build_settings: dict[str, Any] | None = None
     fingerprint: str | None = None
+    file_type: str = "pdf"
 
 
 @dataclass

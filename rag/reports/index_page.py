@@ -12,10 +12,10 @@ from rag.jsonio import read_json, write_atomic
 from rag.paths import Workspace
 from rag.reports.html import badge, esc, page, pct, write_assets
 
-STATE_BADGES = {"current": ("已入库", "ok"), "new": ("未入库", "warn"), "changed": ("PDF 已修改", "warn"),
+STATE_BADGES = {"current": ("已入库", "ok"), "new": ("未入库", "warn"), "changed": ("文件已修改", "warn"),
                 "stale": ("构建设置已改变", "bad"),
-                "incomplete": ("索引不完整", "bad"), "missing": ("PDF 已删除", ""),
-                "unreadable": ("无可用文本", "bad")}
+                "incomplete": ("索引不完整", "bad"), "missing": ("文件已删除", ""),
+                "unreadable": ("无可用文本", "bad"), "unsupported": ("此配置不支持", "")}
 
 
 def _index_cell(complete: bool | None) -> str:
@@ -64,7 +64,7 @@ def _config_section(workspace: Workspace, config) -> str:
                              for name, text in (("1-解析.html", "解析"), ("2-表格.html", "表格"),
                                                 ("3-分块.html", "分块"))
                              if (folder / name).is_file())
-        numbers = (f'<td class="num">{entry.page_count}</td><td class="num">{entry.table_count}</td>'
+        numbers = (f'<td class="num">{"—" if entry.page_count is None else entry.page_count}</td><td class="num">{entry.table_count}</td>'
                    f'<td class="num">{entry.chunk_count}</td>' if entry else '<td></td><td></td><td></td>')
         rows.append(f"<tr><td>{esc(item.relative_path)}</td><td>{badge(label, kind)}</td>"
                     f"<td>{_index_cell(item.vectors_complete)}</td>"
@@ -74,7 +74,7 @@ def _config_section(workspace: Workspace, config) -> str:
     lexical_head = '<th class="nw">倒排索引</th>' if assembly.lexical else ""
     table = (f'<div class="scroll"><table><tr><th>文档</th><th class="nw">状态</th><th class="nw">向量索引</th>{lexical_head}<th class="nw">整表库</th><th class="num">页</th>'
              f'<th class="num">表格</th><th class="num">chunk</th><th>审核页</th></tr>{"".join(rows)}</table></div>'
-             if rows else '<div class="meta">documents/ 中没有 PDF</div>')
+             if rows else '<div class="meta">documents/ 中没有可入库的文档</div>')
     return (f'<h2 id="{esc(config.name)}">配置 {esc(config.name)} {state}</h2>'
             f'<div class="sub">{esc(config.description)} · configs/{esc(config.name)}.toml · '
             f'构建指纹 {esc(assembly.fingerprint()[:12])}</div>'

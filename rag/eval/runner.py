@@ -27,12 +27,13 @@ class EvalError(RuntimeError):
 
 
 # Document types reported separately (docs/rules/evaluation.md); the order is the report's.
-DOCUMENT_TYPES = {"digital": "数字 PDF", "scanned": "扫描 PDF", "partly_scanned": "部分扫描"}
+DOCUMENT_TYPES = {"digital": "数字 PDF", "scanned": "扫描 PDF", "partly_scanned": "部分扫描", "word": "Word"}
 
 
 def _document_types(workspace: Workspace, config_name: str) -> dict[str, str]:
-    """document_id → type, from the page classification in the index's intermediate results;
-    documents of indexes built before V4.1 (no pages.json) are left out."""
+    """document_id → type, from the page classification in the index's intermediate results; Word
+    documents (located by address, no pages) are "word"; PDFs of indexes built before V4.1 (no
+    pages.json) are left out."""
     from rag.ingest.ocr.models import DocumentPages
     from rag.jsonio import from_jsonable
     types = {}
@@ -40,6 +41,10 @@ def _document_types(workspace: Workspace, config_name: str) -> dict[str, str]:
         if (folder / "pages.json").is_file() and (folder / "parsed.json").is_file():
             pages = from_jsonable(DocumentPages, read_json(folder / "pages.json"))
             types[read_json(folder / "parsed.json")["document_id"]] = pages.document_type
+        elif (folder / "parsed.json").is_file():
+            parsed = read_json(folder / "parsed.json")
+            if any("address" in s for node in parsed.get("nodes", ()) for s in node.get("sources", ())):
+                types[parsed["document_id"]] = "word"
     return types
 
 
@@ -99,12 +104,14 @@ def _judge_chunks(workspace: Workspace, config_name: str, chunk_ids: set[str]) -
     for path in sorted((workspace.index_dir(config_name) / "documents").glob("*/chunks.json")):
         for c in read_json(path)["chunks"]:
             regions = c.get("regions") or []
+            pdf = [r for r in regions if "page_number" in r]
             chunks.append(JudgeChunk(
                 c["chunk_id"], c["document_id"], c["text"], c["parent_unit_id"],
-                tuple((r["page_number"], box(r["bbox"])) for r in regions if r["precision"] == "fine"),
-                tuple((r["page_number"], box(r["bbox"])) for r in regions if r["precision"] == "coarse")))
+                tuple((r["page_number"], box(r["bbox"])) for r in pdf if r["precision"] == "fine"),
+                tuple((r["page_number"], box(r["bbox"])) for r in pdf if r["precision"] == "coarse"),
+                tuple((r["address"], r["start"], r["end"]) for r in regions if "address" in r)))
     found = {c.chunk_id for c in chunks}
-    without = [c.chunk_id for c in chunks if not c.fine and not c.coarse]
+    without = [c.chunk_id for c in chunks if not c.fine and not c.coarse and not c.docx]
     if found != chunk_ids or without:
         raise EvalError(f"配置 {config_name} 的中间结果缺少 chunk 来源区域（索引建于 V3.4 之前），"
                         f"请运行 ingest --force 重建")
@@ -129,6 +136,7 @@ class EvalContext:
     searcher: UnitSearch
     owners: dict[str, str]        # chunk_id → table_id, when whole tables are returned
     tokens_of: Any                # text → token count
+    unsupported: frozenset[str] = frozenset()   # documents of a file type this assembly does not read
 
     def scope(self, question: str) -> SearchScope:
         return resolve_scope(question, self.catalog, self.enabled)
@@ -159,7 +167,11 @@ def prepare(workspace: Workspace, assembly: Assembly, cache_retrievals: bool = F
     status = current_status(workspace, assembly)
     if not status.queryable:
         raise EvalError(f"配置 {assembly.name} 的索引不可用（{status.state}），请先运行 ingest")
-    stale = [d.relative_path for d in status.documents if d.state != "current"]
+    # A file type the assembly has no parser for is not a stale index: its questions are scored
+    # like any other, and their evidence cannot be retrieved.
+    stale = [d.relative_path for d in status.documents if d.state not in ("current", "unsupported")]
+    unsupported = frozenset(d.source.document_id for d in status.documents
+                            if d.state == "unsupported" and d.source)
     if stale:
         raise EvalError("以下文档的索引不是最新的，评估结果会失真，请先运行 ingest："
                         + "；".join(stale))
@@ -191,7 +203,8 @@ def prepare(workspace: Workspace, assembly: Assembly, cache_retrievals: bool = F
                           tables, table_return_unit, cache)
     owners = ({cid: t.table_id for cid, t in tables.tables_for_chunks([c.chunk_id for c in chunks]).items()}
               if table_return_unit == "table" else {})
-    return EvalContext(dataset, sources, changed, chunks, enabled, catalog, searcher, owners, _TokenCounter())
+    return EvalContext(dataset, sources, changed, chunks, enabled, catalog, searcher, owners, _TokenCounter(),
+                       unsupported)
 
 
 def run_evaluation(workspace: Workspace, assembly: Assembly, budgets: Sequence[int]) -> list[Path]:
@@ -242,7 +255,8 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, budgets: Sequence[i
         prepared.append((item, run))
 
     unmapped = [f"{r.case.case_id}/{x}：{e.problem}" for r, _ in prepared
-                for x, e in r.evidence.excerpts.items() if e.mode == "unmapped"]
+                for x, e in r.evidence.excerpts.items()
+                if e.mode == "unmapped" and r.case.document_id not in ctx.unsupported]
     if unmapped:
         raise EvalError("以下 excerpt 找不到对应 chunk，评估结果会失真：" + "；".join(unmapped))
     folders = {}
@@ -261,14 +275,14 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, budgets: Sequence[i
                     item.evidence.groups, item.evidence_documents))
             results.append(item)
         _write_run(workspace, assembly, folders[budget], budget, folders, results, dataset, sources,
-                   changed, enabled, catalog is not None, len(table_excerpts))
+                   changed, enabled, catalog is not None, len(table_excerpts), ctx.unsupported)
     return [folders[b] for b in budgets]
 
 
 def _write_run(workspace: Workspace, assembly: Assembly, folder: Path, top_k: int,
                folders: dict[int, Path], results: list[CaseResult], dataset: Dataset,
                sources: dict[str, Any], changed: list[str], enabled: bool, has_catalog: bool,
-               table_excerpts: int) -> None:
+               table_excerpts: int, unsupported: frozenset[str] = frozenset()) -> None:
     table_return_unit = assembly.config.table_return_unit
     names = {doc_id: source.document_name for doc_id, source in sources.items()}
     scored = [r.score for r in results if r.score is not None]
@@ -303,7 +317,8 @@ def _write_run(workspace: Workspace, assembly: Assembly, folder: Path, top_k: in
         "created_at": datetime.now().astimezone().isoformat(timespec="seconds"),
         "dataset": {"version": dataset.version, "fingerprint": dataset.fingerprint,
                     "questions": len(dataset.cases), "answerable": len(scored),
-                    "pdf_changed_since_labelling": changed},
+                    "pdf_changed_since_labelling": changed,
+                    "unsupported_documents": sorted(names.get(d, d) for d in unsupported)},
         "evidence_modes": {mode: sum(x.mode == mode for r in results for x in r.evidence.excerpts.values())
                            for mode in ("coordinate", "fallback", "unmapped")},   # counted per excerpt
         "metrics": _metrics_dict(scored),
@@ -321,9 +336,10 @@ def _write_run(workspace: Workspace, assembly: Assembly, folder: Path, top_k: in
     write_eval_report(workspace, folder, result, latest_before(workspace, result))
 
 
-def _table_boxes(workspace: Workspace, config_name: str) -> dict[str, list[tuple[int, tuple[float, float, float, float]]]]:
-    """Per document, every table's box on each of its pages, as the parser gave it."""
-    boxes: dict[str, list[tuple[int, tuple[float, float, float, float]]]] = {}
+def _table_boxes(workspace: Workspace, config_name: str) -> dict[str, list[tuple[int | str, Any]]]:
+    """Per document, every table's box on each of its pages, as the parser gave it; for Word, every
+    table's address (with no box)."""
+    boxes: dict[str, list[tuple[int | str, Any]]] = {}
     for path in sorted((workspace.index_dir(config_name) / "documents").glob("*/parsed.json")):
         parsed = read_json(path)
         own = boxes.setdefault(parsed["document_id"], [])
@@ -331,6 +347,7 @@ def _table_boxes(workspace: Workspace, config_name: str) -> dict[str, list[tuple
             if "table" in node:
                 own += [(s["page_number"], (s["bbox"]["x0"], s["bbox"]["y0"], s["bbox"]["x1"], s["bbox"]["y1"]))
                         for s in node["sources"] if s.get("bbox")]
+                own += [(s["address"], None) for s in node["sources"] if "address" in s]
     return boxes
 
 
@@ -408,11 +425,14 @@ def _scope_summary(results: list[CaseResult], enabled: bool, has_catalog: bool) 
 def _case_json(item: CaseResult, names: dict[str, str]) -> dict[str, Any]:
     case, score = item.case, item.score
     relevant = {cid for g in item.evidence.groups for s in g.acceptable_sets for cid in s}
-    evidence_docs = item.evidence_documents
+    # Cross-document: outside the evidence's documents; a question without evidence (unanswerable)
+    # is judged against the documents its codes identified, and without any, not judged.
+    evidence_docs = item.evidence_documents or set(item.scope.document_ids or ())
     return {
         "case_id": case.case_id, "document_id": case.document_id,
         "document_name": case.document_name, "question": case.question,
         "reference_answer": case.reference_answer, "answerable": case.answerable,
+        "same_content_as": case.same_content_as,
         "scope": {"kind": item.scope.kind, "codes": list(item.scope.codes),
                   "document_ids": list(item.scope.document_ids) if item.scope.document_ids else None,
                   "document_names": [names.get(d, d) for d in item.scope.document_ids or ()],
@@ -421,7 +441,7 @@ def _case_json(item: CaseResult, names: dict[str, str]) -> dict[str, Any]:
         "hit": score.hit if score else None, "complete": score.complete if score else None,
         "first_relevant_rank": score.first_relevant_rank if score else None,
         "excerpts": [{
-            "excerpt_id": x.excerpt_id, "document_name": x.document_name, "pages": list(x.pages),
+            "excerpt_id": x.excerpt_id, "document_name": x.document_name, "pages": list(x.pages) or list(x.locations),
             "text": x.text, "mode": item.evidence.excerpts[x.excerpt_id].mode,
             "acceptable_sets": [sorted(s) for s in item.evidence.excerpts[x.excerpt_id].acceptable_sets],
             "problem": item.evidence.excerpts[x.excerpt_id].problem, "table_header": x.table_header,
@@ -454,7 +474,7 @@ def _case_json(item: CaseResult, names: dict[str, str]) -> dict[str, Any]:
             "chunk_ids": list(u.chunk_ids),
             "relevant_chunk_ids": [cid for cid in u.chunk_ids if cid in relevant],
             "relevant": any(cid in relevant for cid in u.chunk_ids),
-            "cross_document": u.document_id not in evidence_docs,
+            "cross_document": bool(evidence_docs) and u.document_id not in evidence_docs,
             "tokens": tokens,
             "text": u.text,
         } for rank, (u, tokens) in enumerate(zip(item.units, item.tokens), start=1)],

@@ -1,0 +1,687 @@
+{
+  "schema_version": "ground_truth_document_v2",
+  "document_key": "Nuevas-Especificaciones-Tecnicas-PROYECTO-CHOSICA--21125ec3b4d95316",
+  "document_id": "21125ec3b4d95316",
+  "document_name": "Nuevas Especificaciones Tecnicas PROYECTO CHOSICA SMART.docx",
+  "relative_path": "Nuevas Especificaciones Tecnicas PROYECTO CHOSICA SMART.docx",
+  "file_hash": "34f220226d1d1b18ecd385fcd220a3ee2f41dd3133708c1d5fef0cf2dcc7366d",
+  "cases": [
+    {
+      "case_id": "SPEC-2024-Q001",
+      "question": "技术规格书 SPEC2024001 中，设备分几批交付？每批的最晚交付期限、包含的设备和数量是多少？",
+      "answerable": true,
+      "reference_answer": "分 2 批：第 1 批（空运）单相智能表 10,000 台、三相智能表 1,000 台、数据集中器 120 台，最晚在授标后 50 个日历日交付；第 2 批（空运或海运）单相智能表 14,800 台、三相智能表 4,200 台、数据集中器 265 台，最晚在授标后 80 个日历日交付。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "各批最晚交付期限",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "各批设备与数量",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ],
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "21125ec3b4d95316",
+          "document_name": "Nuevas Especificaciones Tecnicas PROYECTO CHOSICA SMART.docx",
+          "relative_path": "Nuevas Especificaciones Tecnicas PROYECTO CHOSICA SMART.docx",
+          "text": "Lote 1 | (Vía aérea) | Medidores inteligentes monofásicos | 10,000 | 50 días calendario después de fecha de adjudicación\nMedidores inteligentes trifásicos | 1000\nConcentradores de datos para medición inteligente | 120\nLote 2 | (Vía aérea o marítima) | Medidores inteligentes monofásicos | 14,800 | 80 días calendario después de fecha de adjudicación\nMedidores inteligentes trifásicos | 4,200\nConcentradores de datos para medición inteligente | 265",
+          "anchor": {
+            "text_sha256": "65463bc9b503920d",
+            "pieces": [
+              {
+                "text": "Lote 1",
+                "words": [
+                  "body/1/r5c0/23/r1c0/1 0 4",
+                  "body/1/r5c0/23/r1c0/1 5 6"
+                ]
+              },
+              {
+                "text": "(Vía aérea)",
+                "words": [
+                  "body/1/r5c0/23/r1c0/3 0 4",
+                  "body/1/r5c0/23/r1c0/3 5 11"
+                ]
+              },
+              {
+                "text": "Medidores inteligentes monofásicos",
+                "words": [
+                  "body/1/r5c0/23/r1c1/0 0 9",
+                  "body/1/r5c0/23/r1c1/0 10 22",
+                  "body/1/r5c0/23/r1c1/0 23 34",
+                  "body/1/r5c0/23/r4c1/0 0 9",
+                  "body/1/r5c0/23/r4c1/0 10 22",
+                  "body/1/r5c0/23/r4c1/0 23 34"
+                ]
+              },
+              {
+                "text": "10,000",
+                "words": [
+                  "body/1/r5c0/23/r1c2/0 0 6"
+                ]
+              },
+              {
+                "text": "50 días calendario después de fecha de adjudicación",
+                "words": [
+                  "body/1/r5c0/23/r1c3/0 0 2",
+                  "body/1/r5c0/23/r1c3/0 3 7",
+                  "body/1/r5c0/23/r1c3/0 8 18",
+                  "body/1/r5c0/23/r1c3/0 19 26",
+                  "body/1/r5c0/23/r1c3/0 27 29",
+                  "body/1/r5c0/23/r1c3/0 30 35",
+                  "body/1/r5c0/23/r1c3/0 36 38",
+                  "body/1/r5c0/23/r1c3/0 39 51"
+                ]
+              },
+              {
+                "text": "Medidores inteligentes trifásicos",
+                "words": [
+                  "body/1/r5c0/23/r2c1/0 0 9",
+                  "body/1/r5c0/23/r2c1/0 10 22",
+                  "body/1/r5c0/23/r2c1/0 23 33",
+                  "body/1/r5c0/23/r5c1/0 0 9",
+                  "body/1/r5c0/23/r5c1/0 10 22",
+                  "body/1/r5c0/23/r5c1/0 23 33"
+                ]
+              },
+              {
+                "text": "1000",
+                "words": [
+                  "body/1/r5c0/23/r2c2/0 0 4"
+                ]
+              },
+              {
+                "text": "Concentradores de datos para medición inteligente",
+                "words": [
+                  "body/1/r5c0/23/r3c1/0 0 14",
+                  "body/1/r5c0/23/r3c1/0 15 17",
+                  "body/1/r5c0/23/r3c1/0 18 23",
+                  "body/1/r5c0/23/r3c1/0 24 28",
+                  "body/1/r5c0/23/r3c1/0 29 37",
+                  "body/1/r5c0/23/r3c1/0 38 49",
+                  "body/1/r5c0/23/r6c1/0 0 14",
+                  "body/1/r5c0/23/r6c1/0 15 17",
+                  "body/1/r5c0/23/r6c1/0 18 23",
+                  "body/1/r5c0/23/r6c1/0 24 28",
+                  "body/1/r5c0/23/r6c1/0 29 37",
+                  "body/1/r5c0/23/r6c1/0 38 49"
+                ]
+              },
+              {
+                "text": "120",
+                "words": [
+                  "body/1/r5c0/23/r3c2/0 0 3"
+                ]
+              },
+              {
+                "text": "Lote 2",
+                "words": [
+                  "body/1/r5c0/23/r4c0/1 0 4",
+                  "body/1/r5c0/23/r4c0/1 5 6"
+                ]
+              },
+              {
+                "text": "(Vía aérea o marítima)",
+                "words": [
+                  "body/1/r5c0/23/r4c0/3 0 4",
+                  "body/1/r5c0/23/r4c0/3 5 10",
+                  "body/1/r5c0/23/r4c0/3 11 12",
+                  "body/1/r5c0/23/r4c0/3 13 22"
+                ]
+              },
+              {
+                "text": "14,800",
+                "words": [
+                  "body/1/r5c0/23/r4c2/0 0 6"
+                ]
+              },
+              {
+                "text": "80 días calendario después de fecha de adjudicación",
+                "words": [
+                  "body/1/r5c0/23/r4c3/0 0 2",
+                  "body/1/r5c0/23/r4c3/0 3 7",
+                  "body/1/r5c0/23/r4c3/0 8 18",
+                  "body/1/r5c0/23/r4c3/0 19 26",
+                  "body/1/r5c0/23/r4c3/0 27 29",
+                  "body/1/r5c0/23/r4c3/0 30 35",
+                  "body/1/r5c0/23/r4c3/0 36 38",
+                  "body/1/r5c0/23/r4c3/0 39 51"
+                ]
+              },
+              {
+                "text": "4,200",
+                "words": [
+                  "body/1/r5c0/23/r5c2/0 0 5"
+                ]
+              },
+              {
+                "text": "265",
+                "words": [
+                  "body/1/r5c0/23/r6c2/0 0 3"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "表 4"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "SPEC-2024-Q002",
+      "question": "技术规格书 SPEC2024001 要求单相智能电表的额定电压、基本电流和最大电流分别是多少？",
+      "answerable": true,
+      "reference_answer": "额定电压 220 V；基本电流（Ib）5 A；不改变精度等级的最大电流不小于 60 A。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "额定电压",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "基本电流",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e3",
+          "information_item": "最大电流",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ],
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "21125ec3b4d95316",
+          "document_name": "Nuevas Especificaciones Tecnicas PROYECTO CHOSICA SMART.docx",
+          "relative_path": "Nuevas Especificaciones Tecnicas PROYECTO CHOSICA SMART.docx",
+          "text": "Tensión nominal | 220V\nCorriente base (Ib) | 5\nCorriente máxima sin variar la clase de precisión | ≥ 60",
+          "anchor": {
+            "text_sha256": "52f45465c39f82a9",
+            "pieces": [
+              {
+                "text": "Tensión nominal",
+                "words": [
+                  "body/257/r23c1/0 0 7",
+                  "body/257/r23c1/0 8 15"
+                ]
+              },
+              {
+                "text": "220V",
+                "words": [
+                  "body/257/r23c4/0 0 4"
+                ]
+              },
+              {
+                "text": "Corriente base (Ib)",
+                "words": [
+                  "body/257/r24c1/0 0 9",
+                  "body/257/r24c1/0 10 14",
+                  "body/257/r24c1/0 15 19"
+                ]
+              },
+              {
+                "text": "5",
+                "words": [
+                  "body/257/r24c4/0 0 1"
+                ]
+              },
+              {
+                "text": "Corriente máxima sin variar la clase de precisión",
+                "words": [
+                  "body/257/r25c1/0 0 9",
+                  "body/257/r25c1/0 10 16",
+                  "body/257/r25c1/0 17 20",
+                  "body/257/r25c1/0 21 27",
+                  "body/257/r25c1/0 28 30",
+                  "body/257/r25c1/0 31 36",
+                  "body/257/r25c1/0 37 39",
+                  "body/257/r25c1/0 40 49"
+                ]
+              },
+              {
+                "text": "≥ 60",
+                "words": [
+                  "body/257/r25c4/0 2 4"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "表 8"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "SPEC-2024-Q003",
+      "question": "技术规格书 SPEC2024001 规定的付款方式是什么？",
+      "answerable": true,
+      "reference_answer": "按交付的货物和服务分期付款，每张发票在 LUZ DEL SUR 确认合格后 30 个日历日支付。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "付款方式",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ],
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "21125ec3b4d95316",
+          "document_name": "Nuevas Especificaciones Tecnicas PROYECTO CHOSICA SMART.docx",
+          "relative_path": "Nuevas Especificaciones Tecnicas PROYECTO CHOSICA SMART.docx",
+          "text": "Mediante pagos parciales, de acuerdo a las entregas efectuadas (de los bienes y servicios). Cada factura se pagará a los 30 días calendario luego de la conformidad de LUZ DEL SUR S.A.A.",
+          "anchor": {
+            "text_sha256": "ddbf8f8fcb629440",
+            "pieces": [
+              {
+                "text": "Mediante pagos parciales, de acuerdo a las entregas efectuadas (de los bienes y servicios). Cada factura se pagará a los 30 días calendario luego de la conformidad de LUZ DEL SUR S.A.A.",
+                "words": [
+                  "body/3/r5c0/1 0 8",
+                  "body/3/r5c0/1 9 14",
+                  "body/3/r5c0/1 15 25",
+                  "body/3/r5c0/1 26 28",
+                  "body/3/r5c0/1 29 36",
+                  "body/3/r5c0/1 37 38",
+                  "body/3/r5c0/1 39 42",
+                  "body/3/r5c0/1 43 51",
+                  "body/3/r5c0/1 52 62",
+                  "body/3/r5c0/1 63 66",
+                  "body/3/r5c0/1 67 70",
+                  "body/3/r5c0/1 71 77",
+                  "body/3/r5c0/1 78 79",
+                  "body/3/r5c0/1 80 91",
+                  "body/3/r5c0/1 92 96",
+                  "body/3/r5c0/1 97 104",
+                  "body/3/r5c0/1 105 107",
+                  "body/3/r5c0/1 108 114",
+                  "body/3/r5c0/1 115 116",
+                  "body/3/r5c0/1 117 120",
+                  "body/3/r5c0/1 121 123",
+                  "body/3/r5c0/1 124 128",
+                  "body/3/r5c0/1 129 139",
+                  "body/3/r5c0/1 140 145",
+                  "body/3/r5c0/1 146 148",
+                  "body/3/r5c0/1 149 151",
+                  "body/3/r5c0/1 152 163",
+                  "body/3/r5c0/1 164 166",
+                  "body/3/r5c0/1 167 170",
+                  "body/3/r5c0/1 171 174",
+                  "body/3/r5c0/1 175 178",
+                  "body/3/r5c0/1 179 185"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "第 4 块"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "SPEC-2024-Q004",
+      "question": "技术规格书 SPEC2024001 要求的厂家质保期是多久？从何时起算？由谁出具？",
+      "answerable": true,
+      "reference_answer": "至少 4 年，自货物交到 LUZ DEL SUR 仓库之日（服务则自执行之日）起算，由厂家出具并签署。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "质保期",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "起算时间",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e3",
+          "information_item": "出具方",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ],
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "21125ec3b4d95316",
+          "document_name": "Nuevas Especificaciones Tecnicas PROYECTO CHOSICA SMART.docx",
+          "relative_path": "Nuevas Especificaciones Tecnicas PROYECTO CHOSICA SMART.docx",
+          "text": "Garantía de fábrica: La garantía técnica será, como mínimo, de cuatro (4) años, que se contará a partir de la fecha de entrega de los bienes, en los almacenes de LUZ DEL SUR S.A.A., o la ejecución de los servicios y será otorgada y firmada por el fabricante.",
+          "anchor": {
+            "text_sha256": "f9eea21c3a26aa86",
+            "pieces": [
+              {
+                "text": "Garantía de fábrica: La garantía técnica será, como mínimo, de cuatro (4) años, que se contará a partir de la fecha de entrega de los bienes, en los almacenes de LUZ DEL SUR S.A.A., o la ejecución de los servicios y será otorgada y firmada por el fabricante.",
+                "words": [
+                  "body/3/r10c0/2 0 8",
+                  "body/3/r10c0/2 9 11",
+                  "body/3/r10c0/2 12 20",
+                  "body/3/r10c0/2 21 23",
+                  "body/3/r10c0/2 24 32",
+                  "body/3/r10c0/2 33 40",
+                  "body/3/r10c0/2 41 46",
+                  "body/3/r10c0/2 47 51",
+                  "body/3/r10c0/2 52 59",
+                  "body/3/r10c0/2 60 62",
+                  "body/3/r10c0/2 63 69",
+                  "body/3/r10c0/2 70 73",
+                  "body/3/r10c0/2 74 79",
+                  "body/3/r10c0/2 80 83",
+                  "body/3/r10c0/2 84 86",
+                  "body/3/r10c0/2 87 94",
+                  "body/3/r10c0/2 95 96",
+                  "body/3/r10c0/2 97 103",
+                  "body/3/r10c0/2 104 106",
+                  "body/3/r10c0/2 107 109",
+                  "body/3/r10c0/2 110 115",
+                  "body/3/r10c0/2 116 118",
+                  "body/3/r10c0/2 119 126",
+                  "body/3/r10c0/2 127 129",
+                  "body/3/r10c0/2 130 133",
+                  "body/3/r10c0/2 134 141",
+                  "body/3/r10c0/2 142 144",
+                  "body/3/r10c0/2 145 148",
+                  "body/3/r10c0/2 149 158",
+                  "body/3/r10c0/2 159 161",
+                  "body/3/r10c0/2 162 165",
+                  "body/3/r10c0/2 166 169",
+                  "body/3/r10c0/2 170 173",
+                  "body/3/r10c0/2 174 181",
+                  "body/3/r10c0/2 182 183",
+                  "body/3/r10c0/2 184 186",
+                  "body/3/r10c0/2 187 196",
+                  "body/3/r10c0/2 197 199",
+                  "body/3/r10c0/2 200 203",
+                  "body/3/r10c0/2 204 213",
+                  "body/3/r10c0/2 214 215",
+                  "body/3/r10c0/2 216 220",
+                  "body/3/r10c0/2 221 229",
+                  "body/3/r10c0/2 230 231",
+                  "body/3/r10c0/2 232 239",
+                  "body/3/r10c0/2 240 243",
+                  "body/3/r10c0/2 244 246",
+                  "body/3/r10c0/2 247 258"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "第 4 块"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "SPEC-2024-Q005",
+      "question": "技术规格书 SPEC2024001 对计量设备、通信设备和 HES 软件的厂家有什么要求？",
+      "answerable": true,
+      "reference_answer": "所有计量设备、通信设备和 HES 软件必须来自同一厂家，以保证相互兼容。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "厂家要求",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ],
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "21125ec3b4d95316",
+          "document_name": "Nuevas Especificaciones Tecnicas PROYECTO CHOSICA SMART.docx",
+          "relative_path": "Nuevas Especificaciones Tecnicas PROYECTO CHOSICA SMART.docx",
+          "text": "Nota: Todos los equipos de medición, comunicación, y software HES deberán ser del mismo fabricante a efectos de garantizar compatibilidad (a nivel fabricante) entre ellos.",
+          "anchor": {
+            "text_sha256": "9f92deaf0aa217b0",
+            "pieces": [
+              {
+                "text": "Nota: Todos los equipos de medición, comunicación, y software HES deberán ser del mismo fabricante a efectos de garantizar compatibilidad (a nivel fabricante) entre ellos.",
+                "words": [
+                  "body/1/r5c0/5 0 5",
+                  "body/1/r5c0/5 6 11",
+                  "body/1/r5c0/5 12 15",
+                  "body/1/r5c0/5 16 23",
+                  "body/1/r5c0/5 24 26",
+                  "body/1/r5c0/5 27 36",
+                  "body/1/r5c0/5 37 50",
+                  "body/1/r5c0/5 51 52",
+                  "body/1/r5c0/5 53 61",
+                  "body/1/r5c0/5 62 65",
+                  "body/1/r5c0/5 66 73",
+                  "body/1/r5c0/5 74 77",
+                  "body/1/r5c0/5 78 81",
+                  "body/1/r5c0/5 82 87",
+                  "body/1/r5c0/5 88 98",
+                  "body/1/r5c0/5 99 100",
+                  "body/1/r5c0/5 101 108",
+                  "body/1/r5c0/5 109 111",
+                  "body/1/r5c0/5 112 122",
+                  "body/1/r5c0/5 123 137",
+                  "body/1/r5c0/5 138 140",
+                  "body/1/r5c0/5 141 146",
+                  "body/1/r5c0/5 147 158",
+                  "body/1/r5c0/5 159 164",
+                  "body/1/r5c0/5 165 171"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "第 2 块"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "SPEC-2024-Q006",
+      "question": "技术规格书 SPEC2024001 中，单相智能电表需要提供多少台样品做运行测试？",
+      "answerable": true,
+      "reference_answer": "需要 3 台样品。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "样品数量",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ],
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "21125ec3b4d95316",
+          "document_name": "Nuevas Especificaciones Tecnicas PROYECTO CHOSICA SMART.docx",
+          "relative_path": "Nuevas Especificaciones Tecnicas PROYECTO CHOSICA SMART.docx",
+          "text": "Se requieren 3 muestras para pruebas operacionales.",
+          "anchor": {
+            "text_sha256": "984d696c9ff6bf76",
+            "pieces": [
+              {
+                "text": "Se requieren 3 muestras para pruebas operacionales.",
+                "words": [
+                  "body/252 0 2",
+                  "body/252 3 12",
+                  "body/252 13 14",
+                  "body/252 15 23",
+                  "body/252 24 28",
+                  "body/252 29 36",
+                  "body/252 37 51"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "第 253 块"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "SPEC-2024-Q007",
+      "question": "技术规格书 SPEC2024001 中，单相智能电表铭牌上的条形码共有多少位？第 9 至第 15 位表示什么？",
+      "answerable": true,
+      "reference_answer": "条形码共 15 位（P1 至 P15）；第 9 至第 15 位是 LUZ DEL SUR 的 7 位流水号。",
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "条形码位数",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "第 9–15 位的含义",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ],
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "21125ec3b4d95316",
+          "document_name": "Nuevas Especificaciones Tecnicas PROYECTO CHOSICA SMART.docx",
+          "relative_path": "Nuevas Especificaciones Tecnicas PROYECTO CHOSICA SMART.docx",
+          "text": "(P1)(P2)(P3)(P4)(P5)(P6)(P7)(P8)(P9) ... (P15)\nPosición 9 (P9) al 15 (P15): N° Correlativo de 7 Cifras de LUZ DEL SUR S.A.A.",
+          "anchor": {
+            "text_sha256": "f411c8d59b6ff30d",
+            "pieces": [
+              {
+                "text": "(P1)(P2)(P3)(P4)(P5)(P6)(P7)(P8)(P9) ... (P15)",
+                "words": [
+                  "body/200 0 36",
+                  "body/200 41 46"
+                ]
+              },
+              {
+                "text": "Posición 9 (P9) al 15 (P15): N° Correlativo de 7 Cifras de LUZ DEL SUR S.A.A.",
+                "words": [
+                  "body/210 0 8",
+                  "body/210 9 10",
+                  "body/210 11 15",
+                  "body/210 16 18",
+                  "body/210 19 21",
+                  "body/210 22 28",
+                  "body/210 29 31",
+                  "body/210 32 43",
+                  "body/210 44 46",
+                  "body/210 47 48",
+                  "body/210 49 55",
+                  "body/210 56 58",
+                  "body/210 59 62",
+                  "body/210 63 66",
+                  "body/210 67 70",
+                  "body/210 71 77"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "第 201 块",
+            "第 211 块"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "SPEC-2024-Q008",
+      "question": "技术规格书 SPEC2024001 中，单相智能电表的目标单价是多少？",
+      "answerable": false,
+      "reference_answer": "技术规格书没有给出目标单价，费用格式（附件 07）中的单价栏留空，由投标人填写。",
+      "evidence_groups": [],
+      "excerpts": []
+    }
+  ]
+}

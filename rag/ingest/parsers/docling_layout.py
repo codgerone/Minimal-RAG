@@ -45,6 +45,10 @@ class DoclingConversion:
                                      (execution,), candidates, ())
 
 
+# Docling's pipeline options in _convert; change it with them, so the cached conversions are redone.
+CONVERSION_OPTIONS = "ocr_off+tables_accurate+cell_matching_v1"
+
+
 def _convert(pdf_bytes: bytes) -> Any:
     from docling.datamodel.base_models import DocumentStream, InputFormat
     from docling.datamodel.pipeline_options import PdfPipelineOptions, TableFormerMode
@@ -80,9 +84,10 @@ class DoclingLayoutParser:
                 "libraries": versions("docling", "docling-core", "docling-ibm-models", "docling-parse", "pymupdf")}
 
     def parse(self, source: SourceDocument, cache: Any = None) -> ParseResult:
-        """With a cache, Docling's exported document is kept under the parsed file's hash, the
-        parser settings and identity; on a hit the document is rebuilt from it (export → rebuild
-        is exact) and mapped as usual."""
+        """With a cache, Docling's exported document is kept under the parsed file's hash and the
+        Docling library versions: only these decide Docling's own output, so a change to the
+        mapping rules (RULES_VERSION) re-maps the cached output instead of re-running Docling. On a
+        hit the document is rebuilt from it (export → rebuild is exact) and mapped as usual."""
         pdf_bytes = source.pdf_path.read_bytes()
         with fitz.open(stream=pdf_bytes, filetype="pdf") as pdf:
             page_sizes = {index + 1: (float(page.rect.width), float(page.rect.height))
@@ -96,7 +101,9 @@ class DoclingLayoutParser:
         if cache is None:
             native = convert()
         else:
-            key = {"parser": "docling_layout", "pdf_sha256": source.pdf_hash, "identity": self.identity()}
+            from rag.ingest.libraries import versions
+            key = {"parser": "docling", "pdf_sha256": source.pdf_hash, "options": CONVERSION_OPTIONS,
+                   "libraries": versions("docling", "docling-core", "docling-ibm-models", "docling-parse")}
             native, _ = cache.get_or_compute("parse", key, convert, lambda value: value, lambda value: value)
         from docling_core.types.doc import DoclingDocument
         document = DoclingDocument.model_validate(native)

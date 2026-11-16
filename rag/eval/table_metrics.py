@@ -28,12 +28,17 @@ CURVE_K = 20
 MAX_COMBINATIONS = 20000
 
 
-def is_table_excerpt(excerpt: Excerpt, tables: list[tuple[int, Box]]) -> bool:
+def is_table_excerpt(excerpt: Excerpt, tables: list) -> bool:
+    """Every located word lies in a table: within a table's box on its page (PDF), or in a cell of
+    a table (Word: the word's address is under a table's address)."""
     words = [word for _, piece_words in excerpt.anchor or () for word in piece_words]
+    if words and isinstance(words[0][0], str):
+        places = [t for t, _ in tables if isinstance(t, str)]
+        return all(any(w[0].startswith(t + "/") for t in places) for w in words)
 
     def inside(page: int, box: Box) -> bool:
         x, y = (box[0] + box[2]) / 2, (box[1] + box[3]) / 2
-        return any(p == page and b[0] - EDGE <= x <= b[2] + EDGE and b[1] - EDGE <= y <= b[3] + EDGE
+        return any(p == page and b is not None and b[0] - EDGE <= x <= b[2] + EDGE and b[1] - EDGE <= y <= b[3] + EDGE
                    for p, b in tables)
     return bool(words) and all(inside(page, box) for page, box in words)
 

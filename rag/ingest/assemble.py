@@ -51,7 +51,7 @@ def compose_document(
     for item in primary.elements:
         if isinstance(item, PrimaryText):
             nodes.append(TextNode(item.element_id, item.kind, item.text,
-                                  item.sources, item.source_ref, item.word_boxes))
+                                  item.sources, item.source_ref, item.word_boxes, item.pieces))
         elif isinstance(item, PrimaryList):
             nodes.append(ListNode(item.element_id, item.items, item.source_refs, item.sources))
         elif isinstance(item, PrimaryTablePlaceholder):

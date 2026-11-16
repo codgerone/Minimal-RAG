@@ -92,3 +92,12 @@ def test_query_settings_leave_every_record_unchanged(structured):
                      table_return_unit="chunk", query_mode="multi_round")
     assert all(fingerprint(step_settings(structured, facts)) ==
                fingerprint(step_settings(replace(structured, config=config), facts)) for facts in KINDS.values())
+
+
+def test_word_documents_pass_their_own_steps_and_word_settings_never_reach_pdfs(structured):
+    word = DocumentFacts(False, True, "docx")
+    assert list(step_settings(structured, word)) == ["parse", "table_text", "compose", "chunk", "embed", "lexical"]
+    config = replace(structured.config, docx_parser=Component("docx_native", {"option": 1}))
+    changed = replace(structured, config=config)
+    assert changed_steps(step_settings(structured, word), step_settings(changed, word)) == ("parse",)
+    assert set(stale_after(structured, changed).values()) == {()}

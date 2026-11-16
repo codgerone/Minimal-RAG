@@ -24,10 +24,10 @@ from rag.query.retriever import Hit, HybridRetriever, Retriever
 class ResultUnit:
     hit: Hit                          # the best-ranked chunk that brought this unit in
     table: StoredTable | None = None  # the whole table returned in place of the chunk
-    table_pages: tuple[int, ...] = ()  # pages of the whole table's chunks
+    table_pages: tuple[int | str, ...] = ()  # locations of the whole table's chunks
 
     @property
-    def pages(self) -> tuple[int, ...]:
+    def pages(self) -> tuple[int | str, ...]:
         return self.table_pages if self.table else self.hit.chunk.pages
 
     @property
@@ -50,7 +50,7 @@ class ResultUnit:
 
 
 def to_units(hits: list[Hit], tables: dict[str, StoredTable],
-             pages: dict[str, tuple[int, ...]] | None = None) -> list[ResultUnit]:
+             pages: dict[str, tuple[int | str, ...]] | None = None) -> list[ResultUnit]:
     """`tables`: chunk_id → whole table, for the table chunks to return as whole tables;
     `pages`: table_id → the pages its chunks come from."""
     units: list[ResultUnit] = []
@@ -155,6 +155,7 @@ class UnitSearch:
             return [ResultUnit(hit) for hit in hits]
         tables = self.tables.tables_for_chunks([h.chunk.chunk_id for h in hits])
         chunks = self.store.get_chunks(sorted({cid for t in tables.values() for cid in t.chunk_ids}))
-        pages = {t.table_id: tuple(sorted({p for cid in t.chunk_ids for p in chunks[cid].pages}))
+        from rag.locations import merge
+        pages = {t.table_id: merge(p for cid in t.chunk_ids for p in chunks[cid].pages)
                  for t in tables.values()}
         return to_units(hits, tables, pages)

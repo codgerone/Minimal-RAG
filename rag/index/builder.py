@@ -22,6 +22,7 @@ from rag.index.step_cache import StepCache
 from rag.index.store import ChromaStore, StoredChunk
 from rag.index.tables import StoredTable, TableStore, collect_tables
 from rag.ingest.regions import attach_regions
+from rag.locations import span_location
 from rag.ingest.pipeline import ProcessedDocument, process_document
 from rag.ingest.sources import discover, select
 from rag.ingest.timing import StepTimes
@@ -29,7 +30,7 @@ from rag.models import ChunkBatch, SourceDocument
 from rag.paths import Workspace, readable_name
 from rag.registry import Assembly
 
-Action = Literal["added", "updated", "rebuilt", "skipped", "failed", "pruned", "unreadable"]
+Action = Literal["added", "updated", "rebuilt", "skipped", "failed", "pruned", "unreadable", "unsupported"]
 
 
 class IngestError(RuntimeError):
@@ -74,7 +75,12 @@ def current_status(workspace: Workspace, assembly: Assembly,
     sources = discover(workspace.documents) if sources is None else sources
     return check_status(workspace, assembly.name, lambda facts: step_settings(assembly, facts), sources,
                         open_store(workspace, assembly.name), open_lexical(workspace, assembly),
-                        open_tables(workspace, assembly.name), ocr=assembly.ocr is not None)
+                        open_tables(workspace, assembly.name), ocr=assembly.ocr is not None,
+                        file_types=supported_types(assembly))
+
+
+def supported_types(assembly: Assembly) -> tuple[str, ...]:
+    return tuple(kind for kind in ("pdf", "docx") if assembly.parser_for(kind) is not None)
 
 
 def prepare(source: SourceDocument, assembly: Assembly,
@@ -83,7 +89,10 @@ def prepare(source: SourceDocument, assembly: Assembly,
     """`cache` keeps the parser's raw output, each table extractor's report and the passage vectors."""
     times = StepTimes()
     first_lookup = len(cache.log) if cache is not None else 0
-    processed = process_document(source, assembly.parser, assembly.extractors, assembly.table_steps,
+    parser = assembly.parser_for(source.file_type)
+    if parser is None:
+        raise IngestError(f"配置 {assembly.name} 不支持 {source.file_type} 文件：{source.relative_path}")
+    processed = process_document(source, parser, assembly.extractors, assembly.table_steps,
                                  assembly.ocr, progress, times, cache)
     with times.step("chunk"):
         batch = attach_regions(assembly.chunker.chunk(processed.document), processed.document)
@@ -103,14 +112,15 @@ def prepare(source: SourceDocument, assembly: Assembly,
         with times.step("lexical"):
             lexical = [LexicalChunk(chunk.chunk_id, language, assembly.lexical.terms(chunk.text, language))
                        for chunk in batch.chunks]
-    facts = DocumentFacts(any(page.kind == "scanned" for page in processed.pages.pages),
-                          len(processed.prepared_tables) > 0)
+    facts = DocumentFacts(processed.pages is not None
+                          and any(page.kind == "scanned" for page in processed.pages.pages),
+                          len(processed.prepared_tables) > 0, source.file_type)
     record = step_settings(assembly, facts)
     entry = DocumentEntry(source.document_id, source.document_name, source.relative_path,
                           source.file_hash, readable_name(source.relative_path),
                           processed.parse.primary.page_count, len(batch.chunks),
                           len(processed.prepared_tables), now(), times.rounded(),
-                          times.cache, facts.scanned_pages, record, fingerprint(record))
+                          times.cache, facts.scanned_pages, record, fingerprint(record), source.file_type)
     tables = collect_tables(processed.document, batch)
     if len(tables) != entry.table_count:
         raise IngestError(f"整表数 {len(tables)} 与表格数 {entry.table_count} 不一致")
@@ -121,7 +131,7 @@ def _stored(prepared: Prepared) -> list[StoredChunk]:
     source = prepared.source
     return [StoredChunk(chunk.chunk_id, source.document_id, source.document_name,
                         source.relative_path, chunk.chunk_index, chunk.kind,
-                        tuple(dict.fromkeys(span.page_number for item in chunk.sources
+                        tuple(dict.fromkeys(span_location(span) for item in chunk.sources
                                             for span in item.page_spans)),
                         chunk.token_count, chunk.text)
             for chunk in prepared.batch.chunks]
@@ -185,8 +195,8 @@ def ingest(workspace: Workspace, assembly: Assembly, *, file: str | None = None,
                 manifest.save(index_dir / "manifest.json")
                 outcomes.append(DocumentOutcome(item.relative_path, "pruned"))
             continue
-        if item.state == "unreadable":
-            outcomes.append(DocumentOutcome(item.relative_path, "unreadable"))
+        if item.state in ("unreadable", "unsupported"):
+            outcomes.append(DocumentOutcome(item.relative_path, item.state))
             continue
         if not (item.needs_ingest or force):
             outcomes.append(DocumentOutcome(item.relative_path, "skipped"))
@@ -224,7 +234,11 @@ def _rebuild_all(workspace: Workspace, assembly: Assembly,
     prepared_all: list[Prepared] = []
     outcomes: list[DocumentOutcome] = []
     from rag.ingest.sources import has_text
+    types = supported_types(assembly)
     for source in sources:
+        if source.file_type not in types:
+            outcomes.append(DocumentOutcome(source.relative_path, "unsupported"))
+            continue
         if not has_text(source, ocr=assembly.ocr is not None):
             outcomes.append(DocumentOutcome(source.relative_path, "unreadable"))
             continue

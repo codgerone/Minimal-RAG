@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any, Callable, Literal
+from typing import Any, Callable, Collection, Literal
 
 from rag.index.build_steps import STEP_LABELS, DocumentFacts, changed_steps, fingerprint
 from rag.index.lexical import LexicalStore
@@ -15,15 +15,18 @@ from rag.ingest.sources import has_text
 from rag.models import SourceDocument
 from rag.paths import Workspace
 
-DocumentState = Literal["current", "new", "changed", "stale", "incomplete", "missing", "unreadable"]
+DocumentState = Literal["current", "new", "changed", "stale", "incomplete", "missing", "unreadable",
+                        "unsupported"]
+# unsupported: the config has no parser for the document's file type ([docx_parser] for Word).
 # stale: a step the document passes through has other settings, rules or library versions now.
 IndexState = Literal["not_built", "stale", "ready"]
 
 STATE_LABELS = {
-    "current": "已入库", "new": "未入库", "changed": "PDF 已修改，需更新",
+    "current": "已入库", "new": "未入库", "changed": "文件已修改，需更新",
     "stale": "构建设置已改变，需重建",
-    "incomplete": "索引不完整，需重建", "missing": "PDF 已删除，可清理",
+    "incomplete": "索引不完整，需重建", "missing": "文件已删除，可清理",
     "unreadable": "无可用文本（扫描件需配置 [ocr]，或文件损坏）",
+    "unsupported": "此配置不支持",
 }
 
 
@@ -84,21 +87,24 @@ def expected_record(entry: DocumentEntry,
     """The build record the config would give this document now; None for a pre-V4.1.1 entry."""
     if entry.scanned_pages is None:
         return None
-    return settings_for(DocumentFacts(entry.scanned_pages, entry.table_count > 0))
+    return settings_for(DocumentFacts(entry.scanned_pages, entry.table_count > 0, entry.file_type))
 
 
 def check_status(workspace: Workspace, config_name: str,
                  settings_for: Callable[[DocumentFacts], dict[str, Any]],
                  sources: tuple[SourceDocument, ...], store: ChromaStore,
                  lexical: LexicalStore | None = None,
-                 tables: TableStore | None = None, *, ocr: bool = False) -> IndexStatus:
+                 tables: TableStore | None = None, *, ocr: bool = False,
+                 file_types: Collection[str] = ("pdf",)) -> IndexStatus:
     """`settings_for` gives a document's build record from its facts (rag/index/build_steps.py).
     `lexical` is the BM25 index when the config has one; its chunk IDs are checked like the vectors'.
     `tables` is the whole-table store; each document must hold as many tables as the manifest records.
-    `ocr`: the config has [ocr], so documents with scanned pages are readable."""
+    `ocr`: the config has [ocr], so documents with scanned pages are readable.
+    `file_types`: the file types the config has a parser for; other documents are unsupported."""
     manifest = Manifest.load(workspace.index_dir(config_name) / "manifest.json")
     if manifest is None:
-        documents = tuple(DocumentStatus("new" if has_text(s, ocr=ocr) else "unreadable", s, None)
+        documents = tuple(DocumentStatus("unsupported" if s.file_type not in file_types
+                                         else "new" if has_text(s, ocr=ocr) else "unreadable", s, None)
                           for s in sources)
         return IndexStatus(config_name, "not_built", None, documents)
     stored_ids = store.ids_by_document()
@@ -116,8 +122,10 @@ def check_status(workspace: Workspace, config_name: str,
             vectors = _complete(entry, stored_ids.get(source.document_id, set()), workspace, config_name)
             if lexical_ids is not None:
                 lexical_ok = _complete(entry, lexical_ids.get(source.document_id, set()), workspace, config_name)
-        if entry is None:
-            state: DocumentState = "new" if has_text(source, ocr=ocr) else "unreadable"
+        if source.file_type not in file_types:
+            state: DocumentState = "unsupported"
+        elif entry is None:
+            state = "new" if has_text(source, ocr=ocr) else "unreadable"
         elif entry.file_hash != source.file_hash:
             state = "changed" if has_text(source, ocr=ocr) else "unreadable"
         elif not _record_current(entry, settings_for):
