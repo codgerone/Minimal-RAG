@@ -1,7 +1,7 @@
 """Process one document. PDF: classify pages → (OCR scanned pages → text-layer PDF) → parse → document
 language → (extract → select → merge continuations → rule header → table structure → table text →
 index text) → assemble. Word: parse → document language → (rule header → table structure → table
-text → index text) → assemble; its tables come exactly from the file."""
+text → index text) → assemble; its tables come exactly from the file. Excel: as Word."""
 
 from __future__ import annotations
 
@@ -123,8 +123,9 @@ def _select(source: SourceDocument, primary, reports: tuple[TableExtractionRepor
         warnings = tuple(w for report in reports for w in report.warnings)
         warnings += grouping.warnings + scoring.warnings
         adopted, continuations = prepare_tables(primary, reports, resolutions, True)
-    elif primary.table_slots and all(table.table.tool == "docx_native" for table in primary.native_tables):
-        # Tables read exactly from the file (Word): adopted as they are.
+    elif primary.table_slots and all(table.table.tool in ("docx_native", "xlsx_native")
+                                     for table in primary.native_tables):
+        # Tables read exactly from the file (Word, Excel): adopted as they are.
         resolutions = tuple(ContentResolution(slot.slot_id, "parser_exact", None, None, "read_from_file")
                             for slot in primary.table_slots)
         grouping, scoring, warnings = None, None, ()

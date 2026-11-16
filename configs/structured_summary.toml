@@ -11,6 +11,9 @@ use = "docling_layout"
 [docx_parser]      # Word（.docx）直接读文件（规则见 docs/rules/docx.md）
 use = "docx_native"
 
+[xlsx_parser]      # Excel（.xlsx）直接读文件（规则见 docs/rules/xlsx.md）
+use = "xlsx_native"
+
 [[table_extractors]]
 use = "pymupdf"
 

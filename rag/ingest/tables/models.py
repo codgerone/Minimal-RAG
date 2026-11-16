@@ -12,7 +12,7 @@ from typing import Literal, TypeAlias, get_args
 
 from rag.models import BoundingBox, PageSpan, ProcessingWarning, Span
 
-ToolName: TypeAlias = Literal["pymupdf", "camelot", "docling", "unstructured", "docx_native"]
+ToolName: TypeAlias = Literal["pymupdf", "camelot", "docling", "unstructured", "docx_native", "xlsx_native"]
 TableStrategy: TypeAlias = Literal["lines", "lines_strict", "text", "lattice", "stream", "network", "hybrid", "accurate", "hi_res", "file"]
 StrategyStatus: TypeAlias = Literal["not_started", "completed_no_tables", "completed_with_tables", "completed_with_page_failures", "failed"]
 CellRole: TypeAlias = Literal["column_header", "row_header", "row_section", "body", "unknown"]

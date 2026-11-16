@@ -1,5 +1,5 @@
 """Read an .xlsx file into facts: sheets, cells with display values, merges, hidden rows and columns,
-Table objects (docs/rules/xlsx.md). The parser (xlsx_native) and the excerpt locator (anchors) both
+Table objects, which cells have borders (docs/rules/xlsx.md). The parser (xlsx_native) and the excerpt locator (anchors) both
 read through here, so a cell's text is the same for both.
 
 openpyxl reads the file twice: with cached values (what Excel computed when it saved the file) and
@@ -72,6 +72,7 @@ class Sheet:
     tables: tuple[TableObject, ...]
     images: int
     charts: int
+    bordered: tuple[tuple[int, int], ...] = ()   # (row, column) of cells with a border on any side
 
     @property
     def address(self) -> str:
@@ -118,6 +119,11 @@ def _hidden_columns(ws) -> tuple[int, ...]:
     return tuple(sorted(hidden))
 
 
+def _has_border(cell) -> bool:
+    border = cell.border
+    return any(getattr(getattr(border, side, None), "style", None) for side in ("left", "right", "top", "bottom"))
+
+
 def read_xlsx(path: Path) -> XlsxFile:
     import openpyxl
     from openpyxl.chartsheet import Chartsheet
@@ -151,7 +157,8 @@ def read_xlsx(path: Path) -> XlsxFile:
             first_column, first_row, last_column, last_row = range_boundaries(table.ref)
             tables.append(TableObject(table.name, first_row, first_column, last_row, last_column,
                                       table.headerRowCount if table.headerRowCount is not None else 1))
+        bordered = tuple(sorted(position for position, cell in ws._cells.items() if _has_border(cell)))
         sheets.append(Sheet(index, name, ws.sheet_state, tuple(cells), merges, hidden_rows,
                             _hidden_columns(ws), tuple(sorted(tables, key=lambda t: (t.first_row, t.first_column))),
-                            len(ws._images), len(ws._charts)))
+                            len(ws._images), len(ws._charts), bordered))
     return XlsxFile(tuple(sheets), tuple(charts))

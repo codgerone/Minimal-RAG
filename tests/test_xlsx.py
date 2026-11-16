@@ -107,3 +107,106 @@ def test_reader_facts(tmp_path):
     assert [m.ref for m in main.merges] == ["A1:C1"]
     assert (main.hidden_rows, main.hidden_columns) == ((3,), (3,))
     assert [(t.name, t.first_row, t.last_column, t.header_rows) for t in other.tables] == [("Tbl", 1, 2, 1)]
+
+
+# --- regions and the parser -------------------------------------------------------------------
+
+from openpyxl.styles import Border, Side
+
+from rag.ingest.parsers.xlsx_native import XlsxNativeParser
+from rag.ingest.xlsx.regions import sheet_regions
+from rag.models import PrimaryTablePlaceholder, PrimaryText, SourceDocument
+
+
+def _regions(build):
+    import tempfile
+    from pathlib import Path
+    wb = openpyxl.Workbook()
+    build(wb.active)
+    with tempfile.TemporaryDirectory() as folder:
+        path = Path(folder) / "r.xlsx"
+        wb.save(path)
+        sheet = read_xlsx(path).sheets[0]
+    return [(r.kind, r.first_row, r.first_column, r.last_row, r.last_column) for r in sheet_regions(sheet)]
+
+
+def _fill(ws, ref, value="x"):
+    for row in ws[ref]:
+        for cell in row:
+            cell.value = value
+
+
+def test_connected_cells_are_one_region_and_shape_decides_the_kind():
+    def build(ws):
+        _fill(ws, "A1:C3")          # table
+        ws["A5"], ws["B5"] = "a", "b"   # one row
+        ws["E1"], ws["E2"] = "c", "d"   # one column, apart from the table
+    assert _regions(build) == [("table", 1, 1, 3, 3), ("column", 1, 5, 2, 5), ("row", 5, 1, 5, 2)]
+
+
+def test_merge_with_value_occupies_its_cells_and_an_empty_merge_does_not():
+    def build(ws):
+        ws["A1"] = "title"
+        ws.merge_cells("A1:C2")
+        ws["D3"] = "x"              # touches the merge only diagonally
+        ws.merge_cells("A5:B6")      # empty
+        ws["C6"] = "y"
+    assert _regions(build) == [("row", 1, 1, 2, 3), ("row", 3, 4, 3, 4), ("row", 6, 3, 6, 3)]
+
+
+def test_bordered_empty_cells_connect_and_alone_are_dropped():
+    side = Side(style="thin")
+    def build(ws):
+        ws["A1"], ws["C1"], ws["A2"], ws["C2"] = "k", "v", "k2", "v2"
+        ws["B1"].border = ws["B2"].border = Border(left=side)
+        ws["F9"].border = Border(top=side)
+    assert _regions(build) == [("table", 1, 1, 2, 3)]
+
+
+def test_side_by_side_blocks_join_only_when_top_and_bottom_align():
+    def build(ws):
+        _fill(ws, "A1:B4")
+        _fill(ws, "E1:F4")           # same rows: one table
+        _fill(ws, "A7:B10")
+        _fill(ws, "E7:F8")           # rows 7–8 only: a table of its own
+        ws["A12"], ws["E12"] = "t1", "t2"   # single rows on the same row stay apart
+    assert _regions(build) == [("table", 1, 1, 4, 6), ("table", 7, 1, 10, 2), ("table", 7, 5, 8, 6),
+                               ("row", 12, 1, 12, 1), ("row", 12, 5, 12, 5)]
+
+
+def test_overlapping_rectangles_merge():
+    def build(ws):
+        _fill(ws, "A1:A4")
+        _fill(ws, "B1:D1")           # an L shape: connected
+        ws["C3"] = "inside"          # not connected, but inside the L's rectangle
+    assert _regions(build) == [("table", 1, 1, 4, 4)]
+
+
+def test_table_object_is_a_table(tmp_path):
+    path = tmp_path / "book.xlsx"
+    _workbook(path)
+    other = read_xlsx(path).sheets[1]
+    assert [(r.kind, r.table_object) for r in sheet_regions(other)] == [("table", "Tbl")]
+
+
+def test_parser_elements_and_addresses(tmp_path):
+    path = tmp_path / "book.xlsx"
+    wb = openpyxl.Workbook()
+    ws = wb.active
+    ws.title = "Plan"
+    ws["A1"], ws["B1"] = " Name ", "Value"     # one row
+    ws["A3"], ws["B3"], ws["A4"], ws["B4"] = "No.", "Date", 1, dt.datetime(2024, 9, 6)
+    ws["B4"].number_format = "yyyy-mm-dd"
+    wb.save(path)
+    source = SourceDocument("doc", "book.xlsx", "book.xlsx", path, "hash", file_type="xlsx")
+    primary = XlsxNativeParser().parse(source).primary
+    title, row, table = primary.elements
+    assert (title.kind, title.text, title.sources[0].address) == ("title", "Plan", "sheet1#name")
+    assert isinstance(row, PrimaryText) and row.text == "Name | Value"
+    assert [(p.start, p.end, p.address, p.offset) for p in row.pieces] == [
+        (0, 4, "sheet1/r1c1", 1), (7, 12, "sheet1/r1c2", 0)]
+    assert isinstance(table, PrimaryTablePlaceholder) and table.sources[0].label == "Plan!A3:B4"
+    cells = {(c.start_row_offset_idx, c.start_col_offset_idx): (c.text, c.address)
+             for c in primary.native_tables[0].table.cells}
+    assert cells[(1, 1)] == ("2024-09-06", "sheet1/r4c2")
+    assert primary.page_count == 1

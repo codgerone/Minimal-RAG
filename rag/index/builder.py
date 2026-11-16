@@ -80,7 +80,7 @@ def current_status(workspace: Workspace, assembly: Assembly,
 
 
 def supported_types(assembly: Assembly) -> tuple[str, ...]:
-    return tuple(kind for kind in ("pdf", "docx") if assembly.parser_for(kind) is not None)
+    return tuple(kind for kind in ("pdf", "docx", "xlsx") if assembly.parser_for(kind) is not None)
 
 
 def prepare(source: SourceDocument, assembly: Assembly,

@@ -9,7 +9,7 @@ parsing), so whenever either fact could change, the document is already out of d
 
 A Word file passes through Word parsing, the table steps (with tables), composition, chunking,
 encoding and BM25: not page classification, OCR, or table extraction and selection. Its parse
-record holds [docx_parser]; a PDF's records never hold it.
+record holds [docx_parser]; a PDF's records never hold it. An Excel file likewise, with [xlsx_parser].
 """
 
 from __future__ import annotations
@@ -44,9 +44,11 @@ def step_settings(assembly: "Assembly", facts: DocumentFacts | None = None) -> d
     if facts is None:
         facts = DocumentFacts(True, assembly.parser.provides_table_slots)
     steps: dict[str, Any] = {}
-    if facts.file_type == "docx":
-        assert config.docx_parser is not None and assembly.docx_parser is not None
-        steps["parse"] = {**config.docx_parser.as_dict(), "identity": assembly.docx_parser.identity()}
+    if facts.file_type in ("docx", "xlsx"):
+        component = config.docx_parser if facts.file_type == "docx" else config.xlsx_parser
+        parser = assembly.parser_for(facts.file_type)
+        assert component is not None and parser is not None
+        steps["parse"] = {**component.as_dict(), "identity": parser.identity()}
         if facts.tables:
             steps["table_text"] = {**config.table_settings(), "rules": formatters.RULES_VERSION}
         return {**steps, **_shared_steps(assembly)}

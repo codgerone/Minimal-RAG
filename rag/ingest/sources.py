@@ -1,4 +1,4 @@
-"""Discover source documents (PDF, Word) under documents/ and resolve user selectors."""
+"""Discover source documents (PDF, Word, Excel) under documents/ and resolve user selectors."""
 
 from __future__ import annotations
 
@@ -9,7 +9,8 @@ import fitz
 
 from rag.models import FileType, SourceDocument
 
-FILE_TYPES: dict[str, FileType] = {".pdf": "pdf", ".docx": "docx"}
+FILE_TYPES: dict[str, FileType] = {".pdf": "pdf", ".docx": "docx", ".xlsx": "xlsx"}
+MAIN_PARTS = {"docx": "word/document.xml", "xlsx": "xl/workbook.xml"}
 
 
 class SourceError(ValueError):
@@ -88,12 +89,12 @@ def select(selector: str, sources: tuple[SourceDocument, ...]) -> SourceDocument
 
 def has_text(source: SourceDocument, *, ocr: bool = False) -> bool:
     """False for unreadable files, and for PDFs without any text-layer page unless OCR is configured
-    and some page is scanned. A Word file is readable when it is a package with a main document."""
-    if source.file_type == "docx":
+    and some page is scanned. A Word or Excel file is readable when it is a package with a main part."""
+    if source.file_type in MAIN_PARTS:
         import zipfile
         try:
             with zipfile.ZipFile(source.absolute_path) as package:
-                return "word/document.xml" in package.namelist()
+                return MAIN_PARTS[source.file_type] in package.namelist()
         except (OSError, zipfile.BadZipFile):
             return False
     from rag.ingest.ocr.pages import page_kind
