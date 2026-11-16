@@ -425,7 +425,9 @@ def _scope_summary(results: list[CaseResult], enabled: bool, has_catalog: bool) 
 def _case_json(item: CaseResult, names: dict[str, str]) -> dict[str, Any]:
     case, score = item.case, item.score
     relevant = {cid for g in item.evidence.groups for s in g.acceptable_sets for cid in s}
-    evidence_docs = item.evidence_documents
+    # Cross-document: outside the evidence's documents; a question without evidence (unanswerable)
+    # is judged against the documents its codes identified, and without any, not judged.
+    evidence_docs = item.evidence_documents or set(item.scope.document_ids or ())
     return {
         "case_id": case.case_id, "document_id": case.document_id,
         "document_name": case.document_name, "question": case.question,
@@ -472,7 +474,7 @@ def _case_json(item: CaseResult, names: dict[str, str]) -> dict[str, Any]:
             "chunk_ids": list(u.chunk_ids),
             "relevant_chunk_ids": [cid for cid in u.chunk_ids if cid in relevant],
             "relevant": any(cid in relevant for cid in u.chunk_ids),
-            "cross_document": u.document_id not in evidence_docs,
+            "cross_document": bool(evidence_docs) and u.document_id not in evidence_docs,
             "tokens": tokens,
             "text": u.text,
         } for rank, (u, tokens) in enumerate(zip(item.units, item.tokens), start=1)],
