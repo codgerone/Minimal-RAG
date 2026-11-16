@@ -4,8 +4,8 @@ build-backend = "hatchling.build"
 
 [project]
 name = "minimal-rag"
-version = "4.2.0"
-description = "A minimal but complete local PDF RAG system."
+version = "4.3.0"
+description = "A minimal but complete local RAG system for PDF, Word and Excel documents."
 readme = "README.md"
 requires-python = ">=3.11,<3.12"
 dependencies = [
