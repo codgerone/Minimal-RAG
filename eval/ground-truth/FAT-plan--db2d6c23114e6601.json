@@ -1,0 +1,175 @@
+{
+  "schema_version": "ground_truth_document_v2",
+  "document_key": "FAT-plan--db2d6c23114e6601",
+  "document_id": "db2d6c23114e6601",
+  "document_name": "FAT plan.xlsx",
+  "relative_path": "FAT plan.xlsx",
+  "file_hash": "fc6b5058399566652e0676cec8a09fa9b0b9034a40a70d637d0c9b3989c37b5c",
+  "cases": [
+    {
+      "case_id": "FAT-PLAN-Q001",
+      "question": "按 FAT 计划 FAT2025001，2025 年 12 月 12 日这一天安排了哪些测试？",
+      "answerable": true,
+      "reference_answer": "单相表充电 144 只、常规测试 72 只，三相表充电 80 只。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "db2d6c23114e6601",
+          "document_name": "FAT plan.xlsx",
+          "relative_path": "FAT plan.xlsx",
+          "text": "单相充电144只，常规测试72只 三相充电80只",
+          "locate_hint": "2025-12-12"
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "当天的测试安排",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "FAT-PLAN-Q002",
+      "question": "FAT 计划 FAT2025001 的日历中，哪几天是周末？",
+      "answerable": true,
+      "reference_answer": "2025-12-13（周六）、2025-12-14（周日）、2025-12-20（周六）、2025-12-21（周日）。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "db2d6c23114e6601",
+          "document_name": "FAT plan.xlsx",
+          "relative_path": "FAT plan.xlsx",
+          "text": "2025-12-13 | 2025-12-14 | 2025-12-20 | 2025-12-21",
+          "table_header": true
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "db2d6c23114e6601",
+          "document_name": "FAT plan.xlsx",
+          "relative_path": "FAT plan.xlsx",
+          "text": "Saturday | Sunday | Saturday | Sunday"
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "周末的日期",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "FAT-PLAN-Q003",
+      "question": "FAT 计划 FAT2025001 中，单相表和三相表的充电数量合计各是多少？",
+      "answerable": true,
+      "reference_answer": "单相表充电合计 1115 只，三相表充电合计 440 只。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "db2d6c23114e6601",
+          "document_name": "FAT plan.xlsx",
+          "relative_path": "FAT plan.xlsx",
+          "text": "single phase meter charging amount | 1115"
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "db2d6c23114e6601",
+          "document_name": "FAT plan.xlsx",
+          "relative_path": "FAT plan.xlsx",
+          "text": "three phase meter charging amount | 440"
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "单相表充电合计",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "三相表充电合计",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "FAT-PLAN-Q004",
+      "question": "FAT 计划 FAT2025001 中，客户 ENSA 的 HXE12ES 订单数量是多少？验货抽检多少只？",
+      "answerable": true,
+      "reference_answer": "ENSA 的 HXE12ES 数量 24330 只，抽检 85 只。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "db2d6c23114e6601",
+          "document_name": "FAT plan.xlsx",
+          "relative_path": "FAT plan.xlsx",
+          "text": "ENSA | 24330 | HXE12ES | 85"
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "订单数量",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "抽检数量",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "FAT-PLAN-Q005",
+      "question": "FAT 计划 FAT2025001 的验货由哪家第三方检验机构执行？",
+      "answerable": false,
+      "reference_answer": "文件没有写明执行验货的第三方检验机构。",
+      "excerpts": [],
+      "evidence_groups": []
+    }
+  ]
+}

@@ -1,0 +1,321 @@
+{
+  "schema_version": "ground_truth_document_v2",
+  "document_key": "FONAFE普表招标一般贸易概算-20251204--a7d55bc735854453",
+  "document_id": "a7d55bc735854453",
+  "document_name": "FONAFE普表招标一般贸易概算-20251204.xlsx",
+  "relative_path": "FONAFE普表招标一般贸易概算-20251204.xlsx",
+  "file_hash": "44693b22a81bbf3abe51ef10c4d771914390cea7535409642f40eca773a346ce",
+  "cases": [
+    {
+      "case_id": "BUDGET-FONAFE-Q001",
+      "question": "概算 BUDGET2025001 的概算日期、币种和贸易术语分别是什么？",
+      "answerable": true,
+      "reference_answer": "概算日期 2025-11-17，币种 USD，贸易术语 DDP。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "a7d55bc735854453",
+          "document_name": "FONAFE普表招标一般贸易概算-20251204.xlsx",
+          "relative_path": "FONAFE普表招标一般贸易概算-20251204.xlsx",
+          "text": "2025-11-17"
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "a7d55bc735854453",
+          "document_name": "FONAFE普表招标一般贸易概算-20251204.xlsx",
+          "relative_path": "FONAFE普表招标一般贸易概算-20251204.xlsx",
+          "text": "USD"
+        },
+        {
+          "excerpt_id": "x3",
+          "document_id": "a7d55bc735854453",
+          "document_name": "FONAFE普表招标一般贸易概算-20251204.xlsx",
+          "relative_path": "FONAFE普表招标一般贸易概算-20251204.xlsx",
+          "text": "DDP"
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "概算日期",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "币种",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e3",
+          "information_item": "贸易术语",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x3"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "BUDGET-FONAFE-Q002",
+      "question": "概算 BUDGET2025001 中，三相四线表 HXE34K-S1 的数量和管理毛利率是多少？",
+      "answerable": true,
+      "reference_answer": "数量 45,938 只，管理毛利率 7.18%。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "a7d55bc735854453",
+          "document_name": "FONAFE普表招标一般贸易概算-20251204.xlsx",
+          "relative_path": "FONAFE普表招标一般贸易概算-20251204.xlsx",
+          "text": "HXE34K-S1 | 45,938.00 | 7.18%"
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "数量",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "管理毛利率",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "BUDGET-FONAFE-Q003",
+      "question": "概算 BUDGET2025001 中，单相两线表 HXE12ES 的售价单价（不含税）和增值税各是多少？",
+      "answerable": true,
+      "reference_answer": "不含税售价单价 US$5.18，增值税（18%）US$0.93。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "a7d55bc735854453",
+          "document_name": "FONAFE普表招标一般贸易概算-20251204.xlsx",
+          "relative_path": "FONAFE普表招标一般贸易概算-20251204.xlsx",
+          "text": "HXE12ES | US$5.18 | US$0.93"
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "不含税售价单价",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "增值税",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "BUDGET-FONAFE-Q004",
+      "question": "概算 BUDGET2025001 的清关费用测算中，清关预扣所得税（Percepcion）的税率和金额是多少？",
+      "answerable": true,
+      "reference_answer": "税率 3.5%，金额 267746.22（美元）。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "a7d55bc735854453",
+          "document_name": "FONAFE普表招标一般贸易概算-20251204.xlsx",
+          "relative_path": "FONAFE普表招标一般贸易概算-20251204.xlsx",
+          "text": "Percepcion 清关预扣所得税 | 3.5% | 267746.22"
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "税率",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "金额",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "BUDGET-FONAFE-Q005",
+      "question": "概算 BUDGET2025001 中，出口信用保费的费率和信保覆盖比例是多少？保费金额是多少？",
+      "answerable": true,
+      "reference_answer": "出口信用保费费率 0.0470%，信保覆盖比例 100%，出口信用保费 ¥24,542.13。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "a7d55bc735854453",
+          "document_name": "FONAFE普表招标一般贸易概算-20251204.xlsx",
+          "relative_path": "FONAFE普表招标一般贸易概算-20251204.xlsx",
+          "text": "0.0470% | 100% | ¥24,542.13"
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "费率与覆盖比例",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "保费金额",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "BUDGET-FONAFE-Q006",
+      "question": "概算 BUDGET2025001 的关键假设清单中，出口信用保费由哪个部门负责？",
+      "answerable": true,
+      "reference_answer": "由销管负责。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "a7d55bc735854453",
+          "document_name": "FONAFE普表招标一般贸易概算-20251204.xlsx",
+          "relative_path": "FONAFE普表招标一般贸易概算-20251204.xlsx",
+          "text": "出口信用保费 | 销管"
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "负责部门",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "BUDGET-FONAFE-Q007",
+      "question": "按概算 BUDGET2025001 的编制说明，报价有效期在 120 天以上时，风险准备金按多少比例计提？",
+      "answerable": true,
+      "reference_answer": "按 1% 计提。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "a7d55bc735854453",
+          "document_name": "FONAFE普表招标一般贸易概算-20251204.xlsx",
+          "relative_path": "FONAFE普表招标一般贸易概算-20251204.xlsx",
+          "text": "Tender Validity Period  120 day+ | 1.0%"
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "a7d55bc735854453",
+          "document_name": "FONAFE普表招标一般贸易概算-20251204.xlsx",
+          "relative_path": "FONAFE普表招标一般贸易概算-20251204.xlsx",
+          "text": "2）按报价有效期考虑风险准备金，31-120天 0.5%；120天以上1%"
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "风险准备金比例",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            },
+            {
+              "scheme_id": "s2",
+              "excerpt_ids": [
+                "x2"
+              ]
+            }
+          ],
+          "note": "数据假设表与填写说明第 3 节第 2）条都写明，任一处即可"
+        }
+      ]
+    },
+    {
+      "case_id": "BUDGET-FONAFE-Q008",
+      "question": "概算 BUDGET2025001 的海运费按哪个起运港到哪个目的港估算？",
+      "answerable": false,
+      "reference_answer": "文件没有写明起运港和目的港（关键假设清单中相应栏目为空）。",
+      "excerpts": [],
+      "evidence_groups": []
+    }
+  ]
+}

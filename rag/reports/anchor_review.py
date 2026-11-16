@@ -209,7 +209,7 @@ def _excel_pages(items: list[tuple[str, ExcerptAnchor]], books: dict, names: dic
         marks = _excel_highlight([(c, i) for c, i in items if i.excerpt.document_id == doc])
         body = "".join(f'<h2>{esc(sheet_label(sheets[n]))}</h2>' + sheet_grid(sheets[n], regions[n], marks.get(n))
                        for n in sheets)
-        name = f"{readable_name(names[doc])}-xlsx.html"
+        name = f"{readable_name(names[doc])}.html"
         write_atomic(folder / name, page(names[doc], f'<h1>{esc(names[doc])}</h1>'
                                          '<div class="sub">黄色是定位到的格，红框是多处出现时选定的一处。'
                                          '鼠标停在格上显示地址、格式与公式。</div>'

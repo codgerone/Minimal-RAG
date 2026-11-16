@@ -1,0 +1,268 @@
+{
+  "schema_version": "ground_truth_document_v2",
+  "document_key": "交付清单--c9140ebec9aa0c76",
+  "document_id": "c9140ebec9aa0c76",
+  "document_name": "交付清单.xlsx",
+  "relative_path": "交付清单.xlsx",
+  "file_hash": "9a6034c47549ef74cf545233a2faa5fa264598ca7f544be2403f887a51aab2fd",
+  "cases": [
+    {
+      "case_id": "DELIV-FONAFE-Q001",
+      "question": "按交付清单 DELIV2025001，ITEM 1 中 HIDRANDINA 的采购数量、最长交付期限和保函有效期是多少？",
+      "answerable": true,
+      "reference_answer": "数量 190,941 只，最长交付期限 330（天），保函有效期至 2026-09-20。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "c9140ebec9aa0c76",
+          "document_name": "交付清单.xlsx",
+          "relative_path": "交付清单.xlsx",
+          "text": "HIDRANDINA S.A. | 190,941.00 | 330 | 2026-09-20"
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "采购数量",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "最长交付期限",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e3",
+          "information_item": "保函有效期",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "DELIV-FONAFE-Q002",
+      "question": "交付清单 DELIV2025001 中，ITEM 3 三相三线表的不含税单价和含税单价是多少？",
+      "answerable": true,
+      "reference_answer": "不含 IGV 单价 15.33，含 IGV 单价 18.0894。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "c9140ebec9aa0c76",
+          "document_name": "交付清单.xlsx",
+          "relative_path": "交付清单.xlsx",
+          "text": "15.33000 | 18.0894"
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "不含税单价",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "含税单价",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "DELIV-FONAFE-Q003",
+      "question": "交付清单 DELIV2025001 的中信保额度确认中，ENSA 的买方代码和已申请额度是多少？",
+      "answerable": true,
+      "reference_answer": "买方代码 PER/589545，已申请额度 500,000.00。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "c9140ebec9aa0c76",
+          "document_name": "交付清单.xlsx",
+          "relative_path": "交付清单.xlsx",
+          "text": "ENSA， | PER/589545 | 500,000.00",
+          "locate_hint": "已申请额度"
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "买方代码",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "已申请额度",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "DELIV-FONAFE-Q004",
+      "question": "交付清单 DELIV2025001 中，第四批交货 ELCTO 的 item2 数量是多少？",
+      "answerable": true,
+      "reference_answer": "第四批交货 ELCTO 的 item2 数量为 15500。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "c9140ebec9aa0c76",
+          "document_name": "交付清单.xlsx",
+          "relative_path": "交付清单.xlsx",
+          "text": "第四批交货 | ELCTO | 15500",
+          "locate_hint": "item2"
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "第四批 ELCTO 的 item2 数量",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "DELIV-FONAFE-Q005",
+      "question": "交付清单 DELIV2025001 记录的付款要求是什么？中信保额度是多少？",
+      "answerable": true,
+      "reference_answer": "每批次验收（开票）后 30 天付款；中信保额度 50 万美元。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "c9140ebec9aa0c76",
+          "document_name": "交付清单.xlsx",
+          "relative_path": "交付清单.xlsx",
+          "text": "付款要求：验收接受后30天付"
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "c9140ebec9aa0c76",
+          "document_name": "交付清单.xlsx",
+          "relative_path": "交付清单.xlsx",
+          "text": "每批次验收开票后30天支付，中信保额度50w美金"
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "付款要求",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            },
+            {
+              "scheme_id": "s2",
+              "excerpt_ids": [
+                "x2"
+              ]
+            }
+          ],
+          "note": "两处备注都写明验收后 30 天付款，任一处即可"
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "中信保额度",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "DELIV-FONAFE-Q006",
+      "question": "交付清单 DELIV2025001 中合同的（大约）签署日期是哪天？",
+      "answerable": true,
+      "reference_answer": "2025-09-10（大约）。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "c9140ebec9aa0c76",
+          "document_name": "交付清单.xlsx",
+          "relative_path": "交付清单.xlsx",
+          "text": "Fecha firma de contrato (aprox) | 2025-09-10"
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "合同签署日期",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "DELIV-FONAFE-Q007",
+      "question": "交付清单 DELIV2025001 中，各批次计划在哪天从工厂发货？",
+      "answerable": false,
+      "reference_answer": "文件没有给出各批次的发货日期。",
+      "excerpts": [],
+      "evidence_groups": []
+    }
+  ]
+}
