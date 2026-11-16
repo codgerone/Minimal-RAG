@@ -17,21 +17,63 @@
           "document_id": "a7d55bc735854453",
           "document_name": "FONAFE普表招标一般贸易概算-20251204.xlsx",
           "relative_path": "FONAFE普表招标一般贸易概算-20251204.xlsx",
-          "text": "2025-11-17"
+          "text": "2025-11-17",
+          "anchor": {
+            "text_sha256": "59bb17e3ff3f98bf",
+            "pieces": [
+              {
+                "text": "2025-11-17",
+                "words": [
+                  "sheet3/r5c3 0 10"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "1 总表!A1:C19"
+          ]
         },
         {
           "excerpt_id": "x2",
           "document_id": "a7d55bc735854453",
           "document_name": "FONAFE普表招标一般贸易概算-20251204.xlsx",
           "relative_path": "FONAFE普表招标一般贸易概算-20251204.xlsx",
-          "text": "USD"
+          "text": "USD",
+          "anchor": {
+            "text_sha256": "a26cdf3a6e709124",
+            "pieces": [
+              {
+                "text": "USD",
+                "words": [
+                  "sheet3/r6c3 0 3"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "1 总表!A1:C19"
+          ]
         },
         {
           "excerpt_id": "x3",
           "document_id": "a7d55bc735854453",
           "document_name": "FONAFE普表招标一般贸易概算-20251204.xlsx",
           "relative_path": "FONAFE普表招标一般贸易概算-20251204.xlsx",
-          "text": "DDP"
+          "text": "DDP",
+          "anchor": {
+            "text_sha256": "5df748fd8e021b17",
+            "pieces": [
+              {
+                "text": "DDP",
+                "words": [
+                  "sheet3/r7c3 0 3"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "1 总表!A1:C19"
+          ]
         }
       ],
       "evidence_groups": [
@@ -84,7 +126,33 @@
           "document_id": "a7d55bc735854453",
           "document_name": "FONAFE普表招标一般贸易概算-20251204.xlsx",
           "relative_path": "FONAFE普表招标一般贸易概算-20251204.xlsx",
-          "text": "HXE34K-S1 | 45,938.00 | 7.18%"
+          "text": "HXE34K-S1 | 45,938.00 | 7.18%",
+          "anchor": {
+            "text_sha256": "4260f13f937d99a6",
+            "pieces": [
+              {
+                "text": "HXE34K-S1",
+                "words": [
+                  "sheet4/r9c3 0 9"
+                ]
+              },
+              {
+                "text": "45,938.00",
+                "words": [
+                  "sheet4/r9c5 0 9"
+                ]
+              },
+              {
+                "text": "7.18%",
+                "words": [
+                  "sheet4/r9c39 0 5"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "2 成本核价表!A1:AM9"
+          ]
         }
       ],
       "evidence_groups": [
@@ -125,7 +193,33 @@
           "document_id": "a7d55bc735854453",
           "document_name": "FONAFE普表招标一般贸易概算-20251204.xlsx",
           "relative_path": "FONAFE普表招标一般贸易概算-20251204.xlsx",
-          "text": "HXE12ES | US$5.18 | US$0.93"
+          "text": "HXE12ES | US$5.18 | US$0.93",
+          "anchor": {
+            "text_sha256": "484176f00d3a6870",
+            "pieces": [
+              {
+                "text": "HXE12ES",
+                "words": [
+                  "sheet4/r6c3 0 7"
+                ]
+              },
+              {
+                "text": "US$5.18",
+                "words": [
+                  "sheet4/r6c7 0 7"
+                ]
+              },
+              {
+                "text": "US$0.93",
+                "words": [
+                  "sheet4/r6c8 0 7"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "2 成本核价表!A1:AM9"
+          ]
         }
       ],
       "evidence_groups": [
@@ -166,7 +260,34 @@
           "document_id": "a7d55bc735854453",
           "document_name": "FONAFE普表招标一般贸易概算-20251204.xlsx",
           "relative_path": "FONAFE普表招标一般贸易概算-20251204.xlsx",
-          "text": "Percepcion 清关预扣所得税 | 3.5% | 267746.22"
+          "text": "Percepcion 清关预扣所得税 | 3.5% | 267746.22",
+          "anchor": {
+            "text_sha256": "dc1a6d58b82140d0",
+            "pieces": [
+              {
+                "text": "Percepcion 清关预扣所得税",
+                "words": [
+                  "sheet5/r15c3 0 10",
+                  "sheet5/r15c3 11 18"
+                ]
+              },
+              {
+                "text": "3.5%",
+                "words": [
+                  "sheet5/r15c4 0 4"
+                ]
+              },
+              {
+                "text": "267746.22",
+                "words": [
+                  "sheet5/r15c6 0 9"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "Customs clearance fee!B3:G16"
+          ]
         }
       ],
       "evidence_groups": [
@@ -207,7 +328,33 @@
           "document_id": "a7d55bc735854453",
           "document_name": "FONAFE普表招标一般贸易概算-20251204.xlsx",
           "relative_path": "FONAFE普表招标一般贸易概算-20251204.xlsx",
-          "text": "0.0470% | 100% | ¥24,542.13"
+          "text": "0.0470% | 100% | ¥24,542.13",
+          "anchor": {
+            "text_sha256": "adea6136e501e42c",
+            "pieces": [
+              {
+                "text": "0.0470%",
+                "words": [
+                  "sheet6/r8c11 0 7"
+                ]
+              },
+              {
+                "text": "100%",
+                "words": [
+                  "sheet6/r8c12 0 4"
+                ]
+              },
+              {
+                "text": "¥24,542.13",
+                "words": [
+                  "sheet6/r8c13 0 10"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "3 保函&银行手续费&资金成本&出口信保&风险准备金!K6:M14"
+          ]
         }
       ],
       "evidence_groups": [
@@ -248,7 +395,27 @@
           "document_id": "a7d55bc735854453",
           "document_name": "FONAFE普表招标一般贸易概算-20251204.xlsx",
           "relative_path": "FONAFE普表招标一般贸易概算-20251204.xlsx",
-          "text": "出口信用保费 | 销管"
+          "text": "出口信用保费 | 销管",
+          "anchor": {
+            "text_sha256": "f2f92bbb0ebe5352",
+            "pieces": [
+              {
+                "text": "出口信用保费",
+                "words": [
+                  "sheet8/r21c1 0 6"
+                ]
+              },
+              {
+                "text": "销管",
+                "words": [
+                  "sheet8/r21c2 0 2"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "关键假设清单!A17:M21"
+          ]
         }
       ],
       "evidence_groups": [
@@ -277,14 +444,53 @@
           "document_id": "a7d55bc735854453",
           "document_name": "FONAFE普表招标一般贸易概算-20251204.xlsx",
           "relative_path": "FONAFE普表招标一般贸易概算-20251204.xlsx",
-          "text": "Tender Validity Period  120 day+ | 1.0%"
+          "text": "Tender Validity Period  120 day+ | 1.0%",
+          "anchor": {
+            "text_sha256": "8ecf47b15f4ad99f",
+            "pieces": [
+              {
+                "text": "Tender Validity Period  120 day+",
+                "words": [
+                  "sheet7/r26c1 0 6",
+                  "sheet7/r26c1 7 15",
+                  "sheet7/r26c1 16 22",
+                  "sheet7/r26c1 24 27",
+                  "sheet7/r26c1 28 32"
+                ]
+              },
+              {
+                "text": "1.0%",
+                "words": [
+                  "sheet7/r26c2 0 4"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "附 编制说明!A24:B26"
+          ]
         },
         {
           "excerpt_id": "x2",
           "document_id": "a7d55bc735854453",
           "document_name": "FONAFE普表招标一般贸易概算-20251204.xlsx",
           "relative_path": "FONAFE普表招标一般贸易概算-20251204.xlsx",
-          "text": "2）按报价有效期考虑风险准备金，31-120天 0.5%；120天以上1%"
+          "text": "2）按报价有效期考虑风险准备金，31-120天 0.5%；120天以上1%",
+          "anchor": {
+            "text_sha256": "ecab8c21839ea74b",
+            "pieces": [
+              {
+                "text": "2）按报价有效期考虑风险准备金，31-120天 0.5%；120天以上1%",
+                "words": [
+                  "sheet7/r13c1 0 23",
+                  "sheet7/r13c1 24 37"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "附 编制说明!A13"
+          ]
         }
       ],
       "evidence_groups": [
@@ -320,14 +526,54 @@
           "document_id": "a7d55bc735854453",
           "document_name": "FONAFE普表招标一般贸易概算-20251204.xlsx",
           "relative_path": "FONAFE普表招标一般贸易概算-20251204.xlsx",
-          "text": "USD:CNY | 7.088"
+          "text": "USD:CNY | 7.088",
+          "anchor": {
+            "text_sha256": "c92ab5b25ff16a16",
+            "pieces": [
+              {
+                "text": "USD:CNY",
+                "words": [
+                  "sheet4/r1c2 0 7"
+                ]
+              },
+              {
+                "text": "7.088",
+                "words": [
+                  "sheet4/r1c3 0 5"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "2 成本核价表!A1:AM9"
+          ]
         },
         {
           "excerpt_id": "x2",
           "document_id": "a7d55bc735854453",
           "document_name": "FONAFE普表招标一般贸易概算-20251204.xlsx",
           "relative_path": "FONAFE普表招标一般贸易概算-20251204.xlsx",
-          "text": "USD:CNY | 6.83"
+          "text": "USD:CNY | 6.83",
+          "anchor": {
+            "text_sha256": "6554b8dcb3bc8584",
+            "pieces": [
+              {
+                "text": "USD:CNY",
+                "words": [
+                  "sheet7/r21c1 0 7"
+                ]
+              },
+              {
+                "text": "6.83",
+                "words": [
+                  "sheet7/r21c2 0 4"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "附 编制说明!A20:B22"
+          ]
         }
       ],
       "evidence_groups": [

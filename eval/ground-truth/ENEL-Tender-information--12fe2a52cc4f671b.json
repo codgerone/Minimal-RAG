@@ -17,14 +17,59 @@
           "document_id": "12fe2a52cc4f671b",
           "document_name": "ENEL Tender information.xlsx",
           "relative_path": "ENEL Tender information.xlsx",
-          "text": "Deadline for questions | 2024-09-16"
+          "text": "Deadline for questions | 2024-09-16",
+          "anchor": {
+            "text_sha256": "5f027e69d5ff20c4",
+            "pieces": [
+              {
+                "text": "Deadline for questions",
+                "words": [
+                  "sheet1/r5c4 0 8",
+                  "sheet1/r5c4 9 12",
+                  "sheet1/r5c4 13 22"
+                ]
+              },
+              {
+                "text": "2024-09-16",
+                "words": [
+                  "sheet1/r5c5 0 10"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "Tender Information!A1:H18"
+          ]
         },
         {
           "excerpt_id": "x2",
           "document_id": "12fe2a52cc4f671b",
           "document_name": "ENEL Tender information.xlsx",
           "relative_path": "ENEL Tender information.xlsx",
-          "text": "Send consultations to utility | 2024-09-16"
+          "text": "Send consultations to utility | 2024-09-16",
+          "anchor": {
+            "text_sha256": "4778878d1bc051a0",
+            "pieces": [
+              {
+                "text": "Send consultations to utility",
+                "words": [
+                  "sheet2/r21c3 0 4",
+                  "sheet2/r21c3 5 18",
+                  "sheet2/r21c3 19 21",
+                  "sheet2/r21c3 22 29"
+                ]
+              },
+              {
+                "text": "2024-09-16",
+                "words": [
+                  "sheet2/r21c4 0 10"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "Plan!B17:E25"
+          ]
         }
       ],
       "evidence_groups": [
@@ -65,14 +110,70 @@
           "document_id": "12fe2a52cc4f671b",
           "document_name": "ENEL Tender information.xlsx",
           "relative_path": "ENEL Tender information.xlsx",
-          "text": "HXE13ES | Single Phase meter | 570,000"
+          "text": "HXE13ES | Single Phase meter | 570,000",
+          "anchor": {
+            "text_sha256": "4549db42c3304e0c",
+            "pieces": [
+              {
+                "text": "HXE13ES",
+                "words": [
+                  "sheet1/r8c2 0 7"
+                ]
+              },
+              {
+                "text": "Single Phase meter",
+                "words": [
+                  "sheet1/r8c3 0 6",
+                  "sheet1/r8c3 7 12",
+                  "sheet1/r8c3 13 18"
+                ]
+              },
+              {
+                "text": "570,000",
+                "words": [
+                  "sheet1/r8c8 0 7"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "Tender Information!A1:H18"
+          ]
         },
         {
           "excerpt_id": "x2",
           "document_id": "12fe2a52cc4f671b",
           "document_name": "ENEL Tender information.xlsx",
           "relative_path": "ENEL Tender information.xlsx",
-          "text": "HXE33K-S1 | Three Phase meter | 150,000"
+          "text": "HXE33K-S1 | Three Phase meter | 150,000",
+          "anchor": {
+            "text_sha256": "675f8a9e34f0a7c9",
+            "pieces": [
+              {
+                "text": "HXE33K-S1",
+                "words": [
+                  "sheet1/r9c2 0 9"
+                ]
+              },
+              {
+                "text": "Three Phase meter",
+                "words": [
+                  "sheet1/r9c3 0 5",
+                  "sheet1/r9c3 6 11",
+                  "sheet1/r9c3 12 17"
+                ]
+              },
+              {
+                "text": "150,000",
+                "words": [
+                  "sheet1/r9c8 0 7"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "Tender Information!A1:H18"
+          ]
         }
       ],
       "evidence_groups": [
@@ -115,7 +216,37 @@
           "document_id": "12fe2a52cc4f671b",
           "document_name": "ENEL Tender information.xlsx",
           "relative_path": "ENEL Tender information.xlsx",
-          "text": "The penalty is 0.5% of the total amount of the Contract for each calendar day of delay."
+          "text": "The penalty is 0.5% of the total amount of the Contract for each calendar day of delay.",
+          "anchor": {
+            "text_sha256": "85c46ed78f5f4dd8",
+            "pieces": [
+              {
+                "text": "The penalty is 0.5% of the total amount of the Contract for each calendar day of delay.",
+                "words": [
+                  "sheet1/r13c3 0 3",
+                  "sheet1/r13c3 4 11",
+                  "sheet1/r13c3 12 14",
+                  "sheet1/r13c3 15 19",
+                  "sheet1/r13c3 20 22",
+                  "sheet1/r13c3 23 26",
+                  "sheet1/r13c3 27 32",
+                  "sheet1/r13c3 33 39",
+                  "sheet1/r13c3 40 42",
+                  "sheet1/r13c3 43 46",
+                  "sheet1/r13c3 47 55",
+                  "sheet1/r13c3 56 59",
+                  "sheet1/r13c3 60 64",
+                  "sheet1/r13c3 65 73",
+                  "sheet1/r13c3 74 77",
+                  "sheet1/r13c3 78 80",
+                  "sheet1/r13c3 81 87"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "Tender Information!A1:H18"
+          ]
         }
       ],
       "evidence_groups": [
@@ -144,7 +275,36 @@
           "document_id": "12fe2a52cc4f671b",
           "document_name": "ENEL Tender information.xlsx",
           "relative_path": "ENEL Tender information.xlsx",
-          "text": "Evaluation of prices | 2024-10-01 | Maria / Neng"
+          "text": "Evaluation of prices | 2024-10-01 | Maria / Neng",
+          "anchor": {
+            "text_sha256": "b21bd5b7cc040630",
+            "pieces": [
+              {
+                "text": "Evaluation of prices",
+                "words": [
+                  "sheet2/r24c3 0 10",
+                  "sheet2/r24c3 11 13",
+                  "sheet2/r24c3 14 20"
+                ]
+              },
+              {
+                "text": "2024-10-01",
+                "words": [
+                  "sheet2/r24c4 0 10"
+                ]
+              },
+              {
+                "text": "Maria / Neng",
+                "words": [
+                  "sheet2/r24c5 0 5",
+                  "sheet2/r24c5 8 12"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "Plan!B17:E25"
+          ]
         }
       ],
       "evidence_groups": [

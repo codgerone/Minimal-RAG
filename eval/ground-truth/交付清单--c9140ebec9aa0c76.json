@@ -17,14 +17,62 @@
           "document_id": "c9140ebec9aa0c76",
           "document_name": "交付清单.xlsx",
           "relative_path": "交付清单.xlsx",
-          "text": "HIDRANDINA S.A. | HDNA | PER/591251"
+          "text": "HIDRANDINA S.A. | HDNA | PER/591251",
+          "anchor": {
+            "text_sha256": "7033bfc686439012",
+            "pieces": [
+              {
+                "text": "HIDRANDINA S.A.",
+                "words": [
+                  "sheet2/r11c1 92 102",
+                  "sheet2/r11c1 103 107"
+                ]
+              },
+              {
+                "text": "HDNA",
+                "words": [
+                  "sheet2/r11c2 0 4"
+                ]
+              },
+              {
+                "text": "PER/591251",
+                "words": [
+                  "sheet2/r11c23 0 10"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "中信保额度确认!A2:AA23"
+          ]
         },
         {
           "excerpt_id": "x2",
           "document_id": "c9140ebec9aa0c76",
           "document_name": "交付清单.xlsx",
           "relative_path": "交付清单.xlsx",
-          "text": "HIDRANDINA S.A. | 116,710.78"
+          "text": "HIDRANDINA S.A. | 116,710.78",
+          "anchor": {
+            "text_sha256": "c6f703c1507f8e5a",
+            "pieces": [
+              {
+                "text": "HIDRANDINA S.A.",
+                "words": [
+                  "sheet1/r11c2 92 102",
+                  "sheet1/r11c2 103 107"
+                ]
+              },
+              {
+                "text": "116,710.78",
+                "words": [
+                  "sheet1/r11c8 0 10"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "TOTALES!B4:K15"
+          ]
         }
       ],
       "evidence_groups": [
@@ -67,7 +115,33 @@
           "document_name": "交付清单.xlsx",
           "relative_path": "交付清单.xlsx",
           "text": "ENSA， | PER/589545 | 500,000.00",
-          "locate_hint": "已申请额度"
+          "locate_hint": "已申请额度",
+          "anchor": {
+            "text_sha256": "cebb187b6d5068b7",
+            "pieces": [
+              {
+                "text": "ENSA，",
+                "words": [
+                  "sheet2/r8c2 0 5"
+                ]
+              },
+              {
+                "text": "PER/589545",
+                "words": [
+                  "sheet2/r8c23 0 10"
+                ]
+              },
+              {
+                "text": "500,000.00",
+                "words": [
+                  "sheet2/r8c24 0 10"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "中信保额度确认!A2:AA23"
+          ]
         }
       ],
       "evidence_groups": [
@@ -109,7 +183,33 @@
           "document_name": "交付清单.xlsx",
           "relative_path": "交付清单.xlsx",
           "text": "第四批交货 | ELSE | 25,000",
-          "locate_hint": "item1"
+          "locate_hint": "item1",
+          "anchor": {
+            "text_sha256": "5c62e6a275cf596c",
+            "pieces": [
+              {
+                "text": "第四批交货",
+                "words": [
+                  "sheet2/r81c1 0 5"
+                ]
+              },
+              {
+                "text": "ELSE",
+                "words": [
+                  "sheet2/r84c2 0 4"
+                ]
+              },
+              {
+                "text": "25,000",
+                "words": [
+                  "sheet2/r84c3 0 6"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "中信保额度确认!A81:W96"
+          ]
         }
       ],
       "evidence_groups": [
@@ -139,7 +239,33 @@
           "document_name": "交付清单.xlsx",
           "relative_path": "交付清单.xlsx",
           "text": "第四批交货 | ELCTO | 15500",
-          "locate_hint": "item2"
+          "locate_hint": "item2",
+          "anchor": {
+            "text_sha256": "24004395bd2de863",
+            "pieces": [
+              {
+                "text": "第四批交货",
+                "words": [
+                  "sheet2/r81c1 0 5"
+                ]
+              },
+              {
+                "text": "ELCTO",
+                "words": [
+                  "sheet2/r86c2 0 5"
+                ]
+              },
+              {
+                "text": "15500",
+                "words": [
+                  "sheet2/r86c7 0 5"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "中信保额度确认!A81:W96"
+          ]
         }
       ],
       "evidence_groups": [
@@ -168,14 +294,42 @@
           "document_id": "c9140ebec9aa0c76",
           "document_name": "交付清单.xlsx",
           "relative_path": "交付清单.xlsx",
-          "text": "付款要求：验收接受后30天付"
+          "text": "付款要求：验收接受后30天付",
+          "anchor": {
+            "text_sha256": "aa055ce9b28a4573",
+            "pieces": [
+              {
+                "text": "付款要求：验收接受后30天付",
+                "words": [
+                  "sheet2/r17c23 0 14"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "中信保额度确认!A2:AA23"
+          ]
         },
         {
           "excerpt_id": "x2",
           "document_id": "c9140ebec9aa0c76",
           "document_name": "交付清单.xlsx",
           "relative_path": "交付清单.xlsx",
-          "text": "每批次验收开票后30天支付，中信保额度50w美金"
+          "text": "每批次验收开票后30天支付，中信保额度50w美金",
+          "anchor": {
+            "text_sha256": "44560c2e8285d218",
+            "pieces": [
+              {
+                "text": "每批次验收开票后30天支付，中信保额度50w美金",
+                "words": [
+                  "sheet2/r18c21 0 24"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "中信保额度确认!A2:AA23"
+          ]
         }
       ],
       "evidence_groups": [
@@ -223,7 +377,31 @@
           "document_id": "c9140ebec9aa0c76",
           "document_name": "交付清单.xlsx",
           "relative_path": "交付清单.xlsx",
-          "text": "Fecha firma de contrato (aprox) | 2025-09-10"
+          "text": "Fecha firma de contrato (aprox) | 2025-09-10",
+          "anchor": {
+            "text_sha256": "d110cdd4425400e9",
+            "pieces": [
+              {
+                "text": "Fecha firma de contrato (aprox)",
+                "words": [
+                  "sheet1/r2c2 0 5",
+                  "sheet1/r2c2 6 11",
+                  "sheet1/r2c2 12 14",
+                  "sheet1/r2c2 15 23",
+                  "sheet1/r2c2 24 31"
+                ]
+              },
+              {
+                "text": "2025-09-10",
+                "words": [
+                  "sheet1/r2c8 0 10"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "TOTALES!A1:J2"
+          ]
         }
       ],
       "evidence_groups": [
