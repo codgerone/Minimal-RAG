@@ -36,6 +36,8 @@ def _retriever_option(sub: argparse.ArgumentParser) -> None:
                      help="本次改用这个检索器（默认取配置文件 [retriever] use；bm25、hybrid 需要配置 [lexical]）")
     sub.add_argument("--table-return-unit", choices=TABLE_RETURN_UNITS,
                      help="命中表格 chunk 时返回该 chunk 还是整张表（默认取配置文件 [retriever] table_return_unit）")
+    sub.add_argument("--whole-table-max-tokens", type=_positive,
+                     help="整表文本超过这么多 token 的表格只返回命中的 chunk（默认取配置文件 [retriever] whole_table_max_tokens，未写为 4000）")
     sub.add_argument("--bm25-weight", type=_weight,
                      help="混合检索中 BM25 排名的权重 α（默认取配置文件 [retriever] bm25_weight，未写为 1）")
 
@@ -140,8 +142,9 @@ def _out(text: str = "") -> None:
 
 def _assembly(workspace: Workspace, name: str | None, retriever: str | None = None,
               table_return_unit: str | None = None, bm25_weight: float | None = None,
-              query_mode: str | None = None):
-    """`retriever`, `table_return_unit`, `bm25_weight` and `query_mode` replace the config's query settings for this command."""
+              query_mode: str | None = None, whole_table_max_tokens: int | None = None):
+    """`retriever`, `table_return_unit`, `bm25_weight`, `query_mode` and `whole_table_max_tokens`
+    replace the config's query settings for this command."""
     from dataclasses import replace
     from rag.registry import assemble
     config = resolve_config(workspace.root, name)
@@ -153,12 +156,14 @@ def _assembly(workspace: Workspace, name: str | None, retriever: str | None = No
         config = replace(config, bm25_weight=bm25_weight)
     if query_mode is not None:
         config = replace(config, query_mode=query_mode)
+    if whole_table_max_tokens is not None:
+        config = replace(config, whole_table_max_tokens=whole_table_max_tokens)
     return assemble(config)
 
 
 def _query_assembly(workspace: Workspace, args: argparse.Namespace):
     return _assembly(workspace, args.config, args.retriever, args.table_return_unit, args.bm25_weight,
-                     getattr(args, "query_mode", None))
+                     getattr(args, "query_mode", None), getattr(args, "whole_table_max_tokens", None))
 
 
 def _status(workspace: Workspace, args: argparse.Namespace) -> int:
@@ -318,7 +323,8 @@ def _searcher(workspace: Workspace, assembly):
     from rag.query.units import UnitSearch
     store = open_store(workspace, assembly.name)
     return UnitSearch(build_retriever(assembly, store, open_lexical(workspace, assembly)), store,
-                      open_tables(workspace, assembly.name), assembly.config.table_return_unit)
+                      open_tables(workspace, assembly.name), assembly.config.table_return_unit,
+                      whole_table_max_tokens=assembly.config.whole_table_max_tokens)
 
 
 def _hit_scores(hit, retriever: str) -> str:
