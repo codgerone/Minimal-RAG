@@ -27,12 +27,13 @@ class EvalError(RuntimeError):
 
 
 # Document types reported separately (docs/rules/evaluation.md); the order is the report's.
-DOCUMENT_TYPES = {"digital": "数字 PDF", "scanned": "扫描 PDF", "partly_scanned": "部分扫描", "word": "Word"}
+DOCUMENT_TYPES = {"digital": "数字 PDF", "scanned": "扫描 PDF", "partly_scanned": "部分扫描", "word": "Word",
+                  "excel": "Excel"}
 
 
 def _document_types(workspace: Workspace, config_name: str) -> dict[str, str]:
     """document_id → type, from the page classification in the index's intermediate results; Word
-    documents (located by address, no pages) are "word"; PDFs of indexes built before V4.1 (no
+    documents (located by address, no pages) are "word", Excel documents (sheet addresses) "excel"; PDFs of indexes built before V4.1 (no
     pages.json) are left out."""
     from rag.ingest.ocr.models import DocumentPages
     from rag.jsonio import from_jsonable
@@ -43,8 +44,10 @@ def _document_types(workspace: Workspace, config_name: str) -> dict[str, str]:
             types[read_json(folder / "parsed.json")["document_id"]] = pages.document_type
         elif (folder / "parsed.json").is_file():
             parsed = read_json(folder / "parsed.json")
-            if any("address" in s for node in parsed.get("nodes", ()) for s in node.get("sources", ())):
-                types[parsed["document_id"]] = "word"
+            addresses = [s["address"] for node in parsed.get("nodes", ()) for s in node.get("sources", ())
+                         if "address" in s]
+            if addresses:
+                types[parsed["document_id"]] = "excel" if addresses[0].startswith("sheet") else "word"
     return types
 
 
