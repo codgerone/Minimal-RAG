@@ -21,6 +21,7 @@ dependencies = [
     "unstructured[local-inference]>=0.18,<1",
     "unstructured-inference>=1.0,<2",
     "snowballstemmer>=2.2,<4",
+    "openpyxl==3.1.5",
 ]
 
 [dependency-groups]
