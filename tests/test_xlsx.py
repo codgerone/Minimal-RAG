@@ -210,3 +210,50 @@ def test_parser_elements_and_addresses(tmp_path):
              for c in primary.native_tables[0].table.cells}
     assert cells[(1, 1)] == ("2024-09-06", "sheet1/r4c2")
     assert primary.page_count == 1
+
+
+# --- excerpt location -------------------------------------------------------------------------
+
+from rag.eval.dataset import Excerpt
+from rag.eval.xlsx_anchors import file_words, locate_excerpt, _tables
+
+
+def _excerpt(text, hint=None):
+    return Excerpt("x1", "doc", "book.xlsx", (), text, False, hint, None, "missing", ())
+
+
+def _book(tmp_path):
+    wb = openpyxl.Workbook()
+    ws = wb.active
+    ws.title = "Plan"
+    rows = [("Company", "Qty", "Price"), ("ENSA", 100, 5), ("ENOSA", 100, 7), ("ELUC", 300, 5)]
+    for r, row in enumerate(rows, start=1):
+        for c, value in enumerate(row, start=1):
+            ws.cell(r, c, value)
+    ws["A7"] = "Payment: 90 days after conformity"
+    other = wb.create_sheet("Other")
+    other["A1"], other["B1"], other["A2"], other["B2"] = "ENOSA", 100, "x", "y"
+    path = tmp_path / "book.xlsx"
+    wb.save(path)
+    return read_xlsx(path)
+
+
+def test_excerpt_pieces_are_cells_and_the_closest_occurrences_are_chosen(tmp_path):
+    book = _book(tmp_path)
+    anchor = locate_excerpt(_excerpt("ENOSA | 100"), file_words(book), book, _tables(book))
+    assert anchor.status == "ambiguous"
+    assert [(w.address, w.start, w.end) for w in anchor.words] == [("sheet1/r3c1", 0, 5), ("sheet1/r3c2", 0, 3)] \
+        or [(w.address, w.start, w.end) for w in anchor.words] == [("sheet2/r1c1", 0, 5), ("sheet2/r1c2", 0, 3)]
+    assert anchor.locations in (("Plan!A1:C4",), ("Other!A1:B2",))
+
+
+def test_part_of_a_long_text_cell_and_a_hint_choose_the_column(tmp_path):
+    book = _book(tmp_path)
+    words, tables = file_words(book), _tables(book)
+    part = locate_excerpt(_excerpt("90 days"), words, book, tables)
+    assert part.status == "located" and [(w.address, w.start, w.end) for w in part.words] == [
+        ("sheet1/r7c1", 9, 11), ("sheet1/r7c1", 12, 16)]
+    assert part.locations == ("Plan!A7",)
+    hinted = locate_excerpt(_excerpt("ELUC | 5", "Price"), words, book, tables)
+    assert [w.address for w in hinted.words] == ["sheet1/r4c1", "sheet1/r4c3"]   # not the Qty column
+    assert locate_excerpt(_excerpt("no such text"), words, book, tables).status == "missing"

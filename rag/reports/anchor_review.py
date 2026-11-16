@@ -156,6 +156,68 @@ def _word_pages(items: list[tuple[str, ExcerptAnchor]], files: dict[str, DocxFil
     return pages
 
 
+# --- Excel ------------------------------------------------------------------------------------
+
+def _excel_facts(book) -> tuple[dict[int, dict], dict[int, list[dict]]]:
+    """Sheets and regions as the grid renderer reads them (the shape of parse-native.json)."""
+    from rag.ingest.xlsx.regions import sheet_regions
+    from rag.jsonio import to_jsonable
+    sheets = {s.index: to_jsonable(s) for s in book.sheets}
+    regions = {s.index: to_jsonable(sheet_regions(s)) for s in book.sheets}
+    return sheets, regions
+
+
+def _excel_highlight(items: list[tuple[str, ExcerptAnchor]]) -> dict[int, dict[tuple[int, int], str]]:
+    """Sheet → cell → CSS class: hl for located cells, hl-box for a piece chosen among several."""
+    found: dict[int, dict[tuple[int, int], str]] = defaultdict(dict)
+    for _, item in items:
+        ambiguous = {w for p in item.pieces if p.candidates > 1 for w in p.words}
+        for w in item.words:
+            cell = found[w.sheet]
+            if w in ambiguous or cell.get((w.row, w.column)) == "hl-box":
+                cell[(w.row, w.column)] = "hl-box"
+            else:
+                cell[(w.row, w.column)] = "hl"
+    return found
+
+
+def _excel_context(book, item: ExcerptAnchor, case_id: str) -> str:
+    """The regions holding the located cells, as grids with those cells highlighted."""
+    from rag.reports.xlsx_grid import sheet_grid
+    sheets, regions = _excel_facts(book)
+    marks = _excel_highlight([(case_id, item)])
+    parts = []
+    for index, cells in sorted(marks.items()):
+        held = [r for r in regions[index] if any(r["first_row"] <= row <= r["last_row"]
+                                                  and r["first_column"] <= col <= r["last_column"] for row, col in cells)]
+        if not held:
+            continue
+        box = (min(r["first_row"] for r in held), min(r["first_column"] for r in held),
+               max(r["last_row"] for r in held), max(r["last_column"] for r in held))
+        parts.append(f'<div class="meta">工作表「{esc(sheets[index]["name"])}」</div>'
+                     + sheet_grid(sheets[index], regions[index], cells, box))
+    return f'<div class="ctx">{"".join(parts) or "（没有定位到的格）"}</div>'
+
+
+def _excel_pages(items: list[tuple[str, ExcerptAnchor]], books: dict, names: dict[str, str],
+                 folder: Path) -> dict[str, str]:
+    """One page per Excel document: every sheet as a grid, every excerpt's cells highlighted."""
+    from rag.reports.xlsx_grid import LEGEND, sheet_grid, sheet_label
+    pages: dict[str, str] = {}
+    for doc, book in books.items():
+        sheets, regions = _excel_facts(book)
+        marks = _excel_highlight([(c, i) for c, i in items if i.excerpt.document_id == doc])
+        body = "".join(f'<h2>{esc(sheet_label(sheets[n]))}</h2>' + sheet_grid(sheets[n], regions[n], marks.get(n))
+                       for n in sheets)
+        name = f"{readable_name(names[doc])}-xlsx.html"
+        write_atomic(folder / name, page(names[doc], f'<h1>{esc(names[doc])}</h1>'
+                                         '<div class="sub">黄色是定位到的格，红框是多处出现时选定的一处。'
+                                         '鼠标停在格上显示地址、格式与公式。</div>'
+                                         f'<div class="card">{LEGEND}{body}</div>', root="../"))
+        pages[doc] = name
+    return pages
+
+
 def _cases_section(cases) -> str:
     """Questions added or changed this round: what the excerpt cards do not show."""
     if not cases:
@@ -179,18 +241,22 @@ def _cases_section(cases) -> str:
 
 def write_anchor_review(folder: Path, items: list[tuple[str, ExcerptAnchor]], pdf_paths: dict[str, Path],
                         questions: dict[str, str], previous: dict[tuple[str, str], str | None],
-                        word_files: dict[str, DocxFile] | None = None, cases=()) -> Path:
+                        word_files: dict[str, DocxFile] | None = None, cases=(),
+                        excel_files: dict | None = None) -> Path:
     """`previous` maps (case_id, excerpt_id) → text before this round's edit (None = new excerpt).
     `pdf_paths` holds the PDF documents; `word_files` the Word documents, read. `cases`: questions
     added or changed this round, listed in full (question, answer, evidence groups)."""
     word_files = word_files or {}
-    for name in ("img", "pdf", "word"):
+    excel_files = excel_files or {}
+    for name in ("img", "pdf", "word", "excel"):
         (folder / name).mkdir(parents=True, exist_ok=True)
     write_assets(folder)
     pdf_names = _highlighted_pdfs([(c, i) for c, i in items if i.excerpt.document_id in pdf_paths],
                                   pdf_paths, folder / "pdf")
     word_names = _word_pages(items, word_files, {i.excerpt.document_id: i.excerpt.document_name
                                                  for _, i in items}, folder / "word")
+    excel_names = _excel_pages(items, excel_files, {i.excerpt.document_id: i.excerpt.document_name
+                                                    for _, i in items}, folder / "excel")
     rank = {"missing": 0, "ambiguous": 1, "located": 2}
     ordered = sorted(items, key=lambda ci: (rank[ci[1].status], not ci[1].approximate))
     counts = {s: sum(1 for _, i in items if i.status == s) for s in rank}
@@ -203,10 +269,11 @@ def write_anchor_review(folder: Path, items: list[tuple[str, ExcerptAnchor]], pd
         x = item.excerpt
         key = (case_id, x.excerpt_id)
         label, kind = STATUS[item.status]
-        where = ("、".join(item.locations) if x.document_id in word_files
+        where = ("、".join(item.locations) if x.document_id in word_files or x.document_id in excel_files
                  else "第 " + "、".join(map(str, x.pages)) + " 页")
         tags = (["all", item.status] + (["edited"] if key in previous else []) + (["header"] if x.table_header else [])
-                + (["approximate"] if item.approximate else []) + (["word"] if x.document_id in word_files else []))
+                + (["approximate"] if item.approximate else []) + (["word"] if x.document_id in word_files else [])
+                + (["excel"] if x.document_id in excel_files else []))
         head = (f'<h3>{esc(case_id)} · {esc(x.excerpt_id)} {badge(label, kind)}'
                 f'{" " + badge("表头", "warn") if x.table_header else ""}'
                 f'{" " + badge("本次修改") if key in previous else ""}'
@@ -236,6 +303,8 @@ def write_anchor_review(folder: Path, items: list[tuple[str, ExcerptAnchor]], pd
                   f'</details>' if problems else "")
         if x.document_id in word_files:
             images = _word_context(word_files[x.document_id], item, case_id)
+        elif x.document_id in excel_files:
+            images = _excel_context(excel_files[x.document_id], item, case_id)
         else:
             images = "".join(f'<div class="meta">第 {name.rsplit("_p", 1)[1][:-4]} 页</div>'
                              f'<img src="img/{esc(name)}" style="max-width:100%;border:1px solid var(--line)">'
@@ -243,7 +312,8 @@ def write_anchor_review(folder: Path, items: list[tuple[str, ExcerptAnchor]], pd
         cards.append(f'<div class="card" data-tags="{" ".join(tags)}">{head}{text}{compare}{detail}{images}</div>')
 
     links = " · ".join([f'<a href="pdf/{esc(n)}">{esc(n)}</a>' for n in pdf_names.values()]
-                       + [f'<a href="word/{esc(n)}">{esc(n)}</a>' for n in word_names.values()])
+                       + [f'<a href="word/{esc(n)}">{esc(n)}</a>' for n in word_names.values()]
+                       + [f'<a href="excel/{esc(n)}">{esc(n)}</a>' for n in excel_names.values()])
     body = (
         "<h1>excerpt 定位审核</h1>"
         f'<div class="sub">共 {len(items)} 段 excerpt。黄色是定位到的词；蓝色是扫描页上近似匹配的片段'
@@ -262,6 +332,7 @@ def write_anchor_review(folder: Path, items: list[tuple[str, ExcerptAnchor]], pd
                    ("ambiguous", "多处出现", counts["ambiguous"]), ("approximate", "近似匹配", approximate),
                    ("edited", "本次修改", edited),
                    ("word", "Word 文档", sum(1 for _, i in items if i.excerpt.document_id in word_files)),
+                   ("excel", "Excel 文档", sum(1 for _, i in items if i.excerpt.document_id in excel_files)),
                    ("header", "表头 excerpt", headers)])
         + "".join(cards))
     path = folder / "index.html"
