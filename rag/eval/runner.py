@@ -27,12 +27,13 @@ class EvalError(RuntimeError):
 
 
 # Document types reported separately (docs/rules/evaluation.md); the order is the report's.
-DOCUMENT_TYPES = {"digital": "数字 PDF", "scanned": "扫描 PDF", "partly_scanned": "部分扫描", "word": "Word"}
+DOCUMENT_TYPES = {"digital": "数字 PDF", "scanned": "扫描 PDF", "partly_scanned": "部分扫描", "word": "Word",
+                  "excel": "Excel"}
 
 
 def _document_types(workspace: Workspace, config_name: str) -> dict[str, str]:
     """document_id → type, from the page classification in the index's intermediate results; Word
-    documents (located by address, no pages) are "word"; PDFs of indexes built before V4.1 (no
+    documents (located by address, no pages) are "word", Excel documents (sheet addresses) "excel"; PDFs of indexes built before V4.1 (no
     pages.json) are left out."""
     from rag.ingest.ocr.models import DocumentPages
     from rag.jsonio import from_jsonable
@@ -43,8 +44,10 @@ def _document_types(workspace: Workspace, config_name: str) -> dict[str, str]:
             types[read_json(folder / "parsed.json")["document_id"]] = pages.document_type
         elif (folder / "parsed.json").is_file():
             parsed = read_json(folder / "parsed.json")
-            if any("address" in s for node in parsed.get("nodes", ()) for s in node.get("sources", ())):
-                types[parsed["document_id"]] = "word"
+            addresses = [s["address"] for node in parsed.get("nodes", ()) for s in node.get("sources", ())
+                         if "address" in s]
+            if addresses:
+                types[parsed["document_id"]] = "excel" if addresses[0].startswith("sheet") else "word"
     return types
 
 
@@ -200,11 +203,19 @@ def prepare(workspace: Workspace, assembly: Assembly, cache_retrievals: bool = F
     cache = (RetrievalCache(workspace.root / ".rag" / "retrieval-cache", workspace.index_dir(assembly.name),
                             assembly.config.retriever.use) if cache_retrievals else None)
     searcher = UnitSearch(build_retriever(assembly, store, open_lexical(workspace, assembly)), store,
-                          tables, table_return_unit, cache)
-    owners = ({cid: t.table_id for cid, t in tables.tables_for_chunks([c.chunk_id for c in chunks]).items()}
+                          tables, table_return_unit, cache, assembly.config.whole_table_max_tokens)
+    owners = ({cid: t.table_id for cid, t in searcher.returned_tables([c.chunk_id for c in chunks]).items()}
               if table_return_unit == "table" else {})
     return EvalContext(dataset, sources, changed, chunks, enabled, catalog, searcher, owners, _TokenCounter(),
                        unsupported)
+
+
+def _over_limit(ctx: EvalContext, sources: dict[str, Any]) -> list[dict[str, Any]]:
+    """Every indexed table over the whole-table limit, with its document and token count."""
+    found = ctx.searcher.over_limit([c.chunk_id for c in ctx.chunks])
+    return [{"table_id": t.table_id, "document_id": t.document_id,
+             "document_name": sources[t.document_id].document_name if t.document_id in sources else t.document_id,
+             "tokens": tokens, "chunks": len(t.chunk_ids)} for t, tokens in found]
 
 
 def run_evaluation(workspace: Workspace, assembly: Assembly, budgets: Sequence[int]) -> list[Path]:
@@ -275,14 +286,16 @@ def run_evaluation(workspace: Workspace, assembly: Assembly, budgets: Sequence[i
                     item.evidence.groups, item.evidence_documents))
             results.append(item)
         _write_run(workspace, assembly, folders[budget], budget, folders, results, dataset, sources,
-                   changed, enabled, catalog is not None, len(table_excerpts), ctx.unsupported)
+                   changed, enabled, catalog is not None, len(table_excerpts), ctx.unsupported,
+                   _over_limit(ctx, sources) if table_return_unit == "table" else [])
     return [folders[b] for b in budgets]
 
 
 def _write_run(workspace: Workspace, assembly: Assembly, folder: Path, top_k: int,
                folders: dict[int, Path], results: list[CaseResult], dataset: Dataset,
                sources: dict[str, Any], changed: list[str], enabled: bool, has_catalog: bool,
-               table_excerpts: int, unsupported: frozenset[str] = frozenset()) -> None:
+               table_excerpts: int, unsupported: frozenset[str] = frozenset(),
+               over_limit: list[dict[str, Any]] | None = None) -> None:
     table_return_unit = assembly.config.table_return_unit
     names = {doc_id: source.document_name for doc_id, source in sources.items()}
     scored = [r.score for r in results if r.score is not None]
@@ -310,6 +323,9 @@ def _write_run(workspace: Workspace, assembly: Assembly, folder: Path, top_k: in
         "retriever": assembly.config.retriever.use,
         "bm25_weight": assembly.config.bm25_weight,
         "table_return_unit": table_return_unit,
+        "whole_table_max_tokens": assembly.config.whole_table_max_tokens,
+        # tables returned by their hit chunks because the whole text is over the limit
+        "tables_over_limit": over_limit or [],
         "top_k": top_k,
         "query_execution": "plain",
         # the runs written from the same query executions, one per budget

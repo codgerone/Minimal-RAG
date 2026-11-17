@@ -4,8 +4,8 @@ build-backend = "hatchling.build"
 
 [project]
 name = "minimal-rag"
-version = "4.2.0"
-description = "A minimal but complete local PDF RAG system."
+version = "4.3.0"
+description = "A minimal but complete local RAG system for PDF, Word and Excel documents."
 readme = "README.md"
 requires-python = ">=3.11,<3.12"
 dependencies = [
@@ -21,6 +21,7 @@ dependencies = [
     "unstructured[local-inference]>=0.18,<1",
     "unstructured-inference>=1.0,<2",
     "snowballstemmer>=2.2,<4",
+    "openpyxl==3.1.5",
 ]
 
 [dependency-groups]

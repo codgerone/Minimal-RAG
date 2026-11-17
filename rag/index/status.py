@@ -17,7 +17,7 @@ from rag.paths import Workspace
 
 DocumentState = Literal["current", "new", "changed", "stale", "incomplete", "missing", "unreadable",
                         "unsupported"]
-# unsupported: the config has no parser for the document's file type ([docx_parser] for Word).
+# unsupported: the config has no parser for the document's file type ([docx_parser] for Word, [xlsx_parser] for Excel).
 # stale: a step the document passes through has other settings, rules or library versions now.
 IndexState = Literal["not_built", "stale", "ready"]
 

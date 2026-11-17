@@ -24,10 +24,11 @@ WarningCode: TypeAlias = Literal[
     "source_location_unavailable", "detached_text_recovered", "detached_list_item",
     "unknown_docling_text_label", "unsupported_nontext_item", "orphan_nested_list_group",
     "formula_orig_fallback", "empty_text_node", "optional_tool_page_failed", "optional_tool_unavailable",
-    "artifact_cleanup_failed", "unknown_numbering_format",
+    "artifact_cleanup_failed", "unknown_numbering_format", "formula_without_cached_value",
+    "number_format_fallback",
 ]
 ProcessingStage: TypeAlias = Literal[
-    "configuration", "docling_layout_parsing", "docx_parsing", "layout_mapping", "table_extraction",
+    "configuration", "docling_layout_parsing", "docx_parsing", "xlsx_parsing", "layout_mapping", "table_extraction",
     "table_admission", "table_grouping", "table_scoring", "parsed_document_fusion",
     "table_header_detection", "table_serialization", "document_text_serialization",
     "structured_chunking", "artifact_staging", "artifact_cleanup", "index_publication",
@@ -35,7 +36,7 @@ ProcessingStage: TypeAlias = Literal[
 ContextKind: TypeAlias = Literal["none", "overlap", "table_header", "section_title", "merged_cell",
                                  "list_ancestor", "fallback_locator"]
 ChunkKind: TypeAlias = Literal["text", "list", "table", "table_summary"]
-FileType: TypeAlias = Literal["pdf", "docx"]
+FileType: TypeAlias = Literal["pdf", "docx", "xlsx"]
 
 
 @dataclass(frozen=True)
@@ -96,10 +97,11 @@ class PageSpan:
 
 @dataclass(frozen=True)
 class DocxSpan:
-    """Where an element sits in a Word file: a file address (docs/rules/docx.md), e.g. `body/12`,
-    `body/7/r2c1/0`; the numbering text of a paragraph has the address with `#label` appended."""
+    """Where an element sits in a Word or Excel file: a file address. Word (docs/rules/docx.md):
+    `body/12`, `body/7/r2c1/0`; the numbering text of a paragraph has `#label` appended. Excel
+    (docs/rules/xlsx.md): `sheet3/r5c2` a cell, `sheet3#name` a sheet's name, `sheet3/r1c1:r9c6` a table."""
     address: str
-    label: str            # what reports show instead of a page: "第 N 块", "表 N", "页眉", "脚注"…
+    label: str            # what reports show instead of a page: "第 N 块", "表 N", "页眉"…; Excel "工作表!A1:C5"
     source_ref: str
 
 
@@ -139,9 +141,9 @@ class ChunkRegion:
 
 @dataclass(frozen=True)
 class DocxRegion:
-    """A place in a Word file the chunk's content comes from: characters [start, end) of the text
-    at `address`, or everything at and under the address (a table cell) when both are None.
-    Word positions are exact, so there is no coarse kind."""
+    """A place in a Word or Excel file the chunk's content comes from: characters [start, end) of
+    the text at `address`, or everything at and under the address (a table cell) when both are None.
+    File positions are exact, so there is no coarse kind."""
     address: str
     start: int | None
     end: int | None
@@ -211,7 +213,7 @@ PrimaryElement: TypeAlias = PrimaryText | PrimaryList | PrimaryTablePlaceholder
 class PrimaryDocument:
     document_id: str
     file_hash: str
-    page_count: int | None                   # None for Word, which has no pages
+    page_count: int | None                   # None for Word, which has no pages; Excel: sheets
     elements: tuple[PrimaryElement, ...]
     table_slots: tuple[TableSlot, ...]
     native_tables: tuple[NativeTableFact, ...]

@@ -52,3 +52,21 @@ def test_a_table_without_chunks_is_an_error():
                                   CharacterCounter(), max_input_tokens=40)
     with pytest.raises(ValueError, match="没有对应的 chunk"):
         collect_tables(document, batch)
+
+
+def test_a_table_over_the_limit_is_returned_by_its_hit_chunks(tmp_path):
+    from rag.query.units import UnitSearch
+    document = _document()
+    batch = chunk_parsed_document(document, CharacterCounter(), max_input_tokens=40)
+    store = TableStore(tmp_path / "tables.sqlite")
+    store.replace_document("d", collect_tables(document, batch))
+    table_chunks = [c.chunk_id for c in batch.chunks if c.kind == "table"]
+    whole = len(document.nodes[1].whole_text)
+    search = UnitSearch(None, None, store, "table", whole_table_max_tokens=whole + 100)
+    search._counter = CharacterCounter()
+    assert set(search.returned_tables(table_chunks)) == set(table_chunks) and not search.over_limit(table_chunks)
+    tight = UnitSearch(None, None, store, "table", whole_table_max_tokens=whole - 1)
+    tight._counter = CharacterCounter()
+    assert tight.returned_tables(table_chunks) == {}
+    [(table, tokens)] = tight.over_limit(table_chunks)
+    assert (table.table_id, tokens) == (table_id("d", "tbl"), whole)

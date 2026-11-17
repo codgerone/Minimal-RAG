@@ -115,7 +115,8 @@ def _header(processed: DocumentAudit, entry: DocumentEntry, config_name: str,
         links.append(f"<b>{esc(label)}</b>" if index == current else f'<a href="{esc(name)}">{esc(label)}</a>')
     return (f"<h1>{esc(entry.document_name)}</h1>"
             f'<div class="sub">配置 {esc(config_name)} · '
-            + (f'{entry.page_count} 页 · ' if entry.page_count is not None else 'Word 文档 · ')
+            + (f'{entry.page_count} 个工作表 · ' if _is_excel(processed) else
+               f'{entry.page_count} 页 · ' if entry.page_count is not None else 'Word 文档 · ')
             + (f'{TYPE_LABELS[processed.pages.document_type]} · ' if processed.pages else '') +
             f'{entry.chunk_count} 个 chunk · {entry.table_count} 张表 · '
             f'文档语言 {LANGUAGE_NAMES[processed.document.language]} · 入库于 {esc(entry.built_at)}'
@@ -149,8 +150,72 @@ def _node_page(node) -> int:
     return node.sources[0].page_number if node.sources else 0
 
 
+def _is_excel(processed: DocumentAudit) -> bool:
+    return any(isinstance(span, DocxSpan) and span.address.startswith("sheet")
+               for node in processed.document.nodes for span in node.sources)
+
+
 def _is_word(processed: DocumentAudit) -> bool:
-    return any(isinstance(span, DocxSpan) for node in processed.document.nodes for span in node.sources)
+    return not _is_excel(processed) and any(isinstance(span, DocxSpan) for node in processed.document.nodes
+                                            for span in node.sources)
+
+
+REGION_KINDS = {"table": "表格", "row": "正文（一行）", "column": "正文（一列）"}
+
+
+def _excel_parse_body(processed: DocumentAudit) -> tuple[str, str]:
+    """Per sheet: its facts, the grid with regions marked, and the elements in reading order."""
+    from rag.jsonio import read_json
+    from rag.reports.xlsx_grid import LEGEND, sheet_grid, sheet_label
+    facts: dict = {}
+    if processed.folder is not None and (processed.folder / "parse-native.json").is_file():
+        facts = read_json(processed.folder / "parse-native.json")
+    slot_number = {slot.slot_id: n for n, slot in enumerate(processed.table_slots, start=1)}
+    by_sheet: dict[str, list[str]] = {}
+    for node in processed.document.nodes:
+        span = node.sources[0] if node.sources else None
+        address = span.address if isinstance(span, DocxSpan) else ""
+        sheet = address.split("/", 1)[0].split("#", 1)[0]
+        where = esc(span.label) if isinstance(span, DocxSpan) else ""
+        if isinstance(node, TableNode):
+            number = slot_number.get(node.slot_id, 1)
+            html = (f'{badge("表格", "warn")} <span class="meta">{where} · {node.table.row_count} 行 × '
+                    f'{node.table.column_count} 列，详见 <a href="2-表格.html#t{number}">表格页·表 {number}</a></span>')
+        else:
+            html = f'{badge(TEXT_KINDS.get(node.kind, node.kind))} <span class="meta">{where}</span>{text_block(node.text, 400)}'
+        by_sheet.setdefault(sheet, []).append(f'<div class="item">{html}</div>')
+    tabs, panels = [], []
+    regions_by_sheet = facts.get("regions", {})
+    for sheet in facts.get("sheets", []):
+        key = f"sheet{sheet['index']}"
+        regions = regions_by_sheet.get(str(sheet["index"]), [])
+        notes = []
+        if sheet["state"] != "visible":
+            notes.append(f"工作表{'深度隐藏' if sheet['state'] == 'veryHidden' else '隐藏'}，照常入库")
+        if sheet["hidden_rows"]:
+            notes.append(f"隐藏的行 {len(sheet['hidden_rows'])} 行：" + "、".join(map(str, sheet["hidden_rows"][:30])))
+        if sheet["hidden_columns"]:
+            from openpyxl.utils import get_column_letter
+            notes.append(f"隐藏的列 {len(sheet['hidden_columns'])} 列："
+                         + "、".join(get_column_letter(c) for c in sheet["hidden_columns"]))
+        if sheet["images"] or sheet["charts"]:
+            notes.append(f"图片 {sheet['images']} 张、图表 {sheet['charts']} 个未入库")
+        if sheet["tables"]:
+            notes.append("Table 对象：" + "、".join(t["name"] for t in sheet["tables"]))
+        counts = Counter(REGION_KINDS[r["kind"]] for r in regions)
+        summary = "、".join(f"{k} {v}" for k, v in counts.items()) or "没有内容，不入库"
+        info = (f'<div class="meta">区域：{esc(summary)}</div>'
+                + "".join(f'<div class="meta">{esc(n)}</div>' for n in notes))
+        tab_mark = " ·" + sheet_label(sheet)[len(sheet["name"]):] if sheet["state"] != "visible" else ""
+        tabs.append(f'<a href="#{key}" data-tab="{key}">{esc(sheet["name"])}{esc(tab_mark)}</a>')
+        elements = "".join(by_sheet.get(key, []))
+        panels.append(f'<div data-panel="{key}"><div class="card"><h3>{esc(sheet_label(sheet))}</h3>{info}'
+                      f'{LEGEND}{sheet_grid(sheet, regions)}</div>'
+                      + (f'<div class="card"><h3>解析结果（阅读顺序）</h3>{elements}</div>' if elements else "")
+                      + "</div>")
+    if facts.get("chart_sheets"):
+        panels.insert(0, f'<div class="meta">图表工作表未入库：{esc("、".join(facts["chart_sheets"]))}</div>')
+    return f'<div class="tabs">{"".join(tabs)}</div>' + "".join(panels), ""
 
 
 OBJECT_NAMES = {"picture": "图片", "chart": "图表", "ole": "嵌入对象"}
@@ -280,6 +345,17 @@ def parse_page(processed: DocumentAudit, entry: DocumentEntry, config_name: str)
     warnings = Counter(w.code for w in document.warnings)
     warn_html = ("" if not warnings else "<div class='meta'>处理提示：" +
                  "；".join(f"{esc(code)} ×{n}" for code, n in warnings.items()) + "</div>")
+    if _is_excel(processed):
+        sheets, _ = _excel_parse_body(processed)
+        messages = "".join(f'<li>{esc(w.message)}</li>' for w in document.warnings)
+        body = (_header(processed, entry, config_name, 0) +
+                f'<div class="card"><b>解析结果</b>：{esc(summary)}'
+                + (f'<div class="meta">处理提示：</div><ul class="meta">{messages}</ul>' if messages else "")
+                + '<div class="meta">每个工作表一个标签页：网格与 Excel 的行号、列号一致，格内是显示值（按单元格的数字格式写出），'
+                  '鼠标停在格上可看地址、数字格式、公式与缓存值。区域按几何切分：共边相连，有边框的空格算占用，'
+                  '外接矩形重叠或首末行都相同的区域合并；至少 2 行 2 列的是表格，其余是正文。规则见 docs/rules/xlsx.md；'
+                  '读取的原始事实与区域保存在 parse-native.json</div></div>' + sheets)
+        return page(f"解析 · {entry.document_name}", body, root="../../../", crumbs=_crumbs(config_name))
     if _is_word(processed):
         sections, note = _word_parse_sections(processed)
         body = (_header(processed, entry, config_name, 0) +
@@ -503,7 +579,9 @@ def tables_page(processed: DocumentAudit, entry: DocumentEntry, config_name: str
     tool_line = "　".join(f"{e.tool}/{e.strategy} {sum(len(p.candidate_ids) for p in e.pages)} 张"
                           + (" ⚠" if e in failed else "") for e in executions)
     summary = (f'<div class="card"><b>{len(slots)} 张表</b>：' + (
-               '全部由解析器直接从 Word 文件读出（合并单元格按 gridSpan、vMerge），不经过表格提取、选优与续表判定'
+               ('全部由解析器直接从 Excel 文件读出（区域按几何切分，合并单元格按文件中的合并区域），不经过表格提取、选优与续表判定'
+                if _is_excel(processed) else
+                '全部由解析器直接从 Word 文件读出（合并单元格按 gridSpan、vMerge），不经过表格提取、选优与续表判定')
                if exact == len(slots) else
                f'{winners} 张采用候选胜出者，{len(slots) - winners} 张采用解析器原生表格')
                + (f'；跨页合并后共 {len(processed.prepared_tables)} 张' if merged else '') + '。'
@@ -525,7 +603,9 @@ def tables_page(processed: DocumentAudit, entry: DocumentEntry, config_name: str
                         f'{esc(prep.adopted_table.strategy)} · {SELECTION.get(scored.selection_reason, "")}'
                         f'（总分 {scored.highest_total_score:.2f}，{len(scored.candidates)} 个候选参与评分）')
         elif resolution.origin == "parser_exact":
-            decision = f'{badge("文件原表", "ok")} 从 Word 文件直接读出'
+            where = esc(prep.adopted_table.sources[0].label) if prep.adopted_table.sources else ""
+            decision = (f'{badge("文件原表", "ok")} 从 {"Excel" if _is_excel(processed) else "Word"} 文件直接读出'
+                        + (f' · {where}' if _is_excel(processed) and where else ""))
         else:
             decision = f'{badge("原生表格", "warn")} 没有可评分的候选，保留解析器识别的表格结构'
         header_status, header_rows = _header_status(prep.header_decision)

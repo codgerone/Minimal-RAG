@@ -1,7 +1,7 @@
 {
   "schema_version": "ground_truth_manifest_v1",
-  "dataset_version": "4.2.0",
-  "ground_truth_fingerprint": "0745c860b6c4fcb7033b8ec4dc178ed33a761db5b6e0c1c1c4d63dfa972746cb",
+  "dataset_version": "4.3.0",
+  "ground_truth_fingerprint": "a3c72bcbf3c74d7e90c4ff8233ea8254c9d213c196880b9cdbc121ffc4a8e23f",
   "review_status": "approved",
   "files": [
     {
@@ -27,6 +27,24 @@
       "json_path": "eval/ground-truth/E001-602--817cfff2927c6c65.json",
       "content_sha256": "e7ba68fd290e9ab2274957c08140bd633c2c9fa00344c265bca57b68b3582366",
       "case_count": 3
+    },
+    {
+      "document_key": "ENEL-Tender-information--12fe2a52cc4f671b",
+      "json_path": "eval/ground-truth/ENEL-Tender-information--12fe2a52cc4f671b.json",
+      "content_sha256": "d1dbb578b36228fc76f1f6202f0a0090b939d042e03d58aa34eb0b514a7eefda",
+      "case_count": 5
+    },
+    {
+      "document_key": "FAT-plan--db2d6c23114e6601",
+      "json_path": "eval/ground-truth/FAT-plan--db2d6c23114e6601.json",
+      "content_sha256": "39a509bcef997dff480cae9da87fa7a9264d3898652a76a2d4b0830a6af5dce7",
+      "case_count": 6
+    },
+    {
+      "document_key": "FONAFE普表招标一般贸易概算-20251204--a7d55bc735854453",
+      "json_path": "eval/ground-truth/FONAFE普表招标一般贸易概算-20251204--a7d55bc735854453.json",
+      "content_sha256": "fd8491aab5e4325d6d7058214566329d2a2bf8f97a6c0ba773bf2a75d874ca34",
+      "case_count": 9
     },
     {
       "document_key": "Nuevas-Especificaciones-Tecnicas-PROYECTO-CHOSICA--21125ec3b4d95316",
@@ -80,6 +98,12 @@
       "document_key": "scanned-Electrosur-Contrato-Complementario--51acbf9e2a5acbe8",
       "json_path": "eval/ground-truth/scanned-Electrosur-Contrato-Complementario--51acbf9e2a5acbe8.json",
       "content_sha256": "f5e24afc7f449d7e7c429cd13f605c95b306fd3957e496426bea9429bc7da650",
+      "case_count": 7
+    },
+    {
+      "document_key": "交付清单--c9140ebec9aa0c76",
+      "json_path": "eval/ground-truth/交付清单--c9140ebec9aa0c76.json",
+      "content_sha256": "bd9095b252250187111376ed698312f3040ef782dcd8aaf1a4dfc816d21ae80f",
       "case_count": 7
     },
     {

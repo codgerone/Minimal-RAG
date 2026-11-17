@@ -1,0 +1,431 @@
+{
+  "schema_version": "ground_truth_document_v2",
+  "document_key": "交付清单--c9140ebec9aa0c76",
+  "document_id": "c9140ebec9aa0c76",
+  "document_name": "交付清单.xlsx",
+  "relative_path": "交付清单.xlsx",
+  "file_hash": "9a6034c47549ef74cf545233a2faa5fa264598ca7f544be2403f887a51aab2fd",
+  "cases": [
+    {
+      "case_id": "DELIV-FONAFE-Q001",
+      "question": "交付清单 DELIV2025001 中，中信保买方代码为 PER/591251 的是哪家公司？它在 ITEM 1 中的保函（FIANZA 10%）金额是多少？",
+      "answerable": true,
+      "reference_answer": "买方代码 PER/591251 对应 HIDRANDINA（HDNA）；其 ITEM 1 的保函金额为 116,710.78。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "c9140ebec9aa0c76",
+          "document_name": "交付清单.xlsx",
+          "relative_path": "交付清单.xlsx",
+          "text": "HIDRANDINA S.A. | HDNA | PER/591251",
+          "anchor": {
+            "text_sha256": "7033bfc686439012",
+            "pieces": [
+              {
+                "text": "HIDRANDINA S.A.",
+                "words": [
+                  "sheet2/r11c1 92 102",
+                  "sheet2/r11c1 103 107"
+                ]
+              },
+              {
+                "text": "HDNA",
+                "words": [
+                  "sheet2/r11c2 0 4"
+                ]
+              },
+              {
+                "text": "PER/591251",
+                "words": [
+                  "sheet2/r11c23 0 10"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "中信保额度确认!A2:AA23"
+          ]
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "c9140ebec9aa0c76",
+          "document_name": "交付清单.xlsx",
+          "relative_path": "交付清单.xlsx",
+          "text": "HIDRANDINA S.A. | 116,710.78",
+          "anchor": {
+            "text_sha256": "c6f703c1507f8e5a",
+            "pieces": [
+              {
+                "text": "HIDRANDINA S.A.",
+                "words": [
+                  "sheet1/r11c2 92 102",
+                  "sheet1/r11c2 103 107"
+                ]
+              },
+              {
+                "text": "116,710.78",
+                "words": [
+                  "sheet1/r11c8 0 10"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "TOTALES!B4:K15"
+          ]
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "对应的公司",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "ITEM 1 的保函金额",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "DELIV-FONAFE-Q002",
+      "question": "交付清单 DELIV2025001 的中信保额度确认中，ENSA 的买方代码和已申请额度是多少？",
+      "answerable": true,
+      "reference_answer": "买方代码 PER/589545，已申请额度 500,000.00。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "c9140ebec9aa0c76",
+          "document_name": "交付清单.xlsx",
+          "relative_path": "交付清单.xlsx",
+          "text": "ENSA， | PER/589545 | 500,000.00",
+          "locate_hint": "已申请额度",
+          "anchor": {
+            "text_sha256": "cebb187b6d5068b7",
+            "pieces": [
+              {
+                "text": "ENSA，",
+                "words": [
+                  "sheet2/r8c2 0 5"
+                ]
+              },
+              {
+                "text": "PER/589545",
+                "words": [
+                  "sheet2/r8c23 0 10"
+                ]
+              },
+              {
+                "text": "500,000.00",
+                "words": [
+                  "sheet2/r8c24 0 10"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "中信保额度确认!A2:AA23"
+          ]
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "买方代码",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "已申请额度",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "DELIV-FONAFE-Q003",
+      "question": "交付清单 DELIV2025001 中，第四批交货 ELSE 的 item1 数量是多少？",
+      "answerable": true,
+      "reference_answer": "第四批交货 ELSE 的 item1 数量为 25,000。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "c9140ebec9aa0c76",
+          "document_name": "交付清单.xlsx",
+          "relative_path": "交付清单.xlsx",
+          "text": "第四批交货 | ELSE | 25,000",
+          "locate_hint": "item1",
+          "anchor": {
+            "text_sha256": "5c62e6a275cf596c",
+            "pieces": [
+              {
+                "text": "第四批交货",
+                "words": [
+                  "sheet2/r81c1 0 5"
+                ]
+              },
+              {
+                "text": "ELSE",
+                "words": [
+                  "sheet2/r84c2 0 4"
+                ]
+              },
+              {
+                "text": "25,000",
+                "words": [
+                  "sheet2/r84c3 0 6"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "中信保额度确认!A81:W96"
+          ]
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "第四批 ELSE 的 item1 数量",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "DELIV-FONAFE-Q004",
+      "question": "交付清单 DELIV2025001 中，第四批交货 ELCTO 的 item2 数量是多少？",
+      "answerable": true,
+      "reference_answer": "第四批交货 ELCTO 的 item2 数量为 15500。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "c9140ebec9aa0c76",
+          "document_name": "交付清单.xlsx",
+          "relative_path": "交付清单.xlsx",
+          "text": "第四批交货 | ELCTO | 15500",
+          "locate_hint": "item2",
+          "anchor": {
+            "text_sha256": "24004395bd2de863",
+            "pieces": [
+              {
+                "text": "第四批交货",
+                "words": [
+                  "sheet2/r81c1 0 5"
+                ]
+              },
+              {
+                "text": "ELCTO",
+                "words": [
+                  "sheet2/r86c2 0 5"
+                ]
+              },
+              {
+                "text": "15500",
+                "words": [
+                  "sheet2/r86c7 0 5"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "中信保额度确认!A81:W96"
+          ]
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "第四批 ELCTO 的 item2 数量",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "DELIV-FONAFE-Q005",
+      "question": "交付清单 DELIV2025001 记录的付款要求是什么？中信保额度是多少？",
+      "answerable": true,
+      "reference_answer": "每批次验收（开票）后 30 天付款；中信保额度 50 万美元。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "c9140ebec9aa0c76",
+          "document_name": "交付清单.xlsx",
+          "relative_path": "交付清单.xlsx",
+          "text": "付款要求：验收接受后30天付",
+          "anchor": {
+            "text_sha256": "aa055ce9b28a4573",
+            "pieces": [
+              {
+                "text": "付款要求：验收接受后30天付",
+                "words": [
+                  "sheet2/r17c23 0 14"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "中信保额度确认!A2:AA23"
+          ]
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "c9140ebec9aa0c76",
+          "document_name": "交付清单.xlsx",
+          "relative_path": "交付清单.xlsx",
+          "text": "每批次验收开票后30天支付，中信保额度50w美金",
+          "anchor": {
+            "text_sha256": "44560c2e8285d218",
+            "pieces": [
+              {
+                "text": "每批次验收开票后30天支付，中信保额度50w美金",
+                "words": [
+                  "sheet2/r18c21 0 24"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "中信保额度确认!A2:AA23"
+          ]
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "付款要求",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            },
+            {
+              "scheme_id": "s2",
+              "excerpt_ids": [
+                "x2"
+              ]
+            }
+          ],
+          "note": "两处备注都写明验收后 30 天付款，任一处即可"
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "中信保额度",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "DELIV-FONAFE-Q006",
+      "question": "交付清单 DELIV2025001 中合同的（大约）签署日期是哪天？",
+      "answerable": true,
+      "reference_answer": "2025-09-10（大约）。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "c9140ebec9aa0c76",
+          "document_name": "交付清单.xlsx",
+          "relative_path": "交付清单.xlsx",
+          "text": "Fecha firma de contrato (aprox) | 2025-09-10",
+          "anchor": {
+            "text_sha256": "d110cdd4425400e9",
+            "pieces": [
+              {
+                "text": "Fecha firma de contrato (aprox)",
+                "words": [
+                  "sheet1/r2c2 0 5",
+                  "sheet1/r2c2 6 11",
+                  "sheet1/r2c2 12 14",
+                  "sheet1/r2c2 15 23",
+                  "sheet1/r2c2 24 31"
+                ]
+              },
+              {
+                "text": "2025-09-10",
+                "words": [
+                  "sheet1/r2c8 0 10"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "TOTALES!A1:J2"
+          ]
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "合同签署日期",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "DELIV-FONAFE-Q007",
+      "question": "交付清单 DELIV2025001 中，各批次计划在哪天从工厂发货？",
+      "answerable": false,
+      "reference_answer": "文件没有给出各批次的发货日期。",
+      "excerpts": [],
+      "evidence_groups": []
+    }
+  ]
+}

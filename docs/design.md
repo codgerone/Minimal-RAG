@@ -1,4 +1,4 @@
-# 系统设计（V4.2）
+# 系统设计（V4.3）
 
 ## 1. 数据主链
 
@@ -7,7 +7,8 @@
        解析用 PDF（原 PDF 或文字层 PDF）─→ Parser ─→ 主文档（文本 / 列表 / 表格位置，按阅读顺序）─→ 文档语言
                                           │
                                           └─→ TableExtractor × N ─→ 准入·分组·评分选优 ─→ 续表合并 ─→ 规则表头判定
-       Word ─→ 读取模块（事实：部件、节、注释、块）─→ docx_native ─→ 主文档（表格由文件直接给出）──────────────────────┘
+       Word ─→ 读取模块（事实：部件、节、注释、块）─→ docx_native ─→ 主文档（表格由文件直接给出）──────────────────────┤
+       Excel ─→ 读取模块（事实：工作表、格的显示值与公式、合并、隐藏、边框）─→ 区域切分 ─→ xlsx_native ─→ 主文档 ────────┘
                     ─→ TableStructurer（表格结构）─→ TableFormatter（入库文本）+ 整表文本 ─→ 表格检索文本（行 / 行 + 引导句 / 摘要）─┐
                                                                                                                          ↓
                        组装后的文档（ParsedDocument）─→ Chunker ─→ chunks ─→ 来源区域 ─┬─→ Embedder ─→ Chroma（向量索引）
@@ -39,7 +40,9 @@
 
 **Word**（[rules/docx.md](rules/docx.md)，`rag/ingest/docx/`、`rag/ingest/parsers/docx_native.py`）：文件类型由扩展名决定（`.pdf`、`.docx`），每种类型由配置中各自的解析器处理（`[parser]`、`[docx_parser]`）；配置没有某类型的解析器时，该类文档对这份配置为"不支持"，不入库也不报错。Word 不转 PDF：读取模块直接读 XML，只给出文件中的事实（存为 `parse-native.json`）；解析器判定标题、列表、表格与阅读顺序。表格由文件直接给出（`parser_exact`），跳过表格提取、选优与续表判定，从规则表头判定开始与 PDF 的表格走同样的环节。Word 没有页面判定与 OCR，解析不缓存（每份不到 1 秒）。
 
-**位置**：PDF 的位置是页码 + 框；Word 的位置是文件内地址（部件 + 块号 [+ 单元格 + 格内块号]）与该地址文字中的字符区间。两种位置在元素来源、chunk 来源区域、表格单元格、ground-truth 中并存，按字段区分（`rag/models.py` 的 `PageSpan` / `DocxSpan`、`ChunkRegion` / `DocxRegion`）。凡显示位置的地方用位置标签（`rag/locations.py`）：PDF 为页码，Word 为"第 N 块""表 N""页眉"等。解析器与 `anchors` 共用 Word 读取模块，所以 excerpt 的地址与 chunk 的地址一致。
+**Excel**（[rules/xlsx.md](rules/xlsx.md)，`rag/ingest/xlsx/`、`rag/ingest/parsers/xlsx_native.py`）：`.xlsx` 由 `[xlsx_parser]` 处理，其余同 Word。读取模块用 openpyxl 读两遍（缓存值、公式），按单元格的数字格式写出显示值，只给事实；区域切分是解析器唯一的判断，只用几何（相邻、并排对齐、边框），不解读内容，切分结果与事实分开记在 `parse-native.json`。表格区域由文件直接给出（`parser_exact`），表头、分节等语义由表格结构环节恢复。Excel 没有页面判定与 OCR，解析不缓存（每份约 1 秒）。
+
+**位置**：PDF 的位置是页码 + 框；Word、Excel 的位置是文件内地址（Word：部件 + 块号 [+ 单元格 + 格内块号]；Excel：工作表 + 行 + 列）与该地址文字中的字符区间。两种位置在元素来源、chunk 来源区域、表格单元格、ground-truth 中并存，按字段区分（`rag/models.py` 的 `PageSpan` / `DocxSpan`、`ChunkRegion` / `DocxRegion`）。凡显示位置的地方用位置标签（`rag/locations.py`）：PDF 为页码，Word 为"第 N 块""表 N""页眉"等，Excel 为"工作表!A1:C5"。解析器与 `anchors` 共用 Word、Excel 的读取模块，所以 excerpt 的地址与 chunk 的地址一致。
 
 各阶段的数据模型定义在 `rag/models.py`（文档与 chunk）和 `rag/ingest/tables/models.py`（表格证据）。设计原则：解析器、工具和 LLM 的原始结果是"事实"，不会被后续阶段原地修改；选优、表头、结构标注是否采用这类判断单独记录，审核页可以逐层追溯。
 
@@ -60,6 +63,7 @@
 | OcrEngine | `rag/ingest/ocr/__init__.py` | `rapidocr` |
 | Parser（PDF） | `rag/ingest/parsers/__init__.py` | `pymupdf_pages`、`docling_layout` |
 | Parser（Word） | 同上 | `docx_native` |
+| Parser（Excel） | 同上 | `xlsx_native` |
 | TableExtractor（可配多个） | `rag/ingest/tables/extractors.py` | `pymupdf`、`camelot`、`docling`、`unstructured` |
 | TableStructurer | `rag/ingest/tables/structure.py` | `header_rules`、`llm_annotation` |
 | TableFormatter | `rag/ingest/tables/formatters.py` | `markdown_rows`、`labeled_rows` |
@@ -84,7 +88,7 @@
 - 解析器不提供表格位置时，不能配置表格提取器，也不能配置三个表格环节；解析器会产出表格时，三个表格环节都必须配置；
 - `rows_with_lead` 需要 `llm_annotation`；`summary` 只能搭配 `header_rules`，返回单元不能是 chunk；`llm_annotation`、`summary` 需要 `model`，并需要 `structured_tokens` 分块器；
 - 表格提取器不能重复；
-- 配置了 `[docx_parser]` 时必须配置三个表格环节（Word 解析器总会给出表格位置），因此 PDF 解析器也须是给出表格位置的 `docling_layout`。
+- 配置了 `[docx_parser]` 或 `[xlsx_parser]` 时必须配置三个表格环节（这两个解析器总会给出表格位置），因此 PDF 解析器也须是给出表格位置的 `docling_layout`。
 
 `docling_layout` 解析器不配任何表格提取器也是合法组合：这时所有表格都采用 Docling 原生结构。
 
@@ -98,9 +102,9 @@
 - 该步骤的**规则版本**：定义在实现该步骤的模块中（`RULES_VERSION`，值为发布它的版本号），解析器、各表格提取器、分块器、BM25 分析器各有自己的版本。
 - 该步骤用到的**第三方库版本**（从已安装的包读出）。
 
-Word 文档的步骤为解析、表格处理（有表格时）、组装、分块、编码、BM25，记录 `[docx_parser]` 而不记 `[parser]`，所以改 PDF 的解析设置不使 Word 过期，反之亦然。PDF 文档经过哪些步骤由两个入库时记下的事实决定：有没有扫描页（OCR，且配置了 `[ocr]`），解析器找到没有表格（表格提取与表格处理两步）。这两个事实由每个 PDF 都经过的页面判定与解析得出，所以它们可能改变时，文档已因这两步而过期。没有 `[lexical]` 的配置不建 BM25 索引，记录也不含这一步。
+Word 文档的步骤为解析、表格处理（有表格时）、组装、分块、编码、BM25，记录 `[docx_parser]` 而不记 `[parser]`，所以改 PDF 的解析设置不使 Word 过期，反之亦然；Excel 文档同理，记录 `[xlsx_parser]`。PDF 文档经过哪些步骤由两个入库时记下的事实决定：有没有扫描页（OCR，且配置了 `[ocr]`），解析器找到没有表格（表格提取与表格处理两步）。这两个事实由每个 PDF 都经过的页面判定与解析得出，所以它们可能改变时，文档已因这两步而过期。没有 `[lexical]` 的配置不建 BM25 索引，记录也不含这一步。
 
-检索器 `[retriever] use`、命中表格时的返回单元 `table_return_unit`、混合检索中 BM25 排名的权重 `bm25_weight`（默认 1，[decisions/017-bm25-weight.md](decisions/017-bm25-weight.md)）、检索的 `top_k`（问答用，默认 4）、文档过滤开关 `document_filter`、评估的 `[eval] top_k`（默认 3，与历史基线一致）、问答 LLM 设置、查询的一路 `[query] mode` 与多轮检索设置 `[multi_round]` 不进入构建记录，修改它们不需要重建索引。
+检索器 `[retriever] use`、命中表格时的返回单元 `table_return_unit` 与整表返回上限 `whole_table_max_tokens`、混合检索中 BM25 排名的权重 `bm25_weight`（默认 1，[decisions/017-bm25-weight.md](decisions/017-bm25-weight.md)）、检索的 `top_k`（问答用，默认 4）、文档过滤开关 `document_filter`、评估的 `[eval] top_k`（默认 3，与历史基线一致）、问答 LLM 设置、查询的一路 `[query] mode` 与多轮检索设置 `[multi_round]` 不进入构建记录，修改它们不需要重建索引。
 
 **过期与重建**：文档的构建记录与按当前配置、代码、库版本算出的记录不同时，`status` 记为"构建设置已改变"，并写明是哪几步；只影响经过这些步骤的文档。不加 `--force` 的 `ingest` 重建过期文档；编码一步改变（或索引是 V4.1.1 之前建的，没有逐文档记录）时，向量可能换了维度，整份索引重建。入库侧代码改变某一步的输出时，提升该步骤模块中的 `RULES_VERSION`；LLM 提示词改动时提升 `rag/ingest/tables/llm_tables.py` 中的 `PROMPT_VERSION`。检查时点与原因见 [decisions/021-per-document-rebuild.md](decisions/021-per-document-rebuild.md)。
 
@@ -139,7 +143,7 @@ Word 文档的步骤为解析、表格处理（有表格时）、组装、分块
 
 ## 6. 评估与报告
 
-评估流程和指标定义见 [rules/evaluation.md](rules/evaluation.md)。关键设计是：证据按"信息项 → 方案 → excerpt"组织，原因见 [decisions/003-evidence-schemes.md](decisions/003-evidence-schemes.md)；excerpt 与 chunk 的对应按文件中的位置判定（PDF 为坐标，Word 为地址与字符区间），原因见 [decisions/004-coordinate-mapping.md](decisions/004-coordinate-mapping.md)。excerpt 的位置只依赖 PDF，人工确认一次后写入 ground-truth；chunk 的来源区域在入库时由 chunk 来源记录和解析器坐标统一推出（`rag/ingest/regions.py`），所以任何装配都不需要为评估另做确认。对插件的要求：解析器提供元素坐标，分块器记录 chunk 内容来自哪个元素的哪段文字；缺细坐标时记粗略区域，评估在其中按片段文字兜底。扫描件的 excerpt 照抄纸面，在 `ocr.pdf` 上定位；纸面与 OCR 文字不同时近似匹配，记下 OCR 读出的文字供文字兜底比较。评估报告与对比页在全部题目之外按文档类型（数字 PDF、扫描 PDF、部分扫描、Word）分列指标。内容相同的两份文件（Word 稿与签字 PDF）各自标注同一组题时，评估页并排列出两边结果。
+评估流程和指标定义见 [rules/evaluation.md](rules/evaluation.md)。关键设计是：证据按"信息项 → 方案 → excerpt"组织，原因见 [decisions/003-evidence-schemes.md](decisions/003-evidence-schemes.md)；excerpt 与 chunk 的对应按文件中的位置判定（PDF 为坐标，Word 为地址与字符区间），原因见 [decisions/004-coordinate-mapping.md](decisions/004-coordinate-mapping.md)。excerpt 的位置只依赖 PDF，人工确认一次后写入 ground-truth；chunk 的来源区域在入库时由 chunk 来源记录和解析器坐标统一推出（`rag/ingest/regions.py`），所以任何装配都不需要为评估另做确认。对插件的要求：解析器提供元素坐标，分块器记录 chunk 内容来自哪个元素的哪段文字；缺细坐标时记粗略区域，评估在其中按片段文字兜底。扫描件的 excerpt 照抄纸面，在 `ocr.pdf` 上定位；纸面与 OCR 文字不同时近似匹配，记下 OCR 读出的文字供文字兜底比较。评估报告与对比页在全部题目之外按文档类型（数字 PDF、扫描 PDF、部分扫描、Word、Excel）分列指标。内容相同的两份文件（Word 稿与签字 PDF）各自标注同一组题时，评估页并排列出两边结果。
 
 每次评估在 `reports/eval/<日期>_<配置>_k<K>_filter-on|filter-off[_<检索器>][_table]/` 下生成 `index.html` 和 `result.json`（检索器不是 `semantic` 时目录名带上检索器名，返回整表时加 `_table`），同名时在目录名后加 `_2`、`_3`。评估另报表格证据指标（表格 chunk 名次、所需返回单元数与 token、K 曲线）和入库的 LLM 成本。评估页的"较上次"对比同一配置、同一检索器、同一返回单元、同一 K、同一数据集版本的上一次运行（不论过滤状态）。
 
@@ -161,7 +165,7 @@ rag/
   models.py        文档、chunk 等公共模型
   jsonio.py        JSON 写出与按类型读回
   paths.py         目录约定（.rag/ 与 reports/）
-  ingest/          sources（按扩展名发现文档）、ocr/（页面判定、OCR、文字层 PDF）、docx/（Word 读取与自动编号）、parsers/、language（文档语言）、tables/（提取、选优、续表、表头、结构、写法、LLM）、chunkers/、assemble、pipeline、libraries（库版本）、timing（步骤计时）
+  ingest/          sources（按扩展名发现文档）、ocr/（页面判定、OCR、文字层 PDF）、docx/（Word 读取与自动编号）、xlsx/（Excel 读取、显示值、区域切分）、parsers/、language（文档语言）、tables/（提取、选优、续表、表头、结构、写法、LLM）、chunkers/、assemble、pipeline、libraries（库版本）、timing（步骤计时）
   index/           embedder、store（Chroma）、analyzer 与 lexical（BM25）、tables（整表库）、audit（中间结果）、build_steps（逐文档构建记录）、step_cache（步骤结果缓存）、manifest、status、builder
   query/           scope（检索范围、去编码）、retriever、units（返回单元与检索缓存）、planning（规划）、execution（检索执行、融合与合并）、prompt、llm、multi_round/（state、retrieval、planner、runner）
   eval/            dataset、judge、metrics、table_metrics、table_structure（结构标注答案）、runner、query_compare（查询侧对比数据）、multi_round（多轮检索评估的运行事实）

@@ -56,7 +56,13 @@ PARSERS: dict[str, Callable[..., Parser]] = {
     "pymupdf_pages": _pymupdf_parser,
     "docling_layout": _docling_parser,
 }
+def _xlsx_native(**params: Any) -> Parser:
+    from rag.ingest.parsers.xlsx_native import XlsxNativeParser
+    return XlsxNativeParser(**params)
+
+
 DOCX_PARSERS: dict[str, Callable[..., Parser]] = {"docx_native": _docx_native}
+XLSX_PARSERS: dict[str, Callable[..., Parser]] = {"xlsx_native": _xlsx_native}
 TABLE_EXTRACTORS: dict[str, Callable[..., TableExtractor]] = {
     name: _extractor(name) for name in ("pymupdf", "camelot", "docling", "unstructured")
 }
@@ -121,11 +127,12 @@ class Assembly:
     lexical: Analyzer | None = None     # set when the config has [lexical]: ingest builds a BM25 index
     ocr: Any = None                     # OcrStep, set when the config has [ocr]
     docx_parser: Parser | None = None   # set when the config has [docx_parser]
+    xlsx_parser: Parser | None = None   # set when the config has [xlsx_parser]
     _llm: LLM | None = field(default=None, repr=False)
 
     def parser_for(self, file_type: str) -> Parser | None:
         """The parser of this file type; None when the config does not read the type."""
-        return self.parser if file_type == "pdf" else self.docx_parser if file_type == "docx" else None
+        return {"pdf": self.parser, "docx": self.docx_parser, "xlsx": self.xlsx_parser}.get(file_type)
 
     @property
     def name(self) -> str:
@@ -165,7 +172,7 @@ def assemble(config: AssemblyConfig) -> Assembly:
     if config.retriever.use not in RETRIEVERS:
         raise ConfigError(f"[retriever] 没有名为 {config.retriever.use!r} 的实现，可选：{', '.join(RETRIEVERS)}")
     if config.retriever.params:
-        raise ConfigError(f"[retriever] {config.retriever.use} 只接受 top_k、document_filter 和 table_return_unit 参数")
+        raise ConfigError(f"[retriever] {config.retriever.use} 只接受 top_k、document_filter、table_return_unit、whole_table_max_tokens 和 bm25_weight 参数")
     if config.retriever.use in NEEDS_LEXICAL and config.lexical is None:
         raise ConfigError(f"检索器 {config.retriever.use} 需要 BM25 索引，请在配置中加入 [lexical]")
     if config.llm.use not in LLMS:
@@ -185,8 +192,13 @@ def assemble(config: AssemblyConfig) -> Assembly:
         docx_parser = _make(DOCX_PARSERS, "docx_parser", config.docx_parser)
         if table_steps is None:
             raise ConfigError(f"[docx_parser] 会产出表格，需要搭配产出表格的 PDF 解析器（docling_layout）与表格处理三个环节")
+    xlsx_parser = None
+    if config.xlsx_parser is not None:
+        xlsx_parser = _make(XLSX_PARSERS, "xlsx_parser", config.xlsx_parser)
+        if table_steps is None:
+            raise ConfigError("[xlsx_parser] 会产出表格，需要搭配产出表格的 PDF 解析器（docling_layout）与表格处理三个环节")
     return Assembly(config, parser, extractors, table_steps, embedder, chunker, lexical, ocr_step(config),
-                    docx_parser)
+                    docx_parser, xlsx_parser)
 
 
 def ocr_step(config: AssemblyConfig) -> Any:

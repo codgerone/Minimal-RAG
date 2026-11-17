@@ -16,6 +16,7 @@ question. Metrics read the full ranking of the question's scope:
 from __future__ import annotations
 
 import itertools
+import re
 from dataclasses import dataclass
 from typing import Callable
 
@@ -28,13 +29,27 @@ CURVE_K = 20
 MAX_COMBINATIONS = 20000
 
 
+EXCEL_RANGE = re.compile(r"^(sheet\d+)/r(\d+)c(\d+):r(\d+)c(\d+)$")
+EXCEL_CELL = re.compile(r"^(sheet\d+)/r(\d+)c(\d+)$")
+
+
+def _in_range(address: str, table: str) -> bool:
+    """Excel: the cell lies in the table's rectangle (`sheet<N>/r<r1>c<c1>:r<r2>c<c2>`)."""
+    box, cell = EXCEL_RANGE.match(table), EXCEL_CELL.match(address)
+    if not box or not cell or box.group(1) != cell.group(1):
+        return False
+    row, column = int(cell.group(2)), int(cell.group(3))
+    return int(box.group(2)) <= row <= int(box.group(4)) and int(box.group(3)) <= column <= int(box.group(5))
+
+
 def is_table_excerpt(excerpt: Excerpt, tables: list) -> bool:
     """Every located word lies in a table: within a table's box on its page (PDF), or in a cell of
-    a table (Word: the word's address is under a table's address)."""
+    a table (Word: the word's address is under a table's address; Excel: the cell lies in a table's
+    rectangle)."""
     words = [word for _, piece_words in excerpt.anchor or () for word in piece_words]
     if words and isinstance(words[0][0], str):
         places = [t for t, _ in tables if isinstance(t, str)]
-        return all(any(w[0].startswith(t + "/") for t in places) for w in words)
+        return all(any(w[0].startswith(t + "/") or _in_range(w[0], t) for t in places) for w in words)
 
     def inside(page: int, box: Box) -> bool:
         x, y = (box[0] + box[2]) / 2, (box[1] + box[3]) / 2

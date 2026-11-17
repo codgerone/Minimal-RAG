@@ -36,6 +36,8 @@ def _retriever_option(sub: argparse.ArgumentParser) -> None:
                      help="本次改用这个检索器（默认取配置文件 [retriever] use；bm25、hybrid 需要配置 [lexical]）")
     sub.add_argument("--table-return-unit", choices=TABLE_RETURN_UNITS,
                      help="命中表格 chunk 时返回该 chunk 还是整张表（默认取配置文件 [retriever] table_return_unit）")
+    sub.add_argument("--whole-table-max-tokens", type=_positive,
+                     help="整表文本超过这么多 token 的表格只返回命中的 chunk（默认取配置文件 [retriever] whole_table_max_tokens，未写为 4000）")
     sub.add_argument("--bm25-weight", type=_weight,
                      help="混合检索中 BM25 排名的权重 α（默认取配置文件 [retriever] bm25_weight，未写为 1）")
 
@@ -140,8 +142,9 @@ def _out(text: str = "") -> None:
 
 def _assembly(workspace: Workspace, name: str | None, retriever: str | None = None,
               table_return_unit: str | None = None, bm25_weight: float | None = None,
-              query_mode: str | None = None):
-    """`retriever`, `table_return_unit`, `bm25_weight` and `query_mode` replace the config's query settings for this command."""
+              query_mode: str | None = None, whole_table_max_tokens: int | None = None):
+    """`retriever`, `table_return_unit`, `bm25_weight`, `query_mode` and `whole_table_max_tokens`
+    replace the config's query settings for this command."""
     from dataclasses import replace
     from rag.registry import assemble
     config = resolve_config(workspace.root, name)
@@ -153,12 +156,14 @@ def _assembly(workspace: Workspace, name: str | None, retriever: str | None = No
         config = replace(config, bm25_weight=bm25_weight)
     if query_mode is not None:
         config = replace(config, query_mode=query_mode)
+    if whole_table_max_tokens is not None:
+        config = replace(config, whole_table_max_tokens=whole_table_max_tokens)
     return assemble(config)
 
 
 def _query_assembly(workspace: Workspace, args: argparse.Namespace):
     return _assembly(workspace, args.config, args.retriever, args.table_return_unit, args.bm25_weight,
-                     getattr(args, "query_mode", None))
+                     getattr(args, "query_mode", None), getattr(args, "whole_table_max_tokens", None))
 
 
 def _status(workspace: Workspace, args: argparse.Namespace) -> int:
@@ -318,7 +323,8 @@ def _searcher(workspace: Workspace, assembly):
     from rag.query.units import UnitSearch
     store = open_store(workspace, assembly.name)
     return UnitSearch(build_retriever(assembly, store, open_lexical(workspace, assembly)), store,
-                      open_tables(workspace, assembly.name), assembly.config.table_return_unit)
+                      open_tables(workspace, assembly.name), assembly.config.table_return_unit,
+                      whole_table_max_tokens=assembly.config.whole_table_max_tokens)
 
 
 def _hit_scores(hit, retriever: str) -> str:
@@ -541,6 +547,8 @@ def _anchors(workspace: Workspace, args: argparse.Namespace) -> int:
     from rag.eval.anchors import locate_all, write_anchors
     from rag.eval.docx_anchors import locate_all as locate_word, location_labels, parser_spans
     from rag.ingest.docx.reader import read_docx
+    from rag.eval.xlsx_anchors import locate_all as locate_excel
+    from rag.ingest.xlsx.reader import read_xlsx
     from rag.eval.dataset import load_dataset
     from rag.eval.runner import EvalError
     from rag.ingest.sources import discover
@@ -557,19 +565,24 @@ def _anchors(workspace: Workspace, args: argparse.Namespace) -> int:
     step = ocr_step(resolve_config(workspace.root, args.config))
     scanned: dict[str, frozenset[int]] = {}
     word_docs = {doc for doc in dataset.document_hashes if sources[doc].file_type == "docx"}
+    excel_docs = {doc for doc in dataset.document_hashes if sources[doc].file_type == "xlsx"}
     for doc in dataset.document_hashes:
-        if step is not None and doc not in word_docs:
+        if step is not None and sources[doc].file_type == "pdf":
             sources[doc], pages = step.prepare(sources[doc], _out)
             scanned[doc] = frozenset(p.page_number for p in pages.pages if p.kind == "scanned")
     pdf_paths = {d: s.pdf_path for d, s in sources.items() if s.file_type == "pdf"}
     word_files = {doc: read_docx(sources[doc].absolute_path) for doc in word_docs}
+    excel_files = {doc: read_xlsx(sources[doc].absolute_path) for doc in excel_docs}
     spans = {doc: parser_spans(sources[doc]) for doc in word_docs}
     pairs = [(c.case_id, x) for c in dataset.cases for x in c.excerpts]
-    on_pdf = [n for n, (_, x) in enumerate(pairs) if x.document_id not in word_docs]
+    on_pdf = [n for n, (_, x) in enumerate(pairs) if x.document_id not in word_docs | excel_docs]
+    on_excel = [n for n, (_, x) in enumerate(pairs) if x.document_id in excel_docs]
     on_word = [n for n, (_, x) in enumerate(pairs) if x.document_id in word_docs]
     found = dict(zip(on_pdf, locate_all([pairs[n][1] for n in on_pdf], pdf_paths, scanned)))
     for n, item in zip(on_word, locate_word([pairs[n][1] for n in on_word], word_files)):
         found[n] = dataclasses.replace(item, locations=location_labels(item.words, spans[item.excerpt.document_id]))
+    for n, item in zip(on_excel, locate_excel([pairs[n][1] for n in on_excel], excel_files)):
+        found[n] = item
     items = [(case_id, found[n]) for n, (case_id, _) in enumerate(pairs)]
     previous: dict[tuple[str, str], str | None] = {}
     changed_cases: set[str] = set()
@@ -591,7 +604,7 @@ def _anchors(workspace: Workspace, args: argparse.Namespace) -> int:
     folder = workspace.root / "tmp" / "anchor-review"
     page_path = write_anchor_review(folder, items, pdf_paths,
                                     {c.case_id: c.question for c in dataset.cases}, previous, word_files,
-                                    [c for c in dataset.cases if c.case_id in changed_cases])
+                                    [c for c in dataset.cases if c.case_id in changed_cases], excel_files)
     counts = {s: sum(1 for _, i in items if i.status == s) for s in ("located", "ambiguous", "missing")}
     approximate = sum(1 for _, i in items if i.approximate)
     _out(f"{len(items)} 段 excerpt：唯一定位 {counts['located']}，多处出现按位置选定 {counts['ambiguous']}，"

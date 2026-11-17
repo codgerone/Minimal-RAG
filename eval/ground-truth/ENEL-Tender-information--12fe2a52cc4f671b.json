@@ -1,0 +1,346 @@
+{
+  "schema_version": "ground_truth_document_v2",
+  "document_key": "ENEL-Tender-information--12fe2a52cc4f671b",
+  "document_id": "12fe2a52cc4f671b",
+  "document_name": "ENEL Tender information.xlsx",
+  "relative_path": "ENEL Tender information.xlsx",
+  "file_hash": "c6b838bf32f51d8031174a34b000559888704f9730818331c2139467af5763d2",
+  "cases": [
+    {
+      "case_id": "ENEL-TENDER-Q001",
+      "question": "招标 TENDER2024001 规定的提问截止日期是哪天？我方投标工作计划中把澄清问题发给招标方（Send consultations to utility）的日期能赶上这个截止日期吗？",
+      "answerable": true,
+      "reference_answer": "提问截止日期为 2024-09-16；工作计划中向招标方发送澄清问题的日期也是 2024-09-16，正好在截止当天，能赶上（没有余量）。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "12fe2a52cc4f671b",
+          "document_name": "ENEL Tender information.xlsx",
+          "relative_path": "ENEL Tender information.xlsx",
+          "text": "Deadline for questions | 2024-09-16",
+          "anchor": {
+            "text_sha256": "5f027e69d5ff20c4",
+            "pieces": [
+              {
+                "text": "Deadline for questions",
+                "words": [
+                  "sheet1/r5c4 0 8",
+                  "sheet1/r5c4 9 12",
+                  "sheet1/r5c4 13 22"
+                ]
+              },
+              {
+                "text": "2024-09-16",
+                "words": [
+                  "sheet1/r5c5 0 10"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "Tender Information!A1:H18"
+          ]
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "12fe2a52cc4f671b",
+          "document_name": "ENEL Tender information.xlsx",
+          "relative_path": "ENEL Tender information.xlsx",
+          "text": "Send consultations to utility | 2024-09-16",
+          "anchor": {
+            "text_sha256": "4778878d1bc051a0",
+            "pieces": [
+              {
+                "text": "Send consultations to utility",
+                "words": [
+                  "sheet2/r21c3 0 4",
+                  "sheet2/r21c3 5 18",
+                  "sheet2/r21c3 19 21",
+                  "sheet2/r21c3 22 29"
+                ]
+              },
+              {
+                "text": "2024-09-16",
+                "words": [
+                  "sheet2/r21c4 0 10"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "Plan!B17:E25"
+          ]
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "提问截止日期",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "计划发送澄清问题的日期",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "ENEL-TENDER-Q002",
+      "question": "招标 TENDER2024001 采购哪些型号的电表？各自数量是多少？",
+      "answerable": true,
+      "reference_answer": "两种：HXE13ES 单相表 570,000 只；HXE33K-S1 三相表 150,000 只。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "12fe2a52cc4f671b",
+          "document_name": "ENEL Tender information.xlsx",
+          "relative_path": "ENEL Tender information.xlsx",
+          "text": "HXE13ES | Single Phase meter | 570,000",
+          "anchor": {
+            "text_sha256": "4549db42c3304e0c",
+            "pieces": [
+              {
+                "text": "HXE13ES",
+                "words": [
+                  "sheet1/r8c2 0 7"
+                ]
+              },
+              {
+                "text": "Single Phase meter",
+                "words": [
+                  "sheet1/r8c3 0 6",
+                  "sheet1/r8c3 7 12",
+                  "sheet1/r8c3 13 18"
+                ]
+              },
+              {
+                "text": "570,000",
+                "words": [
+                  "sheet1/r8c8 0 7"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "Tender Information!A1:H18"
+          ]
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "12fe2a52cc4f671b",
+          "document_name": "ENEL Tender information.xlsx",
+          "relative_path": "ENEL Tender information.xlsx",
+          "text": "HXE33K-S1 | Three Phase meter | 150,000",
+          "anchor": {
+            "text_sha256": "675f8a9e34f0a7c9",
+            "pieces": [
+              {
+                "text": "HXE33K-S1",
+                "words": [
+                  "sheet1/r9c2 0 9"
+                ]
+              },
+              {
+                "text": "Three Phase meter",
+                "words": [
+                  "sheet1/r9c3 0 5",
+                  "sheet1/r9c3 6 11",
+                  "sheet1/r9c3 12 17"
+                ]
+              },
+              {
+                "text": "150,000",
+                "words": [
+                  "sheet1/r9c8 0 7"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "Tender Information!A1:H18"
+          ]
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "采购的型号",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "各型号的数量",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "ENEL-TENDER-Q003",
+      "question": "招标 TENDER2024001 对迟延交货的罚款是怎么规定的？",
+      "answerable": true,
+      "reference_answer": "每迟延一个日历日，罚合同总额的 0.5%。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "12fe2a52cc4f671b",
+          "document_name": "ENEL Tender information.xlsx",
+          "relative_path": "ENEL Tender information.xlsx",
+          "text": "The penalty is 0.5% of the total amount of the Contract for each calendar day of delay.",
+          "anchor": {
+            "text_sha256": "85c46ed78f5f4dd8",
+            "pieces": [
+              {
+                "text": "The penalty is 0.5% of the total amount of the Contract for each calendar day of delay.",
+                "words": [
+                  "sheet1/r13c3 0 3",
+                  "sheet1/r13c3 4 11",
+                  "sheet1/r13c3 12 14",
+                  "sheet1/r13c3 15 19",
+                  "sheet1/r13c3 20 22",
+                  "sheet1/r13c3 23 26",
+                  "sheet1/r13c3 27 32",
+                  "sheet1/r13c3 33 39",
+                  "sheet1/r13c3 40 42",
+                  "sheet1/r13c3 43 46",
+                  "sheet1/r13c3 47 55",
+                  "sheet1/r13c3 56 59",
+                  "sheet1/r13c3 60 64",
+                  "sheet1/r13c3 65 73",
+                  "sheet1/r13c3 74 77",
+                  "sheet1/r13c3 78 80",
+                  "sheet1/r13c3 81 87"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "Tender Information!A1:H18"
+          ]
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "迟延罚款",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "ENEL-TENDER-Q004",
+      "question": "在招标 TENDER2024001 的投标工作计划中，价格评估（Evaluation of prices）安排在哪天，由谁负责？",
+      "answerable": true,
+      "reference_answer": "2024-10-01，由 Maria / Neng 负责。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "12fe2a52cc4f671b",
+          "document_name": "ENEL Tender information.xlsx",
+          "relative_path": "ENEL Tender information.xlsx",
+          "text": "Evaluation of prices | 2024-10-01 | Maria / Neng",
+          "anchor": {
+            "text_sha256": "b21bd5b7cc040630",
+            "pieces": [
+              {
+                "text": "Evaluation of prices",
+                "words": [
+                  "sheet2/r24c3 0 10",
+                  "sheet2/r24c3 11 13",
+                  "sheet2/r24c3 14 20"
+                ]
+              },
+              {
+                "text": "2024-10-01",
+                "words": [
+                  "sheet2/r24c4 0 10"
+                ]
+              },
+              {
+                "text": "Maria / Neng",
+                "words": [
+                  "sheet2/r24c5 0 5",
+                  "sheet2/r24c5 8 12"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "Plan!B17:E25"
+          ]
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "价格评估日期",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "负责人",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "ENEL-TENDER-Q005",
+      "question": "招标 TENDER2024001 的预算金额（参考价）是多少？",
+      "answerable": false,
+      "reference_answer": "文件没有给出预算金额或参考价。",
+      "excerpts": [],
+      "evidence_groups": []
+    }
+  ]
+}

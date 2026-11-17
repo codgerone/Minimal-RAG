@@ -46,7 +46,10 @@ def unit_chunks(hit: dict[str, Any]) -> list[str]:
 
 
 def table_return_label(result: dict[str, Any]) -> str:
-    return "整表" if result.get("table_return_unit") == "table" else "命中的 chunk"
+    if result.get("table_return_unit") != "table":
+        return "命中的 chunk"
+    limit = result.get("whole_table_max_tokens")
+    return f"整表（整表超过 {limit} token 时返回命中的 chunk）" if limit else "整表"
 
 
 def required_k_badge(group: dict[str, Any]) -> str:
@@ -233,7 +236,7 @@ def render(result: dict[str, Any], previous: dict[str, Any] | None) -> str:
                        '它们的题照常计分，证据检索不到。')
     if result["dataset"]["pdf_changed_since_labelling"]:
         notices.append("部分 PDF 在标注之后被修改过，标注证据可能已过时。")
-    notice_html = "".join(f'<div class="card">⚠ {n}</div>' for n in notices)
+    notice_html = "".join(f'<div class="card">⚠ {n}</div>' for n in notices) + _over_limit_html(result)
     types = result.get("document_types") or {}
     type_label = {kind: info["label"] for kind, info in types.items()}
     doc_rows = "".join(
@@ -289,6 +292,19 @@ def render(result: dict[str, Any], previous: dict[str, Any] | None) -> str:
             f'<div class="meta">指标定义见 docs/rules/evaluation.md；原始数据见同目录 result.json。</div>')
     return page(f"检索评估 · {result['config']} · K={result['top_k']}", body,
                 root="../../", crumbs=[("报告首页", "../../index.html")])
+
+
+def _over_limit_html(result: dict[str, Any]) -> str:
+    """Tables over the whole-table limit: returned by their hit chunks, counted as chunks."""
+    over = result.get("tables_over_limit") or []
+    if not over:
+        return ""
+    rows = "".join(f'<tr><td>{esc(t["document_name"])}</td><td class="meta">{esc(t["table_id"])}</td>'
+                   f'<td class="num">{t["tokens"]}</td><td class="num">{t["chunks"]}</td></tr>' for t in over)
+    return (f'<div class="card"><b>{len(over)} 张表格的整表文本超过 {result["whole_table_max_tokens"]} token'
+            f'</b>：命中时只返回命中的 chunk，评估按 chunk 计返回单元。'
+            f'<div class="scroll"><table><tr><th>文档</th><th>表格</th><th class="num">整表 token</th>'
+            f'<th class="num">chunk 数</th></tr>{rows}</table></div></div>')
 
 
 def _type_table(types: dict[str, Any]) -> str:

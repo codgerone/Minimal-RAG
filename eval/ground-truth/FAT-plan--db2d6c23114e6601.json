@@ -1,0 +1,441 @@
+{
+  "schema_version": "ground_truth_document_v2",
+  "document_key": "FAT-plan--db2d6c23114e6601",
+  "document_id": "db2d6c23114e6601",
+  "document_name": "FAT plan.xlsx",
+  "relative_path": "FAT plan.xlsx",
+  "file_hash": "fc6b5058399566652e0676cec8a09fa9b0b9034a40a70d637d0c9b3989c37b5c",
+  "cases": [
+    {
+      "case_id": "FAT-PLAN-Q001",
+      "question": "按 FAT 计划 FAT2025001，2025 年 12 月 12 日这一天安排了哪些测试？",
+      "answerable": true,
+      "reference_answer": "单相表充电 144 只、常规测试 72 只，三相表充电 80 只。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "db2d6c23114e6601",
+          "document_name": "FAT plan.xlsx",
+          "relative_path": "FAT plan.xlsx",
+          "text": "单相充电144只，常规测试72只 三相充电80只",
+          "locate_hint": "2025-12-12",
+          "anchor": {
+            "text_sha256": "34386d60066ad312",
+            "pieces": [
+              {
+                "text": "单相充电144只，常规测试72只 三相充电80只",
+                "words": [
+                  "sheet1/r4c4 0 16",
+                  "sheet1/r4c4 17 24"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "Sheet1!A1:N10"
+          ]
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "当天的测试安排",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "FAT-PLAN-Q002",
+      "question": "FAT 计划 FAT2025001 的日历中，哪几天是周末？",
+      "answerable": true,
+      "reference_answer": "2025-12-13（周六）、2025-12-14（周日）、2025-12-20（周六）、2025-12-21（周日）。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "db2d6c23114e6601",
+          "document_name": "FAT plan.xlsx",
+          "relative_path": "FAT plan.xlsx",
+          "text": "2025-12-13 | 2025-12-14 | 2025-12-20 | 2025-12-21",
+          "table_header": true,
+          "anchor": {
+            "text_sha256": "7defb1ca65bc4b19",
+            "pieces": [
+              {
+                "text": "2025-12-13",
+                "words": [
+                  "sheet1/r3c5 0 10"
+                ]
+              },
+              {
+                "text": "2025-12-14",
+                "words": [
+                  "sheet1/r3c6 0 10"
+                ]
+              },
+              {
+                "text": "2025-12-20",
+                "words": [
+                  "sheet1/r3c12 0 10"
+                ]
+              },
+              {
+                "text": "2025-12-21",
+                "words": [
+                  "sheet1/r3c13 0 10"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "Sheet1!A1:N10"
+          ]
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "db2d6c23114e6601",
+          "document_name": "FAT plan.xlsx",
+          "relative_path": "FAT plan.xlsx",
+          "text": "Saturday | Sunday | Saturday | Sunday",
+          "anchor": {
+            "text_sha256": "c59531036e717b02",
+            "pieces": [
+              {
+                "text": "Saturday",
+                "words": [
+                  "sheet1/r10c5 0 8",
+                  "sheet1/r10c12 0 8"
+                ]
+              },
+              {
+                "text": "Sunday",
+                "words": [
+                  "sheet1/r10c6 0 6",
+                  "sheet1/r10c13 0 6"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "Sheet1!A1:N10"
+          ]
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "周末的日期",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "FAT-PLAN-Q003",
+      "question": "FAT 计划 FAT2025001 中，单相表和三相表的充电数量合计各是多少？",
+      "answerable": true,
+      "reference_answer": "单相表充电合计 1115 只，三相表充电合计 440 只。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "db2d6c23114e6601",
+          "document_name": "FAT plan.xlsx",
+          "relative_path": "FAT plan.xlsx",
+          "text": "single phase meter charging amount | 1115",
+          "anchor": {
+            "text_sha256": "6bbb4ff655a232fb",
+            "pieces": [
+              {
+                "text": "single phase meter charging amount",
+                "words": [
+                  "sheet1/r5c1 0 6",
+                  "sheet1/r5c1 7 12",
+                  "sheet1/r5c1 13 18",
+                  "sheet1/r5c1 19 27",
+                  "sheet1/r5c1 28 34"
+                ]
+              },
+              {
+                "text": "1115",
+                "words": [
+                  "sheet1/r5c14 0 4"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "Sheet1!A1:N10"
+          ]
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "db2d6c23114e6601",
+          "document_name": "FAT plan.xlsx",
+          "relative_path": "FAT plan.xlsx",
+          "text": "three phase meter charging amount | 440",
+          "anchor": {
+            "text_sha256": "f550467e01866344",
+            "pieces": [
+              {
+                "text": "three phase meter charging amount",
+                "words": [
+                  "sheet1/r7c1 0 5",
+                  "sheet1/r7c1 6 11",
+                  "sheet1/r7c1 12 17",
+                  "sheet1/r7c1 18 26",
+                  "sheet1/r7c1 27 33"
+                ]
+              },
+              {
+                "text": "440",
+                "words": [
+                  "sheet1/r7c14 0 3"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "Sheet1!A1:N10"
+          ]
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "单相表充电合计",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "三相表充电合计",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x2"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "FAT-PLAN-Q004",
+      "question": "FAT 计划 FAT2025001 中，客户 ENSA 的 HXE12ES 订单数量是多少？验货抽检多少只？",
+      "answerable": true,
+      "reference_answer": "ENSA 的 HXE12ES 数量 24330 只，抽检 85 只。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "db2d6c23114e6601",
+          "document_name": "FAT plan.xlsx",
+          "relative_path": "FAT plan.xlsx",
+          "text": "ENSA | 24330 | HXE12ES | 85",
+          "anchor": {
+            "text_sha256": "4859e806def4e0b8",
+            "pieces": [
+              {
+                "text": "ENSA",
+                "words": [
+                  "sheet1/r18c2 0 4"
+                ]
+              },
+              {
+                "text": "24330",
+                "words": [
+                  "sheet1/r18c3 0 5"
+                ]
+              },
+              {
+                "text": "HXE12ES",
+                "words": [
+                  "sheet1/r18c4 0 7"
+                ]
+              },
+              {
+                "text": "85",
+                "words": [
+                  "sheet1/r18c5 0 2"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "Sheet1!A13:G40"
+          ]
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "订单数量",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "抽检数量",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "FAT-PLAN-Q005",
+      "question": "按 FAT 计划 FAT2025001，单相表的充电在哪一天全部完成？那天充电多少只？",
+      "answerable": true,
+      "reference_answer": "2025-12-17 是单相表充电的最后一天，当天充电 83 只（之后几天只做常规测试）。",
+      "excerpts": [
+        {
+          "excerpt_id": "x1",
+          "document_id": "db2d6c23114e6601",
+          "document_name": "FAT plan.xlsx",
+          "relative_path": "FAT plan.xlsx",
+          "text": "2025-12-17",
+          "table_header": true,
+          "anchor": {
+            "text_sha256": "fe5d07b799534a99",
+            "pieces": [
+              {
+                "text": "2025-12-17",
+                "words": [
+                  "sheet1/r3c9 0 10"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "Sheet1!A1:N10"
+          ]
+        },
+        {
+          "excerpt_id": "x2",
+          "document_id": "db2d6c23114e6601",
+          "document_name": "FAT plan.xlsx",
+          "relative_path": "FAT plan.xlsx",
+          "text": "83",
+          "locate_hint": "2025-12-17",
+          "anchor": {
+            "text_sha256": "bbb965ab0c80d653",
+            "pieces": [
+              {
+                "text": "83",
+                "words": [
+                  "sheet1/r5c9 0 2"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "Sheet1!A1:N10"
+          ]
+        },
+        {
+          "excerpt_id": "x3",
+          "document_id": "db2d6c23114e6601",
+          "document_name": "FAT plan.xlsx",
+          "relative_path": "FAT plan.xlsx",
+          "text": "单相充电83只，常规测试96只 三相常规测试80只",
+          "anchor": {
+            "text_sha256": "37be201f44532a39",
+            "pieces": [
+              {
+                "text": "单相充电83只，常规测试96只 三相常规测试80只",
+                "words": [
+                  "sheet1/r4c9 0 15",
+                  "sheet1/r4c9 16 25"
+                ]
+              }
+            ]
+          },
+          "locations": [
+            "Sheet1!A1:N10"
+          ]
+        }
+      ],
+      "evidence_groups": [
+        {
+          "evidence_group_id": "e1",
+          "information_item": "充电完成的日期",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2"
+              ]
+            },
+            {
+              "scheme_id": "s2",
+              "excerpt_ids": [
+                "x1",
+                "x3"
+              ]
+            }
+          ],
+          "note": "按充电数量行或按当天安排的说明行判断，任一即可"
+        },
+        {
+          "evidence_group_id": "e2",
+          "information_item": "当天充电数量",
+          "schemes": [
+            {
+              "scheme_id": "s1",
+              "excerpt_ids": [
+                "x1",
+                "x2"
+              ]
+            },
+            {
+              "scheme_id": "s2",
+              "excerpt_ids": [
+                "x1",
+                "x3"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "FAT-PLAN-Q006",
+      "question": "FAT 计划 FAT2025001 的验货由哪家第三方检验机构执行？",
+      "answerable": false,
+      "reference_answer": "文件没有写明执行验货的第三方检验机构。",
+      "excerpts": [],
+      "evidence_groups": []
+    }
+  ]
+}

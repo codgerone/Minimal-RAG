@@ -3,7 +3,9 @@
 The retriever ranks chunks; this step, run after it, maps each chunk to what is returned.
 With table_return_unit = "table", a table chunk is returned as its whole table, which takes
 the place of the best-ranked of its chunks; the table's other chunks are skipped and later
-results move up. Other chunks, and every chunk with "chunk", are returned as they are.
+results move up. A table whose whole text exceeds `whole_table_max_tokens` (multilingual-e5
+tokens, counted as returned text is) is not returned whole: its chunks are returned as they are.
+Other chunks, and every chunk with "chunk", are returned as they are.
 """
 
 from __future__ import annotations
@@ -108,12 +110,35 @@ class UnitSearch:
     """One retrieval: the retriever ranks the chunks, the return-unit step maps them to units."""
 
     def __init__(self, retriever: Retriever, store: ChromaStore, tables: TableStore,
-                 table_return_unit: str, cache: RetrievalCache | None = None):
+                 table_return_unit: str, cache: RetrievalCache | None = None,
+                 whole_table_max_tokens: int = 4000):
         self.retriever = retriever
         self.store = store
         self.tables = tables
         self.whole_tables = table_return_unit == "table"
         self.cache = cache
+        self.max_tokens = whole_table_max_tokens
+        self._tokens: dict[str, int] = {}
+        self._counter = None
+
+    def table_tokens(self, table: StoredTable) -> int:
+        if table.table_id not in self._tokens:
+            if self._counter is None:
+                from rag.ingest.chunkers.tokens import E5TokenCounter
+                self._counter = E5TokenCounter()
+            self._tokens[table.table_id] = self._counter.count_passage(table.text)
+        return self._tokens[table.table_id]
+
+    def returned_tables(self, chunk_ids: Collection[str]) -> dict[str, StoredTable]:
+        """chunk_id → whole table, for the chunks returned as their whole table."""
+        found = self.tables.tables_for_chunks(chunk_ids)
+        return {cid: t for cid, t in found.items() if self.table_tokens(t) <= self.max_tokens}
+
+    def over_limit(self, chunk_ids: Collection[str]) -> list[tuple[StoredTable, int]]:
+        """The tables of these chunks whose whole text exceeds the limit, with their token counts."""
+        tables = {t.table_id: t for t in self.tables.tables_for_chunks(chunk_ids).values()}
+        return sorted(((t, self.table_tokens(t)) for t in tables.values()
+                       if self.table_tokens(t) > self.max_tokens), key=lambda item: item[0].table_id)
 
     def rank(self, text: str, document_ids: Collection[str] | None = None) -> UnitRanking:
         """The full ranking of the units in scope."""
@@ -153,7 +178,7 @@ class UnitSearch:
     def _units(self, hits: list[Hit]) -> list[ResultUnit]:
         if not self.whole_tables:
             return [ResultUnit(hit) for hit in hits]
-        tables = self.tables.tables_for_chunks([h.chunk.chunk_id for h in hits])
+        tables = self.returned_tables([h.chunk.chunk_id for h in hits])
         chunks = self.store.get_chunks(sorted({cid for t in tables.values() for cid in t.chunk_ids}))
         from rag.locations import merge
         pages = {t.table_id: merge(p for cid in t.chunk_ids for p in chunks[cid].pages)
